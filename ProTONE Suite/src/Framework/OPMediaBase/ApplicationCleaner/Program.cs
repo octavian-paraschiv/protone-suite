@@ -24,8 +24,6 @@ namespace OPMedia.Utility
         [STAThread]
         static void Main()
         {
-            // fake comment
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

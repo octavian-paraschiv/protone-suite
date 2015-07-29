@@ -103,18 +103,21 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             string sElapsed = "", sTotal = "";
 
             if (_elapsedSeconds > 0)
-            {
                 sElapsed = string.Format("{0}", TimeSpan.FromSeconds((int)_elapsedSeconds));
-            
-                if (_totalSeconds > 0)
-                    sTotal = string.Format(" ({0})", TimeSpan.FromSeconds((int)_totalSeconds));
-
-                tslTime.Text = sElapsed + sTotal;
-            }
             else
+                sElapsed = "00:00:00";
+
+            if (_totalSeconds >= 0)
             {
-                tslTime.Text = string.Empty;
+                if (_totalSeconds > 0)
+                    sTotal = string.Format(" / {0}", TimeSpan.FromSeconds((int)_totalSeconds));
+                else
+                    sTotal = " / 00:00:00";
             }
+
+            tslTime.Text = sElapsed + sTotal;
+            tslTime.Font = ThemeManager.VeryLargeFont;
+            tslTime.ForeColor = ThemeManager.BorderColor;
         }
 
         public double TotalSeconds
@@ -137,13 +140,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             InitializeComponent();
 
-            //List<OPMTriStateToolStripButton> toggleButtons = new List<OPMTriStateToolStripButton>
-            //{
-            //    tsmLoopPlay,
-            //    tsmPlaylistEnd,
-            //    tsmToggleShuffle
-            //};
-
             this.DoubleBuffered = true;
             
             _tip = new OPMToolTipManager(opmToolStrip1);
@@ -163,36 +159,17 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmLoopPlay.Checked = ProTONEConfig.LoopPlay;
             tsmPlaylistEnd.Checked = SystemScheduler.PlaylistEventEnabled;
             tsmToggleShuffle.Checked = ProTONEConfig.ShufflePlaylist;
-
-            foreach (var x in opmToolStrip1.Items)
-            {
-                if (x is OPMToolStripSeparator)
-                    continue;
-
-                Padding origM = (x as ToolStripItem).Margin;
-                origM.Top = 2 + ThemeManager.FormBorderWidth;
-                origM.Bottom = 0;
-
-                (x as ToolStripItem).Margin = origM;
-            }
-
-            tsmPlayPause.InactiveImage = SkinResources.btnPlay;
-            tsmPlayPause.ActiveImage = SkinResources.btnPlay2;
-            tsmStop.InactiveImage = SkinResources.btnStop;
-            tsmStop.ActiveImage = SkinResources.btnStop2;
-            tsmNext.InactiveImage = SkinResources.btnNext;
-            tsmNext.ActiveImage = SkinResources.btnNext2;
-            tsmPrev.InactiveImage = SkinResources.btnPrev;
-            tsmPrev.ActiveImage = SkinResources.btnPrev2;
-            tsmOpenDisk.InactiveImage = SkinResources.btnOpenDisk;
-            tsmOpenDisk.ActiveImage = SkinResources.btnOpenDisk2;
-            tsmOpenURL.InactiveImage = SkinResources.btnOpenURL;
-            tsmOpenURL.ActiveImage = SkinResources.btnOpenURL2;
-            tsmLoad.InactiveImage = SkinResources.btnLoad;
-            tsmLoad.ActiveImage = SkinResources.btnLoad2;
-            tsmOpenSettings.InactiveImage = SkinResources.btnOpenSettings;
-            tsmOpenSettings.ActiveImage = SkinResources.btnOpenSettings2;
-
+            tsmPlayPause.InactiveImage = Resources.btnPlay;
+            tsmStop.InactiveImage = Resources.btnStop;
+            tsmNext.InactiveImage = Resources.btnNext;
+            tsmPrev.InactiveImage = Resources.btnPrev;
+            tsmOpenDisk.InactiveImage = Resources.btnOpenDisk;
+            tsmOpenURL.InactiveImage = Resources.btnOpenURL;
+            tsmLoad.InactiveImage = Resources.btnLoad;
+            tsmOpenSettings.InactiveImage = Resources.btnOpenSettings;
+            tsmLoopPlay.InactiveImage = Resources.btnLoopPlay;
+            tsmToggleShuffle.InactiveImage = Resources.btnToggleShuffle;
+            tsmPlaylistEnd.InactiveImage = Resources.btnPlaylistEnd;
         }
 
         private void OnButtonPressed(object sender, EventArgs e)
@@ -256,12 +233,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     if (DvdMedia.FromPath(_mediaName) != null)
                     {
                         pli = new DvdPlaylistItem(_mediaName);
-                        img = pli.GetImage(false);
+                        img = pli.GetImage(true);
                     }
                     else
                     {
                         pli = new PlaylistItem(_mediaName, false);
-                        img = pli.GetImage(false);
+                        img = pli.GetImage(true);
                     }
                 }
                 catch
@@ -269,7 +246,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 }
 
                 if (img == null)
-                    img = ImageProvider.GetIcon(_mediaName, false);
+                    img = ImageProvider.GetIcon(_mediaName, true);
             }
 
             tslFileType.Image = img;
@@ -297,24 +274,20 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             switch(_FilterState)
             {
                 case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
-                    img = SkinResources.btnPlay;
-                    img2 = SkinResources.btnPlay2;
+                    img = Resources.btnPlay;
                     break;
 
                 case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running:
-                    img = SkinResources.btnPause;
-                    img2 = SkinResources.btnPause2;
+                    img = Resources.btnPause;
                     break;
 
                 default:
-                    img = SkinResources.btnPlay;
-                    img2 = SkinResources.btnPlay2;
+                    img = Resources.btnPlay;
                     break;
             }
 
 
             tsmPlayPause.InactiveImage = img;
-            tsmPlayPause.ActiveImage = img2;
         }
 
         private void UpdateMediaType()
@@ -335,18 +308,18 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case MediaTypes.Audio:
-                    tslAudioOn.Image = Resources.btnCfgAudio;
+                    tslAudioOn.Image = Resources.AudioMediaType;
                     tslVideoOn.Image = null;
                     break;
 
                 case MediaTypes.Video:
                     tslAudioOn.Image = null;
-                    tslAudioOn.Image = Resources.btnCfgVideo;
+                    tslAudioOn.Image = Resources.VideoMediaType;
                     break;
 
                 case MediaTypes.Both:
-                    tslAudioOn.Image = Resources.btnCfgAudio;
-                    tslVideoOn.Image = Resources.btnCfgVideo;
+                    tslAudioOn.Image = Resources.AudioMediaType;
+                    tslVideoOn.Image = Resources.VideoMediaType;
                     break;
             }
 
