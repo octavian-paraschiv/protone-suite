@@ -53,7 +53,7 @@ namespace OPMedia.UI.ApplicationUpdate
 
         void OnBackgroundDetect(object sender, DoWorkEventArgs e)
         {
-            string versionFile = "/Versions.txt";
+            string versionFile = "/Versions_build.txt";
             string versionFileUri = AppConfig.DownloadUriBase + versionFile;
             string tempVersionFile = Path.GetTempFileName();
             bool detectOnDemand = (bool)e.Argument;

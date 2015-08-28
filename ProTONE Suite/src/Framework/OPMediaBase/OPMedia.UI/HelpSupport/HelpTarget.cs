@@ -21,7 +21,7 @@ namespace OPMedia.UI.HelpSupport
             string helpUri = string.Empty;
 
             // Help base URI should be something like:
-            // http://protone-suite.googlecode.com/svn/wiki/ProTONE Suite - #VERSION#
+            // https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-docs/master/#VERSION#/
 
             if (string.IsNullOrEmpty(topicName))
             {

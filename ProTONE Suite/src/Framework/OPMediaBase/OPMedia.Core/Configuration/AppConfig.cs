@@ -133,7 +133,7 @@ namespace OPMedia.Core.Configuration
                         }
                         else
                         {
-                            string skinType = key.GetValue("SkinType", string.Empty) as string;
+                            string skinType = key.GetValue("SkinType", string.Empty)  as string;
                             if (skinType != _skinType)
                             {
                                 _skinType = skinType;

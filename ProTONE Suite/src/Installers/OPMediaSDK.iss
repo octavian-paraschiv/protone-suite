@@ -153,6 +153,6 @@ Name: {app}\SDKSamples
 
 [Registry]
 Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: InstallLanguageID; ValueData: {language}; Flags: uninsdeletevalue noerror createvalueifdoesntexist
-Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: DownloadUriBase; ValueData: https://protone-suite.googlecode.com/svn/publish/1.10; Flags: noerror uninsdeletevalue createvalueifdoesntexist
-Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: HelpUriBase; ValueData: http://protone-suite.googlecode.com/svn/wiki/ProTONE Suite - 1.10.x/; Flags: noerror uninsdeletevalue createvalueifdoesntexist
+Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: DownloadUriBase; ValueData: https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-publish/master/current; Flags: noerror uninsdeletevalue createvalueifdoesntexist
+Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: HelpUriBase; ValueData: https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-docs/master/#VERSION#; Flags: noerror uninsdeletevalue createvalueifdoesntexist
 Root: HKLM; Subkey: {#REGENTRY}; ValueType: dword; ValueName: UseOnlineDocumentation; ValueData: 1; Flags: noerror uninsdeletevalue createvalueifdoesntexist
