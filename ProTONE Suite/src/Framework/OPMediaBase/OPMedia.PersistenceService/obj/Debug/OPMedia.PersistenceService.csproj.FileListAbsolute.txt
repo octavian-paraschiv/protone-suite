@@ -12,3 +12,17 @@ D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\bin\OPMedia.PersistenceS
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.csprojResolveAssemblyReference.cache
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.exe
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.pdb
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Persistence.sdf
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\catalog.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\player.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\ir_remote.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\bookmark.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\Subtitle.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\Playlist.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\AudioFile.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\VideoFile.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\OPMedia.PersistenceService.exe
+d:\GIT\protone-suite\ProTONE Suite\src\bin\OPMedia.PersistenceService.pdb
+d:\GIT\protone-suite\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.csprojResolveAssemblyReference.cache
+d:\GIT\protone-suite\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.exe
+d:\GIT\protone-suite\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\obj\Debug\OPMedia.PersistenceService.pdb

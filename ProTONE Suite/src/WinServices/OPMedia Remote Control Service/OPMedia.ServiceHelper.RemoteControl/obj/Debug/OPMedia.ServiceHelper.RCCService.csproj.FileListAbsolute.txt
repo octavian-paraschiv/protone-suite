@@ -28,3 +28,32 @@ D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\WinServices\OPMedia Remo
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\ro\OPMedia.ServiceHelper.RCCService.resources.dll
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.dll
 D:\protone-suite.googlecode.com\trunk\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.pdb
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Themes\Themes.thm
+d:\GIT\protone-suite\ProTONE Suite\src\bin\RCCService.Config
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\catalog.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\player.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\ir_remote.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\bookmark.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\Subtitle.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\Playlist.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\AudioFile.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Resources\VideoFile.ico
+d:\GIT\protone-suite\ProTONE Suite\src\bin\Templates\RemoteControl\ProTONEOnSerial.Config
+d:\GIT\protone-suite\ProTONE Suite\src\bin\OPMedia.ServiceHelper.RCCService.dll
+d:\GIT\protone-suite\ProTONE Suite\src\bin\OPMedia.ServiceHelper.RCCService.pdb
+d:\GIT\protone-suite\ProTONE Suite\src\bin\de\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\bin\fr\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\bin\ro\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Configuration.LircCfgDlg.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Configuration.SerialDeviceCfgDlg.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Configuration.SerialDeviceTuningDlg.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Translations.Translation.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Translations.Translation.de.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Translations.Translation.fr.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.Translations.Translation.ro.resources
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.csproj.GenerateResource.Cache
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\de\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\fr\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\ro\OPMedia.ServiceHelper.RCCService.resources.dll
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.dll
+d:\GIT\protone-suite\ProTONE Suite\src\WinServices\OPMedia Remote Control Service\OPMedia.ServiceHelper.RemoteControl\obj\Debug\OPMedia.ServiceHelper.RCCService.pdb

@@ -10,8 +10,6 @@
 #define PRODUCT GetStringFileInfo(BINDIR + "\OPMedia.Core.dll", PRODUCT_NAME)
 #define REGENTRY "Software" + "\" + COMPANY + "\" + PRODUCT
 
-#expr WriteIni(OUTDIR + "\Versions_build.txt", PRODUCT, "Version", VERSION)
-
 
 [Setup]
 ;------------------------------
