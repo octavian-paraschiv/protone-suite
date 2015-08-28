@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\..\..\..\..\externals\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\..\..\externals\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -62,10 +62,10 @@
     <Reference Include="System.XML" />
     <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\externals\taglib-sharp.dll</HintPath>
+      <HintPath>..\..\..\..\externals\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="XmlRpc">
-      <HintPath>..\..\..\..\..\..\externals\XmlRpc.dll</HintPath>
+      <HintPath>..\..\..\..\externals\XmlRpc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
