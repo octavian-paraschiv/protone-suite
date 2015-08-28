@@ -80,7 +80,11 @@ Source: ISSkin.dll; DestDir: {app}; Flags: dontcopy
 Source: Skins\OPMedia.cjstyles; DestDir: {tmp}; Flags: dontcopy
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: {#BINDIR}\lame_enc.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: {#BINDIR}\NAudio.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: {#BINDIR}\NAudio.Lame.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: {#BINDIR}\libmp3lame.32.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: {#BINDIR}\libmp3lame.64.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+
 Source: {#BINDIR}\ICSharpCode.SharpZipLib.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\XmlRpc.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\taglib-sharp.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace

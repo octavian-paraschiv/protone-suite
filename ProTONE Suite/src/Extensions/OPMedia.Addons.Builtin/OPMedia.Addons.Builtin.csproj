@@ -46,9 +46,11 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\externals\NAudio\NAudio.dll</HintPath>
+    <Reference Include="NAudio">
+      <HintPath>..\..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>..\..\packages\NAudio.Lame.1.0.2\lib\net20\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -413,6 +415,7 @@
     <None Include="Navigation\CatalogExplorer\DataLayer\CatalogDataset.xss">
       <DependentUpon>CatalogDataset.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Templates\Catalog\Default Catalog">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
