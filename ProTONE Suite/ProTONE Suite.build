@@ -2,14 +2,17 @@
 <project name="ProTONE Suite" default="build" basedir=".">
     <description>ProTONE Suite</description>
 
-    <property name="svnuser" value="octavian.paraschiv" />
-    <property name="svnpass" value="Cx9yE2EX3QH7" />
+    <property name="scm-user" value="octavian-paraschiv" />
+    <property name="scm-pass" value="xTG23fc@" />
 
     <property name="debug" value="true" overwrite="false" />
     <property name="dotnet40.framework.dir" value="c:\windows\microsoft.net\framework\v4.0.30319" />
     <property name="msbuild40.executable" value="c:\windows\microsoft.net\framework\v4.0.30319\msbuild.exe" />
     <property name="istool.executable" value="c:\Program Files (x86)\ISTool\istool.exe" />
     <property name="root" value="." />
+    
+    <!-- GIT binary folder -->
+    <property name="git.dir" value="c:\Program Files (x86)\Git\bin\" />
 
     <target name="build" description="Rebuild ProTONE Suite">
         <loadtasks assembly="f:\Programs\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
@@ -17,7 +20,7 @@
         <echo message=" BUILD STARTED !!" />
 
         <call target="cleanup" />
-        <call target="SvnCheckout" />
+        <call target="ScmCheckout" />
         <call target="VersionInfoUpdate" />
         <call target="BuildVSSolution" />
         <call target="BuildInstaller" />
@@ -36,22 +39,22 @@
         <echo message="Source code cleanup done" />
     </target>
 
-    <target name="SvnCheckout">
-        <!-- ReGet files from SVN -->
-        <echo message="Source code check out ..." />
-        <svn-checkout
-            destination="${root}\src"
-            uri="https://protone-suite.googlecode.com/svn/trunk/ProTONE%20Suite/src"
-            recursive="true"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}"
-            revision="HEAD"
-            cache-auth="false"
-            />
-        <echo message="Source code check out done" />
+
+
+
+    <target name="ScmCheckout">
+        <!-- ReGet files from GITHUB -->
+        <echo message="Fetching source code from GITHUB ..." />
+        <exec program="${git.dir}git.exe">
+            <arg value="pull" />
+            <arg value="origin" />
+            <arg value="master" />
+        </exec>
+        
+        <echo message="Fetching source code from GITHUB: done" />
     </target>
+
+
 
     <target name="VersionInfoUpdate">
         <!-- Version info increment -->
@@ -107,84 +110,19 @@
 
     <target name="PostBuildResults">
         <!-- Post build results -->
-        <echo message="Upload build results to SVN ..." />
-        <svn
-            uri="https://protone-suite.googlecode.com/svn/publish/current"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}"
-            failonerror="false">
+        <echo message="Upload build results to GITHUB (TODO) ..." />
 
-            <arg value="add" />
-            <arg path="${'${root}\..\..\..\publish\current\ProTONE Suite ' + newversion + '.exe'}" />
+        <!-- TODO publish new Protone Suite version -->        
 
-        </svn>
+        <!-- TODO delete old Protone Suite version -->        
 
-        <svn
-            uri="https://protone-suite.googlecode.com/svn/publish/current"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}"
-            failonerror="false">
+        <!-- TODO publish new opmedia SDK version -->        
 
-            <arg value="delete" />
-            <arg path="${'${root}\..\..\..\publish\current\ProTONE Suite ' + oldversion + '.exe'}" />
-
-        </svn>
-
-        <svn
-                uri="https://protone-suite.googlecode.com/svn/publish/current"
-                quiet="false"
-                verbose="true"
-                username="${svnuser}"
-                password="${svnpass}"
-                failonerror="false">
-
-            <arg value="add" />
-            <arg path="${'${root}\..\..\..\publish\current\OPMedia SDK ' + newversion + '.exe'}" />
-
-        </svn>
-
-        <svn
-            uri="https://protone-suite.googlecode.com/svn/publish/current"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}"
-            failonerror="false">
-
-            <arg value="delete" />
-            <arg path="${'${root}\..\..\..\publish\current\OPMedia SDK ' + oldversion + '.exe'}" />
-
-        </svn>
-
-        <svn
-            uri="https://protone-suite.googlecode.com/svn/publish/current"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}">
-
-            <arg line="commit -m build_${newversion}" />
-            <arg line="${'${root}\..\..\..\publish\current'}" />
-
-        </svn>
+        <!-- TODO delete old opmedia SDK version -->        
 
         <iniwrite filename="${root}\Versions_build.txt" section="ProTONE Suite" key="Version" value="${newversion}" />
 
-        <svn
-            uri="https://protone-suite.googlecode.com/svn/trunk/ProTONE%20Suite"
-            quiet="false"
-            verbose="true"
-            username="${svnuser}"
-            password="${svnpass}">
-
-            <arg line="commit -m build_${newversion}" />
-            <arg line="${root}" />
-
-        </svn>
+        <!-- TODO commit and push -->        
 
     </target>
 
