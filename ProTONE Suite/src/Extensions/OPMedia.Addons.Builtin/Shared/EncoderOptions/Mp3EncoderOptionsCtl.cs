@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Compression.Lame;
 using OPMedia.UI.Dialogs;
+using OPMedia.Addons.Builtin.Translations;
+using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
+using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
@@ -25,44 +28,110 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         public Mp3EncoderSettings Mp3EncoderSettings { get; set; }
 
-        private BE_CONFIG Mp3ConversionOptions
+        private Mp3ConversionOptions Options
         {
             get
             {
-                return Mp3EncoderSettings.Mp3ConversionOptions;
+                return Mp3EncoderSettings.Options;
             }
 
             set
             {
-                Mp3EncoderSettings.Mp3ConversionOptions = value;
+                Mp3EncoderSettings.Options = value;
             }
         }
 
-        private bool GenerateTagsFromTrackMetadata
+        private bool CopyInputFileMetadata
         {
-            get { return Mp3EncoderSettings.GenerateTagsFromTrackMetadata; }
-            set { Mp3EncoderSettings.GenerateTagsFromTrackMetadata = value; }
+            get { return Mp3EncoderSettings.CopyInputFileMetadata; }
+            set { Mp3EncoderSettings.CopyInputFileMetadata = value; }
         }
 
         public Mp3EncoderOptionsCtl() 
         {
             InitializeComponent();
+
+            if (Mp3EncoderSettings == null)
+                Mp3EncoderSettings = new Mp3EncoderSettings();
+
             this.Load += new EventHandler(Mp3EncoderOptionsCtl_Load);
         }
 
         void Mp3EncoderOptionsCtl_Load(object sender, EventArgs e)
         {
-            cmbChannelMode.Items.Clear();
-            foreach (var x in Enum.GetValues(typeof(MpegMode)))
+            Reload();
+        }
+
+        private void UpdateSummary()
+        {
+            string summary = "";
+            this.Options.BE_CONFIG(ref summary);
+            lblOutputBitrateHint.Text = summary;
+        }
+
+        private void ChangeBitrateModeFieldsVisibility()
+        {
+            switch (this.Options.BitrateMode)
             {
-                switch ((MpegMode)x)
+                case BitrateMode.CBR:
+                    lblBitrate.Visible = cmbBitrate.Visible = true;
+                    lblPreset.Visible = cmbPreset.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    break;
+
+                case BitrateMode.ABR:
+                    lblBitrate.Visible = cmbBitrate.Visible = true;
+                    lblPreset.Visible = cmbPreset.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    break;
+
+                case BitrateMode.Preset:
+                    lblBitrate.Visible = cmbBitrate.Visible = false;
+                    lblPreset.Visible = cmbPreset.Visible = true;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    break;
+
+                case BitrateMode.VBR:
+                    lblBitrate.Visible = cmbBitrate.Visible = false;
+                    lblPreset.Visible = cmbPreset.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = true;
+                    break;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.Options != null)
+            {
+                string summary = "";
+                string conversionFlags = this.Options.BE_CONFIG(ref summary).ToString();
+                LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
+                dlg.Text = "MP3 Conversion Flags";
+                dlg.ShowDialog();
+            }
+        }
+
+        internal void Reload()
+        {
+            if (Mp3EncoderSettings == null)
+                Mp3EncoderSettings = new Mp3EncoderSettings();
+
+            chkGenerateTag.Text = Translator.Translate(UsedForCdRipper ?
+                "TXT_GENERATE_TAG" : "TXT_REUSE_TAG");
+
+            // ------------------------------
+            // Channel mode options
+            cmbChannelMode.Items.Clear();
+            foreach (var x in Enum.GetValues(typeof(ChannelMode)))
+            {
+                switch ((ChannelMode)x)
                 {
-                    case MpegMode.JOINT_STEREO:
-                    case MpegMode.STEREO:
+                    case ChannelMode.JointStereo:
+                    case ChannelMode.Stereo:
                         cmbChannelMode.Items.Add(x);
                         break;
 
-                    case MpegMode.MONO:
+                    case ChannelMode.SingleChannel:
                         {
                             // Mono not available if ripping CD tracks.
                             if (UsedForCdRipper == false)
@@ -72,109 +141,79 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
                 }
 
             }
-
-            cmbVbrMode.Items.Clear();
-            foreach (var x in Enum.GetValues(typeof(VBRMETHOD)))
-            {
-                cmbVbrMode.Items.Add(x);
-            }
-
-
-            // ---- 1 ----
-            grpOptionsVBR.Visible = (Mp3ConversionOptions.format.bEnableVBR != 0);
-            cmbBitrateMode.SelectedIndex = Mp3ConversionOptions.format.bEnableVBR;
-            cmbBitrateMode.SelectedIndexChanged += (s, a) =>
-            {
-                Mp3ConversionOptions.format.bEnableVBR = cmbBitrateMode.SelectedIndex;
-                Mp3ConversionOptions.format.bWriteVBRHeader = cmbBitrateMode.SelectedIndex;
-                grpOptionsVBR.Visible = (Mp3ConversionOptions.format.bEnableVBR != 0);
-            };
-
-            // ---- 2 ----
-            cmbChannelMode.SelectedIndex = cmbChannelMode.FindStringExact(Mp3ConversionOptions.format.nMode.ToString());
+            cmbChannelMode.SelectedIndex = cmbChannelMode.FindStringExact(this.Options.ChannelMode.ToString());
             cmbChannelMode.SelectedIndexChanged += (s, a) =>
             {
-                Mp3ConversionOptions.format.nMode =
-                    (MpegMode)Enum.Parse(typeof(MpegMode), cmbChannelMode.Text);
+                this.Options.ChannelMode =
+                    (ChannelMode)Enum.Parse(typeof(ChannelMode), cmbChannelMode.Text);
+                UpdateSummary();
             };
+            //-------------------------
 
-            // ---- 3 ----
-            cmbBitrate.SelectedIndex = cmbBitrate.FindStringExact(Mp3ConversionOptions.format.dwBitrate.ToString());
+            // ------------------------
+            // Bitrate Mode options
+            cmbBitrateMode.Items.Clear();
+            foreach (var x in Enum.GetValues(typeof(BitrateMode)))
+            {
+                cmbBitrateMode.Items.Add(x);
+            }
+            cmbBitrateMode.SelectedIndex = cmbBitrateMode.FindStringExact(this.Options.BitrateMode.ToString());
+            ChangeBitrateModeFieldsVisibility();
+            cmbBitrateMode.SelectedIndexChanged += (s, a) =>
+            {
+                this.Options.BitrateMode = (BitrateMode)cmbBitrateMode.SelectedIndex;
+                ChangeBitrateModeFieldsVisibility();
+                UpdateSummary();
+            };
+            // ------------------------
+
+            // ------------------------
+            // CBR and ABR bit rate
+            cmbBitrate.SelectedIndex = cmbBitrate.FindStringExact(this.Options.Bitrate.ToString());
             cmbBitrate.SelectedIndexChanged += (s, a) =>
             {
-                Mp3ConversionOptions.format.dwBitrate = uint.Parse(cmbBitrate.Text);
+                this.Options.Bitrate = int.Parse(cmbBitrate.Text);
+                UpdateSummary();
             };
+            // ------------------------
 
-            // ---- 4 ----
-            if (Mp3ConversionOptions.format.dwMaxBitrate == 0)
-                Mp3ConversionOptions.format.dwMaxBitrate = Mp3ConversionOptions.format.dwBitrate;
-
-            cmbVbrMax.SelectedIndex = cmbBitrate.FindStringExact(Mp3ConversionOptions.format.dwMaxBitrate.ToString());
-            cmbVbrMax.SelectedIndexChanged += (s, a) =>
+            // ------------------------
+            // VBR "preset-based"
+            cmbPreset.Items.Clear();
+            foreach (var x in Enum.GetValues(typeof(Preset)))
             {
-                Mp3ConversionOptions.format.dwMaxBitrate = uint.Parse(cmbVbrMax.Text);
-            };
-
-            // ---- 5 ----
-            cmbVbrQuality.SelectedIndex = Mp3ConversionOptions.format.nVBRQuality;
-            cmbVbrQuality.SelectedIndexChanged += (s, a) =>
-                {
-                    Mp3ConversionOptions.format.nVBRQuality = cmbVbrQuality.SelectedIndex;
-                };
-
-            // ---- 6 ----
-            cmbVbrMode.SelectedIndex = cmbVbrMode.FindStringExact(Mp3ConversionOptions.format.nVbrMethod.ToString());
-            cmbVbrMode.SelectedIndexChanged += (s, a) =>
+                cmbPreset.Items.Add(x);
+            }
+            cmbPreset.SelectedIndex = cmbPreset.FindStringExact(this.Options.VBRPreset.ToString());
+            cmbPreset.SelectedIndexChanged += (s, a) =>
             {
-                Mp3ConversionOptions.format.nVbrMethod =
-                    (VBRMETHOD)Enum.Parse(typeof(VBRMETHOD), cmbVbrMode.Text);
+                this.Options.VBRPreset =
+                    (Preset)Enum.Parse(typeof(Preset), cmbPreset.Text);
+                UpdateSummary();
             };
+            // ------------------------
 
-            // ---- 7 ----
-            chkCopyright.Checked = (Mp3ConversionOptions.format.bCopyright != 0);
-            chkCopyright.CheckedChanged += (s, a) =>
+            // ------------------------
+            // VBR "quality-based"
+            cgVbrQuality.Value = this.Options.VBRQuality;
+            cgVbrQuality.PositionChanged += (pos) =>
             {
-                Mp3ConversionOptions.format.bCopyright = chkCopyright.Checked ? 1 : 0;
+                this.Options.VBRQuality = (int)cgVbrQuality.Value;
+                UpdateSummary();
             };
+            // ------------------------
 
-            // ---- 8 ----
-            chkPrivate.Checked = (Mp3ConversionOptions.format.bPrivate != 0);
-            chkPrivate.CheckedChanged += (s, a) =>
-            {
-                Mp3ConversionOptions.format.bPrivate = chkPrivate.Checked ? 1 : 0;
-            };
 
-            // ---- 9 ----
-            chkCRC.Checked = (Mp3ConversionOptions.format.bCRC != 0);
-            chkCRC.CheckedChanged += (s, a) =>
-            {
-                Mp3ConversionOptions.format.bCRC = chkCRC.Checked ? 1 : 0;
-            };
-
-            // ---- 10 ----
-            chkOriginal.Checked = (Mp3ConversionOptions.format.bOriginal != 0);
-            chkOriginal.CheckedChanged += (s, a) =>
-            {
-                Mp3ConversionOptions.format.bOriginal = chkOriginal.Checked ? 1 : 0;
-            };
-
-            // --- 11 ----
-            chkGenerateTag.Checked = GenerateTagsFromTrackMetadata;
+            // ------------------------
+            // CopyInputFileMetadata
+            chkGenerateTag.Checked = this.CopyInputFileMetadata;
             chkGenerateTag.CheckedChanged += (s, a) =>
             {
-                GenerateTagsFromTrackMetadata = chkGenerateTag.Checked;
+                this.CopyInputFileMetadata = chkGenerateTag.Checked;
             };
-        }
+            // ------------------------
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (Mp3ConversionOptions != null)
-            {
-                string conversionFlags = Mp3ConversionOptions.ToString();
-                LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
-                dlg.Text = "MP3 Conversion Flags";
-                dlg.ShowDialog();
-            }
+            UpdateSummary();
         }
     }
 }

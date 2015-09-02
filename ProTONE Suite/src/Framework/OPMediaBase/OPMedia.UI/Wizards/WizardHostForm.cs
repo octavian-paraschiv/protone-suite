@@ -615,6 +615,8 @@ namespace OPMedia.UI.Wizards
             pnlWizardStep.Controls.Clear();
             pnlWizardStep.Controls.Add(wizardPage);
 
+            ThemeManager.SetDoubleBuffer(wizardPage);
+
             if (wizardPage.DesiredSize.IsEmpty)
             {
                 // Standard size
@@ -627,8 +629,6 @@ namespace OPMedia.UI.Wizards
                 this.Width = wizardPage.DesiredSize.Width;
                 this.Height = wizardPage.DesiredSize.Height;
             }
-
-            ThemeManager.SetDoubleBuffer(wizardPage);
 
             pnlWizardStep.ResumeLayout();
             pnlWizardLayout.ResumeLayout();

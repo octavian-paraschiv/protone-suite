@@ -37,6 +37,16 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         bool _tagModified = false;
 
+        public static new ID3FileInfo Empty
+        {
+            get
+            {
+                ID3FileInfo empty = new ID3FileInfo(null, false);
+                empty._tag = new TagLib.Id3v2.Tag();
+                return empty;
+            }
+        }
+
         public static string[] AudioGenres
         {
             get
@@ -69,7 +79,9 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 //    ((af.TagTypesOnDisk & TagTypes.Id3v1) == TagTypes.Id3v1 ||
                 //    (af.TagTypesOnDisk & TagTypes.Id3v2) == TagTypes.Id3v2));
 
-                return (af != null && _tag != null);
+                //return (af != null && _tag != null);
+
+                return (_tag != null);
             } 
         }
 
@@ -261,7 +273,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 Dictionary<string, string> info = new Dictionary<string, string>();
 
                 info.Add("TXT_DURATION:", Duration.GetValueOrDefault().ToString());
-                info.Add("TXT_BITRATE:", Bitrate.GetValueOrDefault().ToString());
+                info.Add("TXT_BITRATE", Bitrate.GetValueOrDefault().ToString());
                 info.Add("TXT_CHANNELS:", Channels.GetValueOrDefault().ToString());
                 info.Add("TXT_FREQUENCY:", Frequency.GetValueOrDefault().ToString());
 
@@ -318,6 +330,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [TranslatableDisplayName("TXT_BITRATE")]
         [TranslatableCategory("TXT_MEDIAINFO")]
+        [ReadOnly(true)]
         [Browsable(true)]
         public override Bitrate? Bitrate
         {
@@ -335,6 +348,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [TranslatableDisplayName("TXT_CHANNELS")]
         [TranslatableCategory("TXT_MEDIAINFO")]
+        [ReadOnly(true)]
         [Browsable(true)]
         public override ChannelMode? Channels
         {
@@ -351,6 +365,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [TranslatableDisplayName("TXT_DURATION")]
         [TranslatableCategory("TXT_MEDIAINFO")]
+        [ReadOnly(true)]
         [Browsable(true)]
         public override TimeSpan? Duration
         {
@@ -367,6 +382,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [TranslatableDisplayName("TXT_FREQUENCY")]
         [TranslatableCategory("TXT_MEDIAINFO")]
+        [ReadOnly(true)]
         [Browsable(true)]
         public override int? Frequency
         {
@@ -380,6 +396,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     return null;
             }
         }
+
 
         [SingleSelectionBrowsable]
         [Editor("OPMedia.UI.ProTONE.Dialogs.ID3ArtworkPropertyBrowser, OPMedia.UI.ProTONE", typeof(UITypeEditor))]
@@ -483,6 +500,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public ID3FileInfo(string path, bool deepLoad)
             : base(path, false)
         {
+            _tag = null;
+
             if (IsValid)
             {
                 try

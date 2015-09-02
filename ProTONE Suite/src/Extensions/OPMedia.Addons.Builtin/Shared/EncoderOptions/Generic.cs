@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
 using OPMedia.Runtime.ProTONE.Compression.Lame;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
@@ -25,7 +26,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         public EncoderSettingsContainer()
         {
-            this.AudioMediaFormatType = EncoderOptions.AudioMediaFormatType.WAV;
+            this.AudioMediaFormatType = EncoderOptions.AudioMediaFormatType.MP3;
             this.WavEncoderSettings = new WavEncoderSettings();
             this.Mp3EncoderSettings = new Mp3EncoderSettings();
             this.OggEncoderSettings = new OggEncoderSettings();
@@ -39,14 +40,20 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
     public class Mp3EncoderSettings
     {
-        public bool GenerateTagsFromTrackMetadata { get; set; }
+        public bool CopyInputFileMetadata { get; set; }
 
-        public BE_CONFIG Mp3ConversionOptions { get; set; }
+        public Mp3ConversionOptions Options { get; set; }
+
+        public override string ToString()
+        {
+            string summary = "";
+            return this.Options.BE_CONFIG(ref summary).ToString();
+        }
 
         public Mp3EncoderSettings()
         {
-            this.GenerateTagsFromTrackMetadata = false;
-            this.Mp3ConversionOptions = new BE_CONFIG();
+            this.CopyInputFileMetadata = false;
+            this.Options = new Mp3ConversionOptions();
         }
     }
 

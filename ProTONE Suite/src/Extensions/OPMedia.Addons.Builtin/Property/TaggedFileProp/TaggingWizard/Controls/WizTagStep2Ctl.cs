@@ -21,13 +21,13 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         private List<EditPanelBase> panels =
             new List<EditPanelBase>();
 
-        public override Size DesiredSize
-        {
-            get
-            {
-                return new Size(640, 455);
-            }
-        }
+        //public override Size DesiredSize
+        //{
+        //    get
+        //    {
+        //        return new Size(640, 455);
+        //    }
+        //}
 
         public WizTagStep2Ctl()
         {
@@ -72,29 +72,37 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             panels.Add(panel);
             panel.Visible = false;
             panel.Dock = DockStyle.Fill;
-            pnlEdit.Controls.Add(panel);
         }
 
         private void ShowPanel(int index)
         {
-            foreach (Control ctl in pnlEdit.Controls)
+            try
             {
-                ctl.Visible = false;
-            }
+                this.SuspendLayout();
+                pnlEdit.SuspendLayout();
+                pnlEdit.Controls.Clear();
 
-            EditPanelBase panel = panels[index];
-            if (panel != null)
+                EditPanelBase panel = panels[index];
+                if (panel != null)
+                {
+                    Translator.TranslateControl(panel, false);
+                    panel.Visible = true;
+                    panel.SetTask(BkgTask as Task);
+
+                    lblPreview.Visible = panel.ShowPreview;
+                    cmbWordCasing.Visible = panel.ShowWordCasing;
+                    lblWordHandling.Visible = panel.ShowWordCasing;
+
+                    pnlEdit.Controls.Add(panel);
+                }
+
+                selectedPanel = index;
+            }
+            finally
             {
-                Translator.TranslateControl(panel, false);
-                panel.Visible = true;
-                panel.SetTask(BkgTask as Task);
-
-                lblPreview.Visible = panel.ShowPreview;
-                cmbWordCasing.Visible = panel.ShowWordCasing;
-                lblWordHandling.Visible = panel.ShowWordCasing;
+                pnlEdit.ResumeLayout();
+                this.ResumeLayout();
             }
-
-            selectedPanel = index;
         }
 
         private void cmbEditType_SelectedIndexChanged(object sender, EventArgs e)

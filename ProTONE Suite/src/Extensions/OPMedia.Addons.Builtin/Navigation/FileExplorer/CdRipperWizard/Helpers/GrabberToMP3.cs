@@ -8,12 +8,14 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.Compression.Lame;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Utilities;
+using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
 {
     class GrabberToMP3 : CdRipper
     {
-        public BE_CONFIG Mp3ConversionOptions;
+        public Mp3ConversionOptions Options { get; set; }
 
         private uint m_hLameStream = 0;
         private uint m_InputSamples = 0;
@@ -30,7 +32,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
             if (MustCancel())
                 return;
 
-            ID3FileInfoSlim ifiSlim = new ID3FileInfoSlim(MediaFileInfo.Empty);
+            ID3FileInfoSlim ifiSlim = new ID3FileInfoSlim();
             ifiSlim.Album = track.Album;
             ifiSlim.Artist = track.Artist;
             ifiSlim.Genre = track.Genre;
@@ -41,12 +43,17 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
             if (short.TryParse(track.Year, out year))
                 ifiSlim.Year = year;
 
+            this.Options.WaveFormat = WaveFormatEx.Cdda;
+
             EncodeBuffer(buff, destFile, generateTags, ifiSlim);
         }
 
         public void EncodeBuffer(byte[] buff, string destFile, bool generateTags, ID3FileInfoSlim ifiSlim)
         {
-            uint LameResult = Lame_encDll.beInitStream(Mp3ConversionOptions, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
+            string summary = "";
+            BE_CONFIG cfg = this.Options.BE_CONFIG(ref summary);
+
+            uint LameResult = Lame_encDll.beInitStream(cfg, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
             if (LameResult != Lame_encDll.BE_ERR_SUCCESSFUL)
             {
                 throw new ApplicationException(string.Format("Lame_encDll.beInitStream failed with the error code {0}", LameResult));
@@ -102,7 +109,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
                 }
             }
 
-            if (!MustCancel() && Mp3ConversionOptions.format.bWriteVBRHeader != 0)
+            if (!MustCancel() && cfg.format.bWriteVBRHeader != 0)
             {
                 uint err = Lame_encDll.beWriteVBRHeader(destFile);
             }

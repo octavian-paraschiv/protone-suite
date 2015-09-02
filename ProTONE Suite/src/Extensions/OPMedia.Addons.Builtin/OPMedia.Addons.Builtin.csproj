@@ -46,11 +46,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio">
-      <HintPath>..\..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Lame">
-      <HintPath>..\..\packages\NAudio.Lame.1.0.2\lib\net20\NAudio.Lame.dll</HintPath>
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\protone-suite-externals\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -88,6 +86,7 @@
     </Compile>
     <Compile Include="Property\TaggedFileProp\TaggingWizard\Helpers\Transcoder.cs" />
     <Compile Include="Shared\Compression\LameEncoder.cs" />
+    <Compile Include="Shared\Compression\LameWrapper.cs" />
     <Compile Include="Shared\EncoderOptions\EncoderConfiguratorCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -415,7 +414,6 @@
     <None Include="Navigation\CatalogExplorer\DataLayer\CatalogDataset.xss">
       <DependentUpon>CatalogDataset.xsd</DependentUpon>
     </None>
-    <None Include="packages.config" />
     <None Include="Templates\Catalog\Default Catalog">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -583,10 +581,7 @@
     <None Include="Resources\New_Folder_Command16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libmp3lame.32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libmp3lame.64.dll">
+    <Content Include="lame_enc.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Tagging.png" />

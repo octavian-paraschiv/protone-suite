@@ -458,6 +458,11 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
     public class ID3FileInfoSlim : MediaFileInfoSlim
     {
+        public ID3FileInfoSlim() :
+            this(ID3FileInfo.Empty)
+        {
+        }
+
         public ID3FileInfoSlim(MediaFileInfo mfi) 
             : base(mfi)
         {

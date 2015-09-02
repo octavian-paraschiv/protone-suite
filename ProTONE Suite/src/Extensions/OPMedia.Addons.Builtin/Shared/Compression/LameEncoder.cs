@@ -310,6 +310,15 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
         [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint beWriteVBRHeader(string lpszFileName);
         
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int lame_decode_init();
+        
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int lame_decode_exit();
+
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int lame_decode(byte[] buffer, int len, short[] pcm_l, short[] pcm_r);
+
         public static uint EncodeChunk(uint hbeStream, byte[] buffer, int index, uint nBytes, byte[] pOutput, ref uint pdwOutput)
         {
             uint res;

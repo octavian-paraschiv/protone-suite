@@ -41,8 +41,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.encoderOptionsCtl.Dock = System.Windows.Forms.DockStyle.Fill;
             encoderSettingsContainer1.AudioMediaFormatType = OPMedia.Addons.Builtin.Shared.EncoderOptions.AudioMediaFormatType.WAV;
-            mp3EncoderSettings1.GenerateTagsFromTrackMetadata = false;
-            mp3EncoderSettings1.Mp3ConversionOptions = ((OPMedia.Runtime.ProTONE.Compression.Lame.BE_CONFIG)(resources.GetObject("mp3EncoderSettings1.Mp3ConversionOptions")));
+            mp3EncoderSettings1.CopyInputFileMetadata = false;
             encoderSettingsContainer1.Mp3EncoderSettings = mp3EncoderSettings1;
             encoderSettingsContainer1.OggEncoderSettings = oggEncoderSettings1;
             encoderSettingsContainer1.WavEncoderSettings = wavEncoderSettings1;

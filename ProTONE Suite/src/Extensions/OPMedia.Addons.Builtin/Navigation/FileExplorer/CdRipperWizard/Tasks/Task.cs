@@ -110,8 +110,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
                                 break;
 
                             case AudioMediaFormatType.MP3:
-                                (_grabber as GrabberToMP3).Mp3ConversionOptions = this.EncoderSettings.Mp3EncoderSettings.Mp3ConversionOptions;
-                                generateTagsFromMetadata = this.EncoderSettings.Mp3EncoderSettings.GenerateTagsFromTrackMetadata;
+                                (_grabber as GrabberToMP3).Options = this.EncoderSettings.Mp3EncoderSettings.Options;
+                                generateTagsFromMetadata = this.EncoderSettings.Mp3EncoderSettings.CopyInputFileMetadata;
                                 break;
                         }
 

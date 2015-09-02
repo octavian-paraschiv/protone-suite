@@ -1084,4 +1084,7 @@ Voulez-vous le créer?</value>
   <data name="TXT_CHOOSE_FONT" xml:space="preserve">
     <value>Choisissez une fonte:</value>
   </data>
+  <data name="TXT_WORST" xml:space="preserve">
+    <value>Pire</value>
+  </data>
 </root>

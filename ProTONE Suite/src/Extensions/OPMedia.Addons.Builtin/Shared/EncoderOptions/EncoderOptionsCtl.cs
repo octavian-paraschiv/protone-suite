@@ -27,21 +27,27 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         {
             this.EncoderSettings = new EncoderSettingsContainer();
             InitializeComponent();
+
+            cmbOutputFormat.Items.Clear();
+            AddPanel(new Mp3EncoderOptionsCtl());
+            AddPanel(new WavEncoderOptionsCtl());
         }
 
         private void InternalDisplaySettings(bool usedForCdRipper)
         {
-            cmbOutputFormat.Items.Clear();
+            foreach (Control ctl in pnlEncoderOptions.Controls)
+            {
+                Mp3EncoderOptionsCtl mp3Ctl = ctl as Mp3EncoderOptionsCtl;
+                if (mp3Ctl != null)
+                {
+                    mp3Ctl.UsedForCdRipper = usedForCdRipper;
+                    mp3Ctl.Mp3EncoderSettings = EncoderSettings.Mp3EncoderSettings;
+                    mp3Ctl.Reload();
+                }
+            }
 
-            Mp3EncoderOptionsCtl ctl = new Mp3EncoderOptionsCtl();
-            ctl.UsedForCdRipper = usedForCdRipper;
-            ctl.Mp3EncoderSettings = EncoderSettings.Mp3EncoderSettings;
-
-            AddPanel(ctl);
-
-            AddPanel(new WavEncoderOptionsCtl());
-
-            cmbOutputFormat.SelectedIndex = 0;
+            cmbOutputFormat.SelectedIndex = (int)EncoderSettings.AudioMediaFormatType;
+            ShowPanel(cmbOutputFormat.SelectedIndex);
         }
 
         private void AddPanel(EncoderConfiguratorCtl panel)
@@ -50,7 +56,6 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             panels.Add(panel);
             panel.Visible = false;
             panel.Dock = DockStyle.Fill;
-            pnlEncoderOptions.Controls.Add(panel);
         }
 
         private void OnSelectOutputFormat(object sender, EventArgs e)
@@ -61,19 +66,28 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         private void ShowPanel(int index)
         {
-            foreach (Control ctl in pnlEncoderOptions.Controls)
+            try
             {
-                ctl.Visible = false;
-            }
+                this.SuspendLayout();
+                pnlEncoderOptions.SuspendLayout();
+                pnlEncoderOptions.Controls.Clear();
 
-            EncoderConfiguratorCtl panel = panels[index];
-            if (panel != null)
+                EncoderConfiguratorCtl panel = panels[index];
+                if (panel != null)
+                {
+                    Translator.TranslateControl(panel, false);
+                    panel.Visible = true;
+
+                    pnlEncoderOptions.Controls.Add(panel);
+                }
+
+                selectedPanel = index;
+            }
+            finally
             {
-                Translator.TranslateControl(panel, false);
-                panel.Visible = true;
+                pnlEncoderOptions.ResumeLayout();
+                this.ResumeLayout();
             }
-
-            selectedPanel = index;
         }
     }
 }

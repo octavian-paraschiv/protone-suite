@@ -103,6 +103,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [TranslatableDisplayName("TXT_ALBUM")]
         [TranslatableCategory("TXT_CDTRACKINFO")]
         [Browsable(true)]
+        [ReadOnly(true)]
         public override string Album
         {
             get
@@ -134,6 +135,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         }
 
         [Browsable(false)]
+        [ReadOnly(true)]
         public override string Comments
         {
             get { return string.Empty; }
@@ -185,7 +187,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 Dictionary<string, string> info = new Dictionary<string, string>();
 
                 info.Add("TXT_DURATION:", Duration.GetValueOrDefault().ToString());
-                info.Add("TXT_BITRATE:", Bitrate.GetValueOrDefault().ToString());
+                info.Add("TXT_BITRATE", Bitrate.GetValueOrDefault().ToString());
                 info.Add("TXT_CHANNELS:", Channels.GetValueOrDefault().ToString());
                 info.Add("TXT_FREQUENCY:", Frequency.GetValueOrDefault().ToString());
               

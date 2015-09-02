@@ -50,6 +50,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
             encoderOptionsCtl.EncoderSettings = (BkgTask as Task).EncoderSettings;
             encoderOptionsCtl.DisplaySettings(true);
+
+            CheckFinishButton();
         }
 
         private void opmButton1_Click(object sender, EventArgs e)

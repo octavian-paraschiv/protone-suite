@@ -158,11 +158,12 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 WaveFormatEx wfex = WaveFormatEx.Cdda;
                                 byte[] buff = ReadWAV(inputFile, ref wfex);
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
-                                grabber.Mp3ConversionOptions = encoderSettings.Mp3EncoderSettings.Mp3ConversionOptions;
+                                grabber.Options = encoderSettings.Mp3EncoderSettings.Options;
 
+                                
                                 // Resample is not supported at this time.
-                                // Specify the same sample rate as the input WAV file, otherwise we'll be failing.
-                                grabber.Mp3ConversionOptions.format.dwSampleRate = (uint)wfex.nSamplesPerSec;
+                                // Specify the same settings as the input WAV file, otherwise we'll be failing.
+                                grabber.Options.WaveFormat = wfex;
 
                                 grabber.EncodeBuffer(buff,
                                     Path.ChangeExtension(inputFile, "MP3"),
@@ -195,15 +196,18 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 byte[] buff = ReadWAV(tempWavFile, ref wfex);
 
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
-                                grabber.Mp3ConversionOptions = encoderSettings.Mp3EncoderSettings.Mp3ConversionOptions;
+                                grabber.Options = encoderSettings.Mp3EncoderSettings.Options;
 
                                 ID3FileInfoSlim ifiSlim = 
                                     new ID3FileInfoSlim(MediaFileInfo.FromPath(inputFile, false));
 
                                 grabber.EncodeBuffer(buff,
                                     Path.ChangeExtension(inputFile, "REENC.MP3"),
-                                    encoderSettings.Mp3EncoderSettings.GenerateTagsFromTrackMetadata,
+                                    encoderSettings.Mp3EncoderSettings.CopyInputFileMetadata,
                                     ifiSlim);
+
+                                if (File.Exists(tempWavFile))
+                                    File.Delete(tempWavFile);
 
                                 return;
                             }
@@ -268,8 +272,9 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
             catch(Exception ex)
             {
                 Logger.LogException(ex);
-                return false;
             }
+
+            return false;
         }
     }
 }

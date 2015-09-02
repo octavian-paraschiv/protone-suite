@@ -44,6 +44,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
         {
             InitializeComponent();
 
+            this.SuspendLayout();
             cmbEditgenre.Items.Add(string.Empty); // no genre
             foreach (string gi in ID3FileInfo.AudioGenres)
             {
@@ -63,6 +64,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
             lvTracks.RegisterEditControl(tbEditAlbum);
             lvTracks.RegisterEditControl(tbEditTitle);
             lvTracks.RegisterEditControl(cmbEditgenre);
+
+            this.ResumeLayout();
         }
 
         void lvTracks_Resize(object sender, EventArgs e)
@@ -321,6 +324,14 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
         private void WizCdRipperStep1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void llClear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach(ListViewItem lvi in lvTracks.Items)
+                lvi.ImageIndex = 0;
+
+            CheckNextButton();
         }
 
 
