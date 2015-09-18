@@ -40,12 +40,12 @@ namespace OPMedia.Core
 
         public class CopyProgressData
         {
-            private FileInfo _source = null;
-            private FileInfo _destination = null;
+            private string _source = null;
+            private string _destination = null;
             private CopyFileCallback _callback = null;
             private object _state = null;
 
-            public CopyProgressData(FileInfo source, FileInfo destination,
+            public CopyProgressData(string source, string destination,
                 CopyFileCallback callback, object state)
             {
                 _source = source;
@@ -76,7 +76,7 @@ namespace OPMedia.Core
                     IntPtr sourceFile, IntPtr destinationFile, IntPtr data);
 
         public delegate CopyFileCallbackAction CopyFileCallback(
-            FileInfo source, FileInfo destination, object state,
+            string source, string destination, object state,
             long totalFileSize, long totalBytesTransferred);
 
         public enum DriveTypes : uint

@@ -390,7 +390,7 @@ namespace OPMedia.Core.Logging
 
         private static void PurgeOldLogFiles()
         {
-            IEnumerable<string> logFiles = Directory.EnumerateFiles(LoggingConfiguration.LogFilePath, "*.log");
+            List<string> logFiles = PathUtils.EnumFiles(LoggingConfiguration.LogFilePath, "*.log");
             foreach (string logFile in logFiles)
             {
                 try

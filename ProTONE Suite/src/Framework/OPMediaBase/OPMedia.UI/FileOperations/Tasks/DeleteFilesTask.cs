@@ -22,14 +22,13 @@ namespace OPMedia.UI.FileTasks
             {
                 if (Directory.Exists(path))
                 {
-                    DirectoryInfo di = new DirectoryInfo(path);
-                    _support.DeleteFolder(di);
+                    _support.DeleteFolder(path);
                 }
                 else
                 {
                     FileInfo fi = new FileInfo(path);
                     DeleteConnectedFiles(fi);
-                    _support.DeleteFile(fi, false);
+                    _support.DeleteFile(fi, true);
                 }
             }
             finally

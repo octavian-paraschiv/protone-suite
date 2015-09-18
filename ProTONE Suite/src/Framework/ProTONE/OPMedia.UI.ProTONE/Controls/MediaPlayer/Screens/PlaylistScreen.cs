@@ -106,7 +106,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             lvPlaylist.ShowItemToolTips = false;
             lvPlaylist.MultiSelect = true;
             lvPlaylist.Items.Clear();
-            lvPlaylist.SmallImageList = ilImages;
 
             lvPlaylist.ItemMouseHover += new ListViewItemMouseHoverEventHandler(lvPlaylist_ItemMouseHover);
             
@@ -174,7 +173,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 if (rebuildFileInfos)
                 {
-                    plItem.MediaFileInfo.Rebuild();
+                    plItem.MediaFileInfo.Rebuild(true);
                 }
 
                 bool isActive = (plItem != null && IsActiveItem(plItem));
@@ -255,7 +254,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         internal void Clear()
         {
-            ilImages.Images.Clear();
             lvPlaylist.Items.Clear();
             playlist.ClearAll();
         }
@@ -283,8 +281,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     }
                     else if (IsFolder(file))
                     {
-                        AddFiles(Directory.EnumerateDirectories(file));
-                        AddFiles(Directory.EnumerateFiles(file));
+                        AddFiles(PathUtils.EnumDirectories(file));
+                        AddFiles(PathUtils.EnumFiles(file));
                     }
                     else
                     {
@@ -903,7 +901,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                             PlaylistItem pli = item.Tag as PlaylistItem;
                             if (pli != null)
                             {
-                                pli.DeepLoad();
+                                pli.Rebuild();
 
                                 Image customImage = pli.MediaFileInfo.CustomImage;
 

@@ -200,7 +200,7 @@ namespace OPMedia.UI.FileTasks
                 ObjectsCount = 0;
                 ErrorMap.Clear();
 
-                List<string> toRemove = new List<string>();
+                List<string> allLinkedFiles = new List<string>();
                 foreach (string path in SrcFiles)
                 {
                     FileInfo fi = new FileInfo(path);
@@ -208,23 +208,31 @@ namespace OPMedia.UI.FileTasks
                     {
                         List<String> linkedFiles = _support.GetChildFiles(fi, TaskType);
                         if (linkedFiles != null && linkedFiles.Count > 0)
-                            toRemove.AddRange(linkedFiles);
+                        {
+                            var linkedFilesLowercase = (from s in linkedFiles
+                                                        select s.ToLowerInvariant()).ToList();
+
+                            allLinkedFiles.AddRange(linkedFilesLowercase);
+                        }
                     }
                 }
 
-                foreach (string dup in toRemove)
+                List<string> srcFilesClone = new List<string>(SrcFiles);
+
+                foreach (string srcFile in srcFilesClone)
                 {
-                    SrcFiles.Remove(dup);
+                    if (allLinkedFiles.Contains(srcFile.ToLowerInvariant()))
+                        SrcFiles.Remove(srcFile);
                 }
                 
                 foreach (string path in SrcFiles)
                 {
                     if (Directory.Exists(path))
                     {
-                        string[] entries = Directory.GetFileSystemEntries(path, "*", SearchOption.AllDirectories);
-                        if (entries != null && entries.Length > 0)
+                        List<string> entries = PathUtils.EnumFileSystemEntries(path, "*", SearchOption.AllDirectories);
+                        if (entries != null && entries.Count > 0)
                         {
-                            ObjectsCount += entries.Length;
+                            ObjectsCount += entries.Count;
                         }
                     }
                     else

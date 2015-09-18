@@ -34,7 +34,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ilImages = new System.Windows.Forms.ImageList(this.components);
             this.cmsPlaylist = new OPMedia.UI.Controls.OPMContextMenuStrip();
             this.dummyToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.lvPlaylist = new OPMedia.UI.Controls.OPMListView(ColumnHeaderStyle.None);
@@ -49,12 +48,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.cmsPlaylist.SuspendLayout();
             this.pnlLayout.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ilImages
-            // 
-            this.ilImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.ilImages.ImageSize = new System.Drawing.Size(16, 16);
-            this.ilImages.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // cmsPlaylist
             // 
@@ -162,7 +155,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         #endregion
 
-        private System.Windows.Forms.ImageList ilImages;
         private OPMToolStripMenuItem dummyToolStripMenuItem;
         private OPMListView lvPlaylist;
         private ColumnHeader colDummy;

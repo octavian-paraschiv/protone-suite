@@ -370,7 +370,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
 
 
-        public virtual void Rebuild()
+        public virtual void Rebuild(bool deepLoad)
         {
         }
 
@@ -407,18 +407,9 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         public void Save()
         {
-            if (_mfi != null) _mfi.Save();
+            if (_mfi != null) 
+                _mfi.Save();
         }
-
-        [TranslatableDisplayName("TXT_TITLE")]
-        [TranslatableCategory("TXT_TAGINFO")]
-        [ReadOnly(true)]
-        public string Title
-        {
-            get { return (_mfi != null) ? _mfi.Title : null; }
-            set { if (_mfi != null) _mfi.Title = value; }
-        }
-
     }
 
     public class VideoFileInfoSlim : MediaFileInfoSlim
@@ -520,6 +511,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             set { if (_mfi != null) _mfi.Year = value; }
         }
 
+        [TranslatableDisplayName("TXT_TITLE")]
+        [TranslatableCategory("TXT_TAGINFO")]
+        public string Title
+        {
+            get { return (_mfi != null) ? _mfi.Title : null; }
+            set { if (_mfi != null) _mfi.Title = value; }
+        }
+
         [TranslatableDisplayName("TXT_BITRATE")]
         [TranslatableCategory("TXT_MEDIAINFO")]
         public Bitrate? Bitrate
@@ -607,6 +606,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public short? Year
         {
             get { return (_mfi != null) ? _mfi.Year : null; }
+        }
+
+        [TranslatableDisplayName("TXT_TITLE")]
+        [TranslatableCategory("TXT_TAGINFO")]
+        [ReadOnly(true)]
+        public string Title
+        {
+            get { return (_mfi != null) ? _mfi.Title : null; }
         }
 
         [TranslatableDisplayName("TXT_BITRATE")]

@@ -63,7 +63,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
             StepDetail detail = new StepDetail();
             detail.Description = string.Format("Importing from {0} ...", SourcePath);
 
-            _abortScan = false;
+            _abortScan.Reset();
 
             try
             {
@@ -74,14 +74,15 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 finished = true;
 
-                if (!_abortScan)
+                bool isAborted = _abortScan.WaitOne(0);
+                if (!isAborted)
                 {
                     cat.CatalogDescription = CatalogDescription;
                     cat.Save(CatalogPath);
                 }
 
-                detail.Results = (_abortScan) ? Translator.Translate("TXT_ABORTED") : Translator.Translate("TXT_SUCCESS");
-                detail.IsSuccess = !_abortScan;
+                detail.Results = (isAborted) ? Translator.Translate("TXT_ABORTED") : Translator.Translate("TXT_SUCCESS");
+                detail.IsSuccess = !isAborted;
             }
             catch(Exception ex)
             {
@@ -105,8 +106,9 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
             try
             {
-                _steps += new List<string>(Directory.EnumerateDirectories(SourcePath, "*", SearchOption.AllDirectories)).Count;
-                _steps += new List<string>(Directory.EnumerateFiles(SourcePath, "*", SearchOption.AllDirectories)).Count;
+                DirectoryInfo diSrc = new DirectoryInfo(SourcePath);
+                _steps += PathUtils.EnumDirectories(_abortScan, diSrc, "*", SearchOption.AllDirectories).Count;
+                _steps += PathUtils.EnumFiles(_abortScan, diSrc, "*", SearchOption.AllDirectories).Count;
             }
             catch(Exception ex)
             {
@@ -118,7 +120,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         #region Scanning
 
-        bool _abortScan = false;
+        ManualResetEvent _abortScan = new ManualResetEvent(false);
 
         public void ScanFolder(Catalog cat, DirectoryInfo dir, CatalogItem parent)
         {
@@ -170,23 +172,13 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 Application.DoEvents();
 
-                IEnumerable<string> strDirs = Directory.EnumerateDirectories(dir.FullName, "*", SearchOption.TopDirectoryOnly);
-                if (strDirs != null)
-                {
-                    foreach (string dirPath in strDirs)
-                    {
-                        ScanFolder(cat, new DirectoryInfo(dirPath), ci);
-                    }
-                }
+                List<DirectoryInfo> subDirs = PathUtils.EnumDirectories(_abortScan, dir);
+                foreach (DirectoryInfo subDir in subDirs)
+                    ScanFolder(cat, subDir, ci);
 
-                IEnumerable<string> strFiles = Directory.EnumerateFiles(dir.FullName, "*", SearchOption.TopDirectoryOnly);
-                if (strFiles != null)
-                {
-                    foreach (string filePath in strFiles)
-                    {
-                        ScanFile(cat, new FileInfo(filePath), ci);
-                    }
-                }
+                List<FileInfo> files = PathUtils.EnumFiles(_abortScan, dir);
+                foreach (FileInfo file in files)
+                    ScanFile(cat, file, ci);
 
                 RaiseTaskProgressEvent(null, _currentStep++);
             }
@@ -271,7 +263,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
         {
             if (ex is ThreadAbortException)
             {
-                _abortScan = true;
+                _abortScan.Set();
             }
             else
             {
@@ -281,7 +273,10 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                     TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
 
-                    _abortScan = MessageDisplay.Query(message, "TXT_SCAN_ERROR", MessageBoxIcon.Exclamation) != DialogResult.Yes;
+                    if (MessageDisplay.Query(message, "TXT_SCAN_ERROR", MessageBoxIcon.Exclamation) != DialogResult.Yes)
+                        _abortScan.Set();
+                    else
+                        _abortScan.Reset();
 
                     TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
                 });
@@ -292,7 +287,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
         {
             do
             {
-                if (_abortScan) 
+                if (_abortScan.WaitOne(0)) 
                     return false;
 
                 Thread.Sleep(50);

@@ -123,25 +123,27 @@ namespace OPMedia.Core
             return null;
         }
         
-        public static Image GetIconOfFileType(string ext)
+        public static Image GetIconOfFileType(string ext, bool largeIcon = false)
         {
+            string key = string.Format("{0}_{1}", ext.ToLowerInvariant(), largeIcon ? "1" : "0");
+
             Image retVal = GenericFileIcon;
-            if (fileTypeIcons.ContainsKey(ext))
+            if (fileTypeIcons.ContainsKey(key))
             {
-                retVal = fileTypeIcons[ext];
+                retVal = fileTypeIcons[key];
             }
             else
             {
                 try
                 {
-                    string tempFile = Path.ChangeExtension(Path.GetTempFileName(), ext.Trim(".".ToCharArray()));
+                    string tempFile = Path.ChangeExtension(Path.GetTempFileName(), ext.Trim('.'));
                     File.Create(tempFile).Close();
 
-                    Image icon = GetIcon(tempFile, false);
+                    Icon icon = _GetIcon(tempFile, largeIcon);
                     if (icon != null)
                     {
-                        fileTypeIcons.Add(ext, icon);
-                        retVal = icon;
+                        fileTypeIcons.Add(key, icon.ToBitmap());
+                        retVal = icon.ToBitmap();
                     }
 
                     File.Delete(tempFile);
@@ -156,21 +158,37 @@ namespace OPMedia.Core
 
         public static Image GetIcon(string strPath, bool largeIcon = false)
         {
-            Icon icon = _GetIcon(strPath, largeIcon);
-            if (icon != null)
+            Image retVal = null;
+
+            if (Directory.Exists(strPath))
             {
-                Image retVal = icon.ToBitmap();
-                if (retVal == null)
+                Icon icon = _GetIcon(strPath, largeIcon);
+                if (icon != null)
                 {
-                    return GetShell32Icon(Shell32Icon.GenericFile, largeIcon);
-                }
-                else
-                {
-                    return retVal.Resize(largeIcon);
+                    Image img = icon.ToBitmap();
+                    if (img == null)
+                    {
+                        retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
+                    }
+                    else
+                    {
+                        retVal = img.Resize(largeIcon);
+                    }
                 }
             }
+            else
+            {
+                retVal = GetIconOfFileType(PathUtils.GetExtension(strPath), largeIcon);
 
-            return null;
+                if (retVal == null)
+                    retVal = GetShell32Icon(Shell32Icon.GenericFile, largeIcon);
+            }
+
+
+            if (retVal == null)
+                retVal = GenericFileIcon;
+
+            return retVal;
         }
 
         private static Icon _GetIcon(string strPath, bool largeIcon = false)
@@ -319,6 +337,53 @@ namespace OPMedia.Core
             }
 
             return null;
+        }
+    }
+
+    public class FileSystemImageListManager
+    {
+        bool _large = false;
+
+        private ImageList _il = null;
+
+        public ImageList ImageList 
+        {
+            get { return _il; }
+        }
+
+        public void Clear()
+        {
+            _il.Images.Clear();
+        }
+
+        public FileSystemImageListManager(bool large)
+            : base()
+        {
+            _large = large;
+            _il = new ImageList();
+            _il.ColorDepth = ColorDepth.Depth32Bit;
+            _il.ImageSize = 
+                large ? new Size(32, 32) : new Size(16, 16);
+        }
+
+        public string GetImageKey(string path)
+        {
+            string key = null;
+            if (Directory.Exists(path))
+                key = path.ToLowerInvariant();
+            else
+            {
+                string ext = PathUtils.GetExtension(path);
+                key = string.Format("ext:{0}", ext);
+            }
+
+            if (_il.Images.ContainsKey(key))
+                return key;
+
+            Image img = ImageProvider.GetIcon(path, _large);
+            _il.Images.Add(key, img);
+
+            return key;
         }
     }
 }

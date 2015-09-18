@@ -29,7 +29,6 @@ namespace OPMedia.UI.Dialogs
             this.components = new System.ComponentModel.Container();
             this.btnAdd = new OPMedia.UI.Controls.OPMButton();
             this.btnDelete = new OPMedia.UI.Controls.OPMButton();
-            this.ilFavorites = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lvFavorites = new OPMedia.UI.Controls.OPMListView(ColumnHeaderStyle.None);
             this.colPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,12 +65,6 @@ namespace OPMedia.UI.Dialogs
             this.btnDelete.Text = "TXT_DELETE";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // ilFavorites
-            // 
-            this.ilFavorites.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.ilFavorites.ImageSize = new System.Drawing.Size(16, 16);
-            this.ilFavorites.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -105,7 +98,6 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel1.SetRowSpan(this.lvFavorites, 4);
             this.lvFavorites.ShowItemToolTips = true;
             this.lvFavorites.Size = new System.Drawing.Size(232, 114);
-            this.lvFavorites.SmallImageList = this.ilFavorites;
             this.lvFavorites.TabIndex = 4;
             this.lvFavorites.UseCompatibleStateImageBehavior = false;
             this.lvFavorites.View = System.Windows.Forms.View.Details;
@@ -133,7 +125,5 @@ namespace OPMedia.UI.Dialogs
         private OPMTableLayoutPanel tableLayoutPanel1;
         private OPMListView lvFavorites;
         private ColumnHeader colPath;
-
-        private ImageList ilFavorites;
     }
 }

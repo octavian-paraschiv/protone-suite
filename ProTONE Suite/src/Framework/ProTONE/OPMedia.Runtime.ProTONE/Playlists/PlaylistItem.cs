@@ -354,6 +354,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return mi.Name;
         }
 
+
+        public void Rebuild()
+        {
+            if (mi != null)
+            {
+                mi.Rebuild(true);
+            }
+        }
+
         public PlaylistItem(string itemPath, bool deepLoad) : this(itemPath, false, deepLoad)
         {
         }
@@ -427,6 +436,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             catch { }
             return false;
         }
+
     }
 
     public class BoormarkEditablePlaylistItem : PlaylistItem

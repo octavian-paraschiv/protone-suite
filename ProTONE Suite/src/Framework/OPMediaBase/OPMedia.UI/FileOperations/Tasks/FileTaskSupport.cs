@@ -12,12 +12,23 @@ using OPMedia.Runtime.FileInformation;
 using System.ComponentModel;
 using OPMedia.UI.Controls;
 using OPMedia.Core.ComTypes;
+using System.Diagnostics;
 
 namespace OPMedia.UI.FileOperations.Tasks
 {
     public class FileTaskSupport
     {
         BaseFileTask _task = null;
+
+        bool _skipConfirmations = false;
+
+        public bool SkipConfirmations
+        {
+            get
+            {
+                return _skipConfirmations;
+            }
+        }
 
         public bool RequiresRefresh { get; private set; }
 
@@ -115,46 +126,57 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         protected ConfirmationData ConfirmObjectAction(string tag, string objectName)
         {
-            ConfirmationData retVal = new ConfirmationData();
-
-            MainThread.Send(delegate(object x)
+            try
             {
-                DialogResult dr = DialogResult.Abort;
+                _fileTaskWaitEvent.Set();
+                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
 
-                if (_task.ObjectsCount == 1)
+                ConfirmationData retVal = new ConfirmationData();
+
+                MainThread.Send(delegate(object x)
                 {
-                    dr = MessageDisplay.Query(
-                    Translator.Translate(tag, objectName), "TXT_CONFIRM");
-                }
-                else
-                {
-                    dr = MessageDisplay.QueryWithCancelAndAbort(
-                    Translator.Translate(tag, objectName),
-                    "TXT_CONFIRM", (_task.ObjectsCount > 1));
-                }
+                    DialogResult dr = DialogResult.Abort;
 
-                switch (dr)
-                {
-                    case DialogResult.Abort:
-                        CanContinue = false;
-                        break;
+                    if (_task.ObjectsCount == 1)
+                    {
+                        dr = MessageDisplay.Query(
+                        Translator.Translate(tag, objectName), "TXT_CONFIRM");
+                    }
+                    else
+                    {
+                        dr = MessageDisplay.QueryWithCancelAndAbort(
+                        Translator.Translate(tag, objectName),
+                        "TXT_CONFIRM", (_task.ObjectsCount > 1));
+                    }
 
-                    case DialogResult.No:
-                        retVal.ConfirmationResult = false;
-                        break;
+                    switch (dr)
+                    {
+                        case DialogResult.Abort:
+                            CanContinue = false;
+                            break;
 
-                    case DialogResult.Yes:
-                        retVal.ConfirmationResult = true;
-                        break;
+                        case DialogResult.No:
+                            retVal.ConfirmationResult = false;
+                            break;
 
-                    case DialogResult.OK: // YES ALL
-                        retVal.ConfirmationResult = true;
-                        retVal.FlagValue = true;
-                        break;
-                }
-            });
+                        case DialogResult.Yes:
+                            retVal.ConfirmationResult = true;
+                            break;
 
-            return retVal;
+                        case DialogResult.OK: // YES ALL
+                            retVal.ConfirmationResult = true;
+                            retVal.FlagValue = true;
+                            break;
+                    }
+                });
+
+                return retVal;
+            }
+            finally
+            {
+                _fileTaskWaitEvent.Reset();
+                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
+            }
         }
 
         protected bool ConfirmObjectAction(string tag, string objectName, ref bool flagValue)
@@ -170,32 +192,21 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         protected bool _overwrite = false;
         protected bool _overwriteReadOnly = false;
-        public bool CanOverwrite(FileSystemInfo fi)
+        public bool CanOverwrite(string path)
         {
-            try
+            if (!_overwrite)
             {
-                _fileTaskWaitEvent.Set();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
-
-                if (!_overwrite)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_OVERWRITE", fi.FullName, ref _overwrite))
-                        return false;
-                }
-
-                if (PathUtils.ObjectHasAttribute(fi, FileAttributes.ReadOnly) && !_overwriteReadOnly)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_OVERWRITE_RO", fi.FullName, ref _overwriteReadOnly))
-                        return false;
-                }
-
-                return true;
+                if (!ConfirmObjectAction("TXT_CONFIRM_OVERWRITE", path, ref _overwrite))
+                    return false;
             }
-            finally
+
+            if (PathUtils.ObjectHasAttribute(path, FileAttributes.ReadOnly) && !_overwriteReadOnly)
             {
-                _fileTaskWaitEvent.Reset();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
+                if (!ConfirmObjectAction("TXT_CONFIRM_OVERWRITE_RO", path, ref _overwriteReadOnly))
+                    return false;
             }
+
+            return true;
         }
 
         #endregion
@@ -204,59 +215,37 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         protected bool _delete = false;
         protected bool _deleteROHS = false;
-        public bool CanDelete(FileSystemInfo fi)
+        public bool CanDelete(string path)
         {
-            try
+            if (!_delete)
             {
-                _fileTaskWaitEvent.Set();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
+                string confirmMsg = PathUtils.ObjectHasAttribute(path, FileAttributes.Directory) ?
+                    "TXT_CONFIRM_DELETE_EMPTYDIR" : "TXT_CONFIRM_DELETE";
 
-                if (!_delete)
-                {
-                    string confirmMsg = PathUtils.ObjectHasAttribute(fi, FileAttributes.Directory) ?
-                        "TXT_CONFIRM_DELETE_EMPTYDIR" : "TXT_CONFIRM_DELETE";
-
-                    if (!ConfirmObjectAction(confirmMsg, fi.FullName, ref _delete))
-                        return false;
-                }
-
-                if (PathUtils.ObjectHasAttribute(fi, FileAttributes.ReadOnly | FileAttributes.System | FileAttributes.Hidden)
-                    && !_deleteROHS)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_DELETE_ROHS", fi.FullName, ref _deleteROHS))
-                        return false;
-                }
-
-                return true;
+                if (!ConfirmObjectAction(confirmMsg, path, ref _delete))
+                    return false;
             }
-            finally
+
+            if (PathUtils.ObjectHasAttribute(path, FileAttributes.ReadOnly | FileAttributes.System | FileAttributes.Hidden)
+                && !_deleteROHS)
             {
-                _fileTaskWaitEvent.Reset();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
+                if (!ConfirmObjectAction("TXT_CONFIRM_DELETE_ROHS", path, ref _deleteROHS))
+                    return false;
             }
+
+            return true;
         }
 
         protected bool _deleteNonEmptyFolders = false;
-        public bool CanDeleteNonEmptyFolder(FileSystemInfo fi)
+        public bool CanDeleteNonEmptyFolder(string path)
         {
-            try
+            if (!_deleteNonEmptyFolders)
             {
-                _fileTaskWaitEvent.Set();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
-
-                if (!_deleteNonEmptyFolders)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_DELETE_DIR", fi.FullName, ref _deleteNonEmptyFolders))
-                        return false;
-                }
-
-                return true;
+                if (!ConfirmObjectAction("TXT_CONFIRM_DELETE_DIR", path, ref _deleteNonEmptyFolders))
+                    return false;
             }
-            finally
-            {
-                _fileTaskWaitEvent.Reset();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
-            }
+
+            return true;
         }
 
         #endregion
@@ -264,60 +253,38 @@ namespace OPMedia.UI.FileOperations.Tasks
         #region Move confirmations
 
         protected bool _moveNonEmptyFolders = false;
-        public bool CanMoveNonEmptyFolder(FileSystemInfo fi)
+        public bool CanMoveNonEmptyFolder(string path)
         {
-            try
+            if (!_moveNonEmptyFolders)
             {
-                _fileTaskWaitEvent.Set();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
-
-                if (!_moveNonEmptyFolders)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_MOVE_DIR", fi.FullName, ref _moveNonEmptyFolders))
-                        return false;
-                }
-
-                return true;
+                if (!ConfirmObjectAction("TXT_CONFIRM_MOVE_DIR", path, ref _moveNonEmptyFolders))
+                    return false;
             }
-            finally
-            {
-                _fileTaskWaitEvent.Reset();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
-            }
+
+            return true;
         }
 
         protected bool _move = false;
         protected bool _moveROHS = false;
-        public bool CanMove(FileSystemInfo fi)
+        public bool CanMove(string path)
         {
-            try
+            if (!_move)
             {
-                _fileTaskWaitEvent.Set();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Paused);
+                string confirmMsg = PathUtils.ObjectHasAttribute(path, FileAttributes.Directory) ?
+                    "TXT_CONFIRM_MOVE_EMPTYDIR" : "TXT_CONFIRM_MOVE";
 
-                if (!_move)
-                {
-                    string confirmMsg = PathUtils.ObjectHasAttribute(fi, FileAttributes.Directory) ?
-                        "TXT_CONFIRM_MOVE_EMPTYDIR" : "TXT_CONFIRM_MOVE";
-
-                    if (!ConfirmObjectAction(confirmMsg, fi.FullName, ref _move))
-                        return false;
-                }
-
-                if (PathUtils.ObjectHasAttribute(fi, FileAttributes.ReadOnly | FileAttributes.System | FileAttributes.Hidden)
-                    && !_moveROHS)
-                {
-                    if (!ConfirmObjectAction("TXT_CONFIRM_MOVE_ROHS", fi.FullName, ref _moveROHS))
-                        return false;
-                }
-
-                return true;
+                if (!ConfirmObjectAction(confirmMsg, path, ref _move))
+                    return false;
             }
-            finally
+
+            if (PathUtils.ObjectHasAttribute(path, FileAttributes.ReadOnly | FileAttributes.System | FileAttributes.Hidden)
+                && !_moveROHS)
             {
-                _fileTaskWaitEvent.Reset();
-                TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
+                if (!ConfirmObjectAction("TXT_CONFIRM_MOVE_ROHS", path, ref _moveROHS))
+                    return false;
             }
+
+            return true;
         }
 
         #endregion
@@ -332,18 +299,20 @@ namespace OPMedia.UI.FileOperations.Tasks
         {
             try
             {
-                FileInfo fi2 = new FileInfo(destFile);
-                if (!fi2.Exists || this.CanOverwrite(fi2))
+                if (_skipConfirmations || !File.Exists(destFile) || this.CanOverwrite(destFile))
                 {
-                    if (!Directory.Exists(fi2.DirectoryName))
+                    string dir = Path.GetDirectoryName(destFile);
+                    if (!Directory.Exists(dir))
                     {
-                        Directory.CreateDirectory(fi2.DirectoryName);
+                        Directory.CreateDirectory(dir);
+                        Log(FSAction.NewFolder, dir);
 
                         // File system changed => refresh will be required
                         this.RequiresRefresh = true;
                     }
 
-                    FileRoutines.CopyFile(fi, fi2, Kernel32.CopyFileOptions.None, new Kernel32.CopyFileCallback(this.CopyFileCallback));
+                    FileRoutines.CopyFile(fi.FullName, destFile, Kernel32.CopyFileOptions.None, new Kernel32.CopyFileCallback(this.CopyFileCallback));
+                    Log(FSAction.Copy, fi, destFile);
 
                     // File system changed => refresh will be required
                     this.RequiresRefresh = true;
@@ -362,32 +331,37 @@ namespace OPMedia.UI.FileOperations.Tasks
             }
         }
 
-        public void MoveFile(FileInfo fi, string destFile, bool skipConfirmations)
+        public void MoveFile(FileInfo fi, string destFile, bool needConfirmation)
         {
-            if (skipConfirmations || this.CanMove(fi))
+            if (_skipConfirmations || !needConfirmation || this.CanMove(destFile))
             {
                 if (PathUtils.PathsAreOnSameRoot(fi.FullName, destFile))
                 {
-                    FileInfo fi2 = new FileInfo(destFile);
-                    if (!fi2.Exists || this.CanOverwrite(fi2))
+                    bool fileExists = File.Exists(destFile);
+                    if (_skipConfirmations || !needConfirmation || !fileExists || this.CanOverwrite(destFile))
                     {
-                        if (!Directory.Exists(fi2.DirectoryName))
+                        string dir = Path.GetDirectoryName(destFile);
+                        if (!Directory.Exists(dir))
                         {
-                            Directory.CreateDirectory(fi2.DirectoryName);
+                            Directory.CreateDirectory(dir);
+                            Log(FSAction.NewFolder, dir);
 
                             // File system changed => refresh will be required
                             this.RequiresRefresh = true;
 
                         }
-                        if (fi2.Exists)
+                        if (fileExists)
                         {
-                            fi2.Attributes ^= fi2.Attributes;
+                            FileAttributes attr = File.GetAttributes(destFile);
+                            File.SetAttributes(destFile, attr ^ attr);
 
                             // File system changed => refresh will be required
                             this.RequiresRefresh = true;
 
                         }
+
                         fi.MoveTo(destFile);
+                        Log(FSAction.Move, fi, destFile);
 
                         // File system changed => refresh will be required
                         this.RequiresRefresh = true;
@@ -395,26 +369,26 @@ namespace OPMedia.UI.FileOperations.Tasks
                 }
                 else if (this.CopyFile(fi, destFile))
                 {
-                    this.DeleteFile(fi, true);
+                    this.DeleteFile(fi, false);
                 }
             }
         }
 
-        public void DeleteFile(FileInfo fi, bool skipConfirmations)
+        public void DeleteFile(FileInfo fi, bool needConfirmation)
         {
-            if (skipConfirmations || CanDelete(fi))
+            if (_skipConfirmations || !needConfirmation || CanDelete(fi.FullName))
             {
                 DeleteFileSystemObject(fi);
             }
         }
 
         public Kernel32.CopyFileCallbackAction CopyFileCallback(
-           FileInfo source, FileInfo destination, object state,
+           string source, string destination, object state,
            long totalFileSize, long totalBytesTransferred)
         {
             UpdateProgressData data = new UpdateProgressData(totalFileSize, totalBytesTransferred);
 
-            _task.FireTaskProgress(ProgressEventType.Progress, source.FullName, data);
+            _task.FireTaskProgress(ProgressEventType.Progress, source, data);
 
             do
             {
@@ -431,23 +405,30 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         #region Folder operations
 
-        public void DeleteFolder(DirectoryInfo di)
+        public void DeleteFolder(string path)
         {
-            if (di.Exists)
+            if (Directory.Exists(path))
             {
-                if (di.GetFileSystemInfos().Length == 0)
+                if (PathUtils.IsEmptyFolder(path))
                 {
                     // empty folder
-                    if (CanDelete(di))
+                    if (_skipConfirmations || CanDelete(path))
                     {
-                        DeleteFileSystemObject(di);
+                        Directory.Delete(path);
                     }
                 }
-                else if (CanDeleteNonEmptyFolder(di))
+                else if (_skipConfirmations || CanDeleteNonEmptyFolder(path))
                 {
-                    DeleteFileSystemObject(di);
+                    Directory.Delete(path);
                 }
             }
+        }
+
+        internal void MoveTo(string dir, string destinationPath)
+        {
+            Directory.Move(dir, destinationPath);
+            Log(FSAction.MoveFolder, dir, destinationPath);
+
         }
 
         #endregion
@@ -463,7 +444,14 @@ namespace OPMedia.UI.FileOperations.Tasks
                     DirectoryInfo di = fsi as DirectoryInfo;
                     if (di != null)
                     {
-                        PathUtils.DeleteFolderTree(fsi.FullName);
+                        PathUtils.DeleteFolderTree(fsi.FullName, 
+                            (delFSI) => 
+                            {
+                                if (delFSI is FileInfo)
+                                    Log(FSAction.Delete, delFSI);
+                                else
+                                    Log(FSAction.DeleteFolder, delFSI);
+                            });
 
                         // File system changed => refresh will be required
                         this.RequiresRefresh = true;
@@ -473,6 +461,11 @@ namespace OPMedia.UI.FileOperations.Tasks
 
                     fsi.Attributes ^= fsi.Attributes;
                     fsi.Delete();
+
+                    if (fsi is FileInfo)
+                        Log(FSAction.Delete, fsi);
+                    else
+                        Log(FSAction.DeleteFolder, fsi);
 
                     // File system changed => refresh will be required
                     this.RequiresRefresh = true;
@@ -496,5 +489,28 @@ namespace OPMedia.UI.FileOperations.Tasks
         }
 
         #endregion
+
+        #region Logging
+
+        private void Log(FSAction fsla, object obj1, object obj2 = null)
+        {
+            if (obj2 == null)
+                Trace.WriteLine(string.Format("FS: {0}: {1}", fsla, obj1));
+            else
+                Trace.WriteLine(string.Format("FS: {0}: {1} -> {2}", fsla, obj1, obj2));
+        }
+
+        #endregion
+
+        public enum FSAction
+        {
+            Copy = 0,
+            Move,
+            Delete,
+
+            NewFolder,
+            MoveFolder,
+            DeleteFolder
+        }
     }
 }

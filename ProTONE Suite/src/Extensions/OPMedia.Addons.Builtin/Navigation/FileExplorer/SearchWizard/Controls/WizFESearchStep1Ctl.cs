@@ -25,11 +25,15 @@ using OPMedia.UI.Dialogs;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 
+using System.Linq;
+using System.Threading;
+using System.Diagnostics;
+
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 {
     public partial class WizFESearchStep1Ctl : WizardBaseCtl
     {
-        ImageList _il = new ImageList();
+        FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
 
         private Task theTask
         {
@@ -59,9 +63,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             lbAttributes.Visible = false;
 
             lvResults.MultiSelect = true;
-            _il.ColorDepth = ColorDepth.Depth32Bit;
-            _il.ImageSize = new Size(16, 16);
-            lvResults.SmallImageList = _il;
+            lvResults.SmallImageList = _ilm.ImageList;
 
             foreach(FileAttributes attr in Enum.GetValues(typeof(FileAttributes)))
             {
@@ -274,13 +276,14 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         }
 
         bool _searchInProgress = false;
-        bool _cancelSearch = false;
+
+        ManualResetEvent _shouldCancelSearch = new ManualResetEvent(false);
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (_searchInProgress)
             {
-                _cancelSearch = true;
+                _shouldCancelSearch.Set();
                 return;
             }
 
@@ -296,12 +299,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
             SaveSearchSettings();
 
-            _cancelSearch = false;
+            _shouldCancelSearch.Reset();
+
             _searchInProgress = true;
             btnSearch.Text = Translator.Translate("TXT_CANCEL");
 
             lvResults.Items.Clear();
-            _il.Images.Clear();
+            _ilm.Clear();
 
             ExecuteSearch();
 
@@ -309,27 +313,28 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             btnSearch.Text = Translator.Translate("TXT_SEARCH");
         }
 
-        private void CreateItem(string path)
+        List<ListViewItem> _listViewItems = new List<ListViewItem>();
+
+        private void CreateListViewItem(string path)
         {
-            Image img = ImageProvider.GetIcon(path, false);
-            _il.Images.Add(img);
-
-            ListViewItem item = new ListViewItem(path);
+            ListViewItem item = new ListViewItem(new string[] { path } );
             item.Tag = path;
-            item.ImageIndex = _il.Images.Count - 1;
+            item.ImageKey = _ilm.GetImageKey(path);
 
-            lvResults.Items.Add(item);
-
-            Application.DoEvents();
+            _listViewItems.Add(item);
         }
 
         List<string> _matchingItems = new List<string>();
+        List<string> _displayItems = new List<string>();
+
         private void ExecuteSearch()
         {
             _matchingItems.Clear();
+            _displayItems.Clear();
+            _listViewItems.Clear();
             lvResults.Items.Clear();
 
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return;
 
             try
@@ -343,29 +348,72 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 ssStatus.Text = Translator.Translate("TXT_INIT_SEARCH");
                 Application.DoEvents();
 
-                // Build folder list to look into for files
-                if (theTask.IsRecursive)
+                DirectoryInfo diSearch = new DirectoryInfo(theTask.SearchPath);
+
+                bool needFolderLookup = true;
+
+                string actualSearchPattern = theTask.SearchPattern;
+                if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_BOOKMARKS"))
                 {
-                    List<string> subdirs = new List<string>(Directory.GetDirectories(theTask.SearchPath, "*", SearchOption.AllDirectories));
-
-                    pbProgress.Maximum = subdirs.Count + 1;
-
-                    foreach (string subdir in subdirs)
-                    {
-                        if (_cancelSearch)
-                            return;
-
-                        try
-                        {
-                            SearchInFolder(subdir);
-                        }
-                        catch
-                        {
-                        }
-                    }
+                    actualSearchPattern = "*.bmk";
+                    needFolderLookup = false;
+                }
+                else if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_MEDIAFILES"))
+                {
+                    needFolderLookup = false;
+                    actualSearchPattern = MediaRenderer.AllMediaTypesMultiFilter;
                 }
 
-                SearchInFolder(theTask.SearchPath);
+                List<FileSystemInfo> fsEntries = new List<FileSystemInfo>();
+                
+                SearchOption searchOption = theTask.IsRecursive ?
+                    SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+
+                if (needFolderLookup)
+                {
+                    List<DirectoryInfo> subdirs = PathUtils.EnumDirectoriesUsingMultiFilter(_shouldCancelSearch,
+                        diSearch, actualSearchPattern, searchOption);
+                    if (subdirs != null)
+                        fsEntries.AddRange(subdirs);
+                }
+
+                List<FileInfo> files = PathUtils.EnumFilesUsingMultiFilter(_shouldCancelSearch,
+                    diSearch, actualSearchPattern, searchOption);
+
+
+                if (files != null)
+                    fsEntries.AddRange(files);
+
+                pbProgress.Maximum = fsEntries.Count + 1;
+
+                foreach (FileSystemInfo fsi in fsEntries)
+                {
+                    if (_shouldCancelSearch.WaitOne(0))
+                        return;
+
+                    if (fsi is DirectoryInfo)
+                        TestFolder(fsi as DirectoryInfo);
+                    else if (fsi is FileInfo)
+                        TestFile(fsi as FileInfo);
+
+                    ssStatus.Text = fsi.FullName;
+                    pbProgress.Value = pbProgress.Value + 1;
+                    Application.DoEvents();
+                }
+
+                _displayItems.Sort();
+
+                foreach (string str in _displayItems)
+                {
+                    //if (_shouldCancelSearch.WaitOne(0))
+                      //  return;
+
+                    CreateListViewItem(str);
+
+                    //ssStatus.Text = str;
+                    //pbProgress.Value = pbProgress.Value + 1;
+                    //Application.DoEvents();
+                }
             }
             catch(Exception ex)
             {
@@ -373,6 +421,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
             finally
             {
+                lvResults.Items.AddRange(_listViewItems.ToArray());
+
                 if (lvResults.Items.Count > 0)
                     ssStatus.Text = Translator.Translate("TXT_TOTAL_ITEMS_FOUND", lvResults.Items.Count);
                 else
@@ -385,113 +435,38 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
         }
 
-        private void SearchInFolder(string subdir)
+        private void TestFolder(DirectoryInfo folder)
         {
-            ssStatus.Text = subdir;
-            Application.DoEvents();
-
-            TestFolder(subdir);
-
-            if ((theTask.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
-            {
-                // Only required to search folders; don't look for any file.
-                return;
-            }
-
-            List<string> files = new List<string>();
-
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return;
 
-            if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_BOOKMARKS"))
+            if (folder != null && folder.Exists)
             {
-                files.AddRange(Directory.EnumerateFiles(subdir, "*.bmk", SearchOption.TopDirectoryOnly));
-            }
-            else if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_MEDIAFILES"))
-            {
-                files.AddRange(Directory.EnumerateFiles(subdir, "*", SearchOption.TopDirectoryOnly));
-            }
-            else
-            {
-                files.AddRange(Directory.EnumerateFiles(subdir, theTask.SearchPattern, SearchOption.TopDirectoryOnly));
-            }
-
-            if (files != null)
-            {
-                foreach (string file in files)
+                if (!theTask.UseAttributes || AttributesMatch(folder.Attributes, false))
                 {
-                    if (_cancelSearch)
-                        return;
+                    List<DirectoryInfo> childFolders = new List<DirectoryInfo>();
+                    childFolders.AddRange(folder.EnumerateDirectories(theTask.SearchPattern, SearchOption.TopDirectoryOnly));
 
-                    try
+                    if (_matchingItems.Contains(folder.FullName.ToLowerInvariant()) == false)
                     {
-                        TestFile(file);
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-
-                pbProgress.Value += 1;
-                Application.DoEvents();
-            }
-
-        private void TestFolder(string folder)
-        {
-            if (_cancelSearch)
-                return;
-
-            if (theTask.IsCaseInsensitive)
-            {
-                folder = folder.ToLowerInvariant();
-            }
-
-            DirectoryInfo di = new DirectoryInfo(folder);
-            if (di != null)
-            {
-                if (!theTask.UseAttributes || AttributesMatch(di.Attributes, false))
-                {
-                    List<string> childFolders = new List<string>();
-                    childFolders.AddRange(Directory.EnumerateDirectories(di.Parent.FullName, theTask.SearchPattern, SearchOption.TopDirectoryOnly));
-
-                    foreach (string fld in childFolders)
-                    {
-                        if (_cancelSearch)
-                            return;
-
-                        string childFolder = fld;
-                        string keyword = theTask.SearchText;
-
-                        if (theTask.IsCaseInsensitive)
-                        {
-                            childFolder = childFolder.ToLowerInvariant();
-                            keyword = keyword.ToLowerInvariant();
-                        }
-
-                        bool match = (theTask.SearchText.Length == 0) || (childFolder.Contains(keyword));
-                        if (match && !_matchingItems.Contains(childFolder))
-                        {
-                            _matchingItems.Add(childFolder);
-                            CreateItem(childFolder);
-                        }
+                        _matchingItems.Add(folder.FullName.ToLowerInvariant());
+                        _displayItems.Add(folder.FullName);
                     }
                 }
             }
         }
 
-        private void TestFile(string file)
+        private void TestFile(FileInfo file)
         {
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return;
 
-            FileInfo fi = new FileInfo(file);
-            if (fi == null || !fi.Exists)
+            if (file == null || file.Exists == false)
                 return;
 
             if (SearchBookmarksActive())
             {
-                BookmarkFileInfo bfi = new BookmarkFileInfo(file, false);
+                BookmarkFileInfo bfi = new BookmarkFileInfo(file.FullName, false);
                 if (bfi == null ||
                     !bfi.IsValid ||
                     (theTask.Option1 && bfi.IsOrphan) || /* for BMK files: option 1 = non-orphan bookmarks */
@@ -502,10 +477,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
             else if (SearchMediaFilesActive())
             {
-                if (!MediaRenderer.IsSupportedMedia(file))
+                if (!MediaRenderer.IsSupportedMedia(file.FullName))
                     return; // not a media file
 
-                MediaFileInfo mfi = MediaFileInfo.FromPath(file);
+                MediaFileInfo mfi = MediaFileInfo.FromPath(file.FullName);
                 if (mfi == null ||
                     !mfi.IsValid ||
                     (theTask.Option1 && mfi.Bookmarks.Count < 1) || /* for media files: option 1 = files with bookmarks */
@@ -515,24 +490,24 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 }
             }
 
-            if (!theTask.UseAttributes || AttributesMatch(fi.Attributes, true))
+            if (!theTask.UseAttributes || AttributesMatch(file.Attributes, true))
             {
                 bool match = 
                     (theTask.SearchText.Length == 0) ||
-                    (theTask.SearchProperties && ContainsProperty(file)) ||
-                    (!theTask.SearchProperties && ContainsText(file));
+                    (theTask.SearchProperties && ContainsProperty(file.FullName)) ||
+                    (!theTask.SearchProperties && ContainsText(file.FullName));
 
-                if (match && !_matchingItems.Contains(file))
+                if (match && !_matchingItems.Contains(file.FullName.ToLowerInvariant()))
                 {
-                    _matchingItems.Add(file);
-                    CreateItem(file);
+                    _matchingItems.Add(file.FullName.ToLowerInvariant());
+                    _displayItems.Add(file.FullName);
                 }
             }
         }
 
         private bool ContainsProperty(string file)
         {
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return false;
 
             try
@@ -574,7 +549,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
         private bool ContainsText(string file)
         {
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return false;
 
             try
@@ -608,7 +583,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
         private bool AttributesMatch(FileAttributes fileAttributes, bool isFile)
         {
-            if (_cancelSearch)
+            if (_shouldCancelSearch.WaitOne(0))
                 return false;
 
             if (isFile && (theTask.Attributes & FileAttributes.Directory) == FileAttributes.Directory)

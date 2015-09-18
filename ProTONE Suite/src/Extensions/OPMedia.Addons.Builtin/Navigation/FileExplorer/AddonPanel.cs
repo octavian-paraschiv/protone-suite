@@ -613,7 +613,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         {
                                             if (Directory.Exists(item))
                                             {
-                                                taskTagging.Files.AddRange(Directory.EnumerateFiles(item, "*.mp?", SearchOption.AllDirectories));
+                                                taskTagging.Files.AddRange(PathUtils.EnumFiles(item, "*.mp?", SearchOption.AllDirectories));
                                             }
                                             else if (File.Exists(item))
                                             {
@@ -659,7 +659,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             {
                                 if (Directory.Exists(item))
                                 {
-                                    taskTagging.Files.AddRange(Directory.EnumerateFiles(item, "*.mp?", SearchOption.AllDirectories));
+                                    taskTagging.Files.AddRange(PathUtils.EnumFiles(item, "*.mp?", SearchOption.AllDirectories));
                                 }
                                 else if (File.Exists(item))
                                 {

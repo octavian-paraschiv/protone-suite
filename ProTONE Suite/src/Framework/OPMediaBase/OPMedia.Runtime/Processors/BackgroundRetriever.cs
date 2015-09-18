@@ -134,7 +134,7 @@ namespace OPMedia.Runtime.Processors
         {
             string ext = PathUtils.GetExtension(_downloadUrl);
 
-            List<string> files = new List<string>(Directory.EnumerateFiles(_repositoryPath, "*" + ext));
+            List<string> files = PathUtils.EnumFiles(_repositoryPath, "*" + ext);
             if (files.Count > 0)
             {
                 return files[files.Count - 1];

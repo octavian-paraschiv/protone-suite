@@ -4,6 +4,10 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.Core
 {
@@ -211,7 +215,7 @@ namespace OPMedia.Core
             try
             {
                 string ext = Path.GetExtension(path);
-                return ext.Trim(new char[] { '.' }).ToLowerInvariant();
+                return ext.Trim('.').ToLowerInvariant();
             }
             catch 
             {
@@ -219,9 +223,16 @@ namespace OPMedia.Core
             }
         }
 
-        public static bool ObjectHasAttribute(FileSystemInfo fi, FileAttributes fa)
+        public static bool ObjectHasAttribute(string path, FileAttributes fa)
         {
-            return ((fi.Attributes & fa) == fa);
+            FileSystemInfo fsi = null;
+
+            if ((fa & FileAttributes.Directory) == FileAttributes.Directory)
+                fsi = new DirectoryInfo(path);
+            else
+                fsi = new FileInfo(path);
+
+            return (fsi != null) && ((fsi.Attributes & fa) == fa);
         }
 
         public static bool PathHasChildFolder(string path, string childName)
@@ -250,35 +261,32 @@ namespace OPMedia.Core
             return false;
         }
 
-        
+        public delegate void ObjectDeleted(FileSystemInfo fsi);
 
-        public static void DeleteFolderTree(string folder)
+        public static void DeleteFolderTree(string folder, ObjectDeleted deletedCB = null)
         {
             if (folder != CurrentDir)
             {
-                IEnumerable<string> subdirs = Directory.EnumerateDirectories(folder);
-                if (subdirs != null)
+                List<string> subdirs = EnumDirectories(folder);
+                foreach (string subdir in subdirs)
                 {
-                    foreach (string subdir in subdirs)
-                    {
-                        DeleteFolderTree(subdir);
-                    }
+                    DeleteFolderTree(subdir);
                 }
 
-                IEnumerable<string> files = Directory.EnumerateFiles(folder);
-                if (files != null)
+                List<string> files = EnumFiles(folder);
+                foreach (string file in files)
                 {
-                    foreach (string file in files)
+                    try
                     {
-                        try
-                        {
-                            FileInfo fi = new FileInfo(file);
-                            fi.Attributes ^= fi.Attributes;
-                            fi.Delete();
-                        }
-                        catch
-                        {
-                        }
+                        FileInfo fi = new FileInfo(file);
+                        fi.Attributes ^= fi.Attributes;
+                        fi.Delete();
+
+                        if (deletedCB != null)
+                            deletedCB(fi);
+                    }
+                    catch
+                    {
                     }
                 }
 
@@ -287,6 +295,9 @@ namespace OPMedia.Core
                     DirectoryInfo di = new DirectoryInfo(folder);
                     di.Attributes ^= di.Attributes;
                     di.Delete();
+
+                    if (deletedCB != null)
+                        deletedCB(di);
                 }
                 catch
                 {
@@ -335,6 +346,465 @@ namespace OPMedia.Core
 
             return string.Empty;
         }
+
+        #region EnumerateDirectories
+
+        public static List<DirectoryInfo> EnumDirectoriesUsingMultiFilter(ManualResetEvent abortEvent, DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            if (string.IsNullOrEmpty(multiFilter))
+                return PathUtils.EnumDirectories(abortEvent, sourceFolder, "*", searchOption);
+
+            if (multiFilter.Contains(";") == false)
+                return PathUtils.EnumDirectories(abortEvent, sourceFolder, multiFilter, searchOption);
+
+            List<DirectoryInfo> subfolders = new List<DirectoryInfo>();
+
+            string[] allFilters = multiFilter.Replace(" ;", ";").Replace("; ", ";").Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (string filter in allFilters)
+            {
+                if (abortEvent != null && abortEvent.WaitOne(0))
+                    break;
+
+                subfolders.AddRange(PathUtils.EnumDirectories(abortEvent, sourceFolder, filter, searchOption));
+            }
+
+            return subfolders;
+        }
+
+        public static List<DirectoryInfo> EnumDirectoriesUsingMultiFilter(DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return EnumDirectoriesUsingMultiFilter(null, sourceFolder, multiFilter, searchOption);
+        }
+
+        public static List<string> EnumDirectoriesUsingMultiFilter(string sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(sourceFolder);
+                return (from file in EnumDirectoriesUsingMultiFilter(di, multiFilter, searchOption)
+                        select file.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+
+        public static List<string> EnumDirectories(string path,
+           string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(path);
+
+                return (from dir in EnumDirectories(null, di, searchPattern, searchOptions)
+                        select dir.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        public static List<DirectoryInfo> EnumDirectories(DirectoryInfo di,
+            string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            return EnumDirectories(null, di, searchPattern, searchOptions);
+        }
+
+        public static List<DirectoryInfo> EnumDirectories(ManualResetEvent abortEvent, DirectoryInfo di, 
+            string searchPattern="*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            List<DirectoryInfo> dirList = new List<DirectoryInfo>();
+
+            try
+            {
+                if (abortEvent == null || abortEvent.WaitOne(0) == false)
+                {
+                    Application.DoEvents();
+                    InternalEnumDirectories(abortEvent, di, searchPattern, searchOptions, ref dirList);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return dirList;
+        }
+
+        private static void InternalEnumDirectories(ManualResetEvent abortEvent, DirectoryInfo di, string searchPattern, SearchOption searchOptions,
+            ref List<DirectoryInfo> dirList)
+        {
+            try
+            {
+                if (abortEvent != null && abortEvent.WaitOne(0))
+                    return;
+
+                Application.DoEvents();
+
+                List<DirectoryInfo> diList = InternalEnumSubFolders(di, searchPattern);
+                dirList.AddRange(diList);
+
+                foreach (DirectoryInfo dir in diList)
+                {
+                    if (abortEvent != null && abortEvent.WaitOne(0))
+                        return;
+
+                    Application.DoEvents();
+
+                    try
+                    {
+                        if (searchOptions == SearchOption.AllDirectories)
+                            InternalEnumDirectories(abortEvent, dir, searchPattern, searchOptions, ref dirList);
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                    }
+
+                    Application.DoEvents();
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+        }
+
+        private static List<DirectoryInfo> InternalEnumSubFolders(DirectoryInfo di, string searchPattern)
+        {
+            List<DirectoryInfo> subfolders = new List<DirectoryInfo>();
+
+            try
+            {
+                IEnumerable<DirectoryInfo> dirList = di.EnumerateDirectories(searchPattern, SearchOption.TopDirectoryOnly);
+                if (dirList != null)
+                {
+                    // This is done to exclude the matches on the 8.3 DOS-like file names.
+                    // This app is not 16-bit and it does not target 16-bit OS-es.
+                    // So we're not interested in the 8.3 DOS-like file names.
+                    // We need to keep only the long file names that match the specified pattern.
+                    var x = from dir in dirList
+                            where StringUtils.StringMatchesPattern(dir.Name, searchPattern)
+                            select dir;
+
+                    if (x != null)
+                        subfolders.AddRange(x.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return subfolders;
+        }
+        #endregion
+
+        #region EnumerateFiles
+
+        public static List<FileInfo> EnumFilesUsingMultiFilter(ManualResetEvent abortEvent, DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            if (string.IsNullOrEmpty(multiFilter))
+                return PathUtils.EnumFiles(abortEvent, sourceFolder, "*", searchOption);
+
+            if (multiFilter.Contains(";") == false)
+                return PathUtils.EnumFiles(abortEvent, sourceFolder, multiFilter, searchOption);
+
+            List<FileInfo> files = new List<FileInfo>();
+
+            string[] allFilters = multiFilter.Replace(" ;", ";").Replace("; ", ";").Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (string filter in allFilters)
+            {
+                if (abortEvent != null && abortEvent.WaitOne(0))
+                    break;
+
+                files.AddRange(PathUtils.EnumFiles(abortEvent, sourceFolder, filter, searchOption));
+            }
+
+            return files;
+        }
+
+        public static List<FileInfo> EnumFilesUsingMultiFilter(DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return EnumFilesUsingMultiFilter(null, sourceFolder, multiFilter, searchOption);
+        }
+
+        public static List<string> EnumFilesUsingMultiFilter(string sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(sourceFolder);
+                return (from file in EnumFilesUsingMultiFilter(di, multiFilter, searchOption)
+                        select file.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        public static List<string> EnumFiles(string path,
+           string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(path);
+
+                return (from file in EnumFiles(null, di, searchPattern, searchOptions)
+                        select file.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        public static List<FileInfo> EnumFiles(DirectoryInfo di,
+            string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            return EnumFiles(null, di, searchPattern, searchOptions);
+        }
+
+        public static List<FileInfo> EnumFiles(ManualResetEvent abortEvent, DirectoryInfo di,
+            string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            List<FileInfo> fileList = new List<FileInfo>();
+
+            try
+            {
+                if (abortEvent == null || abortEvent.WaitOne(0) == false)
+                {
+                    Application.DoEvents();
+                    InternalEnumFiles(abortEvent, di, searchPattern, searchOptions, ref fileList);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return fileList;
+        }
+
+        private static void InternalEnumFiles(ManualResetEvent abortEvent, DirectoryInfo di, string searchPattern, SearchOption searchOptions,
+            ref List<FileInfo> fileList)
+        {
+            if (abortEvent != null && abortEvent.WaitOne(0))
+                return;
+
+            Application.DoEvents();
+
+            List<FileInfo> filesInThisFolder = InternalEnumFilesInFolder(di, searchPattern);
+            fileList.AddRange(filesInThisFolder);
+
+            var diList = di.EnumerateDirectories();
+            if (diList != null)
+            {
+                List<DirectoryInfo> dl = diList.ToList();
+                foreach (DirectoryInfo dir in dl)
+                {
+                    if (abortEvent != null && abortEvent.WaitOne(0))
+                        return;
+
+                    Application.DoEvents();
+
+                    try
+                    {
+                        if (searchOptions == SearchOption.AllDirectories)
+                            InternalEnumFiles(abortEvent, dir, searchPattern, searchOptions, ref fileList);
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                    }
+
+                    Application.DoEvents();
+                }
+            }
+        }
+
+        private static List<FileInfo> InternalEnumFilesInFolder(DirectoryInfo di, string searchPattern)
+        {
+            List<FileInfo> files = new List<FileInfo>();
+
+            try
+            {
+                IEnumerable<FileInfo> fiList = di.EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly);
+                if (fiList != null)
+                {
+                    // This is done to exclude the matches on the 8.3 DOS-like file names.
+                    // This app is not 16-bit and it does not target 16-bit OS-es.
+                    // So we're not interested in the 8.3 DOS-like file names.
+                    // We need to keep only the long file names that match the specified pattern.
+                    var x = from fi in fiList
+                            where StringUtils.StringMatchesPattern(fi.Name, searchPattern)
+                            select fi;
+
+                    if (x != null)
+                        files.AddRange(x.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return files;
+        }
+
+        #endregion 
+
+        #region EnumFileSystemEntries
+        public static List<FileSystemInfo> EnumFileSystemEntriesUsingMultiFilter(ManualResetEvent abortEvent, DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            if (string.IsNullOrEmpty(multiFilter))
+                return PathUtils.EnumFileSystemEntries(abortEvent, sourceFolder, "*", searchOption);
+
+            if (multiFilter.Contains(";") == false)
+                return PathUtils.EnumFileSystemEntries(abortEvent, sourceFolder, multiFilter, searchOption);
+
+            List<FileSystemInfo> fsiList = new List<FileSystemInfo>();
+
+            string[] allFilters = multiFilter.Replace(" ;", ";").Replace("; ", ";").Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (string filter in allFilters)
+            {
+                if (abortEvent != null && abortEvent.WaitOne(0))
+                    break;
+
+                fsiList.AddRange(PathUtils.EnumFileSystemEntries(abortEvent, sourceFolder, filter, searchOption));
+            }
+
+            return fsiList;
+        }
+
+        public static List<FileSystemInfo> EnumFileSystemEntriesUsingMultiFilter(DirectoryInfo sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return EnumFileSystemEntriesUsingMultiFilter(null, sourceFolder, multiFilter, searchOption);
+        }
+
+        public static List<string> EnumFileSystemEntriesUsingMultiFilter(string sourceFolder, string multiFilter,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(sourceFolder);
+                return (from fsi in EnumFileSystemEntriesUsingMultiFilter(di, multiFilter, searchOption)
+                        select fsi.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        public static List<string> EnumFileSystemEntries(string path,
+           string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(path);
+
+                return (from file in EnumFileSystemEntries(null, di, searchPattern, searchOptions)
+                        select file.FullName).ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+
+        public static List<FileSystemInfo> EnumFileSystemEntries(DirectoryInfo di,
+            string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            return EnumFileSystemEntries(null, di, searchPattern, searchOptions);
+        }
+
+        public static List<FileSystemInfo> EnumFileSystemEntries(ManualResetEvent abortEvent, DirectoryInfo di,
+            string searchPattern = "*", SearchOption searchOptions = SearchOption.TopDirectoryOnly)
+        {
+            List<FileSystemInfo> fsiList = new List<FileSystemInfo>();
+
+            try
+            {
+                if (abortEvent == null || abortEvent.WaitOne(0) == false)
+                {
+                    Application.DoEvents();
+                    InternalEnumFileSystemEntries(abortEvent, di, searchPattern, searchOptions, ref fsiList);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return fsiList;
+        }
+
+        private static void InternalEnumFileSystemEntries(ManualResetEvent abortEvent, DirectoryInfo di, string searchPattern, 
+            SearchOption searchOptions, ref List<FileSystemInfo> fsiList)
+        {
+            List<DirectoryInfo> diList = new List<DirectoryInfo>();
+            InternalEnumDirectories(abortEvent, di, searchPattern, searchOptions, ref diList);
+
+            List<FileInfo> fiList = new List<FileInfo>();
+            InternalEnumFiles(abortEvent, di, searchPattern, searchOptions, ref fiList);
+
+            fsiList.AddRange(diList);
+            fsiList.AddRange(fiList);
+        }
+        #endregion
+
+        #region IsEmptyFolder
+
+        public static bool IsEmptyFolder(string path)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(path);
+                return IsEmptyFolder(di);
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        public static bool IsEmptyFolder(DirectoryInfo di)
+        {
+            return IsEmptyFolder(null, di);
+        }
+
+        public static bool IsEmptyFolder(ManualResetEvent abortEvent, DirectoryInfo di)
+        {
+            List<FileSystemInfo> fsiList = new List<FileSystemInfo>();
+
+            try
+            {
+                if (abortEvent == null || abortEvent.WaitOne(0) == false)
+                {
+                    Application.DoEvents();
+                    InternalEnumFileSystemEntries(abortEvent, di, "*", SearchOption.TopDirectoryOnly, ref fsiList);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+
+            return (fsiList.Count < 1);
+        }
+        #endregion
     }
 
     public static class WindowHelper

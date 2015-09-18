@@ -15,6 +15,7 @@ using OPMedia.Core.GlobalEvents;
 using System.Drawing.Drawing2D;
 using OPMedia.UI.Generic;
 using System.Threading;
+using System.Diagnostics;
 #endregion
 
 namespace OPMedia.UI.Controls
@@ -338,7 +339,8 @@ namespace OPMedia.UI.Controls
             this.DoubleBuffered = true;
 
             base.OwnerDraw = true;
-            base.DrawSubItem += new DrawListViewSubItemEventHandler(OnDrawSubItem);
+            base.DrawItem += new DrawListViewItemEventHandler(OnDrawItem);
+            //base.DrawSubItem += new DrawListViewSubItemEventHandler(OnDrawSubItem);
             base.DrawColumnHeader += new DrawListViewColumnHeaderEventHandler(OPMListView_DrawColumnHeader);
 
             base.BackColor = ThemeManager.BackColor;
@@ -691,147 +693,190 @@ namespace OPMedia.UI.Controls
             e.SuppressKeyPress = false;
         }
 
+        private void OnDrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            for (int col = 0; col < e.Item.SubItems.Count; col++)
+            {
+                ListViewItem.ListViewSubItem subitem = e.Item.SubItems[col];
+                if (subitem != null)
+                {
+                    try
+                    {
+                        DrawListViewSubItemEventArgs e2 = new DrawListViewSubItemEventArgs(
+                            e.Graphics,
+                            subitem.Bounds,
+                            e.Item,
+                            subitem,
+                            e.ItemIndex,
+                            col,
+                            this.Columns[col],
+                            e.State);
+
+                        OnDrawSubItem(sender, e2);
+                    }
+                    catch (Exception ex)
+                    {
+                        string s = ex.Message;
+                    }
+                }
+            }
+        }
+
         void OnDrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
-            bool isSelected = e.Item.Selected;
-            bool drawBorder = false;
-            bool isValid = true;
-            bool isHotItem = false;
-
-            Font drawFont = e.SubItem.Font;
-
-            if (e.SubItem is OPMListViewSubItem)
+            try
             {
-                isValid = (e.SubItem as OPMListViewSubItem).IsValid;
-            }
+                bool isSelected = e.Item.Selected;
+                bool drawBorder = false;
+                bool isValid = true;
+                bool isHotItem = false;
 
-            Color bColor = isSelected ? ThemeManager.SelectedColor : GetBackColor();
-            Color fColor = e.Item.ForeColor;// ThemeManager.ForeColor;
+                Font drawFont = e.SubItem.Font;
 
-            ExtendedSubItemDetail esid = e.SubItem.Tag as ExtendedSubItemDetail;
-
-            OPMListViewSubItem osi = e.SubItem as OPMListViewSubItem;
-            if (osi != null && !osi.ReadOnly)
-            {
-                isHotItem = this.Focused && 
-                    endEditingPending == 0 &&
-                    (e.ColumnIndex == _hotItemColumn && e.ItemIndex == _hotItemRow);
-
-                if (osi.EditControl is LinkLabel)
+                if (e.SubItem is OPMListViewSubItem)
                 {
-                    fColor = ThemeManager.LinkColor;
-                    drawFont = new Font(drawFont, drawFont.Style | FontStyle.Underline);
+                    isValid = (e.SubItem as OPMListViewSubItem).IsValid;
                 }
-                else
+
+                Color bColor = isSelected ? ThemeManager.SelectedColor : GetBackColor();
+                Color fColor = e.Item.ForeColor;// ThemeManager.ForeColor;
+
+                ExtendedSubItemDetail esid = e.SubItem.Tag as ExtendedSubItemDetail;
+
+                OPMListViewSubItem osi = e.SubItem as OPMListViewSubItem;
+                if (osi != null && !osi.ReadOnly)
                 {
-                    // here's an editable subitem
-                    drawBorder = true;
+                    isHotItem = this.Focused &&
+                        endEditingPending == 0 &&
+                        (e.ColumnIndex == _hotItemColumn && e.ItemIndex == _hotItemRow);
 
-                    if (isValid)
+                    if (osi.EditControl is LinkLabel)
                     {
-                        bColor = ThemeManager.WndValidColor;
-                        fColor = ThemeManager.WndTextColor;
-
-                        if (isSelected)
-                        {
-                            bColor = ThemeManager.GradientNormalColor2;
-                            fColor = ThemeManager.WndValidColor;
-                        }
+                        fColor = ThemeManager.LinkColor;
+                        drawFont = new Font(drawFont, drawFont.Style | FontStyle.Underline);
                     }
                     else
                     {
-                        bColor = ThemeManager.ColorValidationFailed;
-                        fColor = ThemeManager.WndTextColor;
+                        // here's an editable subitem
+                        drawBorder = true;
+
+                        if (isValid)
+                        {
+                            bColor = ThemeManager.WndValidColor;
+                            fColor = ThemeManager.WndTextColor;
+
+                            if (isSelected)
+                            {
+                                bColor = ThemeManager.GradientNormalColor2;
+                                fColor = ThemeManager.WndValidColor;
+                            }
+                        }
+                        else
+                        {
+                            bColor = ThemeManager.ColorValidationFailed;
+                            fColor = ThemeManager.WndTextColor;
+                        }
                     }
                 }
-            }
 
-            int d = 0;
-            bool drawImage = false;
+                int d = 0;
+                bool drawImage = false;
 
-            if (e.ColumnIndex == 0)
-            {
-                if (this.SmallImageList != null)
+                if (e.ColumnIndex == 0)
                 {
-                    d += this.SmallImageList.ImageSize.Width + 2;
-                    drawImage = true;
-                }
-            }
-
-            Rectangle rc1 =   new Rectangle(e.Bounds.Left + d, e.Bounds.Top, e.Bounds.Width - d, e.Bounds.Height);
-            Rectangle rc2 =   new Rectangle(e.Bounds.Left + d - 1, e.Bounds.Top, e.Bounds.Width - d, e.Bounds.Height);
-            rc2.Inflate(1, 0);
-
-            Rectangle rcHot = new Rectangle(e.Bounds.Left + d - 1, e.Bounds.Top + 1, e.Bounds.Width - d - 2, e.Bounds.Height - 2);
-            
-            using (Brush b1 = new SolidBrush(bColor))
-            using (Brush b2 = new SolidBrush(GetBackColor()))
-            using (Brush bt = new SolidBrush(fColor))
-            using (Pen pEditableItemsBorder = new Pen(ThemeManager.BorderColor))
-            using (Pen pHotItemsBorder = new Pen(ThemeManager.ListHotItemColor, 2))
-            using (Pen pGridLines = new Pen(ThemeManager.ForeColor))
-            {
-                ThemeManager.PrepareGraphics(e.Graphics);
-
-                //e.Graphics.FillRectangle(b2, rc2);
-                e.Graphics.FillRectangle(b1, rc2);
-                
-                StringFormat sf = new StringFormat();
-                sf.Alignment = StringAlignment.Near;
-                sf.LineAlignment = StringAlignment.Center;
-                sf.FormatFlags = StringFormatFlags.NoWrap;
-                sf.Trimming = StringTrimming.EllipsisWord;
-
-                if (GridLines)
-                {
-                    e.Graphics.DrawRectangle(pGridLines, rc1);
-                }
-
-                if (drawBorder)
-                {
-                    e.Graphics.DrawRectangle(pEditableItemsBorder, rc2);
-                }
-
-                if (isHotItem)
-                {
-                    e.Graphics.DrawRectangle(pHotItemsBorder, rcHot);
-                }
-                
-
-                rc1.X += 3;
-
-                string text = e.SubItem.Text;
-                if (esid != null)
-                {
-                    text = esid.Text;
-                }
-
-                if (text == null)
-                    text = string.Empty;
-
-                bool drawText = true;
-
-                if (drawImage)
-                {
-                    e.Graphics.DrawImageUnscaled(SmallImageList.Images[e.Item.ImageIndex], 
-                        e.Bounds.Location);
-                }
-                else if (esid != null && esid.Image != null)
-                {
-                    Size imgSize = new Size(16, 16);
-                    if (this.StateImageList != null)
+                    if (this.SmallImageList != null)
                     {
-                        imgSize = this.StateImageList.ImageSize;
+                        d += this.SmallImageList.ImageSize.Width + 2;
+                        drawImage = true;
                     }
-
-                    Image img = ImageProvider.ScaleImage(esid.Image, imgSize, false);
-                    e.Graphics.DrawImageUnscaled(img, e.Bounds.Location);
-
-                    drawText = false;
                 }
 
-                if (drawText)
+                Rectangle rc1 = new Rectangle(e.Bounds.Left + d, e.Bounds.Top, e.Bounds.Width - d, e.Bounds.Height);
+                Rectangle rc2 = new Rectangle(e.Bounds.Left + d - 1, e.Bounds.Top, e.Bounds.Width - d, e.Bounds.Height);
+                rc2.Inflate(1, 0);
+
+                Rectangle rcHot = new Rectangle(e.Bounds.Left + d - 1, e.Bounds.Top + 1, e.Bounds.Width - d - 2, e.Bounds.Height - 2);
+
+                using (Brush b1 = new SolidBrush(bColor))
+                using (Brush b2 = new SolidBrush(GetBackColor()))
+                using (Brush bt = new SolidBrush(fColor))
+                using (Pen pEditableItemsBorder = new Pen(ThemeManager.BorderColor))
+                using (Pen pHotItemsBorder = new Pen(ThemeManager.ListHotItemColor, 2))
+                using (Pen pGridLines = new Pen(ThemeManager.ForeColor))
+                {
+                    ThemeManager.PrepareGraphics(e.Graphics);
+
+                    //e.Graphics.FillRectangle(b2, rc2);
+                    e.Graphics.FillRectangle(b1, rc2);
+
+                    StringFormat sf = new StringFormat();
+                    sf.Alignment = StringAlignment.Near;
+                    sf.LineAlignment = StringAlignment.Center;
+                    sf.FormatFlags = StringFormatFlags.NoWrap;
+                    sf.Trimming = StringTrimming.EllipsisWord;
+
+                    if (GridLines)
+                    {
+                        e.Graphics.DrawRectangle(pGridLines, rc1);
+                    }
+
+                    if (drawBorder)
+                    {
+                        e.Graphics.DrawRectangle(pEditableItemsBorder, rc2);
+                    }
+
+                    if (isHotItem)
+                    {
+                        e.Graphics.DrawRectangle(pHotItemsBorder, rcHot);
+                    }
+
+
+                    rc1.X += 3;
+
+                    string text = e.SubItem.Text;
+                    if (esid != null)
+                    {
+                        text = esid.Text;
+                    }
+
+                    if (text == null)
+                        text = string.Empty;
+
+                    bool drawText = true;
+
+                    if (drawImage)
+                    {
+                        Image imgToDraw = null;
+
+                        if (string.IsNullOrEmpty(e.Item.ImageKey) == false)
+                            imgToDraw = SmallImageList.Images[e.Item.ImageKey];
+
+                        if (imgToDraw == null && 0 <= e.Item.ImageIndex && e.Item.ImageIndex < SmallImageList.Images.Count)
+                            imgToDraw = SmallImageList.Images[e.Item.ImageIndex];
+
+                        e.Graphics.DrawImageUnscaled(imgToDraw, e.Bounds.Location);
+                    }
+                    else if (esid != null && esid.Image != null)
+                    {
+                        Size imgSize = new Size(16, 16);
+                        if (this.StateImageList != null)
+                        {
+                            imgSize = this.StateImageList.ImageSize;
+                        }
+
+                        Image img = ImageProvider.ScaleImage(esid.Image, imgSize, false);
+                        e.Graphics.DrawImageUnscaled(img, e.Bounds.Location);
+
+                        drawText = false;
+                    }
+
+                    //if (drawText)
                     e.Graphics.DrawString(text, drawFont, bt, rc1, sf);
+                }
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
             }
         }
 

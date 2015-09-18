@@ -11,6 +11,7 @@ using OPMedia.UI.Dialogs;
 using OPMedia.UI.Themes;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Configuration;
+using System.IO;
 
 namespace OPMedia.Utility
 {

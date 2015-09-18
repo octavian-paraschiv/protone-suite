@@ -125,41 +125,38 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
             List<string> filesToDelete = new List<string>();
 
-            IEnumerable<string> files = Directory.EnumerateFiles(Application.StartupPath, string.Format("{0}*", assembly));
-            if (files != null)
+            IEnumerable<string> files = PathUtils.EnumFiles(Application.StartupPath, string.Format("{0}*", assembly));
+            foreach (string asmFile in files)
             {
-                foreach (string asmFile in files)
+                Assembly asm = Assembly.LoadFrom(asmFile);
+                if (asm != null)
                 {
-                    Assembly asm = Assembly.LoadFrom(asmFile);
-                    if (asm != null)
-                    {
-                        filesToDelete.Add(asmFile);
+                    filesToDelete.Add(asmFile);
 
-                        foreach (CultureInfo ci in AppConfig.SupportedCultures)
+                    foreach (CultureInfo ci in AppConfig.SupportedCultures)
+                    {
+                        try
                         {
-                            try
+                            Assembly satAsm = asm.GetSatelliteAssembly(ci);
+                            if (satAsm != null)
                             {
-                                Assembly satAsm = asm.GetSatelliteAssembly(ci);
-                                if (satAsm != null)
+                                string path = satAsm.Location.ToLowerInvariant();
+                                if (!filesToDelete.Contains(path))
                                 {
-                                    string path = satAsm.Location.ToLowerInvariant();
-                                    if (!filesToDelete.Contains(path))
-                                    {
-                                        filesToDelete.Add(path.ToLowerInvariant());
-                                    }
+                                    filesToDelete.Add(path.ToLowerInvariant());
                                 }
                             }
-                            catch (Exception ex)
-                            {
-                                Logger.LogException(ex);
-                            }
                         }
-
-                        foreach (string file in filesToDelete)
+                        catch (Exception ex)
                         {
-                            markedForUninstall += file;
-                            markedForUninstall += "|";
+                            Logger.LogException(ex);
                         }
+                    }
+
+                    foreach (string file in filesToDelete)
+                    {
+                        markedForUninstall += file;
+                        markedForUninstall += "|";
                     }
                 }
             }

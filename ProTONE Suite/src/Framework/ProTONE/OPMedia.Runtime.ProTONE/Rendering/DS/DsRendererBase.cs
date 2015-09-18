@@ -861,6 +861,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private double _signalEnergy = 0;
 
+        int _idx = 0;
+        double _avgDelay = 0;
+
+        private void CalculateAverageDelay(double momentaryDelay)
+        {
+            _avgDelay = ((double)_idx * _avgDelay + momentaryDelay) / (double)(_idx + 1);
+            _idx++;
+
+            if (_idx % 100 == 1)
+            {
+                Debug.WriteLine("[SAMPLE] AvgDelay={0:0.000} msec", _avgDelay);
+                Debug.Flush();
+            }
+        }
+
         private void ExtractSamples(AudioSample smp)
         {
             if (smp == null || _actualAudioFormat == null || mediaPosition == null)
@@ -870,12 +885,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             mediaPosition.get_CurrentPosition(out mediaTime);
 
             double delay = smp.SampleTime - mediaTime;
+            double absDelay = Math.Abs(delay);
 
-            // Sync the sample. 
-            // Use extended sleep since Thread.Sleep is too low-resolution.
-            //ThreadScheduler.SleepEx(delay);
+            // Discard samples too far in time from current media time
+            if (absDelay > 1)
+                return;
 
-            if (delay > 0 && delay < 1)
+            //CalculateAverageDelay(delay * 1000);
+
+            if (delay > 0)
                 Thread.Sleep(TimeSpan.FromSeconds(delay));
 
             FilterState ms = GetFilterState();
@@ -1113,6 +1131,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     {
         public double SampleTime;
         public byte[] RawSamples;
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("SampleTime: {0}...", SampleTime);
+
+            //if (RawSamples != null)
+            //{
+            //    for (int i = 0; i < RawSamples.Length; i++)
+            //        sb.AppendFormat("sample[{0}]={1}...", i, RawSamples[i]);
+            //}
+
+            return sb.ToString();
+        }
     }
 }
 

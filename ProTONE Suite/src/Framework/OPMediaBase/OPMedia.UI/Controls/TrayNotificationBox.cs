@@ -75,14 +75,22 @@ namespace OPMedia.UI.Controls
             AssignData(title, values, img);
             User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
             User32.SetWindowOnTop(Handle, false);
+            User32.ShowWindow(Handle, ShowWindowStyles.SW_HIDE);
             //User32.BringWindowToTop(Handle);
         }
 
-        int showLocation = 0;
+        int showLocation = 0, startLocation = 0;
 
         public TrayNotificationBox()
         {
             InitializeComponent();
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.DoubleBuffered = true;
 
             this.Opacity = 1;
             this.AnimationType = UI.Controls.AnimationType.Dissolve;
@@ -120,6 +128,8 @@ namespace OPMedia.UI.Controls
 
         void _tmrAnimation_Tick(object sender, EventArgs e)
         {
+            User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
+
             try
             {
                 _tmrAnimation.Stop();
@@ -147,7 +157,9 @@ namespace OPMedia.UI.Controls
                 }
                 else if (AnimationType == UI.Controls.AnimationType.Slide)
                 {
-                    int step = this.Height / 10;
+                    int step = _fullHeight / 10;
+                    if (_animationStep == 0)
+                        this.Height = 0;
 
                     switch (_ts)
                     {
@@ -164,9 +176,13 @@ namespace OPMedia.UI.Controls
                             return;
                     }
 
-                    Location = new Point(Location.X, showLocation);
+                    int delta = Location.Y - showLocation;
+                    this.Location = new Point(Location.X, showLocation);
+                    this.Height += delta;
 
-                    Debug.WriteLine("(TEST) showLocation: {0}", this.Location);
+                    //this.Invalidate();
+
+                    Debug.WriteLine("(TEST) showLocation: {0} startLocation: {2} size:{1}", this.Location, this.Size, startLocation);
                 }
             }
             catch (Exception ex)
@@ -227,12 +243,15 @@ namespace OPMedia.UI.Controls
             this.ResumeLayout(false);
         }
 
+        int _fullHeight = 0;
+
 
         private void AssignData(string title, Dictionary<string, string> values, Image img)
         {
             data = new OPMToolTipData { Values = values, TitleImage = img, Title = title };
             base.Size = CalculateSize(data);
             base.Location = CalculateLocation();
+            _fullHeight = base.Size.Height;
         }
 
         private Point CalculateLocation()
@@ -265,7 +284,7 @@ namespace OPMedia.UI.Controls
                 if (AnimationType == UI.Controls.AnimationType.Slide)
                 {
                    y = Screen.FromPoint(mousePosition).WorkingArea.Bottom;
-                   showLocation = y;
+                   startLocation = showLocation = y;
                 }
 
                 //y -= (__count - 1) * base.Size.Height;

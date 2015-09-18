@@ -133,8 +133,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 DirectoryInfo di = new DirectoryInfo(directory);
                 if (di.Exists)
                 {
-                    FileInfo[] fileInfos = di.GetFiles(string.Format("{0}.*", fileName));
-                    if (fileInfos.Length > 1)
+                    List<FileInfo> fileInfos = PathUtils.EnumFiles(di, string.Format("{0}.*", fileName));
+                    if (fileInfos.Count > 1)
                     {
                         // There is at least another file having a similar name in the folder.
                         // Check if its extension is a valid subtitle extension.
@@ -299,7 +299,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 {
                     TrayNotificationBox f = new TrayNotificationBox();
                     f.HideDelay = 6000;
-                    f.AnimationType = AnimationType.Slide;
+                    f.AnimationType = AnimationType.None;
                     
                     f.ShowSimple(Translator.Translate("TXT_SUB_LOADED"), false);
                 });

@@ -295,7 +295,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             get { return "CDA"; }
         }
 
-        public override void Rebuild()
+        public override void Rebuild(bool deepLoad)
         {
             if (!string.IsNullOrEmpty(_discId))
             {

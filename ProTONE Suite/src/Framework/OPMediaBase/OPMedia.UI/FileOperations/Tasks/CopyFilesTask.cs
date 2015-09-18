@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using OPMedia.Core;
 
 namespace OPMedia.UI.FileTasks
 {
@@ -23,8 +24,8 @@ namespace OPMedia.UI.FileTasks
 
                 if (Directory.Exists(path))
                 {
-                    string[] subObjects = Directory.GetFileSystemEntries(path);
-                    if (subObjects != null && subObjects.Length > 0)
+                    List<string> subObjects = PathUtils.EnumFileSystemEntries(path);
+                    if (subObjects != null && subObjects.Count > 0)
                     {
                         foreach (string subObj in subObjects)
                         {

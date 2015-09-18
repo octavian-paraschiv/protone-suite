@@ -29,11 +29,11 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         {
             StringBuilder ans = new StringBuilder();
             ans.AppendLine("ACK");
-            foreach (string dir in Directory.EnumerateDirectories(DirectoryPath))
+            foreach (string dir in PathUtils.EnumDirectories(DirectoryPath))
             {
                 ans.AppendLine(string.Format("[DIR] {0}", dir));
             }
-            foreach (string file in Directory.EnumerateFiles(DirectoryPath, Filter))
+            foreach (string file in PathUtils.EnumFiles(DirectoryPath, Filter))
             {
                 ans.AppendLine(string.Format("[FIL] {0}", file));
             }

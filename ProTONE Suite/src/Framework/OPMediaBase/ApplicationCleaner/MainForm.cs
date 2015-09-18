@@ -93,7 +93,7 @@ namespace OPMedia.Utility
             {
                 if (Directory.Exists(LoggingConfiguration.LogFilePath))
                 {
-                    List<string> logFiles = new List<string>(Directory.EnumerateFiles(LoggingConfiguration.LogFilePath, "*.log"));
+                    List<string> logFiles = PathUtils.EnumFiles(LoggingConfiguration.LogFilePath, "*.log");
                     if (logFiles.Count > 0)
                     {
                         int stepLen = (int)(50 / logFiles.Count);
@@ -177,7 +177,7 @@ namespace OPMedia.Utility
 
         private void ProcessUserAppDataPath(string userAppDatapath)
         {
-            string[] appSettingsFolders = Directory.GetDirectories(userAppDatapath, "OPMedia*", SearchOption.TopDirectoryOnly);
+            List<string> appSettingsFolders = PathUtils.EnumDirectories(userAppDatapath, "OPMedia*");
             foreach (string appSettingsFolder in appSettingsFolders)
             {
                 if (Directory.Exists(appSettingsFolder))

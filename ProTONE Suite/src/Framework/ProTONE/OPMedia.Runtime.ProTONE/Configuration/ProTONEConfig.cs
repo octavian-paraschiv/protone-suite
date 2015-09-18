@@ -195,11 +195,24 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             return true;
         }
 
+        static bool? _useLinkedFiles = null;
 
         public static bool UseLinkedFiles
         {
-            get { return (PersistenceProxy.ReadObject("UseLinkedFiles", 1) != 0); }
-            set { PersistenceProxy.SaveObject("UseLinkedFiles", value ? 1 : 0); }
+            get 
+            {
+                if (_useLinkedFiles.HasValue)
+                    return _useLinkedFiles.Value;
+
+                _useLinkedFiles = (PersistenceProxy.ReadObject("UseLinkedFiles", 1) != 0);
+
+                return _useLinkedFiles.Value; 
+            }
+            set 
+            {
+                _useLinkedFiles = value;
+                PersistenceProxy.SaveObject("UseLinkedFiles", value ? 1 : 0); 
+            }
         }
 
         static Dictionary<string, string> _table = null;
@@ -207,35 +220,38 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                _table = new Dictionary<string, string>();
-
-                try
+                if (_table == null)
                 {
-                    string st = PersistenceProxy.ReadObject("LinkedFiles", DefaultLinkedFiles);
-                    string[] pairs = StringUtils.ToStringArray(st, '\\');
-                    if (pairs != null && pairs.Length > 0)
-                    {
-                        foreach (string pair in pairs)
-                        {
-                            string[] nameValue = StringUtils.ToStringArray(pair, '/');
-                            if (nameValue != null && nameValue.Length > 0)
-                            {
-                                string name = nameValue[0];
-                                string value = nameValue.Length > 1 ? nameValue[1] : string.Empty;
+                    _table = new Dictionary<string, string>();
 
-                                try
+                    try
+                    {
+                        string st = PersistenceProxy.ReadObject("LinkedFiles", DefaultLinkedFiles);
+                        string[] pairs = StringUtils.ToStringArray(st, '\\');
+                        if (pairs != null && pairs.Length > 0)
+                        {
+                            foreach (string pair in pairs)
+                            {
+                                string[] nameValue = StringUtils.ToStringArray(pair, '/');
+                                if (nameValue != null && nameValue.Length > 0)
                                 {
-                                    _table.Add(name, value);
-                                }
-                                catch
-                                {
+                                    string name = nameValue[0];
+                                    string value = nameValue.Length > 1 ? nameValue[1] : string.Empty;
+
+                                    try
+                                    {
+                                        _table.Add(name, value);
+                                    }
+                                    catch
+                                    {
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                catch
-                {
+                    catch
+                    {
+                    }
                 }
 
                 return _table;
@@ -320,10 +336,36 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             return ((ProTONEConfig.ShowMediaScreens & mediaScreen) == mediaScreen);
         }
 
+        private static SignalAnalisysFunction? _signalAnalisysFunctions = null;
+        private static object _signalAnalisysFunctionsLock = new object();
+
         public static SignalAnalisysFunction SignalAnalisysFunctions
         {
-            get { return (SignalAnalisysFunction)ConfigFileManager.Default.GetValue("SignalAnalisysFunctions", (int)SignalAnalisysFunction.All); }
-            set { ConfigFileManager.Default.SetValue("SignalAnalisysFunctions", (int)value); }
+            get 
+            {
+                lock (_signalAnalisysFunctionsLock)
+                {
+                    if (_signalAnalisysFunctions == null)
+                        _signalAnalisysFunctions = (SignalAnalisysFunction)ConfigFileManager.Default.GetValue("SignalAnalisysFunctions", (int)SignalAnalisysFunction.All);
+
+                    if (_signalAnalisysFunctions == null)
+                        return SignalAnalisysFunction.All;
+
+                    return _signalAnalisysFunctions.Value;
+                }
+            }
+            
+            set 
+            {
+                lock (_signalAnalisysFunctionsLock)
+                {
+                    if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
+                    {
+                        _signalAnalisysFunctions = value;
+                        ConfigFileManager.Default.SetValue("SignalAnalisysFunctions", (int)value);
+                    }
+                }
+            }
         }
 
         public static bool SignalAnalisysFunctionActive(SignalAnalisysFunction function)

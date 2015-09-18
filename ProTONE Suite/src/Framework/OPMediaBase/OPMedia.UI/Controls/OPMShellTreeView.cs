@@ -289,22 +289,6 @@ namespace OPMedia.UI.Controls
                 TreeNode rootNode = CreateTreeNode(di, imageList, true);
                 tree.Nodes.Add(rootNode);
                 CheckForSubDirs(rootNode, imageList);
-
-                /*
-                try
-                {
-                    foreach (DirectoryInfo sdi in di.EnumerateDirectories())
-                    {
-                        TreeNode tn = CreateTreeNode(sdi, imageList, getIcons);
-                        rootNode.Nodes.Add(tn);
-                        
-                        CursorHelper.ShowWaitCursor(tree, true);
-                    }
-                }
-                catch
-                {
-
-                }*/
             }
 
             CursorHelper.ShowWaitCursor(tree, false);
@@ -320,7 +304,7 @@ namespace OPMedia.UI.Controls
 
                 DirectoryInfo di = tn.Tag as DirectoryInfo;
 
-                foreach (DirectoryInfo sdi in di.EnumerateDirectories())
+                foreach (DirectoryInfo sdi in PathUtils.EnumDirectories(di))
                 {
                     TreeNode ntn = CreateTreeNode(sdi, imageList, getIcons);
                     tn.Nodes.Add(ntn);
@@ -348,13 +332,16 @@ namespace OPMedia.UI.Controls
 				{
 					// create dummy nodes for any subfolders that have further subfolders
                     DirectoryInfo di = tn.Tag as DirectoryInfo;
-                    bool hasFolders = (new List<DirectoryInfo>(di.EnumerateDirectories()).Count) > 0;
-					if(hasFolders)
-					{
-						TreeNode ntn = new TreeNode();
-						ntn.Tag = "DUMMYNODE";
-						tn.Nodes.Add(ntn);
-					}
+                    if (di != null)
+                    {
+                        bool hasFolders = (PathUtils.EnumDirectories(di).Count > 0);
+                        if (hasFolders)
+                        {
+                            TreeNode ntn = new TreeNode();
+                            ntn.Tag = "DUMMYNODE";
+                            tn.Nodes.Add(ntn);
+                        }
+                    }
 				}
 				catch
                 {
@@ -376,15 +363,17 @@ namespace OPMedia.UI.Controls
 				tn.Nodes.Clear();
 
                 DirectoryInfo di = tn.Tag as DirectoryInfo;
+                if (di != null)
+                {
+                    foreach (DirectoryInfo sdi in PathUtils.EnumDirectories(di))
+                    {
+                        TreeNode ntn = CreateTreeNode(sdi, imageList, true);
+                        tn.Nodes.Add(ntn);
+                        CheckForSubDirs(ntn, imageList);
 
-                foreach (DirectoryInfo sdi in di.EnumerateDirectories())
-				{
-					TreeNode ntn = CreateTreeNode(sdi, imageList, true);
-					tn.Nodes.Add(ntn);
-					CheckForSubDirs(ntn, imageList);
-
-                    CursorHelper.ShowWaitCursor(tn.TreeView, true);
-				}
+                        CursorHelper.ShowWaitCursor(tn.TreeView, true);
+                    }
+                }
 			}
 
             CursorHelper.ShowWaitCursor(tn.TreeView, false);

@@ -100,7 +100,7 @@ namespace OPMedia.UI.Controls
         ColumnHeader colSize = new ColumnHeader();
         ColumnHeader colAttr = new ColumnHeader();
 
-        private ImageList m_ilDirList;
+        private FileSystemImageListManager m_ilDirListManager = new FileSystemImageListManager(false);
 
         #endregion
 
@@ -338,12 +338,7 @@ namespace OPMedia.UI.Controls
 		{
             this.SearchPattern = null;
 
-            m_ilDirList = new ImageList();
-            m_ilDirList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            m_ilDirList.ImageSize = new System.Drawing.Size(16, 16);
-            m_ilDirList.TransparentColor = Color.Transparent;
-            
-            base.SmallImageList = m_ilDirList;
+            base.SmallImageList = m_ilDirListManager.ImageList;
 
             colName.Text = "TXT_FILENAME";
             this.Columns.Add(colName);
@@ -788,7 +783,7 @@ namespace OPMedia.UI.Controls
             }
 
             Clear();
-            m_ilDirList.Images.Clear();
+            m_ilDirListManager.Clear();
 
             lock (syncRoot)
             {
@@ -832,39 +827,24 @@ namespace OPMedia.UI.Controls
                     }
                     else
                     {
-                        IEnumerable<string> strDirs = Directory.EnumerateDirectories(m_strDirPath);
-                        if (strDirs != null)
+                        List<string> strDirs = PathUtils.EnumDirectories(m_strDirPath);
+                        foreach (string dir in strDirs)
                         {
-                            foreach (string dir in strDirs)
-                            {
-                                DirectoryInfo di = new DirectoryInfo(dir);
-                                if (!di.Exists)
-                                    continue;
+                            DirectoryInfo di = new DirectoryInfo(dir);
+                            if (!di.Exists)
+                                continue;
 
-                                CreateNewRow(di);
-                            }
+                            CreateNewRow(di);
                         }
 
-                        IEnumerable<string> strFiles = null;
-                        if (string.IsNullOrEmpty(this.SearchPattern))
+                        List<string> strFiles = PathUtils.EnumFilesUsingMultiFilter(m_strDirPath, this.SearchPattern);
+                        foreach (string file in strFiles)
                         {
-                            strFiles = Directory.EnumerateFiles(m_strDirPath);
-                        }
-                        else
-                        {
-                            strFiles = EnumerateFiles(m_strDirPath, this.SearchPattern, SearchOption.TopDirectoryOnly);
-                        }
+                            FileInfo fi = new FileInfo(file);
+                            if (!fi.Exists)
+                                continue;
 
-                        if (strFiles != null)
-                        {
-                            foreach (string file in strFiles)
-                            {
-                                FileInfo fi = new FileInfo(file);
-                                if (!fi.Exists)
-                                    continue;
-
-                                CreateNewRow(fi);
-                            }
+                            CreateNewRow(fi);
                         }
                     }
                 }
@@ -952,11 +932,6 @@ namespace OPMedia.UI.Controls
                 Rename();
             }
 		}
-
-        private static string[] EnumerateFiles(string sourceFolder, string filters, System.IO.SearchOption searchOption)
-        {
-            return filters.Split(';').SelectMany(filter => System.IO.Directory.EnumerateFiles(sourceFolder, filter, searchOption)).ToArray();
-        }
 
         public void ExploreBack()
         {
@@ -1192,12 +1167,10 @@ namespace OPMedia.UI.Controls
                 DirectoryInfo parent = Directory.GetParent(Path);
                 if (parent != null)
                 {
-                    int imgIndex = GetIcon(parent.FullName);
-
                     string[] data = new string[] { PathUtils.ParentDir, BuildLastAccessTime(parent), "[ DIR ]", BuildAttributes(parent) };
 
                     ListViewItem item = new ListViewItem(data);
-                    item.ImageIndex = imgIndex;
+                    item.ImageKey = m_ilDirListManager.GetImageKey(parent.FullName);
                     item.Tag = parent;
                     item.BackColor = ThemeManager.BackColor;
                     item.ForeColor = ThemeManager.ForeColor;
@@ -1241,8 +1214,6 @@ namespace OPMedia.UI.Controls
                 isFile = true;
             }
 
-            int imgIndex = GetIcon(fsi.FullName);
-
             string[] data = new string[] 
             { 
                 //fsi.Name, 
@@ -1256,7 +1227,7 @@ namespace OPMedia.UI.Controls
             ListViewItem item = new ListViewItem(data);
             item.BackColor = ThemeManager.BackColor;
             item.ForeColor = isFile ? ThemeManager.ForeColor : ThemeManager.HighlightColor;
-            item.ImageIndex = imgIndex;
+            item.ImageKey = m_ilDirListManager.GetImageKey(fsi.FullName);
             item.Tag = fsi;
             item.Font = isFile ? ThemeManager.NormalFont : ThemeManager.NormalBoldFont;
 
@@ -1296,42 +1267,24 @@ namespace OPMedia.UI.Controls
         {
             string strAttr = "";
 
-            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.ReadOnly))
+            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.ReadOnly))
                 strAttr += "R";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.Archive))
+            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.Archive))
                 strAttr += "A";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.Hidden))
+            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.Hidden))
                 strAttr += "H";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.System))
+            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.System))
                 strAttr += "S";
             else
                 strAttr += "-";
 
             return strAttr;
-        }
-
-        /// <summary>
-        /// Gets the system image index for the specified file.
-        /// </summary>
-        /// <param name="strFile"></param>
-        /// <returns></returns>
-        private int GetIcon(string strFile)
-        {
-            try
-            {
-                m_ilDirList.Images.Add(ImageProvider.GetIcon(strFile, false));
-                return m_ilDirList.Images.Count - 1;
-            }
-            catch
-            {
-                return -1;
-            }
         }
 
         DirectoryInfo _diNew = null;

@@ -21,15 +21,13 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {
     public partial class WizTagStep1Ctl : WizardBaseCtl
     {
-        ImageList _ilFiles = new ImageList();
+        FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
 
         public WizTagStep1Ctl()
         {
             InitializeComponent();
             lvFiles.MultiSelect = true;
-            _ilFiles.ColorDepth = ColorDepth.Depth32Bit;
-            _ilFiles.ImageSize = new Size(16, 16);
-            lvFiles.SmallImageList = _ilFiles;
+            lvFiles.SmallImageList = _ilm.ImageList;
 
             
         }
@@ -53,7 +51,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             base.OnPageEnter_Initializing();
 
             lvFiles.Items.Clear();
-            _ilFiles.Images.Clear();
+            _ilm.Clear();
 
             if (BkgTask == null)
             {
@@ -70,10 +68,8 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
         private void AddFile(string file)
         {
-            _ilFiles.Images.Add(ImageProvider.GetIcon(file, false));
-
             ListViewItem item = lvFiles.Items.Add(file);
-            item.ImageIndex = _ilFiles.Images.Count - 1;
+            item.ImageKey = _ilm.GetImageKey(file);
             item.Tag = file;
         }
 
@@ -131,7 +127,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                IEnumerable<string> files = Directory.EnumerateFiles(dlg.SelectedPath, "*.mp?", SearchOption.AllDirectories);
+                IEnumerable<string> files = PathUtils.EnumFiles(dlg.SelectedPath, "*.mp?", SearchOption.AllDirectories);
                 if (files != null)
                 {
                     foreach (string file in files)

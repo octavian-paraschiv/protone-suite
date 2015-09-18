@@ -47,7 +47,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                 try
                 {
                     FileInfo lfi = new FileInfo(parentFile);
-                    _support.DeleteFile(lfi, false);
+                    _support.DeleteFile(lfi, true);
                 }
                 catch
                 {

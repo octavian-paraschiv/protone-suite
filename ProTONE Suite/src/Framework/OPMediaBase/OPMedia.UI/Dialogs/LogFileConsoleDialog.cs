@@ -317,13 +317,10 @@ namespace OPMedia.UI.Dialogs
             {
                 cmbLogFileNames.Items.Clear();
 
-                IEnumerable<string> logFiles = Directory.EnumerateFiles(Logger.GetCurrentLogFolder(), "*.log", SearchOption.TopDirectoryOnly);
-                if (logFiles != null)
+                List<string> logFiles = PathUtils.EnumFiles(Logger.GetCurrentLogFolder(), "*.log");
+                foreach (string logFile in logFiles)
                 {
-                    foreach (string logFile in logFiles)
-                    {
-                        cmbLogFileNames.Items.Add(Path.GetFileName(logFile));
-                    }
+                    cmbLogFileNames.Items.Add(Path.GetFileName(logFile));
                 }
             }
             else

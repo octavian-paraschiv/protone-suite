@@ -70,14 +70,10 @@ namespace OPMedia.Runtime.Addons.AddonManagement
                     if (string.IsNullOrEmpty(item))
                         return null;
 
-                    string[] itemFields = item.Split(".".ToCharArray());
-                    if (itemFields.Length > 1)
+                    string ext = PathUtils.GetExtension(item);
+                    if (!extensions.Contains(ext))
                     {
-                        string extension = itemFields[itemFields.Length - 1].ToLowerInvariant();
-                        if (!extensions.Contains(extension))
-                        {
-                            extensions.Add(extension);
-                        }
+                        extensions.Add(ext);
                     }
 
                     try

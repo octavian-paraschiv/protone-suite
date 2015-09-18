@@ -20,7 +20,29 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
     public partial class TrackInfoScreen : OPMBaseControl
     {
+        #region CanSaveData
         bool _canSaveData = false;
+        object _canSaveDataLock = new object();
+
+        private bool CanSaveData
+        {
+            get
+            {
+                lock (_canSaveDataLock)
+                {
+                    return _canSaveData;
+                }
+            }
+
+            set
+            {
+                lock (_canSaveDataLock)
+                {
+                    _canSaveData = value;
+                }
+            }
+        }
+        #endregion
 
         public PlaylistItem PlaylistItem 
         {
@@ -96,50 +118,50 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         
         public void ShowPlaylistItem(PlaylistItem plItem, bool callByProperty)
         {
-            if (plItem == null && callByProperty)
+            try
             {
-                List<PlaylistItem> plItems = playlistScreen.GetPlaylistItems();
-                if (plItems != null && plItems.Count > 0)
+                this.CanSaveData = false;
+
+                if (plItem == null && callByProperty)
                 {
-                    plItem = plItems[0];
+                    List<PlaylistItem> plItems = playlistScreen.GetPlaylistItems();
+                    if (plItems != null && plItems.Count > 0)
+                    {
+                        plItem = plItems[0];
+                    }
                 }
-            }
 
-            pgProperties.Tag = null;
-            pgProperties.SelectedObject = null;
-            pgProperties.Visible = false;
-            lblNoInfo.Visible = true;
-            lblItem.Text = string.Empty;
-            _canSaveData = false;
+                pgProperties.Tag = null;
+                pgProperties.SelectedObject = null;
+                pgProperties.Visible = false;
+                lblNoInfo.Visible = true;
+                lblItem.Text = string.Empty;
 
-            if (plItem != null)
-            {
-                lblItem.Text = plItem.MediaFileInfo.Path;
-
-                if (plItem.SupportsTrackInfo)
+                if (plItem != null)
                 {
-                    pgProperties.Tag = plItem;
+                    plItem.Rebuild();
 
-                    MediaFileInfoSlim slim = plItem.MediaFileInfo.Slim();
-                    FileAttributesBrowser.ProcessSingleObjectAttributes(slim);
-                    pgProperties.SelectedObject = slim;
-                    
-                    pgProperties.Visible = true;
-                    lblNoInfo.Visible = false;
+                    lblItem.Text = plItem.MediaFileInfo.Path;
+
+                    if (plItem.SupportsTrackInfo)
+                    {
+                        pgProperties.Tag = plItem;
+
+                        MediaFileInfoSlim slim = plItem.MediaFileInfo.Slim();
+                        FileAttributesBrowser.ProcessSingleObjectAttributes(slim);
+                        pgProperties.SelectedObject = slim;
+
+                        pgProperties.Visible = true;
+                        lblNoInfo.Visible = false;
+                    }
                 }
-            }
 
-            if (callByProperty)
-            {
-                try
-                {
-                    _canSaveData = false;
+                if (callByProperty)
                     playlistScreen.SetFirstSelectedPlaylistItem(plItem);
-                }
-                finally
-                {
-                    _canSaveData = true;
-                }
+            }
+            finally
+            {
+                this.CanSaveData = true;
             }
         }
 
@@ -167,10 +189,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
         void playlistScreen_SelectedItemChanged(PlaylistItem newSelectedItem)
         {
-            if (_canSaveData)
-            {
+            if (this.CanSaveData)
                 SaveData();
-            }
 
             ShowPlaylistItem(newSelectedItem, false);
         }

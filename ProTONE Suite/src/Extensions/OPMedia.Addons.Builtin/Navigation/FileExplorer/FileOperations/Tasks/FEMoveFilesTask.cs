@@ -33,7 +33,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                         string destinationPath = this.GetDestinationPath(linkedFile);
 
                         FileInfo lfi = new FileInfo(linkedFile);
-                        _support.MoveFile(lfi, destinationPath, true);
+                        _support.MoveFile(lfi, destinationPath, false);
                     }
                     catch
                     {
@@ -51,7 +51,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                     string destinationPath = this.GetDestinationPath(parentFile);
 
                     FileInfo lfi = new FileInfo(parentFile);
-                    _support.MoveFile(lfi, destinationPath, false);
+                    _support.MoveFile(lfi, destinationPath, true);
                 }
                 catch
                 {

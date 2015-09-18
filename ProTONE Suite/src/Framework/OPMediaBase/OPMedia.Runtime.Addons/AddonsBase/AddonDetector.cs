@@ -9,6 +9,7 @@ using OPMedia.Runtime.Addons.AddonsBase.Prop;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Themes;
+using OPMedia.Core;
 
 namespace OPMedia.Runtime.Addons.AddonsBase
 {
@@ -70,18 +71,15 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             _assemblies = new Dictionary<string, string>();
             _requiredAddons = new List<string>();
 
-            IEnumerable<string> assemblies = Directory.EnumerateFiles(Application.StartupPath, "*.dll", SearchOption.TopDirectoryOnly);
-            if (assemblies != null)
+            List<string> assemblies = PathUtils.EnumFiles(Application.StartupPath, "*.dll");
+            foreach (string assembly in assemblies)
             {
-                foreach (string assembly in assemblies)
+                try
                 {
-                    try
-                    {
-                        TestAssembly(assembly);
-                    }
-                    catch
-                    {
-                    }
+                    TestAssembly(assembly);
+                }
+                catch
+                {
                 }
             }
         }

@@ -493,12 +493,9 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 TimeSpan duration = af.Properties.Duration;
                 _deepLoad = true;
             }
-
         }
 
-        private bool _deepLoad = false;
-        public ID3FileInfo(string path, bool deepLoad)
-            : base(path, false)
+        public override void Rebuild(bool deepLoad)
         {
             _tag = null;
 
@@ -506,7 +503,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             {
                 try
                 {
-                    af = new TagLib.Mpeg.AudioFile(path, ReadStyle.Average);
+                    af = new TagLib.Mpeg.AudioFile(base.Path, ReadStyle.Average);
 
                     if (deepLoad)
                     {
@@ -524,6 +521,13 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 _tagModified = false;
             }
+        }
+
+        private bool _deepLoad = false;
+        public ID3FileInfo(string path, bool deepLoad)
+            : base(path, false)
+        {
+            Rebuild(deepLoad);
         }
 
         private string BuildCleanString(string input)

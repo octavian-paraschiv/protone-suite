@@ -17,6 +17,8 @@ namespace OPMedia.UI.Dialogs
     {
         public event EventHandler OnModified = null;
 
+        private FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
+
         public string FavoriteFoldersHiveName { get; set; }
 
         public List<string> FavoriteFolders
@@ -92,7 +94,7 @@ namespace OPMedia.UI.Dialogs
         public void DisplayFavorites()
         {
             lvFavorites.Items.Clear();
-            ilFavorites.Images.Clear();
+            _ilm.Clear();
 
             foreach (string path in ProTONEConfig.GetFavoriteFolders(FavoriteFoldersHiveName))
             {
@@ -104,14 +106,7 @@ namespace OPMedia.UI.Dialogs
         {
             ListViewItem item = new ListViewItem(path);
             item.Tag = path;
-
-            Image icon = ImageProvider.GetIcon(path, false);
-            if (icon != null)
-            {
-                ilFavorites.Images.Add(icon);
-                item.ImageIndex = ilFavorites.Images.Count - 1;
-            }
-
+            item.ImageKey = _ilm.GetImageKey(path);
             lvFavorites.Items.Add(item);
         }
 

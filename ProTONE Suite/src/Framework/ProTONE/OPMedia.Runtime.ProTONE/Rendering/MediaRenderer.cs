@@ -422,6 +422,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         //    set { streamRenderer.FullScreen = value; }
         //}
 
+        public static string AllMediaTypesMultiFilter
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (string type in AllMediaTypes)
+                    sb.Append(string.Format("{0};", type));
+
+                return sb.ToString().ToLowerInvariant().Trim(';');
+            }
+        }
+
         public static List<string> AllMediaTypes
         {
             get
@@ -1084,28 +1096,22 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public static bool FolderContainsMediaFiles(string path, int level)
         {
-            IEnumerable<string> files = Directory.EnumerateFiles(path);
-            if (files != null)
+            List<string> files = PathUtils.EnumFiles(path);
+            foreach (string file in files)
             {
-                foreach (string file in files)
+                if (IsSupportedMedia(file))
                 {
-                    if (IsSupportedMedia(file))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
-            IEnumerable<string> subfolders = Directory.EnumerateDirectories(path);
-            if (subfolders != null)
+            List<string> subfolders = PathUtils.EnumDirectories(path);
+            foreach (string subfolder in subfolders)
             {
-                foreach (string subfolder in subfolders)
+                if (level < (MaxRecursionLevel - 1) &&
+                    FolderContainsMediaFiles(subfolder, level + 1))
                 {
-                    if (level < (MaxRecursionLevel - 1) &&
-                        FolderContainsMediaFiles(subfolder, level + 1))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 

@@ -347,8 +347,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                    TrayNotificationBox f = new TrayNotificationBox();
                    f.HideDelay = 6000;
                    f.AnimationType = AnimationType.Dissolve;
-                       f.ShowSimple(text, true);
-   
+                   f.ShowSimple(text, true);
                    this.Focus();
                }
            }

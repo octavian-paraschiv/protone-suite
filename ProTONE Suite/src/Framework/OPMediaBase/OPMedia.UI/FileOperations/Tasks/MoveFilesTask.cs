@@ -26,28 +26,21 @@ namespace OPMedia.UI.FileTasks
                 {
                     if (Directory.Exists(path))
                     {
-                        // Destination path is on same disk => can use MoveTo
-                        DirectoryInfo di = new DirectoryInfo(path);
-
                         if (PathUtils.PathsAreOnSameRoot(path, destinationPath))
                         {
-                            if (di.GetFileSystemInfos().Length == 0)
+                            if (PathUtils.IsEmptyFolder(path))
                             {
                                 // empty folder
-                                if (_support.CanMove(di))
-                                {
-                                    di.MoveTo(destinationPath);
-                                }
+                                if (_support.SkipConfirmations || _support.CanMove(path))
+                                    _support.MoveTo(path, destinationPath);
                             }
-                            else if (_support.CanMoveNonEmptyFolder(di))
-                            {
-                                di.MoveTo(destinationPath);
-                            }
+                            else if (_support.SkipConfirmations || _support.CanMoveNonEmptyFolder(path))
+                                _support.MoveTo(path, destinationPath);
                         }
                         else
                         {
-                            string[] subObjects = Directory.GetFileSystemEntries(path);
-                            if (subObjects != null && subObjects.Length > 0)
+                            List<string> subObjects = PathUtils.EnumFileSystemEntries(path);
+                            if (subObjects != null && subObjects.Count > 0)
                             {
                                 foreach (string subObj in subObjects)
                                 {
@@ -55,14 +48,15 @@ namespace OPMedia.UI.FileTasks
                                 }
                             }
 
-                            _support.DeleteFolder(di);
+                            if (Directory.CreateDirectory(path) != null)
+                                _support.DeleteFolder(path);
                         }
                     }
                     else
                     {
-                        FileInfo fi = new FileInfo(path);
-                        MoveConnectedFiles(fi, destinationPath);
-                        _support.MoveFile(fi, destinationPath, false);
+                        FileInfo srcFile = new FileInfo(path);
+                        MoveConnectedFiles(srcFile, destinationPath);
+                        _support.MoveFile(srcFile, destinationPath, true);
                     }
                 }
                 catch (Exception ex)
