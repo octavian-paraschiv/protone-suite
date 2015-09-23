@@ -18,6 +18,7 @@ using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Core;
 using OPMedia.Runtime.Addons;
 using OPMedia.Core.Logging;
+using System.IO;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonManagement
@@ -74,17 +75,15 @@ namespace OPMedia.Runtime.Addons.AddonManagement
                 }
                 else
                 {
-                    System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(items[0]);
-                    string extension = di.Extension.Trim(new char[] { '.' }).ToLowerInvariant();
-
-                    if (di.Exists &&
-                        (di.Attributes & System.IO.FileAttributes.Directory) == System.IO.FileAttributes.Directory)
+                    string path = items[0];
+                    if (Directory.Exists(path))
                     {
                         // Cannot preview folders !!
                         retVal = null;
                     }
                     else
                     {
+                        string extension = PathUtils.GetExtension(path);
                         retVal = InternalSelectAddon(extension);
                     }
                 }

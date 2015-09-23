@@ -49,14 +49,13 @@ namespace OPMedia.UI.Dialogs
             btnOK.Enabled = false;
             btnNewFolder.Enabled = false;
 
-            DirectoryInfo di = new DirectoryInfo(tvExplorer.SelectedNodePath);
-            if (di.Exists)
+            if (Directory.Exists(tvExplorer.SelectedNodePath))
             {
                 btnOK.Enabled = (PerformPathValidation == null || PerformPathValidation(tvExplorer.SelectedNodePath));
 
                 try
                 {
-                    DriveInfo drvInvo = new DriveInfo(di.Root.FullName);
+                    DriveInfo drvInvo = new DriveInfo(Path.GetPathRoot(tvExplorer.SelectedNodePath));
                     btnNewFolder.Enabled = (drvInvo.AvailableFreeSpace > 0 && drvInvo.IsReady);
                 }
                 catch { }
@@ -107,17 +106,16 @@ namespace OPMedia.UI.Dialogs
 
         private void btnNewFolder_Click(object sender, EventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo(SelectedPath);
-            if (di.Exists)
+            if (Directory.Exists(SelectedPath))
             {
                 string newName = string.Format("NewFolder_{0}", StringUtils.GenerateRandomToken(4));
-                //string newPath = Path.Combine(di.FullName, );
-                DirectoryInfo diNew = di.CreateSubdirectory(newName);
+                string fullName = Path.Combine(SelectedPath, newName);
+
+                Directory.CreateDirectory(fullName);
                 Thread.Sleep(700);
-                if (diNew.Exists)
+                if (Directory.Exists(fullName))
                 {
-                    //this.SelectedPath = diNew.FullName;
-                    TreeNode node = tvExplorer.CreateTreeNode(diNew);
+                    TreeNode node = tvExplorer.CreateTreeNode(fullName);
                     tvExplorer.SelectedNode.Nodes.Add(node);
                     tvExplorer.SelectedNode = node;
 

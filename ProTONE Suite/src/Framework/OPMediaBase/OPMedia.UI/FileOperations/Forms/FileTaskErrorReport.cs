@@ -11,7 +11,7 @@ using OPMedia.Core;
 
 namespace OPMedia.UI.FileTasks
 {
-    public partial class FileTaskErrorReport : ToolForm
+    public partial class FileTaskErrorReport : ThemeForm
     {
         public FileTaskErrorReport(Dictionary<string, string> errorMap, string title, string message)
         {
@@ -26,9 +26,11 @@ namespace OPMedia.UI.FileTasks
             foreach (KeyValuePair<string, string> kvp in errorMap)
             {
                 TreeNode tnPath = new TreeNode(kvp.Key);
-                tnPath.NodeFont = ThemeManager.LargeFont;
+                tnPath.NodeFont = ThemeManager.NormalBoldFont;
 
                 TreeNode tnError = new TreeNode(kvp.Value);
+                tnError.NodeFont = ThemeManager.NormalFont;
+
                 tnPath.Nodes.Add(tnError);
 
                 tvReports.Nodes.Add(tnPath);

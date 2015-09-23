@@ -11,19 +11,9 @@ namespace OPMedia.Runtime.FileInformation
 {
     public sealed class FileRoutines
     {
-        const long FILESIZE_ATOM = 256 * 1024;
-        /*
-        public static void CopyFile(FileInfo source, FileInfo destination)
-        {
-            CopyFile(source, destination, Kernel32.CopyFileOptions.None);
-        }
+        public const long FILESIZE_NOTIFY_ATOM = 10 * 1024 * 1024;
+        public const long FILESIZE_TRANSFER_ATOM = 1 * 1024 * 1024;
 
-        public static void CopyFile(FileInfo source, FileInfo destination,
-            Kernel32.CopyFileOptions options)
-        {
-            CopyFile(source, destination, options, null);
-        }
-        */
         public static void CopyFile(string source, string destination,
             Kernel32.CopyFileOptions options, Kernel32.CopyFileCallback callback)
         {
@@ -40,13 +30,12 @@ namespace OPMedia.Runtime.FileInformation
             if ((options & ~Kernel32.CopyFileOptions.All) != 0)
                 throw new ArgumentOutOfRangeException("options");
 
-            new FileIOPermission(FileIOPermissionAccess.Read, source).Demand();
-            new FileIOPermission(FileIOPermissionAccess.Write, destination).Demand();
+            //new FileIOPermission(FileIOPermissionAccess.Read, source).Demand();
+            //new FileIOPermission(FileIOPermissionAccess.Write, destination).Demand();
 
-            if (source.Length <= FILESIZE_ATOM)
+            if (new FileInfo(source).Length <= FILESIZE_TRANSFER_ATOM)
             {
                 File.Copy(source, destination, true);
-                callback(source, destination, state, source.Length, source.Length);
             }
             else
             {

@@ -562,15 +562,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     if (fsi != null)
                     {
-                        FileInfo fi = fsi as FileInfo;
-                        if (fi != null && fi.Name.ToUpperInvariant().EndsWith("CDA"))
+                        if (fsi.ToUpperInvariant().EndsWith("CDA"))
                         {
-                            CDAFileInfo cdfi = MediaFileInfo.FromPath(fsi.FullName) as CDAFileInfo;
+                            CDAFileInfo cdfi = MediaFileInfo.FromPath(fsi) as CDAFileInfo;
                             if (cdfi != null)
                                 return cdfi.DisplayName;
                         }
 
-                        return fsi.Name;
+                        return Path.GetFileName(fsi);
                     }
 
                     return string.Empty;
@@ -605,8 +604,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 try
                 {
-                    FileInfo fi = new FileInfo(dlg.FileNames[0]);
-                    ProTONEConfig.LastOpenedFolder = fi.DirectoryName;
+                    string file = dlg.FileNames[0];
+                    ProTONEConfig.LastOpenedFolder = Path.GetDirectoryName(file);
                 }
                 catch
                 {

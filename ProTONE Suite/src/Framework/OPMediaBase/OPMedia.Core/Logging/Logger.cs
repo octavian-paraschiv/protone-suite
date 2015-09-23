@@ -13,6 +13,7 @@ using System.IO;
 using System.Globalization;
 using OPMedia.Core;
 using System.Collections.Concurrent;
+using OPMedia.Core.Utilities;
 #endregion
 
 namespace OPMedia.Core.Logging
@@ -323,9 +324,7 @@ namespace OPMedia.Core.Logging
 
             logFileFolder = LoggingConfiguration.LogFilePath;
             if (string.IsNullOrEmpty(logFileFolder) || logFileFolder == PathUtils.CurrentDir)
-            {
-                logFileFolder = new System.IO.FileInfo(assemblyLocation).Directory.FullName;
-            }
+                logFileFolder = Path.GetDirectoryName(assemblyLocation);
 
             if (LoggingConfiguration.LoggingEnabled)
             {

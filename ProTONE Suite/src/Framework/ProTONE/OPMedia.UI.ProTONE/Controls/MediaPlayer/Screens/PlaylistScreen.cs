@@ -270,16 +270,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     if (_abortLoad)
                         break;
 
-                    if (DvdMedia.FromPath(file) != null)
+                    if (File.Exists(file))
                     {
-                        playlist.AddItem(file);
-                        return;
+                        if (DvdMedia.FromPath(file) != null)
+                        {
+                            playlist.AddItem(file);
+                            return;
+                        }
+                        else if (IsPlaylist(file))
+                        {
+                            LoadPlaylist(file, true);
+                        }
                     }
-                    else if (IsPlaylist(file))
-                    {
-                        LoadPlaylist(file, true);
-                    }
-                    else if (IsFolder(file))
+                    else if (Directory.Exists(file))
                     {
                         AddFiles(PathUtils.EnumDirectories(file));
                         AddFiles(PathUtils.EnumFiles(file));
@@ -304,23 +307,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 return false;
             }
-        }
-
-        private bool IsFolder(string file)
-        {
-            try
-            {
-                DirectoryInfo di = new DirectoryInfo(file);
-                return (di.Exists);
-                //{
-                  //  return ((fi.Attributes & FileAttributes.Directory) == FileAttributes.Directory);
-                //}
-            }
-            catch
-            {
-            }
-
-            return false;
         }
 
         internal string GetFirstFile()
@@ -523,8 +509,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 try
                 {
-                    FileInfo fi = new FileInfo(dlg.FileName);
-                    ProTONEConfig.PL_LastOpenedFolder = fi.DirectoryName;
+                    string file = dlg.FileNames[0];
+                    ProTONEConfig.PL_LastOpenedFolder = Path.GetDirectoryName(file);
                 }
                 catch
                 {
@@ -590,8 +576,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 try
                 {
-                    FileInfo fi = new FileInfo(dlg.FileName);
-                    ProTONEConfig.PL_LastOpenedFolder = fi.DirectoryName;
+                    string file = dlg.FileNames[0];
+                    ProTONEConfig.PL_LastOpenedFolder = Path.GetDirectoryName(file);
                 }
                 catch
                 {

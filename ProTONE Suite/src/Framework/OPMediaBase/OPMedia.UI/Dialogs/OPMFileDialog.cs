@@ -138,7 +138,7 @@ namespace OPMedia.UI.Controls.Dialogs
             btnOK.OnDropDownClicked += new EventHandler(btnOK_OnDropDownClicked);
         }
 
-        string lvExplorer_QueryDisplayName(FileSystemInfo fsi)
+        string lvExplorer_QueryDisplayName(string fsi)
         {
             if (fsi != null)
             {
@@ -147,7 +147,7 @@ namespace OPMedia.UI.Controls.Dialogs
                     return QueryDisplayName(fsi);
                 }
 
-                return fsi.Name;
+                return fsi;
             }
 
             return string.Empty;

@@ -67,7 +67,7 @@ namespace OPMedia.UI.Controls
 
     public delegate bool LaunchMultipleItemsHandler(object sender, System.EventArgs e);
 
-    public delegate string QueryDisplayNameHandler(FileSystemInfo fsi);
+    public delegate string QueryDisplayNameHandler(string fsi);
 
     #endregion
 
@@ -82,6 +82,7 @@ namespace OPMedia.UI.Controls
 
         System.Windows.Forms.Timer _delayedExplore = null;
         System.Windows.Forms.Timer _delayedSelectionTimer = null;
+        System.Windows.Forms.Timer _delayedRenameTimer = null;
 
         private string m_strDirPath = Environment.CurrentDirectory;
 		private string m_strPrevDirPath = "";
@@ -167,10 +168,11 @@ namespace OPMedia.UI.Controls
 
                 foreach (ListViewItem item in SelectedItems)
                 {
-                    FileSystemInfo fsi = item.Tag as FileSystemInfo;
-                    if (fsi != null && fsi.Exists && string.Compare(fsi.FullName, ParentFolderTarget, true) != 0)
+                    string fsi = item.Tag as string;
+                    if (fsi != null && string.Compare(fsi, ParentFolderTarget, true) != 0)
                     {
-                        selectedItems.Add(fsi.FullName);
+                        if (PathUtils.Exists(fsi))
+                            selectedItems.Add(fsi);
                     }
                 }
 
@@ -210,14 +212,12 @@ namespace OPMedia.UI.Controls
                         }
                         else
                         {
-                            DirectoryInfo di = new DirectoryInfo(m_strDirPath);
-                            m_strDirPath = di.Root.FullName;
+                            m_strDirPath = System.IO.Path.GetPathRoot(m_strDirPath);
                         }
                     }
                     else if (value == PathUtils.ParentDir)
                     {
-                        DirectoryInfo di = new DirectoryInfo(m_strDirPath);
-                        m_strDirPath = di.Parent.FullName;
+                        m_strDirPath = System.IO.Path.GetDirectoryName(m_strDirPath);
                     }
                     else if (value == PathUtils.CurrentDir)
                     {
@@ -308,13 +308,19 @@ namespace OPMedia.UI.Controls
             }
         }
 
+        void _delayedRenameTimer_Tick(object sender, EventArgs e)
+        {
+            _delayedRenameTimer.Stop();
+            Rename();
+        }
+
         void _delayedExplore_Tick(object sender, EventArgs e)
         {
             _delayedExplore.Stop();
 
             try
             {
-                Explore(_diNew == null);
+                Explore(_pathToSelect == null);
             }
             finally
             {
@@ -389,6 +395,12 @@ namespace OPMedia.UI.Controls
             _delayedExplore.Tick += new EventHandler(_delayedExplore_Tick);
             _delayedExplore.Enabled = false;
 
+            _delayedRenameTimer = new System.Windows.Forms.Timer();
+            _delayedRenameTimer.Interval = 500;
+            _delayedRenameTimer.Tick += _delayedRenameTimer_Tick;
+            _delayedRenameTimer.Enabled = false;
+
+
             ThemeManager.SetFont(this, FontSizes.Normal);
         }
 
@@ -430,13 +442,16 @@ namespace OPMedia.UI.Controls
 
         void OnCellEndEdit(object sender, LabelEditEventArgs e)
         {
+            string oldPath = "";
+            string finalPath = "";
+
             try
             {
                 string newName = e.Label;
                 if (e.CancelEdit || string.IsNullOrEmpty(newName))
                     return;
 
-                FileSystemInfo fsi = this.Items[e.Item].Tag as FileSystemInfo;
+                string fsi = this.Items[e.Item].Tag as string;
                 if (fsi == null)
                     return;
 
@@ -451,54 +466,42 @@ namespace OPMedia.UI.Controls
                     e.CancelEdit = (initialName == PathUtils.ParentDir);
                 }
 
-                string oldPath = fsi.FullName;
-                string finalPath = System.IO.Path.Combine(m_strDirPath, newName);
+                oldPath = fsi;
+                finalPath = System.IO.Path.Combine(m_strDirPath, newName);
 
-                if (String.Equals(finalPath, fsi.FullName, StringComparison.InvariantCultureIgnoreCase))
+                if (String.Equals(finalPath, fsi, StringComparison.InvariantCultureIgnoreCase))
                     return;
 
-                if ((fsi.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
+                if (Directory.Exists(fsi))
                 {
                     // Renaming a folder
-                    DirectoryInfo di = fsi as DirectoryInfo;
-                    if (di != null && di.Exists)
-                    {
-                        di.MoveTo(finalPath);
-                    }
+                    Directory.Move(fsi, finalPath);
                 }
-                else
+                else if (File.Exists(fsi))
                 {
-                    // Renaming a file
-                    FileInfo fi = fsi as FileInfo;
-                    if (fi != null && fi.Exists)
+                    List<String> linkedFiles = null;
+
+                    if (QueryLinkedFiles != null)
                     {
-                        List<String> linkedFiles = null;
-
-                        if (QueryLinkedFiles != null)
-                        {
-                            linkedFiles = QueryLinkedFiles(oldPath, FileTaskType.Move);
-                        }
-
-                        if (linkedFiles != null)
-                        {
-                            string oldFileName = System.IO.Path.GetFileNameWithoutExtension(oldPath);
-                            string newFileName = System.IO.Path.GetFileNameWithoutExtension(finalPath);
-
-                            foreach (string linkedFile in linkedFiles)
-                            {
-                                string linkedFileName = System.IO.Path.GetFileName(linkedFile).Replace(oldFileName, newFileName);
-                                string linkedFileFinalPath = System.IO.Path.Combine(m_strDirPath, linkedFileName);
-
-                                FileInfo lfi = new FileInfo(linkedFile);
-                                if (lfi.Exists)
-                                {
-                                    lfi.MoveTo(linkedFileFinalPath);
-                                }
-                            }
-                        }
-
-                        fi.MoveTo(finalPath);
+                        linkedFiles = QueryLinkedFiles(oldPath, FileTaskType.Move);
                     }
+
+                    if (linkedFiles != null)
+                    {
+                        string oldFileName = System.IO.Path.GetFileNameWithoutExtension(oldPath);
+                        string newFileName = System.IO.Path.GetFileNameWithoutExtension(finalPath);
+
+                        foreach (string linkedFile in linkedFiles)
+                        {
+                            string linkedFileName = System.IO.Path.GetFileName(linkedFile).Replace(oldFileName, newFileName);
+                            string linkedFileFinalPath = System.IO.Path.Combine(m_strDirPath, linkedFileName);
+
+                            if (File.Exists(linkedFile))
+                                File.Move(linkedFile, linkedFileFinalPath);
+                        }
+                    }
+
+                    File.Move(oldPath, finalPath);
                 }
 
                 item.Selected = item.Focused = true;
@@ -508,10 +511,12 @@ namespace OPMedia.UI.Controls
                     ItemRenamed(finalPath);
                 }
 
+                _pathToSelect = finalPath;
             }
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchError(ex.Message, "Rename error");
+                _pathToSelect = oldPath;
             }
             finally
             {
@@ -583,16 +588,16 @@ namespace OPMedia.UI.Controls
             {
                 ListViewItem item = this.SelectedItems[0];
 
-                FileSystemInfo fsi = item.Tag as FileSystemInfo;
+                string fsi = item.Tag as string;
                 if (fsi != null)
                 {
-                    if (fsi is FileInfo)
+                    if (File.Exists(fsi))
                     {
-                        OnSelectFile(fsi.FullName);
+                        OnSelectFile(fsi);
                     }
-                    else if (fsi is DirectoryInfo)
+                    else if (Directory.Exists(fsi))
                     {
-                        OnSelectDirectory(fsi.FullName);
+                        OnSelectDirectory(fsi);
                     }
                 }
             }
@@ -714,7 +719,8 @@ namespace OPMedia.UI.Controls
             base.OnThemeUpdatedInternal();
             foreach (ListViewItem item in Items)
             {
-                bool isFile = (item.Tag is FileInfo);
+                string fsi = item.Tag as string;
+                bool isFile = (string.IsNullOrEmpty(fsi) == false && File.Exists(fsi));
                 item.BackColor = ThemeManager.BackColor;
                 item.ForeColor = isFile ? ThemeManager.ForeColor : ThemeManager.HighlightColor;
                 item.Font = isFile ? ThemeManager.NormalFont : ThemeManager.NormalBoldFont;
@@ -725,21 +731,10 @@ namespace OPMedia.UI.Controls
         {
             foreach (ListViewItem row in this.Items)
             {
-                FileSystemInfo fsi = (row.Tag as FileSystemInfo);
-                if (fsi != null && string.Compare(fsi.FullName, item, true) == 0)
+                string fsi = (row.Tag as string);
+                if (fsi != null && string.Compare(fsi, item, true) == 0)
                 {
-                    if (fsi is DirectoryInfo)
-                    {
-                        fsi = new DirectoryInfo(item);
-                    }
-                    else if (fsi is FileInfo)
-                    {
-                        fsi = new FileInfo(item);
-                    }
-
-                    row.Tag = fsi;
                     row.SubItems[colAttr.Index].Text = BuildAttributes(fsi);
-
                     break;
                 }
             }
@@ -782,6 +777,16 @@ namespace OPMedia.UI.Controls
                 selection.AddRange(SelectedPaths);
             }
 
+            int selIdx = 0;
+            try
+            {
+                selIdx = this.SelectedIndices[0];
+            }
+            catch
+            {
+                selIdx = 0;
+            }
+
             Clear();
             m_ilDirListManager.Clear();
 
@@ -818,11 +823,10 @@ namespace OPMedia.UI.Controls
                             if (!share.IsFileSystem)
                                 continue;
 
-                            DirectoryInfo di = share.Root;
-                            if (!di.Exists)
+                            if (Directory.Exists(share.Root.FullName) == false)
                                 continue;
 
-                            CreateNewRow(di);
+                            CreateNewRow(share.Root.FullName);
                         }
                     }
                     else
@@ -830,21 +834,19 @@ namespace OPMedia.UI.Controls
                         List<string> strDirs = PathUtils.EnumDirectories(m_strDirPath);
                         foreach (string dir in strDirs)
                         {
-                            DirectoryInfo di = new DirectoryInfo(dir);
-                            if (!di.Exists)
+                            if (Directory.Exists(dir) == false)
                                 continue;
 
-                            CreateNewRow(di);
+                            CreateNewRow(dir);
                         }
 
                         List<string> strFiles = PathUtils.EnumFilesUsingMultiFilter(m_strDirPath, this.SearchPattern);
                         foreach (string file in strFiles)
                         {
-                            FileInfo fi = new FileInfo(file);
-                            if (!fi.Exists)
+                            if (File.Exists(file) == false)
                                 continue;
 
-                            CreateNewRow(fi);
+                            CreateNewRow(file);
                         }
                     }
                 }
@@ -870,21 +872,17 @@ namespace OPMedia.UI.Controls
             //ClearSelection();
             this.SelectedItems.Clear();
 
-            if (keepSelection || _diNew != null)
+            bool selectedSomething = false;
+            if (keepSelection || _pathToSelect != null)
             {
-                if ((selection != null && selection.Count > 0) || _diNew != null)
+                if ((selection != null && selection.Count > 0) || _pathToSelect != null)
                 {
                     bool focusSet = false;
 
                     foreach (ListViewItem item in Items)
                     {
-                        string path = string.Empty;
-                        if (item.Tag is FileSystemInfo)
-                        {
-                            path = (item.Tag as FileSystemInfo).FullName;
-                        }
-
-                        if (selection.Contains(path) || (_diNew != null && string.Compare(_diNew.FullName, path, true) == 0))
+                        string path = item.Tag as string;
+                        if (selection.Contains(path) || (string.Compare(_pathToSelect, path, true) == 0))
                         {
                             if (!focusSet)
                             {
@@ -894,6 +892,7 @@ namespace OPMedia.UI.Controls
 
                             item.Selected = true;
                             EnsureVisible(item.Index);
+                            selectedSomething = true;
                         }
                     }
                 }
@@ -903,12 +902,12 @@ namespace OPMedia.UI.Controls
                 int lastVisibleIndex = 0;
                 foreach (ListViewItem item in this.Items)
                 {
-                    DirectoryInfo info = item.Tag as DirectoryInfo;
-                    if (info != null)
+                    string path = item.Tag as string;
+                    if (string.IsNullOrEmpty(path) == false)
                     {
                         item.Selected = false;
 
-                        if (string.Compare(info.FullName, m_strPrevDirPath, false) == 0)
+                        if (string.Compare(path, m_strPrevDirPath, false) == 0)
                         {
                             item.Selected = true;
                             item.Focused = true;
@@ -921,16 +920,23 @@ namespace OPMedia.UI.Controls
                 }
 
                 EnsureVisible(lastVisibleIndex);
+                selectedSomething = true;
+            }
+
+            if (!selectedSomething)
+            {
+                if (selIdx < 0)
+                    selIdx = 0;
+                if (selIdx >= this.Items.Count)
+                    selIdx = this.Items.Count - 1;
+
+                this.Items[selIdx].Selected = true;
+                this.Items[selIdx].Focused = true;
+                EnsureVisible(selIdx);
             }
 
             this.Select();
             this.Focus();
-
-            if (_diNew != null)
-            {
-                _diNew = null;
-                Rename();
-            }
 		}
 
         public void ExploreBack()
@@ -1017,8 +1023,8 @@ namespace OPMedia.UI.Controls
             {
                 if (!IsInDriveRoot)
                 {
-                    DirectoryInfo di = new DirectoryInfo(m_strDirPath);
-                    return di.Parent.FullName;
+                    string parent = System.IO.Path.GetDirectoryName(m_strDirPath);
+                    return parent;
                 }
 
                 return string.Empty;
@@ -1045,17 +1051,17 @@ namespace OPMedia.UI.Controls
 
             if (LaunchMultipleItems == null || !LaunchMultipleItems(sender, e))
             {
-                FileSystemInfo fsi = this.SelectedItems[0].Tag as FileSystemInfo;
+                string fsi = this.SelectedItems[0].Tag as string;
                 if (fsi != null)
                 {
-                    if (fsi is DirectoryInfo)
+                    if (Directory.Exists(fsi))
                     {
-                        this.Path = fsi.FullName;
-                        OnDoubleClickDirectory(fsi.FullName);
+                        this.Path = fsi;
+                        OnDoubleClickDirectory(fsi);
                     }
-                    else if (fsi is FileInfo)
+                    else if (File.Exists(fsi))
                     {
-                        OnDoubleClickFile(fsi.FullName);
+                        OnDoubleClickFile(fsi);
                     }
                 }
             }
@@ -1079,18 +1085,13 @@ namespace OPMedia.UI.Controls
             {
                 isUNCPathRoot = false;
 
-                DirectoryInfo di = new DirectoryInfo(path);
-                if (!di.Exists)
+                if (Directory.Exists(path) == false)
                 {
-                    if (di.Parent != null)
-                    {
-                        usablePath = FindFirstUsablePath(di.Parent.FullName, ref isUNCPathRoot);
-                    }
-                    else
-                    {
-                        di = new DirectoryInfo(Environment.SystemDirectory);
-                        usablePath = di.Root.FullName;
-                    }
+                    string parent = System.IO.Path.GetDirectoryName(path);
+                    usablePath = FindFirstUsablePath(parent, ref isUNCPathRoot);
+
+                    if (string.IsNullOrEmpty(usablePath))
+                        usablePath = Environment.SystemDirectory;
                 }
             }
 
@@ -1114,8 +1115,8 @@ namespace OPMedia.UI.Controls
 
                 foreach (ListViewItem item in this.Items)
                 {
-                    FileSystemInfo fsi = item.Tag as FileSystemInfo;
-                    if (fsi != null && string.Compare(fsi.FullName, itemPath, true) == 0)
+                    string fsi = item.Tag as string;
+                    if (fsi != null && string.Compare(fsi, itemPath, true) == 0)
                     {
                         this.Select();
                         this.Focus();
@@ -1164,13 +1165,13 @@ namespace OPMedia.UI.Controls
         {
             if (!PathUtils.IsRootPath(Path))
             {
-                DirectoryInfo parent = Directory.GetParent(Path);
+                string parent = System.IO.Path.GetDirectoryName(Path);
                 if (parent != null)
                 {
                     string[] data = new string[] { PathUtils.ParentDir, BuildLastAccessTime(parent), "[ DIR ]", BuildAttributes(parent) };
 
                     ListViewItem item = new ListViewItem(data);
-                    item.ImageKey = m_ilDirListManager.GetImageKey(parent.FullName);
+                    item.ImageKey = m_ilDirListManager.GetImageKey(parent);
                     item.Tag = parent;
                     item.BackColor = ThemeManager.BackColor;
                     item.ForeColor = ThemeManager.ForeColor;
@@ -1181,15 +1182,15 @@ namespace OPMedia.UI.Controls
             }
         }
 
-        public void CreateNewRow(FileSystemInfo fsi)
+        public void CreateNewRow(string fsi)
         {
             string strLen = "[ DIR ]";
             Color c = ThemeManager.SelectedColor;
 
             bool isFile = false;
-            if (fsi is FileInfo)
+            if (File.Exists(fsi))
             {
-                long len = (fsi as FileInfo).Length;
+                long len = new FileInfo(fsi).Length;
                 float lenKB = (float)len / (float)(1024);
                 float lenMB = (float)len / (float)(1024 * 1024);
                 float lenGB = (float)len / (float)(1024 * 1024 * 1024);
@@ -1227,7 +1228,7 @@ namespace OPMedia.UI.Controls
             ListViewItem item = new ListViewItem(data);
             item.BackColor = ThemeManager.BackColor;
             item.ForeColor = isFile ? ThemeManager.ForeColor : ThemeManager.HighlightColor;
-            item.ImageKey = m_ilDirListManager.GetImageKey(fsi.FullName);
+            item.ImageKey = m_ilDirListManager.GetImageKey(fsi);
             item.Tag = fsi;
             item.Font = isFile ? ThemeManager.NormalFont : ThemeManager.NormalBoldFont;
 
@@ -1235,27 +1236,28 @@ namespace OPMedia.UI.Controls
             
         }
 
-        private string BuildDisplayName(FileSystemInfo fsi)
+        private string BuildDisplayName(string fsi)
         {
-            if (fsi is DirectoryInfo)
-                return fsi.Name;
+            if (Directory.Exists(fsi))
+                return PathUtils.GetDirectoryTitle(fsi);
 
-            if (fsi is FileInfo)
+            if (File.Exists(fsi))
             {
                 if (QueryDisplayName != null)
                     return QueryDisplayName(fsi);
 
-                return fsi.Name;
+                return System.IO.Path.GetFileName(fsi);
             }
 
             return string.Empty;
         }
 
-        private string BuildLastAccessTime(FileSystemInfo fsi)
+        private string BuildLastAccessTime(string fsi)
         {
             try
             {
-                return StringUtils.BuildTimeString(fsi.LastWriteTime);
+                DateTime dt = File.GetLastWriteTime(fsi);
+                return StringUtils.BuildTimeString(dt);
             }
             catch
             {
@@ -1263,23 +1265,23 @@ namespace OPMedia.UI.Controls
             }
         }
 
-        private string BuildAttributes(FileSystemInfo fsi)
+        private string BuildAttributes(string fsi)
         {
             string strAttr = "";
 
-            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.ReadOnly))
+            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.ReadOnly))
                 strAttr += "R";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.Archive))
+            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.Archive))
                 strAttr += "A";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.Hidden))
+            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.Hidden))
                 strAttr += "H";
             else
                 strAttr += "-";
-            if (PathUtils.ObjectHasAttribute(fsi.FullName, FileAttributes.System))
+            if (PathUtils.ObjectHasAttribute(fsi, FileAttributes.System))
                 strAttr += "S";
             else
                 strAttr += "-";
@@ -1287,15 +1289,29 @@ namespace OPMedia.UI.Controls
             return strAttr;
         }
 
-        DirectoryInfo _diNew = null;
+        string _pathToSelect = null;
 
         public void CreateNewFolder()
         {
-            DirectoryInfo di = new DirectoryInfo(Path);
-            if (di.Exists)
+            _pathToSelect = null;
+
+            try
             {
-                string newName = string.Format("NewFolder_{0}", StringUtils.GenerateRandomToken(4));
-                _diNew = di.CreateSubdirectory(newName);
+                if (Directory.Exists(Path))
+                {
+                    string newName = string.Format("NewFolder_{0}", StringUtils.GenerateRandomToken(4));
+                    string newPath = System.IO.Path.Combine(Path, newName);
+                    Directory.CreateDirectory(newPath);
+                    if (Directory.Exists(newPath))
+                    {
+                        _pathToSelect = newPath;
+                        _delayedRenameTimer.Start();
+                    }
+                }
+            }
+            catch
+            {
+                _pathToSelect = null;
             }
         }
     }
@@ -1338,8 +1354,8 @@ namespace OPMedia.UI.Controls
                 else if (row2 == null)
                     return -1;
 
-                FileSystemInfo fsi1 = row1.Tag as FileSystemInfo;
-                FileSystemInfo fsi2 = row2.Tag as FileSystemInfo;
+                string fsi1 = row1.Tag as string;
+                string fsi2 = row2.Tag as string;
 
                 if (fsi1 == null && fsi2 == null)
                     return 0;
@@ -1348,8 +1364,8 @@ namespace OPMedia.UI.Controls
                 else if (fsi2 == null)
                     return -1;
 
-                bool isDir1 = (fsi1.Attributes & FileAttributes.Directory) == FileAttributes.Directory;
-                bool isDir2 = (fsi2.Attributes & FileAttributes.Directory) == FileAttributes.Directory;
+                bool isDir1 = Directory.Exists(fsi1);
+                bool isDir2 = Directory.Exists(fsi2);
 
                 if (isDir1 != isDir2)
                 {
@@ -1359,15 +1375,7 @@ namespace OPMedia.UI.Controls
                         return 1;
                 }
 
-                string str1 = row1.SubItems[_col].Text;
-                string str2 = row2.SubItems[_col].Text;
-
-                if (str1 == PathUtils.ParentDir)
-                    return -1;
-                if (str2 == PathUtils.ParentDir)
-                    return 1;
-
-                return String.Compare(str1, str2, true);
+                return String.Compare(fsi1, fsi2, true);
             }
             catch
             {

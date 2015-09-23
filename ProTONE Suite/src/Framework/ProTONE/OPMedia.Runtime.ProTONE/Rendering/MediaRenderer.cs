@@ -1072,12 +1072,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         return true; // DVD's are supported media
                 }
 
-                FileInfo info = new FileInfo(path);
-
-                if ((info.Attributes & FileAttributes.Directory) == FileAttributes.Directory)
-                {
+                if (Directory.Exists(path))
                     return FolderContainsMediaFiles(path);
-                }
             }
             catch
             {

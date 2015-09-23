@@ -130,20 +130,19 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 string fileName = Path.GetFileNameWithoutExtension(movieFileName);
                 string directory = Path.GetDirectoryName(movieFileName);
 
-                DirectoryInfo di = new DirectoryInfo(directory);
-                if (di.Exists)
+                if (Directory.Exists(directory))
                 {
-                    List<FileInfo> fileInfos = PathUtils.EnumFiles(di, string.Format("{0}.*", fileName));
-                    if (fileInfos.Count > 1)
+                    List<string> files = PathUtils.EnumFiles(directory, string.Format("{0}.*", fileName));
+                    if (files.Count > 1)
                     {
                         // There is at least another file having a similar name in the folder.
                         // Check if its extension is a valid subtitle extension.
-                        foreach(FileInfo fi in fileInfos)
+                        foreach(string file in files)
                         {
-                            if (fi.FullName.ToLowerInvariant() == movieFileName.ToLowerInvariant())
+                            if (file.ToLowerInvariant() == movieFileName.ToLowerInvariant())
                                 continue; // This is our video file ... not interesting
 
-                            string ext = fi.Extension.Trim('.').ToLowerInvariant();
+                            string ext = PathUtils.GetExtension(file);
                             if (SubtitleDownloader.AllowedSubtitleExtensions.Contains(ext))
                                 return true;
                         }

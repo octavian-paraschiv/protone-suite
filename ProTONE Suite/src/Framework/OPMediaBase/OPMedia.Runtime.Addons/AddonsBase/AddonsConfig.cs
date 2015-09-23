@@ -13,6 +13,7 @@ using OPMedia.Runtime;
 using OPMedia.UI.Configuration;
 using System.Reflection;
 using System.Globalization;
+using OPMedia.UI.FileOperations.Tasks;
 
 namespace OPMedia.Runtime.Addons.AddonsBase
 {
@@ -193,9 +194,11 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         private static void UninstallAddonLibrary(string name)
         {
-            FileInfo fi = new FileInfo(name);
-            fi.Attributes ^= fi.Attributes;
-            fi.Delete();
+            if (File.Exists(name))
+            {
+                File.SetAttributes(name, FileAttributes.Normal);
+                File.Delete(name);
+            }
         }
 
         internal static void InstallAddonLibrary(string fileName)

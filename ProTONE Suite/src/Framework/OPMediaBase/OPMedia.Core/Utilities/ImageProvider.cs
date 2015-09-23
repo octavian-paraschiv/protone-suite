@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 using System.Resources;
 using OPMedia.Core.Properties;
 using System.Reflection;
+using OPMedia.Core.Utilities;
 #endregion
 
 

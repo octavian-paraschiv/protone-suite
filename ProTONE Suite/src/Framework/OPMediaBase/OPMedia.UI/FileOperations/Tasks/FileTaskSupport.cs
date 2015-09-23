@@ -73,38 +73,30 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         }
 
-        bool _canContinue = true;
+        ManualResetEvent _canContinueEvent = new ManualResetEvent(true);
         public bool CanContinue 
         {
             get
             {
-                lock (_lock)
-                {
-                    return _canContinue;
-                }
+                return _canContinueEvent.WaitOne(0);
             }
 
             private set
             {
-                lock (_lock)
-                {
-                    _canContinue = value;
-                }
+                if (value)
+                    _canContinueEvent.Set();
+                else
+                    _canContinueEvent.Reset();
             }
         }
 
         public void CheckIfCanContinue(string path)
         {
-            do
-            {
+            while (_fileTaskWaitEvent.WaitOne(10))
                 Application.DoEvents();
-            }
-            while (_fileTaskWaitEvent.WaitOne(20, true));
 
-            if (!_canContinue)
-            {
+            if (CanContinue == false)
                 throw new TaskInterruptedException(path);
-            }
         }
 
         #endregion
@@ -295,7 +287,7 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         #region File operations
 
-        public bool CopyFile(FileInfo fi, string destFile)
+        public bool CopyFile(string srcFile, string destFile)
         {
             try
             {
@@ -311,8 +303,11 @@ namespace OPMedia.UI.FileOperations.Tasks
                         this.RequiresRefresh = true;
                     }
 
-                    FileRoutines.CopyFile(fi.FullName, destFile, Kernel32.CopyFileOptions.None, new Kernel32.CopyFileCallback(this.CopyFileCallback));
-                    Log(FSAction.Copy, fi, destFile);
+                    _transferredAtomCount = 0;
+                    FileRoutines.CopyFile(srcFile, destFile, Kernel32.CopyFileOptions.None, new Kernel32.CopyFileCallback(this.CopyFileCallback));
+                    _task.FireTaskProgress(ProgressEventType.Progress, srcFile, UpdateProgressData.FileDone);
+                    
+                    Log(FSAction.Copy, srcFile, destFile);
 
                     // File system changed => refresh will be required
                     this.RequiresRefresh = true;
@@ -324,18 +319,18 @@ namespace OPMedia.UI.FileOperations.Tasks
                 Win32Exception winEx = exception as Win32Exception;
                 if (winEx == null || winEx.NativeErrorCode != WinError.S_OK)
                 {
-                    _task.AddToErrorMap(fi.FullName, exception.Message);
+                    _task.AddToErrorMap(srcFile, exception.Message);
                 }
 
                 return false;
             }
         }
 
-        public void MoveFile(FileInfo fi, string destFile, bool needConfirmation)
+        public void MoveFile(string srcFile, string destFile, bool needConfirmation)
         {
             if (_skipConfirmations || !needConfirmation || this.CanMove(destFile))
             {
-                if (PathUtils.PathsAreOnSameRoot(fi.FullName, destFile))
+                if (PathUtils.PathsAreOnSameRoot(srcFile, destFile))
                 {
                     bool fileExists = File.Exists(destFile);
                     if (_skipConfirmations || !needConfirmation || !fileExists || this.CanOverwrite(destFile))
@@ -352,49 +347,51 @@ namespace OPMedia.UI.FileOperations.Tasks
                         }
                         if (fileExists)
                         {
-                            FileAttributes attr = File.GetAttributes(destFile);
-                            File.SetAttributes(destFile, attr ^ attr);
+                            File.SetAttributes(destFile, FileAttributes.Normal);
 
                             // File system changed => refresh will be required
                             this.RequiresRefresh = true;
 
                         }
 
-                        fi.MoveTo(destFile);
-                        Log(FSAction.Move, fi, destFile);
+                        File.Move(srcFile, destFile);
+                        Log(FSAction.Move, srcFile, destFile);
 
                         // File system changed => refresh will be required
                         this.RequiresRefresh = true;
                     }
                 }
-                else if (this.CopyFile(fi, destFile))
+                else if (this.CopyFile(srcFile, destFile))
                 {
-                    this.DeleteFile(fi, false);
+                    this.DeleteFile(srcFile, false);
                 }
             }
         }
 
-        public void DeleteFile(FileInfo fi, bool needConfirmation)
+        public void DeleteFile(string file, bool needConfirmation)
         {
-            if (_skipConfirmations || !needConfirmation || CanDelete(fi.FullName))
+            if (_skipConfirmations || !needConfirmation || CanDelete(file))
             {
-                DeleteFileSystemObject(fi);
+                DeleteFileSystemObject(file);
             }
         }
+
+        int _transferredAtomCount = 0;
 
         public Kernel32.CopyFileCallbackAction CopyFileCallback(
            string source, string destination, object state,
            long totalFileSize, long totalBytesTransferred)
         {
-            UpdateProgressData data = new UpdateProgressData(totalFileSize, totalBytesTransferred);
-
-            _task.FireTaskProgress(ProgressEventType.Progress, source, data);
-
-            do
+            int atomCount = (int)(totalBytesTransferred / FileRoutines.FILESIZE_NOTIFY_ATOM);
+            if (atomCount != _transferredAtomCount)
             {
-                Application.DoEvents();
+                _transferredAtomCount = atomCount;
+                UpdateProgressData data = new UpdateProgressData(totalFileSize, totalBytesTransferred);
+                _task.FireTaskProgress(ProgressEventType.Progress, source, data);
             }
-            while (_fileTaskWaitEvent.WaitOne(20, true));
+
+            while (_fileTaskWaitEvent.WaitOne(10))
+                Application.DoEvents();
 
             return CanContinue ? 
                 Kernel32.CopyFileCallbackAction.Continue : 
@@ -415,11 +412,13 @@ namespace OPMedia.UI.FileOperations.Tasks
                     if (_skipConfirmations || CanDelete(path))
                     {
                         Directory.Delete(path);
+                        this.RequiresRefresh = true;
                     }
                 }
                 else if (_skipConfirmations || CanDeleteNonEmptyFolder(path))
                 {
                     Directory.Delete(path);
+                    this.RequiresRefresh = true;
                 }
             }
         }
@@ -427,6 +426,7 @@ namespace OPMedia.UI.FileOperations.Tasks
         internal void MoveTo(string dir, string destinationPath)
         {
             Directory.Move(dir, destinationPath);
+            this.RequiresRefresh = true;
             Log(FSAction.MoveFolder, dir, destinationPath);
 
         }
@@ -435,55 +435,45 @@ namespace OPMedia.UI.FileOperations.Tasks
 
         #region Generic file system operations
 
-        public void DeleteFileSystemObject(FileSystemInfo fsi)
+        public void DeleteFileSystemObject(string fsi)
         {
             try
             {
-                if (fsi.Exists)
+                if (File.Exists(fsi))
                 {
-                    DirectoryInfo di = fsi as DirectoryInfo;
-                    if (di != null)
-                    {
-                        PathUtils.DeleteFolderTree(fsi.FullName, 
-                            (delFSI) => 
-                            {
-                                if (delFSI is FileInfo)
-                                    Log(FSAction.Delete, delFSI);
-                                else
-                                    Log(FSAction.DeleteFolder, delFSI);
-                            });
-
-                        // File system changed => refresh will be required
-                        this.RequiresRefresh = true;
-
-                        return;
-                    }
-
-                    fsi.Attributes ^= fsi.Attributes;
-                    fsi.Delete();
-
-                    if (fsi is FileInfo)
-                        Log(FSAction.Delete, fsi);
-                    else
-                        Log(FSAction.DeleteFolder, fsi);
-
-                    // File system changed => refresh will be required
-                    this.RequiresRefresh = true;
+                    File.SetAttributes(fsi, FileAttributes.Normal);
+                    File.Delete(fsi);
+                    Log(FSAction.Delete, fsi);
                 }
+                else if (Directory.Exists(fsi))
+                {
+                    PathUtils.DeleteFolderTree(fsi,
+                        (delFSI, isFolder) =>
+                        {
+                            if (isFolder)
+                                Log(FSAction.DeleteFolder, delFSI);
+                            else
+                                Log(FSAction.Delete, delFSI);
+                        });
+                }
+
+
+                // File system changed => refresh will be required
+                this.RequiresRefresh = true;
             }
             catch (Exception ex)
             {
-                _task.AddToErrorMap(fsi.FullName, ex.Message);
+                _task.AddToErrorMap(fsi, ex.Message);
             }
         }
 
         #endregion
 
-        public virtual List<string> GetChildFiles(FileInfo fi, FileTaskType taskType)
+        public virtual List<string> GetChildFiles(string path, FileTaskType taskType)
         {
             return null;
         }
-        public virtual string GetParentFile(FileInfo fi, FileTaskType taskType)
+        public virtual string GetParentFile(string path, FileTaskType taskType)
         {
             return null;
         }

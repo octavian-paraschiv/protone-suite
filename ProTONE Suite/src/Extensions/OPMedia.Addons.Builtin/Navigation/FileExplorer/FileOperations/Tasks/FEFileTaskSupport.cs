@@ -20,13 +20,13 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
         {
         }
 
-        public override List<string> GetChildFiles(FileInfo fi, FileTaskType taskType)
+        public override List<string> GetChildFiles(string file, FileTaskType taskType)
         {
             List<string> list = new List<string>();
 
             if (ProTONEConfig.UseLinkedFiles)
             {
-                string fileType = fi.Extension.ToUpperInvariant().Trim('.');
+                string fileType = PathUtils.GetExtension(file).ToUpperInvariant();
                 string[] childFileTypes = ProTONEConfig.GetChildFileTypes(fileType);
 
                 if (childFileTypes != null && childFileTypes.Length > 0)
@@ -34,7 +34,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                     foreach (string childFileType in childFileTypes)
                     {
                         // This will find files like "FileName.PFT" and change them into "FileName.CFT"
-                        string childFilePath = Path.ChangeExtension(fi.FullName, childFileType);
+                        string childFilePath = Path.ChangeExtension(file, childFileType);
                         if (File.Exists(childFilePath) && !list.Contains(childFilePath))
                         {
                             list.Add(childFilePath);
@@ -42,8 +42,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
 
                         // This will find files like "FileName.PFT" and change them into "FileName.PFT.CFT"
                         // (i.e. handle double type extension case like for Bookmark files)
-                        string childFileType2 = string.Format("{0}.{1}", fi.Extension, childFileType);
-                        string childFilePath2 = Path.ChangeExtension(fi.FullName, childFileType2);
+                        string childFileType2 = string.Format("{0}.{1}", PathUtils.GetExtension(file), childFileType);
+                        string childFilePath2 = Path.ChangeExtension(file, childFileType2);
                         if (File.Exists(childFilePath2) && !list.Contains(childFilePath2))
                         {
                             list.Add(childFilePath2);
@@ -55,24 +55,29 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
             return list;
         }
 
-        public override string GetParentFile(FileInfo fi, FileTaskType taskType)
+        public override string GetParentFile(string file, FileTaskType taskType)
         {
             if (ProTONEConfig.UseLinkedFiles)
             {
-                // Check whether the child file is a double extension file
-                // In this case the parent file should have same name but w/o the second extension part.
-                string parentFilePath = Path.Combine(fi.DirectoryName, Path.GetFileNameWithoutExtension(fi.FullName));
-                if (File.Exists(parentFilePath))
-                    return parentFilePath;
+                string parentFilePath = "";
 
-                string fileType = fi.Extension.ToUpperInvariant().Trim('.');
+                if (Path.HasExtension(file))
+                {
+                    // Check whether the child file is a double extension file
+                    // In this case the parent file should have same name but w/o the second extension part.
+                    parentFilePath = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file));
+                    if (File.Exists(parentFilePath))
+                        return parentFilePath;
+                }
+
+                string fileType = Path.GetExtension(file).ToUpperInvariant();
                 string[] parentFileTypes = ProTONEConfig.GetParentFileTypes(fileType);
 
                 if (parentFileTypes != null && parentFileTypes.Length > 0)
                 {
                     foreach (string parentFileType in parentFileTypes)
                     {
-                        parentFilePath = Path.ChangeExtension(fi.FullName, parentFileType);
+                        parentFilePath = Path.ChangeExtension(file, parentFileType);
                         if (File.Exists(parentFilePath))
                         {
                             return parentFilePath;

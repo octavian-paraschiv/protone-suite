@@ -291,8 +291,7 @@ namespace OPMedia.Core.Configuration
                         Assembly asm = Assembly.GetAssembly(typeof(AppConfig));
                         if (asm != null)
                         {
-                            FileInfo fi = new FileInfo(asm.Location);
-                            retVal = fi.DirectoryName;
+                            retVal = Path.GetDirectoryName(asm.Location);
                         }
                     }
                 }

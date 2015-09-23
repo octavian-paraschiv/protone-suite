@@ -19,9 +19,9 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
             return new FEFileTaskSupport(this);
         }
 
-        protected override void DeleteConnectedFiles(System.IO.FileInfo fi)
+        protected override void DeleteConnectedFiles(string path)
         {
-            List<string> linkedFiles = _support.GetChildFiles(fi, this.TaskType);
+            List<string> linkedFiles = _support.GetChildFiles(path, this.TaskType);
             if (linkedFiles != null && linkedFiles.Count > 0)
             {
                 foreach (string linkedFile in linkedFiles)
@@ -30,8 +30,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
 
                     try
                     {
-                        FileInfo lfi = new FileInfo(linkedFile);
-                        _support.DeleteFile(lfi, true);
+                        _support.DeleteFile(linkedFile, false);
                     }
                     catch
                     {
@@ -39,15 +38,14 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                 }
             }
 
-            string parentFile = _support.GetParentFile(fi, this.TaskType);
+            string parentFile = _support.GetParentFile(path, this.TaskType);
             if (!string.IsNullOrEmpty(parentFile))
             {
                 _support.CheckIfCanContinue(parentFile);
 
                 try
                 {
-                    FileInfo lfi = new FileInfo(parentFile);
-                    _support.DeleteFile(lfi, true);
+                    _support.DeleteFile(parentFile, true);
                 }
                 catch
                 {

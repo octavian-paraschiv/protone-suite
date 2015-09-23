@@ -52,7 +52,8 @@ namespace OPMedia.UI.FileTasks
 
     public class UpdateProgressData
     {
-        public static UpdateProgressData Default = new UpdateProgressData(); 
+        public static UpdateProgressData Empty = new UpdateProgressData();
+        public static UpdateProgressData FileDone = new UpdateProgressData(100, 100);
 
         public long TotalFileSize { get; private set; }
         public long TotalBytesTransferred { get; private set; }
@@ -141,7 +142,7 @@ namespace OPMedia.UI.FileTasks
         {
             if (string.IsNullOrEmpty(_currentPath))
             {
-                FireTaskProgress(ProgressEventType.KeepAlive, _currentPath, UpdateProgressData.Default);
+                FireTaskProgress(ProgressEventType.KeepAlive, _currentPath, UpdateProgressData.Empty);
             }
         }
 
@@ -203,10 +204,9 @@ namespace OPMedia.UI.FileTasks
                 List<string> allLinkedFiles = new List<string>();
                 foreach (string path in SrcFiles)
                 {
-                    FileInfo fi = new FileInfo(path);
-                    if (fi.Exists)
+                    if (File.Exists(path))
                     {
-                        List<String> linkedFiles = _support.GetChildFiles(fi, TaskType);
+                        List<String> linkedFiles = _support.GetChildFiles(path, TaskType);
                         if (linkedFiles != null && linkedFiles.Count > 0)
                         {
                             var linkedFilesLowercase = (from s in linkedFiles
@@ -241,7 +241,7 @@ namespace OPMedia.UI.FileTasks
                     }
                 }
 
-                FireTaskProgress(ProgressEventType.Started, string.Empty, UpdateProgressData.Default);
+                FireTaskProgress(ProgressEventType.Started, string.Empty, UpdateProgressData.Empty);
 
                 _currentPath = string.Empty;
                 _timer.Start();
@@ -251,7 +251,7 @@ namespace OPMedia.UI.FileTasks
                     foreach (string path in SrcFiles)
                     {
                         _currentPath = path;
-                        FireTaskProgress(ProgressEventType.Progress, path, UpdateProgressData.Default);
+                        FireTaskProgress(ProgressEventType.Progress, path, UpdateProgressData.Empty);
 
                         switch (TaskType)
                         {
@@ -271,7 +271,7 @@ namespace OPMedia.UI.FileTasks
                 }
                 catch (TaskInterruptedException)
                 {
-                    FireTaskProgress(ProgressEventType.Aborted, string.Empty, UpdateProgressData.Default);
+                    FireTaskProgress(ProgressEventType.Aborted, string.Empty, UpdateProgressData.Empty);
                     return;
                 }
                 finally
@@ -289,7 +289,7 @@ namespace OPMedia.UI.FileTasks
                 IsFinished = true;
             }
 
-            FireTaskProgress(ProgressEventType.Finished, string.Empty, UpdateProgressData.Default);
+            FireTaskProgress(ProgressEventType.Finished, string.Empty, UpdateProgressData.Empty);
             _requiresRefresh = _support.RequiresRefresh;
             _support = null;
         }

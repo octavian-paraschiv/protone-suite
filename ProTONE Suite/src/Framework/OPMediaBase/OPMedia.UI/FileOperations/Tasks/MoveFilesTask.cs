@@ -48,15 +48,14 @@ namespace OPMedia.UI.FileTasks
                                 }
                             }
 
-                            if (Directory.CreateDirectory(path) != null)
+                            if (Directory.CreateDirectory(destinationPath) != null)
                                 _support.DeleteFolder(path);
                         }
                     }
-                    else
+                    else if (File.Exists(path))
                     {
-                        FileInfo srcFile = new FileInfo(path);
-                        MoveConnectedFiles(srcFile, destinationPath);
-                        _support.MoveFile(srcFile, destinationPath, true);
+                        MoveConnectedFiles(path, destinationPath);
+                        _support.MoveFile(path, destinationPath, true);
                     }
                 }
                 catch (Exception ex)
@@ -72,6 +71,6 @@ namespace OPMedia.UI.FileTasks
             return true;
         }
 
-        protected virtual void MoveConnectedFiles(FileInfo fi, string destPath) { }
+        protected virtual void MoveConnectedFiles(string srcPath, string destPath) { }
     }
 }

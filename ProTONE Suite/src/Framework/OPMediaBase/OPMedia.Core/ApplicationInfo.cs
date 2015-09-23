@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.Core
 {

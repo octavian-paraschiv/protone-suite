@@ -63,16 +63,16 @@ namespace OPMedia.UI.Controls
             if (!string.IsNullOrEmpty(e.Label))
             {
                 string newName = e.Label;
-                DirectoryInfo di = new DirectoryInfo(e.Node.FullPath);
-                if (di != null && di.Exists && di.Parent != null && di.Parent.Exists)
+                string dir = e.Node.FullPath;
+                string parent = Path.GetDirectoryName(dir);
+                if (Directory.Exists(dir) && Directory.Exists(parent))
                 {
-                    string newPath = Path.Combine(di.Parent.FullName, newName);
-
+                    string newPath = Path.Combine(parent, newName);
                     try
                     {
-                        di.MoveTo(newPath);
-                        e.Node.Name = di.Name;
-                        e.Node.Tag = di;
+                        Directory.Move(dir, newPath);
+                        e.Node.Name = newName;
+                        e.Node.Tag = newPath;
                         e.CancelEdit = false;
 
                         SelectedNode = null;
@@ -97,9 +97,9 @@ namespace OPMedia.UI.Controls
             this.SelectedNode = null;
 		}
 
-        public TreeNode CreateTreeNode(DirectoryInfo di, bool getIcons = true)
+        public TreeNode CreateTreeNode(string dir, bool getIcons = true)
         {
-            return ShellOperations.CreateTreeNode(di, base.ImageList, getIcons);
+            return ShellOperations.CreateTreeNode(dir, base.ImageList, getIcons);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace OPMedia.UI.Controls
 		{
             get
             {
-                return ShellOperations.GetFilePath(SelectedNode);
+                return this.SelectedNode.FullPath;
             }
 		}
 
@@ -160,9 +160,10 @@ namespace OPMedia.UI.Controls
 			if(Directory.Exists(folderPath)) // don't bother drilling unless the directory exists
 			{
 				this.BeginUpdate();
-				// if there's a trailing \ on the folderPath, remove it unless it's a drive letter
-				if(folderPath.Length > 3 && folderPath.LastIndexOf(PathUtils.DirectorySeparator) == folderPath.Length -1)
-					folderPath = folderPath.Substring(0, folderPath.Length -1);
+
+                // if there's a trailing \ on the folderPath, remove it unless it's a drive letter
+                if (PathUtils.IsRootPath(folderPath) == false)
+                    folderPath = folderPath.TrimEnd(PathUtils.DirectorySeparatorChars);
 				
                 //Start drilling the tree
 				DrillTree(this.Nodes, folderPath.ToUpperInvariant(), ref folderFound);
@@ -179,14 +180,14 @@ namespace OPMedia.UI.Controls
 				if(!folderFound)
 				{
                     // Some brief preconditions checks here ...
-                    DirectoryInfo folder = tn.Tag as DirectoryInfo;
+                    string folder = tn.Tag as string;
                     if (folder == null)
                     {
                         folderFound = false;
                         return;
                     }
 
-                    string tnPath = folder.FullName.ToUpperInvariant();
+                    string tnPath = folder.ToUpperInvariant();
 					if(path == tnPath && !folderFound)
 					{
                         // We have found the node !!! Congratulations ...
@@ -203,7 +204,7 @@ namespace OPMedia.UI.Controls
 					}
 					else if(path.StartsWith(tnPath) && !folderFound)
 					{
-                        // Leave the trail of expansion whenever do we go.
+                        // Leave the trail of expansion wherever we go.
 						tn.Expand();
 
                         // We're on the good track but we are not there yet, so drill deeper on. 
@@ -229,20 +230,6 @@ namespace OPMedia.UI.Controls
 
 		#region OPMShellTreeView Methods
 
-		#region GetFilePath
-		public static string GetFilePath(TreeNode tn)
-		{
-			try
-			{
-                return (tn.Tag as DirectoryInfo).FullName;
-			}
-			catch
-			{
-				return string.Empty;
-			}
-		}
-		#endregion
-
 		#region Populate Tree
         public static void PopulateTree(OPMTreeView tree, ImageList imageList, bool showSpecialFolders)
 		{
@@ -258,14 +245,14 @@ namespace OPMedia.UI.Controls
 
 			tree.Nodes.Clear();
 
-            List<DirectoryInfo> roots = new List<DirectoryInfo>();
+            List<string> roots = new List<string>();
 
             try
             {
                 System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
                 foreach (System.IO.DriveInfo di in drives)
                 {
-                    roots.Add(di.RootDirectory);
+                    roots.Add(di.RootDirectory.FullName);
                 }
 
                 if (showSpecialFolders)
@@ -275,7 +262,7 @@ namespace OPMedia.UI.Controls
                         string path = Environment.GetFolderPath(sf, Environment.SpecialFolderOption.Create);
                         if (Directory.Exists(path))
                         {
-                            roots.Add(new DirectoryInfo(path));
+                            roots.Add(path);
                         }
                     }
                 }
@@ -284,9 +271,9 @@ namespace OPMedia.UI.Controls
             {
             }
             
-            foreach (DirectoryInfo di in roots)
+            foreach (string dir in roots)
             {
-                TreeNode rootNode = CreateTreeNode(di, imageList, true);
+                TreeNode rootNode = CreateTreeNode(dir, imageList, true);
                 tree.Nodes.Add(rootNode);
                 CheckForSubDirs(rootNode, imageList);
             }
@@ -298,21 +285,26 @@ namespace OPMedia.UI.Controls
 		#region Fill Sub Dirs
 		private static void FillSubDirectories(TreeNode tn, ref int imageCount, ImageList imageList, bool getIcons)
 		{
-            if (tn.Tag != null && tn.Tag is DirectoryInfo)
+            try
             {
                 CursorHelper.ShowWaitCursor(tn.TreeView, true);
 
-                DirectoryInfo di = tn.Tag as DirectoryInfo;
-
-                foreach (DirectoryInfo sdi in PathUtils.EnumDirectories(di))
+                string dir = tn.Tag as string;
+                if (string.IsNullOrEmpty(dir) == false && Directory.Exists(dir))
                 {
-                    TreeNode ntn = CreateTreeNode(sdi, imageList, getIcons);
-                    tn.Nodes.Add(ntn);
-                    CheckForSubDirs(ntn, imageList);
+                    foreach (string subdir in PathUtils.EnumDirectories(dir))
+                    {
+                        TreeNode ntn = CreateTreeNode(subdir, imageList, getIcons);
+                        tn.Nodes.Add(ntn);
+                        CheckForSubDirs(ntn, imageList);
 
-                    CursorHelper.ShowWaitCursor(tn.TreeView, true);
+                        CursorHelper.ShowWaitCursor(tn.TreeView, true);
+                    }
                 }
-
+            }
+            catch { }
+            finally
+            {
                 CursorHelper.ShowWaitCursor(tn.TreeView, false);
             }
 		}
@@ -331,10 +323,10 @@ namespace OPMedia.UI.Controls
 				try
 				{
 					// create dummy nodes for any subfolders that have further subfolders
-                    DirectoryInfo di = tn.Tag as DirectoryInfo;
-                    if (di != null)
+                    string dir = tn.Tag as string;
+                    if (string.IsNullOrEmpty(dir) == false && Directory.Exists(dir))
                     {
-                        bool hasFolders = (PathUtils.EnumDirectories(di).Count > 0);
+                        bool hasFolders = (PathUtils.EnumDirectories(dir).Count > 0);
                         if (hasFolders)
                         {
                             TreeNode ntn = new TreeNode();
@@ -362,12 +354,12 @@ namespace OPMedia.UI.Controls
 			{
 				tn.Nodes.Clear();
 
-                DirectoryInfo di = tn.Tag as DirectoryInfo;
-                if (di != null)
+                string dir = tn.Tag as string;
+                if (string.IsNullOrEmpty(dir) == false && Directory.Exists(dir))
                 {
-                    foreach (DirectoryInfo sdi in PathUtils.EnumDirectories(di))
+                    foreach (string subdir in PathUtils.EnumDirectories(dir))
                     {
-                        TreeNode ntn = CreateTreeNode(sdi, imageList, true);
+                        TreeNode ntn = CreateTreeNode(subdir, imageList, true);
                         tn.Nodes.Add(ntn);
                         CheckForSubDirs(ntn, imageList);
 
@@ -380,19 +372,19 @@ namespace OPMedia.UI.Controls
 		}
 		#endregion
 
-		public static TreeNode CreateTreeNode(DirectoryInfo di, ImageList imageList, bool getIcons)
+		public static TreeNode CreateTreeNode(string dir, ImageList imageList, bool getIcons)
 		{
 			TreeNode tn = new TreeNode();
-			tn.Text = di.Name;
-			tn.Tag = di;
+			tn.Text = PathUtils.GetDirectoryTitle(dir);
+			tn.Tag = dir;
 
 			if(getIcons)
 			{
 				try
 				{
-                    imageList.Images.Add(ImageProvider.GetIcon(di.FullName, false)); // normal icon
+                    imageList.Images.Add(ImageProvider.GetIcon(dir, false)); // normal icon
                     tn.ImageIndex = imageList.Images.Count - 1;
-                    imageList.Images.Add(ImageProvider.GetIcon(di.FullName, true)); // selected icon
+                    imageList.Images.Add(ImageProvider.GetIcon(dir, true)); // selected icon
                     tn.SelectedImageIndex = imageList.Images.Count - 1;
 				}
 				catch // use default 

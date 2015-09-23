@@ -100,8 +100,8 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
                 try
                 {
-                    FileInfo fi = new FileInfo(dlg.FileNames[0]);
-                    ProTONEConfig.LastOpenedFolder = fi.DirectoryName;
+                    string file = dlg.FileNames[0];
+                    ProTONEConfig.LastOpenedFolder = Path.GetDirectoryName(file);
                 }
                 catch
                 {

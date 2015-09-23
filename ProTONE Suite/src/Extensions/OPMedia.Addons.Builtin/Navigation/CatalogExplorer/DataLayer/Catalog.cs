@@ -46,8 +46,8 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             get
             {
                 string assemblyLocation = Assembly.GetExecutingAssembly().Location;
-                string assemblyFolder = new System.IO.FileInfo(assemblyLocation).Directory.FullName;
-                return string.Format("{0}{1}", assemblyFolder, TemplateFileName);
+                string assemblyFolder = System.IO.Path.GetDirectoryName(assemblyLocation);
+                return System.IO.Path.Combine(assemblyFolder, TemplateFileName);
             }
         }
 

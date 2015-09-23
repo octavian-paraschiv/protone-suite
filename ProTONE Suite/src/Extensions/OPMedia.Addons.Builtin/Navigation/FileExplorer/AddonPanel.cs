@@ -131,19 +131,18 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             opmShellList.QueryDisplayName += opmShellList_QueryDisplayName;
         }
 
-        string opmShellList_QueryDisplayName(FileSystemInfo fsi)
+        string opmShellList_QueryDisplayName(string fsi)
         {
             if (fsi != null)
             {
-                FileInfo fi = fsi as FileInfo;
-                if (fi != null && fi.Name.ToUpperInvariant().EndsWith("CDA"))
+                if (fsi.ToUpperInvariant().EndsWith("CDA"))
                 {
-                    CDAFileInfo cdfi = MediaFileInfo.FromPath(fsi.FullName) as CDAFileInfo;
+                    CDAFileInfo cdfi = MediaFileInfo.FromPath(fsi) as CDAFileInfo;
                     if (cdfi != null)
                         return cdfi.DisplayName;
                 }
 
-                return fsi.Name;
+                return Path.GetFileName(fsi);
             }
 
             return string.Empty;
@@ -152,11 +151,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         List<string> OnQueryLinkedFiles(string path, FileTaskType taskType)
         {
             FEFileTaskSupport support = new FEFileTaskSupport(null);
-
-            FileInfo fi = new FileInfo(path);
-            if (fi != null && fi.Exists)
+            if (File.Exists(path))
             {
-                return support.GetChildFiles(fi, taskType);
+                return support.GetChildFiles(path, taskType);
             }
 
             return null;

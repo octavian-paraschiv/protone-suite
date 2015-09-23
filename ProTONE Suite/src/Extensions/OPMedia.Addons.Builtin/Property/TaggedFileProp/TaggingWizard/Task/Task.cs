@@ -210,8 +210,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
             FEFileTaskSupport support = new FEFileTaskSupport(null);
 
-            FileInfo fi = new FileInfo(oldPath);
-            List<string> linkedFiles = support.GetChildFiles(fi, FileTaskType.Move);
+            List<string> linkedFiles = support.GetChildFiles(oldPath, FileTaskType.Move);
 
             File.Move(oldPath, newPath);
 

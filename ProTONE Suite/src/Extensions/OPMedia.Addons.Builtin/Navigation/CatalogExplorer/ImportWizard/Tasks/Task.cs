@@ -70,7 +70,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 Catalog cat = new Catalog(CatalogPath);
                 CatalogItem parent = cat.GetByItemID(InsertionPointID);
 
-                ScanFolder(cat, new System.IO.DirectoryInfo(SourcePath), parent);
+                ScanFolder(cat, this.SourcePath, parent);
 
                 finished = true;
 
@@ -106,9 +106,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
             try
             {
-                DirectoryInfo diSrc = new DirectoryInfo(SourcePath);
-                _steps += PathUtils.EnumDirectories(_abortScan, diSrc, "*", SearchOption.AllDirectories).Count;
-                _steps += PathUtils.EnumFiles(_abortScan, diSrc, "*", SearchOption.AllDirectories).Count;
+                _steps += PathUtils.EnumDirectories(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
+                _steps += PathUtils.EnumFiles(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
             }
             catch(Exception ex)
             {
@@ -122,28 +121,28 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         ManualResetEvent _abortScan = new ManualResetEvent(false);
 
-        public void ScanFolder(Catalog cat, DirectoryInfo dir, CatalogItem parent)
+        public void ScanFolder(Catalog cat, string dir, CatalogItem parent)
         {
             if (!CanContinue()) 
                 return;
 
-            ReportPseudoStepInit("TXT_SCANNING: "  + dir.FullName);
+            ReportPseudoStepInit("TXT_SCANNING: "  + dir);
 
             try
             {
-                DriveInfo di = new DriveInfo(dir.Root.FullName);
+                DriveInfo di = new DriveInfo(Path.GetPathRoot(dir));
 
                 CatalogItem ci = new CatalogItem(cat);
 
                 if (di.DriveType == DriveType.Removable || di.DriveType == DriveType.CDRom)
                 {
-                    ci.OrigItemPath = dir.FullName.Replace(dir.Root.FullName, "$:/");
+                    ci.OrigItemPath = dir.Replace(Path.GetPathRoot(dir), "$:/");
                     if (PathUtils.DirectorySeparator != "/")
                         ci.OrigItemPath = ci.OrigItemPath.Replace(PathUtils.DirectorySeparator, "/");
                 }
                 else
                 {
-                    ci.OrigItemPath = dir.FullName;
+                    ci.OrigItemPath = dir;
                 }
 
                 ci.IsRoot = (parent == null);
@@ -172,12 +171,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 Application.DoEvents();
 
-                List<DirectoryInfo> subDirs = PathUtils.EnumDirectories(_abortScan, dir);
-                foreach (DirectoryInfo subDir in subDirs)
+                List<string> subDirs = PathUtils.EnumDirectories(_abortScan, dir);
+                foreach (string subDir in subDirs)
                     ScanFolder(cat, subDir, ci);
 
-                List<FileInfo> files = PathUtils.EnumFiles(_abortScan, dir);
-                foreach (FileInfo file in files)
+                List<string> files = PathUtils.EnumFiles(_abortScan, dir);
+                foreach (string file in files)
                     ScanFile(cat, file, ci);
 
                 RaiseTaskProgressEvent(null, _currentStep++);
@@ -188,13 +187,13 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
             }
         }
 
-        private string GetName(DirectoryInfo dir, DriveInfo rootDrive)
+        private string GetName(string dir, DriveInfo rootDrive)
         {
-            string retVal = dir.Name;
-            DirectoryInfo root = dir.Root;
+            string retVal = dir;
+            string root = Path.GetPathRoot(dir);
 
-            string rootSpec = dir.Root.ToString().TrimEnd(PathUtils.DirectorySeparator.ToCharArray());
-            string dirSpec = dir.FullName.TrimEnd(PathUtils.DirectorySeparator.ToCharArray());
+            string rootSpec = root.ToString().TrimEnd(PathUtils.DirectorySeparator.ToCharArray());
+            string dirSpec = dir.TrimEnd(PathUtils.DirectorySeparator.ToCharArray());
 
             if (rootSpec == dirSpec)
             {
@@ -203,30 +202,30 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
             return retVal;
         }
 
-        private void ScanFile(Catalog cat, FileInfo file, CatalogItem parent)
+        private void ScanFile(Catalog cat, string file, CatalogItem parent)
         {
             if (!CanContinue()) 
                 return;
 
-            ReportPseudoStepInit("TXT_SCANNING: " + file.FullName);
+            ReportPseudoStepInit("TXT_SCANNING: " + file);
 
             try
             {
                 CatalogItem ci = new CatalogItem(cat);
                 ci.IsRoot = false;
                 ci.ItemType = cat.CatalogItemType_GetByTypeCode("FIL").TypeID; // is a file
-                ci.Name = file.Name;
+                ci.Name = file;
 
-                DriveInfo di = new DriveInfo(file.Directory.Root.FullName);
+                DriveInfo di = new DriveInfo(Path.GetPathRoot(file));
                 if (di.DriveType == DriveType.Removable || di.DriveType == DriveType.CDRom)
                 {
-                    ci.OrigItemPath = file.FullName.Replace(file.Directory.Root.FullName, "$:/");
+                    ci.OrigItemPath = file.Replace(Path.GetPathRoot(file), "$:/");
                     if (PathUtils.DirectorySeparator != "/")
                         ci.OrigItemPath = ci.OrigItemPath.Replace(PathUtils.DirectorySeparator, "/");
                 }
                 else
                 {
-                    ci.OrigItemPath = file.FullName;
+                    ci.OrigItemPath = file;
                 }
 
                 ci.RootItemLabel = di.VolumeLabel;
@@ -235,7 +234,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 try
                 {
-                    NativeFileInfo nfi = NativeFileInfoFactory.FromPath(file.FullName);
+                    NativeFileInfo nfi = NativeFileInfoFactory.FromPath(file);
                     if (nfi != null)
                     {
                         ci.Description = nfi.Details;

@@ -76,17 +76,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
                         extensions.Add(ext);
                     }
 
-                    try
-                    {
-                        System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(item);
-                        if (di.Exists && (di.Attributes & System.IO.FileAttributes.Directory) == System.IO.FileAttributes.Directory)
-                        {
-                            mustHandleFolders = true;
-                        }
-                    }
-                    catch
-                    {
-                    }
+                    mustHandleFolders = Directory.Exists(item);
                 }
 
                 retVal = InternalSelectAddon(extensions, mustHandleFolders, items.Count);

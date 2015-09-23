@@ -348,9 +348,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 ssStatus.Text = Translator.Translate("TXT_INIT_SEARCH");
                 Application.DoEvents();
 
-                DirectoryInfo diSearch = new DirectoryInfo(theTask.SearchPath);
-
-                bool needFolderLookup = true;
+                bool needFolderLookup = 
+                    (theTask.UseAttributes == true) && ((theTask.Attributes & FileAttributes.Directory) == FileAttributes.Directory);
 
                 string actualSearchPattern = theTask.SearchPattern;
                 if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_BOOKMARKS"))
@@ -364,39 +363,35 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                     actualSearchPattern = MediaRenderer.AllMediaTypesMultiFilter;
                 }
 
-                List<FileSystemInfo> fsEntries = new List<FileSystemInfo>();
+                List<string> fsEntries = new List<string>();
                 
                 SearchOption searchOption = theTask.IsRecursive ?
                     SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
                 if (needFolderLookup)
                 {
-                    List<DirectoryInfo> subdirs = PathUtils.EnumDirectoriesUsingMultiFilter(_shouldCancelSearch,
-                        diSearch, actualSearchPattern, searchOption);
+                    List<string> subdirs = PathUtils.EnumDirectoriesUsingMultiFilter(_shouldCancelSearch,
+                        theTask.SearchPath, actualSearchPattern, searchOption);
                     if (subdirs != null)
                         fsEntries.AddRange(subdirs);
                 }
 
-                List<FileInfo> files = PathUtils.EnumFilesUsingMultiFilter(_shouldCancelSearch,
-                    diSearch, actualSearchPattern, searchOption);
-
-
+                List<string> files = PathUtils.EnumFilesUsingMultiFilter(_shouldCancelSearch,
+                    theTask.SearchPath, actualSearchPattern, searchOption);
                 if (files != null)
                     fsEntries.AddRange(files);
 
                 pbProgress.Maximum = fsEntries.Count + 1;
 
-                foreach (FileSystemInfo fsi in fsEntries)
+                foreach (string fsi in fsEntries)
                 {
                     if (_shouldCancelSearch.WaitOne(0))
                         return;
 
-                    if (fsi is DirectoryInfo)
-                        TestFolder(fsi as DirectoryInfo);
-                    else if (fsi is FileInfo)
-                        TestFile(fsi as FileInfo);
+                    if (TestFolder(fsi) == false)
+                        TestFile(fsi);
 
-                    ssStatus.Text = fsi.FullName;
+                    ssStatus.Text = fsi;
                     pbProgress.Value = pbProgress.Value + 1;
                     Application.DoEvents();
                 }
@@ -404,16 +399,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 _displayItems.Sort();
 
                 foreach (string str in _displayItems)
-                {
-                    //if (_shouldCancelSearch.WaitOne(0))
-                      //  return;
-
                     CreateListViewItem(str);
-
-                    //ssStatus.Text = str;
-                    //pbProgress.Value = pbProgress.Value + 1;
-                    //Application.DoEvents();
-                }
             }
             catch(Exception ex)
             {
@@ -435,74 +421,82 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
         }
 
-        private void TestFolder(DirectoryInfo folder)
+        private bool TestFolder(string folder)
         {
             if (_shouldCancelSearch.WaitOne(0))
-                return;
+                return false;
 
-            if (folder != null && folder.Exists)
+            if (folder != null && Directory.Exists(folder))
             {
-                if (!theTask.UseAttributes || AttributesMatch(folder.Attributes, false))
+                if (!theTask.UseAttributes || AttributesMatch(File.GetAttributes(folder), false))
                 {
-                    List<DirectoryInfo> childFolders = new List<DirectoryInfo>();
-                    childFolders.AddRange(folder.EnumerateDirectories(theTask.SearchPattern, SearchOption.TopDirectoryOnly));
+                    List<string> childFolders = new List<string>();
+                    childFolders.AddRange(PathUtils.EnumDirectoriesUsingMultiFilter(folder, theTask.SearchPattern, SearchOption.TopDirectoryOnly));
 
-                    if (_matchingItems.Contains(folder.FullName.ToLowerInvariant()) == false)
+                    if (_matchingItems.Contains(folder.ToLowerInvariant()) == false)
                     {
-                        _matchingItems.Add(folder.FullName.ToLowerInvariant());
-                        _displayItems.Add(folder.FullName);
+                        _matchingItems.Add(folder.ToLowerInvariant());
+                        _displayItems.Add(folder);
+
+                        return true;
                     }
                 }
             }
+
+            return false;
         }
 
-        private void TestFile(FileInfo file)
+        private bool TestFile(string file)
         {
             if (_shouldCancelSearch.WaitOne(0))
-                return;
+                return false;
 
-            if (file == null || file.Exists == false)
-                return;
+            if (file == null || File.Exists(file) == false)
+                return false;
 
             if (SearchBookmarksActive())
             {
-                BookmarkFileInfo bfi = new BookmarkFileInfo(file.FullName, false);
+                BookmarkFileInfo bfi = new BookmarkFileInfo(file, false);
                 if (bfi == null ||
                     !bfi.IsValid ||
                     (theTask.Option1 && bfi.IsOrphan) || /* for BMK files: option 1 = non-orphan bookmarks */
                     (theTask.Option2 && !bfi.IsOrphan))  /* for BMK files: option 2 = orphan bookmarks */
                 {
-                    return; // skip this file
+                    return false; // skip this file
                 }
             }
             else if (SearchMediaFilesActive())
             {
-                if (!MediaRenderer.IsSupportedMedia(file.FullName))
-                    return; // not a media file
+                if (!MediaRenderer.IsSupportedMedia(file))
+                    return false; // not a media file
 
-                MediaFileInfo mfi = MediaFileInfo.FromPath(file.FullName);
+                MediaFileInfo mfi = MediaFileInfo.FromPath(file);
                 if (mfi == null ||
                     !mfi.IsValid ||
                     (theTask.Option1 && mfi.Bookmarks.Count < 1) || /* for media files: option 1 = files with bookmarks */
                     (theTask.Option2 && mfi.Bookmarks.Count > 0))  /* for media files: option 2 = files w/o bookmarks */
                 {
-                    return; // skip this file
+                    return false; // skip this file
                 }
             }
 
-            if (!theTask.UseAttributes || AttributesMatch(file.Attributes, true))
+            if (!theTask.UseAttributes || AttributesMatch(File.GetAttributes(file), true))
             {
                 bool match = 
                     (theTask.SearchText.Length == 0) ||
-                    (theTask.SearchProperties && ContainsProperty(file.FullName)) ||
-                    (!theTask.SearchProperties && ContainsText(file.FullName));
+                    (theTask.SearchProperties && ContainsProperty(file)) ||
+                    (!theTask.SearchProperties && ContainsText(file));
 
-                if (match && !_matchingItems.Contains(file.FullName.ToLowerInvariant()))
+                if (match && !_matchingItems.Contains(file.ToLowerInvariant()))
                 {
-                    _matchingItems.Add(file.FullName.ToLowerInvariant());
-                    _displayItems.Add(file.FullName);
+                    _matchingItems.Add(file.ToLowerInvariant());
+                    _displayItems.Add(file);
+
+                    return true;
                 }
             }
+
+            return false;
         }
 
         private bool ContainsProperty(string file)

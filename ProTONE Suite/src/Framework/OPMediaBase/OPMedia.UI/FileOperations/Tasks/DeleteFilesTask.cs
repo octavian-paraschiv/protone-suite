@@ -24,11 +24,10 @@ namespace OPMedia.UI.FileTasks
                 {
                     _support.DeleteFolder(path);
                 }
-                else
+                else if (File.Exists(path))
                 {
-                    FileInfo fi = new FileInfo(path);
-                    DeleteConnectedFiles(fi);
-                    _support.DeleteFile(fi, true);
+                    DeleteConnectedFiles(path);
+                    _support.DeleteFile(path, true);
                 }
             }
             finally
@@ -39,6 +38,6 @@ namespace OPMedia.UI.FileTasks
             return true;
         }
 
-        protected virtual void DeleteConnectedFiles(FileInfo fi) { }
+        protected virtual void DeleteConnectedFiles(string file) { }
     }
 }

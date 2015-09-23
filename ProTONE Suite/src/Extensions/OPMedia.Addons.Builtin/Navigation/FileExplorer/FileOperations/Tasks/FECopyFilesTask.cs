@@ -20,9 +20,9 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
             return new FEFileTaskSupport(this);
         }
 
-        protected override void CopyConnectedFiles(System.IO.FileInfo fi, string destPath)
+        protected override void CopyConnectedFiles(string srcPath, string destPath)
         {
-            List<string> linkedFiles = _support.GetChildFiles(fi, this.TaskType);
+            List<string> linkedFiles = _support.GetChildFiles(srcPath, this.TaskType);
             if (linkedFiles != null && linkedFiles.Count > 0)
             {
                 foreach (string linkedFile in linkedFiles)
@@ -32,9 +32,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                     try
                     {
                         string destinationPath = this.GetDestinationPath(linkedFile);
-
-                        FileInfo lfi = new FileInfo(linkedFile);
-                        _support.CopyFile(lfi, destinationPath);
+                        _support.CopyFile(linkedFile, destinationPath);
                     }
                     catch
                     {
@@ -42,7 +40,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                 }
             }
 
-            string parentFile = _support.GetParentFile(fi, this.TaskType);
+            string parentFile = _support.GetParentFile(srcPath, this.TaskType);
             if (!string.IsNullOrEmpty(parentFile))
             {
                 _support.CheckIfCanContinue(parentFile);
@@ -50,9 +48,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                 try
                 {
                     string destinationPath = this.GetDestinationPath(parentFile);
-
-                    FileInfo lfi = new FileInfo(parentFile);
-                    _support.CopyFile(lfi, destinationPath);
+                    _support.CopyFile(parentFile, destinationPath);
                 }
                 catch
                 {
