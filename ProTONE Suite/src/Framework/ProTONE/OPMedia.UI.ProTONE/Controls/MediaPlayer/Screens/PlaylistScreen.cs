@@ -270,26 +270,25 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     if (_abortLoad)
                         break;
 
-                    if (File.Exists(file))
+                    if (DvdMedia.FromPath(file) != null)
                     {
-                        if (DvdMedia.FromPath(file) != null)
-                        {
-                            playlist.AddItem(file);
-                            return;
-                        }
-                        else if (IsPlaylist(file))
+                        playlist.AddItem(file);
+                    }
+                    else if (File.Exists(file))
+                    {
+                        if (IsPlaylist(file))
                         {
                             LoadPlaylist(file, true);
+                        }
+                        else
+                        {
+                            playlist.AddItem(file);
                         }
                     }
                     else if (Directory.Exists(file))
                     {
                         AddFiles(PathUtils.EnumDirectories(file));
                         AddFiles(PathUtils.EnumFiles(file));
-                    }
-                    else
-                    {
-                        playlist.AddItem(file);
                     }
                 }
             }

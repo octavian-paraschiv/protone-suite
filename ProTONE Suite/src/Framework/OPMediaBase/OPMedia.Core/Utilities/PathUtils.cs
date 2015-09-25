@@ -78,6 +78,9 @@ namespace OPMedia.Core
         public static string GetDirectoryTitle(string path)
         {
             string parentDir = Path.GetDirectoryName(path);
+            if (parentDir == null)
+                return path;
+
             return path.Replace(parentDir, string.Empty).Trim('\\');
         }
 
