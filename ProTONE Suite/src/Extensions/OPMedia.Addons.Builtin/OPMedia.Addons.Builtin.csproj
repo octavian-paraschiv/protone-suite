@@ -591,9 +591,9 @@
     <None Include="Resources\New_Folder_Command16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lame_enc.dll">
+    <None Include="lame_enc.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Resources\Tagging.png" />
     <Content Include="Resources\Tagging16.png" />
   </ItemGroup>
