@@ -453,7 +453,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
             {
-                MediaRenderer.DefaultInstance.StopRenderer();
+                MediaRenderer.DefaultInstance.StopRenderer(isStopFromGui);
 
                 if (isStopFromGui)
                 {
@@ -998,7 +998,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void renderFrame_HandleDestroyed(object sender, EventArgs e)
         {
-            MediaRenderer.DefaultInstance.StopRenderer();
+            MediaRenderer.DefaultInstance.StopRenderer(true);
             MediaRenderer.DefaultInstance.RenderPanel = null;
             MediaRenderer.DefaultInstance.MessageDrain = null;
         

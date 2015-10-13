@@ -742,11 +742,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         }
 
-        public void StopRenderer()
+        bool _isStopFromGui = false;
+
+        public void StopRenderer(bool isStopFromGui)
         {
             try
             {
                 _hasRenderingErrors = false;
+                _isStopFromGui = isStopFromGui;
 
                 _position = 0;
 
@@ -953,10 +956,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (newState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
-                        this.StopRenderer();
+                        this.StopRenderer(false);
+                        newState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened;
                     }
-
-                    newState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened;
+                    else
+                    {
+                        newState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
+                    }
+                    
                 }
                 else if (oldState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened && newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                 {

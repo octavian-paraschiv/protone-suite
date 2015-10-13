@@ -451,7 +451,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     {
                         MediaRenderer.DefaultInstance.PauseRenderer();
                         resumePosition = MediaRenderer.DefaultInstance.MediaPosition;
-                        MediaRenderer.DefaultInstance.StopRenderer();
+                        MediaRenderer.DefaultInstance.PauseRenderer();
                         Thread.Sleep(100);
                     }
 
