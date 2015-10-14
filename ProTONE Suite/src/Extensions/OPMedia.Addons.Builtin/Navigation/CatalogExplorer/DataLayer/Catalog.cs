@@ -22,8 +22,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         private CatalogInfo _info = null;
 
         #region Members
-        static string TemplateFileName = string.Format("{0}Templates{0}Catalog{0}Default Catalog", PathUtils.DirectorySeparator);
-
+        static string TemplateFileName = string.Format("Templates{0}Catalog{0}Default Catalog", PathUtils.DirectorySeparator);
         private CatalogDataset _dataset;
 
         private bool _isDefaultLocation = true;
