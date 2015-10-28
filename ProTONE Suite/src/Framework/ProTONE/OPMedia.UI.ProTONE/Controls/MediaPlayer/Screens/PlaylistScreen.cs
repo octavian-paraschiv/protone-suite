@@ -290,6 +290,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         AddFiles(PathUtils.EnumDirectories(file));
                         AddFiles(PathUtils.EnumFiles(file));
                     }
+                    else
+                    {
+                        playlist.AddItem(file);
+                    }
                 }
             }
         }
