@@ -219,7 +219,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Paused) &&
                     mi.MediaType == "URL")
                 {
-                    info.Add("TXT_TITLE:", MediaRenderer.DefaultInstance.StreamTitle);
+                    foreach (KeyValuePair<string, string> kvp in MediaRenderer.DefaultInstance.StreamData)
+                        info.Add(kvp.Key + ":", kvp.Value);
                 }
                 else if (mi.ExtendedInfo != null && mi.ExtendedInfo.Count > 0)
                 {

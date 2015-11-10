@@ -8,6 +8,7 @@ using OPMedia.Core;
 using System.IO;
 using System.Runtime.InteropServices;
 using OPMedia.Runtime.ProTONE.Rendering.SHOUTCast;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
 {
@@ -36,13 +37,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
             Mp3WaveFormat _wfex = new Mp3WaveFormat();
             _wfex.cbSize = 12; // MPEGLAYER3_WFX_EXTRA_BYTES
             _wfex.fdwFlags = 0; // MPEGLAYER3_FLAG_PADDING_ISO
+            
             _wfex.nAvgBytesPerSec = (_stream.Bitrate * 1024 / 8);
+
             _wfex.nBlockAlign = 1; // must be 1 for streamed MP3
             _wfex.nBlockSize = 522; // MP3_BLOCK_SIZE magic number
             _wfex.nChannels = 2; // Stereo
             _wfex.nCodecDelay = 0; // must be 0
             _wfex.nFramesPerBlock = 1; // must be 1
-            _wfex.nSamplesPerSec = 44100; // 44.1 kHz
+            
+            _wfex.nSamplesPerSec = _stream.SampleRate;
+
             _wfex.wBitsPerSample = 0; // must be 0
             _wfex.wFormatTag = 0x0055; // WAVE_FORMAT_MPEGLAYER3
             _wfex.wID = 1; // MPEGLAYER3_ID_MPEG
@@ -115,7 +120,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
         {
             ShoutcastStream ss = (m_pParser as ShoutcastStreamParser).ShoutcastStream;
 
-            int slice = ss.Bitrate * 1024 / 8 ;
+            int slice = ss.Bitrate * 1024  / 8;
 
             PacketData _data = new PacketData();
             _data.Buffer = new byte[slice];
@@ -127,7 +132,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
                 _data.Size = (int)bytesRead;
                 _data.SyncPoint = true;
                 _data.Start = m_rtMediaPosition;
-                _data.Stop = _data.Start + UNITS / 2;
+                _data.Stop = _data.Start + UNITS/2;
                 m_rtMediaPosition = _data.Stop;
 
                 return _data;

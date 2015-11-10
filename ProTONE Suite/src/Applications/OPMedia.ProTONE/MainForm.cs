@@ -103,7 +103,7 @@ namespace OPMedia.ProTONE
                 OnPerformTranslation();
 
                 MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
-                MediaRenderer.DefaultInstance.RenderedStreamTitleChanged += new RenderedStreamTitleChangedHandler(OnStreamTitleChanged);
+                MediaRenderer.DefaultInstance.RenderedStreamPropertyChanged += new RenderedStreamPropertyChangedHandler(OnStreamTitleChanged);
             }
         }
 
@@ -164,7 +164,7 @@ namespace OPMedia.ProTONE
             mediaPlayer.DoLayout();
         }
 
-        void OnStreamTitleChanged(string newTitle)
+        void OnStreamTitleChanged(Dictionary<string, string> data)
         {
             MainThread.Post((d) =>
             {

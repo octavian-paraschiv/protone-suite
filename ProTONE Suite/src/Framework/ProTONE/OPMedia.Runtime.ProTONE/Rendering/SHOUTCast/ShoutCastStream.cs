@@ -11,6 +11,8 @@ using OPMedia.Core.Logging;
 using System.Reflection;
 using System.Net.Configuration;
 using System.Collections.Specialized;
+using TagLib.Mpeg;
+using TagLib;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
 {
@@ -31,7 +33,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
 
         public bool Connected { get { return connected; } }
 
-        public int Bitrate { get { return bitrate; } }
+        public int Bitrate { get { return bitrate; } set { bitrate = value; }}
+
+        private int sampleRate = 44100;
+        public int SampleRate { get { return sampleRate; } set { sampleRate = value; } }
+
+        List<byte> _reservoir = new List<byte>();
 
         /// <summary>
         /// Creates a new ShoutcastStream and connects to the specified Url
@@ -39,7 +46,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
         /// <param name="url">Url of the Shoutcast stream</param>
         public ShoutcastStream(string url, int timeout)
         {
+            InitShoutcastStream(url, timeout, false);
+
+            if (connected)
+                InitShoutcastStream(url, timeout, true);
+        }
+
+        private void InitShoutcastStream(string url, int timeout, bool skipMetaInfo)
+        {
             HttpWebResponse response = null;
+
+            if (netStream != null)
+            {
+                netStream.Close();
+                netStream = null;
+            }
 
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Headers.Clear();
@@ -72,7 +93,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
 
                 try
                 {
-                    bitrate = int.Parse(nvc["icy-br"]);
+                    if (skipMetaInfo == false)
+                        bitrate = int.Parse(nvc["icy-br"]);
                 }
                 catch { }
 
@@ -89,9 +111,41 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 receivedBytes = 0;
 
                 netStream = response.GetResponseStream();
+
+                if (skipMetaInfo == false)
+                {
+                    int passes = 0;
+                    while (passes < 100 * 1024)
+                    {
+                        passes++;
+                        byte[] buff = new byte[sizeof(int)];
+                        int result = netStream.Read(buff, 0, buff.Length);
+                        if (result > 0)
+                        {
+                            ByteVector vector = new ByteVector(buff, result);
+                            AudioHeader hdr = AudioHeader.Unknown;
+                            if (AudioHeader.Find(out hdr, vector) == true
+                                && hdr.Version == TagLib.Mpeg.Version.Version1
+                                && hdr.AudioLayer == 3)
+                            {
+                                sampleRate = hdr.AudioSampleRate;
+                                bitrate = hdr.AudioBitrate;
+                                break;
+                            }
+                        }
+                    }
+
+                    Dictionary<string, string> data = new Dictionary<string, string>();
+                    data.Add("TXT_FREQUENCY", sampleRate.ToString());
+                    data.Add("TXT_BITRATE", bitrate.ToString());
+                    data.Add("Content-Type", contentType);
+
+                    MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
+                }
+
                 connected = true;
             }
-            catch
+            catch(Exception ex)
             {
                 connected = false;
                 throw;
@@ -146,7 +200,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 streamTitle = newStreamTitle;
                 //OnStreamTitleChanged();
 
-                MediaRenderer.DefaultInstance.FireStreamTitleChanged(newStreamTitle);
+                Dictionary<string, string> data = new Dictionary<string,string>();
+                data.Add("TXT_TITLE", streamTitle);
+
+                MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
             }
         }
 
@@ -245,6 +302,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 int bytesLeft = ((metaInt - receivedBytes) > count) ? count : (metaInt - receivedBytes);
                 int result = netStream.Read(buffer, offset, bytesLeft);
                 receivedBytes += result;
+
                 return result;
             }
             catch (Exception e)
@@ -254,6 +312,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 return -1;
             }
         }
+
 
         /// <summary>
         /// Closes the ShoutcastStream.

@@ -60,7 +60,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
     public delegate void MediaRenderingExceptionHandler(RenderingExceptionEventArgs args);
     
-    public delegate void RenderedStreamTitleChangedHandler(string newTitle);
+    public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
     public class AudioSampleData
     {
@@ -158,7 +158,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         private int _hash = DateTime.Now.GetHashCode();
         private double _position = 0;
 
-        public event RenderedStreamTitleChangedHandler RenderedStreamTitleChanged = null;
+        public event RenderedStreamPropertyChangedHandler RenderedStreamPropertyChanged = null;
 
         public class SupportedFileProvider : ISupportedFileProvider
         {
@@ -511,16 +511,31 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         #region Methods
 
-        public bool IsStreamedMedia { get { return (streamRenderer is DSShoutcastRenderer); } } 
+        public bool IsStreamedMedia { get { return (streamRenderer is DSShoutcastRenderer); } }
 
-        public string StreamTitle { get; private set; }
+        public Dictionary<string, string> StreamData { get; private set; }
 
-        internal void FireStreamTitleChanged(string newTitle)
+        internal void FireStreamPropertyChanged(Dictionary<string, string> newData)
         {
-            if (IsStreamedMedia && RenderedStreamTitleChanged != null)
+            if (IsStreamedMedia && RenderedStreamPropertyChanged != null)
             {
-                this.StreamTitle = newTitle;
-                RenderedStreamTitleChanged(newTitle);
+                if (StreamData == null)
+                    StreamData = new Dictionary<string, string>();
+
+                foreach (KeyValuePair<string, string> kvp in newData)
+                {
+                    if (StreamData.ContainsKey(kvp.Key))
+                    {
+                        if (String.IsNullOrEmpty(kvp.Value))
+                            StreamData.Remove(kvp.Key);
+                        else
+                            StreamData[kvp.Key] = kvp.Value;
+                    }
+                    else if (String.IsNullOrEmpty(kvp.Value) == false)
+                        StreamData.Add(kvp.Key, kvp.Value);
+                }
+
+                RenderedStreamPropertyChanged(newData);
             }
         }
 
@@ -659,6 +674,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 _hasRenderingErrors = false;
                 _position = 0;
+                StreamData = new Dictionary<string, string>();
 
                 if (this.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
                 {
@@ -682,6 +698,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 _hasRenderingErrors = false;
                 _position = 0;
+                StreamData = new Dictionary<string, string>();
 
                 Logger.LogTrace("Media will be rendered using {0}", streamRenderer.GetType().Name);
 
