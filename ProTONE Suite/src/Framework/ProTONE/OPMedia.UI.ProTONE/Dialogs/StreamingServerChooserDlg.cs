@@ -79,6 +79,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
                 DisplayData();
             }
+
+            // Move focus in the Search box
+            txtSearch.Select();
+            txtSearch.Focus();
         }
 
         private void DisplayData()

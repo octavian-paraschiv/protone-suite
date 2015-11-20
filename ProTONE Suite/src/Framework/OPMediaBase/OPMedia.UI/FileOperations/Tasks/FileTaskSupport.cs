@@ -417,7 +417,7 @@ namespace OPMedia.UI.FileOperations.Tasks
                 }
                 else if (_skipConfirmations || CanDeleteNonEmptyFolder(path))
                 {
-                    Directory.Delete(path);
+                    DeleteFileSystemObject(path);
                     this.RequiresRefresh = true;
                 }
             }
