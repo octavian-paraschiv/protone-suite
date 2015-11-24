@@ -165,57 +165,6 @@ namespace OPMedia.UI.Generic
             return gp;
         }
 
-
-
-        public static GraphicsPath GenerateRoundCornersBorder(Rectangle rcSource, int cornerSize = 3, CornersPosition corners = CornersPosition.All)
-        {
-            GraphicsPath borderPath = new GraphicsPath();
-
-            cornerSize = cornerSize & 0x0F;
-            if (cornerSize > 0)
-            {
-                int c = 2 * cornerSize;
-                int l = rcSource.Left;
-                int t = rcSource.Top;
-                int r = rcSource.Right;
-                int b = rcSource.Bottom;
-
-                // left, top corner
-                if ((corners & CornersPosition.LeftTop) == CornersPosition.LeftTop)
-                    borderPath.AddArc(l, t, c, c, 180, 90);
-                else
-                    borderPath.AddLine(l, t, l, t);
-
-                // right, top corner
-                if ((corners & CornersPosition.RightTop) == CornersPosition.RightTop) 
-                    borderPath.AddArc(r - c, t, c, c, -90, 90);
-                else
-                    borderPath.AddLine(r, t, r, t);
-
-                // right, bottom corner
-                if ((corners & CornersPosition.RightBottom) == CornersPosition.RightBottom)
-                    borderPath.AddArc(r - c, b - c, c, c, 0, 90);
-                else
-                    borderPath.AddLine(r, b, r, b);
-
-                // left, bottom corner
-                if ((corners & CornersPosition.LeftBottom) == CornersPosition.LeftBottom)
-                    borderPath.AddArc(l, b - c, c, c, 90, 90);
-                else
-                    borderPath.AddLine(l, b, l, b);
-
-                // This will automatically add the missing lines
-                borderPath.CloseAllFigures();
-                borderPath.Flatten();
-            }
-            else
-            {
-                borderPath.AddRectangle(rcSource);
-            }
-
-            return borderPath;
-        }
-
         public static void AddGridToBitmap(Bitmap bmp, int hLineCount, int vLineCount, Color gridColor)
         {
             if (bmp != null)

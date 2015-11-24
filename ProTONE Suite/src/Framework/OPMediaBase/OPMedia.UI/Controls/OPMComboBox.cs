@@ -329,11 +329,9 @@ namespace OPMedia.UI.Controls
 
             using (Pen p = new Pen(cb, pw))
             using (Brush b = new LinearGradientBrush(rc, c1, c2, 90))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rc, 
-                _disableRoundCorners ? 0 : ThemeManager.CornerSize))
             {
-                g.FillPath(b, path);
-                g.DrawPath(p, path);
+                g.FillRectangle(b, rc);
+                g.DrawRectangle(p, rc);
             }
 
             rc = new Rectangle(ClientRectangle.Left + 2, ClientRectangle.Top + 2,
@@ -542,11 +540,9 @@ namespace OPMedia.UI.Controls
 
             using (Pen p = new Pen(cb, pw))
             using (Brush b = new LinearGradientBrush(rc, c1, c2, 90))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rc,
-                _disableRoundCorners ? 0 : ThemeManager.CornerSize))
             {
-                g.FillPath(b, path);
-                g.DrawPath(p, path);
+                g.FillRectangle(b, rc);
+                g.DrawRectangle(p, rc);
             }
 
             rc = new Rectangle(ClientRectangle.Left + 2, ClientRectangle.Top + 2,
@@ -691,10 +687,9 @@ namespace OPMedia.UI.Controls
 
             using (Pen p = new Pen(cb, pw))
             using (Brush b = new LinearGradientBrush(rc, c1, c2, 90))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rc, ThemeManager.CornerSize))
             {
-                g.FillPath(b, path);
-                g.DrawPath(p, path);
+                g.FillRectangle(b, rc);
+                g.DrawRectangle(p, rc);
             }
 
             rc = new Rectangle(ClientRectangle.Left + 2, ClientRectangle.Top + 2,

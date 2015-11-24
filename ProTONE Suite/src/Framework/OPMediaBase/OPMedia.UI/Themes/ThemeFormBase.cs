@@ -71,7 +71,7 @@ namespace OPMedia.UI.Themes
         private ResizeMargin _rmLB;
         private ResizeMargin _rmRB;
 
-        private GraphicsPath _borderPath = null;
+        private Rectangle _rcBorder = Rectangle.Empty;
 
         Color _overrideBackColor = Color.Empty;
         public Color OverrideBackColor
@@ -180,22 +180,6 @@ namespace OPMedia.UI.Themes
             }
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-
-                if (ThemeManager.CornerSize > 0)
-                {
-                    const int CS_DROPSHADOW = 0x00020000;
-                    cp.ClassStyle |= CS_DROPSHADOW;
-                    //cp.ExStyle |= 0x02000000;
-                }
-
-                return cp;
-            }
-        }
 
         Rectangle _rcTitleBar = Rectangle.Empty;
         Rectangle _rcIcon = Rectangle.Empty;
@@ -900,18 +884,12 @@ namespace OPMedia.UI.Themes
                 ClientRectangle.Width,
                 Math.Min(ClientRectangle.Height, CaptionButtonSize.Height)) : Rectangle.Empty;
 
-            if (_borderPath != null)
-                _borderPath.Dispose();
-
-            Rectangle rcRegion = new Rectangle(0, 0, Width, Height);
-            GraphicsPath regionPath = ImageProcessing.GenerateRoundCornersBorder(rcRegion, ThemeManager.FormCornerSize);
-
-            Rectangle rcBorder = new Rectangle(0, 0, Width - 1, Height - 1);
-            _borderPath = ImageProcessing.GenerateRoundCornersBorder(rcBorder, ThemeManager.FormCornerSize);
+            _rcBorder = new Rectangle(0, 0, Width - 1, Height - 1);
 
             if (FormWindowState.Maximized != WindowState)
             {
-                base.Region = new Region(regionPath);
+                Rectangle rcRegion = new Rectangle(0, 0, Width, Height); 
+                base.Region = new Region(rcRegion);
             }
             else
             {
@@ -952,18 +930,18 @@ namespace OPMedia.UI.Themes
 
             if (_rcTitleBar != Rectangle.Empty)
             {
-                g.FillPath(_brBackground, _borderPath);
+                g.FillRectangle(_brBackground, _rcBorder);
 
                 if (_rcTitleBar != Rectangle.Empty)
                     DrawTitleBar(g);
 
-                g.DrawPath(_penBorder, _borderPath);
+                g.DrawRectangle(_penBorder, _rcBorder);
                 g.Flush();
             }
             else
             {
-                g.FillPath(Brushes.Black, _borderPath);
-                g.DrawPath(Pens.Black, _borderPath);
+                g.FillRectangle(Brushes.Black, _rcBorder);
+                g.DrawRectangle(Pens.Black, _rcBorder);
             }
         }
 

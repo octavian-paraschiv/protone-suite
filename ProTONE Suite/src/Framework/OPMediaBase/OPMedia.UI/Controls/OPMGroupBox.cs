@@ -111,9 +111,8 @@ namespace OPMedia.UI.Controls
 
             using (Pen pen = new Pen(cb))
             using (Pen penEraser = new Pen(ThemeManager.BackColor))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rcBorder, ThemeManager.CornerSize))
             {
-                e.Graphics.DrawPath(pen, path);
+                e.Graphics.DrawRectangle(pen, rcBorder);
 
                 // Careful not to give a "strikethrough" effect on the text.
                 e.Graphics.DrawLine(penEraser, offsetX, offsetY, offsetX + textSize.Width, offsetY);

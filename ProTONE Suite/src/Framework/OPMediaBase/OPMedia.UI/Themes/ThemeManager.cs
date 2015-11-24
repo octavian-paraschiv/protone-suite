@@ -223,19 +223,19 @@ namespace OPMedia.UI.Themes
         public static Color GradientGaugeColor1a
         { get { return ThemeElement("GradientGaugeColor1a", SafeColorFromString("255, 242, 000")); } }
 
-        public static int CornerSize
-        { get { return ThemeElement("CornerSize", 0); } }
+        //public static int CornerSize
+        //{ get { return ThemeElement("CornerSize", 0); } }
 
-        public static int FormCornerSize
-        { 
-            get 
-            {
-                if (CornerSize > 0)
-                    return CornerSize + FormBorderWidth;
-
-                return 0;
-            } 
-        }
+        //public static int FormCornerSize
+        //{ 
+        //    get 
+        //    {
+        //        if (CornerSize > 0)
+        //            return CornerSize + FormBorderWidth;
+        //
+        //        return 0;
+        //    } 
+        //}
 
         public static int FormBorderWidth
         { get { return ThemeElement("FormBorderWidth", 1); } }

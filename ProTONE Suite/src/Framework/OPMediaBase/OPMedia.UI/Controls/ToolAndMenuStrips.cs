@@ -146,11 +146,8 @@ namespace OPMedia.UI.Controls
 
                 if (Enabled && (Selected || Pressed))
                 {
-                    using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rect, ThemeManager.CornerSize))
-                    {
-                        e.Graphics.FillPath(b1, path);
-                        e.Graphics.DrawPath(p2, path);
-                    }
+                    e.Graphics.FillRectangle(b1, rect);
+                    e.Graphics.DrawRectangle(p2, rect);
 
                     if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
                     {
@@ -284,11 +281,8 @@ namespace OPMedia.UI.Controls
 
                     if (isHighlight)
                     {
-                        using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rect, ThemeManager.CornerSize))
-                        {
-                            e.Graphics.FillPath(bBack, path);
-                            e.Graphics.DrawPath(p2, path);
-                        }
+                        e.Graphics.FillRectangle(bBack, rect);
+                        e.Graphics.DrawRectangle(p2, rect);
                     }
 
                     int xpos = this.ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2 + 1 + offset;
@@ -470,11 +464,8 @@ namespace OPMedia.UI.Controls
 
                     if (Selected || Pressed)
                     {
-                        using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rect, ThemeManager.CornerSize))
-                        {
-                            e.Graphics.FillPath(b1, path);
-                            e.Graphics.DrawPath(p2, path);
-                        }
+                        e.Graphics.FillRectangle(b1, rect);
+                        e.Graphics.DrawRectangle(p2, rect);
                     }
 
                     int xpos = ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2;

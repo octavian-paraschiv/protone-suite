@@ -238,10 +238,9 @@ namespace OPMedia.UI.Controls
 
             using (Brush b = new LinearGradientBrush(rc, c1, c2, 90f))
             using (Pen p = new Pen(cb, pw))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rc, ThemeManager.CornerSize))
             {
-                e.Graphics.FillPath(b, path);
-                e.Graphics.DrawPath(p, path);
+                e.Graphics.FillRectangle(b, rc);
+                e.Graphics.DrawRectangle(p, rc);
             }
 
             if (this.Image != null)

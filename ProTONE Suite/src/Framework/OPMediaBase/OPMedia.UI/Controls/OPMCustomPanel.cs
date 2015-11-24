@@ -50,7 +50,6 @@ namespace OPMedia.UI.Controls
 
                 using (Brush b = new SolidBrush(this.BackColor))
                 using (Pen p = new Pen(cb, BorderWidth))
-                using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(ClientRectangle, ThemeManager.CornerSize))
                 {
                     g.FillRectangle(b, ClientRectangle);
                     g.DrawRectangle(p, ClientRectangle);

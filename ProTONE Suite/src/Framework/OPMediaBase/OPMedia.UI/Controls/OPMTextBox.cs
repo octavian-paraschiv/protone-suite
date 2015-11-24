@@ -227,11 +227,10 @@ namespace OPMedia.UI.Controls
             using (Brush b1 = new SolidBrush(ThemeManager.BackColor))
             using (Brush b2 = new SolidBrush(cWnd))
             using (Pen p = new Pen(cb, pw))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rcPath, ThemeManager.CornerSize)) 
             {
                 e.Graphics.FillRectangle(b1, ClientRectangle);
-                e.Graphics.FillPath(b2, path);
-                e.Graphics.DrawPath(p, path);
+                e.Graphics.FillRectangle(b2, rcPath);
+                e.Graphics.DrawRectangle(p, rcPath);
             }
         }
 

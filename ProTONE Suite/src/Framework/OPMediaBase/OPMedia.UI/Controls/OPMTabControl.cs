@@ -142,10 +142,8 @@ namespace OPMedia.UI.Controls
                 ClientRectangle.Height - ItemSize.Height - 4);
 
             using (Pen p = new Pen(ThemeManager.BorderColor))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rcx, ThemeManager.CornerSize, 
-                CornersPosition.LeftBottom | CornersPosition.RightBottom | CornersPosition.RightTop))
             {
-                e.Graphics.DrawPath(p, path);
+                e.Graphics.DrawRectangle(p, rcx);
             }
 
             for (int i = 0; i < base.TabPages.Count; i++)
@@ -193,20 +191,16 @@ namespace OPMedia.UI.Controls
 
             using (Brush b = new LinearGradientBrush(rcx, c1, c2, 90))
             using (Pen p = new Pen(cb))
-            using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rcx, ThemeManager.CornerSize, 
-                CornersPosition.LeftTop | CornersPosition.RightTop))
             {
-                graphics.FillPath(b, path);
-                graphics.DrawPath(p, path);
+                graphics.FillRectangle(b, rcx);
+                graphics.DrawRectangle(p, rcx);
             }
 
             if (selected)
             {
                 using (Brush b = new SolidBrush(ThemeManager.BackColor))
-                using (GraphicsPath path = ImageProcessing.GenerateRoundCornersBorder(rcx2, ThemeManager.CornerSize,
-                    CornersPosition.LeftTop | CornersPosition.RightTop))
                 {
-                    graphics.FillPath(b, path);
+                    graphics.FillRectangle(b, rcx2);
                 }
             }
             /*
