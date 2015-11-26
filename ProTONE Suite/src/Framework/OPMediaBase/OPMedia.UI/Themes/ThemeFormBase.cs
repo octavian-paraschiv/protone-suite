@@ -220,7 +220,8 @@ namespace OPMedia.UI.Themes
         {
             get
             {
-                return SystemInformation.CaptionButtonSize;
+                return new Size(22, 22);
+                //return SystemInformation.CaptionButtonSize;
             }
         }
         
@@ -281,7 +282,6 @@ namespace OPMedia.UI.Themes
             _rmRight.Tag = HTRIGHT;
             _rmRT.Tag = HTTOPRIGHT;
             _rmTop.Tag = HTTOP;
-
 
             this.BackColor = ThemeManager.BackColor;
 

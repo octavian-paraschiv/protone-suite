@@ -38,12 +38,6 @@ namespace OPMedia.Runtime.Addons
         public static bool networkConfig = false;
         string _launchPath = string.Empty;
 
-        public static void RunApplication()
-        {
-            AddonHostForm frm = new AddonHostForm();
-            Application.Run(frm);
-        }
-
         #region Reload methods
 
         public void ReloadNavigation(object target)
@@ -72,7 +66,7 @@ namespace OPMedia.Runtime.Addons
         }
         #endregion
 
-        protected AddonHostForm(string launchPath)
+        public AddonHostForm(string launchPath)
             : this()
         {
             _launchPath = launchPath;
@@ -256,6 +250,7 @@ namespace OPMedia.Runtime.Addons
             this.VSplitterDistance = AddonAppConfig.VSplitterDistance;
             this.HSplitterDistance = AddonAppConfig.HSplitterDistance;
 
+            pnlContent.BringToFront();
         }
 
         protected override bool IsShortcutAllowed(OPMShortcut cmd)
@@ -845,6 +840,7 @@ namespace OPMedia.Runtime.Addons
             {
                 lblStatusMain.Visible = false;
                 txtStatusMain.Visible = true;
+                txtStatusMain.Width = this.Width - 5;
 
                 string realPath = lblStatusMain.Text.Replace(Translator.Translate("TXT_CURRENT_PATH", string.Empty), string.Empty);
                 txtStatusMain.Text = realPath;

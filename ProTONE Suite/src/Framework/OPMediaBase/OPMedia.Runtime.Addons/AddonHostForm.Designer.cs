@@ -42,7 +42,7 @@ namespace OPMedia.Runtime.Addons
             this.tsmiAbout = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.toolStripSeparator2 = new OPMedia.UI.Controls.OPMMenuStripSeparator();
             this.tXTSHOWLOGToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
-            this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
+            this.pnlLayoutFull = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pnlOpMedia = new OPMedia.UI.Controls.OPMSplitContainer();
             this.pnlNavContainer = new OPMedia.UI.Controls.OPMPanel();
             this.lblNoItems = new OPMedia.UI.Controls.OPMLabel();
@@ -55,8 +55,9 @@ namespace OPMedia.Runtime.Addons
             this.lblStatusMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtStatusMain = new OPMedia.UI.Controls.OPMStatusStripTextBox();
             this.lblStatusBarSep = new OPMedia.UI.Controls.OPMLabel();
+            this.pnlContent.SuspendLayout();
             this.msMain.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.pnlLayoutFull.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlOpMedia)).BeginInit();
             this.pnlOpMedia.Panel1.SuspendLayout();
             this.pnlOpMedia.Panel2.SuspendLayout();
@@ -71,10 +72,14 @@ namespace OPMedia.Runtime.Addons
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
+            // pnlContent
+            // 
+            this.pnlContent.Controls.Add(this.pnlLayoutFull);
+            this.pnlContent.Controls.Add(this.msMain);
+            // 
             // msMain
             // 
             this.msMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.msMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.msMain.Font = new System.Drawing.Font("Trebuchet MS", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.msMain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -83,7 +88,7 @@ namespace OPMedia.Runtime.Addons
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0);
-            this.msMain.Size = new System.Drawing.Size(818, 24);
+            this.msMain.Size = new System.Drawing.Size(822, 24);
             this.msMain.TabIndex = 0;
             // 
             // tsmiFile
@@ -156,37 +161,32 @@ namespace OPMedia.Runtime.Addons
             this.tXTSHOWLOGToolStripMenuItem.Text = "TXT_SHOWLOG";
             this.tXTSHOWLOGToolStripMenuItem.Click += new System.EventHandler(this.tXTSHOWLOGToolStripMenuItem_Click);
             // 
-            // tableLayoutPanel1
+            // pnlLayoutFull
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.msMain, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlOpMedia, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.statusBar, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatusBarSep, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 21);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(818, 545);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.pnlLayoutFull.ColumnCount = 1;
+            this.pnlLayoutFull.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlLayoutFull.Controls.Add(this.pnlOpMedia, 0, 1);
+            this.pnlLayoutFull.Controls.Add(this.statusBar, 0, 3);
+            this.pnlLayoutFull.Controls.Add(this.lblStatusBarSep, 0, 2);
+            this.pnlLayoutFull.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLayoutFull.Location = new System.Drawing.Point(0, 24);
+            this.pnlLayoutFull.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlLayoutFull.Name = "pnlLayoutFull";
+            this.pnlLayoutFull.OverrideBackColor = System.Drawing.Color.Empty;
+            this.pnlLayoutFull.RowCount = 4;
+            this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlLayoutFull.Size = new System.Drawing.Size(822, 523);
+            this.pnlLayoutFull.TabIndex = 3;
             // 
             // pnlOpMedia
             // 
             this.pnlOpMedia.Cursor = System.Windows.Forms.Cursors.Default;
             this.pnlOpMedia.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOpMedia.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.pnlOpMedia.Location = new System.Drawing.Point(0, 24);
+            this.pnlOpMedia.Location = new System.Drawing.Point(0, 0);
             this.pnlOpMedia.Margin = new System.Windows.Forms.Padding(0);
             this.pnlOpMedia.Name = "pnlOpMedia";
             this.pnlOpMedia.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -198,8 +198,8 @@ namespace OPMedia.Runtime.Addons
             // pnlOpMedia.Panel2
             // 
             this.pnlOpMedia.Panel2.Controls.Add(this.pnlLocalContent);
-            this.pnlOpMedia.Size = new System.Drawing.Size(818, 500);
-            this.pnlOpMedia.SplitterDistance = 472;
+            this.pnlOpMedia.Size = new System.Drawing.Size(822, 495);
+            this.pnlOpMedia.SplitterDistance = 465;
             this.pnlOpMedia.SplitterWidth = 3;
             this.pnlOpMedia.TabIndex = 6;
             // 
@@ -210,7 +210,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlNavContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlNavContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNavContainer.Name = "pnlNavContainer";
-            this.pnlNavContainer.Size = new System.Drawing.Size(818, 472);
+            this.pnlNavContainer.Size = new System.Drawing.Size(822, 465);
             this.pnlNavContainer.TabIndex = 0;
             // 
             // lblNoItems
@@ -223,7 +223,7 @@ namespace OPMedia.Runtime.Addons
             this.lblNoItems.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNoItems.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoItems.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNoItems.Size = new System.Drawing.Size(818, 60);
+            this.lblNoItems.Size = new System.Drawing.Size(822, 60);
             this.lblNoItems.TabIndex = 0;
             this.lblNoItems.Text = "aaaa";
             this.lblNoItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,7 +244,7 @@ namespace OPMedia.Runtime.Addons
             // pnlLocalContent.Panel2
             // 
             this.pnlLocalContent.Panel2.Controls.Add(this.pnlPreview);
-            this.pnlLocalContent.Size = new System.Drawing.Size(818, 25);
+            this.pnlLocalContent.Size = new System.Drawing.Size(822, 27);
             this.pnlLocalContent.SplitterDistance = 25;
             this.pnlLocalContent.SplitterWidth = 3;
             this.pnlLocalContent.TabIndex = 3;
@@ -304,18 +304,18 @@ namespace OPMedia.Runtime.Addons
             // statusBar
             // 
             this.statusBar.AllowMerge = false;
-            this.statusBar.AutoSize = false;
             this.statusBar.BackColor = System.Drawing.Color.Transparent;
-            this.statusBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.statusBar.Font = new System.Drawing.Font("Trebuchet MS", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.statusBar.GripMargin = new System.Windows.Forms.Padding(0);
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusMain,
             this.txtStatusMain});
-            this.statusBar.Location = new System.Drawing.Point(0, 530);
+            this.statusBar.Location = new System.Drawing.Point(0, 501);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(818, 15);
+            this.statusBar.Size = new System.Drawing.Size(822, 22);
             this.statusBar.SizingGrip = false;
+            this.statusBar.Stretch = false;
             this.statusBar.TabIndex = 0;
             this.statusBar.Click += new System.EventHandler(this.statusBar_Click);
             // 
@@ -323,9 +323,10 @@ namespace OPMedia.Runtime.Addons
             // 
             this.lblStatusMain.AutoToolTip = true;
             this.lblStatusMain.Image = global::OPMedia.Runtime.Addons.Properties.Resources.Addons;
+            this.lblStatusMain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblStatusMain.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatusMain.Name = "lblStatusMain";
-            this.lblStatusMain.Size = new System.Drawing.Size(111, 15);
+            this.lblStatusMain.Size = new System.Drawing.Size(111, 22);
             this.lblStatusMain.Text = "nonEditModePath";
             this.lblStatusMain.Click += new System.EventHandler(this.lblStatusMain_Click);
             // 
@@ -335,8 +336,9 @@ namespace OPMedia.Runtime.Addons
             this.txtStatusMain.BackColor = System.Drawing.Color.White;
             this.txtStatusMain.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.txtStatusMain.ForeColor = System.Drawing.Color.Black;
+            this.txtStatusMain.Margin = new System.Windows.Forms.Padding(0);
             this.txtStatusMain.Name = "txtStatusMain";
-            this.txtStatusMain.Size = new System.Drawing.Size(696, 13);
+            this.txtStatusMain.Size = new System.Drawing.Size(800, 22);
             this.txtStatusMain.Text = "editModePath";
             this.txtStatusMain.Leave += new System.EventHandler(this.txtStatusMain_Leave);
             this.txtStatusMain.LostFocus += new System.EventHandler(this.txtStatusMain_LostFocus);
@@ -346,27 +348,26 @@ namespace OPMedia.Runtime.Addons
             // 
             this.lblStatusBarSep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatusBarSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStatusBarSep.Location = new System.Drawing.Point(0, 524);
+            this.lblStatusBarSep.Location = new System.Drawing.Point(0, 495);
             this.lblStatusBarSep.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.lblStatusBarSep.Name = "lblStatusBarSep";
             this.lblStatusBarSep.OverrideBackColor = System.Drawing.Color.Red;
             this.lblStatusBarSep.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblStatusBarSep.Size = new System.Drawing.Size(818, 3);
+            this.lblStatusBarSep.Size = new System.Drawing.Size(822, 3);
             this.lblStatusBarSep.TabIndex = 7;
             this.lblStatusBarSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AddonHostForm
             // 
             this.ClientSize = new System.Drawing.Size(824, 571);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(700, 450);
             this.Name = "AddonHostForm";
-            this.Controls.SetChildIndex(this.pnlContent, 0);
-            this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
+            this.pnlContent.ResumeLayout(false);
+            this.pnlContent.PerformLayout();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.pnlLayoutFull.ResumeLayout(false);
+            this.pnlLayoutFull.PerformLayout();
             this.pnlOpMedia.Panel1.ResumeLayout(false);
             this.pnlOpMedia.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlOpMedia)).EndInit();
@@ -396,7 +397,7 @@ namespace OPMedia.Runtime.Addons
         private OPMToolStripMenuItem tXTAPPHELPToolStripMenuItem;
         private OPMMenuStripSeparator toolStripSeparator2;
         private OPMToolStripMenuItem tXTSHOWLOGToolStripMenuItem;
-        private OPMTableLayoutPanel tableLayoutPanel1;
+        private OPMTableLayoutPanel pnlLayoutFull;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusMain;
         private OPMPanel pnlNavContainer;
