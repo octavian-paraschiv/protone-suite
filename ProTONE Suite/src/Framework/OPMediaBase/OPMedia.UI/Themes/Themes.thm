@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Themes>
   <Theme Name="Metro" IsDefault="false">
     <ThemeElement Name="BorderColor" Value="150, 150, 150" />
@@ -149,7 +149,7 @@
     <ThemeElement Name="HighlightMenuTextColor" Value="240, 240, 240" />
     <ThemeElement Name="HighlightHeaderMenuTextColor" Value="059, 059, 059" />
     <ThemeElement Name="CheckedMenuTextColor" Value="059, 059, 059" />
-    <ThemeElement Name="GradientGaugeColor1" Value="000, 255, 000" />
+    <ThemeElement Name="GradientGaugeColor1" Value="100, 255, 100" />
     <ThemeElement Name="GradientGaugeColor2" Value="255, 000, 000" />
     <ThemeElement Name="GradientGaugeColor1a" Value="255, 000, 000" />
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />

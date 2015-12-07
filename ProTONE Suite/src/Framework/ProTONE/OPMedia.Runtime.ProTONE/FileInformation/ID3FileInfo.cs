@@ -451,7 +451,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     {
                         MediaRenderer.DefaultInstance.PauseRenderer();
                         resumePosition = MediaRenderer.DefaultInstance.MediaPosition;
-                        MediaRenderer.DefaultInstance.PauseRenderer();
+                        MediaRenderer.DefaultInstance.StopRenderer(true);
                         Thread.Sleep(100);
                     }
 
@@ -460,16 +460,19 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         af.RemoveTags(TagTypes.AllTags);
                     }
 
-                    af.Save();
-                    _tagModified = false;
-
-                    if (resumePosition > 0)
+                    try
                     {
-                        BookmarkStartHint hint = new BookmarkStartHint(
-                            new Bookmark("default", (int)resumePosition));
-
-                        MediaRenderer.DefaultInstance.StartRendererWithHint(hint);
-                        MediaRenderer.DefaultInstance.AudioVolume = ProTONEConfig.LastVolume;
+                        af.Save();
+                        _tagModified = false;
+                    }
+                    finally
+                    {
+                        if (resumePosition > 0)
+                        {
+                            BookmarkStartHint hint = new BookmarkStartHint(new Bookmark("default", (int)resumePosition));
+                            MediaRenderer.DefaultInstance.StartRendererWithHint(hint);
+                            MediaRenderer.DefaultInstance.AudioVolume = ProTONEConfig.LastVolume;
+                        }
                     }
                 }
             }

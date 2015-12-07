@@ -20,6 +20,7 @@ using OPMedia.Core;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.Shortcuts;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -275,19 +276,26 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         [EventSink(OPMedia.UI.ProTONE.GlobalEvents.EventNames.ExecuteShortcut)]
         public void OnExecuteShortcut(Runtime.Shortcuts.OPMShortcutEventArgs args)
         {
-            // Dispatch shortcut to active screen
-            if (_activeScreen == this.PlaylistScreen)
+            if (this.PlaylistScreen != null)
             {
-                this.PlaylistScreen.OnExecuteShortcut(args);
-            }
-            else if (_activeScreen == this.BookmarkScreen)
-            {
-            }
-            else if (_activeScreen == this.TrackInfoScreen)
-            {
-            }
-            else if (_activeScreen == this.SignalAnalysisScreen)
-            {
+                bool dispatchCmd = false;
+
+                switch(args.cmd)
+                {
+                    case OPMShortcut.CmdPlaylistEnd:
+                    case OPMShortcut.CmdToggleShuffle:
+                    case OPMShortcut.CmdLoopPlay:
+                        dispatchCmd = true;
+                        break;
+
+                    default:
+                        dispatchCmd = (_activeScreen == this.PlaylistScreen);
+                        break;
+                }
+
+                // Dispatch shortcut
+                if (dispatchCmd)
+                    this.PlaylistScreen.OnExecuteShortcut(args);
             }
         }
     }

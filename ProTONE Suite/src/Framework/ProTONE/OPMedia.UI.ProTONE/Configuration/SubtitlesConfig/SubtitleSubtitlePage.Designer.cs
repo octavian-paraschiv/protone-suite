@@ -88,7 +88,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lvDownloadAddresses.MultiSelect = false;
             this.lvDownloadAddresses.Name = "lvDownloadAddresses";
             this.lvDownloadAddresses.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvDownloadAddresses.Size = new System.Drawing.Size(446, 95);
+            this.lvDownloadAddresses.Size = new System.Drawing.Size(446, 83);
             this.lvDownloadAddresses.TabIndex = 0;
             this.lvDownloadAddresses.UseCompatibleStateImageBehavior = false;
             this.lvDownloadAddresses.View = System.Windows.Forms.View.Details;
@@ -187,7 +187,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.pnlOnlineSubtitles.Name = "pnlOnlineSubtitles";
             this.pnlOnlineSubtitles.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlOnlineSubtitles.RowCount = 6;
-            this.pnlOnlineSubtitles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this.pnlOnlineSubtitles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.pnlOnlineSubtitles.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlOnlineSubtitles.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlOnlineSubtitles.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -212,7 +212,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(22, 95);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(22, 83);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // kryptonLabel1
@@ -281,7 +281,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.opmTableLayoutPanel1.Controls.Add(this.lblClickHint, 0, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.btnRestoreDefaults, 1, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 98);
+            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 86);
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
@@ -342,12 +342,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel3.Controls.Add(this.nudMinMovieDuration);
             this.tableLayoutPanel3.Controls.Add(this.kryptonLabel2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 132);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 125);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(468, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(468, 22);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // lblMinDuration
@@ -358,13 +358,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblMinDuration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMinDuration.Location = new System.Drawing.Point(0, 0);
             this.lblMinDuration.Margin = new System.Windows.Forms.Padding(0);
-            this.lblMinDuration.MinimumSize = new System.Drawing.Size(39, 30);
             this.lblMinDuration.Name = "lblMinDuration";
             this.lblMinDuration.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblMinDuration.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblMinDuration.Size = new System.Drawing.Size(139, 30);
+            this.lblMinDuration.Size = new System.Drawing.Size(139, 22);
             this.lblMinDuration.TabIndex = 0;
-            this.lblMinDuration.Text = "TXT_MINMOVIEDURATION\r\naaaa";
+            this.lblMinDuration.Text = "TXT_MINMOVIEDURATION";
             this.lblMinDuration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nudMinMovieDuration
@@ -373,7 +372,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudMinMovieDuration.AutoSize = true;
             this.nudMinMovieDuration.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nudMinMovieDuration.Location = new System.Drawing.Point(139, 0);
-            this.nudMinMovieDuration.Margin = new System.Windows.Forms.Padding(0);
+            this.nudMinMovieDuration.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.nudMinMovieDuration.Maximum = new decimal(new int[] {
             40,
             0,
@@ -395,14 +394,15 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.kryptonLabel2.AutoSize = true;
             this.kryptonLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kryptonLabel2.Location = new System.Drawing.Point(179, 5);
-            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.kryptonLabel2.Location = new System.Drawing.Point(179, 0);
+            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(0);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.kryptonLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.kryptonLabel2.Size = new System.Drawing.Size(289, 25);
+            this.kryptonLabel2.Size = new System.Drawing.Size(289, 22);
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Text = "TXT_MINUTES";
+            this.kryptonLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkNotifySubDownloaded
             // 
@@ -410,8 +410,8 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.pnlOnlineSubtitles.SetColumnSpan(this.chkNotifySubDownloaded, 2);
             this.chkNotifySubDownloaded.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkNotifySubDownloaded.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkNotifySubDownloaded.Location = new System.Drawing.Point(0, 175);
-            this.chkNotifySubDownloaded.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.chkNotifySubDownloaded.Location = new System.Drawing.Point(0, 162);
+            this.chkNotifySubDownloaded.Margin = new System.Windows.Forms.Padding(0, 15, 3, 3);
             this.chkNotifySubDownloaded.Name = "chkNotifySubDownloaded";
             this.chkNotifySubDownloaded.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkNotifySubDownloaded.Size = new System.Drawing.Size(465, 17);

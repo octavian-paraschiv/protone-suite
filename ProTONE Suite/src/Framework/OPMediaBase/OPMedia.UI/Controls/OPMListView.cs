@@ -726,6 +726,16 @@ namespace OPMedia.UI.Controls
         {
             try
             {
+                if (this.Columns[e.ColumnIndex].Width < 10)
+                    return;
+            }
+            catch
+            {
+                return;
+            }
+
+            try
+            {
                 bool isSelected = e.Item.Selected;
                 bool drawBorder = false;
                 bool isValid = true;
@@ -870,8 +880,8 @@ namespace OPMedia.UI.Controls
                         drawText = false;
                     }
 
-                    //if (drawText)
-                    e.Graphics.DrawString(text, drawFont, bt, rc1, sf);
+                    if (drawText)
+                        e.Graphics.DrawString(text, drawFont, bt, rc1, sf);
                 }
             }
             catch (Exception ex)
