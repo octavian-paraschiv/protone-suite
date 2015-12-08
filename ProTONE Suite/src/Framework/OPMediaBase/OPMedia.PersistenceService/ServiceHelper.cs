@@ -25,6 +25,12 @@ namespace OPMedia.PersistenceService
 
             using (SqlCeEngine eng = new SqlCeEngine("Data Source = Persistence.sdf"))
             {
+                try
+                {
+                    eng.Upgrade();
+                }
+                catch{ }
+
                 eng.Shrink();
             }
 

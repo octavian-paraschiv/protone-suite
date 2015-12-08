@@ -9,7 +9,7 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
 using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers;
 using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.TranslationSupport;
 using System.Threading;

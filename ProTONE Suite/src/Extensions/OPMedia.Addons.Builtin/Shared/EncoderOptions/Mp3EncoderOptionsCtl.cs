@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 using OPMedia.UI.Dialogs;
 using OPMedia.Addons.Builtin.Translations;
 using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
@@ -65,7 +65,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         private void UpdateSummary()
         {
             string summary = "";
-            this.Options.BE_CONFIG(ref summary);
+            this.Options.GetConfig(ref summary);
             lblOutputBitrateHint.Text = summary;
         }
 
@@ -104,7 +104,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             if (this.Options != null)
             {
                 string summary = "";
-                string conversionFlags = this.Options.BE_CONFIG(ref summary).ToString();
+                string conversionFlags = this.Options.GetConfig(ref summary).ToString();
                 LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
                 dlg.Text = "MP3 Conversion Flags";
                 dlg.ShowDialog();

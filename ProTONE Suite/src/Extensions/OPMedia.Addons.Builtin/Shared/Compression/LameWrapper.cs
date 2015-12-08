@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.Compression.Lame;
 
 namespace OPMedia.Addons.Builtin.Shared.Compression
 {
@@ -65,9 +66,9 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
                 this.WaveFormat = WaveFormatEx.Cdda;
             }
 
-            public BE_CONFIG BE_CONFIG(ref string summary)
+            public LameEncConfig GetConfig(ref string summary)
             {
-                BE_CONFIG cfg = new BE_CONFIG(this.WaveFormat, (uint)this.Bitrate);
+                LameEncConfig cfg = new LameEncConfig(this.WaveFormat, (uint)this.Bitrate);
                 cfg.format.nMode = (MpegMode)this.ChannelMode;
                 
                 cfg.format.dwSampleRate = (uint)this.WaveFormat.nSamplesPerSec;

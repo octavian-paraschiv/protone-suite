@@ -5,8 +5,10 @@ const
    DotNetFxRegistryPath =       'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full';
    DotNetFxDownloadUrl =        'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe';
    
-   //
-   WicDownloadUrl = 		'http://download.microsoft.com/download/f/f/1/ff178bb1-da91-48ed-89e5-478a99387d4f/wic_x86_enu.exe';
+   // Windows Imaging Component, required for XP / 2003. 
+   // Both 32-bit and 64-bit flavors exist so we must be careful which one we choose to download.
+   WicDownloadUrl =             'http://download.microsoft.com/download/f/f/1/ff178bb1-da91-48ed-89e5-478a99387d4f/wic_x86_enu.exe';
+   WicDownloadUrl64 =           'http://download.microsoft.com/download/6/4/5/645FED5F-A6E7-44D9-9D10-FE83348796B0/wic_x64_enu.exe';
 
    // Haali Media Splitter detection parameter
    // This is the CLSID of splitter.ax filter
@@ -197,8 +199,16 @@ var
    ResultCode : integer;
 begin
 
-   DownloadFile('Download .NET 4.0 prerequisites ...', 'Please wait while downloading Windows Imaging Component (WIC) ...', 
-       WicDownloadUrl, ExpandConstant('{tmp}\wic_setup.exe'));
+   if (IsWin64) then
+   begin
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Please wait while downloading Windows Imaging Component (WIC) for 64-bit ...', 
+           WicDownloadUrl64, ExpandConstant('{tmp}\wic_setup.exe'));
+   end
+   else
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Please wait while downloading Windows Imaging Component (WIC) for 32-bit ...', 
+           WicDownloadUrl, ExpandConstant('{tmp}\wic_setup.exe'));
+   begin
+   end;
 
    Exec(ExpandConstant('{tmp}\wic_setup.exe'), '/q /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
    

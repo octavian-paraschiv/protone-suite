@@ -163,14 +163,17 @@ Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}
 Source: {#BINDIR}\DefaultAddons.OPMedia.MediaLibrary.config; DestDir: {app}
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 
-Source: {#EXTDIR}\SQLCE\sqlceca35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlcecompact35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlceer35EN.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlceme35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlceoledb35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlceqp35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlcese35.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\System.Data.SqlServerCe.dll; DestDir: {app}
+Source: {#BINDIR}\System.Data.SqlServerCe.dll; DestDir: {app}
+Source: {#BINDIR}\x86\sqlceca40.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\sqlcecompact40.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\sqlceer40EN.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\sqlceme40.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\sqlceqp40.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\sqlcese40.dll; DestDir: {app}\x86
+Source: {#BINDIR}\x86\Microsoft.VC90.CRT\msvcr90.dll; DestDir: {app}\x86\Microsoft.VC90.CRT
+Source: {#BINDIR}\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest; DestDir: {app}\x86\Microsoft.VC90.CRT
+Source: {#BINDIR}\x86\Microsoft.VC90.CRT\README_ENU.txt; DestDir: {app}\x86\Microsoft.VC90.CRT
+
 Source: {#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_kernelDeint.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_liba52.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow

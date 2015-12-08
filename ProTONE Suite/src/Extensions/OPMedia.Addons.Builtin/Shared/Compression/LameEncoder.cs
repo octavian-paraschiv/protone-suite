@@ -61,7 +61,7 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 327), Serializable]
-    public struct LHV1 // BE_CONFIG_LAME LAME header version 1
+    public struct LHV1 // CFG_LAME LAME header version 1
     {
         public const uint MPEG1 = 1;
         public const uint MPEG2 = 0;
@@ -139,7 +139,7 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
                 throw new ArgumentOutOfRangeException("format", "Only 16 bits samples supported");
             }
             dwStructVersion = 1;
-            dwStructSize = (uint)Marshal.SizeOf(typeof(BE_CONFIG));
+            dwStructSize = (uint)Marshal.SizeOf(typeof(LameEncConfig));
             switch (format.nSamplesPerSec)
             {
                 case 16000:
@@ -223,27 +223,27 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
     }
 
     [StructLayout(LayoutKind.Sequential), Serializable]
-    public class BE_CONFIG
+    public class LameEncConfig
     {
         // encoding formats
-        public const uint BE_CONFIG_MP3 = 0;
-        public const uint BE_CONFIG_LAME = 256;
+        public const uint CFG_MP3 = 0;
+        public const uint CFG_LAME = 256;
 
         public uint dwConfig;
         public LHV1 format;
 
-        public BE_CONFIG(WaveFormatEx format, uint MpeBitRate)
+        public LameEncConfig(WaveFormatEx format, uint MpeBitRate)
         {
-            this.dwConfig = BE_CONFIG_LAME;
+            this.dwConfig = CFG_LAME;
             this.format = new LHV1(format, MpeBitRate);
         }
 
-        public BE_CONFIG(WaveFormatEx format)
+        public LameEncConfig(WaveFormatEx format)
             : this(format, 192)
         {
         }
 
-        public BE_CONFIG() :
+        public LameEncConfig() :
             this(WaveFormatEx.Cdda)
         {
         }
@@ -251,16 +251,16 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("dwConfig={0}\r\n", dwConfig == 0 ? "BE_CONFIG_MP3" : "BE_CONFIG_LAME");
+            sb.AppendFormat("dwConfig={0}\r\n", dwConfig == 0 ? "CFG_MP3" : "CFG_LAME");
             sb.AppendFormat("format=\r\n[\r\n{0}\r\n];", format);
             return sb.ToString();
         }
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class BE_VERSION
+    public class LameEncVersion
     {
-        public const uint BE_MAX_HOMEPAGE = 256;
+        public const int MAX_HOMEPAGE = 256;
         public byte byDLLMajorVersion;
         public byte byDLLMinorVersion;
         public byte byMajorVersion;
@@ -270,14 +270,14 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
         public byte byMonth;
         public ushort wYear;
         //Homepage URL
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 257/*BE_MAX_HOMEPAGE+1*/)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_HOMEPAGE+1)]
         public string zHomepage;
         public byte byAlphaLevel;
         public byte byBetaLevel;
         public byte byMMXEnabled;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 125)]
         public byte[] btReserved;
-        public BE_VERSION()
+        public LameEncVersion()
         {
             btReserved = new byte[125];
         }
@@ -289,44 +289,35 @@ namespace OPMedia.Runtime.ProTONE.Compression.Lame
     public class Lame_encDll
     {
         //Error codes
-        public const uint BE_ERR_SUCCESSFUL = 0;
-        public const uint BE_ERR_INVALID_FORMAT = 1;
-        public const uint BE_ERR_INVALID_FORMAT_PARAMETERS = 2;
-        public const uint BE_ERR_NO_MORE_HANDLES = 3;
-        public const uint BE_ERR_INVALID_HANDLE = 4;
-        
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint beInitStream(BE_CONFIG pbeConfig, ref uint dwSamples, ref uint dwBufferSize, ref uint phbeStream);
+        public const uint ERR_SUCCESSFUL = 0;
+        public const uint ERR_INVALID_FORMAT = 1;
+        public const uint ERR_INVALID_FORMAT_PARAMETERS = 2;
+        public const uint ERR_NO_MORE_HANDLES = 3;
+        public const uint ERR_INVALID_HANDLE = 4;
 
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        protected static extern uint beEncodeChunk(uint hbeStream, uint nSamples, IntPtr pSamples, [In, Out] byte[] pOutput, ref uint pdwOutput);
-        
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint beDeinitStream(uint hbeStream, [In, Out] byte[] pOutput, ref uint pdwOutput);
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "beInitStream")]
+        public static extern uint Init(LameEncConfig pbeConfig, ref uint dwSamples, ref uint dwBufferSize, ref uint phbeStream);
 
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint beCloseStream(uint hbeStream);
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "beEncodeChunk")]
+        private static extern uint _Encode(uint hbeStream, uint nSamples, IntPtr pSamples, [In, Out] byte[] pOutput, ref uint pdwOutput);
 
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint beWriteVBRHeader(string lpszFileName);
-        
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lame_decode_init();
-        
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lame_decode_exit();
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "beDeinitStream")]
+        public static extern uint Release(uint hbeStream, [In, Out] byte[] pOutput, ref uint pdwOutput);
 
-        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lame_decode(byte[] buffer, int len, short[] pcm_l, short[] pcm_r);
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "beCloseStream")]
+        public static extern uint Close(uint hbeStream);
 
-        public static uint EncodeChunk(uint hbeStream, byte[] buffer, int index, uint nBytes, byte[] pOutput, ref uint pdwOutput)
+        [DllImport("Lame_enc.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "beWriteVBRHeader")]
+        public static extern uint WriteVBRHeader(string lpszFileName);
+
+        public static uint Encode(uint hbeStream, byte[] buffer, int index, uint nBytes, byte[] pOutput, ref uint pdwOutput)
         {
             uint res;
             GCHandle handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
                 IntPtr ptr = (IntPtr)(handle.AddrOfPinnedObject().ToInt32() + index);
-                res = beEncodeChunk(hbeStream, nBytes / 2, ptr, pOutput, ref pdwOutput);
+                res = _Encode(hbeStream, nBytes / 2, ptr, pOutput, ref pdwOutput);
             }
             finally
             {

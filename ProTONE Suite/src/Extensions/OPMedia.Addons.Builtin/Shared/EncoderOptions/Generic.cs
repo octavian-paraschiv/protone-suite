@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
@@ -47,7 +47,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         public override string ToString()
         {
             string summary = "";
-            return this.Options.BE_CONFIG(ref summary).ToString();
+            return this.Options.GetConfig(ref summary).ToString();
         }
 
         public Mp3EncoderSettings()

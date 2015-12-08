@@ -5,11 +5,12 @@ using System.Text;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
 using System.IO;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Utilities;
 using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.Compression.Lame;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
 {
@@ -51,12 +52,12 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
         public void EncodeBuffer(byte[] buff, string destFile, bool generateTags, ID3FileInfoSlim ifiSlim)
         {
             string summary = "";
-            BE_CONFIG cfg = this.Options.BE_CONFIG(ref summary);
+            LameEncConfig cfg = this.Options.GetConfig(ref summary);
 
-            uint LameResult = Lame_encDll.beInitStream(cfg, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
-            if (LameResult != Lame_encDll.BE_ERR_SUCCESSFUL)
+            uint LameResult = Lame_encDll.Init(cfg, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
+            if (LameResult != Lame_encDll.ERR_SUCCESSFUL)
             {
-                throw new ApplicationException(string.Format("Lame_encDll.beInitStream failed with the error code {0}", LameResult));
+                throw new ApplicationException(string.Format("Lame_encDll.Init failed with the error code {0}", LameResult));
             } 
             
             using (FileStream fs = new FileStream(destFile, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -80,7 +81,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
 
                         uint bytesToCopy = Math.Min(2 * m_InputSamples, (uint)buff.Length - (uint)buffPos);
 
-                        if ((LameResult = Lame_encDll.EncodeChunk(m_hLameStream, buff, buffPos, (uint)bytesToCopy, m_OutBuffer, ref EncodedSize)) == Lame_encDll.BE_ERR_SUCCESSFUL)
+                        if ((LameResult = Lame_encDll.Encode(m_hLameStream, buff, buffPos, (uint)bytesToCopy, m_OutBuffer, ref EncodedSize)) == Lame_encDll.ERR_SUCCESSFUL)
                         {
                             if (EncodedSize > 0)
                             {
@@ -89,7 +90,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
                         }
                         else
                         {
-                            throw new ApplicationException(string.Format("Lame_encDll.EncodeChunk failed with the error code {0}", LameResult));
+                            throw new ApplicationException(string.Format("Lame_encDll.Encode failed with the error code {0}", LameResult));
                         }
 
                         buffPos += (int)bytesToCopy;
@@ -98,20 +99,20 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
                 finally
                 {
                     EncodedSize = 0;
-                    if (Lame_encDll.beDeinitStream(m_hLameStream, m_OutBuffer, ref EncodedSize) == Lame_encDll.BE_ERR_SUCCESSFUL)
+                    if (Lame_encDll.Release(m_hLameStream, m_OutBuffer, ref EncodedSize) == Lame_encDll.ERR_SUCCESSFUL)
                     {
                         if (EncodedSize > 0)
                         {
                             bw.Write(m_OutBuffer, 0, (int)EncodedSize);
                         }
                     }
-                    Lame_encDll.beCloseStream(m_hLameStream);
+                    Lame_encDll.Close(m_hLameStream);
                 }
             }
 
             if (!MustCancel() && cfg.format.bWriteVBRHeader != 0)
             {
-                uint err = Lame_encDll.beWriteVBRHeader(destFile);
+                uint err = Lame_encDll.WriteVBRHeader(destFile);
             }
 
             if (!MustCancel() && generateTags && ifiSlim != null)

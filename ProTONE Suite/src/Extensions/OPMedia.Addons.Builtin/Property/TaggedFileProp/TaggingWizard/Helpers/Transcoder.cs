@@ -11,7 +11,7 @@ using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
+
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
