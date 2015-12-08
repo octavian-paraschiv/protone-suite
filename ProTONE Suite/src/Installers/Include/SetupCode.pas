@@ -201,11 +201,11 @@ begin
 
    if (IsWin64) then
    begin
-       DownloadFile('Download .NET 4.0 prerequisites ...', 'Please wait while downloading Windows Imaging Component (WIC) for 64-bit ...', 
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Downloading Windows Imaging Component (WIC x64) ...', 
            WicDownloadUrl64, ExpandConstant('{tmp}\wic_setup.exe'));
    end
    else
-       DownloadFile('Download .NET 4.0 prerequisites ...', 'Please wait while downloading Windows Imaging Component (WIC) for 32-bit ...', 
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Downloading Windows Imaging Component (WIC x86)...', 
            WicDownloadUrl, ExpandConstant('{tmp}\wic_setup.exe'));
    begin
    end;
