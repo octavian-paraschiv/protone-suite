@@ -147,7 +147,7 @@ namespace OPMedia.UI.Controls.Dialogs
                     return QueryDisplayName(fsi);
                 }
 
-                return fsi;
+                return Path.GetFileName(fsi);
             }
 
             return string.Empty;

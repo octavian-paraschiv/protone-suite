@@ -360,34 +360,50 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                if (string.IsNullOrEmpty(_languageId))
+                try
                 {
-                    _languageId = InstallLanguageID;
+                    if (string.IsNullOrEmpty(_languageId))
+                    {
+                        _languageId = InstallLanguageID;
+                    }
+
+                    return _languageId;
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
                 }
 
-                return _languageId;
+                return "en";
             }
 
             set
             {
                 try
                 {
-                    if (value != _languageId)
+                    string langToSet = "en";
+                    if (string.IsNullOrEmpty(value))
+                        langToSet = InstallLanguageID;
+                    else
+                        langToSet = value;
+
+                    if (langToSet != _languageId)
                     {
                         using (RegistryKey key = Registry.CurrentUser.CreateSubKey(ConfigRegPath))
                         {
                             if (key != null)
                             {
-                                key.SetValue("LanguageID", value);
+                                key.SetValue("LanguageID", langToSet);
                             }
                         }
 
-                        _languageId = value;
+                        _languageId = langToSet;
                         Translator.SetInterfaceLanguage(_languageId);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Logger.LogException(ex);
                 }
             }
         }
@@ -396,12 +412,19 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
+                try
                 {
-                    if (key != null)
+                    using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
                     {
-                        return key.GetValue("InstallLanguageID", "en") as string;
+                        if (key != null)
+                        {
+                            return key.GetValue("InstallLanguageID", "en") as string;
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
                 }
 
                 return "en";

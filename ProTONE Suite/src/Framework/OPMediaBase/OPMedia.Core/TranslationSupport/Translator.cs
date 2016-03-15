@@ -183,7 +183,8 @@ namespace OPMedia.Core.TranslationSupport
         /// <param name="languageId">The language id.</param>
         public static void SetInterfaceLanguage(string languageId)
         {
-            if (AppConfig.AllowRealtimeGUISetup == false)
+            if (AppConfig.AllowRealtimeGUISetup == false ||
+                string.IsNullOrEmpty(languageId))
             {
                 languageId = "en";
             }
@@ -206,9 +207,9 @@ namespace OPMedia.Core.TranslationSupport
 
                 EventDispatch.DispatchEvent(EventNames.PerformTranslation);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
 
