@@ -43,8 +43,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected double _maxLevel = short.MaxValue;
         protected double _maxLogLevel = Math.Log((double)short.MaxValue);
 
-
-
+        protected System.Timers.Timer _tmrInternalClock = null;
+        protected Int64 _elapsedSeconds = 0;
+        protected object _syncElapsedSeconds = new object();
+        
         #region Properties
 
         internal Control RenderRegion
@@ -79,7 +81,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         { 
             get 
             {
-                return GetMediaPosition(); 
+                return _elapsedSeconds;
+                //return GetMediaPosition(); 
             } 
             set 
             {
@@ -240,27 +243,82 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         internal void StartRendererWithHint(RenderingStartHint startHint)
         {
+            CreateAndStartInternalClock();
             DoStartRendererWithHint(startHint);
         }
 
         internal void StartRenderer()
         {
+            CreateAndStartInternalClock();
             DoStartRenderer();
         }
 
         internal void PauseRenderer()
         {
+            PauseInternalClock();
             DoPauseRenderer();
         }
 
         internal void StopRenderer()
         {
+            StopInternalClock();
             DoStopRenderer();
         }
 
         internal void ResumeRenderer(double fromPosition)
         {
+            ResumeInternalClock((int)fromPosition);
             DoResumeRenderer(fromPosition);
+        }
+
+        private void CreateAndStartInternalClock()
+        {
+            lock (_syncElapsedSeconds)
+            {
+                _elapsedSeconds = 0;
+            }
+
+            if (_tmrInternalClock == null)
+            {
+                _tmrInternalClock = new System.Timers.Timer();
+                _tmrInternalClock.AutoReset = true;
+                _tmrInternalClock.Interval = 1000;
+                _tmrInternalClock.Elapsed += new System.Timers.ElapsedEventHandler(OnInternalClock);
+            }
+
+            _tmrInternalClock.Stop();
+            _tmrInternalClock.Start();
+        }
+
+        void OnInternalClock(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            lock (_syncElapsedSeconds)
+            {
+                _elapsedSeconds++;
+            }
+        }
+
+        private void ResumeInternalClock(int newPosition)
+        {
+            _tmrInternalClock.Start();
+            lock (_syncElapsedSeconds)
+            {
+                _elapsedSeconds = newPosition;
+            }
+        }
+
+        private void PauseInternalClock()
+        {
+            _tmrInternalClock.Stop();
+        }
+
+        private void StopInternalClock()
+        {
+            _tmrInternalClock.Stop(); 
+            lock (_syncElapsedSeconds)
+            {
+                _elapsedSeconds = 0;
+            }
         }
 
         internal void AdjustVideoSize(VideoSizeAdjustmentDirection direction, VideoSizeAdjustmentAction action)
@@ -272,7 +330,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         {
             get
             {
-                return IsEndOfMedia();
+                bool ret = IsEndOfMedia();
+                
+                if (ret)
+                    StopInternalClock();
+                
+                return ret;
             }
         }
 
