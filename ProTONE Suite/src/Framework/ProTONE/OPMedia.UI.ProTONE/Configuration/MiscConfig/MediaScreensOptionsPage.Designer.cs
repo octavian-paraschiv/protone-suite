@@ -43,6 +43,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkVuMeter = new OPMedia.UI.Controls.OPMCheckBox();
             this.chkWaveform = new OPMedia.UI.Controls.OPMCheckBox();
             this.chkSpectrogram = new OPMedia.UI.Controls.OPMCheckBox();
+            this.chkWCFInterface = new OPMedia.UI.Controls.OPMCheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlSignalAnalisysOptions.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +79,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(480, 234);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(619, 234);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // chkShowPlaylist
@@ -90,7 +91,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkShowPlaylist.Location = new System.Drawing.Point(3, 3);
             this.chkShowPlaylist.Name = "chkShowPlaylist";
             this.chkShowPlaylist.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkShowPlaylist.Size = new System.Drawing.Size(474, 17);
+            this.chkShowPlaylist.Size = new System.Drawing.Size(613, 17);
             this.chkShowPlaylist.TabIndex = 0;
             this.chkShowPlaylist.Text = "TXT_SHOW_PLAYLIST";
             // 
@@ -104,7 +105,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkShowTrackInfo.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.chkShowTrackInfo.Name = "chkShowTrackInfo";
             this.chkShowTrackInfo.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkShowTrackInfo.Size = new System.Drawing.Size(474, 17);
+            this.chkShowTrackInfo.Size = new System.Drawing.Size(613, 17);
             this.chkShowTrackInfo.TabIndex = 1;
             this.chkShowTrackInfo.Text = "TXT_SHOW_TRACKINFO";
             // 
@@ -118,7 +119,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkShowSignalAnalisys.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.chkShowSignalAnalisys.Name = "chkShowSignalAnalisys";
             this.chkShowSignalAnalisys.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkShowSignalAnalisys.Size = new System.Drawing.Size(474, 17);
+            this.chkShowSignalAnalisys.Size = new System.Drawing.Size(613, 17);
             this.chkShowSignalAnalisys.TabIndex = 2;
             this.chkShowSignalAnalisys.Text = "TXT_SHOW_SIGNALANALISYS";
             // 
@@ -128,11 +129,11 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.SetColumnSpan(this.chkShowBookmarkInfo, 2);
             this.chkShowBookmarkInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkShowBookmarkInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkShowBookmarkInfo.Location = new System.Drawing.Point(3, 160);
+            this.chkShowBookmarkInfo.Location = new System.Drawing.Point(3, 183);
             this.chkShowBookmarkInfo.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.chkShowBookmarkInfo.Name = "chkShowBookmarkInfo";
             this.chkShowBookmarkInfo.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkShowBookmarkInfo.Size = new System.Drawing.Size(474, 17);
+            this.chkShowBookmarkInfo.Size = new System.Drawing.Size(613, 17);
             this.chkShowBookmarkInfo.TabIndex = 3;
             this.chkShowBookmarkInfo.Text = "TXT_SHOW_BOOKMARKINFO";
             // 
@@ -145,7 +146,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(454, 13);
+            this.opmLabel1.Size = new System.Drawing.Size(593, 13);
             this.opmLabel1.TabIndex = 4;
             this.opmLabel1.Text = "TXT_HINT_PLAYLISTTAB";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -159,7 +160,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(454, 13);
+            this.opmLabel2.Size = new System.Drawing.Size(593, 13);
             this.opmLabel2.TabIndex = 5;
             this.opmLabel2.Text = "TXT_HINT_TRACKINFOTAB";
             this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,7 +174,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(454, 13);
+            this.opmLabel3.Size = new System.Drawing.Size(593, 13);
             this.opmLabel3.TabIndex = 6;
             this.opmLabel3.Text = "TXT_HINT_SIGNALANALISYSTAB";
             this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -183,11 +184,11 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel4.AutoSize = true;
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel4.Location = new System.Drawing.Point(23, 180);
+            this.opmLabel4.Location = new System.Drawing.Point(23, 203);
             this.opmLabel4.Name = "opmLabel4";
             this.opmLabel4.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel4.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel4.Size = new System.Drawing.Size(454, 13);
+            this.opmLabel4.Size = new System.Drawing.Size(593, 13);
             this.opmLabel4.TabIndex = 7;
             this.opmLabel4.Text = "TXT_HINT_BOOKMARKINFOTAB";
             this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -199,12 +200,13 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.pnlSignalAnalisysOptions.Controls.Add(this.chkVuMeter);
             this.pnlSignalAnalisysOptions.Controls.Add(this.chkWaveform);
             this.pnlSignalAnalisysOptions.Controls.Add(this.chkSpectrogram);
+            this.pnlSignalAnalisysOptions.Controls.Add(this.chkWCFInterface);
             this.pnlSignalAnalisysOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSignalAnalisysOptions.Location = new System.Drawing.Point(20, 127);
             this.pnlSignalAnalisysOptions.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.pnlSignalAnalisysOptions.Name = "pnlSignalAnalisysOptions";
             this.pnlSignalAnalisysOptions.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlSignalAnalisysOptions.Size = new System.Drawing.Size(460, 23);
+            this.pnlSignalAnalisysOptions.Size = new System.Drawing.Size(599, 46);
             this.pnlSignalAnalisysOptions.TabIndex = 8;
             // 
             // chkVuMeter
@@ -243,13 +245,25 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkSpectrogram.Text = "TXT_SHOW_SPECTROGRAM";
             this.chkSpectrogram.UseVisualStyleBackColor = true;
             // 
+            // chkWCFInterface
+            // 
+            this.chkWCFInterface.AutoSize = true;
+            this.chkWCFInterface.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkWCFInterface.Location = new System.Drawing.Point(3, 26);
+            this.chkWCFInterface.Name = "chkWCFInterface";
+            this.chkWCFInterface.OverrideForeColor = System.Drawing.Color.Empty;
+            this.chkWCFInterface.Size = new System.Drawing.Size(172, 17);
+            this.chkWCFInterface.TabIndex = 3;
+            this.chkWCFInterface.Text = "TXT_ENABLE_WCF_INTERFACE";
+            this.chkWCFInterface.UseVisualStyleBackColor = true;
+            // 
             // MediaScreensOptionsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MediaScreensOptionsPage";
-            this.Size = new System.Drawing.Size(480, 234);
+            this.Size = new System.Drawing.Size(619, 234);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.pnlSignalAnalisysOptions.ResumeLayout(false);
@@ -274,5 +288,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMCheckBox chkVuMeter;
         private OPMCheckBox chkWaveform;
         private OPMCheckBox chkSpectrogram;
+        private OPMCheckBox chkWCFInterface;
     }
 }

@@ -15,6 +15,7 @@ using OPMedia.Core;
 using OPMedia.Core.Utilities;
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -32,15 +33,17 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             chkVuMeter.Checked = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter);
             chkWaveform.Checked = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform);
             chkSpectrogram.Checked = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram);
+            chkWCFInterface.Checked = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.WCFInterface);
 
             this.chkShowPlaylist.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             this.chkShowTrackInfo.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             this.chkShowSignalAnalisys.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             this.chkShowBookmarkInfo.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
+            
             this.chkVuMeter.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             this.chkWaveform.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             this.chkSpectrogram.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
-
+            this.chkWCFInterface.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
         }
 
         protected override void SaveInternal()
@@ -52,17 +55,30 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
                 mediaScreen |= MediaScreen.Playlist;
             if (chkShowTrackInfo.Checked)
                 mediaScreen |= MediaScreen.TrackInfo;
-            if (chkShowSignalAnalisys.Checked)
-                mediaScreen |= MediaScreen.SignalAnalisys;
             if (chkShowBookmarkInfo.Checked)
                 mediaScreen |= MediaScreen.BookmarkInfo;
 
-            if (chkVuMeter.Checked)
-                functions |= SignalAnalisysFunction.VUMeter;
-            if (chkWaveform.Checked)
-                functions |= SignalAnalisysFunction.Waveform;
-            if (chkSpectrogram.Checked)
-                functions |= SignalAnalisysFunction.Spectrogram;
+            if (chkShowSignalAnalisys.Checked)
+            {
+                mediaScreen |= MediaScreen.SignalAnalisys;
+
+                if (chkVuMeter.Checked)
+                    functions |= SignalAnalisysFunction.VUMeter;
+                if (chkWaveform.Checked)
+                    functions |= SignalAnalisysFunction.Waveform;
+                if (chkSpectrogram.Checked)
+                    functions |= SignalAnalisysFunction.Spectrogram;
+            }
+
+            if (chkWCFInterface.Checked)
+            {
+                functions |= SignalAnalisysFunction.WCFInterface;
+                MediaRenderer.DefaultInstance.InitSignalAnalisysWCF();
+            }
+            else
+            {
+                MediaRenderer.DefaultInstance.CleanupSignalAnalisysWCF();
+            }
 
             ProTONEConfig.ShowMediaScreens = mediaScreen;
             ProTONEConfig.SignalAnalisysFunctions = functions;
@@ -73,7 +89,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         private void OnSettingsChanged(object sender, EventArgs e)
         {
-            pnlSignalAnalisysOptions.Enabled = chkShowSignalAnalisys.Checked;
+            chkSpectrogram.Enabled = chkShowSignalAnalisys.Checked;
+            chkVuMeter.Enabled = chkShowSignalAnalisys.Checked;
+            chkWaveform.Enabled = chkShowSignalAnalisys.Checked;
+
             base.Modified = true;
         }
 

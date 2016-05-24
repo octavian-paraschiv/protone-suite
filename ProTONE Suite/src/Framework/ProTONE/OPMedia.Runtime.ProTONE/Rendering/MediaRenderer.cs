@@ -35,6 +35,8 @@ using OPMedia.UI.Generic;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 
 #endregion
 
@@ -62,39 +64,48 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
+    [DataContract]
     public class AudioSampleData
     {
+        [DataMember]
         public double LVOL { get; private set; }
+
+        [DataMember]
         public double RVOL { get; private set; }
-
-        public double AvgLevel
-        {
-            get
-            {
-                return LVOL;// (LVOL + RVOL) / 2;
-            }
-        }
-
-        public double RmsLevel
-        {
-            get
-            {
-                return LVOL;// Math.Sqrt((LVOL * LVOL + RVOL * RVOL) / 2);
-            }
-        }
 
         public AudioSampleData(double lVol, double rVol)
         {
             LVOL = lVol;
             RVOL = rVol;
         }
-
-        //public override string ToString()
-        //{
-        //    return string.Format("AudioSample: SampleTime={0} PlaybackTime={1} RealTime={2:HH:mm:ss}.{3} L={4} R={5}", 
-        //        SampleTime, PlaybackTime, RealTime, RealTime.Millisecond, LVOL, RVOL);
-        //}
     }
+
+    [DataContract]
+    public class SignalAnalisysData
+    {
+        [DataMember]
+        public AudioSampleData MomentarySampleData { get; set; }
+
+        [DataMember]
+        public double[] SpectrogramData { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("MomSample: L={0},R={1}, Spectrogram: len={2}, data[0]={3:0.00}",
+                (MomentarySampleData != null) ? MomentarySampleData.LVOL : 0, 
+                (MomentarySampleData != null) ? MomentarySampleData.RVOL : 0, 
+                (SpectrogramData != null) ? SpectrogramData.Length : 0, 
+                (SpectrogramData != null) ? SpectrogramData[0] : 0);
+        }
+    }
+
+    [ServiceContract]
+    public interface ISignalAnalisys
+    {
+        [OperationContract]
+        SignalAnalisysData GetSignalAnalisysData();
+    }
+
 
     public sealed class MediaRenderer : IDisposable
     {
@@ -171,7 +182,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
         #region Members
-        private static MediaRenderer __defaultInstance = new MediaRenderer();
+        private static MediaRenderer __defaultInstance = new MediaRenderer(true);
 
         private StreamRenderer streamRenderer = null;
         private Timer timerCheckState = null;
@@ -201,7 +212,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public static MediaRenderer NewInstance()
         {
-            return new MediaRenderer();
+            return new MediaRenderer(false);
         }
 
         
@@ -455,7 +466,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public double[] WaveformData
+        public double[][] WaveformData
         {
             get
             {
@@ -906,7 +917,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         #endregion
 
         #region Construction
-        private MediaRenderer()
+        private MediaRenderer(bool isDefaultInstance)
         {
             streamRenderer = null;
 
@@ -917,6 +928,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             timerCheckState.Interval = 500;
             timerCheckState.Start();
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
+
+            if (isDefaultInstance && 
+                ProTONEConfig.IsPlayer && 
+                ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.WCFInterface))
+            {
+                InternalInitSignalAnalisysWCF();
+            }
 
         }
 
@@ -932,6 +950,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (ProTONEConfig.IsPlayer)
                 {
                     SystemScheduler.Stop();
+                    CleanupSignalAnalisysWCF();
                 }
 
                 __defaultInstance = null;
@@ -1311,7 +1330,94 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         #endregion
 
-      
+        #region Signal Analisys WCF Interface
+        ServiceHost _wcfHost = null;
+
+        public void InitSignalAnalisysWCF()
+        {
+            if (__defaultInstance != this)
+                throw new InvalidOperationException("InitSignalAnalisysWCF can only be done on MediaRenderer default instance !");
+
+            InternalInitSignalAnalisysWCF();
+        }
+
+        public void CleanupSignalAnalisysWCF()
+        {
+            if (__defaultInstance != this)
+                throw new InvalidOperationException("CleanupSignalAnalisysWCF can only be done on MediaRenderer default instance !");
+
+            InternalCleanupSignalAnalisysWCF();
+        }
+
+        private void InternalInitSignalAnalisysWCF()
+        {
+            try
+            {
+                Logger.LogInfo("Opening Signal Analisys WCF Interface ...");
+                if (_wcfHost == null)
+                {
+                    string address = "net.pipe://localhost/ProTONESignalAnalisys.svc";
+
+                    NetNamedPipeBinding binding = new NetNamedPipeBinding();
+                    binding.MaxReceivedMessageSize = int.MaxValue;
+                    binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+
+                    _wcfHost = new ServiceHost(typeof(ProTONESignalAnalisys));
+                    _wcfHost.AddServiceEndpoint(typeof(ISignalAnalisys), binding, address);
+
+                    _wcfHost.Open();
+
+                    Logger.LogInfo("Signal Analisys WCF Interface opened succesfully.");
+                }
+                else
+                {
+                    Logger.LogInfo("Signal Analisys WCF Interface was already open.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private void InternalCleanupSignalAnalisysWCF()
+        {
+            try
+            {
+                Logger.LogInfo("Closing Signal Analisys WCF Interface ...");
+
+                if (_wcfHost != null)
+                {
+                    _wcfHost.Close();
+                    _wcfHost = null;
+
+                    Logger.LogInfo("Signal Analisys WCF Interface closed succesfully.");
+                }
+                else
+                {
+                    Logger.LogInfo("Signal Analisys WCF Interface was already closed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+        }
+
+        #endregion
+
+        [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerCall)]
+        public class ProTONESignalAnalisys : ISignalAnalisys
+        {
+            public SignalAnalisysData GetSignalAnalisysData()
+            {
+                SignalAnalisysData data = new SignalAnalisysData();
+                data.MomentarySampleData = MediaRenderer.DefaultInstance.VuMeterData;
+                data.SpectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
+                return data;
+            }
+        }
     }
 
    

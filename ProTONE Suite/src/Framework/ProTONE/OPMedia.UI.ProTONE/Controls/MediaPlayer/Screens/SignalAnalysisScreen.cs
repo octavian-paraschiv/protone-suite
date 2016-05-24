@@ -115,12 +115,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                 {
                     gpWaveform.Reset(false);
 
-                    double[] waveformData = MediaRenderer.DefaultInstance.WaveformData;
-                    if (waveformData != null && waveformData.Length > 0)
+                    double[][] waveformData = MediaRenderer.DefaultInstance.WaveformData;
+                    if (waveformData != null && waveformData[0].Length > 0)
                     {
                         gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
                         gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
-                        gpWaveform.AddDataRange(waveformData, ThemeManager.GradientGaugeColor1);
+                        gpWaveform.AddDataRange(waveformData[0], ThemeManager.GradientGaugeColor1);
                     }
                     else
                     {

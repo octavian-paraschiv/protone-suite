@@ -17,6 +17,8 @@ using OPMedia.Runtime.InterProcessCommunication;
 using OPMedia.Core;
 using OPMedia.UI.Generic;
 using OPMedia.RemoteControlEmulator.Properties;
+using System.ServiceModel;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.RemoteControlEmulator
 {
@@ -52,6 +54,9 @@ namespace OPMedia.RemoteControlEmulator
 
             this.Load += new EventHandler(MainForm_Load);
         }
+
+        protected static ISignalAnalisys _proxy = null;
+        protected static Timer _tmrWCFCheck = null;
 
         void MainForm_Load(object sender, EventArgs e)
         {
@@ -108,7 +113,33 @@ namespace OPMedia.RemoteControlEmulator
 
             }
             #endregion
+
+            #region WCF tab
+            WCFOpen();
+            _tmrWCFCheck = new Timer();
+            _tmrWCFCheck.Interval = 2000;
+            _tmrWCFCheck.Tick += new EventHandler(_tmrWCFCheck_Tick);
+            _tmrWCFCheck.Start();
+            #endregion
         }
+
+        private void WCFOpen()
+        {
+            var myBinding = new NetNamedPipeBinding();
+            myBinding.MaxReceivedMessageSize = int.MaxValue;
+            myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+
+            var myEndpoint = new EndpointAddress("net.pipe://localhost/ProTONESignalAnalisys.svc");
+            var myChannelFactory = new ChannelFactory<ISignalAnalisys>(myBinding, myEndpoint);
+            _proxy = myChannelFactory.CreateChannel();        
+        }
+
+        protected void WCFAbort()
+        {
+            ((ICommunicationObject)_proxy).Abort();
+            _proxy = null;
+        }
+
 
         #region API tester tab
 
@@ -186,6 +217,34 @@ namespace OPMedia.RemoteControlEmulator
 
             pnlContent.Select();
             pnlContent.Focus();
+        }
+        #endregion
+
+        #region WCF tab
+        void _tmrWCFCheck_Tick(object sender, EventArgs e)
+        {
+            SignalAnalisysData data = null;
+            try
+            {
+                data = _proxy.GetSignalAnalisysData();
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+                WCFAbort();
+                WCFOpen();
+            }
+
+            if (data != null)
+                AddText(data.ToString());
+            else
+                AddText("can't read WCF data ...");
+        }
+
+        private void AddText(string p)
+        {
+            tbWCFDetails.Text += p + "\r\n";
+            tbWCFDetails.Select(tbWCFDetails.Text.Length - 2, 1);
         }
         #endregion
     }

@@ -81,6 +81,8 @@
             this.btnRemote = new OPMedia.UI.Controls.OPMButton();
             this.btnMediaLib = new OPMedia.UI.Controls.OPMButton();
             this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
+            this.tpWCF = new System.Windows.Forms.TabPage();
+            this.tbWCFDetails = new System.Windows.Forms.TextBox();
             this.pnlContent.SuspendLayout();
             this.tabEmulator.SuspendLayout();
             this.tpRemoteControl.SuspendLayout();
@@ -93,6 +95,7 @@
             this.opmTableLayoutPanel3.SuspendLayout();
             this.tpMockup.SuspendLayout();
             this.opmTableLayoutPanel4.SuspendLayout();
+            this.tpWCF.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -104,12 +107,14 @@
             this.tabEmulator.Controls.Add(this.tpRemoteControl);
             this.tabEmulator.Controls.Add(this.tpApi);
             this.tabEmulator.Controls.Add(this.tpMockup);
+            this.tabEmulator.Controls.Add(this.tpWCF);
             this.tabEmulator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabEmulator.InnerPadding = new System.Windows.Forms.Padding(5, 10, 5, 5);
             this.tabEmulator.Location = new System.Drawing.Point(0, 0);
+            this.tabEmulator.Multiline = true;
             this.tabEmulator.Name = "tabEmulator";
             this.tabEmulator.SelectedIndex = 0;
-            this.tabEmulator.Size = new System.Drawing.Size(239, 433);
+            this.tabEmulator.Size = new System.Drawing.Size(314, 432);
             this.tabEmulator.TabIndex = 0;
             // 
             // tpRemoteControl
@@ -119,7 +124,7 @@
             this.tpRemoteControl.Location = new System.Drawing.Point(4, 23);
             this.tpRemoteControl.Name = "tpRemoteControl";
             this.tpRemoteControl.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpRemoteControl.Size = new System.Drawing.Size(237, 406);
+            this.tpRemoteControl.Size = new System.Drawing.Size(306, 405);
             this.tpRemoteControl.TabIndex = 1;
             this.tpRemoteControl.Text = "Simulator";
             // 
@@ -177,7 +182,7 @@
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlSimulator.Size = new System.Drawing.Size(227, 391);
+            this.pnlSimulator.Size = new System.Drawing.Size(296, 390);
             this.pnlSimulator.TabIndex = 0;
             // 
             // opmButton6
@@ -185,7 +190,7 @@
             this.opmButton6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton6.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton6.Location = new System.Drawing.Point(144, 38);
+            this.opmButton6.Location = new System.Drawing.Point(178, 38);
             this.opmButton6.Name = "opmButton6";
             this.opmButton6.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton6.OverrideForeColor = System.Drawing.Color.Empty;
@@ -200,7 +205,7 @@
             this.opmButton5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton5.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton5.Location = new System.Drawing.Point(89, 38);
+            this.opmButton5.Location = new System.Drawing.Point(123, 38);
             this.opmButton5.Name = "opmButton5";
             this.opmButton5.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton5.OverrideForeColor = System.Drawing.Color.Empty;
@@ -215,7 +220,7 @@
             this.opmButton4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton4.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton4.Location = new System.Drawing.Point(34, 38);
+            this.opmButton4.Location = new System.Drawing.Point(68, 38);
             this.opmButton4.Name = "opmButton4";
             this.opmButton4.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton4.OverrideForeColor = System.Drawing.Color.Empty;
@@ -230,7 +235,7 @@
             this.opmButton11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton11.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton11.Location = new System.Drawing.Point(144, 73);
+            this.opmButton11.Location = new System.Drawing.Point(178, 73);
             this.opmButton11.Name = "opmButton11";
             this.opmButton11.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton11.OverrideForeColor = System.Drawing.Color.Empty;
@@ -245,7 +250,7 @@
             this.opmButton10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton10.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton10.Location = new System.Drawing.Point(89, 73);
+            this.opmButton10.Location = new System.Drawing.Point(123, 73);
             this.opmButton10.Name = "opmButton10";
             this.opmButton10.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton10.OverrideForeColor = System.Drawing.Color.Empty;
@@ -260,7 +265,7 @@
             this.opmButton9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton9.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton9.Location = new System.Drawing.Point(34, 73);
+            this.opmButton9.Location = new System.Drawing.Point(68, 73);
             this.opmButton9.Name = "opmButton9";
             this.opmButton9.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton9.OverrideForeColor = System.Drawing.Color.Empty;
@@ -275,7 +280,7 @@
             this.opmButton16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton16.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton16.Location = new System.Drawing.Point(144, 108);
+            this.opmButton16.Location = new System.Drawing.Point(178, 108);
             this.opmButton16.Name = "opmButton16";
             this.opmButton16.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton16.OverrideForeColor = System.Drawing.Color.Empty;
@@ -290,7 +295,7 @@
             this.opmButton15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton15.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton15.Location = new System.Drawing.Point(89, 108);
+            this.opmButton15.Location = new System.Drawing.Point(123, 108);
             this.opmButton15.Name = "opmButton15";
             this.opmButton15.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton15.OverrideForeColor = System.Drawing.Color.Empty;
@@ -305,7 +310,7 @@
             this.opmButton14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton14.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton14.Location = new System.Drawing.Point(34, 108);
+            this.opmButton14.Location = new System.Drawing.Point(68, 108);
             this.opmButton14.Name = "opmButton14";
             this.opmButton14.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton14.OverrideForeColor = System.Drawing.Color.Empty;
@@ -320,7 +325,7 @@
             this.opmButton7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton7.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton7.Location = new System.Drawing.Point(34, 143);
+            this.opmButton7.Location = new System.Drawing.Point(68, 143);
             this.opmButton7.Name = "opmButton7";
             this.opmButton7.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton7.OverrideForeColor = System.Drawing.Color.Empty;
@@ -335,7 +340,7 @@
             this.opmButton8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton8.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton8.Location = new System.Drawing.Point(89, 143);
+            this.opmButton8.Location = new System.Drawing.Point(123, 143);
             this.opmButton8.Name = "opmButton8";
             this.opmButton8.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton8.OverrideForeColor = System.Drawing.Color.Empty;
@@ -350,7 +355,7 @@
             this.opmButton12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton12.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton12.Location = new System.Drawing.Point(144, 143);
+            this.opmButton12.Location = new System.Drawing.Point(178, 143);
             this.opmButton12.Name = "opmButton12";
             this.opmButton12.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton12.OverrideForeColor = System.Drawing.Color.Empty;
@@ -367,7 +372,7 @@
             this.opmButton2.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
             this.opmButton2.ImageIndex = 4;
             this.opmButton2.ImageList = this.ilX;
-            this.opmButton2.Location = new System.Drawing.Point(34, 3);
+            this.opmButton2.Location = new System.Drawing.Point(68, 3);
             this.opmButton2.Name = "opmButton2";
             this.opmButton2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton2.OverrideForeColor = System.Drawing.Color.Empty;
@@ -394,7 +399,7 @@
             this.opmButton3.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
             this.opmButton3.ImageIndex = 5;
             this.opmButton3.ImageList = this.ilX;
-            this.opmButton3.Location = new System.Drawing.Point(144, 3);
+            this.opmButton3.Location = new System.Drawing.Point(178, 3);
             this.opmButton3.Name = "opmButton3";
             this.opmButton3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton3.OverrideForeColor = System.Drawing.Color.Empty;
@@ -409,7 +414,7 @@
             this.opmButton26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton26.ImageIndex = 0;
             this.opmButton26.ImageList = this.ilX;
-            this.opmButton26.Location = new System.Drawing.Point(89, 303);
+            this.opmButton26.Location = new System.Drawing.Point(123, 303);
             this.opmButton26.Name = "opmButton26";
             this.opmButton26.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton26.OverrideForeColor = System.Drawing.Color.Empty;
@@ -423,7 +428,7 @@
             this.opmButton27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton27.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton27.Location = new System.Drawing.Point(89, 268);
+            this.opmButton27.Location = new System.Drawing.Point(123, 268);
             this.opmButton27.Name = "opmButton27";
             this.opmButton27.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton27.OverrideForeColor = System.Drawing.Color.Empty;
@@ -439,7 +444,7 @@
             this.opmButton24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton24.ImageIndex = 1;
             this.opmButton24.ImageList = this.ilX;
-            this.opmButton24.Location = new System.Drawing.Point(34, 268);
+            this.opmButton24.Location = new System.Drawing.Point(68, 268);
             this.opmButton24.Name = "opmButton24";
             this.opmButton24.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton24.OverrideForeColor = System.Drawing.Color.Empty;
@@ -454,7 +459,7 @@
             this.opmButton25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton25.ImageIndex = 2;
             this.opmButton25.ImageList = this.ilX;
-            this.opmButton25.Location = new System.Drawing.Point(144, 268);
+            this.opmButton25.Location = new System.Drawing.Point(178, 268);
             this.opmButton25.Name = "opmButton25";
             this.opmButton25.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton25.OverrideForeColor = System.Drawing.Color.Empty;
@@ -469,7 +474,7 @@
             this.opmButton23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton23.ImageIndex = 3;
             this.opmButton23.ImageList = this.ilX;
-            this.opmButton23.Location = new System.Drawing.Point(89, 233);
+            this.opmButton23.Location = new System.Drawing.Point(123, 233);
             this.opmButton23.Name = "opmButton23";
             this.opmButton23.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton23.OverrideForeColor = System.Drawing.Color.Empty;
@@ -483,7 +488,7 @@
             this.opmButton20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton20.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmButton20.Location = new System.Drawing.Point(34, 188);
+            this.opmButton20.Location = new System.Drawing.Point(68, 188);
             this.opmButton20.Name = "opmButton20";
             this.opmButton20.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton20.OverrideForeColor = System.Drawing.Color.Empty;
@@ -498,7 +503,7 @@
             this.opmButton21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton21.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmButton21.Location = new System.Drawing.Point(144, 188);
+            this.opmButton21.Location = new System.Drawing.Point(178, 188);
             this.opmButton21.Name = "opmButton21";
             this.opmButton21.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton21.OverrideForeColor = System.Drawing.Color.Empty;
@@ -513,7 +518,7 @@
             this.opmButton13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton13.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton13.Location = new System.Drawing.Point(34, 348);
+            this.opmButton13.Location = new System.Drawing.Point(68, 348);
             this.opmButton13.Name = "opmButton13";
             this.opmButton13.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton13.OverrideForeColor = System.Drawing.Color.Empty;
@@ -528,7 +533,7 @@
             this.opmButton17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton17.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton17.Location = new System.Drawing.Point(89, 348);
+            this.opmButton17.Location = new System.Drawing.Point(123, 348);
             this.opmButton17.Name = "opmButton17";
             this.opmButton17.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton17.OverrideForeColor = System.Drawing.Color.Empty;
@@ -543,7 +548,7 @@
             this.opmButton18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton18.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.opmButton18.Location = new System.Drawing.Point(144, 348);
+            this.opmButton18.Location = new System.Drawing.Point(178, 348);
             this.opmButton18.Name = "opmButton18";
             this.opmButton18.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton18.OverrideForeColor = System.Drawing.Color.Empty;
@@ -558,7 +563,7 @@
             this.opmButton19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton19.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmButton19.Location = new System.Drawing.Point(89, 188);
+            this.opmButton19.Location = new System.Drawing.Point(123, 188);
             this.opmButton19.Name = "opmButton19";
             this.opmButton19.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton19.OverrideForeColor = System.Drawing.Color.Empty;
@@ -575,7 +580,7 @@
             this.tpApi.Location = new System.Drawing.Point(4, 23);
             this.tpApi.Name = "tpApi";
             this.tpApi.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpApi.Size = new System.Drawing.Size(237, 406);
+            this.tpApi.Size = new System.Drawing.Size(231, 405);
             this.tpApi.TabIndex = 0;
             this.tpApi.Text = "API";
             // 
@@ -596,7 +601,7 @@
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel2.Size = new System.Drawing.Size(227, 391);
+            this.opmTableLayoutPanel2.Size = new System.Drawing.Size(221, 390);
             this.opmTableLayoutPanel2.TabIndex = 1;
             // 
             // opmGroupBox1
@@ -608,7 +613,7 @@
             this.opmGroupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.opmGroupBox1.Location = new System.Drawing.Point(3, 3);
             this.opmGroupBox1.Name = "opmGroupBox1";
-            this.opmGroupBox1.Size = new System.Drawing.Size(221, 79);
+            this.opmGroupBox1.Size = new System.Drawing.Size(215, 79);
             this.opmGroupBox1.TabIndex = 0;
             this.opmGroupBox1.TabStop = false;
             this.opmGroupBox1.Text = "Command Parameters";
@@ -632,7 +637,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(215, 58);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(209, 58);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // opmLabel1
@@ -671,7 +676,7 @@
             this.cmbCommandType.Location = new System.Drawing.Point(52, 3);
             this.cmbCommandType.Name = "cmbCommandType";
             this.cmbCommandType.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbCommandType.Size = new System.Drawing.Size(160, 23);
+            this.cmbCommandType.Size = new System.Drawing.Size(154, 23);
             this.cmbCommandType.TabIndex = 2;
             this.cmbCommandType.SelectedIndexChanged += new System.EventHandler(this.cmbCommandType_SelectedIndexChanged);
             // 
@@ -683,7 +688,7 @@
             this.cmbPlaybackCmd.Location = new System.Drawing.Point(52, 32);
             this.cmbPlaybackCmd.Name = "cmbPlaybackCmd";
             this.cmbPlaybackCmd.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbPlaybackCmd.Size = new System.Drawing.Size(160, 23);
+            this.cmbPlaybackCmd.Size = new System.Drawing.Size(154, 23);
             this.cmbPlaybackCmd.TabIndex = 4;
             // 
             // opmGroupBox2
@@ -695,7 +700,7 @@
             this.opmGroupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.opmGroupBox2.Location = new System.Drawing.Point(3, 88);
             this.opmGroupBox2.Name = "opmGroupBox2";
-            this.opmGroupBox2.Size = new System.Drawing.Size(221, 76);
+            this.opmGroupBox2.Size = new System.Drawing.Size(215, 76);
             this.opmGroupBox2.TabIndex = 1;
             this.opmGroupBox2.TabStop = false;
             this.opmGroupBox2.Text = "Command Destination";
@@ -718,7 +723,7 @@
             this.opmTableLayoutPanel3.RowCount = 2;
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(215, 55);
+            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(209, 55);
             this.opmTableLayoutPanel3.TabIndex = 1;
             // 
             // opmLabel2
@@ -746,7 +751,7 @@
             this.cmbDestination.Location = new System.Drawing.Point(79, 3);
             this.cmbDestination.Name = "cmbDestination";
             this.cmbDestination.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbDestination.Size = new System.Drawing.Size(133, 23);
+            this.cmbDestination.Size = new System.Drawing.Size(127, 23);
             this.cmbDestination.TabIndex = 2;
             // 
             // opmLabel3
@@ -783,7 +788,7 @@
             this.txtDestinationName.ReadOnly = false;
             this.txtDestinationName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDestinationName.ShortcutsEnabled = true;
-            this.txtDestinationName.Size = new System.Drawing.Size(139, 20);
+            this.txtDestinationName.Size = new System.Drawing.Size(133, 20);
             this.txtDestinationName.TabIndex = 4;
             this.txtDestinationName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDestinationName.UseSystemPasswordChar = false;
@@ -823,7 +828,7 @@
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtResult.ShortcutsEnabled = true;
-            this.txtResult.Size = new System.Drawing.Size(227, 193);
+            this.txtResult.Size = new System.Drawing.Size(221, 192);
             this.txtResult.TabIndex = 3;
             this.txtResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtResult.UseSystemPasswordChar = false;
@@ -836,7 +841,7 @@
             this.tpMockup.Location = new System.Drawing.Point(4, 23);
             this.tpMockup.Name = "tpMockup";
             this.tpMockup.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpMockup.Size = new System.Drawing.Size(231, 406);
+            this.tpMockup.Size = new System.Drawing.Size(231, 405);
             this.tpMockup.TabIndex = 2;
             this.tpMockup.Text = "Mock-up";
             // 
@@ -861,7 +866,7 @@
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.opmTableLayoutPanel4.Size = new System.Drawing.Size(221, 391);
+            this.opmTableLayoutPanel4.Size = new System.Drawing.Size(221, 390);
             this.opmTableLayoutPanel4.TabIndex = 16;
             // 
             // btnPlayer
@@ -919,15 +924,36 @@
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel4.SetRowSpan(this.lblDesc, 5);
-            this.lblDesc.Size = new System.Drawing.Size(34, 391);
+            this.lblDesc.Size = new System.Drawing.Size(34, 390);
             this.lblDesc.TabIndex = 16;
             this.lblDesc.Text = "ProTONE Suite 2.0";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDesc.VerticalText = true;
             // 
+            // tpWCF
+            // 
+            this.tpWCF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.tpWCF.Controls.Add(this.tbWCFDetails);
+            this.tpWCF.Location = new System.Drawing.Point(4, 23);
+            this.tpWCF.Name = "tpWCF";
+            this.tpWCF.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
+            this.tpWCF.Size = new System.Drawing.Size(306, 405);
+            this.tpWCF.TabIndex = 3;
+            this.tpWCF.Text = "Signal Analisys WCF";
+            // 
+            // tbWCFDetails
+            // 
+            this.tbWCFDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbWCFDetails.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbWCFDetails.Location = new System.Drawing.Point(5, 10);
+            this.tbWCFDetails.Multiline = true;
+            this.tbWCFDetails.Name = "tbWCFDetails";
+            this.tbWCFDetails.Size = new System.Drawing.Size(296, 390);
+            this.tbWCFDetails.TabIndex = 0;
+            // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(241, 456);
+            this.ClientSize = new System.Drawing.Size(316, 456);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "MainForm";
             this.pnlContent.ResumeLayout(false);
@@ -947,6 +973,8 @@
             this.opmTableLayoutPanel3.PerformLayout();
             this.tpMockup.ResumeLayout(false);
             this.opmTableLayoutPanel4.ResumeLayout(false);
+            this.tpWCF.ResumeLayout(false);
+            this.tpWCF.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1004,6 +1032,8 @@
         private UI.Controls.OPMButton btnRemote;
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel4;
         private UI.Controls.OPMLabel lblDesc;
+        private System.Windows.Forms.TabPage tpWCF;
+        private System.Windows.Forms.TextBox tbWCFDetails;
     }
 }
 

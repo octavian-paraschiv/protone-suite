@@ -27,7 +27,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
     public abstract class DsRendererBase : StreamRenderer
 #if HAVE_SAMPLES
-        , ISampleGrabberCB
+, ISampleGrabberCB
 #endif
     {
         protected IMediaControl mediaControl = null;
@@ -73,7 +73,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         public DsRendererBase()
         {
-            GraphNotifyWnd.Instance.FilterGraphMessage += 
+            GraphNotifyWnd.Instance.FilterGraphMessage +=
                 new System.Windows.Forms.MethodInvoker(OnFilterGraphMessage);
 
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
@@ -91,7 +91,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             int p1, p2;
             EventCode code = EventCode.None;
 
-            if (mediaEvent == null) 
+            if (mediaEvent == null)
                 return;
 
             while (mediaEvent.GetEvent(out code, out p1, out p2, 0) == 0)
@@ -200,7 +200,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 int w = 0;
                 int hr = basicVideo.get_VideoWidth(out w);
-                isVideoAvailable = (hr >=0 && w > 0);
+                isVideoAvailable = (hr >= 0 && w > 0);
 
                 // Setup the video window
                 SetupVideoWindow();
@@ -208,13 +208,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 FitVideoInPanel();
 
                 renderRegion.Visible = true;
-                
+
                 renderRegion.Resize -= new EventHandler(renderPanel_Resize);
                 renderRegion.Resize += new EventHandler(renderPanel_Resize);
             }
             catch
             {
-                isVideoAvailable = false;               
+                isVideoAvailable = false;
             }
 
             try
@@ -281,7 +281,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             }
 
             renderRegion.SuspendLayout();
-            
+
             int hr = videoWindow.SetWindowPosition(left, top, width, height);
             DsError.ThrowExceptionForHR(hr);
 
@@ -387,7 +387,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 DsError.ThrowExceptionForHR(hr);
             }
         }
-        
+
         protected override bool IsVideoMediaAvailable()
         {
             return isVideoAvailable;
@@ -405,7 +405,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 int hr = mediaPosition.CanSeekForward(out seekFwd);
                 DsError.ThrowExceptionForHR(hr);
-                
+
                 hr = mediaPosition.CanSeekBackward(out seekBwd);
                 DsError.ThrowExceptionForHR(hr);
             }
@@ -431,7 +431,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             if (isVideoAvailable && videoWindow != null)
             {
                 int hidden = (int)OABool.False;
-                
+
                 int hr = videoWindow.IsCursorHidden(out hidden);
                 DsError.ThrowExceptionForHR(hr);
 
@@ -503,10 +503,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         ConcurrentQueue<AudioSample> samples = new ConcurrentQueue<AudioSample>();
         ConcurrentQueue<AudioSample> samples2 = new ConcurrentQueue<AudioSample>();
-        
+
         protected ManualResetEvent sampleAnalyzerMustStop = new ManualResetEvent(false);
         protected ManualResetEvent sampleGrabberConfigured = new ManualResetEvent(false);
-    
+
         /*
         protected void InitAudioSampleGrabber()
         {
@@ -745,10 +745,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             try
             {
                 if (sampleAnalyzerMustStop != null)
-                sampleAnalyzerMustStop.Set(); // This will cause the thread to stop
+                    sampleAnalyzerMustStop.Set(); // This will cause the thread to stop
 
                 if (sampleAnalyzerThread != null)
-                sampleAnalyzerThread.Join(200);
+                    sampleAnalyzerThread.Join(200);
 
                 if (sampleGrabber != null)
                 {
@@ -834,7 +834,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         public int SampleCB(double SampleTime, IntPtr pSample)
         {
-            return 0; 
+            return 0;
         }
 
         protected void SampleAnalyzerLoop()
@@ -933,12 +933,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     _sampleData.Enqueue(new AudioSampleData((double)channels[0], (double)channels[1]));
                 else
                     _sampleData.Enqueue(new AudioSampleData((double)channels[0], 0));
-                
+
                 _gatheredSamples++;
                 if (_gatheredSamples % _waveformWindowSize == 0)
                 {
                     if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter) ||
-                        ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform))
+                        ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform) ||
+                        ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.WCFInterface))
                     {
                         AnalyzeWaveform(_sampleData.Skip(_sampleData.Count - _waveformWindowSize).Take(_waveformWindowSize).ToArray(),
                             smp.SampleTime);
@@ -952,7 +953,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             while (_sampleData.Count > _fftWindowSize)
                 _sampleData.TryDequeue(out lostSample);
 
-            if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram))
+            if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram) ||
+                ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.WCFInterface))
             {
                 AnalyzeFFT(_sampleData.ToArray());
             }
@@ -963,7 +965,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         private void AnalyzeWaveform(AudioSampleData[] data, double sampleTime)
         {
             double lVal = 0, rVal = 0;
-            double[] dataWaveform = new double[data.Length];
+
+            double[][] dataWaveform = new double[2][];
+            dataWaveform[0] = new double[data.Length];
+            dataWaveform[1] = new double[data.Length];
 
             int i = 0;
             for (i = 0; i < data.Length; i++)
@@ -976,7 +981,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 if (rVal < absR)
                     rVal = absR;
 
-                dataWaveform[i] = data[i].AvgLevel;
+                dataWaveform[0][i] = data[i].LVOL;
+                dataWaveform[1][i] = data[i].RVOL;
 
                 if (i % 32 == 0)
                 {
@@ -1003,9 +1009,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 double[] dataIn = new double[data.Length];
                 double[] dataOut = new double[data.Length];
-                
+
                 for (int i = 0; i < data.Length; i++)
-                    dataIn[i] = data[i].RmsLevel;
+                    dataIn[i] = data[i].LVOL;
 
                 FFT.Forward(dataIn, dataOut);
 

@@ -34,7 +34,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected object _waveformLock = new object();
         protected object _spectrogramLock = new object();
         protected AudioSampleData _vuMeterData = null;
-        protected double[] _waveformData = null;
+        protected double[][] _waveformData = null;
         protected double[] _spectrogramData = null;
 
         protected int _waveformWindowSize = 512;
@@ -178,7 +178,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             }
         }
 
-        public double[] WaveformData
+        public double[][] WaveformData
         {
             get
             {

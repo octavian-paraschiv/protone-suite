@@ -49,6 +49,8 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         Waveform = 0x02,
         Spectrogram = 0x04,
 
+        WCFInterface = 0x10,
+
         All = 0xFF
     }
 
@@ -346,7 +348,8 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 lock (_signalAnalisysFunctionsLock)
                 {
                     if (_signalAnalisysFunctions == null)
-                        _signalAnalisysFunctions = (SignalAnalisysFunction)ConfigFileManager.Default.GetValue("SignalAnalisysFunctions", (int)SignalAnalisysFunction.All);
+                        _signalAnalisysFunctions = (SignalAnalisysFunction)ConfigFileManager.Default.GetValue("SignalAnalisysFunctions", 
+                            (int)SignalAnalisysFunction.All);
 
                     if (_signalAnalisysFunctions == null)
                         return SignalAnalisysFunction.All;
