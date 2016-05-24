@@ -79,58 +79,121 @@ namespace OPMedia.Core
                 if (string.Compare(lang.ThreeLetterISOLanguageName, name, true) == 0)
                     return lang;
             }
-
+            
             try
             {
                 switch (name.ToLowerInvariant())
                 {
+                    case "cze":
+                    case "ces":
                     case "cze/ces":
                         return new Language("cs");
+
+                    case "nld":
+                    case "dut":
                     case "dut/nld":
                         return new Language("nl");
+
+                    case "fra":
+                    case "fre":
                     case "fre/fra":
                         return new Language("fr");
-                    case "gre":
-                        return new Language("el");
+
+                    case "ron":
+                    case "rum":
                     case "rum/ron":
                         return new Language("ro");
 
+                    case "sqi":
+                    case "alb":
                     case "alb/sqi":
                         return new Language("sq");
+                    
+                    case "hye":
+                    case "arm":
                     case "arm/hye":
                         return new Language("hy");
+
+                    case "eus":
+                    case "baq":
                     case "baq/eus":
                         return new Language("eu");
+
+                    case "mya":
+                    case "bur":
                     case "bur/mya":
                         return new Language("my");
+                    
+                    case "zho":
+                    case "chi":
                     case "chi/zho":
                         return new Language("zh");
+                    
+                    case "kat":
+                    case "geo":
                     case "geo/kat":
                         return new Language("ka");
+
+                    case "deu":
+                    case "ger":
                     case "ger/deu":
                         return new Language("de");
+
+                    case "gre":
+                    case "ell":
                     case "gre/ell":
                         return new Language("el");
+                    
+                    case "isl":
+                    case "ice":
                     case "ice/isl":
                         return new Language("is");
+
+                    case "mkd":
+                    case "mac":
                     case "mac/mkd":
                         return new Language("mk");
+
+                    case "msa":
+                    case "may":
                     case "may/msa":
                         return new Language("ms");
+
+                    case "mri":
+                    case "mao":
                     case "mao/mri":
                         return new Language("mi");
+
+                    case "fas":
+                    case "per":
                     case "per/fas":
                         return new Language("fa");
+
+                    case "pb":
+                    case "pob":
                     case "pob/pb":
                         return new Language("pt-BR");
-                    case "qaa-qtz":
-                        return new Language("ro");
+                    
+                    //case "qaa-qtz":
+                      //  return new Language("ro");
+
+                    case "slo":
+                    case "slk":
                     case "slk/slo":
                         return new Language("sk");
+                    
+                    case "bod":
+                    case "tib":
                     case "tib/bod":
                         return new Language("bo");
+
+                    case "cym":
+                    case "wel":
                     case "wel/cym":
                         return new Language("cy");
+
+                    case "bos":
+                        return new Language("bs");
 
                 }
             }
