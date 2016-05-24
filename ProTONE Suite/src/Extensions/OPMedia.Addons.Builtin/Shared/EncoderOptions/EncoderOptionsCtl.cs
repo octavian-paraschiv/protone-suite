@@ -35,7 +35,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         private void InternalDisplaySettings(bool usedForCdRipper)
         {
-            foreach (Control ctl in pnlEncoderOptions.Controls)
+            foreach (EncoderConfiguratorCtl ctl in panels)
             {
                 Mp3EncoderOptionsCtl mp3Ctl = ctl as Mp3EncoderOptionsCtl;
                 if (mp3Ctl != null)
