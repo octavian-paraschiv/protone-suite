@@ -115,15 +115,22 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         #region Supported file types
         static List<string> __supportedAudioMediaTypes = new List<string>(new string[] 
             { 
-                // 15 supported audio file types
-                "au",   "aif", "aiff", 
-                
+                // 17 supported audio file types
+                "au",   
+                "aif", 
+                "aiff", 
                 "cda", // Audio CD track
-
-                "flac", "mid", 
-                "midi", "mp1", "mp2",  "mp3", "mpa",  
-                "raw", "rmi",  "snd",  "wav",  "wma",
+                "flac", 
+                "mid", "midi", 
                 
+                "mod", // audio "module" file type
+
+                "mp1", "mp2",  "mp3", "mpa",  
+                "raw", 
+                "rmi",  
+                "snd",  
+                "wav",  
+                "wma",
             });
 
         static List<string> __supportedVideoMediaTypes = new List<string>(new string[] 
@@ -131,12 +138,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 // 14 supported video file types
 
                 "avi", "divx", "qt",  "m1v", "m2v", 
-                "mod", "mov",  "mpg", "mpeg", "vob", 
+                
+                "mod", // video format for use in digital tapeless camcorders (JVC / Panasonic / Canon)
+
+                "mov",  "mpg", "mpeg", "vob", 
                 "wm", "wmv", 
                 
                 "mkv", "mp4", 
             });
-
         static List<string> __supportedHDVideoMediaTypes = new List<string>(new string[] 
             {
                 "mkv", "mp4", 
