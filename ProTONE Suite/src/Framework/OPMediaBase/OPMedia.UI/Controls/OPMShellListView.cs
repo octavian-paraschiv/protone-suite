@@ -364,7 +364,7 @@ namespace OPMedia.UI.Controls
             colSize.DisplayIndex = i++;
             colAttr.DisplayIndex = i++;
 
-            this.ListViewItemSorter = new Sorter(colName.Index);
+            //this.ListViewItemSorter = new Sorter(colName.Index);
             
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -759,6 +759,12 @@ namespace OPMedia.UI.Controls
             }
         }
 
+        private void ClearCurrentContents()
+        {
+            Clear();
+            m_ilDirListManager.Clear();
+        }
+
         /// <summary>
         /// Explore the current folder.
         /// </summary>
@@ -787,9 +793,6 @@ namespace OPMedia.UI.Controls
                 selIdx = 0;
             }
 
-            Clear();
-            m_ilDirListManager.Clear();
-
             lock (syncRoot)
             {
                 try
@@ -813,11 +816,39 @@ namespace OPMedia.UI.Controls
                         m_strDirPath = m_strDirPath.TrimEnd(string.Copy(PathUtils.DirectorySeparator).ToCharArray()) + PathUtils.DirectorySeparator;
                     }
 
-                    CreateParentFolderRow();
+                    ShareCollection shares = null;
+                    List<string> dirs = null;
+                    List<string> files = null;
 
                     if (isUncPathRoot)
                     {
-                        ShareCollection shares = ShareCollection.GetShares(m_strDirPath);
+                        try
+                        {
+                            shares = ShareCollection.GetShares(m_strDirPath);
+                        }
+                        catch { }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            dirs = PathUtils.EnumDirectories(m_strDirPath);
+                        }
+                        catch { }
+
+                        try
+                        {
+                            files = PathUtils.EnumFilesUsingMultiFilter(m_strDirPath, this.SearchPattern);
+                        }
+                        catch { }
+                    }
+
+                    ClearCurrentContents();
+
+                    CreateParentFolderRow();
+
+                    if (isUncPathRoot && shares != null)
+                    {
                         foreach(Share share in shares)
                         {
                             if (!share.IsFileSystem)
@@ -831,22 +862,27 @@ namespace OPMedia.UI.Controls
                     }
                     else
                     {
-                        List<string> strDirs = PathUtils.EnumDirectories(m_strDirPath);
-                        foreach (string dir in strDirs)
+                        if (dirs != null)
                         {
-                            if (Directory.Exists(dir) == false)
-                                continue;
+                            foreach (string dir in dirs)
+                            {
+                                if (Directory.Exists(dir) == false)
+                                    continue;
 
-                            CreateNewRow(dir);
+                                CreateNewRow(dir);
+                                int tt = 0;
+                            }
                         }
 
-                        List<string> strFiles = PathUtils.EnumFilesUsingMultiFilter(m_strDirPath, this.SearchPattern);
-                        foreach (string file in strFiles)
+                        if (files != null)
                         {
-                            if (File.Exists(file) == false)
-                                continue;
+                            foreach (string file in files)
+                            {
+                                if (File.Exists(file) == false)
+                                    continue;
 
-                            CreateNewRow(file);
+                                CreateNewRow(file);
+                            }
                         }
                     }
                 }

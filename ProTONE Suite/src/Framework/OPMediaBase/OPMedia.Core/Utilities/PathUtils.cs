@@ -241,6 +241,7 @@ namespace OPMedia.Core
                 subfolders.AddRange(EnumDirectories(abortEvent, sourceFolder, filter, searchOption));
             }
 
+            subfolders.Sort();
             return subfolders;
         }
 
@@ -275,6 +276,7 @@ namespace OPMedia.Core
                 string s = ex.Message;
             }
 
+            dirList.Sort();
             return dirList;
         }
 
@@ -371,6 +373,7 @@ namespace OPMedia.Core
                 files.AddRange(EnumFiles(abortEvent, sourceFolder, filter, searchOption));
             }
 
+            files.Sort();
             return files;
         }
 
@@ -404,6 +407,7 @@ namespace OPMedia.Core
                 string s = ex.Message;
             }
 
+            fileList.Sort();
             return fileList;
         }
 
