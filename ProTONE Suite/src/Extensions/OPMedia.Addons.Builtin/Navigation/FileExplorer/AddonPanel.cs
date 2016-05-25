@@ -51,6 +51,7 @@ using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using OPMedia.Core.NetworkAccess;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.UI.Controls.Dialogs;
 
 #endregion
 
@@ -1003,48 +1004,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer
 
                 foreach (System.IO.DriveInfo di in drives)
                 {
-                    string name = string.Empty;
-                    string label = string.Empty;
-                    string format = string.Empty;
-                    string freeSpace = string.Empty;
-                    string ready = string.Empty;
-
-                    try { name = di.Name.ToUpperInvariant(); }
-                    catch { }
-
-                    try { label = di.VolumeLabel; }
-                    catch { }
-
-                    try { format = di.DriveFormat; }
-                    catch { }
-
-                    try { freeSpace = ((double)(di.AvailableFreeSpace) / (1024 * 1024)).ToString("F"); }
-                    catch { }
-
-                    try { ready = (di.IsReady) ? Translator.Translate("TXT_READY") : Translator.Translate("TXT_NOT_READY"); }
-                    catch { }
-
-                    if (string.IsNullOrEmpty(name))
-                        name = Translator.Translate("TXT_NO_NAME");
-                    if (string.IsNullOrEmpty(label))
-                        label = Translator.Translate("TXT_NO_LABEL");
-                    if (string.IsNullOrEmpty(format))
-                        format = Translator.Translate("TXT_FORMAT_UNKNOWN");
-                    if (string.IsNullOrEmpty(freeSpace))
-                        freeSpace = "0";
-                    if (string.IsNullOrEmpty(ready))
-                        ready = Translator.Translate("TXT_NOT_READY");
-
-                    ilDrives.Images.Add(ImageProvider.GetIcon(name, false));
-
+                    DriveInfoItem dii = new DriveInfoItem(di);
                     OPMToolStripDropDownMenuItem tsi = new OPMToolStripDropDownMenuItem(tsbDrives);
                     tsi.ImageScaling = ToolStripItemImageScaling.None;
 
-                    // "{0}    [{1}][{2}][{3} MB free][{4}]"
-                    tsi.Text = Translator.Translate("TXT_DRIVE_DESC_FORMAT", name, label, format, freeSpace, ready);
-                    
-                    tsi.Tag = name;
-                    tsi.Image = ilDrives.Images[ilDrives.Images.Count - 1];
+                    tsi.Text = dii.ToString();
+                    tsi.Tag = dii.Path;
+                    tsi.Image = dii.Image;
 
                     tsbDrives.DropDownItems.Add(tsi);
                 }

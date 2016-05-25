@@ -101,8 +101,6 @@ namespace OPMedia.UI.Controls.Dialogs
 
         private Timer _tmrUpdateUi = null;
 
-        private ImageList ilDrives = null;
-
         public OPMFileDialog()
         {
             InitializeComponent();
@@ -117,15 +115,9 @@ namespace OPMedia.UI.Controls.Dialogs
             lvExplorer.SelectMultipleItems += new SelectMultipleItemsEventHandler(lvExplorer_SelectMultipleItems);
             lvExplorer.SelectDirectory += new SelectDirectoryEventHandler(lvExplorer_SelectDirectory);
             lvExplorer.DoubleClickFile += new DoubleClickFileEventHandler(lvExplorer_DoubleClickFile);
-
             lvExplorer.LaunchMultipleItems += new LaunchMultipleItemsHandler(lvExplorer_LaunchMultipleItems);
-
             lvExplorer.QueryDisplayName += new QueryDisplayNameHandler(lvExplorer_QueryDisplayName);
-
-            
-            ilDrives = new ImageList();
-            ilDrives.ImageSize = new Size(16, 16);
-            ilDrives.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            lvExplorer.Resize += new EventHandler(OnResize);
 
             this.Load += new EventHandler(OPMFileDialog_Load);
 
@@ -136,6 +128,11 @@ namespace OPMedia.UI.Controls.Dialogs
             _tt2 = new OPMToolTipManager(btnNewFolder);
 
             btnOK.OnDropDownClicked += new EventHandler(btnOK_OnDropDownClicked);
+        }
+
+        void OnResize(object sender, EventArgs e)
+        {
+            cmbDiskDrives.DropDownHeight = lvExplorer.Height;
         }
 
         string lvExplorer_QueryDisplayName(string fsi)
@@ -554,11 +551,11 @@ namespace OPMedia.UI.Controls.Dialogs
                 System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
 
                 cmbDiskDrives.Items.Clear();
-                ilDrives.Images.Clear();
 
                 foreach (System.IO.DriveInfo di in drives)
                 {
-                    cmbDiskDrives.Items.Add(new DriveInfoItem(di));
+                    DriveInfoItem dii = new DriveInfoItem(di);
+                    cmbDiskDrives.Items.Add(dii);
                 }
 
                 SelectDrive(this.InitialDirectory);
@@ -888,18 +885,34 @@ namespace OPMedia.UI.Controls.Dialogs
 
         public override string ToString()
         {
+            return _displayText;
+        }
+
+        string _displayText = "??";
+
+        public DriveInfoItem(DriveInfo di)
+        {
+            _di = di;
+            
+            base.Image = ImageProvider.GetIcon(di.Name.ToUpperInvariant(), false);
+            _displayText = BuildDisplayText();
+        }
+
+        private string BuildDisplayText()
+        {
             string name = string.Empty;
             string label = string.Empty;
             string format = string.Empty;
             string freeSpace = string.Empty;
             string ready = string.Empty;
 
-            try { name = _di.Name.ToUpperInvariant(); }
+            try { name = _di.Name.ToUpperInvariant().TrimEnd('\\'); }
             catch { }
 
             try { label = _di.VolumeLabel; }
             catch { }
 
+            /*
             try { format = _di.DriveFormat; }
             catch { }
 
@@ -908,25 +921,24 @@ namespace OPMedia.UI.Controls.Dialogs
 
             try { ready = (_di.IsReady) ? Translator.Translate("TXT_READY") : Translator.Translate("TXT_NOT_READY"); }
             catch { }
-
+            */
+              
             if (string.IsNullOrEmpty(name))
                 name = Translator.Translate("TXT_NO_NAME");
             if (string.IsNullOrEmpty(label))
                 label = Translator.Translate("TXT_NO_LABEL");
+            
+            /*
             if (string.IsNullOrEmpty(format))
                 format = Translator.Translate("TXT_FORMAT_UNKNOWN");
             if (string.IsNullOrEmpty(freeSpace))
                 freeSpace = "0";
             if (string.IsNullOrEmpty(ready))
                 ready = Translator.Translate("TXT_NOT_READY");
+            */
 
-            return Translator.Translate("TXT_DRIVE_DESC_FORMAT", name, label, format, freeSpace, ready);
-        }
-
-        public DriveInfoItem(DriveInfo di)
-        {
-            _di = di;
-            base.Image = ImageProvider.GetIcon(di.Name.ToUpperInvariant(), false);
+            //return Translator.Translate("TXT_DRIVE_DESC_FORMAT", name, label, format, freeSpace, ready);
+            return string.Format("{0} [{1}]", name, label);
         }
     }
 

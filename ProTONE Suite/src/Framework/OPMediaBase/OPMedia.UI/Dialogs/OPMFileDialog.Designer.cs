@@ -85,7 +85,7 @@
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlLayout.Size = new System.Drawing.Size(648, 497);
+            this.pnlLayout.Size = new System.Drawing.Size(648, 496);
             this.pnlLayout.TabIndex = 0;
             // 
             // opmLabel1
@@ -108,7 +108,7 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(0, 435);
+            this.opmLabel2.Location = new System.Drawing.Point(0, 434);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
@@ -123,7 +123,7 @@
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.Location = new System.Drawing.Point(0, 466);
+            this.opmLabel3.Location = new System.Drawing.Point(0, 465);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
@@ -152,7 +152,7 @@
             this.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFilter.FormattingEnabled = true;
-            this.cmbFilter.Location = new System.Drawing.Point(85, 471);
+            this.cmbFilter.Location = new System.Drawing.Point(85, 470);
             this.cmbFilter.Margin = new System.Windows.Forms.Padding(0, 5, 10, 0);
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.OverrideForeColor = System.Drawing.Color.Empty;
@@ -167,7 +167,7 @@
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFileNames.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtFileNames.Location = new System.Drawing.Point(85, 440);
+            this.txtFileNames.Location = new System.Drawing.Point(85, 439);
             this.txtFileNames.Margin = new System.Windows.Forms.Padding(0, 5, 10, 0);
             this.txtFileNames.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtFileNames.MaxLength = 32767;
@@ -195,7 +195,7 @@
             this.pnlLayout.SetColumnSpan(this.btnOK, 2);
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(565, 438);
+            this.btnOK.Location = new System.Drawing.Point(565, 437);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
@@ -214,7 +214,7 @@
             this.pnlLayout.SetColumnSpan(this.btnCancel, 2);
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(565, 469);
+            this.btnCancel.Location = new System.Drawing.Point(565, 468);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -238,7 +238,7 @@
             this.lvExplorer.MultiSelect = false;
             this.lvExplorer.Name = "lvExplorer";
             this.lvExplorer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvExplorer.Size = new System.Drawing.Size(560, 371);
+            this.lvExplorer.Size = new System.Drawing.Size(560, 370);
             this.lvExplorer.TabIndex = 3;
             this.lvExplorer.UseCompatibleStateImageBehavior = false;
             this.lvExplorer.View = System.Windows.Forms.View.Details;
@@ -273,7 +273,7 @@
             this.tsSpecialFolders.MinimumSize = new System.Drawing.Size(80, 300);
             this.tsSpecialFolders.Name = "tsSpecialFolders";
             this.tsSpecialFolders.ShowBorder = true;
-            this.tsSpecialFolders.Size = new System.Drawing.Size(85, 371);
+            this.tsSpecialFolders.Size = new System.Drawing.Size(85, 370);
             this.tsSpecialFolders.TabIndex = 2;
             this.tsSpecialFolders.Text = "opmToolStrip1";
             this.tsSpecialFolders.VerticalGradient = false;
