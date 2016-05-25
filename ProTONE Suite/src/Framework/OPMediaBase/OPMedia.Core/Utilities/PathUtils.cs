@@ -144,7 +144,7 @@ namespace OPMedia.Core
                 List<string> subdirs = EnumDirectories(folder);
                 foreach (string subdir in subdirs)
                 {
-                    DeleteFolderTree(subdir);
+                    DeleteFolderTree(subdir, deletedCB);
                 }
 
                 List<string> files = EnumFiles(folder);

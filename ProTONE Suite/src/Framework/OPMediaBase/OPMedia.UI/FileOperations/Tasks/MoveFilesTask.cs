@@ -63,10 +63,7 @@ namespace OPMedia.UI.FileTasks
                     AddToErrorMap(path, ex.Message);
                 }
             }
-            finally
-            {
-                ProcessedObjects++;
-            }
+            catch { }
 
             return true;
         }

@@ -43,10 +43,6 @@ namespace OPMedia.UI.FileTasks
             {
                 return false;
             }
-            finally
-            {
-                ProcessedObjects++;
-            }
 
             return true;
         }

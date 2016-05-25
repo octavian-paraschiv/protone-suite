@@ -93,7 +93,7 @@ namespace OPMedia.UI.FileTasks
         public string DestFolder { get; private set; }
         public int ObjectsCount { get; private set; }
 
-        public long ProcessedObjects { get; protected set; }
+        public long ProcessedObjects { get; private set; }
 
         protected Thread _fileTaskThread;
         protected FileTaskSupport _support = null;
@@ -148,6 +148,12 @@ namespace OPMedia.UI.FileTasks
 
         public void FireTaskProgress(ProgressEventType eventType, string file, UpdateProgressData data)
         {
+            if (eventType == ProgressEventType.Progress &&
+                data == UpdateProgressData.FileDone)
+            {
+                ProcessedObjects++;
+            }
+
             if (FileTaskProgress != null)
             {
                 FileTaskProgress(eventType, file, data);

@@ -30,10 +30,7 @@ namespace OPMedia.UI.FileTasks
                     _support.DeleteFile(path, true);
                 }
             }
-            finally
-            {
-                ProcessedObjects++;
-            }
+            catch { }
 
             return true;
         }

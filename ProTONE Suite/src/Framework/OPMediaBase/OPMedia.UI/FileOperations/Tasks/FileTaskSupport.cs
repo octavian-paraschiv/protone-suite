@@ -411,7 +411,9 @@ namespace OPMedia.UI.FileOperations.Tasks
                     // empty folder
                     if (_skipConfirmations || CanDelete(path))
                     {
-                        Directory.Delete(path);
+                        //Directory.Delete(path);
+
+                        DeleteFileSystemObject(path);
                         this.RequiresRefresh = true;
                     }
                 }
@@ -441,19 +443,27 @@ namespace OPMedia.UI.FileOperations.Tasks
             {
                 if (File.Exists(fsi))
                 {
+                    _task.FireTaskProgress(ProgressEventType.Progress, fsi, UpdateProgressData.Empty);
+
                     File.SetAttributes(fsi, FileAttributes.Normal);
                     File.Delete(fsi);
                     Log(FSAction.Delete, fsi);
+
+                    _task.FireTaskProgress(ProgressEventType.Progress, fsi, UpdateProgressData.FileDone);
                 }
                 else if (Directory.Exists(fsi))
                 {
                     PathUtils.DeleteFolderTree(fsi,
                         (delFSI, isFolder) =>
                         {
+                            _task.FireTaskProgress(ProgressEventType.Progress, delFSI, UpdateProgressData.Empty);
+
                             if (isFolder)
                                 Log(FSAction.DeleteFolder, delFSI);
                             else
                                 Log(FSAction.Delete, delFSI);
+
+                            _task.FireTaskProgress(ProgressEventType.Progress, delFSI, UpdateProgressData.FileDone);
                         });
                 }
 
