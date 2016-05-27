@@ -8,7 +8,7 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System.Runtime.InteropServices;
 
-namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
+namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     class GrabberToWave : CdRipper
     {

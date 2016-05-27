@@ -581,4 +581,10 @@ Double-click on check images to choose whether to grab a track or not.</value>
   <data name="TXT_PRESET">
     <value>Preset:</value>
   </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCCD">
+    <value>The output WAV files will have the standard sample rate for Audio-CDs (44100 Hz)</value>
+  </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCFILE">
+    <value>The output WAV files will have the same sample rate as the input files.</value>
+  </data>
 </root>

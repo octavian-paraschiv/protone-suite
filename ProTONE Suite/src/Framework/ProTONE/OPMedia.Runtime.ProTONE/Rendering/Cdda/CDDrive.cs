@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.IO;
 using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
+using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
 {
@@ -630,11 +631,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
           List<string> artists = new List<string>();
           List<string> genres = new List<string>();
 
-          string item = string.Empty;
-
           try
           {
-              Debug.Write("CD_TEXT info dump BEGIN:");
+              Debug.WriteLine("CD_TEXT info dump BEGIN:");
+              StringBuilder sb = new StringBuilder();
+
               for (int i = 0; i < Data.Descriptors.MaxIndex; i++)
               {
                   string line = "";
@@ -646,9 +647,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
                           line += ".";
                   }
 
-                  Debug.Write(line);
+                  sb.Append(line);
               }
-              Debug.Write("CD_TEXT info dump END");
+              Debug.WriteLine("CD_TEXT: " + sb.ToString());
+              Debug.WriteLine("CD_TEXT info dump END");
+
+              string item = string.Empty;
 
               for (int i = 0; i < Data.Descriptors.MaxIndex; i++)
               {
@@ -658,34 +662,35 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
                       if (ch != '\0')
                       {
                           item = item + ch;
+                          continue;
                       }
-                      else if (!string.IsNullOrEmpty(item))
-                      {
-                          switch (cdrom_toc_cd_text_data_block.PackType)
-                          {
-                              case Kernel32.CDROM_CD_TEXT_PACK.ALBUM_NAME:
-                                  titles.Add(item);
-                                  item = string.Empty;
-                                  break;
 
-                              case Kernel32.CDROM_CD_TEXT_PACK.GENRE:
-                                  genres.Add(item);
-                                  item = string.Empty;
-                                  break;
+                        switch (cdrom_toc_cd_text_data_block.PackType)
+                        {
+                            case Kernel32.CDROM_CD_TEXT_PACK.ALBUM_NAME:
+                                if (string.IsNullOrEmpty(item) == false || titles.Count == 0)
+                                    titles.Add(item);
+                                item = string.Empty;
+                                break;
 
-                              case Kernel32.CDROM_CD_TEXT_PACK.PERFORMER:
-                                  artists.Add(item);
-                                  item = string.Empty;
-                                  break;
+                            case Kernel32.CDROM_CD_TEXT_PACK.GENRE:
+                                if (string.IsNullOrEmpty(item) == false || genres.Count == 0)
+                                    genres.Add(item);
+                                item = string.Empty;
+                                break;
 
-                              default:
-                                  item = string.Empty;
-                                  break;
-                          }
+                            case Kernel32.CDROM_CD_TEXT_PACK.PERFORMER:
+                                if (string.IsNullOrEmpty(item) == false || artists.Count == 0)
+                                    artists.Add(item);
+                                item = string.Empty;
+                                break;
+
+                            default:
+                                item = string.Empty;
+                                break;
+                        }
                       }
                   }
-              }
-
           }
           catch (IndexOutOfRangeException)
           {

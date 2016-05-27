@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using NAudio.Wave;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers;
 using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
 using OPMedia.Core;
@@ -16,6 +15,7 @@ using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.UI;
+using OPMedia.Addons.Builtin.Shared.Compression;
 
 namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 {
@@ -24,7 +24,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
         static List<Transcoding> _supportedTranscodings = new List<Transcoding>();
 
         [Browsable(false)]
-        public EncoderSettingsContainer EncoderSettings { get; set; }
+        public EncoderSettings EncoderSettings { get; set; }
 
         private Transcoding _transcoding = null;
 
@@ -75,7 +75,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
             string inputFileType = PathUtils.GetExtension(file).ToUpperInvariant();
 
             AudioMediaFormatType inputFormat = AudioMediaFormatType.WAV;
-            AudioMediaFormatType outputFormat = EncoderSettings.AudioMediaFormatType;
+            AudioMediaFormatType outputFormat = EncoderSettings.FormatType;
 
             if (Enum.TryParse<AudioMediaFormatType>(inputFileType, out inputFormat) == false)
                 throw new NotSupportedException(string.Format("TXT_UNSUPPORTED_INPUT_FORMAT: {0}", inputFileType));
@@ -141,7 +141,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
             return string.Format("{0} => {1}", InputFormat, OutputFormat);
         }
 
-        public void DoTranscoding(EncoderSettingsContainer encoderSettings, string inputFile)
+        public void DoTranscoding(EncoderSettings encoderSettings, string inputFile)
         {
             _grabber = CdRipper.CreateGrabber(OutputFormat);
             if (_grabber == null)
@@ -158,7 +158,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 WaveFormatEx wfex = WaveFormatEx.Cdda;
                                 byte[] buff = ReadWAV(inputFile, ref wfex);
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
-                                grabber.Options = encoderSettings.Mp3EncoderSettings.Options;
+                                grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
                                 
                                 // Resample is not supported at this time.
@@ -196,14 +196,14 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 byte[] buff = ReadWAV(tempWavFile, ref wfex);
 
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
-                                grabber.Options = encoderSettings.Mp3EncoderSettings.Options;
+                                grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
                                 ID3FileInfoSlim ifiSlim = 
                                     new ID3FileInfoSlim(MediaFileInfo.FromPath(inputFile, false));
 
                                 grabber.EncodeBuffer(buff,
                                     Path.ChangeExtension(inputFile, "REENC.MP3"),
-                                    encoderSettings.Mp3EncoderSettings.CopyInputFileMetadata,
+                                    (encoderSettings as Mp3EncoderSettings).CopyInputFileMetadata,
                                     ifiSlim);
 
                                 if (File.Exists(tempWavFile))

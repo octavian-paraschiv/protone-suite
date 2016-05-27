@@ -31,13 +31,22 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         {
             this.title = "TXT_CHANGEENCODINGPANEL";
             InitializeComponent();
+
+            encoderOptionsCtl.SettingsChanged += new EventHandler(encoderOptionsCtl_SettingsChanged);
+        }
+
+        void encoderOptionsCtl_SettingsChanged(object sender, EventArgs e)
+        {
+            _task.EncoderSettings = encoderOptionsCtl.EncoderSettings;
         }
 
         protected override void DisplayTask()
         {
             _task.TaskType = TaskType.ChangeEncoding;
+            
+            //if (_task.EncoderSettings != null)
+              //  encoderOptionsCtl.EncoderSettings = _task.EncoderSettings;
 
-            encoderOptionsCtl.EncoderSettings = (_task as Task).EncoderSettings;
             encoderOptionsCtl.DisplaySettings(false);
         }
     }

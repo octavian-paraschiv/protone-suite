@@ -113,10 +113,8 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         public WordCasing WordCasing
         { get { return _wordCasing; } set { _wordCasing = value; } }
 
-        EncoderSettingsContainer _encoderSettings = new EncoderSettingsContainer();
         [Browsable(false)]
-        public EncoderSettingsContainer EncoderSettings
-        { get { return _encoderSettings; } set { _encoderSettings = value; } }
+        public EncoderSettings EncoderSettings { get; set; }
 
         #endregion
 

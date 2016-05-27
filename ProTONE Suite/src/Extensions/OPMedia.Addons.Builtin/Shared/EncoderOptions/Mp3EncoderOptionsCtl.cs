@@ -9,51 +9,34 @@ using System.Windows.Forms;
 
 using OPMedia.UI.Dialogs;
 using OPMedia.Addons.Builtin.Translations;
-using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Addons.Builtin.Shared.Compression;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
     public partial class Mp3EncoderOptionsCtl : EncoderConfiguratorCtl
     {
-        public bool UsedForCdRipper { get; set; }
-        
-        public override AudioMediaFormatType OutputFormat
+        public Mp3EncoderSettings Settings
         {
             get
             {
-                return AudioMediaFormatType.MP3;
+                return (base.EncoderSettings as Mp3EncoderSettings);
             }
         }
 
-        public Mp3EncoderSettings Mp3EncoderSettings { get; set; }
-
-        private Mp3ConversionOptions Options
+        public Mp3ConversionOptions Options
         {
             get
             {
-                return Mp3EncoderSettings.Options;
+                return this.Settings.Options;
             }
-
-            set
-            {
-                Mp3EncoderSettings.Options = value;
-            }
-        }
-
-        private bool CopyInputFileMetadata
-        {
-            get { return Mp3EncoderSettings.CopyInputFileMetadata; }
-            set { Mp3EncoderSettings.CopyInputFileMetadata = value; }
         }
 
         public Mp3EncoderOptionsCtl() 
+            : base(new Mp3EncoderSettings())
         {
             InitializeComponent();
-
-            if (Mp3EncoderSettings == null)
-                Mp3EncoderSettings = new Mp3EncoderSettings();
-
             this.Load += new EventHandler(Mp3EncoderOptionsCtl_Load);
         }
 
@@ -62,11 +45,14 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             Reload();
         }
 
-        private void UpdateSummary()
+        private void UpdateSummary(bool fireSettingsChanged = true)
         {
             string summary = "";
             this.Options.GetConfig(ref summary);
             lblOutputBitrateHint.Text = summary;
+
+            if (fireSettingsChanged)
+                FireSettingsChanged();
         }
 
         private void ChangeBitrateModeFieldsVisibility()
@@ -111,11 +97,8 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             }
         }
 
-        internal void Reload()
+        internal override void  Reload()
         {
-            if (Mp3EncoderSettings == null)
-                Mp3EncoderSettings = new Mp3EncoderSettings();
-
             chkGenerateTag.Text = Translator.Translate(UsedForCdRipper ?
                 "TXT_GENERATE_TAG" : "TXT_REUSE_TAG");
 
@@ -198,7 +181,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             cgVbrQuality.Value = this.Options.VBRQuality;
             cgVbrQuality.PositionChanged += (pos) =>
             {
-                this.Options.VBRQuality = (int)cgVbrQuality.Value;
+                this.Options.VBRQuality = (int)Math.Round(cgVbrQuality.Value);
                 UpdateSummary();
             };
             // ------------------------
@@ -206,14 +189,25 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
             // ------------------------
             // CopyInputFileMetadata
-            chkGenerateTag.Checked = this.CopyInputFileMetadata;
+            chkGenerateTag.Checked = this.Settings.CopyInputFileMetadata;
             chkGenerateTag.CheckedChanged += (s, a) =>
             {
-                this.CopyInputFileMetadata = chkGenerateTag.Checked;
+                this.Settings.CopyInputFileMetadata = chkGenerateTag.Checked;
+                UpdateSummary();
             };
             // ------------------------
 
-            UpdateSummary();
+            // ------------------------
+            // resample frequency
+            cmbFrequency.SelectedIndex = cmbFrequency.FindStringExact(this.Options.ResampleFrequency.ToString());
+            cmbFrequency.SelectedIndexChanged += (s, a) =>
+            {
+                this.Options.ResampleFrequency = int.Parse(cmbFrequency.Text);
+                UpdateSummary();
+            };
+            // ------------------------
+
+            UpdateSummary(false);
         }
     }
 }

@@ -581,4 +581,10 @@ Beim Check Bildern zu entscheiden, ob eine Spur oder nicht greifen Doppelklick.<
   <data name="TXT_PRESET">
     <value>Voreinstellung:</value>
   </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCCD">
+    <value>Die Ausgangs WAV-Dateien wird die Standard-Sample-Rate für Audio-CDs (44100 Hz)</value>
+  </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCFILE">
+    <value>Die Ausgangs WAV-Dateien wird die gleiche Abtastrate wie die Eingabedateien haben.</value>
+  </data>
 </root>

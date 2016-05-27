@@ -61,5 +61,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         protected virtual void DisplayTask()
         {
         }
+
+
     }
 }

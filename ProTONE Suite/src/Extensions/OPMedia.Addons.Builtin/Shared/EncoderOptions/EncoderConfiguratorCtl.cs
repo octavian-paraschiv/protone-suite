@@ -12,17 +12,26 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
     public partial class EncoderConfiguratorCtl : OPMBaseControl
     {
-        public virtual AudioMediaFormatType OutputFormat
+        public bool UsedForCdRipper { get; set; }
+
+        public EncoderSettings EncoderSettings { get; set; }
+
+        public event EventHandler SettingsChanged = null;
+        public void FireSettingsChanged()
         {
-            get
-            {
-                return AudioMediaFormatType.WAV;
-            }
+            if (SettingsChanged != null)
+                SettingsChanged(this, EventArgs.Empty);
         }
 
-        public EncoderConfiguratorCtl()
+        public EncoderConfiguratorCtl(EncoderSettings settings)
         {
             InitializeComponent();
+            this.EncoderSettings = settings;
         }
+
+        internal virtual void Reload()
+        {
+        }
+            
     }
 }

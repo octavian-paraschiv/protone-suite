@@ -13,7 +13,7 @@ using OPMedia.Core.Utilities;
 using System.Threading;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
 
-namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
+namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     public abstract class CdRipper
     {

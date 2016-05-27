@@ -45,9 +45,13 @@
             this.pnlVbrHints = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel4 = new OPMedia.UI.Controls.OPMLabel();
+            this.opmTableLayoutPanel2 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
+            this.lblFrequency = new OPMedia.UI.Controls.OPMLabel();
+            this.cmbFrequency = new OPMedia.UI.Controls.OPMComboBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.opmTableLayoutPanel3.SuspendLayout();
             this.pnlVbrHints.SuspendLayout();
+            this.opmTableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // opmTableLayoutPanel1
@@ -66,6 +70,7 @@
             this.opmTableLayoutPanel1.Controls.Add(this.opmTableLayoutPanel3, 2, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.lblOutputBitrateHint, 0, 12);
             this.opmTableLayoutPanel1.Controls.Add(this.pnlVbrHints, 2, 9);
+            this.opmTableLayoutPanel1.Controls.Add(this.opmTableLayoutPanel2, 2, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -285,23 +290,23 @@
             // 
             // cgVbrQuality
             // 
-            this.cgVbrQuality.AllowDragging = true;
+            this.cgVbrQuality.AllowDragging = false;
             this.opmTableLayoutPanel3.SetColumnSpan(this.cgVbrQuality, 2);
             this.cgVbrQuality.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cgVbrQuality.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cgVbrQuality.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cgVbrQuality.Location = new System.Drawing.Point(100, 61);
-            this.cgVbrQuality.Maximum = 10D;
+            this.cgVbrQuality.Maximum = 9D;
             this.cgVbrQuality.MaximumSize = new System.Drawing.Size(1500, 23);
             this.cgVbrQuality.MinimumSize = new System.Drawing.Size(100, 23);
             this.cgVbrQuality.Name = "cgVbrQuality";
-            this.cgVbrQuality.NrTicks = 10;
+            this.cgVbrQuality.NrTicks = 8;
             this.cgVbrQuality.OverrideBackColor = System.Drawing.Color.Empty;
             this.cgVbrQuality.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.cgVbrQuality.ShowTicks = true;
             this.cgVbrQuality.Size = new System.Drawing.Size(134, 23);
             this.cgVbrQuality.TabIndex = 11;
-            this.cgVbrQuality.Value = 8D;
+            this.cgVbrQuality.Value = 7D;
             this.cgVbrQuality.Vertical = false;
             // 
             // lblOutputBitrateHint
@@ -372,6 +377,61 @@
             this.opmLabel4.Text = "max=0";
             this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // opmTableLayoutPanel2
+            // 
+            this.opmTableLayoutPanel2.AutoSize = true;
+            this.opmTableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.opmTableLayoutPanel2.ColumnCount = 2;
+            this.opmTableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.opmTableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.opmTableLayoutPanel2.Controls.Add(this.lblFrequency, 0, 0);
+            this.opmTableLayoutPanel2.Controls.Add(this.cmbFrequency, 1, 0);
+            this.opmTableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.opmTableLayoutPanel2.Location = new System.Drawing.Point(200, 0);
+            this.opmTableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.opmTableLayoutPanel2.Name = "opmTableLayoutPanel2";
+            this.opmTableLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
+            this.opmTableLayoutPanel2.RowCount = 1;
+            this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmTableLayoutPanel2.Size = new System.Drawing.Size(237, 32);
+            this.opmTableLayoutPanel2.TabIndex = 14;
+            // 
+            // cmbFrequency
+            // 
+            this.lblFrequency.AutoSize = true;
+            this.lblFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblFrequency.Location = new System.Drawing.Point(3, 3);
+            this.lblFrequency.Margin = new System.Windows.Forms.Padding(3);
+            this.lblFrequency.Name = "cmbFrequency";
+            this.lblFrequency.OverrideBackColor = System.Drawing.Color.Empty;
+            this.lblFrequency.OverrideForeColor = System.Drawing.Color.Empty;
+            this.lblFrequency.Size = new System.Drawing.Size(91, 26);
+            this.lblFrequency.TabIndex = 8;
+            this.lblFrequency.Text = "Freq:";
+            this.lblFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // opmComboBox1
+            // 
+            this.cmbFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbFrequency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbFrequency.FormattingEnabled = true;
+            this.cmbFrequency.Items.AddRange(new object[] {
+            "8000",
+            "11025",
+            "12000",
+            "16000",
+            "22050",
+            "24000",
+            "32000",
+            "44100",
+            "48000"});
+            this.cmbFrequency.Location = new System.Drawing.Point(100, 3);
+            this.cmbFrequency.Name = "opmComboBox1";
+            this.cmbFrequency.OverrideForeColor = System.Drawing.Color.Empty;
+            this.cmbFrequency.Size = new System.Drawing.Size(134, 23);
+            this.cmbFrequency.TabIndex = 7;
+            // 
             // Mp3EncoderOptionsCtl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -386,6 +446,8 @@
             this.opmTableLayoutPanel3.PerformLayout();
             this.pnlVbrHints.ResumeLayout(false);
             this.pnlVbrHints.PerformLayout();
+            this.opmTableLayoutPanel2.ResumeLayout(false);
+            this.opmTableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -409,6 +471,9 @@
         private UI.Controls.OPMLabel opmLabel2;
         private UI.Controls.OPMLabel opmLabel4;
         private UI.Controls.OPMTableLayoutPanel pnlVbrHints;
+        private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel2;
+        private UI.Controls.OPMLabel lblFrequency;
+        private UI.Controls.OPMComboBox cmbFrequency;
 
     }
 }

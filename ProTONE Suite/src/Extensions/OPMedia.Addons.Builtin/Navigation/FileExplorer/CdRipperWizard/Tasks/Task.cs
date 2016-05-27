@@ -7,13 +7,13 @@ using System.ComponentModel;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using System.IO;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers;
 using OPMedia.Core.Utilities;
 
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.TranslationSupport;
 using System.Threading;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
+using OPMedia.Addons.Builtin.Shared.Compression;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
 {
@@ -63,7 +63,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
         { get { return tracks; } set { tracks = value; } }
 
         [Browsable(false)]
-        public DriveInfo Drive { get; set; }
+        public string DrivePath { get; set; }
 
         [Browsable(false)]
         public string OutputFolder { get; set; }
@@ -72,18 +72,17 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
         public string OutputFilePattern { get; set; }
 
         [Browsable(false)]
-        public EncoderSettingsContainer EncoderSettings { get; set; }
+        public EncoderSettings EncoderSettings { get; set; }
 
         public Task()
         {
-            this.EncoderSettings = new EncoderSettingsContainer();
         }
 
         private StepDetail ProcessTrack(Track track)
         {
             string newFileName = string.Format("{0}.{1}",
                 CdRipper.GetFileName(WordCasing.KeepCase, track, OutputFilePattern),
-                this.EncoderSettings.AudioMediaFormatType.ToString().ToLowerInvariant());
+                this.EncoderSettings.FormatType.ToString().ToLowerInvariant());
 
             StepDetail detail = new StepDetail();
             detail.Description = Translator.Translate("TXT_PROCESSING_TRACK", track, newFileName);
@@ -94,8 +93,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
 
             try
             {
-                _grabber = CdRipper.CreateGrabber(this.EncoderSettings.AudioMediaFormatType);
-                char letter = Drive.RootDirectory.FullName.ToUpperInvariant()[0];
+                _grabber = CdRipper.CreateGrabber(this.EncoderSettings.FormatType);
+                char letter = DrivePath.ToUpperInvariant()[0];
                 using (CDDrive cd = new CDDrive())
                 {
                     if (cd.Open(letter) && cd.Refresh() && cd.HasAudioTracks())
@@ -104,14 +103,15 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
 
                         bool generateTagsFromMetadata = false;
 
-                        switch (this.EncoderSettings.AudioMediaFormatType)
+                        switch (this.EncoderSettings.FormatType)
                         {
                             case AudioMediaFormatType.WAV:
                                 break;
 
                             case AudioMediaFormatType.MP3:
-                                (_grabber as GrabberToMP3).Options = this.EncoderSettings.Mp3EncoderSettings.Options;
-                                generateTagsFromMetadata = this.EncoderSettings.Mp3EncoderSettings.CopyInputFileMetadata;
+                                Mp3EncoderSettings settings = (this.EncoderSettings as Mp3EncoderSettings);
+                                (_grabber as GrabberToMP3).Options = settings.Options;
+                                generateTagsFromMetadata = settings.CopyInputFileMetadata;
                                 break;
                         }
 

@@ -8,11 +8,9 @@ using System.IO;
 
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Utilities;
-using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Compression.Lame;
 
-namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
+namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     class GrabberToMP3 : CdRipper
     {
@@ -52,7 +50,10 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Helpers
         public void EncodeBuffer(byte[] buff, string destFile, bool generateTags, ID3FileInfoSlim ifiSlim)
         {
             string summary = "";
+            
             LameEncConfig cfg = this.Options.GetConfig(ref summary);
+            if (ifiSlim != null && ifiSlim.Frequency.HasValue)
+                cfg.format.dwSampleRate = (uint)ifiSlim.Frequency;
 
             uint LameResult = Lame_encDll.Init(cfg, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
             if (LameResult != Lame_encDll.ERR_SUCCESSFUL)

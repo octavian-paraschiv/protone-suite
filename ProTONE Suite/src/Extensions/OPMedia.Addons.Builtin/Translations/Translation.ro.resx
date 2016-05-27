@@ -581,4 +581,10 @@ Daţi dublu-clic pe imagini pentru a alege dacă importaţi o pistă sau nu.</va
   <data name="TXT_PRESET">
     <value>Presetare:</value>
   </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCCD">
+    <value>Fișierele de ieșire WAV vor avea rata standard de eșantionare pentru CD-uri Audio (44100 Hz)</value>
+  </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCFILE">
+    <value>Fișierele de ieșire WAV vor avea aceeași rată de eșantionare ca şi fișierele de intrare.</value>
+  </data>
 </root>

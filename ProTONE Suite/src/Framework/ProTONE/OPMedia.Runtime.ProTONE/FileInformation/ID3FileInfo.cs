@@ -549,13 +549,17 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             {
                 try
                 {
-                    List<ICodec> codecs = new List<ICodec>(_prop.Codecs);
-                    return (AudioHeader)codecs[0];
+                    if (_prop != null)
+                    {
+                        List<ICodec> codecs = new List<ICodec>(_prop.Codecs);
+                        return (AudioHeader)codecs[0];
+                    }
                 }
                 catch
                 {
-                    return null;
                 }
+
+                return null;
             }
         }
 

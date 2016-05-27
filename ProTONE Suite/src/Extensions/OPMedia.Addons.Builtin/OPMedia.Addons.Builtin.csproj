@@ -148,9 +148,9 @@
     <Compile Include="Shared\EncoderOptions\WmaEncoderOptionsCtl.Designer.cs">
       <DependentUpon>WmaEncoderOptionsCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Navigation\FileExplorer\CdRipperWizard\Helpers\AudioGrabber.cs" />
-    <Compile Include="Navigation\FileExplorer\CdRipperWizard\Helpers\GrabberToMP3.cs" />
-    <Compile Include="Navigation\FileExplorer\CdRipperWizard\Helpers\GrabberToWave.cs" />
+    <Compile Include="Shared\Compression\AudioGrabber.cs" />
+    <Compile Include="Shared\Compression\GrabberToMP3.cs" />
+    <Compile Include="Shared\Compression\GrabberToWave.cs" />
     <Compile Include="Navigation\FileExplorer\CdRipperWizard\Tasks\Task.cs" />
     <Compile Include="Navigation\FileExplorer\FileOperations\Tasks\FECopyFilesTask.cs" />
     <Compile Include="Navigation\FileExplorer\FileOperations\Tasks\FEDeleteFilesTask.cs" />

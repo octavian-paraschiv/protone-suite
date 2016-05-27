@@ -12,11 +12,32 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
     public partial class EncoderOptionsCtl : UserControl
     {
-        private int selectedPanel = -1;
+        public EncoderSettings EncoderSettings
+        {
+            get
+            {
+                EncoderSettings retVal = null;
+                if (cmbOutputFormat.SelectedIndex >= 0)
+                {
+                    EncoderConfiguratorCtl panel = panels[cmbOutputFormat.SelectedIndex];
+                    if (panel != null)
+                    {
+                        retVal = panel.EncoderSettings;
+                    }
+                }
 
-        public EncoderSettingsContainer EncoderSettings { get; set; }
+                return retVal;
+            }
+        }
 
         List<EncoderConfiguratorCtl> panels = new List<EncoderConfiguratorCtl>();
+
+        public event EventHandler SettingsChanged = null;
+        public void FireSettingsChanged(object sender, EventArgs e)
+        {
+            if (SettingsChanged != null)
+                SettingsChanged(sender, e);
+        }
 
         public void DisplaySettings(bool usedForCdRipper)
         {
@@ -25,43 +46,43 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         public EncoderOptionsCtl()
         {
-            this.EncoderSettings = new EncoderSettingsContainer();
             InitializeComponent();
 
             cmbOutputFormat.Items.Clear();
             AddPanel(new Mp3EncoderOptionsCtl());
             AddPanel(new WavEncoderOptionsCtl());
+
+            cmbOutputFormat.SelectedIndex = 0;
         }
 
         private void InternalDisplaySettings(bool usedForCdRipper)
         {
             foreach (EncoderConfiguratorCtl ctl in panels)
             {
-                Mp3EncoderOptionsCtl mp3Ctl = ctl as Mp3EncoderOptionsCtl;
-                if (mp3Ctl != null)
-                {
-                    mp3Ctl.UsedForCdRipper = usedForCdRipper;
-                    mp3Ctl.Mp3EncoderSettings = EncoderSettings.Mp3EncoderSettings;
-                    mp3Ctl.Reload();
-                }
+                ctl.UsedForCdRipper = usedForCdRipper;
+                ctl.Reload();
             }
 
-            cmbOutputFormat.SelectedIndex = (int)EncoderSettings.AudioMediaFormatType;
             ShowPanel(cmbOutputFormat.SelectedIndex);
         }
 
         private void AddPanel(EncoderConfiguratorCtl panel)
         {
-            cmbOutputFormat.Items.Add(panel.OutputFormat);
+            cmbOutputFormat.Items.Add(panel.EncoderSettings.FormatType);
             panels.Add(panel);
             panel.Visible = false;
             panel.Dock = DockStyle.Fill;
+            panel.SettingsChanged += new EventHandler(panel_SettingsChanged);
+        }
+
+        void panel_SettingsChanged(object sender, EventArgs e)
+        {
+            FireSettingsChanged(sender, e);
         }
 
         private void OnSelectOutputFormat(object sender, EventArgs e)
         {
             ShowPanel(cmbOutputFormat.SelectedIndex);
-            EncoderSettings.AudioMediaFormatType = (AudioMediaFormatType)cmbOutputFormat.SelectedIndex;
         }
 
         private void ShowPanel(int index)
@@ -80,8 +101,6 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
                     pnlEncoderOptions.Controls.Add(panel);
                 }
-
-                selectedPanel = index;
             }
             finally
             {

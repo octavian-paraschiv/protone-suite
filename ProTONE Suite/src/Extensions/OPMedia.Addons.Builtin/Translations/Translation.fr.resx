@@ -581,4 +581,10 @@ Double-cliquez sur les images de chèques de choisir de saisir une piste ou pas.
   <data name="TXT_PRESET">
     <value>Prereglage:</value>
   </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCCD">
+    <value>Les fichiers de sortie WAV auront la fréquence d'échantillonnage standard pour les CD audio (44100 Hz)</value>
+  </data>
+  <data name="TXT_SAMPLERATE_HINT_SRCFILE">
+    <value>Les fichiers de sortie WAV auront la même fréquence d'échantillonnage que les fichiers d'entrée.</value>
+  </data>
 </root>

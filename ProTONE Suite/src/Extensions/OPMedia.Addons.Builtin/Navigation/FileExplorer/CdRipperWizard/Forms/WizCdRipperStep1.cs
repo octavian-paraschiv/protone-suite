@@ -151,12 +151,12 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
                             MainThread.Post((d) => { cmbAudioCDDrives.Items.Add(item); });
 
-                            if ((BkgTask as Task).Drive == null)
+                            if ((BkgTask as Task).DrivePath == null)
                             {
-                                (BkgTask as Task).Drive = di;
+                                (BkgTask as Task).DrivePath = di.RootDirectory.FullName;
                             }
 
-                            if (Path.Equals(di.RootDirectory.FullName, (BkgTask as Task).Drive.RootDirectory.FullName))
+                            if (Path.Equals(di.RootDirectory.FullName, (BkgTask as Task).DrivePath))
                             {
                                 selected = item;
                             }
@@ -189,6 +189,8 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
                 string rootPath = System.IO.Path.GetPathRoot(item.Path);
                 if (!string.IsNullOrEmpty(rootPath))
                 {
+                    (BkgTask as Task).DrivePath = rootPath;
+
                     CDEntry cdEntry = null;
                     char letter = rootPath.ToUpperInvariant()[0];
                     using (CDDrive cd = new CDDrive())

@@ -48,7 +48,6 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
             txtDestFolder.Text = (BkgTask as Task).OutputFolder;
 
-            encoderOptionsCtl.EncoderSettings = (BkgTask as Task).EncoderSettings;
             encoderOptionsCtl.DisplaySettings(true);
 
             CheckFinishButton();

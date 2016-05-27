@@ -12,15 +12,8 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
     public partial class OggEncoderOptionsCtl : EncoderConfiguratorCtl
     {
-        public override AudioMediaFormatType OutputFormat
-        {
-            get
-            {
-                return AudioMediaFormatType.OGG;
-            }
-        }
-
-        public OggEncoderOptionsCtl() 
+        public OggEncoderOptionsCtl()
+            : base(new OggEncoderSettings())
         {
             InitializeComponent();
         }

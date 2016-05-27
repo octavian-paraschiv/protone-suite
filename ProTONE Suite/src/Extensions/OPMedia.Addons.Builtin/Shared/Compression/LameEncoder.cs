@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 
-namespace OPMedia.Runtime.ProTONE.Compression.Lame
+namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     public enum VBRMETHOD : int
     {

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OPMedia.Addons.Builtin.Shared.Compression.OPMedia.Runtime.ProTONE.Compression.LameWrapper;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Addons.Builtin.Shared.Compression;
 
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
@@ -15,30 +16,26 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         OGG
     }
 
-    public sealed class EncoderSettingsContainer
+
+    public abstract class EncoderSettings
     {
-        public AudioMediaFormatType AudioMediaFormatType { get; set; }
+        public AudioMediaFormatType FormatType { get; private set; }
 
-        public WavEncoderSettings WavEncoderSettings { get; set; }
-        public Mp3EncoderSettings Mp3EncoderSettings { get; set; }
-        public OggEncoderSettings OggEncoderSettings { get; set; }
-        public WmaEncoderSettings WmaEncoderSettings { get; set; }
-
-        public EncoderSettingsContainer()
+        public EncoderSettings(AudioMediaFormatType fmtType)
         {
-            this.AudioMediaFormatType = EncoderOptions.AudioMediaFormatType.MP3;
-            this.WavEncoderSettings = new WavEncoderSettings();
-            this.Mp3EncoderSettings = new Mp3EncoderSettings();
-            this.OggEncoderSettings = new OggEncoderSettings();
-            this.WmaEncoderSettings = new WmaEncoderSettings();
+            this.FormatType = fmtType;
         }
     }
 
-    public class WavEncoderSettings
+    public class WavEncoderSettings : EncoderSettings
     {
+        public WavEncoderSettings()
+            : base(AudioMediaFormatType.WAV)
+        {
+        }
     }
 
-    public class Mp3EncoderSettings
+    public class Mp3EncoderSettings : EncoderSettings
     {
         public bool CopyInputFileMetadata { get; set; }
 
@@ -50,19 +47,28 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             return this.Options.GetConfig(ref summary).ToString();
         }
 
-        public Mp3EncoderSettings()
+        public Mp3EncoderSettings() 
+            : base(AudioMediaFormatType.MP3)
         {
             this.CopyInputFileMetadata = false;
             this.Options = new Mp3ConversionOptions();
         }
     }
 
-    public class OggEncoderSettings
+    public class OggEncoderSettings : EncoderSettings
     {
+        public OggEncoderSettings()
+            : base(AudioMediaFormatType.OGG)
+        {
+        }
     }
 
-    public class WmaEncoderSettings
+    public class WmaEncoderSettings : EncoderSettings
     {
+        public WmaEncoderSettings()
+            : base(AudioMediaFormatType.WMA)
+        {
+        }
     }
 
 }

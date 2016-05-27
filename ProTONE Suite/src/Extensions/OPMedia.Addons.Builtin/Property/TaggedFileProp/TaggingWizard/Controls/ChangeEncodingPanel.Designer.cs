@@ -28,25 +28,13 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         /// </summary>
         private void InitializeComponent()
         {
-            OPMedia.Addons.Builtin.Shared.EncoderOptions.EncoderSettingsContainer encoderSettingsContainer1 = new OPMedia.Addons.Builtin.Shared.EncoderOptions.EncoderSettingsContainer();
-            OPMedia.Addons.Builtin.Shared.EncoderOptions.Mp3EncoderSettings mp3EncoderSettings1 = new OPMedia.Addons.Builtin.Shared.EncoderOptions.Mp3EncoderSettings();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeEncodingPanel));
-            OPMedia.Addons.Builtin.Shared.EncoderOptions.OggEncoderSettings oggEncoderSettings1 = new OPMedia.Addons.Builtin.Shared.EncoderOptions.OggEncoderSettings();
-            OPMedia.Addons.Builtin.Shared.EncoderOptions.WavEncoderSettings wavEncoderSettings1 = new OPMedia.Addons.Builtin.Shared.EncoderOptions.WavEncoderSettings();
-            OPMedia.Addons.Builtin.Shared.EncoderOptions.WmaEncoderSettings wmaEncoderSettings1 = new OPMedia.Addons.Builtin.Shared.EncoderOptions.WmaEncoderSettings();
             this.encoderOptionsCtl = new OPMedia.Addons.Builtin.Shared.EncoderOptions.EncoderOptionsCtl();
             this.SuspendLayout();
             // 
             // encoderOptionsCtl1
             // 
             this.encoderOptionsCtl.Dock = System.Windows.Forms.DockStyle.Fill;
-            encoderSettingsContainer1.AudioMediaFormatType = OPMedia.Addons.Builtin.Shared.EncoderOptions.AudioMediaFormatType.WAV;
-            mp3EncoderSettings1.CopyInputFileMetadata = false;
-            encoderSettingsContainer1.Mp3EncoderSettings = mp3EncoderSettings1;
-            encoderSettingsContainer1.OggEncoderSettings = oggEncoderSettings1;
-            encoderSettingsContainer1.WavEncoderSettings = wavEncoderSettings1;
-            encoderSettingsContainer1.WmaEncoderSettings = wmaEncoderSettings1;
-            this.encoderOptionsCtl.EncoderSettings = encoderSettingsContainer1;
             this.encoderOptionsCtl.Location = new System.Drawing.Point(0, 0);
             this.encoderOptionsCtl.Name = "encoderOptionsCtl1";
             this.encoderOptionsCtl.Size = new System.Drawing.Size(350, 280);

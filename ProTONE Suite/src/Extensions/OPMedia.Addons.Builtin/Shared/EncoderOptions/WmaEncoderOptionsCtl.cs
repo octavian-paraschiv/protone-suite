@@ -12,15 +12,8 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
     public partial class WmaEncoderOptionsCtl : EncoderConfiguratorCtl
     {
-        public override AudioMediaFormatType OutputFormat
-        {
-            get
-            {
-                return AudioMediaFormatType.WMA;
-            }
-        }
-
         public WmaEncoderOptionsCtl()
+            : base(new WmaEncoderSettings())
         {
             InitializeComponent();
         }
