@@ -26,12 +26,12 @@ namespace OPMedia.UI.Dialogs
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnAdd = new OPMedia.UI.Controls.OPMButton();
             this.btnDelete = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lvFavorites = new OPMedia.UI.Controls.OPMListView(ColumnHeaderStyle.None);
             this.colPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,6 +45,7 @@ namespace OPMedia.UI.Dialogs
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnAdd.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnAdd.ShowDropDown = false;
             this.btnAdd.Size = new System.Drawing.Size(76, 25);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "TXT_ADD";
@@ -60,6 +61,7 @@ namespace OPMedia.UI.Dialogs
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnDelete.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnDelete.ShowDropDown = false;
             this.btnDelete.Size = new System.Drawing.Size(76, 25);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "TXT_DELETE";
@@ -70,6 +72,7 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lvFavorites, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnAdd, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnDelete, 1, 1);
@@ -87,6 +90,7 @@ namespace OPMedia.UI.Dialogs
             // 
             // lvFavorites
             // 
+            this.lvFavorites.AllowEditing = true;
             this.lvFavorites.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvFavorites.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPath});
@@ -108,6 +112,23 @@ namespace OPMedia.UI.Dialogs
             this.colPath.Name = "colPath";
             this.colPath.Text = "";
             // 
+            // btnOK
+            // 
+            this.btnOK.AutoSize = true;
+            this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.Location = new System.Drawing.Point(241, 92);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
+            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnOK.ShowDropDown = false;
+            this.btnOK.Size = new System.Drawing.Size(76, 25);
+            this.btnOK.TabIndex = 5;
+            this.btnOK.Text = "TXT_OK";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // FavoriteFoldersControl
             // 
             this.Controls.Add(this.tableLayoutPanel1);
@@ -125,5 +146,6 @@ namespace OPMedia.UI.Dialogs
         private OPMTableLayoutPanel tableLayoutPanel1;
         private OPMListView lvFavorites;
         private ColumnHeader colPath;
+        private OPMButton btnOK;
     }
 }

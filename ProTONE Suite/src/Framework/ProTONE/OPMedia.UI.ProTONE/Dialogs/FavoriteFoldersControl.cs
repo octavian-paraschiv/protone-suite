@@ -16,10 +16,14 @@ namespace OPMedia.UI.Dialogs
     public partial class FavoriteFoldersControl : UserControl
     {
         public event EventHandler OnModified = null;
-
         private FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
-
         public string FavoriteFoldersHiveName { get; set; }
+
+        public bool ShowOKButton 
+        { 
+            get { return btnOK.Visible; }
+            set { btnOK.Visible = value; }
+        }
 
         public List<string> FavoriteFolders
         {
@@ -113,6 +117,21 @@ namespace OPMedia.UI.Dialogs
         private void lvFavorites_Resize(object sender, EventArgs e)
         {
             colPath.Width = lvFavorites.Width - SystemInformation.VerticalScrollBarWidth;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (btnOK.Visible)
+            {
+                Save();
+                FindForm().Close();
+            }
+        }
+
+        public void Save()
+        {
+            ProTONEConfig.SetFavoriteFolders(this.FavoriteFolders,
+                    this.FavoriteFoldersHiveName);
         }
     }
 }

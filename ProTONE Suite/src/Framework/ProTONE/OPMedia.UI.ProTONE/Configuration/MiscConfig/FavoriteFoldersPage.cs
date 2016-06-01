@@ -24,7 +24,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         public FavoriteFoldersPage()
         {
             InitializeComponent();
-
+            favoriteFoldersControl.ShowOKButton = false;
             favoriteFoldersControl.FavoriteFoldersHiveName = "FavoriteFolders";
             favoriteFoldersControl.OnModified += new EventHandler(favoriteFoldersControl_OnModified);
         }
@@ -36,8 +36,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         protected override void SaveInternal()
         {
-            ProTONEConfig.SetFavoriteFolders(favoriteFoldersControl.FavoriteFolders,
-                favoriteFoldersControl.FavoriteFoldersHiveName);
+            favoriteFoldersControl.Save();
         }
     }
 }

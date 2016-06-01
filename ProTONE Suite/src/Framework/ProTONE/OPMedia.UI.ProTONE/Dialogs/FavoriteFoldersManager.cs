@@ -25,6 +25,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             InitializeComponent();
 
             favoriteFoldersControl.FavoriteFoldersHiveName = favFoldersHiveName;
+            favoriteFoldersControl.ShowOKButton = true;
 
             this.Load += new EventHandler(FavoriteFoldersManager_Load);
         }
@@ -59,7 +60,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.favoriteFoldersControl.FavoriteFoldersHiveName = null;
             this.favoriteFoldersControl.Location = new System.Drawing.Point(0, 0);
             this.favoriteFoldersControl.Name = "favoriteFoldersControl";
-            this.favoriteFoldersControl.Size = new System.Drawing.Size(390, 172);
+            this.favoriteFoldersControl.Size = new System.Drawing.Size(398, 176);
             this.favoriteFoldersControl.TabIndex = 0;
             // 
             // btnOK
@@ -69,10 +70,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(332, 145);
+            this.btnOK.Location = new System.Drawing.Point(478, 221);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(55, 25);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_OK";
@@ -82,6 +84,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // FavoriteFoldersManager
             // 
             this.ClientSize = new System.Drawing.Size(400, 200);
+            this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "FavoriteFoldersManager";
             this.pnlContent.ResumeLayout(false);
             this.pnlContent.PerformLayout();

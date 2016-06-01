@@ -150,7 +150,11 @@ namespace OPMedia.UI.Controls
 		{
             get
             {
-                return this.SelectedNode.FullPath;
+                string selPath = this.SelectedNode.FullPath;
+                if (string.IsNullOrEmpty(selPath))
+                    return null;
+
+                return selPath.Replace("\\\\", "\\");
             }
 		}
 
