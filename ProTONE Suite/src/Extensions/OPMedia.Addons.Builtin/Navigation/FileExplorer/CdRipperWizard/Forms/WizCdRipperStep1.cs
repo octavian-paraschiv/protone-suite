@@ -20,6 +20,7 @@ using OPMedia.UI.Controls;
 using System.Threading;
 using OPMedia.Runtime.ProTONE.Configuration;
 using WF = System.Windows.Forms;
+using OPMedia.UI.Themes;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 {
@@ -75,12 +76,12 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
         private void ResizeColumns()
         {
-            colTrackNo.Width = 36;
-            colSizeBytes.Width = 65;
+            colTrackNo.Width = 37;
+            colSizeBytes.Width = 60;
             colDuration.Width = 55;
 
             int w = lvTracks.Width - colTrackNo.Width - colDuration.Width - colSizeBytes.Width -
-                SystemInformation.VerticalScrollBarWidth;
+                SystemInformation.VerticalScrollBarWidth - 3;
 
             colAlbum.Width = colArtist.Width = colTitle.Width = colGenre.Width = w / 4;
         }
@@ -323,15 +324,19 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
             Wizard.CanMoveNext = ((BkgTask as Task).Tracks.Count > 0);
         }
 
-        private void WizCdRipperStep1_Load(object sender, EventArgs e)
-        {
 
+        private void OnUncheckAll(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (ListViewItem lvi in lvTracks.Items)
+                lvi.ImageIndex = 0;
+
+            CheckNextButton();
         }
 
-        private void llClear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OnCheckAll(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            foreach(ListViewItem lvi in lvTracks.Items)
-                lvi.ImageIndex = 0;
+            foreach (ListViewItem lvi in lvTracks.Items)
+                lvi.ImageIndex = 1;
 
             CheckNextButton();
         }

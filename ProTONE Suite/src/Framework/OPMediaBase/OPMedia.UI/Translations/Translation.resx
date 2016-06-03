@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1089,5 +1089,11 @@ Do you want to create it ?</value>
   </data>
   <data name="TXT_BEST">
     <value>Best</value>
+  </data>
+  <data name="TXT_UNCHECK_ALL">
+    <value>Uncheck all</value>
+  </data>
+  <data name="TXT_CHECK_ALL">
+    <value>Check all</value>
   </data>
 </root>

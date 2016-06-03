@@ -1088,6 +1088,12 @@ Doriţi să fie creat ?</value>
     <value>C.m. rău</value>
   </data>
   <data name="TXT_BEST">
-    <value></value>
+    <value>Cel mai bun</value>
+  </data>
+  <data name="TXT_UNCHECK_ALL">
+    <value>Bifați tot</value>
+  </data>
+  <data name="TXT_CHECK_ALL">
+    <value>Debifați tot</value>
   </data>
 </root>

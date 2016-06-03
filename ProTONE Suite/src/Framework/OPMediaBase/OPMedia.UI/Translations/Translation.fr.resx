@@ -1087,4 +1087,13 @@ Voulez-vous le créer?</value>
   <data name="TXT_WORST" xml:space="preserve">
     <value>Pire</value>
   </data>
+  <data name="TXT_UNCHECK_ALL">
+    <value>Décocher tout</value>
+  </data>
+  <data name="TXT_CHECK_ALL">
+    <value>Cocher tout</value>
+  </data>
+  <data name="TXT_BEST">
+    <value>Meilleur</value>
+  </data>
 </root>

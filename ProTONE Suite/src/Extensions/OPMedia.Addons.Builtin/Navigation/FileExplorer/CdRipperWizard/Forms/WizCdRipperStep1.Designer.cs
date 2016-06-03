@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.llClear = new OPMedia.UI.Controls.OPMLinkLabel();
             this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.cmbAudioCDDrives = new OPMedia.UI.Controls.OPMComboBox();
@@ -43,24 +42,28 @@
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new OPMedia.UI.Controls.OPMButton();
+            this.opmFlowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
+            this.llCheckAll = new OPMedia.UI.Controls.OPMLinkLabel();
+            this.llUncheckAll = new OPMedia.UI.Controls.OPMLinkLabel();
             this.pbWaiting = new OPMedia.UI.Controls.WaitingPictureBox();
             this.opmTableLayoutPanel1.SuspendLayout();
+            this.opmFlowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWaiting)).BeginInit();
             this.SuspendLayout();
             // 
             // opmTableLayoutPanel1
             // 
             this.opmTableLayoutPanel1.ColumnCount = 3;
-            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.opmTableLayoutPanel1.Controls.Add(this.llClear, 2, 4);
+            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel3, 0, 4);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.cmbAudioCDDrives, 0, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel2, 0, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.lvTracks, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.btnRefresh, 1, 1);
+            this.opmTableLayoutPanel1.Controls.Add(this.opmFlowLayoutPanel1, 2, 4);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -75,19 +78,6 @@
             this.opmTableLayoutPanel1.Size = new System.Drawing.Size(600, 400);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
-            // llClear
-            // 
-            this.llClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llClear.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.llClear.Location = new System.Drawing.Point(410, 377);
-            this.llClear.Name = "llClear";
-            this.llClear.Size = new System.Drawing.Size(187, 23);
-            this.llClear.TabIndex = 0;
-            this.llClear.TabStop = true;
-            this.llClear.Text = "TXT_CLEAR";
-            this.llClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.llClear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llClear_LinkClicked);
-            // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
@@ -95,12 +85,12 @@
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmLabel3.Location = new System.Drawing.Point(0, 377);
-            this.opmLabel3.Margin = new System.Windows.Forms.Padding(0);
+            this.opmLabel3.Location = new System.Drawing.Point(0, 382);
+            this.opmLabel3.Margin = new System.Windows.Forms.Padding(5,0,0,0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(407, 23);
+            this.opmLabel3.Size = new System.Drawing.Size(419, 18);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_GRABBERHINT_STEP1";
             this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,7 +120,7 @@
             this.cmbAudioCDDrives.Margin = new System.Windows.Forms.Padding(0, 5, 0, 3);
             this.cmbAudioCDDrives.Name = "cmbAudioCDDrives";
             this.cmbAudioCDDrives.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbAudioCDDrives.Size = new System.Drawing.Size(383, 23);
+            this.cmbAudioCDDrives.Size = new System.Drawing.Size(395, 23);
             this.cmbAudioCDDrives.TabIndex = 1;
             this.cmbAudioCDDrives.SelectedIndexChanged += new System.EventHandler(this.OnDriveSelected);
             // 
@@ -168,7 +158,7 @@
             this.lvTracks.MultiSelect = false;
             this.lvTracks.Name = "lvTracks";
             this.lvTracks.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvTracks.Size = new System.Drawing.Size(600, 308);
+            this.lvTracks.Size = new System.Drawing.Size(600, 313);
             this.lvTracks.TabIndex = 3;
             this.lvTracks.UseCompatibleStateImageBehavior = false;
             this.lvTracks.View = System.Windows.Forms.View.Details;
@@ -206,7 +196,7 @@
             // 
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Reload16;
-            this.btnRefresh.Location = new System.Drawing.Point(384, 24);
+            this.btnRefresh.Location = new System.Drawing.Point(396, 24);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(1, 5, 0, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.OverrideBackColor = System.Drawing.Color.Empty;
@@ -216,6 +206,47 @@
             this.btnRefresh.TabIndex = 4;
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // opmFlowLayoutPanel1
+            // 
+            this.opmFlowLayoutPanel1.AutoSize = true;
+            this.opmFlowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.opmFlowLayoutPanel1.Controls.Add(this.llCheckAll);
+            this.opmFlowLayoutPanel1.Controls.Add(this.llUncheckAll);
+            this.opmFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.opmFlowLayoutPanel1.Location = new System.Drawing.Point(422, 385);
+            this.opmFlowLayoutPanel1.Name = "opmFlowLayoutPanel1";
+            this.opmFlowLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
+            this.opmFlowLayoutPanel1.Size = new System.Drawing.Size(175, 12);
+            this.opmFlowLayoutPanel1.TabIndex = 6;
+            this.opmFlowLayoutPanel1.WrapContents = false;
+            // 
+            // llCheckAll
+            // 
+            this.llCheckAll.AutoSize = true;
+            this.llCheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
+            this.llCheckAll.Location = new System.Drawing.Point(3, 0);
+            this.llCheckAll.Margin = new System.Windows.Forms.Padding(3, 0, 13, 0);
+            this.llCheckAll.Name = "llCheckAll";
+            this.llCheckAll.Size = new System.Drawing.Size(70, 12);
+            this.llCheckAll.TabIndex = 1;
+            this.llCheckAll.TabStop = true;
+            this.llCheckAll.Text = "TXT_CHECK_ALL";
+            this.llCheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.llCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OnCheckAll);
+            // 
+            // llUncheckAll
+            // 
+            this.llUncheckAll.AutoSize = true;
+            this.llUncheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
+            this.llUncheckAll.Location = new System.Drawing.Point(89, 0);
+            this.llUncheckAll.Name = "llUncheckAll";
+            this.llUncheckAll.Size = new System.Drawing.Size(83, 12);
+            this.llUncheckAll.TabIndex = 0;
+            this.llUncheckAll.TabStop = true;
+            this.llUncheckAll.Text = "TXT_UNCHECK_ALL";
+            this.llUncheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.llUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OnUncheckAll);
             // 
             // pbWaiting
             // 
@@ -235,9 +266,10 @@
             this.Controls.Add(this.opmTableLayoutPanel1);
             this.Name = "WizCdRipperStep1";
             this.Size = new System.Drawing.Size(600, 400);
-            this.Load += new System.EventHandler(this.WizCdRipperStep1_Load);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
+            this.opmFlowLayoutPanel1.ResumeLayout(false);
+            this.opmFlowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWaiting)).EndInit();
             this.ResumeLayout(false);
 
@@ -260,6 +292,8 @@
         private System.Windows.Forms.ColumnHeader colAlbum;
         private UI.Controls.OPMLabel opmLabel3;
         private UI.Controls.WaitingPictureBox pbWaiting;
-        private UI.Controls.OPMLinkLabel llClear;
+        private UI.Controls.OPMLinkLabel llUncheckAll;
+        private UI.Controls.OPMFlowLayoutPanel opmFlowLayoutPanel1;
+        private UI.Controls.OPMLinkLabel llCheckAll;
     }
 }

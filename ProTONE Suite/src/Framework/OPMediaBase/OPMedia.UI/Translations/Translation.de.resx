@@ -1087,4 +1087,13 @@ Wollen Sie es schaffen?</value>
   <data name="TXT_WORST" xml:space="preserve">
     <value>Schlechteste</value>
   </data>
+  <data name="TXT_CHECK_ALL">
+    <value>Alle Aktivieren</value>
+  </data>
+  <data name="TXT_UNCHECK_ALL">
+    <value>Alle Deaktivieren</value>
+  </data>
+  <data name="TXT_BEST">
+    <value>Beste</value>
+  </data>
 </root>
