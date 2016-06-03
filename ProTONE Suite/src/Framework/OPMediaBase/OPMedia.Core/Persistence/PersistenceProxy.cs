@@ -5,6 +5,8 @@ using System.Text;
 using System.ServiceModel;
 using OPMedia.Core.Logging;
 using System.Security.Principal;
+using System.ServiceProcess;
+using System.Threading;
 
 namespace OPMedia.Core
 {
@@ -23,6 +25,8 @@ namespace OPMedia.Core
         {
             try
             {
+                ActivatePersistenceService();
+
                 try
                 {
                     _persistenceContext = WindowsIdentity.GetCurrent().Name;
@@ -39,6 +43,30 @@ namespace OPMedia.Core
             }
 
             Open();
+        }
+
+        private void ActivatePersistenceService()
+        {
+            int attempts = 5;
+
+            while(attempts > 0)
+            {
+                try
+                {
+                    ServiceController srv = new ServiceController(Constants.PersistenceServiceShortName);
+                    if (srv.Status == ServiceControllerStatus.Running)
+                        return;
+
+                    srv.Start();
+                    Thread.Sleep(500);
+                }
+                catch(Exception ex)
+                {
+                    Logger.LogException(ex);
+                }
+
+                attempts--;
+            }
         }
 
         protected virtual void Open()

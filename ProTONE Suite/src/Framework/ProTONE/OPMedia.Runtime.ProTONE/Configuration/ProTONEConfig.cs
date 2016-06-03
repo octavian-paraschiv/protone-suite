@@ -155,31 +155,26 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Level 2 Settings using Persistence Service (Per-user settings)
 
-        private static List<string> __favoriteFolders = null;
-
         public static List<string> GetFavoriteFolders(string favFoldersHiveName)
         {
-            if (__favoriteFolders == null)
-            {
-                __favoriteFolders = new List<string>();
+            List<string> favoriteFolders = new List<string>();
 
-                string str = PersistenceProxy.ReadObject(favFoldersHiveName, string.Empty);
-                if (!string.IsNullOrEmpty(str))
-                {
-                    string[] favFolders = StringUtils.ToStringArray(str, '?');
-                    __favoriteFolders.AddRange(favFolders);
-                }
+            string str = PersistenceProxy.ReadObject(favFoldersHiveName, string.Empty);
+            if (!string.IsNullOrEmpty(str))
+            {
+                string[] favFolders = StringUtils.ToStringArray(str, '?');
+                favoriteFolders.AddRange(favFolders);
             }
 
-            return __favoriteFolders;
+            return favoriteFolders;
         }
 
         public static void SetFavoriteFolders(List<string> folders, string favFoldersHiveName)
         {
-            __favoriteFolders.Clear();
-            __favoriteFolders.AddRange(folders);
+            List<string> favoriteFolders = new List<string>();
+            favoriteFolders.AddRange(folders);
 
-            string favFolders = StringUtils.FromStringArray(__favoriteFolders.ToArray(), '?');
+            string favFolders = StringUtils.FromStringArray(favoriteFolders.ToArray(), '?');
             if (favFolders == null)
                 favFolders = string.Empty;
 
