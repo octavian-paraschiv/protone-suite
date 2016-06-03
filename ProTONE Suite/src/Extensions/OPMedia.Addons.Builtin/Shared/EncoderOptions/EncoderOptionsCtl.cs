@@ -83,6 +83,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         private void OnSelectOutputFormat(object sender, EventArgs e)
         {
             ShowPanel(cmbOutputFormat.SelectedIndex);
+            FireSettingsChanged(sender, e);
         }
 
         private void ShowPanel(int index)
