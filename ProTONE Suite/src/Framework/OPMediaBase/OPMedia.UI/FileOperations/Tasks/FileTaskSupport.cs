@@ -340,21 +340,20 @@ namespace OPMedia.UI.FileOperations.Tasks
                         {
                             Directory.CreateDirectory(dir);
                             Log(FSAction.NewFolder, dir);
-
-                            // File system changed => refresh will be required
-                            this.RequiresRefresh = true;
-
                         }
                         if (fileExists)
                         {
                             File.SetAttributes(destFile, FileAttributes.Normal);
+                            File.Delete(destFile);
 
-                            // File system changed => refresh will be required
-                            this.RequiresRefresh = true;
-
+                            if (this.CopyFile(srcFile, destFile))
+                            {
+                                this.DeleteFile(srcFile, false);
+                            }
                         }
+                        else
+                            File.Move(srcFile, destFile);
 
-                        File.Move(srcFile, destFile);
                         Log(FSAction.Move, srcFile, destFile);
 
                         // File system changed => refresh will be required

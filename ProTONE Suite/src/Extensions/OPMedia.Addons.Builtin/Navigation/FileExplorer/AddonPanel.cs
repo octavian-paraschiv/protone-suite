@@ -67,7 +67,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         //private bool drivesDisplayed = false;
 
         private ImageList ilDrives = null;
-        private FileTaskForm _fileTask = null;
+        
+        private FileTaskForm _pasteFileTask = null;
+        private FileTaskForm _deleteFileTask = null;
 
         private ImageList ilFavorites = null;
 
@@ -547,6 +549,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 if (!IsToolActionEnabled(action))
                     return;
 
+                FileTaskForm activeFileTask = null;
+
                 updateUiTimer.Stop();
 
                 List<string> selItems = opmShellList.SelectedPaths;
@@ -625,15 +629,16 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                     break;
 
                                 case ToolAction.ToolActionCopy:
-                                    _fileTask = new FEFileTaskForm(FileTaskType.Copy, taskSearch.MatchingItems, opmShellList.Path);
+                                    _pasteFileTask = new FEFileTaskForm(FileTaskType.Copy, taskSearch.MatchingItems, opmShellList.Path);
                                     break;
 
                                 case ToolAction.ToolActionCut:
-                                    _fileTask = new FEFileTaskForm(FileTaskType.Move, taskSearch.MatchingItems, opmShellList.Path);
+                                    _pasteFileTask = new FEFileTaskForm(FileTaskType.Move, taskSearch.MatchingItems, opmShellList.Path);
                                     break;
 
                                 case ToolAction.ToolActionDelete:
-                                    _fileTask = new FEFileTaskForm(FileTaskType.Delete, taskSearch.MatchingItems, opmShellList.Path);
+                                    _deleteFileTask = new FEFileTaskForm(FileTaskType.Delete, taskSearch.MatchingItems, opmShellList.Path);
+                                    activeFileTask = _deleteFileTask;
                                     break;
 
                                 case ToolAction.ToolActionLaunch:
@@ -683,24 +688,26 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                         break;
 
                     case ToolAction.ToolActionCopy:
-                        _fileTask = new FEFileTaskForm(FileTaskType.Copy, opmShellList.SelectedPaths, opmShellList.Path);
+                        _pasteFileTask = new FEFileTaskForm(FileTaskType.Copy, opmShellList.SelectedPaths, opmShellList.Path);
                         return;
 
                     case ToolAction.ToolActionCut:
-                        _fileTask = new FEFileTaskForm(FileTaskType.Move, opmShellList.SelectedPaths, opmShellList.Path);
+                        _pasteFileTask = new FEFileTaskForm(FileTaskType.Move, opmShellList.SelectedPaths, opmShellList.Path);
                         return;
 
                     case ToolAction.ToolActionPaste:
-                        if (_fileTask != null)
+                        if (_pasteFileTask != null)
                         {
-                            _fileTask.DestFolder = opmShellList.Path;
+                            _pasteFileTask.DestFolder = opmShellList.Path;
+                            activeFileTask = _pasteFileTask;
                         }
                         break;
 
                     case ToolAction.ToolActionDelete:
                         if (!opmShellList.IsInEditMode)
                         {
-                            _fileTask = new FEFileTaskForm(FileTaskType.Delete, opmShellList.SelectedPaths, opmShellList.Path);
+                            _deleteFileTask = new FEFileTaskForm(FileTaskType.Delete, opmShellList.SelectedPaths, opmShellList.Path);
+                            activeFileTask = _deleteFileTask;
                         }
                         break;
 
@@ -749,24 +756,30 @@ namespace OPMedia.Addons.Builtin.FileExplorer
 
                 }
 
-                if (_fileTask != null)
+                if (activeFileTask != null)
                 {
                     RaiseNavigationAction(NavActionType.ActionCancelAutoPreview, null, null);
 
                     try
                     {
                         opmShellList.EnableAutoRefresh(false);
-                        DialogResult dlg = _fileTask.ShowDialog();
+                        DialogResult dlg = activeFileTask.ShowDialog();
                     }
                     finally
                     {
-                        if (_fileTask.RequiresRefresh)
+                        if (activeFileTask.RequiresRefresh)
                         {
                             opmShellList.RefreshList(true);
                         }
 
                         opmShellList.EnableAutoRefresh(true);
-                        _fileTask = null;
+
+                        if (activeFileTask.FileTaskType == FileTaskType.Delete)
+                            _deleteFileTask = null;
+                        else
+                            _pasteFileTask = null;
+
+                        activeFileTask = null;
                     }
                 }
             }
@@ -878,8 +891,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
 
                     case ToolAction.ToolActionPaste:
                         BuildMenuText(btn, "TXT_PASTE", string.Empty, OPMShortcut.CmdGenericPaste);
-                        btn.Enabled = (_fileTask != null &&
-                            (_fileTask.FileTaskType == FileTaskType.Copy || _fileTask.FileTaskType == FileTaskType.Move));
+                        btn.Enabled = (_pasteFileTask != null &&
+                            (_pasteFileTask.FileTaskType == FileTaskType.Copy || _pasteFileTask.FileTaskType == FileTaskType.Move));
                         break;
 
                     case ToolAction.ToolActionRename:
