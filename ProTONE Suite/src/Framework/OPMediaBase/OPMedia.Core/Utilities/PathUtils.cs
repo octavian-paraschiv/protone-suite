@@ -88,6 +88,13 @@ namespace OPMedia.Core
         {
             try
             {
+                if (string.IsNullOrEmpty(path))
+                    return string.Empty;
+
+                // Is this a VPath ?? (Catalog explorer item)
+                if (path.EndsWith(":"))
+                    return ":";
+
                 string ext = Path.GetExtension(path);
                 return ext.Trim('.').ToLowerInvariant();
             }
