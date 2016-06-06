@@ -52,6 +52,7 @@ using OPMedia.Core.NetworkAccess;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.UI.Controls.Dialogs;
+using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
 
 #endregion
 
@@ -671,7 +672,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             }
                             
                             TaggingWizardMain.Execute(FindForm(), taskTagging);
-                            ReloadProperties();
+
+                            if (taskTagging.TaskType != TaskType.MultiRename)
+                                ReloadProperties();
+                            else
+                                RaiseNavigationAction(NavActionType.ActionSelectMultipleItems, opmShellList.SelectedPaths);
                         }
                         return;
 

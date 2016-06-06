@@ -155,7 +155,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
             foreach (string item in strItems)
             {
                 ITaggedMediaFileInfo tmfi = TaggedMediaFileInfoFactory.GetTaggedMediaFileInfo(item, deepLoad && (strItems.Count == 1));
-                if (tmfi.IsValid)
+                if (tmfi != null && tmfi.IsValid)
                 {
                     lii.Add(tmfi);
                 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -28,8 +29,16 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
     {
         public static ITaggedMediaFileInfo GetTaggedMediaFileInfo(string path, bool deepLoad)
         {
-            MediaFileInfo mfi = MediaFileInfo.FromPath(path, deepLoad);
-            return mfi as ITaggedMediaFileInfo;
+            try
+            {
+                MediaFileInfo mfi = MediaFileInfo.FromPath(path, deepLoad);
+                return mfi as ITaggedMediaFileInfo;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return null;
+            }
         }
 
         public static List<String> TaggedFileTypes

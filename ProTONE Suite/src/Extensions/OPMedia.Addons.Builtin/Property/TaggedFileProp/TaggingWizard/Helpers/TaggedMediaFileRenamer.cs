@@ -25,7 +25,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         public string GetNewPath(WordCasing wordCasing)
         {
             string retVal = _taggedFileInfo.Path;
-            if (_taggedFileInfo.IsValid)
+            if (_taggedFileInfo != null && _taggedFileInfo.IsValid)
             {
                 string newName = renamePattern;
                 bool doRename = false;

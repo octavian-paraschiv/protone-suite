@@ -29,7 +29,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this._taggedFileInfo = TaggedMediaFileInfoFactory.GetTaggedMediaFileInfo(path, false);
             this.task = task;
 
-            if (_taggedFileInfo.IsValid)
+            if (_taggedFileInfo != null && _taggedFileInfo.IsValid)
             {
                 FileInfo fi = _taggedFileInfo.FileSystemInfo as FileInfo;
                 if (fi != null)
