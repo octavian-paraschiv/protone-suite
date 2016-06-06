@@ -230,7 +230,7 @@ namespace OPMedia.UI.FileTasks
                     if (allLinkedFiles.Contains(srcFile.ToLowerInvariant()))
                         SrcFiles.Remove(srcFile);
                 }
-                
+
                 foreach (string path in SrcFiles)
                 {
                     if (Directory.Exists(path))
@@ -246,6 +246,8 @@ namespace OPMedia.UI.FileTasks
                         ObjectsCount++;
                     }
                 }
+
+                ObjectsCount += allLinkedFiles.Count;
 
                 FireTaskProgress(ProgressEventType.Started, string.Empty, UpdateProgressData.Empty);
 
