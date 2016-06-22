@@ -501,7 +501,6 @@
     <EmbeddedResource Include="Resources\btnPrev.png" />
     <EmbeddedResource Include="Resources\btnSavePlaylist.png" />
     <EmbeddedResource Include="Resources\btnStop.png" />
-    <EmbeddedResource Include="Resources\Addons.png" />
     <EmbeddedResource Include="Resources\btnClear.png" />
     <EmbeddedResource Include="Resources\diagnostics.png" />
     <EmbeddedResource Include="Resources\add.png" />

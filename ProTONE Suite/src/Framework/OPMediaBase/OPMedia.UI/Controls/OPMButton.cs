@@ -245,13 +245,15 @@ namespace OPMedia.UI.Controls
 
             if (this.Image != null)
             {
+                rc = ClientRectangle;
+
                 Rectangle rcImage = new Rectangle(
                     (rc.Size.Width - Image.Size.Width) / 2,
                     (rc.Size.Height - Image.Size.Height) / 2,
                     rc.Size.Width, rc.Size.Height);
 
-                int l = Math.Max(2, rcImage.Left);
-                int t = Math.Max(2, rcImage.Top);
+                int l = rcImage.Left;
+                int t = rcImage.Top;
                 rcImage.Location = new Point(l, t);
 
                 int w = Math.Min(Image.Width, rcImage.Size.Width);

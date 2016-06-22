@@ -127,9 +127,6 @@
   <data name="Add3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Addons" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Addons.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="AudioMediaType" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AudioMediaType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -250,10 +247,10 @@
   <data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="btnMoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MoveDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="btnMoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Music_Note_Double_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
