@@ -164,7 +164,7 @@ Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}
 Source: {#BINDIR}\DefaultAddons.OPMedia.MediaLibrary.config; DestDir: {app}
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 
-Source: {#BINDIR}\System.Data.SqlServerCe.dll; DestDir: {app}
+Source: {#EXTDIR}\SQLCE\System.Data.SqlServerCe.dll; DestDir: {app}
 Source: {#EXTDIR}\SQLCE\sqlceca40.dll; DestDir: {app}\x86
 Source: {#EXTDIR}\SQLCE\sqlcecompact40.dll; DestDir: {app}\x86
 Source: {#EXTDIR}\SQLCE\sqlceer40EN.dll; DestDir: {app}\x86
