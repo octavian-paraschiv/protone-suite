@@ -19,6 +19,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -481,12 +482,21 @@ namespace OPMedia.UI.ProTONE.Configuration
 
     public class SubtitleLanguage : IComparable
     {
+        const int LOCALE_CUSTOM_UNSPECIFIED = 0x1000;
+
         private static CultureInfo[] __cultures =
             CultureInfo.GetCultures(CultureTypes.NeutralCultures);
 
         public static CultureInfo[] AvailableLanguages
         {
-            get { return __cultures; }
+            get 
+            {
+                var l = (from c in __cultures
+                         where c.LCID != LOCALE_CUSTOM_UNSPECIFIED
+                         select c).ToArray();
+
+                return l;
+            }
         }
 
         public int LCID = -1;
@@ -503,14 +513,21 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         public override string ToString()
         {
-            if (LCID > 0)
+            try
             {
-                CultureInfo ci = new CultureInfo(LCID);
+                if (LCID > 0 && LCID != LOCALE_CUSTOM_UNSPECIFIED)
+                {
+                    CultureInfo ci = new CultureInfo(LCID);
 
-                return string.Format("{0} | {1} | {2}",
-                    StringUtils.CapitalizeWords(ci.EnglishName), 
-                    StringUtils.CapitalizeWords(ci.NativeName), 
-                    ci.TwoLetterISOLanguageName.ToUpperInvariant());
+                    return string.Format("{0} | {1} | {2}",
+                        StringUtils.CapitalizeWords(ci.EnglishName),
+                        StringUtils.CapitalizeWords(ci.NativeName),
+                        ci.TwoLetterISOLanguageName.ToUpperInvariant());
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
 
             return "[ " + Translator.Translate("TXT_NO_LANG") + " ]";
