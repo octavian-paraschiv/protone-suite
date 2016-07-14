@@ -456,7 +456,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override bool IsEndOfMedia()
         {
-            return (GetMediaPosition() >= GetMediaLength());
+            long nMediaPos = (long)GetMediaPosition();
+            long nMediaLen = (long)GetMediaLength();
+            long nElapsed = base._elapsedSeconds;
+
+            return (nElapsed >= nMediaLen || nMediaPos >= nMediaLen);
         }
 
         protected override bool IsFullScreen()
