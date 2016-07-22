@@ -189,7 +189,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         private string GetName(string dir, DriveInfo rootDrive)
         {
-            string retVal = dir;
+            string retVal = PathUtils.GetDirectoryTitle(dir);
             string root = Path.GetPathRoot(dir);
 
             string rootSpec = root.ToString().TrimEnd(PathUtils.DirectorySeparator.ToCharArray());
@@ -214,7 +214,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 CatalogItem ci = new CatalogItem(cat);
                 ci.IsRoot = false;
                 ci.ItemType = cat.CatalogItemType_GetByTypeCode("FIL").TypeID; // is a file
-                ci.Name = file;
+                ci.Name = Path.GetFileName(file);
 
                 DriveInfo di = new DriveInfo(Path.GetPathRoot(file));
                 if (di.DriveType == DriveType.Removable || di.DriveType == DriveType.CDRom)

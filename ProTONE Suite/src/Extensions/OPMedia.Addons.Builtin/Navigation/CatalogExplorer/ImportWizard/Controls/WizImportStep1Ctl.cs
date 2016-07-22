@@ -58,6 +58,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
 
         protected override void OnPageEnter_Initializing()
         {
+            Wizard.CanMoveNext = false;
+
             if (BkgTask == null)
             {
                 BkgTask = new Task();
