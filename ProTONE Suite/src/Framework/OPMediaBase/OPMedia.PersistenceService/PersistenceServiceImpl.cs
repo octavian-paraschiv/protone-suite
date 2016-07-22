@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Transactions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
+using System.Data.SqlServerCe;
 
 namespace OPMedia.PersistenceService
 {
@@ -16,7 +17,8 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                using (Persistence db = new Persistence("Persistence.sdf"))
+                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
+                using (Persistence db = new Persistence(conn))
                 {
                     var s = (from po in db.PersistedObjects
                             where
@@ -45,7 +47,8 @@ namespace OPMedia.PersistenceService
                 //opt.IsolationLevel = IsolationLevel.Snapshot;
                 opt.Timeout = TimeSpan.FromSeconds(3);
 
-                using (Persistence db = new Persistence("Persistence.sdf"))
+                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
+                using (Persistence db = new Persistence(conn))
                 {
                     var obj = (from po in db.PersistedObjects
                                 where
@@ -91,7 +94,8 @@ namespace OPMedia.PersistenceService
                 //opt.IsolationLevel = IsolationLevel.Snapshot;
                 opt.Timeout = TimeSpan.FromSeconds(3);
 
-                using (Persistence db = new Persistence("Persistence.sdf"))
+                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
+                using (Persistence db = new Persistence(conn))
                 {
                     var obj = (from po in db.PersistedObjects
                                 where
