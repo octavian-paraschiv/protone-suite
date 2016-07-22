@@ -32,6 +32,7 @@ namespace OPMedia.UI.Wizards
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblWizardResults = new OPMedia.UI.Controls.OPMLabel();
             this.pbProgress = new OPMedia.UI.Controls.OPMProgressBar();
             this.tvResults = new OPMedia.UI.Controls.OPMTreeView();
@@ -65,6 +66,7 @@ namespace OPMedia.UI.Wizards
             this.pbProgress.Maximum = 10000D;
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.NrTicks = 20;
+            this.pbProgress.OverrideBackColor = System.Drawing.Color.Empty;
             this.pbProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbProgress.ShowTicks = false;
             this.pbProgress.Size = new System.Drawing.Size(212, 10);
@@ -118,7 +120,6 @@ namespace OPMedia.UI.Wizards
             this.lblStepDetails.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblStepDetails.Size = new System.Drawing.Size(212, 13);
             this.lblStepDetails.TabIndex = 3;
-            this.lblStepDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // WizFinishPageCtl
             // 
