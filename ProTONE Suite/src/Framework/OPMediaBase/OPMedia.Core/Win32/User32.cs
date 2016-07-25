@@ -498,6 +498,34 @@ namespace OPMedia.Core
         public IntPtr pwpos; // WINDOWPOS*
     }
 
+    public enum MessageFilterInfo : uint
+    {
+        None=0, 
+        AlreadyAllowed=1, 
+        AlreadyDisAllowed=2, 
+        AllowedHigher=3
+    };
+
+    public enum ChangeWindowMessageFilterExAction : uint
+    {
+        Reset = 0, 
+        Allow = 1, 
+        DisAllow = 2
+    };
+
+    public enum ChangeWindowMessageFilterFlags : uint
+    {
+        Add = 1, 
+        Remove = 2
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CHANGEFILTERSTRUCT
+    {
+        public uint size;
+        public MessageFilterInfo info;
+    }
+
     /// <summary>
     /// Helper class that holds all the data types and unmanaged
     /// functions imported from User32.dll. Refer to 
@@ -882,6 +910,14 @@ namespace OPMedia.Core
 
         [DllImport(USER32)]
         public static extern int GetSystemMetrics(int nIndex);
+
+        [DllImport(USER32)]
+        public static extern bool ChangeWindowMessageFilter(uint message, ChangeWindowMessageFilterFlags dwFlag);
+
+        [DllImport(USER32)]
+        public static extern bool ChangeWindowMessageFilterEx(IntPtr hWnd, uint msg, ChangeWindowMessageFilterExAction action, ref CHANGEFILTERSTRUCT changeInfo);
+
+
 #endif
 
         #endregion

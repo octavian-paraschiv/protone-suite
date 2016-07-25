@@ -198,5 +198,59 @@ namespace OPMedia.Core
         }
     }
 
-   
+    public static class Advapi32
+    {
+        const string ADVAPI32 = "advapi32.dll";
+
+        /// <summary>
+        /// Passed to <see cref="GetTokenInformation"/> to specify what
+        /// information about the token to return.
+        /// </summary>
+        public enum TokenInformationClass
+        {
+            TokenUser = 1,
+            TokenGroups,
+            TokenPrivileges,
+            TokenOwner,
+            TokenPrimaryGroup,
+            TokenDefaultDacl,
+            TokenSource,
+            TokenType,
+            TokenImpersonationLevel,
+            TokenStatistics,
+            TokenRestrictedSids,
+            TokenSessionId,
+            TokenGroupsAndPrivileges,
+            TokenSessionReference,
+            TokenSandBoxInert,
+            TokenAuditPolicy,
+            TokenOrigin,
+            TokenElevationType,
+            TokenLinkedToken,
+            TokenElevation,
+            TokenHasRestrictions,
+            TokenAccessInformation,
+            TokenVirtualizationAllowed,
+            TokenVirtualizationEnabled,
+            TokenIntegrityLevel,
+            TokenUiAccess,
+            TokenMandatoryPolicy,
+            TokenLogonSid,
+            MaxTokenInfoClass
+        }
+
+        /// <summary>
+        /// The elevation type for a user token.
+        /// </summary>
+        public enum TokenElevationType
+        {
+            TokenElevationTypeDefault = 1,
+            TokenElevationTypeFull,
+            TokenElevationTypeLimited
+        }
+
+        [DllImport(ADVAPI32, SetLastError = true)]
+        public static extern bool GetTokenInformation(IntPtr tokenHandle, TokenInformationClass tokenInformationClass, IntPtr tokenInformation, int tokenInformationLength, out int returnLength);
+    }
+
 }

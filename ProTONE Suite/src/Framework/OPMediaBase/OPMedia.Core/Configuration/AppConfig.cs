@@ -17,6 +17,7 @@ using System.Globalization;
 using Microsoft.Win32;
 using System.Security.Principal;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace OPMedia.Core.Configuration
 {
@@ -258,9 +259,57 @@ namespace OPMedia.Core.Configuration
             {
                 try
                 {
-                    WindowsIdentity user = WindowsIdentity.GetCurrent();
-                    WindowsPrincipal principal = new WindowsPrincipal(user);
-                    return principal.IsInRole(WindowsBuiltInRole.Administrator);
+                    WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                    WindowsPrincipal principal = new WindowsPrincipal(identity);
+
+                    if (principal.IsInRole(WindowsBuiltInRole.Administrator))
+                        return true;
+
+                    if (OSVersion < VerWinVista)
+                        // Operating system does not support UAC; skipping elevation check.
+                        return false;
+
+                    int tokenInfLength = Marshal.SizeOf(typeof(int));
+                    IntPtr tokenInformation = Marshal.AllocHGlobal(tokenInfLength);
+
+                    try
+                    {
+                        var token = identity.Token;
+                        var result = Advapi32.GetTokenInformation(token,
+                            Advapi32.TokenInformationClass.TokenElevationType, tokenInformation, tokenInfLength, out tokenInfLength);
+
+                        if (!result)
+                        {
+                            var exception = Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error());
+                            throw new InvalidOperationException("Couldn't get token information", exception);
+                        }
+
+                        var elevationType = (Advapi32.TokenElevationType)Marshal.ReadInt32(tokenInformation);
+
+                        switch (elevationType)
+                        {
+                            case Advapi32.TokenElevationType.TokenElevationTypeDefault:
+                                // TokenElevationTypeDefault - User is not using a split token, so they cannot elevate.
+                                return false;
+
+                            case Advapi32.TokenElevationType.TokenElevationTypeFull:
+                                // TokenElevationTypeFull - User has a split token, and the process is running elevated. Assuming they're an administrator.
+                                return true;
+
+                            case Advapi32.TokenElevationType.TokenElevationTypeLimited:
+                                // TokenElevationTypeLimited - User has a split token, but the process is not running elevated. Assuming they're an administrator.
+                                return true;
+
+                            default:
+                                // Unknown token elevation type.
+                                return false;
+                        }
+                    }
+                    finally
+                    {
+                        if (tokenInformation != IntPtr.Zero) 
+                            Marshal.FreeHGlobal(tokenInformation);
+                    }
                 }
                 catch
                 {

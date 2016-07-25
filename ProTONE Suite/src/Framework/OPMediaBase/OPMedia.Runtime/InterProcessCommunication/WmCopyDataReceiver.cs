@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using OPMedia.Core;
 using System.Runtime.InteropServices;
 using OPMedia.Core.Logging;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.InterProcessCommunication
 {
@@ -63,6 +64,26 @@ namespace OPMedia.Runtime.InterProcessCommunication
             {
                 CreateHandle(cp);
                 Logger.LogTrace("WmCopyDataWindow created,  wndName: {0}", cp.Caption);
+
+                int osVersion = AppConfig.OSVersion;
+                if (osVersion == AppConfig.VerWinVista)
+                {
+                    // Allow WM_COPYDATA through UIPI
+                    // On Vista, there is no way to do it per-window; you have to do it per-process
+                    User32.ChangeWindowMessageFilter((int)Messages.WM_COPYDATA, ChangeWindowMessageFilterFlags.Add);
+                    Logger.LogTrace("[Windows VISTA] Asking UIPI to allow WM_COPYDATA for WmCopyDataWindow ...");
+                }
+                else if (AppConfig.OSVersion >= AppConfig.VerWin7)
+                {
+                    // Allow WM_COPYDATA through UIPI
+                    CHANGEFILTERSTRUCT cfs = new CHANGEFILTERSTRUCT();
+                    cfs.size = (uint)Marshal.SizeOf(cfs);
+                    cfs.info = MessageFilterInfo.None;
+
+                    User32.ChangeWindowMessageFilterEx(this.Handle, (int)Messages.WM_COPYDATA, ChangeWindowMessageFilterExAction.Allow, ref cfs);
+                    Logger.LogTrace("[Windows 8 or later] Asking UIPI to allow WM_COPYDATA for WmCopyDataWindow ...");
+                }
+
             }
             catch
             {
