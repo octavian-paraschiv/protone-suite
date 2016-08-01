@@ -974,6 +974,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         double _prevTime = 0;
         void timerCheckState_Tick(object sender, EventArgs e)
         {
+            var newMediaPosition = this.MediaPosition;
             double nowTime = TimeSpan.FromTicks(DateTime.Now.Ticks).TotalSeconds;
             double diff = (nowTime - _prevTime);
             _prevTime = nowTime;
@@ -987,14 +988,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 newState = this.FilterState;
                 string newMedia = this.RenderMediaName;
 
-                if (newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running && oldMediaPosition == this.MediaPosition)
+                if (newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running && oldMediaPosition == newMediaPosition)
                 {
                     nofPasses++;
-                    Logger.LogHeavyTrace("Media position did not change in the last {0} iterations", nofPasses);
+                    Logger.LogHeavyTrace("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
+                        nofPasses, oldMediaPosition, newMediaPosition);
                 }
                 else
                 {
                     nofPasses = 0;
+                    Logger.LogHeavyTrace("Media position changed ... old={0}, new={1}",
+                        oldMediaPosition, newMediaPosition);
+
+                    oldMediaPosition = newMediaPosition;
                 }
 
                 if (this.IsEndOfMedia || (!IsStreamedMedia && nofPasses > 10))
@@ -1062,7 +1068,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 oldState = newState;
                 oldMedia = this.RenderMediaName;
-                oldMediaPosition = this.MediaPosition;
             }
         }
 
