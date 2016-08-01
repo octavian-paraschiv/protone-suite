@@ -39,7 +39,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.Resize += new EventHandler(RenderingFrame_Resize);
 
             this.FormButtons = Themes.FormButtons.Close;
-            this.TopMost = true;
+            this.ShowInTaskbar = true;
 
             _osdShowTimer.Interval = 500;
             _osdShowTimer.Tick += new EventHandler(_osdShowTimer_Tick);
@@ -122,31 +122,37 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         bool _settingFullScreenState = false;
         public void SetFullScreen(bool fullScreen, bool persistWindowState)
         {
-            _fullScreen = fullScreen;
-            _settingFullScreenState = true;
-
-            this.TitleBarVisible = !fullScreen;
-
-            if (_fullScreen)
+            try
             {
-                // Save position before entring full screen if told so
-                if (persistWindowState)
+                _fullScreen = fullScreen && ProTONEConfig.IsPlayer;
+                _settingFullScreenState = true;
+
+                this.TitleBarVisible = !fullScreen;
+
+                if (_fullScreen)
                 {
-                    ProTONEConfig.DetachedWindowLocation = this.Location;
-                    ProTONEConfig.DetachedWindowSize = this.Size;
-                    ProTONEConfig.DetachedWindowState = FormWindowState.Normal;
-                    AppConfig.Save();
+                    // Save position before entring full screen if told so
+                    if (persistWindowState)
+                    {
+                        ProTONEConfig.DetachedWindowLocation = this.Location;
+                        ProTONEConfig.DetachedWindowSize = this.Size;
+                        ProTONEConfig.DetachedWindowState = FormWindowState.Normal;
+                        AppConfig.Save();
+                    }
+
+                    this.WindowState = FormWindowState.Maximized;
                 }
-
-                this.WindowState = FormWindowState.Maximized;
+                else
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.Location = ProTONEConfig.DetachedWindowLocation;
+                    this.Size = ProTONEConfig.DetachedWindowSize;
+                }
             }
-            else
+            finally
             {
-                this.WindowState = FormWindowState.Normal;
-                this.Location = ProTONEConfig.DetachedWindowLocation;
-                this.Size = ProTONEConfig.DetachedWindowSize;
+                this.TopMost = (ProTONEConfig.IsMediaLibrary && !_fullScreen);
             }
-
         }
 
         protected override bool OnChangeWindowState(FormWindowState requestedState)

@@ -786,12 +786,16 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("FullScreenOn", false);
+                if (IsPlayer)
+                    return ConfigFileManager.Default.GetValue("FullScreenOn", false);
+
+                return false;
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("FullScreenOn", value);
+                if (IsPlayer == false)
+                    ConfigFileManager.Default.SetValue("FullScreenOn", value);
             }
         }
 
