@@ -35,7 +35,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             //btnBrowse.Image = bmp;
         }
 
-        protected override void  OnPageEnter_MovingNext()
+        protected override void OnPageLeave_MovingNext()
         {
             long insertionPointID = -1;
 
