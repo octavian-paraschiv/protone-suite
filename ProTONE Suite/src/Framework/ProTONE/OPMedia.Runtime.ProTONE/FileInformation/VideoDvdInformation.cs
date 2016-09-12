@@ -212,12 +212,9 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 switch (ver)
                 {
                     case AppConfig.VerWin10:
-                        retVal = AMDvdGraphFlags.SWDecPrefer;
-                        break;
-
                     case AppConfig.VerWin8:
                     case AppConfig.VerWin8_1:
-                        retVal = AMDvdGraphFlags.None;
+                        retVal = AMDvdGraphFlags.SWDecPrefer;
                         break;
 
                     default:
