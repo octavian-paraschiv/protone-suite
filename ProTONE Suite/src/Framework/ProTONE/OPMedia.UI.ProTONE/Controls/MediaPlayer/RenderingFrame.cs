@@ -40,6 +40,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             this.FormButtons = Themes.FormButtons.Close;
             this.ShowInTaskbar = true;
+            this.TopMost = (ProTONEConfig.IsMediaLibrary);
 
             _osdShowTimer.Interval = 500;
             _osdShowTimer.Tick += new EventHandler(_osdShowTimer_Tick);

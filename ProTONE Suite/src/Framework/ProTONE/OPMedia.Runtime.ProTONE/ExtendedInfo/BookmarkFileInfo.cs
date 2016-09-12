@@ -74,6 +74,9 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 
             try
             {
+                if (File.Exists(_path) == false)
+                    return;
+
                 using (StreamReader sr = new StreamReader(_path))
                 {
                     string line = sr.ReadLine();

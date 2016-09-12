@@ -100,6 +100,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             return true;
         }
 
+        static string _prevSubtitleFile = null;
         public static bool TestForExistingSubtitle(string movieFileName)
         {
             // If strFile indicates only a disk root, the movie is actually a DVD
@@ -113,16 +114,20 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             {
                 string subtitleFile = MediaRenderer.DefaultInstance.CurrentSubtitleFile;
 
-                if (string.IsNullOrEmpty(subtitleFile))
+                bool usingSubtitle = !string.IsNullOrEmpty(subtitleFile);
+
+                if (string.Compare(_prevSubtitleFile, subtitleFile, true) != 0)
                 {
-                    Logger.LogTrace("Not using a subtitle file");
-                    return false;
+                    _prevSubtitleFile = subtitleFile;
+
+                    // using another subtitle file that last time
+                    if (usingSubtitle)
+                        Logger.LogTrace("Using subtitle file: {0}", subtitleFile);
+                    else
+                        Logger.LogTrace("Not using a subtitle file");
                 }
-                else
-                {
-                    Logger.LogTrace("Using subtitle file: {0}", subtitleFile);
-                    return true;
-                }
+
+                return usingSubtitle;
             }
             else
             {
