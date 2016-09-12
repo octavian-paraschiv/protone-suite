@@ -57,6 +57,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 // Give enough time for the filter graph to be completely built
                 Thread.Sleep(500);
+
+                rotEntry = new DsROTEntry(mediaControl as IFilterGraph);
+
             }
 
             if (hint == DvdRenderingStartHint.MainMenu)
@@ -118,11 +121,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             AMDvdRenderStatus status;
 
-            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, AMDvdGraphFlags.VMR9Only, out status);
-            
+            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, VideoDvdInformation.DvdRenderingFlags, out status);
 
             if (status.bDvdVolInvalid)
                 throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);
+
+            Logger.LogTrace("Failed to open DVD streams: {0}", status.dwFailedStreamsFlag);
 
             dvdInfo = GetInterface(typeof(IDvdInfo2)) as IDvdInfo2;
 
@@ -147,6 +151,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 #if HAVE_SAMPLES
             InitAudioSampleGrabber_v2();
             CompleteAudioSampleGrabberIntialization();
+#else
+            rotEntry = new DsROTEntry(graphBuilder as IFilterGraph);
 #endif
 
             mediaEvent = mediaControl as IMediaEventEx;

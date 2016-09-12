@@ -571,6 +571,26 @@ namespace OPMedia.Core
         public static extern bool WritePrivateProfileString(string lpAppName,
            string lpKeyName, string lpString, string lpFileName);
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct OSVERSIONINFO
+        {
+            public uint dwOSVersionInfoSize;
+            public uint dwMajorVersion;
+            public uint dwMinorVersion;
+            public uint dwBuildNumber;
+            public uint dwPlatformId;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string szCSDVersion;
+            public Int16 wServicePackMajor;
+            public Int16 wServicePackMinor;
+            public Int16 wSuiteMask;
+            public Byte wProductType;
+            public Byte wReserved;
+        }
+
+        [DllImport(KERNEL32)]
+        public static extern bool GetVersionEx(ref OSVERSIONINFO osvi);  
+
         #endregion
     }
 

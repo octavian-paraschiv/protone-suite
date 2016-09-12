@@ -657,6 +657,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     name = mfi.Name;
                 }
 
+                if (isDVDVolume)
+                    Logger.LogTrace("Played media appears to be a DVD volume ...");
+                else if (isVideoFile)
+                    Logger.LogTrace("Played media appears to be a video file ...");
+                else
+                    Logger.LogTrace("Played media appears to be an audio file...");
+
                 if (isVideoFile || isDVDVolume)
                 {
                     ShowRenderingRegion();

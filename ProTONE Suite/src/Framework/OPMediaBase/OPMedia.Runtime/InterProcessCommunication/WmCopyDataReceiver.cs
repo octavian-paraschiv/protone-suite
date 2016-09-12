@@ -65,7 +65,7 @@ namespace OPMedia.Runtime.InterProcessCommunication
                 CreateHandle(cp);
                 Logger.LogTrace("WmCopyDataWindow created,  wndName: {0}", cp.Caption);
 
-                int osVersion = AppConfig.OSVersion;
+                uint osVersion = AppConfig.OSVersion;
                 if (osVersion == AppConfig.VerWinVista)
                 {
                     // Allow WM_COPYDATA through UIPI

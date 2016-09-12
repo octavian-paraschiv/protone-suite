@@ -474,8 +474,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         SWDecPrefer = 0x04,
         SWDecOnly = 0x08,
         NoVPE = 0x100,
-        VMR9Only = 0x800
+        DoNotClear = 0x200,
+        VMR9Only = 0x800,
+        EVROnly = 0x1000,   // only use EVR (otherwise fail) for rendering
+        EVRQOS = 0x2000,   // Enabled EVR Dynamic QoS
+        AdaptGraph = 0x4000,   // Adapt graph building to machine capbilities
+
+        Mask = 0xffff   // only lower WORD is used/allowed
     }
+
 
     /// <summary>
     /// From AM_DVD_STREAM_FLAGS

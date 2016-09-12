@@ -9,6 +9,7 @@ using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Core;
 using System.IO;
+using OPMedia.Core.Configuration;
 #endif
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
@@ -115,7 +116,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
             AMDvdRenderStatus status;
 
-            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, AMDvdGraphFlags.VMR9Only, out status);
+            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, DvdRenderingFlags, out status);
 
             if (status.bDvdVolInvalid)
                 throw new COMException(ErrDvdVolume, -1);
@@ -198,6 +199,36 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     _chaptersPerTitle.Add(numChapters);
                 }
                 catch { }
+            }
+        }
+
+        public static AMDvdGraphFlags DvdRenderingFlags
+        {
+            get
+            {
+                AMDvdGraphFlags retVal = AMDvdGraphFlags.None;
+                var ver = AppConfig.OSVersion;
+
+                switch (ver)
+                {
+                    case AppConfig.VerWin10:
+                        retVal = AMDvdGraphFlags.SWDecPrefer;
+                        break;
+
+                    case AppConfig.VerWin8:
+                    case AppConfig.VerWin8_1:
+                        retVal = AMDvdGraphFlags.None;
+                        break;
+
+                    default:
+                        retVal = AMDvdGraphFlags.VMR9Only;
+                        break;
+                }
+
+                Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.", 
+                    ver / 10, ver % 10, retVal);
+
+                return retVal;
             }
         }
     }

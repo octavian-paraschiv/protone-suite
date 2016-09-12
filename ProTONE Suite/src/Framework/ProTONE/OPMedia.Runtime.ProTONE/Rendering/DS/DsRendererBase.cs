@@ -754,12 +754,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 if (sampleAnalyzerThread != null)
                     sampleAnalyzerThread.Join(200);
 
-                if (sampleGrabber != null)
-                {
-                    int hr = (mediaControl as IGraphBuilder).RemoveFilter(sampleGrabber as IBaseFilter);
-                    DsError.ThrowExceptionForHR(hr);
+                IBaseFilter filter = sampleGrabber as IBaseFilter;
 
-                    Marshal.ReleaseComObject(sampleGrabber);
+                if (filter != null)
+                {
+                    IGraphBuilder graphBuilder = (mediaControl as IGraphBuilder);
+                    if (graphBuilder != null)
+                    {
+                        int hr = graphBuilder.RemoveFilter(filter);
+                        DsError.ThrowExceptionForHR(hr);
+                    }
+
+                    Marshal.ReleaseComObject(filter);
                     sampleGrabber = null;
                 }
             }
