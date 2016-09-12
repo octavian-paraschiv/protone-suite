@@ -1538,12 +1538,21 @@ Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: xvid;
 Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: mp4v; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 
 ; Disable using MPG1/MPG2 codecs in Windows 7 and lower => use those that are shipped with Windows
-Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+Root: HKCU; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+Root: HKCU; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+
+; Enable using MPG1/MPG2 codecs in Windows 8 and higher
+Root: HKCU; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
+Root: HKCU; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
+
+; Disable using MPG1/MPG2 codecs in Windows 7 and lower => use those that are shipped with Windows
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
 
 ; Enable using MPG1/MPG2 codecs in Windows 8 and higher
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
+
 
 [UninstallDelete]
 Name: {app}\InstallUtil.InstallLog; Type: files
