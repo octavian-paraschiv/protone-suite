@@ -319,8 +319,6 @@ Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: dvsd; Val
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: fps1; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: loco; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpegAVI; ValueData: $00000005; Components: itemCodecs\itemFFDShow
-Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000000; Components: itemCodecs\itemFFDShow
-Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000000; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mss1; ValueData: $0000000c; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mss2; ValueData: $0000000c; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: qpeg; ValueData: $00000001; Components: itemCodecs\itemFFDShow
@@ -714,7 +712,7 @@ Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: a
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: showAvisynth; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: avisynthFfdshowSource; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScriptMULTI_SZ; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,36,00,38,00,2c,00,30,00,30,00,2c,00,36,00,35,00,2c,00,30,00,30,00,2c,00,37,00,38,00,2c,00,30,00,30,00,2c,00,32,00,38,00,2c,00,30,00,30,00,2c,00,33,00,37,00,2c,00,30,00,30,00,2c,00,32,00,39,00,2c,00,30,00,30,00,2c,00,33,00,61,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,32,00,63,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00; Components: itemCodecs\itemFFDShow
-Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScript; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00
+Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScript; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00
 ; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: isVis; ValueData: $00000000; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: showVis; ValueData: $00000001; Components: itemCodecs\itemFFDShow
@@ -1538,6 +1536,14 @@ Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: div3;
 Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: dx50; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: xvid; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow_vfw; ValueType: dword; ValueName: mp4v; ValueData: $00000001; Components: itemCodecs\itemFFDShow
+
+; Disable using MPG1/MPG2 codecs in Windows 7 and lower => use those that are shipped with Windows
+Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000000; Components: itemCodecs\itemFFDShow; OnlyBelowVersion: 0,6.2
+
+; Enable using MPG1/MPG2 codecs in Windows 8 and higher
+Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
+Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
 
 [UninstallDelete]
 Name: {app}\InstallUtil.InstallLog; Type: files
