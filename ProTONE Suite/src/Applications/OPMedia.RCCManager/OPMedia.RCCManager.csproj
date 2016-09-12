@@ -55,6 +55,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -172,6 +175,7 @@
     <Content Include="Resources\Delete.png" />
     <Content Include="Resources\Modify.png" />
     <Content Include="Resources\Save.png" />
+    <None Include="app.manifest" />
     <None Include="Resources\Nothing.png" />
     <None Include="Resources\Remote.png" />
     <None Include="Resources\RemoteDisabled.png" />
