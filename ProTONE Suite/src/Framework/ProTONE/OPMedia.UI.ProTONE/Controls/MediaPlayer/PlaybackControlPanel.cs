@@ -163,7 +163,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmStop.InactiveImage = Resources.btnStop;
             tsmNext.InactiveImage = Resources.btnNext;
             tsmPrev.InactiveImage = Resources.btnPrev;
-            tsmOpenDisk.InactiveImage = Resources.btnOpenDisk;
+
+            if (VideoDVDHelpers.IsOSSupported)
+                tsmOpenDisk.InactiveImage = Resources.btnOpenDisk;
+            else
+            {
+                tsmOpenDisk.Visible = false;
+                if (opmToolStrip1.Items.Contains(tsmOpenDisk))
+                    opmToolStrip1.Items.Remove(tsmOpenDisk);
+            }
+
             tsmOpenURL.InactiveImage = Resources.btnOpenURL;
             tsmLoad.InactiveImage = Resources.btnLoad;
             tsmOpenSettings.InactiveImage = Resources.btnOpenSettings;

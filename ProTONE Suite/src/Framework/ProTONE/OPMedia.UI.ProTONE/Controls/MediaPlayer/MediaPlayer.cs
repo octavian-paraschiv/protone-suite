@@ -512,21 +512,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void LoadDisc()
         {
-            SelectDvdMediaDlg dlg = new SelectDvdMediaDlg();
-            if (dlg.ShowDialog() == DialogResult.OK)
+            if (VideoDVDHelpers.IsOSSupported)
             {
-                if (dlg.SelectedMedia != null)
+                SelectDvdMediaDlg dlg = new SelectDvdMediaDlg();
+                if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    string[] dvdDrive = new string[] { dlg.SelectedMedia.DvdPath };
-
-                    pnlScreens.PlaylistScreen.Clear();
-                    pnlScreens.PlaylistScreen.AddFiles(dvdDrive);
-
-                    if (Autoplay)
+                    if (dlg.SelectedMedia != null)
                     {
-                        PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-                    }
+                        string[] dvdDrive = new string[] { dlg.SelectedMedia.DvdPath };
 
+                        pnlScreens.PlaylistScreen.Clear();
+                        pnlScreens.PlaylistScreen.AddFiles(dvdDrive);
+
+                        if (Autoplay)
+                        {
+                            PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
+                        }
+
+                    }
                 }
             }
         }

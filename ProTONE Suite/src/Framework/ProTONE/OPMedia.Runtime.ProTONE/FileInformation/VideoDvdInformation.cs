@@ -16,6 +16,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 {
     public class VideoDvdInformation : VideoFileInfo
     {
+        public const string UnsupportedWindows = "Sorry, ProTONE does not support playing video DVD's in the current Windows v.({0}).";
         public const string ErrDvdVolume = "An invalid DVD volume was specified";
 
         string _dvdPath = string.Empty;
@@ -116,7 +117,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
             AMDvdRenderStatus status;
 
-            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, DvdRenderingFlags, out status);
+            dvdGraphBuilder.TryRenderDVD(volumePath, out status);
 
             if (status.bDvdVolInvalid)
                 throw new COMException(ErrDvdVolume, -1);
@@ -201,8 +202,38 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 catch { }
             }
         }
+    }
 
-        public static AMDvdGraphFlags DvdRenderingFlags
+    public static class VideoDVDHelpers
+    {
+        public static bool IsOSSupported
+        {
+            get
+            {
+                bool retVal = false;
+
+                var ver = AppConfig.OSVersion;
+
+                switch (ver)
+                {
+                    case AppConfig.VerWin10:
+                    case AppConfig.VerWin7:
+                        retVal = true;
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+                Logger.LogTrace("[Windows {0}.{1}] - VideoDVDHelpers::IsOSSupported={2}",
+                    ver / 10, ver % 10, retVal);
+
+                return retVal;
+            }
+        }
+
+        private static AMDvdGraphFlags DvdRenderingFlags
         {
             get
             {
@@ -222,11 +253,52 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         break;
                 }
 
-                Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.", 
+                Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.",
                     ver / 10, ver % 10, retVal);
 
                 return retVal;
             }
+        }
+
+        public static void TryRenderDVD(this IDvdGraphBuilder dvdGraphBuilder, string volumePath, out AMDvdRenderStatus latestStatus)
+        {
+            // Is the OS supported for this operation ?
+            if (IsOSSupported == false)
+            {
+                var ver = AppConfig.OSVersion;
+                throw new COMException(string.Format(VideoDvdInformation.UnsupportedWindows, 
+                    string.Format("{0}.{1}", ver / 10, ver % 10)), -1);
+            }
+
+            // First we try with the default flags per current OS
+            AMDvdGraphFlags defaultFlags = DvdRenderingFlags;
+            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, defaultFlags, out latestStatus);
+            if (latestStatus.bDvdVolInvalid)
+                throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);
+
+            if (latestStatus.iNumStreamsFailed == 0)
+            {
+                Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using default flags {0} => SUCCESS !", defaultFlags);
+                return;
+            }
+
+            Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using default flags  {0} => failed to open DVD streams: {1}.",
+                defaultFlags, latestStatus.dwFailedStreamsFlag);
+
+            // If no success, we iterate through all possible rendering flags
+            foreach (AMDvdGraphFlags flags in Enum.GetValues(typeof(AMDvdGraphFlags)))
+            {
+                if (latestStatus.iNumStreamsFailed == 0)
+                {
+                    Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using flags {0} => SUCCESS !", flags);
+                    return;
+                }
+
+                Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using flags {0} => failed to open DVD streams: {1}", 
+                    flags, latestStatus.dwFailedStreamsFlag);
+            }
+
+            
         }
     }
 }

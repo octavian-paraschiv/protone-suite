@@ -16,6 +16,7 @@ using OPMedia.UI.Menus;
 using OPMedia.UI.Themes;
 using OPMedia.UI.ProTONE.Properties;
 using System.Drawing;
+using OPMedia.Runtime.ProTONE.FileInformation;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -198,6 +199,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void BuildMenuEntry(OPMShortcut cmd, MenuWrapper<T> menu, EventHandler clickHandler, int index = -1, bool enabled = true)
         {
+            if (cmd == OPMShortcut.CmdOpenDisk)
+            {
+                if (VideoDVDHelpers.IsOSSupported == false)
+                    return;
+            }
+
             string shortcuts = ShortcutMapper.GetShortcutString(cmd);
             string menuName = cmd.ToString().ToUpperInvariant().Replace("CMD", "MNU");
             string imageName = "btn" + cmd.ToString().Replace("Cmd", "");

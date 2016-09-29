@@ -16,6 +16,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.FileInformation;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -44,6 +45,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         void OnLoad(object sender, EventArgs e)
         {
+            dvdGroupBox.Visible = VideoDVDHelpers.IsOSSupported;
+            dvdGroupBox.Enabled = VideoDVDHelpers.IsOSSupported;
+
             cmbAudioCdInfoSource.SelectedIndexChanged += new EventHandler(OnSettingsChanged);
             cbDisableDVDMenu.CheckedChanged += new EventHandler(OnSettingsChanged);
             txtCddbServerName.TextChanged += new EventHandler(OnSettingsChanged);

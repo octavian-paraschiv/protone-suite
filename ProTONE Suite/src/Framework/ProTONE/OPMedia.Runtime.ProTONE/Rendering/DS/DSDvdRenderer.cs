@@ -121,7 +121,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             AMDvdRenderStatus status;
 
-            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, VideoDvdInformation.DvdRenderingFlags, out status);
+            dvdGraphBuilder.TryRenderDVD(volumePath, out status);
 
             if (status.bDvdVolInvalid)
                 throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);

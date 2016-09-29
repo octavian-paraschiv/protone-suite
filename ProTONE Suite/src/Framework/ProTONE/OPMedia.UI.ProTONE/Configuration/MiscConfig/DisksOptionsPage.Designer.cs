@@ -31,7 +31,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private void InitializeComponent()
         {
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.opmGroupBox2 = new OPMedia.UI.Controls.OPMGroupBox();
+            this.dvdGroupBox = new OPMedia.UI.Controls.OPMGroupBox();
             this.opmTableLayoutPanel2 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.cbDisableDVDMenu = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmGroupBox1 = new OPMedia.UI.Controls.OPMGroupBox();
@@ -43,7 +43,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerName = new OPMedia.UI.Controls.OPMTextBox();
             this.txtCddbServerPort = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.opmTableLayoutPanel1.SuspendLayout();
-            this.opmGroupBox2.SuspendLayout();
+            this.dvdGroupBox.SuspendLayout();
             this.opmTableLayoutPanel2.SuspendLayout();
             this.opmGroupBox1.SuspendLayout();
             this.opmTableLayoutPanel3.SuspendLayout();
@@ -53,7 +53,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.opmTableLayoutPanel1.ColumnCount = 1;
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Controls.Add(this.opmGroupBox2, 0, 1);
+            this.opmTableLayoutPanel1.Controls.Add(this.dvdGroupBox, 0, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.opmGroupBox1, 0, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -66,18 +66,18 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmTableLayoutPanel1.Size = new System.Drawing.Size(467, 326);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
-            // opmGroupBox2
+            // dvdGroupBox
             // 
-            this.opmGroupBox2.AutoSize = true;
-            this.opmGroupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.opmGroupBox2.Controls.Add(this.opmTableLayoutPanel2);
-            this.opmGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmGroupBox2.Location = new System.Drawing.Point(3, 115);
-            this.opmGroupBox2.Name = "opmGroupBox2";
-            this.opmGroupBox2.Size = new System.Drawing.Size(461, 48);
-            this.opmGroupBox2.TabIndex = 5;
-            this.opmGroupBox2.TabStop = false;
-            this.opmGroupBox2.Text = "DVD";
+            this.dvdGroupBox.AutoSize = true;
+            this.dvdGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dvdGroupBox.Controls.Add(this.opmTableLayoutPanel2);
+            this.dvdGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dvdGroupBox.Location = new System.Drawing.Point(3, 99);
+            this.dvdGroupBox.Name = "dvdGroupBox";
+            this.dvdGroupBox.Size = new System.Drawing.Size(461, 48);
+            this.dvdGroupBox.TabIndex = 5;
+            this.dvdGroupBox.TabStop = false;
+            this.dvdGroupBox.Text = "DVD";
             // 
             // opmTableLayoutPanel2
             // 
@@ -116,7 +116,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmGroupBox1.Location = new System.Drawing.Point(3, 3);
             this.opmGroupBox1.Name = "opmGroupBox1";
-            this.opmGroupBox1.Size = new System.Drawing.Size(461, 106);
+            this.opmGroupBox1.Size = new System.Drawing.Size(461, 90);
             this.opmGroupBox1.TabIndex = 4;
             this.opmGroupBox1.TabStop = false;
             this.opmGroupBox1.Text = "CD";
@@ -143,7 +143,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(455, 85);
+            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(455, 69);
             this.opmTableLayoutPanel3.TabIndex = 0;
             // 
             // opmLabel1
@@ -180,7 +180,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCddbServerName.Name = "lblCddbServerName";
             this.lblCddbServerName.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblCddbServerName.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblCddbServerName.Size = new System.Drawing.Size(152, 28);
+            this.lblCddbServerName.Size = new System.Drawing.Size(152, 20);
             this.lblCddbServerName.TabIndex = 2;
             this.lblCddbServerName.Text = "TXT_CDDB_SERVERNAME";
             this.lblCddbServerName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -190,37 +190,66 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCddbServerPort.AutoSize = true;
             this.lblCddbServerPort.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCddbServerPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblCddbServerPort.Location = new System.Drawing.Point(3, 57);
+            this.lblCddbServerPort.Location = new System.Drawing.Point(3, 49);
             this.lblCddbServerPort.Name = "lblCddbServerPort";
             this.lblCddbServerPort.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblCddbServerPort.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblCddbServerPort.Size = new System.Drawing.Size(152, 28);
+            this.lblCddbServerPort.Size = new System.Drawing.Size(152, 20);
             this.lblCddbServerPort.TabIndex = 3;
             this.lblCddbServerPort.Text = "TXT_CDDB_SERVERPORT";
             this.lblCddbServerPort.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCddbServerName
             // 
-            this.txtCddbServerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.txtCddbServerName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtCddbServerName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtCddbServerName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtCddbServerName.Location = new System.Drawing.Point(161, 32);
+            this.txtCddbServerName.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.txtCddbServerName.Location = new System.Drawing.Point(158, 29);
+            this.txtCddbServerName.Margin = new System.Windows.Forms.Padding(0);
+            this.txtCddbServerName.MaximumSize = new System.Drawing.Size(2000, 20);
+            this.txtCddbServerName.MaxLength = 32767;
+            this.txtCddbServerName.MinimumSize = new System.Drawing.Size(20, 20);
+            this.txtCddbServerName.Multiline = false;
             this.txtCddbServerName.Name = "txtCddbServerName";
+            this.txtCddbServerName.OverrideBackColor = System.Drawing.Color.Empty;
             this.txtCddbServerName.OverrideForeColor = System.Drawing.Color.Empty;
-            this.txtCddbServerName.Size = new System.Drawing.Size(291, 22);
+            this.txtCddbServerName.Padding = new System.Windows.Forms.Padding(3);
+            this.txtCddbServerName.PasswordChar = '\0';
+            this.txtCddbServerName.ReadOnly = false;
+            this.txtCddbServerName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCddbServerName.ShortcutsEnabled = true;
+            this.txtCddbServerName.Size = new System.Drawing.Size(297, 20);
             this.txtCddbServerName.TabIndex = 4;
+            this.txtCddbServerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCddbServerName.UseSystemPasswordChar = false;
+            this.txtCddbServerName.WordWrap = true;
             // 
             // txtCddbServerPort
             // 
-            this.txtCddbServerPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.txtCddbServerPort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtCddbServerPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCddbServerPort.Location = new System.Drawing.Point(161, 60);
+            this.txtCddbServerPort.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.txtCddbServerPort.Location = new System.Drawing.Point(158, 49);
+            this.txtCddbServerPort.Margin = new System.Windows.Forms.Padding(0);
+            this.txtCddbServerPort.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtCddbServerPort.MaxLength = 5;
+            this.txtCddbServerPort.MinimumSize = new System.Drawing.Size(20, 20);
+            this.txtCddbServerPort.Multiline = false;
             this.txtCddbServerPort.Name = "txtCddbServerPort";
             this.txtCddbServerPort.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
+            this.txtCddbServerPort.OverrideBackColor = System.Drawing.Color.Empty;
             this.txtCddbServerPort.OverrideForeColor = System.Drawing.Color.Empty;
-            this.txtCddbServerPort.Size = new System.Drawing.Size(100, 22);
+            this.txtCddbServerPort.Padding = new System.Windows.Forms.Padding(3);
+            this.txtCddbServerPort.PasswordChar = '\0';
+            this.txtCddbServerPort.ReadOnly = false;
+            this.txtCddbServerPort.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCddbServerPort.ShortcutsEnabled = true;
+            this.txtCddbServerPort.Size = new System.Drawing.Size(100, 20);
             this.txtCddbServerPort.TabIndex = 6;
             this.txtCddbServerPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCddbServerPort.UseSystemPasswordChar = false;
+            this.txtCddbServerPort.WordWrap = true;
             // 
             // DisksOptionsPage
             // 
@@ -231,8 +260,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.Size = new System.Drawing.Size(467, 326);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
-            this.opmGroupBox2.ResumeLayout(false);
-            this.opmGroupBox2.PerformLayout();
+            this.dvdGroupBox.ResumeLayout(false);
+            this.dvdGroupBox.PerformLayout();
             this.opmTableLayoutPanel2.ResumeLayout(false);
             this.opmTableLayoutPanel2.PerformLayout();
             this.opmGroupBox1.ResumeLayout(false);
@@ -247,7 +276,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         private OPMTableLayoutPanel opmTableLayoutPanel1;
         private OPMCheckBox cbDisableDVDMenu;
-        private OPMGroupBox opmGroupBox2;
+        private OPMGroupBox dvdGroupBox;
         private OPMTableLayoutPanel opmTableLayoutPanel2;
         private OPMGroupBox opmGroupBox1;
         private OPMTableLayoutPanel opmTableLayoutPanel3;
