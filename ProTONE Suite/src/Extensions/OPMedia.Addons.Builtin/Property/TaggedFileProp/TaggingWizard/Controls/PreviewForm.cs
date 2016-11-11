@@ -30,7 +30,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
 
         void OnResize(object sender, EventArgs e)
         {
-            int w = lvPreview.Width - SystemInformation.VerticalScrollBarWidth - 5;
+            int w = lvPreview.EffectiveWidth;
 
             switch (_task.TaskType)
             {

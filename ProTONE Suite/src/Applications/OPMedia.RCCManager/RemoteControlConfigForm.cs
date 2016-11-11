@@ -56,7 +56,7 @@ namespace OPMedia.RCCManager
             colActionName.Width = 110;
             colEnabled.Width = 50;
 
-            int w = (int)((lvButtons.Width - SystemInformation.VerticalScrollBarWidth - 163) / 3);
+            int w = (int)((lvButtons.EffectiveWidth - colActionName.Width - colEnabled.Width) / 3);
             colInputData.Width = w;
             colOutputData.Width = 2 * w;
                 

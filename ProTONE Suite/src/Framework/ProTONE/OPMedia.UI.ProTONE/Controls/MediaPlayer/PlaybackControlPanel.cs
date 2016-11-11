@@ -117,7 +117,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             tslTime.Text = sElapsed + sTotal;
             tslTime.Font = ThemeManager.VeryLargeFont;
-            tslTime.ForeColor = ThemeManager.BorderColor;
+            tslTime.ForeColor = ThemeManager.WndTextColor;
         }
 
         public double TotalSeconds
@@ -179,6 +179,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmLoopPlay.InactiveImage = Resources.btnLoopPlay;
             tsmToggleShuffle.InactiveImage = Resources.btnToggleShuffle;
             tsmPlaylistEnd.InactiveImage = Resources.btnPlaylistEnd;
+
+            tslTime.Font = ThemeManager.VeryLargeFont;
+            tslTime.ForeColor = ThemeManager.WndTextColor;
         }
 
         private void OnButtonPressed(object sender, EventArgs e)

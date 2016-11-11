@@ -123,7 +123,7 @@ namespace OPMedia.Runtime.Addons
             tsmiSettings.ShortcutKeyDisplayString =
                 ShortcutMapper.GetShortcutString(OPMShortcut.CmdOpenSettings);
 
-            tsmiSettings.Image = Resources.settings;
+            tsmiSettings.Image = Resources.settings.Transparent();
 
             SetColors();
 

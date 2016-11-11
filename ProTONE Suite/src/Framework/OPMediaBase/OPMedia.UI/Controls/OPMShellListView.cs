@@ -409,7 +409,7 @@ namespace OPMedia.UI.Controls
             colSize.Width = 83;
             colAttr.Width = 85;
             colLastAccess.Width = 130;
-            colName.Width = this.Width - colSize.Width - colAttr.Width - colLastAccess.Width - SystemInformation.VerticalScrollBarWidth - 5;
+            colName.Width = this.EffectiveWidth - colSize.Width - colAttr.Width - colLastAccess.Width;
         }
 
         #endregion

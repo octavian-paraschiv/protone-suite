@@ -288,7 +288,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             colImage.Width = 55;
             colImageType.Width = 80;
-            colDescription.Width = lvPictures.Width - SystemInformation.VerticalScrollBarWidth - 140;
+            colDescription.Width = lvPictures.EffectiveWidth - colImage.Width - colImageType.Width;
         }
 
         

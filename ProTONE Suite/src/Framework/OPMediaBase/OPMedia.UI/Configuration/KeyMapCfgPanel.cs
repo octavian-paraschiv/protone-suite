@@ -50,7 +50,7 @@ namespace OPMedia.UI.Configuration
             hdrCmdName.Width = 90;
             hdrCmdDesc.Width = 170;
             hdrAltkey.Width = hdrKey.Width =
-                (lvShortcuts.Width - SystemInformation.VerticalScrollBarWidth - 90 - 175) / 2;
+                (lvShortcuts.EffectiveWidth - hdrCmdName.Width - hdrCmdDesc.Width) / 2;
         }
 
         void lvShortcuts_SubItemEditing(object sender, ListViewSubItemEventArgs args)

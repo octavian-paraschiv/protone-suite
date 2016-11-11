@@ -59,9 +59,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             colLanguage.Width = 70;
             colSize.Width = 55;
 
-            colFileName.Width = lvSubtitles.Width - 5 -
-                (colServer.Width + colPrio.Width + colLanguage.Width + colSize.Width) - 
-                SystemInformation.VerticalScrollBarWidth;
+            colFileName.Width = lvSubtitles.EffectiveWidth -
+                (colServer.Width + colPrio.Width + colLanguage.Width + colSize.Width);
         }
 
         int _highestPrio = int.MaxValue;

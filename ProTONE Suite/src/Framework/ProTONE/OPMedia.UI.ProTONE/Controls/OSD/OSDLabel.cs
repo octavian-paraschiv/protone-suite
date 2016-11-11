@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using OPMedia.UI.Themes;
 
 
 namespace OPMedia.UI.ProTONE.Controls.OSD
@@ -26,12 +27,7 @@ namespace OPMedia.UI.ProTONE.Controls.OSD
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.TextRenderingHint = TextRenderingHint.AntiAlias;
-            g.CompositingMode = CompositingMode.SourceOver;
-
+            ThemeManager.PrepareGraphics(g);
             using (Brush b1 = new SolidBrush(ForeColor))
             {
                 for (int x = 0; x <= BlurAmt; x++)

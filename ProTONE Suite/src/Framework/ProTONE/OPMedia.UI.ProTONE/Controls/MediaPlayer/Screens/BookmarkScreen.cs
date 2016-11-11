@@ -175,7 +175,7 @@ namespace OPMedia.UI.ProTONE.Controls.BookmarkManagement
         void ApplyColumnWidths()
         {
             colIcon.Width = 20;
-            int w = lvBookmarks.Width - SystemInformation.VerticalScrollBarWidth - colIcon.Width;
+            int w = lvBookmarks.EffectiveWidth - colIcon.Width;
             colTime.Width = colText.Width = w / 2;
         }
 

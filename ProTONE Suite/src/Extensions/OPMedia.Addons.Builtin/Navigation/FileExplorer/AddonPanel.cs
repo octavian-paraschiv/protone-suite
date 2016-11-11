@@ -1020,6 +1020,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 tsbDrives.DropDownItems.Clear();
                 ilDrives.Images.Clear();
 
+                tsbDrives.DropDown.BackColor = ThemeManager.WndValidColor;
+
                 foreach (System.IO.DriveInfo di in drives)
                 {
                     DriveInfoItem dii = new DriveInfoItem(di);
@@ -1084,6 +1086,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 ToolStripDropDownItem tsmi = sender as ToolStripDropDownItem;
                 if (tsmi == null || tsmi.DropDownItems == null || tsmi.DropDownItems.Count < 2) 
                     return;
+
+                tsbFavorites.DropDown.BackColor = ThemeManager.WndValidColor;
 
                 ilFavorites.Images.Clear();
 

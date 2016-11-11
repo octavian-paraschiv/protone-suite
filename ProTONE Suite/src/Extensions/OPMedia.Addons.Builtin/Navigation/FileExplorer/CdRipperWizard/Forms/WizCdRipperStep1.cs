@@ -80,8 +80,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
             colSizeBytes.Width = 60;
             colDuration.Width = 55;
 
-            int w = lvTracks.Width - colTrackNo.Width - colDuration.Width - colSizeBytes.Width -
-                SystemInformation.VerticalScrollBarWidth - 3;
+            int w = lvTracks.EffectiveWidth - colTrackNo.Width - colDuration.Width - colSizeBytes.Width;
 
             colAlbum.Width = colArtist.Width = colTitle.Width = colGenre.Width = w / 4;
         }

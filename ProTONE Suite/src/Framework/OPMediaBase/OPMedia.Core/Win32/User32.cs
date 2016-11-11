@@ -35,6 +35,20 @@ namespace OPMedia.Core
     }
 
     [StructLayout(LayoutKind.Sequential)]
+    public struct SCROLLBARINFO
+    {
+        public int cbSize;
+        public RECT rcScrollBar;
+        public int dxyLineButton;
+        public int xyThumbTop;
+        public int xyThumbBottom;
+        public int reserved;
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+        public int[] rgstate;
+    } 
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct WINDOWPOS
     {
         public IntPtr hwnd;
@@ -526,6 +540,21 @@ namespace OPMedia.Core
         public MessageFilterInfo info;
     }
 
+    public enum OBJID : uint
+    {
+        HSCROLL = 0xFFFFFFFA,
+        VSCROLL = 0xFFFFFFFB,
+        CLIENT = 0xFFFFFFFC,
+    }
+
+    public enum SB : int
+    {
+        HORZ = 0,
+        VERT = 1,
+        CTL = 2,
+        BOTH = 3,
+    }
+
     /// <summary>
     /// Helper class that holds all the data types and unmanaged
     /// functions imported from User32.dll. Refer to 
@@ -773,6 +802,12 @@ namespace OPMedia.Core
             return -1;
         }
 #else
+        [DllImport(USER32, CharSet = CharSet.Auto)]
+        public static extern bool ShowScrollBar(IntPtr hWnd, int wBar, bool bShow);
+
+        [DllImport(USER32, CharSet = CharSet.Auto)]
+        public static extern int GetScrollBarInfo(IntPtr hWnd, uint idObject, ref SCROLLBARINFO psbi);
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int PostMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         

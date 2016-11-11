@@ -573,7 +573,8 @@ namespace SkinBuilder.Navigation
                                             _il.Images.Add(bmp, Color.Magenta);
                                     }
 
-                                    themeElementNode.Text = string.Format("{0} [{1}]", themeElement.Key, themeElement.Value);
+                                    themeElementNode.Text = string.Format("{0} -> RGB=[{1}], HEX=#{2}", themeElement.Key, themeElement.Value, 
+                                        ValueAsHex(themeElement.Value).ToUpperInvariant());
                                 }
                                 else
                                 {
@@ -596,6 +597,25 @@ namespace SkinBuilder.Navigation
                 tvThemes.Nodes.Add(themeFileNode);
                 themeFileNode.Expand();
             }
+        }
+
+        private string ValueAsHex(string p)
+        {
+            byte r = 255, g = 255, b = 255;
+
+            string[] fields = p.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            if (fields != null && fields.Length == 3)
+            {
+                if (byte.TryParse(fields[0], out r) == false)
+                    r = 255;
+                if (byte.TryParse(fields[1], out g) == false)
+                    g = 255;
+                if (byte.TryParse(fields[2], out b) == false)
+                    b = 255;
+
+            }
+
+            return string.Format("{0:x2}{1:x2}{2:x2}", r, g, b);
         }
 
         public override void Reload(object target)
@@ -638,7 +658,8 @@ namespace SkinBuilder.Navigation
                                             _il.Images.Add(bmp, Color.Magenta);
                                     }
 
-                                    tn.Text = string.Format("{0} [{1}]", args.NewThemeElementName, value);
+                                    tn.Text = string.Format("{0} -> RGB=[{1}], HEX=#{2}", args.NewThemeElementName, value,
+                                        ValueAsHex(value).ToUpperInvariant());
                                 }
                                 else
                                 {
@@ -685,13 +706,9 @@ namespace SkinBuilder.Navigation
                 foreach (TreeNode tn in themeNode.Nodes)
                 {
                     string textToLookup = tn.Text;
-
-                    int i1 = textToLookup.IndexOf('[');
-                    int i2 = textToLookup.IndexOf(']');
-                    if (i1 > 1 && i2 > i1)
-                    {
-                        textToLookup = textToLookup.Substring(0, i1 - 1);
-                    }
+                    string[] fields = textToLookup.Split(new char[]{' '});
+                    if (fields.Length > 1)
+                        textToLookup = fields[0];
 
                     if (textToLookup == themeElementName)
                         return tn;

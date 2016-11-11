@@ -116,7 +116,7 @@ namespace OPMedia.UI.Dialogs
 
         private void lvFavorites_Resize(object sender, EventArgs e)
         {
-            colPath.Width = lvFavorites.Width - SystemInformation.VerticalScrollBarWidth;
+            colPath.Width = lvFavorites.EffectiveWidth;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

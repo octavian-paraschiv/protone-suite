@@ -264,14 +264,21 @@ namespace OPMedia.Core
         {
             try
             {
-                bmp.MakeTransparent(Color.FromArgb((int)argbTRansparentColor));
-                return Icon.FromHandle(bmp.GetHicon());
+                Bitmap bmp2 = bmp.Transparent(argbTRansparentColor);
+                return Icon.FromHandle(bmp2.GetHicon());
             }
             catch
             {
             }
 
             return GetAppIcon();
+        }
+
+        public static Bitmap Transparent(this Bitmap bmp, uint argbTRansparentColor = 0xFFFF00FF)
+        {
+            Bitmap bmp2 = bmp.Clone() as Bitmap;
+            bmp2.MakeTransparent(Color.FromArgb((int)argbTRansparentColor));
+            return bmp2;
         }
 
         public static Image Resize(this Image img, bool largeIcon)

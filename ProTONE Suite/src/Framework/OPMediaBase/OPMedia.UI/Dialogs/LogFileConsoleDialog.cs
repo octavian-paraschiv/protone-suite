@@ -196,7 +196,7 @@ namespace OPMedia.UI.Dialogs
 
         private void lvLogLines_Resize(object sender, EventArgs e)
         {
-            hdrText.Width = lvLogLines.Width - SystemInformation.VerticalScrollBarWidth -
+            hdrText.Width = lvLogLines.EffectiveWidth -
                 (hdrEntryType.Width + hdrModule.Width + hdrPID.Width + hdrTID.Width + hdrTimeStamp.Width);
         }
 

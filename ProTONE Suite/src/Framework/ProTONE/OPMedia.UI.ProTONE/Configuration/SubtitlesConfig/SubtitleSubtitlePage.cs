@@ -113,9 +113,8 @@ namespace OPMedia.UI.ProTONE.Configuration
                         w += widths[ch.Index];
                     }
                 }
-                w += 5;
 
-                e.NewWidth = colServerUrl.Width = (lvDownloadAddresses.Width - w - SystemInformation.VerticalScrollBarWidth);
+                e.NewWidth = colServerUrl.Width = (lvDownloadAddresses.EffectiveWidth - w);
             }
         }
 
@@ -130,9 +129,8 @@ namespace OPMedia.UI.ProTONE.Configuration
                     w += ch.Width;
                 }
             }
-            w += 1;
 
-            colServerUrl.Width = (lvDownloadAddresses.Width - w - SystemInformation.VerticalScrollBarWidth);
+            colServerUrl.Width = (lvDownloadAddresses.EffectiveWidth - w);
         }
 
         void OnLoad(object sender, EventArgs e)

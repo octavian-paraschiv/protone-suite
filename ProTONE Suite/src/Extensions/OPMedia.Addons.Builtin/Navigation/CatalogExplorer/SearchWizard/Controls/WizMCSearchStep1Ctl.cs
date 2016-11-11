@@ -352,7 +352,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             colImage.Width = 20;
             colInternalLabel.Width = 135;
             colMediaLabel.Width = 135;
-            colMediaPath.Width = lvResults.Width - SystemInformation.VerticalScrollBarWidth - 295;
+            colMediaPath.Width = lvResults.EffectiveWidth - colImage.Width - colInternalLabel.Width - colMediaLabel.Width;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

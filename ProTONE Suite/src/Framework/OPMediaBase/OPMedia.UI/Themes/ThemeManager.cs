@@ -118,6 +118,8 @@ namespace OPMedia.UI.Themes
             } 
         }
 
+
+
         public static Color ListHotItemColor
         { get { return ThemeElement("ListHotItemColor", SafeColorFromString("255, 000, 000")); } }
 
@@ -135,7 +137,9 @@ namespace OPMedia.UI.Themes
 
         public static Color BorderColor
         { get { return ThemeElement("BorderColor", SafeColorFromString("150, 150, 150")); } }
-          
+
+        #region Normal buttons
+
         public static Color GradientNormalColor1
         { get { return ThemeElement("GradientNormalColor1", SafeColorFromString("224, 227, 206")); } }
 
@@ -159,6 +163,35 @@ namespace OPMedia.UI.Themes
 
         public static Color GradientFocusHoverColor2
         { get { return ThemeElement("GradientFocusHoverColor2", SafeColorFromString("170, 220, 255")); } }
+
+        #endregion
+
+        #region Default button
+        public static Color DefaultButtonNormalColor1
+        { get { return ThemeElement("DefaultButtonNormalColor1", SafeColorFromString("224, 227, 206")); } }
+
+        public static Color DefaultButtonNormalColor2
+        { get { return ThemeElement("DefaultButtonNormalColor2", SafeColorFromString("224, 227, 206")); } }
+
+        public static Color DefaultButtonHoverColor1
+        { get { return ThemeElement("DefaultButtonHoverColor1", SafeColorFromString("159, 207, 255")); } }
+
+        public static Color DefaultButtonHoverColor2
+        { get { return ThemeElement("DefaultButtonHoverColor2", SafeColorFromString("159, 207, 255")); } }
+
+        public static Color DefaultButtonFocusColor1
+        { get { return ThemeElement("DefaultButtonFocusColor1", SafeColorFromString("224, 227, 206")); } }
+
+        public static Color DefaultButtonFocusColor2
+        { get { return ThemeElement("DefaultButtonFocusColor2", SafeColorFromString("224, 227, 206")); } }
+
+        public static Color DefaultButtonFocusHoverColor1
+        { get { return ThemeElement("DefaultButtonFocusHoverColor1", SafeColorFromString("170, 220, 255")); } }
+
+        public static Color DefaultButtonFocusHoverColor2
+        { get { return ThemeElement("DefaultButtonFocusHoverColor2", SafeColorFromString("170, 220, 255")); } }
+        #endregion
+
 
         public static Color FocusBorderColor
         { get { return ThemeElement("FocusBorderColor", SafeColorFromString("051, 153, 255")); } }
@@ -202,6 +235,9 @@ namespace OPMedia.UI.Themes
         public static Color MenuTextColor
         { get { return ThemeElement("MenuTextColor", SafeColorFromString("000, 000, 000")); } }
 
+        public static Color MenuBackColor
+        { get { return ThemeElement("MenuBackColor", SafeColorFromString("255, 000, 000")); } }
+
         public static Color CheckedMenuTextColor
         { get { return ThemeElement("CheckedMenuTextColor", SafeColorFromString("000, 000, 000")); } }
 
@@ -213,6 +249,8 @@ namespace OPMedia.UI.Themes
 
         public static Color HighlightHeaderMenuTextColor
         { get { return ThemeElement("HighlightHeaderMenuTextColor", SafeColorFromString("000, 000, 000")); } }
+
+
 
         public static Color GradientGaugeColor1
         { get { return ThemeElement("GradientGaugeColor1", SafeColorFromString("000, 255, 000")); } }
@@ -249,6 +287,18 @@ namespace OPMedia.UI.Themes
             } 
         }
 
+        public static string ThemeFontFamily
+        { 
+            get 
+            { 
+                string defFamily = AppConfig.OSVersion < AppConfig.VerWinVista ?
+                    "Trebuchet MS" : "Segoe UI";
+
+                return ThemeElement("ThemeFontFamily", defFamily); 
+            } 
+        }
+
+
         public static Color ColorValidationFailed
         { get { return Color.MistyRose; } }
 
@@ -276,6 +326,16 @@ namespace OPMedia.UI.Themes
 
         public static Font ExtremeLargeFont
         { get { return _extremeLargeFont; } }
+
+        public static bool IsDarkTheme
+        {
+            get
+            {
+                float fFore = ThemeManager.ForeColor.GetBrightness();
+                float fBack = ThemeManager.BackColor.GetBrightness();
+                return (fFore < fBack);
+            }
+        }
 
         #endregion
 
@@ -348,11 +408,6 @@ namespace OPMedia.UI.Themes
             }
         }
 
-        private readonly static string ThemeFontFamily = 
-            AppConfig.OSVersion < AppConfig.VerWinVista ?
-            "Trebuchet MS" : "Segoe UI";
-
-
         public static void RecreateFonts()
         {
             using (Label l = new Label())
@@ -361,21 +416,22 @@ namespace OPMedia.UI.Themes
                 using (Graphics g = Graphics.FromHwnd(l.Handle))
                 {
                     float step = 72f / g.DpiX;
-                    _smallestFont =
-                        new Font(ThemeFontFamily, 9 * step, FontStyle.Regular, GraphicsUnit.Point);
-                    _smallFont =
-                        new Font(ThemeFontFamily, 9 * step, FontStyle.Bold, GraphicsUnit.Point);
-                    _normalFont =
-                        new Font(ThemeFontFamily, 11 * step, FontStyle.Regular, GraphicsUnit.Point);
-                    _normalBoldFont =
-                        new Font(ThemeFontFamily, 11 * step, FontStyle.Bold, GraphicsUnit.Point);
-                    _largeFont =
-                        new Font(ThemeFontFamily, 12 * step, FontStyle.Bold, GraphicsUnit.Point);
-                    _veryLargeFont =
-                        new Font(ThemeFontFamily, 15 * step, FontStyle.Bold, GraphicsUnit.Point);
+                    string themeFontFamily = ThemeManager.ThemeFontFamily;
 
+                    _smallestFont =
+                        new Font(themeFontFamily, 9 * step, FontStyle.Regular, GraphicsUnit.Point);
+                    _smallFont =
+                        new Font(themeFontFamily, 9 * step, FontStyle.Bold, GraphicsUnit.Point);
+                    _normalFont =
+                        new Font(themeFontFamily, 11 * step, FontStyle.Regular, GraphicsUnit.Point);
+                    _normalBoldFont =
+                        new Font(themeFontFamily, 11 * step, FontStyle.Bold, GraphicsUnit.Point);
+                    _largeFont =
+                        new Font(themeFontFamily, 12 * step, FontStyle.Bold, GraphicsUnit.Point);
+                    _veryLargeFont =
+                        new Font(themeFontFamily, 15 * step, FontStyle.Bold, GraphicsUnit.Point);
                     _extremeLargeFont =
-                        new Font(ThemeFontFamily, 35 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, 35 * step, FontStyle.Bold, GraphicsUnit.Point);
                 }
             }
         }
@@ -557,6 +613,8 @@ namespace OPMedia.UI.Themes
                         InitThemeElements();
                         AppConfig.SkinType = _defaultTheme;
                         AppConfig.SkinType = themeBefore;
+
+                        RecreateFonts();
                     }
 
                     Logger.LogInfo("Themes reloaded succesfully.");
@@ -632,12 +690,20 @@ namespace OPMedia.UI.Themes
             }
         }
 
+        static string _previousTheme = "Black";
+
         private static string ThemeElement(string elementName, string defaultValue = null)
         {
             lock (_loadThemeLock)
             {
                 string currentTheme = AppConfig.AllowRealtimeGUISetup ? AppConfig.SkinType : "Black";
                 string elementValue = defaultValue;
+
+                if (_previousTheme != currentTheme)
+                {
+                    _previousTheme = currentTheme;
+                    RecreateFonts();
+                }
 
                 if (_allThemesElements == null)
                     _allThemesElements = new Dictionary<string, Dictionary<string, string>>();

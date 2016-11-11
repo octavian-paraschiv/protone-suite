@@ -115,7 +115,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
         void CatalogListView_Resize(object sender, EventArgs e)
         {
             colDate.Width = 110;
-            int w = this.Width - colDate.Width - SystemInformation.VerticalScrollBarWidth;
+            int w = this.EffectiveWidth - colDate.Width;
 
             colItemName.Width = (int)(w / 3);
             colPath.Width = w - colItemName.Width;

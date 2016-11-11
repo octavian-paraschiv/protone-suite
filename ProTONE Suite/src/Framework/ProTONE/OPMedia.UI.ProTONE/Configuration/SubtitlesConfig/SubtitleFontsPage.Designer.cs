@@ -33,7 +33,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblOsdFont = new OPMedia.UI.Controls.OPMLinkLabel();
             this.lblOsdColor = new OPMedia.UI.Controls.OPMLinkLabel();
             this.nudOsdTmr = new OPMedia.UI.Controls.OPMNumericUpDown();
-            this.label2 = new OPMedia.UI.Controls.OPMLabel();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.chkSubEnabled = new OPMedia.UI.Controls.OPMCheckBox();
             this.lblOsdText = new OPMedia.UI.ProTONE.Controls.OSD.OSDLabel();
@@ -46,6 +45,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.flowLayoutPanel3 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.tableLayoutPanel4 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.chkOsdEnabled = new OPMedia.UI.Controls.OPMCheckBox();
+            this.label2 = new OPMedia.UI.Controls.OPMLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nudOsdTmr)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -108,22 +108,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudOsdTmr.Size = new System.Drawing.Size(48, 22);
             this.nudOsdTmr.TabIndex = 2;
             this.nudOsdTmr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AccessibleName = "label2";
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Location = new System.Drawing.Point(340, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label2.Size = new System.Drawing.Size(82, 22);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "TXT_OSDTIMER";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
             // 
@@ -289,9 +273,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel4.AutoSize = true;
             this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Controls.Add(this.chkOsdEnabled, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.nudOsdTmr, 2, 0);
@@ -315,9 +300,25 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkOsdEnabled.Margin = new System.Windows.Forms.Padding(0);
             this.chkOsdEnabled.Name = "chkOsdEnabled";
             this.chkOsdEnabled.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkOsdEnabled.Size = new System.Drawing.Size(114, 22);
+            this.chkOsdEnabled.Size = new System.Drawing.Size(211, 22);
             this.chkOsdEnabled.TabIndex = 0;
             this.chkOsdEnabled.Text = "TXT_OSDENABLED";
+            // 
+            // label2
+            // 
+            this.label2.AccessibleName = "label2";
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Location = new System.Drawing.Point(211, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
+            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
+            this.label2.Size = new System.Drawing.Size(208, 22);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "TXT_OSDTIMER";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // SubtitleOsdPage
             // 
@@ -345,7 +346,6 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMLinkLabel lblOsdFont;
         private OPMLinkLabel lblOsdColor;
         private OPMNumericUpDown nudOsdTmr;
-        private OPMLabel label2;
         private OPMTableLayoutPanel tableLayoutPanel1;
         private Controls.OSD.OSDLabel lblOsdText2;
         private Controls.OSD.OSDLabel lblOsdText;
@@ -358,5 +358,6 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMFlowLayoutPanel flowLayoutPanel3;
         private OPMTableLayoutPanel tableLayoutPanel4;
         private OPMCheckBox chkSubEnabled;
+        private OPMLabel label2;
     }
 }

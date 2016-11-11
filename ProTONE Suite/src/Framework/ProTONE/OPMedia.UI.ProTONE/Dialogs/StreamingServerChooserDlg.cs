@@ -110,7 +110,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private void AdjustColumns()
         {
             colGenre.Width = 120;
-            colURL.Width = colTitle.Width = (lvServers.Width - colGenre.Width - SystemInformation.VerticalScrollBarWidth - 5) / 2;
+            colURL.Width = colTitle.Width = (lvServers.EffectiveWidth - colGenre.Width) / 2;
         }
 
 

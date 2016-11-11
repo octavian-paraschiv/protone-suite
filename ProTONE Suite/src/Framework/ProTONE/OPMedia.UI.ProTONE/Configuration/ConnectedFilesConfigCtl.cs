@@ -43,7 +43,7 @@ namespace OPMedia.UI.Configuration
 
         void lvConnFiles_Resize(object sender, EventArgs e)
         {
-            int w = lvConnFiles.Width - SystemInformation.VerticalScrollBarWidth;
+            int w = lvConnFiles.EffectiveWidth;
             colID.Width = 0;
             colPFT.Width = colCFT.Width = w / 2;
         }

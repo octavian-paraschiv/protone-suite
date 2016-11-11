@@ -934,8 +934,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             colIcon.Width = _compactMode ? 0 : 18;
             colMisc.Width = _compactMode ? 0 : 18;
             colTime.Width = _compactMode ? 0 : 50;
-            colFile.Width = lvPlaylist.Width - colIcon.Width - colMisc.Width - colTime.Width - 
-                SystemInformation.VerticalScrollBarWidth;
+            colFile.Width = lvPlaylist.EffectiveWidth - colIcon.Width - colMisc.Width - colTime.Width;
         }
 
         private void UpdateTotalTime(double totalSeconds)

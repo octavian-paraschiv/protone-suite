@@ -695,7 +695,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         private void OnResize(object sender, EventArgs e)
         {
             colImage.Width = 20;
-            colPath.Width = lvResults.Width - SystemInformation.VerticalScrollBarWidth - 25;
+            colPath.Width = lvResults.EffectiveWidth - colImage.Width;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

@@ -279,6 +279,12 @@ namespace OPMedia.UI.Controls
         [EditorBrowsable(EditorBrowsableState.Never)]
         public new ColumnHeaderStyle HeaderStyle { get { return base.HeaderStyle; } }
 
+        public bool AlternateRowColors
+        {
+            get;
+            set;
+        }
+
         Color _overrideBackColor = Color.Empty;
         public Color OverrideBackColor
         {
@@ -345,6 +351,8 @@ namespace OPMedia.UI.Controls
 
             base.BackColor = ThemeManager.BackColor;
             base.ForeColor = ThemeManager.ForeColor;
+
+            this.AlternateRowColors = true;
 
             this.HandleCreated += new EventHandler(OPMListView_HandleCreated);
             this.HandleDestroyed += new EventHandler(OPMListView_HandleDestroyed);
@@ -430,7 +438,7 @@ namespace OPMedia.UI.Controls
             Rectangle rc = new Rectangle(e.Bounds.Left - 2, e.Bounds.Top - 1,
                 e.Bounds.Width, e.Bounds.Height + 2);
 
-            Rectangle rcHeader = 
+            Rectangle rcHeader =
                 (rcFull == Rectangle.Empty) ? e.Bounds : rcFull;
 
             using (Brush b = new LinearGradientBrush(e.Bounds, ThemeManager.GradientNormalColor1, ThemeManager.GradientNormalColor2, 90f))
@@ -448,7 +456,7 @@ namespace OPMedia.UI.Controls
 
                 rc.Offset(2, 0);
 
-                string append = (e.ColumnIndex == _sortColumn) ? 
+                string append = (e.ColumnIndex == _sortColumn) ?
                     (_sortorder == SortOrder.Ascending ? " A" : "D") : "";
 
                 e.Graphics.DrawString(e.Header.Text + append, this.Font, bText, rc, sf);
@@ -475,30 +483,38 @@ namespace OPMedia.UI.Controls
                         // Set distinctive background for editable fields and also reposition the
                         // subitem being edited (if any)
                         ListViewItem.ListViewSubItem editedSubItem = null;
-                        foreach (ListViewItem item in Items)
+
+                        if (this.Items != null)
                         {
-                            int subItemIndex = 0;
-                            foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
+                            foreach (ListViewItem item in this.Items)
                             {
-                                Control editControl = null;
-                                OPMListViewSubItem editableSubItem = subItem as OPMListViewSubItem;
-                                if (editableSubItem != null)
+                                int subItemIndex = 0;
+
+                                if (item != null && item.SubItems != null)
                                 {
-                                    if (!editableSubItem.ReadOnly)
+                                    foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
                                     {
-                                        editControl = editableSubItem.EditControl;
+                                        Control editControl = null;
+                                        OPMListViewSubItem editableSubItem = subItem as OPMListViewSubItem;
+                                        if (editableSubItem != null)
+                                        {
+                                            if (!editableSubItem.ReadOnly)
+                                            {
+                                                editControl = editableSubItem.EditControl;
+                                            }
+                                        }
+
+                                        if (editControl != null)
+                                        {
+                                            if (item.Index == EditedRow && subItemIndex == EditedColumn)
+                                            {
+                                                editedSubItem = subItem;
+                                            }
+                                        }
+
+                                        subItemIndex++;
                                     }
                                 }
-
-                                if (editControl != null)
-                                {
-                                    if (item.Index == EditedRow && subItemIndex == EditedColumn)
-                                    {
-                                        editedSubItem = subItem;
-                                    }
-                                }
-
-                                subItemIndex++;
                             }
                         }
 
@@ -743,12 +759,16 @@ namespace OPMedia.UI.Controls
 
                 Font drawFont = e.SubItem.Font;
 
+                bool alt = this.AlternateRowColors && (e.ItemIndex % 2 == 1);
+
                 if (e.SubItem is OPMListViewSubItem)
                 {
                     isValid = (e.SubItem as OPMListViewSubItem).IsValid;
                 }
 
-                Color bColor = isSelected ? ThemeManager.SelectedColor : GetBackColor();
+                Color bColor = isSelected ? ThemeManager.SelectedColor : 
+                    (alt ? ThemeManager.DefaultButtonFocusColor1 : GetBackColor());
+
                 Color fColor = e.Item.ForeColor;// ThemeManager.ForeColor;
 
                 ExtendedSubItemDetail esid = e.SubItem.Tag as ExtendedSubItemDetail;
@@ -1295,6 +1315,53 @@ namespace OPMedia.UI.Controls
             }
         }
         #endregion
+
+        public int EffectiveWidth
+        {
+            get
+            {
+                return this.Width - VisibleVerticalScrollbarWidth;
+            }
+        }
+
+
+        int _updatePending = 0;
+
+        public int VisibleVerticalScrollbarWidth
+        {
+            get
+            {
+                int w = SystemInformation.VerticalScrollBarWidth;
+
+                //if (1 == Interlocked.CompareExchange(ref _updatePending, 1, 0))
+                //    return w;
+
+                ////if (this.HeaderStyle == ColumnHeaderStyle.None)
+                //{
+                //    try
+                //    {
+                //        SCROLLBARINFO sbi = new SCROLLBARINFO();
+                //        sbi.cbSize = Marshal.SizeOf(sbi);
+
+                //        int rc = User32.GetScrollBarInfo(this.Handle, (uint)OBJID.VSCROLL, ref sbi);
+                //        if (rc > 0)
+                //            w = sbi.rcScrollBar.Width;
+
+                       
+                //    }
+                //    catch
+                //    {
+                //    }
+                //    finally
+                //    {
+                //        Interlocked.Exchange(ref _updatePending, 0);
+                //    }
+                //}
+
+                User32.ShowScrollBar(this.Handle, (int)SB.HORZ, false);
+                return 0;
+            }
+        }
     }
 
     public class OPMListViewHeaderWrapper : NativeWindow

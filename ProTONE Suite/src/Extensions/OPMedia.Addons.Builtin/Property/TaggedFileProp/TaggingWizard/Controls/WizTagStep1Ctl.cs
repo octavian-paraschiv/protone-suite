@@ -167,7 +167,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
         private void lvFiles_Resize(object sender, EventArgs e)
         {
-            colPath.Width = lvFiles.Width - SystemInformation.VerticalScrollBarWidth;
+            colPath.Width = lvFiles.EffectiveWidth;
         }
     }
 }
