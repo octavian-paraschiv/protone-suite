@@ -91,6 +91,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             return double.MaxValue - double.Epsilon;
         }
+
+        protected override bool IsEndOfMedia()
+        {
+            return false;
+        }
     }
 
 }

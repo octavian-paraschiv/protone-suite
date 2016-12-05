@@ -92,7 +92,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 if (MediaRenderer.DefaultInstance.IsStreamedMedia)
                 {
-                    return MediaRenderer.DefaultInstance.StreamData["TXT_TITLE"] ?? string.Empty;
+                    if (MediaRenderer.DefaultInstance.StreamData != null &&
+                        MediaRenderer.DefaultInstance.StreamData.ContainsKey("TXT_TITLE"))
+                    {
+                        return MediaRenderer.DefaultInstance.StreamData["TXT_TITLE"] ?? string.Empty;
+                    }
                 }
 
                 return pnlScreens.PlaylistScreen.GetActiveFileTitle();

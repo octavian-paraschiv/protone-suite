@@ -441,6 +441,9 @@ namespace OPMedia.UI.Controls
             Rectangle rcHeader =
                 (rcFull == Rectangle.Empty) ? e.Bounds : rcFull;
 
+            if (e.Bounds.Width < 1 || e.Bounds.Height < 1)
+                return;
+
             using (Brush b = new LinearGradientBrush(e.Bounds, ThemeManager.GradientNormalColor1, ThemeManager.GradientNormalColor2, 90f))
             using (Brush bText = new SolidBrush(ThemeManager.ForeColor))
             using (Pen p = new Pen(ThemeManager.BorderColor, 1))
