@@ -230,19 +230,30 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private void SetupVideoWindow()
         {
-            int hr = videoWindow.put_Owner(renderRegion.Handle);
-            DsError.ThrowExceptionForHR(hr);
+            int hr = 0;
 
-            hr = videoWindow.put_MessageDrain(renderRegion.Handle);
-            DsError.ThrowExceptionForHR(hr);
+            if (renderRegion != null && videoWindow != null)
+            {
+                hr = videoWindow.put_Owner(renderRegion.Handle);
+                DsError.ThrowExceptionForHR(hr);
 
-            hr = videoWindow.put_WindowStyle((int)(WindowStyle.Child |
-                WindowStyle.ClipSiblings |
-                WindowStyle.ClipChildren));
-            DsError.ThrowExceptionForHR(hr);
+                hr = videoWindow.put_MessageDrain(renderRegion.Handle);
+                DsError.ThrowExceptionForHR(hr);
+            }
 
-            hr = mediaEvent.SetNotifyWindow(GraphNotifyWnd.Instance.Handle, (int)Messages.WM_GRAPH_EVENT, IntPtr.Zero);
-            DsError.ThrowExceptionForHR(hr);
+            if (videoWindow != null)
+            {
+                hr = videoWindow.put_WindowStyle((int)(WindowStyle.Child |
+                    WindowStyle.ClipSiblings |
+                    WindowStyle.ClipChildren));
+                DsError.ThrowExceptionForHR(hr);
+            }
+
+            if (mediaEvent != null)
+            {
+                hr = mediaEvent.SetNotifyWindow(GraphNotifyWnd.Instance.Handle, (int)Messages.WM_GRAPH_EVENT, IntPtr.Zero);
+                DsError.ThrowExceptionForHR(hr);
+            }
         }
 
 

@@ -35,6 +35,7 @@ using OPMedia.Runtime.Processors;
 using System.Net;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -123,10 +124,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+                //MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnFilterStateChanged);
             }
 
             OnThemeUpdatedInternal();
+        }
+
+        void OnFilterStateChanged(FilterState oldState, string oldMedia, FilterState newState, string newMedia)
+        {
+            OnMediaRendererHeartbeat();
         }
 
         void MainWindow_Shown(object sender, EventArgs e)
@@ -182,7 +189,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     lvi.SubItems[colFile.Index].Text = plItem.DisplayName;
                 }
 
-                UpdateMiscIcon(lvi);
+                if (UpdateMiscIcon(lvi))
+                {
+                    lvPlaylist.EnsureVisible(lvi.Index);
+                }
 
                 foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
                 {
@@ -192,33 +202,73 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        private void UpdateMiscIcon(ListViewItem lvi)
+        private string _prevActiveItem = null;
+        private bool UpdateMiscIcon(ListViewItem lvi)
         {
             PlaylistItem plItem = lvi.Tag as PlaylistItem;
 
             Image imgMisc = null;
             string txtMisc = string.Empty;
 
-            if (plItem != null && plItem.IsVideo)
-            {
-                if (SubtitleDownloadProcessor.IsFileOnDownloadList(plItem.Path))
-                {
-                    // Currently downloading a subtitle
-                    Bitmap bmp = OPMedia.UI.Properties.Resources.hourglass;
-                    bmp.MakeTransparent(ThemeManager.TransparentColor);
-                    imgMisc = ImageProvider.ScaleImage(bmp, new Size(16, 16), true);
-                    txtMisc = Translator.Translate("TXT_SUBTITLE_DOWNLOADING");
+            bool retVal = false;
 
-                }
-                else if (SubtitleDownloadProcessor.TestForExistingSubtitle(plItem.Path))
+            if (plItem != null)
+            {
+                string renderFile = MediaRenderer.DefaultInstance.GetRenderFile();
+                bool isActiveItem = string.Compare(renderFile, plItem.Path, true) == 0;
+
+                if (plItem.IsVideo)
                 {
-                    // Already having a subtitle
-                    imgMisc = Resources.ResourceManager.GetImage("subtitles16");
-                    txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE"); 
+                    if (SubtitleDownloadProcessor.IsFileOnDownloadList(plItem.Path))
+                    {
+                        // Currently downloading a subtitle
+                        Bitmap bmp = OPMedia.UI.Properties.Resources.hourglass;
+                        bmp.MakeTransparent(ThemeManager.TransparentColor);
+                        imgMisc = ImageProvider.ScaleImage(bmp, new Size(16, 16), true);
+                        txtMisc = Translator.Translate("TXT_SUBTITLE_DOWNLOADING");
+
+                    }
+                    else if (SubtitleDownloadProcessor.TestForExistingSubtitle(plItem.Path))
+                    {
+                        // Already having a subtitle
+                        imgMisc = Resources.ResourceManager.GetImage("subtitles16");
+                        txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE");
+                    }
+                }
+                else if (isActiveItem)
+                {
+                    Image img = null;
+                    switch (MediaRenderer.DefaultInstance.FilterState)
+                    {
+                        case FilterState.Running:
+                            img = Resources.btnPlay;
+                            break;
+
+                        case FilterState.Paused:
+                            img = Resources.btnPause;
+                            break;
+
+                        default:
+                            img = null;
+                            break;
+                    }
+
+                    imgMisc = img.Resize(false);
+                }
+                else
+                {
+                    imgMisc = null;
+                }
+
+                if (isActiveItem)
+                {
+                    _prevActiveItem = plItem.Path;
+                    retVal = string.Compare(_prevActiveItem, plItem.Path, true) == 0;
                 }
             }
 
             lvi.SubItems[colMisc.Index].Tag = new ExtendedSubItemDetail(imgMisc, txtMisc);
+            return retVal;
         }
 
         bool _abortLoad = false;

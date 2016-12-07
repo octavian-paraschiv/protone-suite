@@ -47,6 +47,8 @@ namespace OPMedia.Core
         CompactDisk = 188,
         
         AutomaticProcess = 165,
+
+        URL = 0xFFFF001,
     }
 
     public enum User32Icon
@@ -241,6 +243,9 @@ namespace OPMedia.Core
 
                 case Shell32Icon.Internet:
                     return Resources.Internet;
+
+                case Shell32Icon.URL:
+                    return Resources.URL;
 
                 default:
                     break;

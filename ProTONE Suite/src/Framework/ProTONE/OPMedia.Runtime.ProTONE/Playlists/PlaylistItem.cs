@@ -260,7 +260,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 else switch (mi.MediaType.ToUpperInvariant())
                 {
                     case "URL":
-                        img = ImageProvider.GetShell32Icon(Shell32Icon.Internet, large);
+                        img = ImageProvider.GetShell32Icon(Shell32Icon.URL, large);
                         break;
 
                     case "CDA":
