@@ -525,12 +525,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         private string GetAbsoluteItemPath(string itemLine, string playlistFileName)
         {
-            string playlistPath = Path.GetDirectoryName(playlistFileName);
             string itemPath = Path.GetDirectoryName(itemLine);
-
             if (string.IsNullOrEmpty(itemPath))
             {
-                itemLine = Path.Combine(playlistPath, itemLine);
+                try
+                {
+                    string playlistPath = Path.GetDirectoryName(playlistFileName);
+                    itemLine = Path.Combine(playlistPath, itemLine);
+                }
+                catch { }
             }
             else
             {
@@ -590,40 +593,59 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public string SaveM3UPlaylistAsString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (PlaylistItem item in this.AsReadOnly())
+            {
+                sb.AppendLine(string.Format("#EXTINF:{0},{1}",
+                    item.Duration.TotalSeconds, item.DisplayName));
+
+                sb.AppendLine(item.Path);
+            }
+
+            return sb.ToString();
+        }
+
         private void LoadM3UPlaylist(string fileName)
         {
-            StreamReader sr = null;
-
             try
             {
-                sr = new StreamReader(fileName);
-                string line = sr.ReadLine();
-                while (line != null)
+                string text = File.ReadAllText(fileName);
+                if (string.IsNullOrEmpty(text) == false)
+                    LoadM3UPlaylistFromString(text, fileName);
+            }
+            catch (Exception ex)
+            {
+                ErrorDispatcher.DispatchError(ex);
+            }
+        }
+
+        public void LoadM3UPlaylistFromString(string content, string playlistFileName = "")
+        {
+            try
+            {
+                string[] lines = content.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                if (lines != null)
                 {
-                    if (_abortLoad)
-                        break;
-
-                    if (!line.StartsWith("#"))
+                    foreach(string line in lines)
                     {
-                        AddItem(GetAbsoluteItemPath(line, fileName));
-                    }
+                        if (_abortLoad)
+                            break;
 
-                    line = sr.ReadLine();
+                        if (!line.StartsWith("#"))
+                        {
+                            AddItem(GetAbsoluteItemPath(line, playlistFileName));
+                        }
+
+                    }
                 }
             }
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchError(ex);
             }
-            finally
-            {
-                if (sr != null)
-                {
-                    sr.Close();
-                }
-            }
         }
-
         #endregion
 
         #region PLS playlists

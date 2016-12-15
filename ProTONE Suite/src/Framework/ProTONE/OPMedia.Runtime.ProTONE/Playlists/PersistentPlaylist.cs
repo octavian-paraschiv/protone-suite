@@ -11,21 +11,20 @@ namespace OPMedia.Runtime.ProTONE.Playlists
     public class PersistentPlaylist
     {
         static bool _isLoading = false;
-        static string _fileName = string.Empty;
 
         static PersistentPlaylist()
         {
-            _fileName = Path.Combine(ApplicationInfo.SettingsFolder, ApplicationInfo.ApplicationName) + ".m3u";
         }
 
         public static void Load(ref Playlist playlist)
         {
-            if (File.Exists(_fileName))
+            string persistedPlaylist = PersistenceProxy.ReadObject(true, "PersistentPlaylist", string.Empty);
+            if (string.IsNullOrEmpty(persistedPlaylist) == false)
             {
                 try
                 {
                     _isLoading = true;
-                    playlist.LoadPlaylist(_fileName);
+                    playlist.LoadM3UPlaylistFromString(persistedPlaylist);
                 }
                 finally
                 {
@@ -42,7 +41,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             else
             {
-                playlist.SavePlaylist(_fileName);
+                string persistedPlaylist = playlist.SaveM3UPlaylistAsString();
+                PersistenceProxy.SaveObject(true, "PersistentPlaylist", persistedPlaylist);
             }
         }
     }

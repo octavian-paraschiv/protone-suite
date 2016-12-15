@@ -24,16 +24,6 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         static string[] _previewAddons = null;
 
         static Dictionary<string, string> _assemblies = new Dictionary<string, string>();
-        static string filePath = string.Empty;
-
-        public static string AddonsConfigFile
-        {
-            get
-            {
-                return filePath;
-            }
-
-        }
 
         public static string[] NavigationAddons
         {
@@ -78,13 +68,6 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         static AddonsConfig()
         {
             IsInitialConfig = false;
-
-            filePath = string.Format(@"{0}{1}{2}.Addons.config",
-                    ApplicationInfo.SettingsFolder, PathUtils.DirectorySeparator,
-                    ApplicationInfo.ApplicationName);
-
-            //SettingsForm.InitAddonCfg +=
-              //  new SettingsForm.InitAddonCfgHandler(SettingsForm_InitAddonCfg);
 
             try
             {

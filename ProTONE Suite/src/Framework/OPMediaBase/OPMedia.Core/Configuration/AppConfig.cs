@@ -704,7 +704,7 @@ namespace OPMedia.Core.Configuration
                 if (CanWriteToFolder(defaultPath))
                     return defaultPath;
 
-                defaultPath = Path.Combine(ApplicationInfo.SettingsFolder, "Logs");
+                defaultPath = Path.Combine(ApplicationInfo.AltLogsFolder, "Logs");
                 if (CanWriteToFolder(defaultPath))
                     return defaultPath;
             }

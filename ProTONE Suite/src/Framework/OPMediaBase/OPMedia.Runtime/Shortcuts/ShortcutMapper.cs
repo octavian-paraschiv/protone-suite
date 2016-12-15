@@ -28,8 +28,6 @@ namespace OPMedia.Runtime.Shortcuts
 
     public class ShortcutMapper
     {
-        static string fileName = string.Empty;
-
         static List<KeyEventArgs> keyCommands = new List<KeyEventArgs>();
         static List<KeyEventArgs> altKeyCommands = new List<KeyEventArgs>();
 
@@ -118,11 +116,32 @@ namespace OPMedia.Runtime.Shortcuts
         {
             try
             {
-                if (File.Exists(fileName))
+                KeysConverter kc = new KeysConverter();
+
+                string keymap = PersistenceProxy.ReadObject(true, "Keymap", string.Empty);
+                if (string.IsNullOrEmpty(keymap) == false)
                 {
-                    using (FileStream isoStream = new FileStream(fileName, FileMode.Open))
+                    string[] lines = keymap.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    if (lines != null)
                     {
-                        LoadInternal(isoStream);
+                        foreach (string line in lines)
+                        {
+                            string[] fields = line.Split(";".ToCharArray());
+                            if (fields.Length >= 2)
+                            {
+                                OPMShortcut cmd = (OPMShortcut)Enum.Parse(typeof(OPMShortcut), fields[0]);
+                                keyCommands[(int)cmd] = new KeyEventArgs((Keys)kc.ConvertFromInvariantString(fields[1]));
+
+                                if (fields.Length >= 3)
+                                {
+                                    altKeyCommands[(int)cmd] = new KeyEventArgs((Keys)kc.ConvertFromInvariantString(fields[2]));
+                                }
+                                else
+                                {
+                                    altKeyCommands[(int)cmd] = new KeyEventArgs(keyCommands[(int)cmd].KeyData);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -135,14 +154,20 @@ namespace OPMedia.Runtime.Shortcuts
         {
             try
             {
-                using (FileStream stream = new FileStream(fileName, FileMode.Create))
+                StringBuilder sb = new StringBuilder();
+                KeysConverter kc = new KeysConverter();
+
+                for (OPMShortcut cmd = CmdFirst; cmd < CmdLast; cmd++)
                 {
-                    SaveInternal(stream);
+                    sb.AppendLine(string.Format("{0};{1};{2}",
+                        cmd,
+                        kc.ConvertToInvariantString(keyCommands[(int)cmd].KeyData),
+                        kc.ConvertToInvariantString(altKeyCommands[(int)cmd].KeyData)));
                 }
+
+                PersistenceProxy.SaveObject(true, "Keymap", sb.ToString());
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public static void DispatchKey(Keys key)
@@ -208,9 +233,6 @@ namespace OPMedia.Runtime.Shortcuts
 
         public static void Init()
         {
-            fileName =
-                Path.Combine(ApplicationInfo.SettingsFolder, ApplicationInfo.ApplicationName) + ".keymap";
-
             RestoreDefaults(false);
             Load();
 
@@ -223,50 +245,6 @@ namespace OPMedia.Runtime.Shortcuts
             if (!_intialized)
             {
                 Init();
-            }
-        }
-
-        private static void LoadInternal(Stream s)
-        {
-            using (StreamReader sr = new StreamReader(s))
-            {
-                KeysConverter kc = new KeysConverter();
-
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-                    string[] fields = line.Split(";".ToCharArray());
-                    if (fields.Length >= 2)
-                    {
-                        OPMShortcut cmd = (OPMShortcut)Enum.Parse(typeof(OPMShortcut), fields[0]);
-                        keyCommands[(int)cmd] = new KeyEventArgs((Keys)kc.ConvertFromInvariantString(fields[1]));
-
-                        if (fields.Length >= 3)
-                        {
-                            altKeyCommands[(int)cmd] = new KeyEventArgs((Keys)kc.ConvertFromInvariantString(fields[2]));
-                        }
-                        else
-                        {
-                            altKeyCommands[(int)cmd] = new KeyEventArgs(keyCommands[(int)cmd].KeyData);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void SaveInternal(Stream s)
-        {
-            using (StreamWriter sw = new StreamWriter(s))
-            {
-                KeysConverter kc = new KeysConverter();
-
-                for (OPMShortcut cmd = CmdFirst; cmd < CmdLast; cmd++)
-                {
-                    sw.WriteLine("{0};{1};{2}",
-                        cmd, 
-                        kc.ConvertToInvariantString(keyCommands[(int)cmd].KeyData), 
-                        kc.ConvertToInvariantString(altKeyCommands[(int)cmd].KeyData));
-                }
             }
         }
 
