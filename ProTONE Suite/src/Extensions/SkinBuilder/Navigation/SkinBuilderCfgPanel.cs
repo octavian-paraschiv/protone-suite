@@ -57,7 +57,7 @@ namespace SkinBuilder.Configuration
             SkinBuilderConfiguration.OpenLastFile = chkReopenLastCatalog.Checked;
             SkinBuilderConfiguration.RememberRecentFiles = chkRememberRecentFiles.Checked;
             SkinBuilderConfiguration.RecentFilesCount = (int)nudRecentFilesCount.Value;
-            AppConfig.Save();
+            
         }
 
         

@@ -58,7 +58,7 @@ namespace OPMedia.RCCManager
                 Application.Run(mainFrm);
                 mainFrm.Dispose();
 
-                AppConfig.Save();
+                
             }
             catch (Exception ex)
             {

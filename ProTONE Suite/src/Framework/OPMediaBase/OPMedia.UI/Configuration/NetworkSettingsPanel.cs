@@ -46,7 +46,7 @@ namespace OPMedia.UI.Configuration
         protected override void SaveInternal()
         {
             AppConfig.ProxySettings = ctlProxy.ProxySettings;
-            AppConfig.Save();
+            
         }
 
         

@@ -120,7 +120,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             ProTONEConfig.SchedulerWaitTimerProceed = (int)nudSchedulerWaitTimerProceed.Value;
 
-            AppConfig.Save();
+            
         }
 
         private void OnSettingsChanged(object sender, EventArgs e)

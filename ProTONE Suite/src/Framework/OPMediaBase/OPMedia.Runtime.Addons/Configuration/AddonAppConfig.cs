@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OPMedia.Core.Configuration;
 using System.Windows.Forms;
+using OPMedia.Core;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {
@@ -13,13 +14,12 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("VSplitterDistance",
-                    4 * Screen.PrimaryScreen.Bounds.Width / 9);
+                return PersistenceProxy.ReadObject(true, "VSplitterDistance", 4 * Screen.PrimaryScreen.Bounds.Width / 9);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("VSplitterDistance", value);
+                PersistenceProxy.SaveObject(true, "VSplitterDistance", value);
             }
         }
 
@@ -27,13 +27,12 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("HSplitterDistance",
-                    Screen.PrimaryScreen.Bounds.Height / 3 - 50);
+                return PersistenceProxy.ReadObject(true, "HSplitterDistance", Screen.PrimaryScreen.Bounds.Height / 3 - 50);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("HSplitterDistance", value);
+                PersistenceProxy.SaveObject(true, "HSplitterDistance", value);
             }
         }
 
@@ -41,19 +40,19 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastNavAddon", "FileExplorer");
+                return PersistenceProxy.ReadObject(true, "LastNavAddon", "FileExplorer");
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastNavAddon", value);
+                PersistenceProxy.SaveObject(true, "LastNavAddon", value);
             }
         }
 
         public static int MaxProcessedEntries
         {
-            get { return ConfigFileManager.Default.GetValue("MaxProcessedEntries", 100); }
-            set { ConfigFileManager.Default.SetValue("MaxProcessedEntries", value); }
+            get { return PersistenceProxy.ReadObject(true, "MaxProcessedEntries", 100); }
+            set { PersistenceProxy.SaveObject(true, "MaxProcessedEntries", value); }
         }
     }
 }

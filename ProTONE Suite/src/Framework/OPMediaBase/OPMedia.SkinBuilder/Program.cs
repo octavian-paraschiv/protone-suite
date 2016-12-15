@@ -51,7 +51,7 @@ namespace OPMedia.SkinBuilder
                 Translator.SetInterfaceLanguage("en"); // Only English
                 Application.Run(new SkinBuilderForm());
 
-                AppConfig.Save();
+                
             }
             catch (Exception ex)
             {

@@ -70,7 +70,7 @@ namespace OPMedia.ProTONE
             : base("TXT_APP_NAME")
         {
             AppConfig.CanSendToTray = true;
-            AppConfig.Save();
+            
 
             InitializeComponent();
 

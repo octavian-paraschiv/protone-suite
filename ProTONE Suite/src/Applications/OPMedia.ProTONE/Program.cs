@@ -74,7 +74,7 @@ namespace OPMedia.ProTONE
                         Application.Run(mainFrm);
                         mainFrm.Dispose();
 
-                        AppConfig.Save();
+                        
                         ShortcutMapper.Save();
                     }
                     catch (MultipleInstancesException ex)

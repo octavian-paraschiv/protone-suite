@@ -80,7 +80,7 @@ namespace OPMedia.MediaLibrary
                     Application.Run(new MediaLibraryForm());
                 }
 
-                AppConfig.Save();
+                
             }
             catch (Exception ex)
             {

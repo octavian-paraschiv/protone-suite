@@ -353,7 +353,7 @@ namespace OPMedia.UI.Dialogs
                 AppConfig.FilterLogLinesCount = 500;
             }
 
-            AppConfig.Save();
+            
 
             ReadLogFile();
         }

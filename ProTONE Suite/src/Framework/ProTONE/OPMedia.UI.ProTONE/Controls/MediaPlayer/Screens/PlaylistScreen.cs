@@ -820,7 +820,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 case OPMShortcut.CmdToggleShuffle:
                     ProTONEConfig.ShufflePlaylist ^= true;
-                    AppConfig.Save();
+                    
                     playlist.SetupRandomSequence(playlist.PlayIndex);
                     args.Handled = true;
                     refreshButtonState = true;
@@ -828,7 +828,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 case OPMShortcut.CmdLoopPlay:
                     ProTONEConfig.LoopPlay ^= true;
-                    AppConfig.Save();
+                    
                     args.Handled = true;
                     refreshButtonState = true;
                     break;

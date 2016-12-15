@@ -558,7 +558,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             ProTONEConfig.ExplorerLaunchType =
                 (cmbExplorerLaunchType.SelectedItem as ExplorerLaunchType).CommandType.ToString();
-            AppConfig.Save();
+            
 
             SuiteRegistrationSupport.ReloadFileAssociations();
         }

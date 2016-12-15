@@ -82,7 +82,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             ProTONEConfig.ShowMediaScreens = mediaScreen;
             ProTONEConfig.SignalAnalisysFunctions = functions;
-            AppConfig.Save();
+            
 
             EventDispatch.DispatchEvent(LocalEventNames.UpdateMediaScreens);
         }

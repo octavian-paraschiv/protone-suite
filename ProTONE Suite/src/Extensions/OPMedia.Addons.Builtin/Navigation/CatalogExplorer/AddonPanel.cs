@@ -1284,7 +1284,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
                     BuiltinAddonConfig.MCRecentFiles =
                         StringUtils.FromStringArray(_recentFiles.ToArray(), '?');
-                    AppConfig.Save();
+                    
                 }
             }
         }

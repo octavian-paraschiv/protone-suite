@@ -29,12 +29,16 @@ namespace OPMedia.Core.Logging
 
         private LoggingConfiguration()
         {
-            try
+            if (string.Compare(Constants.PersistenceServiceShortName,
+                ApplicationInfo.ApplicationName, true) != 0)
             {
-                ReadConfiguration();
-            }
-            catch
-            {
+                try
+                {
+                    ReadConfiguration();
+                }
+                catch
+                {
+                }
             }
         }
 

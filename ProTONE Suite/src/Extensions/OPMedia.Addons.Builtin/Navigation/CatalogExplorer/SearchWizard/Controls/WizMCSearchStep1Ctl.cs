@@ -81,14 +81,14 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         private void OnClearSearchPatternHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchPatternsMC = string.Empty;
-            AppConfig.Save();
+            
             PopulateSearchPattern();
         }
 
         private void OnClearSearchValueHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchTextsMC = string.Empty;
-            AppConfig.Save();
+            
             PopulateSearchText();
         }
 
@@ -152,7 +152,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         {
             BuiltinAddonConfig.SearchPatternsMC = SaveSetting(BuiltinAddonConfig.SearchPatternsMC, cmbSearchPattern.Text);
             BuiltinAddonConfig.SearchTextsMC = SaveSetting(BuiltinAddonConfig.SearchTextsMC, cmbSearchText.Text);
-            AppConfig.Save();
+            
         }
 
         private string SaveSetting(string initialSetting, string settingToAdd)

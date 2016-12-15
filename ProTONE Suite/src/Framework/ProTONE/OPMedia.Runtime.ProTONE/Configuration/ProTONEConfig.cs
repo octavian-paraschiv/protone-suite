@@ -56,10 +56,10 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
     public static class ProTONEConfig
     {
-        public const string DefaultSubtitleURIs = 
+        const string _Fallback_DefaultSubtitleURIs = 
             @"BSP_V1;http://api.bsplayer-subtitles.com/v1.php;1\Osdb;http://api.opensubtitles.org/xml-rpc;1\NuSoap;http://api.getsubtitle.com/server.php;0";
 
-        public const string DefaultLinkedFiles =
+        const string _Fallback_DefaultLinkedFiles =
             @"AU;AIF;AIFF;CDA;FLAC;MID;MIDI;MP1;MP2;MP3;MPA;RAW;RMI;SND;WAV;WMA/BMK\AVI;DIVX;QT;M1V;M2V;MOD;MOV;MPG;MPEG;VOB;WM;WMV;MKV;MP4/SUB;SRT;USF;ASS;SSA;BMK";
 
 
@@ -133,27 +133,221 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Level 2 Settings using Persistence Service (Per-suite settings)
 
+        public static int OsdbKeepAliveInterval
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject("OsdbKeepAliveInterval", 5 * 60 * 1000);
+            }
+            set
+            {
+                PersistenceProxy.SaveObject("OsdbKeepAliveInterval", value);
+            }
+        }
+
+
+        public static bool UseMetadata
+        {
+            get { return PersistenceProxy.ReadObject("UseMetadata", true); }
+            set { PersistenceProxy.SaveObject("UseMetadata", value); }
+        }
+
+        public static bool UseFileNameFormat
+        {
+            get { return PersistenceProxy.ReadObject("UseFileNameFormat", true); }
+            set { PersistenceProxy.SaveObject("UseFileNameFormat", value); }
+        }
+
+        public static string PlaylistEntryFormat
+        {
+            get { return PersistenceProxy.ReadObject("PlaylistEntryFormat", "<A> - <T>"); }
+            set { PersistenceProxy.SaveObject("PlaylistEntryFormat", value); }
+        }
+
+        public static string FileNameFormat
+        {
+            get { return PersistenceProxy.ReadObject("FileNameFormat", "<A> - <T>"); }
+            set { PersistenceProxy.SaveObject("FileNameFormat", value); }
+        }
+
+        public static string CustomPlaylistEntryFormats
+        {
+            get { return PersistenceProxy.ReadObject("CustomPlaylistEntryFormats", string.Empty); }
+            set { PersistenceProxy.SaveObject("CustomPlaylistEntryFormats", value); }
+        }
+
+        public static string CustomFileNameFormats
+        {
+            get { return PersistenceProxy.ReadObject("CustomFileNameFormats", string.Empty); }
+            set { PersistenceProxy.SaveObject("CustomFileNameFormats", value); }
+        }
+
+
+        public static bool DisableDVDMenu
+        {
+            get { return PersistenceProxy.ReadObject(true, "DisableDVDMenu", false); }
+            set { PersistenceProxy.SaveObject(true, "DisableDVDMenu", value); }
+        }
+
+        public static int PrefferedSubtitleLang
+        {
+            get { return PersistenceProxy.ReadObject("PrefferedSubtitleLang", 1033); }
+            set { PersistenceProxy.SaveObject("PrefferedSubtitleLang", value); }
+        }
+
+        public static bool SubEnabled
+        {
+            get { return PersistenceProxy.ReadObject("SubEnabled", false); }
+            set { PersistenceProxy.SaveObject("SubEnabled", value); }
+        }
+
+        public static bool OsdEnabled
+        {
+            get { return PersistenceProxy.ReadObject("OsdEnabled", false); }
+            set { PersistenceProxy.SaveObject("OsdEnabled", value); }
+        }
+
+        public static Color OsdColor
+        {
+            get
+            {
+                int argb = PersistenceProxy.ReadObject("OsdColor", Color.White.ToArgb());
+                return Color.FromArgb(argb);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("OsdColor", value.ToArgb());
+            }
+        }
+
+        public static Color SubColor
+        {
+            get
+            {
+                int argb = PersistenceProxy.ReadObject("SubColor", Color.White.ToArgb());
+                return Color.FromArgb(argb);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("SubColor", value.ToArgb());
+            }
+        }
+
+        static Font DefSubAndOsdFont = new Font("Segoe UI", 12f, FontStyle.Bold, GraphicsUnit.Point);
+
+        public static Font OsdFont
+        {
+            get
+            {
+                string _f = PersistenceProxy.ReadObject("OsdFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
+                Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
+                byte charSet = (byte)PersistenceProxy.ReadObject("OsdFontCharSet", DefSubAndOsdFont.GdiCharSet);
+                return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("OsdFont", new FontConverter().ConvertToInvariantString(value));
+                PersistenceProxy.SaveObject("OsdFontCharSet", value.GdiCharSet);
+            }
+        }
+
+        public static Font SubFont
+        {
+            get
+            {
+                string _f = PersistenceProxy.ReadObject("SubFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
+                Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
+                byte charSet = (byte)PersistenceProxy.ReadObject("SubFontCharSet", DefSubAndOsdFont.GdiCharSet);
+                return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("SubFont", new FontConverter().ConvertToInvariantString(value));
+                PersistenceProxy.SaveObject("SubFontCharSet", value.GdiCharSet);
+            }
+        }
+
+        public static int OsdPersistTimer
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject("OsdPersistTimer", 4000);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("OsdPersistTimer", value);
+            }
+        }
+
+        public static bool SubtitleDownloadEnabled
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject("SubtitleDownloadEnabled", true);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("SubtitleDownloadEnabled", value);
+            }
+        }
+
+        public static int SubtitleMinimumMovieDuration
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject("SubtitleMinimumMovieDuration", 20 /* 20 minutes */);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject("SubtitleMinimumMovieDuration", value);
+            }
+        }
+
+        public static string DefaultSubtitleURIs
+        {
+            get { return PersistenceProxy.ReadObject("DefaultSubtitleURIs", _Fallback_DefaultSubtitleURIs, false); }
+        }
+
+        public static string DefaultLinkedFiles
+        {
+            get { return PersistenceProxy.ReadObject("DefaultLinkedFiles", _Fallback_DefaultLinkedFiles, false); }
+        }
+
+
         public static CddaInfoSource AudioCdInfoSource
         {
-            get { return PersistenceProxy.ReadObject("AudioCdInfoSource", CddaInfoSource.CdText_Cddb); }
-            set { PersistenceProxy.SaveObject("AudioCdInfoSource", value); }
+            get { return PersistenceProxy.ReadObject("AudioCdInfoSource", CddaInfoSource.CdText_Cddb, false); }
+            set { PersistenceProxy.SaveObject("AudioCdInfoSource", value, false); }
         }
 
         public static string CddbServerName
         {
-            get { return PersistenceProxy.ReadObject("CddbServerName", "freedb.freedb.org"); }
-            set { PersistenceProxy.SaveObject("CddbServerName", value); }
+            get { return PersistenceProxy.ReadObject("CddbServerName", "freedb.freedb.org", false); }
+            set { PersistenceProxy.SaveObject("CddbServerName", value, false); }
         }
 
         public static int CddbServerPort
         {
-            get { return PersistenceProxy.ReadObject("CddbServerPort", 8880); }
-            set { PersistenceProxy.SaveObject("CddbServerPort", value); }
+            get { return PersistenceProxy.ReadObject("CddbServerPort", 8880, false); }
+            set { PersistenceProxy.SaveObject("CddbServerPort", value, false); }
         }
 
         #endregion
 
         #region Level 2 Settings using Persistence Service (Per-user settings)
+
+        public static string SubtitleDownloadURIs
+        {
+            get { return PersistenceProxy.ReadObject("SubtitleDownloadURIs", DefaultSubtitleURIs); }
+            set { PersistenceProxy.SaveObject("SubtitleDownloadURIs", value); }
+        }
 
         public static List<string> GetFavoriteFolders(string favFoldersHiveName)
         {
@@ -316,16 +510,10 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Level 2 Settings using Settings File (Combined per-app and per-user settings)
 
-        public static string SubtitleDownloadURIs
-        {
-            get { return ConfigFileManager.Default.GetValue("SubtitleDownloadURIs", DefaultSubtitleURIs); }
-            set { ConfigFileManager.Default.SetValue("SubtitleDownloadURIs", value); }
-        }
-
         public static MediaScreen ShowMediaScreens
         {
-            get { return (MediaScreen)ConfigFileManager.Default.GetValue("ShowMediaScreens", (int)MediaScreen.All); }
-            set { ConfigFileManager.Default.SetValue("ShowMediaScreens", (int)value); }
+            get { return (MediaScreen)PersistenceProxy.ReadObject(true, "ShowMediaScreens", (int)MediaScreen.All); }
+            set { PersistenceProxy.SaveObject(true, "ShowMediaScreens", (int)value); }
         }
 
         public static bool MediaScreenActive(MediaScreen mediaScreen)
@@ -343,7 +531,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 lock (_signalAnalisysFunctionsLock)
                 {
                     if (_signalAnalisysFunctions == null)
-                        _signalAnalisysFunctions = (SignalAnalisysFunction)ConfigFileManager.Default.GetValue("SignalAnalisysFunctions", 
+                        _signalAnalisysFunctions = (SignalAnalisysFunction)PersistenceProxy.ReadObject(true, "SignalAnalisysFunctions", 
                             (int)SignalAnalisysFunction.All);
 
                     if (_signalAnalisysFunctions == null)
@@ -360,7 +548,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                     if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
                     {
                         _signalAnalisysFunctions = value;
-                        ConfigFileManager.Default.SetValue("SignalAnalisysFunctions", (int)value);
+                        PersistenceProxy.SaveObject(true, "SignalAnalisysFunctions", (int)value);
                     }
                 }
             }
@@ -381,12 +569,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ExplorerLaunchType", "EnqueueFiles");
+                return PersistenceProxy.ReadObject(true, "ExplorerLaunchType", "EnqueueFiles");
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("ExplorerLaunchType", value);
+                PersistenceProxy.SaveObject(true, "ExplorerLaunchType", value);
             }
         }
 
@@ -394,12 +582,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastBalance", 0);
+                return PersistenceProxy.ReadObject(true, "LastBalance", 0);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastBalance", value);
+                PersistenceProxy.SaveObject(true, "LastBalance", value);
             }
         }
 
@@ -407,12 +595,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastVolume", 5000);
+                return PersistenceProxy.ReadObject(true, "LastVolume", 5000);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastVolume", value);
+                PersistenceProxy.SaveObject(true, "LastVolume", value);
             }
         }
 
@@ -420,12 +608,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastFilterIndex", 0);
+                return PersistenceProxy.ReadObject(true, "LastFilterIndex", 0);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastFilterIndex", value);
+                PersistenceProxy.SaveObject(true, "LastFilterIndex", value);
             }
         }
 
@@ -433,12 +621,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastOpenedFolder", PathUtils.CurrentDir);
+                return PersistenceProxy.ReadObject(true, "LastOpenedFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastOpenedFolder", value);
+                PersistenceProxy.SaveObject(true, "LastOpenedFolder", value);
             }
         }
 
@@ -446,12 +634,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("PL_LastFilterIndex", 0);
+                return PersistenceProxy.ReadObject(true, "PL_LastFilterIndex", 0);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("PL_LastFilterIndex", value);
+                PersistenceProxy.SaveObject(true, "PL_LastFilterIndex", value);
             }
         }
 
@@ -459,12 +647,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("PL_LastOpenedFolder", PathUtils.CurrentDir);
+                return PersistenceProxy.ReadObject(true, "PL_LastOpenedFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("PL_LastOpenedFolder", value);
+                PersistenceProxy.SaveObject(true, "PL_LastOpenedFolder", value);
             }
         }
 
@@ -474,12 +662,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LoopPlay", false);
+                return PersistenceProxy.ReadObject(true, "LoopPlay", false);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LoopPlay", value);
+                PersistenceProxy.SaveObject(true, "LoopPlay", value);
             }
         }
 
@@ -487,12 +675,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ShufflePlaylist", true);
+                return PersistenceProxy.ReadObject(true, "ShufflePlaylist", true);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("ShufflePlaylist", value);
+                PersistenceProxy.SaveObject(true, "ShufflePlaylist", value);
             }
         }
 
@@ -500,11 +688,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("PlaylistEventHandler", 0);
+                return PersistenceProxy.ReadObject(true, "PlaylistEventHandler", 0);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("PlaylistEventHandler", value);
+                PersistenceProxy.SaveObject(true, "PlaylistEventHandler", value);
             }
         }
 
@@ -512,11 +700,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("PlaylistEventData", string.Empty);
+                return PersistenceProxy.ReadObject(true, "PlaylistEventData", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("PlaylistEventData", value);
+                PersistenceProxy.SaveObject(true, "PlaylistEventData", value);
             }
         }
 
@@ -525,11 +713,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ScheduledEventHandler", 0);
+                return PersistenceProxy.ReadObject(true, "ScheduledEventHandler", 0);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ScheduledEventHandler", value);
+                PersistenceProxy.SaveObject(true, "ScheduledEventHandler", value);
             }
         }
 
@@ -537,11 +725,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ScheduledEventData", string.Empty);
+                return PersistenceProxy.ReadObject(true, "ScheduledEventData", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ScheduledEventData", value);
+                PersistenceProxy.SaveObject(true, "ScheduledEventData", value);
             }
         }
 
@@ -549,11 +737,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ScheduledEventTime", new TimeSpan(0, 0, 0));
+                return PersistenceProxy.ReadObject(true, "ScheduledEventTime", new TimeSpan(0, 0, 0));
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ScheduledEventTime", value);
+                PersistenceProxy.SaveObject(true, "ScheduledEventTime", value);
             }
         }
 
@@ -561,11 +749,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ScheduledEventDays", 0);
+                return PersistenceProxy.ReadObject(true, "ScheduledEventDays", 0);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ScheduledEventDays", value);
+                PersistenceProxy.SaveObject(true, "ScheduledEventDays", value);
             }
         }
 
@@ -573,11 +761,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("EnableScheduledEvent", false);
+                return PersistenceProxy.ReadObject(true, "EnableScheduledEvent", false);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("EnableScheduledEvent", value);
+                PersistenceProxy.SaveObject(true, "EnableScheduledEvent", value);
             }
         }
 
@@ -585,151 +773,26 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SchedulerWaitTimerProceed", 2);
+                return PersistenceProxy.ReadObject(true, "SchedulerWaitTimerProceed", 2);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("SchedulerWaitTimerProceed", value);
+                PersistenceProxy.SaveObject(true, "SchedulerWaitTimerProceed", value);
             }
         }
 
-        public static bool DisableDVDMenu
-        {
-            get { return ConfigFileManager.Default.GetValue("DisableDVDMenu", false); }
-            set { ConfigFileManager.Default.SetValue("DisableDVDMenu", value); }
-        }
 
-        public static int PrefferedSubtitleLang
-        {
-            get { return ConfigFileManager.Default.GetValue("PrefferedSubtitleLang", 1033); }
-            set { ConfigFileManager.Default.SetValue("PrefferedSubtitleLang", value); }
-        }
-
-        public static bool SubEnabled
-        {
-            get { return ConfigFileManager.Default.GetValue("SubEnabled", false); }
-            set { ConfigFileManager.Default.SetValue("SubEnabled", value); }
-        }
-
-        public static bool OsdEnabled
-        {
-            get { return ConfigFileManager.Default.GetValue("OsdEnabled", false); }
-            set { ConfigFileManager.Default.SetValue("OsdEnabled", value); }
-        }
-
-        public static Color OsdColor
-        {
-            get
-            {
-                int argb = ConfigFileManager.Default.GetValue("OsdColor", Color.White.ToArgb());
-                return Color.FromArgb(argb);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("OsdColor", value.ToArgb());
-            }
-        }
-
-        public static Color SubColor
-        {
-            get
-            {
-                int argb = ConfigFileManager.Default.GetValue("SubColor", Color.White.ToArgb());
-                return Color.FromArgb(argb);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("SubColor", value.ToArgb());
-            }
-        }
-
-        static Font DefSubAndOsdFont = new Font("Segoe UI", 12f, FontStyle.Bold, GraphicsUnit.Point);
-
-        public static Font OsdFont
-        {
-            get
-            {
-                string _f = ConfigFileManager.Default.GetValue("OsdFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
-                Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
-                byte charSet = (byte)ConfigFileManager.Default.GetValue("OsdFontCharSet", DefSubAndOsdFont.GdiCharSet);
-                return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("OsdFont", new FontConverter().ConvertToInvariantString(value));
-                ConfigFileManager.Default.SetValue("OsdFontCharSet", value.GdiCharSet);
-            }
-        }
-
-        public static Font SubFont
-        {
-            get
-            {
-                string _f = ConfigFileManager.Default.GetValue("SubFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
-                Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
-                byte charSet = (byte)ConfigFileManager.Default.GetValue("SubFontCharSet", DefSubAndOsdFont.GdiCharSet);
-                return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("SubFont", new FontConverter().ConvertToInvariantString(value));
-                ConfigFileManager.Default.SetValue("SubFontCharSet", value.GdiCharSet);
-            }
-        }
-
-        public static int OsdPersistTimer
-        {
-            get
-            {
-                return ConfigFileManager.Default.GetValue("OsdPersistTimer", 4000);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("OsdPersistTimer", value);
-            }
-        }
-
-        public static bool SubtitleDownloadEnabled
-        {
-            get
-            {
-                return ConfigFileManager.Default.GetValue("SubtitleDownloadEnabled", true);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("SubtitleDownloadEnabled", value);
-            }
-        }
-
-        public static int SubtitleMinimumMovieDuration
-        {
-            get
-            {
-                return ConfigFileManager.Default.GetValue("SubtitleMinimumMovieDuration", 20 /* 20 minutes */);
-            }
-
-            set
-            {
-                ConfigFileManager.Default.SetValue("SubtitleMinimumMovieDuration", value);
-            }
-        }
 
         public static bool MediaStateNotificationsEnabled
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MediaStateNotificationsEnabled", true);
+                return PersistenceProxy.ReadObject(true, "MediaStateNotificationsEnabled", true);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("MediaStateNotificationsEnabled", value);
+                PersistenceProxy.SaveObject(true, "MediaStateNotificationsEnabled", value);
             }
         }
 
@@ -737,65 +800,30 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SubDownloadedNotificationsEnabled", true);
+                return PersistenceProxy.ReadObject(true, "SubDownloadedNotificationsEnabled", true);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SubDownloadedNotificationsEnabled", value);
+                PersistenceProxy.SaveObject(true, "SubDownloadedNotificationsEnabled", value);
             }
         }
 
-        public static bool UseMetadata
-        {
-            get { return ConfigFileManager.Default.GetValue("UseMetadata", true); }
-            set { ConfigFileManager.Default.SetValue("UseMetadata", value); }
-        }
-
-        public static bool UseFileNameFormat
-        {
-            get { return ConfigFileManager.Default.GetValue("UseFileNameFormat", true); }
-            set { ConfigFileManager.Default.SetValue("UseFileNameFormat", value); }
-        }
-
-        public static string PlaylistEntryFormat
-        {
-            get { return ConfigFileManager.Default.GetValue("PlaylistEntryFormat", "<A> - <T>"); }
-            set { ConfigFileManager.Default.SetValue("PlaylistEntryFormat", value); }
-        }
-
-        public static string FileNameFormat
-        {
-            get { return ConfigFileManager.Default.GetValue("FileNameFormat", "<A> - <T>"); }
-            set { ConfigFileManager.Default.SetValue("FileNameFormat", value); }
-        }
-
-        public static string CustomPlaylistEntryFormats
-        {
-            get { return ConfigFileManager.Default.GetValue("CustomPlaylistEntryFormats", string.Empty); }
-            set { ConfigFileManager.Default.SetValue("CustomPlaylistEntryFormats", value); }
-        }
-
-        public static string CustomFileNameFormats
-        {
-            get { return ConfigFileManager.Default.GetValue("CustomFileNameFormats", string.Empty); }
-            set { ConfigFileManager.Default.SetValue("CustomFileNameFormats", value); }
-        }
-
+        
         public static bool FullScreenOn
         {
             get
             {
                 if (IsPlayer)
-                    return ConfigFileManager.Default.GetValue("FullScreenOn", false);
+                    return PersistenceProxy.ReadObject(true, "FullScreenOn", false);
 
                 return false;
             }
 
             set
             {
-                if (IsPlayer == false)
-                    ConfigFileManager.Default.SetValue("FullScreenOn", value);
+                if (IsPlayer)
+                    PersistenceProxy.SaveObject(true, "FullScreenOn", value);
             }
         }
 
@@ -805,7 +833,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 try
                 {
-                    string str = ConfigFileManager.Default.GetValue("DetachedWindowLocation");
+                    string str = PersistenceProxy.ReadObject("DetachedWindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         return (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -817,7 +845,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 Point ptFallback = new Point(100, 100);
 
-                ConfigFileManager.Default.SetValue("DetachedWindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+                PersistenceProxy.SaveObject(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
 
                 return ptFallback;
             }
@@ -825,7 +853,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    ConfigFileManager.Default.SetValue("DetachedWindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    PersistenceProxy.SaveObject(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -837,7 +865,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 Size size = new Size(800, 600);
                 try
                 {
-                    string str = ConfigFileManager.Default.GetValue("DetachedWindowSize");
+                    string str = PersistenceProxy.ReadObject(true, "DetachedWindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -852,7 +880,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    ConfigFileManager.Default.SetValue("DetachedWindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    PersistenceProxy.SaveObject(true, "DetachedWindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -864,7 +892,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 FormWindowState normal = FormWindowState.Normal;
                 try
                 {
-                    normal = (FormWindowState)ConfigFileManager.Default.GetValue("DetachedWindowState", 0);
+                    normal = (FormWindowState)PersistenceProxy.ReadObject(true, "DetachedWindowState", 0);
                 }
                 catch
                 {
@@ -873,21 +901,10 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
             set
             {
-                ConfigFileManager.Default.SetValue("DetachedWindowState", (int)value);
+                PersistenceProxy.SaveObject(true, "DetachedWindowState", (int)value);
             }
         }
 
-        public static int KeepAliveInterval
-        {
-            get
-            {
-                return ConfigFileManager.Default.GetValue("KeepAliveInterval", 5 * 60 * 1000);
-            }
-            set
-            {
-                ConfigFileManager.Default.SetValue("KeepAliveInterval", value);
-            }
-        }
         #endregion
     }
 }

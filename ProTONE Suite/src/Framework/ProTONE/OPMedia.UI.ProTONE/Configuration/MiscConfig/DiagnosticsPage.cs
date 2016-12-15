@@ -169,7 +169,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
             ProTONEConfig.DetachedWindowLocation = new Point(100, 100);
             ProTONEConfig.DetachedWindowSize = new Size(800, 600);
-            AppConfig.Save();
+            
 
             EventDispatch.DispatchEvent(OPMedia.UI.ProTONE.GlobalEvents.EventNames.RestoreRenderingRegionPosition);
 

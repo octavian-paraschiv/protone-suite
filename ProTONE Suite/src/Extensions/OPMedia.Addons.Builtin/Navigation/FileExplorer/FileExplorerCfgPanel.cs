@@ -81,7 +81,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             connectedFilesConfigCtl1.Save();
             AddonAppConfig.MaxProcessedEntries = (int)nudMaxProcessedFiles.Value;
             BuiltinAddonConfig.FEPreviewTimer = nudPreviewTimer.Value;
-            AppConfig.Save();
+            
         }
     }
 }

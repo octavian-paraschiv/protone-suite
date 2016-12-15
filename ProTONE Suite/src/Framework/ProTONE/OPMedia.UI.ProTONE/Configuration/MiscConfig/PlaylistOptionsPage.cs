@@ -177,7 +177,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
 
-            AppConfig.Save();
+            
         }
 
         private string[] GetCustomFormats(OPMEditableComboBox cmb)

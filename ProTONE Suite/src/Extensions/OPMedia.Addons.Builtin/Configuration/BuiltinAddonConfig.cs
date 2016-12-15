@@ -7,6 +7,7 @@ using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System.ComponentModel;
+using OPMedia.Core;
 
 namespace OPMedia.Addons.Builtin.Configuration
 {
@@ -16,12 +17,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SearchPaths", string.Empty);
+                return PersistenceProxy.ReadObject(true, "SearchPaths", string.Empty);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SearchPaths", value);
+                PersistenceProxy.SaveObject(true, "SearchPaths", value);
             }
         }
 
@@ -29,12 +30,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SearchTexts", string.Empty);
+                return PersistenceProxy.ReadObject(true, "SearchTexts", string.Empty);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SearchTexts", value);
+                PersistenceProxy.SaveObject(true, "SearchTexts", value);
             }
         }
 
@@ -42,12 +43,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SearchPatterns", string.Empty);
+                return PersistenceProxy.ReadObject(true, "SearchPatterns", string.Empty);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SearchPatterns", value);
+                PersistenceProxy.SaveObject(true, "SearchPatterns", value);
             }
         }
 
@@ -56,12 +57,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SearchTextsMC", string.Empty);
+                return PersistenceProxy.ReadObject(true, "SearchTextsMC", string.Empty);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SearchTextsMC", value);
+                PersistenceProxy.SaveObject(true, "SearchTextsMC", value);
             }
         }
 
@@ -69,12 +70,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SearchPatternsMC", string.Empty);
+                return PersistenceProxy.ReadObject(true, "SearchPatternsMC", string.Empty);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SearchPatternsMC", value);
+                PersistenceProxy.SaveObject(true, "SearchPatternsMC", value);
             }
         }
 
@@ -82,12 +83,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("SplitterDistanceMC", 200);
+                return PersistenceProxy.ReadObject(true, "SplitterDistanceMC", 200);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("SplitterDistanceMC", value);
+                PersistenceProxy.SaveObject(true, "SplitterDistanceMC", value);
             }
         }
 
@@ -98,7 +99,7 @@ namespace OPMedia.Addons.Builtin.Configuration
                 try
                 {
                     return (decimal)new DecimalConverter().ConvertFromInvariantString(
-                    ConfigFileManager.Default.GetValue("FEPreviewTimer",
+                    PersistenceProxy.ReadObject(true, "FEPreviewTimer",
                         new DecimalConverter().ConvertToInvariantString(0.5M)));
                 }
                 catch { }
@@ -108,7 +109,7 @@ namespace OPMedia.Addons.Builtin.Configuration
 
             set
             {
-                ConfigFileManager.Default.SetValue("FEPreviewTimer",
+                PersistenceProxy.SaveObject(true, "FEPreviewTimer",
                     new DecimalConverter().ConvertToInvariantString(value));
             }
         }
@@ -117,11 +118,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MCLastOpenedFolder", string.Empty);
+                return PersistenceProxy.ReadObject(true, "MCLastOpenedFolder", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("MCLastOpenedFolder", value);
+                PersistenceProxy.SaveObject(true, "MCLastOpenedFolder", value);
             }
         }
 
@@ -129,11 +130,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MCOpenLastCatalog", false);
+                return PersistenceProxy.ReadObject(true, "MCOpenLastCatalog", false);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("MCOpenLastCatalog", value);
+                PersistenceProxy.SaveObject(true, "MCOpenLastCatalog", value);
             }
         }
 
@@ -141,11 +142,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MCRememberRecentFiles", false);
+                return PersistenceProxy.ReadObject(true, "MCRememberRecentFiles", false);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("MCRememberRecentFiles", value);
+                PersistenceProxy.SaveObject(true, "MCRememberRecentFiles", value);
             }
         }
 
@@ -153,11 +154,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MCRecentFilesCount", 5);
+                return PersistenceProxy.ReadObject(true, "MCRecentFilesCount", 5);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("MCRecentFilesCount", value);
+                PersistenceProxy.SaveObject(true, "MCRecentFilesCount", value);
             }
         }
 
@@ -165,11 +166,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("MCRecentFiles", string.Empty);
+                return PersistenceProxy.ReadObject(true, "MCRecentFiles", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("MCRecentFiles", value);
+                PersistenceProxy.SaveObject(true, "MCRecentFiles", value);
             }
         }
 

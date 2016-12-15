@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OPMedia.Core.Configuration;
+using OPMedia.Core;
 
 namespace OPMedia.SkinBuilder.Configuration
 {
@@ -12,11 +13,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastOpenedFolder", string.Empty);
+                return PersistenceProxy.ReadObject(true, "LastOpenedFolder", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("LastOpenedFolder", value);
+                PersistenceProxy.SaveObject(true, "LastOpenedFolder", value);
             }
         }
 
@@ -24,11 +25,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("OpenLastFile", false);
+                return PersistenceProxy.ReadObject(true, "OpenLastFile", false);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("OpenLastFile", value);
+                PersistenceProxy.SaveObject(true, "OpenLastFile", value);
             }
         }
 
@@ -36,11 +37,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("RememberRecentFiles", false);
+                return PersistenceProxy.ReadObject(true, "RememberRecentFiles", false);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("RememberRecentFiles", value);
+                PersistenceProxy.SaveObject(true, "RememberRecentFiles", value);
             }
         }
 
@@ -48,11 +49,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("RecentFilesCount", 5);
+                return PersistenceProxy.ReadObject(true, "RecentFilesCount", 5);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("RecentFilesCount", value);
+                PersistenceProxy.SaveObject(true, "RecentFilesCount", value);
             }
         }
 
@@ -60,11 +61,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("RecentFiles", string.Empty);
+                return PersistenceProxy.ReadObject(true, "RecentFiles", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("RecentFiles", value);
+                PersistenceProxy.SaveObject(true, "RecentFiles", value);
             }
         }
     }

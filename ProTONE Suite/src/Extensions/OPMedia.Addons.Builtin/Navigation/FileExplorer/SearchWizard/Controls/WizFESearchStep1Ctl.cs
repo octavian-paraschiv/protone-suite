@@ -76,14 +76,14 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         private void OnClearSearchPatternHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchPatterns = string.Empty;
-            AppConfig.Save();
+            
             PopulateSearchPattern();
         }
 
         private void OnClearSearchValueHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchTexts = string.Empty;
-            AppConfig.Save();
+            
             PopulateSearchText();
         }
 
@@ -240,7 +240,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
 
             BuiltinAddonConfig.SearchTexts = SaveSetting(BuiltinAddonConfig.SearchTexts, cmbSearchText.Text);
-            AppConfig.Save();
+            
         }
 
         private string SaveSetting(string initialSetting, string settingToAdd)

@@ -87,11 +87,6 @@ namespace OPMedia.Core.Configuration
         static string _skinType = string.Empty;
         static string _languageId = InstallLanguageID;
 
-        public static void Save()
-        {
-            ConfigFileManager.Default.Save();
-        }
-
         static AppConfig()
         {
             _cultures.Add("en", new CultureInfo("en"));
@@ -639,11 +634,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return (ProxyType)ConfigFileManager.Default.GetValue("ProxyType", (int)ProxyType.NoProxy);
+                return (ProxyType)PersistenceProxy.ReadObject("ProxyType", (int)ProxyType.NoProxy);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ProxyType", (int)value);
+                PersistenceProxy.SaveObject("ProxyType", (int)value);
             }
         }
 
@@ -651,11 +646,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ProxyAddress", "your.proxy.address");
+                return PersistenceProxy.ReadObject("ProxyAddress", "your.proxy.address");
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ProxyAddress", value);
+                PersistenceProxy.SaveObject("ProxyAddress", value);
             }
         }
 
@@ -663,11 +658,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ProxyPort", 8080);
+                return PersistenceProxy.ReadObject("ProxyPort", 8080);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ProxyPort", value);
+                PersistenceProxy.SaveObject("ProxyPort", value);
             }
         }
 
@@ -675,11 +670,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ProxyUser", "user.name");
+                return PersistenceProxy.ReadObject("ProxyUser", "user.name");
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ProxyUser", value);
+                PersistenceProxy.SaveObject("ProxyUser", value);
             }
         }
 
@@ -687,11 +682,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("ProxyPassword", string.Empty);
+                return PersistenceProxy.ReadObject("ProxyPassword", string.Empty);
             }
             set
             {
-                ConfigFileManager.Default.SetValue("ProxyPassword", value);
+                PersistenceProxy.SaveObject("ProxyPassword", value);
             }
         }
         #endregion
@@ -754,81 +749,81 @@ namespace OPMedia.Core.Configuration
 
         public static bool LogEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogEnabled", value); }
         }
 
         public static bool LogHeavyTraceLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogHeavyTraceLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogHeavyTraceLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogHeavyTraceLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogHeavyTraceLevelEnabled", value); }
         }
 
         public static bool LogTraceLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogTraceLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogTraceLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogTraceLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogTraceLevelEnabled", value); }
         }
 
         public static bool LogInfoLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogInfoLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogInfoLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogInfoLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogInfoLevelEnabled", value); }
         }
 
         public static bool LogWarningLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogWarningLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogWarningLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogWarningLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogWarningLevelEnabled", value); }
         }
 
         public static bool LogErrorLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogErrorLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("LogErrorLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogErrorLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("LogErrorLevelEnabled", value); }
         }
 
         public static string LogFilePath
         {
-            get { return ConfigFileManager.Default.GetValue("LogFilePath", GetDefaultLoggingFolder()); }
-            set { ConfigFileManager.Default.SetValue("LogFilePath", value); }
+            get { return PersistenceProxy.ReadObject("LogFilePath", GetDefaultLoggingFolder()); }
+            set { PersistenceProxy.SaveObject("LogFilePath", value); }
         }
 
         public static int DaysToKeepLogs
         {
-            get { return ConfigFileManager.Default.GetValue("DaysToKeepLogs", 2); }
-            set { ConfigFileManager.Default.SetValue("DaysToKeepLogs", value); }
+            get { return PersistenceProxy.ReadObject("DaysToKeepLogs", 2); }
+            set { PersistenceProxy.SaveObject("DaysToKeepLogs", value); }
         }
 
 
         public static bool FilterTraceLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("FilterTraceLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("FilterTraceLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("FilterTraceLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("FilterTraceLevelEnabled", value); }
         }
 
         public static bool FilterInfoLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("FilterInfoLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("FilterInfoLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("FilterInfoLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("FilterInfoLevelEnabled", value); }
         }
 
         public static bool FilterWarningLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("LogWarningLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("FilterWarningLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("LogWarningLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("FilterWarningLevelEnabled", value); }
         }
 
         public static bool FilterErrorLevelEnabled
         {
-            get { return ConfigFileManager.Default.GetValue("FilterErrorLevelEnabled", true); }
-            set { ConfigFileManager.Default.SetValue("FilterErrorLevelEnabled", value); }
+            get { return PersistenceProxy.ReadObject("FilterErrorLevelEnabled", true); }
+            set { PersistenceProxy.SaveObject("FilterErrorLevelEnabled", value); }
         }
 
         public static int FilterLogLinesCount
         {
-            get { return ConfigFileManager.Default.GetValue("FilterLogLinesCount", 20); }
-            set { ConfigFileManager.Default.SetValue("FilterLogLinesCount", value); }
+            get { return PersistenceProxy.ReadObject("FilterLogLinesCount", 20); }
+            set { PersistenceProxy.SaveObject("FilterLogLinesCount", value); }
         }
         #endregion
 
@@ -846,7 +841,7 @@ namespace OPMedia.Core.Configuration
 
                 try
                 {
-                    string str = ConfigFileManager.Default.GetValue("WindowLocation");
+                    string str = PersistenceProxy.ReadObject(true, "WindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         point = (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -862,7 +857,7 @@ namespace OPMedia.Core.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    ConfigFileManager.Default.SetValue("WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    PersistenceProxy.SaveObject(true, "WindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -879,7 +874,7 @@ namespace OPMedia.Core.Configuration
                     
                 try
                 {
-                    string str = ConfigFileManager.Default.GetValue("WindowSize");
+                    string str = PersistenceProxy.ReadObject(true, "WindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -894,7 +889,7 @@ namespace OPMedia.Core.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    ConfigFileManager.Default.SetValue("WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    PersistenceProxy.SaveObject(true, "WindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -905,7 +900,7 @@ namespace OPMedia.Core.Configuration
             {
                 try
                 {
-                    return (FormWindowState)ConfigFileManager.Default.GetValue("WindowState", (int)FormWindowState.Normal);
+                    return (FormWindowState)PersistenceProxy.ReadObject(true, "WindowState", (int)FormWindowState.Normal);
                 }
                 catch
                 {
@@ -915,7 +910,7 @@ namespace OPMedia.Core.Configuration
             }
             set
             {
-                ConfigFileManager.Default.SetValue("WindowState", (int)value);
+                PersistenceProxy.SaveObject(true, "WindowState", (int)value);
             }
         }
 
@@ -923,12 +918,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return (ConfigFileManager.Default.GetValue("MimimizedToTray", false) && CanSendToTray);
+                return (PersistenceProxy.ReadObject(true, "MimimizedToTray", false) && CanSendToTray);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("MimimizedToTray", value && CanSendToTray);
+                PersistenceProxy.SaveObject(true, "MimimizedToTray", value && CanSendToTray);
             }
         }
 
@@ -936,12 +931,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("CanSendToTray", false);
+                return PersistenceProxy.ReadObject(true, "CanSendToTray", false);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("CanSendToTray", value);
+                PersistenceProxy.SaveObject(true, "CanSendToTray", value);
             }
         }
         
@@ -952,12 +947,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return ConfigFileManager.Default.GetValue("LastExploredFolder", PathUtils.CurrentDir);
+                return PersistenceProxy.ReadObject(true, "LastExploredFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                ConfigFileManager.Default.SetValue("LastExploredFolder", value);
+                PersistenceProxy.SaveObject(true, "LastExploredFolder", value);
             }
         }
         #endregion

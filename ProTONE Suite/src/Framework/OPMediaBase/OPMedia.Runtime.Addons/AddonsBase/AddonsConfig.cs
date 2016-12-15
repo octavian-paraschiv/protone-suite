@@ -88,13 +88,11 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
             try
             {
-                ConfigFileManager config = new ConfigFileManager(filePath);
+                UninstallMarkedItems();
 
-                UninstallMarkedItems(config);
-
-                _navAddons = ReadAddonConfig(config, "NavigationAddons");
-                _previewAddons = ReadAddonConfig(config, "PreviewAddons");
-                _propAddons = ReadAddonConfig(config, "PropertyAddons");
+                _navAddons = ReadAddonConfig("NavigationAddons");
+                _previewAddons = ReadAddonConfig("PreviewAddons");
+                _propAddons = ReadAddonConfig("PropertyAddons");
             }
             catch (Exception ex)
             {
@@ -102,17 +100,18 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             }
         }
 
-        private static string[] ReadAddonConfig(ConfigFileManager config, string keyBase)
+        private static string[] ReadAddonConfig(string keyBase)
         {
             string[] names = null;
-            string namesRaw = config.GetValue(keyBase);
+            string namesRaw = PersistenceProxy.ReadObject(keyBase, string.Empty, false);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
                 names = namesRaw.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string name in names)
                 {
-                    _assemblies.Add(name, config.GetValue(name));
+                    string val = PersistenceProxy.ReadObject(name, string.Empty, false);
+                    _assemblies.Add(name, val);
                 }
             }
 
@@ -121,8 +120,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         internal static void MarkForUninstall(string assembly)
         {
-            ConfigFileManager config = new ConfigFileManager(filePath);
-            string markedForUninstall = config.GetValue("MarkedForUninstall", string.Empty);
+            string markedForUninstall = PersistenceProxy.ReadObject("MarkedForUninstall", string.Empty, false);
 
             List<string> filesToDelete = new List<string>();
 
@@ -162,14 +160,13 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 }
             }
 
-            config.SetValue("MarkedForUninstall", markedForUninstall);
-            config.Save();
+            PersistenceProxy.SaveObject("MarkedForUninstall", markedForUninstall, false);
         }
 
-        private static void UninstallMarkedItems(ConfigFileManager config)
+        private static void UninstallMarkedItems()
         {
             string[] names = null;
-            string namesRaw = config.GetValue("MarkedForUninstall");
+            string namesRaw = PersistenceProxy.ReadObject("MarkedForUninstall", string.Empty, false);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
@@ -187,8 +184,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     }
                 }
 
-                config.DeleteValue("MarkedForUninstall");
-                config.Save();
+                PersistenceProxy.SaveObject("MarkedForUninstall", string.Empty, false);
             }
         }
 

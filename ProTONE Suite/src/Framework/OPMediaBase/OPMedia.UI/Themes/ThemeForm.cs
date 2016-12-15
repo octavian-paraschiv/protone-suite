@@ -476,7 +476,7 @@ namespace OPMedia.UI.Themes
             PersistState();
             PersistPosition();
 
-            AppConfig.Save();
+            
         }
 
         void OnShown(object sender, EventArgs e)

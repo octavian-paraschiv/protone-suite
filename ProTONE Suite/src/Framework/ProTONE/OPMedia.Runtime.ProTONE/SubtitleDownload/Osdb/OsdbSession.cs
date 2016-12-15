@@ -117,7 +117,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 
         protected override double GetKeepAliveInterval()
         {
-            return ProTONEConfig.KeepAliveInterval;
+            return ProTONEConfig.OsdbKeepAliveInterval;
         }
 
         protected override void DoKeepAliveSession()

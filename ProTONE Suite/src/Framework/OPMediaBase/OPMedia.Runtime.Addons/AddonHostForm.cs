@@ -283,7 +283,7 @@ namespace OPMedia.Runtime.Addons
         {
             AddonAppConfig.VSplitterDistance = this.VSplitterDistance;
             AddonAppConfig.HSplitterDistance = this.HSplitterDistance;
-            AppConfig.Save();
+            
         }
 
         /// <summary>

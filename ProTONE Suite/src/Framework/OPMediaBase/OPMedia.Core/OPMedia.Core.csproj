@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
-    <Compile Include="Configuration\ConfigFileManager.cs" />
     <None Include="VersionTemplate.cs" />
     <Compile Include="MainThread.cs" />
     <Compile Include="NetworkAccess\Shares.cs" />

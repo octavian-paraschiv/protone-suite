@@ -16,6 +16,8 @@ namespace OPMedia.Core
 
         protected string _persistenceContext = string.Empty;
 
+        private static int _unsuccesfulAttempts = 0;
+
         protected static PersistenceProxy CreateProxy()
         {
             return new PersistenceProxy();
@@ -25,7 +27,13 @@ namespace OPMedia.Core
         {
             try
             {
-                ActivatePersistenceService();
+                if (_unsuccesfulAttempts < 5)
+                {
+                    if (ActivatePersistenceService())
+                        _unsuccesfulAttempts = 0;
+                    else
+                        _unsuccesfulAttempts++;
+                }
 
                 try
                 {
@@ -33,7 +41,7 @@ namespace OPMedia.Core
                 }
                 catch
                 {
-                    _persistenceContext = string.Format("{0}\\{1}", 
+                    _persistenceContext = string.Format("{0}\\{1}",
                         Environment.UserDomainName, Environment.UserName);
                 }
             }
@@ -45,7 +53,7 @@ namespace OPMedia.Core
             Open();
         }
 
-        private void ActivatePersistenceService()
+        private bool ActivatePersistenceService()
         {
             int attempts = 5;
 
@@ -55,7 +63,7 @@ namespace OPMedia.Core
                 {
                     ServiceController srv = new ServiceController(Constants.PersistenceServiceShortName);
                     if (srv.Status == ServiceControllerStatus.Running)
-                        return;
+                        return true;
 
                     srv.Start();
                     Thread.Sleep(500);
@@ -67,6 +75,8 @@ namespace OPMedia.Core
 
                 attempts--;
             }
+
+            return false;
         }
 
         protected virtual void Open()
@@ -82,12 +92,21 @@ namespace OPMedia.Core
 
         protected void Abort()
         {
-            ((ICommunicationObject)_proxy).Abort();
+            try
+            {
+                ((ICommunicationObject)_proxy).Abort();
+            }
+            catch { }
         }
 
         public void Dispose()
         {
-            ((ICommunicationObject)_proxy).Close();
+            try
+            {
+                ((ICommunicationObject)_proxy).Close();
+            }
+            catch { }
+
             _proxy = null;
         }
 
@@ -135,6 +154,20 @@ namespace OPMedia.Core
             }
         }
 
+        static string BuildPersistenceId(bool includeAppName, string persistenceId)
+        {
+            if (includeAppName)
+                return string.Format("{0}_{1}", ApplicationInfo.ApplicationName, persistenceId);
+
+            return persistenceId;
+        }
+
+        public static T ReadObject<T>(bool includeAppName, string persistenceId, T defaultValue, bool usePersistenceContext = true)
+        {
+            string id = BuildPersistenceId(includeAppName, persistenceId);
+            return ReadObject<T>(id, defaultValue, usePersistenceContext);
+        }
+
         public static T ReadObject<T>(string persistenceId, T defaultValue, bool usePersistenceContext = true)
         {
             T retVal = defaultValue;
@@ -151,13 +184,20 @@ namespace OPMedia.Core
                     {
                         try
                         {
-                            try
-                            {
-                                retVal = (T)Convert.ChangeType(content, typeof(T));
-                            }
-                            catch (InvalidCastException)
+                            if (typeof(T).IsSubclassOf(typeof(Enum)))
                             {
                                 retVal = (T)Enum.Parse(typeof(T), content);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    retVal = (T)Convert.ChangeType(content, typeof(T));
+                                }
+                                catch (InvalidCastException)
+                                {
+                                    retVal = (T)Enum.Parse(typeof(T), content);
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -177,6 +217,12 @@ namespace OPMedia.Core
             return retVal;
         }
 
+        public static void SaveObject<T>(bool includeAppName, string persistenceId, T objectContent, bool usePersistenceContext = true)
+        {
+            string id = BuildPersistenceId(includeAppName, persistenceId);
+            SaveObject<T>(id, objectContent, usePersistenceContext);
+        }
+
         public static void SaveObject<T>(string persistenceId, T objectContent, bool usePersistenceContext = true)
         {
             try
@@ -193,6 +239,12 @@ namespace OPMedia.Core
             {
                 Logger.LogException(ex);
             }
+        }
+
+        public static void DeleteObject(bool includeAppName, string persistenceId, bool usePersistenceContext = true)
+        {
+            string id = BuildPersistenceId(includeAppName, persistenceId);
+            DeleteObject(id, usePersistenceContext);
         }
 
         public static void DeleteObject(string persistenceId, bool usePersistenceContext = true)

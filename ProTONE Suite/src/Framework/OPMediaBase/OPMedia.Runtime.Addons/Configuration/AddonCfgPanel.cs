@@ -150,13 +150,9 @@ namespace OPMedia.Runtime.Addons.Configuration
                     Translator.Translate("TXT_APP_RESTART"),
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    ConfigFileManager cfgFile = new ConfigFileManager(AddonsConfig.AddonsConfigFile);
-
-                    SaveGroup(cfgFile, addonList.NavigationAddons, "NavigationAddons");
-                    SaveGroup(cfgFile, addonList.PropertyAddons, "PropertyAddons");
-                    SaveGroup(cfgFile, addonList.PreviewAddons, "PreviewAddons");
-
-                    cfgFile.Save();
+                    SaveGroup(addonList.NavigationAddons, "NavigationAddons");
+                    SaveGroup(addonList.PropertyAddons, "PropertyAddons");
+                    SaveGroup(addonList.PreviewAddons, "PreviewAddons");
 
                     if (!AddonsConfig.IsInitialConfig)
                     {
@@ -178,7 +174,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             }
         }
 
-        private void SaveGroup(ConfigFileManager cfgFile, List<AddonInfo> addonList, string groupName)
+        private void SaveGroup(List<AddonInfo> addonList, string groupName)
         {
             string addons = string.Empty;
             foreach (AddonInfo ai in addonList)
@@ -188,17 +184,17 @@ namespace OPMedia.Runtime.Addons.Configuration
                     addons += ai.Name;
                     addons += "|";
 
-                    cfgFile.SetValue(ai.Name, ai.CodeBase);
+                    PersistenceProxy.SaveObject(ai.Name, ai.CodeBase, false);
                 }
             }
 
             if (addons.Length > 0)
             {
-                cfgFile.SetValue(groupName, addons.TrimEnd(new char[] { '|' }));
+                PersistenceProxy.SaveObject(groupName, addons.TrimEnd(new char[] { '|' }), false);
             }
             else
             {
-                cfgFile.SetValue(groupName, string.Empty);
+                PersistenceProxy.SaveObject(groupName, string.Empty, false);
             }
         }
 
@@ -364,15 +360,11 @@ namespace OPMedia.Runtime.Addons.Configuration
             {
                 // Clear for uninstalling.
 
-                ConfigFileManager cfgFile = new ConfigFileManager(AddonsConfig.AddonsConfigFile);
-
                 foreach (AddonInfo ai in itemsToDisable)
                 {
-                    cfgFile.DeleteValue(ai.Name);
+                    PersistenceProxy.DeleteObject(ai.Name, false);
                     addonList.RemoveAddon(ai);
                 }
-
-                cfgFile.Save();
 
                 AddonsConfig.MarkForUninstall(assembly);
                 _uninstallScheduled = true;
