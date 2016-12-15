@@ -30,6 +30,7 @@ using OPMedia.UI.HelpSupport;
 using System.Drawing;
 using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Dialogs;
 
 namespace OPMedia.ProTONE
 {
@@ -47,9 +48,18 @@ namespace OPMedia.ProTONE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
             try
             {
+                if (Environment.CommandLine.EndsWith("-LogViewer"))
+                {
+                    LoggingConfiguration.LoggingEnabled = false;
+                    LogFileConsoleDialog dlg = new LogFileConsoleDialog(true);
+                    Application.Run(dlg);
+                    return;
+                }
+
+
                 if (!ProcessCommandLine(true))
                 {
                     try
@@ -66,7 +76,7 @@ namespace OPMedia.ProTONE
 
                         mainFrm = new MainForm();
 
-                        foreach(BasicCommand cmd in _commandQueue)
+                        foreach (BasicCommand cmd in _commandQueue)
                         {
                             mainFrm.EnqueueCommand(cmd);
                         }
@@ -74,7 +84,7 @@ namespace OPMedia.ProTONE
                         Application.Run(mainFrm);
                         mainFrm.Dispose();
 
-                        
+
                         ShortcutMapper.Save();
                     }
                     catch (MultipleInstancesException ex)
@@ -98,8 +108,10 @@ namespace OPMedia.ProTONE
             {
                 ErrorDispatcher.DispatchError(ex);
             }
-
-            Logger.StopLogger();
+            finally
+            {
+                Logger.StopLogger();
+            }
         }
 
         public static bool ProcessCommandLine(bool testForShellExec)

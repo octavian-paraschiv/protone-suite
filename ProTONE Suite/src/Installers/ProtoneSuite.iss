@@ -88,7 +88,6 @@ Source: {#BINDIR}\XmlRpc.dll; DestDir: {app}; Flags: replacesameversion uninsrem
 Source: {#BINDIR}\taglib-sharp.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Core.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.ProTONE.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\OPMedia.Utility.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Runtime.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Runtime.ProTONE.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.ShellSupport.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: OPMedia.ShellSupport.dll
@@ -104,24 +103,24 @@ Source: {#BINDIR}\Resources\AudioFile.ico; DestDir: {app}\Resources; Flags: prom
 Source: {#BINDIR}\Resources\VideoFile.ico; DestDir: {app}\Resources; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\Resources\Playlist.ico; DestDir: {app}\Resources; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\Resources\Subtitle.ico; DestDir: {app}\Resources\; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
+Source: {#BINDIR}\Resources\Logging.ico; DestDir: {app}\Resources\; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
 
 Source: {#BINDIR}\ro\OPMedia.ProTONE.resources.dll; DestDir: {app}\ro\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\ro\OPMedia.UI.ProTONE.resources.dll; DestDir: {app}\ro\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\ro\OPMedia.UI.resources.dll; DestDir: {app}\ro\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\ro\OPMedia.ShellSupport.resources.dll; DestDir: {app}\ro\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\ro\OPMedia.Utility.resources.dll; DestDir: {app}\ro; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 
 Source: {#BINDIR}\de\OPMedia.ProTONE.resources.dll; DestDir: {app}\de\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\de\OPMedia.UI.ProTONE.resources.dll; DestDir: {app}\de\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\de\OPMedia.UI.resources.dll; DestDir: {app}\de\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\de\OPMedia.ShellSupport.resources.dll; DestDir: {app}\de\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\de\OPMedia.Utility.resources.dll; DestDir: {app}\de; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 
 Source: {#BINDIR}\fr\OPMedia.ProTONE.resources.dll; DestDir: {app}\fr\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\fr\OPMedia.UI.ProTONE.resources.dll; DestDir: {app}\fr\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\fr\OPMedia.UI.resources.dll; DestDir: {app}\fr\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\fr\OPMedia.ShellSupport.resources.dll; DestDir: {app}\fr\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\fr\OPMedia.Utility.resources.dll; DestDir: {app}\fr; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 
 Source: {#BINDIR}\OPMedia.Addons.Builtin.dll; DestDir: {app}; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 Source: {#BINDIR}\OPMedia.MediaLibrary.exe; DestDir: {app}; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
@@ -210,7 +209,7 @@ Name: {group}\{cm:UninstallProgram,ProTONE Suite}; Filename: {uninstallexe}
 Name: {group}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
 Name: {group}\{cm:nameLibrary}; Filename: {app}\OPMedia.MediaLibrary.exe; WorkingDir: {app}; IconFilename: {app}\Resources\catalog.ico; Comment: {cm:startLibrary}; Components: itemPlayer\itemLibrary
 Name: {group}\{cm:nameRCCManager}; Filename: {app}\OPMedia.RCCManager.exe; WorkingDir: {app}; IconFilename: {app}\Resources\ir_remote.ico; Comment: {cm:startRCCManager}; Components: itemPlayer\itemRemote
-Name: {group}\{cm:nameLogViewer}; Filename: {app}\OPMedia.Utility.exe; WorkingDir: {app}; Comment: {cm:startLogViewer}; IconFilename: {app}\OPMedia.LogViewer.exe
+Name: {group}\{cm:nameLogViewer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; Comment: {cm:startLogViewer}; IconFilename: {app}\Resources\Logging.ico; Parameters: -LogViewer
 Name: {userdesktop}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
 Name: {userdesktop}\{cm:nameLibrary}; Filename: {app}\OPMedia.MediaLibrary.exe; WorkingDir: {app}; IconFilename: {app}\Resources\catalog.ico; Comment: {cm:startLibrary}; Components: itemPlayer\itemLibrary
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
@@ -252,7 +251,6 @@ Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMe
 Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCManager.exe"" ""OPMedia RCC Manager"" ENABLE ALL"; StatusMsg: {cm:firewallRccManager}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
 
 [UninstallRun]
-Filename: {app}\OPMedia.Utility.exe; WorkingDir: {app}; Flags: SkipIfDoesntExist; Parameters: {{9566B126-2205-4E61-8C1C-E6D4D0FC34F0}; RunOnceId: _id0
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.RCCService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopRCCService}; RunOnceId: _id1.1; Components: itemPlayer\itemRemote
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.RCCService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstRCCService}; RunOnceId: _id2.1; Components: itemPlayer\itemRemote
 Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3; Components: itemPlayer

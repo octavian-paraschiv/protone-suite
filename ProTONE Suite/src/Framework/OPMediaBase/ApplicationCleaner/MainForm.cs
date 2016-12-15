@@ -136,6 +136,9 @@ namespace OPMedia.Utility
         {
             try
             {
+                // TODO rework this using Persistence Service Proxy as now all user settings are in persistence DB
+
+                /*
                 const string RegProfilesPath = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList";
                 const string UserProfileKeyPrefix = "s-1-5-21-";
                 const string ProfilePathValueName = "ProfileImagePath";
@@ -165,25 +168,13 @@ namespace OPMedia.Utility
                             }
                         }
                     }
-                }
+                }*/
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,
                     Translator.Translate(_launchFromUninstaller ? "TXT_APP_NAME" : "TXT_APP_NAME2"),
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ProcessUserAppDataPath(string userAppDatapath)
-        {
-            List<string> appSettingsFolders = PathUtils.EnumDirectories(userAppDatapath, "OPMedia*");
-            foreach (string appSettingsFolder in appSettingsFolders)
-            {
-                if (Directory.Exists(appSettingsFolder))
-                {
-                    PathUtils.DeleteFolderTree(appSettingsFolder);
-                }
             }
         }
     }

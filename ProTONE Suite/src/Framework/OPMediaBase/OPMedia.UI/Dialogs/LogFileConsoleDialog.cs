@@ -37,20 +37,6 @@ namespace OPMedia.UI.Dialogs
         FileSystemWatcher _fsw = null;
         object _fswLock = new object();
 
-        public static Form ShowLogConsole(bool allowChooseLog)
-        {
-            if (__instance == null)
-            {
-                __instance = new LogFileConsoleDialog(allowChooseLog);
-                __instance.Show();
-                __instance.CenterToScreen();
-            }
-
-            __instance.BringToFront();
-
-            return __instance;
-        }
-
         public static Form ShowLogConsole()
         {
             if (__instance == null)
@@ -65,7 +51,7 @@ namespace OPMedia.UI.Dialogs
             return __instance;
         }
 
-        private LogFileConsoleDialog(bool allowChooseLog)
+        public LogFileConsoleDialog(bool allowChooseLog)
             : this()
         {
             _allowChooseLog = allowChooseLog;
@@ -144,6 +130,13 @@ namespace OPMedia.UI.Dialogs
         void LogFileConsoleDialog_Load(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+
+            if (_allowChooseLog)
+            {
+                this.InheritAppIcon = false;
+                this.Icon = Resources.Logging;
+                this.ShowIcon = true;
+            }
 
             ThemeManager.SetFont(lvLogLines, FontSizes.Small);
 

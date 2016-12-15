@@ -698,7 +698,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Resources\Logging.ICO" />
+    <None Include="Resources\Logging.ICO">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Network.ico" />
   </ItemGroup>
   <ItemGroup>
