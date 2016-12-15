@@ -5,7 +5,7 @@ using System.Text;
 using OPMedia.Runtime.ServiceHelpers;
 using System.ServiceModel;
 using OPMedia.Core;
-using System.Data.SqlServerCe;
+
 using OPMedia.Core.Configuration;
 
 namespace OPMedia.PersistenceService
@@ -23,16 +23,16 @@ namespace OPMedia.PersistenceService
         {
             Environment.CurrentDirectory = AppConfig.InstallationPath;
 
-            using (SqlCeEngine eng = new SqlCeEngine("Data Source = Persistence.sdf"))
-            {
-                try
-                {
-                    eng.Upgrade();
-                }
-                catch{ }
+            //using (SqlCeEngine eng = new SqlCeEngine("Data Source = Persistence.sdf"))
+            //{
+            //    try
+            //    {
+            //        eng.Upgrade();
+            //    }
+            //    catch{ }
 
-                eng.Shrink();
-            }
+            //    eng.Shrink();
+            //}
 
             string address = "net.pipe://localhost/PersistenceService.svc";
 

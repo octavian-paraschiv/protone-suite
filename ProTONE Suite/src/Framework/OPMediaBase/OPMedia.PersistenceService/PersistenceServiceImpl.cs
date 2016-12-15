@@ -6,19 +6,21 @@ using System.ServiceModel;
 using System.Transactions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-using System.Data.SqlServerCe;
+using MainContext;
+
 
 namespace OPMedia.PersistenceService
 {
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerCall)]
     public class PersistenceServiceImpl : IPersistenceService
     {
+        const string DbConnString = "data source = \".\\Persistence.db3\"";
+
         public string ReadObject(string persistenceId, string persistenceContext)
         {
             try
             {
-                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
-                using (Persistence db = new Persistence(conn))
+                using (MainDataContext db = new MainDataContext(DbConnString))
                 {
                     var s = (from po in db.PersistedObjects
                             where
@@ -47,8 +49,7 @@ namespace OPMedia.PersistenceService
                 //opt.IsolationLevel = IsolationLevel.Snapshot;
                 opt.Timeout = TimeSpan.FromSeconds(3);
 
-                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
-                using (Persistence db = new Persistence(conn))
+                using (MainDataContext db = new MainDataContext(DbConnString))
                 {
                     var obj = (from po in db.PersistedObjects
                                 where
@@ -66,7 +67,7 @@ namespace OPMedia.PersistenceService
                             db.SubmitChanges();
                         }
 
-                        PersistedObjects po = new PersistedObjects();
+                        PersistedObject po = new PersistedObject();
                         po.PersistenceID = persistenceId;
                         po.Content = objectContent;
 
@@ -94,8 +95,7 @@ namespace OPMedia.PersistenceService
                 //opt.IsolationLevel = IsolationLevel.Snapshot;
                 opt.Timeout = TimeSpan.FromSeconds(3);
 
-                using (SqlCeConnection conn = new SqlCeConnection("Data Source = Persistence.sdf"))
-                using (Persistence db = new Persistence(conn))
+                using (MainDataContext db = new MainDataContext(DbConnString))
                 {
                     var obj = (from po in db.PersistedObjects
                                 where

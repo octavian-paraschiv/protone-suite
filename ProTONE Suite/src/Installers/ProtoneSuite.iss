@@ -96,7 +96,7 @@ Source: {#BINDIR}\OPMedia.UI.dll; DestDir: {app}; Flags: replacesameversion unin
 Source: {#BINDIR}\OPMedia.UI.ProTONE.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 
 Source: {#BINDIR}\OPMedia.PersistenceService.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\Persistence.sdf; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist uninsneveruninstall
+Source: {#BINDIR}\Persistence.db3; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist uninsneveruninstall
 
 Source: {#BINDIR}\Resources\player.ico; DestDir: {app}\Resources; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\Resources\bookmark.ico; DestDir: {app}\Resources; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
@@ -163,16 +163,11 @@ Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}
 Source: {#BINDIR}\DefaultAddons.OPMedia.MediaLibrary.config; DestDir: {app}
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 
-Source: {#EXTDIR}\SQLCE\System.Data.SqlServerCe.dll; DestDir: {app}
-Source: {#EXTDIR}\SQLCE\sqlceca40.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\sqlcecompact40.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\sqlceer40EN.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\sqlceme40.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\sqlceqp40.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\sqlcese40.dll; DestDir: {app}\x86
-Source: {#EXTDIR}\SQLCE\Microsoft.VC90.CRT\msvcr90.dll; DestDir: {app}\x86\Microsoft.VC90.CRT
-Source: {#EXTDIR}\SQLCE\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest; DestDir: {app}\x86\Microsoft.VC90.CRT
-Source: {#EXTDIR}\SQLCE\Microsoft.VC90.CRT\README_ENU.txt; DestDir: {app}\x86\Microsoft.VC90.CRT
+Source: {#EXTDIR}\DevArt\Devart.Data.dll; DestDir: {app}
+Source: {#EXTDIR}\DevArt\Devart.Data.Linq.dll; DestDir: {app}
+Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.dll; DestDir: {app}
+Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.Linq.dll; DestDir: {app}
+Source: {#EXTDIR}\DevArt\Devart.Data.SqlServer.Linq.dll; DestDir: {app}
 
 Source: {#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_kernelDeint.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow

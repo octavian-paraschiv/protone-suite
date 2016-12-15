@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Database Name="main" EntityNamespace="MainContext" ContextNamespace="MainContext" Class="MainDataContext" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" ed:Guid="abd55564-d776-4385-9ea2-763dbb86b040" Provider="Devart.Data.SQLite.Linq.Provider.SQLiteDataProvider, Devart.Data.SQLite.Linq" Extended="true" xmlns="http://schemas.devart.com/linqconnect/mapping">
+  <Connection Mode="ConnectionString" ConnectionString="Data Source=&quot;D:\Personal\GIT\protone-suite\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.PersistenceService\Persistence.db3&quot;" Provider="Devart.Data.SQLite" />
+  <Table Name="&quot;main&quot;.PersistedObjects" Member="PersistedObjects">
+    <Type Name="PersistedObject" ed:Guid="d24ea7ac-9dfa-4a0e-ad5f-b800fb291441">
+      <Column Name="PersistenceID" Type="System.String" DbType="CHAR NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Always" FixedLength="true" MaxLength="4000" ed:ValidateMaxLength="4000" ed:ValidateRequired="true" ed:Guid="aecd4eff-f482-4f9a-8537-03ea1500a92d" />
+      <Column Name="PersistenceContext" Type="System.String" DbType="CHAR NOT NULL" CanBeNull="false" UpdateCheck="Never" FixedLength="true" MaxLength="4000" ed:ValidateMaxLength="4000" ed:ValidateRequired="true" ed:Guid="a3d580f4-53f8-42ae-84b8-60b11a72677a" />
+      <Column Name="Content" Type="System.String" DbType="TEXT" CanBeNull="true" UpdateCheck="Never" ed:ValidateRequired="false" ed:Guid="4a839488-e155-4427-9cfa-28033ac5b5a6" />
+      <Column Name="Reserved" Type="System.Int64" DbType="INTEGER" CanBeNull="true" UpdateCheck="Never" ed:ValidateRequired="false" ed:Guid="60ab96f2-e695-450a-949c-5332e4ff294e" />
+    </Type>
+  </Table>
+</Database>

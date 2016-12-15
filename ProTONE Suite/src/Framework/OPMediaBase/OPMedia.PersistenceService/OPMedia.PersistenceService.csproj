@@ -83,26 +83,37 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Devart.Data, Version=5.0.1555.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.SQLite, Version=5.6.763.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.SQLite.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.SqlServer.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\protone-suite-externals\SQLCE\System.Data.SqlServerCe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Persistence.designer.cs">
+    <Compile Include="Persistence.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Persistence.dbml</DependentUpon>
+      <DependentUpon>Persistence.lqml</DependentUpon>
     </Compile>
     <Compile Include="PersistenceServiceImpl.cs" />
     <Compile Include="PersistenceServiceInstaller.cs">
@@ -129,13 +140,6 @@
       <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>
       <Name>OPMedia.Runtime</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Persistence.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Generator>GenerateDbmlFromSdf</Generator>
-      <LastGenOutput>Persistence1.sdf</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -168,15 +172,18 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Persistence.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Persistence.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <None Include="Persistence.db3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Persistence.dbml.layout">
-      <DependentUpon>Persistence.dbml</DependentUpon>
+    <None Include="Persistence.Diagram1.view">
+      <DependentUpon>Persistence.lqml</DependentUpon>
+    </None>
+    <None Include="Persistence.edps">
+      <DependentUpon>Persistence.lqml</DependentUpon>
+    </None>
+    <None Include="Persistence.lqml">
+      <Generator>DevartLinqToSqlGenerator</Generator>
+      <LastGenOutput>Persistence.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
