@@ -562,7 +562,7 @@ namespace OPMedia.UI.Controls.Dialogs
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

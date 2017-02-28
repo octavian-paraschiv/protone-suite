@@ -238,6 +238,9 @@
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\SelfValidableCollection.cs" />
+    <Compile Include="Controls\TrayNotificationBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\ToolAndMenuStrips.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -258,9 +261,6 @@
     </Compile>
     <Compile Include="Controls\OPMTimePicker.Designer.cs">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TrayNotificationBox.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\WaitingPictureBox.cs">
       <SubType>Component</SubType>
@@ -385,7 +385,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menus\MenuWrapper.cs" />
-    <Compile Include="MessageDisplayNotifyTarget.cs" />
     <Compile Include="Controls\OPMButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -798,9 +797,6 @@
     <None Include="Resources\Add3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\delete1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\delete2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -811,6 +807,8 @@
     <None Include="Resources\Back.png" />
     <Content Include="Resources\ControlPanel.png" />
     <None Include="Resources\Forward.png" />
+    <Content Include="Resources\moveDown.png" />
+    <Content Include="Resources\moveUp.png" />
     <Content Include="Resources\wizard.png" />
     <None Include="Resources\waiting.gif" />
     <None Include="Resources\waitframe.bmp" />

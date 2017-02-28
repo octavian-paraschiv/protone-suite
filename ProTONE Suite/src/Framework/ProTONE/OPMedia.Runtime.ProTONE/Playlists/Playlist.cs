@@ -407,7 +407,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, true);
             }
             finally
             {
@@ -496,7 +496,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, true);
             }
             finally
             {
@@ -582,7 +582,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
             finally
             {
@@ -617,7 +617,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -643,7 +643,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
         #endregion
@@ -774,7 +774,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
             finally
             {
@@ -875,7 +875,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
             finally
             {

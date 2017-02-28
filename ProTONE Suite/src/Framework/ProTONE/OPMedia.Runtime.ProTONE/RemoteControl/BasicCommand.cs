@@ -168,7 +168,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
 
             return null;
@@ -236,7 +236,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
 
             return null;

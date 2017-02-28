@@ -39,7 +39,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
         private static void FireNotify(string message, string title, MessageBoxIcon icon)
         {
-            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, message, title, icon);
+            EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, message, title, icon);
         }
 
         public static void TryFindSubtitle(string strFile, int duration, bool askToOverwrite)
@@ -299,14 +299,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
             if (ProTONEConfig.SubDownloadedNotificationsEnabled)
             {
-                MainThread.Post(delegate(object x)
-                {
-                    TrayNotificationBox f = new TrayNotificationBox();
-                    f.HideDelay = 6000;
-                    f.AnimationType = AnimationType.None;
-                    
-                    f.ShowSimple(Translator.Translate("TXT_SUB_LOADED"), false);
-                });
+                string msg = Translator.Translate("TXT_SUB_LOADED");
+                FireNotify(msg,  ApplicationInfo.ApplicationName, MessageBoxIcon.Information);
             }
         }
     }

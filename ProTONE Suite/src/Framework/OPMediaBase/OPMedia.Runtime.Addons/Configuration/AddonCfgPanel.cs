@@ -224,13 +224,11 @@ namespace OPMedia.Runtime.Addons.Configuration
                 {
                     if (dlg.FileName.ToLowerInvariant().Contains("builtin"))
                     {
-                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_CANT_INSTALL_BUILTIN"),
-                            Translator.Translate("TXT_CAUTION"));
+                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_CANT_INSTALL_BUILTIN"), false);
                     }
                     else if (!dlg.FileName.ToLowerInvariant().EndsWith("extension.dll"))
                     {
-                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_INVALID_NAME"),
-                            Translator.Translate("TXT_CAUTION"));
+                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_INVALID_NAME"), false);
                     }
                     else if (TestAssembly(dlg.FileName))
                     {
@@ -239,13 +237,12 @@ namespace OPMedia.Runtime.Addons.Configuration
                     }
                     else
                     {
-                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_INVALID_ADDON"),
-                            Translator.Translate("TXT_CAUTION"));
+                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_INVALID_ADDON"), false);
                     }
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
             }
         }
@@ -286,7 +283,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             return false;
@@ -307,10 +304,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             {
                 if (ali.IsNative)
                 {
-                    ErrorDispatcher.DispatchError(
-                        Translator.Translate("TXT_CANT_UNINSTALL_BUILTIN"),
-                        Translator.Translate("TXT_CAUTION"));
-
+                    ErrorDispatcher.DispatchError(Translator.Translate("TXT_CANT_UNINSTALL_BUILTIN"), false);
                     return;
                 }
 
@@ -328,7 +322,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

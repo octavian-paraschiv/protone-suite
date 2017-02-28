@@ -16,7 +16,7 @@ using System.Diagnostics;
 
 namespace OPMedia.UI
 {
-    public partial class MessageDisplay : ToolForm
+    public partial class MessageDisplay : ThemeForm
     {
         string message = string.Empty;
         string title = string.Empty;
@@ -29,12 +29,20 @@ namespace OPMedia.UI
 
         public static void ShowAboutBox()
         {
+            Assembly thisAssembly = Assembly.GetEntryAssembly();
+
             string msgFmt = "{0}\n{1}\n{2}\n";
             string caption = Translator.Translate("TXT_ABOUT", Translator.Translate("TXT_APP_NAME"));
+            string copyrightNotice = AssemblyInfo.GetCopyright(Assembly.GetEntryAssembly());
+
+            DateTime? buildDate = ApplicationInfo.BuildDateTime;
+
             string message = string.Format(msgFmt,
                 Translator.Translate("TXT_APP_NAME"),
-                Translator.Translate("TXT_VERSION", AssemblyInfo.GetVersionNumber(Assembly.GetEntryAssembly())),
-                AssemblyInfo.GetCopyright(Assembly.GetEntryAssembly()));
+                Translator.Translate("TXT_VERSION", AssemblyInfo.GetVersionNumber(thisAssembly)),
+                buildDate.HasValue ? 
+                    string.Format("{0}, 2005-{1}", copyrightNotice, buildDate.Value.Year) :
+                    copyrightNotice);
 
             MessageDisplay dlg = new MessageDisplay(message, caption, MessageBoxIcon.None);
             dlg._isAboutBox = true;
@@ -151,7 +159,7 @@ namespace OPMedia.UI
                 chkAdditionalCheck.Margin = new Padding(pbImage.Right + 15, 8, 3, 3);
             }
 
-            this.Height = pnlContentAll.Height + CaptionButtonSize.Height + pnlContentAll.Margin.Vertical + 2;
+            this.Height = pnlContentAll.Height + CaptionButtonSize.Height + pnlContentAll.Margin.Vertical;
             this.Width = pnlContentAll.Width + pnlContentAll.Margin.Horizontal;
         }
 
@@ -325,6 +333,11 @@ namespace OPMedia.UI
         private void lblThirdPartyNotice_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             Process.Start(e.LinkText);
+        }
+
+        private void chkAdditionalCheck_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

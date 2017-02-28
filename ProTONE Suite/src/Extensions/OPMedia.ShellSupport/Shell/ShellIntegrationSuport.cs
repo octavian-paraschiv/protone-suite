@@ -53,7 +53,7 @@ namespace OPMedia.ShellSupport
             }
             catch(Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
                 hBitmap = IntPtr.Zero;
             }
         }
@@ -76,7 +76,7 @@ namespace OPMedia.ShellSupport
             }
             catch (Exception exception)
             {
-                ErrorDispatcher.DispatchFatalError(exception.Message, "Fatal registration error");
+                ErrorDispatcher.DispatchFatalError("Fatal registration error: " + exception.Message);
             }
 
             Logger.StopLogger();
@@ -98,7 +98,7 @@ namespace OPMedia.ShellSupport
             }
             catch (Exception exception)
             {
-                ErrorDispatcher.DispatchFatalError(exception.Message, "Fatal unregistration error");
+                ErrorDispatcher.DispatchFatalError("Fatal unregistration error: " + exception.Message);
             }
 
             Logger.StopLogger();
@@ -242,7 +242,7 @@ namespace OPMedia.ShellSupport
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

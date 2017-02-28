@@ -102,7 +102,7 @@ namespace OPMedia.UI.ApplicationUpdate
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
                 return false;
             }
         }

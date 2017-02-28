@@ -1037,7 +1037,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             }
             catch(Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
         #endregion
@@ -1126,7 +1126,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
 

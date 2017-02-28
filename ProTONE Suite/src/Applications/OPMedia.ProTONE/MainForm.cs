@@ -46,8 +46,6 @@ namespace OPMedia.ProTONE
 
         TrayNotificationTarget _msgTarget = null;
 
-        OPMToolTip _tip = new OPMToolTip();
-
         public void EnqueueCommand(BasicCommand cmd)
         {
             if (cmd != null)
@@ -92,6 +90,8 @@ namespace OPMedia.ProTONE
 
                 notifyIcon.Icon = ImageProvider.GetAppIcon(false);
 
+                _msgTarget = new TrayNotificationTarget(notifyIcon, this);
+
                 this.Resize += new EventHandler(MainForm_Resize);
                 this.Shown += new EventHandler(MainForm_Shown);
                 this.HandleDestroyed += new EventHandler(MainForm_HandleDestroyed);
@@ -117,13 +117,10 @@ namespace OPMedia.ProTONE
 
         int _cmdMenusCount = 0;
 
-        protected override void RegisterMessageBoxTarget()
-        {
-            _msgTarget = new TrayNotificationTarget(this);
-        }
-
         void MainForm_Shown(object sender, EventArgs e)
         {
+            User32.UIPI_AllowWindowsMessage(this.Handle, Messages.WM_COMMAND, "MainForm");
+
             _commandTarget = new BasicCommandTarget(this);
 
             mediaPlayer.DoLayout();
@@ -172,9 +169,13 @@ namespace OPMedia.ProTONE
             });
         }
 
+        bool _hasMediaStateChangedAtLeastOnce = false;
+
         void OnMediaStateChanged(FilterState oldState, string oldMedia, FilterState newState, string newMedia)
         {
             string FilterState = string.Empty;
+            _hasMediaStateChangedAtLeastOnce = true;
+
             if (BuildMediaStateString(false, ref FilterState))
             {
                 mnuMediaState.Visible = true;
@@ -214,7 +215,7 @@ namespace OPMedia.ProTONE
             BuildThumbnailButtons(false);
         }
 
-        bool BuildMediaStateString(bool addTime, ref string message)
+        bool BuildMediaStateString(bool showTime, ref string message)
         {
             message = MediaRenderer.DefaultInstance.TranslatedFilterState;
 
@@ -225,7 +226,7 @@ namespace OPMedia.ProTONE
                     message += ": " + mediaPlayer.PlayedFileTitle;
                 }
 
-                if (addTime)
+                if (showTime)
                 {
                     bool running = (MediaRenderer.DefaultInstance.FilterState == FilterState.Running || 
                         MediaRenderer.DefaultInstance.FilterState == FilterState.Paused);
@@ -255,7 +256,7 @@ namespace OPMedia.ProTONE
             {
             }
 
-            return (addTime || !string.IsNullOrEmpty(mediaPlayer.PlayedFileTitle));
+            return (showTime || !string.IsNullOrEmpty(mediaPlayer.PlayedFileTitle));
         }
 
         protected override bool IsShortcutAllowed(OPMShortcut cmd)
@@ -316,7 +317,7 @@ namespace OPMedia.ProTONE
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
 
@@ -349,25 +350,34 @@ namespace OPMedia.ProTONE
             BuildThumbnailButtons(true);
         }
 
-        bool _tipActive = false;
+        private System.Windows.Forms.Timer _notifyIconMoveTimer = null;
 
         void notifyIcon_MouseMove(object sender, MouseEventArgs e)
         {
-            string info = string.Empty;
-            if (!_tipActive && BuildMediaStateString(true, ref info))
+            if (_notifyIconMoveTimer == null)
             {
-                _tipActive = true;
-
-                TrayNotificationBox f = new TrayNotificationBox();
-                f.HideDelay = 3000;
-                f.FormClosed += new FormClosedEventHandler(f_FormClosed);
-                f.ShowSimple(info, true);
+                _notifyIconMoveTimer = new Timer();
+                _notifyIconMoveTimer.Interval = 300;
+                _notifyIconMoveTimer.Tick += new EventHandler(_notifyIconMoveTimer_Tick);
             }
+
+            _notifyIconMoveTimer.Stop();
+            _notifyIconMoveTimer.Start();
         }
 
-        void f_FormClosed(object sender, FormClosedEventArgs e)
+        void _notifyIconMoveTimer_Tick(object sender, EventArgs e)
         {
-            _tipActive = false;
+            _notifyIconMoveTimer.Stop();
+
+            string info = string.Empty;
+
+            if (_hasMediaStateChangedAtLeastOnce == false)
+                return;
+
+            if (BuildMediaStateString(true, ref info))
+            {
+                EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, info, Translator.Translate("TXT_APP_NAME"), 0);
+            }
         }
 
         public void NotifyMenuClick(object sender, System.EventArgs e)

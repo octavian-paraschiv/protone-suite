@@ -9,60 +9,79 @@ using OPMedia.UI.Controls;
 using System;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE
 {
     public class TrayNotificationTarget
     {
-        private Form _parent = null;
+        private NotifyIcon _notifyIcon = null;
+        private bool _tipVisible = false;
+        private string _dispMessage = string.Empty;
+
+        private TrayNotificationBox _box = new TrayNotificationBox();
 
         ~TrayNotificationTarget()
         {
             EventDispatch.UnregisterHandler(this);
         }
 
-        public TrayNotificationTarget(Form parent)
+        public TrayNotificationTarget(NotifyIcon notifyIcon, Form hostForm)
         {
-            _parent = parent;
+            _notifyIcon = notifyIcon;
             EventDispatch.RegisterHandler(this);
         }
 
-        [EventSink(EventNames.ShowMessageBox)]
-        public void ShowMessage(string message, string title, MessageBoxIcon icon)
+        private Image GetTrayToolTipIcon(int icon)
         {
-            Image img = null;
-            Color backColor = ThemeManager.BackColor;
+            Image dispIcon = null;
 
             switch (icon)
             {
-                case MessageBoxIcon.Information:
-                    img = ImageProvider.GetUser32Icon(User32Icon.Information, true);
+                case (int)ToolTipIcon.Warning:
+                case (int)MessageBoxIcon.Warning:
+                    dispIcon = ImageProvider.GetUser32Icon(User32Icon.Warning, true);
                     break;
 
-                case MessageBoxIcon.Warning:
-                    img = ImageProvider.GetUser32Icon(User32Icon.Warning, true);
+                case (int)ToolTipIcon.Error:
+                case (int)MessageBoxIcon.Error:
+                    dispIcon = ImageProvider.GetUser32Icon(User32Icon.Error, true);
                     break;
 
-                case MessageBoxIcon.Error:
-                    img = ImageProvider.GetUser32Icon(User32Icon.Error, true);
+                case (int)ToolTipIcon.Info:
+                case (int)MessageBoxIcon.Information:
+                    dispIcon = ImageProvider.GetUser32Icon(User32Icon.Information, true);
                     break;
 
-                case MessageBoxIcon.None:
                 default:
+                    dispIcon = ImageProvider.ApplicationIconLarge;
                     break;
             }
 
-            Dictionary<string, string> d = null;
-            if (message != null)
-            {
-                d = new Dictionary<string, string>();
-                d.Add(message, string.Empty);
-            }
+            return dispIcon;
+        }
 
-            TrayNotificationBox f = new TrayNotificationBox();
-            f.HideDelay = 5000;
-            f.AnimationType = AnimationType.None;
-            f.Show(title, d, img);
+        [EventSink(EventNames.ShowTrayMessage)]
+        public void ShowTrayMessage(string message, string title, int icon)
+        {
+            string dispMsg = string.Format("{0}_{1}_{2}", message, title, icon);
+            Image dispIcon = GetTrayToolTipIcon(icon);
+
+            if (dispMsg != _dispMessage)
+            {
+                _dispMessage = dispMsg;
+
+                Dictionary<string, string> d = null;
+                if (message != null)
+                {
+                    d = new Dictionary<string, string>();
+                    d.Add(message, string.Empty);
+                }
+
+                TrayNotificationBox box = new TrayNotificationBox();
+                box.HideDelay = 5000;
+                box.Show(title, d, dispIcon);
+            }
         }
     }
 }

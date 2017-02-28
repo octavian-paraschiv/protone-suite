@@ -162,7 +162,7 @@ namespace OPMedia.Core.TranslationSupport
                     }
                     catch (Exception ex)
                     {
-                        ErrorDispatcher.DispatchError(ex);
+                        Logger.LogException(ex);
                         retVal = tag;
                     }
                 }

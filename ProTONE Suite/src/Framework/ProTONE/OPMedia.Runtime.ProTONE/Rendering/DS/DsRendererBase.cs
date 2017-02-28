@@ -186,7 +186,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 // This is running on other thread than the DSRenderer,
                 // so its exceptions are not caught in MediaRenderer
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
 

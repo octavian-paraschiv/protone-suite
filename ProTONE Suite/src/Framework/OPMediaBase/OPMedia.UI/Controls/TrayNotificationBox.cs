@@ -18,65 +18,31 @@ using System.Threading;
 
 namespace OPMedia.UI.Controls
 {
-    public enum TransparencyState
-    {
-        Increasing = 0,
-        Full,
-        Decreasing
-    }
-
-    public enum AnimationType
-    {
-        None = 0,
-        Dissolve,
-        Slide
-    }
-
     public partial class TrayNotificationBox : Form
     {
         private static int __count = 0;
 
         OPMToolTipData data = null;
 
-        TransparencyState _ts = TransparencyState.Increasing;
-
         Font _fVal = ThemeManager.SmallFont;
         Font _fKey = new Font(ThemeManager.SmallFont, FontStyle.Bold);
         Font _fTitle = ThemeManager.LargeFont;
         static Font _def = new Font("Segoe UI", 12.0f, FontStyle.Regular, GraphicsUnit.World);
 
-        System.Windows.Forms.Timer _tmrAnimation = new System.Windows.Forms.Timer();
-        System.Windows.Forms.Timer _tmrHide = new System.Windows.Forms.Timer();
-
-        public AnimationType AnimationType { get; set; }
+        System.Windows.Forms.Timer _tmrHide = null;
         public int HideDelay { get; set; }
-
-        bool _forceShowNearTray = false;
-
-        public void ShowSimple(string text, bool showNearTray, Image img = null)
-        {
-            _forceShowNearTray = showNearTray;
-
-            Dictionary<string, string> d = null;
-            if (text != null)
-            {
-                d = new Dictionary<string, string>();
-                d.Add(text, string.Empty);
-            }
-
-            this.Show(Translator.Translate("TXT_APP_NAME"), d,
-                img ?? ImageProvider.ApplicationIconLarge);
-        }
 
         public void Show(string title, Dictionary<string, string> values = null, Image img = null)
         {
             __count++;
 
             AssignData(title, values, img);
+            
             User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
             User32.SetWindowOnTop(Handle, false);
-            User32.ShowWindow(Handle, ShowWindowStyles.SW_HIDE);
-            //User32.BringWindowToTop(Handle);
+
+            _tmrHide.Interval = HideDelay;
+            _tmrHide.Start();
         }
 
         int showLocation = 0, startLocation = 0;
@@ -93,131 +59,18 @@ namespace OPMedia.UI.Controls
             this.DoubleBuffered = true;
 
             this.Opacity = 1;
-            this.AnimationType = UI.Controls.AnimationType.Dissolve;
 
             HideDelay = 6000;
             this.ShowInTaskbar = false;
             this.Paint += new PaintEventHandler(TrayNotificationBox_Paint);
-            this.HandleCreated += new EventHandler(TrayNotificationBox_HandleCreated);
             this.Click += new EventHandler(TrayNotificationBox_Click);
-        }
 
-        void TrayNotificationBox_HandleCreated(object sender, EventArgs e)
-        {
-            if (AnimationType != UI.Controls.AnimationType.None)
-            {
-                _tmrAnimation.Interval = HideDelay / 50;
-                //_tmrAnimation.AutoReset = true;
-                _tmrAnimation.Tick += new EventHandler(_tmrAnimation_Tick);
-                _tmrAnimation.Start();
-            }
-
-            if (AnimationType == UI.Controls.AnimationType.Dissolve)
-            {
-                this.Opacity = 0;
-            }
-
-
-            _tmrHide.Interval = HideDelay;
-            //_tmrHide.AutoReset = true;
+            _tmrHide = new System.Windows.Forms.Timer();
             _tmrHide.Tick += new EventHandler(_tmrHide_Tick);
-            _tmrHide.Start();
-        }
-
-        int _animationStep = 0;
-
-        void _tmrAnimation_Tick(object sender, EventArgs e)
-        {
-            User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
-
-            try
-            {
-                _tmrAnimation.Stop();
-
-                if (AnimationType == UI.Controls.AnimationType.Dissolve)
-                {
-                    double opacity = this.Opacity;
-
-                    switch (_ts)
-                    {
-                        case TransparencyState.Increasing:
-                            opacity += 0.1f;
-                            break;
-
-                        case TransparencyState.Decreasing:
-                            opacity -= 0.1f;
-                            break;
-
-                        case TransparencyState.Full:
-                            // No action
-                            return;
-                    }
-
-                    Opacity = opacity;
-                }
-                else if (AnimationType == UI.Controls.AnimationType.Slide)
-                {
-                    int step = _fullHeight / 10;
-                    if (_animationStep == 0)
-                        this.Height = 0;
-
-                    switch (_ts)
-                    {
-                        case TransparencyState.Increasing:
-                            showLocation -= step;
-                            break;
-
-                        case TransparencyState.Decreasing:
-                            showLocation += step;
-                            break;
-
-                        case TransparencyState.Full:
-                            // No action
-                            return;
-                    }
-
-                    int delta = Location.Y - showLocation;
-                    this.Location = new Point(Location.X, showLocation);
-                    this.Height += delta;
-
-                    //this.Invalidate();
-
-                    Debug.WriteLine("(TEST) showLocation: {0} startLocation: {2} size:{1}", this.Location, this.Size, startLocation);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-            finally
-            {
-                _animationStep++;
-
-                if (_animationStep >= 10 && _animationStep < 30 || _animationStep > 40)
-                {
-                    _ts = TransparencyState.Full;
-                }
-                else if (_animationStep >= 30)
-                {
-                    _ts = TransparencyState.Decreasing;
-                }
-                else
-                {
-                    _ts = TransparencyState.Increasing;
-                }
-
-                _tmrAnimation.Start();
-            }
         }
 
         void _tmrHide_Tick(object sender, EventArgs e)
         {
-            if (AnimationType != UI.Controls.AnimationType.None)
-            {
-                _tmrAnimation.Stop();
-                _tmrAnimation.Tick -= new EventHandler(_tmrAnimation_Tick);
-            }
-
             _tmrHide.Stop();
             _tmrHide.Tick -= new EventHandler(_tmrHide_Tick);
 
@@ -243,52 +96,22 @@ namespace OPMedia.UI.Controls
             this.ResumeLayout(false);
         }
 
-        int _fullHeight = 0;
-
 
         private void AssignData(string title, Dictionary<string, string> values, Image img)
         {
             data = new OPMToolTipData { Values = values, TitleImage = img, Title = title };
             base.Size = CalculateSize(data);
             base.Location = CalculateLocation();
-            _fullHeight = base.Size.Height;
         }
 
         private Point CalculateLocation()
         {
-            Form frmCenter = null;
-
-            if (_forceShowNearTray == false)
-            {
-                if (MainThread.ModalForm != null)
-                    frmCenter = MainThread.ModalForm;
-                else if (MainThread.MainWindow != null)
-                    frmCenter = MainThread.MainWindow;
-            }
-
             int x = 0, y = 0;
 
-            if (frmCenter != null)
-            {
-                x = frmCenter.Location.X + (frmCenter.Width - base.Size.Width - 1) / 2;
-                y = frmCenter.Location.Y + (frmCenter.Height - base.Size.Height - 1) / 2;
-                //y += (__count - 1) * base.Size.Height;
-            }
-            else
-            {
-                Point mousePosition = MousePosition;
+            Point mousePosition = MousePosition;
 
-                x = Screen.FromPoint(mousePosition).WorkingArea.Right - base.Size.Width - 1;
-                y = Screen.FromPoint(mousePosition).WorkingArea.Bottom - base.Size.Height - 1;
-
-                if (AnimationType == UI.Controls.AnimationType.Slide)
-                {
-                   y = Screen.FromPoint(mousePosition).WorkingArea.Bottom;
-                   startLocation = showLocation = y;
-                }
-
-                //y -= (__count - 1) * base.Size.Height;
-            }
+            x = Screen.FromPoint(mousePosition).WorkingArea.Right - base.Size.Width - 1;
+            y = Screen.FromPoint(mousePosition).WorkingArea.Bottom - base.Size.Height - 1;
 
             return new Point(x, y);
         }

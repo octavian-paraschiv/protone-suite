@@ -378,7 +378,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 }
                 catch (Exception exception)
                 {
-                    ErrorDispatcher.DispatchError(exception);
+                    Logger.LogException(exception);
                 }
             }
 

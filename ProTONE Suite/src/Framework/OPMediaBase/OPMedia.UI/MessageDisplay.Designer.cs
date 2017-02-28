@@ -74,8 +74,10 @@ namespace OPMedia.UI
             // pbImage
             // 
             this.pbImage.BackColor = System.Drawing.Color.Transparent;
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbImage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.pbImage.Location = new System.Drawing.Point(3, 3);
+            this.pbImage.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(40, 40);
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -85,14 +87,14 @@ namespace OPMedia.UI
             // lblText
             // 
             this.lblText.AutoSize = true;
-            this.lblText.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblText.Location = new System.Drawing.Point(49, 3);
-            this.lblText.Margin = new System.Windows.Forms.Padding(3);
+            this.lblText.Location = new System.Drawing.Point(48, 0);
+            this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
             this.lblText.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblText.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblText.Size = new System.Drawing.Size(143, 40);
+            this.lblText.Size = new System.Drawing.Size(298, 46);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "label1 gv gdsrg fstg ret tre";
             this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,7 +136,7 @@ namespace OPMedia.UI
             this.pnlContentAll.AutoSize = true;
             this.pnlContentAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlContentAll.ColumnCount = 1;
-            this.pnlContentAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlContentAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pnlContentAll.Controls.Add(this.pnlButtons, 0, 2);
             this.pnlContentAll.Controls.Add(this.pnlContentMessage, 0, 0);
             this.pnlContentAll.Controls.Add(this.chkAdditionalCheck, 0, 3);
@@ -143,7 +145,7 @@ namespace OPMedia.UI
             this.pnlContentAll.Name = "pnlContentAll";
             this.pnlContentAll.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlContentAll.RowCount = 4;
-            this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -173,7 +175,7 @@ namespace OPMedia.UI
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlButtons.RowCount = 1;
-            this.pnlButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlButtons.Size = new System.Drawing.Size(352, 31);
             this.pnlButtons.TabIndex = 2;
             // 

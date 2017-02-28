@@ -467,8 +467,6 @@
     <EmbeddedResource Include="Resources\Music_Note_Double_48.png" />
     <EmbeddedResource Include="Resources\subtitles16.png" />
     <EmbeddedResource Include="Resources\Playlist.png" />
-    <EmbeddedResource Include="Resources\delete2.png" />
-    <EmbeddedResource Include="Resources\delete3.png" />
     <EmbeddedResource Include="Resources\GenVideoDoc_32x32_72.png" />
     <EmbeddedResource Include="Resources\btnShowLogConsole.bmp" />
     <EmbeddedResource Include="Resources\btnPlayAfterPause.png" />
@@ -480,8 +478,6 @@
     <EmbeddedResource Include="Resources\btnShowLogConsole.png" />
     <EmbeddedResource Include="Resources\btnToggleShuffle.png" />
     <EmbeddedResource Include="Resources\file-tabs-icone-4362-48.png" />
-    <EmbeddedResource Include="Resources\movedown.png" />
-    <EmbeddedResource Include="Resources\moveup.png" />
     <EmbeddedResource Include="Resources\btnCfgTimer.png" />
     <EmbeddedResource Include="Resources\btnFwd.png" />
     <EmbeddedResource Include="Resources\btnVolDn.png" />
@@ -503,9 +499,6 @@
     <EmbeddedResource Include="Resources\btnStop.png" />
     <EmbeddedResource Include="Resources\btnClear.png" />
     <EmbeddedResource Include="Resources\diagnostics.png" />
-    <EmbeddedResource Include="Resources\add.png" />
-    <EmbeddedResource Include="Resources\add2.png" />
-    <EmbeddedResource Include="Resources\delete.png" />
     <EmbeddedResource Include="Resources\subtitles.png" />
   </ItemGroup>
   <ItemGroup>
@@ -532,12 +525,14 @@
     <EmbeddedResource Include="Resources\Scheduler.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Add3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\FileTypes.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\movedown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\moveup.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

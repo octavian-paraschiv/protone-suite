@@ -515,7 +515,7 @@ namespace OPMedia.UI.Controls
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex.Message, "Rename error");
+                ErrorDispatcher.DispatchError(ex.Message, false);
                 _pathToSelect = oldPath;
             }
             finally

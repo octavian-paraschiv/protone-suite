@@ -9,7 +9,7 @@ namespace OPMedia.Core
         public const string SuiteName = "ProTONE Suite";
 
         public const string CompanyName =           "OPMedia Research";
-        public const string CopyrightNotice =       "Copyright © " + CompanyName + ", 2005-2014";
+        public const string CopyrightNotice =       "Copyright © " + CompanyName;
 
         public const string SuiteAppPrefix = "OPMedia.";
 

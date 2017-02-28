@@ -62,7 +62,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchFatalError(ex);
             }
             finally
             {

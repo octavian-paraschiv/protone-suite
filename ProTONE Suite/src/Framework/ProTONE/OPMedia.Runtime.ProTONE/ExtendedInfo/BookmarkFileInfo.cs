@@ -111,7 +111,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
             {
                 if (throwException)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
                 else
                 {
@@ -150,7 +150,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             if (reloadAfterSave && File.Exists(_path))

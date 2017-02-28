@@ -86,7 +86,7 @@ namespace OPMedia.UI.Dialogs
             tsbSave.Text = string.Empty;
 
             tsbFreezeWindow.Image = Resources.Stop.ToBitmap();
-            tsbClearLog.Image = Resources.Delete.Resize(false);
+            tsbClearLog.Image = Resources.Remove.Resize(false);
 
             lblLogFileName.ForeColor = ThemeManager.ForeColor;
             lblLogLineCount.ForeColor = ThemeManager.ForeColor;

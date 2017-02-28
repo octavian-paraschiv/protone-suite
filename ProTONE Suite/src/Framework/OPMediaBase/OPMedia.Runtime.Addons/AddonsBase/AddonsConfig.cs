@@ -79,7 +79,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -162,7 +162,6 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     }
                     catch(Exception ex)
                     {
-                        //ErrorDispatcher.DispatchError(ex);
                         Logger.LogException(ex);
                     }
                 }
@@ -220,7 +219,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

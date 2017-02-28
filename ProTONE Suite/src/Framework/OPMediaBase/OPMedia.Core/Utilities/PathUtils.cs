@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using OPMedia.Core.Utilities;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Core
 {
@@ -580,5 +581,17 @@ namespace OPMedia.Core
             return (fsiList.Count < 1);
         }
         #endregion
+
+        public static string GetTempFilePath(string inFile = null)
+        {
+            if (string.IsNullOrEmpty(inFile))
+            {
+                DateTime dt = DateTime.Now;
+                inFile = StringUtils.GetUniqueFileName(ref dt);
+            }
+
+            string tmpDir = Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User);
+            return Path.Combine(tmpDir, inFile);
+        }
     }
 }

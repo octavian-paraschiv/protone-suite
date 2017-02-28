@@ -38,6 +38,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
         private int sampleRate = 44100;
         public int SampleRate { get { return sampleRate; } set { sampleRate = value; } }
 
+        public string ContentType { get; private set; }
+
         List<byte> _reservoir = new List<byte>();
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
         /// <param name="url">Url of the Shoutcast stream</param>
         public ShoutcastStream(string url, int timeout)
         {
+            this.ContentType = string.Empty;
             InitShoutcastStream(url, timeout, false);
 
             if (connected)
@@ -104,9 +107,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 }
                 catch { }
 
-                if (contentType != "audio/mpeg")
-                    throw new NotSupportedException(string.Format("The streaming server {0} has content-type: {1}, which is not supported.", 
-                        url, contentType));
+                switch (contentType)
+                {
+                    case "audio/mpg":
+                    case "audio/mpeg":
+                    //case "audio/aac":
+                    //case "audio/aacp":
+                        this.ContentType = contentType;
+                        break;
+
+                    default:
+                        throw new NotSupportedException(string.Format("Unsupported content type: {0}.", contentType));
+                }
 
                 receivedBytes = 0;
 

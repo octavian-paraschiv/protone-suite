@@ -24,42 +24,48 @@ namespace OPMedia.Core.Logging
                 "The application has encountered a fatal error.\nWe are sorry for the inconvenience. Details: \n\n" + msg + "\n\n" +
                 "It is strongly recommended to restart the application now.\n" +
                 "If the problem persists after restart, activate application logging and send the log files to OPMedia Research",
-                Application.ProductName);
+                Translator.Translate("TXT_APP_NAME"), false);
         }
 
-        public static void DispatchFatalError(string msg, string title)
+        public static void DispatchFatalError(string msg)
         {
             Logger.LogError(msg);
             InnerDisplayFatalError(
                 "The application has encountered a fatal error.\nWe are sorry for the inconvenience. Details: \n\n" + msg + "\n\n" +
                 "It is strongly recommended to restart the application now.\n" +
                 "If the problem persists after restart, activate application logging and send the log files to OPMedia Research",
-                Application.ProductName);
+                Translator.Translate("TXT_APP_NAME"), false);
         }
 
-        public static void DispatchError(Exception ex)
+        public static void DispatchError(Exception ex, bool showInTray)
         {
             Logger.LogException(ex);
             string msg = GetErrorMessageForException(ex);
 
-            InnerDisplayNonFatalError(msg, Translator.Translate("TXT_APP_NAME"));
+            InnerDisplayNonFatalError(msg, Translator.Translate("TXT_APP_NAME"), showInTray);
         }
 
-        public static void DispatchError(string msg, string title)
+        public static void DispatchError(string msg, bool showInTray)
         {
             Logger.LogError(msg);
-            InnerDisplayNonFatalError(msg, Translator.Translate("TXT_APP_NAME"));
+            InnerDisplayNonFatalError(msg, Translator.Translate("TXT_APP_NAME"), showInTray);
         }
 
 
-        private static void InnerDisplayFatalError(string message, string title)
+        private static void InnerDisplayFatalError(string message, string title, bool showInTray)
         {
-            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, message, title, MessageBoxIcon.Error);
+            if (showInTray)
+                EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, message, title, ToolTipIcon.Error);
+            else
+                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, message, title, MessageBoxIcon.Error);
         }
 
-        private static void InnerDisplayNonFatalError(string message, string title)
+        private static void InnerDisplayNonFatalError(string message, string title, bool showInTray)
         {
-            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, message, title, MessageBoxIcon.Warning);
+            if (showInTray)
+                EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, message, title, ToolTipIcon.Warning);
+            else
+                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, message, title, MessageBoxIcon.Warning);
         }
 
         private static string GetErrorMessageForException(Exception ex)

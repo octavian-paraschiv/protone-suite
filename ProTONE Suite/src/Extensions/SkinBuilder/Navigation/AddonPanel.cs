@@ -421,7 +421,7 @@ namespace SkinBuilder.Navigation
                     mainMessage += Translator.Translate("TXT_RECENT_FILE_REMOVED");
                 }
 
-                ErrorDispatcher.DispatchError(mainMessage, Translator.Translate("TXT_CAUTION"));
+                ErrorDispatcher.DispatchError(mainMessage, false);
             }
         }
 
@@ -434,7 +434,7 @@ namespace SkinBuilder.Navigation
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
                 _themeFile = null;
             }
         }
@@ -448,7 +448,7 @@ namespace SkinBuilder.Navigation
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
                 _themeFile = null;
             }
         }
@@ -692,7 +692,7 @@ namespace SkinBuilder.Navigation
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                     DisplayThemeFile();
                 }
             }

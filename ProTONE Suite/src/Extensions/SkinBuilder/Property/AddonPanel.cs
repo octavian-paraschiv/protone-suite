@@ -233,7 +233,7 @@ namespace SkinBuilder.Property
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
 
                 base.Modified = false;

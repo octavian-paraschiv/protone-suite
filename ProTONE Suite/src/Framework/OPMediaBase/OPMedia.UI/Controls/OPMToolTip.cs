@@ -15,6 +15,7 @@ using System.Diagnostics;
 
 using OPMedia.UI.Generic;
 using OPMedia.Core.Logging;
+using OPMedia.Core.GlobalEvents;
 
 namespace OPMedia.UI.Controls
 {

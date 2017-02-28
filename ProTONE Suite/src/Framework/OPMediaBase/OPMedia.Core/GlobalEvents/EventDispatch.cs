@@ -171,11 +171,11 @@ namespace OPMedia.Core
                     }
                     catch (TargetInvocationException ex)
                     {
-                        ErrorDispatcher.DispatchError(ex.InnerException);
+                        Logger.LogException(ex.InnerException);
                     }
                     catch (Exception ex)
                     {
-                        ErrorDispatcher.DispatchError(ex);
+                        Logger.LogException(ex);
                     }
                 }
             }
@@ -190,11 +190,11 @@ namespace OPMedia.Core
                     }
                     catch (TargetInvocationException ex)
                     {
-                        ErrorDispatcher.DispatchError(ex.InnerException);
+                        Logger.LogException(ex.InnerException);
                     }
                     catch (Exception ex)
                     {
-                        ErrorDispatcher.DispatchError(ex);
+                        Logger.LogException(ex);
                     }
                 }
             }

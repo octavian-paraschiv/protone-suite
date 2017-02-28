@@ -16,6 +16,7 @@ using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.UI;
 using OPMedia.Addons.Builtin.Shared.Compression;
+using OPMedia.Runtime.ProTONE.Compression;
 
 namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 {
@@ -156,7 +157,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                             {
                                 // Transcode WAV => MP3 i.o.w encode the wav
                                 WaveFormatEx wfex = WaveFormatEx.Cdda;
-                                byte[] buff = ReadWAV(inputFile, ref wfex);
+                                byte[] buff = WaveFile.ReadWaveData(inputFile, ref wfex);
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
@@ -193,7 +194,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                     throw new Exception("TXT_FAILED_CONVERSION_MP3_TEMP_WAV");
 
                                 WaveFormatEx wfex = WaveFormatEx.Cdda;
-                                byte[] buff = ReadWAV(tempWavFile, ref wfex);
+                                byte[] buff = WaveFile.ReadWaveData(tempWavFile, ref wfex);
 
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
@@ -216,48 +217,6 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
             }
 
             throw new NotSupportedException(string.Format("TXT_UNSUPPORTED_TRANSCODING: {0}", this));
-        }
-
-        private byte[] ReadWAV(string inputFile, ref WaveFormatEx wfex)
-        {
-            try
-            {
-                using (FileStream fs = new FileStream(inputFile, FileMode.Open, FileAccess.Read, FileShare.Read))
-                using (BinaryReader br = new BinaryReader(fs))
-                {
-                    br.ReadUInt32(); // RIFF_TAG
-                    uint rawSize = br.ReadUInt32(); // WaveHeaderSize + buff.Length
-                    uint buffSize = rawSize - CdRipper.WaveHeaderSize - sizeof(uint);
-
-                    br.ReadUInt32(); // WAVE_TAG
-                    br.ReadUInt32(); // FMT__TAG
-                    br.ReadUInt32(); // WaveFormatSize
-
-                    byte[] bytesWfex = br.ReadBytes(Marshal.SizeOf(wfex));
-
-                    var pinnedRawData = GCHandle.Alloc(bytesWfex, GCHandleType.Pinned);
-                    try
-                    {
-                        // Get the address of the data array
-                        var pinnedRawDataPtr = pinnedRawData.AddrOfPinnedObject();
-
-                        // overlay the data type on top of the raw data
-                        wfex = (WaveFormatEx)Marshal.PtrToStructure(pinnedRawDataPtr, typeof(WaveFormatEx));
-                    }
-                    finally
-                    {
-                        // must explicitly release
-                        pinnedRawData.Free();
-                    }
-
-                    br.ReadUInt32(); // DATA_TAG
-
-                    return br.ReadBytes((int)buffSize);
-                }
-            }
-            catch { }
-
-            return null;
         }
 
         private bool DecodeMP3ToWAV(string inputFile, string outputFile)

@@ -9,6 +9,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using OPMedia.Runtime.ProTONE.Rendering.SHOUTCast;
 using OPMedia.Core.Logging;
+using NAudio.Wave;
+using OPMedia.Runtime.ProTONE.Compression;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
 {
@@ -34,30 +36,56 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
 
         protected override HRESULT LoadTracks()
         {
-            Mp3WaveFormat _wfex = new Mp3WaveFormat();
-            _wfex.cbSize = 12; // MPEGLAYER3_WFX_EXTRA_BYTES
-            _wfex.fdwFlags = 0; // MPEGLAYER3_FLAG_PADDING_ISO
-            
-            _wfex.nAvgBytesPerSec = (_stream.Bitrate * 1024 / 8);
-
-            _wfex.nBlockAlign = 1; // must be 1 for streamed MP3
-            _wfex.nBlockSize = 522; // MP3_BLOCK_SIZE magic number
-            _wfex.nChannels = 2; // Stereo
-            _wfex.nCodecDelay = 0; // must be 0
-            _wfex.nFramesPerBlock = 1; // must be 1
-            
-            _wfex.nSamplesPerSec = _stream.SampleRate;
-
-            _wfex.wBitsPerSample = 0; // must be 0
-            _wfex.wFormatTag = 0x0055; // WAVE_FORMAT_MPEGLAYER3
-            _wfex.wID = 1; // MPEGLAYER3_ID_MPEG
+            string contentType = _stream.ContentType;
+            Logger.LogToConsole("ShoutCast::LoadTracks contentType={0}", contentType);
 
             AMMediaType mt = new AMMediaType();
-            mt.majorType = MediaType.Audio;
-            mt.subType = MediaSubType.MPEG1Audio;
-            mt.sampleSize = 0;
-            mt.fixedSizeSamples = false;
-            mt.SetFormat(_wfex);
+
+            switch (contentType)
+            {
+                case "audio/mpg":
+                case "audio/mpeg":
+                    {
+                        BaseClasses.Mp3WaveFormat wfex = new BaseClasses.Mp3WaveFormat();
+                        wfex.cbSize = 12; // MPEGLAYER3_WFX_EXTRA_BYTES
+                        wfex.fdwFlags = 0; // MPEGLAYER3_FLAG_PADDING_ISO
+
+                        wfex.nAvgBytesPerSec = (_stream.Bitrate * 1024 / 8);
+
+                        wfex.nBlockAlign = 1; // must be 1 for streamed MP3
+                        wfex.nBlockSize = 522; // MP3_BLOCK_SIZE magic number
+                        wfex.nChannels = 2; // Stereo
+                        wfex.nCodecDelay = 0; // must be 0
+                        wfex.nFramesPerBlock = 1; // must be 1
+
+                        wfex.nSamplesPerSec = _stream.SampleRate;
+
+                        wfex.wBitsPerSample = 0; // must be 0
+                        wfex.wFormatTag = 0x0055; // WAVE_FORMAT_MPEGLAYER3
+                        wfex.wID = 1; // MPEGLAYER3_ID_MPEG
+
+                        mt.majorType = MediaType.Audio;
+                        mt.subType = MediaSubType.MPEG1Audio;
+                        mt.sampleSize = 0;
+                        mt.fixedSizeSamples = false;
+                        mt.SetFormat(wfex);
+                    }
+                    break;
+
+                //case "audio/aac":
+                //case "audio/aacp":
+                //    {
+                //        WaveFormatEx wfex = WaveFormatEx.Cdda;
+
+                //        mt.majorType = MediaType.Audio;
+                //        mt.subType = MediaSubType.PCM;
+                //        mt.sampleSize = wfex.nBlockAlign;
+                //        mt.fixedSizeSamples = true;
+                //        mt.SetFormat(wfex);
+                //    }
+                //    break;
+            }
+
             m_Tracks.Add(new ShoutcastStreamTrack(this, mt));
 
             return S_OK;
@@ -119,26 +147,86 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
         public override PacketData GetNextPacket()
         {
             ShoutcastStream ss = (m_pParser as ShoutcastStreamParser).ShoutcastStream;
+            string contentType = ss.ContentType;
 
-            int slice = ss.Bitrate * 1024  / 8;
+            Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0}", ss.ContentType);
 
-            PacketData _data = new PacketData();
-            _data.Buffer = new byte[slice];
+            int slice = ss.Bitrate * 1024 / 8;
 
-            int bytesRead = ss.Read(_data.Buffer, 0, slice);
+            PacketData dataToReturn = null;
+
+            PacketData dataToRead = new PacketData();
+            dataToRead.Buffer = new byte[slice];
+
+            int bytesRead = ss.Read(dataToRead.Buffer, 0, slice);
             if (bytesRead > 0)
             {
-                _data.Position = 0;
-                _data.Size = (int)bytesRead;
-                _data.SyncPoint = true;
-                _data.Start = m_rtMediaPosition;
-                _data.Stop = _data.Start + UNITS/2;
-                m_rtMediaPosition = _data.Stop;
+                Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0} bytesRead={1}", ss.ContentType, bytesRead);
 
-                return _data;
+                switch (contentType)
+                {
+                    case "audio/mpg":
+                    case "audio/mpeg":
+                        {
+                            // The data that was read has mp3 format
+                            // Since we initialized the media subtype as MPEG1Audio, it's safe to send this data directly
+                            // to the output renderer.
+                            dataToRead.Position = 0;
+                            dataToRead.Size = (int)bytesRead;
+                            dataToRead.SyncPoint = true;
+                            dataToRead.Start = m_rtMediaPosition;
+                            dataToRead.Stop = dataToRead.Start + UNITS / 2;
+                            m_rtMediaPosition = dataToRead.Stop;
+                            dataToReturn = dataToRead;
+                        }
+                        break;
+
+                    //case "audio/aac":
+                    //case "audio/aacp":
+                    //    {
+                    //        try
+                    //        {
+                    //            // The data that was read has ac3 format
+                    //            // Since we initialized the media subtype as PCM, we'll need to convert the AC3 data
+                    //            // to WAV before sending to the output renderer.
+                    //            string aacFile = PathUtils.GetTempFilePath("shoutcast_in.aac");
+                    //            string wavFile = PathUtils.GetTempFilePath("shoutcast_out.wav");
+
+                    //            File.WriteAllBytes(aacFile, dataToRead.Buffer);
+
+                    //            string aacFileUrl = string.Format(@"file:///{0}", aacFile.Replace("\\", "/"));
+
+                                
+
+                    //            using (var reader = new MediaFoundationReader(aacFileUrl))
+                    //                WaveFileWriter.CreateWaveFile(wavFile, reader);
+
+                    //            WaveFormatEx wfex = WaveFormatEx.Cdda;
+                    //            byte[] buff = WaveFile.ReadWaveData(wavFile, ref wfex);
+
+                    //            dataToRead.Position = 0;
+                    //            dataToRead.Size = buff.Length;
+                    //            dataToRead.SyncPoint = true;
+                    //            dataToRead.Start = m_rtMediaPosition;
+                    //            dataToRead.Stop = dataToRead.Start + UNITS;
+                    //            m_rtMediaPosition = dataToRead.Stop;
+
+                    //            dataToReturn = new PacketData();
+                    //            dataToReturn.Buffer = new byte[buff.Length];
+                    //            Array.Copy(buff, dataToReturn.Buffer, buff.Length);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            Logger.LogToConsole("ShoutcastStreamTrack: " + ex.ToString());
+                    //        }
+                    //    }
+                    //    break;
+                }
             }
 
-            return null;
+            Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0} returning {1}null", ss.ContentType, 
+                (dataToReturn == null) ? string.Empty : "non-");
+            return dataToReturn;
         }
 
         #endregion

@@ -17,16 +17,6 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     public abstract class CdRipper
     {
-        protected const uint RIFF_TAG = 0x46464952;
-        protected const uint CDDA_TAG = 0x41444443;
-        protected const uint WAVE_TAG = 0x45564157;
-        protected const uint FMT__TAG = 0x20746D66;
-        protected const uint DATA_TAG = 0x61746164;
-        public const uint WAVE_FORMAT_PCM = 0x01;
-
-        public const uint WaveHeaderSize = 38;
-        public const uint WaveFormatSize = 18;
-
         private bool _cancel = false;
         private object _cancelLock = new object();
 

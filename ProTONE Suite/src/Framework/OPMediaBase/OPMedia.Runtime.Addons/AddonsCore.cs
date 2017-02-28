@@ -198,7 +198,7 @@ namespace OPMedia.Runtime.Addons
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
                 navAddonsLoader = null;
                 return; // navigations addons are critical; if they fail loading don't continue.
             }
@@ -211,7 +211,7 @@ namespace OPMedia.Runtime.Addons
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
                 propAddonsLoader = null;
                 errors = true;
             }
@@ -224,7 +224,7 @@ namespace OPMedia.Runtime.Addons
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
                 previewAddonsLoader = null;
                 errors = true;
             }
@@ -233,7 +233,7 @@ namespace OPMedia.Runtime.Addons
             {
                 ErrorDispatcher.DispatchError("Some errors were encountered while loading addons.\n" +
                 "You can open Settings -> Addon Config to check which addons are operational.", 
-                "Addons loaded with errors.");
+                false);
             }
 
             Logger.LogTrace("InitializeAddons() done.");

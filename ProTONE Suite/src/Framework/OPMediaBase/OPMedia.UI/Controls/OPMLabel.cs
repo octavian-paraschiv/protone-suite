@@ -139,8 +139,16 @@ namespace OPMedia.UI.Controls
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignments.FromContentAlignment(TextAlign).Alignment;
                 sf.LineAlignment = StringAlignments.FromContentAlignment(TextAlign).LineAlignment;
-                sf.Trimming = StringTrimming.EllipsisWord;
-                //sf.FormatFlags = StringFormatFlags.NoClip;
+
+                if (base.AutoSize)
+                {
+                    sf.Trimming = StringTrimming.None;
+                    sf.FormatFlags = StringFormatFlags.NoWrap;
+                }
+                else
+                {
+                    sf.Trimming = StringTrimming.EllipsisWord;
+                }
                 
                 sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
 

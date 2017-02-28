@@ -83,7 +83,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
             }
 

@@ -47,7 +47,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
                     catch (Exception ex)
                     {
                         ErrorDispatcher.DispatchError(string.Format("Could not load addon: {0}.\nError: {1}",
-                            addonName, ex.Message), Application.ProductName);
+                            addonName, ex.Message), false);
                     }
                 }
             }

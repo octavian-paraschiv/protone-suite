@@ -63,36 +63,6 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap add {
-            get {
-                object obj = ResourceManager.GetObject("add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap add2 {
-            get {
-                object obj = ResourceManager.GetObject("add2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Add3 {
-            get {
-                object obj = ResourceManager.GetObject("Add3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap AudioMediaType {
             get {
                 object obj = ResourceManager.GetObject("AudioMediaType", resourceCulture);
@@ -396,36 +366,6 @@ namespace OPMedia.UI.ProTONE.Properties {
         public static System.Drawing.Bitmap btnVolUp {
             get {
                 object obj = ResourceManager.GetObject("btnVolUp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap delete {
-            get {
-                object obj = ResourceManager.GetObject("delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap delete2 {
-            get {
-                object obj = ResourceManager.GetObject("delete2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap delete3 {
-            get {
-                object obj = ResourceManager.GetObject("delete3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

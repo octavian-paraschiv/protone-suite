@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.Core
 {
@@ -1024,6 +1026,39 @@ namespace OPMedia.Core
 			    0, 0, 0, 0,
                 uFlags);
 	    }
+
+        public static bool UIPI_AllowWindowsMessage(IntPtr wndHandle, Messages msg, string desc)
+        {
+            bool ret = true;
+
+            uint osVersion = AppConfig.OSVersion;
+            decimal ver = osVersion / 10;
+
+            if (osVersion == AppConfig.VerWinVista)
+            {
+                // Allow WM_COPYDATA through UIPI
+                // On Vista, there is no way to do it per-window; you have to do it per-process
+                ret = User32.ChangeWindowMessageFilter((uint)msg, ChangeWindowMessageFilterFlags.Add);
+                Logger.LogTrace("[Windows v.{2:0.0} => VISTA] Calling ChangeWindowMessageFilter to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
+            }
+            else if (AppConfig.OSVersion >= AppConfig.VerWin7)
+            {
+                // Allow WM_COPYDATA through UIPI
+                CHANGEFILTERSTRUCT cfs = new CHANGEFILTERSTRUCT();
+                cfs.size = (uint)Marshal.SizeOf(cfs);
+                cfs.info = MessageFilterInfo.None;
+
+                ret = User32.ChangeWindowMessageFilterEx(wndHandle, (uint)msg, ChangeWindowMessageFilterExAction.Allow, ref cfs);
+                Logger.LogTrace("[Windows v.{2:0.0} => Win8 or later] Calling ChangeWindowMessageFilterEx to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
+            }
+            else
+            {
+                Logger.LogTrace("[Windows v.{2:0.0} => earlier than VISTA] No need to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
+                ret = true;
+            }
+
+            return ret;
+        }
 
     }
 }

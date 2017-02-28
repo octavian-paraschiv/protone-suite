@@ -96,7 +96,7 @@ namespace OPMedia.ProTONE
                     }
                     catch (Exception ex)
                     {
-                        ErrorDispatcher.DispatchError(ex);
+                        ErrorDispatcher.DispatchFatalError(ex);
                     }
                     finally
                     {
@@ -106,7 +106,7 @@ namespace OPMedia.ProTONE
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchFatalError(ex);
             }
             finally
             {
@@ -156,7 +156,7 @@ namespace OPMedia.ProTONE
                 }
                 catch(Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
 
                 return true;

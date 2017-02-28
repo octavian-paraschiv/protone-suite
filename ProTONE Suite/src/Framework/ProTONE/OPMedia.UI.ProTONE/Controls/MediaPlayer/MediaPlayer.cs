@@ -348,11 +348,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
    
                if (ProTONEConfig.MediaStateNotificationsEnabled)
                {
-                   TrayNotificationBox f = new TrayNotificationBox();
-                   f.HideDelay = 6000;
-                   f.AnimationType = AnimationType.Dissolve;
-                   f.ShowSimple(text, true);
-                   this.Focus();
+                   EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, text, Translator.Translate("TXT_APP_NAME"), 0);
                }
            }
         }
@@ -364,9 +360,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void OnMediaRenderingException(RenderingExceptionEventArgs args)
         {
-            ErrorDispatcher.DispatchError(args.RenderingException.ToString(), 
-                Translator.Translate("TXT_APP_NAME"));
-
+            string msg = args.RenderingException.ToString();
+            ErrorDispatcher.DispatchError(msg, false);
             args.Handled = true;
         }
 

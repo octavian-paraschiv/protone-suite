@@ -31,7 +31,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         public override string ToString()
         {
-            return string.Format("Cannot play: {0}.\r\nReason: {1}", 
+            return string.Format("Cannot play: {0}\r\nReason: {1}", 
                 this.RenderedFile, this.Message);
         }
 

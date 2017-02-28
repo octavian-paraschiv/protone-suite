@@ -94,7 +94,9 @@ namespace OPMedia.Core
         {
             try
             {
-                ((ICommunicationObject)_proxy).Abort();
+                ICommunicationObject channel = _proxy as ICommunicationObject;
+                if (channel != null)
+                    channel.Abort();
             }
             catch { }
         }
@@ -103,7 +105,9 @@ namespace OPMedia.Core
         {
             try
             {
-                ((ICommunicationObject)_proxy).Close();
+                ICommunicationObject channel = _proxy as ICommunicationObject;
+                if (channel != null)
+                    channel.Close();
             }
             catch { }
 

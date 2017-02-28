@@ -253,4 +253,15 @@ namespace OPMedia.Core
         public static extern bool GetTokenInformation(IntPtr tokenHandle, TokenInformationClass tokenInformationClass, IntPtr tokenInformation, int tokenInformationLength, out int returnLength);
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public class IMAGE_FILE_HEADER
+    {
+        public ushort Machine;
+        public ushort NumberOfSections;
+        public uint TimeDateStamp;
+        public uint PointerToSymbolTable;
+        public uint NumberOfSymbols;
+        public ushort SizeOfOptionalHeader;
+        public ushort Characteristics;
+    };
 }

@@ -319,7 +319,7 @@ namespace OPMedia.UI.ProTONE.Controls.BookmarkManagement
                     lvBookmarks.Enabled = false;
                     lvBookmarks.AllowEditing = false;
 
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
             }
             finally

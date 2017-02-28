@@ -363,7 +363,7 @@ namespace OPMedia.Runtime.Addons
                         }
                     }
 
-                    ErrorDispatcher.DispatchError("ProTONE Media Library cannot handle this file: " + _launchPath, "ERROR");
+                    ErrorDispatcher.DispatchError("ProTONE Media Library cannot handle this file: " + _launchPath, false);
                     Process.GetCurrentProcess().Kill();
                     return true;
                 }
@@ -717,7 +717,7 @@ namespace OPMedia.Runtime.Addons
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
             finally
             {

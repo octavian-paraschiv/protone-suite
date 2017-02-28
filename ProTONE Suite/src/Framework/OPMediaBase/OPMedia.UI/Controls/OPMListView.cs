@@ -1314,7 +1314,7 @@ namespace OPMedia.UI.Controls
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
         #endregion

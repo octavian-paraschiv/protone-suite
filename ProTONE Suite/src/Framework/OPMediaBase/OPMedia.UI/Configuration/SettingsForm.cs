@@ -150,7 +150,7 @@ namespace OPMedia.UI
             }
             catch(SettingsSaveException ex)
             {
-                ErrorDispatcher.DispatchError(ex.Message, "Caution");
+                ErrorDispatcher.DispatchError(ex.Message, false);
             }
 
             e.Cancel = true;

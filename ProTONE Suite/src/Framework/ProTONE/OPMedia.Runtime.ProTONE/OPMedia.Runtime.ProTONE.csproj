@@ -58,6 +58,10 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\..\..\..\protone-suite-externals\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -79,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\WaveFile.cs" />
     <Compile Include="Configuration\ProTONEConfig.cs" />
     <Compile Include="DirectX\DirectXConfig.cs" />
     <Compile Include="ExtendedInfo\ID3ArtworkInfo.cs" />

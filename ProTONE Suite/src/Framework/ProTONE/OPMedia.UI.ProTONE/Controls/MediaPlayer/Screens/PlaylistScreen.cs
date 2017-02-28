@@ -290,7 +290,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
 

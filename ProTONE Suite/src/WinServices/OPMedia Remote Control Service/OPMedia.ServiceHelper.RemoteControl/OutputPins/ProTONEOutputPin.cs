@@ -64,7 +64,7 @@ namespace OPMedia.ServiceHelper.RCCService.OutputPins
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                Logger.LogException(ex);
             }
         }
     }

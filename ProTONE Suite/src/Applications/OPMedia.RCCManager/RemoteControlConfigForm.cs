@@ -350,7 +350,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -372,7 +372,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -402,7 +402,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             UseWaitCursor = false;
@@ -436,7 +436,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -455,7 +455,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
     }

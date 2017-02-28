@@ -10,7 +10,9 @@ namespace OPMedia.Core
         public const string PerformTranslation =    "PerformTranslation";
         public const string ExecuteShortcut =       "ExecuteShortcut";
         public const string KeymapChanged =         "KeymapChanged";
+        
         public const string ShowMessageBox =        "ShowMessageBox";
+        public const string ShowTrayMessage =    "ShowTrayMessage";
 
         public const string SetMainStatusBar =      "SetMainStatusBar";
 

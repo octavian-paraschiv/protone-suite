@@ -378,7 +378,6 @@ namespace OPMedia.UI.Themes
 
     public class MainFrame : ThemeFrame
     {
-        private ThemedMessageBoxTarget _messageTarget;
         private ApplicationUpdateHelper _updateHelper;
 
         public MainFrame(string title) : base(title)
@@ -413,13 +412,6 @@ namespace OPMedia.UI.Themes
             }
 
             _updateHelper = new ApplicationUpdateHelper();
-
-            RegisterMessageBoxTarget();
-        }
-
-        protected virtual void RegisterMessageBoxTarget()
-        {
-            _messageTarget = new ThemedMessageBoxTarget();
         }
 
         void OnMove(object sender, EventArgs e)
@@ -621,7 +613,12 @@ namespace OPMedia.UI.Themes
         {
             return false;
         }
-        
+
+        [EventSink(EventNames.ShowMessageBox)]
+        public void ShowMessageBox(string message, string title, MessageBoxIcon icon)
+        {
+            MessageDisplay.Show(message, title, icon);
+        }
     }
 
     #endregion

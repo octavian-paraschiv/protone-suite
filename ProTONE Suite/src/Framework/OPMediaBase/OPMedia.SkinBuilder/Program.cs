@@ -55,7 +55,7 @@ namespace OPMedia.SkinBuilder
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             Logger.StopLogger();

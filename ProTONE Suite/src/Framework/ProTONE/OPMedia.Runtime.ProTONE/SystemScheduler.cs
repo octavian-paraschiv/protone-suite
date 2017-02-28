@@ -325,7 +325,7 @@ namespace OPMedia.Runtime.ProTONE
                 }
                 catch(Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, true);
                 }
             }
         }

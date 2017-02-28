@@ -179,7 +179,7 @@ namespace OPMedia.ServiceHelper.RCCService
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    Logger.LogException(ex);
                 }
             }
 
@@ -191,7 +191,7 @@ namespace OPMedia.ServiceHelper.RCCService
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    Logger.LogException(ex);
                 }
             }
 

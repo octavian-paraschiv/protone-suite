@@ -48,7 +48,6 @@ namespace OPMedia.RCCManager
 
         bool _modified = false;
         private RCCServiceConfig _config = null;
-        ThemedMessageBoxTarget _messageTarget = new ThemedMessageBoxTarget();
 
         ImageList ilTree = null;
 
@@ -306,7 +305,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
             finally
             {
@@ -367,7 +366,7 @@ namespace OPMedia.RCCManager
                     }
                     catch (Exception ex)
                     {
-                        ErrorDispatcher.DispatchError(ex);
+                        ErrorDispatcher.DispatchError(ex, false);
                     }
                 }
                 else
@@ -385,7 +384,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             UseWaitCursor = false;
@@ -430,7 +429,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
             UseWaitCursor = false;
@@ -464,7 +463,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
 
         }
@@ -559,7 +558,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -584,7 +583,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -609,7 +608,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -632,7 +631,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 
@@ -738,7 +737,7 @@ namespace OPMedia.RCCManager
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

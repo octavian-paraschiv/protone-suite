@@ -75,7 +75,7 @@ namespace OPMedia.Runtime
             }
             catch(Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex);
+                ErrorDispatcher.DispatchError(ex, false);
             }
         }
 

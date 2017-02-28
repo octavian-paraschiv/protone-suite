@@ -179,7 +179,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
                 }
                 catch (Exception ex)
                 {
-                    ErrorDispatcher.DispatchError(ex);
+                    ErrorDispatcher.DispatchError(ex, false);
                 }
             }
             return true;

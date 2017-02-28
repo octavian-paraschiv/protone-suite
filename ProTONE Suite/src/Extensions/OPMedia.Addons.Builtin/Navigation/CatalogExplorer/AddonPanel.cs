@@ -1129,7 +1129,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                     mainMessage += Translator.Translate("TXT_RECENT_FILE_REMOVED");
                 }
 
-                ErrorDispatcher.DispatchError(mainMessage, Translator.Translate("TXT_CAUTION"));
+                ErrorDispatcher.DispatchError(mainMessage, false);
             }
         }
 
@@ -1226,10 +1226,10 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                 {
                     Logger.LogException(cex);
                     string msg = Translator.Translate(cex.Message, cex.Detail);
-                    MessageDisplay.Show(msg, Translator.Translate("TXT_APP_NAME"), MessageBoxIcon.Exclamation);
+                    EventDispatch.DispatchEvent(EventNames.ShowMessageBox, msg, Translator.Translate("TXT_APP_NAME"), MessageBoxIcon.Exclamation);
                 }
                 else
-                    ErrorDispatcher.DispatchError(e.Error);
+                    ErrorDispatcher.DispatchError(e.Error, false);
             }
 
             DisplayCatalog();

@@ -83,12 +83,7 @@ namespace OPMedia.UI.ApplicationUpdate
                            current, available);
 
                         if (detectOnDemand)
-                        {
-                            MainThread.Post(delegate(object x)
-                            {
-                                MessageDisplay.Show("TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
-                            });
-                        }
+                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
                     }
                 }
 
