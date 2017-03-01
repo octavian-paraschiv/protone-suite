@@ -74,15 +74,15 @@ Name: en; MessagesFile: compiler:Default.isl
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\DLL\Themes
 
 Source: {#BINDIR}\OPMedia.Core.dll; DestDir: {app}\DLL; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\OPMedia.Utility.exe; DestDir: {app}\DLL; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 Source: {#BINDIR}\OPMedia.Runtime.dll; DestDir: {app}\DLL; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.UI.dll; DestDir: {app}\DLL; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\ro\OPMedia.UI.resources.dll; DestDir: {app}\DLL\ro\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\ro\OPMedia.Utility.resources.dll; DestDir: {app}\DLL\ro; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 Source: {#BINDIR}\de\OPMedia.UI.resources.dll; DestDir: {app}\DLL\de\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\de\OPMedia.Utility.resources.dll; DestDir: {app}\DLL\de; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 Source: {#BINDIR}\fr\OPMedia.UI.resources.dll; DestDir: {app}\DLL\fr\; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\fr\OPMedia.Utility.resources.dll; DestDir: {app}\DLL\fr; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 Source: {#BINDIR}\OPMedia.Runtime.Addons.dll; DestDir: {app}\DLL; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
 Source: {#BINDIR}\ro\OPMedia.Runtime.Addons.resources.dll; DestDir: {app}\DLL\ro\; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
 Source: {#BINDIR}\de\OPMedia.Runtime.Addons.resources.dll; DestDir: {app}\DLL\de\; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
