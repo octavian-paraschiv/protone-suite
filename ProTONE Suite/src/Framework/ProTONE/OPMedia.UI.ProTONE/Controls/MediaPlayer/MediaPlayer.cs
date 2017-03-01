@@ -616,6 +616,17 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
+        private void LoadRadioStations(RadioStation[] radioStations)
+        {
+            pnlScreens.PlaylistScreen.Clear();
+            pnlScreens.PlaylistScreen.AddRadioStations(radioStations);
+
+            if (Autoplay)
+            {
+                PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
+            }
+        }
+
         private void LoadFiles(string[] fileNames)
         {
             pnlScreens.PlaylistScreen.Clear();
@@ -881,31 +892,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         args.Handled = true;
 
                         StreamingServerChooserDlg dlg2 = new StreamingServerChooserDlg();
-                        if (dlg2.ShowDialog() == DialogResult.OK)
-                        {
-                            string[] urls = new string[] { dlg2.Uri };
-                            LoadFiles(urls);
-                        }
+                        dlg2.Show();
 
                         /*
-                        UrlCfgDlg dlg = new UrlCfgDlg(true);
-                        dlg.ShowChooserButton = true;
-                        dlg.RequiredUriParts = UriComponents.SchemeAndServer;
-                        dlg.OpenChooser += new EventHandler((s, e) =>
+                        if (dlg2.ShowDialog() == DialogResult.OK)
                         {
-                            StreamingServerChooserDlg dlg2 = new StreamingServerChooserDlg();
-                            if (dlg2.ShowDialog() == DialogResult.OK)
-                            {
-                                dlg.Uri = dlg2.Uri;
-                                dlg.DialogResult = DialogResult.OK;
-                                dlg.Close();
-                            }
-                        });
+                            string textUrl = dlg2.Uri;
+                            string radioStationUrl = dlg2.RadioStation != null ? dlg2.RadioStation.Url : string.Empty;
 
-                        if (dlg.ShowDialog() == DialogResult.OK)
-                        {
-                            string[] urls = new string[] { dlg.Uri };
-                            LoadFiles(urls);
+                            if (string.Compare(textUrl, radioStationUrl, true) != 0)
+                            {
+                                // Load the specified url (manually entered by the user)
+                                string[] urls = new string[] { textUrl };
+                                LoadFiles(urls);
+                            }
+                            else if (dlg2.RadioStation != null)
+                            {
+                                LoadRadioStation(dlg2.RadioStation);
+                            }
                         }*/
                     }
                     break;
@@ -929,6 +933,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
 
             Logger.LogInfo("OnExecuteShortcut leave");
+        }
+
+        [EventSink(GlobalEvents.EventNames.LoadRadioStation)]
+        public void LoadRadioStation(RadioStation rs)
+        {
+            RadioStation[] radioStations = new RadioStation[] { rs };
+            LoadRadioStations(radioStations);
         }
 
         private void ToggleFullScreen()

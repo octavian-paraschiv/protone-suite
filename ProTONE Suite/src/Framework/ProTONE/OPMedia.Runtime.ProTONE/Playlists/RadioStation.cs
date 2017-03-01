@@ -8,9 +8,20 @@ using System.Xml;
 using System.IO;
 using System.Xml.Serialization;
 using OPMedia.Core.Utilities;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.Logging;
+using System.Web;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
+    public enum RadioStationSource
+    {
+        Internal = 0,
+        ShoutCast,
+    }
+
     [DataContract]
     public class RadioStation
     {
@@ -22,6 +33,61 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         [DataMember(Order = 2)]
         public string Genre { get; set; }
+
+        [DataMember(Order = 3)]
+        public string Type { get; set; }
+
+        [DataMember(Order = 4)]
+        public RadioStationSource Source { get; set; }
+
+        [DataMember(Order = 5)]
+        public int Bitrate { get; set; }
+
+        [DataMember(Order = 5)]
+        public string Content { get; set; }
+
+        private bool _isFake = false;
+
+        public bool IsFake
+        {
+            get
+            {
+                return _isFake;
+            }
+        }
+
+        public static RadioStation Empty
+        {
+            get
+            {
+                RadioStation rs = new RadioStation();
+                rs.Title = "No stations loaded yet. Please search something first...";
+                 
+                return rs;
+            }
+        }
+
+        public static RadioStation NotFound
+        {
+            get
+            {
+                RadioStation rs = new RadioStation();
+                rs.Title = "No stations found. Please search something else...";
+                return rs;
+            }
+        }
+
+        public RadioStation()
+        {
+            this.Source = RadioStationSource.Internal;
+            _isFake = true;
+        }
+
+        public RadioStation(RadioStationSource source)
+        {
+            this.Source = source;
+            _isFake = true;
+        }
     }
 
     [DataContract]
@@ -35,22 +101,184 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             RadioStations = new List<RadioStation>();
         }
 
-        public static RadioStationsData Load()
+        public static RadioStationsData GetDefault()
         {
-            string xml = PersistenceProxy.ReadObject("RadioStationsData", string.Empty, false);
-            if (!string.IsNullOrEmpty(xml))
+            RadioStationsData rsd = new RadioStationsData();
+
+            rsd.RadioStations.Add(RadioStation.Empty);
+
+            return rsd;
+        }
+
+        public static RadioStationsData Search(string searchKeyword, int maxCount = 20, RadioStation additionalParams = null)
+        {
+            RadioStationsData rsd = new RadioStationsData();
+
+            string shoutCastdevId = ProTONEConfig.ShoutCastApiDevID;
+            string shoutCastSearchBaseUrl = ProTONEConfig.ShoutCastSearchBaseURL;
+            string shoutCastTuneInBaseUrl = ProTONEConfig.ShoutCastTuneInBaseURL;
+            bool doShoutcastLookup = false;
+
+            if (string.IsNullOrEmpty(shoutCastdevId) == false && 
+                string.IsNullOrEmpty(shoutCastSearchBaseUrl) == false &&
+                string.IsNullOrEmpty(shoutCastTuneInBaseUrl) == false)
             {
-                XmlReaderSettings settings = new XmlReaderSettings();
-                using (StringReader sr = new StringReader(xml))
-                using (XmlReader xr = XmlReader.Create(sr))
+                doShoutcastLookup = true;
+
+                // ShoutCast API DevID available, try to get stations list from ShoutCast Directory
+                string searchUrl = string.Format("{0}/advancedsearch?mt=audio/mpeg&f=json&limit={1}&k={2}",
+                        shoutCastSearchBaseUrl, maxCount, shoutCastdevId);
+
+                if (string.IsNullOrEmpty(searchKeyword) == false)
                 {
-                    XmlSerializer xs = new XmlSerializer(typeof(RadioStationsData));
-                    return xs.Deserialize(xr) as RadioStationsData;
+                    if (searchKeyword.ToLowerInvariant().StartsWith("now:"))
+                    {
+                        // search by "now playing"
+                        searchKeyword = searchKeyword.ToLowerInvariant().Replace("now:", "").Trim();
+                        searchUrl = string.Format("{0}/nowplaying?mt=audio/mpeg&f=json&limit={1}&k={2}&ct={3}",
+                        shoutCastSearchBaseUrl, maxCount, shoutCastdevId, 
+                        StringUtils.UrlEncode(searchKeyword));
+                    }
+                    else
+                    {
+                        // generic search
+                        searchUrl += string.Format("&search={0}", StringUtils.UrlEncode(searchKeyword));
+                    }
+                }
+
+
+
+                using (WebClient wc = new WebClient())
+                {
+                    string jsonReply = wc.DownloadString(searchUrl);
+                    dynamic obj2 = JObject.Parse(jsonReply);
+
+                    var stations = obj2.response.data.stationlist.station;
+
+                    if (stations != null)
+                    {
+                        string tuneInBase = string.Empty;
+                        try
+                        {
+                            tuneInBase = obj2.response.data.stationlist.tunein["base"] as string;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                            tuneInBase = null;
+                        }
+
+                        if (string.IsNullOrEmpty(tuneInBase))
+                            tuneInBase = "/sbin/tunein-station.pls";
+
+                        for (int i = 0; i < stations.Count; i++)
+                        {
+                            var station = stations[i];
+
+                            try
+                            {
+                                RadioStation rs = new RadioStation(RadioStationSource.ShoutCast);
+                                rs.Title = station.name;
+                                rs.Type = station.mt;
+                                rs.Genre = station.genre;
+                                rs.Bitrate = station.br;
+                                rs.Content = station.ct;
+
+                                int stationId = station.id;
+
+                                string tuneInUrl = string.Format("{0}/{1}?id={2}",
+                                    shoutCastTuneInBaseUrl, tuneInBase, stationId);
+
+                                string reply = wc.DownloadString(tuneInUrl);
+
+                                string stationUrl = ParseReply(reply);
+                                if (string.IsNullOrEmpty(stationUrl))
+                                    continue;
+
+                                rs.Url = stationUrl;
+
+                                if (rs.Title.ToLowerInvariant().Contains("radionomy") ||
+                                    rs.Url.ToLowerInvariant().Contains("radionomy"))
+                                    continue;
+
+                                rsd.RadioStations.Add(rs);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.LogException(ex);
+                            }
+                        }
+                    }
                 }
             }
 
-            return null;
+            if (doShoutcastLookup == false)
+            {
+                RadioStationsData internalDatabase = null;
+
+                // Fill with Internal stations list from Persistence Service
+                string xml = PersistenceProxy.ReadObject("RadioStationsData", string.Empty, false);
+                if (!string.IsNullOrEmpty(xml))
+                {
+                    XmlReaderSettings settings = new XmlReaderSettings();
+                    using (StringReader sr = new StringReader(xml))
+                    using (XmlReader xr = XmlReader.Create(sr))
+                    {
+                        XmlSerializer xs = new XmlSerializer(typeof(RadioStationsData));
+                        internalDatabase = xs.Deserialize(xr) as RadioStationsData;
+                    }
+                }
+
+                if (internalDatabase != null &&
+                    internalDatabase.RadioStations != null &&
+                    internalDatabase.RadioStations.Count > 0)
+                {
+                    rsd.RadioStations.AddRange(internalDatabase.RadioStations);
+                }
+            }
+
+            if (rsd.RadioStations.Count < 1)
+                rsd.RadioStations.Add(RadioStation.NotFound);
+
+            return rsd;
         }
+
+        private static string ParseReply(string reply)
+        {
+            string url = string.Empty;
+
+            if (string.IsNullOrEmpty(reply) == false)
+            {
+                string[] lines = reply.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                if (lines != null)
+                {
+                    foreach (string line in lines)
+                    {
+                        string[] fields = line.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        if (fields != null && fields.Length > 1)
+                        {
+                            string name = fields[0];
+                            string value = fields[1];
+
+                            if (name.ToLowerInvariant().StartsWith("file"))
+                            {
+                                try
+                                {
+                                    Uri uri = new Uri(value);
+                                    url = uri.ToString();
+                                }
+                                catch { }
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return url;
+        }
+
         /*
         public void SavePersistentList()
         {

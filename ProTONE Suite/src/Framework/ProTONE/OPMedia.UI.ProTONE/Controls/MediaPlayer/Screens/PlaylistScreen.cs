@@ -308,6 +308,23 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             playlist.ClearAll();
         }
 
+        internal void AddRadioStations(IEnumerable<RadioStation> radioStations)
+        {
+            if (_abortLoad)
+                return;
+
+            if (radioStations != null)
+            {
+                foreach (RadioStation rs in radioStations)
+                {
+                    if (_abortLoad)
+                        break;
+
+                    playlist.AddRadioStation(rs);
+                }
+            }
+        }
+
         internal void AddFiles(IEnumerable<string> files)
         {
             if (_abortLoad)
@@ -1004,6 +1021,5 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
 
         }
-
     }
 }

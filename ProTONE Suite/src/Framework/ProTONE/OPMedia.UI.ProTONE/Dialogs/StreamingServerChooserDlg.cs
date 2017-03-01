@@ -10,6 +10,9 @@ using OPMedia.UI.Themes;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.UI.Controls;
 using TagLib;
+using OPMedia.UI.Dialogs;
+using OPMedia.Core;
+using LocalEvents = OPMedia.UI.ProTONE.GlobalEvents;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -18,7 +21,22 @@ namespace OPMedia.UI.ProTONE.Dialogs
         public string Uri 
         {
             get { return txtSelectedURL.Text; }
-            //set { txtSelectedURL.Text = value; }
+        }
+
+        public RadioStation RadioStation
+        {
+            get 
+            { 
+                RadioStation rs = null;
+
+                if (lvServers.SelectedItems != null && lvServers.SelectedItems.Count > 0)
+                {
+                    ListViewItem lvi = lvServers.SelectedItems[0];
+                    rs = lvi.Tag as RadioStation;
+                }
+
+                return rs;
+            }
         }
 
         Timer _tmrSearch = null;
@@ -26,16 +44,34 @@ namespace OPMedia.UI.ProTONE.Dialogs
         RadioStationsData _allData = null;
         List<RadioStation> _displayData = null;
 
+        GenericWaitDialog _waitDialog = null;
+        BackgroundWorker _bwSearch = new BackgroundWorker();
+
         public StreamingServerChooserDlg() : base("TXT_SELECT_RADIO_STATION")
         {
             InitializeComponent();
+
+            _bwSearch.WorkerSupportsCancellation = false;
+            _bwSearch.WorkerReportsProgress = false;
+            _bwSearch.DoWork += new DoWorkEventHandler(OnBackgroundSearch);
+            _bwSearch.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnBackgroundSearchCompleted);
 
             AdjustColumns();
             lvServers.Resize += new EventHandler(lvServers_Resize);
 
             this.Load += new EventHandler(StreamingServerChooserDlg_Load);
+            this.Shown += new EventHandler(StreamingServerChooserDlg_Shown);
 
-            lvServers.ColumnClick += new ColumnClickEventHandler(lvServers_ColumnClick);
+            //lvServers.ColumnClick += new ColumnClickEventHandler(lvServers_ColumnClick);
+
+            txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
+            lvServers.DoubleClick += new EventHandler(lvServers_DoubleClick);
+        }
+
+        void StreamingServerChooserDlg_Shown(object sender, EventArgs e)
+        {
+            _allData = RadioStationsData.GetDefault();
+            DisplayData();
         }
 
         int _oldColumnIndex = 1;
@@ -59,27 +95,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         void StreamingServerChooserDlg_Load(object sender, EventArgs e)
         {
             lvServers.Items.Clear();
-
-            // Get the list from persistency support
-            _allData = RadioStationsData.Load();
-            if (_allData != null && _allData.RadioStations != null)
-            {
-                var genres = (from rs in _allData.RadioStations
-                              orderby rs.Genre ascending
-                              select rs.Genre).Distinct();
-
-                cmbSearchgenre.Items.Add(string.Empty);
-                foreach (var genre in genres)
-                {
-                    cmbSearchgenre.Items.Add(genre);
-                }
-
-                this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-                this.cmbSearchgenre.SelectedIndexChanged += new System.EventHandler(this.cmbSearchgenre_SelectedIndexChanged);
-
-                DisplayData();
-            }
-
+            
             // Move focus in the Search box
             txtSearch.Select();
             txtSearch.Focus();
@@ -87,19 +103,31 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void DisplayData()
         {
-            lvServers.Items.Clear();
-            _displayData = PrepareDisplayData();
-            foreach (RadioStation rs in _displayData)
+            if (_allData != null)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { "", rs.Url, rs.Title, rs.Genre });
-                lvServers.Items.Add(lvi);
+                foreach (RadioStation rs in _allData.RadioStations)
+                {
+                    ListViewItem lvi = new ListViewItem(new string[] { "", 
+                        rs.Title, 
+                        rs.IsFake ? "" : rs.Source.ToString(), 
+                        rs.Url, rs.Content, rs.Genre, 
+                        rs.IsFake ? "" : rs.Bitrate.ToString(), 
+                        rs.Type });
+
+                    lvi.Tag = rs;
+                    lvServers.Items.Add(lvi);
+                }
+
+                if (lvServers.Items.Count > 0)
+                {
+                    lvServers.Items[0].Selected = true;
+                    lvServers.Items[0].Focused = true;
+                }
             }
 
-            if (lvServers.Items.Count > 0)
-            {
-                lvServers.Items[0].Selected = true;
-                lvServers.Items[0].Focused = true;
-            }
+            // Move focus in the Search box
+            txtSearch.Select();
+            txtSearch.Focus();
         }
 
         void lvServers_Resize(object sender, EventArgs e)
@@ -109,14 +137,12 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void AdjustColumns()
         {
-            colGenre.Width = 120;
-            colURL.Width = colTitle.Width = (lvServers.EffectiveWidth - colGenre.Width) / 2;
-        }
+            colSource.Width = colGenre.Width = colMediaType.Width = 70;
+            colContent.Width = 100;
+            colBitrate.Width = 50;
 
-
-        private void cmbSearchgenre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            StartSearchTimer();
+            int w = colContent.Width + colSource.Width + colGenre.Width + colMediaType.Width + colBitrate.Width;
+            colURL.Width = colName.Width = (lvServers.EffectiveWidth - w) / 2;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -129,40 +155,21 @@ namespace OPMedia.UI.ProTONE.Dialogs
             if (_tmrSearch == null)
             {
                 _tmrSearch = new Timer();
-                _tmrSearch.Interval = 300;
+                _tmrSearch.Interval = 1000;
                 _tmrSearch.Tick += new EventHandler(_tmrSearch_Tick);
             }
 
+            _tmrSearch.Stop();
             _tmrSearch.Start();
         }
 
         void _tmrSearch_Tick(object sender, EventArgs e)
         {
-            _tmrSearch.Stop();
-            DisplayData();
-        }
+            if (_tmrSearch != null)
+                _tmrSearch.Stop();
 
-        private List<RadioStation> PrepareDisplayData()
-        {
-            if (_allData != null && _allData.RadioStations != null)
-            {
-                string searchText = txtSearch.Text.ToLowerInvariant();
-                string searchGenre = cmbSearchgenre.Text.ToLowerInvariant();
-
-                var x = from rs in _allData.RadioStations 
-                        where 
-                            (searchText.Length < 1 || 
-                                (rs.Url.ToLowerInvariant().Contains(searchText) || rs.Title.ToLowerInvariant().Contains(searchText))) &&
-                            
-                            (cmbSearchgenre.Text.Length < 1 || rs.Genre == cmbSearchgenre.Text)
-
-                        orderby rs.Genre ascending
-                        select rs;
-
-                return x.ToList();
-            }
-
-            return new List<RadioStation>();
+            _bwSearch.RunWorkerAsync(txtSearch.Text);
+            ShowWaitDialog("Search in progress, please wait ...");
         }
 
         private void lvServers_SelectedIndexChanged(object sender, EventArgs e)
@@ -179,18 +186,40 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         void lvServers_DoubleClick(object sender, System.EventArgs e)
         {
-            string url = string.Empty;
-            try
-            {
-                url = lvServers.SelectedItems[0].SubItems[colURL.Index].Text;
-            }
-            catch { }
-
-            txtSelectedURL.Text = url;
-
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            Close();
+            if (this.RadioStation != null)
+                EventDispatch.DispatchEvent(LocalEvents.EventNames.LoadRadioStation, this.RadioStation);
         }
 
+
+        private void ShowWaitDialog(string message)
+        {
+            CloseWaitDialog();
+            _waitDialog = new GenericWaitDialog();
+            _waitDialog.ShowDialog(message);
+        }
+
+        private void CloseWaitDialog()
+        {
+            if (_waitDialog != null)
+            {
+                _waitDialog.Close();
+                _waitDialog = null;
+            }
+        }
+
+        void OnBackgroundSearch(object sender, DoWorkEventArgs e)
+        {
+            string keyword = e.Argument as string;
+            _allData = RadioStationsData.Search(keyword);
+        }
+
+        void OnBackgroundSearchCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CloseWaitDialog();
+            lvServers.Items.Clear();
+
+            if (e.Cancelled == false && e.Error == null)
+                DisplayData();
+        }
     }
 }

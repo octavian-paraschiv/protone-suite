@@ -31,16 +31,18 @@
             this.lvServers = new OPMedia.UI.Controls.OPMListView();
             this.colEmpty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
-            this.txtSearchGenre = new OPMedia.UI.Controls.OPMLabel();
-            this.cmbSearchgenre = new OPMedia.UI.Controls.OPMComboBox();
             this.txtSearch = new OPMedia.UI.Controls.OPMTextBox();
             this.txtSelectedURL = new OPMedia.UI.Controls.OPMTextBox();
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colBitrate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colMediaType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,23 +54,27 @@
             // lvServers
             // 
             this.lvServers.AllowEditing = true;
+            this.lvServers.AlternateRowColors = true;
             this.lvServers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colEmpty,
+            this.colName,
+            this.colSource,
             this.colURL,
-            this.colTitle,
-            this.colGenre});
+            this.colContent,
+            this.colGenre,
+            this.colBitrate,
+            this.colMediaType});
             this.opmTableLayoutPanel1.SetColumnSpan(this.lvServers, 3);
             this.lvServers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvServers.Location = new System.Drawing.Point(3, 65);
+            this.lvServers.Location = new System.Drawing.Point(3, 36);
             this.lvServers.MultiSelect = false;
             this.lvServers.Name = "lvServers";
             this.lvServers.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvServers.Size = new System.Drawing.Size(623, 284);
+            this.lvServers.Size = new System.Drawing.Size(948, 325);
             this.lvServers.TabIndex = 0;
             this.lvServers.UseCompatibleStateImageBehavior = false;
             this.lvServers.View = System.Windows.Forms.View.Details;
             this.lvServers.SelectedIndexChanged += new System.EventHandler(this.lvServers_SelectedIndexChanged);
-            this.lvServers.DoubleClick += lvServers_DoubleClick;
             // 
             // colEmpty
             // 
@@ -78,14 +84,12 @@
             // colURL
             // 
             this.colURL.Text = "TXT_SERVERURL";
-            // 
-            // colTitle
-            // 
-            this.colTitle.Text = "TXT_TITLE";
+            this.colURL.Width = 113;
             // 
             // colGenre
             // 
             this.colGenre.Text = "TXT_GENRE";
+            this.colGenre.Width = 105;
             // 
             // opmTableLayoutPanel1
             // 
@@ -97,8 +101,6 @@
             this.opmTableLayoutPanel1.Controls.Add(this.lvServers, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.btnOK, 2, 4);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 0);
-            this.opmTableLayoutPanel1.Controls.Add(this.txtSearchGenre, 0, 1);
-            this.opmTableLayoutPanel1.Controls.Add(this.cmbSearchgenre, 1, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.txtSearch, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.txtSelectedURL, 1, 4);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -113,7 +115,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(629, 383);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(954, 395);
             this.opmTableLayoutPanel1.TabIndex = 1;
             // 
             // opmLabel2
@@ -121,14 +123,14 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(3, 352);
+            this.opmLabel2.Location = new System.Drawing.Point(3, 364);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(87, 31);
             this.opmLabel2.TabIndex = 10;
             this.opmLabel2.Text = "TXT_SERVERURL";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnOK
             // 
@@ -137,7 +139,7 @@
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(571, 355);
+            this.btnOK.Location = new System.Drawing.Point(896, 367);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
@@ -163,35 +165,11 @@
             this.opmLabel1.Text = "TXT_SEARCH:";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtSearchGenre
-            // 
-            this.txtSearchGenre.AutoSize = true;
-            this.txtSearchGenre.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearchGenre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtSearchGenre.Location = new System.Drawing.Point(3, 33);
-            this.txtSearchGenre.Name = "txtSearchGenre";
-            this.txtSearchGenre.OverrideBackColor = System.Drawing.Color.Empty;
-            this.txtSearchGenre.OverrideForeColor = System.Drawing.Color.Empty;
-            this.txtSearchGenre.Size = new System.Drawing.Size(87, 29);
-            this.txtSearchGenre.TabIndex = 5;
-            this.txtSearchGenre.Text = "TXT_GENRE:";
-            this.txtSearchGenre.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cmbSearchgenre
-            // 
-            this.cmbSearchgenre.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbSearchgenre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbSearchgenre.FormattingEnabled = true;
-            this.cmbSearchgenre.Location = new System.Drawing.Point(96, 36);
-            this.cmbSearchgenre.Name = "cmbSearchgenre";
-            this.cmbSearchgenre.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbSearchgenre.Size = new System.Drawing.Size(469, 23);
-            this.cmbSearchgenre.TabIndex = 8;
-            // 
             // txtSearch
             // 
             this.txtSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.opmTableLayoutPanel1.SetColumnSpan(this.txtSearch, 2);
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtSearch.Location = new System.Drawing.Point(93, 10);
@@ -208,7 +186,7 @@
             this.txtSearch.ReadOnly = false;
             this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(475, 20);
+            this.txtSearch.Size = new System.Drawing.Size(861, 20);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSearch.UseSystemPasswordChar = false;
@@ -218,9 +196,10 @@
             // 
             this.txtSelectedURL.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtSelectedURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtSelectedURL.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtSelectedURL.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtSelectedURL.Location = new System.Drawing.Point(93, 352);
-            this.txtSelectedURL.Margin = new System.Windows.Forms.Padding(0);
+            this.txtSelectedURL.Location = new System.Drawing.Point(93, 369);
+            this.txtSelectedURL.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.txtSelectedURL.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtSelectedURL.MaxLength = 32767;
             this.txtSelectedURL.MinimumSize = new System.Drawing.Size(20, 20);
@@ -233,15 +212,39 @@
             this.txtSelectedURL.ReadOnly = false;
             this.txtSelectedURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSelectedURL.ShortcutsEnabled = true;
-            this.txtSelectedURL.Size = new System.Drawing.Size(475, 20);
+            this.txtSelectedURL.Size = new System.Drawing.Size(800, 20);
             this.txtSelectedURL.TabIndex = 9;
             this.txtSelectedURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSelectedURL.UseSystemPasswordChar = false;
             this.txtSelectedURL.WordWrap = true;
             // 
+            // colName
+            // 
+            this.colName.Text = "TXT_NAME";
+            this.colName.Width = 116;
+            // 
+            // colSource
+            // 
+            this.colSource.Text = "TXT_SOURCE";
+            this.colSource.Width = 119;
+            // 
+            // colBitrate
+            // 
+            this.colBitrate.Text = "TXT_BITRATE";
+            this.colBitrate.Width = 82;
+            // 
+            // colMediaType
+            // 
+            this.colMediaType.Text = "TXT_MEDIATYPE";
+            this.colMediaType.Width = 83;
+            // 
+            // colContent
+            // 
+            this.colContent.Text = "TXT_CONTENT";
+            // 
             // StreamingServerChooserDlg
             // 
-            this.ClientSize = new System.Drawing.Size(631, 406);
+            this.ClientSize = new System.Drawing.Size(956, 419);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "StreamingServerChooserDlg";
             this.pnlContent.ResumeLayout(false);
@@ -259,12 +262,14 @@
         private UI.Controls.OPMButton btnOK;
         private System.Windows.Forms.ColumnHeader colEmpty;
         private System.Windows.Forms.ColumnHeader colURL;
-        private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colGenre;
-        private UI.Controls.OPMLabel txtSearchGenre;
         private UI.Controls.OPMTextBox txtSearch;
-        private UI.Controls.OPMComboBox cmbSearchgenre;
         private UI.Controls.OPMLabel opmLabel2;
         private UI.Controls.OPMTextBox txtSelectedURL;
+        private System.Windows.Forms.ColumnHeader colName;
+        private System.Windows.Forms.ColumnHeader colSource;
+        private System.Windows.Forms.ColumnHeader colBitrate;
+        private System.Windows.Forms.ColumnHeader colMediaType;
+        private System.Windows.Forms.ColumnHeader colContent;
     }
 }

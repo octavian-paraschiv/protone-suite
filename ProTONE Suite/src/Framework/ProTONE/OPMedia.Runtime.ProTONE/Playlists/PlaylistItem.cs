@@ -74,6 +74,14 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public virtual string PersistentPlaylistName
+        {
+            get
+            {
+                return DisplayName;
+            }
+        }
+
         public virtual string DisplayName
         {
             get

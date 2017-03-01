@@ -86,6 +86,7 @@ Source: {#BINDIR}\lame_enc.dll; DestDir: {app}; Flags: replacesameversion uninsr
 Source: {#BINDIR}\ICSharpCode.SharpZipLib.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\XmlRpc.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\taglib-sharp.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+
 Source: {#BINDIR}\OPMedia.Core.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.ProTONE.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Runtime.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -160,6 +161,8 @@ Source: {#BINDIR}\Templates\Catalog\Default Catalog; DestDir: {app}\Templates\Ca
 Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}\Templates\RemoteControl; Flags: uninsrestartdelete promptifolder uninsremovereadonly touch replacesameversion restartreplace; Components: itemPlayer\itemRemote
 
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
+
+Source: {#EXTDIR}\Newtonsoft.Json.dll; DestDir: {app}
 
 Source: {#EXTDIR}\DevArt\Devart.Data.dll; DestDir: {app}
 Source: {#EXTDIR}\DevArt\Devart.Data.Linq.dll; DestDir: {app}

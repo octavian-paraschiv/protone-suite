@@ -906,5 +906,74 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         }
 
         #endregion
+
+        public static string ShoutCastApiDevID
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("ShoutCastApiDevID") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+        }
+
+        public static string ShoutCastSearchBaseURL
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("ShoutCastSearchBaseURL") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+        }
+
+        public static string ShoutCastTuneInBaseURL
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("ShoutCastTuneInBaseURL") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+        }
     }
 }

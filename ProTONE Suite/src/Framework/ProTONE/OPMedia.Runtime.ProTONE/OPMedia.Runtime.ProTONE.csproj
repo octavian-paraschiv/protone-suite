@@ -58,9 +58,14 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\..\..\..\protone-suite-externals\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\protone-suite-externals\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -110,6 +115,7 @@
     <Compile Include="Playlists\Playlist.cs" />
     <Compile Include="Playlists\PlaylistItem.cs" />
     <Compile Include="Playlists\RadioStation.cs" />
+    <Compile Include="Playlists\RadioStationPlaylistItem.cs" />
     <Compile Include="Playlists\UrlPlaylistItem.cs" />
     <Compile Include="ProTONEConstants.cs" />
     <Compile Include="RemoteControl\ActivateCommand.cs" />

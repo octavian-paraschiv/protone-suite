@@ -362,6 +362,24 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return true;
         }
 
+        public void AddRadioStation(RadioStation rs)
+        {
+            try
+            {
+                Add(new RadioStationPlaylistItem(rs));
+                EventRaiser(Count - 1, -1, UpdateType.Added);
+                SetupRandomSequence(-1);
+            }
+            catch (Exception ex)
+            {
+                ErrorDispatcher.DispatchError(ex, true);
+            }
+            finally
+            {
+                Application.DoEvents();
+            }
+        }
+
         public virtual void AddItem(string itemPath)
         {
             try
@@ -570,15 +588,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
             try
             {
-                sw = new StreamWriter(fileName);
-                sw.WriteLine("#EXTM3U");
-                foreach (PlaylistItem item in this.AsReadOnly())
-                {
-                    sw.WriteLine(string.Format("#EXTINF:{0},{1}", 
-                        item.Duration.TotalSeconds, item.DisplayName));
-
-                    sw.WriteLine(item.Path);
-                }
+                string s = SaveM3UPlaylistAsString();
+                File.WriteAllText(fileName, s);
             }
             catch (Exception ex)
             {
@@ -596,10 +607,11 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         public string SaveM3UPlaylistAsString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("#EXTM3U");
             foreach (PlaylistItem item in this.AsReadOnly())
             {
                 sb.AppendLine(string.Format("#EXTINF:{0},{1}",
-                    item.Duration.TotalSeconds, item.DisplayName));
+                    item.Duration.TotalSeconds, item.PersistentPlaylistName));
 
                 sb.AppendLine(item.Path);
             }
@@ -625,6 +637,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             try
             {
+                RadioStation rs = null;
+
                 string[] lines = content.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (lines != null)
                 {
@@ -633,9 +647,30 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                         if (_abortLoad)
                             break;
 
-                        if (!line.StartsWith("#"))
+                        if (line.StartsWith("#"))
                         {
-                            AddItem(GetAbsoluteItemPath(line, playlistFileName));
+                            if (line.StartsWith("#EXTINF"))
+                            {
+                                string s = line.Replace("#EXTINF", "").Trim();
+                                string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                if (fields != null && fields.Length > 1)
+                                {
+                                    rs = new RadioStation(RadioStationSource.ShoutCast);
+                                    rs.Title = fields[1];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (rs != null)
+                            {
+                                rs.Url = line;
+                                AddRadioStation(rs);
+                            }
+                            else
+                                AddItem(GetAbsoluteItemPath(line, playlistFileName));
+
+                            rs = null;
                         }
 
                     }
