@@ -610,8 +610,10 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             sb.AppendLine("#EXTM3U");
             foreach (PlaylistItem item in this.AsReadOnly())
             {
-                sb.AppendLine(string.Format("#EXTINF:{0},{1}",
-                    item.Duration.TotalSeconds, item.PersistentPlaylistName));
+                string fmt = item is RadioStationPlaylistItem ?
+                    "#RADIO:{0},{1}" : "#EXTINF:{0},{1}";
+                
+                sb.AppendLine(string.Format(fmt, item.Duration.TotalSeconds, item.PersistentPlaylistName));
 
                 sb.AppendLine(item.Path);
             }
@@ -649,9 +651,9 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                         if (line.StartsWith("#"))
                         {
-                            if (line.StartsWith("#EXTINF"))
+                            if (line.StartsWith("#RADIO:"))
                             {
-                                string s = line.Replace("#EXTINF", "").Trim();
+                                string s = line.Replace("#RADIO:", "").Trim();
                                 string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                                 if (fields != null && fields.Length > 1)
                                 {
