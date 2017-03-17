@@ -30,19 +30,19 @@
         {
             this.lvServers = new OPMedia.UI.Controls.OPMListView();
             this.colEmpty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colBitrate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colMediaType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.txtSearch = new OPMedia.UI.Controls.OPMTextBox();
             this.txtSelectedURL = new OPMedia.UI.Controls.OPMTextBox();
-            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colBitrate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colMediaType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +70,7 @@
             this.lvServers.MultiSelect = false;
             this.lvServers.Name = "lvServers";
             this.lvServers.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvServers.Size = new System.Drawing.Size(948, 325);
+            this.lvServers.Size = new System.Drawing.Size(948, 362);
             this.lvServers.TabIndex = 0;
             this.lvServers.UseCompatibleStateImageBehavior = false;
             this.lvServers.View = System.Windows.Forms.View.Details;
@@ -81,15 +81,39 @@
             this.colEmpty.Text = "";
             this.colEmpty.Width = 0;
             // 
+            // colName
+            // 
+            this.colName.Text = "TXT_NAME";
+            this.colName.Width = 116;
+            // 
+            // colSource
+            // 
+            this.colSource.Text = "TXT_SOURCE";
+            this.colSource.Width = 119;
+            // 
             // colURL
             // 
             this.colURL.Text = "TXT_SERVERURL";
             this.colURL.Width = 113;
             // 
+            // colContent
+            // 
+            this.colContent.Text = "TXT_CONTENT";
+            // 
             // colGenre
             // 
             this.colGenre.Text = "TXT_GENRE";
             this.colGenre.Width = 105;
+            // 
+            // colBitrate
+            // 
+            this.colBitrate.Text = "TXT_BITRATE";
+            this.colBitrate.Width = 82;
+            // 
+            // colMediaType
+            // 
+            this.colMediaType.Text = "TXT_MEDIATYPE";
+            this.colMediaType.Width = 83;
             // 
             // opmTableLayoutPanel1
             // 
@@ -113,9 +137,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(954, 395);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(954, 432);
             this.opmTableLayoutPanel1.TabIndex = 1;
             // 
             // opmLabel2
@@ -123,7 +145,7 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(3, 364);
+            this.opmLabel2.Location = new System.Drawing.Point(3, 401);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
@@ -137,17 +159,17 @@
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.AutoSize = true;
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(896, 367);
+            this.btnOK.Location = new System.Drawing.Point(884, 404);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
-            this.btnOK.Size = new System.Drawing.Size(55, 25);
+            this.btnOK.Size = new System.Drawing.Size(67, 25);
             this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "TXT_OK";
+            this.btnOK.Text = "TXT_TUNE";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // opmLabel1
             // 
@@ -173,7 +195,7 @@
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtSearch.Location = new System.Drawing.Point(93, 10);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(0, 10, 0, 3);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(0, 10, 5, 3);
             this.txtSearch.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.MinimumSize = new System.Drawing.Size(20, 20);
@@ -186,7 +208,7 @@
             this.txtSearch.ReadOnly = false;
             this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(861, 20);
+            this.txtSearch.Size = new System.Drawing.Size(856, 20);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSearch.UseSystemPasswordChar = false;
@@ -198,7 +220,7 @@
             this.txtSelectedURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtSelectedURL.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtSelectedURL.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtSelectedURL.Location = new System.Drawing.Point(93, 369);
+            this.txtSelectedURL.Location = new System.Drawing.Point(93, 406);
             this.txtSelectedURL.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.txtSelectedURL.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtSelectedURL.MaxLength = 32767;
@@ -212,41 +234,19 @@
             this.txtSelectedURL.ReadOnly = false;
             this.txtSelectedURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSelectedURL.ShortcutsEnabled = true;
-            this.txtSelectedURL.Size = new System.Drawing.Size(800, 20);
+            this.txtSelectedURL.Size = new System.Drawing.Size(788, 20);
             this.txtSelectedURL.TabIndex = 9;
             this.txtSelectedURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSelectedURL.UseSystemPasswordChar = false;
             this.txtSelectedURL.WordWrap = true;
             // 
-            // colName
-            // 
-            this.colName.Text = "TXT_NAME";
-            this.colName.Width = 116;
-            // 
-            // colSource
-            // 
-            this.colSource.Text = "TXT_SOURCE";
-            this.colSource.Width = 119;
-            // 
-            // colBitrate
-            // 
-            this.colBitrate.Text = "TXT_BITRATE";
-            this.colBitrate.Width = 82;
-            // 
-            // colMediaType
-            // 
-            this.colMediaType.Text = "TXT_MEDIATYPE";
-            this.colMediaType.Width = 83;
-            // 
-            // colContent
-            // 
-            this.colContent.Text = "TXT_CONTENT";
-            // 
             // StreamingServerChooserDlg
             // 
-            this.ClientSize = new System.Drawing.Size(956, 419);
+            this.ClientSize = new System.Drawing.Size(956, 456);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "StreamingServerChooserDlg";
+            this.ShowInTaskbar = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pnlContent.ResumeLayout(false);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();

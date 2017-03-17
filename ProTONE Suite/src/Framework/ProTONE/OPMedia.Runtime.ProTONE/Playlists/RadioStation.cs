@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Logging;
 using System.Web;
+using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -182,7 +183,21 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                                 rs.Type = station.mt;
                                 rs.Genre = station.genre;
                                 rs.Bitrate = station.br;
-                                rs.Content = station.ct;
+
+                                string ct = "";
+                                string cst = "";
+
+                                try { ct = station.ct; }
+                                catch { }
+                                try { cst = station.cst; }
+                                catch { }
+
+                                if (string.IsNullOrEmpty(ct) == false)
+                                    rs.Content = ct;
+                                else if (string.IsNullOrEmpty(cst) == false)
+                                    rs.Content = cst;
+                                else
+                                    rs.Content = Translator.Translate("TXT_NA");
 
                                 int stationId = station.id;
 

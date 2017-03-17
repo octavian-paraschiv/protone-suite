@@ -16,7 +16,7 @@ using LocalEvents = OPMedia.UI.ProTONE.GlobalEvents;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
-    public partial class StreamingServerChooserDlg : ToolForm
+    public partial class StreamingServerChooserDlg : ThemeForm
     {
         public string Uri 
         {
@@ -195,7 +195,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             CloseWaitDialog();
             _waitDialog = new GenericWaitDialog();
-            _waitDialog.ShowDialog(message);
+            _waitDialog.ShowDialog(message, this);
         }
 
         private void CloseWaitDialog()
@@ -220,6 +220,23 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             if (e.Cancelled == false && e.Error == null)
                 DisplayData();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSelectedURL.Text) == false)
+            {
+                RadioStation rs = new RadioStation(RadioStationSource.Internal);
+                rs.Url = txtSelectedURL.Text;
+                EventDispatch.DispatchEvent(LocalEvents.EventNames.LoadRadioStation, rs);
+                return;
+            }
+
+            if (this.RadioStation != null)
+            {
+                EventDispatch.DispatchEvent(LocalEvents.EventNames.LoadRadioStation, this.RadioStation);
+                return;
+            }
         }
     }
 }
