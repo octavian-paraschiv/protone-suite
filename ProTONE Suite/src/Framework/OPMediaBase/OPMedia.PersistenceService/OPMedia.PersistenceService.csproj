@@ -84,19 +84,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Devart.Data, Version=5.0.1555.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\DevArt\Devart.Data.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\DevArt\Devart.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.SQLite, Version=5.6.763.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\DevArt\Devart.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.SQLite.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\DevArt\Devart.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.SqlServer.Linq, Version=4.5.1100.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\protone-suite-externals\DevArt\Devart.Data.SqlServer.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -184,6 +189,11 @@
     <None Include="Persistence.lqml">
       <Generator>DevartLinqToSqlGenerator</Generator>
       <LastGenOutput>Persistence.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sqlite3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
