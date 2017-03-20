@@ -170,6 +170,8 @@ Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.dll; DestDir: {app}
 Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.Linq.dll; DestDir: {app}
 Source: {#EXTDIR}\DevArt\Devart.Data.SqlServer.Linq.dll; DestDir: {app}
 
+Source: {#EXTDIR}\sqlite\SQLite3.dll; DestDir: {app}
+
 Source: {#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_kernelDeint.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_liba52.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
