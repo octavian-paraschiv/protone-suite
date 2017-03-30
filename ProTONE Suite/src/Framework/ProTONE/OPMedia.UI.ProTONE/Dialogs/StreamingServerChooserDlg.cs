@@ -13,6 +13,7 @@ using TagLib;
 using OPMedia.UI.Dialogs;
 using OPMedia.Core;
 using LocalEvents = OPMedia.UI.ProTONE.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -107,8 +108,13 @@ namespace OPMedia.UI.ProTONE.Dialogs
             {
                 foreach (RadioStation rs in _allData.RadioStations)
                 {
+                    string title = rs.Title ?? string.Empty;
+
                     ListViewItem lvi = new ListViewItem(new string[] { "", 
-                        rs.Title, 
+                        
+                        title.ToUpperInvariant().StartsWith("TXT_") ? 
+                            Translator.Translate(title) : title, 
+
                         rs.IsFake ? "" : rs.Source.ToString(), 
                         rs.Url, rs.Content, rs.Genre, 
                         rs.IsFake ? "" : rs.Bitrate.ToString(), 
@@ -138,11 +144,11 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private void AdjustColumns()
         {
             colSource.Width = colGenre.Width = colMediaType.Width = 70;
-            colContent.Width = 100;
+            //colContent.Width = 100;
             colBitrate.Width = 50;
 
-            int w = colContent.Width + colSource.Width + colGenre.Width + colMediaType.Width + colBitrate.Width;
-            colURL.Width = colName.Width = (lvServers.EffectiveWidth - w) / 2;
+            int w = colSource.Width + colGenre.Width + colMediaType.Width + colBitrate.Width;
+            colContent.Width = colURL.Width = colName.Width = (lvServers.EffectiveWidth - w) / 3;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

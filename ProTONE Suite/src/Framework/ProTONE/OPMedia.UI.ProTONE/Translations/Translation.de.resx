@@ -160,6 +160,9 @@
 <data name="TXT_AUDIOSETTINGS">
   <value>Audio-Einstellungen</value>
 </data>
+<data name="TXT_NO_STATIONS_FOUND">
+  <value>Es wurden keine Stationen gefunden. Bitte ändern Sie die Suchparameter und versuchen Sie es erneut ...</value>
+</data>
 <data name="TXT_AVAILABLE_DVD_MEDIA">
   <value>oder öffnen Sie eine der verfügbaren DVD-Medien im System:</value>
 </data>
@@ -188,91 +191,91 @@
   <value>Lesezeichen</value>
 </data>
 <data name="TXT_BTNCLEAR">
-  <value>Löschen gesamte Wiedergabeliste&#xD;
+  <value>Löschen gesamte Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNDELETE">
-  <value>Ausgewählte Elemente löschen&#xD;
+  <value>Ausgewählte Elemente löschen&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNFULLSCREEN">
-  <value>Vollbild umschalten&#xD;
+  <value>Vollbild umschalten&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNFWD">
-  <value>Schneller Vorlauf mit 5 Sekunden&#xD;
+  <value>Schneller Vorlauf mit 5 Sekunden&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNJUMPTOITEM">
-  <value>Öffnen Sie das 'Jump to wiedergabelist item' Dialog&#xD;
+  <value>Öffnen Sie das 'Jump to wiedergabelist item' Dialog&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNLOAD">
-  <value>Legen Sie neue Datei (en)&#xD;
+  <value>Legen Sie neue Datei (en)&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNLOADPLAYLIST">
-  <value>Legen Sie eine neue Wiedergabeliste&#xD;
+  <value>Legen Sie eine neue Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNLOOPPLAY">
-  <value>Schaltet ein / aus Spielen in Schleife&#xD;
+  <value>Schaltet ein / aus Spielen in Schleife&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNMOVEDOWN">
-  <value>Bewegen Sie mit ausgewählten Elemente eine Position nach unten in der Wiedergabeliste&#xD;
+  <value>Bewegen Sie mit ausgewählten Elemente eine Position nach unten in der Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNMOVEUP">
-  <value>Bewegen Sie mit ausgewählten Elemente eine Position nach oben in der Wiedergabeliste&#xD;
+  <value>Bewegen Sie mit ausgewählten Elemente eine Position nach oben in der Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNNEXT">
-  <value>Zum nächsten Datei in der Wiedergabeliste&#xD;
+  <value>Zum nächsten Datei in der Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNOPENDISK">
-  <value>Öffnet das Load-DVD-Medien Dialog&#xD;
+  <value>Öffnet das Load-DVD-Medien Dialog&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNOPENSETTINGS">
-  <value>Zeigt den Dialog Einstellungen&#xD;
+  <value>Zeigt den Dialog Einstellungen&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNPLAYPAUSE">
-  <value>Spielen/Anhalten&#xD;
+  <value>Spielen/Anhalten&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNPLAYLISTEND">
-  <value>Aktiviert die 'Aktion am Ende Wiedergabelist'&#xD;
+  <value>Aktiviert die 'Aktion am Ende Wiedergabelist'&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNPREV">
-  <value>Zum vorherigen Datei in der Wiedergabeliste&#xD;
+  <value>Zum vorherigen Datei in der Wiedergabeliste&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNREW">
-  <value>Mit 5 Sekunden zurückspulen&#xD;
+  <value>Mit 5 Sekunden zurückspulen&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNSAVEPLAYLIST">
-  <value>Speichern Sie die aktuelle Wiedergabelist&#xD;
+  <value>Speichern Sie die aktuelle Wiedergabelist&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNSTOP">
-  <value>Stoppen Sie die Wiedergabe&#xD;
+  <value>Stoppen Sie die Wiedergabe&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNTOGGLESHUFFLE">
-  <value>Aktiviert Wiedergabelist Mischen-Modus&#xD;
+  <value>Aktiviert Wiedergabelist Mischen-Modus&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNVOLDN">
-  <value>Lauter um 5%.&#xD;
+  <value>Lauter um 5%.&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_BTNVOLUP">
-  <value>Leiser um 5%.&#xD;
+  <value>Leiser um 5%.&#xD;&#xD;
 Tastenkürzel: {0}</value>
 </data>
 <data name="TXT_CAUTION_REALTIME">
@@ -357,7 +360,7 @@ Tastenkürzel: {0}</value>
   <value>Öffnet das Load-DVD-Medien Dialog</value>
 </data>
 <data name="TXT_CMDOPENURL">
-  <value>Öffnen Sie eine URL</value>
+  <value>Laden Sie eine Online-Radiosender (Media Streaming)</value>
 </data>
 <data name="TXT_CMDPLAYPAUSE">
   <value>Spielen/Anhalten.</value>
@@ -414,7 +417,7 @@ Tastenkürzel: {0}</value>
   <value>CD/DVD</value>
 </data>
 <data name="TXT_DISPLAY_FILENAME">
-  <value>Keine Formatierungsoptionen angegeben sind.&#xD;
+  <value>Keine Formatierungsoptionen angegeben sind.&#xD;&#xD;
 Das Programm wird den Namen der Datei in der Wiedergabeliste Eintrag anzuzeigen.</value>
 </data>
 <data name="TXT_DURATION">
@@ -424,7 +427,7 @@ Das Programm wird den Namen der Datei in der Wiedergabeliste Eintrag anzuzeigen.
   <value>ID3-Artwork Editor</value>
 </data>
 <data name="TXT_ELAPSED_TIME">
-  <value>Abgelaufene Zeit.&#xD;
+  <value>Abgelaufene Zeit.&#xD;&#xD;
 Doppelklick verbleibende Zeit zu wechseln</value>
 </data>
 <data name="TXT_ENABLE_PLAYLISTEVT">
@@ -506,7 +509,7 @@ Doppelklick verbleibende Zeit zu wechseln</value>
   <value>LVOL</value>
 </data>
 <data name="TXT_LOAD_DVD_FOLDER">
-  <value>Bitte wählen Sie eine Video-DVD-Inhalte Ordner&#xD;
+  <value>Bitte wählen Sie eine Video-DVD-Inhalte Ordner&#xD;&#xD;
 (Entweder ein VIDEO_TS-Ordner, oder deren Eltern):</value>
 </data>
 <data name="TXT_LOADMEDIAFILES">
@@ -534,14 +537,14 @@ Doppelklick verbleibende Zeit zu wechseln</value>
   <value>Medieninformation</value>
 </data>
 <data name="TXT_METADATAPATTERNS">
-  <value>Die Muster für Wiedergabelistenobjekt Formatierung werden auf Kombinationen aus diesen Schlüsselwörtern:&#xD;
-&#xD;
-&lt;A&gt; = Name des Interpreten (von Etikett);&#xD;
-&lt;B&gt; = Name des Albums (von Etikett);&#xD;
-&lt;T&gt;=Titel (von Etikett);&#xD;
-&lt;C&gt; = Kommentare (von Etikett);&#xD;
-&lt;G&gt; = Genre (von Etikett);&#xD;
-&lt;#&gt; = # verfolgen (von Etikett);&#xD;
+  <value>Die Muster für Wiedergabelistenobjekt Formatierung werden auf Kombinationen aus diesen Schlüsselwörtern:&#xD;&#xD;
+&#xD;&#xD;
+&lt;A&gt; = Name des Interpreten (von Etikett);&#xD;&#xD;
+&lt;B&gt; = Name des Albums (von Etikett);&#xD;&#xD;
+&lt;T&gt;=Titel (von Etikett);&#xD;&#xD;
+&lt;C&gt; = Kommentare (von Etikett);&#xD;&#xD;
+&lt;G&gt; = Genre (von Etikett);&#xD;&#xD;
+&lt;#&gt; = # verfolgen (von Etikett);&#xD;&#xD;
 &lt;Y&gt; = Jahr, (von Etikett).</value>
 </data>
 <data name="TXT_MINMOVIEDURATION">
@@ -686,7 +689,7 @@ Doppelklick verbleibende Zeit zu wechseln</value>
   <value>Diese Option ist in diesem Moment nicht verfügbar.</value>
 </data>
 <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW">
-  <value>Diese Option ist in diesem Moment nicht verfügbar.&#xD;
+  <value>Diese Option ist in diesem Moment nicht verfügbar.&#xD;&#xD;
 Sie müssen die FFDShow-Codec-Suite zu installieren, um Aktionen an dieser Option haben.</value>
 </data>
 <data name="TXT_NOTIFICATIONSENABLED">
@@ -756,13 +759,13 @@ Sie müssen die FFDShow-Codec-Suite zu installieren, um Aktionen an dieser Optio
   <value>OSD-Timer Visibility (Sekunden):</value>
 </data>
 <data name="TXT_OVERWRITE_SUBTITLE">
-  <value>Der ausgewählte Film-Clip bereits ein Untertitel.&#xD;
-Wenn ein anderer Untertitel im Internet gefunden wird, wird die bestehende zu überschreiben.&#xD;
-&#xD;
+  <value>Der ausgewählte Film-Clip bereits ein Untertitel.&#xD;&#xD;
+Wenn ein anderer Untertitel im Internet gefunden wird, wird die bestehende zu überschreiben.&#xD;&#xD;
+&#xD;&#xD;
 Sind Sie sicher, dass Sie eine andere Untertitel suchen?</value>
 </data>
 <data name="TXT_PANELSHIDDEN_NOADMIN">
-  <value>Weil Ihr Benutzerkonto nicht über Administratorrechte verfügt, werden Sie nicht Lage sein, die Unterstützte Dateien und die Fernsteuerung-Einstellungen anzuzeigen.&#xD;
+  <value>Weil Ihr Benutzerkonto nicht über Administratorrechte verfügt, werden Sie nicht Lage sein, die Unterstützte Dateien und die Fernsteuerung-Einstellungen anzuzeigen.&#xD;&#xD;
 Um diese Einstellungen zuzugreifen, müssen Sie starten ProTONE Spieler unter ein Benutzerkonto, das Administrator-Privilegien hat</value>
 </data>
 <data name="TXT_PAUSED">
@@ -820,7 +823,7 @@ Um diese Einstellungen zuzugreifen, müssen Sie starten ProTONE Spieler unter ei
   <value>Priorität</value>
 </data>
 <data name="TXT_PROCEED_SCHEDULED_ACTION">
-  <value>ProTone Player an {0} versucht. Dies geschieht, weil Sie den Player so konfiguriert haben, dies zu tun, wenn {1}. Wollen Sie vorgehen?&#xD;
+  <value>ProTone Player an {0} versucht. Dies geschieht, weil Sie den Player so konfiguriert haben, dies zu tun, wenn {1}. Wollen Sie vorgehen?&#xD;&#xD;
 Sie können diesen Vorgang abbrechen, wenn Sie auf Abbrechen klicken innerhalb des verbleibenden Zeitrahmen (siehe Zähler unten). Wenn diese Zeit abgelaufen ist, und Sie haben keine Aktion gewählt wird, wird davon ausgegangen, die Sie gewählt haben, um fortzufahren werden.</value>
 </data>
 <data name="TXT_PROTONE_ENQUEUE">
@@ -830,18 +833,18 @@ Sie können diesen Vorgang abbrechen, wenn Sie auf Abbrechen klicken innerhalb d
   <value>Spielen Sie in ProTONE Spieler</value>
 </data>
 <data name="TXT_REMAINING_TIME">
-  <value>Verbleibende Zeit.&#xD;
+  <value>Verbleibende Zeit.&#xD;&#xD;
 Doppelklick verstrichene Zeit zu wechseln</value>
 </data>
 <data name="TXT_REMOTECONTROLCFG">
   <value>Fernsteuerung</value>
 </data>
 <data name="TXT_REMOTECONTROLDEFINITION">
-  <value>Um die Programme und Geräte, die erlaubt, ProTONE Player steuern, sind zu definieren, müssen Sie die Fernsteuerung-Manager.&#xD;
+  <value>Um die Programme und Geräte, die erlaubt, ProTONE Player steuern, sind zu definieren, müssen Sie die Fernsteuerung-Manager.&#xD;&#xD;
 Klicken Sie auf die Taste unten, um Fernsteuerung-Manager zu starten ...</value>
 </data>
 <data name="TXT_RESETVIDEOPOSITION">
-  <value>Zurücksetzen &#xD;
+  <value>Zurücksetzen &#xD;&#xD;
 Videofenster Position</value>
 </data>
 <data name="TXT_RESETVIDEOPOSITION_HINT">
@@ -896,7 +899,7 @@ Videofenster Position</value>
   <value>Planen Sie Timer-Ereignis an:</value>
 </data>
 <data name="TXT_SCHEDULERWAITTIMERPROCEED">
-  <value>Wie viele Minuten die Bestätigung warten, bevor Sie fortfahren&#xD;
+  <value>Wie viele Minuten die Bestätigung warten, bevor Sie fortfahren&#xD;&#xD;
 (0 = nicht nach einer Bestätigung gefragt, fahren Sie direkt):</value>
 </data>
 <data name="TXT_SEARCH_BY">
@@ -984,7 +987,7 @@ Videofenster Position</value>
   <value>Untertitel-Suche wurde abgebrochen, weil ein Fehler aufgetreten.</value>
 </data>
 <data name="TXT_SUB_HINTS">
-  <value>Hinweis: Die Ergebnisse werden sortiert Nach diesen Kriterien (in dieser Reihenfolge): ausgewählte Spalte, Sprache (bevorzugte Sprache auf der Oberseite),&#xD;
+  <value>Hinweis: Die Ergebnisse werden sortiert Nach diesen Kriterien (in dieser Reihenfolge): ausgewählte Spalte, Sprache (bevorzugte Sprache auf der Oberseite),&#xD;&#xD;
 prio (Server order = Reihenfolge der Untertitel-Servern in Untertitel / OSD-Einstellungen-Seite). Klicken Sie auf eine Spaltenüberschrift, um eine andere Art citeria wählen.</value>
 </data>
 <data name="TXT_SUB_LOAD">
@@ -1036,30 +1039,30 @@ prio (Server order = Reihenfolge der Untertitel-Servern in Untertitel / OSD-Eins
   <value>Diagnostics</value>
 </data>
 <data name="TXT_TAGGINGPATTERNS">
-  <value>Die Etikettieren-Muster werden auf Kombinationen dieser Schlüsselwörtern:&#xD;
-&#xD;
-&lt;N&gt; = Dateiname;&#xD;
-&lt;F&gt; = Ordnername;&#xD;
-&lt;A&gt; = Künstlername (von Etikett)&#xD;
-&lt;B&gt; = Albumname (von Etikett)&#xD;
-&lt;T&gt; = Titel (von Etikett)&#xD;
-&lt;C&gt; = Kommentare (von Etikett)&#xD;
-&lt;G&gt; = Genre (von Etikett)&#xD;
-&lt;#&gt; = Track-Nummer (von Etikett)&#xD;
-&lt;Y&gt; = Jahr (von Etikett)&#xD;
-&#xD;
+  <value>Die Etikettieren-Muster werden auf Kombinationen dieser Schlüsselwörtern:&#xD;&#xD;
+&#xD;&#xD;
+&lt;N&gt; = Dateiname;&#xD;&#xD;
+&lt;F&gt; = Ordnername;&#xD;&#xD;
+&lt;A&gt; = Künstlername (von Etikett)&#xD;&#xD;
+&lt;B&gt; = Albumname (von Etikett)&#xD;&#xD;
+&lt;T&gt; = Titel (von Etikett)&#xD;&#xD;
+&lt;C&gt; = Kommentare (von Etikett)&#xD;&#xD;
+&lt;G&gt; = Genre (von Etikett)&#xD;&#xD;
+&lt;#&gt; = Track-Nummer (von Etikett)&#xD;&#xD;
+&lt;Y&gt; = Jahr (von Etikett)&#xD;&#xD;
+&#xD;&#xD;
 Zeichenbereiche wie &lt;N2-12,14-20&gt; sind ebenfalls erlaubt.</value>
 </data>
 <data name="TXT_TAGINFO">
   <value>Medien Etikett</value>
 </data>
 <data name="TXT_TIMESCALE">
-  <value>Zeitskala.&#xD;
+  <value>Zeitskala.&#xD;&#xD;
 Klicken, um von Position zu spielen: {0}</value>
 </data>
 <data name="TXT_TIMESCALE_BOOKMARK">
-  <value>Zeitskala.&#xD;
-Klicken Sie auf das Lesezeichen aus spielen: "{1}"&#xD;
+  <value>Zeitskala.&#xD;&#xD;
+Klicken Sie auf das Lesezeichen aus spielen: "{1}"&#xD;&#xD;
 Bookmark Zeit: {0}</value>
 </data>
 <data name="TXT_TITLE">
@@ -1105,7 +1108,7 @@ Bookmark Zeit: {0}</value>
   <value>Video-Einstellungen</value>
 </data>
 <data name="TXT_VOLSCALE">
-  <value>Volumenskala.&#xD;
+  <value>Volumenskala.&#xD;&#xD;
 Klicken Sie auf das Volumen eingestellt werden: {0}%</value>
 </data>
 <data name="TXT_YEAR">
@@ -1113,6 +1116,24 @@ Klicken Sie auf das Volumen eingestellt werden: {0}%</value>
 </data>
 <data name="TXT_ENABLE_WCF_INTERFACE">
   <value>Lassen Sie externe Anwendungen Signal analisys Daten von Protone Spieler zu sammeln</value>
+</data>
+<data name="TXT_CONTENT">
+  <value>Aktueller Inhalt:</value>
+</data>
+<data name="TXT_MEDIATYPE">
+  <value>Medientyp:</value>
+</data>
+<data name="TXT_SOURCE">
+  <value>Quelle:</value>
+</data>
+<data name="TXT_TUNE">
+  <value>Einschalten</value>
+</data>
+<data name="TXT_BTNOPENURL">
+  <value>Laden Sie eine Online-Radiosender (Media Streaming)</value>
+</data>
+<data name="TXT_NO_STATIONS_LOADED">
+  <value>Noch keine Stationen geladen. Bitte zuerst eine Suche ...</value>
 </data>
     
 </root>

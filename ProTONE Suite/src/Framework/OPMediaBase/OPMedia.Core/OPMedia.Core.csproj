@@ -185,7 +185,9 @@
     <None Include="Resources\Internet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Library.ico" />
+    <Content Include="Resources\Library.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\URL.png" />
     <Content Include="Resources\Utility.ico" />
   </ItemGroup>

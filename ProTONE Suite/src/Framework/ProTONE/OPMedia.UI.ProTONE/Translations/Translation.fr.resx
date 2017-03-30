@@ -160,6 +160,9 @@
 <data name="TXT_AUDIOSETTINGS">
   <value>Paramètres audio</value>
 </data>
+<data name="TXT_NO_STATIONS_FOUND">
+  <value>Aucune station n'a été trouvée. Veuillez modifier les paramètres de recherche et réessayer ...</value>
+</data>
 <data name="TXT_AVAILABLE_DVD_MEDIA">
   <value>ou, ouvrez l'un des médias de DVD disponibles dans le système:</value>
 </data>
@@ -188,91 +191,91 @@
   <value>Signets</value>
 </data>
 <data name="TXT_BTNCLEAR">
-  <value>Effacer toute la liste de lecture&#xD;
+  <value>Effacer toute la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNDELETE">
-  <value>Supprimer les éléments sélectionnés&#xD;
+  <value>Supprimer les éléments sélectionnés&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNFULLSCREEN">
-  <value>Basculer plein écran&#xD;
+  <value>Basculer plein écran&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNFWD">
-  <value>Avance rapide. Avec 5 secondes&#xD;
+  <value>Avance rapide. Avec 5 secondes&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNJUMPTOITEM">
-  <value>Ouvrez le 'Saut au liste de lecture article' dialogue&#xD;
+  <value>Ouvrez le 'Saut au liste de lecture article' dialogue&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNLOAD">
-  <value>Chargez nouveau fichier (s)&#xD;
+  <value>Chargez nouveau fichier (s)&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNLOADPLAYLIST">
-  <value>Chargez une nouvelle liste de lecture&#xD;
+  <value>Chargez une nouvelle liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNLOOPPLAY">
-  <value>Active / désactive la lecture en boucle&#xD;
+  <value>Active / désactive la lecture en boucle&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNMOVEDOWN">
-  <value>Déplacez les éléments sélectionnés avec une position basse dans la liste de lecture&#xD;
+  <value>Déplacez les éléments sélectionnés avec une position basse dans la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNMOVEUP">
-  <value>Déplacez les éléments sélectionnés avec une position vers le haut dans la liste de lecture&#xD;
+  <value>Déplacez les éléments sélectionnés avec une position vers le haut dans la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNNEXT">
-  <value>Aller à l'image suivante dans la liste de lecture&#xD;
+  <value>Aller à l'image suivante dans la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNOPENDISK">
-  <value>Ouvre la boîte de dialogue Charger un support DVD&#xD;
+  <value>Ouvre la boîte de dialogue Charger un support DVD&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNOPENSETTINGS">
-  <value>Affiche la boîte de dialogue de Paramètres&#xD;
+  <value>Affiche la boîte de dialogue de Paramètres&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNPLAYPAUSE">
-  <value>Lire/Pause&#xD;
+  <value>Lire/Pause&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNPLAYLISTEND">
-  <value>Active l'action liste de lecture fin'&#xD;
+  <value>Active l'action liste de lecture fin'&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNPREV">
-  <value>Aller à l'image précédente dans la liste de lecture&#xD;
+  <value>Aller à l'image précédente dans la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNREW">
-  <value>Rembobinez de 5 secondes&#xD;
+  <value>Rembobinez de 5 secondes&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNSAVEPLAYLIST">
-  <value>Enregistrer la liste de lecture&#xD;
+  <value>Enregistrer la liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNSTOP">
-  <value>Arrêt de la lecture&#xD;
+  <value>Arrêt de la lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNTOGGLESHUFFLE">
-  <value>Active le mode aléatoire liste de lecture&#xD;
+  <value>Active le mode aléatoire liste de lecture&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNVOLDN">
-  <value>Réduction de volume de 5%&#xD;
+  <value>Réduction de volume de 5%&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_BTNVOLUP">
-  <value>Volume en hausse de 5%&#xD;
+  <value>Volume en hausse de 5%&#xD;&#xD;
 Raccourci: {0}</value>
 </data>
 <data name="TXT_CAUTION_REALTIME">
@@ -357,7 +360,7 @@ Raccourci: {0}</value>
   <value>Ouvre la boîte de dialogue Charger un support DVD</value>
 </data>
 <data name="TXT_CMDOPENURL">
-  <value>Ouvrir une URL</value>
+  <value>Charger une station de radio en ligne (diffusion multimédia)</value>
 </data>
 <data name="TXT_CMDPLAYPAUSE">
   <value>Lire/Pause</value>
@@ -414,7 +417,7 @@ Raccourci: {0}</value>
   <value>CD/DVD</value>
 </data>
 <data name="TXT_DISPLAY_FILENAME">
-  <value>Pas options de formatage sont spécifiées.&#xD;
+  <value>Pas options de formatage sont spécifiées.&#xD;&#xD;
 Le programme affiche le nom du fichier en entrée liste de lecture.</value>
 </data>
 <data name="TXT_DURATION">
@@ -424,7 +427,7 @@ Le programme affiche le nom du fichier en entrée liste de lecture.</value>
   <value>ID3 Editor Création</value>
 </data>
 <data name="TXT_ELAPSED_TIME">
-  <value>Temps écoulé.&#xD;
+  <value>Temps écoulé.&#xD;&#xD;
 Double click to toggle temps restant</value>
 </data>
 <data name="TXT_ENABLE_PLAYLISTEVT">
@@ -506,7 +509,7 @@ Double click to toggle temps restant</value>
   <value>Lvol</value>
 </data>
 <data name="TXT_LOAD_DVD_FOLDER">
-  <value>S'il vous plaît sélectionner un dossier de contenu DVD vidéo&#xD;
+  <value>S'il vous plaît sélectionner un dossier de contenu DVD vidéo&#xD;&#xD;
 (Soit un dossier VIDEO_TS, ou son parent):</value>
 </data>
 <data name="TXT_LOADMEDIAFILES">
@@ -534,14 +537,14 @@ Double click to toggle temps restant</value>
   <value>Renseignements pour les médias</value>
 </data>
 <data name="TXT_METADATAPATTERNS">
-  <value>Les modèles disponibles pour le formatage élément de la liste de lecture sont basées sur des combinaisons de ces mots-clés:&#xD;
-&#xD;
-&lt;A&gt; = nom de l'artiste (de etiquette);&#xD;
-&lt;B&gt; = nom de l'album (de etiquette);&#xD;
-&lt;T&gt; = titre (de etiquette);&#xD;
-&lt;C&gt; = commentaires (de etiquette);&#xD;
-&lt;G&gt; = genre (de etiquette);&#xD;
-&lt;#&gt; = numéro de piste (de etiquette);&#xD;
+  <value>Les modèles disponibles pour le formatage élément de la liste de lecture sont basées sur des combinaisons de ces mots-clés:&#xD;&#xD;
+&#xD;&#xD;
+&lt;A&gt; = nom de l'artiste (de etiquette);&#xD;&#xD;
+&lt;B&gt; = nom de l'album (de etiquette);&#xD;&#xD;
+&lt;T&gt; = titre (de etiquette);&#xD;&#xD;
+&lt;C&gt; = commentaires (de etiquette);&#xD;&#xD;
+&lt;G&gt; = genre (de etiquette);&#xD;&#xD;
+&lt;#&gt; = numéro de piste (de etiquette);&#xD;&#xD;
 &lt;Y&gt; = année (de etiquette).</value>
 </data>
 <data name="TXT_MINMOVIEDURATION">
@@ -686,7 +689,7 @@ Double click to toggle temps restant</value>
   <value>Cette option n'est pas disponible en ce moment.</value>
 </data>
 <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW">
-  <value>Cette option n'est pas disponible en ce moment.&#xD;
+  <value>Cette option n'est pas disponible en ce moment.&#xD;&#xD;
 Vous devez installer l'ensemble des codecs FFDShow afin d'avoir des actions à cette option.</value>
 </data>
 <data name="TXT_NOTIFICATIONSENABLED">
@@ -756,13 +759,13 @@ Vous devez installer l'ensemble des codecs FFDShow afin d'avoir des actions à c
   <value>Visibilité minuterie OSD (en secondes):</value>
 </data>
 <data name="TXT_OVERWRITE_SUBTITLE">
-  <value>Le clip sélectionné possède déjà un sous-titre.&#xD;
-Si un autre sous-titres est disponible sur Internet, il remplacera celui existant.&#xD;
-&#xD;
+  <value>Le clip sélectionné possède déjà un sous-titre.&#xD;&#xD;
+Si un autre sous-titres est disponible sur Internet, il remplacera celui existant.&#xD;&#xD;
+&#xD;&#xD;
 Etes-vous sûr que vous voulez rechercher une autre sous-titre?</value>
 </data>
 <data name="TXT_PANELSHIDDEN_NOADMIN">
-  <value>Parce que votre compte d'utilisateur ne dispose pas des droits d'administrateur, vous ne serez pas en mesure d'afficher les fichiers pris en charge et les paramètres de contrôle à distance.&#xD;
+  <value>Parce que votre compte d'utilisateur ne dispose pas des droits d'administrateur, vous ne serez pas en mesure d'afficher les fichiers pris en charge et les paramètres de contrôle à distance.&#xD;&#xD;
 Pour accéder à ces paramètres, vous devez lancer ProTone Joueur sous un compte d'utilisateur qui a des privilèges d'administrateur</value>
 </data>
 <data name="TXT_PAUSED">
@@ -820,7 +823,7 @@ Pour accéder à ces paramètres, vous devez lancer ProTone Joueur sous un compt
   <value>Priorité</value>
 </data>
 <data name="TXT_PROCEED_SCHEDULED_ACTION">
-  <value>ProTONE Lecteur tente de {0}. Ce qui se passe parce que vous avez configuré le joueur à le faire lorsque {1}. Voulez-vous continuer?&#xD;
+  <value>ProTONE Lecteur tente de {0}. Ce qui se passe parce que vous avez configuré le joueur à le faire lorsque {1}. Voulez-vous continuer?&#xD;&#xD;
 Vous pouvez annuler cette opération si vous cliquez sur Annuler dans le délai restant (voir ci-dessous contre). Si ce temps s'écoule et que vous n'avez pas choisi une action, il sera considéré que vous avez choisi de procéder.</value>
 </data>
 <data name="TXT_PROTONE_ENQUEUE">
@@ -830,18 +833,18 @@ Vous pouvez annuler cette opération si vous cliquez sur Annuler dans le délai 
   <value>Jouer dans ProTONE Lecteur</value>
 </data>
 <data name="TXT_REMAINING_TIME">
-  <value>Le temps restant.&#xD;
+  <value>Le temps restant.&#xD;&#xD;
 Double click to toggle temps écoulé</value>
 </data>
 <data name="TXT_REMOTECONTROLCFG">
   <value>Télécommande</value>
 </data>
 <data name="TXT_REMOTECONTROLDEFINITION">
-  <value>Pour définir les programmes et les dispositifs qui sont autorisés à contrôler ProTONE Lecteur, vous devez utiliser le programme Gestionaire de Telecommandes.&#xD;
+  <value>Pour définir les programmes et les dispositifs qui sont autorisés à contrôler ProTONE Lecteur, vous devez utiliser le programme Gestionaire de Telecommandes.&#xD;&#xD;
 Cliquez sur le bouton ci-dessous pour lancer le Gestionaire de Telecommandes ...</value>
 </data>
 <data name="TXT_RESETVIDEOPOSITION">
-  <value>Réinitialiser position &#xD;
+  <value>Réinitialiser position &#xD;&#xD;
 de la fenêtre vidéo</value>
 </data>
 <data name="TXT_RESETVIDEOPOSITION_HINT">
@@ -896,7 +899,7 @@ de la fenêtre vidéo</value>
   <value>Programmer événement de minuterie à:</value>
 </data>
 <data name="TXT_SCHEDULERWAITTIMERPROCEED">
-  <value>Combien de minutes à attendre confirmation avant de procéder&#xD;
+  <value>Combien de minutes à attendre confirmation avant de procéder&#xD;&#xD;
 (0 = ne demande pas de confirmation, passez directement):</value>
 </data>
 <data name="TXT_SEARCH_BY">
@@ -984,7 +987,7 @@ de la fenêtre vidéo</value>
   <value>Recherche sous-titre a été abandonnée en raison d'une erreur s'est produite.</value>
 </data>
 <data name="TXT_SUB_HINTS">
-  <value>Remarque: Les résultats sont triés en utilisant ces critères (dans cet ordre): la colonne sélectionnée, la langue (langue préférée en haut),&#xD;
+  <value>Remarque: Les résultats sont triés en utilisant ces critères (dans cet ordre): la colonne sélectionnée, la langue (langue préférée en haut),&#xD;&#xD;
 prio (serveur order = ordre de serveurs de sous-titres Sous-titres en / page Paramètres OSD). Cliquez sur un en-tête de colonne pour sélectionner une autre citeria sorte.</value>
 </data>
 <data name="TXT_SUB_LOAD">
@@ -1036,30 +1039,30 @@ prio (serveur order = ordre de serveurs de sous-titres Sous-titres en / page Par
   <value>Diagnostics</value>
 </data>
 <data name="TXT_TAGGINGPATTERNS">
-  <value>Les motifs de marquage sont basés sur des combinaisons de ces mots-clés:&#xD;
-&#xD;
-&lt;N&gt; = nom de fichier;&#xD;
-&lt;F&gt; = nom du dossier;&#xD;
-&lt;A&gt; = nom de l'artiste (de etiquette)&#xD;
-&lt;B&gt; = nom de l'album (de etiquette)&#xD;
-&lt;T&gt; = titre (de etiquette)&#xD;
-&lt;C&gt; = commentaires (de etiquette)&#xD;
-&lt;G&gt; = genre (de etiquette)&#xD;
-&lt;#&gt; = numéro de piste (de etiquette)&#xD;
-&lt;Y&gt; = année (de etiquette)&#xD;
-&#xD;
+  <value>Les motifs de marquage sont basés sur des combinaisons de ces mots-clés:&#xD;&#xD;
+&#xD;&#xD;
+&lt;N&gt; = nom de fichier;&#xD;&#xD;
+&lt;F&gt; = nom du dossier;&#xD;&#xD;
+&lt;A&gt; = nom de l'artiste (de etiquette)&#xD;&#xD;
+&lt;B&gt; = nom de l'album (de etiquette)&#xD;&#xD;
+&lt;T&gt; = titre (de etiquette)&#xD;&#xD;
+&lt;C&gt; = commentaires (de etiquette)&#xD;&#xD;
+&lt;G&gt; = genre (de etiquette)&#xD;&#xD;
+&lt;#&gt; = numéro de piste (de etiquette)&#xD;&#xD;
+&lt;Y&gt; = année (de etiquette)&#xD;&#xD;
+&#xD;&#xD;
 Gammes de caractères comme &lt;N2-12,14-20&gt; sont également autorisées.</value>
 </data>
 <data name="TXT_TAGINFO">
   <value>Etiquette de media</value>
 </data>
 <data name="TXT_TIMESCALE">
-  <value>Échelle de temps&#xD;
+  <value>Échelle de temps&#xD;&#xD;
 Cliquez pour jouer à partir de la position: {0}</value>
 </data>
 <data name="TXT_TIMESCALE_BOOKMARK">
-  <value>Échelle de temps&#xD;
-Cliquez pour jouer à partir de signet: "{1}"&#xD;
+  <value>Échelle de temps&#xD;&#xD;
+Cliquez pour jouer à partir de signet: "{1}"&#xD;&#xD;
 Temps de signet: {0}</value>
 </data>
 <data name="TXT_TITLE">
@@ -1105,7 +1108,7 @@ Temps de signet: {0}</value>
   <value>Paramètres vidéo</value>
 </data>
 <data name="TXT_VOLSCALE">
-  <value>Échelle de volume&#xD;
+  <value>Échelle de volume&#xD;&#xD;
 Cliquez pour régler le volume d': {0}%</value>
 </data>
 <data name="TXT_YEAR">
@@ -1113,6 +1116,24 @@ Cliquez pour régler le volume d': {0}%</value>
 </data>
 <data name="TXT_ENABLE_WCF_INTERFACE">
   <value>Autoriser les applications externes pour recueillir des données de analisys de signal de Protone Joueur</value>
+</data>
+<data name="TXT_CONTENT">
+  <value>Contenu actuel:</value>
+</data>
+<data name="TXT_MEDIATYPE">
+  <value>Type de media:</value>
+</data>
+<data name="TXT_SOURCE">
+  <value>Source:</value>
+</data>
+<data name="TXT_TUNE">
+  <value>Accorder</value>
+</data>
+<data name="TXT_BTNOPENURL">
+  <value>Charger une station de radio en ligne (diffusion multimédia)</value>
+</data>
+<data name="TXT_NO_STATIONS_LOADED">
+  <value>Aucune station n'est encore chargée. S'il vous plaît faire une recherche d'abord ...</value>
 </data>
     
 </root>
