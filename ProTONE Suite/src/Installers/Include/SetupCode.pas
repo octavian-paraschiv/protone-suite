@@ -39,14 +39,6 @@ const
 //--------------------------------------------------------------------------------
 // External functions
 
-// Importing LoadSkin API from ISSkin.DLL
-procedure LoadSkin(lpszPath: String; lpszIniFileName: String);
-external 'LoadSkin@files:ISSkin.dll stdcall';
-
-// Importing UnloadSkin API from ISSkin.DLL
-procedure UnloadSkin();
-external 'UnloadSkin@files:ISSkin.dll stdcall';
-
 // Importing ShowWindow Windows API from User32.DLL
 function ShowWindow(hWnd: Integer; uType: Integer): Integer;
 external 'ShowWindow@user32.dll stdcall';
@@ -415,9 +407,7 @@ function InitializeSetup: Boolean;
 var
    res : integer;
 begin
-   ExtractTemporaryFile('OPMedia.cjstyles');
-   LoadSkin(ExpandConstant('{tmp}\OPMedia.cjstyles'), 'NormalBlack.ini');
-   
+  
    if (AreApplicationsStopped = false) then
    begin
     result := false;
@@ -489,10 +479,6 @@ var
    s : string;
    rc : integer;
 begin
-   // Hide Window before unloading skin so user does not get
-   // a glimse of an unskinned window before it is closed.
-   ShowWindow(StrToInt(ExpandConstant('{wizardhwnd}')), 0);
-   UnloadSkin();
    
    s := GetCommandlineParam('/APPRESTART');
    if (Length(s) > 0) then

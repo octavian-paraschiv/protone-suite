@@ -72,12 +72,6 @@ Name: fr; MessagesFile: compiler:Languages\French.isl
 Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 
 [Files]
-; Add the ISSkin DLL used for skinning Inno Setup installations.
-Source: ISSkin.dll; DestDir: {app}; Flags: dontcopy
-
-; Add the Visual Style resource contains resources used for skinning,
-; you can also use Microsoft Visual Styles (*.msstyles) resources.
-Source: Skins\OPMedia.cjstyles; DestDir: {tmp}; Flags: dontcopy
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: {#BINDIR}\NAudio.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
