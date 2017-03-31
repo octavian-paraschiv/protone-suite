@@ -189,6 +189,5 @@
     <ThemeElement Name="DefaultButtonFocusHoverColor1" Value="245, 244, 255" />
     <ThemeElement Name="DefaultButtonFocusHoverColor2" Value="200, 200, 255" />
     <ThemeElement Name="FormBorderWidth" Value="2" />
-    <ThemeElement Name="ThemeFontFamily" Value="Arial" />
   </Theme>
 </Themes>
