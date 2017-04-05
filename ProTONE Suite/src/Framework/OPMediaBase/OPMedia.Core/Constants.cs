@@ -18,7 +18,7 @@ namespace OPMedia.Core
 
         public const string PersistenceServiceShortName = "OPMedia.PersistenceService";
         public const string PersistenceServiceLongName = "OPMedia Persistence Service";
-        public const string PersistenceServiceDescription = "Provides long-time persistence support for OPMedia based applications.";
+        public const string PersistenceServiceDescription = "Provides caching and long-time persistence support for OPMedia applications settings.";
         public const string PersistenceServiceBinary = Constants.PersistenceServiceShortName + ".exe";
     }
 }

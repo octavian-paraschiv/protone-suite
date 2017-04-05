@@ -115,6 +115,8 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheStore.cs" />
+    <Compile Include="DbStore.cs" />
     <Compile Include="Persistence.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

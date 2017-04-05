@@ -72,6 +72,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="NetworkAccess\WebFileRetriever.cs" />
+    <Compile Include="TicToc.cs" />
     <Compile Include="Persistence\IPersistenceService.cs" />
     <Compile Include="Persistence\PersistenceProxy.cs" />
     <Compile Include="Properties\Resources1.Designer.cs">

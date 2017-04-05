@@ -7,6 +7,7 @@ using OPMedia.Core.Logging;
 using System.Security.Principal;
 using System.ServiceProcess;
 using System.Threading;
+using System.Diagnostics;
 
 namespace OPMedia.Core
 {
@@ -114,50 +115,6 @@ namespace OPMedia.Core
             _proxy = null;
         }
 
-        string IPersistenceService.ReadObject(string persistenceId, string persistenceContext)
-        {
-            try
-            {
-                return _proxy.ReadObject(persistenceId, persistenceContext);
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-                Abort();
-                Open();
-            }
-
-            return null;
-        }
-
-        void IPersistenceService.SaveObject(string persistenceId, string persistenceContext, string objectContent)
-        {
-            try
-            {
-                _proxy.SaveObject(persistenceId, persistenceContext, objectContent);
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-                Abort();
-                Open();
-            }
-        }
-
-        void IPersistenceService.DeleteObject(string persistenceId, string persistenceContext)
-        {
-            try
-            {
-                _proxy.DeleteObject(persistenceId, persistenceContext);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                Abort();
-                Open();
-            }
-        }
-
         static string BuildPersistenceId(bool includeAppName, string persistenceId)
         {
             if (includeAppName)
@@ -166,11 +123,15 @@ namespace OPMedia.Core
             return persistenceId;
         }
 
+        #region ReadObject
+
         public static T ReadObject<T>(bool includeAppName, string persistenceId, T defaultValue, bool usePersistenceContext = true)
         {
             string id = BuildPersistenceId(includeAppName, persistenceId);
             return ReadObject<T>(id, defaultValue, usePersistenceContext);
         }
+
+        static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
 
         public static T ReadObject<T>(string persistenceId, T defaultValue, bool usePersistenceContext = true)
         {
@@ -178,6 +139,8 @@ namespace OPMedia.Core
 
             try
             {
+                _readTicToc.Tic();
+
                 using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     string content = usePersistenceContext ?
@@ -192,6 +155,19 @@ namespace OPMedia.Core
                             {
                                 retVal = (T)Enum.Parse(typeof(T), content);
                             }
+
+                            else if (typeof(T) == typeof(TimeSpan))
+                            {
+                                TimeSpan ts = TimeSpan.Parse(content);
+                                retVal = (T)Convert.ChangeType(ts, typeof(T));
+                            }
+
+                            else if (typeof(T) == typeof(DateTime))
+                            {
+                                DateTime dt = DateTime.Parse(content);
+                                retVal = (T)Convert.ChangeType(dt, typeof(T));
+                            }
+
                             else
                             {
                                 try
@@ -217,9 +193,32 @@ namespace OPMedia.Core
                 Logger.LogException(ex);
                 retVal = defaultValue;
             }
+            finally
+            {
+                _readTicToc.Toc();
+            }
 
             return retVal;
         }
+
+        string IPersistenceService.ReadObject(string persistenceId, string persistenceContext)
+        {
+            try
+            {
+                return _proxy.ReadObject(persistenceId, persistenceContext);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region SaveObject
 
         public static void SaveObject<T>(bool includeAppName, string persistenceId, T objectContent, bool usePersistenceContext = true)
         {
@@ -227,10 +226,14 @@ namespace OPMedia.Core
             SaveObject<T>(id, objectContent, usePersistenceContext);
         }
 
+        static TicToc _saveTicToc = new TicToc("Persistence.Proxy.SaveObject");
+
         public static void SaveObject<T>(string persistenceId, T objectContent, bool usePersistenceContext = true)
         {
             try
             {
+                _saveTicToc.Tic();
+
                 using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     if (usePersistenceContext)
@@ -243,7 +246,28 @@ namespace OPMedia.Core
             {
                 Logger.LogException(ex);
             }
+            finally
+            {
+                _saveTicToc.Toc();
+            }
         }
+
+        void IPersistenceService.SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        {
+            try
+            {
+                _proxy.SaveObject(persistenceId, persistenceContext, objectContent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+        }
+        #endregion
+
+        #region DeleteObject
 
         public static void DeleteObject(bool includeAppName, string persistenceId, bool usePersistenceContext = true)
         {
@@ -251,10 +275,14 @@ namespace OPMedia.Core
             DeleteObject(id, usePersistenceContext);
         }
 
+        static TicToc _deleteTicToc = new TicToc("Persistence.Proxy.DeleteObject", 5);
+
         public static void DeleteObject(string persistenceId, bool usePersistenceContext = true)
         {
             try
             {
+                _deleteTicToc.Tic();
+
                 using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     if (usePersistenceContext)
@@ -267,6 +295,25 @@ namespace OPMedia.Core
             {
                 Logger.LogException(ex);
             }
+            finally
+            {
+                _deleteTicToc.Toc();
+            }
         }
+
+        void IPersistenceService.DeleteObject(string persistenceId, string persistenceContext)
+        {
+            try
+            {
+                _proxy.DeleteObject(persistenceId, persistenceContext);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+        }
+        #endregion
     }
 }

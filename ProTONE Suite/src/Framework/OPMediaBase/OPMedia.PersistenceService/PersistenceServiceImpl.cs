@@ -14,76 +14,44 @@ namespace OPMedia.PersistenceService
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerCall)]
     public class PersistenceServiceImpl : IPersistenceService
     {
-        const string DbConnString = "data source = \".\\Persistence.db3\"";
+        static TicToc _readTicToc = new TicToc("Persistence.Service.ReadObject");
+        static TicToc _saveTicToc = new TicToc("Persistence.Service.SaveObject");
+        static TicToc _deleteTicToc = new TicToc("Persistence.Service.DeleteObject");
 
         public string ReadObject(string persistenceId, string persistenceContext)
         {
             try
             {
-                using (MainDataContext db = new MainDataContext(DbConnString))
-                {
-                    var s = (from po in db.PersistedObjects
-                            where
-                            ( 
-                                po.PersistenceID == persistenceId
-                                && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                            )
-                            select po.Content).FirstOrDefault();
-
-                    return s;
-                }
+                _readTicToc.Tic();
+                return CacheStore.Instance.ReadObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+            }
+            finally
+            {
+                _readTicToc.Toc();
             }
 
             return null;
         }
 
+
         public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
             try
             {
-                TransactionOptions opt = new TransactionOptions();
-                //opt.IsolationLevel = IsolationLevel.Snapshot;
-                opt.Timeout = TimeSpan.FromSeconds(3);
-
-                using (MainDataContext db = new MainDataContext(DbConnString))
-                {
-                    var obj = (from po in db.PersistedObjects
-                                where
-                                (
-                                    po.PersistenceID == persistenceId
-                                    && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                                )
-                                select po);
-
-                    using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew, opt))
-                    {
-                        if (obj != null && obj.Count() > 0)
-                        {
-                            db.PersistedObjects.DeleteAllOnSubmit(obj);
-                            db.SubmitChanges();
-                        }
-
-                        PersistedObject po = new PersistedObject();
-                        po.PersistenceID = persistenceId;
-                        po.Content = objectContent;
-
-                        po.PersistenceContext = string.IsNullOrEmpty(persistenceContext) ?
-                            string.Empty : persistenceContext;
-
-                        db.PersistedObjects.InsertOnSubmit(po);
-                        db.SubmitChanges();
-
-                        ts.Complete();
-                    }
-                }
+                _saveTicToc.Tic();
+                CacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+            }
+            finally
+            {
+                _saveTicToc.Toc();
             }
         }
 
@@ -91,37 +59,16 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                TransactionOptions opt = new TransactionOptions();
-                //opt.IsolationLevel = IsolationLevel.Snapshot;
-                opt.Timeout = TimeSpan.FromSeconds(3);
-
-                using (MainDataContext db = new MainDataContext(DbConnString))
-                {
-                    var obj = (from po in db.PersistedObjects
-                                where
-                                (
-                                    po.PersistenceID == persistenceId
-                                    && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                                )
-                                select po);
-
-                    using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew, opt))
-                    {
-                        if (obj != null && obj.Count() > 0)
-                        {
-                            db.PersistedObjects.DeleteAllOnSubmit(obj);
-                            db.SubmitChanges();
-                        }
-
-                        db.SubmitChanges();
-
-                        ts.Complete();
-                    }
-                }
+                _deleteTicToc.Tic();
+                CacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
+            }
+            finally
+            {
+                _deleteTicToc.Toc();
             }
         }
     }
