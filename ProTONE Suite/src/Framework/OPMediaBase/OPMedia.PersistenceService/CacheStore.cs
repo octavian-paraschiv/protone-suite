@@ -10,8 +10,35 @@ namespace OPMedia.PersistenceService
 {
     public class CacheItem
     {
+        // Time-To-Live: 30 seconds
+        const int MaxCachedItemTTL = 30 * 1000;
+
         public string Key { get; private set; }
-        public string Value { get; set; }
+
+        object _accessLock = new object();
+
+        public string _value = null;
+        public string Value 
+        {
+            get
+            {
+                lock (_accessLock)
+                {
+                    this.TimeStamp = DateTime.Now;
+                    return _value;
+                }
+            }
+
+            set
+            {
+                lock (_accessLock)
+                {
+                    this.TimeStamp = DateTime.Now;
+                    _value = value;
+                }
+            }
+        }
+
         public DateTime TimeStamp { get; private set; }
 
         public bool IsExpired
@@ -19,7 +46,7 @@ namespace OPMedia.PersistenceService
             get
             {
                 TimeSpan ts = DateTime.Now - TimeStamp;
-                return (ts.TotalMilliseconds >= CacheStore.MaxCachedItemTTL);
+                return (ts.TotalMilliseconds >= MaxCachedItemTTL);
             }
         }
 
@@ -27,13 +54,15 @@ namespace OPMedia.PersistenceService
         {
             this.Key = key;
             this.Value = value;
-            this.TimeStamp = DateTime.Now;
         }
     }
 
     public class CacheStore : IPersistenceService
     {
-        public const int MaxCachedItemTTL = 5000;
+        // Poll for expired items at each 10 seconds.
+        const int ExpiredItemsPollTimer = 10 * 1000;
+
+        const int IterationsUntilGarbageCollection = (10 * 60 * 1000) / ExpiredItemsPollTimer;
 
         private static CacheStore _instance = new CacheStore();
         public static CacheStore Instance
@@ -52,11 +81,12 @@ namespace OPMedia.PersistenceService
         private CacheStore()
         {
             _tmrCachePoller = new System.Timers.Timer();
-            _tmrCachePoller.Interval = MaxCachedItemTTL;
+            _tmrCachePoller.Interval = ExpiredItemsPollTimer;
             _tmrCachePoller.Elapsed += new System.Timers.ElapsedEventHandler(_tmrCachePoller_Elapsed);
             _tmrCachePoller.Start();
         }
 
+        int _iter = 0;
         void _tmrCachePoller_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -70,6 +100,17 @@ namespace OPMedia.PersistenceService
             }
             finally
             {
+                try
+                {
+                    _iter = (_iter + 1) % IterationsUntilGarbageCollection;
+                    if (_iter == 0)
+                        GC.Collect();
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+                }
+
                 _tmrCachePoller.Start();
             }
         }
@@ -80,7 +121,7 @@ namespace OPMedia.PersistenceService
             {
                 List<string> keysToDelete = new List<string>();
 
-                foreach(KeyValuePair<string, CacheItem> kvp in _cache)
+                foreach (KeyValuePair<string, CacheItem> kvp in _cache)
                 {
                     if (kvp.Value.IsExpired)
                     {
@@ -88,6 +129,8 @@ namespace OPMedia.PersistenceService
                         keysToDelete.Add(kvp.Key);
                     }
                 }
+
+                Logger.LogToConsole("PollForExpiredCachedItems: A number of {0} objects will be removed from the cache...", keysToDelete.Count);
 
                 foreach (string key in keysToDelete)
                 {
