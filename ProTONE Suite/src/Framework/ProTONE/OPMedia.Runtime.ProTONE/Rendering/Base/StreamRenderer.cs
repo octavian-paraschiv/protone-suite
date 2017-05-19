@@ -13,6 +13,7 @@ using System.Text;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Base
@@ -243,7 +244,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         internal void StartRendererWithHint(RenderingStartHint startHint)
         {
-            CreateAndStartInternalClock();
+            int hintPos = 0;
+            if (startHint is BookmarkStartHint)
+                hintPos = (int)(startHint as BookmarkStartHint).Bookmark.PlaybackTimeInSeconds;
+                
+            CreateAndStartInternalClock(hintPos); 
             DoStartRendererWithHint(startHint);
         }
 
@@ -271,11 +276,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             DoResumeRenderer(fromPosition);
         }
 
-        private void CreateAndStartInternalClock()
+        private void CreateAndStartInternalClock(int elapsedSeconds = 0)
         {
             lock (_syncElapsedSeconds)
             {
-                _elapsedSeconds = 0;
+                _elapsedSeconds = elapsedSeconds;
             }
 
             if (_tmrInternalClock == null)
