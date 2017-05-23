@@ -86,14 +86,14 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         private static string[] ReadAddonConfig(string keyBase)
         {
             string[] names = null;
-            string namesRaw = PersistenceProxy.ReadObject(keyBase, string.Empty, false);
+            string namesRaw = PersistenceProxy.ReadObject(true, keyBase, string.Empty, false);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
                 names = namesRaw.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string name in names)
                 {
-                    string val = PersistenceProxy.ReadObject(name, string.Empty, false);
+                    string val = PersistenceProxy.ReadObject(true, name, string.Empty, false);
                     _assemblies.Add(name, val);
                 }
             }
@@ -103,7 +103,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         internal static void MarkForUninstall(string assembly)
         {
-            string markedForUninstall = PersistenceProxy.ReadObject("MarkedForUninstall", string.Empty, false);
+            string markedForUninstall = PersistenceProxy.ReadObject(true, "MarkedForUninstall", string.Empty, false);
 
             List<string> filesToDelete = new List<string>();
 
@@ -143,13 +143,13 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 }
             }
 
-            PersistenceProxy.SaveObject("MarkedForUninstall", markedForUninstall, false);
+            PersistenceProxy.SaveObject(true, "MarkedForUninstall", markedForUninstall, false);
         }
 
         private static void UninstallMarkedItems()
         {
             string[] names = null;
-            string namesRaw = PersistenceProxy.ReadObject("MarkedForUninstall", string.Empty, false);
+            string namesRaw = PersistenceProxy.ReadObject(true, "MarkedForUninstall", string.Empty, false);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
@@ -166,7 +166,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     }
                 }
 
-                PersistenceProxy.SaveObject("MarkedForUninstall", string.Empty, false);
+                PersistenceProxy.SaveObject(true, "MarkedForUninstall", string.Empty, false);
             }
         }
 

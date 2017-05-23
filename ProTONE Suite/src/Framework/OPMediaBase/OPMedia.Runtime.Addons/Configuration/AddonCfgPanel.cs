@@ -184,17 +184,17 @@ namespace OPMedia.Runtime.Addons.Configuration
                     addons += ai.Name;
                     addons += "|";
 
-                    PersistenceProxy.SaveObject(ai.Name, ai.CodeBase, false);
+                    PersistenceProxy.SaveObject(true, ai.Name, ai.CodeBase, false);
                 }
             }
 
             if (addons.Length > 0)
             {
-                PersistenceProxy.SaveObject(groupName, addons.TrimEnd(new char[] { '|' }), false);
+                PersistenceProxy.SaveObject(true, groupName, addons.TrimEnd(new char[] { '|' }), false);
             }
             else
             {
-                PersistenceProxy.SaveObject(groupName, string.Empty, false);
+                PersistenceProxy.SaveObject(true, groupName, string.Empty, false);
             }
         }
 
