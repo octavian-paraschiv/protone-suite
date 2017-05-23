@@ -19,11 +19,18 @@ namespace OPMedia.UI.ProTONE.Controls
     {
         Brush _b;
         int _w = 1;
-        double _f = 0.8f;
+        double _f = 0.85f;
+
+        static readonly double[] DecadeLinesRelativePositions = { 0, 9, 15, 22, 30, 36, 43, 51, 57, 64 };
+        static readonly string[] DecadeLinesText = { "20", "50", "100", "200", "500", "1K", "2K", "5K", "10K", "a" };
 
         public SpectrogramPlotter() : base()
         {
             RecreateBrush();
+
+            for (int i = 0; i < DecadeLinesRelativePositions.Length; i++)
+                DecadeLinesRelativePositions[i] /= DsRendererBase.MAX_SPECTROGRAM_BANDS;
+
             this.Resize += new EventHandler(SpectrogramPlotter_Resize);
         }
 
@@ -46,11 +53,11 @@ namespace OPMedia.UI.ProTONE.Controls
 
         protected override void DrawCustomHistoBar(Graphics g, Rectangle rc, int w, Point pt)
         {
-            Rectangle rcBar = new Rectangle(pt.X - (int)(_f * _w), pt.Y, _w, rc.Bottom - pt.Y);
+            Rectangle rcBar = new Rectangle(pt.X - (int)(0.5f * _w), pt.Y, _w, rc.Bottom - pt.Y);
             g.FillRectangle(_b, rcBar);
         }
 
-        protected override void DrawDecadeLines(Graphics g, Rectangle rc)
+        protected override void DrawDecadicLines(Graphics g, Rectangle rc)
         {
             using (Pen p = new Pen(ThemeManager.ForeColor))
             using (Brush b = new SolidBrush(ThemeManager.ForeColor))
@@ -65,7 +72,7 @@ namespace OPMedia.UI.ProTONE.Controls
                         {
                             int maxFq = FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
                                 DsRendererBase.MAX_SPECTROGRAM_BANDS);
-                            decadeLineText = string.Format("{0}KHz", (int)(maxFq / 1000));
+                            decadeLineText = string.Format("{0}K", (int)(maxFq / 1000));
                         }
                         catch
                         {

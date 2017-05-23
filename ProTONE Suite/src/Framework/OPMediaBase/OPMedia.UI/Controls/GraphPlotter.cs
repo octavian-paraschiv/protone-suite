@@ -21,13 +21,10 @@ namespace OPMedia.UI.Controls
         public bool LogarithmicYAxis { get; set; }
 
         public bool IsHistogram { get; set; }
-        public bool ShowDecadeLines { get; set; }
+        public bool ShowDecadicLines { get; set; }
 
         public double? MinVal { get; set; }
         public double? MaxVal { get; set; }
-
-        protected static readonly double[] DecadeLinesRelativePositions = { 0, 0.23, 0.56, 0.89, 1 };
-        protected static readonly string[] DecadeLinesText = { "20 Hz", "100 Hz", "1K", "10K", "a" };
 
         public void Reset(bool redraw)
         {
@@ -65,7 +62,7 @@ namespace OPMedia.UI.Controls
                 rc.Height -= 15;
 
             using (Pen p = new Pen(ThemeManager.ForeColor))
-            using (Pen p2 = new Pen(ThemeManager.ForeColor, 1.5f))
+            using (Pen p2 = new Pen(ThemeManager.ForeColor, 2))
             {
                 for (int i = 0; i < _dataSets.Count; i++)
                 {
@@ -91,12 +88,12 @@ namespace OPMedia.UI.Controls
                         rc.Left + rc.Width / 2, rc.Bottom);
                 }
 
-                if (IsHistogram && ShowDecadeLines)
-                    DrawDecadeLines(g, rc);
+                if (IsHistogram && ShowDecadicLines)
+                    DrawDecadicLines(g, rc);
             }
         }
 
-        protected virtual void DrawDecadeLines(Graphics g, Rectangle rc)
+        protected virtual void DrawDecadicLines(Graphics g, Rectangle rc)
         {
         }
 

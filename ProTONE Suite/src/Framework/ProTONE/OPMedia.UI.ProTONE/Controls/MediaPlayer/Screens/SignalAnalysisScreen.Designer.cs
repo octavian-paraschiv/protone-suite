@@ -307,7 +307,7 @@
             this.gpWaveform.Name = "gpWaveform";
             this.gpWaveform.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlWaveform.SetRowSpan(this.gpWaveform, 3);
-            this.gpWaveform.ShowDecadeLines = false;
+            this.gpWaveform.ShowDecadicLines = false;
             this.gpWaveform.ShowXAxis = true;
             this.gpWaveform.ShowYAxis = false;
             this.gpWaveform.Size = new System.Drawing.Size(403, 162);
@@ -397,7 +397,7 @@
             this.spSpectrogram.Name = "spSpectrogram";
             this.spSpectrogram.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlSpectrogram.SetRowSpan(this.spSpectrogram, 3);
-            this.spSpectrogram.ShowDecadeLines = true;
+            this.spSpectrogram.ShowDecadicLines = true;
             this.spSpectrogram.ShowXAxis = true;
             this.spSpectrogram.ShowYAxis = false;
             this.spSpectrogram.Size = new System.Drawing.Size(403, 163);

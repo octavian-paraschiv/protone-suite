@@ -121,7 +121,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     {
                         gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
                         gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
-                        gpWaveform.AddDataRange(waveformData[0], ThemeManager.GradientGaugeColor1);
+                        gpWaveform.AddDataRange(waveformData[0], Color.BurlyWood);
                     }
                     else
                     {
