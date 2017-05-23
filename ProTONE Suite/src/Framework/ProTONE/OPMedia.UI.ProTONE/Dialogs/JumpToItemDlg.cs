@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.UI.Controls;
+using System.Threading;
+using OPMedia.Core;
 
 
 namespace OPMedia.UI.ProTONE.Dialogs
@@ -22,6 +24,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private OPMTableLayoutPanel opmLayoutPanel1;
 
         private Playlist _playlist = null;
+        private System.Windows.Forms.Timer _tmrSelayedSearch = null;
 
         public PlaylistItem SelectedItem
         {
@@ -45,6 +48,20 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
+            if (_tmrSelayedSearch == null)
+            {
+                _tmrSelayedSearch = new System.Windows.Forms.Timer();
+                _tmrSelayedSearch.Interval = 500;
+                _tmrSelayedSearch.Tick += new EventHandler(_tmrSelayedSearch_Tick);
+            }
+
+            _tmrSelayedSearch.Stop();
+            _tmrSelayedSearch.Start();
+        }
+
+        void _tmrSelayedSearch_Tick(object sender, EventArgs e)
+        {
+            _tmrSelayedSearch.Stop();
             PerformSearch();
         }
 
@@ -220,18 +237,31 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void PerformSearch(string[] keywords)
         {
-            lbMatchingItems.Items.Clear();
-            foreach (PlaylistItem plItem in _playlist.AllItems)
+            try
             {
-                if (TestForMatch(plItem, keywords))
+                CursorHelper.ShowWaitCursor(this, true);
+
+                lbMatchingItems.Items.Clear();
+
+                List<object> itemsToShow = new List<object>();
+                foreach (PlaylistItem plItem in _playlist.AllItems)
                 {
-                    lbMatchingItems.Items.Add(plItem);
+                    if (TestForMatch(plItem, keywords))
+                    {
+                        itemsToShow.Add(plItem);
+                    }
+                }
+
+                if (itemsToShow.Count > 0)
+                {
+                    lbMatchingItems.Items.AddRange(itemsToShow.ToArray());
+                    if (lbMatchingItems.Items.Count > 0)
+                        lbMatchingItems.SelectedIndex = 0;
                 }
             }
-
-            if (lbMatchingItems.Items.Count > 0)
+            finally
             {
-                lbMatchingItems.SelectedIndex = 0;
+                CursorHelper.ShowWaitCursor(this, false);
             }
         }
 
