@@ -30,6 +30,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 , ISampleGrabberCB
 #endif
     {
+        public const int MAX_SPECTROGRAM_BANDS = 64;
+
         protected IMediaControl mediaControl = null;
         protected IVideoWindow videoWindow = null;
         protected IBasicAudio basicAudio = null;
@@ -1038,10 +1040,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 lock (_spectrogramLock)
                 {
-                    _spectrogramData = dataOut
+                    var linearData = dataOut
                         .Skip(1 /* First band represents the 'total energy' of the signal */ )
                         .Take(_fftWindowSize / 2 /* The spectrum is 'mirrored' horizontally around the sample rate / 2 according to Nyquist theorem */ )
                         .ToArray();
+
+                    _spectrogramData = FFTHelper.TranslateFFTIntoBands(linearData, _actualAudioFormat.nSamplesPerSec / 2, MAX_SPECTROGRAM_BANDS);
                 }
             }
         }

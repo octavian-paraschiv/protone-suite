@@ -40,7 +40,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         protected int _waveformWindowSize = 512;
         protected int _vuMeterWindowSize = 64;
-        protected int _fftWindowSize = 4096;
+        protected int _fftWindowSize = 2048;
         protected double _maxLevel = short.MaxValue;
         protected double _maxLogLevel = Math.Log((double)short.MaxValue);
 

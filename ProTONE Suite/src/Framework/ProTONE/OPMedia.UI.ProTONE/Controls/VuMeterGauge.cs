@@ -49,8 +49,8 @@ namespace OPMedia.UI.ProTONE.Controls
 
             _b1H = BrushHelper.GenerateVuMeterBrush(Width, Height, true);
             _b1V = BrushHelper.GenerateVuMeterBrush(Width, Height, false);
-            _b2H = new SolidBrush(ThemeManager.GradientNormalColor1);
-            _b2V = new SolidBrush(ThemeManager.GradientNormalColor1);
+            _b2H = new SolidBrush(Color.White);
+            _b2V = new SolidBrush(Color.White);
         }
 
         private void InternalCustomizeBrushes(ref Brush b1H, ref Brush b2H, ref Brush b1V, ref Brush b2V)

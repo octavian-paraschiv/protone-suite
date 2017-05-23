@@ -175,9 +175,11 @@
     <ThemeElement Name="HighlightMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="HighlightHeaderMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="CheckedMenuTextColor" Value="255, 255, 255" />
-    <ThemeElement Name="GradientGaugeColor1" Value="115, 187, 2" />
-    <ThemeElement Name="GradientGaugeColor2" Value="220, 232, 155" />
-    <ThemeElement Name="GradientGaugeColor1a" Value="220, 23, 23" />
+    
+    <ThemeElement Name="GradientGaugeColor1" Value="044, 190, 078" />
+    <ThemeElement Name="GradientGaugeColor2" Value="225, 029, 033" />
+    <ThemeElement Name="GradientGaugeColor1a" Value="243, 151, 018" />
+    
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="220, 23, 23" />
     <ThemeElement Name="DefaultButtonNormalColor1" Value="153, 217, 234" />

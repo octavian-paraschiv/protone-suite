@@ -7,11 +7,19 @@ namespace OPMedia.Runtime.DSP
 {
     public static class FFTHelper
     {
+        public const int LOWEST_AUDIBLE_FREQ = 20;
+
+        public static int GetMaxDisplayableFreq(double maxFq, int bandCount)
+        {
+            double ratio = Math.Pow(maxFq / LOWEST_AUDIBLE_FREQ, 1f / bandCount);
+            return (int)Math.Round(Math.Pow(ratio, bandCount) * LOWEST_AUDIBLE_FREQ);
+        }
+
         public static double[] TranslateFFTIntoBands(double[] fftData, double maxFq, int bandCount)
         {
             double[] bandFqs = new double[bandCount];
             double[] outData = new double[bandCount];
-            bandFqs[0] = 20;
+            bandFqs[0] = LOWEST_AUDIBLE_FREQ;
 
             double ratio = Math.Pow(maxFq / bandFqs[0], 1f / bandCount);
 

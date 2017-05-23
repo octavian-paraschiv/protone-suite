@@ -21,6 +21,7 @@ using OPMedia.Core.GlobalEvents;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.ProTONE.Translations;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
@@ -28,7 +29,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
     {
         private System.Windows.Forms.Timer _tmrUpdate = new System.Windows.Forms.Timer();
 
-        public const int BandCount = 64; // always a power of 2
+        public const int BandCount = DsRendererBase.MAX_SPECTROGRAM_BANDS;
         private double[] _bands = new double[BandCount];
 
         #region Constructor
@@ -52,7 +53,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
             pnlVuMeter.Visible = showVU;
 
-            opmTableLayoutPanel1.RowStyles[0] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, showVU ? 51F : 0F);
+            opmTableLayoutPanel1.RowStyles[0] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, showVU ? 70F : 0F);
 
             pnlWaveform.Visible = showWaveform;
 
@@ -134,24 +135,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
                     spSpectrogram.Reset(false);
                     spSpectrogram.MinVal = maxFftLevel / 2; // Min level = -6 dBM
-                    spSpectrogram.MaxVal = maxFftLevel; // Max level = -6 dBM
+                    spSpectrogram.MaxVal = maxFftLevel; // Max level = 0 dBM
 
                     double[] spectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
                     if (spectrogramData != null && spectrogramData.Length > 0)
                     {
-                        try
-                        {
-                            lblFqMin.Text = "1 Hz";
-                            string s = string.Format("{0} Hz", (MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2));
-
-                            if (lblFqMax.Text != s)
-                                lblFqMax.Text = s;
-                        }
-                        catch
-                        {
-                            lblFqMin.Text = "??";
-                            lblFqMax.Text = "??";
-                        }
 
                         double[] spectrogramData2 = new double[spectrogramData.Length];
                         Array.Clear(spectrogramData2, 0, spectrogramData.Length);
@@ -165,18 +153,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
                         try
                         {
-                            for (int i = 0; i < spectrogramData.Length; i++)
+                            int maxSize = (int)Math.Min(BandCount, spectrogramData.Length);
+                            for (int i = 0; i < maxSize; i++)
                             {
-                                int bandPos = i % div;
-                                if (i > 0 && bandPos == 0)
-                                    jBand++;
-
-                                bands[jBand] = (bands[jBand] * bandPos + spectrogramData[i]) / (bandPos + 1);
-                            }
-
-                            for (int i = 0; i < BandCount; i++)
-                            {
-                                bands[i] = Math.Max(0, Math.Min(maxFftLevel, SpectrogramTransferFunction(bands[i])));
+                                bands[i] = Math.Max(0, Math.Min(maxFftLevel, SpectrogramTransferFunction(spectrogramData[i])));
                                 _bands[i] = 0.5 * (_bands[i] + bands[i]);
                             }
 
@@ -193,9 +173,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     {
                         spSpectrogram.Reset(true);
                         Array.Clear(_bands, 0, _bands.Length);
-
-                        lblFqMin.Text = "??";
-                        lblFqMax.Text = "??";
                     }
                 }
             }

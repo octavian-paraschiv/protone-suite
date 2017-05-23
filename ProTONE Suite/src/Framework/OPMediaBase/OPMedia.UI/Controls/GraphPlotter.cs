@@ -21,9 +21,13 @@ namespace OPMedia.UI.Controls
         public bool LogarithmicYAxis { get; set; }
 
         public bool IsHistogram { get; set; }
+        public bool ShowDecadeLines { get; set; }
 
         public double? MinVal { get; set; }
         public double? MaxVal { get; set; }
+
+        protected static readonly double[] DecadeLinesRelativePositions = { 0, 0.23, 0.56, 0.89, 1 };
+        protected static readonly string[] DecadeLinesText = { "20 Hz", "100 Hz", "1K", "10K", "a" };
 
         public void Reset(bool redraw)
         {
@@ -55,19 +59,25 @@ namespace OPMedia.UI.Controls
             ThemeManager.PrepareGraphics(g);
 
             Rectangle rc = this.ClientRectangle;
-            rc.Inflate(-1, -1);
 
-            using (Pen p = new Pen(ThemeManager.BorderColor))
+            rc.Inflate(-1, -1);
+            if (IsHistogram)
+                rc.Height -= 15;
+
+            using (Pen p = new Pen(ThemeManager.ForeColor))
+            using (Pen p2 = new Pen(ThemeManager.ForeColor, 1.5f))
             {
                 for (int i = 0; i < _dataSets.Count; i++)
                 {
                     DrawDataSet(g, rc, _dataSets[i], _dataSetsColors[i]);
                 }
 
-                g.DrawRectangle(p, rc);
+                p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                g.DrawRectangle(p2, rc);
 
                 if (ShowXAxis)
                 {
+                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
                     g.DrawLine(p,
                         rc.Left, rc.Top + rc.Height / 2,
                         rc.Right, rc.Top + rc.Height / 2);
@@ -75,11 +85,19 @@ namespace OPMedia.UI.Controls
 
                 if (ShowYAxis)
                 {
+                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
                     g.DrawLine(p,
                         rc.Left + rc.Width / 2, rc.Top,
                         rc.Left + rc.Width / 2, rc.Bottom);
                 }
+
+                if (IsHistogram && ShowDecadeLines)
+                    DrawDecadeLines(g, rc);
             }
+        }
+
+        protected virtual void DrawDecadeLines(Graphics g, Rectangle rc)
+        {
         }
 
         private void DrawDataSet(Graphics g, Rectangle rc, double[] data, Color color)
@@ -89,45 +107,41 @@ namespace OPMedia.UI.Controls
 
             int dataSetLen = data.Length;
 
-            foreach (double d in data)
-            {
-                if (min > d)
-                    min = d;
-                if (max < d)
-                    max = d;
-            }
-
             Point last = new Point(rc.Left, 
                 (max == min) ? rc.Bottom - rc.Height / 2 :
                 rc.Bottom - (int)((data[0] - min) * rc.Height / (max - min)));
 
-            for (double i = 1; i < data.Length; i++)
+            for (double i = 0; i < data.Length; i++)
             {
                 try
                 {
                     Point pt = Point.Empty;
 
+                    double val = Math.Min(max, Math.Max(min, data[(int)i]));
+
                     int y =
                         (max == min) ? rc.Bottom - rc.Height / 2 :
-                        rc.Bottom - (int)((data[(int)i] - min) * rc.Height / (max - min));
+                        rc.Bottom - (int)((val - min) * rc.Height / (max - min));
 
+                    int w = (int)Math.Round((float)rc.Width / (float)dataSetLen);
+                    if (w < 1)
+                        w = 1;
 
+                    int x = 0;
                     if (LogarithmicXAxis)
                     {
-                        double logXDomain = Math.Abs(Math.Log10((double)1 / data.Length));
-                        int x = rc.Left + (int)((logXDomain + Math.Log10(i / data.Length)) * rc.Width / logXDomain);
-
-                        pt = new Point(x, y);
+                        double logXDomain = Math.Abs(Math.Log((double)1 / data.Length));
+                        x = rc.Left + (int)((logXDomain + Math.Log(i / data.Length)) * rc.Width / logXDomain);
                     }
                     else
                     {
-                        pt = new Point(rc.Left + (int)(i * rc.Width / data.Length), y);
+                        x = rc.Left + (int)(i * rc.Width / data.Length);
                     }
+
+                    pt = new Point(x, y);
 
                     if (IsHistogram)
                     {
-                        int w = this.Width / dataSetLen;
-
                         if (color == Color.Transparent)
                         {
                             DrawCustomHistoBar(g, rc, w, pt);
@@ -143,7 +157,7 @@ namespace OPMedia.UI.Controls
                     }
                     else
                     {
-                        using (Pen pen = new Pen(color))
+                        using (Pen pen = new Pen(color, 1.5f))
                         {
                             g.DrawLine(pen, last, pt);
                         }
