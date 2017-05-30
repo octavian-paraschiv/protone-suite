@@ -48,7 +48,9 @@ namespace OPMedia.UI.ProTONE.Controls
             if (_w < 1)
                 _w = 1;
 
-            _b = BrushHelper.GenerateVuMeterBrush(_w, this.Height, false);
+            int h = Math.Max(1, this.Height - 15);
+
+            _b = BrushHelper.GenerateVuMeterBrush(_w, h, false);
         }
 
         protected override void DrawCustomHistoBar(Graphics g, Rectangle rc, int w, Point pt)

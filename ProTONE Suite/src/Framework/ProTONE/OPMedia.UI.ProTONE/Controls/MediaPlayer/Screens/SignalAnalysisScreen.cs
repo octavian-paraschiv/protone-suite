@@ -91,6 +91,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             lblSignalSpectrum.Text = Translator.Translate("TXT_SIGNALSPECTRUM");
         }
 
+        double[] _prevWaveform = null;
+
         void _tmrUpdate_Tick(object sender, EventArgs e)
         {
             try
@@ -119,9 +121,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     double[][] waveformData = MediaRenderer.DefaultInstance.WaveformData;
                     if (waveformData != null && waveformData[0].Length > 0)
                     {
+                        if (_prevWaveform == null)
+                            _prevWaveform = new double[waveformData[0].Length];
+
+                        for(int k = 0; k < _prevWaveform.Length; k++)
+                            _prevWaveform[k] = 0.5 * (_prevWaveform[k] + waveformData[0][k]);
+
                         gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
                         gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
-                        gpWaveform.AddDataRange(waveformData[0], Color.BurlyWood);
+                        gpWaveform.AddDataRange(_prevWaveform, ThemeManager.GradientGaugeColor1);
                     }
                     else
                     {

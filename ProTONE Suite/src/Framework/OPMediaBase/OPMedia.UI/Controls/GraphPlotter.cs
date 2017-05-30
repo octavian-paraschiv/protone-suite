@@ -62,7 +62,7 @@ namespace OPMedia.UI.Controls
                 rc.Height -= 15;
 
             using (Pen p = new Pen(ThemeManager.ForeColor))
-            using (Pen p2 = new Pen(ThemeManager.ForeColor, 2))
+            using (Pen p2 = new Pen(ThemeManager.ForeColor))
             {
                 for (int i = 0; i < _dataSets.Count; i++)
                 {
@@ -154,7 +154,7 @@ namespace OPMedia.UI.Controls
                     }
                     else
                     {
-                        using (Pen pen = new Pen(color, 1.5f))
+                        using (Pen pen = new Pen(color, 1.51f))
                         {
                             g.DrawLine(pen, last, pt);
                         }
