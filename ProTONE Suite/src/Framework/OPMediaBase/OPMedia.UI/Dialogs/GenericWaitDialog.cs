@@ -17,9 +17,14 @@ namespace OPMedia.UI.Dialogs
 {
     public partial class GenericWaitDialog : ToolForm, IDisposable
     {
+        public void SetText(string msg)
+        {
+            this.lblNotifyText.Text = Translator.Translate(msg);
+        }
+
         public DialogResult ShowDialog(string message, Form parent = null)
         {
-            this.lblNotifyText.Text = Translator.Translate(message);
+            SetText(message);
 
             if (parent == null)
                 return ShowDialog();

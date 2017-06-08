@@ -14,6 +14,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Logging;
 using System.Web;
 using OPMedia.Core.TranslationSupport;
+using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -110,12 +111,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return rsd;
         }
 
-        public static RadioStationsData Search(string searchKeyword, int maxCount = 20, RadioStation additionalParams = null)
+        public static RadioStationsData Search(ref ManualResetEvent abortEvent, string searchKeyword, int maxCount = 20, RadioStation additionalParams = null)
         {
             RadioStationsData rsd = new RadioStationsData();
 
             try
             {
+                if (abortEvent.WaitOne(5))
+                    goto Exit_Search;
+
                 string shoutCastdevId = ProTONEConfig.ShoutCastApiDevID;
                 string shoutCastSearchBaseUrl = ProTONEConfig.ShoutCastSearchBaseURL;
                 string shoutCastTuneInBaseUrl = ProTONEConfig.ShoutCastTuneInBaseURL;
@@ -148,20 +152,39 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                         }
                     }
 
+                    if (abortEvent.WaitOne(5))
+                        goto Exit_Search;
+
                     using (WebClient wc = new WebClient())
                     {
                         string jsonReply = wc.DownloadString(searchUrl);
+
+                        if (abortEvent.WaitOne(5))
+                            goto Exit_Search;
+
                         dynamic obj2 = JObject.Parse(jsonReply);
+
+                        if (abortEvent.WaitOne(5))
+                            goto Exit_Search;
 
                         var response = obj2.response;
                         if (response != null && response.statusCode == "200")
                         {
+                            if (abortEvent.WaitOne(5))
+                                goto Exit_Search;
+
                             if (response.data != null &&
                                 response.data.stationlist != null)
                             {
+                                if (abortEvent.WaitOne(5))
+                                    goto Exit_Search;
+
                                 var stations = response.data.stationlist.station;
                                 if (stations != null)
                                 {
+                                    if (abortEvent.WaitOne(5))
+                                        goto Exit_Search;
+
                                     string tuneInBase = string.Empty;
                                     try
                                     {
@@ -173,11 +196,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                                         tuneInBase = null;
                                     }
 
+                                    if (abortEvent.WaitOne(5))
+                                        goto Exit_Search;
+
                                     if (string.IsNullOrEmpty(tuneInBase))
                                         tuneInBase = "/sbin/tunein-station.pls";
 
                                     for (int i = 0; i < stations.Count; i++)
                                     {
+                                        if (abortEvent.WaitOne(5))
+                                            goto Exit_Search;
+
                                         var station = stations[i];
 
                                         try
@@ -233,6 +262,9 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     }
                 }
 
+                if (abortEvent.WaitOne(5))
+                    goto Exit_Search;
+
                 if (doShoutcastLookup == false)
                 {
                     RadioStationsData internalDatabase = null;
@@ -250,6 +282,9 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                         }
                     }
 
+                    if (abortEvent.WaitOne(5))
+                        goto Exit_Search;
+
                     if (internalDatabase != null &&
                         internalDatabase.RadioStations != null &&
                         internalDatabase.RadioStations.Count > 0)
@@ -263,6 +298,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 Logger.LogException(ex);
             }
 
+Exit_Search:
             if (rsd.RadioStations.Count < 1)
                 rsd.RadioStations.Add(RadioStation.NotFound);
 

@@ -89,10 +89,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override double GetMediaLength()
         {
-            return double.MaxValue - double.Epsilon;
+            return -1;
         }
 
         protected override bool IsEndOfMedia()
+        {
+            return false;
+        }
+
+        protected override bool IsMediaSeekable()
         {
             return false;
         }

@@ -14,6 +14,7 @@ using OPMedia.UI.Dialogs;
 using OPMedia.Core;
 using LocalEvents = OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.Core.TranslationSupport;
+using System.Threading;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -40,13 +41,14 @@ namespace OPMedia.UI.ProTONE.Dialogs
             }
         }
 
-        Timer _tmrSearch = null;
+        //Timer _tmrSearch = null;
 
         RadioStationsData _allData = null;
         List<RadioStation> _displayData = null;
 
-        GenericWaitDialog _waitDialog = null;
+        SearchWaitDialog _waitDialog = null;
         BackgroundWorker _bwSearch = new BackgroundWorker();
+        ManualResetEvent _searchCancelled = new ManualResetEvent(false);
 
         public StreamingServerChooserDlg() : base("TXT_SELECT_RADIO_STATION")
         {
@@ -64,8 +66,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.Shown += new EventHandler(StreamingServerChooserDlg_Shown);
 
             //lvServers.ColumnClick += new ColumnClickEventHandler(lvServers_ColumnClick);
+            //txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
 
-            txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
             lvServers.DoubleClick += new EventHandler(lvServers_DoubleClick);
         }
 
@@ -153,30 +155,30 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            StartSearchTimer();
+            //StartSearchTimer();
         }
 
-        private void StartSearchTimer()
-        {
-            if (_tmrSearch == null)
-            {
-                _tmrSearch = new Timer();
-                _tmrSearch.Interval = 1000;
-                _tmrSearch.Tick += new EventHandler(_tmrSearch_Tick);
-            }
+        //private void StartSearchTimer()
+        //{
+        //    if (_tmrSearch == null)
+        //    {
+        //        _tmrSearch = new Timer();
+        //        _tmrSearch.Interval = 1000;
+        //        _tmrSearch.Tick += new EventHandler(_tmrSearch_Tick);
+        //    }
 
-            _tmrSearch.Stop();
-            _tmrSearch.Start();
-        }
+        //    _tmrSearch.Stop();
+        //    _tmrSearch.Start();
+        //}
 
-        void _tmrSearch_Tick(object sender, EventArgs e)
-        {
-            if (_tmrSearch != null)
-                _tmrSearch.Stop();
+        //void _tmrSearch_Tick(object sender, EventArgs e)
+        //{
+        //    if (_tmrSearch != null)
+        //        _tmrSearch.Stop();
 
-            _bwSearch.RunWorkerAsync(txtSearch.Text);
-            ShowWaitDialog("Search in progress, please wait ...");
-        }
+        //    _bwSearch.RunWorkerAsync(txtSearch.Text);
+        //    ShowWaitDialog("Search in progress, please wait ...");
+        //}
 
         private void lvServers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -200,8 +202,19 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private void ShowWaitDialog(string message)
         {
             CloseWaitDialog();
-            _waitDialog = new GenericWaitDialog();
+
+            _waitDialog = new SearchWaitDialog();
+            _waitDialog.FormClosed += new FormClosedEventHandler(_waitDialog_FormClosed);
             _waitDialog.ShowDialog(message, this);
+        }
+
+        void _waitDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (_waitDialog != null && _waitDialog.EscapePressed)
+            {
+                _waitDialog.SetText("Please wait while cancelling the search task ...");
+                _searchCancelled.Set();
+            }
         }
 
         private void CloseWaitDialog()
@@ -216,7 +229,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         void OnBackgroundSearch(object sender, DoWorkEventArgs e)
         {
             string keyword = e.Argument as string;
-            _allData = RadioStationsData.Search(keyword);
+            _allData = RadioStationsData.Search(ref _searchCancelled, keyword);
         }
 
         void OnBackgroundSearchCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -243,6 +256,24 @@ namespace OPMedia.UI.ProTONE.Dialogs
                 EventDispatch.DispatchEvent(LocalEvents.EventNames.LoadRadioStation, this.RadioStation);
                 return;
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            _searchCancelled.Reset();
+            _bwSearch.RunWorkerAsync(txtSearch.Text);
+            ShowWaitDialog("Please wait for the search task to finish.\r\nYou can press ESC to cancel the search.");
+        }
+    }
+
+    public class SearchWaitDialog : GenericWaitDialog
+    {
+        public bool EscapePressed { get; private set; }
+
+        protected override bool AllowCloseOnKeyDown(Keys key)
+        {
+            this.EscapePressed = (key == Keys.Escape);
+            return this.EscapePressed;
         }
     }
 }

@@ -43,6 +43,7 @@
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.txtSearch = new OPMedia.UI.Controls.OPMTextBox();
             this.txtSelectedURL = new OPMedia.UI.Controls.OPMTextBox();
+            this.btnSearch = new OPMedia.UI.Controls.OPMButton();
             this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,11 +67,11 @@
             this.colMediaType});
             this.opmTableLayoutPanel1.SetColumnSpan(this.lvServers, 3);
             this.lvServers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvServers.Location = new System.Drawing.Point(3, 36);
+            this.lvServers.Location = new System.Drawing.Point(3, 37);
             this.lvServers.MultiSelect = false;
             this.lvServers.Name = "lvServers";
             this.lvServers.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvServers.Size = new System.Drawing.Size(948, 362);
+            this.lvServers.Size = new System.Drawing.Size(948, 361);
             this.lvServers.TabIndex = 0;
             this.lvServers.UseCompatibleStateImageBehavior = false;
             this.lvServers.View = System.Windows.Forms.View.Details;
@@ -127,6 +128,7 @@
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.txtSearch, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.txtSelectedURL, 1, 4);
+            this.opmTableLayoutPanel1.Controls.Add(this.btnSearch, 2, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
@@ -137,6 +139,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.opmTableLayoutPanel1.Size = new System.Drawing.Size(954, 432);
             this.opmTableLayoutPanel1.TabIndex = 1;
             // 
@@ -156,16 +159,17 @@
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.AutoSize = true;
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(884, 404);
+            this.btnOK.Location = new System.Drawing.Point(876, 404);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
-            this.btnOK.Size = new System.Drawing.Size(67, 25);
+            this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "TXT_TUNE";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -182,7 +186,7 @@
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(87, 20);
+            this.opmLabel1.Size = new System.Drawing.Size(87, 21);
             this.opmLabel1.TabIndex = 1;
             this.opmLabel1.Text = "TXT_SEARCH:";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -191,11 +195,10 @@
             // 
             this.txtSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.opmTableLayoutPanel1.SetColumnSpan(this.txtSearch, 2);
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearch.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtSearch.Location = new System.Drawing.Point(93, 10);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(0, 10, 5, 3);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(0, 10, 0, 3);
             this.txtSearch.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.MinimumSize = new System.Drawing.Size(20, 20);
@@ -208,7 +211,7 @@
             this.txtSearch.ReadOnly = false;
             this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(856, 20);
+            this.txtSearch.Size = new System.Drawing.Size(780, 20);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSearch.UseSystemPasswordChar = false;
@@ -234,14 +237,32 @@
             this.txtSelectedURL.ReadOnly = false;
             this.txtSelectedURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSelectedURL.ShortcutsEnabled = true;
-            this.txtSelectedURL.Size = new System.Drawing.Size(788, 20);
+            this.txtSelectedURL.Size = new System.Drawing.Size(780, 20);
             this.txtSelectedURL.TabIndex = 9;
             this.txtSelectedURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSelectedURL.UseSystemPasswordChar = false;
             this.txtSelectedURL.WordWrap = true;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Location = new System.Drawing.Point(876, 8);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.OverrideBackColor = System.Drawing.Color.Empty;
+            this.btnSearch.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnSearch.ShowDropDown = false;
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.Text = "TXT_SEARCH";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // StreamingServerChooserDlg
             // 
+            this.AcceptButton = this.btnSearch;
             this.ClientSize = new System.Drawing.Size(956, 456);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "StreamingServerChooserDlg";
@@ -271,5 +292,6 @@
         private System.Windows.Forms.ColumnHeader colBitrate;
         private System.Windows.Forms.ColumnHeader colMediaType;
         private System.Windows.Forms.ColumnHeader colContent;
+        private UI.Controls.OPMButton btnSearch;
     }
 }

@@ -727,7 +727,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     plItem.Duration = duration;
                 }
 
-                if (duration.TotalMilliseconds == 0)
+                int totalSeconds = (int)(Math.Max(0, duration.TotalSeconds));
+                TimeSpan representableDuration = TimeSpan.FromSeconds(totalSeconds);
+
+                if (representableDuration.TotalMilliseconds == 0)
                 {
                     lvItem.SubItems[colTime.Index].Text = "";
                 }
