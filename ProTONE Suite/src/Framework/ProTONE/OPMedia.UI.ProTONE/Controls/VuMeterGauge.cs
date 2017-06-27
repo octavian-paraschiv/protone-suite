@@ -6,6 +6,7 @@ using OPMedia.UI.Controls;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using OPMedia.UI.Themes;
+using OPMedia.Core.GlobalEvents;
 
 namespace OPMedia.UI.ProTONE.Controls
 {
@@ -36,7 +37,12 @@ namespace OPMedia.UI.ProTONE.Controls
             RecreateBrushes();
         }
 
-        private void RecreateBrushes()
+        protected override void OnThemeUpdatedInternal()
+        {
+            RecreateBrushes();
+        }
+
+        public void RecreateBrushes()
         {
             if (_b1H != null)
                 _b1H.Dispose();
@@ -49,8 +55,15 @@ namespace OPMedia.UI.ProTONE.Controls
 
             _b1H = BrushHelper.GenerateVuMeterBrush(Width, Height, true);
             _b1V = BrushHelper.GenerateVuMeterBrush(Width, Height, false);
-            _b2H = new SolidBrush(Color.White);
-            _b2V = new SolidBrush(Color.White);
+
+            Color cBack = ThemeManager.BackColor;
+            if (_overrideBackColor != Color.Empty)
+            {
+                cBack = _overrideBackColor;
+            }
+
+            _b2H = new SolidBrush(cBack);
+            _b2V = new SolidBrush(cBack);
         }
 
         private void InternalCustomizeBrushes(ref Brush b1H, ref Brush b2H, ref Brush b1V, ref Brush b2V)

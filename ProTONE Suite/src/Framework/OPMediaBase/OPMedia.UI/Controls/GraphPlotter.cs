@@ -57,6 +57,9 @@ namespace OPMedia.UI.Controls
 
             Rectangle rc = this.ClientRectangle;
 
+            using (Brush b = new SolidBrush(ThemeManager.BackColor))
+                g.FillRectangle(b, rc);
+
             rc.Inflate(-1, -1);
             if (IsHistogram)
                 rc.Height -= 15;

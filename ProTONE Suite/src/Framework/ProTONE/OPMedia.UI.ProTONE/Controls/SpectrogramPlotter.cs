@@ -39,6 +39,11 @@ namespace OPMedia.UI.ProTONE.Controls
             RecreateBrush();
         }
 
+        protected override void OnThemeUpdatedInternal()
+        {
+            RecreateBrush();
+        }
+
         private void RecreateBrush()
         {
             if (_b != null)
