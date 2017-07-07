@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{0631AAC4-FD6F-47FB-9B3E-7FF95E8C67C5}"
 EndProject
@@ -63,8 +63,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.SkinBuilder", "Framework\OPMediaBase\OPMedia.SkinBuilder\OPMedia.SkinBuilder.csproj", "{9CE3BFAB-D572-4BB7-88AC-6379841C23D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinBuilder", "Extensions\SkinBuilder\SkinBuilder.csproj", "{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Runtime.Deezer", "OPMedia.Runtime.Deezer\OPMedia.Runtime.Deezer.csproj", "{C7F3B614-BE9B-4B6B-9124-A304A772D707}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -218,14 +216,6 @@ Global
 		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|x86.ActiveCfg = Release|Any CPU
 		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|x86.Build.0 = Release|Any CPU
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Debug|x86.ActiveCfg = Debug|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Debug|x86.Build.0 = Debug|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Release|Mixed Platforms.Build.0 = Release|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Release|x86.ActiveCfg = Release|x86
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -252,6 +242,5 @@ Global
 		{9603D04E-CCD3-471A-A454-24CE2D48F047} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{9CE3BFAB-D572-4BB7-88AC-6379841C23D0} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
-		{C7F3B614-BE9B-4B6B-9124-A304A772D707} = {114014C8-9E85-476A-9BD3-036DE649D6CB}
 	EndGlobalSection
 EndGlobal
