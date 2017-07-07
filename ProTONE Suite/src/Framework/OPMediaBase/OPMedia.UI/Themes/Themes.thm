@@ -97,7 +97,7 @@
   <Theme Name="Black" IsDefault="true">
     <ThemeElement Name="BorderColor" Value="25, 25, 25" />
     <ThemeElement Name="ForeColor" Value="240, 240, 240" />
-    <ThemeElement Name="BackColor" Value="110, 110, 110" />
+    <ThemeElement Name="BackColor" Value="100, 100, 100" />
     <ThemeElement Name="GradientNormalColor1" Value="100, 100, 100" />
     <ThemeElement Name="GradientNormalColor2" Value="080, 080, 080" />
     <ThemeElement Name="GradientHoverColor1" Value="139, 115, 115" />
