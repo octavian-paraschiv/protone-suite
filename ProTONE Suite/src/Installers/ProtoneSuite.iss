@@ -82,6 +82,7 @@ Source: {#BINDIR}\XmlRpc.dll; DestDir: {app}; Flags: replacesameversion uninsrem
 Source: {#BINDIR}\taglib-sharp.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 
 Source: {#BINDIR}\OPMedia.Core.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: {#BINDIR}\OPMedia.DeezerInterop.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.ProTONE.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Runtime.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\OPMedia.Runtime.ProTONE.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -157,6 +158,7 @@ Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 
 Source: {#EXTDIR}\Newtonsoft.Json.dll; DestDir: {app}
+Source: {#EXTDIR}\libdeezer.x86.dll; DestDir: {app}
 
 Source: {#EXTDIR}\DevArt\Devart.Data.dll; DestDir: {app}
 Source: {#EXTDIR}\DevArt\Devart.Data.Linq.dll; DestDir: {app}
