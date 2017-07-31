@@ -95,7 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Resources\Down.png" />
   </ItemGroup>
   <ItemGroup>

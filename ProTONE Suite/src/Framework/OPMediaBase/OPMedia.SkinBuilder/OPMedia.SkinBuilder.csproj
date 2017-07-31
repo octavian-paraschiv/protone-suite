@@ -69,7 +69,6 @@
     <EmbeddedResource Include="Translations\Translation.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="DefaultAddons.OPMedia.SkinBuilder.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
