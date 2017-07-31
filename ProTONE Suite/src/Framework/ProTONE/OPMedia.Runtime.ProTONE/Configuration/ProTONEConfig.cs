@@ -975,5 +975,53 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 return str;
             }
         }
+
+
+        public static string DeezerUserAccessToken
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("DeezerUserAccessToken") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+        }
+
+        public static string DeezerApplicationId
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("DeezerApplicationId") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+        }
+
     }
 }

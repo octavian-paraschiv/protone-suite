@@ -920,7 +920,7 @@ de la fenêtre vidéo</value>
 <data name="TXT_SELECT_DVD">
   <value>Chargez du DVD</value>
 </data>
-<data name="TXT_SELECT_RADIO_STATION">
+<data name="TXT_SELECT_ONLINE_MEDIA">
   <value>Sélectionnez une station de radio:</value>
 </data>
 <data name="TXT_SERIALDEVICE">

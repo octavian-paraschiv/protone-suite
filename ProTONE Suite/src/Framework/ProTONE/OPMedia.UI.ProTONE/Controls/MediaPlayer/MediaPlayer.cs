@@ -46,6 +46,7 @@ using System.Net;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -56,6 +57,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public event NotifyMediaStateChangedHandler NotifyMediaStateChanged = null;
 
         private ContextMenuStrip _menuRendering = null;
+
+        private OnlineContentBrowser _onlineContentBrowser = null;
 
         #region Members
         const int PanelOffset = 20;
@@ -616,17 +619,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        private void LoadRadioStations(RadioStation[] radioStations)
-        {
-            pnlScreens.PlaylistScreen.Clear();
-            pnlScreens.PlaylistScreen.AddRadioStations(radioStations);
-
-            if (Autoplay)
-            {
-                PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-            }
-        }
-
         private void LoadFiles(string[] fileNames)
         {
             pnlScreens.PlaylistScreen.Clear();
@@ -891,8 +883,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         args.Handled = true;
 
-                        StreamingServerChooserDlg dlg2 = new StreamingServerChooserDlg();
-                        dlg2.Show();
+                        //StreamingServerChooserDlg dlg2 = new StreamingServerChooserDlg();
+                        //dlg2.Show();
+
+                        if (_onlineContentBrowser == null)
+                        {
+                            _onlineContentBrowser = new OnlineContentBrowser();
+                            _onlineContentBrowser.FormClosed += _onlineContentBrowser_FormClosed;
+                        }
+
+                        _onlineContentBrowser.Show();
 
                         /*
                         if (dlg2.ShowDialog() == DialogResult.OK)
@@ -935,11 +935,23 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             Logger.LogInfo("OnExecuteShortcut leave");
         }
 
-        [EventSink(GlobalEvents.EventNames.LoadRadioStation)]
-        public void LoadRadioStation(RadioStation rs)
+        private void _onlineContentBrowser_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RadioStation[] radioStations = new RadioStation[] { rs };
-            LoadRadioStations(radioStations);
+            _onlineContentBrowser = null;
+        }
+
+        [EventSink(GlobalEvents.EventNames.LoadOnlineContent)]
+        public void LoadOnlineContent(List<IOnlineMediaItem> onlineContent, bool doEnqueue)
+        {
+            if (doEnqueue == false)
+                pnlScreens.PlaylistScreen.Clear();
+
+            pnlScreens.PlaylistScreen.AddOnlineContent(onlineContent);
+
+            if (doEnqueue == false && Autoplay)
+            {
+                PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
+            }
         }
 
         private void ToggleFullScreen()

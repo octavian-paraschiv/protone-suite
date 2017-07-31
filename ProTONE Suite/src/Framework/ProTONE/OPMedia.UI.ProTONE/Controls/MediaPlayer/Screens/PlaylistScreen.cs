@@ -36,6 +36,7 @@ using System.Net;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -308,19 +309,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             playlist.ClearAll();
         }
 
-        internal void AddRadioStations(IEnumerable<RadioStation> radioStations)
+        internal void AddOnlineContent(List<IOnlineMediaItem> onlineContent)
         {
             if (_abortLoad)
                 return;
 
-            if (radioStations != null)
+            if (onlineContent != null)
             {
-                foreach (RadioStation rs in radioStations)
+                foreach (IOnlineMediaItem omi in onlineContent)
                 {
                     if (_abortLoad)
                         break;
 
-                    playlist.AddRadioStation(rs);
+                    playlist.AddOnlineMediaItem(omi);
                 }
             }
         }

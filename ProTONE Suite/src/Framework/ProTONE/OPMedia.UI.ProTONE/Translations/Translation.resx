@@ -922,8 +922,8 @@ window position</value>
 <data name="TXT_SELECT_DVD">
   <value>Load DVD Media</value>
 </data>
-<data name="TXT_SELECT_RADIO_STATION">
-  <value>Select a radio station:</value>
+<data name="TXT_SELECT_ONLINE_MEDIA">
+  <value>Select online media resources to be played:</value>
 </data>
 <data name="TXT_SERIALDEVICE">
   <value>Remote Control</value>
@@ -1132,10 +1132,18 @@ Click to set volume to: {0} %</value>
   <value>Tune in</value>
 </data>
 <data name="TXT_BTNOPENURL">
-  <value>Load an Online Radio Station (media streaming)</value>
+  <value>Open an online media resource...</value>
 </data>
 <data name="TXT_NO_STATIONS_LOADED">
   <value>No stations loaded yet. Please do a search first...</value>
 </data>
-    
+<data name="TXT_LOOKUP_INTERNAL_DB">
+  <value>Lookup Shoutcast station names in the internal database</value>
+</data>
+<data name="TXT_LOOKUP_SHOUTCAST_DIR">
+  <value>Lookup in the online Shoutcast Directory</value>
+</data>
+<data name="TXT_LOOKUP_DEEZER_DIR">
+  <value>Lookup in the online Deezer Directory</value>
+</data>
 </root>

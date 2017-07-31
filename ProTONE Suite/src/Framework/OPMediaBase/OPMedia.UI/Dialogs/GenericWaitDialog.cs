@@ -44,4 +44,15 @@ namespace OPMedia.UI.Dialogs
             return false;
         }
     }
+
+    public class CancellableWaitDialog : GenericWaitDialog
+    {
+        public bool EscapePressed { get; private set; }
+
+        protected override bool AllowCloseOnKeyDown(Keys key)
+        {
+            this.EscapePressed = (key == Keys.Escape);
+            return this.EscapePressed;
+        }
+    }
 }

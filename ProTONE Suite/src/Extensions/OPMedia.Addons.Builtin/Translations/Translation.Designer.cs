@@ -1038,6 +1038,24 @@ namespace OPMedia.Addons.Builtin.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The output WAV files will have the standard sample rate for Audio-CDs (44100 Hz).
+        /// </summary>
+        internal static string TXT_SAMPLERATE_HINT_SRCCD {
+            get {
+                return ResourceManager.GetString("TXT_SAMPLERATE_HINT_SRCCD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The output WAV files will have the same sample rate as the input files..
+        /// </summary>
+        internal static string TXT_SAMPLERATE_HINT_SRCFILE {
+            get {
+                return ResourceManager.GetString("TXT_SAMPLERATE_HINT_SRCFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save catalog as ....
         /// </summary>
         internal static string TXT_SAVECATALOG {

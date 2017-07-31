@@ -15,7 +15,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/OPMedia.Runtime.ProTONE/</PublishUrl>
     <Install>true</Install>
@@ -31,6 +31,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,10 +111,17 @@
     <Compile Include="FileInformation\VideoFileInfo.cs" />
     <Compile Include="Haali\HaaliConfig.cs" />
     <Compile Include="HeartbeatConsumer.cs" />
+    <Compile Include="OnlineMediaContent\BaseClasses.cs" />
+    <Compile Include="OnlineMediaContent\DeezerTrackItem.cs" />
+    <Compile Include="OnlineMediaContent\DeezerTrackSearcher.cs" />
+    <Compile Include="OnlineMediaContent\LocalDatabaseSearcher.cs" />
+    <Compile Include="OnlineMediaContent\OnlineContentSearcher.cs" />
+    <Compile Include="OnlineMediaContent\ShoutcastDirSearcher.cs" />
     <Compile Include="Playlists\DvdPlaylistItem.cs" />
     <Compile Include="Playlists\PersistentPlaylist.cs" />
     <Compile Include="Playlists\Playlist.cs" />
     <Compile Include="Playlists\PlaylistItem.cs" />
+    <Compile Include="Playlists\DeezerTrackPlaylistItem.cs" />
     <Compile Include="Playlists\RadioStation.cs" />
     <Compile Include="Playlists\RadioStationPlaylistItem.cs" />
     <Compile Include="Playlists\UrlPlaylistItem.cs" />
@@ -133,9 +141,12 @@
     <Compile Include="Rendering\Cdda\FreeDb\FreedbHelper.cs" />
     <Compile Include="Rendering\Cdda\FreeDb\QueryResult.cs" />
     <Compile Include="Rendering\Cdda\FreeDb\Track.cs" />
-    <Compile Include="Rendering\DS\BaseClasses\BaseClasses.cs" />
+    <Compile Include="Rendering\DS\BaseClasses\BaseClasses.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Rendering\DS\BaseClasses\DirectShow.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DSHelper.cs" />
+    <Compile Include="Rendering\DS\DeezerRenderer.cs" />
     <Compile Include="Rendering\DS\DsFilters\ShoutCast.cs" />
     <Compile Include="Rendering\DS\DSAudioCDRenderer.cs" />
     <Compile Include="Rendering\DS\DSDvdRenderer.cs" />
@@ -174,6 +185,10 @@
     <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
+      <Project>{41d162bd-95f4-4348-b353-93ba1c3923b4}</Project>
+      <Name>OPMedia.DeezerInterop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
       <Name>OPMedia.Core</Name>
@@ -219,9 +234,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Deezer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

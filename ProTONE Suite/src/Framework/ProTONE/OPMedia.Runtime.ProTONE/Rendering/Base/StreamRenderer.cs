@@ -305,7 +305,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         private void ResumeInternalClock(int newPosition)
         {
-            _tmrInternalClock.Start();
+            if (_tmrInternalClock != null)
+                _tmrInternalClock.Start();
+
             lock (_syncElapsedSeconds)
             {
                 _elapsedSeconds = newPosition;
@@ -314,12 +316,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         private void PauseInternalClock()
         {
-            _tmrInternalClock.Stop();
+            if (_tmrInternalClock != null)
+                _tmrInternalClock.Stop();
         }
 
         private void StopInternalClock()
         {
-            _tmrInternalClock.Stop(); 
+            if (_tmrInternalClock != null)
+                _tmrInternalClock.Stop(); 
+
             lock (_syncElapsedSeconds)
             {
                 _elapsedSeconds = 0;

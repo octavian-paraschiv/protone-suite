@@ -920,7 +920,7 @@ Videofenster Position</value>
 <data name="TXT_SELECT_DVD">
   <value>Legen Sie DVD-Medien</value>
 </data>
-<data name="TXT_SELECT_RADIO_STATION">
+<data name="TXT_SELECT_ONLINE_MEDIA">
   <value>Wählen Sie einen Radiosender:</value>
 </data>
 <data name="TXT_SERIALDEVICE">

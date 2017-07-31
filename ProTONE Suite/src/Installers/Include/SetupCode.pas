@@ -1,11 +1,15 @@
 //--------------------------------------------------------------------------------
 // Various constants required to detect isntallation of various features
 const
-   // .NET Framework 4.5 detection parameters
-   DotNetFxRequiredRelease =    378389;
+   // .NET Framework detection parameters
    DotNetFxRegistryPath =       'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full';
-   DotNetFxDownloadUrl =        'http://download.microsoft.com/download/B/A/4/BA4A7E71-2906-4B2D-A0E1-80CF16844F5F/dotNetFx45_Full_x86_x64.exe';
+   DotNetFxDownloadUrl =        'http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe';
    
+   // Windows Imaging Component, required for XP / 2003. 
+   // Both 32-bit and 64-bit flavors exist so we must be careful which one we choose to download.
+   WicDownloadUrl =             'http://download.microsoft.com/download/f/f/1/ff178bb1-da91-48ed-89e5-478a99387d4f/wic_x86_enu.exe';
+   WicDownloadUrl64 =           'http://download.microsoft.com/download/6/4/5/645FED5F-A6E7-44D9-9D10-FE83348796B0/wic_x64_enu.exe';
+
    // Haali Media Splitter detection parameter
    // This is the CLSID of splitter.ax filter
    HaaliRegistryPath =          'SOFTWARE\Classes\CLSID\{55DA30FC-F16B-49FC-BAA5-AE59FC65F82D}\InprocServer32';
@@ -181,15 +185,47 @@ begin
 end;
 
 //--------------------------------------------------------------------------------
-// Indicates whether required .NET Framework version is installed.
+// Installs Windows Imaging Component (WIC)
+function InstallWIC: boolean;
+var
+   ResultCode : integer;
+begin
+
+   if (IsWin64) then
+   begin
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Downloading Windows Imaging Component (WIC x64) ...', 
+           WicDownloadUrl64, ExpandConstant('{tmp}\wic_setup.exe'));
+   end
+   else
+       DownloadFile('Download .NET 4.0 prerequisites ...', 'Downloading Windows Imaging Component (WIC x86)...', 
+           WicDownloadUrl, ExpandConstant('{tmp}\wic_setup.exe'));
+   begin
+   end;
+
+   Exec(ExpandConstant('{tmp}\wic_setup.exe'), '/q /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
+   
+   DeleteFile(ExpandConstant('{tmp}\wic_setup.exe'))
+
+   if (IsWICDetected = false) then
+   begin
+    MsgBox('Windows Imaging Component failed to install.', mbCriticalError, MB_OK);
+    result := false;
+    exit;
+   end;
+
+   result := true;
+end;
+
+//--------------------------------------------------------------------------------
+// Indicates whether .NET Framework 4.0 is installed.
 function IsDotNETFxDetected: boolean;
 var
     success: boolean;
-    release: cardinal;
+    install: cardinal;
 
 begin
-    success := RegQueryDWordValue(HKLM, DotNetFxRegistryPath, 'Release', release);
-    Result := success and (release >= DotNetFxRequiredRelease);
+    success := RegQueryDWordValue(HKLM, DotNetFxRegistryPath, 'Install', install);
+    Result := success and (install = 1);
 end;
 
 //--------------------------------------------------------------------------------
@@ -197,14 +233,26 @@ end;
 function InstallDotNETFx: boolean;
 var
    ResultCode : integer;
+   wicPresent : boolean;
 begin
 
-   DownloadFile(CustomMessage('DotNetDownload'), CustomMessage('DotNetDownloadWait'), 
-       DotNetFxDownloadUrl, ExpandConstant('{tmp}\dotnet45.exe'));
+   wicPresent := IsVistaOrLater or IsWICDetected;
+   if (wicPresent = false) then
+   begin
+       // On XP/2003, WIC must be installed before .NET 4.0
+       if (InstallWIC = false) then
+       begin
+           result := false;
+           exit;
+       end;
+   end;
 
-   Exec(ExpandConstant('{tmp}\dotnet45.exe'), '/q', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
+   DownloadFile('Download .NET 4.0 installation ...', 'Please wait while downloading Microsoft .NET Framework 4.0 ...', 
+       DotNetFxDownloadUrl, ExpandConstant('{tmp}\dotnet40.exe'));
+
+   Exec(ExpandConstant('{tmp}\dotnet40.exe'), '/q', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
    
-   DeleteFile(ExpandConstant('{tmp}\dotnet45.exe'))
+   DeleteFile(ExpandConstant('{tmp}\dotnet40.exe'))
 
    if (IsDotNETFxDetected = false) then
    begin

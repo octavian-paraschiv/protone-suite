@@ -637,9 +637,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     //this.streamType = "URL";
 
-                    if (streamRenderer as DSShoutcastRenderer == null)
+                    if (uri.OriginalString.StartsWith("dzmedia:///track/"))
                     {
-                        streamRenderer = new DSShoutcastRenderer();
+                        if (streamRenderer as DeezerRenderer == null)
+                        {
+                            streamRenderer = new DeezerRenderer();
+                        }
+                    }
+                    else
+                    {
+                        if (streamRenderer as DSShoutcastRenderer == null)
+                        {
+                            streamRenderer = new DSShoutcastRenderer();
+                        }
                     }
                 }
                 else

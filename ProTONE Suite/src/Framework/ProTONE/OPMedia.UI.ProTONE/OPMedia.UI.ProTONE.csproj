@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -15,7 +15,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -120,6 +121,27 @@
     <Compile Include="Controls\MediaPlayer\Screens\SignalAnalysisScreen.Designer.cs">
       <DependentUpon>SignalAnalysisScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\DeezerTrackBrowserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\DeezerTrackBrowserCtl.Designer.cs">
+      <DependentUpon>DeezerTrackBrowserCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\LocalDatabaseBrowserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\LocalDatabaseBrowserCtl.Designer.cs">
+      <DependentUpon>LocalDatabaseBrowserCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\MediaBrowserPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.Designer.cs">
+      <DependentUpon>ShoutcastDirectoryBrowserCtl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OSD\OSDLabel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -138,11 +160,11 @@
     <Compile Include="Dialogs\FavoriteFoldersManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\StreamingServerChooserDlg.cs">
+    <Compile Include="Dialogs\OnlineContentBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\StreamingServerChooserDlg.Designer.cs">
-      <DependentUpon>StreamingServerChooserDlg.cs</DependentUpon>
+    <Compile Include="Dialogs\OnlineContentBrowser.Designer.cs">
+      <DependentUpon>OnlineContentBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -368,6 +390,15 @@
       <DependentUpon>VolumeScale.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OnlineMediaBrowser\DeezerTrackBrowserCtl.resx">
+      <DependentUpon>DeezerTrackBrowserCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OnlineMediaBrowser\LocalDatabaseBrowserCtl.resx">
+      <DependentUpon>LocalDatabaseBrowserCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.resx">
+      <DependentUpon>ShoutcastDirectoryBrowserCtl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FavoriteFoldersControl.resx">
       <DependentUpon>FavoriteFoldersControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -375,8 +406,8 @@
       <DependentUpon>FavoriteFoldersManager.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\StreamingServerChooserDlg.resx">
-      <DependentUpon>StreamingServerChooserDlg.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\OnlineContentBrowser.resx">
+      <DependentUpon>OnlineContentBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Translations\Translation.fr.resx">
       <SubType>Designer</SubType>

@@ -8043,7 +8043,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
     #endregion
 
-    #region Async Stream Reader
+    #region Stream Reader
 
     [ComVisible(false)]
     [ClassInterface(ClassInterfaceType.None)]

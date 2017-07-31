@@ -14,6 +14,6 @@ namespace OPMedia.UI.ProTONE.GlobalEvents
         public const string RestoreRenderingRegionPosition = "RestoreRenderingRegionPosition";
 
         public const string UpdateMediaScreens = "UpdateMediaScreens";
-        public const string LoadRadioStation = "LoadRadioStation";
+        public const string LoadOnlineContent = "LoadOnlineContent";
     }
 }

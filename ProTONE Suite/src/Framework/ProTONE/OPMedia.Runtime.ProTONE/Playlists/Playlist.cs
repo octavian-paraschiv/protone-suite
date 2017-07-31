@@ -20,6 +20,7 @@ using System.Xml;
 using OPMedia.Core.Utilities;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -362,11 +363,16 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return true;
         }
 
-        public void AddRadioStation(RadioStation rs)
+        public void AddOnlineMediaItem(IOnlineMediaItem omi)
         {
             try
             {
-                Add(new RadioStationPlaylistItem(rs));
+                if (omi is RadioStation)
+                    Add(new RadioStationPlaylistItem(omi as RadioStation));
+                else if (omi is DeezerTrackItem)
+                    Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
+                   
+
                 EventRaiser(Count - 1, -1, UpdateType.Added);
                 SetupRandomSequence(-1);
             }
@@ -610,9 +616,13 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             sb.AppendLine("#EXTM3U");
             foreach (PlaylistItem item in this.AsReadOnly())
             {
-                string fmt = item is RadioStationPlaylistItem ?
-                    "#RADIO:{0},{1}" : "#EXTINF:{0},{1}";
-                
+                string fmt = "#EXTINF:{0},{1}";
+
+                if (item is RadioStationPlaylistItem)
+                    fmt = "#RADIO:{0},{1}";
+                else if (item is DeezerTrackPlaylistItem)
+                    fmt = "#DZMEDIA:{0},{1}";
+
                 sb.AppendLine(string.Format(fmt, item.Duration.TotalSeconds, item.PersistentPlaylistName));
 
                 sb.AppendLine(item.Path);
@@ -639,7 +649,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             try
             {
-                RadioStation rs = null;
+                IOnlineMediaItem omi = null;
 
                 string[] lines = content.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (lines != null)
@@ -657,22 +667,45 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                                 string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                                 if (fields != null && fields.Length > 1)
                                 {
-                                    rs = new RadioStation(RadioStationSource.ShoutCast);
-                                    rs.Title = fields[1];
+                                    omi = new RadioStation(OnlineMediaSource.ShoutCast);
+                                    omi.Title = fields[1];
+                                }
+                            }
+                            else if (line.StartsWith("#DZMEDIA:"))
+                            {
+                                string s = line.Replace("#DZMEDIA:", "").Trim();
+                                string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                if (fields != null && fields.Length > 1)
+                                {
+                                    DeezerTrackItem dti = new DeezerTrackItem();
+
+                                    int sec = 0;
+                                    int.TryParse(fields[0], out sec);
+                                    dti.Duration = TimeSpan.FromSeconds(sec);
+
+                                    if (fields[1] != null)
+                                    {
+                                        string[] fields2 = fields[1].Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                        dti.Artist = fields2[0];
+                                        dti.Title = fields2[1];
+                                        dti.Album = fields2[2];
+                                    }
+
+                                    omi = dti;
                                 }
                             }
                         }
                         else
                         {
-                            if (rs != null)
+                            if (omi != null)
                             {
-                                rs.Url = line;
-                                AddRadioStation(rs);
+                                omi.Url = line;
+                                AddOnlineMediaItem(omi);
                             }
                             else
                                 AddItem(GetAbsoluteItemPath(line, playlistFileName));
 
-                            rs = null;
+                            omi = null;
                         }
 
                     }

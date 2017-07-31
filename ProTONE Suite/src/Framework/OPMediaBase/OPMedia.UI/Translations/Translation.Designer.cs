@@ -304,6 +304,15 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check all.
+        /// </summary>
+        internal static string TXT_CHECK_ALL {
+            get {
+                return ResourceManager.GetString("TXT_CHECK_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check program updates.
         /// </summary>
         internal static string TXT_CHECKUPDATE {
@@ -2665,6 +2674,15 @@ namespace OPMedia.UI.Translations {
         internal static string TXT_TUESDAY {
             get {
                 return ResourceManager.GetString("TXT_TUESDAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncheck all.
+        /// </summary>
+        internal static string TXT_UNCHECK_ALL {
+            get {
+                return ResourceManager.GetString("TXT_UNCHECK_ALL", resourceCulture);
             }
         }
         
