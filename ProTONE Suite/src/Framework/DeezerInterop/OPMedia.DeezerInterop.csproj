@@ -68,9 +68,6 @@
     <Content Include="libdeezer.x86.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="libdeezer.x86.dll.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
