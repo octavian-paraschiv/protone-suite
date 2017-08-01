@@ -82,13 +82,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         { 
             get 
             {
-                return _elapsedSeconds;
+                return DoGetMediaPosition();
                 //return GetMediaPosition(); 
             } 
             set 
             {
                 SetMediaPosition(value); 
             } 
+        }
+
+        protected virtual double DoGetMediaPosition()
+        {
+            return _elapsedSeconds;
         }
 
         internal bool AudioMediaAvailable

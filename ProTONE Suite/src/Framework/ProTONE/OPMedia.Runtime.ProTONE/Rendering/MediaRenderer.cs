@@ -984,7 +984,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         double _prevTime = 0;
         void timerCheckState_Tick(object sender, EventArgs e)
         {
-            var newMediaPosition = this.MediaPosition;
+            double newMediaPosition = this.MediaPosition;
+
             double nowTime = TimeSpan.FromTicks(DateTime.Now.Ticks).TotalSeconds;
             double diff = (nowTime - _prevTime);
             _prevTime = nowTime;
@@ -1017,6 +1018,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (newState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
+                        Logger.LogToConsole("timerCheckState_Tick ... IsEndOfMedia={0}, IsStreamedMedia={1}, nofPasses={2}, newState={3}", 
+                            IsEndOfMedia, IsStreamedMedia, nofPasses, newState);
+
                         this.StopRenderer(false);
                         newState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened;
                     }

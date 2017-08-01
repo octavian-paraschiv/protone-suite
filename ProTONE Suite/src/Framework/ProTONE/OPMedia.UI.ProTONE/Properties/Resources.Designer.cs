@@ -373,9 +373,29 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Deezer {
+            get {
+                object obj = ResourceManager.GetObject("Deezer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap diagnostics {
             get {
                 object obj = ResourceManager.GetObject("diagnostics", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Favorites {
+            get {
+                object obj = ResourceManager.GetObject("Favorites", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,6 +453,16 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap LocalDB {
+            get {
+                object obj = ResourceManager.GetObject("LocalDB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Miscellaneous {
             get {
                 object obj = ResourceManager.GetObject("Miscellaneous", resourceCulture);
@@ -483,6 +513,16 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap player {
+            get {
+                object obj = ResourceManager.GetObject("player", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Playlist {
             get {
                 object obj = ResourceManager.GetObject("Playlist", resourceCulture);
@@ -506,6 +546,16 @@ namespace OPMedia.UI.ProTONE.Properties {
         public static System.Drawing.Bitmap Scheduler {
             get {
                 object obj = ResourceManager.GetObject("Scheduler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Shoutcast {
+            get {
+                object obj = ResourceManager.GetObject("Shoutcast", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

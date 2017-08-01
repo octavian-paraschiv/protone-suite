@@ -176,6 +176,35 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 }
             }
 
+            if (abortEvent.WaitOne(5))
+                return results;
+
+            results.Sort((r1, r2) =>
+            {
+                int cmp = 0;
+
+                RadioStation rs1 = r1 as RadioStation;
+                RadioStation rs2 = r2 as RadioStation;
+                if (rs1 != null && rs2 != null)
+                {
+                    cmp = string.Compare(rs1.Content, rs2.Content, true);
+                    if (cmp != 0)
+                        return cmp;
+                    cmp = string.Compare(rs1.Genre, rs2.Genre, true);
+                    if (cmp != 0)
+                        return cmp;
+                }
+
+                cmp = string.Compare(r1.Title, r2.Title, true);
+                if (cmp != 0)
+                    return cmp;
+                cmp = string.Compare(r1.Url, r2.Url, true);
+                if (cmp != 0)
+                    return cmp;
+
+                return 0;
+            });
+
             return results;
         }
 

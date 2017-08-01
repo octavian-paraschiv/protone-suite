@@ -48,7 +48,6 @@
             this.colAlbum});
             this.lvTracks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvTracks.Location = new System.Drawing.Point(0, 0);
-            this.lvTracks.MultiSelect = true;
             this.lvTracks.Name = "lvTracks";
             this.lvTracks.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvTracks.Size = new System.Drawing.Size(568, 428);

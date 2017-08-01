@@ -360,7 +360,7 @@ Shortcut: {0}</value>
   <value>Opens the Load DVD media dialog</value>
 </data>
 <data name="TXT_CMDOPENURL">
-  <value>Load an Online Radio Station (media streaming)</value>
+  <value>Opens the Online Media Content Browser</value>
 </data>
 <data name="TXT_CMDPLAYPAUSE">
   <value>Play/Pause</value>
@@ -923,7 +923,7 @@ window position</value>
   <value>Load DVD Media</value>
 </data>
 <data name="TXT_SELECT_ONLINE_MEDIA">
-  <value>Select online media resources to be played:</value>
+  <value>Online Media Content Browser</value>
 </data>
 <data name="TXT_SERIALDEVICE">
   <value>Remote Control</value>
@@ -1132,18 +1132,41 @@ Click to set volume to: {0} %</value>
   <value>Tune in</value>
 </data>
 <data name="TXT_BTNOPENURL">
-  <value>Open an online media resource...</value>
+  <value>Opens the Online Media Content Browser</value>
 </data>
 <data name="TXT_NO_STATIONS_LOADED">
   <value>No stations loaded yet. Please do a search first...</value>
 </data>
-<data name="TXT_LOOKUP_INTERNAL_DB">
-  <value>Lookup Shoutcast station names in the internal database</value>
+
+<data name="TXT_PLAY">
+<value>Play</value>
 </data>
-<data name="TXT_LOOKUP_SHOUTCAST_DIR">
-  <value>Lookup in the online Shoutcast Directory</value>
+<data name="TXT_ENQUEUE">
+<value>Add to playlist</value>
 </data>
-<data name="TXT_LOOKUP_DEEZER_DIR">
-  <value>Lookup in the online Deezer Directory</value>
+<data name="TXT_ADD_FAV_LIST">
+  <value>Add to Favorites</value>
 </data>
+<data name="TXT_DEL_FAV_LIST">
+  <value>Remove from Favorites</value>
+</data>
+<data name="TXT_LOCAL_DB">
+  <value>Favorites</value>
+</data>
+<data name="TXT_SHOUTCAST_DIR">
+  <value>Shoutcast Directory</value>
+</data>
+<data name="TXT_DEEZER_CONTENT">
+  <value>Deezer Directory</value>
+</data>
+<data name="TXT_SELECT_CONTENT_SOURCE">
+  <value>Step 1: Select an online media content source
+Step 2: Type some keywords that identify the online media content that you search
+Step 3: Press Search button or Enter key
+Step 4: Right click on search results and choose the actions you want to do.
+
+</value>
+</data>
+
+
 </root>

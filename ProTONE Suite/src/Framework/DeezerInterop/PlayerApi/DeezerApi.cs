@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
+using OPMedia.Core.Logging;
 
 // Ported from original header file deezer-api.h
 
@@ -133,10 +134,11 @@ namespace OPMedia.DeezerInterop.PlayerApi
             switch (err)
             {
                 case dz_error_t.DZ_ERROR_NO_ERROR:
-                //case dz_error_t.DZ_ERROR_NO_ERROR_ASYNC:
+                case dz_error_t.DZ_ERROR_NO_ERROR_ASYNC:
                     return;
 
                 default:
+                    Logger.LogToConsole(" ... last Deezer operation returned error, code={0}", err);
                     throw DeezerPlayerException.FromDzErrorCode(err);
             }
         }

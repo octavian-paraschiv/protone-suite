@@ -14,7 +14,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
     public enum dz_error_t
     {
         DZ_ERROR_NO_ERROR = 0x00000000,
-        DZ_ERROR_NO_ERROR_= 0x00000001,
+        DZ_ERROR_NO_ERROR_ASYNC = 0x00000001,
         DZ_ERROR_ERROR_ARG = 0x00000002,
         DZ_ERROR_ERROR_STATE = 0x00000003,
         DZ_ERROR_NOT_IMPLEMENTED = 0x00000004,

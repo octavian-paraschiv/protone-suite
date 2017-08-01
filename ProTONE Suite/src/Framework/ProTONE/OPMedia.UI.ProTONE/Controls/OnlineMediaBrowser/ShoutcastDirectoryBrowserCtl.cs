@@ -11,6 +11,7 @@ using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Controls;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -21,8 +22,10 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             InitializeComponent();
             _searchType = OnlineMediaSource.ShoutCast;
 
+            lvRadioStations.MultiSelect = true;
             lvRadioStations.Resize += lvRadioStations_Resize;
             lvRadioStations.SelectedIndexChanged += LvRadioStations_SelectedIndexChanged;
+            lvRadioStations.ContextMenuStrip = BuildMenuStrip(true);
         }
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)

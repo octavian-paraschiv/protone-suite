@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Core.Logging;
+using System.Diagnostics;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -26,6 +28,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             if (renderMediaName == null || renderMediaName.Length <= 0)
                 return;
+
+            Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
 
             if (_config == null)
             {
@@ -97,7 +101,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoStopRenderer()
         {
-            if (_fs != FilterState.Stopped)
+            StackTrace st = new StackTrace();
+            Logger.LogToConsole("DeezerRenderer::DoStopRenderer call Stack = {0}", st.ToString());
+
+            if (FilterState != FilterState.Stopped)
             {
                 if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
                 {
@@ -111,7 +118,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoPauseRenderer()
         {
-            if (_fs == FilterState.Running)
+            Logger.LogToConsole("DeezerRenderer::DoPauseRenderer");
+
+            if (FilterState == FilterState.Running)
             {
                 if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
                 {
@@ -125,14 +134,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoResumeRenderer(double fromPosition)
         {
-            if (_fs == FilterState.Paused)
+            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
+
+            if (FilterState == FilterState.Paused)
             {
                 if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
                 {
                     dz_error_t err;
 
                     int resumePos = (int)fromPosition;
-                    if (resumePos != _renderPos)
+                    if (resumePos != RenderPosition)
                     {
                         Thread.Sleep(2000);
 
@@ -145,14 +156,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetMediaPosition(double pos)
         {
-            if (_fs != FilterState.Stopped)
+            Logger.LogToConsole("DeezerRenderer::SetMediaPosition pos={0}", pos);
+
+            if (FilterState != FilterState.Stopped)
             {
                 if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
                 {
                     dz_error_t err;
 
                     int resumePos = (int)pos;
-                    if (resumePos != _renderPos)
+                    if (resumePos != RenderPosition)
                     {
                         err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
                         DeezerApi.ThrowExceptionForDzErrorCode(err);
@@ -176,6 +189,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetAudioVolume(int vol)
         {
+            Logger.LogToConsole("DeezerRenderer::SetAudioVolume vol={0}", vol);
+
             if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
             {
                 dz_error_t err;
@@ -195,9 +210,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private void OnApplicationConnectEvent(IntPtr handle, IntPtr evtHandle, IntPtr userData)
         {
-            dz_connect_event_t type = DeezerApi.dz_connect_event_get_type(evtHandle);
-
-            int s = 0;
+            dz_connect_event_t evtType = DeezerApi.dz_connect_event_get_type(evtHandle);
+            Logger.LogToConsole("DeezerRenderer::OnApplicationConnectEvent evtType={0}", evtType);
         }
 
         #region Duration and related
@@ -206,8 +220,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
-            dz_player_event_t type = DeezerApi.dz_player_event_get_type(evtHandle);
-            switch (type)
+            dz_player_event_t evtType = DeezerApi.dz_player_event_get_type(evtHandle);
+            Logger.LogToConsole("DeezerRenderer::OnPlayerEvent evtType={0}", evtType);
+
+            switch (evtType)
             {
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_TRACK_SELECTED:
                     {
@@ -219,16 +235,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_START:
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_RESUMED:
-                    _fs = FilterState.Running;
+                    FilterState = FilterState.Running;
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_PAUSED:
-                    _fs = FilterState.Paused;
+                    FilterState = FilterState.Paused;
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_END:
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_REMOVED:
-                    _fs = FilterState.Stopped;
+                    FilterState = FilterState.Stopped;
                     break;
 
             }
@@ -252,21 +268,79 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         #region Media position and related
 
-        int _renderPos = 0;
+        #region RenderPosition
+        double _renderPosition = 0;
+        object _renderPosLock = new object();
+
+        private double RenderPosition
+        {
+            get
+            {
+                lock (_renderPosLock)
+                {
+                    return _renderPosition;
+                }
+            }
+
+            set
+            {
+                lock (_renderPosLock)
+                {
+                    _renderPosition = value;
+                };
+            }
+        }
+        #endregion
+
+        #region FilterState
+
+        FilterState _filterState = FilterState.Stopped;
+        object _fsLock = new object();
+
+        private FilterState FilterState
+        {
+            get
+            {
+                lock (_fsLock)
+                {
+                    return _filterState;
+                }
+            }
+
+            set
+            {
+                lock (_fsLock)
+                {
+                    _filterState = value;
+                };
+            }
+        }
+        #endregion
+
 
         private void OnRenderProgress(IntPtr handle, UInt64 progress, IntPtr userdata)
         {
-            int curRenderPos = (int)(progress / 1e6);
-            if (curRenderPos != _renderPos && curRenderPos > 0)
+            double curRenderPos = (double)progress / 1e6;
+
+            if (curRenderPos != RenderPosition && curRenderPos > 0)
             {
-                _renderPos = curRenderPos;
-                _fs = FilterState.Running;
+                Logger.LogToConsole("DeezerRenderer::OnRenderProgress curRenderPos={0} [SET]", curRenderPos);
+                RenderPosition = curRenderPos;
+                FilterState = FilterState.Running;
             }
+            else
+                Logger.LogToConsole("DeezerRenderer::OnRenderProgress curRenderPos={0} [IGNORED]", curRenderPos);
+
         }
 
         protected override double GetMediaPosition()
         {
-            return _renderPos;
+            return RenderPosition;
+        }
+
+        protected override double DoGetMediaPosition()
+        {
+            return RenderPosition;
         }
 
         #endregion
@@ -276,11 +350,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             return true;
         }
 
-        FilterState _fs = FilterState.Stopped;
-
         protected override FilterState GetFilterState()
         {
-            return _fs;
+            return FilterState;
         }
     }
 }

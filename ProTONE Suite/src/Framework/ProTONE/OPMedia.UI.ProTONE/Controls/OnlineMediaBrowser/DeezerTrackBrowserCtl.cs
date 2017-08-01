@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Menus;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -19,8 +21,10 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             InitializeComponent();
             _searchType = OnlineMediaSource.Deezer;
 
+            lvTracks.MultiSelect = true;
             lvTracks.Resize += OnListResize;
             lvTracks.SelectedIndexChanged += OnListSelectedIndexChanged;
+            lvTracks.ContextMenuStrip = BuildMenuStrip(true);
         }
 
         private void OnListSelectedIndexChanged(object sender, EventArgs e)

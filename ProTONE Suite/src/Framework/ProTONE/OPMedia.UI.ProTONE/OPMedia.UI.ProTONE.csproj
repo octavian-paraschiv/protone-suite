@@ -559,7 +559,12 @@
     <EmbeddedResource Include="Resources\FileTypes.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Deezer.png" />
+    <None Include="Resources\Favorites.png" />
+    <Content Include="Resources\LocalDB.png" />
     <Content Include="Resources\movedown.png" />
+    <None Include="Resources\player.png" />
+    <Content Include="Resources\Shoutcast.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\moveup.png" />

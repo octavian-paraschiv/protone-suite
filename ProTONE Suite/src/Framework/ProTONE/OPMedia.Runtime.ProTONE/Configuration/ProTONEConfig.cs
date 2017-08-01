@@ -827,13 +827,71 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+        public static Point OnlineContentBrowser_WindowLocation
+        {
+            get
+            {
+                try
+                {
+                    string str = PersistenceProxy.ReadObject(true, "OnlineContentBrowser_WindowLocation", string.Empty);
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        return (Point)new PointConverter().ConvertFromInvariantString(str);
+                    }
+                }
+                catch
+                {
+                }
+
+                Point ptFallback = new Point(100, 100);
+
+                PersistenceProxy.SaveObject(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+
+                return ptFallback;
+            }
+            set
+            {
+                if ((value.X >= 0) && (value.Y >= 0))
+                {
+                    PersistenceProxy.SaveObject(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                }
+            }
+        }
+
+        public static Size OnlineContentBrowser_WindowSize
+        {
+            get
+            {
+                Size size = new Size(800, 600);
+                try
+                {
+                    string str = PersistenceProxy.ReadObject(true, "OnlineContentBrowser_WindowSize", string.Empty);
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        size = (Size)new SizeConverter().ConvertFromInvariantString(str);
+                    }
+                }
+                catch
+                {
+                }
+                return size;
+            }
+            set
+            {
+                if ((value.Width >= 0) && (value.Height >= 0))
+                {
+                    PersistenceProxy.SaveObject(true, "OnlineContentBrowser_WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                }
+            }
+        }
+
         public static Point DetachedWindowLocation
         {
             get
             {
                 try
                 {
-                    string str = PersistenceProxy.ReadObject("DetachedWindowLocation", string.Empty);
+                    string str = PersistenceProxy.ReadObject(true, "DetachedWindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         return (Point)new PointConverter().ConvertFromInvariantString(str);

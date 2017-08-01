@@ -889,7 +889,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         if (_onlineContentBrowser == null)
                         {
                             _onlineContentBrowser = new OnlineContentBrowser();
+                            _onlineContentBrowser.FormClosing += new FormClosingEventHandler(_onlineContentBrowser_FormClosing);
                             _onlineContentBrowser.FormClosed += _onlineContentBrowser_FormClosed;
+                            _onlineContentBrowser.Shown += new EventHandler(_onlineContentBrowser_Shown);
                         }
 
                         _onlineContentBrowser.Show();
@@ -933,6 +935,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
 
             Logger.LogInfo("OnExecuteShortcut leave");
+        }
+
+        void _onlineContentBrowser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _onlineContentBrowser.SavePosition();
+        }
+
+        void _onlineContentBrowser_Shown(object sender, EventArgs e)
+        {
+            _onlineContentBrowser.RestorePosition();
         }
 
         private void _onlineContentBrowser_FormClosed(object sender, FormClosedEventArgs e)

@@ -13,7 +13,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -22,6 +23,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         CancellableWaitDialog _waitDialog = null;
         ManualResetEvent _searchCancelled = new ManualResetEvent(false);
 
+        ImageList _ilImages = null;
 
         public OnlineContentBrowser() : base("TXT_SELECT_ONLINE_MEDIA")
         {
@@ -29,16 +31,41 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             this.ShowInTaskbar = true;
 
+            _ilImages = new ImageList();
+            _ilImages.TransparentColor = Color.White;
+            _ilImages.ColorDepth = ColorDepth.Depth32Bit;
+            _ilImages.ImageSize = new Size(32, 32);
+
+            _ilImages.Images.Add(Resources.Favorites);
+            _ilImages.Images.Add(Resources.Shoutcast);
+            _ilImages.Images.Add(Resources.Deezer);
+
+            tabContentBrowser.ImageList = _ilImages;
+
             if (OnlineContentSearcher.IsSearchConfigValid(OnlineMediaSource.Internal) == false)
                 tabContentBrowser.TabPages.Remove(tpLocalDatabase);
+            else
+                tpLocalDatabase.ImageIndex = 0;
 
             if (OnlineContentSearcher.IsSearchConfigValid(OnlineMediaSource.ShoutCast) == false)
                 tabContentBrowser.TabPages.Remove(tpShoutcastDir);
+            else
+                tpShoutcastDir.ImageIndex = 1;
 
             if (OnlineContentSearcher.IsSearchConfigValid(OnlineMediaSource.Deezer) == false)
                 tabContentBrowser.TabPages.Remove(tpDeezerContent);
+            else
+                tpDeezerContent.ImageIndex = 2;
 
             this.Shown += OnlineContentBrowser_Shown;
+
+            tabContentBrowser.SelectedIndexChanged += new EventHandler(tabContentBrowser_SelectedIndexChanged);
+        }
+
+        void tabContentBrowser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearch.Select();
+            txtSearch.Focus();
         }
 
         private void OnlineContentBrowser_Shown(object sender, EventArgs e)
@@ -114,25 +141,16 @@ namespace OPMedia.UI.ProTONE.Dialogs
             }
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+        internal void RestorePosition()
         {
-            LaunchSelectedItems(false);
+            this.Size = ProTONEConfig.OnlineContentBrowser_WindowSize;
+            this.Location = ProTONEConfig.OnlineContentBrowser_WindowLocation;
         }
 
-        private void btnEnqueue_Click(object sender, EventArgs e)
+        internal void SavePosition()
         {
-            LaunchSelectedItems(true);
-        }
-
-        private void LaunchSelectedItems(bool doEnqueue)
-        {
-            MediaBrowserPage selectedPage = GetSelectedPage();
-            if (selectedPage != null)
-            {
-                var selItems = selectedPage.SelectedItems;
-                if (selItems != null && selItems.Count > 0)
-                    EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, doEnqueue);
-            }
+            ProTONEConfig.OnlineContentBrowser_WindowLocation = this.Location;
+            ProTONEConfig.OnlineContentBrowser_WindowSize = this.Size;
         }
     }
 

@@ -70,6 +70,35 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 }
             }
 
+            if (abortEvent.WaitOne(5))
+                return results;
+
+            results.Sort((r1, r2) =>
+                {
+                    int cmp = 0;
+
+                    DeezerTrackItem dti1 = r1 as DeezerTrackItem;
+                    DeezerTrackItem dti2 = r2 as DeezerTrackItem;
+                    if (dti1 != null && dti2 != null)
+                    {
+                        cmp = string.Compare(dti1.Artist, dti2.Artist, true);
+                        if (cmp != 0)
+                            return cmp;
+                        cmp = string.Compare(dti1.Album, dti2.Album, true);
+                        if (cmp != 0)
+                            return cmp;
+                    }
+
+                    cmp = string.Compare(r1.Title, r2.Title, true);
+                    if (cmp != 0)
+                        return cmp;
+                    cmp = string.Compare(r1.Url, r2.Url, true);
+                    if (cmp != 0)
+                        return cmp;
+
+                    return 0;
+                });
+
             return results;
         }
     }

@@ -54,7 +54,6 @@
             this.colMediaType});
             this.lvRadioStations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRadioStations.Location = new System.Drawing.Point(0, 0);
-            this.lvRadioStations.MultiSelect = true;
             this.lvRadioStations.Name = "lvRadioStations";
             this.lvRadioStations.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvRadioStations.Size = new System.Drawing.Size(617, 395);

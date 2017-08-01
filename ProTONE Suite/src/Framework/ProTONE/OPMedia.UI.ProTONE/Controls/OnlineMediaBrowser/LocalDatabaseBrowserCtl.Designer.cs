@@ -37,7 +37,6 @@
             // 
             // lvRadioStations
             // 
-            this.lvRadioStations.MultiSelect = true;
             this.lvRadioStations.AllowEditing = false;
             this.lvRadioStations.AlternateRowColors = true;
             this.lvRadioStations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -47,6 +46,8 @@
             this.colGenre});
             this.lvRadioStations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRadioStations.Location = new System.Drawing.Point(0, 0);
+            this.lvRadioStations.Margin = new System.Windows.Forms.Padding(0);
+            this.lvRadioStations.MultiSelect = false;
             this.lvRadioStations.Name = "lvRadioStations";
             this.lvRadioStations.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvRadioStations.Size = new System.Drawing.Size(677, 412);
@@ -79,6 +80,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lvRadioStations);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "LocalDatabaseBrowserCtl";
             this.Size = new System.Drawing.Size(677, 412);
             this.ResumeLayout(false);
