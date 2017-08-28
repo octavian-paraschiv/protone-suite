@@ -21,5 +21,8 @@ namespace OPMedia.Runtime.Deezer
 
         public dz_player_onrenderprogress_cb renderProgressCB;
         public dz_player_onevent_cb playerEventCB;
+        public dz_player_onrendererevent_cb rendererEventCB;
+        
+        public dz_activity_operation_callback activityCB;
     }
 }

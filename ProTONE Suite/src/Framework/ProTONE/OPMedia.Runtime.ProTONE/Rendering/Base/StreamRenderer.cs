@@ -128,7 +128,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             } 
             set 
             {
-                SetAudioVolume(value); 
+                int scaledVolume = GetScaledVolume(value);
+                SetAudioVolume(scaledVolume); 
             } 
         }
 
@@ -439,6 +440,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected abstract WaveFormatEx DoGetActualAudioFormat();
 
         #endregion
+
+        protected virtual int GetScaledVolume(int rawVolume)
+        {
+            return rawVolume;
+        }
     }
 }
 

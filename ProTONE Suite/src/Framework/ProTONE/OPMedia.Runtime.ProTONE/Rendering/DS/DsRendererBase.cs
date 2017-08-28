@@ -122,6 +122,26 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected abstract void HandleGraphEvent(EventCode code, int p1, int p2);
 
+        protected override int GetScaledVolume(int rawVolume)
+        {
+            double a = (-1000 / Math.Log10(0.5));
+            double b = 0.01;
+            double c = 0.0976;
+            double x = (double)(rawVolume / 100);
+            double logVolume = a * Math.Log10(b * (x + c));
+            int scaledVolume = (int)logVolume;
+            if (logVolume < -10000)
+            {
+                scaledVolume = -10000;
+            }
+            else if (logVolume > 0)
+            {
+                scaledVolume = 0;
+            }
+
+            return scaledVolume;
+        }
+
         protected override void DoStartRenderer()
         {
             // Leave empty; every particular renderer will do its own startup.

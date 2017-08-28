@@ -50,6 +50,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 _ctx.renderProgressCB = new dz_player_onrenderprogress_cb(OnRenderProgress);
                 _ctx.playerEventCB = new dz_player_onevent_cb(OnPlayerEvent);
+                _ctx.rendererEventCB = new dz_player_onrendererevent_cb(OnRendererEvent);
             }
 
             dz_error_t err;
@@ -89,6 +90,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             err = DeezerApi.dz_player_set_render_progress_cb(_ctx.dzplayer, _ctx.renderProgressCB, (UInt64)5e5);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+            err = DeezerApi.dz_player_set_renderer_event_cb(_ctx.dzplayer, _ctx.rendererEventCB);
+            DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+            err = DeezerApi.dz_player_renderer_change_selection(_ctx.dzplayer, null, IntPtr.Zero, "[\"a\"]");
 
             Thread.Sleep(2000);
 
@@ -189,15 +195,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetAudioVolume(int vol)
         {
-            Logger.LogToConsole("DeezerRenderer::SetAudioVolume vol={0}", vol);
-
             if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
             {
                 dz_error_t err;
 
-                int dz_vol = 100 * vol - 10000;
+                Logger.LogToConsole("DeezerRenderer::SetAudioVolume vol={0}", vol);
 
-                err = DeezerApi.dz_player_set_output_volume(_ctx.dzplayer, null, IntPtr.Zero, dz_vol);
+                err = DeezerApi.dz_player_set_output_volume(_ctx.dzplayer, null, IntPtr.Zero, vol);
+
                 DeezerApi.ThrowExceptionForDzErrorCode(err);
             }
         }
@@ -269,10 +274,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         #region Media position and related
 
         #region RenderPosition
-        double _renderPosition = 0;
+        int _renderPosition = 0;
         object _renderPosLock = new object();
 
-        private double RenderPosition
+        private int RenderPosition
         {
             get
             {
@@ -317,10 +322,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         }
         #endregion
 
+        private void OnRendererEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
+        {
+            string s = DeezerApi.dz_renderer_event_get_infos(evtHandle);
+            Logger.LogToConsole("DeezerRenderer::OnRendererEvent info={0}", s ?? "<null>");
+
+            
+        }
 
         private void OnRenderProgress(IntPtr handle, UInt64 progress, IntPtr userdata)
         {
-            double curRenderPos = (double)progress / 1e6;
+            int curRenderPos = (int)(progress / 1e6);
 
             if (curRenderPos != RenderPosition && curRenderPos > 0)
             {
@@ -330,7 +342,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             }
             else
                 Logger.LogToConsole("DeezerRenderer::OnRenderProgress curRenderPos={0} [IGNORED]", curRenderPos);
-
         }
 
         protected override double GetMediaPosition()
@@ -353,6 +364,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         protected override FilterState GetFilterState()
         {
             return FilterState;
+        }
+
+        protected override int GetScaledVolume(int rawVolume)
+        {
+            int dz_vol = (int)(0.01 * rawVolume);
+            return dz_vol;
         }
     }
 }
