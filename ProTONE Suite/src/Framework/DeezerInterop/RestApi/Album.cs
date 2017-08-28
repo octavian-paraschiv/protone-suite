@@ -26,6 +26,8 @@ namespace OPMedia.DeezerInterop.RestApi
         [JsonProperty("tracks")]
         public List<Track> Tracks { get; set; }
 
+        [JsonProperty("artist")]
+        public Artist Artist { get; set; }
 
         public List<Track> LoadTracks()
         {
@@ -40,6 +42,7 @@ namespace OPMedia.DeezerInterop.RestApi
                 foreach (Track track in Tracks)
                 {
                     track.CurrentRuntime = CurrentRuntime;
+                    track.Album = this;
                 }
 
             }
@@ -52,6 +55,12 @@ namespace OPMedia.DeezerInterop.RestApi
             TracksCount = Tracks.Count;
             return Tracks;
 
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[ID={0}, Artist={1}, Title={2}, Genre={3}]", 
+                this.Id, this.Artist, this.Title, this.Genre);
         }
     }
 }

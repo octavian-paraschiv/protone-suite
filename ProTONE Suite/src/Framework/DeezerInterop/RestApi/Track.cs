@@ -29,5 +29,12 @@ namespace OPMedia.DeezerInterop.RestApi
         public Uri Preview { get; set; }
         public Artist Artist { get; set; }
         public Album Album { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[ID={0}, Artist={1}, Album={2}, Title={3}, Duration={4}]", 
+                this.Id, this.Artist, this.Title, (int)this.Duration.TotalSeconds);
+        }
+
     }
 }

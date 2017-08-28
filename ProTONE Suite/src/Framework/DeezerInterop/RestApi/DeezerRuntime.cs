@@ -136,6 +136,7 @@ namespace OPMedia.DeezerInterop.RestApi
                     album.CurrentRuntime = this;
 
                     tracksChunk = album.LoadTracks();
+
                     if (tracksChunk != null && tracksChunk.Count > 0)
                         tracks.AddRange(tracksChunk);
                 }

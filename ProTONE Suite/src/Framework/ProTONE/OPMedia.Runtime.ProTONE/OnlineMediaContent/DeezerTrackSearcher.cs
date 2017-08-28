@@ -89,10 +89,11 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                             return cmp;
                     }
 
-                    cmp = string.Compare(r1.Title, r2.Title, true);
+                    cmp = string.Compare(r1.Url, r2.Url, true);
                     if (cmp != 0)
                         return cmp;
-                    cmp = string.Compare(r1.Url, r2.Url, true);
+
+                    cmp = string.Compare(r1.Title, r2.Title, true);
                     if (cmp != 0)
                         return cmp;
 

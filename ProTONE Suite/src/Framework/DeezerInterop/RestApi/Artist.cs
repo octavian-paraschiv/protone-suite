@@ -57,12 +57,19 @@ namespace OPMedia.DeezerInterop.RestApi
 
             foreach (Album album in Albums)
             {
-                album.CurrentRuntime = CurrentRuntime;    
+                album.CurrentRuntime = CurrentRuntime;
+                album.Artist = this;
             }
 
             AlbumsCount = Albums.Count;
 
             return Albums;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[ID={0}, Name={1}]", 
+                this.Id, this.Name);
         }
     }
 }
