@@ -7,13 +7,72 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
+    public class DeezerJsonFilter
+    {
+        [JsonProperty("artist")]
+        public string Artist { get; set; }
+
+        [JsonProperty("album")]
+        public string Album { get; set; }
+
+        [JsonProperty("track")]
+        public string Title { get; set; }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                bool val = true;
+
+                val &= string.IsNullOrEmpty(this.Album);
+                val &= string.IsNullOrEmpty(this.Artist);
+                val &= string.IsNullOrEmpty(this.Title);
+
+                return val;
+            }
+        }
+
+        public static bool IsNullOrEmpty(DeezerJsonFilter flt)
+        {
+            return (flt == null || flt.IsEmpty);
+        }
+    }
+
     public class DeezerTrackSearcher : OnlineContentSearcher
     {
         private static DeezerRuntime _dzr = null;
 
+        public static DeezerJsonFilter BuildFilterFromQuery(string query)
+        {
+            DeezerJsonFilter filter = null;
+
+            try
+            {
+                // A filter string was specified by the user, so try to parse its fields ...
+                // Instead of old-school parse using string.Split or regex, we use JSON, it is cooler :)
+                string jsonSearchBody = query;
+
+                jsonSearchBody = jsonSearchBody.Replace("artist:", ",\"artist\":");
+                jsonSearchBody = jsonSearchBody.Replace("album:", ",\"album\":");
+                jsonSearchBody = jsonSearchBody.Replace("track:", ",\"track\":");
+                jsonSearchBody = jsonSearchBody.Trim(",".ToCharArray());
+
+                string jsonSearch = string.Format("{{{0}}}", jsonSearchBody);
+
+                filter = JsonConvert.DeserializeObject<DeezerJsonFilter>(jsonSearch);
+            }
+            catch
+            {
+                filter = null;
+            }
+
+            return filter;
+        }
+        
         protected override bool HasValidConfig
         {
             get
@@ -26,7 +85,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             }
         }
 
-        protected override List<IOnlineMediaItem> Search(string search, ManualResetEvent abortEvent)
+        protected override List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             List<IOnlineMediaItem> results = new List<IOnlineMediaItem>();
 
@@ -42,7 +101,20 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 if (_dzr != dzr)
                     _dzr = dzr;
 
-                List<Track> tracks = _dzr.ExecuteSearch(search, abortEvent);
+                searchParams.Filter = OnlineContentSearchFilter.None;
+
+                bool isFilteredSearch = false;
+
+                isFilteredSearch |= searchParams.SearchText.Contains("artist:");
+                isFilteredSearch |= searchParams.SearchText.Contains("track:");
+                isFilteredSearch |= searchParams.SearchText.Contains("album:");
+
+                DeezerJsonFilter filter = null;
+
+                if (isFilteredSearch)
+                    filter = BuildFilterFromQuery(searchParams.SearchText);
+
+                List<Track> tracks = _dzr.ExecuteSearch(searchParams.SearchText, abortEvent);
 
                 if (tracks != null)
                 {
@@ -59,7 +131,22 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                                 Duration = t.Duration
                             };
 
-                            results.Add(dti);
+                            bool shouldAddTrack = true;
+
+                            if (DeezerJsonFilter.IsNullOrEmpty(filter) == false)
+                            {
+                                if (shouldAddTrack && string.IsNullOrEmpty(filter.Artist) == false)
+                                    shouldAddTrack &= dti.Artist.ToLowerInvariant().Contains(filter.Artist);
+
+                                if (shouldAddTrack && string.IsNullOrEmpty(filter.Album) == false)
+                                    shouldAddTrack &= dti.Album.ToLowerInvariant().Contains(filter.Album);
+
+                                if (shouldAddTrack && string.IsNullOrEmpty(filter.Title) == false)
+                                    shouldAddTrack &= dti.Title.ToLowerInvariant().Contains(filter.Title);
+                            }
+
+                            if (shouldAddTrack)
+                                results.Add(dti);
                         }
                         catch (Exception ex)
                         {
@@ -102,5 +189,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             return results;
         }
+
+
     }
 }

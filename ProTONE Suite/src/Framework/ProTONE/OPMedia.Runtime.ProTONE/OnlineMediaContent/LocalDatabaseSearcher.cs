@@ -22,7 +22,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             }
         }
 
-        protected override List<IOnlineMediaItem> Search(string search, ManualResetEvent abortEvent)
+        protected override List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             List<IOnlineMediaItem> results = new List<IOnlineMediaItem>();
 
@@ -61,10 +61,10 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     var title = rs.Title ?? string.Empty;
                     var url = rs.Url ?? string.Empty;
 
-                    if (content.ToLowerInvariant().Contains(search) ||
-                        genre.ToLowerInvariant().Contains(search) ||
-                        title.ToLowerInvariant().Contains(search) ||
-                        url.ToLowerInvariant().Contains(search))
+                    if (content.ToLowerInvariant().Contains(searchParams.SearchText) ||
+                        genre.ToLowerInvariant().Contains(searchParams.SearchText) ||
+                        title.ToLowerInvariant().Contains(searchParams.SearchText) ||
+                        url.ToLowerInvariant().Contains(searchParams.SearchText))
                         results.Add(rs);
                 }
             }

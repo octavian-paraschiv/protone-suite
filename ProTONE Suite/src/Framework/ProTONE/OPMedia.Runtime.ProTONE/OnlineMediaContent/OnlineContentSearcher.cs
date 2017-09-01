@@ -9,6 +9,35 @@ using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
+    [Flags]
+    public enum OnlineContentSearchFilter
+    {
+        None = 0x00,
+
+        Title = 0x01,
+        Artist = 0x02,
+        Album = 0x04,
+
+        Any = 0xFF,
+    }
+
+    public class OnlineContentSearchParameters
+    {
+        public OnlineContentSearchFilter Filter { get; set; }
+        public string SearchText { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[SearchText='{0}', Filter={1}]", SearchText ?? "<null>", Filter);
+        }
+
+        public OnlineContentSearchParameters()
+        {
+            Filter = OnlineContentSearchFilter.Any;
+            SearchText = string.Empty;
+        }
+    }
+
     public abstract class OnlineContentSearcher
     {
         public static bool IsSearchConfigValid(OnlineMediaSource source)
@@ -27,16 +56,22 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             return false;
         }
 
-        public static List<IOnlineMediaItem> Search(OnlineMediaSource source, string search, ManualResetEvent abortEvent)
+        public static List<IOnlineMediaItem> Search(OnlineMediaSource source, OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             try
             {
-                if (search == null)
-                    search = string.Empty;
+                if (searchParams == null)
+                    searchParams = new OnlineContentSearchParameters();
+
+                // Nothing means Everything.
+                if (searchParams.Filter == OnlineContentSearchFilter.None)
+                    searchParams.Filter = OnlineContentSearchFilter.Any;
+
+                searchParams.SearchText = searchParams.SearchText.ToLowerInvariant();
 
                 OnlineContentSearcher searcher = GetSearcher(source);
                 if (searcher != null)
-                    return searcher.Search(search.ToLowerInvariant(), abortEvent);
+                    return searcher.Search(searchParams, abortEvent);
             }
             catch (Exception ex)
             {
@@ -69,7 +104,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             return searcher;
         }
 
-        protected abstract List<IOnlineMediaItem> Search(string search, ManualResetEvent abortEvent);
+        protected abstract List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent);
 
         protected abstract bool HasValidConfig { get; }
     }

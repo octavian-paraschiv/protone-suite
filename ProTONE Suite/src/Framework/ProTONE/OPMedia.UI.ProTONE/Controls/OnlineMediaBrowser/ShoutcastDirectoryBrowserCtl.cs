@@ -12,6 +12,7 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -26,6 +27,26 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvRadioStations.Resize += lvRadioStations_Resize;
             lvRadioStations.SelectedIndexChanged += LvRadioStations_SelectedIndexChanged;
             lvRadioStations.ContextMenuStrip = BuildMenuStrip(true);
+
+            this.Load += new EventHandler(OnLoad);
+
+            OnThemeUpdatedInternal();
+        }
+
+
+        protected override void OnThemeUpdatedInternal()
+        {
+            lblFilterHint.BackColor = ThemeManager.BackColor;
+            lblFilterHint.ForeColor = ThemeManager.ForeColor;
+        }
+
+        void OnLoad(object sender, EventArgs e)
+        {
+            if (this.DesignMode == false)
+            {
+                // Setting RTF should always be done inside OnLoad ... not on constructor ...
+                lblFilterHint.Rtf = Translator.Translate("TXT_SHOUTCASTFILTER_HINT");
+            }
         }
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,6 +111,26 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                     lvRadioStations.Items[0].Focused = true;
                 }
             }
+        }
+
+        public override bool PreValidateSearch(string search)
+        {
+            bool valid = base.PreValidateSearch(search);
+
+            if (valid)
+            {
+                search = search.ToLowerInvariant();
+
+                if (search.StartsWith("now:"))
+                {
+                    // We're trying to make use of the "now playing" advanced search filter.
+                    // If the search string after "now:" is non empty then we're OK.
+                    search = search.Replace("now:", "");
+                    valid = string.IsNullOrEmpty(search) == false;
+                }
+            }
+
+            return valid;
         }
     }
 }

@@ -117,8 +117,8 @@ namespace OPMedia.DeezerInterop.RestApi
             if (abortEvent.WaitOne(5))
                 return tracks;
 
-            string response = this.ExecuteHttpGet(string.Format("/search?limit=1000&q={0}", query));
-
+            string response = this.ExecuteHttpGet(string.Format("/search?limit=10000&q={0}", query));
+            
             var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
             List<Track> tracksChunk = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());

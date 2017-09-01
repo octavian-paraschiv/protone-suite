@@ -32,7 +32,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             }
         }
 
-        protected override List<IOnlineMediaItem> Search(string search, ManualResetEvent abortEvent)
+        protected override List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             List<IOnlineMediaItem> results = new List<IOnlineMediaItem>();
 
@@ -49,20 +49,20 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 string searchUrl = string.Format("{0}/advancedsearch?mt=audio/mpeg&f=json&limit={1}&k={2}",
                         shoutCastSearchBaseUrl, MaxSearchCount, shoutCastdevId);
 
-                if (string.IsNullOrEmpty(search) == false)
+                if (string.IsNullOrEmpty(searchParams.SearchText) == false)
                 {
-                    if (search.ToLowerInvariant().StartsWith("now:"))
+                    if (searchParams.SearchText.StartsWith("now:"))
                     {
                         // search by "now playing"
-                        search = search.ToLowerInvariant().Replace("now:", "").Trim();
+                        searchParams.SearchText = searchParams.SearchText.Replace("now:", "").Trim();
                         searchUrl = string.Format("{0}/nowplaying?mt=audio/mpeg&f=json&limit={1}&k={2}&ct={3}",
                         shoutCastSearchBaseUrl, MaxSearchCount, shoutCastdevId,
-                        StringUtils.UrlEncode(search));
+                        StringUtils.UrlEncode(searchParams.SearchText));
                     }
                     else
                     {
                         // generic search
-                        searchUrl += string.Format("&search={0}", StringUtils.UrlEncode(search));
+                        searchUrl += string.Format("&search={0}", StringUtils.UrlEncode(searchParams.SearchText));
                     }
                 }
 

@@ -60,12 +60,30 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.Shown += OnlineContentBrowser_Shown;
 
             tabContentBrowser.SelectedIndexChanged += new EventHandler(tabContentBrowser_SelectedIndexChanged);
+
+            txtSearch.TextChanged += new EventHandler(OnSearchTextChanged);
+
+            OnSearchTextChanged(null, null);
+        }
+
+        void OnSearchTextChanged(object sender, EventArgs e)
+        {
+            bool validText = false;
+
+            MediaBrowserPage selectedPage = GetSelectedPage();
+            if (selectedPage != null)
+                validText = selectedPage.PreValidateSearch(txtSearch.Text);
+
+            btnSearch.Enabled = validText;
+            txtSearch.BackColor = validText ? ThemeManager.WndValidColor : ThemeManager.ColorValidationFailed;
         }
 
         void tabContentBrowser_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtSearch.Select();
             txtSearch.Focus();
+
+            OnSearchTextChanged(null, null);
         }
 
         private void OnlineContentBrowser_Shown(object sender, EventArgs e)
@@ -95,11 +113,17 @@ namespace OPMedia.UI.ProTONE.Dialogs
             {
                 string search = txtSearch.Text;
 
-                selectedPage.SearchCompleted -= SelectedPage_SearchCompleted;
-                selectedPage.SearchCompleted += SelectedPage_SearchCompleted;
+                if (selectedPage.PreValidateSearch(search))
+                {
+                    selectedPage.SearchCompleted -= SelectedPage_SearchCompleted;
+                    selectedPage.SearchCompleted += SelectedPage_SearchCompleted;
 
-                selectedPage.StartCancellableSearch(txtSearch.Text, _searchCancelled);
-                ShowWaitDialog("Please wait for the search task to finish.\r\nYou can press ESC to cancel the search.");
+                    _searchCancelled.Reset();
+
+                    selectedPage.StartCancellableSearch(txtSearch.Text, _searchCancelled);
+
+                    ShowWaitDialog("Please wait for the search task to finish.\r\nYou can press ESC to cancel the search.");
+                }
             }
         }
 

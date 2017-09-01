@@ -277,7 +277,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete entire playlist.        ///        ///
+        ///   Looks up a localized string similar to Delete entire playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNCLEAR {
@@ -287,7 +289,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete selected items.        ///        ///
+        ///   Looks up a localized string similar to Delete selected items.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNDELETE {
@@ -297,7 +301,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle Full Screen        ///        ///
+        ///   Looks up a localized string similar to Toggle Full Screen
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNFULLSCREEN {
@@ -307,7 +313,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fast forward with 5 seconds.        ///        ///
+        ///   Looks up a localized string similar to Fast forward with 5 seconds.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNFWD {
@@ -317,7 +325,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open the &apos;Jump to playlist item&apos; dialog.        ///        ///
+        ///   Looks up a localized string similar to Open the &apos;Jump to playlist item&apos; dialog.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNJUMPTOITEM {
@@ -327,7 +337,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load new file(s).        ///        ///
+        ///   Looks up a localized string similar to Load new file(s).
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNLOAD {
@@ -337,7 +349,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a new playlist.        ///        ///
+        ///   Looks up a localized string similar to Load a new playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNLOADPLAYLIST {
@@ -347,7 +361,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles on/off playing in loop.        ///        ///
+        ///   Looks up a localized string similar to Toggles on/off playing in loop.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNLOOPPLAY {
@@ -357,7 +373,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move selected items with one position down in playlist.        ///        ///
+        ///   Looks up a localized string similar to Move selected items with one position down in playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNMOVEDOWN {
@@ -367,7 +385,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move selected items with one position up in playlist.        ///        ///
+        ///   Looks up a localized string similar to Move selected items with one position up in playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNMOVEUP {
@@ -377,7 +397,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move to next file in playlist.        ///        ///
+        ///   Looks up a localized string similar to Move to next file in playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNNEXT {
@@ -387,7 +409,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opens the Load DVD media dialog.        ///        ///
+        ///   Looks up a localized string similar to Opens the Load DVD media dialog.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNOPENDISK {
@@ -397,7 +421,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays the Settings dialog.        ///        ///
+        ///   Looks up a localized string similar to Displays the Settings dialog.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNOPENSETTINGS {
@@ -416,7 +442,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activates the &apos;action on playlist end&apos;        ///        ///
+        ///   Looks up a localized string similar to Activates the &apos;action on playlist end&apos;
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNPLAYLISTEND {
@@ -426,7 +454,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play/Pause        ///        ///
+        ///   Looks up a localized string similar to Play/Pause
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNPLAYPAUSE {
@@ -436,7 +466,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move to previous file in playlist.        ///        ///
+        ///   Looks up a localized string similar to Move to previous file in playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNPREV {
@@ -446,7 +478,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewind  with 5 seconds.        ///        ///
+        ///   Looks up a localized string similar to Rewind  with 5 seconds.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNREW {
@@ -456,7 +490,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save the current playlist.        ///        ///
+        ///   Looks up a localized string similar to Save the current playlist.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNSAVEPLAYLIST {
@@ -466,7 +502,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop playback.        ///        ///
+        ///   Looks up a localized string similar to Stop playback.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNSTOP {
@@ -476,7 +514,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activates playlist shuffle mode.        ///        ///
+        ///   Looks up a localized string similar to Activates playlist shuffle mode.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNTOGGLESHUFFLE {
@@ -486,7 +526,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Volume down by 5%.        ///        ///
+        ///   Looks up a localized string similar to Volume down by 5%.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNVOLDN {
@@ -496,7 +538,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Volume up by 5%.        ///        ///
+        ///   Looks up a localized string similar to Volume up by 5%.
+        ///
+        ///
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNVOLUP {
@@ -920,6 +964,18 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset204 Arial;}{\f1\fnil\fcharset0 Arial;}}
+        ///\viewkind4\uc1\pard\f0\fs17\b0 Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red. \par
+        ///In \b normal search mode \b0 , it will return entries that contain fields matching any of the words that you entered. This may even not include what you are looking for as it can only return a limited amount of results. \par
+        ///In \b adv [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TXT_DEEZERFILTER_HINT {
+            get {
+                return ResourceManager.GetString("TXT_DEEZERFILTER_HINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from Favorites.
         /// </summary>
         internal static string TXT_DEL_FAV_LIST {
@@ -947,7 +1003,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No formatting options are specified.        ///        ///
+        ///   Looks up a localized string similar to No formatting options are specified.
+        ///
+        ///
         ///The program will display the file name in playlist entry..
         /// </summary>
         internal static string TXT_DISPLAY_FILENAME {
@@ -975,7 +1033,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Elapsed time.        ///        ///
+        ///   Looks up a localized string similar to Elapsed time.
+        ///
+        ///
         ///Double click to toggle remaining time.
         /// </summary>
         internal static string TXT_ELAPSED_TIME {
@@ -1237,7 +1297,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a video DVD content folder        ///        ///
+        ///   Looks up a localized string similar to Please select a video DVD content folder
+        ///
+        ///
         ///(Either a VIDEO_TS folder, or its parent):.
         /// </summary>
         internal static string TXT_LOAD_DVD_FOLDER {
@@ -1337,14 +1399,30 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The patterns available for playlist item names formatting are based on combinations of these keywords:        ///        ///
-        ///        ///        ///
-        ///&lt;A&gt; = artist name (from media tag);        ///        ///
-        ///&lt;B&gt; = album name (from media tag);        ///        ///
-        ///&lt;T&gt; = title (from media  tag);        ///        ///
-        ///&lt;C&gt; = comments (from media tag);        ///        ///
-        ///&lt;G&gt; = genre (from media tag);        ///        ///
-        ///&lt;#&gt; = track # (from media tag);        ///        ///
+        ///   Looks up a localized string similar to The patterns available for playlist item names formatting are based on combinations of these keywords:
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///&lt;A&gt; = artist name (from media tag);
+        ///
+        ///
+        ///&lt;B&gt; = album name (from media tag);
+        ///
+        ///
+        ///&lt;T&gt; = title (from media  tag);
+        ///
+        ///
+        ///&lt;C&gt; = comments (from media tag);
+        ///
+        ///
+        ///&lt;G&gt; = genre (from media tag);
+        ///
+        ///
+        ///&lt;#&gt; = track # (from media tag);
+        ///
+        ///
         ///&lt;Y&gt; = year (from media tag)..
         /// </summary>
         internal static string TXT_METADATAPATTERNS {
@@ -1795,7 +1873,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This option is not available at this moment.        ///        ///
+        ///   Looks up a localized string similar to This option is not available at this moment.
+        ///
+        ///
         ///You must install the FFDShow codec suite in order to have actions to this option..
         /// </summary>
         internal static string TXT_NOT_CONFIGURABLE_NOFFDSHOW {
@@ -2003,9 +2083,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The selected movie clip already has a subtitle.         ///        ///
-        ///If another subtitle is found on Internet, it will overwrite the existing one.        ///        ///
-        ///        ///        ///
+        ///   Looks up a localized string similar to The selected movie clip already has a subtitle. 
+        ///
+        ///
+        ///If another subtitle is found on Internet, it will overwrite the existing one.
+        ///
+        ///
+        ///
+        ///
+        ///
         ///Are you sure you want to search another subtitle ?.
         /// </summary>
         internal static string TXT_OVERWRITE_SUBTITLE {
@@ -2015,8 +2101,12 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your user account does not have administrator rights.         ///        ///
-        ///You won&apos;t be able to view the Supported Files and the Remote Control settings.        ///        ///
+        ///   Looks up a localized string similar to Your user account does not have administrator rights. 
+        ///
+        ///
+        ///You won&apos;t be able to view the Supported Files and the Remote Control settings.
+        ///
+        ///
         ///In order to access these settings, you must launch ProTONE Player under a user account that has administrator rights..
         /// </summary>
         internal static string TXT_PANELSHIDDEN_NOADMIN {
@@ -2197,7 +2287,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ProTONE Player is attempting to {0}. This is happening because you have configured the player to do so when {1}. Do you want to proceed ?        ///        ///
+        ///   Looks up a localized string similar to ProTONE Player is attempting to {0}. This is happening because you have configured the player to do so when {1}. Do you want to proceed ?
+        ///
+        ///
         ///You can abort this operation if you click Abort within the remaining time frame (see counter below). If this time elapses and you have not chosen any action, it will be assumed you have chosen to proceed..
         /// </summary>
         internal static string TXT_PROCEED_SCHEDULED_ACTION {
@@ -2225,7 +2317,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remaining time.         ///        ///
+        ///   Looks up a localized string similar to Remaining time. 
+        ///
+        ///
         ///Double click to toggle elapsed time.
         /// </summary>
         internal static string TXT_REMAINING_TIME {
@@ -2244,8 +2338,12 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To define the programs and devices that are allowed to control ProTONE Player remotely, you must use the Remote Control Manager.        ///        ///
-        ///        ///        ///
+        ///   Looks up a localized string similar to To define the programs and devices that are allowed to control ProTONE Player remotely, you must use the Remote Control Manager.
+        ///
+        ///
+        ///
+        ///
+        ///
         ///Click on the button below to launch the Remote Control Manager ....
         /// </summary>
         internal static string TXT_REMOTECONTROLDEFINITION {
@@ -2255,7 +2353,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset video         ///        ///
+        ///   Looks up a localized string similar to Reset video 
+        ///
+        ///
         ///window position.
         /// </summary>
         internal static string TXT_RESETVIDEOPOSITION {
@@ -2418,7 +2518,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How many minutes to wait confirmation before proceeding         ///        ///
+        ///   Looks up a localized string similar to How many minutes to wait confirmation before proceeding 
+        ///
+        ///
         ///(0 = do not ask for confirmation, proceed directly):.
         /// </summary>
         internal static string TXT_SCHEDULERWAITTIMERPROCEED {
@@ -2555,6 +2657,18 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_SHOUTCAST_DIR {
             get {
                 return ResourceManager.GetString("TXT_SHOUTCAST_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset204 Arial;}{\f1\fnil\fcharset0 Arial;}}
+        ///\viewkind4\uc1\pard\f0\fs17\b0 Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red. \par
+        ///In \b normal search mode \b0 , it will return radio stations that contain fields matching any of the words that you entered. \par
+        ///In \b advanced search mode \b0 , you can search radio stations that are currently playing certain conten [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TXT_SHOUTCASTFILTER_HINT {
+            get {
+                return ResourceManager.GetString("TXT_SHOUTCASTFILTER_HINT", resourceCulture);
             }
         }
         
@@ -2721,7 +2835,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hint: The results are sorted using these criteria (in this order): selected column, language (Preferred language on top),         ///        ///
+        ///   Looks up a localized string similar to Hint: The results are sorted using these criteria (in this order): selected column, language (Preferred language on top), 
+        ///
+        ///
         ///prio (server order = order of subtitle servers in Subtitles/OSD Settings page). Click on a column header to select another sort citeria..
         /// </summary>
         internal static string TXT_SUB_HINTS {
@@ -2875,18 +2991,42 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tagging patterns are based on combinations of these keywords:        ///        ///
-        ///        ///        ///
-        ///&lt;N&gt; = file name;        ///        ///
-        ///&lt;F&gt; = folder name;        ///        ///
-        ///&lt;A&gt; = artist name (from tag)        ///        ///
-        ///&lt;B&gt; = album name (from tag)        ///        ///
-        ///&lt;T&gt; = title (from tag)        ///        ///
-        ///&lt;C&gt; = comments (from tag)        ///        ///
-        ///&lt;G&gt; = genre (from tag)        ///        ///
-        ///&lt;#&gt; = track number (from tag)        ///        ///
-        ///&lt;Y&gt; = year (from tag)        ///        ///
-        ///        ///        ///
+        ///   Looks up a localized string similar to The tagging patterns are based on combinations of these keywords:
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///&lt;N&gt; = file name;
+        ///
+        ///
+        ///&lt;F&gt; = folder name;
+        ///
+        ///
+        ///&lt;A&gt; = artist name (from tag)
+        ///
+        ///
+        ///&lt;B&gt; = album name (from tag)
+        ///
+        ///
+        ///&lt;T&gt; = title (from tag)
+        ///
+        ///
+        ///&lt;C&gt; = comments (from tag)
+        ///
+        ///
+        ///&lt;G&gt; = genre (from tag)
+        ///
+        ///
+        ///&lt;#&gt; = track number (from tag)
+        ///
+        ///
+        ///&lt;Y&gt; = year (from tag)
+        ///
+        ///
+        ///
+        ///
+        ///
         ///Character ranges such as &lt;N2-12,14-20&gt; are also allowed..
         /// </summary>
         internal static string TXT_TAGGINGPATTERNS {
@@ -2905,7 +3045,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time scale.        ///        ///
+        ///   Looks up a localized string similar to Time scale.
+        ///
+        ///
         ///Click to play from position: {0}.
         /// </summary>
         internal static string TXT_TIMESCALE {
@@ -2915,8 +3057,12 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time scale.        ///        ///
-        ///Click to play from bookmark: &quot;{1}&quot;        ///        ///
+        ///   Looks up a localized string similar to Time scale.
+        ///
+        ///
+        ///Click to play from bookmark: &quot;{1}&quot;
+        ///
+        ///
         ///Bookmark time: {0}.
         /// </summary>
         internal static string TXT_TIMESCALE_BOOKMARK {
@@ -3052,7 +3198,9 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Volume scale.        ///        ///
+        ///   Looks up a localized string similar to Volume scale.
+        ///
+        ///
         ///Click to set volume to: {0} %.
         /// </summary>
         internal static string TXT_VOLSCALE {

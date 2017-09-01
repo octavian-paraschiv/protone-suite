@@ -11,6 +11,8 @@ using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Menus;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -25,6 +27,24 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvTracks.Resize += OnListResize;
             lvTracks.SelectedIndexChanged += OnListSelectedIndexChanged;
             lvTracks.ContextMenuStrip = BuildMenuStrip(true);
+            OnThemeUpdatedInternal();
+
+            this.Load += new EventHandler(OnLoad);
+        }
+
+        void OnLoad(object sender, EventArgs e)
+        {
+            if (this.DesignMode == false)
+            {
+                // Setting RTF should always be done inside OnLoad ... not on constructor ...
+                lblFilterHint.Rtf = Translator.Translate("TXT_DEEZERFILTER_HINT");
+            }
+        }
+
+        protected override void OnThemeUpdatedInternal()
+        {
+            lblFilterHint.BackColor = ThemeManager.BackColor;
+            lblFilterHint.ForeColor = ThemeManager.ForeColor;
         }
 
         private void OnListSelectedIndexChanged(object sender, EventArgs e)
@@ -46,8 +66,9 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         private void AdjustColumns()
         {
-            int w = lvTracks.EffectiveWidth / 4;
-            colAlbum.Width = colArtist.Width = colName.Width = colURL.Width = w;
+            colURL.Width = 150;
+            int w = (lvTracks.EffectiveWidth - colURL.Width) / 3;
+            colAlbum.Width = colArtist.Width = colName.Width = w;
         }
 
         protected override void DisplaySearchResultsInternal()
@@ -65,9 +86,9 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                         {
                             string.Empty,
                             dzi.Title,
-                            dzi.Url,
                             dzi.Artist,
-                            dzi.Album
+                            dzi.Album,
+                            dzi.Url
                         });
 
                         lvi.Tag = dzi;
@@ -81,6 +102,24 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                     lvTracks.Items[0].Focused = true;
                 }
             }
+        }
+
+        public override bool PreValidateSearch(string search)
+        {
+            bool valid = base.PreValidateSearch(search);
+
+            if (valid)
+            {
+                if (search.Contains(":") || search.Contains("\""))
+                {
+                    // We're trying to make use of advanced search filters.
+                    // If the Deezer Searcher can build a non-empty filter from the user input, then we're OK.
+                    DeezerJsonFilter filter = DeezerTrackSearcher.BuildFilterFromQuery(search);
+                    valid = DeezerJsonFilter.IsNullOrEmpty(filter) == false;
+                }
+            }
+
+            return valid;
         }
     }
 }

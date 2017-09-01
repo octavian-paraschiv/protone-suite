@@ -16,9 +16,9 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
     public class MediaBrowserPage : OPMBaseControl
     {
-        class SearchParams
+        class MediaBrowserSearchParams
         {
-            public string SearchText { get; set; }
+            public OnlineContentSearchParameters SearchParams { get; set; }
             public ManualResetEvent AbortEvent { get; set; }
         }
 
@@ -31,12 +31,16 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         protected OnlineMediaSource _searchType = OnlineMediaSource.Internal;
 
+        protected OnlineContentSearchFilter SearchFilter { get; set; }
+
         public new OPMContextMenuStrip ContextMenuStrip { get; set; }
 
         public MediaBrowserPage() : base()
         {
             this.SelectedItems = new List<IOnlineMediaItem>();
             this.Items = new List<IOnlineMediaItem>();
+
+            this.SearchFilter = OnlineContentSearchFilter.Any;
 
             _bwSearch.WorkerSupportsCancellation = false;
             _bwSearch.WorkerReportsProgress = false;
@@ -49,17 +53,30 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             DisplaySearchResultsInternal();
         }
 
+        public virtual bool PreValidateSearch(string search)
+        {
+            return string.IsNullOrEmpty(search) == false;
+        }
+
         public void StartCancellableSearch(string search, ManualResetEvent abortEvent)
         {
-            SearchParams sp = new SearchParams { SearchText = search, AbortEvent = abortEvent };
+            MediaBrowserSearchParams sp = new MediaBrowserSearchParams
+            {
+                AbortEvent = abortEvent,
+                SearchParams = new OnlineContentSearchParameters
+                {
+                    Filter = this.SearchFilter,
+                    SearchText = search
+                }
+            };
             _bwSearch.RunWorkerAsync(sp);
         }
 
         void OnBackgroundSearch(object sender, DoWorkEventArgs e)
         {
-            SearchParams sp = e.Argument as SearchParams;
+            MediaBrowserSearchParams sp = e.Argument as MediaBrowserSearchParams;
             if (sp != null)
-                SearchInternal(sp.SearchText, sp.AbortEvent);
+                SearchInternal(sp.SearchParams, sp.AbortEvent);
         }
 
         void OnBackgroundSearchCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -68,12 +85,12 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 SearchCompleted(this, EventArgs.Empty);
         }
 
-        protected virtual void SearchInternal(string search, ManualResetEvent abortEvent)
+        protected virtual void SearchInternal(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             this.Items.Clear();
             this.SelectedItems.Clear();
 
-            var results = OnlineContentSearcher.Search(_searchType, search, abortEvent);
+            var results = OnlineContentSearcher.Search(_searchType, searchParams, abortEvent);
             if (results != null && results.Count > 0)
                 this.Items.AddRange(results);
         }
