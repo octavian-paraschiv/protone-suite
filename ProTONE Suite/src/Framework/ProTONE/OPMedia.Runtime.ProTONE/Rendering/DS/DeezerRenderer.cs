@@ -23,6 +23,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         DeezerAppContext _ctx = null;
 
         const string USER_CACHE_PATH = "c:\\dzr\\dzrcache_NDK_SAMPLE";
+        
+        const int DZ_SESSION_TIMEOUT = 60000;
+        const int DZ_OPERATION_TIMEOUT = 10000;
 
         protected override void DoStartRendererWithHint(RenderingStartHint startHint)
         {
@@ -78,7 +81,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             _evtAppUserOfflineAvailable.Reset();
             err = DeezerApi.dz_connect_offline_mode(_ctx.dzconnect, null, IntPtr.Zero, false);
 
-            if (_evtAppUserOfflineAvailable.WaitOne(10000) == false)
+            if (_evtAppUserOfflineAvailable.WaitOne(DZ_SESSION_TIMEOUT) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_NOT_ONLINE);
             else
                 Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE");
@@ -93,7 +96,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             _ctx.dzplayer = DeezerApi.dz_player_new(_ctx.dzconnect);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-            if (_evtAppUserLoginOK.WaitOne(10000) == false)
+            if (_evtAppUserLoginOK.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
             else
                 Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_new => DZ_CONNECT_EVENT_USER_LOGIN_OK");
@@ -129,7 +132,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             err = DeezerApi.dz_player_load(_ctx.dzplayer, null, IntPtr.Zero, _ctx.sz_content_url);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-            if (_evtQueueListLoaded.WaitOne(10000) == false)
+            if (_evtQueueListLoaded.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
             else
                 Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_LOGIN_OK");
@@ -144,7 +147,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                        DeezerInterop.PlayerApi.Constants.DZ_INDEX_IN_QUEUELIST_CURRENT);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-            if (_evtPlayerPlaybackStarted.WaitOne(10000) == false)
+            if (_evtPlayerPlaybackStarted.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_RUNNABLE_NOT_STARTED);
             else
                 Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_play => DZ_PLAYER_EVENT_RENDER_TRACK_START");
@@ -193,7 +196,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     err = DeezerApi.dz_player_pause(_ctx.dzplayer, null, IntPtr.Zero);
                     DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-                    if (_evtPlayerPaused.WaitOne(10000) == false)
+                    if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                         DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
                     else
                         Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
@@ -207,7 +210,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             dz_error_t err;
 
-            if (_evtPlayerPaused.WaitOne(10000) == false)
+            if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
             else
                 Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
@@ -225,7 +228,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                         err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
                         DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-                        if (_evtPlayerStreamReadyAfterSeek.WaitOne(10000) == false)
+                        if (_evtPlayerStreamReadyAfterSeek.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                             DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_MEDIASTREAMER_SEEK_NOT_SEEKABLE);
                         else
                             Logger.LogToConsole("DeezerRenderer::DoResumeRenderer dz_player_seek completed with success, ready for dz_player_resume");
@@ -260,7 +263,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                         DeezerApi.ThrowExceptionForDzErrorCode(err);
                     }
 
-                    if (_evtPlayerPaused.WaitOne(10000) == false)
+                    if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                         DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
                     else
                         Logger.LogToConsole("DeezerRenderer::SetMediaPosition player is now paused, OK to resume rendering");
