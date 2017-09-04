@@ -31,6 +31,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
 
+            ResetAllEvents();
+
             if (_config == null)
             {
                 _config = new dz_connect_configuration();
@@ -134,6 +136,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             DeezerApi.ThrowExceptionForDzErrorCode(err);
         }
 
+        private void ResetAllEvents()
+        {
+            _evtAppUserLoginOK.Reset();
+            _evtAppUserOfflineAvailable.Reset();
+            _evtPlayerPaused.Reset();
+            _evtPlayerStreamReadyAfterSeek.Reset();
+            _evtQueueListLoaded.Reset();
+        }
+
         protected override void DoStopRenderer()
         {
             StackTrace st = new StackTrace();
@@ -161,8 +172,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 {
                     dz_error_t err;
 
+                    _evtPlayerPaused.Reset();
+
                     err = DeezerApi.dz_player_pause(_ctx.dzplayer, null, IntPtr.Zero);
                     DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+                    if (_evtPlayerPaused.WaitOne(10000) == false)
+                        DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
+                    else
+                        Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
                 }
             }
         }
@@ -171,20 +189,34 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             Logger.LogToConsole("DeezerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
 
+            dz_error_t err;
+
+            if (_evtPlayerPaused.WaitOne(10000) == false)
+                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
+            else
+                Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
+
             if (FilterState == FilterState.Paused)
             {
                 if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
                 {
-                    dz_error_t err;
-
                     int resumePos = (int)fromPosition;
                     if (resumePos != RenderPosition)
                     {
-                        Thread.Sleep(2000);
-
+                        // dz_player_seek will trigger DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK
+                        // Upon completion, _evtPlayerStreamReadyAfterSeek will be set.
+                        _evtPlayerStreamReadyAfterSeek.Reset();
                         err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
                         DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+                        if (_evtPlayerStreamReadyAfterSeek.WaitOne(10000) == false)
+                            DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_MEDIASTREAMER_SEEK_NOT_SEEKABLE);
+                        else
+                            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer dz_player_seek completed with success, ready for dz_player_resume");
                     }
+
+                    err = DeezerApi.dz_player_resume(_ctx.dzplayer, null, IntPtr.Zero);
+                    DeezerApi.ThrowExceptionForDzErrorCode(err);
                 }
             }
         }
@@ -199,12 +231,25 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 {
                     dz_error_t err;
 
+                    //if (FilterState == BaseClasses.FilterState.Running)
+                    //{
+                    //    err = DeezerApi.dz_player_pause(_ctx.dzplayer, null, IntPtr.Zero);
+                    //    DeezerApi.ThrowExceptionForDzErrorCode(err);
+                    //}
+
                     int resumePos = (int)pos;
                     if (resumePos != RenderPosition)
                     {
                         err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
                         DeezerApi.ThrowExceptionForDzErrorCode(err);
                     }
+
+                    if (_evtPlayerPaused.WaitOne(10000) == false)
+                        DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
+                    else
+                        Logger.LogToConsole("DeezerRenderer::SetMediaPosition player is now paused, OK to resume rendering");
+
+                   
                 }
             }
         }
@@ -268,6 +313,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         ManualResetEvent _evtQueueListLoaded = new ManualResetEvent(false);
 
+        ManualResetEvent _evtPlayerPaused= new ManualResetEvent(false);
+        ManualResetEvent _evtPlayerStreamReadyAfterSeek = new ManualResetEvent(false);
+
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
             dz_player_event_t evtType = DeezerApi.dz_player_event_get_type(evtHandle);
@@ -289,6 +337,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_PAUSED:
+                    _evtPlayerPaused.Set();
                     FilterState = FilterState.Paused;
                     break;
 
@@ -299,6 +348,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_LOADED:
                     _evtQueueListLoaded.Set();
+                    break;
+
+                case dz_player_event_t.DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK:
+                    _evtPlayerStreamReadyAfterSeek.Set();
                     break;
 
             }
