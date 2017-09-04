@@ -68,42 +68,46 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             err = DeezerApi.dz_connect_cache_path_set(_ctx.dzconnect, null, IntPtr.Zero, USER_CACHE_PATH);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
-            // --------------------------------------------------------------------
-            // Phase 1
-            // dz_player_new will trigger DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE
-            // Upon completion, _evtAppUserOfflineAvailable will be set.
-            _evtAppUserOfflineAvailable.Reset();
-            _ctx.dzplayer = DeezerApi.dz_player_new(_ctx.dzconnect);
-
-            if (_evtAppUserOfflineAvailable.WaitOne(10000) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_NOT_ONLINE);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_new => DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE");
-            // --------------------------------------------------------------------
-                        
-            IntPtr pCtx = Marshal.AllocHGlobal(Marshal.SizeOf(_ctx));
-            Marshal.StructureToPtr(_ctx, pCtx, false);
-
-            err = DeezerApi.dz_player_activate(_ctx.dzplayer, pCtx);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-
             err = DeezerApi.dz_connect_set_access_token(_ctx.dzconnect, null, IntPtr.Zero, ProTONEConfig.DeezerUserAccessToken);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
             // --------------------------------------------------------------------
-            // Phase 2
-            // dz_connect_offline_mode will trigger DZ_CONNECT_EVENT_USER_LOGIN_OK
+            // Phase 1: Connect offline mode using dz_connect_offline_mode
+            // This will trigger DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE.
+            // Upon completion, _evtAppUserOfflineAvailable will be set.
+            _evtAppUserOfflineAvailable.Reset();
+            err = DeezerApi.dz_connect_offline_mode(_ctx.dzconnect, null, IntPtr.Zero, false);
+
+            if (_evtAppUserOfflineAvailable.WaitOne(10000) == false)
+                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_NOT_ONLINE);
+            else
+                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE");
+            // --------------------------------------------------------------------
+                        
+            // --------------------------------------------------------------------
+            // Phase 2: Create a new player object using dz_player_new
+            // This will trigger DZ_CONNECT_EVENT_USER_LOGIN_OK.
             // Upon completion, _evtAppUserLoginOK will be set.
             _evtAppUserLoginOK.Reset();
-            err = DeezerApi.dz_connect_offline_mode(_ctx.dzconnect, null, IntPtr.Zero, false);
+
+            _ctx.dzplayer = DeezerApi.dz_player_new(_ctx.dzconnect);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
             if (_evtAppUserLoginOK.WaitOne(10000) == false)
                 DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
             else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_LOGIN_OK");
+                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_new => DZ_CONNECT_EVENT_USER_LOGIN_OK");
             // --------------------------------------------------------------------
 
+
+            // --------------------------------------------------------------------
+            // Phase 3: Activate the player using dz_player_activate and set the callback delegates
+            IntPtr pCtx = Marshal.AllocHGlobal(Marshal.SizeOf(_ctx));
+            Marshal.StructureToPtr(_ctx, pCtx, false);
+
+            err = DeezerApi.dz_player_activate(_ctx.dzplayer, pCtx);
+            DeezerApi.ThrowExceptionForDzErrorCode(err);
+            
             err = DeezerApi.dz_player_set_event_cb(_ctx.dzplayer, _ctx.playerEventCB);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
 
@@ -112,13 +116,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             err = DeezerApi.dz_player_set_renderer_event_cb(_ctx.dzplayer, _ctx.rendererEventCB);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
+            // --------------------------------------------------------------------
+
+            // --------------------------------------------------------------------
+            // Phase 4: Load the playable content using dz_player_load
+            // This will trigger DZ_PLAYER_EVENT_QUEUELIST_LOADED
+            // Upon completion, _evtQueueListLoaded will be set.
 
             _ctx.sz_content_url = renderMediaName;
 
-            // --------------------------------------------------------------------
-            // Phase 3
-            // dz_player_load will trigger DZ_PLAYER_EVENT_QUEUELIST_LOADED
-            // Upon completion, _evtQueueListLoaded will be set.
             _evtQueueListLoaded.Reset();
             err = DeezerApi.dz_player_load(_ctx.dzplayer, null, IntPtr.Zero, _ctx.sz_content_url);
             DeezerApi.ThrowExceptionForDzErrorCode(err);
@@ -128,12 +134,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             else
                 Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_LOGIN_OK");
             // --------------------------------------------------------------------
-            
+
+            // --------------------------------------------------------------------
+            // Phase 5: Start playback using dz_player_play
+            // This will trigger DZ_PLAYER_EVENT_RENDER_TRACK_START
+            // Upon completion, _evtPlayerPlaybackStarted will be set.
             err = DeezerApi.dz_player_play(_ctx.dzplayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
                        DeezerInterop.PlayerApi.Constants.DZ_INDEX_IN_QUEUELIST_CURRENT);
-
             DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+            if (_evtPlayerPlaybackStarted.WaitOne(10000) == false)
+                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_RUNNABLE_NOT_STARTED);
+            else
+                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_play => DZ_PLAYER_EVENT_RENDER_TRACK_START");
+            // --------------------------------------------------------------------
         }
 
         private void ResetAllEvents()
@@ -143,6 +158,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             _evtPlayerPaused.Reset();
             _evtPlayerStreamReadyAfterSeek.Reset();
             _evtQueueListLoaded.Reset();
+            _evtPlayerPlaybackStarted.Reset();
         }
 
         protected override void DoStopRenderer()
@@ -315,6 +331,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         ManualResetEvent _evtPlayerPaused= new ManualResetEvent(false);
         ManualResetEvent _evtPlayerStreamReadyAfterSeek = new ManualResetEvent(false);
+        ManualResetEvent _evtPlayerPlaybackStarted = new ManualResetEvent(false);
 
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
@@ -332,6 +349,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_START:
+                    _evtPlayerPlaybackStarted.Set();
+                    FilterState = FilterState.Running;
+                    break;
+
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_RESUMED:
                     FilterState = FilterState.Running;
                     break;
