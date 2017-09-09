@@ -1,5 +1,5 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{0631AAC4-FD6F-47FB-9B3E-7FF95E8C67C5}"
 EndProject
@@ -10,6 +10,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media Library", "Media Library", "{EC82DB45-3623-4BAF-9B88-53956575CC87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Remote Control", "Remote Control", "{7AFB26AE-EB50-4A26-AB45-26BA28563E7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Device Drivers", "Device Drivers", "{CD886A8C-7F9E-40A3-9306-7C0D8AE440FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OPMediaBase", "OPMediaBase", "{1101B967-4322-4698-8D82-83DA0B0DACFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProTONE", "ProTONE", "{114014C8-9E85-476A-9BD3-036DE649D6CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EE48AD0-EB1A-46F0-BF87-2587913815BF}"
+	ProjectSection(SolutionItems) = preProject
+		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
+		..\..\..\protone-suite-publish\ProTONE Suite.build = ..\..\..\protone-suite-publish\ProTONE Suite.build
+		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
+		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.MediaLibrary", "Applications\OPMedia.MediaLibrary\OPMedia.MediaLibrary.csproj", "{83EB55B7-DC25-4D02-B6A1-282D29033829}"
 EndProject
@@ -27,12 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.ProTONE", "Applicat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IRSerDev", "IRSerDev\IRSerDev.vcxproj", "{7527A503-9FD3-4F31-86B6-D59A37E9B441}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Device Drivers", "Device Drivers", "{CD886A8C-7F9E-40A3-9306-7C0D8AE440FD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OPMediaBase", "OPMediaBase", "{1101B967-4322-4698-8D82-83DA0B0DACFD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProTONE", "ProTONE", "{114014C8-9E85-476A-9BD3-036DE649D6CB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Core", "Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj", "{D75C6E16-0208-40FD-8C54-F073667F5384}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Runtime", "Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj", "{0A0114C0-4409-42F3-940C-31038104261C}"
@@ -44,14 +52,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Runtime.ProTONE", "Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj", "{8C047807-786E-4B9C-8DF5-1DF99F75C874}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.UI.ProTONE", "Framework\ProTONE\OPMedia.UI.ProTONE\OPMedia.UI.ProTONE.csproj", "{742E1775-5F08-40E3-97D1-E0EEEB7198F4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EE48AD0-EB1A-46F0-BF87-2587913815BF}"
-	ProjectSection(SolutionItems) = preProject
-		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
-		..\..\..\protone-suite-publish\ProTONE Suite.build = ..\..\..\protone-suite-publish\ProTONE Suite.build
-		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
-		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.PersistenceService", "Framework\OPMediaBase\OPMedia.PersistenceService\OPMedia.PersistenceService.csproj", "{B34154DC-D0F2-4D9C-9BCD-97EF4BA3E958}"
 EndProject
@@ -306,10 +306,10 @@ Global
 		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
 		{6D148B9D-5B38-4B24-93C8-4B86DDF6D1C6} = {1EB2C442-CCBF-4A77-9F6B-04FE3B36344C}
 		{83EB55B7-DC25-4D02-B6A1-282D29033829} = {EC82DB45-3623-4BAF-9B88-53956575CC87}
+		{CD886A8C-7F9E-40A3-9306-7C0D8AE440FD} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{424CBA75-45EA-42AC-87BA-81F1C5B40222} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{796ABA17-4782-480F-A16F-156A35BBDD01} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{4FE8AAEA-D6B5-47D7-B60E-9F50C4CB06EB} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
-		{CD886A8C-7F9E-40A3-9306-7C0D8AE440FD} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{9603D04E-CCD3-471A-A454-24CE2D48F047} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{7527A503-9FD3-4F31-86B6-D59A37E9B441} = {CD886A8C-7F9E-40A3-9306-7C0D8AE440FD}
 		{D75C6E16-0208-40FD-8C54-F073667F5384} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
