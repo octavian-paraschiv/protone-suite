@@ -131,7 +131,7 @@ Ensuite, réglez les paramètres de détection jusqu'à ce que le facteur de bru
     <value>Codeword détecté: {0: x}</value>
   </data>
   <data name="TXT_ERRORFACTOR" xml:space="preserve">
-    <value>Facteur de bruit: {0:0 # #.} DBM</value>
+    <value>Facteur de bruit: {0:0.##} DBM</value>
   </data>
   <data name="TXT_DEFINE_LIRC_SERVER" xml:space="preserve">
     <value>Définir serveur de LIRC</value>

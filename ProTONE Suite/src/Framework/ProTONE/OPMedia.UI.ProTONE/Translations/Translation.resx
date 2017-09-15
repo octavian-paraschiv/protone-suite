@@ -192,132 +192,110 @@
   <data name="TXT_BTNCLEAR" xml:space="preserve">
     <value>Delete entire playlist.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNDELETE" xml:space="preserve">
     <value>Delete selected items.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNFULLSCREEN" xml:space="preserve">
     <value>Toggle Full Screen
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNFWD" xml:space="preserve">
     <value>Fast forward with 5 seconds.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNJUMPTOITEM" xml:space="preserve">
     <value>Open the 'Jump to playlist item' dialog.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOAD" xml:space="preserve">
     <value>Load new file(s).
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOADPLAYLIST" xml:space="preserve">
     <value>Load a new playlist.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY" xml:space="preserve">
     <value>Toggles on/off playing in loop.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN" xml:space="preserve">
     <value>Move selected items with one position down in playlist.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNMOVEUP" xml:space="preserve">
     <value>Move selected items with one position up in playlist.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNNEXT" xml:space="preserve">
     <value>Move to next file in playlist.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNOPENDISK" xml:space="preserve">
     <value>Opens the Load DVD media dialog.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNOPENSETTINGS" xml:space="preserve">
     <value>Displays the Settings dialog.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPLAYPAUSE" xml:space="preserve">
     <value>Play/Pause
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPLAYLISTEND" xml:space="preserve">
     <value>Activates the 'action on playlist end'
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPREV" xml:space="preserve">
     <value>Move to previous file in playlist.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNREW" xml:space="preserve">
     <value>Rewind  with 5 seconds.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNSAVEPLAYLIST" xml:space="preserve">
     <value>Save the current playlist.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNSTOP" xml:space="preserve">
     <value>Stop playback.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNTOGGLESHUFFLE" xml:space="preserve">
     <value>Activates playlist shuffle mode.
-
 
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNVOLDN" xml:space="preserve">
     <value>Volume down by 5%.
 
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNVOLUP" xml:space="preserve">
     <value>Volume up by 5%.
-
 
 Shortcut: {0}</value>
   </data>
@@ -462,7 +440,6 @@ Shortcut: {0}</value>
   <data name="TXT_DISPLAY_FILENAME" xml:space="preserve">
     <value>No formatting options are specified.
 
-
 The program will display the file name in playlist entry.</value>
   </data>
   <data name="TXT_DURATION" xml:space="preserve">
@@ -473,7 +450,6 @@ The program will display the file name in playlist entry.</value>
   </data>
   <data name="TXT_ELAPSED_TIME" xml:space="preserve">
     <value>Elapsed time.
-
 
 Double click to toggle remaining time</value>
   </data>
@@ -558,7 +534,6 @@ Double click to toggle remaining time</value>
   <data name="TXT_LOAD_DVD_FOLDER" xml:space="preserve">
     <value>Please select a video DVD content folder
 
-
 (Either a VIDEO_TS folder, or its parent):</value>
   </data>
   <data name="TXT_LOADMEDIAFILES" xml:space="preserve">
@@ -588,28 +563,12 @@ Double click to toggle remaining time</value>
   <data name="TXT_METADATAPATTERNS" xml:space="preserve">
     <value>The patterns available for playlist item names formatting are based on combinations of these keywords:
 
-
-
-
-
 &lt;A&gt; = artist name (from media tag);
-
-
 &lt;B&gt; = album name (from media tag);
-
-
 &lt;T&gt; = title (from media  tag);
-
-
 &lt;C&gt; = comments (from media tag);
-
-
 &lt;G&gt; = genre (from media tag);
-
-
 &lt;#&gt; = track # (from media tag);
-
-
 &lt;Y&gt; = year (from media tag).</value>
   </data>
   <data name="TXT_MINMOVIEDURATION" xml:space="preserve">
@@ -756,7 +715,6 @@ Double click to toggle remaining time</value>
   <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW" xml:space="preserve">
     <value>This option is not available at this moment.
 
-
 You must install the FFDShow codec suite in order to have actions to this option.</value>
   </data>
   <data name="TXT_NOTIFICATIONSENABLED" xml:space="preserve">
@@ -827,23 +785,12 @@ You must install the FFDShow codec suite in order to have actions to this option
   </data>
   <data name="TXT_OVERWRITE_SUBTITLE" xml:space="preserve">
     <value>The selected movie clip already has a subtitle. 
-
-
 If another subtitle is found on Internet, it will overwrite the existing one.
-
-
-
-
-
 Are you sure you want to search another subtitle ?</value>
   </data>
   <data name="TXT_PANELSHIDDEN_NOADMIN" xml:space="preserve">
     <value>Your user account does not have administrator rights. 
-
-
 You won't be able to view the Supported Files and the Remote Control settings.
-
-
 In order to access these settings, you must launch ProTONE Player under a user account that has administrator rights.</value>
   </data>
   <data name="TXT_PAUSED" xml:space="preserve">
@@ -903,7 +850,6 @@ In order to access these settings, you must launch ProTONE Player under a user a
   <data name="TXT_PROCEED_SCHEDULED_ACTION" xml:space="preserve">
     <value>ProTONE Player is attempting to {0}. This is happening because you have configured the player to do so when {1}. Do you want to proceed ?
 
-
 You can abort this operation if you click Abort within the remaining time frame (see counter below). If this time elapses and you have not chosen any action, it will be assumed you have chosen to proceed.</value>
   </data>
   <data name="TXT_PROTONE_ENQUEUE" xml:space="preserve">
@@ -915,7 +861,6 @@ You can abort this operation if you click Abort within the remaining time frame 
   <data name="TXT_REMAINING_TIME" xml:space="preserve">
     <value>Remaining time. 
 
-
 Double click to toggle elapsed time</value>
   </data>
   <data name="TXT_REMOTECONTROLCFG" xml:space="preserve">
@@ -924,16 +869,10 @@ Double click to toggle elapsed time</value>
   <data name="TXT_REMOTECONTROLDEFINITION" xml:space="preserve">
     <value>To define the programs and devices that are allowed to control ProTONE Player remotely, you must use the Remote Control Manager.
 
-
-
-
-
 Click on the button below to launch the Remote Control Manager ...</value>
   </data>
   <data name="TXT_RESETVIDEOPOSITION" xml:space="preserve">
     <value>Reset video 
-
-
 window position</value>
   </data>
   <data name="TXT_RESETVIDEOPOSITION_HINT" xml:space="preserve">
@@ -989,8 +928,6 @@ window position</value>
   </data>
   <data name="TXT_SCHEDULERWAITTIMERPROCEED" xml:space="preserve">
     <value>How many minutes to wait confirmation before proceeding 
-
-
 (0 = do not ask for confirmation, proceed directly):</value>
   </data>
   <data name="TXT_SEARCH_BY" xml:space="preserve">
@@ -1079,8 +1016,6 @@ window position</value>
   </data>
   <data name="TXT_SUB_HINTS" xml:space="preserve">
     <value>Hint: The results are sorted using these criteria (in this order): selected column, language (Preferred language on top), 
-
-
 prio (server order = order of subtitle servers in Subtitles/OSD Settings page). Click on a column header to select another sort citeria.</value>
   </data>
   <data name="TXT_SUB_LOAD" xml:space="preserve">
@@ -1134,39 +1069,15 @@ prio (server order = order of subtitle servers in Subtitles/OSD Settings page). 
   <data name="TXT_TAGGINGPATTERNS" xml:space="preserve">
     <value>The tagging patterns are based on combinations of these keywords:
 
-
-
-
-
 &lt;N&gt; = file name;
-
-
 &lt;F&gt; = folder name;
-
-
 &lt;A&gt; = artist name (from tag)
-
-
 &lt;B&gt; = album name (from tag)
-
-
 &lt;T&gt; = title (from tag)
-
-
 &lt;C&gt; = comments (from tag)
-
-
 &lt;G&gt; = genre (from tag)
-
-
 &lt;#&gt; = track number (from tag)
-
-
 &lt;Y&gt; = year (from tag)
-
-
-
-
 
 Character ranges such as &lt;N2-12,14-20&gt; are also allowed.</value>
   </data>
@@ -1176,15 +1087,12 @@ Character ranges such as &lt;N2-12,14-20&gt; are also allowed.</value>
   <data name="TXT_TIMESCALE" xml:space="preserve">
     <value>Time scale.
 
-
 Click to play from position: {0}</value>
   </data>
   <data name="TXT_TIMESCALE_BOOKMARK" xml:space="preserve">
     <value>Time scale.
 
-
 Click to play from bookmark: "{1}"
-
 
 Bookmark time: {0}</value>
   </data>
@@ -1290,26 +1198,31 @@ Step 4: Right click on search results and choose the actions you want to do.
 </value>
   </data>
   <data name="TXT_DEEZERFILTER_HINT" xml:space="preserve">
-    <value>{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset204 Arial;}{\f1\fnil\fcharset0 Arial;}}
-\viewkind4\uc1\pard\f0\fs17\b0 Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red. \par
-In \b normal search mode \b0 , it will return entries that contain fields matching any of the words that you entered. This may even not include what you are looking for as it can only return a limited amount of results. \par
-In \b advanced search mode \b0 , you can search by artist name, album name or song name by using the keywords "artist:", "album:" or "track:", respectively. You can even combine these keywords in the same search text. \par
-Some examples (you are welcome to try them out):\par
-\par
-If you search by: \b artist:"Nirvana" track:"Polly" \b0, it will return all records associated with songs named "Polly" played by artist(s) named "Nirvana".\par
-If you search by: \b artist:"Nirvana" album:"Nevermind"\b0, it will return all records associated with songs played by artist(s) named "Nirvana" included on album(s) named "Nevermind".\par
-But if you enter text: \b Nirvana Polly \b0, it will return all records that contain fields matching any of the words "Nirvana" or "Polly". You can expect this to return a large number of results. 
-}</value>
+    <value>Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red.
+In "normal search mode", it will return entries that contain fields matching any of the words that you entered. This may even not include what you are looking for as it can only return a limited amount of results.
+In "advanced search mode", you can search by artist name, album name or song name by using the keywords "artist:", "album:" or "track:", respectively. You can even combine these keywords in the same search text.
+Some examples (you are welcome to try them out):
+
+If you search by: "artist:"Nirvana" track:"Polly"", it will return all records associated with songs named "Polly" played by artist(s) named "Nirvana".
+If you search by: "artist:"Nirvana" album:"Nevermind"", it will return all records associated with songs played by artist(s) named "Nirvana" included on album(s) named "Nevermind".
+But if you enter text: "Nirvana Polly", it will return all records that contain fields matching any of the words "Nirvana" or "Polly". You can expect this to return a large number of results. </value>
   </data>
   <data name="TXT_SHOUTCASTFILTER_HINT" xml:space="preserve">
-    <value>{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset204 Arial;}{\f1\fnil\fcharset0 Arial;}}
-\viewkind4\uc1\pard\f0\fs17\b0 Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red. \par
-In \b normal search mode \b0 , it will return radio stations that contain fields matching any of the words that you entered. \par
-In \b advanced search mode \b0 , you can search radio stations that are currently playing certain content, by using the keyword "now:". \par
-Some examples (you are welcome to try them out):\par
-\par
-If you search by: \b now:Nirvana \b0, it will return radio stations records for which the Current Content field are matching "Nirvana" (entirely or patially). \par
-But if you enter text: \b Nirvana \b0, it will return all radio stations for which any of the fields are matching "Nirvana" (entirely or patially). \par
-}</value>
+    <value>Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red.
+In "normal search mode", it will return radio stations that contain fields matching any of the words that you entered.
+In "advanced search mode", you can search radio stations that are currently playing certain content, by using the keyword "now:".
+Some examples (you are welcome to try them out):
+
+If you search by: "now:Nirvana", it will return radio stations records for which the Current Content field are matching "Nirvana" (entirely or patially).
+But if you enter text: "Nirvana", it will return all radio stations for which any of the fields are matching "Nirvana" (entirely or patially).</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ALBUM" xml:space="preserve">
+    <value>Look up this album</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ARTIST" xml:space="preserve">
+    <value>Look up this artist</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_TRACK" xml:space="preserve">
+    <value>Look up this song</value>
   </data>
 </root>
