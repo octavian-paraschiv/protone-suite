@@ -95,7 +95,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 this.Items.AddRange(results);
         }
 
-        protected OPMContextMenuStrip BuildMenuStrip(bool addToFav)
+        protected OPMContextMenuStrip BuildCommonMenuStrip(bool addToFav)
         {
             OPMContextMenuStrip cms = new OPMContextMenuStrip();
 
@@ -137,6 +137,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 cms.Items.Add(tsmi);
             }
 
+
+
             return cms;
         }
 
@@ -177,6 +179,11 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             var selItems = this.SelectedItems;
             if (selItems != null && selItems.Count > 0)
                 EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, doEnqueue);
+        }
+
+        public virtual string GetSearchBoxTip()
+        {
+            return null;
         }
     }
 }

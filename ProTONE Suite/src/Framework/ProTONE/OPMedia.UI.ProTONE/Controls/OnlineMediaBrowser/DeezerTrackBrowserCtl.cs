@@ -13,6 +13,9 @@ using OPMedia.UI.Controls;
 using OPMedia.UI.Menus;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Themes;
+using OPMedia.Core;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+using OPMedia.UI.ProTONE.Properties;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -26,26 +29,71 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvTracks.MultiSelect = true;
             lvTracks.Resize += OnListResize;
             lvTracks.SelectedIndexChanged += OnListSelectedIndexChanged;
-            lvTracks.ContextMenuStrip = BuildMenuStrip(true);
-            OnThemeUpdatedInternal();
+            
+            OPMContextMenuStrip cms = BuildCommonMenuStrip(true);
 
-            this.Load += new EventHandler(OnLoad);
+            OPMMenuStripSeparator sep = new OPMMenuStripSeparator();
+
+            cms.Items.Add(sep);
+            
+            OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
+
+            Bitmap searchIcon = Resources.Search16;
+            searchIcon.MakeTransparent(Color.Magenta);
+
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ARTIST");
+            tsmi.Tag = "LookupDeezerArtist";
+            tsmi.Image = searchIcon;
+            cms.Items.Add(tsmi);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ALBUM");
+            tsmi.Tag = "LookupDeezerAlbum";
+            tsmi.Image = searchIcon;
+            cms.Items.Add(tsmi);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_TRACK");
+            tsmi.Tag = "LookupDeezerTrack";
+            tsmi.Image = searchIcon;
+            cms.Items.Add(tsmi);
+
+            lvTracks.ContextMenuStrip = cms;
         }
 
-        void OnLoad(object sender, EventArgs e)
+        protected override void HandleAction(string act)
         {
-            if (this.DesignMode == false)
+            var selItems = this.SelectedItems;
+            if (selItems != null && selItems.Count > 0)
             {
-                // Setting RTF should always be done inside OnLoad ... not on constructor ...
-                lblFilterHint.Rtf = Translator.Translate("TXT_DEEZERFILTER_HINT");
+                var item = selItems[0] as DeezerTrackItem;
+                if (item != null)
+                {
+                    string search = string.Empty;
+
+                    switch (act)
+                    {
+                        case "LookupDeezerArtist":
+                            search = string.Format("artist:\"{0}\"", item.Artist.ToLowerInvariant());
+                            break;
+
+                        case "LookupDeezerAlbum":
+                            search = string.Format("artist:\"{0}\" album:\"{1}\"", item.Artist.ToLowerInvariant(), item.Album.ToLowerInvariant());
+                            break;
+
+                        case "LookupDeezerTrack":
+                            search = string.Format("artist:\"{0}\" track:\"{1}\"", item.Artist.ToLowerInvariant(), item.Title.ToLowerInvariant());
+                            break;
+                    }
+
+                    EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, search);
+                }
             }
         }
-
-        protected override void OnThemeUpdatedInternal()
-        {
-            lblFilterHint.BackColor = ThemeManager.BackColor;
-            lblFilterHint.ForeColor = ThemeManager.ForeColor;
-        }
+                
 
         private void OnListSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -120,6 +168,11 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
 
             return valid;
+        }
+
+        public override string GetSearchBoxTip()
+        {
+            return Translator.Translate("TXT_DEEZERFILTER_HINT");
         }
     }
 }

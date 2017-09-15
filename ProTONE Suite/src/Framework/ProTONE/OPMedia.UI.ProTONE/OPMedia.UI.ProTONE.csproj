@@ -564,6 +564,7 @@
     <Content Include="Resources\LocalDB.png" />
     <Content Include="Resources\movedown.png" />
     <None Include="Resources\player.png" />
+    <None Include="Resources\Search16.png" />
     <Content Include="Resources\Shoutcast.png" />
   </ItemGroup>
   <ItemGroup>

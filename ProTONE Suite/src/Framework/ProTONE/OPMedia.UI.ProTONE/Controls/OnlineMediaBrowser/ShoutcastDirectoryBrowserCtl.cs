@@ -26,28 +26,9 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvRadioStations.MultiSelect = true;
             lvRadioStations.Resize += lvRadioStations_Resize;
             lvRadioStations.SelectedIndexChanged += LvRadioStations_SelectedIndexChanged;
-            lvRadioStations.ContextMenuStrip = BuildMenuStrip(true);
-
-            this.Load += new EventHandler(OnLoad);
-
-            OnThemeUpdatedInternal();
+            lvRadioStations.ContextMenuStrip = BuildCommonMenuStrip(true);
         }
 
-
-        protected override void OnThemeUpdatedInternal()
-        {
-            lblFilterHint.BackColor = ThemeManager.BackColor;
-            lblFilterHint.ForeColor = ThemeManager.ForeColor;
-        }
-
-        void OnLoad(object sender, EventArgs e)
-        {
-            if (this.DesignMode == false)
-            {
-                // Setting RTF should always be done inside OnLoad ... not on constructor ...
-                lblFilterHint.Rtf = Translator.Translate("TXT_SHOUTCASTFILTER_HINT");
-            }
-        }
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -132,5 +113,11 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             return valid;
         }
+
+        public override string GetSearchBoxTip()
+        {
+            return Translator.Translate("TXT_SHOUTCASTFILTER_HINT");
+        }
+
     }
 }

@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.GlobalEvents;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+using OPMedia.UI.Controls;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -24,6 +27,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
         ManualResetEvent _searchCancelled = new ManualResetEvent(false);
 
         ImageList _ilImages = null;
+
+        OPMToolTip _tt = null;
 
         public OnlineContentBrowser() : base("TXT_SELECT_ONLINE_MEDIA")
         {
@@ -63,6 +68,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             txtSearch.TextChanged += new EventHandler(OnSearchTextChanged);
 
+            _tt = new OPMToolTip();
+
             OnSearchTextChanged(null, null);
         }
 
@@ -72,7 +79,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             MediaBrowserPage selectedPage = GetSelectedPage();
             if (selectedPage != null)
+            {
+                _tt.SetSimpleToolTip(txtSearch.InnerTextBox, selectedPage.GetSearchBoxTip());
                 validText = selectedPage.PreValidateSearch(txtSearch.Text);
+            }
 
             btnSearch.Enabled = validText;
             txtSearch.BackColor = validText ? ThemeManager.WndValidColor : ThemeManager.ColorValidationFailed;
@@ -175,6 +185,13 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             ProTONEConfig.OnlineContentBrowser_WindowLocation = this.Location;
             ProTONEConfig.OnlineContentBrowser_WindowSize = this.Size;
+        }
+
+        [EventSink(LocalEventNames.StartDeezerSearch)]
+        public void StartDeezerSearch(string search)
+        {
+            txtSearch.Text = search;
+            btnSearch_Click(this, EventArgs.Empty);
         }
     }
 

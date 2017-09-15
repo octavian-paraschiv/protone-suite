@@ -17,6 +17,14 @@ namespace OPMedia.UI.Controls
         bool _hasInput = false;
         protected TextBox txtField;
 
+        public TextBox InnerTextBox
+        {
+            get
+            {
+                return txtField;
+            }
+        }
+
         #region GUI Properties
 
 

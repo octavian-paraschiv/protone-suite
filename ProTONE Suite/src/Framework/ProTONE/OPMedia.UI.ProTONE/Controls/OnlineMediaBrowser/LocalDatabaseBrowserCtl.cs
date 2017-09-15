@@ -27,7 +27,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvRadioStations.MultiSelect = true;
             lvRadioStations.Resize += lvRadioStations_Resize;
             lvRadioStations.SelectedIndexChanged += LvRadioStations_SelectedIndexChanged;
-            lvRadioStations.ContextMenuStrip = BuildMenuStrip(false);
+            lvRadioStations.ContextMenuStrip = BuildCommonMenuStrip(false);
         }
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)

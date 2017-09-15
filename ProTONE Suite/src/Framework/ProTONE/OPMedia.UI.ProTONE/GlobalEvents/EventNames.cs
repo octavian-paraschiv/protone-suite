@@ -15,5 +15,7 @@ namespace OPMedia.UI.ProTONE.GlobalEvents
 
         public const string UpdateMediaScreens = "UpdateMediaScreens";
         public const string LoadOnlineContent = "LoadOnlineContent";
+
+        public const string StartDeezerSearch = "StartDeezerSearch";
     }
 }
