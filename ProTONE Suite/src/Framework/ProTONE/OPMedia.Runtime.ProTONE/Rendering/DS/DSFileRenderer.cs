@@ -116,8 +116,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private void InitMedia()
         {
-            mediaControl = Activator.CreateInstance(Type.GetTypeFromCLSID(Filters.FilterGraph, true))
-                        as IMediaControl;
+            mediaControl = BuildMediaControl();
 
             if ((mediaControl as IGraphBuilder) == null)
                 throw new RenderingException("Unable to render the file: " + renderMediaName);

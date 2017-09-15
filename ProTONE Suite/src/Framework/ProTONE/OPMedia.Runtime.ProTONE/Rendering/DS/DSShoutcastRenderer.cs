@@ -48,8 +48,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             GC.Collect();
 
-            mediaControl = Activator.CreateInstance(Type.GetTypeFromCLSID(Filters.FilterGraph, true))
-                        as IMediaControl;
+            mediaControl = BuildMediaControl();
 
             // Create Filter
             _source = new DSBaseSourceFilter(new ShoutcastStreamSourceFilter());

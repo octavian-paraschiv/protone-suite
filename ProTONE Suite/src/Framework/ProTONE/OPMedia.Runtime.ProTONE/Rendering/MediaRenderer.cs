@@ -852,9 +852,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (vfi != null && vfi.IsValid)
                     {
-                        IMediaControl mediaControl =
-                            Activator.CreateInstance(Type.GetTypeFromCLSID(Filters.FilterGraph, true))
-                            as IMediaControl;
+                        Guid filterGraphGuid = ProTONEConfig.FilterGraphGuid;
+                        Type mediaControlType = Type.GetTypeFromCLSID(filterGraphGuid, true);
+
+                        IMediaControl mediaControl = Activator.CreateInstance(mediaControlType) as IMediaControl;
                         IBasicAudio basicAudio = mediaControl as IBasicAudio;
                         IBasicVideo basicVideo = mediaControl as IBasicVideo;
                         IMediaPosition mediaPosition = mediaControl as IMediaPosition;

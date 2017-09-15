@@ -1072,6 +1072,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
 #endif // HAVE_SAMPLES
         #endregion Sample analisys
+
+        protected IMediaControl BuildMediaControl()
+        {
+            Guid filterGraphGuid = ProTONEConfig.FilterGraphGuid;
+
+            Type mediaControlType = Type.GetTypeFromCLSID(filterGraphGuid, true);
+
+            return Activator.CreateInstance(mediaControlType) as IMediaControl;
+        }
     }
 
     internal class GraphNotifyWnd : NativeWindow

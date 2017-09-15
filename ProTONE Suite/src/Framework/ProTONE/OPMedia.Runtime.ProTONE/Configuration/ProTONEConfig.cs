@@ -10,6 +10,7 @@ using OPMedia.Core.Utilities;
 using Microsoft.Win32;
 using System.Drawing;
 using System.Windows.Forms;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 
 namespace OPMedia.Runtime.ProTONE.Configuration
 {
@@ -1078,6 +1079,40 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 }
 
                 return str;
+            }
+        }
+
+        static Guid _filterGraphGuid = Guid.Empty;
+        static object _filterGraphGuidLock = new object();
+
+        public static Guid FilterGraphGuid
+        {
+            get
+            {
+                try
+                {
+                    if (_filterGraphGuid == Guid.Empty)
+                    {
+                        lock (_filterGraphGuidLock)
+                        {
+                            if (_filterGraphGuid == Guid.Empty)
+                            {
+                                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                                if (key != null)
+                                {
+                                    string str = key.GetValue("SelectedFilterGraphGuid", Filters.FilterGraphNoThread.ToString()) as string;
+                                    _filterGraphGuid = Guid.Parse(str);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    _filterGraphGuid = Filters.FilterGraphNoThread;
+                }
+
+                return _filterGraphGuid;
             }
         }
 
