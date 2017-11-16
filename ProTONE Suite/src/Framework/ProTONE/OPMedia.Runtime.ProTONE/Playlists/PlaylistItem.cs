@@ -23,6 +23,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.Core;
 using System.Linq;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -204,7 +205,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public Dictionary<string, string> MediaInfo
+        public virtual Dictionary<string, string> MediaInfo
         {
             get
             {
@@ -222,15 +223,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     info.Add("TXT_FILE_TYPE:", mi.MediaType.ToUpperInvariant());
                 }
 
-                if (MediaRenderer.DefaultInstance.GetRenderFile() == mi.Name &&
-                    (MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Running ||
-                    MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Paused) &&
-                    mi.MediaType == "URL")
-                {
-                    foreach (KeyValuePair<string, string> kvp in MediaRenderer.DefaultInstance.StreamData)
-                        info.Add(kvp.Key + ":", kvp.Value);
-                }
-                else if (mi.ExtendedInfo != null && mi.ExtendedInfo.Count > 0)
+                if (mi.ExtendedInfo != null && mi.ExtendedInfo.Count > 0)
                 {
                     info.Add(" ", null); // separator
                     foreach (KeyValuePair<string, string> kvp in mi.ExtendedInfo)
@@ -244,14 +237,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 }
 
                 return info;
-            }
-        }
-
-        protected virtual Dictionary<string, string> MediaInfoInternal
-        {
-            get
-            {
-                return mi.ExtendedInfo;
             }
         }
 
@@ -445,7 +430,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             catch { }
             return false;
         }
-
     }
 
     public class BoormarkEditablePlaylistItem : PlaylistItem

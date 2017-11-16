@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -69,6 +70,28 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 return _dti.Duration;
             }
         }
+
+        public override Dictionary<string, string> MediaInfo
+        {
+            get            
+            {
+                Dictionary<string, string> info = base.MediaInfo;
+
+                if (_dti != null)
+                {
+                    info.Add(" ", null); // separator
+
+                    // add specific details for DeezerTrackItem
+                    info.Add("TXT_ARTIST:", _dti.Artist);
+                    info.Add("TXT_TITLE:", _dti.Title);
+                    info.Add("TXT_ALBUM:", _dti.Album);
+                    info.Add("TXT_DURATION:", _dti.Duration.ToString());
+                }
+
+                return info;
+            }
+        }
+
 
         public DeezerTrackPlaylistItem(DeezerTrackItem dti) : 
             base(dti.Url, false, false)

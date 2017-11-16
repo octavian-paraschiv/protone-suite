@@ -30,14 +30,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         public override string Type
         { get { return "DVD"; } }
 
-        protected override Dictionary<string, string> MediaInfoInternal
-        {
-            get
-            {
-                return vdi.ExtendedInfo;
-            }
-        }
-
         public override TimeSpan Duration
         {
             get

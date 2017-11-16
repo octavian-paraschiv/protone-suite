@@ -373,7 +373,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             OnMediaRendererHeartbeat();
 
-            pnlRendering.FilterStateChanged(newState, newMedia, MediaRenderer.DefaultInstance.RenderedMediaType);
+            PlaylistItem pli = pnlScreens.PlaylistScreen.GetActivePlaylistItem();
+
+            //pnlRendering.FilterStateChanged(newState, newMedia, MediaRenderer.DefaultInstance.RenderedMediaType);
+            pnlRendering.FilterStateChanged(newState, pli, MediaRenderer.DefaultInstance.RenderedMediaType);
 
             if (newState == FilterState.NotOpened && Autoplay && pnlScreens.PlaylistScreen.GetFileCount() >= 1)
             {
@@ -659,7 +662,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     MediaFileInfo mfi = MediaFileInfo.FromPath(strFile);
                     isVideoFile = MediaRenderer.SupportedVideoTypes.Contains(mfi.MediaType);
-                    name = mfi.Name;
+                    
+                    //
+                    PlaylistItem pli = pnlScreens.PlaylistScreen.GetActivePlaylistItem();
+                    if (pli != null)
+                        name = pli.DisplayName;
+                    else
+                        name = mfi.Name;
                 }
 
                 if (isDVDVolume)

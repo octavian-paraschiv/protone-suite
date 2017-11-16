@@ -135,7 +135,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.playbackPanel.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.playbackPanel.Location = new System.Drawing.Point(0, 24);
             this.playbackPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.playbackPanel.MediaName = "";
             this.playbackPanel.MediaType = OPMedia.Runtime.ProTONE.Rendering.Base.MediaTypes.None;
             this.playbackPanel.MinimumSize = new System.Drawing.Size(200, 30);
             this.playbackPanel.Name = "playbackPanel";

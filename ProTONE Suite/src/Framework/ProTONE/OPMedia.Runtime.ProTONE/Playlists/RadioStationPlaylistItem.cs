@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -60,7 +62,25 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 return _rs.Title;
             }
         }
-       
+
+
+        public override Dictionary<string, string> MediaInfo
+        {
+            get
+            {
+                Dictionary<string, string> info = base.MediaInfo;
+
+                if (MediaRenderer.DefaultInstance.GetRenderFile() == mi.Name &&
+                    (MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Running ||
+                    MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Paused))
+                {
+                    foreach (KeyValuePair<string, string> kvp in MediaRenderer.DefaultInstance.StreamData)
+                        info.Add(kvp.Key + ":", kvp.Value);
+                }
+
+                return info;
+            }
+        }
 
         public RadioStationPlaylistItem(RadioStation rs) : 
             base(rs.Url, false, false)

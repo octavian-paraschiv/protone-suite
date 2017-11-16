@@ -40,7 +40,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         OPMToolTipManager _tip = null;
         ToolStripItem _hoveredItem = null;
 
-        private string _mediaName = string.Empty;
+        private PlaylistItem _pli = null;
         private FilterState _FilterState = FilterState.Stopped;
         private MediaTypes _mediaType = MediaTypes.None;
 
@@ -73,8 +73,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         }
 
         #region Properties
-        public string MediaName
-        { get { return _mediaName; } set { _mediaName = value; UpdateFileType(); } }
+        public PlaylistItem PlaylistItem
+        { get { return _pli; } set { _pli = value; UpdateFileType(); } }
 
         public FilterState FilterState
         { get { return _FilterState; } set { _FilterState = value; UpdateFilterState(); } }
@@ -235,43 +235,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void UpdateFileType()
         {
-            PlaylistItem pli = null;
-
             Image img = null;
-            if (!string.IsNullOrEmpty(_mediaName))
-            {
-                try
-                {
-                    if (DvdMedia.FromPath(_mediaName) != null)
-                    {
-                        pli = new DvdPlaylistItem(_mediaName);
-                        img = pli.GetImage(true);
-                    }
-                    else
-                    {
-                        pli = new PlaylistItem(_mediaName, false);
-                        img = pli.GetImage(true);
-                    }
-                }
-                catch
-                {
-                }
 
-                if (img == null)
-                    img = ImageProvider.GetIcon(_mediaName, true);
-            }
+            if (_pli != null)
+                img = _pli.GetImage(true);
+
+            if (img == null)
+                img = ImageProvider.GetIcon(_pli.Path, true);
 
             tslFileType.Image = img;
-            tslFileType.Tag = pli;
+            tslFileType.Tag = _pli;
         }
 
         private void UpdateFilterState()
         {
             Image img = null;
-            if (!string.IsNullOrEmpty(_mediaName))
-            {
+
+            if (_pli != null)
                 img = Resources.ResourceManager.GetImage(_FilterState.ToString().ToLowerInvariant());
-            }
 
             tslFilterState.Image = img;
             tslFilterState.Tag = Translator.Translate("TXT_MEDIA_STATE", MediaRenderer.DefaultInstance.TranslatedFilterState);
@@ -307,10 +288,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             string tipAudio = Translator.Translate("TXT_AUDIO_AVAILABLE");
             string tipVideo = Translator.Translate("TXT_VIDEO_AVAILABLE");
 
-            if (string.IsNullOrEmpty(_mediaName))
-            {
+            if (_pli == null)
                 _mediaType = MediaTypes.None;
-            }
 
             switch (_mediaType)
             {
@@ -355,13 +334,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     PlaylistItem pli = lbl.Tag as PlaylistItem;
                     if (pli != null)
                     {
-                        _tip.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, pli.GetImage(true), 
+                        var mediaInfo = pli.MediaInfo;
+
+                        _tip.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), mediaInfo, pli.GetImage(true), 
                             pli.MediaFileInfo.CustomImage);
                     }
                     else
                     {
-                        Image img = ImageProvider.GetIcon(_mediaName, true); 
-                        _tip.ShowSimpleToolTip(_mediaName, img);
+                        //Image img = ImageProvider.GetIcon(_mediaName, true); 
+                        //_tip.ShowSimpleToolTip(_mediaName, img);
                     } 
                 }
             }
