@@ -166,6 +166,7 @@
     <Compile Include="Dialogs\OnlineContentBrowser.Designer.cs">
       <DependentUpon>OnlineContentBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Playlists\PlaylistItemExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -559,13 +560,13 @@
     <EmbeddedResource Include="Resources\FileTypes.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Deezer.png" />
+    <None Include="Resources\Shoutcast.png" />
     <None Include="Resources\Favorites.png" />
+    <None Include="Resources\deezer.png" />
     <Content Include="Resources\LocalDB.png" />
     <Content Include="Resources\movedown.png" />
     <None Include="Resources\player.png" />
     <None Include="Resources\Search16.png" />
-    <Content Include="Resources\Shoutcast.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\moveup.png" />

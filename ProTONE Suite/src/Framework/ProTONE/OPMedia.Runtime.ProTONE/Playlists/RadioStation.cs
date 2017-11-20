@@ -19,30 +19,9 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
-    [DataContract]
-    public class RadioStation : IOnlineMediaItem
+    [Serializable]
+    public class RadioStation : OnlineMediaItem
     {
-        [DataMember(Order = 0)]
-        public string Url { get; set; }
-
-        [DataMember(Order = 1)]
-        public string Title { get; set; }
-
-        [DataMember(Order = 2)]
-        public string Genre { get; set; }
-
-        [DataMember(Order = 3)]
-        public string Type { get; set; }
-
-        [DataMember(Order = 4)]
-        public OnlineMediaSource Source { get; set; }
-
-        [DataMember(Order = 5)]
-        public int Bitrate { get; set; }
-
-        [DataMember(Order = 5)]
-        public string Content { get; set; }
-
         private bool _isFake = false;
 
         public bool IsFake
@@ -101,23 +80,43 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
 
     [DataContract]
-    public class RadioStationsData
+    [Serializable]
+    [XmlInclude(typeof(RadioStation))]
+    [XmlInclude(typeof(DeezerTrackItem))]
+    public class OnlineMediaData
     {
         [DataMember(Order = 0)]
-        public List<RadioStation> RadioStations { get; set; }
+        public List<OnlineMediaItem> OnlineMediaItems { get; set; }
 
-        public RadioStationsData()
+        public OnlineMediaData()
         {
-            RadioStations = new List<RadioStation>();
+            OnlineMediaItems = new List<OnlineMediaItem>();
         }
 
-        public static RadioStationsData GetDefault()
+        public static OnlineMediaData GetDefault()
         {
-            RadioStationsData rsd = new RadioStationsData();
+            OnlineMediaData rsd = new OnlineMediaData();
 
-            rsd.RadioStations.Add(RadioStation.Empty);
+            rsd.OnlineMediaItems.Add(RadioStation.Empty);
 
             return rsd;
+        }
+
+        public bool Contains(OnlineMediaItem item)
+        {
+            return OnlineMediaItems.Contains(item);
+        }
+
+        public void SafeAddItem(OnlineMediaItem item)
+        {
+            if (Contains(item) == false)
+                OnlineMediaItems.Add(item);
+        }
+
+        public void SafeRemoveItem(OnlineMediaItem item)
+        {
+            if (Contains(item))
+                OnlineMediaItems.Remove(item);
         }
     }
 }

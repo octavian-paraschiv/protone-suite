@@ -32,9 +32,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             }
         }
 
-        protected override List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
+        protected override List<OnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
-            List<IOnlineMediaItem> results = new List<IOnlineMediaItem>();
+            List<OnlineMediaItem> results = new List<OnlineMediaItem>();
 
             if (abortEvent.WaitOne(5))
                 return results;

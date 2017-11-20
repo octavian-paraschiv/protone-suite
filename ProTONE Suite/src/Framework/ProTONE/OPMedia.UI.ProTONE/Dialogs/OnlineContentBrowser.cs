@@ -37,7 +37,9 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.ShowInTaskbar = true;
 
             _ilImages = new ImageList();
+            
             _ilImages.TransparentColor = Color.White;
+
             _ilImages.ColorDepth = ColorDepth.Depth32Bit;
             _ilImages.ImageSize = new Size(32, 32);
 
@@ -190,8 +192,32 @@ namespace OPMedia.UI.ProTONE.Dialogs
         [EventSink(LocalEventNames.StartDeezerSearch)]
         public void StartDeezerSearch(string search)
         {
-            txtSearch.Text = search;
+            if (string.IsNullOrEmpty(search) == false)
+                txtSearch.Text = search;
+
             btnSearch_Click(this, EventArgs.Empty);
+        }
+
+        [EventSink(LocalEventNames.ManageOnlineContent)]
+        public void ManageOnlineContent(List<OnlineMediaItem> onlineContent, bool doAdd)
+        {
+            var data = LocalDatabaseSearcher.LoadOnlineMediaData();
+
+            foreach(OnlineMediaItem item in onlineContent)
+            {
+                if (doAdd)
+                    data.SafeAddItem(item);
+                else
+                    data.SafeRemoveItem(item);
+            }
+
+            bool isSaved = LocalDatabaseSearcher.SaveOnlineMediaData(data);
+            if (isSaved && !doAdd)
+            {
+                LocalDatabaseBrowserCtl localDbBrowser = GetSelectedPage() as LocalDatabaseBrowserCtl;
+                if (localDbBrowser != null)
+                    StartDeezerSearch(null);
+            }
         }
     }
 

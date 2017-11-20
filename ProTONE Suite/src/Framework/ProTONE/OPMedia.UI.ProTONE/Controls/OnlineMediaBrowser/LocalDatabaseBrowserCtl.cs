@@ -14,11 +14,14 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Menus;
 using System.Linq;
+using OPMedia.UI.ProTONE.Properties;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
     public partial class LocalDatabaseBrowserCtl : MediaBrowserPage
     {
+        ImageList _ilImages = null;
+
         public LocalDatabaseBrowserCtl()
         {
             InitializeComponent();
@@ -28,6 +31,16 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvRadioStations.Resize += lvRadioStations_Resize;
             lvRadioStations.SelectedIndexChanged += LvRadioStations_SelectedIndexChanged;
             lvRadioStations.ContextMenuStrip = BuildCommonMenuStrip(false);
+
+            _ilImages = new ImageList();
+            _ilImages.TransparentColor = Color.White;
+            _ilImages.ColorDepth = ColorDepth.Depth32Bit;
+            _ilImages.ImageSize = new Size(16, 16);
+
+            _ilImages.Images.Add(Resources.Shoutcast);
+            _ilImages.Images.Add(Resources.Deezer);
+
+            lvRadioStations.SmallImageList = _ilImages;
         }
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,7 +49,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             foreach (ListViewItem lvi in lvRadioStations.SelectedItems)
             {
-                RadioStation rs = lvi.Tag as RadioStation;
+                OnlineMediaItem rs = lvi.Tag as OnlineMediaItem;
                 if (rs != null)
                     base.SelectedItems.Add(rs);
             }
@@ -49,10 +62,13 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         private void AdjustColumns()
         {
-            colGenre.Width = 120;
+            colBitrate.Width = 50;
+            colGenre.Width = colType.Width = 100;
+            colIcon.Width = 20;
 
-            int w = lvRadioStations.EffectiveWidth - colGenre.Width;
-            colURL.Width = colName.Width = w / 2;
+            int w = lvRadioStations.EffectiveWidth - (colGenre.Width + colType.Width + colBitrate.Width + colIcon.Width);
+
+            colName.Width = colAlbum.Width = colArtist.Width = colURL.Width = w / 4;
         }
 
         protected override void DisplaySearchResultsInternal()
@@ -63,30 +79,46 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             {
                 foreach (var item in this.Items)
                 {
-                    RadioStation rs = item as RadioStation;
-                    if (rs != null)
+                    string title = item.Title ?? string.Empty;
+
+                    int ilIndex = -1;
+                    if (item.Source == OnlineMediaSource.ShoutCast)
+                        ilIndex = 0;
+                    else if (item.Source == OnlineMediaSource.Deezer)
+                        ilIndex = 1;
+
+                    ListViewItem lvi = new ListViewItem(new string[] 
                     {
-                        string title = rs.Title ?? string.Empty;
+                        // Icon
+                        string.Empty,
 
-                        ListViewItem lvi = new ListViewItem(new string[] 
-                        {
-                            // Dummy entry
-                            string.Empty,
+                        // Name
+                        title.ToUpperInvariant().StartsWith("TXT_") ?
+                            Translator.Translate(title) : title,
 
-                            // Name
-                            title.ToUpperInvariant().StartsWith("TXT_") ?
-                                Translator.Translate(title) : title,
+                        // Artist
+                        item.Artist ?? string.Empty,
 
-                            // URL
-                            rs.Url,
+                        // Album
+                        item.Album ?? string.Empty,
 
-                            // Genre
-                            rs.Genre
-                        });
+                        // URL
+                        item.Url ?? string.Empty,
 
-                        lvi.Tag = rs;
-                        lvRadioStations.Items.Add(lvi);
-                    }
+                        // Genre
+                        item.Genre ?? string.Empty,
+
+                        // Bitrate
+                        (item.Bitrate > 0) ? item.Bitrate.ToString() : string.Empty,
+
+                        // Type
+                        item.Type ?? string.Empty,
+                    });
+
+                    lvi.ImageIndex = ilIndex;
+
+                    lvi.Tag = item;
+                    lvRadioStations.Items.Add(lvi);
                 }
             }
 

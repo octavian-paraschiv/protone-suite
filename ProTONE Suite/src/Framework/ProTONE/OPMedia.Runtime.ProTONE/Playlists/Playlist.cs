@@ -363,7 +363,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return true;
         }
 
-        public void AddOnlineMediaItem(IOnlineMediaItem omi)
+        public void AddOnlineMediaItem(OnlineMediaItem omi)
         {
             try
             {
@@ -649,7 +649,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             try
             {
-                IOnlineMediaItem omi = null;
+                OnlineMediaItem omi = null;
 
                 string[] lines = content.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (lines != null)

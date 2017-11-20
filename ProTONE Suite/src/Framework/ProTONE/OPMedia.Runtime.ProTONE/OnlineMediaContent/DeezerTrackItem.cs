@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
-    public class DeezerTrackItem : IOnlineMediaItem
+    [Serializable]
+    public class DeezerTrackItem : OnlineMediaItem
     {
-        public OnlineMediaSource Source { get; set; }
-
-        public string Title { get; set; }
-
-        public string Url { get; set; }
-
-        public string Artist { get; set; }
-
-        public string Album { get; set; }
-
-        public TimeSpan Duration { get; set; }
-
         public DeezerTrackItem()
         {
             this.Source = OnlineMediaSource.Deezer;

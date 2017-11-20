@@ -309,14 +309,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             playlist.ClearAll();
         }
 
-        internal void AddOnlineContent(List<IOnlineMediaItem> onlineContent)
+        internal void AddOnlineContent(List<OnlineMediaItem> onlineContent)
         {
             if (_abortLoad)
                 return;
 
             if (onlineContent != null)
             {
-                foreach (IOnlineMediaItem omi in onlineContent)
+                foreach (OnlineMediaItem omi in onlineContent)
                 {
                     if (_abortLoad)
                         break;
@@ -740,7 +740,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     lvItem.SubItems[colTime.Index].Text = duration.ToString();
                 }
 
-                lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImage(false), null);
+                lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImageEx(false), null);
                 UpdateMiscIcon(lvItem);
             }
         }
@@ -965,7 +965,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                                 Image customImage = pli.MediaFileInfo.CustomImage;
 
-                                _ttm.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, pli.GetImage(true), customImage);
+                                _ttm.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, pli.GetImageEx(true), customImage);
                                 set = true;
                             }
                         }

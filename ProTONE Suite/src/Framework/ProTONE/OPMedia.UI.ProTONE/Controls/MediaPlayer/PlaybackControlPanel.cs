@@ -238,7 +238,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             Image img = null;
 
             if (_pli != null)
-                img = _pli.GetImage(true);
+                img = _pli.GetImageEx(true);
 
             if (img == null)
                 img = ImageProvider.GetIcon(_pli.Path, true);
@@ -336,7 +336,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         var mediaInfo = pli.MediaInfo;
 
-                        _tip.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), mediaInfo, pli.GetImage(true), 
+                        _tip.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), mediaInfo, pli.GetImageEx(true), 
                             pli.MediaFileInfo.CustomImage);
                     }
                     else

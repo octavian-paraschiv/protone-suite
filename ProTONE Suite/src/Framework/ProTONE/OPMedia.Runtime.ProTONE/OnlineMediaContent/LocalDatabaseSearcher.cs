@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -22,36 +23,87 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             }
         }
 
-        protected override List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
+        static object _dbLock = new object();
+
+        public static OnlineMediaData LoadOnlineMediaData()
         {
-            List<IOnlineMediaItem> results = new List<IOnlineMediaItem>();
+            lock (_dbLock)
+            {
+                OnlineMediaData internalDatabase = null;
+
+                try
+                {
+                    // Fill with Internal stations list from Persistence Service
+                    string xml = PersistenceProxy.ReadObject("OnlineMediaData", string.Empty, false);
+                    if (!string.IsNullOrEmpty(xml))
+                    {
+                        using (StringReader sr = new StringReader(xml))
+                        using (XmlReader xr = XmlReader.Create(sr))
+                        {
+                            XmlSerializer xs = new XmlSerializer(typeof(OnlineMediaData));
+                            internalDatabase = xs.Deserialize(xr) as OnlineMediaData;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+                }
+
+                return internalDatabase;
+            }
+        }
+
+        public static bool SaveOnlineMediaData(OnlineMediaData data)
+        {
+            bool isSaved = false;
+            lock (_dbLock)
+            {
+                string xml = null;
+
+                try
+                {
+                    using (StringWriter sw = new StringWriter())
+                    using (XmlWriter xw = XmlWriter.Create(sw))
+                    {
+                        XmlSerializer xs = new XmlSerializer(typeof(OnlineMediaData));
+                        xs.Serialize(xw, data);
+
+                        xml = sw.ToString();
+                    }
+
+                    if (xml != null)
+                    {
+                        PersistenceProxy.SaveObject("OnlineMediaData", xml, false);
+                        isSaved = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+                }
+            }
+
+            return isSaved;
+        }
+
+        protected override List<OnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
+        {
+            List<OnlineMediaItem> results = new List<OnlineMediaItem>();
 
             if (abortEvent.WaitOne(5))
                 return results;
 
-            RadioStationsData internalDatabase = null;
-
-            // Fill with Internal stations list from Persistence Service
-            string xml = PersistenceProxy.ReadObject("RadioStationsData", string.Empty, false);
-            if (!string.IsNullOrEmpty(xml))
-            {
-                XmlReaderSettings settings = new XmlReaderSettings();
-                using (StringReader sr = new StringReader(xml))
-                using (XmlReader xr = XmlReader.Create(sr))
-                {
-                    XmlSerializer xs = new XmlSerializer(typeof(RadioStationsData));
-                    internalDatabase = xs.Deserialize(xr) as RadioStationsData;
-                }
-            }
+            OnlineMediaData internalDatabase = LoadOnlineMediaData();
 
             if (abortEvent.WaitOne(5))
                 return results;
 
             if (internalDatabase != null &&
-                internalDatabase.RadioStations != null &&
-                internalDatabase.RadioStations.Count > 0)
+                internalDatabase.OnlineMediaItems != null &&
+                internalDatabase.OnlineMediaItems.Count > 0)
             {
-                foreach (var rs in internalDatabase.RadioStations)
+                foreach (var rs in internalDatabase.OnlineMediaItems)
                 {
                     if (abortEvent.WaitOne(5))
                         break;

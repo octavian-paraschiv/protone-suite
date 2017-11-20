@@ -962,7 +962,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         }
 
         [EventSink(GlobalEvents.EventNames.LoadOnlineContent)]
-        public void LoadOnlineContent(List<IOnlineMediaItem> onlineContent, bool doEnqueue)
+        public void LoadOnlineContent(List<OnlineMediaItem> onlineContent, bool doEnqueue)
         {
             if (doEnqueue == false)
                 pnlScreens.PlaylistScreen.Clear();

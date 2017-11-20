@@ -924,7 +924,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current content:.
+        ///   Looks up a localized string similar to Now playing:.
         /// </summary>
         internal static string TXT_CONTENT {
             get {

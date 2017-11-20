@@ -29,10 +29,14 @@
         private void InitializeComponent()
         {
             this.lvRadioStations = new OPMedia.UI.Controls.OPMListView();
-            this.colEmpty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colIcon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colURL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colBitrate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lvRadioStations
@@ -40,30 +44,42 @@
             this.lvRadioStations.AllowEditing = false;
             this.lvRadioStations.AlternateRowColors = true;
             this.lvRadioStations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colEmpty,
+            this.colIcon,
             this.colName,
+            this.colArtist,
+            this.colAlbum,
             this.colURL,
-            this.colGenre});
+            this.colGenre,
+            this.colBitrate,
+            this.colType});
             this.lvRadioStations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvRadioStations.Location = new System.Drawing.Point(0, 0);
             this.lvRadioStations.Margin = new System.Windows.Forms.Padding(0);
             this.lvRadioStations.MultiSelect = false;
             this.lvRadioStations.Name = "lvRadioStations";
             this.lvRadioStations.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvRadioStations.Size = new System.Drawing.Size(677, 412);
+            this.lvRadioStations.Size = new System.Drawing.Size(711, 412);
             this.lvRadioStations.TabIndex = 1;
             this.lvRadioStations.UseCompatibleStateImageBehavior = false;
             this.lvRadioStations.View = System.Windows.Forms.View.Details;
             // 
-            // colEmpty
+            // colIcon
             // 
-            this.colEmpty.Text = "";
-            this.colEmpty.Width = 0;
+            this.colIcon.Text = "";
+            this.colIcon.Width = 25;
             // 
             // colName
             // 
             this.colName.Text = "TXT_NAME";
             this.colName.Width = 116;
+            // 
+            // colAlbum
+            // 
+            this.colAlbum.Text = "TXT_ALBUM";
+            // 
+            // colArtist
+            // 
+            this.colArtist.Text = "TXT_ARTIST";
             // 
             // colURL
             // 
@@ -75,6 +91,14 @@
             this.colGenre.Text = "TXT_GENRE";
             this.colGenre.Width = 105;
             // 
+            // colBitrate
+            // 
+            this.colBitrate.Text = "TXT_BITRATE";
+            // 
+            // colType
+            // 
+            this.colType.Text = "TXT_TYPE";
+            // 
             // LocalDatabaseBrowserCtl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -82,7 +106,7 @@
             this.Controls.Add(this.lvRadioStations);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "LocalDatabaseBrowserCtl";
-            this.Size = new System.Drawing.Size(677, 412);
+            this.Size = new System.Drawing.Size(711, 412);
             this.ResumeLayout(false);
 
         }
@@ -90,9 +114,13 @@
         #endregion
 
         private UI.Controls.OPMListView lvRadioStations;
-        private System.Windows.Forms.ColumnHeader colEmpty;
         private System.Windows.Forms.ColumnHeader colName;
         private System.Windows.Forms.ColumnHeader colURL;
         private System.Windows.Forms.ColumnHeader colGenre;
+        private System.Windows.Forms.ColumnHeader colIcon;
+        private System.Windows.Forms.ColumnHeader colAlbum;
+        private System.Windows.Forms.ColumnHeader colArtist;
+        private System.Windows.Forms.ColumnHeader colBitrate;
+        private System.Windows.Forms.ColumnHeader colType;
     }
 }

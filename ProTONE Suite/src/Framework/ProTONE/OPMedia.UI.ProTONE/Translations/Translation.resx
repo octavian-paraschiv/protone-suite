@@ -1151,7 +1151,7 @@ Click to set volume to: {0} %</value>
     <value>Allow external applications to gather signal analisys data from ProTONE Player</value>
   </data>
   <data name="TXT_CONTENT" xml:space="preserve">
-    <value>Current content:</value>
+    <value>Now playing:</value>
   </data>
   <data name="TXT_MEDIATYPE" xml:space="preserve">
     <value>Media Type:</value>

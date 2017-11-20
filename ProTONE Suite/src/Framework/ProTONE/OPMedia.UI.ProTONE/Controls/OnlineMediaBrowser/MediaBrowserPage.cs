@@ -22,8 +22,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             public ManualResetEvent AbortEvent { get; set; }
         }
 
-        public List<IOnlineMediaItem> SelectedItems { get; protected set; }
-        public List<IOnlineMediaItem> Items { get; protected set; }
+        public List<OnlineMediaItem> SelectedItems { get; protected set; }
+        public List<OnlineMediaItem> Items { get; protected set; }
 
         public event EventHandler SearchCompleted;
 
@@ -37,8 +37,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         public MediaBrowserPage() : base()
         {
-            this.SelectedItems = new List<IOnlineMediaItem>();
-            this.Items = new List<IOnlineMediaItem>();
+            this.SelectedItems = new List<OnlineMediaItem>();
+            this.Items = new List<OnlineMediaItem>();
 
             this.SearchFilter = OnlineContentSearchFilter.Any;
 
@@ -105,14 +105,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_PLAY");
-            tsmi.Tag = "Play";
+            tsmi.Tag = MediaBrowserAction.Play;
             tsmi.Image = Resources.player;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_ENQUEUE");
-            tsmi.Tag = "Enqueue";
+            tsmi.Tag = MediaBrowserAction.Enqueue;
             tsmi.Image = Resources.player;
             cms.Items.Add(tsmi);
 
@@ -123,7 +123,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi = new OPMToolStripMenuItem();
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_ADD_FAV_LIST");
-                tsmi.Tag = "AddFav";
+                tsmi.Tag = MediaBrowserAction.AddFav;
                 tsmi.Image = Resources.Favorites;
                 cms.Items.Add(tsmi);
             }
@@ -132,7 +132,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi = new OPMToolStripMenuItem();
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_DEL_FAV_LIST");
-                tsmi.Tag = "DelFav";
+                tsmi.Tag = MediaBrowserAction.DelFav;
                 tsmi.Image = Resources.btnDelete;
                 cms.Items.Add(tsmi);
             }
@@ -152,20 +152,35 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             if (tsmi != null)
             {
                 string act = tsmi.Tag as string;
-                switch (act)
+                if (string.IsNullOrEmpty(act) == false)
                 {
-                    case "Play":
-                        LaunchSelectedItems(false);
-                        break;
+                    var selItems = this.SelectedItems;
+                    if (selItems != null && selItems.Count > 0)
+                    {
+                        switch (act)
+                        {
+                            case MediaBrowserAction.Play:
+                                EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, false);
+                                break;
 
-                    case "Enqueue":
-                        LaunchSelectedItems(true);
-                        break;
+                            case MediaBrowserAction.Enqueue:
+                                EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, true);
+                                break;
 
-                    default:
-                        HandleAction(act);
-                        break;
+                            case MediaBrowserAction.AddFav:
+                                EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, true);
+                                break;
 
+                            case MediaBrowserAction.DelFav:
+                                EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, false);
+                                break;
+
+                            default:
+                                HandleAction(act);
+                                break;
+
+                        }
+                    }
                 }
             }
         }
@@ -174,16 +189,18 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         {
         }
 
-        private void LaunchSelectedItems(bool doEnqueue)
-        {
-            var selItems = this.SelectedItems;
-            if (selItems != null && selItems.Count > 0)
-                EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, doEnqueue);
-        }
-
         public virtual string GetSearchBoxTip()
         {
             return null;
         }
+    }
+
+    public class MediaBrowserAction
+    {
+        public const string Play = "Play";
+        public const string Enqueue = "Enqueue";
+        public const string AddFav = "AddFav";
+        public const string DelFav = "DelFav";
+
     }
 }

@@ -56,7 +56,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             return false;
         }
 
-        public static List<IOnlineMediaItem> Search(OnlineMediaSource source, OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
+        public static List<OnlineMediaItem> Search(OnlineMediaSource source, OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             return searcher;
         }
 
-        protected abstract List<IOnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent);
+        protected abstract List<OnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent);
 
         protected abstract bool HasValidConfig { get; }
     }

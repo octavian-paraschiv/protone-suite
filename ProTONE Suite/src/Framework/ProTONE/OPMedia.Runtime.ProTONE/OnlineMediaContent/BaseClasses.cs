@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using OPMedia.Runtime.ProTONE.Playlists;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -18,13 +21,52 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         All = 0xFF,
     }
 
-    public interface IOnlineMediaItem
+    [DataContract]
+    [Serializable]
+    [XmlInclude(typeof(RadioStation))]
+    [XmlInclude(typeof(DeezerTrackItem))]
+    public class OnlineMediaItem
     {
-        string Url { get; set; }
+        [DataMember(Order = 0)]
+        public string Url { get; set; }
 
-        string Title { get; set; }
+        [DataMember(Order = 1)]
+        public string Title { get; set; }
 
-        OnlineMediaSource Source { get; set; }
+        [DataMember(Order = 2)]
+        public string Genre { get; set; }
+
+        [DataMember(Order = 3)]
+        public string Type { get; set; }
+
+        [DataMember(Order = 4)]
+        public OnlineMediaSource Source { get; set; }
+
+        [DataMember(Order = 5)]
+        public int Bitrate { get; set; }
+
+        [DataMember(Order = 6)]
+        public string Content { get; set; }
+
+        [DataMember(Order = 7)]
+        public string Artist { get; set; }
+
+        [DataMember(Order = 8)]
+        public string Album { get; set; }
+
+        [DataMember(Order = 9)]
+        public TimeSpan Duration { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            OnlineMediaItem item = obj as OnlineMediaItem;
+            if (item != null)
+            {
+                return (string.Compare(this.Url, item.Url, true) == 0);
+            }
+
+            return false;
+        }
     }
 
 
