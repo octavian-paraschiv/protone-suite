@@ -17,7 +17,8 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
         public override string ToString()
         {
-            return string.Format("{0} - {1} [{2}]", Artist, Title, Url);
+            //return string.Format("{0} - {1} [{2}]", Artist, Title, Url);
+            return string.Format("{0} - {1}", Artist, Title);
         }
     }
 }

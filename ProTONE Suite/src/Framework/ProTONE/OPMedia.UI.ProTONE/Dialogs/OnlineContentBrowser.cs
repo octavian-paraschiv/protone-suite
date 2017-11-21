@@ -45,7 +45,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             _ilImages.Images.Add(Resources.Favorites);
             _ilImages.Images.Add(Resources.Shoutcast);
-            _ilImages.Images.Add(Resources.Deezer);
+            _ilImages.Images.Add(Resources.deezer);
 
             tabContentBrowser.ImageList = _ilImages;
 

@@ -26,7 +26,7 @@ namespace OPMedia.UI.ProTONE
                 }
                 else if (pli is DeezerTrackPlaylistItem)
                 {
-                    Bitmap bmp = Resources.Deezer;
+                    Bitmap bmp = Resources.deezer;
                     bmp.MakeTransparent(Color.White);
                     img = bmp.Resize(large);
                 }

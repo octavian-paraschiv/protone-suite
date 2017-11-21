@@ -39,6 +39,14 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public override string SubType
+        {
+            get
+            {
+                return "ShoutCast";
+            }
+        }
+
         public override string DisplayName
         {
             get

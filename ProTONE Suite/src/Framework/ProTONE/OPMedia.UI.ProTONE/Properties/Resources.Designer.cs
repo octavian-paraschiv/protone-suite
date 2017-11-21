@@ -373,9 +373,29 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Deezer {
+        public static System.Drawing.Bitmap deezer {
             get {
-                object obj = ResourceManager.GetObject("Deezer", resourceCulture);
+                object obj = ResourceManager.GetObject("deezer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap deezer16 {
+            get {
+                object obj = ResourceManager.GetObject("deezer16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Deezer32 {
+            get {
+                object obj = ResourceManager.GetObject("Deezer32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -566,6 +586,26 @@ namespace OPMedia.UI.ProTONE.Properties {
         public static System.Drawing.Bitmap Shoutcast {
             get {
                 object obj = ResourceManager.GetObject("Shoutcast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Shoutcast16 {
+            get {
+                object obj = ResourceManager.GetObject("Shoutcast16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Shoutcast32 {
+            get {
+                object obj = ResourceManager.GetObject("Shoutcast32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -561,7 +561,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shoutcast.png" />
+    <EmbeddedResource Include="Resources\Shoutcast16.png" />
+    <EmbeddedResource Include="Resources\Shoutcast32.png" />
     <None Include="Resources\Favorites.png" />
+    <EmbeddedResource Include="Resources\deezer32.png" />
+    <EmbeddedResource Include="Resources\deezer16.png" />
     <None Include="Resources\deezer.png" />
     <Content Include="Resources\LocalDB.png" />
     <Content Include="Resources\movedown.png" />

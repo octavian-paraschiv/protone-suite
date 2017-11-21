@@ -35,7 +35,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get
             {
-                return "deezer";
+                return "URL";
+            }
+        }
+
+        public override string SubType
+        {
+            get
+            {
+                return "Deezer";
             }
         }
 

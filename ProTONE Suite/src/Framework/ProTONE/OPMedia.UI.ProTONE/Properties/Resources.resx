@@ -160,8 +160,8 @@
   <data name="btnOpenURL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnOpenURL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Shoutcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shoutcast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Shoutcast32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shoutcast32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnMoveDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\movedown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,8 +220,8 @@
   <data name="btnSavePlaylist" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnSavePlaylist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Deezer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\deezer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Deezer32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\deezer32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnMoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\moveup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -285,5 +285,17 @@
   </data>
   <data name="Search16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deezer16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deezer16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shoutcast16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Shoutcast16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deezer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deezer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shoutcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Shoutcast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

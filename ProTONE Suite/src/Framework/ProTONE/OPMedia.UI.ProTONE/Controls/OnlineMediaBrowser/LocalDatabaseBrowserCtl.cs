@@ -38,7 +38,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             _ilImages.ImageSize = new Size(16, 16);
 
             _ilImages.Images.Add(Resources.Shoutcast);
-            _ilImages.Images.Add(Resources.Deezer);
+            _ilImages.Images.Add(Resources.deezer);
 
             lvRadioStations.SmallImageList = _ilImages;
         }

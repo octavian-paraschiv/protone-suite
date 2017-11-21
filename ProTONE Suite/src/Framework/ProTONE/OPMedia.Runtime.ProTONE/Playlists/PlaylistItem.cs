@@ -169,6 +169,14 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public virtual string SubType
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
         public virtual int TrackNumber
         {
             get
@@ -220,7 +228,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 if (!string.IsNullOrEmpty(mi.MediaType))
                 {
-                    info.Add("TXT_FILE_TYPE:", mi.MediaType.ToUpperInvariant());
+                    info.Add("TXT_MEDIATYPE:", this.GetMediaTypeEx());
                 }
 
                 if (mi.ExtendedInfo != null && mi.ExtendedInfo.Count > 0)
@@ -482,6 +490,26 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             _name = name;
             _parent = parent;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static string GetMediaTypeEx(this PlaylistItem pli)
+        {
+            string str = string.Empty;
+
+            if (pli != null)
+            {
+                string type = pli.Type.ToUpperInvariant();
+                string subType = pli.SubType;
+
+                str = type;
+                if (string.IsNullOrEmpty(subType) == false)
+                    str += string.Format(" ({0})", subType);
+            }
+
+            return str;
         }
     }
 }
