@@ -45,6 +45,7 @@
     <ThemeElement Name="GradientGaugeColor1a" Value="255, 000, 000" />
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="255, 000, 000" />
+    <ThemeElement Name="AltRowColor" Value="212, 212, 212" />
     <ThemeElement Name="FormBorderWidth" Value="2" />
   </Theme>
   <Theme Name="Blue" IsDefault="false">
@@ -92,6 +93,7 @@
     <ThemeElement Name="GradientGaugeColor1a" Value="255, 000, 000" />
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="255, 000, 000" />
+    <ThemeElement Name="AltRowColor" Value="197, 211, 228" />
     <ThemeElement Name="FormBorderWidth" Value="2" />
   </Theme>
   <Theme Name="Black" IsDefault="true">
@@ -140,34 +142,35 @@
     <ThemeElement Name="GradientGaugeColor1a" Value="255, 255, 100" />
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="255, 209, 24" />
+    <ThemeElement Name="AltRowColor" Value="90, 90, 90" />
     <ThemeElement Name="FormBorderWidth" Value="2" />
   </Theme>
   <Theme Name="Deezer" IsDefault="false">
     <ThemeElement Name="BorderColor" Value="155, 155, 155" />
-    <ThemeElement Name="ForeColor" Value="50, 50, 50" />
+    <ThemeElement Name="ForeColor" Value="30, 30, 30" />
     <ThemeElement Name="BackColor" Value="255, 255, 255" />
-    <ThemeElement Name="GradientNormalColor1" Value="225, 225, 225" />
-    <ThemeElement Name="GradientNormalColor2" Value="200, 200, 200" />
-    <ThemeElement Name="GradientHoverColor1" Value="242, 244, 251" />
+    <ThemeElement Name="GradientNormalColor1" Value="220, 220, 220" />
+    <ThemeElement Name="GradientNormalColor2" Value="210, 210, 210" />
+    <ThemeElement Name="GradientHoverColor1" Value="203, 210, 242" />
     <ThemeElement Name="GradientHoverColor2" Value="193, 200, 232" />
-    <ThemeElement Name="GradientFocusColor1" Value="235, 244, 245" />
+    <ThemeElement Name="GradientFocusColor1" Value="200, 210, 235" />
     <ThemeElement Name="GradientFocusColor2" Value="190, 200, 225" />
-    <ThemeElement Name="GradientFocusHoverColor1" Value="245, 244, 245" />
+    <ThemeElement Name="GradientFocusHoverColor1" Value="210, 210, 235" />
     <ThemeElement Name="GradientFocusHoverColor2" Value="200, 200, 225" />
     <ThemeElement Name="FocusBorderColor" Value="163, 172, 220" />
     <ThemeElement Name="SelectedTextColor" Value="000, 000, 000" />
-    <ThemeElement Name="CaptionBarColor1" Value="212, 212, 212" />
-    <ThemeElement Name="CaptionBarColor2" Value="185, 185, 185" />
-    <ThemeElement Name="CaptionButtonColor1" Value="205, 205, 205" />
+    <ThemeElement Name="CaptionBarColor1" Value="215, 215, 215" />
+    <ThemeElement Name="CaptionBarColor2" Value="205, 205, 205" />
+    <ThemeElement Name="CaptionButtonColor1" Value="150, 150, 150" />
     <ThemeElement Name="CaptionButtonColor2" Value="140, 140, 140" />
-    <ThemeElement Name="CaptionButtonRedColor1" Value="255, 155, 157" />
-    <ThemeElement Name="CaptionButtonRedColor2" Value="255, 26, 31" />
+    <ThemeElement Name="CaptionButtonRedColor1" Value="255, 36, 41" />
+    <ThemeElement Name="CaptionButtonRedColor2" Value="245, 26, 31" />
     <ThemeElement Name="SelectedColor" Value="193, 200, 232" />
     <ThemeElement Name="WndValidColor" Value="255, 255, 255" />
-    <ThemeElement Name="HighlightColor" Value="115, 187, 2" />
+    <ThemeElement Name="HighlightColor" Value="Maroon" />
     <ThemeElement Name="WndTextColor" Value="50, 50, 50" />
     <ThemeElement Name="LinkColor" Value="57, 149, 205" />
-    <ThemeElement Name="CheckedMenuColor" Value="0, 162, 232" />
+    <ThemeElement Name="CheckedMenuColor" Value="155, 155, 155" />
     <ThemeElement Name="SeparatorColor" Value="100, 100, 100" />
     <ThemeElement Name="MenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="MenuBackColor" Value="180, 180, 180" />
@@ -175,21 +178,20 @@
     <ThemeElement Name="HighlightMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="HighlightHeaderMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="CheckedMenuTextColor" Value="255, 255, 255" />
-    
     <ThemeElement Name="GradientGaugeColor1" Value="044, 190, 078" />
     <ThemeElement Name="GradientGaugeColor2" Value="225, 029, 033" />
     <ThemeElement Name="GradientGaugeColor1a" Value="243, 151, 018" />
-    
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="220, 23, 23" />
-    <ThemeElement Name="DefaultButtonNormalColor1" Value="153, 217, 234" />
+    <ThemeElement Name="DefaultButtonNormalColor1" Value="10, 172, 242" />
     <ThemeElement Name="DefaultButtonNormalColor2" Value="0, 162, 232" />
-    <ThemeElement Name="DefaultButtonHoverColor1" Value="242, 244, 255" />
-    <ThemeElement Name="DefaultButtonHoverColor2" Value="193, 200, 255" />
-    <ThemeElement Name="DefaultButtonFocusColor1" Value="235, 244, 255" />
-    <ThemeElement Name="DefaultButtonFocusColor2" Value="190, 200, 255" />
-    <ThemeElement Name="DefaultButtonFocusHoverColor1" Value="245, 244, 255" />
-    <ThemeElement Name="DefaultButtonFocusHoverColor2" Value="200, 200, 255" />
+    <ThemeElement Name="DefaultButtonHoverColor1" Value="203, 210, 255" />
+    <ThemeElement Name="DefaultButtonHoverColor2" Value="193, 200, 245" />
+    <ThemeElement Name="DefaultButtonFocusColor1" Value="200, 210, 255" />
+    <ThemeElement Name="DefaultButtonFocusColor2" Value="190, 200, 245" />
+    <ThemeElement Name="DefaultButtonFocusHoverColor1" Value="210, 210, 255" />
+    <ThemeElement Name="DefaultButtonFocusHoverColor2" Value="200, 200, 245" />
+    <ThemeElement Name="AltRowColor" Value="245, 245, 255" />
     <ThemeElement Name="FormBorderWidth" Value="2" />
   </Theme>
 </Themes>

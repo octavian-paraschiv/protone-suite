@@ -565,7 +565,7 @@ namespace SkinBuilder.Navigation
                                 {
                                     themeElementNode.ForeColor = ThemeManager.ForeColor;
 
-                                    Color c = (Color)cc.ConvertFromInvariantString(themeElement.Value);
+                                    Color c = ThemeManager.SafeColorFromString(themeElement.Value);
                                     Bitmap bmp = CreateColorBitmap(c);
                                     if (bmp != null)
                                     {
@@ -650,7 +650,7 @@ namespace SkinBuilder.Navigation
                                 {
                                     tn.ForeColor = ThemeManager.ForeColor;
 
-                                    Color c = (Color)cc.ConvertFromInvariantString(value);
+                                    Color c = ThemeManager.SafeColorFromString(value);
                                     Bitmap bmp = CreateColorBitmap(c);
                                     if (bmp != null)
                                     {

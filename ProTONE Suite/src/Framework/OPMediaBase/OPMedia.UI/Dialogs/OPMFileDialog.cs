@@ -111,13 +111,15 @@ namespace OPMedia.UI.Controls.Dialogs
             this.ShowAddToFavorites = false;
             this.ShowNewFolder = (this is OPMSaveFileDialog);
 
+            lvExplorer.ShowAttributes = false;
+            lvExplorer.ShowLastAccess = false;
+
             lvExplorer.SelectFile += new SelectFileEventHandler(lvExplorer_SelectFile);
             lvExplorer.SelectMultipleItems += new SelectMultipleItemsEventHandler(lvExplorer_SelectMultipleItems);
             lvExplorer.SelectDirectory += new SelectDirectoryEventHandler(lvExplorer_SelectDirectory);
             lvExplorer.DoubleClickFile += new DoubleClickFileEventHandler(lvExplorer_DoubleClickFile);
             lvExplorer.LaunchMultipleItems += new LaunchMultipleItemsHandler(lvExplorer_LaunchMultipleItems);
             lvExplorer.QueryDisplayName += new QueryDisplayNameHandler(lvExplorer_QueryDisplayName);
-            lvExplorer.Resize += new EventHandler(OnResize);
 
             this.Load += new EventHandler(OPMFileDialog_Load);
 
@@ -128,11 +130,6 @@ namespace OPMedia.UI.Controls.Dialogs
             _tt2 = new OPMToolTipManager(btnNewFolder);
 
             btnOK.OnDropDownClicked += new EventHandler(btnOK_OnDropDownClicked);
-        }
-
-        void OnResize(object sender, EventArgs e)
-        {
-            cmbDiskDrives.DropDownHeight = lvExplorer.Height;
         }
 
         string lvExplorer_QueryDisplayName(string fsi)
@@ -320,9 +317,9 @@ namespace OPMedia.UI.Controls.Dialogs
         void OPMFileDialog_Load(object sender, EventArgs e)
         {
             SetTitle(this.Title);
+
             FillDriveList();
             FillFilterList();
-
             FillSpecialFolders();
             FillFavoriteFolders();
 
@@ -339,7 +336,6 @@ namespace OPMedia.UI.Controls.Dialogs
                 lvExplorer.Margin = new System.Windows.Forms.Padding(3);
             }
 
-            cmbDiskDrives.SelectedIndexChanged += new EventHandler(cmbDiskDrives_SelectedIndexChanged);
             tsSpecialFolders.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsSpecialFolders_ItemClicked);
 
             _tmrUpdateUi = new Timer();
@@ -466,18 +462,6 @@ namespace OPMedia.UI.Controls.Dialogs
 
         #region Drives combo box
 
-        void cmbDiskDrives_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FolderItem fi = cmbDiskDrives.SelectedItem as FolderItem;
-            if (fi != null)
-            {
-                lvExplorer.Path = fi.Path;
-            }
-
-            cmbDiskDrives.Focus();
-            cmbDiskDrives.Select();
-        }
-
         private void FillFavoriteFolders()
         {
             if (FillFavoriteFoldersEvt != null)
@@ -550,37 +534,30 @@ namespace OPMedia.UI.Controls.Dialogs
 
                 System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
 
-                cmbDiskDrives.Items.Clear();
-
                 foreach (System.IO.DriveInfo di in drives)
                 {
-                    DriveInfoItem dii = new DriveInfoItem(di);
-                    cmbDiskDrives.Items.Add(dii);
-                }
+                    string path = di.RootDirectory.FullName.ToUpperInvariant();
 
-                SelectDrive(this.InitialDirectory);
+                    string title = string.Format("{0} [{1}]", di.Name, di.VolumeLabel);
+
+                    OPMToolStripButton btn = new OPMToolStripButton(title);
+                    btn.Name = title;
+                    btn.Image = ImageProvider.GetIcon(path, true);
+                    btn.ToolTipText = path;
+                    btn.TextAlign = ContentAlignment.MiddleLeft;
+                    btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+                    btn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.SizeToFit;
+                    btn.ImageTransparentColor = System.Drawing.Color.Magenta;
+                    btn.AutoSize = true;
+                    btn.Tag = path;
+                    btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+
+                    tsSpecialFolders.Items.Add(btn);
+                }
             }
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchError(ex, false);
-            }
-        }
-
-        private void SelectDrive(string dir)
-        {
-            foreach (object item in cmbDiskDrives.Items)
-            {
-                FolderItem fi = item as FolderItem;
-                if (fi != null)
-                {
-                    string itemPath = fi.Path.Trim("\\/".ToCharArray());
-                    string compareDir = dir.Trim("\\/".ToCharArray());
-                    if (compareDir.StartsWith(itemPath))
-                    {
-                        cmbDiskDrives.SelectedItem = item;
-                        break;
-                    }
-                }
             }
         }
 
@@ -654,7 +631,9 @@ namespace OPMedia.UI.Controls.Dialogs
 
             if (VerifyFolder(path))
             {
-                SelectDrive(path);
+                // TODO fix
+                //SelectDrive(path);
+
                 lvExplorer.Path = path;
             }
             else
@@ -766,7 +745,9 @@ namespace OPMedia.UI.Controls.Dialogs
                 SpecialFolderButton sfb = tsb as SpecialFolderButton;
                 if (sfb != null)
                 {
-                    SelectDrive(sfb.Path);
+                    // TODO fix
+                    //SelectDrive(sfb.Path);
+
                     lvExplorer.Path = sfb.Path;
                 }
                 else
@@ -774,7 +755,9 @@ namespace OPMedia.UI.Controls.Dialogs
                     string path = tsb.Tag as string;
                     if (Directory.Exists(path))
                     {
-                        SelectDrive(path);
+                        // TODO fix
+                        //SelectDrive(path);
+
                         lvExplorer.Path = path;
                     }
                 }
@@ -792,6 +775,11 @@ namespace OPMedia.UI.Controls.Dialogs
 
         private void btnAddToFavorites_Click(object sender, EventArgs e)
         {
+            // Check if we are in a root folder.
+            // Root folders are shown anyways.
+            if (PathUtils.IsRootPath(lvExplorer.Path))
+                return;
+
             if (AddToFavoriteFolders != null)
             {
                 if (AddToFavoriteFolders(lvExplorer.Path))

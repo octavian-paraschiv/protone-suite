@@ -1002,9 +1002,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void lvPlaylist_Resize(object sender, EventArgs e)
         {
             colDummy.Width = 0;
-            colIcon.Width = _compactMode ? 0 : 18;
-            colMisc.Width = _compactMode ? 0 : 18;
-            colTime.Width = _compactMode ? 0 : 50;
+            colIcon.Width = _compactMode ? 0 : 20;
+            colMisc.Width = _compactMode ? 0 : 20;
+            colTime.Width = _compactMode ? 0 : 55;
             colFile.Width = lvPlaylist.EffectiveWidth - colIcon.Width - colMisc.Width - colTime.Width;
         }
 

@@ -436,6 +436,7 @@
     <Compile Include="Themes\ResizeMargin.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Themes\SmoothGraphics.cs" />
     <Compile Include="Themes\ThemeForm.cs">
       <SubType>Form</SubType>
     </Compile>

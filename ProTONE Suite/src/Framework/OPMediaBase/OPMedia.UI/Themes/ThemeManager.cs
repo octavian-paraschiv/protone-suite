@@ -70,6 +70,28 @@ namespace OPMedia.UI.Themes
 
         static FileSystemWatcher _fsw = null;
 
+        static readonly float[] fontSizes = 
+        { 
+            11, 
+            11, 
+            12, 
+            12, 
+            14, 
+            16, 
+            32 
+        };
+        
+        static readonly FontStyle[] fontStyles = 
+        { 
+            FontStyle.Regular, 
+            FontStyle.Bold, 
+            FontStyle.Regular, 
+            FontStyle.Bold, 
+            FontStyle.Bold, 
+            FontStyle.Bold, 
+            FontStyle.Bold 
+        };
+
         #region Members
         private static Font _smallestFont = null;
         private static Font _smallFont = null;
@@ -261,6 +283,10 @@ namespace OPMedia.UI.Themes
         public static Color GradientGaugeColor1a
         { get { return ThemeElement("GradientGaugeColor1a", SafeColorFromString("255, 242, 000")); } }
 
+
+        public static Color AltRowColor
+        { get { return ThemeElement("AltRowColor", SafeColorFromString("250, 250, 250")); } }
+
         //public static int CornerSize
         //{ get { return ThemeElement("CornerSize", 0); } }
 
@@ -418,20 +444,22 @@ namespace OPMedia.UI.Themes
                     float step = 72f / g.DpiX;
                     string themeFontFamily = ThemeManager.ThemeFontFamily;
 
+                    int i = 0;
+
                     _smallestFont =
-                        new Font(themeFontFamily, 9 * step, FontStyle.Regular, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _smallFont =
-                        new Font(themeFontFamily, 9 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _normalFont =
-                        new Font(themeFontFamily, 11 * step, FontStyle.Regular, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _normalBoldFont =
-                        new Font(themeFontFamily, 11 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _largeFont =
-                        new Font(themeFontFamily, 12 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _veryLargeFont =
-                        new Font(themeFontFamily, 15 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _extremeLargeFont =
-                        new Font(themeFontFamily, 35 * step, FontStyle.Bold, GraphicsUnit.Point);
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                 }
             }
         }
@@ -678,16 +706,18 @@ namespace OPMedia.UI.Themes
             return retVal;
         }
 
-        private static Color SafeColorFromString(string value)
+        public static Color SafeColorFromString(string value)
         {
             try
             {
-                return (Color)cc.ConvertFromInvariantString(value);
+                if (value != "null" && string.IsNullOrEmpty(value) == false)
+                    return (Color)cc.ConvertFromInvariantString(value);
             }
             catch
             {
-                return Color.Empty;
             }
+
+            return Color.Empty;
         }
 
         static string _previousTheme = "Black";

@@ -144,6 +144,18 @@ namespace OPMedia.UI.Controls
 
         #region Properties
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DefaultValue(true)]
+        public bool ShowAttributes { get; set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DefaultValue(true)]
+        public bool ShowLastAccess { get; set; }
+
         [ReadOnly(true)]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -360,19 +372,21 @@ namespace OPMedia.UI.Controls
             colName.Text = "TXT_FILENAME";
             this.Columns.Add(colName);
 
-            colLastAccess.Text = "TXT_LASTCHANGEDATE";
-            this.Columns.Add(colLastAccess);
-
             colSize.Text = "TXT_FILESIZE";
             this.Columns.Add(colSize);
 
+            colLastAccess.Text = "TXT_LASTCHANGEDATE";
+            this.Columns.Add(colLastAccess);
+            this.ShowLastAccess = true;
+
             colAttr.Text = "TXT_ATTRIBUTES";
             this.Columns.Add(colAttr);
+            this.ShowAttributes = true;
 
             int i = 0;
             colName.DisplayIndex = i++;
-            colLastAccess.DisplayIndex = i++;
             colSize.DisplayIndex = i++;
+            colLastAccess.DisplayIndex = i++;
             colAttr.DisplayIndex = i++;
 
             //this.ListViewItemSorter = new Sorter(colName.Index);
@@ -417,10 +431,12 @@ namespace OPMedia.UI.Controls
 
         void OPMShellListView_Resize(object sender, EventArgs e)
         {
-            colSize.Width = 83;
-            colAttr.Width = 85;
-            colLastAccess.Width = 130;
-            colName.Width = this.EffectiveWidth - colSize.Width - colAttr.Width - colLastAccess.Width;
+            colSize.Width = 75;
+            colAttr.Width = 65;
+            colLastAccess.Width = 160;
+            colName.Width = this.EffectiveWidth - colSize.Width - 
+                (ShowLastAccess ? colLastAccess.Width : 0) - 
+                (ShowAttributes ? colAttr.Width : 0);
         }
 
         #endregion
@@ -543,6 +559,12 @@ namespace OPMedia.UI.Controls
             fwdPaths.Clear();
 
             EventDispatch.RegisterHandler(this);
+
+            if (ShowAttributes == false)
+                this.Columns.Remove(colAttr);
+
+            if (ShowLastAccess == false)
+                this.Columns.Remove(colLastAccess);
         }
 
         void OPMShellListView_HandleDestroyed(object sender, EventArgs e)
@@ -1215,9 +1237,19 @@ namespace OPMedia.UI.Controls
                 string parent = System.IO.Path.GetDirectoryName(Path);
                 if (parent != null)
                 {
-                    string[] data = new string[] { PathUtils.ParentDir, BuildLastAccessTime(parent), "[ DIR ]", BuildAttributes(parent) };
+                    List<string> data = new List<string>();
 
-                    ListViewItem item = new ListViewItem(data);
+                    data.Add(PathUtils.ParentDir);
+                    
+                    data.Add("[ DIR ]");
+
+                    if (ShowLastAccess)
+                        data.Add(BuildLastAccessTime(parent));
+
+                    if (ShowAttributes)
+                        data.Add(BuildAttributes(parent));
+
+                    ListViewItem item = new ListViewItem(data.ToArray());
                     item.ImageKey = m_ilDirListManager.GetImageKey(parent);
                     item.Tag = parent;
                     item.BackColor = ThemeManager.BackColor;
@@ -1262,17 +1294,19 @@ namespace OPMedia.UI.Controls
                 isFile = true;
             }
 
-            string[] data = new string[] 
-            { 
-                //fsi.Name, 
-                BuildDisplayName(fsi),
+            List<string> data = new List<string>();
 
-                BuildLastAccessTime(fsi), 
-                strLen, 
-                BuildAttributes(fsi) 
-            };
+            data.Add(BuildDisplayName(fsi));
 
-            ListViewItem item = new ListViewItem(data);
+            data.Add(strLen);
+
+            if (ShowLastAccess)
+                data.Add(BuildLastAccessTime(fsi));
+
+            if (ShowAttributes)
+                data.Add(BuildAttributes(fsi));
+
+            ListViewItem item = new ListViewItem(data.ToArray());
             item.BackColor = ThemeManager.BackColor;
             item.ForeColor = isFile ? ThemeManager.ForeColor : ThemeManager.HighlightColor;
             item.ImageKey = m_ilDirListManager.GetImageKey(fsi);

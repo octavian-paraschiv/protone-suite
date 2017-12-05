@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OPMedia.UI.Controls;
 using System.Drawing;
+using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 {
@@ -28,7 +29,7 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
             
             set 
             {
-                base.Color = (Color)cc.ConvertFromInvariantString(value);
+                base.Color = ThemeManager.SafeColorFromString(value);
             }
         }
 

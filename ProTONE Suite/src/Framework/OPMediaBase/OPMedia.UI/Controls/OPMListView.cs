@@ -132,6 +132,8 @@ namespace OPMedia.UI.Controls
 
         int _hotItemRow = 0, _hotItemColumn = 0;
 
+        ImageList _stateImageList = null;
+
 		#region Delegates
 		/// <summary>
 		/// Type of delegate used to raise EditableListViewXXX events.
@@ -333,7 +335,10 @@ namespace OPMedia.UI.Controls
             // Set grid row height equal with default combo box height.
             // With this all "regular" comboboxes should fit exactly
             // in a grid cell.
-            //this.RowHeight = new ComboBox().Height;
+            int h = new ComboBox().Height;
+            _stateImageList = new ImageList();
+            _stateImageList.ImageSize = new System.Drawing.Size(h, h);
+            this.StateImageList = _stateImageList;
 
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -719,6 +724,9 @@ namespace OPMedia.UI.Controls
                 ListViewItem.ListViewSubItem subitem = e.Item.SubItems[col];
                 if (subitem != null)
                 {
+                    if (this is OPMShellListView)
+                        subitem.Font = e.Item.Font;
+
                     try
                     {
                         DrawListViewSubItemEventArgs e2 = new DrawListViewSubItemEventArgs(
@@ -769,8 +777,12 @@ namespace OPMedia.UI.Controls
                     isValid = (e.SubItem as OPMListViewSubItem).IsValid;
                 }
 
-                Color bColor = isSelected ? ThemeManager.SelectedColor : 
-                    (alt ? ThemeManager.DefaultButtonFocusColor1 : GetBackColor());
+                Color altRowColor = ThemeManager.AltRowColor;
+                if (altRowColor == Color.Empty)
+                    altRowColor = GetBackColor();
+
+                Color bColor = isSelected ? ThemeManager.SelectedColor :
+                    (alt ? altRowColor : GetBackColor());
 
                 Color fColor = e.Item.ForeColor;// ThemeManager.ForeColor;
 
@@ -887,7 +899,10 @@ namespace OPMedia.UI.Controls
                         if (imgToDraw == null && 0 <= e.Item.ImageIndex && e.Item.ImageIndex < SmallImageList.Images.Count)
                             imgToDraw = SmallImageList.Images[e.Item.ImageIndex];
 
-                        e.Graphics.DrawImageUnscaled(imgToDraw, e.Bounds.Location);
+                        Rectangle rc = new Rectangle(e.Bounds.Location, imgToDraw.Size);
+                        rc.Offset(0, (e.Bounds.Height - imgToDraw.Height) / 2);
+
+                        e.Graphics.DrawImageUnscaled(imgToDraw, rc);
                     }
                     else if (esid != null && esid.Image != null)
                     {
@@ -897,8 +912,12 @@ namespace OPMedia.UI.Controls
                             imgSize = this.StateImageList.ImageSize;
                         }
 
-                        Image img = ImageProvider.ScaleImage(esid.Image, imgSize, false);
-                        e.Graphics.DrawImageUnscaled(img, e.Bounds.Location);
+                        Image imgToDraw = ImageProvider.ScaleImage(esid.Image, imgSize, false);
+
+                        Rectangle rc = new Rectangle(e.Bounds.Location, imgToDraw.Size);
+                        rc.Offset(0, (e.Bounds.Height - imgToDraw.Height) / 2);
+
+                        e.Graphics.DrawImageUnscaled(imgToDraw, rc);
 
                         drawText = false;
                     }
@@ -1323,7 +1342,7 @@ namespace OPMedia.UI.Controls
         {
             get
             {
-                return this.Width - VisibleVerticalScrollbarWidth;
+                return this.Width - VisibleVerticalScrollbarWidth - 3;
             }
         }
 
