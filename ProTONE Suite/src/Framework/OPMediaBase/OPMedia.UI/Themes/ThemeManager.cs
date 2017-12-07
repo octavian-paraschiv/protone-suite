@@ -242,11 +242,17 @@ namespace OPMedia.UI.Themes
         public static Color CaptionButtonColor2
         { get { return ThemeElement("CaptionButtonColor2", SafeColorFromString("224, 227, 206")); } }
 
-        public static Color CaptionButtonRedColor1
-        { get { return ThemeElement("CaptionButtonRedColor1", SafeColorFromString("225, 100, 100")); } }
+        public static Color CaptionCloseButtonColor1
+        { get { return ThemeElement("CaptionCloseButtonColor1", SafeColorFromString("225, 100, 100")); } }
 
-        public static Color CaptionButtonRedColor2
-        { get { return ThemeElement("CaptionButtonRedColor2", SafeColorFromString("225, 100, 100")); } }
+        public static Color CaptionCloseButtonColor2
+        { get { return ThemeElement("CaptionCloseButtonColor2", SafeColorFromString("225, 100, 100")); } }
+
+        public static Color CaptionButtonForeColor
+        { get { return ThemeElement("CaptionButtonForeColor", SafeColorFromString("225, 100, 100")); } }
+
+        public static Color CaptionCloseButtonForeColor
+        { get { return ThemeElement("CaptionCloseButtonForeColor", SafeColorFromString("225, 100, 100")); } }
 
         public static Color SelectedTextColor
         { get { return ThemeElement("SelectedTextColor", SafeColorFromString("000, 000, 000")); } }

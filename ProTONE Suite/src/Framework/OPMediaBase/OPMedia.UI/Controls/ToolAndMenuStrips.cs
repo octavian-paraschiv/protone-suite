@@ -395,7 +395,7 @@ namespace OPMedia.UI.Controls
                         imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.CheckedMenuColor);
                 }
                 else
-                    imgDraw = this.InactiveImage;
+                    imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.ForeColor);
 
                 if (imgDraw == null)
                     imgDraw = InactiveImage;
@@ -410,7 +410,7 @@ namespace OPMedia.UI.Controls
                     int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
                     int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
 
-                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
+                    e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
                 }
             }
         }

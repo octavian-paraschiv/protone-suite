@@ -783,7 +783,7 @@ namespace OPMedia.UI.Themes
             Color cl1 = ThemeManager.CaptionButtonColor1;
             Color cl2 = ThemeManager.CaptionButtonColor2;
             Color clPen = ThemeManager.BorderColor;
-            Color clText = ThemeManager.ForeColor;
+            Color clText = ThemeManager.CaptionButtonForeColor;
 
             float percLight = 0.4f;
             string letter = "";
@@ -799,7 +799,6 @@ namespace OPMedia.UI.Themes
                     letter = "0";
                     cl1 = ControlPaint.Light(cl1, percLight);
                     cl2 = ControlPaint.Light(cl2, percLight);
-                    clText = ThemeManager.WndTextColor;
                     break;
 
                 case ButtonIcons.Maximize:
@@ -810,7 +809,6 @@ namespace OPMedia.UI.Themes
                     letter = "1";
                     cl1 = ControlPaint.Light(cl1, percLight);
                     cl2 = ControlPaint.Light(cl2, percLight);
-                    clText = ThemeManager.WndTextColor;
                     break;
                 
                 case ButtonIcons.Restore:
@@ -821,20 +819,20 @@ namespace OPMedia.UI.Themes
                     letter = "2";
                     cl1 = ControlPaint.Light(cl1, percLight);
                     cl2 = ControlPaint.Light(cl2, percLight);
-                    clText = ThemeManager.WndTextColor;
                     break;
 
                 case ButtonIcons.Close:
                     letter = "r";
-                    cl1 = ThemeManager.CaptionButtonRedColor1;
-                    cl2 = ThemeManager.CaptionButtonRedColor2;
+                    cl1 = ThemeManager.CaptionCloseButtonColor1;
+                    cl2 = ThemeManager.CaptionCloseButtonColor2;
+                    clText = ThemeManager.CaptionCloseButtonForeColor;
                     break;
                 
                 case ButtonIcons.CloseHovered:
                     letter = "r";
-                    cl1 = ControlPaint.Light(ThemeManager.CaptionButtonRedColor1, percLight);
-                    cl2 = ControlPaint.Light(ThemeManager.CaptionButtonRedColor2, percLight);
-                    clText = ThemeManager.WndTextColor;
+                    cl1 = ControlPaint.Light(ThemeManager.CaptionCloseButtonColor1, percLight);
+                    cl2 = ControlPaint.Light(ThemeManager.CaptionCloseButtonColor2, percLight);
+                    clText = ThemeManager.CaptionCloseButtonForeColor;
                     break;
             }
 
