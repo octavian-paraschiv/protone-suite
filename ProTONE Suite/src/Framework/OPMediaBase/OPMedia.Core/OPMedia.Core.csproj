@@ -185,6 +185,9 @@
     <None Include="Resources\folder.png" />
     <None Include="Resources\folder16.png" />
     <None Include="Resources\DiskDrive16.png" />
+    <Content Include="Resources\Catalog.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Library.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
