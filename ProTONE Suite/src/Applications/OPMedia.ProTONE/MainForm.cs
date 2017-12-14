@@ -96,7 +96,7 @@ namespace OPMedia.ProTONE
                 this.Shown += new EventHandler(MainForm_Shown);
                 this.HandleDestroyed += new EventHandler(MainForm_HandleDestroyed);
 
-                this.mnuTools.Image = OPMedia.UI.ProTONE.Properties.Resources.btnOpenSettings;
+                this.mnuTools.Image = OPMedia.UI.Properties.Resources.Settings16;
                 this.notifyIcon.ContextMenuStrip = this.cmsMain;
                 mediaPlayer.SetRenderingMenu(cmsMain);
 

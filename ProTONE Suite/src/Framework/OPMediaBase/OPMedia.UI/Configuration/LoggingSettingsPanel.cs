@@ -24,7 +24,7 @@ namespace OPMedia.UI.Configuration
         {
             get
             {
-                return Resources.Logging.ToBitmap();
+                return Resources.Logging;
             }
         }
 

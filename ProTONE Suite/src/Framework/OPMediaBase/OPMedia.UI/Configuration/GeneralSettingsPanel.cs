@@ -18,6 +18,7 @@ using System.Diagnostics;
 
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Utilities;
+using OPMedia.UI.Generic;
 
 
 namespace OPMedia.UI.Configuration
@@ -31,8 +32,7 @@ namespace OPMedia.UI.Configuration
         {
             get
             {
-                Icon appIcon = ImageProvider.GetAppIcon(true);
-                return (appIcon != null) ? appIcon.ToBitmap() : null;
+                return ImageProcessing.AppIcon;
             }
         }
 

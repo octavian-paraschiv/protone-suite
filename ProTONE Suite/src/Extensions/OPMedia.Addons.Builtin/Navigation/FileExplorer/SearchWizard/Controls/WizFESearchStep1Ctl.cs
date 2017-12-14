@@ -28,6 +28,8 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using System.Linq;
 using System.Threading;
 using System.Diagnostics;
+using OPMedia.Addons.Builtin.Shared;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 {
@@ -55,6 +57,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         public WizFESearchStep1Ctl()
         {
             InitializeComponent();
+
+            this.tsmiProTONEPlay.Image = ImageProcessing.Player16;
+            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
 
             this.ShowImage = false;
             this.ShowSeparator = false;

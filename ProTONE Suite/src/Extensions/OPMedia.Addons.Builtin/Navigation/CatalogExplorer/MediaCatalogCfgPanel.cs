@@ -13,6 +13,8 @@ using OPMedia.Addons.Builtin.Properties;
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Shared;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer
 {
@@ -22,7 +24,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         {
             get
             {
-                return Resources.Catalog16;
+                return ImageProcessing.Library16;
             }
         }
 

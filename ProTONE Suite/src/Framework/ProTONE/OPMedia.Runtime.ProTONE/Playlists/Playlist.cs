@@ -674,18 +674,20 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                             else if (line.StartsWith("#DZMEDIA:"))
                             {
                                 string s = line.Replace("#DZMEDIA:", "").Trim();
-                                string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                                if (fields != null && fields.Length > 1)
+                                int idx = s.IndexOf(',');
+                                if (idx > 0)
                                 {
+                                    string durStr = s.Substring(0, idx);
+
                                     DeezerTrackItem dti = new DeezerTrackItem();
 
                                     int sec = 0;
-                                    int.TryParse(fields[0], out sec);
+                                    int.TryParse(durStr, out sec);
                                     dti.Duration = TimeSpan.FromSeconds(sec);
 
-                                    if (fields[1] != null)
+                                    if (idx < (s.Length - 2))
                                     {
-                                        string[] fields2 = fields[1].Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                        string[] fields2 = s.Substring(idx + 1).Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                                         dti.Artist = fields2[0];
                                         dti.Title = fields2[1];
                                         dti.Album = fields2[2];

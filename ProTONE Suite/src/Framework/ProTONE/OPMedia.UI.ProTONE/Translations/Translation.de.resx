@@ -1166,4 +1166,29 @@ Klicken Sie auf das Volumen eingestellt werden: {0}%</value>
   <data name="TXT_NO_STATIONS_LOADED">
     <value>Noch keine Stationen geladen. Bitte zuerst eine Suche ...</value>
   </data>
+  <data name="TXT_SHOUTCAST_DEV_ID_HINT" xml:space="preserve">
+    <value>Der private Schlüssel der ShoutCastAPI-Geräte-ID stellt Ihre eindeutige Identität für die ShoutCast-API dar.
+Es soll individuell verwendet werden, also teilen Sie es bitte nicht mit anderen.
+Um Ihren eigenen privaten Schlüssel zu erhalten, gehen Sie bitte auf:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_SEARCH_URL" xml:space="preserve">
+    <value>ShoutCast Station Search URL:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_TUNEIN_URL" xml:space="preserve">
+    <value>ShoutCast Station Tune-in URL:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_DEV_ID" xml:space="preserve">
+    <value>ShoutCast API Device ID private key:</value>
+  </data>
+  <data name="TXT_DEEZER_APP_ID" xml:space="preserve">
+    <value>Deezer Application ID:</value>
+  </data>
+  <data name="TXT_DEEZER_TOKEN" xml:space="preserve">
+    <value>Deezer User Access Token:</value>
+  </data>
+  <data name="TXT_DEEZER_ID_HINT" xml:space="preserve">
+    <value>The Application ID and the User Access Token represents your unique identity for Deezer API.
+These credentials is meant to be individually used, so please do not share them with anyone.
+To get your own credentials, please access:</value>
+  </data>
 </root>

@@ -326,7 +326,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // tsmiDelete
             // 
             this.tsmiDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiDelete.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Delete;
+            this.tsmiDelete.Image = global::OPMedia.UI.Properties.Resources.Delete;
             this.tsmiDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDelete.Name = "tsmiDelete";
             this.tsmiDelete.Size = new System.Drawing.Size(201, 22);
@@ -356,7 +356,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // tsmiProTONEPlay
             // 
             this.tsmiProTONEPlay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiProTONEPlay.Image = global::OPMedia.Addons.Builtin.Properties.Resources.player16;
             this.tsmiProTONEPlay.Name = "tsmiProTONEPlay";
             this.tsmiProTONEPlay.Size = new System.Drawing.Size(201, 22);
             this.tsmiProTONEPlay.Tag = "ToolActionProTONEPlay";
@@ -366,7 +365,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // tsmiProTONEEnqueue
             // 
             this.tsmiProTONEEnqueue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiProTONEEnqueue.Image = global::OPMedia.Addons.Builtin.Properties.Resources.player16;
             this.tsmiProTONEEnqueue.Name = "tsmiProTONEEnqueue";
             this.tsmiProTONEEnqueue.Size = new System.Drawing.Size(201, 22);
             this.tsmiProTONEEnqueue.Tag = "ToolActionProTONEEnqueue";

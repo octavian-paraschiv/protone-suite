@@ -232,7 +232,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     else if (SubtitleDownloadProcessor.TestForExistingSubtitle(plItem.Path))
                     {
                         // Already having a subtitle
-                        imgMisc = Resources.ResourceManager.GetImage("subtitles16");
+                        imgMisc = ImageProcessing.Subtitle16;
                         txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE");
                     }
                 }
@@ -564,7 +564,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = Resources.btnSavePlaylist.ToIcon((uint)Color.White.ToArgb());
+            dlg.Icon = OPMedia.UI.Properties.Resources.Save16.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
@@ -632,7 +632,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = Resources.btnLoadPlaylist.ToIcon((uint)Color.White.ToArgb());
+            dlg.Icon = OPMedia.UI.Properties.Resources.Open16.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
@@ -953,7 +953,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         ExtendedSubItemDetail esid = lvsi.Tag as ExtendedSubItemDetail;
                         if (esid != null && !string.IsNullOrEmpty(esid.Text))
                         {
-                            _ttm.ShowSimpleToolTip(esid.Text, Resources.ResourceManager.GetImage("subtitles"));
+                            _ttm.ShowSimpleToolTip(esid.Text, ImageProcessing.Subtitle);
                             set = true;
                         }
                         else

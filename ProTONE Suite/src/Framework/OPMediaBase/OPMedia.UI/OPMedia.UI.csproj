@@ -110,11 +110,17 @@
     <Compile Include="Configuration\LoggingSettingsPanel.Designer.cs">
       <DependentUpon>LoggingSettingsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\NetworkSettingsPanel.cs">
+    <Compile Include="Configuration\InternetSettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\NetworkSettingsPanel.designer.cs">
-      <DependentUpon>NetworkSettingsPanel.cs</DependentUpon>
+    <Compile Include="Configuration\InternetSettingsPanel.designer.cs">
+      <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\NetworkCfgPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Configuration\NetworkCfgPanel.designer.cs">
+      <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration\SerialPortCfgDlg.cs">
       <SubType>Form</SubType>
@@ -502,6 +508,10 @@
     <EmbeddedResource Include="Configuration\MultiPageCfgPanel.resx">
       <DependentUpon>MultiPageCfgPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\NetworkCfgPanel.resx">
+      <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\TroubleshootingPanel.resx">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -603,8 +613,8 @@
       <DependentUpon>LoggingSettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\NetworkSettingsPanel.resx">
-      <DependentUpon>NetworkSettingsPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Configuration\InternetSettingsPanel.resx">
+      <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\SettingsForm.resx">
@@ -691,7 +701,6 @@
     </EmbeddedResource>
     <None Include="Resources\ImageNotFound.png" />
     <None Include="Resources\menuChildren.png" />
-    <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -699,10 +708,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Resources\Logging.ICO">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Network.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Configuration\BaseCfgPanel.resx">
@@ -739,24 +744,6 @@
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Stop.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lan disconnect.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CloseButton.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MaximizeButton.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MinimizeButton.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RestoreButton.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Keyboard.png" />
   </ItemGroup>
   <ItemGroup>
@@ -778,42 +765,53 @@
     <None Include="Resources\ilDn.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Favorites.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\favorites16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\New_Folder_Command.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\New_Folder_Command16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\add2.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\Add2.png" />
     <None Include="Resources\Add3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\delete2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\delete3.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\Add.png" />
     <Content Include="Resources\Assistance.png" />
     <None Include="Resources\Back.png" />
+    <None Include="Resources\Back16.png" />
     <Content Include="Resources\ControlPanel.png" />
     <None Include="Resources\Forward.png" />
-    <Content Include="Resources\moveDown.png" />
-    <Content Include="Resources\moveUp.png" />
+    <None Include="Resources\Forward16.png" />
+    <None Include="Resources\Favorites.png" />
+    <None Include="Resources\Favorites16.png" />
+    <None Include="Resources\Copy.png" />
+    <None Include="Resources\copy16.png" />
+    <None Include="Resources\Cut.png" />
+    <None Include="Resources\cut16.png" />
+    <None Include="Resources\delete16.png" />
+    <None Include="Resources\Down.png" />
+    <None Include="Resources\Down16.png" />
+    <None Include="Resources\Del2.png" />
+    <None Include="Resources\Del3.png" />
+    <None Include="Resources\Del.png" />
+    <None Include="Resources\Up.png" />
+    <None Include="Resources\Up16.png" />
+    <None Include="Resources\Open.png" />
+    <None Include="Resources\SaveAs.png" />
+    <None Include="Resources\Open16.png" />
+    <None Include="Resources\Save16.png" />
+    <None Include="Resources\SaveAs16.png" />
+    <None Include="Resources\Paste.png" />
+    <None Include="Resources\paste16.png" />
+    <None Include="Resources\Reload.png" />
+    <None Include="Resources\reload16.png" />
+    <None Include="Resources\Rename.png" />
+    <None Include="Resources\rename16.png" />
+    <None Include="Resources\new_folder_command.png" />
+    <None Include="Resources\new_folder_command16.png" />
+    <None Include="Resources\Settings.png" />
+    <None Include="Resources\Settings16.png" />
+    <Content Include="Resources\lan_disconnect.png" />
+    <Content Include="Resources\lan_ok.png" />
+    <None Include="Resources\Logging.png" />
+    <None Include="Resources\Stop.png" />
+    <None Include="Resources\Stop16.png" />
+    <None Include="Resources\Search.png" />
+    <None Include="Resources\search16.png" />
     <Content Include="Resources\wizard.png" />
     <None Include="Resources\waiting.gif" />
-    <None Include="Resources\waitframe.bmp" />
     <Content Include="Resources\hourglass.png" />
     <Content Include="Resources\Troubleshooting.png" />
     <Content Include="Resources\TVState0.bmp" />

@@ -536,23 +536,32 @@ namespace OPMedia.UI.Controls.Dialogs
 
                 foreach (System.IO.DriveInfo di in drives)
                 {
-                    string path = di.RootDirectory.FullName.ToUpperInvariant();
+                    try
+                    {
+                        string path = di.RootDirectory.FullName.ToUpperInvariant();
 
-                    string title = string.Format("{0} [{1}]", di.Name, di.VolumeLabel);
+                        string title = di.Name;
+                        if (di.IsReady)
+                            title += string.Format(" [{0}]", di.VolumeLabel);
 
-                    OPMToolStripButton btn = new OPMToolStripButton(title);
-                    btn.Name = title;
-                    btn.Image = ImageProvider.GetIcon(path, true);
-                    btn.ToolTipText = path;
-                    btn.TextAlign = ContentAlignment.MiddleLeft;
-                    btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-                    btn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.SizeToFit;
-                    btn.ImageTransparentColor = System.Drawing.Color.Magenta;
-                    btn.AutoSize = true;
-                    btn.Tag = path;
-                    btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+                        OPMToolStripButton btn = new OPMToolStripButton(title);
+                        btn.Name = title;
+                        btn.Image = ImageProvider.GetIcon(path, true);
+                        btn.ToolTipText = path;
+                        btn.TextAlign = ContentAlignment.MiddleLeft;
+                        btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+                        btn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.SizeToFit;
+                        btn.ImageTransparentColor = System.Drawing.Color.Magenta;
+                        btn.AutoSize = true;
+                        btn.Tag = path;
+                        btn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 
-                    tsSpecialFolders.Items.Add(btn);
+                        tsSpecialFolders.Items.Add(btn);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogException(ex);
+                    }
                 }
             }
             catch (Exception ex)

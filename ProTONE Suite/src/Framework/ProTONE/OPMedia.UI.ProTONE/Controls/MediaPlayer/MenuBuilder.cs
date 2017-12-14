@@ -17,6 +17,7 @@ using OPMedia.UI.Themes;
 using OPMedia.UI.ProTONE.Properties;
 using System.Drawing;
 using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -215,35 +216,89 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmi.Click += clickHandler;
             tsmi.Tag = cmd;
             tsmi.ShortcutKeyDisplayString = shortcuts;
-            
-            
-            if (cmd == OPMShortcut.CmdPlayPause)
+
+            switch (cmd)
             {
-                Bitmap img = null;
+                case OPMShortcut.CmdMoveUp:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Up16;
+                    break;
 
-                switch (MediaRenderer.DefaultInstance.FilterState)
-                {
-                    case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
-                        img = Resources.btnPlayAfterPause;
-                        break;
+                case OPMShortcut.CmdMoveDown:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Down16;
+                    break;
 
-                    case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running:
-                        img = Resources.btnPause;
-                        break;
+                case OPMShortcut.CmdDelete:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Delete16;
+                    break;
 
-                    default:
-                        img = Resources.btnPlay;
-                        break;
-                }
+                case OPMShortcut.CmdLoadPlaylist:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Open16;
+                    break;
 
-                img.MakeTransparent(ThemeManager.TransparentColor);
-                tsmi.Image = img;
+                case OPMShortcut.CmdSavePlaylist:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Save16;
+                    break;
+
+                case OPMShortcut.CmdOpenDisk:
+                    tsmi.Image = OPMedia.Core.Properties.Resources.DVD;
+                    break;
+
+                case OPMShortcut.CmdOpenURL:
+                    tsmi.Image = OPMedia.Core.Properties.Resources.Internet;
+                    break;
+
+                case OPMShortcut.CmdPlayPause:
+                    {
+                        Bitmap img = null;
+
+                        switch (MediaRenderer.DefaultInstance.FilterState)
+                        {
+                            case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
+                                img = Resources.btnPlay;
+                                break;
+
+                            case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running:
+                                img = Resources.btnPause;
+                                break;
+
+                            default:
+                                img = Resources.btnPlay;
+                                break;
+                        }
+
+                        img.MakeTransparent(ThemeManager.TransparentColor);
+                        tsmi.Image = img;
+                    }
+                    break;
+
+                case OPMShortcut.CmdCfgAudio:
+                    tsmi.Image = ImageProcessing.AudioFile16;
+                    break;
+
+                case OPMShortcut.CmdCfgVideo:
+                    tsmi.Image = ImageProcessing.VideoFile16;
+                    break;
+
+                case OPMShortcut.CmdCfgSubtitles:
+                    tsmi.Image = ImageProcessing.Subtitle16;
+                    break;
+
+                case OPMShortcut.CmdShowLogConsole:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Logging;
+                    break;
+
+                case OPMShortcut.CmdOpenSettings:
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Settings16;
+                    break;
+
+                case OPMShortcut.CmdCfgTimer:
+                    tsmi.Image = Resources.IconTime;
+                    break;
+                
+                default:
+                    tsmi.Image = Resources.ResourceManager.GetImage(imageName);
+                    break;
             }
-            else
-            { 
-                tsmi.Image = Resources.ResourceManager.GetImage(imageName); 
-            }
-            
 
             tsmi.Enabled = enabled;
 

@@ -987,6 +987,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 return str;
             }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("ShoutCastApiDevID", value);
+                    }
+                }
+                catch { }
+            }
         }
 
         public static string ShoutCastSearchBaseURL
@@ -1010,6 +1023,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 return str;
             }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("ShoutCastSearchBaseURL", value);
+                    }
+                }
+                catch { }
+            }
         }
 
         public static string ShoutCastTuneInBaseURL
@@ -1032,6 +1058,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 }
 
                 return str;
+            }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("ShoutCastTuneInBaseURL", value);
+                    }
+                }
+                catch { }
             }
         }
 
@@ -1057,6 +1096,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 return str;
             }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("DeezerUserAccessToken", value);
+                    }
+                }
+                catch { }
+            }
         }
 
         public static string DeezerApplicationId
@@ -1079,6 +1131,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 }
 
                 return str;
+            }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("DeezerApplicationId", value);
+                    }
+                }
+                catch { }
             }
         }
 

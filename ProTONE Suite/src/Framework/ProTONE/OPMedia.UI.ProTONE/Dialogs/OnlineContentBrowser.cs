@@ -43,7 +43,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             _ilImages.ColorDepth = ColorDepth.Depth32Bit;
             _ilImages.ImageSize = new Size(32, 32);
 
-            _ilImages.Images.Add(Resources.Favorites);
+            _ilImages.Images.Add(OPMedia.UI.Properties.Resources.Favorites);
             _ilImages.Images.Add(Resources.Shoutcast);
             _ilImages.Images.Add(Resources.deezer);
 

@@ -39,6 +39,8 @@ using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Runtime.Addons;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Addons.Builtin.Shared;
+using OPMedia.UI.Generic;
 
 /*
  * IMPORTANT NOTE: In Media Catalog, instead of paths are used VPaths. 
@@ -82,8 +84,14 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         {
             InitializeComponent();
 
-            this.AddonImage = Resources.Catalog;
-            this.SmallAddonImage = Resources.Catalog16;
+            tsmiProTONEPlay.Image = ImageProcessing.Player16;
+            tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
+            tsmiCatalog.Image = ImageProcessing.Library16;
+
+            tsbCatalog.Image = ImageProcessing.Library;
+
+            this.AddonImage = ImageProcessing.Library;
+            this.SmallAddonImage = ImageProcessing.Library16;
 
             tvCatalog.Cursor = lvCatalogFolder.Cursor = Cursors.Default;
 
@@ -763,12 +771,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible =
                 playerInstalled;
 
-#if MC_COPY_PASTE
-            tsmiCopyPaste.Visible = tssCopyPaste.Visible = true;
-#else
-            tsmiCopyPaste.Visible = tssCopyPaste.Visible = false;
-#endif
-
             for (int i = 0; i < tsic.Count; i++)
             {
                 ToolStripItem btn = tsic[i] as ToolStripItem;
@@ -1360,7 +1362,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                     typeof(WizMCSearchStep1Ctl),
                 };
 
-            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_MC", pages, true, initTask, Resources.Search16.ToIcon());
+            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_MC", pages, true, initTask,
+                OPMedia.UI.Properties.Resources.Search.ToIcon());
         }
 
         public static DialogResult Execute()

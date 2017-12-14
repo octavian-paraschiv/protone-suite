@@ -123,7 +123,7 @@ namespace OPMedia.Runtime.Addons
             tsmiSettings.ShortcutKeyDisplayString =
                 ShortcutMapper.GetShortcutString(OPMShortcut.CmdOpenSettings);
 
-            tsmiSettings.Image = Resources.settings.Transparent();
+            tsmiSettings.Image = Resources.Settings.Transparent();
 
             SetColors();
 
@@ -254,7 +254,7 @@ namespace OPMedia.Runtime.Addons
             if (args.Handled)
                 return;
 
-            AddonAppSettingsForm.NetworkConfig = networkConfig;
+            AddonAppSettingsForm.InternetConfig = networkConfig;
 
             switch (args.cmd)
             {

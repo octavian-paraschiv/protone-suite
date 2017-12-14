@@ -65,7 +65,7 @@ namespace OPMedia.UI.Controls
 
             this.TextImageRelation = TextImageRelation.ImageBeforeText;
 
-            this.SizeMode = TabSizeMode.Normal;
+            this.SizeMode = TabSizeMode.Fixed;
 
             base.SetStyle(ControlStyles.ResizeRedraw, true);
             base.SetStyle(ControlStyles.UserPaint, true);

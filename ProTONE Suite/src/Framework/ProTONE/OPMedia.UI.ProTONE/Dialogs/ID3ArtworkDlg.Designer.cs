@@ -133,7 +133,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowse.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnLoadPlaylist;
+            this.btnBrowse.Image = global::OPMedia.UI.Properties.Resources.Open16;
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnBrowse.Location = new System.Drawing.Point(195, 200);
             this.btnBrowse.Name = "btnBrowse";
@@ -190,7 +190,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnSavePlaylist;
+            this.btnSave.Image = global::OPMedia.UI.Properties.Resources.Save16;
             this.btnSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnSave.Location = new System.Drawing.Point(173, 200);
             this.btnSave.Name = "btnSave";

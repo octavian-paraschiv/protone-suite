@@ -27,7 +27,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
             get
             {
-                return Resources.Scheduler;
+                return Resources.IconTime;
             }
         }
 

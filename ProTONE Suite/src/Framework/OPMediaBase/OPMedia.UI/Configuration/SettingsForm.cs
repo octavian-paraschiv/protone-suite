@@ -20,7 +20,7 @@ namespace OPMedia.UI
 {
     public partial class SettingsForm : ToolForm
     {
-        public static bool NetworkConfig = false;
+        public static bool InternetConfig = false;
 
         protected static bool _restart = false;
 
@@ -58,7 +58,7 @@ namespace OPMedia.UI
 
             //this.AllowResize = true;
             this.InheritAppIcon = false;
-            this.Icon = Resources.settings.ToIcon();
+            this.Icon = Resources.Settings.ToIcon();
             this.FormClosing += new FormClosingEventHandler(SettingsForm_FormClosing);
             this.HandleDestroyed += new EventHandler(SettingsForm_HandleDestroyed);
             this.Load += new EventHandler(SettingsForm_Load);
@@ -72,7 +72,7 @@ namespace OPMedia.UI
 
             AddPanel(typeof(GeneralSettingsPanel));
             AddAditionalPanels();
-            AddPanel(typeof(NetworkSettingsPanel), RequiresNetworkConfig());
+            AddPanel(typeof(InternetSettingsPanel), RequiresInternetConfig());
             AddPanel(typeof(TroubleshootingPanel));
             
             RemoveUnneededPanels();
@@ -107,9 +107,9 @@ namespace OPMedia.UI
         {
         }
 
-        public virtual bool RequiresNetworkConfig()
+        public virtual bool RequiresInternetConfig()
         {
-            return NetworkConfig;
+            return InternetConfig;
         }
 
 
@@ -245,6 +245,15 @@ namespace OPMedia.UI
                                     subPagesToAdd.AddRange(pages);
                                 }
                             }
+                            else if (panel is InternetSettingsPanel)
+                            {
+                                subPagesToAdd.Add(new NetworkCfgPanel());
+                                List<BaseCfgPanel> pages = GetInternetSubPages();
+                                if (pages != null)
+                                {
+                                    subPagesToAdd.AddRange(pages);
+                                }
+                            }
 
                             foreach(var page in subPagesToAdd)
                             {
@@ -331,6 +340,12 @@ namespace OPMedia.UI
         }
 
         public virtual List<BaseCfgPanel> GetControlSubPages()
+        {
+            return null;
+        }
+
+
+        public virtual List<BaseCfgPanel> GetInternetSubPages()
         {
             return null;
         }

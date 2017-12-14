@@ -85,8 +85,8 @@ namespace OPMedia.UI.Dialogs
 
             tsbSave.Text = string.Empty;
 
-            tsbFreezeWindow.Image = Resources.Stop.ToBitmap();
-            tsbClearLog.Image = Resources.Remove.Resize(false);
+            tsbFreezeWindow.Image = Resources.Stop16;
+            tsbClearLog.Image = Resources.Delete16;
 
             lblLogFileName.ForeColor = ThemeManager.ForeColor;
             lblLogLineCount.ForeColor = ThemeManager.ForeColor;
@@ -134,7 +134,7 @@ namespace OPMedia.UI.Dialogs
             if (_allowChooseLog)
             {
                 this.InheritAppIcon = false;
-                this.Icon = Resources.Logging;
+                this.Icon = Resources.Logging.ToIcon();
                 this.ShowIcon = true;
             }
 

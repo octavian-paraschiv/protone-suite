@@ -10,6 +10,8 @@ using OPMedia.Core.Logging;
 using System.Threading;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.Addons.Builtin.Properties;
+using OPMedia.Addons.Builtin.Shared;
+using OPMedia.UI.Generic;
 
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
@@ -33,7 +35,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
 
             ilItems.Images.Clear();
 
-            ilItems.Images.Add(Resources.Catalog16);
+            ilItems.Images.Add(ImageProcessing.Library16);
 
             LoadShell32Image(Shell32Icon.DriveUnknown);
             LoadShell32Image(Shell32Icon.DriveNoRoot);

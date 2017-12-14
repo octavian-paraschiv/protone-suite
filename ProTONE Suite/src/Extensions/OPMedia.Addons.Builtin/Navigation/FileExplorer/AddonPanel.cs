@@ -53,6 +53,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
+using OPMedia.Addons.Builtin.Shared;
 
 #endregion
 
@@ -88,6 +89,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         public AddonPanel() : base()
         {
             InitializeComponent();
+
+            tsmiProTONEPlay.Image = ImageProcessing.Player16;
+            tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
 
             opmShellList.MultiSelect = true;
             
@@ -1233,7 +1237,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     typeof(WizFESearchStep1Ctl),
                 };
 
-            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_FE", pages, true, initTask, Resources.Search16.ToIcon());
+            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_FE", pages, true, initTask, 
+                OPMedia.UI.Properties.Resources.Search.ToIcon());
         }
 
         public static DialogResult Execute()
@@ -1253,7 +1258,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 };
 
             return WizardHostForm.CreateWizard("TXT_CDRIPPERWIZARD", pages, true, initTask, 
-                Resources.blank_cd.ToIcon());
+                OPMedia.Core.Properties.Resources.CDA.ToIcon());
         }
 
         public static DialogResult Execute()

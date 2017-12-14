@@ -102,131 +102,118 @@ namespace OPMedia.UI.Controls
     #endregion
 
     #region OPMToolStripSplitButton
+
     public class OPMToolStripSplitButton : ToolStripSplitButton
     {
+        public new Image Image
+        {
+            get { return this.InactiveImage; }
+            set { this.InactiveImage = value; }
+        }
+
+        public Image ActiveImage { get; set; }
+        public Image InactiveImage { get; set; }
+        public Image DisabledImage { get; set; }
+        public Image CheckedImage { get; set; }
+
+
         public OPMToolStripSplitButton()
             : base()
         {
+            base.AutoSize = true;
         }
 
 
         public OPMToolStripSplitButton(string text)
             : base(text)
         {
+            base.AutoSize = true;
+        }
+
+        private Image GetImageToDraw()
+        {
+            Image imgDraw = this.InactiveImage;
+
+            try
+            {
+                if (!Enabled)
+                {
+                    if (DisabledImage != null)
+                        imgDraw = this.DisabledImage;
+                    else if (InactiveImage != null)
+                        imgDraw = ImageProcessing.Grayscale(InactiveImage, 0.5f);
+                }
+                //else if (Checked)
+                //{
+                //    if (CheckedImage != null)
+                //        imgDraw = this.CheckedImage;
+                //    else if (InactiveImage != null)
+                //        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
+                //}
+                else if (Selected)
+                {
+                    if (ActiveImage != null)
+                        imgDraw = this.ActiveImage;
+                    else if (InactiveImage != null)
+                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
+                }
+                else
+                    imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.ForeColor);
+
+                if (imgDraw == null)
+                    imgDraw = InactiveImage;
+                if (imgDraw == null)
+                    imgDraw = base.Image;
+            }
+            catch { }
+
+            return imgDraw;
         }
         
         protected override void OnPaint(PaintEventArgs e)
         {
             ThemeManager.PrepareGraphics(e.Graphics);
 
-                Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
-                Color c1 = ThemeManager.GradientHoverColor1;
-                Color c2 = ThemeManager.GradientHoverColor2;
+            Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
+            if (Selected || Pressed)
+                clText = ThemeManager.HighlightColor;
 
-                if (Selected || Pressed)
-                {
-                    //c1 = c2 = ThemeManager.SelectedColor;
-                    clText = ThemeManager.HighlightMenuTextColor;
-                }
+            Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2,
+                ContentRectangle.Y - 2,
+                ContentRectangle.Width + 4,
+                ContentRectangle.Height + 4);
 
-                Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2,
-                    ContentRectangle.Y - 2,
-                    ContentRectangle.Width + 4,
-                    ContentRectangle.Height + 4);
+            int ddw = DropDownButtonWidth;
 
-                int ddw = DropDownButtonWidth;
+            Image imgDraw = GetImageToDraw();
 
-                using (Brush b1 = new LinearGradientBrush(clientRectangle, c1, c2, 90f))
-                using (Pen p2 = new Pen(ThemeManager.BorderColor))
+            if (imgDraw != null)
+            {
+                Bitmap bmp = new Bitmap(imgDraw);
+                bmp.MakeTransparent(this.ImageTransparentColor);
+
+                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
+                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
+
+                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
+            }
+
+            if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
+            {
+                Rectangle rcArrow = new Rectangle(clientRectangle.Right - ddw - 2,
+                    clientRectangle.Top + (clientRectangle.Height - 20) / 2,
+                        ddw, 15);
+
+                using (GraphicsPath gp = ImageProcessing.GenerateCenteredArrow(rcArrow))
                 using (Brush b = new SolidBrush(clText))
+                using (Pen p = new Pen(b, 1))
                 {
-                    Rectangle rect = clientRectangle;
-                    rect.Width -= 1;
-                    rect.Height -= 1;
-
-                    if (Enabled && (Selected || Pressed))
-                    {
-                    e.Graphics.FillRectangle(b1, rect);
-                    e.Graphics.DrawRectangle(p2, rect);
-
-                        if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
-                        {
-                            Point pt1 = new Point(clientRectangle.Right - ddw,
-                                clientRectangle.Top + 2);
-                            Point pt2 = new Point(clientRectangle.Right - ddw,
-                                clientRectangle.Bottom - 4);
-
-                        e.Graphics.DrawLine(p2, pt1, pt2);
-                        }
-                    }
-
-                    int xpos = ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2 - ddw / 2;
-
-                    if (Image != null)
-                    {
-                        Image img = this.Image;
-                        if (!Enabled)
-                        {
-                            Bitmap bmp = ImageProcessing.Grayscale(this.Image);
-                            bmp.MakeTransparent(Color.Black);
-                            img = bmp;
-                        }
-
-                        if (string.IsNullOrEmpty(this.Text))
-                        {
-                            xpos += (this.Height - img.Height) / 2;
-                        }
-
-                    e.Graphics.DrawImage(ImageProvider.ScaleImage(img, Owner.ImageScalingSize, true),
-                            new Point(xpos, 2));
-                    }
-
-                    StringFormat sf = new StringFormat();
-
-                    rect = clientRectangle;
-                    rect.Width -= ddw;
-
-                    switch (TextDirection)
-                    {
-                        case ToolStripTextDirection.Inherit:
-                        case ToolStripTextDirection.Horizontal:
-                            sf.LineAlignment = StringAlignment.Near;
-                            sf.Alignment = StringAlignment.Center;
-                            break;
-
-                        default:
-                            sf.FormatFlags |= StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft;
-                            sf.LineAlignment = StringAlignment.Center;
-                            sf.Alignment = StringAlignment.Center;
-                            break;
-
-                    }
-
-                    if (Image != null)
-                    {
-                        rect.Y += this.Owner.ImageScalingSize.Height;
-                        rect.Height -= this.Owner.ImageScalingSize.Height;
-                    }
-
-                e.Graphics.DrawString(this.Text, this.Font, b, rect, sf);
-                }
-
-                if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
-                {
-                    Rectangle rcArrow = new Rectangle(clientRectangle.Right - ddw - 2,
-                        clientRectangle.Top + (clientRectangle.Height - 20) / 2,
-                            ddw, 15);
-
-                    using (GraphicsPath gp = ImageProcessing.GenerateCenteredArrow(rcArrow))
-                    using (Brush b = new SolidBrush(clText))
-                    using (Pen p = new Pen(b, 1))
-                    {
                     e.Graphics.FillPath(b, gp);
                     e.Graphics.DrawPath(p, gp);
-                    }
                 }
             }
         }
+    }
     #endregion
 
     #region OPMToolStripButton
@@ -353,6 +340,12 @@ namespace OPMedia.UI.Controls
     #region OPMTriStateToolStripButton
     public class OPMTriStateToolStripButton : ToolStripButton
     {
+        public new Image Image
+        {
+            get { return this.InactiveImage; }
+            set { this.InactiveImage = value; }
+        }
+
         public Image ActiveImage { get; set; }
         public Image InactiveImage { get; set; }
         public Image DisabledImage { get; set; }
@@ -365,14 +358,16 @@ namespace OPMedia.UI.Controls
             this.InactiveImage = null;
             this.CheckedImage = null;
             this.DisabledImage = null;
+            base.AutoSize = true;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+
+        private Image GetImageToDraw()
         {
-            ThemeManager.PrepareGraphics(e.Graphics);
+            Image imgDraw = this.InactiveImage;
 
-                Image imgDraw = null;
-
+            try
+            {
                 if (!Enabled)
                 {
                     if (DisabledImage != null)
@@ -385,14 +380,14 @@ namespace OPMedia.UI.Controls
                     if (CheckedImage != null)
                         imgDraw = this.CheckedImage;
                     else if (InactiveImage != null)
-                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.CheckedMenuColor);
+                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
                 }
                 else if (Selected)
                 {
                     if (ActiveImage != null)
                         imgDraw = this.ActiveImage;
                     else if (InactiveImage != null)
-                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.CheckedMenuColor);
+                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
                 }
                 else
                     imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.ForeColor);
@@ -401,26 +396,88 @@ namespace OPMedia.UI.Controls
                     imgDraw = InactiveImage;
                 if (imgDraw == null)
                     imgDraw = base.Image;
+            }
+            catch { }
 
-                if (imgDraw != null)
-                {
-                    Bitmap bmp = new Bitmap(imgDraw);
-                    bmp.MakeTransparent(this.ImageTransparentColor);
+            return imgDraw;
+        }
 
-                    int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
-                    int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            ThemeManager.PrepareGraphics(e.Graphics);
 
-                    e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
-                }
+            Image imgDraw = GetImageToDraw();
+
+            if (imgDraw != null)
+            {
+                Bitmap bmp = new Bitmap(imgDraw);
+                bmp.MakeTransparent(this.ImageTransparentColor);
+
+                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
+                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
+
+                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
             }
         }
+    }
     #endregion
 
     #region OPMToolStripDropDownButton
 
     public class OPMToolStripDropDownButton : ToolStripDropDownButton
     {
+        public new Image Image
+        {
+            get { return this.InactiveImage; }
+            set { this.InactiveImage = value; }
+        }
+
+        public Image ActiveImage { get; set; }
+        public Image InactiveImage { get; set; }
+        public Image DisabledImage { get; set; }
+        public Image CheckedImage { get; set; }
+
         public Size ImageScalingSize { get; set; }
+
+        private Image GetImageToDraw()
+        {
+            Image imgDraw = this.InactiveImage;
+
+            try
+            {
+                if (!Enabled)
+                {
+                    if (DisabledImage != null)
+                        imgDraw = this.DisabledImage;
+                    else if (InactiveImage != null)
+                        imgDraw = ImageProcessing.Grayscale(InactiveImage, 0.5f);
+                }
+                //else if (Checked)
+                //{
+                //    if (CheckedImage != null)
+                //        imgDraw = this.CheckedImage;
+                //    else if (InactiveImage != null)
+                //        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
+                //}
+                else if (Selected)
+                {
+                    if (ActiveImage != null)
+                        imgDraw = this.ActiveImage;
+                    else if (InactiveImage != null)
+                        imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.HighlightColor);
+                }
+                else
+                    imgDraw = ImageProcessing.ColorShift(InactiveImage, ThemeManager.ForeColor);
+
+                if (imgDraw == null)
+                    imgDraw = InactiveImage;
+                if (imgDraw == null)
+                    imgDraw = base.Image;
+            }
+            catch { }
+
+            return imgDraw;
+        }
 
         public OPMToolStripDropDownButton()
             : base()
@@ -439,97 +496,46 @@ namespace OPMedia.UI.Controls
         {
             ThemeManager.PrepareGraphics(e.Graphics);
 
-                Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
-                Color c1 = ThemeManager.GradientHoverColor1;
-                Color c2 = ThemeManager.GradientHoverColor2;
+            Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
+            if (Selected || Pressed)
+                clText = ThemeManager.HighlightColor;
 
-                if (Selected || Pressed)
-                {
-                    //c1 = c2 = ThemeManager.SelectedColor;
-                    clText = ThemeManager.HighlightMenuTextColor;
-                }
+            Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2,
+                ContentRectangle.Y - 2,
+                ContentRectangle.Width + 4,
+                ContentRectangle.Height + 4);
 
-                Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2,
-                    ContentRectangle.Y - 2,
-                    ContentRectangle.Width + 4,
-                    ContentRectangle.Height + 4);
+            int ddw = new ToolStripSplitButton().DropDownButtonWidth;
 
-                using (Brush b1 = new LinearGradientBrush(clientRectangle, c1, c2, 90f))
-                {
-                    using (Pen p2 = new Pen(ThemeManager.BorderColor))
-                    {
-                        Rectangle rect = clientRectangle;
-                        rect.Width -= 1;
-                        rect.Height -= 1;
+            Image imgDraw = GetImageToDraw();
 
-                        if (Selected || Pressed)
-                        {
-                        e.Graphics.FillRectangle(b1, rect);
-                        e.Graphics.DrawRectangle(p2, rect);
-                        }
+            if (imgDraw != null)
+            {
+                Bitmap bmp = new Bitmap(imgDraw);
+                bmp.MakeTransparent(this.ImageTransparentColor);
 
-                        int xpos = ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2;
+                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
+                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
 
-                        if (Image != null)
-                        {
-                            Image img = this.Image;
-                            if (!Enabled)
-                            {
-                                Bitmap bmp = ImageProcessing.Grayscale(this.Image);
-                                bmp.MakeTransparent(Color.Black);
-                                img = bmp;
-                            }
+                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
+            }
 
-                        e.Graphics.DrawImage(ImageProvider.ScaleImage(img, Owner.ImageScalingSize, true),
-                                new Point(xpos, 2));
-                        }
-
-                        StringFormat sf = new StringFormat();
-
-                        rect = clientRectangle;
-
-                        switch (TextDirection)
-                        {
-                            case ToolStripTextDirection.Inherit:
-                            case ToolStripTextDirection.Horizontal:
-                                sf.LineAlignment = StringAlignment.Near;
-                                sf.Alignment = StringAlignment.Center;
-                                break;
-
-                            default:
-                                sf.FormatFlags |= StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft;
-                                sf.LineAlignment = StringAlignment.Center;
-                                sf.Alignment = StringAlignment.Center;
-                                break;
-
-                        }
-
-                        if (Image != null)
-                        {
-                            rect.Y += this.Owner.ImageScalingSize.Height;
-                            rect.Height -= this.Owner.ImageScalingSize.Height;
-                        }
-
-                        using (Brush b = new SolidBrush(clText))
-                        {
-                        e.Graphics.DrawString(this.Text, this.Font, b, rect, sf);
-                        }
-                    }
-                }
-
-                Rectangle rcArrow = new Rectangle(clientRectangle.Right - 18,
-                    clientRectangle.Top + (clientRectangle.Height - 25) / 2,
-                        15, 15);
+            if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
+            {
+                Rectangle rcArrow = new Rectangle(clientRectangle.Right - ddw - 2,
+                    clientRectangle.Top + (clientRectangle.Height - 20) / 2,
+                        ddw, 15);
 
                 using (GraphicsPath gp = ImageProcessing.GenerateCenteredArrow(rcArrow))
                 using (Brush b = new SolidBrush(clText))
                 using (Pen p = new Pen(b, 1))
                 {
-                e.Graphics.FillPath(b, gp);
-                e.Graphics.DrawPath(p, gp);
+                    e.Graphics.FillPath(b, gp);
+                    e.Graphics.DrawPath(p, gp);
                 }
             }
         }
+    }
 
     #endregion
 

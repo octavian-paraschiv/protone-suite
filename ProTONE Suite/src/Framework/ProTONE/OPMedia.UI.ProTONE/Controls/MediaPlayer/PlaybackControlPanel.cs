@@ -165,7 +165,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmPrev.InactiveImage = Resources.btnPrev;
 
             if (VideoDVDHelpers.IsOSSupported)
-                tsmOpenDisk.InactiveImage = Resources.btnOpenDisk;
+                tsmOpenDisk.InactiveImage = OPMedia.Core.Properties.Resources.DVD;
             else
             {
                 tsmOpenDisk.Visible = false;
@@ -173,9 +173,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     opmToolStrip1.Items.Remove(tsmOpenDisk);
             }
 
-            tsmOpenURL.InactiveImage = Resources.btnOpenURL;
+            tsmOpenURL.InactiveImage = OPMedia.Core.Properties.Resources.Internet;
             tsmLoad.InactiveImage = Resources.btnLoad;
-            tsmOpenSettings.InactiveImage = Resources.btnOpenSettings;
+            tsmOpenSettings.InactiveImage = OPMedia.UI.Properties.Resources.Settings;
             tsmLoopPlay.InactiveImage = Resources.btnLoopPlay;
             tsmToggleShuffle.InactiveImage = Resources.btnToggleShuffle;
             tsmPlaylistEnd.InactiveImage = Resources.btnPlaylistEnd;
@@ -299,18 +299,18 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case MediaTypes.Audio:
-                    tslAudioOn.Image = Resources.AudioMediaType;
+                    tslAudioOn.Image = ImageProcessing.AudioFile;
                     tslVideoOn.Image = null;
                     break;
 
                 case MediaTypes.Video:
                     tslAudioOn.Image = null;
-                    tslAudioOn.Image = Resources.VideoMediaType;
+                    tslAudioOn.Image = ImageProcessing.VideoFile;
                     break;
 
                 case MediaTypes.Both:
-                    tslAudioOn.Image = Resources.AudioMediaType;
-                    tslVideoOn.Image = Resources.VideoMediaType;
+                    tslAudioOn.Image = ImageProcessing.AudioFile;
+                    tslVideoOn.Image = ImageProcessing.VideoFile;
                     break;
             }
 

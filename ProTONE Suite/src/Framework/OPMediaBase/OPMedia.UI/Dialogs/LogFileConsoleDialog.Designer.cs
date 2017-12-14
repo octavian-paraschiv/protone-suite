@@ -253,7 +253,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbSave.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiSaveWindow,
             this.tsmiSaveLogFile});
-            this.tsbSave.Image = global::OPMedia.UI.Properties.Resources.Save;
+            this.tsbSave.Image = global::OPMedia.UI.Properties.Resources.Save16;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(29, 33);

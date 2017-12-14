@@ -14,6 +14,7 @@ using OPMedia.Runtime.ProTONE.ServiceHelpers;
 using OPMedia.Core;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -44,25 +45,21 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             Translator.TranslateControl(this, DesignMode);
 
-            Bitmap bmp = Resources.Tabs;
-            bmp.MakeTransparent();
+            Image bmp = Resources.Tabs;
             tabMisc.ImageList.Images.Add(bmp);
 
-            bmp = Resources.btnOpenDisk;
-            bmp.MakeTransparent();
+            bmp = OPMedia.Core.Properties.Resources.DVD;
             tabMisc.ImageList.Images.Add(bmp);
 
-            bmp = Resources.Playlist;
-            bmp.MakeTransparent();
+            bmp = ImageProcessing.Playlist16;
             tabMisc.ImageList.Images.Add(bmp);
 
-            bmp = Resources.Scheduler;
-            bmp.MakeTransparent();
+            bmp = Resources.IconTime;
             tabMisc.ImageList.Images.Add(bmp);
 
             tabMisc.ImageList.Images.Add(OPMedia.UI.Properties.Resources.Favorites16);
-            tabMisc.ImageList.Images.Add(OPMedia.Core.Properties.Resources.ir_remote);
-            tabMisc.ImageList.Images.Add(Resources.diagnostics);
+            //tabMisc.ImageList.Images.Add(OPMedia.Core.Properties.Resources.ir_remote);
+            //tabMisc.ImageList.Images.Add(OPMedia.UI.Properties.Resources.Assistance);
 
             int i = 0;
             foreach (OPMTabPage tp in tabMisc.TabPages)

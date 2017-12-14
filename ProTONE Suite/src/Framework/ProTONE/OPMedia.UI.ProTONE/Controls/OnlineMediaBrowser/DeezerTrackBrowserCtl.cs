@@ -38,7 +38,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             
             OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
 
-            Bitmap searchIcon = Resources.Search16;
+            Bitmap searchIcon = OPMedia.UI.Properties.Resources.Search16;
             searchIcon.MakeTransparent(Color.Magenta);
 
             tsmi.Click += new EventHandler(OnMenuClick);

@@ -72,12 +72,9 @@ namespace OPMedia.UI.ProTONE.Configuration
             
             InitializeComponent();
 
-            hdrAudio.Image = ImageProvider.ScaleImage(Resources.btnCfgAudio, new Size(16, 16), true);
-            hdrVideo.Image = ImageProvider.ScaleImage(Resources.btnCfgVideo, new Size(16, 16), true);
-
-            Bitmap bmp = Resources.Playlist;
-            bmp.MakeTransparent(ThemeManager.TransparentColor);
-            hdrPlaylists.Image = ImageProvider.ScaleImage(bmp, new Size(16, 16), true);
+            hdrAudio.Image = ImageProcessing.AudioFile16;
+            hdrVideo.Image = ImageProcessing.VideoFile16;
+            hdrPlaylists.Image = ImageProcessing.Playlist16;
 
             Translator.TranslateControl(this, DesignMode);
             ThemeManager.SetFont(btnSelAllAudio, FontSizes.Small);
@@ -360,7 +357,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.hdrAudio.AutoSize = true;
             this.hdrAudio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hdrAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.hdrAudio.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnCfgAudio;
             this.hdrAudio.Location = new System.Drawing.Point(0, 0);
             this.hdrAudio.Margin = new System.Windows.Forms.Padding(0);
             this.hdrAudio.MaximumSize = new System.Drawing.Size(4000, 20);

@@ -21,6 +21,8 @@ using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Addons.Builtin.Shared;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
 {
@@ -45,6 +47,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         public WizMCSearchStep1Ctl()
         {
             InitializeComponent();
+            this.tsmiProTONEPlay.Image = ImageProcessing.Player16;
+            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
 
             this.ShowImage = false;
             this.ShowSeparator = false;

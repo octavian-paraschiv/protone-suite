@@ -593,5 +593,35 @@ namespace OPMedia.Core
             string tmpDir = Environment.GetEnvironmentVariable("temp", EnvironmentVariableTarget.User);
             return Path.Combine(tmpDir, inFile);
         }
+
+        public static bool IsSpecialFolder(string dir1)
+        {
+            bool ret = false;
+
+            try
+            {
+                foreach(Environment.SpecialFolder sf in Enum.GetValues(typeof(Environment.SpecialFolder)))
+                {
+                    string dir2 = Environment.GetFolderPath(sf);
+
+                    DirectoryInfo di1 = new DirectoryInfo(dir1);
+                    DirectoryInfo di2 = new DirectoryInfo(dir2);
+
+                    if (string.Compare(di1.FullName, di2.FullName, false) == 0)
+                    {
+                        ret = true;
+                        break;
+                    }
+                }
+
+                
+            }
+            catch
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
     }
 }

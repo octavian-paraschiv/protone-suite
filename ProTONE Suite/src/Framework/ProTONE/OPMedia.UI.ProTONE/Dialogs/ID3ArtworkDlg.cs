@@ -56,8 +56,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
             pbAdd.Image = OPMedia.UI.Properties.Resources.Add;
             pbDelete.Image = OPMedia.UI.Properties.Resources.Del;
 
-            btnBrowse.Image = Resources.btnLoadPlaylist;
-            btnSave.Image = Resources.btnSavePlaylist;
+            btnBrowse.Image = OPMedia.UI.Properties.Resources.Open16;
+            btnSave.Image = OPMedia.UI.Properties.Resources.Save16;
 
             _tip.SetToolTip(pbAdd, Translator.Translate("TXT_ADD"));
             _tip.SetToolTip(pbDelete, Translator.Translate("TXT_DELETE"));

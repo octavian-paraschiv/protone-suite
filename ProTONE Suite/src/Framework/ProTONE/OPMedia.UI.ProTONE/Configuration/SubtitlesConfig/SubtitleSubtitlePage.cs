@@ -66,8 +66,8 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             btnAdd.Image = OPMedia.UI.Properties.Resources.Add;
             btnDelete.Image = OPMedia.UI.Properties.Resources.Del;
-            btnMoveUp.Image = Resources.btnMoveUp;
-            btnMoveDown.Image = Resources.btnMoveDown;
+            btnMoveUp.Image = OPMedia.UI.Properties.Resources.Up16;
+            btnMoveDown.Image = OPMedia.UI.Properties.Resources.Down16;
 
             _tip.SetToolTip(btnAdd, Translator.Translate("TXT_ADD"));
             _tip.SetToolTip(btnDelete, Translator.Translate("TXT_DELETE"));

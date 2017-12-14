@@ -933,11 +933,40 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deezer Application ID:.
+        /// </summary>
+        internal static string TXT_DEEZER_APP_ID {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_APP_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deezer Directory.
         /// </summary>
         internal static string TXT_DEEZER_CONTENT {
             get {
                 return ResourceManager.GetString("TXT_DEEZER_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Application ID and the User Access Token represents your unique identity for Deezer API.
+        ///These credentials is meant to be individually used, so please do not share them with anyone.
+        ///To get your own credentials, please access:.
+        /// </summary>
+        internal static string TXT_DEEZER_ID_HINT {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_ID_HINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deezer User Access Token:.
+        /// </summary>
+        internal static string TXT_DEEZER_TOKEN {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_TOKEN", resourceCulture);
             }
         }
         
@@ -2615,11 +2644,49 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ShoutCast API Device ID private key:.
+        /// </summary>
+        internal static string TXT_SHOUTCAST_DEV_ID {
+            get {
+                return ResourceManager.GetString("TXT_SHOUTCAST_DEV_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ShoutCast API Device ID private key represents your unique identity for the ShoutCast API.
+        ///It is meant to be individually used, so please do not share it with anyone.
+        ///To get your own private key, please access:.
+        /// </summary>
+        internal static string TXT_SHOUTCAST_DEV_ID_HINT {
+            get {
+                return ResourceManager.GetString("TXT_SHOUTCAST_DEV_ID_HINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shoutcast Directory.
         /// </summary>
         internal static string TXT_SHOUTCAST_DIR {
             get {
                 return ResourceManager.GetString("TXT_SHOUTCAST_DIR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShoutCast Station Search URL:.
+        /// </summary>
+        internal static string TXT_SHOUTCAST_SEARCH_URL {
+            get {
+                return ResourceManager.GetString("TXT_SHOUTCAST_SEARCH_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ShoutCast Station Tune-in URL:.
+        /// </summary>
+        internal static string TXT_SHOUTCAST_TUNEIN_URL {
+            get {
+                return ResourceManager.GetString("TXT_SHOUTCAST_TUNEIN_URL", resourceCulture);
             }
         }
         

@@ -1225,4 +1225,29 @@ But if you enter text: "Nirvana", it will return all radio stations for which an
   <data name="TXT_LOOKUP_THIS_TRACK" xml:space="preserve">
     <value>Look up this song</value>
   </data>
+  <data name="TXT_SHOUTCAST_DEV_ID_HINT" xml:space="preserve">
+    <value>The ShoutCast API Device ID private key represents your unique identity for the ShoutCast API.
+It is meant to be individually used, so please do not share it with anyone.
+To get your own private key, please access:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_SEARCH_URL" xml:space="preserve">
+    <value>ShoutCast Station Search URL:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_TUNEIN_URL" xml:space="preserve">
+    <value>ShoutCast Station Tune-in URL:</value>
+  </data>
+  <data name="TXT_SHOUTCAST_DEV_ID" xml:space="preserve">
+    <value>ShoutCast API Device ID private key:</value>
+  </data>
+  <data name="TXT_DEEZER_ID_HINT" xml:space="preserve">
+    <value>The Application ID and the User Access Token represents your unique identity for Deezer API.
+These credentials is meant to be individually used, so please do not share them with anyone.
+To get your own credentials, please access:</value>
+  </data>
+  <data name="TXT_DEEZER_APP_ID" xml:space="preserve">
+    <value>Deezer Application ID:</value>
+  </data>
+  <data name="TXT_DEEZER_TOKEN" xml:space="preserve">
+    <value>Deezer User Access Token:</value>
+  </data>
 </root>

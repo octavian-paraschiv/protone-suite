@@ -732,7 +732,7 @@ namespace OPMedia.UI.Themes
             StringFormat sf = new StringFormat();
             sf.Alignment = StringAlignment.Near;
             sf.LineAlignment = StringAlignment.Center;
-            sf.Trimming = StringTrimming.EllipsisWord;
+            sf.Trimming = StringTrimming.EllipsisCharacter;
             sf.FormatFlags = StringFormatFlags.NoWrap;
 
             if (_rcIcon.Width > 0)

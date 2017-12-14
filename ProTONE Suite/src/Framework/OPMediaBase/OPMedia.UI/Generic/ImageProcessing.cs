@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Diagnostics;
+using OPMedia.Core;
 
 namespace OPMedia.UI.Generic
 {
@@ -22,7 +23,136 @@ namespace OPMedia.UI.Generic
 
     public class ImageProcessing
     {
-       
+        public static Image AppIcon
+        {
+            get
+            {
+                var img = ImageProvider.GetAppIcon(true).ToBitmap();
+                //var img = ImageProvider.ApplicationIconLarge as Bitmap;
+
+                ImageProcessing.GrayToBlack(img); 
+
+                return img;
+            }
+        }
+
+        public static Image AppIcon16
+        {
+            get
+            {
+                return AppIcon.Resize(false);
+            }
+        }
+
+        public static Image Subtitle
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.Subtitle.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image Subtitle16
+        {
+            get
+            {
+                return Subtitle.Resize(false);
+            }
+        }
+
+
+        public static Image AudioFile
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.AudioFile.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image AudioFile16
+        {
+            get
+            {
+                return AudioFile.Resize(false);
+            }
+        }
+
+        public static Image VideoFile
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.VideoFile.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image VideoFile16
+        {
+            get
+            {
+                return VideoFile.Resize(false);
+            }
+        }
+
+        public static Image Library
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.Library.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image Library16
+        {
+            get
+            {
+                return Library.Resize(false);
+            }
+        }
+
+        public static Image Player
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.player.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image Player16
+        {
+            get
+            {
+                return Player.Resize(false);
+            }
+        }
+
+
+        public static Image Playlist
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.Playlist.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image Playlist16
+        {
+            get
+            {
+                return Playlist.Resize(false);
+            }
+        }
 
         public static Bitmap Brightness(Image b, float brightness)
         {
@@ -201,6 +331,12 @@ namespace OPMedia.UI.Generic
                     }
                 }
             }
+        }
+
+        public static void GrayToBlack(Bitmap bmp)
+        {
+            for (int i = 125; i <= 128; i++)
+                ImageProcessing.ReplaceColor(bmp, Color.FromArgb(i, i, i), Color.Black);
         }
 
         public static void ReplaceColor(Bitmap bmp, Color oldColor, Color newColor)

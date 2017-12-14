@@ -16,6 +16,7 @@ using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -25,7 +26,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         {
             get
             {
-                return Resources.ResourceManager.GetImage("subtitles");
+                return ImageProcessing.Subtitle;
             }
         }
 

@@ -43,7 +43,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             this.AllowResize = false;
             this.InheritAppIcon = false;
-            this.Icon = OPMedia.UI.ProTONE.Properties.Resources.btnOpenDisk.ToIcon((uint)Color.White.ToArgb());
+            this.Icon = OPMedia.Core.Properties.Resources.DVD.ToIcon();
 
             this.HandleDestroyed += new EventHandler(OnHandleDestroyed);
             this.Shown += new EventHandler(OnFormShown);

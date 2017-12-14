@@ -195,7 +195,7 @@
             // btnRefresh
             // 
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefresh.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Reload16;
+            this.btnRefresh.Image = global::OPMedia.UI.Properties.Resources.Reload16;
             this.btnRefresh.Location = new System.Drawing.Point(396, 24);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(1, 5, 0, 3);
             this.btnRefresh.Name = "btnRefresh";

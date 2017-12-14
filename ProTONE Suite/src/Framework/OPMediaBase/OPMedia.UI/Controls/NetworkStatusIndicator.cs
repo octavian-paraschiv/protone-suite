@@ -72,8 +72,8 @@ namespace OPMedia.UI.Controls
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Image = Resources.landisconnect;
-            this.pictureBox1.InitialImage = Resources.landisconnect;
+            this.pictureBox1.Image = Resources.NetworkOff;
+            this.pictureBox1.InitialImage = Resources.NetworkOff;
             this.pictureBox1.Location = new System.Drawing.Point(0, 1);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";

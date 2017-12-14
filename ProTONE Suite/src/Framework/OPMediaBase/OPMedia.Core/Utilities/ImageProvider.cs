@@ -69,6 +69,7 @@ namespace OPMedia.Core
         public static readonly Image ApplicationIconLarge = null;
         public static readonly Image ApplicationIcon = null;
 
+
         static ImageProvider()
         {
             Icon icon = GetAppIcon(true);
@@ -104,19 +105,6 @@ namespace OPMedia.Core
 
         public static Icon GetAppIcon(bool largeIcon = false)
         {
-            //if (ApplicationInfo.IsPlayer)
-            //{
-            //    return ResizeIcon(Resources.player, largeIcon);
-            //}
-            //else if (ApplicationInfo.IsMediaLibrary)
-            //{
-            //    return ResizeIcon(Resources.catalog, largeIcon);
-            //}
-            //else if (ApplicationInfo.IsRCCManager)
-            //{
-            //    return ResizeIcon(Resources.ir_remote, largeIcon);
-            //}
-
             try
             {
                 return _GetIcon(Assembly.GetEntryAssembly().Location, largeIcon);
@@ -165,18 +153,25 @@ namespace OPMedia.Core
 
             if (Directory.Exists(strPath))
             {
-                Icon icon = _GetIcon(strPath, largeIcon);
-                if (icon != null)
+                if (PathUtils.IsSpecialFolder(strPath))
                 {
-                    Image img = icon.ToBitmap();
-                    if (img == null)
+                    Icon icon = _GetIcon(strPath, largeIcon);
+                    if (icon != null)
                     {
-                        retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
+                        Image img = icon.ToBitmap();
+                        if (img == null)
+                        {
+                            retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
+                        }
+                        else
+                        {
+                            retVal = img.Resize(largeIcon);
+                        }
                     }
-                    else
-                    {
-                        retVal = img.Resize(largeIcon);
-                    }
+                }
+                else
+                {
+                    retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
                 }
             }
             else
@@ -239,13 +234,18 @@ namespace OPMedia.Core
                     return Resources.DVD;
 
                 case Shell32Icon.CompactDisk:
+                case Shell32Icon.DriveCdrom:
                     return Resources.CDA;
 
                 case Shell32Icon.Internet:
+                case Shell32Icon.URL:
                     return Resources.Internet;
 
-                case Shell32Icon.URL:
-                    return Resources.URL;
+                case Shell32Icon.GenericFolder:
+                    return largeIcon ? Resources.Folder : Resources.Folder16;
+
+                case Shell32Icon.DriveFixed:
+                    return largeIcon ? Resources.DiskDrive : Resources.DiskDrive16;
 
                 default:
                     break;
@@ -398,5 +398,8 @@ namespace OPMedia.Core
 
             return key;
         }
+
+
+
     }
 }

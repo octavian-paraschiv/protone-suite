@@ -10,6 +10,7 @@ using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.UI.ProTONE.Configuration.MiscConfig;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Configuration;
+using OPMedia.UI.ProTONE.Configuration.InternetConfig;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -50,14 +51,10 @@ namespace OPMedia.UI.ProTONE.Configuration
                 AddPanel(typeof(AddonSettingsPanel));
             }
 
-            //AddPanel(typeof(AudioSettingsPanel));
-            //AddPanel(typeof(VideoSettingsPanel));
             AddPanel(typeof(SubtitleSettingsPanel));
 
             if (ProTONEConfig.IsPlayer)
             {
-                //AddPanel(typeof(SchedulerSettingsPanel));
-
                 if (!AppConfig.CurrentUserIsAdministrator)
                 {
                     MessageDisplay.Show(Translator.Translate("TXT_PANELSHIDDEN_NOADMIN"),
@@ -70,7 +67,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             AddPanel(typeof(ControlAppPanel));
         }
 
-        public override bool RequiresNetworkConfig()
+        public override bool RequiresInternetConfig()
         {
             return true;
         }
@@ -91,6 +88,18 @@ namespace OPMedia.UI.ProTONE.Configuration
             return new List<BaseCfgPanel> 
             { 
                 new DiagnosticsPage() 
+            };
+        }
+
+        public override List<BaseCfgPanel> GetInternetSubPages()
+        {
+            if (!ProTONEConfig.IsPlayer)
+                return null;
+
+            return new List<BaseCfgPanel> 
+            { 
+                new ShoutcastConfigPage(),
+                new DeezerConfigPage(),
             };
         }
     }

@@ -11,6 +11,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Core;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+using OPMedia.UI.Generic;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -106,14 +107,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_PLAY");
             tsmi.Tag = MediaBrowserAction.Play;
-            tsmi.Image = Resources.player;
+            tsmi.Image = ImageProcessing.Player16;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_ENQUEUE");
             tsmi.Tag = MediaBrowserAction.Enqueue;
-            tsmi.Image = Resources.player;
+            tsmi.Image = ImageProcessing.Player16;
             cms.Items.Add(tsmi);
 
             cms.Items.Add(sep);
@@ -124,7 +125,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_ADD_FAV_LIST");
                 tsmi.Tag = MediaBrowserAction.AddFav;
-                tsmi.Image = Resources.Favorites;
+                tsmi.Image = OPMedia.UI.Properties.Resources.Favorites16;
                 cms.Items.Add(tsmi);
             }
             else
@@ -133,7 +134,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_DEL_FAV_LIST");
                 tsmi.Tag = MediaBrowserAction.DelFav;
-                tsmi.Image = Resources.btnDelete;
+                tsmi.Image = OPMedia.UI.Properties.Resources.Delete16;
                 cms.Items.Add(tsmi);
             }
 
