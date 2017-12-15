@@ -59,13 +59,12 @@ namespace OPMedia.PersistenceService
                         };
 
                         obj.Insert(po);
-                        }
-                        else
-                        {
-                            po.Content = objectContent;
-                            obj.Update(po);
-                        }
-
+                    }
+                    else
+                    {
+                        po.Content = objectContent;
+                        obj.Update(po);
+                    }
                 }
             }
             catch (Exception ex)

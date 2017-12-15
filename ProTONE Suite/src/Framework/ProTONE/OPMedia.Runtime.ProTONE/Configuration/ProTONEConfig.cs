@@ -676,7 +676,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "ShufflePlaylist", true);
+                return PersistenceProxy.ReadObject(true, "ShufflePlaylist", false);
             }
 
             set

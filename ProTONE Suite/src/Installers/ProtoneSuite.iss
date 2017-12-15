@@ -160,6 +160,8 @@ Source: {#BINDIR}\Newtonsoft.Json.dll; DestDir: {app}
 Source: {#BINDIR}\libdeezer.x86.dll; DestDir: {app}
 Source: {#BINDIR}\LiteDB.dll; DestDir: {app}
 
+Source: {#BINDIR}\DefaultOnlineMediaData.xml; DestDir: {app}
+
 Source: {#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_kernelDeint.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_liba52.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow

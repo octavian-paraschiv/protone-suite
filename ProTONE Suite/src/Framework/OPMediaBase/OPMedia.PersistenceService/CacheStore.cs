@@ -145,6 +145,9 @@ namespace OPMedia.PersistenceService
 
         public string ReadObject(string persistenceId, string persistenceContext)
         {
+            if (string.IsNullOrEmpty(persistenceContext))
+                persistenceContext = "*";
+
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
             lock (_cachePollerLock)
@@ -185,6 +188,9 @@ namespace OPMedia.PersistenceService
 
         public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
+            if (string.IsNullOrEmpty(persistenceContext))
+                persistenceContext = "*";
+
             string key = BuildCacheKey(persistenceId, persistenceContext);
             bool foundInCache = false;
 
@@ -222,6 +228,9 @@ namespace OPMedia.PersistenceService
 
         public void DeleteObject(string persistenceId, string persistenceContext)
         {
+            if (string.IsNullOrEmpty(persistenceContext))
+                persistenceContext = "*";
+
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
             lock (_cachePollerLock)

@@ -47,8 +47,24 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 }
                 catch (Exception ex)
                 {
+                    internalDatabase = null;
                     Logger.LogException(ex);
                 }
+
+                // Try fall back to DefaultOnlineMediaData.xml
+                if (internalDatabase == null)
+                {
+                    using (FileStream fs = new FileStream(@".\DefaultOnlineMediaData.xml", FileMode.Open, FileAccess.Read))
+                    using (XmlReader xr = XmlReader.Create(fs))
+                    {
+                        XmlSerializer xs = new XmlSerializer(typeof(OnlineMediaData));
+                        internalDatabase = xs.Deserialize(xr) as OnlineMediaData;
+                    }
+                }
+
+                // Try fallback to empty data
+                if (internalDatabase == null)
+                    internalDatabase = new OnlineMediaData();
 
                 return internalDatabase;
             }
