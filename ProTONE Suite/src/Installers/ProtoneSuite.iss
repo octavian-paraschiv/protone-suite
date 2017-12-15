@@ -91,7 +91,7 @@ Source: {#BINDIR}\OPMedia.UI.dll; DestDir: {app}; Flags: replacesameversion unin
 Source: {#BINDIR}\OPMedia.UI.ProTONE.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 
 Source: {#BINDIR}\OPMedia.PersistenceService.exe; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: {#BINDIR}\Persistence.db3; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist uninsneveruninstall
+Source: {#BINDIR}\Persistence.db; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist uninsneveruninstall
 
 Source: {#BINDIR}\Resources\player.ico; DestDir: {app}\Resources; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: {#BINDIR}\Resources\bookmark.ico; DestDir: {app}\Resources; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
@@ -156,16 +156,9 @@ Source: {#BINDIR}\Templates\RemoteControl\ProTONEOnSerial.Config; DestDir: {app}
 
 Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 
-Source: {#EXTDIR}\Newtonsoft.Json.dll; DestDir: {app}
-Source: {#EXTDIR}\libdeezer.x86.dll; DestDir: {app}
-
-Source: {#EXTDIR}\DevArt\Devart.Data.dll; DestDir: {app}
-Source: {#EXTDIR}\DevArt\Devart.Data.Linq.dll; DestDir: {app}
-Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.dll; DestDir: {app}
-Source: {#EXTDIR}\DevArt\Devart.Data.SQLite.Linq.dll; DestDir: {app}
-Source: {#EXTDIR}\DevArt\Devart.Data.SqlServer.Linq.dll; DestDir: {app}
-
-Source: {#EXTDIR}\sqlite\SQLite3.dll; DestDir: {app}
+Source: {#BINDIR}\Newtonsoft.Json.dll; DestDir: {app}
+Source: {#BINDIR}\libdeezer.x86.dll; DestDir: {app}
+Source: {#BINDIR}\LiteDB.dll; DestDir: {app}
 
 Source: {#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
 Source: {#EXTDIR}\ffdshow\ff_kernelDeint.dll; DestDir: {app}\Codecs; Components: itemCodecs\itemFFDShow
