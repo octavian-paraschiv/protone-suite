@@ -6,8 +6,6 @@ using System.ServiceModel;
 using System.Transactions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-using MainContext;
-
 
 namespace OPMedia.PersistenceService
 {

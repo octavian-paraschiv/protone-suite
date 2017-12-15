@@ -202,6 +202,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
         public void ManageOnlineContent(List<OnlineMediaItem> onlineContent, bool doAdd)
         {
             var data = LocalDatabaseSearcher.LoadOnlineMediaData();
+            if (data == null)
+                data = new Runtime.ProTONE.Playlists.OnlineMediaData();
 
             foreach(OnlineMediaItem item in onlineContent)
             {

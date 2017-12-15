@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OPMedia.Core;
-using MainContext;
-using OPMedia.Core.Logging;
-using System.Transactions;
+using LiteDB;
+using OP_Logger = OPMedia.Core.Logging.Logger;
+using OPMedia.SimpleCacheService;
 
 namespace OPMedia.PersistenceService
 {
     public class DbStore
     {
-        const string DbConnString = "data source = \".\\Persistence.db3\"";
+        static DbStore()
+        {
+            using (var db = new LiteDatabase(@"Persistence.db"))
+                db.Shrink();
+        }
 
         public static string ReadObject(string persistenceId, string persistenceContext)
         {
             try
             {
-                using (MainDataContext db = new MainDataContext(DbConnString))
+                using (var db = new LiteDatabase(@"Persistence.db"))
                 {
-                    var s = (from po in db.PersistedObjects
-                             where
-                             (
-                                 po.PersistenceID == persistenceId
-                                 && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                             )
-                             select po.Content).FirstOrDefault();
+                    var obj = GetObjects<PersistedObject>(db);
+                    var qry = GetQuery(persistenceId, persistenceContext);
 
-                    return s;
+                    var cnt = obj.Find(qry).Select(p => p.Content).FirstOrDefault();
+                    return cnt;
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                OP_Logger.LogException(ex);
             }
 
             return null;
@@ -42,47 +42,35 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                TransactionOptions opt = new TransactionOptions();
-                //opt.IsolationLevel = IsolationLevel.Snapshot;
-                opt.Timeout = TimeSpan.FromSeconds(3);
-
-                using (MainDataContext db = new MainDataContext(DbConnString))
+                using (var db = new LiteDatabase(@"Persistence.db"))
                 {
-                    var obj = (from po in db.PersistedObjects
-                               where
-                               (
-                                   po.PersistenceID == persistenceId
-                                   && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                               )
-                               select po).SingleOrDefault();
+                    var obj = GetObjects<PersistedObject>(db);
+                    var qry = GetQuery(persistenceId, persistenceContext);
 
-                    using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew, opt))
+                    var po = obj.Find(qry).FirstOrDefault();
+
+                    if (po == null)
                     {
-                        if (obj != null)
+                        po = new PersistedObject
                         {
-                            obj.Content = objectContent;
+                            PersistenceId = persistenceId,
+                            PersistenceContext = persistenceContext,
+                            Content = objectContent
+                        };
+
+                        obj.Insert(po);
                         }
                         else
                         {
-                            PersistedObject po = new PersistedObject();
-                            po.PersistenceID = persistenceId;
                             po.Content = objectContent;
-
-                            po.PersistenceContext = string.IsNullOrEmpty(persistenceContext) ?
-                                string.Empty : persistenceContext;
-
-                            db.PersistedObjects.InsertOnSubmit(po);
+                            obj.Update(po);
                         }
 
-                        db.SubmitChanges();
-
-                        ts.Complete();
-                    }
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                OP_Logger.LogException(ex);
             }
         }
 
@@ -90,37 +78,40 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                TransactionOptions opt = new TransactionOptions();
-                //opt.IsolationLevel = IsolationLevel.Snapshot;
-                opt.Timeout = TimeSpan.FromSeconds(3);
-
-                using (MainDataContext db = new MainDataContext(DbConnString))
+                using (var db = new LiteDatabase(@"Persistence.db"))
                 {
-                    var obj = (from po in db.PersistedObjects
-                               where
-                               (
-                                   po.PersistenceID == persistenceId
-                                   && (string.IsNullOrEmpty(persistenceContext) || string.Compare(persistenceContext, po.PersistenceContext, true) == 0)
-                               )
-                               select po);
+                    var obj = GetObjects<PersistedObject>(db);
+                    var qry = GetQuery(persistenceId, persistenceContext);
 
-                    using (TransactionScope ts = new TransactionScope(TransactionScopeOption.RequiresNew, opt))
-                    {
-                        if (obj != null && obj.Count() > 0)
-                        {
-                            db.PersistedObjects.DeleteAllOnSubmit(obj);
-                            db.SubmitChanges();
-                        }
-
-                        db.SubmitChanges();
-
-                        ts.Complete();
-                    }
+                    obj.Delete(qry);
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                OP_Logger.LogException(ex);
+            }
+        }
+
+        private static LiteCollection<T> GetObjects<T>(LiteDatabase db)
+        {
+            string typeName = typeof(T).Name;
+            string pluralizedTypeName = string.Format("{0}s", typeName);
+            return db.GetCollection<T>(pluralizedTypeName);
+        }
+
+        private static Query GetQuery(string persistenceId, string persistenceContext)
+        {
+            if (string.IsNullOrEmpty(persistenceContext))
+            {
+                return Query.EQ("PersistenceId", persistenceId);
+            }
+            else
+            {
+                return Query.And
+                (
+                    Query.EQ("PersistenceId", persistenceId),
+                    Query.EQ("PersistenceContext", persistenceContext)
+                );
             }
         }
     }
