@@ -56,7 +56,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.pbDirectX, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblCodecSupport, 1, 1);
@@ -81,22 +81,22 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(555, 368);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(647, 425);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pbDirectX
             // 
-            this.pbDirectX.Location = new System.Drawing.Point(0, 5);
-            this.pbDirectX.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.pbDirectX.Location = new System.Drawing.Point(0, 6);
+            this.pbDirectX.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.pbDirectX.Name = "pbDirectX";
-            this.pbDirectX.Size = new System.Drawing.Size(16, 16);
+            this.pbDirectX.Size = new System.Drawing.Size(19, 18);
             this.pbDirectX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbDirectX.TabIndex = 11;
             this.pbDirectX.TabStop = false;
@@ -108,12 +108,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCodecSupport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCodecSupport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCodecSupport.FontSize = OPMedia.UI.Themes.FontSizes.Large;
-            this.lblCodecSupport.Location = new System.Drawing.Point(21, 31);
-            this.lblCodecSupport.Margin = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.lblCodecSupport.Location = new System.Drawing.Point(25, 37);
+            this.lblCodecSupport.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblCodecSupport.Name = "lblCodecSupport";
             this.lblCodecSupport.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblCodecSupport.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblCodecSupport.Size = new System.Drawing.Size(376, 16);
+            this.lblCodecSupport.Size = new System.Drawing.Size(453, 19);
             this.lblCodecSupport.TabIndex = 2;
             this.lblCodecSupport.Text = "TXT_CODECSUPPORT";
             this.lblCodecSupport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,12 +125,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblDirectX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDirectX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDirectX.FontSize = OPMedia.UI.Themes.FontSizes.Large;
-            this.lblDirectX.Location = new System.Drawing.Point(21, 5);
-            this.lblDirectX.Margin = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.lblDirectX.Location = new System.Drawing.Point(25, 6);
+            this.lblDirectX.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblDirectX.Name = "lblDirectX";
             this.lblDirectX.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDirectX.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDirectX.Size = new System.Drawing.Size(376, 16);
+            this.lblDirectX.Size = new System.Drawing.Size(453, 19);
             this.lblDirectX.TabIndex = 0;
             this.lblDirectX.Text = "TXT_DIRECTX";
             this.lblDirectX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,42 +142,42 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblGlobalStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGlobalStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblGlobalStatus.FontSize = OPMedia.UI.Themes.FontSizes.Large;
-            this.lblGlobalStatus.Location = new System.Drawing.Point(21, 105);
-            this.lblGlobalStatus.Margin = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.lblGlobalStatus.Location = new System.Drawing.Point(25, 125);
+            this.lblGlobalStatus.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblGlobalStatus.Name = "lblGlobalStatus";
             this.lblGlobalStatus.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblGlobalStatus.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblGlobalStatus.Size = new System.Drawing.Size(534, 16);
+            this.lblGlobalStatus.Size = new System.Drawing.Size(622, 19);
             this.lblGlobalStatus.TabIndex = 7;
             this.lblGlobalStatus.Text = "GlobalStatus";
             this.lblGlobalStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbCodecSupport
             // 
-            this.pbCodecSupport.Location = new System.Drawing.Point(0, 31);
-            this.pbCodecSupport.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.pbCodecSupport.Location = new System.Drawing.Point(0, 37);
+            this.pbCodecSupport.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.pbCodecSupport.Name = "pbCodecSupport";
-            this.pbCodecSupport.Size = new System.Drawing.Size(16, 16);
+            this.pbCodecSupport.Size = new System.Drawing.Size(19, 18);
             this.pbCodecSupport.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCodecSupport.TabIndex = 12;
             this.pbCodecSupport.TabStop = false;
             // 
             // pbHDSupport
             // 
-            this.pbHDSupport.Location = new System.Drawing.Point(0, 57);
-            this.pbHDSupport.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.pbHDSupport.Location = new System.Drawing.Point(0, 68);
+            this.pbHDSupport.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.pbHDSupport.Name = "pbHDSupport";
-            this.pbHDSupport.Size = new System.Drawing.Size(16, 16);
+            this.pbHDSupport.Size = new System.Drawing.Size(19, 18);
             this.pbHDSupport.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbHDSupport.TabIndex = 13;
             this.pbHDSupport.TabStop = false;
             // 
             // pbGlobalStatus
             // 
-            this.pbGlobalStatus.Location = new System.Drawing.Point(0, 105);
-            this.pbGlobalStatus.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.pbGlobalStatus.Location = new System.Drawing.Point(0, 125);
+            this.pbGlobalStatus.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.pbGlobalStatus.Name = "pbGlobalStatus";
-            this.pbGlobalStatus.Size = new System.Drawing.Size(16, 16);
+            this.pbGlobalStatus.Size = new System.Drawing.Size(19, 18);
             this.pbGlobalStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbGlobalStatus.TabIndex = 20;
             this.pbGlobalStatus.TabStop = false;
@@ -189,12 +189,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblHDSupport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHDSupport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblHDSupport.FontSize = OPMedia.UI.Themes.FontSizes.Large;
-            this.lblHDSupport.Location = new System.Drawing.Point(21, 57);
-            this.lblHDSupport.Margin = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.lblHDSupport.Location = new System.Drawing.Point(25, 68);
+            this.lblHDSupport.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblHDSupport.Name = "lblHDSupport";
             this.lblHDSupport.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblHDSupport.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblHDSupport.Size = new System.Drawing.Size(376, 16);
+            this.lblHDSupport.Size = new System.Drawing.Size(453, 19);
             this.lblHDSupport.TabIndex = 4;
             this.lblHDSupport.Text = "TXT_HDSUPPORT";
             this.lblHDSupport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -204,10 +204,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblActDirectX.AutoSize = true;
             this.lblActDirectX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActDirectX.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.lblActDirectX.Location = new System.Drawing.Point(397, 5);
-            this.lblActDirectX.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.lblActDirectX.Location = new System.Drawing.Point(478, 6);
+            this.lblActDirectX.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblActDirectX.Name = "lblActDirectX";
-            this.lblActDirectX.Size = new System.Drawing.Size(158, 16);
+            this.lblActDirectX.Size = new System.Drawing.Size(169, 19);
             this.lblActDirectX.TabIndex = 1;
             this.lblActDirectX.TabStop = true;
             this.lblActDirectX.Text = "TXT_INSTALLCOMPONENT";
@@ -218,10 +218,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblActCodecSupport.AutoSize = true;
             this.lblActCodecSupport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActCodecSupport.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.lblActCodecSupport.Location = new System.Drawing.Point(397, 31);
-            this.lblActCodecSupport.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.lblActCodecSupport.Location = new System.Drawing.Point(478, 37);
+            this.lblActCodecSupport.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblActCodecSupport.Name = "lblActCodecSupport";
-            this.lblActCodecSupport.Size = new System.Drawing.Size(158, 16);
+            this.lblActCodecSupport.Size = new System.Drawing.Size(169, 19);
             this.lblActCodecSupport.TabIndex = 3;
             this.lblActCodecSupport.TabStop = true;
             this.lblActCodecSupport.Text = "TXT_INSTALLCOMPONENT";
@@ -232,10 +232,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblActHDSupport.AutoSize = true;
             this.lblActHDSupport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActHDSupport.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.lblActHDSupport.Location = new System.Drawing.Point(397, 57);
-            this.lblActHDSupport.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.lblActHDSupport.Location = new System.Drawing.Point(478, 68);
+            this.lblActHDSupport.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblActHDSupport.Name = "lblActHDSupport";
-            this.lblActHDSupport.Size = new System.Drawing.Size(158, 16);
+            this.lblActHDSupport.Size = new System.Drawing.Size(169, 19);
             this.lblActHDSupport.TabIndex = 5;
             this.lblActHDSupport.TabStop = true;
             this.lblActHDSupport.Text = "TXT_INSTALLCOMPONENT";
@@ -246,9 +246,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblSep.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanel1.SetColumnSpan(this.lblSep, 4);
             this.lblSep.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSep.Location = new System.Drawing.Point(3, 88);
+            this.lblSep.Location = new System.Drawing.Point(3, 105);
             this.lblSep.Name = "lblSep";
-            this.lblSep.Size = new System.Drawing.Size(549, 2);
+            this.lblSep.Size = new System.Drawing.Size(641, 2);
             this.lblSep.TabIndex = 6;
             // 
             // opmLabel1
@@ -256,12 +256,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.opmLabel1.Location = new System.Drawing.Point(19, 317);
+            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
+            this.opmLabel1.Location = new System.Drawing.Point(22, 369);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(355, 31);
+            this.opmLabel1.Size = new System.Drawing.Size(430, 33);
             this.opmLabel1.TabIndex = 8;
             this.opmLabel1.Text = "TXT_RESETVIDEOPOSITION_HINT";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -272,11 +272,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.opmButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmButton1.Location = new System.Drawing.Point(400, 320);
+            this.opmButton1.Location = new System.Drawing.Point(481, 372);
             this.opmButton1.Name = "opmButton1";
             this.opmButton1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmButton1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmButton1.Size = new System.Drawing.Size(152, 25);
+            this.opmButton1.ShowDropDown = false;
+            this.opmButton1.Size = new System.Drawing.Size(163, 27);
             this.opmButton1.TabIndex = 9;
             this.opmButton1.Text = "TXT_RESETVIDEOPOSITION";
             this.opmButton1.UseVisualStyleBackColor = true;
@@ -284,11 +285,11 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // DiagnosticsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "DiagnosticsPage";
-            this.Size = new System.Drawing.Size(555, 368);
+            this.Size = new System.Drawing.Size(647, 425);
             this.Load += new System.EventHandler(this.DiagnosticsPage_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

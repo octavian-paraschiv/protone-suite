@@ -34,7 +34,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         TextBox _txtEditUser = new TextBox();
         TextBox _txtEditPswd = new TextBox();
 
-        readonly int[] widths = new int[] { 0, 65, 120, 45, 50, 50 };
+        readonly int[] widths = new int[] { 0, 80, 100, 45, 50, 50 };
 
         private string _subtitleDownloadURIs = string.Empty;
 
@@ -85,6 +85,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             lvDownloadAddresses.Resize += new EventHandler(lvDownloadAddresses_Resize);
             lvDownloadAddresses.SubItemEdited += new OPMListView.EditableListViewEventHandler(OnListEdited);
+            lvDownloadAddresses.ColumnWidthChanging += new ColumnWidthChangingEventHandler(lvDownloadAddresses_ColumnWidthChanging);
 
             lvDownloadAddresses.RegisterEditControl(_txtEditServer);
             lvDownloadAddresses.RegisterEditControl(_cmbEditServerType);
@@ -92,45 +93,25 @@ namespace OPMedia.UI.ProTONE.Configuration
             lvDownloadAddresses.RegisterEditControl(_txtEditUser);
             lvDownloadAddresses.RegisterEditControl(_txtEditPswd);
 
-            lvDownloadAddresses.ColumnWidthChanging += new ColumnWidthChangingEventHandler(lvDownloadAddresses_ColumnWidthChanging);
         }
 
         void lvDownloadAddresses_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
             e.Cancel = true;
-
-            if (e.ColumnIndex != colServerUrl.Index)
-            {
-                e.NewWidth = widths[e.ColumnIndex];
-            }
-            else
-            {
-                int w = 0;
-                foreach (ColumnHeader ch in lvDownloadAddresses.Columns)
-                {
-                    if (ch != colServerUrl)
-                    {
-                        w += widths[ch.Index];
-                    }
-                }
-
-                e.NewWidth = colServerUrl.Width = (lvDownloadAddresses.EffectiveWidth - w);
-            }
         }
 
         void lvDownloadAddresses_Resize(object sender, EventArgs e)
         {
-            int w = 0;
-            foreach (ColumnHeader ch in lvDownloadAddresses.Columns)
-            {
-                if (ch != colServerUrl)
-                {
-                    ch.Width = widths[ch.Index];
-                    w += ch.Width;
-                }
-            }
+            colEmpty.Width = 0;
+            colServerType.Width = 80;
+            colServerUrl.Width = 250;
+            colActive.Width = 60;
 
-            colServerUrl.Width = (lvDownloadAddresses.EffectiveWidth - w);
+            int w = lvDownloadAddresses.EffectiveWidth - 15 -
+                (colServerType.Width + colServerUrl.Width + colActive.Width);
+
+            colUserName.Width = colPassword.Width = w / 2;
+           
         }
 
         void OnLoad(object sender, EventArgs e)

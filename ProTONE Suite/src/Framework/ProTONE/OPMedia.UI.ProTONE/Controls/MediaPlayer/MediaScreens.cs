@@ -21,6 +21,8 @@ using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Properties;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -33,10 +35,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public Control _activeScreen = null;
         public Control _oldActiveScreen = null;
-            
+
         public MediaScreens() : base()
         {
             this.InnerPadding = new Padding(0);
+
+            this.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ItemSize = new Size(100, 55);
+            this.SizeMode = TabSizeMode.Fixed;
 
             this.PlaylistScreen = new PlaylistScreen();
             this.PlaylistScreen.Dock = DockStyle.Fill;
@@ -58,6 +64,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.HandleCreated += new EventHandler(MediaScreens_HandleCreated);
             this.HandleDestroyed += new EventHandler(MediaScreens_HandleDestroyed);
 
+            this.ImageList = new ImageList();
+            this.ImageList.ColorDepth = ColorDepth.Depth32Bit;
+            this.ImageList.ImageSize = new Size(32, 32);
+            this.ImageList.TransparentColor = Color.Magenta;
+
+            this.ImageList.Images.Add(ImageProcessing.Playlist);
+            this.ImageList.Images.Add(Resources.TrackInfo);
+            this.ImageList.Images.Add(Resources.SignalAnalisys);
+            this.ImageList.Images.Add(ImageProcessing.Bookmark);
+            
             OnUpdateMediaScreens();
         }
 
@@ -77,6 +93,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 OPMTabPage otp = new OPMTabPage("TXT_PLAYLIST", this.PlaylistScreen);
                 otp.BackColor = Color.Red;
+                otp.ImageIndex = 0;
 
                 if (idx >= TabPages.Count)
                     TabPages.Add(otp);
@@ -96,6 +113,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 int idx = FindIndexForInsert(TrackInfoScreen);
 
                 OPMTabPage otp = new OPMTabPage("TXT_TRACKINFO", this.TrackInfoScreen);
+                otp.ImageIndex = 1;
+
                 if (idx >= TabPages.Count)
                     TabPages.Add(otp);
                 else
@@ -114,6 +133,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 int idx = FindIndexForInsert(SignalAnalysisScreen);
 
                 OPMTabPage otp = new OPMTabPage("TXT_SIGNALANALYSIS", this.SignalAnalysisScreen);
+                otp.ImageIndex = 2;
+
                 if (idx >= TabPages.Count)
                     TabPages.Add(otp);
                 else
@@ -132,13 +153,28 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 int idx = FindIndexForInsert(BookmarkScreen);
 
                 OPMTabPage otp = new OPMTabPage("TXT_BOOKMARKS", this.BookmarkScreen);
+                otp.ImageIndex = 3;
+
                 if (idx >= TabPages.Count)
                     TabPages.Add(otp);
                 else
                     base.TabPages.Insert(idx, otp);
             }
 
+            ResizeTabPages();
             Translator.TranslateControl(this, DesignMode);
+
+        }
+
+        internal void DoLayout()
+        {
+            ResizeTabPages();
+        }
+
+        private void ResizeTabPages()
+        {
+            int w = (this.Width - 3) / this.TabCount;
+            this.ItemSize = new Size(w, 55);
         }
 
         private int FindIndexForInsert(OPMBaseControl screen)

@@ -97,7 +97,7 @@
             // 
             // colType
             // 
-            this.colType.Text = "TXT_TYPE";
+            this.colType.Text = "TXT_MEDIATYPE";
             // 
             // LocalDatabaseBrowserCtl
             // 

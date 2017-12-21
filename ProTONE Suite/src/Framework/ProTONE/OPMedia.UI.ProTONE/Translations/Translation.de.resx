@@ -163,7 +163,7 @@
     <value>Es wurden keine Stationen gefunden. Bitte ändern Sie die Suchparameter und versuchen Sie es erneut ...</value>
   </data>
   <data name="TXT_AVAILABLE_DVD_MEDIA">
-    <value>oder öffnen Sie eine der verfügbaren DVD-Medien im System:</value>
+    <value>Alternativ können Sie eines der verfügbaren DVD-Medien im System auswählen:</value>
   </data>
   <data name="TXT_BITRATE">
     <value>Bitrate:</value>
@@ -498,18 +498,6 @@ Doppelklick verbleibende Zeit zu wechseln</value>
   <data name="TXT_HIBERNATE_PC">
     <value>Setzen Sie den PC in den Ruhezustand</value>
   </data>
-  <data name="TXT_HINT_BOOKMARKINFOTAB">
-    <value>Diese Seite zeigt die Lesezeichen-Informationen und erlaubt bearbeiten. Es ist für die Medien, die nicht unterstützt Lesezeichen bearbeiten (CD, DVD, Streaming-Medien) deaktiviert.</value>
-  </data>
-  <data name="TXT_HINT_PLAYLISTTAB">
-    <value>Diese Seite ermöglicht die Interaktion mit der Wiedergabeliste.</value>
-  </data>
-  <data name="TXT_HINT_SIGNALANALISYSTAB">
-    <value>Diese Seite zeigt Signaldiagramme wie VU-Meter, Wellenform und Spektrogramm. Die Signalanalyse etwas CPU so können Sie dieses Feature (oder einige Teile davon) zu deaktivieren, wenn Sie eine langsamere CPU Computer haben.</value>
-  </data>
-  <data name="TXT_HINT_TRACKINFOTAB">
-    <value>Diese Seite zeigt die Titelinformationen und ermöglicht die Bearbeitung einige Teile dieser Informationen gegebenenfalls (zB die ID3-Felder für MP3). Es ist für die Streaming-Medien (Shoutcast-URL) deaktiviert.</value>
-  </data>
   <data name="TXT_IGNOREMOUSEMOVE">
     <value>Ignorieren Mausbewegung im Vollbild-Modus</value>
   </data>
@@ -532,9 +520,9 @@ Doppelklick verbleibende Zeit zu wechseln</value>
     <value>LVOL</value>
   </data>
   <data name="TXT_LOAD_DVD_FOLDER">
-    <value>Bitte wählen Sie eine Video-DVD-Inhalte Ordner
-
-(Entweder ein VIDEO_TS-Ordner, oder deren Eltern):</value>
+    <value>Klicken Sie auf "Durchsuchen", um einen Video-DVD-Inhaltsordner
+auszuwählen (Es muss entweder ein VIDEO_TS-Ordner oder dessen 
+Eltern sein):</value>
   </data>
   <data name="TXT_LOADMEDIAFILES">
     <value>Laden Sie die Medien-Dateien ...</value>
@@ -823,7 +811,7 @@ Um diese Einstellungen zuzugreifen, müssen Sie starten ProTONE Spieler unter ei
     <value>ACHTUNG: Das Programm startet immer mit der "Wiedergabelist beendet" Ereignis deaktiviert!</value>
   </data>
   <data name="TXT_PLAYLISTEVT_DESC">
-    <value>Wenn die Wiedergabelist endet:</value>
+    <value>Wenn das Ereignis aufgetreten ist:</value>
   </data>
   <data name="TXT_PLAYLISTOPTIONS">
     <value>Wiedergabelist</value>
@@ -866,7 +854,8 @@ Doppelklick verstrichene Zeit zu wechseln</value>
     <value>Fernsteuerung</value>
   </data>
   <data name="TXT_REMOTECONTROLDEFINITION">
-    <value>Um die Programme und Geräte, die erlaubt, ProTONE Player steuern, sind zu definieren, müssen Sie die Fernsteuerung-Manager.
+    <value>Um die Programme und Geräte, die erlaubt, ProTONE Player steuern, sind zu definieren, müssen Sie die 
+Fernsteuerung-Manager.
 
 Klicken Sie auf die Taste unten, um Fernsteuerung-Manager zu starten ...</value>
   </data>
@@ -875,7 +864,8 @@ Klicken Sie auf die Taste unten, um Fernsteuerung-Manager zu starten ...</value>
 Videofenster Position</value>
   </data>
   <data name="TXT_RESETVIDEOPOSITION_HINT">
-    <value>Verwenden Sie diesen Befehl, um den Video-Rendering-Fenster in der aktuell aktiven Bildschirm zu bringen.</value>
+    <value>Verwenden Sie diesen Befehl, um den Video-Rendering-Fenster in der 
+aktuell aktiven Bildschirm zu bringen.</value>
   </data>
   <data name="TXT_RESTORE_DEFAULTSERVERS">
     <value>Legen Sie Standardserver</value>
@@ -920,10 +910,10 @@ Videofenster Position</value>
     <value>der geplante Zeitpunkt ist aufgetreten</value>
   </data>
   <data name="TXT_SCHEDULEDEVT_DESC">
-    <value>Wenn der geplante Zeitpunkt eintritt:</value>
+    <value>Wenn das Ereignis aufgetreten ist:</value>
   </data>
   <data name="TXT_SCHEDULEDEVT_TIME">
-    <value>Planen Sie Timer-Ereignis an:</value>
+    <value>Geplante Ereigniszeit:</value>
   </data>
   <data name="TXT_SCHEDULERWAITTIMERPROCEED">
     <value>Wie viele Minuten die Bestätigung warten, bevor Sie fortfahren
@@ -963,19 +953,22 @@ Videofenster Position</value>
     <value>Integration mit Windows Explorer</value>
   </data>
   <data name="TXT_SHOW_BOOKMARKINFO">
-    <value>Zeigen Sie die Seite "Lesezeichen"</value>
+    <value>Zeigen Sie die Seite "Lesezeichen". Diese Seite zeigt die Lesezeichen-Informationen und erlaubt bearbeiten,
+falls dies möglich ist.</value>
   </data>
   <data name="TXT_SHOW_PLAYLIST">
-    <value>Zeigen Sie die Seite "Wiedergabeliste"</value>
+    <value>Zeigen Sie die Seite "Wiedergabeliste". Diese Seite ermöglicht die Interaktion mit der Wiedergabeliste.</value>
   </data>
   <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Zeigen Sie die Seite "Signalanalyse"</value>
+    <value>Zeigen Sie die Seite "Signalanalyse". Diese Seite zeigt Signaldiagramme wie VU-Meter, Wellenform 
+und Spektrogramm.</value>
   </data>
   <data name="TXT_SHOW_SPECTROGRAM">
     <value>Zeigen Sie die Spektrogramm</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
-    <value>Zeigen Sie die Seite "Mediainfo"</value>
+    <value>Zeigen Sie die Seite "Titel-Info". Diese Seite zeigt die Titelinformationen und ermöglicht das 
+Bearbeiten einiger Teile dieser Informationen (z.B die ID3-Felder von MP3).</value>
   </data>
   <data name="TXT_SHOW_VUMETER">
     <value>Zeigen Sie die VU-Meter</value>

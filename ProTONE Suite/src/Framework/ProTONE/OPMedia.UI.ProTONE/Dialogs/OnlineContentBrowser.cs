@@ -134,7 +134,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
                     selectedPage.StartCancellableSearch(txtSearch.Text, _searchCancelled);
 
-                    ShowWaitDialog("Please wait for the search task to finish.\r\nYou can press ESC to cancel the search.");
+                    ShowWaitDialog("Please wait for the search task to finish. You can press ESC to cancel the search.");
                 }
             }
         }

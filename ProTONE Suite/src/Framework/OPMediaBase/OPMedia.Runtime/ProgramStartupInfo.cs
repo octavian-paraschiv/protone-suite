@@ -15,7 +15,6 @@ namespace OPMedia.Runtime
         Shutdown,
         StandBy,
         Hibernate,
-        LaunchProgram
     }
 
     [Flags]

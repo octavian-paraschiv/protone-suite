@@ -141,6 +141,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void DoLayout()
         {
             pnlScreens.Visible = !compactView;
+            pnlScreens.DoLayout();
 
             layoutPanel.Controls.Clear();
             if (!compactView)

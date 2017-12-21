@@ -153,7 +153,25 @@ namespace OPMedia.Core
 
             if (Directory.Exists(strPath))
             {
-                if (PathUtils.IsSpecialFolder(strPath))
+                if (PathUtils.IsRootPath(strPath))
+                {
+                    DriveInfo di = new DriveInfo(strPath);
+                    switch (di.DriveType)
+                    {
+                        case DriveType.Fixed:
+                            retVal = GetShell32Icon(Shell32Icon.DriveFixed, largeIcon);
+                            break;
+
+                        case DriveType.CDRom:
+                            retVal = GetShell32Icon(Shell32Icon.CompactDisk, largeIcon);
+                            break;
+
+                        default:
+                            retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
+                            break;
+                    }
+                }
+                else if (PathUtils.IsSpecialFolder(strPath))
                 {
                     Icon icon = _GetIcon(strPath, largeIcon);
                     if (icon != null)
@@ -228,30 +246,39 @@ namespace OPMedia.Core
 
         public static Image GetShell32Icon(Shell32Icon type, bool largeIcon)
         {
+            Image img = null;
+
             switch (type)
             {
                 case Shell32Icon.DvdDisk:
-                    return Resources.DVD;
+                    img = Resources.DVD;
+                    break;
 
                 case Shell32Icon.CompactDisk:
                 case Shell32Icon.DriveCdrom:
-                    return Resources.CDA;
+                    img = Resources.CDA;
+                    break;
 
                 case Shell32Icon.Internet:
                 case Shell32Icon.URL:
-                    return Resources.Internet;
+                    img = Resources.Internet;
+                    break;
 
                 case Shell32Icon.GenericFolder:
-                    return largeIcon ? Resources.Folder : Resources.Folder16;
+                    img = Resources.Folder;
+                    break;
 
                 case Shell32Icon.DriveFixed:
-                    return largeIcon ? Resources.DiskDrive : Resources.DiskDrive16;
+                    img = Resources.DiskDrive;
+                    break;
 
                 default:
                     break;
 
             }
 
+            if (img != null)
+                return img.Resize(largeIcon);
 
             // Use icons provided by Shell32.dll itself
             return GetIcon(Environment.SystemDirectory + PathUtils.DirectorySeparator + "shell32.dll",

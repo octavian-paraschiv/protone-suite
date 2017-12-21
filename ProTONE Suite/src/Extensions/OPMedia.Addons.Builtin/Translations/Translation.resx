@@ -587,4 +587,10 @@ Double-click on check images to choose whether to grab a track or not.</value>
   <data name="TXT_SAMPLERATE_HINT_SRCFILE">
     <value>The output WAV files will have the same sample rate as the input files.</value>
   </data>
+  <data name="TXT_CMDCDRIPPERWIZARD" xml:space="preserve">
+    <value>Launch the CD Ripper wizard</value>
+  </data>
+  <data name="TXT_CMDEDITPATH" xml:space="preserve">
+    <value>Starts editing the current folder path</value>
+  </data>
 </root>

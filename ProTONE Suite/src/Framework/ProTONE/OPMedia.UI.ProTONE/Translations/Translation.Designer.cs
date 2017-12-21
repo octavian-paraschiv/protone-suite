@@ -196,7 +196,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to or, open one of the available DVD media in system:.
+        ///   Looks up a localized string similar to Alternatively, you can select one of the available DVD media in system:.
         /// </summary>
         internal static string TXT_AVAILABLE_DVD_MEDIA {
             get {
@@ -1202,42 +1202,6 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page displays the bookmark information and allows editing it. It is disabled for media that does not support editing bookmarks (CD, DVD, streamed media - Shoutcast)..
-        /// </summary>
-        internal static string TXT_HINT_BOOKMARKINFOTAB {
-            get {
-                return ResourceManager.GetString("TXT_HINT_BOOKMARKINFOTAB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This page allows interaction with the playlist..
-        /// </summary>
-        internal static string TXT_HINT_PLAYLISTTAB {
-            get {
-                return ResourceManager.GetString("TXT_HINT_PLAYLISTTAB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This page displays signal graphics such as VU-Meter, Waveform and Spectrogram. The signal analisys requires significant processing power. You can disable this feature (or some parts of it), if you have a slower processor on your computer..
-        /// </summary>
-        internal static string TXT_HINT_SIGNALANALISYSTAB {
-            get {
-                return ResourceManager.GetString("TXT_HINT_SIGNALANALISYSTAB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This page displays the track information and allows editing some parts of this information, where applicable (e.g. the ID3 fields for MP3). It is disabled for streamed media (Shoutcast)..
-        /// </summary>
-        internal static string TXT_HINT_TRACKINFOTAB {
-            get {
-                return ResourceManager.GetString("TXT_HINT_TRACKINFOTAB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ignore mouse movement in full screen mode.
         /// </summary>
         internal static string TXT_IGNOREMOUSEMOVE {
@@ -1301,9 +1265,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a video DVD content folder
-        ///
-        ///(Either a VIDEO_TS folder, or its parent):.
+        ///   Looks up a localized string similar to Please click &apos;Browse&apos; to select a video DVD content folder.
+        ///(It must be either a VIDEO_TS folder, or its parent):.
         /// </summary>
         internal static string TXT_LOAD_DVD_FOLDER {
             get {
@@ -2217,7 +2180,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the playlist ends:.
+        ///   Looks up a localized string similar to When the event has occurred:.
         /// </summary>
         internal static string TXT_PLAYLISTEVT_DESC {
             get {
@@ -2338,7 +2301,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To define the programs and devices that are allowed to control ProTONE Player remotely, you must use the Remote Control Manager.
+        ///   Looks up a localized string similar to To define the programs and devices that are allowed to control ProTONE Player remotely, you must use 
+        ///the Remote Control Manager.
         ///
         ///Click on the button below to launch the Remote Control Manager ....
         /// </summary>
@@ -2359,7 +2323,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this command to bring the video rendering window into the current active screen..
+        ///   Looks up a localized string similar to Use this command to bring the video rendering window into the current 
+        ///active screen..
         /// </summary>
         internal static string TXT_RESETVIDEOPOSITION_HINT {
             get {
@@ -2494,7 +2459,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the scheduled moment occurs:.
+        ///   Looks up a localized string similar to When the event has occurred:.
         /// </summary>
         internal static string TXT_SCHEDULEDEVT_DESC {
             get {
@@ -2503,7 +2468,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule timer event at:.
+        ///   Looks up a localized string similar to Scheduled event time:.
         /// </summary>
         internal static string TXT_SCHEDULEDEVT_TIME {
             get {
@@ -2705,7 +2670,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the &quot;Bookmarks&quot; page.
+        ///   Looks up a localized string similar to Show the &quot;Bookmarks&quot; page. This page displays the bookmark information and allows editing it,
+        ///if this is possible..
         /// </summary>
         internal static string TXT_SHOW_BOOKMARKINFO {
             get {
@@ -2714,7 +2680,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the &quot;Playlist &quot; page.
+        ///   Looks up a localized string similar to Show the &quot;Playlist &quot; page. This page allows interaction with the playlist..
         /// </summary>
         internal static string TXT_SHOW_PLAYLIST {
             get {
@@ -2723,7 +2689,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the &quot;Signal Analisys&quot; page.
+        ///   Looks up a localized string similar to Show the &quot;Signal Analisys&quot; page. This page displays signal graphics such as VU-Meter, Waveform
+        ///and Spectrogram..
         /// </summary>
         internal static string TXT_SHOW_SIGNALANALISYS {
             get {
@@ -2741,7 +2708,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the &quot;Media Info&quot; page.
+        ///   Looks up a localized string similar to Show the &quot;Track Info&quot; page. This page displays the track information and allows editing some
+        ///parts of this information, where applicable (e.g. the ID3 fields of MP3)..
         /// </summary>
         internal static string TXT_SHOW_TRACKINFO {
             get {
@@ -3209,6 +3177,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_VOLSCALE {
             get {
                 return ResourceManager.GetString("TXT_VOLSCALE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait for the search task to finish. You can press ESC to cancel the search..
+        /// </summary>
+        internal static string TXT_WAIT_SEARCH {
+            get {
+                return ResourceManager.GetString("TXT_WAIT_SEARCH", resourceCulture);
             }
         }
         

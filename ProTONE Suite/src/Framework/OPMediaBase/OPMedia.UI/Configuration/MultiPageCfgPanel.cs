@@ -23,6 +23,10 @@ namespace OPMedia.UI.Configuration
             InitializeComponent();
 
             tabSubPages.SizeMode = TabSizeMode.Fixed;
+            tabSubPages.ItemSize = new System.Drawing.Size(110, 28);
+
+            tabSubPages.ImageList = new ImageList();
+            tabSubPages.ImageList.ImageSize = new System.Drawing.Size(24, 24);
         }
 
         public void AddSubPage(BaseCfgPanel page)
@@ -39,6 +43,9 @@ namespace OPMedia.UI.Configuration
             
             tabSubPages.ImageList.Images.Add(page.Image);
             tabSubPages.TabPages.Add(tp);
+
+            if (page.RequestedItemSize != null)
+                tabSubPages.ItemSize = page.RequestedItemSize.Value;
 
             page.ModifiedActive -= new EventHandler(OnModifiedActive);
             page.ModifiedActive += new EventHandler(OnModifiedActive);

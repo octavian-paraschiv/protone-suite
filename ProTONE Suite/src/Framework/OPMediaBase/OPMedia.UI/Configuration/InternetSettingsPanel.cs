@@ -28,11 +28,7 @@ namespace OPMedia.UI.Configuration
             InitializeComponent();
         }
 
-        public void AddNetworkPage()
-        {
-            AddSubPage(new KeyMapCfgPanel());
-        }
-
+       
         
     }
 }

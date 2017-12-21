@@ -99,7 +99,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
                 {
                     Translator.TranslateControl(panel, false);
                     panel.Visible = true;
-
+                    panel.Dock = DockStyle.Fill;
                     pnlEncoderOptions.Controls.Add(panel);
                 }
             }

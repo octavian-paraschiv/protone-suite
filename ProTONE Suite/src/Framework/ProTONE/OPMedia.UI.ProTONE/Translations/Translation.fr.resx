@@ -163,7 +163,7 @@
     <value>Aucune station n'a été trouvée. Veuillez modifier les paramètres de recherche et réessayer ...</value>
   </data>
   <data name="TXT_AVAILABLE_DVD_MEDIA">
-    <value>ou, ouvrez l'un des médias de DVD disponibles dans le système:</value>
+    <value>Vous pouvez également sélectionner l'un des supports DVD disponibles dans le système:</value>
   </data>
   <data name="TXT_BITRATE">
     <value>Débit binaire:</value>
@@ -498,18 +498,6 @@ Double click to toggle temps restant</value>
   <data name="TXT_HIBERNATE_PC">
     <value>mettre l'ordinateur en mode Veille prolongée</value>
   </data>
-  <data name="TXT_HINT_BOOKMARKINFOTAB">
-    <value>Cette page affiche les informations du signet et permet de le modifier. Elle est désactivée pour les médias qui ne prennent pas en charge l'édition des signets (CD, DVD, online médias - Shoutcast).</value>
-  </data>
-  <data name="TXT_HINT_PLAYLISTTAB">
-    <value>Cette page permet l'interaction avec la liste de lecture.</value>
-  </data>
-  <data name="TXT_HINT_SIGNALANALISYSTAB">
-    <value>Cette page affiche signalent diagrammes tels que les VU-mètre, de forme d'onde et spectrogramme. Le analisys signal consomme une partie de UC de sorte que vous pouvez désactiver cette fonction (ou certaines parties de celui-ci), si vous avez un ordinateur de l'UC inférieure.</value>
-  </data>
-  <data name="TXT_HINT_TRACKINFOTAB">
-    <value>Cette page affiche les informations de la piste et permet d'éditer certaines parties de ces informations, le cas échéant (par exemple, les champs ID3 pour MP3). Elle est désactivée pour online médias (Shoutcast).</value>
-  </data>
   <data name="TXT_IGNOREMOUSEMOVE">
     <value>Ignorer les mouvements de la souris en mode plein écran</value>
   </data>
@@ -532,9 +520,8 @@ Double click to toggle temps restant</value>
     <value>Lvol</value>
   </data>
   <data name="TXT_LOAD_DVD_FOLDER">
-    <value>S'il vous plaît sélectionner un dossier de contenu DVD vidéo
-
-(Soit un dossier VIDEO_TS, ou son parent):</value>
+    <value>Cliquez sur "Parcourir" pour sélectionner un dossier de contenu de DVD vidéo.
+(Il doit s'agir d'un dossier VIDEO_TS ou de son parent):</value>
   </data>
   <data name="TXT_LOADMEDIAFILES">
     <value>Charger des fichiers multimédia ...</value>
@@ -823,7 +810,7 @@ Pour accéder à ces paramètres, vous devez lancer ProTone Joueur sous un compt
     <value>ATTENTION: L'eveniment "termination de list de lecture" état marche / arrêt n'est pas mémorisée entre les sessions du programme!</value>
   </data>
   <data name="TXT_PLAYLISTEVT_DESC">
-    <value>Quand la liste de lecture se termine:</value>
+    <value>Quand l'événement s'est produit:</value>
   </data>
   <data name="TXT_PLAYLISTOPTIONS">
     <value>Liste de lecture</value>
@@ -866,7 +853,8 @@ Double click to toggle temps écoulé</value>
     <value>Télécommande</value>
   </data>
   <data name="TXT_REMOTECONTROLDEFINITION">
-    <value>Pour définir les programmes et les dispositifs qui sont autorisés à contrôler ProTONE Lecteur, vous devez utiliser le programme Gestionaire de Telecommandes.
+    <value>Pour définir les programmes et les dispositifs qui sont autorisés à contrôler ProTONE Lecteur, vous devez 
+utiliser le programme Gestionaire de Telecommandes.
 
 Cliquez sur le bouton ci-dessous pour lancer le Gestionaire de Telecommandes ...</value>
   </data>
@@ -875,7 +863,8 @@ Cliquez sur le bouton ci-dessous pour lancer le Gestionaire de Telecommandes ...
 de la fenêtre vidéo</value>
   </data>
   <data name="TXT_RESETVIDEOPOSITION_HINT">
-    <value>Utilisez cette commande pour afficher la fenêtre de rendu vidéo dans l'écran actif.</value>
+    <value>Utilisez cette commande pour afficher la fenêtre de rendu vidéo dans 
+l'écran actif.</value>
   </data>
   <data name="TXT_RESTORE_DEFAULTSERVERS">
     <value>Charge des serveurs par défaut</value>
@@ -920,10 +909,10 @@ de la fenêtre vidéo</value>
     <value>le moment prévu s'est produite</value>
   </data>
   <data name="TXT_SCHEDULEDEVT_DESC">
-    <value>Quand le moment prévu se produit:</value>
+    <value>Quand l'événement s'est produit:</value>
   </data>
   <data name="TXT_SCHEDULEDEVT_TIME">
-    <value>Programmer événement de minuterie à:</value>
+    <value>Heure de l'événement:</value>
   </data>
   <data name="TXT_SCHEDULERWAITTIMERPROCEED">
     <value>Combien de minutes à attendre confirmation avant de procéder
@@ -963,19 +952,22 @@ de la fenêtre vidéo</value>
     <value>Intégration avec l'Explorateur Windows</value>
   </data>
   <data name="TXT_SHOW_BOOKMARKINFO">
-    <value>Afficher le page "Signets"</value>
+    <value>Afficher la page "Signets" Cette page affiche les informations du signet et permet de l'éditer,
+si cela est possible.</value>
   </data>
   <data name="TXT_SHOW_PLAYLIST">
-    <value>Afficher le page "Liste de lecture"</value>
+    <value>Afficher le page "Liste de lecture". Cette page permet l'interaction avec la liste de lecture.</value>
   </data>
   <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Afficher le page "Analyse du signal"</value>
+    <value>Afficher le page "Analyse du signal". Cette page affiche signalent diagrammes tels que les VU-mètre,
+de forme d'onde et spectrogramme.</value>
   </data>
   <data name="TXT_SHOW_SPECTROGRAM">
     <value>Afficher spectrogramme</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
-    <value>Afficher le page "Info Media"</value>
+    <value>Afficher le page "Info de Piste". Cette page affiche les informations de la piste et permet
+d'éditer certaines parties de ces informations, le cas échéant (p.e, les champs ID3 de MP3).</value>
   </data>
   <data name="TXT_SHOW_VUMETER">
     <value>Afficher VU-mètre</value>

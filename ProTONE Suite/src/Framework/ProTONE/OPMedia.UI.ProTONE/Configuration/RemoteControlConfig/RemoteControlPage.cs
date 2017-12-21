@@ -12,6 +12,7 @@ using OPMedia.Core;
 using System.Diagnostics;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Configuration;
+using OPMedia.UI.Controls;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -22,6 +23,14 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             get
             {
                 return OPMedia.Core.Properties.Resources.ir_remote.ToBitmap();
+            }
+        }
+
+        public override Size? RequestedItemSize
+        {
+            get
+            {
+                return new Size(130, 28);
             }
         }
 

@@ -28,22 +28,22 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeEncodingPanel));
             this.encoderOptionsCtl = new OPMedia.Addons.Builtin.Shared.EncoderOptions.EncoderOptionsCtl();
             this.SuspendLayout();
             // 
-            // encoderOptionsCtl1
+            // encoderOptionsCtl
             // 
             this.encoderOptionsCtl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.encoderOptionsCtl.Location = new System.Drawing.Point(0, 0);
-            this.encoderOptionsCtl.Name = "encoderOptionsCtl1";
-            this.encoderOptionsCtl.Size = new System.Drawing.Size(350, 280);
+            this.encoderOptionsCtl.Name = "encoderOptionsCtl";
+            this.encoderOptionsCtl.Size = new System.Drawing.Size(509, 280);
             this.encoderOptionsCtl.TabIndex = 0;
             // 
             // ChangeEncodingPanel
             // 
             this.Controls.Add(this.encoderOptionsCtl);
             this.Name = "ChangeEncodingPanel";
+            this.Size = new System.Drawing.Size(509, 280);
             this.ResumeLayout(false);
 
         }

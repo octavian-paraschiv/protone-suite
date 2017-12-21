@@ -103,16 +103,6 @@ namespace OPMedia.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap DiskDrive16 {
-            get {
-                object obj = ResourceManager.GetObject("DiskDrive16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap DVD {
             get {
                 object obj = ResourceManager.GetObject("DVD", resourceCulture);
@@ -126,16 +116,6 @@ namespace OPMedia.Core.Properties {
         public static System.Drawing.Bitmap Folder {
             get {
                 object obj = ResourceManager.GetObject("Folder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Folder16 {
-            get {
-                object obj = ResourceManager.GetObject("Folder16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

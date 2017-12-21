@@ -45,21 +45,25 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             Translator.TranslateControl(this, DesignMode);
 
+            tabMisc.SizeMode = TabSizeMode.Fixed;
+            tabMisc.ItemSize = new System.Drawing.Size(110, 28);
+
+            tabMisc.ImageList = new ImageList();
+            tabMisc.ImageList.ImageSize = new System.Drawing.Size(24, 24);
+
             Image bmp = Resources.Tabs;
             tabMisc.ImageList.Images.Add(bmp);
 
-            bmp = OPMedia.Core.Properties.Resources.DVD;
+            bmp = ImageProcessing.DVD;
             tabMisc.ImageList.Images.Add(bmp);
 
-            bmp = ImageProcessing.Playlist16;
+            bmp = ImageProcessing.Playlist;
             tabMisc.ImageList.Images.Add(bmp);
 
             bmp = Resources.IconTime;
             tabMisc.ImageList.Images.Add(bmp);
 
-            tabMisc.ImageList.Images.Add(OPMedia.UI.Properties.Resources.Favorites16);
-            //tabMisc.ImageList.Images.Add(OPMedia.Core.Properties.Resources.ir_remote);
-            //tabMisc.ImageList.Images.Add(OPMedia.UI.Properties.Resources.Assistance);
+            tabMisc.ImageList.Images.Add(OPMedia.UI.Properties.Resources.Favorites);
 
             int i = 0;
             foreach (OPMTabPage tp in tabMisc.TabPages)

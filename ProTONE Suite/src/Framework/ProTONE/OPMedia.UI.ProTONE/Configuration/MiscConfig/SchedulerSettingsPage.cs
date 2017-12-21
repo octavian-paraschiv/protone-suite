@@ -58,10 +58,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         public void ApplyColors()
         {
-            lblSep1.OverrideBackColor =
-            lblSep2.OverrideBackColor = 
-            lblSep3.OverrideBackColor = ThemeManager.ForeColor;
-            lblCaution.OverrideForeColor = ThemeManager.ColorValidationFailed;
+           
+            lblCaution.OverrideForeColor = ThemeManager.HighlightColor;
         }
 
         void SchedulerSettingsPanel_Load(object sender, EventArgs e)
@@ -81,14 +79,11 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             chkEnablePlaylistEvt.Checked = SystemScheduler.PlaylistEventEnabled;
 
             cmbPlaylistEvtHandler.SelectedIndex = ProTONEConfig.PlaylistEventHandler;
-            psiPlaylistEvtData.ProgramStartupInfo = 
-                ProgramStartupInfo.FromString(ProTONEConfig.PlaylistEventData);
 
             chkEnableScheduledEvt.Checked = ProTONEConfig.EnableScheduledEvent;
 
             cmbScheduledEvtHandler.SelectedIndex = ProTONEConfig.ScheduledEventHandler;
-            psiScheduledEvtData.ProgramStartupInfo =
-                ProgramStartupInfo.FromString(ProTONEConfig.ScheduledEventData);
+
             wsScheduledEvtDays.Weekdays = (Weekday)ProTONEConfig.ScheduledEventDays;
 
             DateTime dtDisplay = DateTime.Today;
@@ -109,11 +104,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             SystemScheduler.PlaylistEventEnabled = chkEnablePlaylistEvt.Checked;
             
             ProTONEConfig.PlaylistEventHandler =  cmbPlaylistEvtHandler.SelectedIndex;
-            ProTONEConfig.PlaylistEventData =     psiPlaylistEvtData.GetProgramStartupInfo();
 
             ProTONEConfig.EnableScheduledEvent =  chkEnableScheduledEvt.Checked;
             ProTONEConfig.ScheduledEventHandler = cmbScheduledEvtHandler.SelectedIndex;
-            ProTONEConfig.ScheduledEventData =    psiScheduledEvtData.GetProgramStartupInfo();
             ProTONEConfig.ScheduledEventDays =    (int)wsScheduledEvtDays.Weekdays;
             ProTONEConfig.ScheduledEventTime =
                 new TimeSpan(dtpScheduledEvtTime.Value.TimeOfDay.Hours, dtpScheduledEvtTime.Value.TimeOfDay.Minutes, 0);
@@ -150,17 +143,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
             grpPlaylistEvt.Enabled = chkEnablePlaylistEvt.Checked;
             grpPlaylistEvt.Visible = chkEnablePlaylistEvt.Checked;
-            lblSep1.Visible = chkEnablePlaylistEvt.Checked;
-
-            psiPlaylistEvtData.Visible =
-               (cmbPlaylistEvtHandler.SelectedIndex == (int)ScheduledActionType.LaunchProgram);
 
             grpScheduledEvt.Enabled = chkEnableScheduledEvt.Checked;
             grpScheduledEvt.Visible = chkEnableScheduledEvt.Checked;
-            lblSep2.Visible = chkEnableScheduledEvt.Checked;
-
-            psiScheduledEvtData.Visible =
-               (cmbScheduledEvtHandler.SelectedIndex == (int)ScheduledActionType.LaunchProgram);
 
             pnlProceedTimerOptions.Visible = (chkEnablePlaylistEvt.Checked || chkEnableScheduledEvt.Checked);
             lblSep3.Visible = (chkEnablePlaylistEvt.Checked || chkEnableScheduledEvt.Checked);
@@ -171,11 +156,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             UnsubscribeAll();
 
             wsScheduledEvtDays.InfoChanged += new System.EventHandler(this.OnSettingsChanged);
-            psiPlaylistEvtData.InfoChanged += new System.EventHandler(this.OnSettingsChanged);
             cmbPlaylistEvtHandler.SelectedIndexChanged += new System.EventHandler(this.OnSettingsChanged);
             chkEnablePlaylistEvt.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             dtpScheduledEvtTime.ValueChanged += new System.EventHandler(this.OnSettingsChanged);
-            psiScheduledEvtData.InfoChanged += new System.EventHandler(this.OnSettingsChanged);
             chkEnableScheduledEvt.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             cmbScheduledEvtHandler.SelectedIndexChanged += new System.EventHandler(this.OnSettingsChanged);
             nudSchedulerWaitTimerProceed.ValueChanged += new System.EventHandler(this.OnSettingsChanged);
@@ -184,11 +167,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private void UnsubscribeAll()
         {
             wsScheduledEvtDays.InfoChanged -= new System.EventHandler(this.OnSettingsChanged);
-            psiPlaylistEvtData.InfoChanged -= new System.EventHandler(this.OnSettingsChanged);
             cmbPlaylistEvtHandler.SelectedIndexChanged -= new System.EventHandler(this.OnSettingsChanged);
             chkEnablePlaylistEvt.CheckedChanged -= new System.EventHandler(this.OnSettingsChanged);
             dtpScheduledEvtTime.ValueChanged -= new System.EventHandler(this.OnSettingsChanged);
-            psiScheduledEvtData.InfoChanged -= new System.EventHandler(this.OnSettingsChanged);
             chkEnableScheduledEvt.CheckedChanged -= new System.EventHandler(this.OnSettingsChanged);
             cmbScheduledEvtHandler.SelectedIndexChanged -= new System.EventHandler(this.OnSettingsChanged);
             nudSchedulerWaitTimerProceed.ValueChanged -= new System.EventHandler(this.OnSettingsChanged);

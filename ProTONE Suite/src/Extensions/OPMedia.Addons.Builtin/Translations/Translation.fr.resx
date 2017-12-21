@@ -587,4 +587,10 @@ Double-cliquez sur les images de chèques de choisir de saisir une piste ou pas.
   <data name="TXT_SAMPLERATE_HINT_SRCFILE">
     <value>Les fichiers de sortie WAV auront la même fréquence d'échantillonnage que les fichiers d'entrée.</value>
   </data>
+  <data name="TXT_CMDCDRIPPERWIZARD" xml:space="preserve">
+    <value>Lancez l'assistant CD Ripper</value>
+  </data>
+  <data name="TXT_CMDEDITPATH" xml:space="preserve">
+    <value>Commence à modifier le chemin du dossier actuel !</value>
+  </data>
 </root>

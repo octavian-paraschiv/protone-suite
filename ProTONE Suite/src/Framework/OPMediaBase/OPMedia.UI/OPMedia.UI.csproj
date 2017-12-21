@@ -293,12 +293,6 @@
     <Compile Include="Controls\OPMTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ProgramStartupInfoCtl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ProgramStartupInfoCtl.Designer.cs">
-      <DependentUpon>ProgramStartupInfoCtl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\OPMFontChooserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,12 +322,6 @@
     </Compile>
     <Compile Include="Dialogs\OPMFileDialog.Designer.cs">
       <DependentUpon>OPMFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\ProgramStartupInfoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\ProgramStartupInfoForm.Designer.cs">
-      <DependentUpon>ProgramStartupInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\WeekdaySelector.cs">
       <SubType>UserControl</SubType>
@@ -659,14 +647,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\ProgramStartupInfoCtl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ProgramStartupInfoCtl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ProgramStartupInfoForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ProgramStartupInfoForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\WeekdaySelector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WeekdaySelector.cs</DependentUpon>

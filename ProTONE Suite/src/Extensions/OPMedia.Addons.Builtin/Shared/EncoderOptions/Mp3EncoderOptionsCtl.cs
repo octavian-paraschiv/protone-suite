@@ -62,25 +62,25 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
                 case BitrateMode.CBR:
                     lblBitrate.Visible = cmbBitrate.Visible = true;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
                     break;
 
                 case BitrateMode.ABR:
                     lblBitrate.Visible = cmbBitrate.Visible = true;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
                     break;
 
                 case BitrateMode.Preset:
                     lblBitrate.Visible = cmbBitrate.Visible = false;
                     lblPreset.Visible = cmbPreset.Visible = true;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = false;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
                     break;
 
                 case BitrateMode.VBR:
                     lblBitrate.Visible = cmbBitrate.Visible = false;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = pnlVbrHints.Visible = true;
+                    lblVbrQuality.Visible = cgVbrQuality.Visible = true;
                     break;
             }
         }

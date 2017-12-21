@@ -64,7 +64,6 @@ namespace OPMedia.UI.Controls
             this.ImageList.TransparentColor = Color.Magenta;
 
             this.TextImageRelation = TextImageRelation.ImageBeforeText;
-
             this.SizeMode = TabSizeMode.Fixed;
 
             base.SetStyle(ControlStyles.ResizeRedraw, true);

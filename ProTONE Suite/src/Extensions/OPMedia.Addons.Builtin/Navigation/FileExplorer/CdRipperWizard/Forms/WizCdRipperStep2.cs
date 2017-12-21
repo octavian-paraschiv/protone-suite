@@ -17,13 +17,13 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 {
     public partial class WizCdRipperStep2 : WizardBaseCtl
     {
-        public override Size DesiredSize
-        {
-            get
-            {
-                return new Size(660, 455);
-            }
-        }
+        //public override Size DesiredSize
+        //{
+        //    get
+        //    {
+        //        return new Size(660, 455);
+        //    }
+        //}
 
         public WizCdRipperStep2()
         {

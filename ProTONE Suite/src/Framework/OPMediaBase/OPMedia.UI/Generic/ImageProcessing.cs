@@ -154,6 +154,62 @@ namespace OPMedia.UI.Generic
             }
         }
 
+
+        public static Image Bookmark
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.bookmark.ToBitmap();
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image Bookmark16
+        {
+            get
+            {
+                return Bookmark.Resize(false);
+            }
+        }
+
+        public static Image CDA
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.CDA;
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image CDA16
+        {
+            get
+            {
+                return CDA.Resize(false);
+            }
+        }
+
+        public static Image DVD
+        {
+            get
+            {
+                var img = OPMedia.Core.Properties.Resources.DVD;
+                ImageProcessing.GrayToBlack(img);
+                return img;
+            }
+        }
+
+        public static Image DVD16
+        {
+            get
+            {
+                return CDA.Resize(false);
+            }
+        }
+
+
         public static Bitmap Brightness(Image b, float brightness)
         {
             Bitmap bDest = new Bitmap(b.Width, b.Height, b.PixelFormat);

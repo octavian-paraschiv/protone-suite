@@ -93,5 +93,13 @@ namespace OPMedia.UI.Configuration
             this.ResumeLayout(false);
 
         }
+
+        public virtual Size? RequestedItemSize
+        {
+            get
+            {
+                return null;
+            }
+        }
     }
 }

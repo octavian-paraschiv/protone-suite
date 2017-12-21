@@ -295,11 +295,29 @@ namespace OPMedia.Addons.Builtin.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Launch the CD Ripper wizard.
+        /// </summary>
+        internal static string TXT_CMDCDRIPPERWIZARD {
+            get {
+                return ResourceManager.GetString("TXT_CMDCDRIPPERWIZARD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change logical disk.
         /// </summary>
         internal static string TXT_CMDCHANGEDISK {
             get {
                 return ResourceManager.GetString("TXT_CMDCHANGEDISK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts editing the current folder path.
+        /// </summary>
+        internal static string TXT_CMDEDITPATH {
+            get {
+                return ResourceManager.GetString("TXT_CMDEDITPATH", resourceCulture);
             }
         }
         

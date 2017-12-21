@@ -57,7 +57,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(385, 193);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(375, 215);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
@@ -66,12 +66,12 @@
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(302, 165);
+            this.btnCancel.Location = new System.Drawing.Point(282, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
-            this.btnCancel.Size = new System.Drawing.Size(80, 25);
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "TXT_CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -82,12 +82,12 @@
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(241, 165);
+            this.btnOK.Location = new System.Drawing.Point(215, 185);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
-            this.btnOK.Size = new System.Drawing.Size(55, 25);
+            this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -100,17 +100,17 @@
             this.ctlColorChooser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctlColorChooser.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.ctlColorChooser.Location = new System.Drawing.Point(0, 0);
-            this.ctlColorChooser.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ctlColorChooser.Margin = new System.Windows.Forms.Padding(0);
             this.ctlColorChooser.Name = "ctlColorChooser";
             this.ctlColorChooser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.ctlColorChooser.Size = new System.Drawing.Size(382, 162);
+            this.ctlColorChooser.Size = new System.Drawing.Size(375, 182);
             this.ctlColorChooser.TabIndex = 2;
             // 
             // OPMColorChooserDialog
             // 
             this.AcceptButton = this.btnOK;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(387, 216);
+            this.ClientSize = new System.Drawing.Size(377, 239);
             this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "OPMColorChooserDialog";
             this.pnlContent.ResumeLayout(false);

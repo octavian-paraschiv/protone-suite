@@ -240,7 +240,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case OPMShortcut.CmdOpenDisk:
-                    tsmi.Image = OPMedia.Core.Properties.Resources.DVD;
+                    tsmi.Image = ImageProcessing.DVD;
                     break;
 
                 case OPMShortcut.CmdOpenURL:

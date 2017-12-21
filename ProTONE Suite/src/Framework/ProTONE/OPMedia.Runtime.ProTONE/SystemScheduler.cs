@@ -251,10 +251,6 @@ namespace OPMedia.Runtime.ProTONE
 
         private bool QueryScheduledAction(ScheduledActionType action, ProgramStartupInfo psi, string msg)
         {
-            if ((action == ScheduledActionType.None) ||
-                (action == ScheduledActionType.LaunchProgram && psi == null))
-                return false;
-
             string actionType = string.Empty;
             switch (action)
             {
@@ -270,9 +266,10 @@ namespace OPMedia.Runtime.ProTONE
                     actionType = Translator.Translate("TXT_HIBERNATE_PC");
                     break;
 
-                case ScheduledActionType.LaunchProgram:
-                    actionType = Translator.Translate("TXT_LAUNCH_PROGRAM");
-                    break;
+                case ScheduledActionType.None:
+                default:
+                    return false;
+
             }
 
             //RestoreWindowFromTray();
@@ -313,13 +310,6 @@ namespace OPMedia.Runtime.ProTONE
 
                         case ScheduledActionType.Hibernate:
                             Application.SetSuspendState(PowerState.Hibernate, true, false);
-                            break;
-
-                        case ScheduledActionType.LaunchProgram:
-                            if (_psi != null)
-                            {
-                                _psi.ExecuteProgram(false);
-                            }
                             break;
                     }
                 }

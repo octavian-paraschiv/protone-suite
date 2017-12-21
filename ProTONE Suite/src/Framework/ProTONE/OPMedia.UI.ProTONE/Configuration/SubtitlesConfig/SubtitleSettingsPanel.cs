@@ -44,6 +44,18 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.Title = "TXT_S_SUBTITLESETTINGS";
             InitializeComponent();
 
+            tabSubtitlesOsd.SizeMode = TabSizeMode.Fixed;
+            tabSubtitlesOsd.ItemSize = new System.Drawing.Size(130, 28);
+
+            tabSubtitlesOsd.ImageList = new ImageList();
+            tabSubtitlesOsd.ImageList.ImageSize = new System.Drawing.Size(24, 24);
+
+            tabSubtitlesOsd.ImageList.Images.Add(ImageProcessing.Subtitle);
+            tabSubtitlesOsd.ImageList.Images.Add(Resources.Fonts);
+
+            tpSubtitles.ImageIndex = 0;
+            tpOsd.ImageIndex = 1;
+
             pageSubtitles.ModifiedActive += new EventHandler(OnModifiedActive);
             pageOsd.ModifiedActive += new EventHandler(OnModifiedActive);
 

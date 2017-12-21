@@ -165,7 +165,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmPrev.InactiveImage = Resources.btnPrev;
 
             if (VideoDVDHelpers.IsOSSupported)
-                tsmOpenDisk.InactiveImage = OPMedia.Core.Properties.Resources.DVD;
+                tsmOpenDisk.InactiveImage = ImageProcessing.DVD;
             else
             {
                 tsmOpenDisk.Visible = false;

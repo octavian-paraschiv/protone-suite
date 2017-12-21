@@ -587,4 +587,10 @@ Daţi dublu-clic pe imagini pentru a alege dacă importaţi o pistă sau nu.</va
   <data name="TXT_SAMPLERATE_HINT_SRCFILE">
     <value>Fișierele de ieșire WAV vor avea aceeași rată de eșantionare ca şi fișierele de intrare.</value>
   </data>
+  <data name="TXT_CMDCDRIPPERWIZARD" xml:space="preserve">
+    <value>Lansează utilitarul CD Ripper</value>
+  </data>
+  <data name="TXT_CMDEDITPATH" xml:space="preserve">
+    <value>Incepe editarea căii spre directorul curent</value>
+  </data>
 </root>

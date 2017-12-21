@@ -23,6 +23,11 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
                 SettingsChanged(this, EventArgs.Empty);
         }
 
+        public EncoderConfiguratorCtl()
+        {
+            InitializeComponent();
+        }
+
         public EncoderConfiguratorCtl(EncoderSettings settings)
         {
             InitializeComponent();

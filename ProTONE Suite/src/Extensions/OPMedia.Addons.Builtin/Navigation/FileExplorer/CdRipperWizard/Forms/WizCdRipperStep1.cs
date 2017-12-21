@@ -37,7 +37,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
         {
             get
             {
-                return new Size(660, 455);
+                return new Size(800, 600);
             }
         }
 
@@ -76,11 +76,11 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
         private void ResizeColumns()
         {
-            colTrackNo.Width = 37;
+            colTrackNo.Width = 45;
             colSizeBytes.Width = 60;
             colDuration.Width = 55;
 
-            int w = lvTracks.EffectiveWidth - colTrackNo.Width - colDuration.Width - colSizeBytes.Width;
+            int w = lvTracks.EffectiveWidth - colTrackNo.Width - colDuration.Width - colSizeBytes.Width - 15;
 
             colAlbum.Width = colArtist.Width = colTitle.Width = colGenre.Width = w / 4;
         }
@@ -296,11 +296,16 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
         private void lvTracks_DoubleClick(object sender, EventArgs e)
         {
-            if (lvTracks.SelectedItems != null && lvTracks.SelectedItems.Count > 0)
-            {
-                ListViewItem lvItem = lvTracks.SelectedItems[0];
-                lvItem.ImageIndex = (lvItem.ImageIndex == 0) ? 1 : 0;
-            }
+            Point ptDoubleClick = lvTracks.PointToClient(MousePosition);
+            ListViewItem lvClickedItem = lvTracks.GetItemAt(ptDoubleClick.X, ptDoubleClick.Y);
+
+            if (lvClickedItem == null)
+                return;
+
+            lvClickedItem.ImageIndex = (lvClickedItem.ImageIndex == 0) ? 1 : 0;
+
+            lvTracks.SelectedItems.Clear();
+            lvClickedItem.Selected = true;
 
             CheckNextButton();
         }

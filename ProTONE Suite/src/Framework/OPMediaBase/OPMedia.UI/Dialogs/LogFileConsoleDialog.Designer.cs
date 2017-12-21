@@ -31,6 +31,7 @@ namespace OPMedia.UI.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lvLogLines = new OPMedia.UI.Controls.OPMListView();
             this.hdrEntryType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.hdrTimeStamp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -67,6 +68,8 @@ namespace OPMedia.UI.Dialogs
             // 
             // lvLogLines
             // 
+            this.lvLogLines.AllowEditing = true;
+            this.lvLogLines.AlternateRowColors = true;
             this.lvLogLines.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvLogLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.hdrEntryType,
@@ -76,14 +79,13 @@ namespace OPMedia.UI.Dialogs
             this.hdrModule,
             this.hdrText});
             this.lvLogLines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvLogLines.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.lvLogLines.Location = new System.Drawing.Point(0, 36);
+            this.lvLogLines.Location = new System.Drawing.Point(4, 25);
             this.lvLogLines.Margin = new System.Windows.Forms.Padding(0);
             this.lvLogLines.MultiSelect = false;
             this.lvLogLines.Name = "lvLogLines";
             this.lvLogLines.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvLogLines.ShowItemToolTips = true;
-            this.lvLogLines.Size = new System.Drawing.Size(819, 405);
+            this.lvLogLines.Size = new System.Drawing.Size(923, 411);
             this.lvLogLines.TabIndex = 0;
             this.lvLogLines.UseCompatibleStateImageBehavior = false;
             this.lvLogLines.View = System.Windows.Forms.View.Details;
@@ -142,10 +144,10 @@ namespace OPMedia.UI.Dialogs
             this.tsbWarnings,
             this.tsbErrors,
             this.tsbSave});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMain.Location = new System.Drawing.Point(4, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.ShowBorder = true;
-            this.toolStripMain.Size = new System.Drawing.Size(819, 36);
+            this.toolStripMain.Size = new System.Drawing.Size(923, 25);
             this.toolStripMain.TabIndex = 7;
             this.toolStripMain.Text = "opmToolStrip1";
             this.toolStripMain.VerticalGradient = true;
@@ -154,21 +156,21 @@ namespace OPMedia.UI.Dialogs
             // 
             this.lblLogFileName.BackColor = System.Drawing.Color.Transparent;
             this.lblLogFileName.Name = "lblLogFileName";
-            this.lblLogFileName.Size = new System.Drawing.Size(101, 33);
+            this.lblLogFileName.Size = new System.Drawing.Size(101, 22);
             this.lblLogFileName.Text = "TXT_LOGFILENAME";
             // 
             // cmbLogFileNames
             // 
             this.cmbLogFileNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLogFileNames.Name = "cmbLogFileNames";
-            this.cmbLogFileNames.Size = new System.Drawing.Size(220, 36);
+            this.cmbLogFileNames.Size = new System.Drawing.Size(220, 25);
             this.cmbLogFileNames.SelectedIndexChanged += new System.EventHandler(this.cmbLogFileNames_SelectedIndexChanged);
             // 
             // lblLogLineCount
             // 
             this.lblLogLineCount.BackColor = System.Drawing.Color.Transparent;
             this.lblLogLineCount.Name = "lblLogLineCount";
-            this.lblLogLineCount.Size = new System.Drawing.Size(109, 33);
+            this.lblLogLineCount.Size = new System.Drawing.Size(109, 22);
             this.lblLogLineCount.Text = "TXT_LOGLINECOUNT";
             // 
             // cmbLogLineCount
@@ -188,7 +190,7 @@ namespace OPMedia.UI.Dialogs
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 36);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbClearLog
             // 
@@ -196,7 +198,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbClearLog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbClearLog.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClearLog.Name = "tsbClearLog";
-            this.tsbClearLog.Size = new System.Drawing.Size(23, 33);
+            this.tsbClearLog.Size = new System.Drawing.Size(23, 22);
             this.tsbClearLog.Text = "TXT_CLEARLOG";
             this.tsbClearLog.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbClearLog.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -209,7 +211,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbFreezeWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbFreezeWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFreezeWindow.Name = "tsbFreezeWindow";
-            this.tsbFreezeWindow.Size = new System.Drawing.Size(23, 33);
+            this.tsbFreezeWindow.Size = new System.Drawing.Size(23, 22);
             this.tsbFreezeWindow.Text = "TXT_FREEZEWINDOW";
             this.tsbFreezeWindow.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbFreezeWindow.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -220,7 +222,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbTraces.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbTraces.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbTraces.Name = "tsbTraces";
-            this.tsbTraces.Size = new System.Drawing.Size(23, 33);
+            this.tsbTraces.Size = new System.Drawing.Size(23, 22);
             // 
             // tsbInfo
             // 
@@ -228,7 +230,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbInfo.Name = "tsbInfo";
-            this.tsbInfo.Size = new System.Drawing.Size(23, 33);
+            this.tsbInfo.Size = new System.Drawing.Size(23, 22);
             // 
             // tsbWarnings
             // 
@@ -236,7 +238,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbWarnings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbWarnings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWarnings.Name = "tsbWarnings";
-            this.tsbWarnings.Size = new System.Drawing.Size(23, 33);
+            this.tsbWarnings.Size = new System.Drawing.Size(23, 22);
             // 
             // tsbErrors
             // 
@@ -244,7 +246,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbErrors.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbErrors.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbErrors.Name = "tsbErrors";
-            this.tsbErrors.Size = new System.Drawing.Size(23, 33);
+            this.tsbErrors.Size = new System.Drawing.Size(23, 22);
             // 
             // tsbSave
             // 
@@ -256,7 +258,7 @@ namespace OPMedia.UI.Dialogs
             this.tsbSave.Image = global::OPMedia.UI.Properties.Resources.Save16;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(29, 33);
+            this.tsbSave.Size = new System.Drawing.Size(29, 22);
             this.tsbSave.Text = "Save log file or window";
             // 
             // tsmiSaveWindow
@@ -277,7 +279,7 @@ namespace OPMedia.UI.Dialogs
             // 
             this.chkKeepOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkKeepOnTop.AutoSize = true;
-            this.chkKeepOnTop.Location = new System.Drawing.Point(3, 1464);
+            this.chkKeepOnTop.Location = new System.Drawing.Point(0, 3847);
             this.chkKeepOnTop.Name = "chkKeepOnTop";
             this.chkKeepOnTop.Size = new System.Drawing.Size(92, 17);
             this.chkKeepOnTop.TabIndex = 2;
@@ -286,24 +288,27 @@ namespace OPMedia.UI.Dialogs
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.toolStripMain, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lvLogLines, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(819, 441);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(931, 440);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // LogFileConsoleDialog
             // 
-            this.ClientSize = new System.Drawing.Size(821, 464);
+            this.ClientSize = new System.Drawing.Size(933, 464);
             this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "LogFileConsoleDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

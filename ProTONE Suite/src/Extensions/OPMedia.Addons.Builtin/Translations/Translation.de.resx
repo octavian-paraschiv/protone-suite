@@ -157,7 +157,7 @@
     <value>Ändern logischer Datenträger</value>
   </data>
   <data name="TXT_CMDTAGGINGWIZARD">
-    <value>Etikettieren-Assistent</value>
+    <value>Starten Sie die Etikettieren Assistent</value>
   </data>
   <data name="TXT_CMDNAVIGATEBACK">
     <value>Navigieren Sie zurück</value>
@@ -586,5 +586,11 @@ Beim Check Bildern zu entscheiden, ob eine Spur oder nicht greifen Doppelklick.<
   </data>
   <data name="TXT_SAMPLERATE_HINT_SRCFILE">
     <value>Die Ausgangs WAV-Dateien wird die gleiche Abtastrate wie die Eingabedateien haben.</value>
+  </data>
+  <data name="TXT_CMDCDRIPPERWIZARD" xml:space="preserve">
+    <value>Starten Sie die CD-Ripper Assistent</value>
+  </data>
+  <data name="TXT_CMDEDITPATH" xml:space="preserve">
+    <value>Liest den Inhalt des aktuellen Ordners neu ein.</value>
   </data>
 </root>

@@ -143,11 +143,13 @@ namespace OPMedia.UI.Controls
             Size sz = CheckBoxRenderer.GetGlyphSize(e.Graphics, CheckBoxState.UncheckedNormal);
             sz = new System.Drawing.Size(sz.Width, sz.Height);
 
-            Rectangle rcGlyph = new Rectangle(1, (Height - sz.Height) / 2,
-                sz.Width - 2, sz.Height - 2);
-            Rectangle rcCheck = new Rectangle(rcGlyph.Left + 2, rcGlyph.Top + 2,
-                rcGlyph.Width - 4, rcGlyph.Width - 4);
-            Rectangle rcText = new Rectangle(rcGlyph.Right + 2, 0, Width - rcGlyph.Width - 2,
+
+            int glyphTop = (CheckAlign == System.Drawing.ContentAlignment.TopLeft) ? 2 : (Height - sz.Height) / 2;
+
+            Rectangle rcGlyph = new Rectangle(1, glyphTop, sz.Width - 2, sz.Height - 2);
+            Rectangle rcCheck = new Rectangle(rcGlyph.Left + 2, rcGlyph.Top + 2, rcGlyph.Width - 4, rcGlyph.Width - 4);
+
+            Rectangle rcText = new Rectangle(rcGlyph.Right + 5, 0, Width - rcGlyph.Width - 5,
                 Height);
 
             int d = 2 * rcCheck.Width / 3;

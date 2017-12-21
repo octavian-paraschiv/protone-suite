@@ -1031,7 +1031,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     DriveInfoItem dii = new DriveInfoItem(di);
                     OPMToolStripDropDownMenuItem tsi = new OPMToolStripDropDownMenuItem(tsbDrives);
                     tsi.ImageScaling = ToolStripItemImageScaling.None;
-
+                    
                     tsi.Text = dii.ToString();
                     tsi.Tag = dii.Path;
                     tsi.Image = dii.Image;
