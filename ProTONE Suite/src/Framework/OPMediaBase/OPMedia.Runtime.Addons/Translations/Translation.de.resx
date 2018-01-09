@@ -148,10 +148,13 @@ Ist es OK, um jetzt neu starten?</value>
     <value>Addons</value>
   </data>
   <data name="TXT_ADDONSLIST" xml:space="preserve">
-    <value>Geprüft werden derzeit Addons aktiviert. Verwenden Sie die Kontrollkästchen zum Aktivieren / Deaktivieren Addons. Addons mit * müssen ausgefüllt werden und kann nicht deaktiviert werden. Ein Neustart des Programms erforderlich sein, um den neuen Addons Konfiguration anzuwenden.</value>
+    <value>Geprüft werden derzeit Addons aktiviert. Verwenden Sie die Kontrollkästchen zum Aktivieren/Deaktivieren 
+Addons. Addons mit asterisk (*) müssen ausgefüllt werden und kann nicht deaktiviert werden. Ein Neustart 
+des Programms erforderlich sein, um den neuen Addons Konfiguration anzuwenden.</value>
   </data>
   <data name="TXT_ADDONSLIST_NORESTART" xml:space="preserve">
-    <value>Geprüft werden derzeit Addons aktiviert. Verwenden Sie die Kontrollkästchen zum Aktivieren / Deaktivieren Addons. Addons mit * müssen ausgefüllt werden und kann nicht deaktiviert werden.</value>
+    <value>Geprüft werden derzeit Addons aktiviert. Verwenden Sie die Kontrollkästchen zum Aktivieren/Deaktivieren 
+Addons. Addons mit asterisk (*) müssen ausgefüllt werden und kann nicht deaktiviert werden.</value>
   </data>
   <data name="TXT_CANT_INSTALL_BUILTIN" xml:space="preserve">
     <value>Der von Ihnen gewählte Bibliothek kann nicht installiert werden, weil es eine native Bibliothek. 

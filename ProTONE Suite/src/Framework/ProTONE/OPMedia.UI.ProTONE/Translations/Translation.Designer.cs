@@ -1302,6 +1302,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse my online playlists.
+        /// </summary>
+        internal static string TXT_LOOKUP_MY_PLAYLISTS {
+            get {
+                return ResourceManager.GetString("TXT_LOOKUP_MY_PLAYLISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Look up this album.
         /// </summary>
         internal static string TXT_LOOKUP_THIS_ALBUM {
@@ -2560,6 +2569,24 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_SELECT_ONLINE_MEDIA {
             get {
                 return ResourceManager.GetString("TXT_SELECT_ONLINE_MEDIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an online playlist.
+        /// </summary>
+        internal static string TXT_SELECT_ONLINE_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_SELECT_ONLINE_PLAYLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following playlists were found, please choose one:.
+        /// </summary>
+        internal static string TXT_SELECT_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_SELECT_PLAYLIST", resourceCulture);
             }
         }
         

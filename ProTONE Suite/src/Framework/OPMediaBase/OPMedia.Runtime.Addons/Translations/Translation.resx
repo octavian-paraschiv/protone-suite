@@ -148,10 +148,13 @@ Is it OK to restart now ?</value>
     <value>Addons</value>
   </data>
   <data name="TXT_ADDONSLIST" xml:space="preserve">
-    <value>Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with * are required and cannot be disabled. A program restart will be needed to apply the new addons configuration.</value>
+    <value>Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with 
+asterisk (*) are required and cannot be disabled. A program restart will be needed to apply the new addons
+configuration.</value>
   </data>
   <data name="TXT_ADDONSLIST_NORESTART" xml:space="preserve">
-    <value>Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with * are required and cannot be disabled.</value>
+    <value>Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with 
+asterisk (*) are required and cannot be disabled. </value>
   </data>
   <data name="TXT_CANT_INSTALL_BUILTIN" xml:space="preserve">
     <value>The library you have selected cannot be installed, because it is a native library. 

@@ -148,10 +148,13 @@ Este OK să fie repornit acum?</value>
     <value>Extensii</value>
   </data>
   <data name="TXT_ADDONSLIST" xml:space="preserve">
-    <value>Extensiile bifate sunt active. Folositi casetele pentru a activa/dezactiva extensiile. Extensiile marcate cu * sunt necesare si nu pot fi dezactivate. Programul va trebui repornit pentru a aplica noua configuraţie a extensiilor.</value>
+    <value>Extensiile bifate sunt active. Folositi casetele pentru a activa/dezactiva extensiile. Extensiile marcate 
+cu asterisc (*) sunt necesare si nu pot fi dezactivate. Programul va trebui repornit pentru a aplica noua 
+configuraţie a extensiilor.</value>
   </data>
   <data name="TXT_ADDONSLIST_NORESTART" xml:space="preserve">
-    <value>Extensiile bifate sunt active. Folositi casetele pentru a activa/dezactiva extensiile. Extensiile marcate cu * sunt necesare si nu pot fi dezactivate.</value>
+    <value>Extensiile bifate sunt active. Folositi casetele pentru a activa/dezactiva extensiile. Extensiile marcate 
+cu asterisc (*) sunt necesare si nu pot fi dezactivate.</value>
   </data>
   <data name="TXT_CANT_INSTALL_BUILTIN" xml:space="preserve">
     <value>Biblioteca selectată nu poate fi instalată, intrucât este o bibliotecă nativă.

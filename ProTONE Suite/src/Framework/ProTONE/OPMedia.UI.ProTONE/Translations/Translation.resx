@@ -1245,4 +1245,13 @@ To get your own credentials, please access:</value>
   <data name="TXT_WAIT_SEARCH" xml:space="preserve">
     <value>Please wait for the search task to finish. You can press ESC to cancel the search.</value>
   </data>
+  <data name="TXT_SELECT_ONLINE_PLAYLIST" xml:space="preserve">
+    <value>Select an online playlist</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST" xml:space="preserve">
+    <value>The following playlists were found, please choose one:</value>
+  </data>
+  <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
+    <value>Browse my online playlists</value>
+  </data>
 </root>

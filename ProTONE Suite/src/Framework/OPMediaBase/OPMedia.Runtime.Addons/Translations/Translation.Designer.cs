@@ -89,7 +89,9 @@ namespace OPMedia.Runtime.Addons.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with * are required and cannot be disabled. A program restart will be needed to apply the new addons configuration..
+        ///   Looks up a localized string similar to Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with 
+        ///asterisk (*) are required and cannot be disabled. A program restart will be needed to apply the new addons
+        ///configuration..
         /// </summary>
         internal static string TXT_ADDONSLIST {
             get {
@@ -98,7 +100,8 @@ namespace OPMedia.Runtime.Addons.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with * are required and cannot be disabled..
+        ///   Looks up a localized string similar to Checked addons are currently enabled. Use the checkboxes to enable/disable addons. Addons marked with 
+        ///asterisk (*) are required and cannot be disabled. .
         /// </summary>
         internal static string TXT_ADDONSLIST_NORESTART {
             get {

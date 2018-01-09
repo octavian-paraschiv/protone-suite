@@ -128,10 +128,15 @@ Est-il OK pour redémarrer maintenant?</value>
     <value>Puisque vous avez annulé le redémarrage, votre configuration de modules complementaires ne sera pas modifiée.</value>
   </data>
   <data name="TXT_ADDONSLIST" xml:space="preserve">
-    <value>Modules complementaires cochés sont activés. Utilisez les cases à cocher pour activer / désactiver modules complementaires. Modules complementaires marqués d'une * sont requis et ne peut pas être désactivé. Un redémarrage du programme seront nécessaires pour appliquer la nouvelle configuration modules complementaires.</value>
+    <value>Modules complementaires cochés sont activés. Utilisez les cases a cocher pour activer/désactiver 
+modules complementaires. Modules complementaires marqués d'une asterisk (*) sont requis et ne peut
+pas etre désactivé. Un redémarrage du programme seront nécessaires pour appliquer la nouvelle 
+configuration modules complementaires.</value>
   </data>
   <data name="TXT_ADDONSLIST_NORESTART" xml:space="preserve">
-    <value>Modules complementaires cochés sont activés. Utilisez les cases à cocher pour activer / désactiver modules complementaires. Modules complementaires marqués d'une * sont requis et ne peut pas être désactivé.</value>
+    <value>Modules complementaires cochés sont activés. Utilisez les cases a cocher pour activer/désactiver 
+modules complementaires. Modules complementaires marqués d'une asterisk (*) sont requis et ne peut
+pas etre désactivé.</value>
   </data>
   <data name="TXT_CANT_INSTALL_BUILTIN" xml:space="preserve">
     <value>La bibliothèque que vous avez sélectionné ne peut pas être installé, car il est une bibliothèque native. 

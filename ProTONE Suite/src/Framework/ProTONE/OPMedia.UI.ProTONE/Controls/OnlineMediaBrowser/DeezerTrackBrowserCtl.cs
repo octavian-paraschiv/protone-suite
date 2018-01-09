@@ -33,8 +33,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             OPMContextMenuStrip cms = BuildCommonMenuStrip(true);
 
             OPMMenuStripSeparator sep = new OPMMenuStripSeparator();
-
-            cms.Items.Add(sep);
+           cms.Items.Add(sep);
             
             OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
 
@@ -60,6 +59,9 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Tag = "LookupDeezerTrack";
             tsmi.Image = searchIcon;
             cms.Items.Add(tsmi);
+
+            sep = new OPMMenuStripSeparator();
+            cms.Items.Add(sep);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
