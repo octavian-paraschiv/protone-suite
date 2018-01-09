@@ -139,5 +139,16 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             return results;
         }
+
+        protected override List<OnlinePlaylist> GetMyPlaylists(ManualResetEvent abortEvent)
+        {
+            return null;
+        }
+
+        protected override List<OnlineMediaItem> ExpandOnlinePlaylist(OnlinePlaylist p, ManualResetEvent abortEvent)
+        {
+            return null;
+        }
+
     }
 }

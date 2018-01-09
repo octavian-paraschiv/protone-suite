@@ -81,6 +81,38 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             return null;
         }
 
+        public static List<OnlinePlaylist> GetMyPlaylists(OnlineMediaSource source, ManualResetEvent abortEvent)
+        {
+            try
+            {
+                OnlineContentSearcher searcher = GetSearcher(source);
+                if (searcher != null)
+                    return searcher.GetMyPlaylists(abortEvent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return null;
+        }
+
+        public static List<OnlineMediaItem> ExpandOnlinePlaylist(OnlineMediaSource source, OnlinePlaylist p, ManualResetEvent abortEvent)
+        {
+            try
+            {
+                OnlineContentSearcher searcher = GetSearcher(source);
+                if (searcher != null)
+                    return searcher.ExpandOnlinePlaylist(p, abortEvent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return null;
+        }
+
         private static OnlineContentSearcher GetSearcher(OnlineMediaSource source)
         {
             OnlineContentSearcher searcher = null;
@@ -105,6 +137,8 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         }
 
         protected abstract List<OnlineMediaItem> Search(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent);
+        protected abstract List<OnlinePlaylist> GetMyPlaylists(ManualResetEvent abortEvent);
+        protected abstract List<OnlineMediaItem> ExpandOnlinePlaylist(OnlinePlaylist p, ManualResetEvent abortEvent);
 
         protected abstract bool HasValidConfig { get; }
     }

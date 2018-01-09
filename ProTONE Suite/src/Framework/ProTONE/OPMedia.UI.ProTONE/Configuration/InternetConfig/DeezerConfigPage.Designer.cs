@@ -35,6 +35,8 @@
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.txtDeezerAppID = new OPMedia.UI.Controls.OPMTextBox();
             this.opmLinkLabel1 = new OPMedia.UI.Controls.OPMLinkLabel();
+            this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
+            this.txtDeezerUserId = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel4.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.opmLabel4.Location = new System.Drawing.Point(3, 60);
+            this.opmLabel4.Location = new System.Drawing.Point(3, 90);
             this.opmLabel4.Name = "opmLabel4";
             this.opmLabel4.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel4.OverrideForeColor = System.Drawing.Color.Red;
@@ -59,17 +61,20 @@
             this.opmTableLayoutPanel1.ColumnCount = 2;
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Controls.Add(this.opmLabel4, 0, 2);
+            this.opmTableLayoutPanel1.Controls.Add(this.opmLabel4, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerToken, 1, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel2, 0, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerAppID, 1, 0);
-            this.opmTableLayoutPanel1.Controls.Add(this.opmLinkLabel1, 0, 3);
+            this.opmTableLayoutPanel1.Controls.Add(this.opmLinkLabel1, 0, 4);
+            this.opmTableLayoutPanel1.Controls.Add(this.opmLabel3, 0, 2);
+            this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerUserId, 1, 2);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmTableLayoutPanel1.RowCount = 4;
+            this.opmTableLayoutPanel1.RowCount = 5;
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
@@ -83,10 +88,10 @@
             this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDeezerToken.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtDeezerToken.Location = new System.Drawing.Point(122, 35);
+            this.txtDeezerToken.Location = new System.Drawing.Point(127, 35);
             this.txtDeezerToken.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.txtDeezerToken.MaximumSize = new System.Drawing.Size(2000, 20);
-            this.txtDeezerToken.MaxLength = 32767;
+            this.txtDeezerToken.MaxLength = 100;
             this.txtDeezerToken.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDeezerToken.Multiline = false;
             this.txtDeezerToken.Name = "txtDeezerToken";
@@ -97,7 +102,7 @@
             this.txtDeezerToken.ReadOnly = false;
             this.txtDeezerToken.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDeezerToken.ShortcutsEnabled = true;
-            this.txtDeezerToken.Size = new System.Drawing.Size(452, 20);
+            this.txtDeezerToken.Size = new System.Drawing.Size(447, 20);
             this.txtDeezerToken.TabIndex = 4;
             this.txtDeezerToken.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDeezerToken.UseSystemPasswordChar = false;
@@ -112,7 +117,7 @@
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(116, 30);
+            this.opmLabel1.Size = new System.Drawing.Size(121, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_DEEZER_APP_ID";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -126,7 +131,7 @@
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(116, 30);
+            this.opmLabel2.Size = new System.Drawing.Size(121, 30);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_DEEZER_TOKEN";
             this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,10 +142,10 @@
             this.txtDeezerAppID.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerAppID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDeezerAppID.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtDeezerAppID.Location = new System.Drawing.Point(122, 5);
+            this.txtDeezerAppID.Location = new System.Drawing.Point(127, 5);
             this.txtDeezerAppID.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.txtDeezerAppID.MaximumSize = new System.Drawing.Size(2000, 20);
-            this.txtDeezerAppID.MaxLength = 32767;
+            this.txtDeezerAppID.MaxLength = 100;
             this.txtDeezerAppID.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDeezerAppID.Multiline = false;
             this.txtDeezerAppID.Name = "txtDeezerAppID";
@@ -151,7 +156,7 @@
             this.txtDeezerAppID.ReadOnly = false;
             this.txtDeezerAppID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDeezerAppID.ShortcutsEnabled = true;
-            this.txtDeezerAppID.Size = new System.Drawing.Size(452, 20);
+            this.txtDeezerAppID.Size = new System.Drawing.Size(447, 20);
             this.txtDeezerAppID.TabIndex = 3;
             this.txtDeezerAppID.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDeezerAppID.UseSystemPasswordChar = false;
@@ -161,13 +166,54 @@
             // 
             this.opmLinkLabel1.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLinkLabel1, 2);
-            this.opmLinkLabel1.Location = new System.Drawing.Point(3, 120);
+            this.opmLinkLabel1.Location = new System.Drawing.Point(3, 150);
             this.opmLinkLabel1.Name = "opmLinkLabel1";
             this.opmLinkLabel1.Size = new System.Drawing.Size(388, 15);
             this.opmLinkLabel1.TabIndex = 7;
             this.opmLinkLabel1.TabStop = true;
             this.opmLinkLabel1.Text = "https://developers.deezer.com/sdk/native#_main_features_and_changes";
             this.opmLinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.opmLinkLabel1_LinkClicked);
+            // 
+            // opmLabel3
+            // 
+            this.opmLabel3.AutoSize = true;
+            this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.opmLabel3.Location = new System.Drawing.Point(3, 60);
+            this.opmLabel3.Name = "opmLabel3";
+            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
+            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
+            this.opmLabel3.Size = new System.Drawing.Size(121, 30);
+            this.opmLabel3.TabIndex = 8;
+            this.opmLabel3.Text = "TXT_DEEZER_USER_ID";
+            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtDeezerUserId
+            // 
+            this.txtDeezerUserId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtDeezerUserId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtDeezerUserId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDeezerUserId.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.txtDeezerUserId.Location = new System.Drawing.Point(127, 65);
+            this.txtDeezerUserId.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.txtDeezerUserId.MaximumSize = new System.Drawing.Size(2000, 20);
+            this.txtDeezerUserId.MaxLength = 10;
+            this.txtDeezerUserId.MinimumSize = new System.Drawing.Size(20, 20);
+            this.txtDeezerUserId.Multiline = false;
+            this.txtDeezerUserId.Name = "txtDeezerUserId";
+            this.txtDeezerUserId.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
+            this.txtDeezerUserId.OverrideBackColor = System.Drawing.Color.Empty;
+            this.txtDeezerUserId.OverrideForeColor = System.Drawing.Color.Empty;
+            this.txtDeezerUserId.Padding = new System.Windows.Forms.Padding(3);
+            this.txtDeezerUserId.PasswordChar = '\0';
+            this.txtDeezerUserId.ReadOnly = false;
+            this.txtDeezerUserId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtDeezerUserId.ShortcutsEnabled = true;
+            this.txtDeezerUserId.Size = new System.Drawing.Size(447, 20);
+            this.txtDeezerUserId.TabIndex = 9;
+            this.txtDeezerUserId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtDeezerUserId.UseSystemPasswordChar = false;
+            this.txtDeezerUserId.WordWrap = true;
             // 
             // DeezerConfigPage
             // 
@@ -191,5 +237,7 @@
         private UI.Controls.OPMLabel opmLabel2;
         private UI.Controls.OPMTextBox txtDeezerAppID;
         private UI.Controls.OPMLinkLabel opmLinkLabel1;
+        private UI.Controls.OPMLabel opmLabel3;
+        private UI.Controls.OPMNumericTextBox txtDeezerUserId;
     }
 }

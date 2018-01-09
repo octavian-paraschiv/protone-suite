@@ -12,6 +12,8 @@ using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Core;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Dialogs;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -91,9 +93,34 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             this.Items.Clear();
             this.SelectedItems.Clear();
 
-            var results = OnlineContentSearcher.Search(_searchType, searchParams, abortEvent);
-            if (results != null && results.Count > 0)
-                this.Items.AddRange(results);
+            if (searchParams.SearchText == "LookupMyPlaylists")
+            {
+                var playlists = OnlineContentSearcher.GetMyPlaylists(_searchType, abortEvent);
+                if (playlists != null && playlists.Count > 0)
+                {
+                    OnlinePlaylist p = null;
+
+                    MainThread.Send((c) =>
+                        {
+                            SelectOnlinePlaylistDlg dlg = new SelectOnlinePlaylistDlg(playlists);
+                            if (dlg.ShowDialog(FindForm()) == DialogResult.OK)
+                                p = dlg.SelectedItem;
+                        });
+
+                    if (p != null)
+                    {
+                        var results = OnlineContentSearcher.ExpandOnlinePlaylist(_searchType, p, abortEvent);
+                        if (results != null && results.Count > 0)
+                            this.Items.AddRange(results);
+                    }
+                }
+            }
+            else
+            {
+                var results = OnlineContentSearcher.Search(_searchType, searchParams, abortEvent);
+                if (results != null && results.Count > 0)
+                    this.Items.AddRange(results);
+            }
         }
 
         protected OPMContextMenuStrip BuildCommonMenuStrip(bool addToFav)
@@ -162,26 +189,23 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                         {
                             case MediaBrowserAction.Play:
                                 EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, false);
-                                break;
+                                return;
 
                             case MediaBrowserAction.Enqueue:
                                 EventDispatch.DispatchEvent(LocalEventNames.LoadOnlineContent, selItems, true);
-                                break;
+                                return;
 
                             case MediaBrowserAction.AddFav:
                                 EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, true);
-                                break;
+                                return;
 
                             case MediaBrowserAction.DelFav:
                                 EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, false);
-                                break;
-
-                            default:
-                                HandleAction(act);
-                                break;
-
+                                return;
                         }
                     }
+
+                    HandleAction(act);
                 }
             }
         }
@@ -202,6 +226,5 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public const string Enqueue = "Enqueue";
         public const string AddFav = "AddFav";
         public const string DelFav = "DelFav";
-
     }
 }

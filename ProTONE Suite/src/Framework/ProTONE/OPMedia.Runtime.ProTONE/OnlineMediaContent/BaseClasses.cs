@@ -69,5 +69,23 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         }
     }
 
+    [DataContract]
+    [Serializable]
+    public class OnlinePlaylist
+    {
+        [DataMember(Order = 0)]
+        public uint Id { get; set; }
+
+        [DataMember(Order = 1)]
+        public string Title { get; set; }
+
+        [DataMember(Order = 2)]
+        public string Description { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[Id={0}, Title={1}, Desc={2}]", Id, Title, Description);
+        }
+    }
 
 }

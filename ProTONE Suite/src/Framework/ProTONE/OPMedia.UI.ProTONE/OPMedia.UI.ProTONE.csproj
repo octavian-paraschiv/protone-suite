@@ -163,6 +163,9 @@
     <Compile Include="Controls\VuMeterGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Dialogs\SelectOnlinePlaylistDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\FavoriteFoldersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -417,6 +420,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.resx">
       <DependentUpon>ShoutcastDirectoryBrowserCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SelectOnlinePlaylistDlg.resx">
+      <DependentUpon>SelectOnlinePlaylistDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FavoriteFoldersControl.resx">
       <DependentUpon>FavoriteFoldersControl.cs</DependentUpon>

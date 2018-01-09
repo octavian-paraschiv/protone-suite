@@ -146,6 +146,22 @@ namespace OPMedia.DeezerInterop.RestApi
         }
 
 
-       
+        public List<Playlist> GetPlaylists(string userId, ManualResetEvent abortEvent)
+        {
+            List<Playlist> playlists = new List<Playlist>();
+
+            if (abortEvent.WaitOne(5))
+                return playlists;
+
+            string response = this.ExecuteHttpGet(string.Format("user/{0}/playlists", userId));
+
+            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
+
+            List<Playlist> playlistsChunk = JsonConvert.DeserializeObject<List<Playlist>>(jsonResult["data"].ToString());
+            if (playlistsChunk != null && playlistsChunk.Count > 0)
+                playlists.AddRange(playlistsChunk);
+
+            return playlists;
+        }
     }
 }

@@ -1147,6 +1147,42 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+        public static string DeezerUserId
+        {
+            get
+            {
+                string str = null;
+
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        str = key.GetValue("DeezerUserId") as string;
+                    }
+                }
+                catch
+                {
+                    str = null;
+                }
+
+                return str;
+            }
+
+            set
+            {
+                try
+                {
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
+                    if (key != null)
+                    {
+                        key.SetValue("DeezerUserId", value);
+                    }
+                }
+                catch { }
+            }
+        }
+
         static Guid _filterGraphGuid = Guid.Empty;
         static object _filterGraphGuidLock = new object();
 

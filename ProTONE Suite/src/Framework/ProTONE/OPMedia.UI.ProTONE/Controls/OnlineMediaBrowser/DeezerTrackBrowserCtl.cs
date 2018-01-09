@@ -61,6 +61,13 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Image = searchIcon;
             cms.Items.Add(tsmi);
 
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_LOOKUP_MY_PLAYLISTS");
+            tsmi.Tag = "LookupMyPlaylists";
+            tsmi.Image = searchIcon;
+            cms.Items.Add(tsmi);
+
             lvTracks.ContextMenuStrip = cms;
         }
 
@@ -91,6 +98,10 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
                     EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, search);
                 }
+            }
+            else if (act == "LookupMyPlaylists")
+            {
+                EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, act);
             }
         }
                 

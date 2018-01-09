@@ -32,6 +32,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
             txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
+            txtDeezerUserId.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
         }
 
         void OnTextChanged(object sender, EventArgs e)
@@ -43,6 +44,8 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
+            txtDeezerUserId.Text = ProTONEConfig.DeezerUserId;
+
             this.Enabled = AppConfig.CurrentUserIsAdministrator;
         }
 
@@ -53,6 +56,9 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             if (string.IsNullOrEmpty(txtDeezerToken.Text) == false)
                 ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
+
+            if (string.IsNullOrEmpty(txtDeezerUserId.Text) == false)
+                ProTONEConfig.DeezerUserId = txtDeezerUserId.Text;
         }
 
         private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

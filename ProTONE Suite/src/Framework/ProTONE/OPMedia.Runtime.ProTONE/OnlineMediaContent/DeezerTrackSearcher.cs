@@ -22,6 +22,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         [JsonProperty("track")]
         public string Title { get; set; }
 
+
         public bool IsEmpty
         {
             get
@@ -79,9 +80,11 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
+                string userId = ProTONEConfig.DeezerUserId;
 
                 return (string.IsNullOrEmpty(userAccessToken) == false &&
-                    string.IsNullOrEmpty(applicationId) == false);
+                    string.IsNullOrEmpty(applicationId) == false &&
+                    string.IsNullOrEmpty(userId) == false);
             }
         }
 
@@ -160,36 +163,127 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             if (abortEvent.WaitOne(5))
                 return results;
 
-            results.Sort((r1, r2) =>
-                {
-                    int cmp = 0;
-
-                    DeezerTrackItem dti1 = r1 as DeezerTrackItem;
-                    DeezerTrackItem dti2 = r2 as DeezerTrackItem;
-                    if (dti1 != null && dti2 != null)
-                    {
-                        cmp = string.Compare(dti1.Artist, dti2.Artist, true);
-                        if (cmp != 0)
-                            return cmp;
-                        cmp = string.Compare(dti1.Album, dti2.Album, true);
-                        if (cmp != 0)
-                            return cmp;
-                    }
-
-                    cmp = string.Compare(r1.Url, r2.Url, true);
-                    if (cmp != 0)
-                        return cmp;
-
-                    cmp = string.Compare(r1.Title, r2.Title, true);
-                    if (cmp != 0)
-                        return cmp;
-
-                    return 0;
-                });
+            SortResults(ref results);
 
             return results;
         }
 
+        protected override List<OnlinePlaylist> GetMyPlaylists(ManualResetEvent abortEvent)
+        {
+            List<OnlinePlaylist> results = new List<OnlinePlaylist>();
 
+            if (abortEvent.WaitOne(5))
+                return results;
+
+            if (HasValidConfig)
+            {
+                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
+                string applicationId = ProTONEConfig.DeezerApplicationId;
+                string userId = ProTONEConfig.DeezerUserId;
+
+                DeezerRuntime dzr = new DeezerRuntime(userAccessToken, applicationId);
+                if (_dzr != dzr)
+                    _dzr = dzr;
+
+                List<Playlist> playlists = _dzr.GetPlaylists(userId, abortEvent);
+                if (playlists != null)
+                {
+                    foreach (var p in playlists)
+                    {
+                        OnlinePlaylist op = new OnlinePlaylist
+                        {
+                            Id = p.Id,
+                            Description = p.Description,
+                            Title = p.Title
+                        };
+
+                        results.Add(op);
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        protected override List<OnlineMediaItem> ExpandOnlinePlaylist(OnlinePlaylist op, ManualResetEvent abortEvent)
+        {
+            List<OnlineMediaItem> results = new List<OnlineMediaItem>();
+
+            if (abortEvent.WaitOne(5))
+                return results;
+
+            if (HasValidConfig)
+            {
+                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
+                string applicationId = ProTONEConfig.DeezerApplicationId;
+
+                DeezerRuntime dzr = new DeezerRuntime(userAccessToken, applicationId);
+                if (_dzr != dzr)
+                    _dzr = dzr;
+
+                Playlist p = _dzr.GetPlaylist(op.Id);
+                if (p != null && p.Tracks != null)
+                {
+                    foreach (var t in p.Tracks)
+                    {
+                        try
+                        {
+                            DeezerTrackItem dti = new DeezerTrackItem
+                            {
+                                Album = (t.Album != null) ? t.Album.Title : String.Empty,
+                                Artist = (t.Artist != null) ? t.Artist.Name : string.Empty,
+                                Title = t.Title ?? string.Empty,
+                                Url = string.Format("dzmedia:///track/{0}", t.Id),
+                                Duration = t.Duration
+                            };
+
+                            results.Add(dti);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                        }
+
+                    }
+                }
+            }
+
+            if (abortEvent.WaitOne(5))
+                return results;
+
+            SortResults(ref results);
+
+            return results;
+        }
+
+        private void SortResults(ref List<OnlineMediaItem> results)
+        {
+            results.Sort((r1, r2) =>
+            {
+                int cmp = 0;
+
+                DeezerTrackItem dti1 = r1 as DeezerTrackItem;
+                DeezerTrackItem dti2 = r2 as DeezerTrackItem;
+                if (dti1 != null && dti2 != null)
+                {
+                    cmp = string.Compare(dti1.Artist, dti2.Artist, true);
+                    if (cmp != 0)
+                        return cmp;
+                    cmp = string.Compare(dti1.Album, dti2.Album, true);
+                    if (cmp != 0)
+                        return cmp;
+                }
+
+                cmp = string.Compare(r1.Url, r2.Url, true);
+                if (cmp != 0)
+                    return cmp;
+
+                cmp = string.Compare(r1.Title, r2.Title, true);
+                if (cmp != 0)
+                    return cmp;
+
+                return 0;
+            });
+        }
     }
 }
