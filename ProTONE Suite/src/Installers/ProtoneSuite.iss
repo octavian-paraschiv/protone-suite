@@ -257,9 +257,6 @@ Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Fl
 
 [Registry]
 Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: InstallLanguageID; ValueData: {language}; Flags: uninsdeletevalue noerror
-Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: DownloadUriBase; ValueData: https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-publish/master/current; Flags: noerror uninsdeletevalue
-Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: HelpUriBase; ValueData: https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-docs/master/#VERSION#/; Flags: noerror uninsdeletevalue
-Root: HKLM; Subkey: {#REGENTRY}; ValueType: dword; ValueName: UseOnlineDocumentation; ValueData: 1; Flags: noerror uninsdeletevalue
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: noDxvaDecoder; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: cscd; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: div3; ValueData: $00000001; Components: itemCodecs\itemFFDShow
