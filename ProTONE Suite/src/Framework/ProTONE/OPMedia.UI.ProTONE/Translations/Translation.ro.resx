@@ -1178,7 +1178,7 @@ Daţi click pentru a seta volumul la {0} %</value>
     <value />
   </data>
   <data name="TXT_DEEZER_CONTENT">
-    <value />
+    <value>Deezer</value>
   </data>
   <data name="TXT_SELECT_CONTENT_SOURCE">
     <value />
@@ -1223,5 +1223,11 @@ Pentru a obține propriile dvs. setări de identitate, accesați:</value>
   </data>
   <data name="TXT_DEEZER_TOKEN">
     <value>Deezer User Access Token:</value>
+  </data>
+  <data name="TXT_DEEZER_ENDPOINT" xml:space="preserve">
+    <value>Deezer API Endpoint URL:</value>
+  </data>
+  <data name="TXT_DEEZER_USER_ID" xml:space="preserve">
+    <value>Deezer User ID:</value>
   </data>
 </root>

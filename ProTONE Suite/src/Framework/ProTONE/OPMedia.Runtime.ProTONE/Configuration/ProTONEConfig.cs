@@ -966,222 +966,56 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #endregion
 
+        #region SHoutCast settings
+
         public static string ShoutCastApiDevID
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("ShoutCastApiDevID") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("ShoutCastApiDevID", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("ShoutCastApiDevID", string.Empty); }
+            set { PersistenceProxy.SaveObject("ShoutCastApiDevID", value); }
         }
 
         public static string ShoutCastSearchBaseURL
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("ShoutCastSearchBaseURL") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("ShoutCastSearchBaseURL", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("ShoutCastSearchBaseURL", "http://api.shoutcast.com/station"); }
+            set { PersistenceProxy.SaveObject("ShoutCastSearchBaseURL", value); }
         }
 
         public static string ShoutCastTuneInBaseURL
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("ShoutCastTuneInBaseURL") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("ShoutCastTuneInBaseURL", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("ShoutCastTuneInBaseURL", "http://yp.shoutcast.com"); }
+            set { PersistenceProxy.SaveObject("ShoutCastTuneInBaseURL", value); }
         }
 
+        #endregion
+
+        #region Deezer settings
 
         public static string DeezerUserAccessToken
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("DeezerUserAccessToken") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("DeezerUserAccessToken", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("DeezerUserAccessToken", string.Empty); }
+            set { PersistenceProxy.SaveObject("DeezerUserAccessToken", value); }
         }
 
         public static string DeezerApplicationId
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("DeezerApplicationId") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("DeezerApplicationId", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("DeezerApplicationId", string.Empty); }
+            set { PersistenceProxy.SaveObject("DeezerApplicationId", value); }
         }
 
         public static string DeezerUserId
         {
-            get
-            {
-                string str = null;
-
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        str = key.GetValue("DeezerUserId") as string;
-                    }
-                }
-                catch
-                {
-                    str = null;
-                }
-
-                return str;
-            }
-
-            set
-            {
-                try
-                {
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                    if (key != null)
-                    {
-                        key.SetValue("DeezerUserId", value);
-                    }
-                }
-                catch { }
-            }
+            get { return PersistenceProxy.ReadObject("DeezerUserId", string.Empty); }
+            set { PersistenceProxy.SaveObject("DeezerUserId", value); }
         }
+
+        public static string DeezerApiEndpoint
+        {
+            get { return PersistenceProxy.ReadObject("DeezerApiEndpoint", "http://api.deezer.com/"); }
+            set { PersistenceProxy.SaveObject("DeezerApiEndpoint", value); }
+        }
+
+        #endregion
+
 
         static Guid _filterGraphGuid = Guid.Empty;
         static object _filterGraphGuidLock = new object();

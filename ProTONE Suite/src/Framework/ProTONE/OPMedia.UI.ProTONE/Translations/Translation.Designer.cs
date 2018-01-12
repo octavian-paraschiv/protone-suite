@@ -942,11 +942,20 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deezer Directory.
+        ///   Looks up a localized string similar to Deezer.
         /// </summary>
         internal static string TXT_DEEZER_CONTENT {
             get {
                 return ResourceManager.GetString("TXT_DEEZER_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deezer API Endpoint URL:.
+        /// </summary>
+        internal static string TXT_DEEZER_ENDPOINT {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_ENDPOINT", resourceCulture);
             }
         }
         
@@ -967,6 +976,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_DEEZER_TOKEN {
             get {
                 return ResourceManager.GetString("TXT_DEEZER_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deezer User ID:.
+        /// </summary>
+        internal static string TXT_DEEZER_USER_ID {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_USER_ID", resourceCulture);
             }
         }
         

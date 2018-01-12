@@ -12,7 +12,7 @@ namespace OPMedia.DeezerInterop.RestApi
 {
     public class DeezerRuntime
     {
-        private const string API_ENDPOINT = "http://api.deezer.com/";
+        private string _apiEndpoint = "http://api.deezer.com/";
 
         private WebClient _webClient;
 
@@ -39,10 +39,11 @@ namespace OPMedia.DeezerInterop.RestApi
         /// <summary>
         /// Initializes a new instance of the <see cref="DeezerRuntime"/> class.
         /// </summary>
-        public DeezerRuntime()
+        public DeezerRuntime(string apiEndpoint)
         {
-            _applicationCredentials = null;
+            _apiEndpoint = apiEndpoint;
             _webClient = new WebClient();
+            _applicationCredentials = null;
         }
 
         /// <summary>
@@ -51,15 +52,15 @@ namespace OPMedia.DeezerInterop.RestApi
         /// </summary>
         /// <param name="applicationId">Your Application ID.</param>
         /// <param name="applicationSecretKey">Your Application secret key.</param>
-        public DeezerRuntime(string applicationId, string applicationSecretKey)
+        public DeezerRuntime(string apiEndpoint, string applicationId, string applicationSecretKey)
+            : this(apiEndpoint)
         {
             _applicationCredentials = new Tuple<string, string>(applicationId, applicationSecretKey);
-            _webClient = new WebClient();
         }
 
         public CountryInfos GetCountryInfos()
         {
-            string response = _webClient.DownloadString(string.Format("{0}/infos", API_ENDPOINT));
+            string response = _webClient.DownloadString(string.Format("{0}/infos", _apiEndpoint));
             CheckResponseForErrors(response);
             return JsonConvert.DeserializeObject<CountryInfos>(response);
         }
@@ -80,7 +81,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         internal string ExecuteHttpGet(string method)
         {
-            string response = _webClient.DownloadString(API_ENDPOINT + method);
+            string response = _webClient.DownloadString(_apiEndpoint + method);
             CheckResponseForErrors(response);
             return response;
         }

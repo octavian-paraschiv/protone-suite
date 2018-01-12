@@ -57,7 +57,7 @@ namespace OPMedia.PersistenceService
         }
     }
 
-    public class CacheStore : IPersistenceService
+    public class CacheStore
     {
         // Poll for expired items at each 10 seconds.
         const int ExpiredItemsPollTimer = 10 * 1000;
@@ -186,67 +186,95 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
-        public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
-            if (string.IsNullOrEmpty(persistenceContext))
-                persistenceContext = "*";
+            bool retVal = false;
 
-            string key = BuildCacheKey(persistenceId, persistenceContext);
-            bool foundInCache = false;
-
-            lock (_cachePollerLock)
+            try
             {
-                // Is the requested object in the cache ?
-                if (_cache.ContainsKey(key))
-                {
-                    Logger.LogToConsole("SaveObject: Object with key {0} was found and updated in cache.", key);
+                if (string.IsNullOrEmpty(persistenceContext))
+                    persistenceContext = "*";
 
-                    // If it is, update it in the cache.
-                    _cache[key].Value = objectContent;
-                    foundInCache = true;
-                }
-            }
-
-            // We need to update in DB anyways and also make sure it is in the cache.
-            if (foundInCache == false)
-            {
-                CacheItem ci = new CacheItem(key, objectContent);
+                string key = BuildCacheKey(persistenceId, persistenceContext);
+                bool foundInCache = false;
 
                 lock (_cachePollerLock)
                 {
-                    Logger.LogToConsole("SaveObject: Object with key {0} was not found cache => adding it now", key);
-                    _cache.Add(key, ci);
+                    // Is the requested object in the cache ?
+                    if (_cache.ContainsKey(key))
+                    {
+                        Logger.LogToConsole("SaveObject: Object with key {0} was found and updated in cache.", key);
+
+                        // If it is, update it in the cache.
+                        _cache[key].Value = objectContent;
+                        foundInCache = true;
+
+                        retVal = true;
+                    }
                 }
+
+                // We need to update in DB anyways and also make sure it is in the cache.
+                if (foundInCache == false)
+                {
+                    CacheItem ci = new CacheItem(key, objectContent);
+
+                    lock (_cachePollerLock)
+                    {
+                        Logger.LogToConsole("SaveObject: Object with key {0} was not found cache => adding it now", key);
+                        _cache.Add(key, ci);
+
+                        retVal = true;
+                    }
+                }
+
+                ThreadPool.QueueUserWorkItem((c) =>
+                    {
+                        Logger.LogToConsole("SaveObject: Object with key {0} is now saved also in DB.", key);
+                        DbStore.SaveObject(persistenceId, persistenceContext, objectContent);
+                    });
+            }
+            catch
+            {
+                retVal = false;
             }
 
-            ThreadPool.QueueUserWorkItem((c) => 
-                {
-                    Logger.LogToConsole("SaveObject: Object with key {0} is now saved also in DB.", key);
-                    DbStore.SaveObject(persistenceId, persistenceContext, objectContent);
-                });
+            return retVal;
         }
 
-        public void DeleteObject(string persistenceId, string persistenceContext)
+        public bool DeleteObject(string persistenceId, string persistenceContext)
         {
-            if (string.IsNullOrEmpty(persistenceContext))
-                persistenceContext = "*";
+            bool retVal = false;
 
-            string key = BuildCacheKey(persistenceId, persistenceContext);
-
-            lock (_cachePollerLock)
+            try
             {
-                if (_cache.ContainsKey(key))
+                if (string.IsNullOrEmpty(persistenceContext))
+                    persistenceContext = "*";
+
+                string key = BuildCacheKey(persistenceId, persistenceContext);
+
+                lock (_cachePollerLock)
                 {
-                    Logger.LogToConsole("DeleteObject: Object with key {0} was found in cache and removed.", key);
-                    _cache.Remove(key);
+                    if (_cache.ContainsKey(key))
+                    {
+                        Logger.LogToConsole("DeleteObject: Object with key {0} was found in cache and removed.", key);
+                        _cache.Remove(key);
+
+                        retVal = true;
+                    }
                 }
+
+                ThreadPool.QueueUserWorkItem((c) =>
+                    {
+                        Logger.LogToConsole("DeleteObject: Object with key {0} is now removed also from the DB.", key);
+                        DbStore.DeleteObject(persistenceId, persistenceContext);
+                    });
+            }
+            catch
+            {
+                retVal = false;
             }
 
-            ThreadPool.QueueUserWorkItem((c) =>
-                {
-                    Logger.LogToConsole("DeleteObject: Object with key {0} is now removed also from the DB.", key);
-                    DbStore.DeleteObject(persistenceId, persistenceContext);
-                });
+            return retVal;
         }
 
         private string BuildCacheKey(string persistenceId, string persistenceContext)

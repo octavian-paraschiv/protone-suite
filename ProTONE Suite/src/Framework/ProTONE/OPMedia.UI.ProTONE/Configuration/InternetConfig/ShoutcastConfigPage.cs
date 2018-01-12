@@ -53,14 +53,9 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
         protected override void SaveInternal()
         {
-            if (string.IsNullOrEmpty(txtShoutcastDevId.Text) == false)
-                ProTONEConfig.ShoutCastApiDevID = txtShoutcastDevId.Text;
-
-            if (string.IsNullOrEmpty(txtShoutcastSearchURL.Text) == false)
-                ProTONEConfig.ShoutCastSearchBaseURL = txtShoutcastSearchURL.Text;
-
-            if (string.IsNullOrEmpty(txtShoutcastTuneinURL.Text) == false)
-                ProTONEConfig.ShoutCastTuneInBaseURL = txtShoutcastTuneinURL.Text;
+            ProTONEConfig.ShoutCastApiDevID = txtShoutcastDevId.Text;
+            ProTONEConfig.ShoutCastSearchBaseURL = txtShoutcastSearchURL.Text;
+            ProTONEConfig.ShoutCastTuneInBaseURL = txtShoutcastTuneinURL.Text;
         }
 
         private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

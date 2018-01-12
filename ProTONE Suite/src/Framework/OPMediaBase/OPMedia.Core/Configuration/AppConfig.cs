@@ -14,10 +14,10 @@ using OPMedia.Core.Utilities;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Globalization;
-using Microsoft.Win32;
 using System.Security.Principal;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using OPMedia.Core.Win32;
 
 namespace OPMedia.Core.Configuration
 {
@@ -76,124 +76,70 @@ namespace OPMedia.Core.Configuration
         public const int VerWin8_1 =   63;
         public const int VerWin10 =   100;
 
-        static readonly string _configRegPath =
-            string.Format("Software\\{0}\\{1}", Constants.CompanyName, Constants.SuiteName);
-
-        static object _languageSyncRoot = new object();
-        static System.Windows.Forms.Timer _tmrReadRegistry = null;
-
         static Dictionary<string, CultureInfo> _cultures = new Dictionary<string, CultureInfo>();
 
         static string _skinType = string.Empty;
-        static string _languageId = InstallLanguageID;
+        static string _languageId = string.Empty;
+
+        const string DefaultDownloadUriBase = "https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-publish/master/current";
+        const string DefaultHelpUriBase = "https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-docs/master/#VERSION#/";
 
         static AppConfig()
         {
-            _cultures.Add("en", new CultureInfo("en"));
-            _cultures.Add("de", new CultureInfo("de"));
-            _cultures.Add("fr", new CultureInfo("fr"));
-            _cultures.Add("ro", new CultureInfo("ro"));
-
-            lock (_languageSyncRoot)
+            if (string.Compare(Constants.PersistenceServiceShortName,
+                ApplicationInfo.ApplicationName, true) != 0)
             {
-                try
-                {
-                    // Is the install language setting overriden by current user ?
-                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(ConfigRegPath))
-                    {
-                        if (key == null)
-                        {
-                            // Nop, it is not => Read the install language
-                            _languageId = InstallLanguageID;
-                        }
-                        else
-                        {
-                            _languageId = key.GetValue("LanguageID", InstallLanguageID) as string;
-                        }
-                    }
-                }
-                catch
-                {
-                    _languageId = InstallLanguageID;
-                }
+                _cultures.Add("en", new CultureInfo("en"));
+                _cultures.Add("de", new CultureInfo("de"));
+                _cultures.Add("fr", new CultureInfo("fr"));
+                _cultures.Add("ro", new CultureInfo("ro"));
 
-                if (string.IsNullOrEmpty(_languageId))
-                {
-                    _languageId = InstallLanguageID;
-                }
+                _skinType = PersistenceProxy.ReadObject("SkinType", "Black");
 
-                LanguageID = _languageId;
-
-                try
-                {
-                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(ConfigRegPath))
-                    {
-                        if (key == null)
-                        {
-                            _skinType = string.Empty;
-                        }
-                        else
-                        {
-                            string skinType = key.GetValue("SkinType", string.Empty)  as string;
-                            if (skinType != _skinType)
-                            {
-                                _skinType = skinType;
-                            }
-                        }
-                    }
-                }
-                catch
-                {
-                    _skinType = string.Empty;
-                }
-
-                LanguageID = _languageId;
-                SkinType = _skinType;
+                string defLangId = Regedit.InstallLanguageID;
+                _languageId = PersistenceProxy.ReadObject("LanguageID", defLangId);
             }
-
-            _tmrReadRegistry = new System.Windows.Forms.Timer();
-            _tmrReadRegistry.Interval = 5000;
-            _tmrReadRegistry.Tick += new EventHandler(OnReadRegistry);
-            _tmrReadRegistry.Start();
         }
 
-        static void OnReadRegistry(object sender, EventArgs e)
+        public static void OnSettingsChanged(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
-            if (DetectRegistryChanges)
+            if (changeType != ChangeType.Saved)
+                return;
+
+            if (DetectSettingsChanges)
             {
-                lock (_languageSyncRoot)
+                lock (_settingsChangesLock)
                 {
                     try
                     {
-                        _tmrReadRegistry.Stop();
-
-                        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(ConfigRegPath))
+                        switch(persistenceId)
                         {
-                            if (key != null)
-                            {
-                                string langId = key.GetValue("LanguageID", InstallLanguageID) as string;
-                                if (langId != _languageId)
+                            case "LanguageID":
                                 {
-                                    _languageId = langId;
-                                    Translator.SetInterfaceLanguage(_languageId);
+                                    string langId = objectContent;
+                                    if (langId != _languageId)
+                                    {
+                                        _languageId = langId;
+                                        MainThread.Post((c) => Translator.SetInterfaceLanguage(_languageId));
+                                    }
                                 }
+                                break;
 
-                                string skinType = key.GetValue("SkinType", string.Empty) as string;
-                                if (skinType != _skinType)
+                            case "SkinType":
                                 {
-                                    _skinType = skinType;
-                                    EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
+                                    string skinType = objectContent;
+                                    if (skinType != _skinType)
+                                    {
+                                        _skinType = skinType;
+                                        MainThread.Post((c) => EventDispatch.DispatchEvent(EventNames.ThemeUpdated));
+                                    }
                                 }
-                            }
+                                break;
                         }
                     }
                     catch (Exception ex)
                     {
                         Logger.LogException(ex);
-                    }
-                    finally
-                    {
-                        _tmrReadRegistry.Start();
                     }
                 }
             }
@@ -217,27 +163,27 @@ namespace OPMedia.Core.Configuration
                 lock (_allowGUISetupLock)
                 {
                     _allowGUISetup = value;
-                    DetectRegistryChanges = value;
+                    DetectSettingsChanges = value;
                 }
             }
         }
 
-        private static bool _detectRegistryChanges = true;
-        private static object _registryChangesLock = new object();
-        public static bool DetectRegistryChanges
+        private static bool _detectSettingsChanges = true;
+        private static object _settingsChangesLock = new object();
+        public static bool DetectSettingsChanges
         { 
             get 
             {
-                lock (_registryChangesLock)
+                lock (_settingsChangesLock)
                 {
-                    return _detectRegistryChanges;
+                    return _detectSettingsChanges;
                 }
             } 
             set 
             {
-                lock (_registryChangesLock)
+                lock (_settingsChangesLock)
                 {
-                    _detectRegistryChanges = value;
+                    _detectSettingsChanges = value;
                 }
             } 
         }
@@ -329,13 +275,7 @@ namespace OPMedia.Core.Configuration
                 try
                 {
                     if (ApplicationInfo.IsSuiteApplication)
-                    {
-                        RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                        if (key != null)
-                        {
-                            retVal = key.GetValue("InstallPathOverride") as string;
-                        }
-                    }
+                        retVal = Regedit.InstallPathOverride;
 
                     if (string.IsNullOrEmpty(retVal))
                     {
@@ -352,17 +292,6 @@ namespace OPMedia.Core.Configuration
                 }
 
                 return retVal;
-            }
-        }
-
-        public static string ConfigRegPath
-        {
-            get
-            {
-                if (ApplicationInfo.IsSuiteApplication)
-                    return _configRegPath;
-
-                return "Software\\" + ApplicationInfo.ApplicationName;
             }
         }
 
@@ -388,21 +317,8 @@ namespace OPMedia.Core.Configuration
                 if (value != _skinType)
                 {
                     _skinType = value;
+                    PersistenceProxy.SaveObject("SkinType", value);
                     EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
-
-                    try
-                    {
-                        using (RegistryKey key = Registry.CurrentUser.CreateSubKey(ConfigRegPath))
-                        {
-                            if (key != null)
-                            {
-                                key.SetValue("SkinType", value);
-                            }
-                        }
-                    }
-                    catch
-                    {
-                    }
                 }
             }
         }
@@ -411,74 +327,17 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                try
-                {
-                    if (string.IsNullOrEmpty(_languageId))
-                    {
-                        _languageId = InstallLanguageID;
-                    }
-
-                    return _languageId;
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogException(ex);
-                }
-
-                return "en";
+                return _languageId;
             }
 
             set
             {
-                try
+                if (value != _languageId)
                 {
-                    string langToSet = "en";
-                    if (string.IsNullOrEmpty(value))
-                        langToSet = InstallLanguageID;
-                    else
-                        langToSet = value;
-
-                    if (langToSet != _languageId)
-                    {
-                        using (RegistryKey key = Registry.CurrentUser.CreateSubKey(ConfigRegPath))
-                        {
-                            if (key != null)
-                            {
-                                key.SetValue("LanguageID", langToSet);
-                            }
-                        }
-
-                        _languageId = langToSet;
-                        Translator.SetInterfaceLanguage(_languageId);
-                    }
+                    _languageId = value;
+                    PersistenceProxy.SaveObject("LanguageID", value);
+                    Translator.SetInterfaceLanguage(_languageId);
                 }
-                catch(Exception ex)
-                {
-                    Logger.LogException(ex);
-                }
-            }
-        }
-
-        public static string InstallLanguageID
-        {
-            get
-            {
-                try
-                {
-                    using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
-                    {
-                        if (key != null)
-                        {
-                            return key.GetValue("InstallLanguageID", "en") as string;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogException(ex);
-                }
-
-                return "en";
             }
         }
 
@@ -490,18 +349,12 @@ namespace OPMedia.Core.Configuration
                 {
                     if (UseOnlineDocumentation)
                     {
-                        using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
+                        string val = PersistenceProxy.ReadObject("HelpUriBase", DefaultHelpUriBase);
+                        if (!string.IsNullOrEmpty(val))
                         {
-                            if (key != null)
-                            {
-                                string val = key.GetValue("HelpUriBase", string.Empty) as string;
-                                if (!string.IsNullOrEmpty(val))
-                                {
-                                    Version ver = new Version(SuiteVersion.Version);
-                                    val = val.Replace("#VERSION#", string.Format("{0}.{1}", ver.Major, ver.Minor));
-                                    return val;
-                                }
-                            }
+                            Version ver = new Version(SuiteVersion.Version);
+                            val = val.Replace("#VERSION#", string.Format("{0}.{1}", ver.Major, ver.Minor));
+                            return val;
                         }
                     }
                 }
@@ -515,16 +368,7 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
-                {
-                    if (key != null)
-                    {
-                        int val = (int)key.GetValue("UseOnlineDocumentation", 0);
-                        return (val != 0);
-                    }
-                }
-
-                return false;
+                return PersistenceProxy.ReadObject("UseOnlineDocumentation", true);
             }
         }
 
@@ -532,15 +376,7 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(ConfigRegPath))
-                {
-                    if (key != null)
-                    {
-                        return key.GetValue("DownloadUriBase", string.Empty) as string;
-                    }
-                }
-
-                return string.Empty;
+                return PersistenceProxy.ReadObject("DownloadUriBase", DefaultDownloadUriBase);
             }
         }
 
@@ -548,39 +384,16 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(ConfigRegPath))
-                {
-                    if (key != null)
-                    {
-                        int val = (int)key.GetValue("AllowAutomaticUpdates", 1);
-                        return (val != 0);
-                    }
-                }
-
-                return false;
+                return PersistenceProxy.ReadObject("AllowAutomaticUpdates", false);
             }
 
             set
             {
-                try
-                {
-                    using (RegistryKey key = Registry.CurrentUser.CreateSubKey(ConfigRegPath))
-                    {
-                        if (key != null)
-                        {
-                            key.SetValue("AllowAutomaticUpdates", value ? 1 : 0);
-                        }
-                    }
-                }
-                catch
-                {
-                }
+                PersistenceProxy.SaveObject("AllowAutomaticUpdates", value);
             }
         }
 
         #endregion
-        
-        
 
         #region Level 1 settings using Settings File (Combined per-app and per-user settings)
 
@@ -959,27 +772,5 @@ namespace OPMedia.Core.Configuration
 
         #endregion
 
-        internal static bool RunProcess(string cmdLine, string args, bool wait, bool window = false)
-        {
-            try
-            {
-                ProcessStartInfo psi = new ProcessStartInfo(cmdLine, args);
-                psi.CreateNoWindow = !window;
-                psi.ErrorDialog = true;
-                psi.WindowStyle = (window) ? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden;
-
-                Process p = Process.Start(psi);
-                if (p != null && wait)
-                {
-                    p.WaitForExit();
-                }
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

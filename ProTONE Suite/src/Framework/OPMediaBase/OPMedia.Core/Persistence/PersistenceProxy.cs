@@ -8,21 +8,21 @@ using System.Security.Principal;
 using System.ServiceProcess;
 using System.Threading;
 using System.Diagnostics;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.Core
 {
-    public class PersistenceProxy : IDisposable, IPersistenceService
+    public class PersistenceProxy : IDisposable, IPersistenceService, IPersistenceNotification
     {
-        protected static IPersistenceService _proxy = null;
+        protected readonly static PersistenceProxy _proxy = new PersistenceProxy();
+
+        protected IPersistenceService _channel = null;
 
         protected string _persistenceContext = string.Empty;
+        protected Guid _appId = Guid.NewGuid();
 
         private static int _unsuccesfulAttempts = 0;
 
-        protected static PersistenceProxy CreateProxy()
-        {
-            return new PersistenceProxy();
-        }
 
         protected PersistenceProxy()
         {
@@ -35,20 +35,19 @@ namespace OPMedia.Core
                     else
                         _unsuccesfulAttempts++;
                 }
-
-                try
-                {
-                    _persistenceContext = WindowsIdentity.GetCurrent().Name;
-                }
-                catch
-                {
-                    _persistenceContext = string.Format("{0}\\{1}",
-                        Environment.UserDomainName, Environment.UserName);
-                }
             }
             catch
             {
-                _persistenceContext = string.Empty;
+            }
+
+            try
+            {
+                _persistenceContext = WindowsIdentity.GetCurrent().Name;
+            }
+            catch
+            {
+                _persistenceContext = string.Format("{0}\\{1}",
+                    Environment.UserDomainName, Environment.UserName);
             }
 
             Open();
@@ -82,20 +81,32 @@ namespace OPMedia.Core
 
         protected virtual void Open()
         {
-            var myBinding = new NetNamedPipeBinding();
-            myBinding.MaxReceivedMessageSize = int.MaxValue;
-            myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+            try
+            {
+                var myBinding = new NetNamedPipeBinding();
+                myBinding.MaxReceivedMessageSize = int.MaxValue;
+                myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
-            var myEndpoint = new EndpointAddress("net.pipe://localhost/PersistenceService.svc");
-            var myChannelFactory = new ChannelFactory<IPersistenceService>(myBinding, myEndpoint);
-            _proxy = myChannelFactory.CreateChannel();
+                var instanceContext = new InstanceContext(this);
+                var myEndpoint = new EndpointAddress("net.pipe://localhost/PersistenceService.svc");
+                var myChannelFactory = new DuplexChannelFactory<IPersistenceService>(instanceContext, myBinding, myEndpoint);
+
+                _channel = myChannelFactory.CreateChannel();
+
+                var appId = _appId.ToString();
+                _channel.Subscribe(appId);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
         }
 
         protected void Abort()
         {
             try
             {
-                ICommunicationObject channel = _proxy as ICommunicationObject;
+                ICommunicationObject channel = _channel as ICommunicationObject;
                 if (channel != null)
                     channel.Abort();
             }
@@ -106,13 +117,19 @@ namespace OPMedia.Core
         {
             try
             {
-                ICommunicationObject channel = _proxy as ICommunicationObject;
-                if (channel != null)
-                    channel.Close();
+                if (_channel != null)
+                {
+                    var appId = _appId.ToString();
+                    _channel.Unsubscribe(appId);
+
+                    ICommunicationObject channel = _channel as ICommunicationObject;
+                    if (channel != null)
+                        channel.Close();
+                }
             }
             catch { }
 
-            _proxy = null;
+            _channel = null;
         }
 
         static string BuildPersistenceId(bool includeAppName, string persistenceId)
@@ -133,6 +150,8 @@ namespace OPMedia.Core
 
         static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
 
+        static int _readCount = 0;
+
         public static T ReadObject<T>(string persistenceId, T defaultValue, bool usePersistenceContext = true)
         {
             T retVal = defaultValue;
@@ -141,11 +160,12 @@ namespace OPMedia.Core
             {
                 _readTicToc.Tic();
 
-                using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     string content = usePersistenceContext ?
-                        (pp as IPersistenceService).ReadObject(persistenceId, pp._persistenceContext) :
-                        (pp as IPersistenceService).ReadObject(persistenceId, string.Empty);
+                        (_proxy as IPersistenceService).ReadObject(persistenceId, _proxy._persistenceContext) :
+                        (_proxy as IPersistenceService).ReadObject(persistenceId, string.Empty);
+
+                    _readCount++;
 
                     if (!string.IsNullOrEmpty(content))
                     {
@@ -205,7 +225,8 @@ namespace OPMedia.Core
         {
             try
             {
-                return _proxy.ReadObject(persistenceId, persistenceContext);
+                if (_channel != null) 
+                    return _channel.ReadObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
@@ -234,12 +255,11 @@ namespace OPMedia.Core
             {
                 _saveTicToc.Tic();
 
-                using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     if (usePersistenceContext)
-                        (pp as IPersistenceService).SaveObject(persistenceId, pp._persistenceContext, objectContent.ToString());
+                        (_proxy as IPersistenceService).SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
                     else
-                        (pp as IPersistenceService).SaveObject(persistenceId, string.Empty, objectContent.ToString());
+                        (_proxy as IPersistenceService).SaveObject(persistenceId, string.Empty, objectContent.ToString());
                 }
             }
             catch (Exception ex)
@@ -256,7 +276,8 @@ namespace OPMedia.Core
         {
             try
             {
-                _proxy.SaveObject(persistenceId, persistenceContext, objectContent);
+                if (_channel != null)
+                    _channel.SaveObject(persistenceId, persistenceContext, objectContent);
             }
             catch (Exception ex)
             {
@@ -283,12 +304,11 @@ namespace OPMedia.Core
             {
                 _deleteTicToc.Tic();
 
-                using (PersistenceProxy pp = new PersistenceProxy())
                 {
                     if (usePersistenceContext)
-                        (pp as IPersistenceService).DeleteObject(persistenceId, pp._persistenceContext);
+                        (_proxy as IPersistenceService).DeleteObject(persistenceId, _proxy._persistenceContext);
                     else
-                        (pp as IPersistenceService).DeleteObject(persistenceId, string.Empty);
+                        (_proxy as IPersistenceService).DeleteObject(persistenceId, string.Empty);
                 }
             }
             catch (Exception ex)
@@ -305,7 +325,8 @@ namespace OPMedia.Core
         {
             try
             {
-                _proxy.DeleteObject(persistenceId, persistenceContext);
+                if (_channel != null)
+                    _channel.DeleteObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
@@ -315,5 +336,26 @@ namespace OPMedia.Core
             }
         }
         #endregion
+
+        void IPersistenceService.Subscribe(string appId)
+        {
+            throw new NotSupportedException();
+        }
+
+        void IPersistenceService.Unsubscribe(string appId)
+        {
+            throw new NotSupportedException();
+        }
+
+        void IPersistenceNotification.Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        {
+            if (persistenceContext == null || persistenceContext == "*" || persistenceContext == _persistenceContext)
+                ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
+        }
+
+        void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        {
+            AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);
+        }
     }
 }

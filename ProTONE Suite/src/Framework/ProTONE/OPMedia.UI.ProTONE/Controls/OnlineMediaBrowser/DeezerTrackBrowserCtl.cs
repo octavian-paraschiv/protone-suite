@@ -16,6 +16,7 @@ using OPMedia.UI.Themes;
 using OPMedia.Core;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.ProTONE.Properties;
+using System.Diagnostics;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -65,6 +66,13 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = "www.deezer.com";
+            tsmi.Tag = "OpenDeezerPage";
+            tsmi.Image = searchIcon;
+            cms.Items.Add(tsmi);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_MY_PLAYLISTS");
             tsmi.Tag = "LookupMyPlaylists";
             tsmi.Image = searchIcon;
@@ -76,35 +84,38 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         protected override void HandleAction(string act)
         {
             var selItems = this.SelectedItems;
+            DeezerTrackItem selItem = null;
+
             if (selItems != null && selItems.Count > 0)
+                selItem = selItems[0] as DeezerTrackItem;
+
+            string search = string.Empty;
+
+            switch (act)
             {
-                var item = selItems[0] as DeezerTrackItem;
-                if (item != null)
-                {
-                    string search = string.Empty;
+                case "LookupDeezerArtist":
+                    search = string.Format("artist:\"{0}\"", selItem.Artist.ToLowerInvariant());
+                    break;
 
-                    switch (act)
-                    {
-                        case "LookupDeezerArtist":
-                            search = string.Format("artist:\"{0}\"", item.Artist.ToLowerInvariant());
-                            break;
+                case "LookupDeezerAlbum":
+                    search = string.Format("artist:\"{0}\" album:\"{1}\"", selItem.Artist.ToLowerInvariant(), selItem.Album.ToLowerInvariant());
+                    break;
 
-                        case "LookupDeezerAlbum":
-                            search = string.Format("artist:\"{0}\" album:\"{1}\"", item.Artist.ToLowerInvariant(), item.Album.ToLowerInvariant());
-                            break;
+                case "LookupDeezerTrack":
+                    search = string.Format("artist:\"{0}\" track:\"{1}\"", selItem.Artist.ToLowerInvariant(), selItem.Title.ToLowerInvariant());
+                    break;
 
-                        case "LookupDeezerTrack":
-                            search = string.Format("artist:\"{0}\" track:\"{1}\"", item.Artist.ToLowerInvariant(), item.Title.ToLowerInvariant());
-                            break;
-                    }
+                case "LookupMyPlaylists":
+                    EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, act);
+                    return;
 
-                    EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, search);
-                }
+                case "OpenDeezerPage":
+                    Process.Start("http://www.deezer.com");
+                    return;
             }
-            else if (act == "LookupMyPlaylists")
-            {
-                EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, act);
-            }
+
+            if (string.IsNullOrEmpty(search) == false)
+                EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, search);
         }
                 
 

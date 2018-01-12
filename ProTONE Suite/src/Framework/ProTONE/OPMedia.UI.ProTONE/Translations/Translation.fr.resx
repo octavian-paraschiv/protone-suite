@@ -1183,4 +1183,13 @@ Pour obtenir votre propre clé privée, veuillez accéder à:</value>
 These credentials is meant to be individually used, so please do not share them with anyone.
 To get your own credentials, please access:</value>
   </data>
+  <data name="TXT_DEEZER_CONTENT" xml:space="preserve">
+    <value>Deezer</value>
+  </data>
+  <data name="TXT_DEEZER_ENDPOINT" xml:space="preserve">
+    <value>Deezer API Endpoint URL:</value>
+  </data>
+  <data name="TXT_DEEZER_USER_ID" xml:space="preserve">
+    <value>Deezer User ID:</value>
+  </data>
 </root>

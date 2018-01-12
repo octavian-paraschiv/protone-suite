@@ -81,8 +81,11 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
                 string userId = ProTONEConfig.DeezerUserId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
-                return (string.IsNullOrEmpty(userAccessToken) == false &&
+                return (
+                    string.IsNullOrEmpty(deezerApiEndpoint) == false &&
+                    string.IsNullOrEmpty(userAccessToken) == false &&
                     string.IsNullOrEmpty(applicationId) == false &&
                     string.IsNullOrEmpty(userId) == false);
             }
@@ -99,8 +102,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
-                DeezerRuntime dzr = new DeezerRuntime(userAccessToken, applicationId);
+                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
                 if (_dzr != dzr)
                     _dzr = dzr;
 
@@ -180,8 +184,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
                 string userId = ProTONEConfig.DeezerUserId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
-                DeezerRuntime dzr = new DeezerRuntime(userAccessToken, applicationId);
+                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
                 if (_dzr != dzr)
                     _dzr = dzr;
 
@@ -216,8 +221,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
-                DeezerRuntime dzr = new DeezerRuntime(userAccessToken, applicationId);
+                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
                 if (_dzr != dzr)
                     _dzr = dzr;
 

@@ -1179,7 +1179,7 @@ Click to set volume to: {0} %</value>
     <value>Shoutcast Directory</value>
   </data>
   <data name="TXT_DEEZER_CONTENT">
-    <value>Deezer Directory</value>
+    <value>Deezer</value>
   </data>
   <data name="TXT_SELECT_CONTENT_SOURCE">
     <value>Step 1: Select an online media content source
@@ -1253,5 +1253,11 @@ To get your own credentials, please access:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
     <value>Browse my online playlists</value>
+  </data>
+  <data name="TXT_DEEZER_ENDPOINT" xml:space="preserve">
+    <value>Deezer API Endpoint URL:</value>
+  </data>
+  <data name="TXT_DEEZER_USER_ID" xml:space="preserve">
+    <value>Deezer User ID:</value>
   </data>
 </root>
