@@ -146,13 +146,13 @@ namespace OPMedia.UI.Dialogs
             tsbErrors.CheckedChanged -= new System.EventHandler(this.OnSettingsChanged);
             cmbLogLineCount.SelectedIndexChanged -= new System.EventHandler(this.OnSettingsChanged);
 
-            tsbErrors.Checked = AppConfig.FilterErrorLevelEnabled;
-            tsbInfo.Checked = AppConfig.FilterInfoLevelEnabled;
-            tsbTraces.Checked = AppConfig.FilterTraceLevelEnabled;
-            tsbWarnings.Checked = AppConfig.FilterWarningLevelEnabled;
+            tsbErrors.Checked = LoggingConfig.FilterErrorLevelEnabled;
+            tsbInfo.Checked = LoggingConfig.FilterInfoLevelEnabled;
+            tsbTraces.Checked = LoggingConfig.FilterTraceLevelEnabled;
+            tsbWarnings.Checked = LoggingConfig.FilterWarningLevelEnabled;
 
             string text = string.Empty;
-            int logLinesCount = AppConfig.FilterLogLinesCount;
+            int logLinesCount = LoggingConfig.FilterLogLinesCount;
             if (logLinesCount > 0 && logLinesCount <= 200)
             {
                 text = logLinesCount.ToString();
@@ -331,19 +331,19 @@ namespace OPMedia.UI.Dialogs
 
         private void OnSettingsChanged(object sender, EventArgs e)
         {
-            AppConfig.FilterErrorLevelEnabled = tsbErrors.Checked;
-            AppConfig.FilterInfoLevelEnabled = tsbInfo.Checked;
-            AppConfig.FilterTraceLevelEnabled = tsbTraces.Checked;
-            AppConfig.FilterWarningLevelEnabled = tsbWarnings.Checked;
+            LoggingConfig.FilterErrorLevelEnabled = tsbErrors.Checked;
+            LoggingConfig.FilterInfoLevelEnabled = tsbInfo.Checked;
+            LoggingConfig.FilterTraceLevelEnabled = tsbTraces.Checked;
+            LoggingConfig.FilterWarningLevelEnabled = tsbWarnings.Checked;
 
             _logLineCount = 0;
             if (int.TryParse(cmbLogLineCount.Text, out _logLineCount))
             {
-                AppConfig.FilterLogLinesCount = _logLineCount;
+                LoggingConfig.FilterLogLinesCount = _logLineCount;
             }
             else
             {
-                AppConfig.FilterLogLinesCount = 500;
+                LoggingConfig.FilterLogLinesCount = 500;
             }
 
             

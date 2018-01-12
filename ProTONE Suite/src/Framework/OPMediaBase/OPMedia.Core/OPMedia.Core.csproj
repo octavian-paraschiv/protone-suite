@@ -67,6 +67,7 @@
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <None Include="VersionTemplate.cs" />
+    <Compile Include="Configuration\LoggingConfig.cs" />
     <Compile Include="MainThread.cs" />
     <Compile Include="NetworkAccess\Shares.cs" />
     <Compile Include="NetworkAccess\WebClientWithTimeout.cs">
