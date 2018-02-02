@@ -198,6 +198,23 @@ Source: {#EXTDIR}\haali\ogm.dll; DestDir: {app}\HDSupport; Flags: regserver; Com
 Source: {#EXTDIR}\haali\splitter.ax; DestDir: {app}\HDSupport; Flags: regserver; Components: "  itemCodecs\itemHaali"; Languages: 
 Source: {#EXTDIR}\haali\ts.dll; DestDir: {app}\HDSupport; Flags: regserver; Components: "  itemCodecs\itemHaali"
 
+Source: {#BINDIR}\IRSerDev.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.Addons.Builtin.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.Core.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.DeezerInterop.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.MediaLibrary.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.PersistenceService.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.ProTONE.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.RCCManager.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.RCCService.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.Runtime.Addons.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.Runtime.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.Runtime.ProTONE.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.ServiceHelper.RCCService.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.ShellSupport.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.UI.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+Source: {#BINDIR}\OPMedia.UI.ProTONE.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
+
 [Icons]
 Name: {group}\{cm:UninstallProgram,ProTONE Suite}; Filename: {uninstallexe}
 Name: {group}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
@@ -219,6 +236,7 @@ Name: itemPlayer\itemRemote; Description: {cm:itemRemote}; Flags: dontinheritche
 Name: itemCodecs; Description: {cm:itemCodecs}; Flags: fixed checkablealone; Types: default; Check: CodecsAreMissing
 Name: itemCodecs\itemFFDShow; Description: {cm:itemFfdShow}; Flags: checkablealone; Check: FFDShowIsMissing; Types: default
 Name: itemCodecs\itemHaali; Description: {cm:itemHDSupport}; Flags: checkablealone; Check: HaaliIsMissing; Types: default
+Name: itemDebugSymbols; Description: {cm:itemDebugSymbols}; Flags: checkablealone; Types: default
 
 [Dirs]
 
@@ -232,24 +250,25 @@ Name: {app}\HDSupport; Flags: uninsalwaysuninstall; Components: "  itemCodecs\it
 Name: {app}\Templates; Components: itemPlayer\itemRemote itemPlayer\itemLibrary
 Name: {app}\Templates\Catalog; Languages: ; Components: itemPlayer\itemLibrary
 Name: {app}\Templates\RemoteControl; Components: itemPlayer\itemRemote
+Name: {app}\DebugSymbols; Components: "  itemDebugSymbols"
 
 [Run]
 Filename: {dotnet4032}\installutil.exe; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: {app}; StatusMsg: {cm:instRccService}; Flags: runhidden runascurrentuser
 Filename: cmd.exe; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: {app}; StatusMsg: {cm:startRccService}; Flags: runhidden runascurrentuser
-Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer
-Filename: {dotnet4064}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer; Check: IsWin64
+Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemDebugSymbols
+Filename: {dotnet4064}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Check: IsWin64; Components: itemDebugSymbols
 Filename: {dotnet4032}\installutil.exe; Parameters: "-i ""{app}\OPMedia.RCCService.exe"""; WorkingDir: {app}; StatusMsg: {cm:instRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
 Filename: cmd.exe; Parameters: "/c ""sc start OPMedia.RCCService"""; WorkingDir: {app}; StatusMsg: {cm:startRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
-Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; StatusMsg: {cm:firewallPlayer}; Flags: runhidden runascurrentuser; Components: itemPlayer
+Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; StatusMsg: {cm:firewallPlayer}; Flags: runhidden runascurrentuser; Components: itemDebugSymbols
 Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCService.exe"" ""OPMedia RCC Service"" ENABLE ALL"; StatusMsg: {cm:firewallRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
 Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCManager.exe"" ""OPMedia RCC Manager"" ENABLE ALL"; StatusMsg: {cm:firewallRccManager}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
 
 [UninstallRun]
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.RCCService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopRCCService}; RunOnceId: _id1.1; Components: itemPlayer\itemRemote
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.RCCService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstRCCService}; RunOnceId: _id2.1; Components: itemPlayer\itemRemote
-Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3; Components: itemPlayer
-Filename: {dotnet4064}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3.1; Components: itemPlayer; Check: IsWin64
-Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.ProTONE.exe"""; StatusMsg: {cm:delFirewallPlayer}; Flags: runhidden; RunOnceId: _id4; Components: itemPlayer
+Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3; Components: itemDebugSymbols
+Filename: {dotnet4064}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3.1; Check: IsWin64; Components: itemDebugSymbols
+Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.ProTONE.exe"""; StatusMsg: {cm:delFirewallPlayer}; Flags: runhidden; RunOnceId: _id4; Components: itemDebugSymbols
 Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.RCCService.exe"""; StatusMsg: {cm:delFirewallRccService}; Flags: runhidden; RunOnceId: _id5; Components: itemPlayer\itemRemote
 Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.RCCManager.exe"""; StatusMsg: {cm:delFirewallRccManager}; Flags: runhidden; RunOnceId: _id6; Components: itemPlayer\itemRemote
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopRCCService}; RunOnceId: _id7
