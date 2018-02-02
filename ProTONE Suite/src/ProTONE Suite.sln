@@ -42,6 +42,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IRSerDev", "IRSerDev\IRSerDev.vcxproj", "{7527A503-9FD3-4F31-86B6-D59A37E9B441}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Core", "Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj", "{D75C6E16-0208-40FD-8C54-F073667F5384}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7527A503-9FD3-4F31-86B6-D59A37E9B441} = {7527A503-9FD3-4F31-86B6-D59A37E9B441}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Runtime", "Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj", "{0A0114C0-4409-42F3-940C-31038104261C}"
 EndProject
