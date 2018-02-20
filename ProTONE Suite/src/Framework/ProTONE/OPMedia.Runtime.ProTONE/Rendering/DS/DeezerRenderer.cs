@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Core.Logging;
 using System.Diagnostics;
+using OPMedia.Runtime.Shortcuts;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -199,6 +200,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         protected override void DoStartRendererWithHint(RenderingStartHint startHint)
         {
             dz_error_t err;
+
+            _needNaturalNext = false;
 
             Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
 
@@ -428,6 +431,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         #region Duration and related
 
         int _duration = 0;
+        bool _needNaturalNext = false;
 
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
@@ -460,9 +464,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_END:
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_REMOVED:
-                    _evtPlayerPlaybackStopped.Set();
-                    FilterState = FilterState.Stopped;
-                    RenderPosition = 0;
+                    if (_needNaturalNext)
+                    {
+                        // HACK: The Deezer Native SDK told us that we should advance 
+                        // to the next item by using a "natural next" (WTF is that anyways ??)
+                        _needNaturalNext = false;
+                        // So this is exactly what we'll give it ...
+                        OPMShortcutEventArgs args = new OPMShortcutEventArgs(OPMShortcut.CmdNext);
+                        EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, args);
+                    }
+                    else
+                    {
+                        _evtPlayerPlaybackStopped.Set();
+                        FilterState = FilterState.Stopped;
+                        RenderPosition = 0;
+                    }
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_LOADED:
@@ -473,6 +489,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     _evtPlayerStreamReadyAfterSeek.Set();
                     break;
 
+                case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_NEED_NATURAL_NEXT:
+                    _needNaturalNext = true;
+                    break;
             }
         }
 
@@ -483,7 +502,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override bool IsEndOfMedia()
         {
-
             long nMediaPos = (long)GetMediaPosition();
             long nMediaLen = (long)GetMediaLength();
             long nElapsed = base._elapsedSeconds;
