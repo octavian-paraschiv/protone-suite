@@ -10,16 +10,6 @@ namespace OPMedia.DeezerInterop.PlayerApi
 {
     #region Enums
     /// <summary>
-    /// Streaming modes.
-    /// </summary>
-    public enum dz_streaming_mode_t
-    {
-        DZ_STREAMING_MODE_UNKNOWN,  /* Mode is not known or audio ad is playing. */
-        DZ_STREAMING_MODE_ONDEMAND, /* On demand streaming mode. */
-        DZ_STREAMING_MODE_RADIO,    /* Radio streaming mode. */
-    }
-
-    /// <summary>
     /// Connect events
     /// </summary>
     public enum dz_connect_event_t 
@@ -41,18 +31,6 @@ namespace OPMedia.DeezerInterop.PlayerApi
         DZ_CONNECT_EVENT_ADVERTISEMENT_START,               /* A new advertisement needs to be displayed. */
         DZ_CONNECT_EVENT_ADVERTISEMENT_STOP,                /* An advertisement needs to be stopped. */
     }
-
-    /// <summary>
-    /// Connect smartcache events
-    /// </summary>
-    public enum dz_connect_cache_event_t
-    {
-        DZ_CONNECT_CACHE_EVENT_UNKNOWN,                     /* Cache event has not been set yet, not a valid value. */
-        DZ_CONNECT_CACHE_EVENT_SMART_CACHE_SIZE_CHANGED,    /* Smart cache size has changed */
-        DZ_CONNECT_CACHE_EVENT_OFFLINE_CACHE_SIZE_CHANGED,  /* Offline cache size has changed */
-        DZ_CONNECT_CACHE_EVENT_PARTITION_NEARLY_FULL,       /* Partition where the tracks are cached is almost full, only 200MB left */
-        DZ_CONNECT_CACHE_EVENT_PARTITION_FULL,              /* Partition where the tracks are cached is full */
-    }
     #endregion
 
     #region Delegates
@@ -69,11 +47,6 @@ namespace OPMedia.DeezerInterop.PlayerApi
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate bool dz_connect_crash_reporting_delegate();
 
-    /// <summary>
-    /// Prototype for smartcache usage callback
-    /// </summary>
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void dz_connect_on_cache_event_cb(IntPtr handle, IntPtr evtHandle, IntPtr userData);
     #endregion
 
     #region Structures
@@ -123,68 +96,9 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @brief Get the type of the event.
          *
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_connect_event_t dz_connect_event_get_type(IntPtr self);
 
-        /**
-         * @brief Get the access token of the current session for a #DZ_CONNECT_EVENT_USER_ACCESS_TOKEN_OK event.
-         *
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_event_get_access_token(IntPtr self);
-
-        /**
-         * @brief Get a JSON describing events.
-         *
-         * Available for events:
-         * - #DZ_CONNECT_EVENT_ADVERTISEMENT_START
-         * - #DZ_CONNECT_EVENT_ADVERTISEMENT_STOP
-         *
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_event_get_advertisement_infos_json(IntPtr self);
-
-        /**
-         * @brief Get api /user/me JSON.
-         *
-         * Available for events:
-         * - #DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE
-         * - #DZ_CONNECT_EVENT_USER_LOGIN_OK
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_event_get_user_me_json(IntPtr self);
-    
-        /**
-         * @brief Get api /options JSON.
-         *
-         * Available for events:
-         * - #DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE
-         * - #DZ_CONNECT_EVENT_USER_LOGIN_OK
-         * - #DZ_CONNECT_EVENT_USER_NEW_OPTIONS
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_event_get_options_json(IntPtr self);
-
-        /**
-         * @brief Get the type of the event.
-         *
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_connect_cache_event_t dz_connect_cache_event_get_type(IntPtr self);
-
-        /**
-         * @brief Get the event's size info.
-         *
-         * Available for events:
-         * - #DZ_CONNECT_CACHE_EVENT_SMART_CACHE_SIZE_CHANGED.
-         * - #DZ_CONNECT_CACHE_EVENT_OFFLINE_CACHE_SIZE_CHANGED.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 dz_connect_cache_event_get_new_size(IntPtr self);
 
                 /**
          * @brief Constructor for IntPtr.
@@ -192,7 +106,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param config see #dz_connect_configuration.
          * @returns      A Deezer connect handle.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr dz_connect_new([MarshalAs(UnmanagedType.LPStruct)]dz_connect_configuration config);
 
 
@@ -202,18 +116,8 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param self A Deezer connect handle.
          * @returns    DZ_ERROR_NO_ERROR.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_debug_log_disable(IntPtr self);
-    
-        /**
-         * @brief Get the device_id associated with the lib.
-         *
-         * @param self A Deezer connect handle.
-         * @returns    A string to a device_id.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_get_device_id(IntPtr self);
     
         /**
          * @brief Activate the connect session.
@@ -222,9 +126,8 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param self     The Deezer connect handle you want to activate.
          * @param userdata A reference to the user’s data.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_activate(IntPtr self, IntPtr userdata);
-
 
         /**
          * @brief Deactivate for IntPtr.
@@ -233,10 +136,15 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param cb                 Function called when the result is available.
          * @param operation_userdata A reference to the user’s data.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_deactivate(IntPtr self,
+            
+            [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
+            
             IntPtr operation_userdata);
+
+
 
         /**
          * @brief Set current OAuth access token.
@@ -246,9 +154,12 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param operation_userdata A reference to the user’s data.
          * @param access_token       OAuth access token.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_set_access_token(IntPtr self,
+            
+            [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
+
             IntPtr       operation_userdata,
                                                                 
             [MarshalAs(UnmanagedType.LPStr)]
@@ -263,10 +174,13 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param cb                 Function called when the result is available.
          * @param operation_userdata A reference to the user’s data.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_logout(IntPtr self,
-                                                   dz_activity_operation_callback cb,
-                                                   IntPtr operation_userdata);
+            
+            [MarshalAs(UnmanagedType.FunctionPtr)]
+            dz_activity_operation_callback cb,
+            
+            IntPtr operation_userdata);
 
         /**
          * @brief Set the path of the Native SDK cache.
@@ -279,7 +193,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param operation_userdata A reference to the user’s data.
          * @param local_path         Path to the cache.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_cache_path_set(IntPtr self,
 
             [MarshalAs(UnmanagedType.FunctionPtr)]
@@ -291,62 +205,6 @@ namespace OPMedia.DeezerInterop.PlayerApi
             string local_path);
 
         /**
-         * @brief Set the audio smartcache quota.
-         *
-         * The smartcache allows the player to store tracks while playing.
-         *
-         * A smartcache should not be shared between application or several instances of your
-         * application.
-         *
-         * @param self               A Deezer connect handle.
-         * @param cb                 Function called when the result is available.
-         * @param operation_userdata A reference to the user’s data.
-         * @param quota_kB           Quota in kB.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_error_t dz_connect_smartcache_quota_set(IntPtr self,
-                dz_activity_operation_callback cb,
-                IntPtr operation_userdata,
-                UInt32 quota_kB);
-
-        /**
-         * @brief Set the smartcache event callback.
-         *
-         * @note Set to NULL to disable.
-         *
-         * @param self               A Deezer connect handle.
-         * @param cb                 Function called when the result is available.
-         * @param operation_userdata A reference to the user’s data.
-         * @param cacheevent_cb      Callback call on event.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_error_t dz_connect_cache_eventcb_set(IntPtr self,
-                                                              dz_activity_operation_callback cb,
-                                                              IntPtr operation_userdata,
-                                                              dz_connect_on_cache_event_cb cacheevent_cb);
-    
-        /**
-          * @brief Get the cache size (smartcache + offline tracks).
-          *
-          * @param self Deezer connect handle.
-          * @return     The current size in bytes.
-          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt64 dz_connect_cache_current_size(IntPtr self);
-    
-        /**
-          * @brief Force offline mode in lib.
-          *
-          * @param self               A Deezer connect handle.
-          * @param cb                 Function called when the result is available.
-          * @param operation_userdata A reference to the user’s data.
-          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_error_t dz_connect_cache_flush(IntPtr self,
-                                                        dz_activity_operation_callback cb,
-                                                        IntPtr operation_userdata);
-
-        /**
          * @brief Force offline mode in lib.
          *
          * @param self                A Deezer connect handle.
@@ -354,51 +212,15 @@ namespace OPMedia.DeezerInterop.PlayerApi
          * @param operation_userdata  A reference to the user’s data.
          * @param offline_mode_forced is offline mode enforced.
          */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_offline_mode(IntPtr self,
-                                                         dz_activity_operation_callback cb,
-                                                         IntPtr operation_userdata,
-                                                         bool  offline_mode_forced);
 
-        /**
-         * @brief Send an app event.
-         *
-         * There is no return code.
-         *
-         * Example of event_name:
-         * - menu_click > type (settings, feed, explore), session_duration.
-         *
-         * @param self          A Deezer connect handle.
-         * @param sz_event_name Event name string.
-         * @param sz_properties Serialized JSON of properties.
-         * @param sz_path       Path to associate event with.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_error_t dz_connect_push_app_event(IntPtr self,
-            [MarshalAs(UnmanagedType.LPStr)]
-            string sz_event_name,
-            
-            [MarshalAs(UnmanagedType.LPStr)]
-            string sz_properties,
-        
-            [MarshalAs(UnmanagedType.LPStr)]
-            string sz_path);
+            [MarshalAs(UnmanagedType.FunctionPtr)]
+            dz_activity_operation_callback cb,
 
-        /**
-         * @brief Get the build id of the Native SDK.
-         *
-         * @return A string representing the build id of the Native SDK.
-         */
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(NativeStringMarshaller))]
-        public static extern string dz_connect_get_build_id();
+            IntPtr operation_userdata,
 
-        //public static string dz_connect_get_build_id_2()
-        //{
-        //    IntPtr pStr = dz_connect_get_build_id();
-
-        //    return Marshal.PtrToStringAnsi(pStr);
-        //}
+            bool  offline_mode_forced);
     }
 
     public class NativeStringMarshaller : ICustomMarshaler

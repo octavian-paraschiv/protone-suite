@@ -78,6 +78,16 @@ namespace OPMedia.DeezerInterop.PlayerApi
         DZ_ERROR_OFFLINE_FS_FULL,
 
         DZ_ERROR_PLAYER_BAD_URL,
+
+        // Timeout errors
+        DZ_ERROR_CATEGORY_OPERATION_TIMEOUTS = 0x00050000,
+
+        DZ_ERROR_CONNECT_OFFLINE_MODE_TIMEOUT,
+        DZ_ERROR_PLAYER_LOAD_TIMEOUT,
+        DZ_ERROR_PLAYER_PLAY_TIMEOUT,
+        DZ_ERROR_PLAYER_PAUSE_TIMEOUT,
+        DZ_ERROR_PLAYER_SEEK_TIMEOUT,
+        DZ_ERROR_PLAYER_STOP_TIMEOUT,
     }
 
     /// <summary>
@@ -88,48 +98,4 @@ namespace OPMedia.DeezerInterop.PlayerApi
     /// <param name="status">error code returned</param>
     /// <param name="result">result the result of the operation</param>
     public delegate void dz_activity_operation_callback(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result);
-
-
-    public partial class DeezerApi
-    {
-        const string DLL_NAME = "libdeezer.x86.dll";
-
-        /// <summary>
-        /// Keep object reference and avoid autorelease
-        /// </summary>
-        /// <param name="obj">The object handle that need to be retained</param>
-        /// <returns>the object handle that is retained</returns>
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr dz_object_retain(IntPtr obj);
-
-        /// <summary>
-        /// Release object reference
-        /// </summary>
-        /// <param name="obj">The object handle that need to be released</param>
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void dz_object_release(IntPtr obj);
-
-        /// <summary>
-        /// Deactivate the application activity
-        /// This function is the last one to be called after the player and connect have been deactivated
-        /// </summary>
-        /// <param name="self">Application context</param>
-        /// <param name="cb">Callback that will be called when the application activity has been deactivated</param>
-        /// <param name="operation_userdata">A reference to the user’s data</param>
-        /// <returns></returns>
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern dz_error_t dz_activity_app_deactivate(IntPtr self, dz_activity_operation_callback cb, IntPtr operation_userdata);
-
-        /// <summary>
-        /// Dump some information about bad state of lib
-        /// </summary>
-        /// <param name="self">deezer connect handle</param>
-        /// <remarks>
-        /// Due to the way the Native SDK was designed, it means we didn't get the
-        /// notifications all tasks are finished. 
-        /// This is an internal bug, and there is a leak, it should be fixed.
-        /// </remarks>
-        [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void dz_activity_debug_do_post_deactivation_analysis(IntPtr self);
-    }
 }
