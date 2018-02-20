@@ -198,6 +198,7 @@ Source: {#EXTDIR}\haali\ogm.dll; DestDir: {app}\HDSupport; Flags: regserver; Com
 Source: {#EXTDIR}\haali\splitter.ax; DestDir: {app}\HDSupport; Flags: regserver; Components: "  itemCodecs\itemHaali"; Languages: 
 Source: {#EXTDIR}\haali\ts.dll; DestDir: {app}\HDSupport; Flags: regserver; Components: "  itemCodecs\itemHaali"
 
+Source: {#BINDIR}\libdeezer.x86.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
 Source: {#BINDIR}\IRSerDev.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
 Source: {#BINDIR}\OPMedia.Addons.Builtin.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
 Source: {#BINDIR}\OPMedia.Core.pdb; DestDir: {app}\DebugSymbols; Components: "  itemDebugSymbols"
