@@ -596,11 +596,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 _hasRenderingErrors = false;
 
-                if (streamRenderer != null)
-                {
-                    streamRenderer.Dispose();
-                    streamRenderer = null;
-                }
 
                 // Select the proper renderer for the specified media
                 Uri uri = null;
@@ -615,47 +610,31 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                 if (uri != null && !uri.IsFile)
                 {
-                    //this.streamType = "URL";
-
                     if (uri.OriginalString.StartsWith("dzmedia:///track/"))
                     {
-                        if (streamRenderer as DeezerRenderer == null)
-                        {
-                            streamRenderer = new DeezerRenderer();
-                        }
+                        CreateNewRenderer<DeezerRenderer>();
                     }
                     else
                     {
-                        if (streamRenderer as DSShoutcastRenderer == null)
-                        {
-                            streamRenderer = new DSShoutcastRenderer();
-                        }
+                        CreateNewRenderer<DSShoutcastRenderer>();
                     }
                 }
                 else
                 {
                     if (DvdMedia.FromPath(file) != null)
                     {
-                        //this.streamType = "DVD";
-
-                        if (streamRenderer as DSDvdRenderer == null)
-                        {
-                            streamRenderer = new DSDvdRenderer();
-                        }
+                        CreateNewRenderer<DSDvdRenderer>();
                     }
                     else
                     {
                         string streamType = PathUtils.GetExtension(file).ToLowerInvariant();
                         if (streamType == "cda")
                         {
-                            if (streamRenderer as DSAudioCDRenderer == null)
-                            {
-                                streamRenderer = new DSAudioCDRenderer();
-                            }
+                            CreateNewRenderer<DSAudioCDRenderer>();
                         }
-                        else if (streamRenderer as DSFileRenderer == null)
+                        else
                         {
-                            streamRenderer = new DSFileRenderer();
+                            CreateNewRenderer<DSFileRenderer>();
                         }
                     }
                 }
@@ -675,6 +654,22 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             catch (Exception ex)
             {
                 ReportRenderingException(ex);
+            }
+        }
+
+        private void CreateNewRenderer<T>() where T : StreamRenderer
+        {
+            if (streamRenderer as T == null)
+            {
+                // Cleanup old renderer
+                if (streamRenderer != null)
+                {
+                    streamRenderer.Dispose();
+                    streamRenderer = null;
+                }
+
+                // Set up new one
+                streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
             }
         }
 
