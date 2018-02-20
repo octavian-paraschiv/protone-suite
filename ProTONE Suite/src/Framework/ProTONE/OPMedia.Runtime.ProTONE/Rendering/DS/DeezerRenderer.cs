@@ -2,7 +2,6 @@
 using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.DeezerInterop.PlayerApi;
-using OPMedia.Runtime.Deezer;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
@@ -19,150 +18,252 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
     public class DeezerRenderer : DsCustomRenderer
     {
-        dz_connect_configuration _config = null;
-        DeezerAppContext _ctx = null;
+        dz_connect_configuration _dzConfig = null;
+
+        IntPtr _dzConnect = IntPtr.Zero;
+        IntPtr _dzPlayer = IntPtr.Zero;
+
+        dz_player_onrenderprogress_cb _dzRenderProgressCB = null;
+        dz_player_onevent_cb _dzPlayerEventCB = null;
+        dz_player_onrendererevent_cb _dzRendererEventCB = null;
+
+        dz_activity_operation_callback _dzPlayerDeactivatedCB = null;
+        dz_activity_operation_callback _dzConnectDeactivatedCB = null;
+        
+        bool _connected = false;
 
         const string USER_CACHE_PATH = "c:\\dzr\\dzrcache_NDK_SAMPLE";
         
         const int DZ_SESSION_TIMEOUT = 60000;
         const int DZ_OPERATION_TIMEOUT = 10000;
 
-        protected override void DoStartRendererWithHint(RenderingStartHint startHint)
+        protected override void DoDispose()
         {
-            if (renderMediaName == null || renderMediaName.Length <= 0)
-                return;
+            Logger.LogToConsole("DeezerRenderer::~DoDispose => Cleanup ...");
+            DoStopRenderer();
 
-            Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
+            _connected = false;
 
-            ResetAllEvents();
-
-            if (_config == null)
+            CleanupAppContext();
+            CleanupConfig();
+        }
+        
+        private void CheckIfInitialized()
+        {
+            if (_connected == false)
             {
-                _config = new dz_connect_configuration();
-
-                _config.app_id = ProTONEConfig.DeezerApplicationId;
-                _config.product_id = ApplicationInfo.ApplicationName;
-                _config.product_build_id = SuiteVersion.Version;
-                _config.user_profile_path = USER_CACHE_PATH;          // TODO SET THE USER CACHE PATH
-                _config.connect_event_cb = new dz_connect_onevent_cb(OnApplicationConnectEvent);
-                _config.app_has_crashed_delegate = new dz_connect_crash_reporting_delegate(OnApplicationError);
+                Logger.LogToConsole("DeezerRenderer::CheckIfInitialized => Initializing ...");
+                SetupConfig();
+                SetupAppContext();
             }
+        }
 
-            if (_ctx == null)
+        private void SetupConfig()
+        {
+            if (_dzConfig == null)
             {
-                _ctx = new DeezerAppContext();
-                _ctx.dzconnect = DeezerApi.dz_connect_new(_config);
+                Logger.LogToConsole("DeezerRenderer::SetupConfig => Creating config object ...");
 
-                _ctx.renderProgressCB = new dz_player_onrenderprogress_cb(OnRenderProgress);
-                _ctx.playerEventCB = new dz_player_onevent_cb(OnPlayerEvent);
-                _ctx.rendererEventCB = new dz_player_onrendererevent_cb(OnRendererEvent);
+                _dzConfig = new dz_connect_configuration();
+                _dzConfig.app_id = ProTONEConfig.DeezerApplicationId;
+                _dzConfig.product_id = ApplicationInfo.ApplicationName;
+                _dzConfig.product_build_id = SuiteVersion.Version;
+                _dzConfig.user_profile_path = USER_CACHE_PATH;          // TODO SET THE USER CACHE PATH
+                _dzConfig.connect_event_cb = new dz_connect_onevent_cb(OnApplicationConnectEvent);
+                _dzConfig.app_has_crashed_delegate = null;
             }
+        }
+
+        private void SetupAppContext()
+        {
+            if (_connected == false)
+            {
+                _evtAppUserOfflineAvailable.Reset();
+                _evtAppUserLoginOK.Reset();
+
+                Logger.LogToConsole("DeezerRenderer::SetupConfig => Creating app context ...");
+
+                dz_error_t err;
+
+                _dzRenderProgressCB = new dz_player_onrenderprogress_cb(OnRenderProgress);
+                _dzPlayerEventCB = new dz_player_onevent_cb(OnPlayerEvent);
+                _dzRendererEventCB = new dz_player_onrendererevent_cb(OnRendererEvent);
+
+                _dzConnect = DeezerApi.dz_connect_new(_dzConfig);
+                if (_dzConnect == IntPtr.Zero)
+                    DeezerApi.HandleDzErrorCode("dz_connect_new", dz_error_t.DZ_ERROR_CLASS_INSTANTIATION);
+
+                err = DeezerApi.dz_connect_debug_log_disable(_dzConnect);
+                DeezerApi.HandleDzErrorCode("dz_connect_debug_log_disable", err);
+
+                err = DeezerApi.dz_connect_activate(_dzConnect, IntPtr.Zero);
+                DeezerApi.HandleDzErrorCode("dz_connect_activate", err);
+
+                err = DeezerApi.dz_connect_cache_path_set(_dzConnect, null, IntPtr.Zero, USER_CACHE_PATH);
+                DeezerApi.HandleDzErrorCode("dz_connect_cache_path_set", err);
+
+                _dzPlayer = DeezerApi.dz_player_new(_dzConnect);
+                if (_dzPlayer == IntPtr.Zero)
+                    DeezerApi.HandleDzErrorCode("dz_player_new", dz_error_t.DZ_ERROR_CLASS_INSTANTIATION);
+
+                err = DeezerApi.dz_player_activate(_dzPlayer, IntPtr.Zero);
+                DeezerApi.HandleDzErrorCode("dz_player_activate", err);
+
+                err = DeezerApi.dz_player_set_event_cb(_dzPlayer, _dzPlayerEventCB);
+                DeezerApi.HandleDzErrorCode("dz_player_set_event_cb", err);
+
+                err = DeezerApi.dz_player_set_render_progress_cb(_dzPlayer, _dzRenderProgressCB, (UInt64)5e5);
+                DeezerApi.HandleDzErrorCode("dz_player_set_render_progress_cb", err);
+
+                err = DeezerApi.dz_player_set_renderer_event_cb(_dzPlayer, _dzRendererEventCB);
+                DeezerApi.HandleDzErrorCode("dz_player_set_renderer_event_cb", err);
+
+                err = DeezerApi.dz_connect_set_access_token(_dzConnect, null, IntPtr.Zero, ProTONEConfig.DeezerUserAccessToken);
+                DeezerApi.HandleDzErrorCode("dz_connect_set_access_token", err);
+
+                err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
+                DeezerApi.HandleDzErrorCode("dz_connect_offline_mode", err);
+
+                if (_evtAppUserLoginOK.WaitOne(DZ_OPERATION_TIMEOUT) == false)
+                    DeezerApi.HandleDzErrorCode("DeezerRenderer::SetupConfig", dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
+
+                _connected = true;
+            }
+        }
+
+        private void CleanupAppContext()
+        {
+            Logger.LogToConsole("DeezerRenderer::CleanupAppContext => Cleaning up app context ...");
 
             dz_error_t err;
 
-            err = DeezerApi.dz_connect_debug_log_disable(_ctx.dzconnect);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+            if (_dzPlayer != IntPtr.Zero)
+            {
+                //_evtPlayerDeactivated.Reset();
+                //_dzPlayerDeactivatedCB = new dz_activity_operation_callback(OnPlayerDeactivated);
 
-            err = DeezerApi.dz_connect_activate(_ctx.dzconnect, IntPtr.Zero);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+                err = DeezerApi.dz_player_deactivate(_dzPlayer, _dzPlayerDeactivatedCB, IntPtr.Zero);
 
-            _ctx.activation_count++;
-            
-            err = DeezerApi.dz_connect_cache_path_set(_ctx.dzconnect, null, IntPtr.Zero, USER_CACHE_PATH);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+                DeezerApi.HandleDzErrorCode("dz_player_deactivate", err, false);
 
-            err = DeezerApi.dz_connect_set_access_token(_ctx.dzconnect, null, IntPtr.Zero, ProTONEConfig.DeezerUserAccessToken);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+                //_evtPlayerDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
+                Thread.Sleep(2000);
+
+                Logger.LogToConsole("dz_player_deactivate => Assuming Success");
+
+                DeezerApi.dz_object_release(_dzPlayer);
+                _dzPlayer = IntPtr.Zero;
+            }
+
+            if (_dzConnect != IntPtr.Zero)
+            {
+                //_evtConnectDeactivated.Reset();
+                //_dzConnectDeactivatedCB = new dz_activity_operation_callback(OnConnectDeactivated);
+
+                err = DeezerApi.dz_connect_deactivate(_dzConnect, _dzConnectDeactivatedCB, IntPtr.Zero);
+
+                DeezerApi.HandleDzErrorCode("dz_connect_deactivate", err, false);
+
+                //_evtConnectDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
+                Thread.Sleep(2000);
+
+                Logger.LogToConsole("dz_connect_deactivate => Assuming Success");
+
+                DeezerApi.dz_object_release(_dzConnect);
+                _dzConnect = IntPtr.Zero;
+            }
+        }
+
+        private void CleanupConfig()
+        {
+            if (_dzConfig != null)
+            {
+                Logger.LogToConsole("DeezerRenderer::CleanupConfig => Cleaning up config ...");
+                _dzConfig = null;
+            }
+        }
+
+        public void OnConnectDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
+        {
+            Logger.LogToConsole("DeezerRenderer::OnConnectDeactivated ...");
+            _evtConnectDeactivated.Set();
+        }
+
+        public void OnPlayerDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
+        {
+            Logger.LogToConsole("DeezerRenderer::OnPlayerDeactivated ...");
+            _evtPlayerDeactivated.Set();
+        }
+
+
+        protected override void DoStartRendererWithHint(RenderingStartHint startHint)
+        {
+            dz_error_t err;
+
+            Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
+
+            if (renderMediaName == null || renderMediaName.Length <= 0)
+                return;
+
+            CheckIfInitialized();
+
+            if (_dzConnect == IntPtr.Zero || _dzPlayer == IntPtr.Zero)
+                DeezerApi.HandleDzErrorCode("DeezerRenderer::DoStartRendererWithHint", dz_error_t.DZ_ERROR_CLASS_INSTANTIATION);
 
             // --------------------------------------------------------------------
-            // Phase 1: Connect offline mode using dz_connect_offline_mode
-            // This will trigger DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE.
-            // Upon completion, _evtAppUserOfflineAvailable will be set.
-            _evtAppUserOfflineAvailable.Reset();
-            err = DeezerApi.dz_connect_offline_mode(_ctx.dzconnect, null, IntPtr.Zero, false);
-
-            if (_evtAppUserOfflineAvailable.WaitOne(DZ_SESSION_TIMEOUT) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_NOT_ONLINE);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE");
-            // --------------------------------------------------------------------
-                        
-            // --------------------------------------------------------------------
-            // Phase 2: Create a new player object using dz_player_new
-            // This will trigger DZ_CONNECT_EVENT_USER_LOGIN_OK.
-            // Upon completion, _evtAppUserLoginOK will be set.
-            _evtAppUserLoginOK.Reset();
-
-            _ctx.dzplayer = DeezerApi.dz_player_new(_ctx.dzconnect);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-
-            if (_evtAppUserLoginOK.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_new => DZ_CONNECT_EVENT_USER_LOGIN_OK");
-            // --------------------------------------------------------------------
-
-
-            // --------------------------------------------------------------------
-            // Phase 3: Activate the player using dz_player_activate and set the callback delegates
-            IntPtr pCtx = Marshal.AllocHGlobal(Marshal.SizeOf(_ctx));
-            Marshal.StructureToPtr(_ctx, pCtx, false);
-
-            err = DeezerApi.dz_player_activate(_ctx.dzplayer, pCtx);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-            
-            err = DeezerApi.dz_player_set_event_cb(_ctx.dzplayer, _ctx.playerEventCB);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-
-            err = DeezerApi.dz_player_set_render_progress_cb(_ctx.dzplayer, _ctx.renderProgressCB, (UInt64)5e5);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-
-            err = DeezerApi.dz_player_set_renderer_event_cb(_ctx.dzplayer, _ctx.rendererEventCB);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
-            // --------------------------------------------------------------------
-
-            // --------------------------------------------------------------------
-            // Phase 4: Load the playable content using dz_player_load
-            // This will trigger DZ_PLAYER_EVENT_QUEUELIST_LOADED
-            // Upon completion, _evtQueueListLoaded will be set.
-
-            _ctx.sz_content_url = renderMediaName;
-
             _evtQueueListLoaded.Reset();
-            err = DeezerApi.dz_player_load(_ctx.dzplayer, null, IntPtr.Zero, _ctx.sz_content_url);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+            err = DeezerApi.dz_player_load(_dzPlayer, null, IntPtr.Zero, renderMediaName);
+            DeezerApi.HandleDzErrorCode("dz_player_load", err);
 
             if (_evtQueueListLoaded.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_connect_offline_mode => DZ_CONNECT_EVENT_USER_LOGIN_OK");
+                DeezerApi.HandleDzErrorCode("dz_player_load", dz_error_t.DZ_ERROR_PLAYER_LOAD_TIMEOUT);
+            
+            Logger.LogToConsole("dz_player_load => Success");
+                       
             // --------------------------------------------------------------------
 
             // --------------------------------------------------------------------
-            // Phase 5: Start playback using dz_player_play
+            // Start playback using dz_player_play
             // This will trigger DZ_PLAYER_EVENT_RENDER_TRACK_START
             // Upon completion, _evtPlayerPlaybackStarted will be set.
-            err = DeezerApi.dz_player_play(_ctx.dzplayer, null, IntPtr.Zero,
+            _evtPlayerPlaybackStarted.Reset();
+
+            err = DeezerApi.dz_player_play(_dzPlayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
                        DeezerInterop.PlayerApi.Constants.DZ_INDEX_IN_QUEUELIST_CURRENT);
-            DeezerApi.ThrowExceptionForDzErrorCode(err);
+
+            DeezerApi.HandleDzErrorCode("dz_player_play", err);
 
             if (_evtPlayerPlaybackStarted.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_RUNNABLE_NOT_STARTED);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint dz_player_play => DZ_PLAYER_EVENT_RENDER_TRACK_START");
+                DeezerApi.HandleDzErrorCode("dz_player_play", dz_error_t.DZ_ERROR_PLAYER_PLAY_TIMEOUT);
+            
+            Logger.LogToConsole("dz_player_play => Success");
             // --------------------------------------------------------------------
+           
         }
 
-        private void ResetAllEvents()
-        {
-            _evtAppUserLoginOK.Reset();
-            _evtAppUserOfflineAvailable.Reset();
-            _evtPlayerPaused.Reset();
-            _evtPlayerStreamReadyAfterSeek.Reset();
-            _evtQueueListLoaded.Reset();
-            _evtPlayerPlaybackStarted.Reset();
-        }
+        ManualResetEvent _evtAppUserOfflineAvailable = new ManualResetEvent(false);
+        ManualResetEvent _evtAppUserLoginOK = new ManualResetEvent(false);
+
+        ManualResetEvent _evtQueueListLoaded = new ManualResetEvent(false);
+        ManualResetEvent _evtPlayerPaused = new ManualResetEvent(false);
+        ManualResetEvent _evtPlayerStreamReadyAfterSeek = new ManualResetEvent(false);
+
+        ManualResetEvent _evtPlayerPlaybackStarted = new ManualResetEvent(false);
+        ManualResetEvent _evtPlayerPlaybackStopped = new ManualResetEvent(false);
+
+        ManualResetEvent _evtPlayerDeactivated = new ManualResetEvent(false);
+        ManualResetEvent _evtConnectDeactivated = new ManualResetEvent(false);
+
+        //private void ResetAllEvents()
+        //{
+        //    _evtAppUserOfflineAvailable.Reset();
+        //    _evtAppUserLoginOK.Reset();
+        //    _evtPlayerPaused.Reset();
+        //    _evtPlayerStreamReadyAfterSeek.Reset();
+        //    _evtQueueListLoaded.Reset();
+        //    _evtPlayerPlaybackStarted.Reset();
+        //}
 
         protected override void DoStopRenderer()
         {
@@ -171,12 +272,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (FilterState != FilterState.Stopped)
             {
-                if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
+                if (_dzPlayer != IntPtr.Zero)
                 {
                     dz_error_t err;
 
-                    err = DeezerApi.dz_player_stop(_ctx.dzplayer, null, IntPtr.Zero);
-                    DeezerApi.ThrowExceptionForDzErrorCode(err);
+                    _evtPlayerPlaybackStopped.Reset();
+
+                    err = DeezerApi.dz_player_stop(_dzPlayer, null, IntPtr.Zero);
+                    DeezerApi.HandleDzErrorCode("dz_player_stop", err);
+
+                    if (_evtPlayerPlaybackStopped.WaitOne(DZ_OPERATION_TIMEOUT) == false)
+                        DeezerApi.HandleDzErrorCode("dz_player_pause", dz_error_t.DZ_ERROR_PLAYER_STOP_TIMEOUT);
+
+                    RenderPosition = 0;
+
+                    Logger.LogToConsole("dz_player_stop => Success");
                 }
             }
         }
@@ -187,19 +297,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (FilterState == FilterState.Running)
             {
-                if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
+                if (_dzPlayer != IntPtr.Zero)
                 {
                     dz_error_t err;
 
                     _evtPlayerPaused.Reset();
 
-                    err = DeezerApi.dz_player_pause(_ctx.dzplayer, null, IntPtr.Zero);
-                    DeezerApi.ThrowExceptionForDzErrorCode(err);
+                    err = DeezerApi.dz_player_pause(_dzPlayer, null, IntPtr.Zero);
+                    DeezerApi.HandleDzErrorCode("dz_player_pause", err);
 
                     if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                        DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
-                    else
-                        Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
+                        DeezerApi.HandleDzErrorCode("dz_player_pause", dz_error_t.DZ_ERROR_PLAYER_PAUSE_TIMEOUT);
+                    
+                    Logger.LogToConsole("dz_player_pause => Success");
                 }
             }
         }
@@ -211,13 +321,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             dz_error_t err;
 
             if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
-            else
-                Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
+                DeezerApi.HandleDzErrorCode("DeezerRenderer::DoResumeRenderer", dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
+            
+            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
 
             if (FilterState == FilterState.Paused)
             {
-                if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
+                if (_dzPlayer != IntPtr.Zero)
                 {
                     int resumePos = (int)fromPosition;
                     if (resumePos != RenderPosition)
@@ -225,17 +335,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                         // dz_player_seek will trigger DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK
                         // Upon completion, _evtPlayerStreamReadyAfterSeek will be set.
                         _evtPlayerStreamReadyAfterSeek.Reset();
-                        err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
-                        DeezerApi.ThrowExceptionForDzErrorCode(err);
+                        err = DeezerApi.dz_player_seek(_dzPlayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
+                        DeezerApi.HandleDzErrorCode("dz_player_seek", err);
 
                         if (_evtPlayerStreamReadyAfterSeek.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                            DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_MEDIASTREAMER_SEEK_NOT_SEEKABLE);
-                        else
-                            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer dz_player_seek completed with success, ready for dz_player_resume");
+                            DeezerApi.HandleDzErrorCode("dz_player_seek", dz_error_t.DZ_ERROR_PLAYER_SEEK_TIMEOUT);
+                        
+                        Logger.LogToConsole("dz_player_seek => DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK");
                     }
 
-                    err = DeezerApi.dz_player_resume(_ctx.dzplayer, null, IntPtr.Zero);
-                    DeezerApi.ThrowExceptionForDzErrorCode(err);
+                    err = DeezerApi.dz_player_resume(_dzPlayer, null, IntPtr.Zero);
+                    DeezerApi.HandleDzErrorCode("dz_player_resume", err);
                 }
             }
         }
@@ -246,29 +356,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (FilterState != FilterState.Stopped)
             {
-                if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
+                if (_dzPlayer != IntPtr.Zero)
                 {
                     dz_error_t err;
-
-                    //if (FilterState == BaseClasses.FilterState.Running)
-                    //{
-                    //    err = DeezerApi.dz_player_pause(_ctx.dzplayer, null, IntPtr.Zero);
-                    //    DeezerApi.ThrowExceptionForDzErrorCode(err);
-                    //}
 
                     int resumePos = (int)pos;
                     if (resumePos != RenderPosition)
                     {
-                        err = DeezerApi.dz_player_seek(_ctx.dzplayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
-                        DeezerApi.ThrowExceptionForDzErrorCode(err);
+                        err = DeezerApi.dz_player_seek(_dzPlayer, null, IntPtr.Zero, (UInt64)(resumePos * 1e6));
+                        DeezerApi.HandleDzErrorCode("dz_player_seek", err);
                     }
 
                     if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
-                        DeezerApi.ThrowExceptionForDzErrorCode(dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
-                    else
-                        Logger.LogToConsole("DeezerRenderer::SetMediaPosition player is now paused, OK to resume rendering");
-
-                   
+                        DeezerApi.HandleDzErrorCode("[Event toggled by dz_player_seek]", dz_error_t.DZ_ERROR_PLAYER_SEEK_TIMEOUT);
+                    
+                    Logger.LogToConsole("[Event toggled by dz_player_seek] => DZ_PLAYER_EVENT_RENDER_TRACK_PAUSED");
                 }
             }
         }
@@ -288,15 +390,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetAudioVolume(int vol)
         {
-            if (_ctx != null && _ctx.dzplayer != IntPtr.Zero)
+            if (_dzPlayer != IntPtr.Zero)
             {
                 dz_error_t err;
 
                 Logger.LogToConsole("DeezerRenderer::SetAudioVolume vol={0}", vol);
 
-                err = DeezerApi.dz_player_set_output_volume(_ctx.dzplayer, null, IntPtr.Zero, vol);
+                err = DeezerApi.dz_player_set_output_volume(_dzPlayer, null, IntPtr.Zero, vol);
 
-                DeezerApi.ThrowExceptionForDzErrorCode(err);
+                DeezerApi.HandleDzErrorCode("dz_player_set_output_volume", err);
             }
         }
 
@@ -305,9 +407,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             return true;
         }
-
-        ManualResetEvent _evtAppUserOfflineAvailable = new ManualResetEvent(false);
-        ManualResetEvent _evtAppUserLoginOK = new ManualResetEvent(false);
 
         private void OnApplicationConnectEvent(IntPtr handle, IntPtr evtHandle, IntPtr userData)
         {
@@ -329,12 +428,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         #region Duration and related
 
         int _duration = 0;
-
-        ManualResetEvent _evtQueueListLoaded = new ManualResetEvent(false);
-
-        ManualResetEvent _evtPlayerPaused= new ManualResetEvent(false);
-        ManualResetEvent _evtPlayerStreamReadyAfterSeek = new ManualResetEvent(false);
-        ManualResetEvent _evtPlayerPlaybackStarted = new ManualResetEvent(false);
 
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
@@ -367,7 +460,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_END:
                 case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_REMOVED:
+                    _evtPlayerPlaybackStopped.Set();
                     FilterState = FilterState.Stopped;
+                    RenderPosition = 0;
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_LOADED:
