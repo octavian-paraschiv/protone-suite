@@ -62,7 +62,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
         {
             if (IsError(err))
             {
-                Logger.LogToConsole("{0} => {1}", operation, err);
+                Logger.LogTrace("{0} => {1}", operation, err);
 
                 if (throwException)
                     throw DeezerPlayerException.FromDzErrorCode(err);

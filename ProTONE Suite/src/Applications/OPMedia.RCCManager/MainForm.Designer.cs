@@ -61,7 +61,6 @@ namespace OPMedia.RCCManager
             this.txtAppHelpToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.tsmiAbout = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.toolStripSeparator4 = new OPMedia.UI.Controls.OPMMenuStripSeparator();
-            this.txtShowLogToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.tvRemotes = new OPMedia.UI.Controls.OPMTreeView();
             this.toolStripMain = new OPMedia.UI.Controls.OPMToolStrip();
@@ -306,9 +305,7 @@ namespace OPMedia.RCCManager
             this.txtHelpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.txtHelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtAppHelpToolStripMenuItem,
-            this.tsmiAbout,
-            this.toolStripSeparator4,
-            this.txtShowLogToolStripMenuItem});
+            this.tsmiAbout});
             this.txtHelpToolStripMenuItem.Name = "txtHelpToolStripMenuItem";
             this.txtHelpToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.txtHelpToolStripMenuItem.Text = "TXT_HELP";
@@ -333,14 +330,6 @@ namespace OPMedia.RCCManager
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(173, 6);
-            // 
-            // txtShowLogToolStripMenuItem
-            // 
-            this.txtShowLogToolStripMenuItem.Name = "txtShowLogToolStripMenuItem";
-            this.txtShowLogToolStripMenuItem.ShortcutKeyDisplayString = "F12";
-            this.txtShowLogToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.txtShowLogToolStripMenuItem.Text = "TXT_SHOWLOG";
-            this.txtShowLogToolStripMenuItem.Click += new System.EventHandler(this.tXTSHOWLOGToolStripMenuItem_Click);
             // 
             // opmLayoutPanel1
             // 
@@ -505,7 +494,6 @@ namespace OPMedia.RCCManager
         private OPMToolStripMenuItem txtEditToolStripMenuItem;
         private OPMToolStripMenuItem txtHelpToolStripMenuItem;
         private OPMToolStripMenuItem txtAppHelpToolStripMenuItem;
-        private OPMToolStripMenuItem txtShowLogToolStripMenuItem;
         private OPMTableLayoutPanel opmLayoutPanel1;
         private OPMTreeView tvRemotes;
         private OPMToolStrip toolStripMain;

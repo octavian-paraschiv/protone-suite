@@ -52,11 +52,7 @@ namespace OPMedia.Core.Logging
 
         ~LoggedApplication()
         {
-            LogEntry entry = new LogEntry(SeverityLevels.Info,
-                 appName + " application has finished.",
-                Assembly.GetCallingAssembly().GetName().Name);
-            Logger.WriteLogEntry(entry);
-            Logger.WriteLogSessionEnd();
+            Logger.LogInfo("Application has finished.");
         }
 
         private void OnApplicationThreadException(object sender, ThreadExceptionEventArgs e)
@@ -64,16 +60,9 @@ namespace OPMedia.Core.Logging
             ErrorDispatcher.DispatchFatalError(e.Exception);
         }
 
-        private void LogException(Exception ex)
-        {
-            LogEntry entry = new LogEntry("Unhandled exception:", ex,
-                Assembly.GetCallingAssembly().GetName().Name);
-            Logger.WriteLogEntry(entry);
-        }
-
         protected override void DoInitialize(string appName)
         {
-            Logger.LogInfo(appName + " application is starting up ...");
+            Logger.LogInfo("Application is starting up ...");
 
             _appMutexName = appName.Replace(" ", "").ToLowerInvariant() + @".mutex";
 
@@ -96,7 +85,6 @@ namespace OPMedia.Core.Logging
         protected override void DoTerminate()
         {
             ReleaseAppMutex();
-            Logger.StopLogger();
         }
 
         protected void ReleaseAppMutex()

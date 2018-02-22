@@ -2462,15 +2462,6 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show log file ....
-        /// </summary>
-        internal static string TXT_SHOWLOG {
-            get {
-                return ResourceManager.GetString("TXT_SHOWLOG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show panel splitters in main window.
         /// </summary>
         internal static string TXT_SHOWSPLITTERS {

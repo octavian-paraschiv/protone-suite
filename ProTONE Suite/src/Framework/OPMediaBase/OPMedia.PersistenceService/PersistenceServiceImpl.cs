@@ -32,12 +32,12 @@ namespace OPMedia.PersistenceService
                     if (_notifiedApps.ContainsKey(appId) == false)
                     {
                         _notifiedApps.Add(appId, channel);
-                        Logger.LogToConsole("Subscribe: Adding record for appId {0} ...", appId);
+                        Logger.LogTrace("Subscribe: Adding record for appId {0} ...", appId);
                     }
                     else
                     {
                         _notifiedApps[appId] = channel;
-                        Logger.LogToConsole("Subscribe: Updating record for appId {0} ...", appId);
+                        Logger.LogTrace("Subscribe: Updating record for appId {0} ...", appId);
                     }
 
                 }
@@ -57,7 +57,7 @@ namespace OPMedia.PersistenceService
                     if (_notifiedApps.ContainsKey(appId))
                     {
                         _notifiedApps.Remove(appId);
-                        Logger.LogToConsole("Unsubscribe: Removing record for appId {0} ...", appId);
+                        Logger.LogTrace("Unsubscribe: Removing record for appId {0} ...", appId);
                     }
                 }
                 catch (Exception ex)
@@ -84,7 +84,7 @@ namespace OPMedia.PersistenceService
                             }
                             catch (Exception ex)
                             {
-                                Logger.LogToConsole("Notify: Marking record for appId {0} for deletion, it looks faulted ...",
+                                Logger.LogTrace("Notify: Marking record for appId {0} for deletion, it looks faulted ...",
                                     appRecord.Key);
 
                                 appsToRemove.Add(appRecord.Key);

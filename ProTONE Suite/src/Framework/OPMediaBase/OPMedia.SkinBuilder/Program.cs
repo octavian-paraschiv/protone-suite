@@ -57,8 +57,6 @@ namespace OPMedia.SkinBuilder
             {
                 ErrorDispatcher.DispatchError(ex, false);
             }
-
-            Logger.StopLogger();
         }
     }
 }

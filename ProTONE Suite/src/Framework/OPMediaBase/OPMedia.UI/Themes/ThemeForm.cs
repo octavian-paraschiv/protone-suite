@@ -205,7 +205,7 @@ namespace OPMedia.UI.Themes
         [EventSink(EventNames.ExecuteShortcut)]
         public void ExecuteShortcut(OPMShortcutEventArgs args)
         {
-            Logger.LogHeavyTrace("{0} - IsActive: {1}", Name, IsActive);
+            Logger.LogTrace("{0} - IsActive: {1}", Name, IsActive);
 
             bool isActiveForm = this.IsActive;
             //bool isMainForm = (this is MainApplicationForm);
@@ -216,16 +216,11 @@ namespace OPMedia.UI.Themes
                 switch (args.cmd)
                 {
                     case OPMShortcut.CmdOpenHelp:
-                        if (IsActive || (this is LogFileConsoleDialog))
+                        if (IsActive)
                         {
                             FireHelpRequest();
                             args.Handled = true;
                         }
-                        return;
-
-                    case OPMShortcut.CmdShowLogConsole:
-                        LogFileConsoleDialog.ShowLogConsole();
-                        args.Handled = true;
                         return;
 
                     case OPMShortcut.CmdDumpDebugStats:
@@ -296,7 +291,6 @@ namespace OPMedia.UI.Themes
             switch (cmd)
             {
                 case OPMShortcut.CmdOpenHelp:
-                case OPMShortcut.CmdShowLogConsole:
                 case OPMShortcut.CmdDumpDebugStats:
                     return true;
 

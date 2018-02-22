@@ -221,7 +221,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
             if (prevBmk != Bookmark.Empty)
             {
-                Logger.LogHeavyTrace("Extract Bookmark: " + prevBmk.ToString());
+                Logger.LogTrace("Extract Bookmark: " + prevBmk.ToString());
             }
 
             return (prevBmk != Bookmark.Empty) ? prevBmk : null;

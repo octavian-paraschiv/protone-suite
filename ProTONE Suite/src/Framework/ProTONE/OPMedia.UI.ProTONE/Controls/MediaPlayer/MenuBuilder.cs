@@ -75,7 +75,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             BuildMenuEntry(OPMShortcut.CmdCfgTimer, menu, clickHandler);
             menu.AddSingleEntry(new OPMMenuStripSeparator());
             BuildMenuEntry(OPMShortcut.CmdOpenSettings, menu, clickHandler);
-            BuildMenuEntry(OPMShortcut.CmdShowLogConsole, menu, clickHandler);
         }
 
         public void AttachPlaylistItemMenu(PlaylistItem plItem, MenuWrapper<T> menu, MenuType menuType, EventHandler clickHandler)
@@ -281,10 +280,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 case OPMShortcut.CmdCfgSubtitles:
                     tsmi.Image = ImageProcessing.Subtitle16;
-                    break;
-
-                case OPMShortcut.CmdShowLogConsole:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Logging;
                     break;
 
                 case OPMShortcut.CmdOpenSettings:

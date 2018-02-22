@@ -68,7 +68,6 @@ namespace OPMedia.Runtime.Shortcuts
                 case OPMShortcut.CmdGenericSave:
                 case OPMShortcut.CmdGenericUndo:
                 case OPMShortcut.CmdOpenHelp:
-                case OPMShortcut.CmdShowLogConsole:
                 case OPMShortcut.CmdDumpDebugStats:
 
                 case OPMShortcut.CmdSwitchWindows:
@@ -298,7 +297,6 @@ namespace OPMedia.Runtime.Shortcuts
                     new KeyEventArgs(Keys.F1),
                     new KeyEventArgs(Keys.Control | Keys.Alt | Keys.C),
                     new KeyEventArgs(Keys.Control | Keys.Alt | Keys.K),
-                    new KeyEventArgs(Keys.F12),
                     new KeyEventArgs(Keys.Control | Keys.Alt | Keys.F12),
 
                     // Commands not related to player
@@ -380,7 +378,6 @@ namespace OPMedia.Runtime.Shortcuts
                 new KeyEventArgs(Keys.F1),
                 new KeyEventArgs(Keys.Control | Keys.Alt | Keys.C),
                 new KeyEventArgs(Keys.Control | Keys.Alt | Keys.K),
-                new KeyEventArgs(Keys.F12),
                 new KeyEventArgs(Keys.Control | Keys.Alt | Keys.F12),
 
                 // Commands not related to player
@@ -487,7 +484,6 @@ namespace OPMedia.Runtime.Shortcuts
         CmdOpenHelp,
         CmdOpenSettings,
         CmdCfgKeyboard,
-        CmdShowLogConsole,
         CmdDumpDebugStats,
 
         // Commands not related to player

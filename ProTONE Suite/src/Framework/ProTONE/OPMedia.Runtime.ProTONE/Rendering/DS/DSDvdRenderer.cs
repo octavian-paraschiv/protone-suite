@@ -299,7 +299,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 case EventCode.DvdDomChange:
                     DvdDomain dom = (DvdDomain)p1;
-                    Logger.LogHeavyTrace("Currently in domain: {0}", dom);
+                    Logger.LogTrace("Currently in domain: {0}", dom);
 
                     if (dom == DvdDomain.Title)
                     {

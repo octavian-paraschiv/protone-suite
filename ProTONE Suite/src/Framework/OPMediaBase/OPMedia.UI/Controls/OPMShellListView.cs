@@ -315,7 +315,7 @@ namespace OPMedia.UI.Controls
                 return;
             }
 
-            Logger.LogHeavyTrace("OnFolderContentsUpdated: " + e.ToString());
+            Logger.LogTrace("OnFolderContentsUpdated: " + e.ToString());
             _delayedExplore.Stop();
 
             try

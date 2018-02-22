@@ -37,7 +37,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
         protected override HRESULT LoadTracks()
         {
             string contentType = _stream.ContentType;
-            Logger.LogToConsole("ShoutCast::LoadTracks contentType={0}", contentType);
+            Logger.LogTrace("ShoutCast::LoadTracks contentType={0}", contentType);
 
             AMMediaType mt = new AMMediaType();
 
@@ -149,7 +149,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
             ShoutcastStream ss = (m_pParser as ShoutcastStreamParser).ShoutcastStream;
             string contentType = ss.ContentType;
 
-            Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0}", ss.ContentType);
+            Logger.LogTrace("ShoutcastStreamTrack::GetNextPacket contentType={0}", ss.ContentType);
 
             int slice = ss.Bitrate * 1024 / 8;
 
@@ -161,7 +161,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
             int bytesRead = ss.Read(dataToRead.Buffer, 0, slice);
             if (bytesRead > 0)
             {
-                Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0} bytesRead={1}", ss.ContentType, bytesRead);
+                Logger.LogTrace("ShoutcastStreamTrack::GetNextPacket contentType={0} bytesRead={1}", ss.ContentType, bytesRead);
 
                 switch (contentType)
                 {
@@ -217,14 +217,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
                     //        }
                     //        catch (Exception ex)
                     //        {
-                    //            Logger.LogToConsole("ShoutcastStreamTrack: " + ex.ToString());
+                    //            Logger.LogTrace("ShoutcastStreamTrack: " + ex.ToString());
                     //        }
                     //    }
                     //    break;
                 }
             }
 
-            Logger.LogToConsole("ShoutcastStreamTrack::GetNextPacket contentType={0} returning {1}null", ss.ContentType, 
+            Logger.LogTrace("ShoutcastStreamTrack::GetNextPacket contentType={0} returning {1}null", ss.ContentType, 
                 (dataToReturn == null) ? string.Empty : "non-");
             return dataToReturn;
         }

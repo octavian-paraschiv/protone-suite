@@ -537,9 +537,6 @@ Toate nivelele de jurnalizare sunt implicit active.</value>
   <data name="TXT_SETUILANGUAGE">
     <value>Setare limbă interfaţă grafică (pentru toată suita ProTONE):</value>
   </data>
-  <data name="TXT_SHOWLOG">
-    <value>Afişează fişierul jurnal ...</value>
-  </data>
   <data name="TXT_SHOWSPLITTERS">
     <value>Afişează separatorii de panou în fereastra principală</value>
   </data>

@@ -30,7 +30,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
         public BspV1Session(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogHeavyTrace("BspV1Session: object created");
+            Logger.LogTrace("BspV1Session: object created");
         }
         #endregion
 

@@ -104,12 +104,6 @@
     <Compile Include="Configuration\KeyMapCfgPanel.Designer.cs">
       <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\LoggingSettingsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Configuration\LoggingSettingsPanel.Designer.cs">
-      <DependentUpon>LoggingSettingsPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\InternetSettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -299,12 +293,6 @@
     <Compile Include="Dialogs\OPMFontChooserDialog.Designer.cs">
       <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\LogFileConsoleDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\LogFileConsoleDetail.Designer.cs">
-      <DependentUpon>LogFileConsoleDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\OPMColorChooserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,12 +331,6 @@
     </Compile>
     <Compile Include="Dialogs\InsertDriveNotifyDialog.Designer.cs">
       <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\LogFileConsoleDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\LogFileConsoleDialog.Designer.cs">
-      <DependentUpon>LogFileConsoleDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\TimerWaitingDialog.cs">
       <SubType>Form</SubType>
@@ -536,9 +518,6 @@
     <EmbeddedResource Include="Dialogs\OPMFontChooserDialog.resx">
       <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\LogFileConsoleDetail.resx">
-      <DependentUpon>LogFileConsoleDetail.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OPMColorChooserDialog.resx">
       <DependentUpon>OPMColorChooserDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -595,10 +574,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Configuration\GeneralSettingsPanel.resx">
       <DependentUpon>GeneralSettingsPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\LoggingSettingsPanel.resx">
-      <DependentUpon>LoggingSettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\InternetSettingsPanel.resx">
@@ -711,10 +686,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Resources\blank.ico" />
-    <EmbeddedResource Include="Dialogs\LogFileConsoleDialog.resx">
-      <DependentUpon>LogFileConsoleDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FileOperations\Forms\FileTaskErrorReport.resx">
       <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
       <SubType>Designer</SubType>

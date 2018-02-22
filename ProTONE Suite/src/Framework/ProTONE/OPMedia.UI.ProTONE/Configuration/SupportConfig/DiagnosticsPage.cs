@@ -106,7 +106,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             isOk = (actualVersion.CompareTo(minimumVersion) >= 0);
 
-            lblDirectX.Text = string.Format("Detected: {0} [{1}]", dxFriendlyName, actualVersion);
+            lblDirectX.Text = string.Format("DirectX: {0} (actual: {1})", dxFriendlyName, actualVersion);
             if (!isOk)
             {
                 lblDirectX.Text += "\nRequired: DirectX 9.0c [" + minimumVersion.ToString() + "]";

@@ -764,11 +764,6 @@ namespace OPMedia.RCCManager
             ShortcutMapper.DispatchCommand(OPMShortcut.CmdOpenHelp);
         }
 
-        private void tXTSHOWLOGToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LogFileConsoleDialog.ShowLogConsole();
-        }
-
         private void tvRemotes_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             tsbModifyRemote_Click(sender, e);

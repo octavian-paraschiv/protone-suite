@@ -221,7 +221,6 @@ Name: {group}\{cm:UninstallProgram,ProTONE Suite}; Filename: {uninstallexe}
 Name: {group}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
 Name: {group}\{cm:nameLibrary}; Filename: {app}\OPMedia.MediaLibrary.exe; WorkingDir: {app}; IconFilename: {app}\Resources\catalog.ico; Comment: {cm:startLibrary}; Components: itemPlayer\itemLibrary
 Name: {group}\{cm:nameRCCManager}; Filename: {app}\OPMedia.RCCManager.exe; WorkingDir: {app}; IconFilename: {app}\Resources\ir_remote.ico; Comment: {cm:startRCCManager}; Components: itemPlayer\itemRemote
-Name: {group}\{cm:nameLogViewer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; Comment: {cm:startLogViewer}; IconFilename: {app}\Resources\Logging.ico; Parameters: -LogViewer
 Name: {userdesktop}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}
 Name: {userdesktop}\{cm:nameLibrary}; Filename: {app}\OPMedia.MediaLibrary.exe; WorkingDir: {app}; IconFilename: {app}\Resources\catalog.ico; Comment: {cm:startLibrary}; Components: itemPlayer\itemLibrary
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}

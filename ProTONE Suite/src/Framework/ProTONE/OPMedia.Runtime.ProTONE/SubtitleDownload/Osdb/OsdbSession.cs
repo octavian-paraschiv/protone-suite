@@ -62,7 +62,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         public OsdbSession(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogHeavyTrace("OsdbSession: object created");
+            Logger.LogTrace("OsdbSession: object created");
         }
         #endregion
 
@@ -75,13 +75,13 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 
         protected override void DoInitializeSession()
         {
-            Logger.LogHeavyTrace("OsdbSession: creating OSDB server connection ...");
+            Logger.LogTrace("OsdbSession: creating OSDB server connection ...");
             _client = new OsdbConnection(_serverUrl, AppConfig.ProxySettings);
         }
 
         protected override void DoTestConnection()
         {
-            Logger.LogHeavyTrace("OsdbSession: checking whether URL {0} is valid ...", _serverUrl);
+            Logger.LogTrace("OsdbSession: checking whether URL {0} is valid ...", _serverUrl);
             _serverInfo = _client.GetServerInfo();
         }
 
@@ -89,13 +89,13 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         {
             if (string.IsNullOrEmpty(_username))
             {
-                Logger.LogHeavyTrace("OsdbSession: Attempt to anonymously login to OSDB server ...");
+                Logger.LogTrace("OsdbSession: Attempt to anonymously login to OSDB server ...");
                 _username = string.Empty;
                 _password = string.Empty;
             }
             else
             {
-                Logger.LogHeavyTrace("OsdbSession: Attempt to login to OSDB server with username {0} ...", _username);
+                Logger.LogTrace("OsdbSession: Attempt to login to OSDB server with username {0} ...", _username);
             }
 
             string lang = _culture.TwoLetterISOLanguageName;
@@ -111,7 +111,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
             // Get the session token
             _sessionToken = rsp.token;
 
-            Logger.LogHeavyTrace("OsdbSession: Succesfully logged in.");
+            Logger.LogTrace("OsdbSession: Succesfully logged in.");
 
         }
 
@@ -134,7 +134,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         {
             try
             {
-                Logger.LogHeavyTrace("OsdbSession: Attempt to logout from OSDB server ...");
+                Logger.LogTrace("OsdbSession: Attempt to logout from OSDB server ...");
 
                 OsdbStatusResponse rsp = _client.Logout(_sessionToken);
                 if (!rsp.IsOK())
@@ -143,13 +143,13 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
                     throw new SubtitleDownloadException("Logout from OSDB server has failed", rsp.status);
                 }
 
-                Logger.LogHeavyTrace("OsdbSession: Succesfully logged out from OSDB server.");
+                Logger.LogTrace("OsdbSession: Succesfully logged out from OSDB server.");
             }
             finally
             {
                 _client = null;
 
-                Logger.LogHeavyTrace("OsdbSession: Object destroyed.");
+                Logger.LogTrace("OsdbSession: Object destroyed.");
             }
         }
 

@@ -537,9 +537,6 @@ Toutes niveaux de journalisation sont activées par défaut.</value>
   <data name="TXT_SETUILANGUAGE" xml:space="preserve">
     <value>Réglez la langue de l'interface utilisateur (par toute ProTone Suite):</value>
   </data>
-  <data name="TXT_SHOWLOG" xml:space="preserve">
-    <value>Afficher le fichier journal ...</value>
-  </data>
   <data name="TXT_SHOWSPLITTERS" xml:space="preserve">
     <value>Afficher répartiteurs panneau dans la fenêtre principale</value>
   </data>

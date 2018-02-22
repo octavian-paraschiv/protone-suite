@@ -138,7 +138,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void HandleGraphEvent(EventCode code, int p1, int p2)
         {
-            Logger.LogHeavyTrace("GraphEvent: {0} : {1} : {2}", code, p1, p2);
+            Logger.LogTrace("GraphEvent: {0} : {1} : {2}", code, p1, p2);
         }
 
         protected override int DoGetSubtitleStream()

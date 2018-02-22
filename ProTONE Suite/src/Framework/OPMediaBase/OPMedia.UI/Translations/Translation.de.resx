@@ -537,9 +537,6 @@ Alle Journal-Level sind standardmäßig aktiviert.</value>
   <data name="TXT_SETUILANGUAGE" xml:space="preserve">
     <value>Stellen Sie die Sprache der Benutzeroberfläche (pro gesamte ProTONE Suite):</value>
   </data>
-  <data name="TXT_SHOWLOG" xml:space="preserve">
-    <value>Journal-Datei anzeigen ...</value>
-  </data>
   <data name="TXT_SHOWSPLITTERS" xml:space="preserve">
     <value>Zeige Panel Splitter im Hauptfenster</value>
   </data>

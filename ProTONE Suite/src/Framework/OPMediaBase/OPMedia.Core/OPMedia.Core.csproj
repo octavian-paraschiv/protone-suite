@@ -67,7 +67,6 @@
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <None Include="VersionTemplate.cs" />
-    <Compile Include="Configuration\LoggingConfig.cs" />
     <Compile Include="MainThread.cs" />
     <Compile Include="NetworkAccess\Shares.cs" />
     <Compile Include="NetworkAccess\WebClientWithTimeout.cs">
@@ -98,7 +97,6 @@
     <Compile Include="Logging\LogFileReader.cs" />
     <Compile Include="Logging\LoggedApplication.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LoggingConfiguration.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="TranslationSupport\TranslatableAttributes.cs" />
     <Compile Include="TranslationSupport\Translator.cs" />

@@ -125,18 +125,18 @@ namespace OPMedia.PersistenceService
                 {
                     if (kvp.Value.IsExpired)
                     {
-                        Logger.LogToConsole("PollForExpiredCachedItems: Object with key {0} seems to be expired.", kvp.Key);
+                        Logger.LogTrace("PollForExpiredCachedItems: Object with key {0} seems to be expired.", kvp.Key);
                         keysToDelete.Add(kvp.Key);
                     }
                 }
 
-                Logger.LogToConsole("PollForExpiredCachedItems: A number of {0} objects will be removed from the cache...", keysToDelete.Count);
+                Logger.LogTrace("PollForExpiredCachedItems: A number of {0} objects will be removed from the cache...", keysToDelete.Count);
 
                 foreach (string key in keysToDelete)
                 {
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole("PollForExpiredCachedItems: Object with key {0} was removed from cache because it was expired.", key);
+                        Logger.LogTrace("PollForExpiredCachedItems: Object with key {0} was removed from cache because it was expired.", key);
                         _cache.Remove(key);
                     }
                 }
@@ -155,33 +155,33 @@ namespace OPMedia.PersistenceService
                 // Is the requested object in the cache ?
                 if (_cache.ContainsKey(key))
                 {
-                    Logger.LogToConsole("ReadObject: Object with key {0} was found in cache.", key);
+                    Logger.LogTrace("ReadObject: Object with key {0} was found in cache.", key);
 
                     // If it is, return it from the cache.
                     return _cache[key].Value;
                 }
             }
 
-            Logger.LogToConsole("ReadObject: Object with key {0} was not found in cache.", key);
+            Logger.LogTrace("ReadObject: Object with key {0} was not found in cache.", key);
 
             // If it is not, get it from the persistence DB and also add it in the cache.
             string s = DbStore.ReadObject(persistenceId, persistenceContext);
             if (s != null)
             {
-                Logger.LogToConsole("ReadObject: Object with key {0} was found in DB.", key);
+                Logger.LogTrace("ReadObject: Object with key {0} was found in DB.", key);
 
                 CacheItem ci = new CacheItem(key, s);
 
                 lock (_cachePollerLock)
                 {
-                    Logger.LogToConsole("ReadObject: Object with key {0} was added to cache with a TTL of 5 sec", key);
+                    Logger.LogTrace("ReadObject: Object with key {0} was added to cache with a TTL of 5 sec", key);
                     _cache.Add(key, ci);
                 }
 
                 return ci.Value;
             }
 
-            Logger.LogToConsole("ReadObject: Object with key {0} was not found in DB also.", key);
+            Logger.LogTrace("ReadObject: Object with key {0} was not found in DB also.", key);
 
             return null;
         }
@@ -203,7 +203,7 @@ namespace OPMedia.PersistenceService
                     // Is the requested object in the cache ?
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} was found and updated in cache.", key);
+                        Logger.LogTrace("SaveObject: Object with key {0} was found and updated in cache.", key);
 
                         // If it is, update it in the cache.
                         _cache[key].Value = objectContent;
@@ -220,7 +220,7 @@ namespace OPMedia.PersistenceService
 
                     lock (_cachePollerLock)
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} was not found cache => adding it now", key);
+                        Logger.LogTrace("SaveObject: Object with key {0} was not found cache => adding it now", key);
                         _cache.Add(key, ci);
 
                         retVal = true;
@@ -229,7 +229,7 @@ namespace OPMedia.PersistenceService
 
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} is now saved also in DB.", key);
+                        Logger.LogTrace("SaveObject: Object with key {0} is now saved also in DB.", key);
                         DbStore.SaveObject(persistenceId, persistenceContext, objectContent);
                     });
             }
@@ -256,7 +256,7 @@ namespace OPMedia.PersistenceService
                 {
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole("DeleteObject: Object with key {0} was found in cache and removed.", key);
+                        Logger.LogTrace("DeleteObject: Object with key {0} was found in cache and removed.", key);
                         _cache.Remove(key);
 
                         retVal = true;
@@ -265,7 +265,7 @@ namespace OPMedia.PersistenceService
 
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
-                        Logger.LogToConsole("DeleteObject: Object with key {0} is now removed also from the DB.", key);
+                        Logger.LogTrace("DeleteObject: Object with key {0} is now removed also from the DB.", key);
                         DbStore.DeleteObject(persistenceId, persistenceContext);
                     });
             }

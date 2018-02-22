@@ -234,7 +234,6 @@ namespace OPMedia.UI
                                 {
                                     subPagesToAdd.AddRange(pages);
                                 }
-                                subPagesToAdd.Add(new LoggingSettingsPanel());
                             }
                             else if (panel is ControlAppPanel)
                             {

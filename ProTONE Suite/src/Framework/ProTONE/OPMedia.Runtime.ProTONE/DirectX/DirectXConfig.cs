@@ -16,47 +16,51 @@ namespace OPMedia.Runtime.ProTONE.DirectX
         public const string DxRegPath = @"SOFTWARE\Microsoft\DirectX";
         public static readonly Version Dx1Version = new Version(4, 2, 95); // DirectX 1.0 - there is no DirectX older than this :)
         public static readonly Version Dx9cVersion = new Version("4.9.0.904");
-        public static readonly Version Dx10Version = new Version("6.00.6000.16386");
 
         static Dictionary<Version, string> _dxVersionMap = new Dictionary<Version, string>();
 
         static DirectXConfig()
         {
-            _dxVersionMap.Add(Dx1Version, "DirectX 1.0");
+            _dxVersionMap.Add(Dx1Version, "1.0");
             
-            _dxVersionMap.Add(new Version("4.03.00.1096"), "DirectX 2.0");
-            _dxVersionMap.Add(new Version("4.04.00.0068"), "DirectX 3.0");
-            _dxVersionMap.Add(new Version("4.04.00.0069"), "DirectX 3.0a");
-            _dxVersionMap.Add(new Version("4.04.00.0070"), "DirectX 3.0b");
-            _dxVersionMap.Add(new Version("4.05.00.0155"), "DirectX 5.0");
-            _dxVersionMap.Add(new Version("4.05.01.1600"), "DirectX 5.2");
-            _dxVersionMap.Add(new Version("4.05.01.1998"), "DirectX 5.2");
-            _dxVersionMap.Add(new Version("4.06.00.0318"), "DirectX 6.0");
-            _dxVersionMap.Add(new Version("4.06.02.0436"), "DirectX 6.1");
-            _dxVersionMap.Add(new Version("4.06.03.0518"), "DirectX 6.1a");
-            _dxVersionMap.Add(new Version("4.07.00.0700"), "DirectX 7.0");
-            _dxVersionMap.Add(new Version("4.07.00.0716"), "DirectX 7.0a");
-            _dxVersionMap.Add(new Version("4.07.01.3000"), "DirectX 7.1");
-            _dxVersionMap.Add(new Version("4.08.00.0400"), "DirectX 8.0");
-            _dxVersionMap.Add(new Version("4.08.01.0810"), "DirectX 8.1");
-            _dxVersionMap.Add(new Version("4.08.01.0881"), "DirectX 8.1");
-            _dxVersionMap.Add(new Version("4.08.01.0901"), "DirectX 8.1a");
-            _dxVersionMap.Add(new Version("4.08.02.0134"), "DirectX 8.2");
-            _dxVersionMap.Add(new Version("4.09.00.0900"), "DirectX 9.0");
-            _dxVersionMap.Add(new Version("4.09.00.0901"), "DirectX 9.0a");
-            _dxVersionMap.Add(new Version("4.09.00.0902"), "DirectX 9.0b");
-            _dxVersionMap.Add(new Version("4.09.00.0903"), "DirectX 9.0c");
+            _dxVersionMap.Add(new Version("4.03.00.1096"), "2.0");
+            _dxVersionMap.Add(new Version("4.04.00.0068"), "3.0");
+            _dxVersionMap.Add(new Version("4.04.00.0069"), "3.0a");
+            _dxVersionMap.Add(new Version("4.04.00.0070"), "3.0b");
+            _dxVersionMap.Add(new Version("4.05.00.0155"), "5.0");
+            _dxVersionMap.Add(new Version("4.05.01.1600"), "5.2");
+            _dxVersionMap.Add(new Version("4.05.01.1998"), "5.2");
+            _dxVersionMap.Add(new Version("4.06.00.0318"), "6.0");
+            _dxVersionMap.Add(new Version("4.06.02.0436"), "6.1");
+            _dxVersionMap.Add(new Version("4.06.03.0518"), "6.1a");
+            _dxVersionMap.Add(new Version("4.07.00.0700"), "7.0");
+            _dxVersionMap.Add(new Version("4.07.00.0716"), "7.0a");
+            _dxVersionMap.Add(new Version("4.07.01.3000"), "7.1");
+            _dxVersionMap.Add(new Version("4.08.00.0400"), "8.0");
+            _dxVersionMap.Add(new Version("4.08.01.0810"), "8.1");
+            _dxVersionMap.Add(new Version("4.08.01.0881"), "8.1");
+            _dxVersionMap.Add(new Version("4.08.01.0901"), "8.1a");
+            _dxVersionMap.Add(new Version("4.08.02.0134"), "8.2");
+            _dxVersionMap.Add(new Version("4.09.00.0900"), "9.0");
+            _dxVersionMap.Add(new Version("4.09.00.0901"), "9.0a");
+            _dxVersionMap.Add(new Version("4.09.00.0902"), "9.0b");
+            _dxVersionMap.Add(new Version("4.09.00.0903"), "9.0c");
 
             _dxVersionMap.Add(Dx9cVersion, "DirectX 9.0c");
 
-            _dxVersionMap.Add(Dx10Version, "DirectX 10");
-            _dxVersionMap.Add(new Version("6.00.6001.18000"), "DirectX 10.1");
-            _dxVersionMap.Add(new Version("6.00.6002.18005"), "DirectX 10.1");
-            _dxVersionMap.Add(new Version("6.01.7600.16385"), "DirectX 11");
-            _dxVersionMap.Add(new Version("6.00.6002.18107"), "DirectX 11");
-            _dxVersionMap.Add(new Version("6.01.7601.17514"), "DirectX 11");
-            _dxVersionMap.Add(new Version("6.02.9200.16384"), "DirectX 11.1");
-            _dxVersionMap.Add(new Version("6.03.9600.16384"), "DirectX 11.2");
+            _dxVersionMap.Add(new Version("6.00.6000.16386"), "10");
+            _dxVersionMap.Add(new Version("6.00.6001.18000"), "10.1");
+            _dxVersionMap.Add(new Version("6.00.6002.18005"), "10.1");
+            _dxVersionMap.Add(new Version("6.01.7600.16385"), "11");
+            _dxVersionMap.Add(new Version("6.00.6002.18107"), "11");
+            _dxVersionMap.Add(new Version("6.01.7601.17514"), "11");
+            _dxVersionMap.Add(new Version("6.02.9200.16384"), "11.1");
+            _dxVersionMap.Add(new Version("6.03.9600.16384"), "11.2");
+
+            _dxVersionMap.Add(new Version("10.00.10240.16384"), "12.0");
+            _dxVersionMap.Add(new Version("10.00.16299.15"),    "12.0 updated");
+
+            _dxVersionMap.Add(new Version(int.MaxValue, int.MaxValue), "????");
         }
 
         public static Version GetDirectXVersion(out string friendlyDirectXName)
@@ -106,17 +110,24 @@ namespace OPMedia.Runtime.ProTONE.DirectX
 
         public static string GetDirectXSymbolicVersion(Version dxVersion)
         {
-            KeyValuePair<Version, string> newestVersionEntry = _dxVersionMap.ElementAt(0);
+            if (_dxVersionMap.ContainsKey(dxVersion))
+                return _dxVersionMap[dxVersion];
 
-            foreach (KeyValuePair<Version, string> kvp in _dxVersionMap)
+            List<Version> dxVersions = _dxVersionMap.Keys.ToList();
+
+            Version v1 = dxVersions[0];
+            Version v2 = dxVersions[1];
+
+            for (int i = 0; i < dxVersions.Count - 1; i++)
             {
-                if (kvp.Key >= dxVersion)
-                    break;
+                v1 = dxVersions[i];
+                v2 = dxVersions[i + 1];
 
-                newestVersionEntry = kvp;
+                if (v1 <= dxVersion && dxVersion <= v2)
+                    break;
             }
 
-            return newestVersionEntry.Value;
+            return string.Format("Newer than {0}", _dxVersionMap[v1]);
         }
     }
 }

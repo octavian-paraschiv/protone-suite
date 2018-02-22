@@ -40,7 +40,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoDispose()
         {
-            Logger.LogToConsole("DeezerRenderer::~DoDispose => Cleanup ...");
+            Logger.LogTrace("DeezerRenderer::~DoDispose => Cleanup ...");
             DoStopRenderer();
 
             _connected = false;
@@ -53,7 +53,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             if (_connected == false)
             {
-                Logger.LogToConsole("DeezerRenderer::CheckIfInitialized => Initializing ...");
+                Logger.LogTrace("DeezerRenderer::CheckIfInitialized => Initializing ...");
                 SetupConfig();
                 SetupAppContext();
             }
@@ -63,7 +63,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             if (_dzConfig == null)
             {
-                Logger.LogToConsole("DeezerRenderer::SetupConfig => Creating config object ...");
+                Logger.LogTrace("DeezerRenderer::SetupConfig => Creating config object ...");
 
                 _dzConfig = new dz_connect_configuration();
                 _dzConfig.app_id = ProTONEConfig.DeezerApplicationId;
@@ -82,7 +82,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 _evtAppUserOfflineAvailable.Reset();
                 _evtAppUserLoginOK.Reset();
 
-                Logger.LogToConsole("DeezerRenderer::SetupConfig => Creating app context ...");
+                Logger.LogTrace("DeezerRenderer::SetupConfig => Creating app context ...");
 
                 dz_error_t err;
 
@@ -134,7 +134,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         private void CleanupAppContext()
         {
-            Logger.LogToConsole("DeezerRenderer::CleanupAppContext => Cleaning up app context ...");
+            Logger.LogTrace("DeezerRenderer::CleanupAppContext => Cleaning up app context ...");
 
             dz_error_t err;
 
@@ -150,7 +150,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 //_evtPlayerDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
                 Thread.Sleep(2000);
 
-                Logger.LogToConsole("dz_player_deactivate => Assuming Success");
+                Logger.LogTrace("dz_player_deactivate => Assuming Success");
 
                 DeezerApi.dz_object_release(_dzPlayer);
                 _dzPlayer = IntPtr.Zero;
@@ -168,7 +168,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 //_evtConnectDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
                 Thread.Sleep(2000);
 
-                Logger.LogToConsole("dz_connect_deactivate => Assuming Success");
+                Logger.LogTrace("dz_connect_deactivate => Assuming Success");
 
                 DeezerApi.dz_object_release(_dzConnect);
                 _dzConnect = IntPtr.Zero;
@@ -179,20 +179,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             if (_dzConfig != null)
             {
-                Logger.LogToConsole("DeezerRenderer::CleanupConfig => Cleaning up config ...");
+                Logger.LogTrace("DeezerRenderer::CleanupConfig => Cleaning up config ...");
                 _dzConfig = null;
             }
         }
 
         public void OnConnectDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
         {
-            Logger.LogToConsole("DeezerRenderer::OnConnectDeactivated ...");
+            Logger.LogTrace("DeezerRenderer::OnConnectDeactivated ...");
             _evtConnectDeactivated.Set();
         }
 
         public void OnPlayerDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
         {
-            Logger.LogToConsole("DeezerRenderer::OnPlayerDeactivated ...");
+            Logger.LogTrace("DeezerRenderer::OnPlayerDeactivated ...");
             _evtPlayerDeactivated.Set();
         }
 
@@ -203,7 +203,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             _needNaturalNext = false;
 
-            Logger.LogToConsole("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
+            Logger.LogTrace("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
 
             if (renderMediaName == null || renderMediaName.Length <= 0)
                 return;
@@ -221,7 +221,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             if (_evtQueueListLoaded.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.HandleDzErrorCode("dz_player_load", dz_error_t.DZ_ERROR_PLAYER_LOAD_TIMEOUT);
             
-            Logger.LogToConsole("dz_player_load => Success");
+            Logger.LogTrace("dz_player_load => Success");
                        
             // --------------------------------------------------------------------
 
@@ -240,7 +240,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             if (_evtPlayerPlaybackStarted.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.HandleDzErrorCode("dz_player_play", dz_error_t.DZ_ERROR_PLAYER_PLAY_TIMEOUT);
             
-            Logger.LogToConsole("dz_player_play => Success");
+            Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
            
         }
@@ -271,7 +271,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         protected override void DoStopRenderer()
         {
             StackTrace st = new StackTrace();
-            Logger.LogToConsole("DeezerRenderer::DoStopRenderer call Stack = {0}", st.ToString());
+            Logger.LogTrace("DeezerRenderer::DoStopRenderer call Stack = {0}", st.ToString());
 
             if (FilterState != FilterState.Stopped)
             {
@@ -289,14 +289,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                     RenderPosition = 0;
 
-                    Logger.LogToConsole("dz_player_stop => Success");
+                    Logger.LogTrace("dz_player_stop => Success");
                 }
             }
         }
 
         protected override void DoPauseRenderer()
         {
-            Logger.LogToConsole("DeezerRenderer::DoPauseRenderer");
+            Logger.LogTrace("DeezerRenderer::DoPauseRenderer");
 
             if (FilterState == FilterState.Running)
             {
@@ -312,21 +312,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                         DeezerApi.HandleDzErrorCode("dz_player_pause", dz_error_t.DZ_ERROR_PLAYER_PAUSE_TIMEOUT);
                     
-                    Logger.LogToConsole("dz_player_pause => Success");
+                    Logger.LogTrace("dz_player_pause => Success");
                 }
             }
         }
 
         protected override void DoResumeRenderer(double fromPosition)
         {
-            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
+            Logger.LogTrace("DeezerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
 
             dz_error_t err;
 
             if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                 DeezerApi.HandleDzErrorCode("DeezerRenderer::DoResumeRenderer", dz_error_t.DZ_ERROR_PLAYER_PAUSE_NOT_STARTED);
             
-            Logger.LogToConsole("DeezerRenderer::DoResumeRenderer player is now paused.");
+            Logger.LogTrace("DeezerRenderer::DoResumeRenderer player is now paused.");
 
             if (FilterState == FilterState.Paused)
             {
@@ -344,7 +344,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                         if (_evtPlayerStreamReadyAfterSeek.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                             DeezerApi.HandleDzErrorCode("dz_player_seek", dz_error_t.DZ_ERROR_PLAYER_SEEK_TIMEOUT);
                         
-                        Logger.LogToConsole("dz_player_seek => DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK");
+                        Logger.LogTrace("dz_player_seek => DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK");
                     }
 
                     err = DeezerApi.dz_player_resume(_dzPlayer, null, IntPtr.Zero);
@@ -355,7 +355,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetMediaPosition(double pos)
         {
-            Logger.LogToConsole("DeezerRenderer::SetMediaPosition pos={0}", pos);
+            Logger.LogTrace("DeezerRenderer::SetMediaPosition pos={0}", pos);
 
             if (FilterState != FilterState.Stopped)
             {
@@ -373,7 +373,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     if (_evtPlayerPaused.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                         DeezerApi.HandleDzErrorCode("[Event toggled by dz_player_seek]", dz_error_t.DZ_ERROR_PLAYER_SEEK_TIMEOUT);
                     
-                    Logger.LogToConsole("[Event toggled by dz_player_seek] => DZ_PLAYER_EVENT_RENDER_TRACK_PAUSED");
+                    Logger.LogTrace("[Event toggled by dz_player_seek] => DZ_PLAYER_EVENT_RENDER_TRACK_PAUSED");
                 }
             }
         }
@@ -397,7 +397,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 dz_error_t err;
 
-                Logger.LogToConsole("DeezerRenderer::SetAudioVolume vol={0}", vol);
+                Logger.LogTrace("DeezerRenderer::SetAudioVolume vol={0}", vol);
 
                 err = DeezerApi.dz_player_set_output_volume(_dzPlayer, null, IntPtr.Zero, vol);
 
@@ -414,7 +414,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         private void OnApplicationConnectEvent(IntPtr handle, IntPtr evtHandle, IntPtr userData)
         {
             dz_connect_event_t evtType = DeezerApi.dz_connect_event_get_type(evtHandle);
-            Logger.LogToConsole("DeezerRenderer::OnApplicationConnectEvent evtType={0}", evtType);
+            Logger.LogTrace("DeezerRenderer::OnApplicationConnectEvent evtType={0}", evtType);
 
             switch (evtType)
             {
@@ -436,7 +436,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         private void OnPlayerEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
             dz_player_event_t evtType = DeezerApi.dz_player_event_get_type(evtHandle);
-            Logger.LogToConsole("DeezerRenderer::OnPlayerEvent evtType={0}", evtType);
+            Logger.LogTrace("DeezerRenderer::OnPlayerEvent evtType={0}", evtType);
 
             switch (evtType)
             {
@@ -564,7 +564,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         private void OnRendererEvent(IntPtr handle, IntPtr evtHandle, IntPtr userdata)
         {
             string s = DeezerApi.dz_renderer_event_get_infos(evtHandle);
-            Logger.LogToConsole("DeezerRenderer::OnRendererEvent info={0}", s ?? "<null>");
+            Logger.LogTrace("DeezerRenderer::OnRendererEvent info={0}", s ?? "<null>");
         }
 
         private void OnRenderProgress(IntPtr handle, UInt64 progress, IntPtr userdata)
@@ -573,7 +573,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (curRenderPos != RenderPosition && curRenderPos > 0)
             {
-                Logger.LogToConsole("DeezerRenderer::OnRenderProgress curRenderPos={0}", curRenderPos);
+                Logger.LogTrace("DeezerRenderer::OnRenderProgress curRenderPos={0}", curRenderPos);
                 RenderPosition = curRenderPos;
                 FilterState = FilterState.Running;
             }

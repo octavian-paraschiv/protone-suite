@@ -978,13 +978,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running && oldMediaPosition == newMediaPosition)
                 {
                     nofPasses++;
-                    Logger.LogHeavyTrace("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
+                    Logger.LogTrace("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
                         nofPasses, oldMediaPosition, newMediaPosition);
                 }
                 else
                 {
                     nofPasses = 0;
-                    Logger.LogHeavyTrace("Media position changed ... old={0}, new={1}",
+                    Logger.LogTrace("Media position changed ... old={0}, new={1}",
                         oldMediaPosition, newMediaPosition);
 
                     oldMediaPosition = newMediaPosition;
@@ -994,7 +994,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (newState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
-                        Logger.LogToConsole("timerCheckState_Tick ... IsEndOfMedia={0}, IsStreamedMedia={1}, nofPasses={2}, newState={3}", 
+                        Logger.LogTrace("timerCheckState_Tick ... IsEndOfMedia={0}, IsStreamedMedia={1}, nofPasses={2}, newState={3}", 
                             IsEndOfMedia, IsStreamedMedia, nofPasses, newState);
 
                         this.StopRenderer(false);

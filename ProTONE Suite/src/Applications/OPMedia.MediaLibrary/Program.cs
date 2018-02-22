@@ -86,8 +86,6 @@ namespace OPMedia.MediaLibrary
             {
                 ErrorDispatcher.DispatchFatalError(ex);
             }
-
-            Logger.StopLogger();
         }
     }
 }

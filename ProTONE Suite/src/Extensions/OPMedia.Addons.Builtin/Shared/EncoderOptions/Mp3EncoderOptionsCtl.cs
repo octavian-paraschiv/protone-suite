@@ -91,9 +91,11 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             {
                 string summary = "";
                 string conversionFlags = this.Options.GetConfig(ref summary).ToString();
-                LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
-                dlg.Text = "MP3 Conversion Flags";
-                dlg.ShowDialog();
+
+                // TODO fixme
+                //LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
+                //dlg.Text = "MP3 Conversion Flags";
+                //dlg.ShowDialog();
             }
         }
 

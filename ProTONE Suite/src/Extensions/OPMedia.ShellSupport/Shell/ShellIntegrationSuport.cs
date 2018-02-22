@@ -78,8 +78,6 @@ namespace OPMedia.ShellSupport
             {
                 ErrorDispatcher.DispatchFatalError("Fatal registration error: " + exception.Message);
             }
-
-            Logger.StopLogger();
         }
 
         [ComUnregisterFunction()]
@@ -100,8 +98,6 @@ namespace OPMedia.ShellSupport
             {
                 ErrorDispatcher.DispatchFatalError("Fatal unregistration error: " + exception.Message);
             }
-
-            Logger.StopLogger();
         }
         #endregion
 

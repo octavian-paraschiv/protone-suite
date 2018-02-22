@@ -41,7 +41,6 @@ namespace OPMedia.Runtime.Addons
             this.tXTAPPHELPToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.tsmiAbout = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.toolStripSeparator2 = new OPMedia.UI.Controls.OPMMenuStripSeparator();
-            this.tXTSHOWLOGToolStripMenuItem = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.pnlLayoutFull = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pnlOpMedia = new OPMedia.UI.Controls.OPMSplitContainer();
             this.pnlNavContainer = new OPMedia.UI.Controls.OPMPanel();
@@ -126,9 +125,7 @@ namespace OPMedia.Runtime.Addons
             this.tXTHELPToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tXTHELPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tXTAPPHELPToolStripMenuItem,
-            this.tsmiAbout,
-            this.toolStripSeparator2,
-            this.tXTSHOWLOGToolStripMenuItem});
+            this.tsmiAbout});
             this.tXTHELPToolStripMenuItem.Name = "tXTHELPToolStripMenuItem";
             this.tXTHELPToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.tXTHELPToolStripMenuItem.Text = "TXT_HELP";
@@ -152,14 +149,6 @@ namespace OPMedia.Runtime.Addons
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
-            // 
-            // tXTSHOWLOGToolStripMenuItem
-            // 
-            this.tXTSHOWLOGToolStripMenuItem.Name = "tXTSHOWLOGToolStripMenuItem";
-            this.tXTSHOWLOGToolStripMenuItem.ShortcutKeyDisplayString = "F12";
-            this.tXTSHOWLOGToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.tXTSHOWLOGToolStripMenuItem.Text = "TXT_SHOWLOG";
-            this.tXTSHOWLOGToolStripMenuItem.Click += new System.EventHandler(this.tXTSHOWLOGToolStripMenuItem_Click);
             // 
             // pnlLayoutFull
             // 
@@ -199,7 +188,7 @@ namespace OPMedia.Runtime.Addons
             // 
             this.pnlOpMedia.Panel2.Controls.Add(this.pnlLocalContent);
             this.pnlOpMedia.Size = new System.Drawing.Size(822, 495);
-            this.pnlOpMedia.SplitterDistance = 465;
+            this.pnlOpMedia.SplitterDistance = 466;
             this.pnlOpMedia.SplitterWidth = 3;
             this.pnlOpMedia.TabIndex = 6;
             // 
@@ -210,7 +199,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlNavContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlNavContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNavContainer.Name = "pnlNavContainer";
-            this.pnlNavContainer.Size = new System.Drawing.Size(822, 465);
+            this.pnlNavContainer.Size = new System.Drawing.Size(822, 466);
             this.pnlNavContainer.TabIndex = 0;
             // 
             // lblNoItems
@@ -244,7 +233,7 @@ namespace OPMedia.Runtime.Addons
             // pnlLocalContent.Panel2
             // 
             this.pnlLocalContent.Panel2.Controls.Add(this.pnlPreview);
-            this.pnlLocalContent.Size = new System.Drawing.Size(822, 27);
+            this.pnlLocalContent.Size = new System.Drawing.Size(822, 26);
             this.pnlLocalContent.SplitterDistance = 25;
             this.pnlLocalContent.SplitterWidth = 3;
             this.pnlLocalContent.TabIndex = 3;
@@ -326,7 +315,7 @@ namespace OPMedia.Runtime.Addons
             this.lblStatusMain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblStatusMain.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatusMain.Name = "lblStatusMain";
-            this.lblStatusMain.Size = new System.Drawing.Size(111, 22);
+            this.lblStatusMain.Size = new System.Drawing.Size(110, 22);
             this.lblStatusMain.Text = "nonEditModePath";
             this.lblStatusMain.Click += new System.EventHandler(this.lblStatusMain_Click);
             // 
@@ -396,7 +385,6 @@ namespace OPMedia.Runtime.Addons
         private OPMToolStripMenuItem tsmiAbout;
         private OPMToolStripMenuItem tXTAPPHELPToolStripMenuItem;
         private OPMMenuStripSeparator toolStripSeparator2;
-        private OPMToolStripMenuItem tXTSHOWLOGToolStripMenuItem;
         private OPMTableLayoutPanel pnlLayoutFull;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusMain;

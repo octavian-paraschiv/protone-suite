@@ -175,7 +175,6 @@ namespace OPMedia.Runtime.Addons
             tsmiSettings.Text = Translator.Translate("TXT_SETTINGS");
             tXTAPPHELPToolStripMenuItem.Text = Translator.Translate("TXT_APPHELP");
             tXTHELPToolStripMenuItem.Text = Translator.Translate("TXT_HELP");
-            tXTSHOWLOGToolStripMenuItem.Text = Translator.Translate("TXT_SHOWLOG");
             tsmiExit.Text = Translator.Translate("TXT_EXIT");
 
             foreach (OPMToolStripMenuItem tsmi in msMain.Items)
@@ -292,7 +291,7 @@ namespace OPMedia.Runtime.Addons
         /// </summary>
         private bool GetNavigationAddons()
         {
-            Logger.LogHeavyTrace("MainForm.GetNavigationAddons called ...");
+            Logger.LogTrace("MainForm.GetNavigationAddons called ...");
 
             AddonsCore.Instance.PreviewEnded += new PreviewEndedEventHandler(Instance_PreviewEnded);
 
@@ -385,14 +384,14 @@ namespace OPMedia.Runtime.Addons
                 }
             }
 
-            Logger.LogHeavyTrace("MainForm.GetNavigationAddons done.");
+            Logger.LogTrace("MainForm.GetNavigationAddons done.");
 
             return true;
         }
 
         void Instance_PreviewEnded()
         {
-            Logger.LogHeavyTrace("Preview has terminated.");
+            Logger.LogTrace("Preview has terminated.");
             pnlPreview.Controls.Clear();
             pnlPreview.Controls.Add(lblNoPreview);
         }
@@ -434,7 +433,7 @@ namespace OPMedia.Runtime.Addons
         string selectedAddonTitle = string.Empty;
         private void AddonButtonClick(object sender, EventArgs e)
         {
-            Logger.LogHeavyTrace("MainForm.AddonButtonClick called ...");
+            Logger.LogTrace("MainForm.AddonButtonClick called ...");
 
             NavigationAddon addon = null;
 
@@ -501,7 +500,7 @@ namespace OPMedia.Runtime.Addons
                 }
             }
 
-            Logger.LogHeavyTrace("MainForm.AddonButtonClick done.");
+            Logger.LogTrace("MainForm.AddonButtonClick done.");
         }
 
         bool prepareAutoPreview = false;
@@ -513,7 +512,7 @@ namespace OPMedia.Runtime.Addons
         {
             try
             {
-                Logger.LogHeavyTrace("MainForm handling OnNavigationAction ...");
+                Logger.LogTrace("MainForm handling OnNavigationAction ...");
 
                 Application.UseWaitCursor = true;
                 this.SuspendLayoutEx();
@@ -523,7 +522,7 @@ namespace OPMedia.Runtime.Addons
                 ActionRequest request = new ActionRequest();
                 ActionResponse response = null;
 
-                Logger.LogHeavyTrace("Action is of type: " + args.ActionType.ToString());
+                Logger.LogTrace("Action is of type: " + args.ActionType.ToString());
 
                 pnlPreview.SuspendLayoutEx();
                 pnlProperties.SuspendLayoutEx();
@@ -648,7 +647,7 @@ namespace OPMedia.Runtime.Addons
 
                         if (failed)
                         {
-                            Logger.LogHeavyTrace("Preview action has failed.");
+                            Logger.LogTrace("Preview action has failed.");
                             if (!pnlPreview.Controls.Contains(lblNoPreview))
                             {
                                 pnlPreview.Controls.Clear();
@@ -689,7 +688,7 @@ namespace OPMedia.Runtime.Addons
 
                         if (failed)
                         {
-                            Logger.LogHeavyTrace("View Properties Action has failed.");
+                            Logger.LogTrace("View Properties Action has failed.");
                             pnlProperties.Controls.Clear();
                             pnlProperties.Controls.Add(lblNoProperties);
                         }
@@ -726,7 +725,7 @@ namespace OPMedia.Runtime.Addons
                 this.ResumeLayoutEx();
                 Application.UseWaitCursor = false;
 
-                Logger.LogHeavyTrace("MainForm handled OnNavigationAction.");
+                Logger.LogTrace("MainForm handled OnNavigationAction.");
             }
         }
 
@@ -816,11 +815,6 @@ namespace OPMedia.Runtime.Addons
             {
                 base.FireHelpRequest();
             }
-        }
-
-        private void tXTSHOWLOGToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LogFileConsoleDialog.ShowLogConsole();
         }
 
         protected void EnterEditPathMode()

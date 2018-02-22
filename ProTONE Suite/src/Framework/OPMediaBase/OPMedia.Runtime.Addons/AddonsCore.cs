@@ -118,7 +118,7 @@ namespace OPMedia.Runtime.Addons
         {
             ActionResponse retVal = null;
 
-            Logger.LogHeavyTrace("DispatchAction() called ...");
+            Logger.LogTrace("DispatchAction() called ...");
 
             try
             {
@@ -132,13 +132,13 @@ namespace OPMedia.Runtime.Addons
                 retVal = null;
             }
 
-            Logger.LogHeavyTrace("DispatchAction() done.");
+            Logger.LogTrace("DispatchAction() done.");
             return retVal;
         }
 
         public bool CanDispatchAction(ActionRequest request, ref bool automatic)
         {
-            Logger.LogHeavyTrace("CanDispatchAction() called ...");
+            Logger.LogTrace("CanDispatchAction() called ...");
 
             bool retVal = false;
             try
@@ -153,7 +153,7 @@ namespace OPMedia.Runtime.Addons
                 retVal = false;
             }
 
-            Logger.LogHeavyTrace("CanDispatchAction() done .. returning " + retVal);
+            Logger.LogTrace("CanDispatchAction() done .. returning " + retVal);
             return retVal;
         }
         #endregion

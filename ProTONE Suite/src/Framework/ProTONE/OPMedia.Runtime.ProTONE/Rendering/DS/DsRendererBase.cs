@@ -103,12 +103,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     int hr = mediaEvent.FreeEventParams(code, p1, p2);
                     DsError.ThrowExceptionForHR(hr);
 
-                    Logger.LogHeavyTrace("HandleGraphEvent: code={0} p1={1} p2={2}", code, p1, p2);
+                    Logger.LogTrace("HandleGraphEvent: code={0} p1={1} p2={2}", code, p1, p2);
                     HandleGraphEvent(code, p1, p2);
                 }
                 catch (COMException ex)
                 {
-                    Logger.LogHeavyTrace("Filter graph message loop broken because: {0}",
+                    Logger.LogTrace("Filter graph message loop broken because: {0}",
                         ErrorDispatcher.GetErrorMessageForException(ex, false));
                     break;
                 }
@@ -1107,7 +1107,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void WndProc(ref Message m)
         {
-            Logger.LogHeavyTrace("GraphNotifyWnd: " + m);
+            Logger.LogTrace("GraphNotifyWnd: " + m);
 
             if (m.Msg == (int)Messages.WM_GRAPH_EVENT &&
                 FilterGraphMessage != null)
@@ -1166,7 +1166,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void HandleGraphEvent(EventCode code, int p1, int p2)
         {
-            Logger.LogHeavyTrace("GraphEvent: {0} : {1} : {2}", code, p1, p2);
+            Logger.LogTrace("GraphEvent: {0} : {1} : {2}", code, p1, p2);
         }
 
         protected override double GetDurationScaleFactor()

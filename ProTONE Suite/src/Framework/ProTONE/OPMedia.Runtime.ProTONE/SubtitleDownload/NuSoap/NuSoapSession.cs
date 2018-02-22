@@ -27,7 +27,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
         public NuSoapSession(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogHeavyTrace("NuSoapSession: object created");
+            Logger.LogTrace("NuSoapSession: object created");
         }
         #endregion
 

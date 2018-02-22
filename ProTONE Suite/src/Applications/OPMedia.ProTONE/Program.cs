@@ -51,15 +51,6 @@ namespace OPMedia.ProTONE
 
             try
             {
-                if (Environment.CommandLine.EndsWith("-LogViewer"))
-                {
-                    LoggingConfiguration.LoggingEnabled = false;
-                    LogFileConsoleDialog dlg = new LogFileConsoleDialog(true);
-                    Application.Run(dlg);
-                    return;
-                }
-
-
                 if (!ProcessCommandLine(true))
                 {
                     try
@@ -107,10 +98,6 @@ namespace OPMedia.ProTONE
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchFatalError(ex);
-            }
-            finally
-            {
-                Logger.StopLogger();
             }
         }
 

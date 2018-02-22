@@ -420,7 +420,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                     if (bmk != null)
                     {
-                        Logger.LogHeavyTrace("Display Bookmark: " + bmk.ToString());
+                        Logger.LogTrace("Display Bookmark: " + bmk.ToString());
                         MediaRenderer.DefaultInstance.DisplayOsdMessage(bmk.Title.Replace(";", "\r\n"));
                     }
                 }

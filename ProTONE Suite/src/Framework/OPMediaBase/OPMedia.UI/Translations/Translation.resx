@@ -537,9 +537,6 @@ All log level are enabled by default.</value>
   <data name="TXT_SETUILANGUAGE">
     <value>Set the User Interface Language (per entire ProTONE Suite):</value>
   </data>
-  <data name="TXT_SHOWLOG">
-    <value>Show log file ...</value>
-  </data>
   <data name="TXT_SHOWSPLITTERS">
     <value>Show panel splitters in main window</value>
   </data>
