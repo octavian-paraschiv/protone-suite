@@ -78,7 +78,7 @@
     <Compile Include="Processors\BackgroundRetriever.cs" />
     <Compile Include="Shortcuts\ShortcutMapper.cs" />
     <Compile Include="Processors\QueuedProcessor.cs" />
-    <Compile Include="ProgramStartupInfo.cs" />
+    <Compile Include="SystemScheduler\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Processors\Processor.cs" />
     <Compile Include="ServiceHelpers\ServiceHelperBase.cs" />

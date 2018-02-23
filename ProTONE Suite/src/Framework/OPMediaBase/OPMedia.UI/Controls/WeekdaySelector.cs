@@ -10,6 +10,7 @@ using OPMedia.UI.Controls;
 
 using OPMedia.UI.Themes;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.SystemScheduler;
 
 namespace OPMedia.UI.Controls
 {

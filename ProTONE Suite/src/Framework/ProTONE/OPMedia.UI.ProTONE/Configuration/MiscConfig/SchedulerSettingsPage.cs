@@ -18,6 +18,7 @@ using OPMedia.UI.Themes;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.SystemScheduler;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -69,7 +70,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             cmbPlaylistEvtHandler.Items.Clear();
             cmbScheduledEvtHandler.Items.Clear();
-            foreach (ScheduledActionType act in Enum.GetValues(typeof(ScheduledActionType)))
+            foreach (SchedulerAction act in Enum.GetValues(typeof(SchedulerAction)))
             {
                 string str = string.Format("TXT_ACT_{0}", act.ToString().ToUpperInvariant());
                 cmbPlaylistEvtHandler.Items.Add(Translator.Translate(str));

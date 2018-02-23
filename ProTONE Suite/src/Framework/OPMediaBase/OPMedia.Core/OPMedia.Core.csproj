@@ -81,7 +81,6 @@
     <Compile Include="TicToc.cs" />
     <Compile Include="Persistence\IPersistenceService.cs" />
     <Compile Include="Persistence\PersistenceProxy.cs" />
-    <Compile Include="ThreadHelper.cs" />
     <Compile Include="Utilities\HelperClasses.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Utilities\SerialPortAPI.cs" />
@@ -93,8 +92,6 @@
     <Compile Include="InstanceManagement\OpMediaApplication.cs" />
     <Compile Include="InstanceManagement\SingleInstanceApplication.cs" />
     <Compile Include="Logging\ErrorDispatcher.cs" />
-    <Compile Include="Logging\LogEntry.cs" />
-    <Compile Include="Logging\LogFileReader.cs" />
     <Compile Include="Logging\LoggedApplication.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Constants.cs" />

@@ -181,7 +181,7 @@
     <Compile Include="SubtitleDownload\Osdb\OsdbSession.cs" />
     <Compile Include="SubtitleDownload\Osdb\OsdbStructs.cs" />
     <Compile Include="SubtitleDownload\SubtitleDownloader.cs" />
-    <Compile Include="SystemScheduler.cs" />
+    <Compile Include="SystemScheduler\SystemScheduler.cs" />
     <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
   </ItemGroup>
   <ItemGroup>
