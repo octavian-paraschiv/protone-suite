@@ -722,18 +722,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
-        public static string ScheduledEventData
-        {
-            get
-            {
-                return PersistenceProxy.ReadObject(true, "ScheduledEventData", string.Empty);
-            }
-            set
-            {
-                PersistenceProxy.SaveObject(true, "ScheduledEventData", value);
-            }
-        }
-
         public static TimeSpan ScheduledEventTime
         {
             get
@@ -1016,6 +1004,52 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #endregion
 
+        #region Media Browser History
+        public static List<string> Media_Browser_History_Local
+        {
+            get
+            {
+                string str = PersistenceProxy.ReadObject(true, "Media_Browser_History_Local", string.Empty);
+                return StringUtils.ToStringList(str, '|');
+            }
+
+            set
+            {
+                string str = StringUtils.FromStringList(value, '|');
+                PersistenceProxy.SaveObject(true, "Media_Browser_History_Local", str);
+            }
+        }
+
+        public static List<string> Media_Browser_History_Shoutcast
+        {
+            get
+            {
+                string str = PersistenceProxy.ReadObject(true, "Media_Browser_History_Shoutcast", string.Empty);
+                return StringUtils.ToStringList(str, '|');
+            }
+
+            set
+            {
+                string str = StringUtils.FromStringList(value, '|');
+                PersistenceProxy.SaveObject(true, "Media_Browser_History_Shoutcast", str);
+            }
+        }
+
+        public static List<string> Media_Browser_History_Deezer
+        {
+            get
+            {
+                string str = PersistenceProxy.ReadObject(true, "Media_Browser_History_Deezer", string.Empty);
+                return StringUtils.ToStringList(str, '|');
+            }
+
+            set
+            {
+                string str = StringUtils.FromStringList(value, '|');
+                PersistenceProxy.SaveObject(true, "Media_Browser_History_Deezer", str);
+            }
+        }
+        #endregion
 
         static Guid _filterGraphGuid = Guid.Empty;
         static object _filterGraphGuidLock = new object();

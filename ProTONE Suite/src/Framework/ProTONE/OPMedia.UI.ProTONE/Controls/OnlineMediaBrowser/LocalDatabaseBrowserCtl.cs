@@ -15,6 +15,7 @@ using OPMedia.UI.Controls;
 using OPMedia.UI.Menus;
 using System.Linq;
 using OPMedia.UI.ProTONE.Properties;
+using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -127,6 +128,16 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 lvRadioStations.Items[0].Selected = true;
                 lvRadioStations.Items[0].Focused = true;
             }
+        }
+
+        protected override List<string> GetSearchHistory()
+        {
+            return ProTONEConfig.Media_Browser_History_Local;
+        }
+
+        protected override void SetSearchHistory(List<string> history)
+        {
+            ProTONEConfig.Media_Browser_History_Local = history;
         }
     }
 }

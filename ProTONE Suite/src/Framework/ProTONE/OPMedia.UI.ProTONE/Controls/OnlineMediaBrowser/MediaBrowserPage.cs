@@ -14,6 +14,7 @@ using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.Generic;
 using OPMedia.UI.ProTONE.Dialogs;
 using System.Windows.Forms;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -38,6 +39,12 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         public new OPMContextMenuStrip ContextMenuStrip { get; set; }
 
+        public List<string> SearchHistory
+        {
+            get { return GetSearchHistory(); }
+            set { SetSearchHistory(value); }
+        }
+
         public MediaBrowserPage() : base()
         {
             this.SelectedItems = new List<OnlineMediaItem>();
@@ -54,6 +61,15 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public void DisplaySearchResults()
         {
             DisplaySearchResultsInternal();
+        }
+
+        public bool UpdateSearchHistory(string lastSearchText)
+        {
+            if (Items == null || Items.Count < 1)
+                // Unsuccesful search
+                return false;
+
+            return UpdateSearchHistoryInternal(lastSearchText);
         }
 
         public virtual bool PreValidateSearch(string search)
@@ -174,6 +190,37 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         {
         }
 
+        protected virtual bool UpdateSearchHistoryInternal(string lastSearchText)
+        {
+            try
+            {
+                List<string> history = new List<string>(SearchHistory);
+
+                // Check whether it is already in the search history.
+                // Ignore letter case.
+                foreach (string s in history)
+                {
+                    if (string.Compare(s, lastSearchText, true) == 0)
+                        return false;
+                }
+
+                if (history.Count >= 20)
+                    history.RemoveAt(0);
+
+                history.Add(lastSearchText);
+
+                SearchHistory = history;
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+                return false;
+            }
+        }
+
+        
         protected void OnMenuClick(object sender, EventArgs e)
         {
             OPMToolStripMenuItem tsmi = sender as OPMToolStripMenuItem;
@@ -217,6 +264,15 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public virtual string GetSearchBoxTip()
         {
             return null;
+        }
+
+        protected virtual List<string> GetSearchHistory()
+        {
+            return null;
+        }
+
+        protected virtual void SetSearchHistory(List<string> history)
+        {
         }
     }
 

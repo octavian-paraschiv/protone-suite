@@ -68,7 +68,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             tabContentBrowser.SelectedIndexChanged += new EventHandler(tabContentBrowser_SelectedIndexChanged);
 
-            txtSearch.TextChanged += new EventHandler(OnSearchTextChanged);
+            cmbSearch.TextChanged += new EventHandler(OnSearchTextChanged);
 
             _tt = new OPMToolTip();
 
@@ -82,26 +82,63 @@ namespace OPMedia.UI.ProTONE.Dialogs
             MediaBrowserPage selectedPage = GetSelectedPage();
             if (selectedPage != null)
             {
-                _tt.SetSimpleToolTip(txtSearch.InnerTextBox, selectedPage.GetSearchBoxTip());
-                validText = selectedPage.PreValidateSearch(txtSearch.Text);
+                _tt.SetSimpleToolTip(cmbSearch, selectedPage.GetSearchBoxTip());
+                validText = selectedPage.PreValidateSearch(cmbSearch.Text);
             }
 
             btnSearch.Enabled = validText;
-            txtSearch.BackColor = validText ? ThemeManager.WndValidColor : ThemeManager.ColorValidationFailed;
+            cmbSearch.BackColor = validText ? ThemeManager.WndValidColor : ThemeManager.ColorValidationFailed;
         }
 
         void tabContentBrowser_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtSearch.Select();
-            txtSearch.Focus();
+            UpdateSearchHistoryDropDown();
+
+            cmbSearch.Select();
+            cmbSearch.Focus();
 
             OnSearchTextChanged(null, null);
         }
 
+        private void UpdateSearchHistoryDropDown()
+        {
+            string txt = cmbSearch.Text;
+
+            try
+            {
+                cmbSearch.TextChanged -= new EventHandler(OnSearchTextChanged);
+
+                MediaBrowserPage selectedPage = GetSelectedPage();
+                if (selectedPage != null)
+                {
+                    cmbSearch.Items.Clear();
+                    List<string> history = selectedPage.SearchHistory;
+                    if (history != null && history.Count > 0)
+                    {
+                        history.ForEach((s) =>
+                            {
+                                // Don't add "LookupMyPlaylists" in the drop down history
+                                // even when it comes from the persistence service
+                                if (string.Compare(s, "LookupMyPlaylists", true) != 0)
+                                    cmbSearch.Items.Add(s);
+
+                            });
+                    }
+
+                    cmbSearch.SelectedIndex = -1;
+                }
+            }
+            finally
+            {
+                cmbSearch.Text = txt;
+                cmbSearch.TextChanged += new EventHandler(OnSearchTextChanged);
+            }
+        }
+
         private void OnlineContentBrowser_Shown(object sender, EventArgs e)
         {
-            txtSearch.Select();
-            txtSearch.Focus();
+            cmbSearch.Select();
+            cmbSearch.Focus();
         }
 
         private MediaBrowserPage GetSelectedPage()
@@ -123,7 +160,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             MediaBrowserPage selectedPage = GetSelectedPage();
             if (selectedPage != null)
             {
-                string search = txtSearch.Text;
+                string search = cmbSearch.Text;
 
                 if (selectedPage.PreValidateSearch(search))
                 {
@@ -132,7 +169,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
                     _searchCancelled.Reset();
 
-                    selectedPage.StartCancellableSearch(txtSearch.Text, _searchCancelled);
+                    selectedPage.StartCancellableSearch(cmbSearch.Text, _searchCancelled);
 
                     ShowWaitDialog("Please wait for the search task to finish. You can press ESC to cancel the search.");
                 }
@@ -145,7 +182,18 @@ namespace OPMedia.UI.ProTONE.Dialogs
             MediaBrowserPage selectedPage = GetSelectedPage();
 
             if (senderPage != null && senderPage == selectedPage)
+            {
                 senderPage.DisplaySearchResults();
+
+                string s = cmbSearch.Text;
+
+                // Don't add "LookupMyPlaylists" in the search history 
+                if (string.Compare(s, "LookupMyPlaylists", true) != 0)
+                {
+                    if (senderPage.UpdateSearchHistory(s))
+                        UpdateSearchHistoryDropDown();
+                }
+            }
 
             CloseWaitDialog();
         }
@@ -193,7 +241,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         public void StartDeezerSearch(string search)
         {
             if (string.IsNullOrEmpty(search) == false)
-                txtSearch.Text = search;
+                cmbSearch.Text = search;
 
             btnSearch_Click(this, EventArgs.Empty);
         }

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
-            this.txtSearch = new OPMedia.UI.Controls.OPMTextBox();
+            this.cmbSearch = new System.Windows.Forms.ComboBox();
             this.btnSearch = new OPMedia.UI.Controls.OPMButton();
             this.tabContentBrowser = new OPMedia.UI.Controls.OPMTabControl();
             this.tpLocalDatabase = new System.Windows.Forms.TabPage();
@@ -60,7 +60,7 @@
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 3);
-            this.opmTableLayoutPanel1.Controls.Add(this.txtSearch, 1, 3);
+            this.opmTableLayoutPanel1.Controls.Add(this.cmbSearch, 1, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.btnSearch, 2, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.tabContentBrowser, 0, 2);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -81,53 +81,41 @@
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.opmLabel1.Location = new System.Drawing.Point(3, 624);
+            this.opmLabel1.Location = new System.Drawing.Point(3, 621);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(76, 28);
+            this.opmLabel1.Size = new System.Drawing.Size(82, 31);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SEARCH:";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtSearch
+            // cmbSearch
             // 
-            this.txtSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearch.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtSearch.Location = new System.Drawing.Point(79, 628);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.txtSearch.MaximumSize = new System.Drawing.Size(2000, 20);
-            this.txtSearch.MaxLength = 32767;
-            this.txtSearch.MinimumSize = new System.Drawing.Size(20, 20);
-            this.txtSearch.Multiline = false;
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.OverrideBackColor = System.Drawing.Color.Empty;
-            this.txtSearch.OverrideForeColor = System.Drawing.Color.Empty;
-            this.txtSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.ReadOnly = false;
-            this.txtSearch.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(760, 20);
-            this.txtSearch.TabIndex = 1;
-            this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtSearch.UseSystemPasswordChar = false;
-            this.txtSearch.WordWrap = false;
+            this.cmbSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbSearch.Location = new System.Drawing.Point(85, 625);
+            this.cmbSearch.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.cmbSearch.MaximumSize = new System.Drawing.Size(2000, 0);
+            this.cmbSearch.MaxLength = 256;
+            this.cmbSearch.MinimumSize = new System.Drawing.Size(20, 0);
+            this.cmbSearch.Name = "cmbSearch";
+            this.cmbSearch.Size = new System.Drawing.Size(754, 21);
+            this.cmbSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
             this.btnSearch.AutoSize = true;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(842, 624);
+            this.btnSearch.Location = new System.Drawing.Point(842, 621);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnSearch.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSearch.ShowDropDown = false;
-            this.btnSearch.Size = new System.Drawing.Size(100, 25);
+            this.btnSearch.Size = new System.Drawing.Size(100, 27);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "TXT_SEARCH";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -146,7 +134,7 @@
             this.tabContentBrowser.Margin = new System.Windows.Forms.Padding(3, 5, 1, 0);
             this.tabContentBrowser.Name = "tabContentBrowser";
             this.tabContentBrowser.SelectedIndex = 0;
-            this.tabContentBrowser.Size = new System.Drawing.Size(941, 619);
+            this.tabContentBrowser.Size = new System.Drawing.Size(941, 616);
             this.tabContentBrowser.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabContentBrowser.TabIndex = 3;
             this.tabContentBrowser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -158,7 +146,7 @@
             this.tpLocalDatabase.Location = new System.Drawing.Point(4, 59);
             this.tpLocalDatabase.Margin = new System.Windows.Forms.Padding(0);
             this.tpLocalDatabase.Name = "tpLocalDatabase";
-            this.tpLocalDatabase.Size = new System.Drawing.Size(933, 556);
+            this.tpLocalDatabase.Size = new System.Drawing.Size(933, 553);
             this.tpLocalDatabase.TabIndex = 0;
             this.tpLocalDatabase.Text = "TXT_LOCAL_DB";
             // 
@@ -173,7 +161,7 @@
             this.localDbBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.localDbBrowser.Name = "localDbBrowser";
             this.localDbBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.localDbBrowser.Size = new System.Drawing.Size(933, 556);
+            this.localDbBrowser.Size = new System.Drawing.Size(933, 553);
             this.localDbBrowser.TabIndex = 0;
             // 
             // tpShoutcastDir
@@ -183,7 +171,7 @@
             this.tpShoutcastDir.Location = new System.Drawing.Point(4, 59);
             this.tpShoutcastDir.Margin = new System.Windows.Forms.Padding(0);
             this.tpShoutcastDir.Name = "tpShoutcastDir";
-            this.tpShoutcastDir.Size = new System.Drawing.Size(933, 556);
+            this.tpShoutcastDir.Size = new System.Drawing.Size(933, 553);
             this.tpShoutcastDir.TabIndex = 1;
             this.tpShoutcastDir.Text = "TXT_SHOUTCAST_DIR";
             // 
@@ -195,7 +183,7 @@
             this.shoutcastDirBrowser.Location = new System.Drawing.Point(0, 0);
             this.shoutcastDirBrowser.Name = "shoutcastDirBrowser";
             this.shoutcastDirBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.shoutcastDirBrowser.Size = new System.Drawing.Size(933, 556);
+            this.shoutcastDirBrowser.Size = new System.Drawing.Size(933, 553);
             this.shoutcastDirBrowser.TabIndex = 0;
             // 
             // tpDeezerContent
@@ -205,7 +193,7 @@
             this.tpDeezerContent.Location = new System.Drawing.Point(4, 59);
             this.tpDeezerContent.Margin = new System.Windows.Forms.Padding(0);
             this.tpDeezerContent.Name = "tpDeezerContent";
-            this.tpDeezerContent.Size = new System.Drawing.Size(933, 556);
+            this.tpDeezerContent.Size = new System.Drawing.Size(933, 553);
             this.tpDeezerContent.TabIndex = 2;
             this.tpDeezerContent.Text = "TXT_DEEZER_CONTENT";
             // 
@@ -218,7 +206,7 @@
             this.deezerTrackBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.deezerTrackBrowser.Name = "deezerTrackBrowser";
             this.deezerTrackBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.deezerTrackBrowser.Size = new System.Drawing.Size(933, 556);
+            this.deezerTrackBrowser.Size = new System.Drawing.Size(933, 553);
             this.deezerTrackBrowser.TabIndex = 0;
             // 
             // OnlineContentBrowser
@@ -245,7 +233,7 @@
 
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
         private UI.Controls.OPMLabel opmLabel1;
-        private UI.Controls.OPMTextBox txtSearch;
+        private System.Windows.Forms.ComboBox cmbSearch;
         private UI.Controls.OPMButton btnSearch;
         private UI.Controls.OPMTabControl tabContentBrowser;
         private System.Windows.Forms.TabPage tpLocalDatabase;

@@ -17,6 +17,7 @@ using OPMedia.Core;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.ProTONE.Properties;
 using System.Diagnostics;
+using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -197,6 +198,16 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public override string GetSearchBoxTip()
         {
             return Translator.Translate("TXT_DEEZERFILTER_HINT");
+        }
+
+        protected override List<string> GetSearchHistory()
+        {
+            return ProTONEConfig.Media_Browser_History_Deezer;
+        }
+
+        protected override void SetSearchHistory(List<string> history)
+        {
+            ProTONEConfig.Media_Browser_History_Deezer = history;
         }
     }
 }
