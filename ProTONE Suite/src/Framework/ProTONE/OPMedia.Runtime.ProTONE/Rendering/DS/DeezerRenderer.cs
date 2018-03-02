@@ -71,8 +71,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 _dzConfig.product_build_id = SuiteVersion.Version;
                 _dzConfig.user_profile_path = USER_CACHE_PATH;          // TODO SET THE USER CACHE PATH
                 _dzConfig.connect_event_cb = new dz_connect_onevent_cb(OnApplicationConnectEvent);
-                _dzConfig.app_has_crashed_delegate = null;
+                _dzConfig.app_has_crashed_delegate = new dz_connect_crash_reporting_delegate(OnAppCrashed);
             }
+        }
+
+        private bool OnAppCrashed()
+        {
+            Logger.LogTrace("DeezerRenderer::OnAppCrashed called ...");
+            return false;
         }
 
         private void SetupAppContext()
@@ -94,8 +100,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 if (_dzConnect == IntPtr.Zero)
                     DeezerApi.HandleDzErrorCode("dz_connect_new", dz_error_t.DZ_ERROR_CLASS_INSTANTIATION);
 
-                err = DeezerApi.dz_connect_debug_log_disable(_dzConnect);
-                DeezerApi.HandleDzErrorCode("dz_connect_debug_log_disable", err);
+                //err = DeezerApi.dz_connect_debug_log_disable(_dzConnect);
+                //DeezerApi.HandleDzErrorCode("dz_connect_debug_log_disable", err);
 
                 err = DeezerApi.dz_connect_activate(_dzConnect, IntPtr.Zero);
                 DeezerApi.HandleDzErrorCode("dz_connect_activate", err);
