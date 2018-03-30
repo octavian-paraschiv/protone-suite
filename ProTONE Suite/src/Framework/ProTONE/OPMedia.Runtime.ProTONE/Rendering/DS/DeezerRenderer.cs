@@ -125,7 +125,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 err = DeezerApi.dz_player_set_renderer_event_cb(_dzPlayer, _dzRendererEventCB);
                 DeezerApi.HandleDzErrorCode("dz_player_set_renderer_event_cb", err);
 
-                err = DeezerApi.dz_connect_set_access_token(_dzConnect, null, IntPtr.Zero, ProTONEConfig.DeezerUserAccessToken);
+                string token = ProTONEConfig.DeezerUserAccessToken;
+                err = DeezerApi.dz_connect_set_access_token(_dzConnect, null, IntPtr.Zero, token);
                 DeezerApi.HandleDzErrorCode("dz_connect_set_access_token", err);
 
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
@@ -487,16 +488,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     }
                     break;
 
-                case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_LOADED:
-                    _evtQueueListLoaded.Set();
-                    break;
-
                 case dz_player_event_t.DZ_PLAYER_EVENT_MEDIASTREAM_DATA_READY_AFTER_SEEK:
                     _evtPlayerStreamReadyAfterSeek.Set();
                     break;
 
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_NEED_NATURAL_NEXT:
                     _needNaturalNext = true;
+                    break;
+
+                case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_LOADED:
+                    _evtQueueListLoaded.Set();
+                    break;
+
+                case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_NO_RIGHT:
+                    _evtQueueListLoaded.Reset();
                     break;
             }
         }

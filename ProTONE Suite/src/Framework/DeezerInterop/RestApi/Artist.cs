@@ -11,7 +11,7 @@ namespace OPMedia.DeezerInterop.RestApi
     {
         private List<Album> albums;
 
-        public uint Id { get; set; }
+        public UInt64 Id { get; set; }
 
         public string Name { get; set; }
 

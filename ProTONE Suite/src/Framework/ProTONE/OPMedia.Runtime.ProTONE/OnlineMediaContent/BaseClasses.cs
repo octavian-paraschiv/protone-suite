@@ -74,7 +74,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
     public class OnlinePlaylist
     {
         [DataMember(Order = 0)]
-        public uint Id { get; set; }
+        public UInt64 Id { get; set; }
 
         [DataMember(Order = 1)]
         public string Title { get; set; }

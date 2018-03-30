@@ -86,7 +86,7 @@ namespace OPMedia.DeezerInterop.RestApi
             return response;
         }
 
-        public Artist GetArtist(uint artistId)
+        public Artist GetArtist(UInt64 artistId)
         {
             string response = this.ExecuteHttpGet(string.Format("/artist/{0}", artistId));
 
@@ -97,7 +97,7 @@ namespace OPMedia.DeezerInterop.RestApi
             return artist;
         }
 
-        public Playlist GetPlaylist(uint playlistId)
+        public Playlist GetPlaylist(UInt64 playlistId)
         {
             string response = this.ExecuteHttpGet(string.Format("/playlist/{0}", playlistId));
 

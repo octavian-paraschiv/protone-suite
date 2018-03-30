@@ -11,7 +11,7 @@ namespace OPMedia.DeezerInterop.RestApi
     [DebuggerDisplay("Album({Id},{Title})")]
     public class Album : DeezerEntity
     {
-        public uint Id { get; set; }
+        public UInt64 Id { get; set; }
 
         public string Title { get; set; }
 

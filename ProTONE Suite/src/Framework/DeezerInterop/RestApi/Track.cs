@@ -8,7 +8,7 @@ namespace OPMedia.DeezerInterop.RestApi
 {
     public class Track : DeezerEntity
     {
-        public uint Id { get; set; }
+        public UInt64 Id { get; set; }
         public string Title { get; set; }
 
         [JsonProperty("duration")]
