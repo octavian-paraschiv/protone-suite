@@ -738,7 +738,7 @@ namespace OPMedia.UI.Themes
                 if (_previousTheme != currentTheme)
                 {
                     _previousTheme = currentTheme;
-                    RecreateFonts();
+                    //RecreateFonts();
                 }
 
                 if (_allThemesElements == null)
@@ -752,14 +752,17 @@ namespace OPMedia.UI.Themes
 
                 try
                 {
-                    elementValue = _allThemesElements[currentTheme][elementName];
+                    if (_allThemesElements.ContainsKey(currentTheme))
+                    {
+                        if (_allThemesElements[currentTheme].ContainsKey(elementName))
+                            return _allThemesElements[currentTheme][elementName];
+                    }
                 }
                 catch
                 {
-                    elementValue = defaultValue;
                 }
 
-                return elementValue;
+                return defaultValue;
             }
         }
 

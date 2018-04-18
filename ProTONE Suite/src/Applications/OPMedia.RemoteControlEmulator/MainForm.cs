@@ -223,22 +223,22 @@ namespace OPMedia.RemoteControlEmulator
         #region WCF tab
         void _tmrWCFCheck_Tick(object sender, EventArgs e)
         {
-            SignalAnalisysData data = null;
-            try
-            {
-                data = _proxy.GetSignalAnalisysData();
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-                WCFAbort();
-                WCFOpen();
-            }
+            //SignalAnalisysData data = null;
+            //try
+            //{
+            //    data = _proxy.GetSignalAnalisysData();
+            //}
+            //catch(Exception ex)
+            //{
+            //    Logger.LogException(ex);
+            //    WCFAbort();
+            //    WCFOpen();
+            //}
 
-            if (data != null)
-                AddText(data.ToString());
-            else
-                AddText("can't read WCF data ...");
+            //if (data != null)
+            //    AddText(data.ToString());
+            //else
+            //    AddText("can't read WCF data ...");
         }
 
         private void AddText(string p)

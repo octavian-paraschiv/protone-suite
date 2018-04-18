@@ -115,16 +115,17 @@
             this.tabEmulator.Name = "tabEmulator";
             this.tabEmulator.SelectedIndex = 0;
             this.tabEmulator.Size = new System.Drawing.Size(314, 432);
+            this.tabEmulator.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabEmulator.TabIndex = 0;
             // 
             // tpRemoteControl
             // 
             this.tpRemoteControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.tpRemoteControl.Controls.Add(this.pnlSimulator);
-            this.tpRemoteControl.Location = new System.Drawing.Point(4, 23);
+            this.tpRemoteControl.Location = new System.Drawing.Point(4, 42);
             this.tpRemoteControl.Name = "tpRemoteControl";
             this.tpRemoteControl.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpRemoteControl.Size = new System.Drawing.Size(306, 405);
+            this.tpRemoteControl.Size = new System.Drawing.Size(306, 386);
             this.tpRemoteControl.TabIndex = 1;
             this.tpRemoteControl.Text = "Simulator";
             // 
@@ -182,7 +183,7 @@
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.pnlSimulator.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlSimulator.Size = new System.Drawing.Size(296, 390);
+            this.pnlSimulator.Size = new System.Drawing.Size(296, 371);
             this.pnlSimulator.TabIndex = 0;
             // 
             // opmButton6
@@ -577,10 +578,10 @@
             // 
             this.tpApi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.tpApi.Controls.Add(this.opmTableLayoutPanel2);
-            this.tpApi.Location = new System.Drawing.Point(4, 23);
+            this.tpApi.Location = new System.Drawing.Point(4, 42);
             this.tpApi.Name = "tpApi";
             this.tpApi.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpApi.Size = new System.Drawing.Size(231, 405);
+            this.tpApi.Size = new System.Drawing.Size(306, 386);
             this.tpApi.TabIndex = 0;
             this.tpApi.Text = "API";
             // 
@@ -601,7 +602,7 @@
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel2.Size = new System.Drawing.Size(221, 390);
+            this.opmTableLayoutPanel2.Size = new System.Drawing.Size(296, 371);
             this.opmTableLayoutPanel2.TabIndex = 1;
             // 
             // opmGroupBox1
@@ -613,7 +614,7 @@
             this.opmGroupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.opmGroupBox1.Location = new System.Drawing.Point(3, 3);
             this.opmGroupBox1.Name = "opmGroupBox1";
-            this.opmGroupBox1.Size = new System.Drawing.Size(215, 79);
+            this.opmGroupBox1.Size = new System.Drawing.Size(290, 81);
             this.opmGroupBox1.TabIndex = 0;
             this.opmGroupBox1.TabStop = false;
             this.opmGroupBox1.Text = "Command Parameters";
@@ -637,7 +638,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(209, 58);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(284, 60);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // opmLabel1
@@ -649,7 +650,7 @@
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(33, 29);
+            this.opmLabel1.Size = new System.Drawing.Size(35, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "Type:";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -659,11 +660,11 @@
             this.lblPlaybackCmd.AutoSize = true;
             this.lblPlaybackCmd.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblPlaybackCmd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblPlaybackCmd.Location = new System.Drawing.Point(3, 29);
+            this.lblPlaybackCmd.Location = new System.Drawing.Point(3, 30);
             this.lblPlaybackCmd.Name = "lblPlaybackCmd";
             this.lblPlaybackCmd.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblPlaybackCmd.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblPlaybackCmd.Size = new System.Drawing.Size(43, 29);
+            this.lblPlaybackCmd.Size = new System.Drawing.Size(45, 30);
             this.lblPlaybackCmd.TabIndex = 1;
             this.lblPlaybackCmd.Text = "Action:";
             this.lblPlaybackCmd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -673,10 +674,10 @@
             this.cmbCommandType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbCommandType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbCommandType.FormattingEnabled = true;
-            this.cmbCommandType.Location = new System.Drawing.Point(52, 3);
+            this.cmbCommandType.Location = new System.Drawing.Point(54, 3);
             this.cmbCommandType.Name = "cmbCommandType";
             this.cmbCommandType.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbCommandType.Size = new System.Drawing.Size(154, 23);
+            this.cmbCommandType.Size = new System.Drawing.Size(227, 24);
             this.cmbCommandType.TabIndex = 2;
             this.cmbCommandType.SelectedIndexChanged += new System.EventHandler(this.cmbCommandType_SelectedIndexChanged);
             // 
@@ -685,10 +686,10 @@
             this.cmbPlaybackCmd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPlaybackCmd.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbPlaybackCmd.FormattingEnabled = true;
-            this.cmbPlaybackCmd.Location = new System.Drawing.Point(52, 32);
+            this.cmbPlaybackCmd.Location = new System.Drawing.Point(54, 33);
             this.cmbPlaybackCmd.Name = "cmbPlaybackCmd";
             this.cmbPlaybackCmd.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbPlaybackCmd.Size = new System.Drawing.Size(154, 23);
+            this.cmbPlaybackCmd.Size = new System.Drawing.Size(227, 24);
             this.cmbPlaybackCmd.TabIndex = 4;
             // 
             // opmGroupBox2
@@ -698,9 +699,9 @@
             this.opmGroupBox2.Controls.Add(this.opmTableLayoutPanel3);
             this.opmGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmGroupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.opmGroupBox2.Location = new System.Drawing.Point(3, 88);
+            this.opmGroupBox2.Location = new System.Drawing.Point(3, 90);
             this.opmGroupBox2.Name = "opmGroupBox2";
-            this.opmGroupBox2.Size = new System.Drawing.Size(215, 76);
+            this.opmGroupBox2.Size = new System.Drawing.Size(290, 81);
             this.opmGroupBox2.TabIndex = 1;
             this.opmGroupBox2.TabStop = false;
             this.opmGroupBox2.Text = "Command Destination";
@@ -723,7 +724,7 @@
             this.opmTableLayoutPanel3.RowCount = 2;
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(209, 55);
+            this.opmTableLayoutPanel3.Size = new System.Drawing.Size(284, 60);
             this.opmTableLayoutPanel3.TabIndex = 1;
             // 
             // opmLabel2
@@ -731,11 +732,11 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(23, 0);
+            this.opmLabel2.Location = new System.Drawing.Point(28, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(50, 29);
+            this.opmLabel2.Size = new System.Drawing.Size(50, 30);
             this.opmLabel2.TabIndex = 0;
             this.opmLabel2.Text = "Send to:";
             this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -748,10 +749,10 @@
             this.cmbDestination.Items.AddRange(new object[] {
             "Player",
             "RCC Service"});
-            this.cmbDestination.Location = new System.Drawing.Point(79, 3);
+            this.cmbDestination.Location = new System.Drawing.Point(84, 3);
             this.cmbDestination.Name = "cmbDestination";
             this.cmbDestination.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbDestination.Size = new System.Drawing.Size(127, 23);
+            this.cmbDestination.Size = new System.Drawing.Size(197, 24);
             this.cmbDestination.TabIndex = 2;
             // 
             // opmLabel3
@@ -759,11 +760,11 @@
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.Location = new System.Drawing.Point(3, 29);
+            this.opmLabel3.Location = new System.Drawing.Point(3, 30);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(70, 26);
+            this.opmLabel3.Size = new System.Drawing.Size(75, 30);
             this.opmLabel3.TabIndex = 3;
             this.opmLabel3.Text = "Destination\r\n(name or IP):";
             this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -774,7 +775,7 @@
             this.txtDestinationName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDestinationName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDestinationName.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtDestinationName.Location = new System.Drawing.Point(76, 29);
+            this.txtDestinationName.Location = new System.Drawing.Point(81, 30);
             this.txtDestinationName.Margin = new System.Windows.Forms.Padding(0);
             this.txtDestinationName.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtDestinationName.MaxLength = 32767;
@@ -788,7 +789,7 @@
             this.txtDestinationName.ReadOnly = false;
             this.txtDestinationName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDestinationName.ShortcutsEnabled = true;
-            this.txtDestinationName.Size = new System.Drawing.Size(133, 20);
+            this.txtDestinationName.Size = new System.Drawing.Size(203, 20);
             this.txtDestinationName.TabIndex = 4;
             this.txtDestinationName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDestinationName.UseSystemPasswordChar = false;
@@ -799,12 +800,12 @@
             this.btnExecute.AutoSize = true;
             this.btnExecute.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecute.Location = new System.Drawing.Point(3, 170);
+            this.btnExecute.Location = new System.Drawing.Point(3, 177);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnExecute.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnExecute.ShowDropDown = false;
-            this.btnExecute.Size = new System.Drawing.Size(111, 25);
+            this.btnExecute.Size = new System.Drawing.Size(117, 27);
             this.btnExecute.TabIndex = 2;
             this.btnExecute.Text = "Execute command";
             this.btnExecute.UseVisualStyleBackColor = true;
@@ -816,7 +817,7 @@
             this.txtResult.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtResult.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtResult.Location = new System.Drawing.Point(0, 198);
+            this.txtResult.Location = new System.Drawing.Point(0, 207);
             this.txtResult.Margin = new System.Windows.Forms.Padding(0);
             this.txtResult.MaxLength = 32767;
             this.txtResult.Multiline = true;
@@ -828,7 +829,7 @@
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtResult.ShortcutsEnabled = true;
-            this.txtResult.Size = new System.Drawing.Size(221, 192);
+            this.txtResult.Size = new System.Drawing.Size(296, 164);
             this.txtResult.TabIndex = 3;
             this.txtResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtResult.UseSystemPasswordChar = false;
@@ -838,10 +839,10 @@
             // 
             this.tpMockup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.tpMockup.Controls.Add(this.opmTableLayoutPanel4);
-            this.tpMockup.Location = new System.Drawing.Point(4, 23);
+            this.tpMockup.Location = new System.Drawing.Point(4, 42);
             this.tpMockup.Name = "tpMockup";
             this.tpMockup.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpMockup.Size = new System.Drawing.Size(231, 405);
+            this.tpMockup.Size = new System.Drawing.Size(306, 386);
             this.tpMockup.TabIndex = 2;
             this.tpMockup.Text = "Mock-up";
             // 
@@ -866,7 +867,7 @@
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.opmTableLayoutPanel4.Size = new System.Drawing.Size(221, 390);
+            this.opmTableLayoutPanel4.Size = new System.Drawing.Size(296, 371);
             this.opmTableLayoutPanel4.TabIndex = 16;
             // 
             // btnPlayer
@@ -874,7 +875,7 @@
             this.btnPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPlayer.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.btnPlayer.Location = new System.Drawing.Point(89, 39);
+            this.btnPlayer.Location = new System.Drawing.Point(89, 29);
             this.btnPlayer.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.btnPlayer.Name = "btnPlayer";
             this.btnPlayer.OverrideBackColor = System.Drawing.Color.Empty;
@@ -889,7 +890,7 @@
             this.btnRemote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRemote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemote.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.btnRemote.Location = new System.Drawing.Point(89, 251);
+            this.btnRemote.Location = new System.Drawing.Point(89, 241);
             this.btnRemote.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.btnRemote.Name = "btnRemote";
             this.btnRemote.OverrideBackColor = System.Drawing.Color.Empty;
@@ -904,7 +905,7 @@
             this.btnMediaLib.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMediaLib.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMediaLib.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.btnMediaLib.Location = new System.Drawing.Point(89, 145);
+            this.btnMediaLib.Location = new System.Drawing.Point(89, 135);
             this.btnMediaLib.Margin = new System.Windows.Forms.Padding(8, 3, 3, 3);
             this.btnMediaLib.Name = "btnMediaLib";
             this.btnMediaLib.OverrideBackColor = System.Drawing.Color.Empty;
@@ -924,7 +925,7 @@
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel4.SetRowSpan(this.lblDesc, 5);
-            this.lblDesc.Size = new System.Drawing.Size(34, 390);
+            this.lblDesc.Size = new System.Drawing.Size(34, 371);
             this.lblDesc.TabIndex = 16;
             this.lblDesc.Text = "ProTONE Suite 2.0";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -934,10 +935,10 @@
             // 
             this.tpWCF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.tpWCF.Controls.Add(this.tbWCFDetails);
-            this.tpWCF.Location = new System.Drawing.Point(4, 23);
+            this.tpWCF.Location = new System.Drawing.Point(4, 42);
             this.tpWCF.Name = "tpWCF";
             this.tpWCF.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpWCF.Size = new System.Drawing.Size(306, 405);
+            this.tpWCF.Size = new System.Drawing.Size(306, 386);
             this.tpWCF.TabIndex = 3;
             this.tpWCF.Text = "Signal Analisys WCF";
             // 
@@ -948,7 +949,7 @@
             this.tbWCFDetails.Location = new System.Drawing.Point(5, 10);
             this.tbWCFDetails.Multiline = true;
             this.tbWCFDetails.Name = "tbWCFDetails";
-            this.tbWCFDetails.Size = new System.Drawing.Size(296, 390);
+            this.tbWCFDetails.Size = new System.Drawing.Size(296, 371);
             this.tbWCFDetails.TabIndex = 0;
             // 
             // MainForm
