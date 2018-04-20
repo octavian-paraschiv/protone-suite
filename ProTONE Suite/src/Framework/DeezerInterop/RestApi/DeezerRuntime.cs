@@ -147,14 +147,14 @@ namespace OPMedia.DeezerInterop.RestApi
         }
 
 
-        public List<Playlist> GetPlaylists(string userId, ManualResetEvent abortEvent)
+        public List<Playlist> GetMyPlaylists(string accessToken, ManualResetEvent abortEvent)
         {
             List<Playlist> playlists = new List<Playlist>();
 
             if (abortEvent.WaitOne(5))
                 return playlists;
 
-            string response = this.ExecuteHttpGet(string.Format("user/{0}/playlists", userId));
+            string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}", accessToken));
 
             var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 

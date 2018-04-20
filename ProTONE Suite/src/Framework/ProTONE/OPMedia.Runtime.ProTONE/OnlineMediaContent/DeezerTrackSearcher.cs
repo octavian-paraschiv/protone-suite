@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -80,14 +81,12 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
-                string userId = ProTONEConfig.DeezerUserId;
                 string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
                 return (
                     string.IsNullOrEmpty(deezerApiEndpoint) == false &&
                     string.IsNullOrEmpty(userAccessToken) == false &&
-                    string.IsNullOrEmpty(applicationId) == false &&
-                    string.IsNullOrEmpty(userId) == false);
+                    string.IsNullOrEmpty(applicationId) == false);
             }
         }
 
@@ -183,14 +182,13 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
                 string applicationId = ProTONEConfig.DeezerApplicationId;
-                string userId = ProTONEConfig.DeezerUserId;
                 string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
 
                 DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
                 if (_dzr != dzr)
                     _dzr = dzr;
 
-                List<Playlist> playlists = _dzr.GetPlaylists(userId, abortEvent);
+                List<Playlist> playlists = _dzr.GetMyPlaylists(userAccessToken, abortEvent);
                 if (playlists != null)
                 {
                     foreach (var p in playlists)

@@ -11,6 +11,7 @@ using OPMedia.UI.ProTONE.Properties;
 using System.Diagnostics;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 
 namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 {
@@ -32,8 +33,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
             txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
-            txtDeezerUserId.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
-            txtDeezerEndpoint.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
+            btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
         }
 
         void OnTextChanged(object sender, EventArgs e)
@@ -45,21 +45,23 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
-            txtDeezerUserId.Text = ProTONEConfig.DeezerUserId;
-            txtDeezerEndpoint.Text = ProTONEConfig.DeezerApiEndpoint;
         }
 
         protected override void SaveInternal()
         {
             ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
-            ProTONEConfig.DeezerUserId = txtDeezerUserId.Text;
-            ProTONEConfig.DeezerApiEndpoint = txtDeezerEndpoint.Text;
         }
 
         private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://developers.deezer.com/sdk/native#_main_features_and_changes");
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            new DeezerCredentialsForm().ShowDialog();
+            DeezerConfigPage_HandleCreated(sender, e);
         }
     }
 }

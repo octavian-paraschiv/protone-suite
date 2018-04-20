@@ -2308,6 +2308,24 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Redirect URL:.
+        /// </summary>
+        internal static string TXT_REDIRECTURL {
+            get {
+                return ResourceManager.GetString("TXT_REDIRECTURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the &apos;Redirect URL after authentication&apos; from your Deezer App Registration.
+        /// </summary>
+        internal static string TXT_REDIRECTURL_HINT {
+            get {
+                return ResourceManager.GetString("TXT_REDIRECTURL_HINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remaining time. 
         ///
         ///Double click to toggle elapsed time.
@@ -2336,6 +2354,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_REMOTECONTROLDEFINITION {
             get {
                 return ResourceManager.GetString("TXT_REMOTECONTROLDEFINITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request new token.
+        /// </summary>
+        internal static string TXT_REQUEST_NEW_TOKEN {
+            get {
+                return ResourceManager.GetString("TXT_REQUEST_NEW_TOKEN", resourceCulture);
             }
         }
         

@@ -81,6 +81,12 @@
     <Compile Include="Configuration\InternetConfig\DeezerConfigPage.Designer.cs">
       <DependentUpon>DeezerConfigPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\InternetConfig\DeezerCredentialsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\InternetConfig\DeezerCredentialsForm.Designer.cs">
+      <DependentUpon>DeezerCredentialsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\InternetConfig\ShoutcastConfigPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -330,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\InternetConfig\DeezerConfigPage.resx">
       <DependentUpon>DeezerConfigPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\InternetConfig\DeezerCredentialsForm.resx">
+      <DependentUpon>DeezerCredentialsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\InternetConfig\ShoutcastConfigPage.resx">
       <DependentUpon>ShoutcastConfigPage.cs</DependentUpon>

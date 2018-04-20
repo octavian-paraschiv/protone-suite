@@ -990,12 +990,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set { PersistenceProxy.SaveObject("DeezerApplicationId", value); }
         }
 
-        public static string DeezerUserId
-        {
-            get { return PersistenceProxy.ReadObject("DeezerUserId", string.Empty); }
-            set { PersistenceProxy.SaveObject("DeezerUserId", value); }
-        }
-
         public static string DeezerApiEndpoint
         {
             get { return PersistenceProxy.ReadObject("DeezerApiEndpoint", "http://api.deezer.com/"); }

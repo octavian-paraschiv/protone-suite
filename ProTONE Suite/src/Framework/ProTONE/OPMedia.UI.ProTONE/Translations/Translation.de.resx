@@ -1193,4 +1193,13 @@ To get your own credentials, please access:</value>
   <data name="TXT_DEEZER_USER_ID" xml:space="preserve">
     <value>Deezer User ID:</value>
   </data>
+  <data name="TXT_REDIRECTURL" xml:space="preserve">
+    <value>Redirect URL:</value>
+  </data>
+  <data name="TXT_REDIRECTURL_HINT" xml:space="preserve">
+    <value>Enter the 'Redirect URL after authentication' from your Deezer App Registration</value>
+  </data>
+  <data name="TXT_REQUEST_NEW_TOKEN" xml:space="preserve">
+    <value>Request new token</value>
+  </data>
 </root>
