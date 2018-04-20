@@ -60,9 +60,9 @@ namespace OPMedia.Runtime.InterProcessCommunication
 
         protected virtual void Open()
         {
-            string uri = string.Format("net.pipe://localhost/{0}/RemoteControl.svc", _appName);
+            string uri = string.Format("http://localhost/{0}/RemoteControl.svc", _appName);
 
-            var myBinding = new NetNamedPipeBinding();
+            var myBinding = new WSHttpBinding();
             var myEndpoint = new EndpointAddress(uri);
             var myChannelFactory = new ChannelFactory<IRemoteControl>(myBinding, myEndpoint);
             _proxy = myChannelFactory.CreateChannel();
@@ -162,9 +162,9 @@ namespace OPMedia.Runtime.InterProcessCommunication
 
         public void StartInternal()
         {
-            string uri = string.Format("net.pipe://localhost/{0}/RemoteControl.svc", _appName);
+            string uri = string.Format("http://localhost/{0}/RemoteControl.svc", _appName);
 
-            NetNamedPipeBinding binding = new NetNamedPipeBinding();
+            var binding = new WSHttpBinding();
 
             _remoteControl = new RemoteControlImpl();
             _remoteControl.OnSendRequest += new OnSendRequestHandler(_remoteControl_OnSendRequest);

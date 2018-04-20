@@ -120,7 +120,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         string _appName;
         int _port = 8080;
 
-        public RemoteControlHost(string appName, int port = 8080)
+        public RemoteControlHost(string appName, int port)
         {
             _appName = appName;
             _port = port;

@@ -23,9 +23,9 @@ namespace OPMedia.PersistenceService
         {
             Environment.CurrentDirectory = AppConfig.InstallationPath;
 
-            string address = "net.pipe://localhost/PersistenceService.svc";
+            string address = "http://localhost/PersistenceService.svc";
 
-            NetNamedPipeBinding binding = new NetNamedPipeBinding();
+            var binding = new WSDualHttpBinding();
             binding.MaxReceivedMessageSize = int.MaxValue;
             binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
             

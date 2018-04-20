@@ -6,14 +6,21 @@ using OPMedia.Core;
 using LiteDB;
 using OP_Logger = OPMedia.Core.Logging.Logger;
 using OPMedia.SimpleCacheService;
+using OPMedia.Core.Configuration;
+using System.IO;
 
 namespace OPMedia.PersistenceService
 {
     public class DbStore
     {
+        private static string __peristenceDbPath = @"..\\Persistence.db";
+
         static DbStore()
         {
-            using (var db = new LiteDatabase(@"Persistence.db"))
+            if (File.Exists(__peristenceDbPath) == false)
+                __peristenceDbPath = "Persistence.db";
+
+            using (var db = new LiteDatabase(__peristenceDbPath))
                 db.Shrink();
         }
 
@@ -21,7 +28,7 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                using (var db = new LiteDatabase(@"Persistence.db"))
+                using (var db = new LiteDatabase(__peristenceDbPath))
                 {
                     var obj = GetObjects<PersistedObject>(db);
                     var qry = GetQuery(persistenceId, persistenceContext);
@@ -42,7 +49,7 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                using (var db = new LiteDatabase(@"Persistence.db"))
+                using (var db = new LiteDatabase(__peristenceDbPath))
                 {
                     var obj = GetObjects<PersistedObject>(db);
                     var qry = GetQuery(persistenceId, persistenceContext);
@@ -77,7 +84,7 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                using (var db = new LiteDatabase(@"Persistence.db"))
+                using (var db = new LiteDatabase(__peristenceDbPath))
                 {
                     var obj = GetObjects<PersistedObject>(db);
                     var qry = GetQuery(persistenceId, persistenceContext);

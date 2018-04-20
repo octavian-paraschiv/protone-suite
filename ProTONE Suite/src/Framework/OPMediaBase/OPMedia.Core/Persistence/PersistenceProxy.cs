@@ -83,12 +83,12 @@ namespace OPMedia.Core
         {
             try
             {
-                var myBinding = new NetNamedPipeBinding();
+                var myBinding = new WSDualHttpBinding();
                 myBinding.MaxReceivedMessageSize = int.MaxValue;
                 myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
                 var instanceContext = new InstanceContext(this);
-                var myEndpoint = new EndpointAddress("net.pipe://localhost/PersistenceService.svc");
+                var myEndpoint = new EndpointAddress("http://localhost/PersistenceService.svc");
                 var myChannelFactory = new DuplexChannelFactory<IPersistenceService>(instanceContext, myBinding, myEndpoint);
 
                 _channel = myChannelFactory.CreateChannel();

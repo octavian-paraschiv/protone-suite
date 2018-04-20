@@ -1360,9 +1360,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 Logger.LogInfo("Opening Signal Analisys WCF Interface ...");
                 if (_wcfHost == null)
                 {
-                    string address = "net.pipe://localhost/ProTONESignalAnalisys.svc";
+                    string address = "http://localhost/ProTONESignalAnalisys.svc";
 
-                    NetNamedPipeBinding binding = new NetNamedPipeBinding();
+                    var binding = new WSHttpBinding();
                     binding.MaxReceivedMessageSize = int.MaxValue;
                     binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 

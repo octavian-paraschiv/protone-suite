@@ -125,11 +125,11 @@ namespace OPMedia.RemoteControlEmulator
 
         private void WCFOpen()
         {
-            var myBinding = new NetNamedPipeBinding();
+            var myBinding = new WSHttpBinding();
             myBinding.MaxReceivedMessageSize = int.MaxValue;
             myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
-            var myEndpoint = new EndpointAddress("net.pipe://localhost/ProTONESignalAnalisys.svc");
+            var myEndpoint = new EndpointAddress("http://localhost/ProTONESignalAnalisys.svc");
             var myChannelFactory = new ChannelFactory<ISignalAnalisys>(myBinding, myEndpoint);
             _proxy = myChannelFactory.CreateChannel();        
         }
