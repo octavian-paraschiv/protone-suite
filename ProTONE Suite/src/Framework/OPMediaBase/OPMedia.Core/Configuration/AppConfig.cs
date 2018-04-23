@@ -81,8 +81,8 @@ namespace OPMedia.Core.Configuration
         static string _skinType = string.Empty;
         static string _languageId = string.Empty;
 
-        const string DefaultDownloadUriBase = "https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-publish/master/current";
-        const string DefaultHelpUriBase = "https://raw.githubusercontent.com/octavian-paraschiv/protone-suite-docs/master/#VERSION#/";
+        const string DefaultDownloadUriBase = "http://ocpa.ro/protone/current";
+        const string DefaultHelpUriBase = "http://ocpa.ro/protone/protone-suite-docs/#VERSION#/";
 
         static AppConfig()
         {
@@ -349,7 +349,7 @@ namespace OPMedia.Core.Configuration
                 {
                     if (UseOnlineDocumentation)
                     {
-                        string val = PersistenceProxy.ReadObject("HelpUriBase", DefaultHelpUriBase);
+                        string val = DefaultHelpUriBase;
                         if (!string.IsNullOrEmpty(val))
                         {
                             Version ver = new Version(SuiteVersion.Version);
@@ -376,7 +376,7 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject("DownloadUriBase", DefaultDownloadUriBase);
+                return DefaultDownloadUriBase;
             }
         }
 

@@ -42,9 +42,16 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             _wcdReceiver = new WmCopyDataReceiver(appName);
             _wcdReceiver.DataReceived += new DataReceivedHandler(_wcdReceiver_DataReceived);
 
-            _ipcReceiver = new IPCRemoteControlHost(appName);
-            _ipcReceiver.OnSendRequest += new OnSendRequestHandler(_receiver_OnSendRequest);
-            _ipcReceiver.OnPostRequest += new OnPostRequestHandler(_receiver_OnPostRequest);
+            try
+            {
+                _ipcReceiver = new IPCRemoteControlHost(appName);
+                _ipcReceiver.OnSendRequest += new OnSendRequestHandler(_receiver_OnSendRequest);
+                _ipcReceiver.OnPostRequest += new OnPostRequestHandler(_receiver_OnPostRequest);
+            }
+            catch
+            {
+                _ipcReceiver = null;
+            }
         }
 
         protected override void DoTerminate()

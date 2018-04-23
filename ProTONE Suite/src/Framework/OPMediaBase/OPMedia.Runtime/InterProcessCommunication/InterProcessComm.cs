@@ -160,7 +160,7 @@ namespace OPMedia.Runtime.InterProcessCommunication
             StartInternal();
         }
 
-        public void StartInternal()
+        private void StartInternal()
         {
             string uri = string.Format("http://localhost/{0}/RemoteControl.svc", _appName);
 

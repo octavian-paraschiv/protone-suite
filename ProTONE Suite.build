@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<project name="ProTONE Suite" default="build" basedir=".">
+    <description>ProTONE Suite</description>
+
+    <!--<property name="debug" value="true" overwrite="false" />-->
+    <property name="msbuild.executable" value="c:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" />
+    <property name="istool.executable" value="D:\Programs\Inno Setup 5\iscc.exe" />
+    
+    <property name="root" value=".." />
+    <property name="build.dir" value="${root}\protone-suite-build" />
+    <property name="externals.dir" value="${root}\protone-suite-externals" />
+    <property name="output.dir" value="${root}\protone-suite-output" />
+    
+    <!-- GIT binary folder -->
+    <property name="git.dir" value="c:\Program Files\Git\bin\" />
+    
+    
+    <!-- FTP -->
+    <property name = "ftp.host" value = "188.213.19.151"/>
+    <property name = "ftp.port" value="21"/>
+    <property name = "ftp.user" value = "ocparo"/>
+    <property name = "ftp.password" value="Pomr3$85"/>        
+    <property name = "ftp.remote.dir" value = "/httpdocs/ProTONE/current/" />
+    <property name = "ftp.local.dir" value = "${output.dir}" />
+    
+    <!-- WinSCP-->
+    <property name = "winscp.run" value ="d:\winscp577\WinSCP.com"/>
+    
+
+    <target name="build" description="Rebuild ProTONE Suite">
+        <loadtasks assembly="D:\Kits\Tools\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
+
+        <echo message=" BUILD STARTED !!" />
+
+        <call target="cleanup" />
+        
+        <call target="ScmCheckout" />
+        
+        <call target="VersionInfoUpdate" />
+        
+        <call target="BuildVSSolution" />
+        <call target="BuildInstaller" />
+        <call target="BuildSDKInstaller" />
+
+        <call target="PostBuildResults_GIT" />
+        <call target="PostBuildResults_FTP" />
+
+        <echo message=" BUILD DONE !!" />
+
+    </target>
+
+
+    <target name="cleanup">
+        <!-- Delete folders -->
+        <echo message="Cleaning up autobuild directory ..." />
+        <delete dir="${build.dir}" failonerror="false" />
+        
+	<echo message="Cleaning up output directory ..." />
+	<delete dir="${output.dir}" failonerror="false" />
+        
+        <echo message="Source code cleanup done" />
+    </target>
+
+    <target name="ScmCheckout">
+        <!-- ReGet files from GITHUB -->
+        <echo message="Fetching source code from GITHUB ..." />
+        <exec program="${git.dir}git.exe">
+            <arg value="clone" />
+            <arg value="--recursive" />
+            <arg value="--progress" />
+            <arg value="-v" />
+            <arg value="https://github.com/octavian-paraschiv/protone-suite.git" />
+            <arg value="${build.dir}" />
+        </exec>
+        
+        <echo message="Fetching source code from GITHUB: done" />
+    </target>
+
+    <target name="VersionInfoUpdate">
+        <!-- Version info increment -->
+        <iniread property="oldversion" filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" default="3.0.0" />
+        <property name="oldversion.build" value="${string::substring(oldversion, 4, string::get-length(oldversion) - 4)}" />
+        <property name="newversion.build" value="${int::parse(oldversion.build) + 1}" />
+        <property name="newversion" value="${string::substring(oldversion, 0, 4) + newversion.build}" />
+
+        <echo message="Old version: ${oldversion}" />
+        <echo message="New version: ${newversion}" />
+
+        <loadfile file="${build.dir}\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs" property="file.contents" />
+        <property name="file.contents" value="${string::replace(file.contents, 'VERSION', newversion)}" />
+
+        <echo message="${file.contents}" file="${build.dir}\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs" />
+
+    </target>
+
+    <target name="BuildVSSolution">
+        <!-- Build solution -->
+        <echo message="Building ProTONE Suite solution ..." />
+        <exec
+            program="${msbuild.executable}"
+            verbose="true"
+            workingdir="${build.dir}\ProTONE Suite\src"
+            commandline="/p:Configuration=Debug /t:Rebuild &quot;ProTONE Suite.sln&quot; /v:normal"
+            />
+    </target>
+
+    <target name="BuildInstaller">
+        <!-- Build installation -->
+        <echo message="Building ProTONE Suite installer ..." />
+        <exec
+            program="${istool.executable}"
+            workingdir="${build.dir}\ProTONE Suite\src\Installers"
+            verbose="true">
+            <arg value=".\ProtoneSuite.iss" />
+        </exec>
+    </target>
+
+    <target name="BuildSDKInstaller">
+        <!-- Build installation -->
+        <echo message="Building OPMedia SDK installer ..." />
+        <exec
+            program="${istool.executable}"
+            workingdir="${build.dir}\ProTONE Suite\src\Installers"
+            verbose="true">
+            <arg value=".\OPMediaSDK.iss" />
+        </exec>
+    </target>
+
+    <target name="PostBuildResults_GIT">
+        <!-- Post build results -->
+        <echo message="    -> [PREP] Updating Versions_build.txt ..." />
+        <iniwrite filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" value="${newversion}" />
+        <iniwrite filename="${build.dir}\Versions_build.txt" section="OPMedia SDK" key="Version" value="${newversion}" />
+        
+         
+	<echo message="    -> [STAGE 1] Commiting build versions to GIT (Version_build.txt) ..." />
+	<exec program="${git.dir}git.exe" workingdir="${build.dir}">
+	    <arg value="commit" />
+	    <arg value="-a" />
+	    <arg value="-m" />
+	    <arg value="build_${newversion}" />
+	</exec>
+
+        <!-- NOTE: This needs to have GIT credentials cached by means of a credential helper i.e wincred -->
+        <echo message="    -> [STAGE 1] Pushing build versions to GIT (Versions_build.txt) ..." />
+        <exec program="${git.dir}git.exe" workingdir="${build.dir}">
+            <arg value="push" />
+            <arg value="--all" />
+            <arg value="--progress" />
+            <arg value="origin" />
+        </exec>
+        
+    </target>
+    
+    
+    <target name="PostBuildResults_FTP">
+    	<echo message="    -> [STAGE 3] Uploading build output to ocpa.ro FTP ..." />
+    	
+    	<copy file="${build.dir}\current\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
+    	
+    	<exec program="${winscp.run}" workingdir="${output.dir}">
+			<arg value="/command" />
+			<arg value="option batch abort" />
+			<arg value="option confirm off" />
+			<arg value="option transfer binary" />
+			<arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
+			<arg value="put *.* ${ftp.remote.dir}" />         
+			<arg value="close" />
+		<arg value="exit" />
+		
+    </exec>     
+    </target>
+
+</project>
