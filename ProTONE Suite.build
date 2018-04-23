@@ -24,7 +24,7 @@
     <property name = "ftp.local.dir" value = "${output.dir}" />
     
     <!-- WinSCP-->
-    <property name = "winscp.run" value ="d:\winscp577\WinSCP.com"/>
+    <property name = "winscp.run" value ="c:\winscp577\WinSCP.com"/>
     
 
     <target name="build" description="Rebuild ProTONE Suite">
