@@ -156,7 +156,7 @@
     <target name="PostBuildResults_FTP">
     	<echo message="    -> [STAGE 3] Uploading build output to ocpa.ro FTP ..." />
     	
-    	<copy file="${build.dir}\current\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
+    	<copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
     	
     	<exec program="${winscp.run}" workingdir="${output.dir}">
 			<arg value="/command" />
