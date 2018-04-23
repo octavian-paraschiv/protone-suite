@@ -3,8 +3,8 @@
     <description>ProTONE Suite</description>
 
     <!--<property name="debug" value="true" overwrite="false" />-->
-    <property name="msbuild.executable" value="c:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" />
-    <property name="istool.executable" value="D:\Programs\Inno Setup 5\iscc.exe" />
+    <property name="msbuild.executable" value="C:\Program Files\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe" />
+    <property name="istool.executable" value="C:\Program Files\Inno Setup 5\iscc.exe" />
     
     <property name="root" value=".." />
     <property name="build.dir" value="${root}\protone-suite-build" />
@@ -28,20 +28,16 @@
     
 
     <target name="build" description="Rebuild ProTONE Suite">
-        <loadtasks assembly="D:\Kits\Tools\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
+        <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
 
         <echo message=" BUILD STARTED !!" />
 
         <call target="cleanup" />
-        
         <call target="ScmCheckout" />
-        
         <call target="VersionInfoUpdate" />
-        
         <call target="BuildVSSolution" />
         <call target="BuildInstaller" />
         <call target="BuildSDKInstaller" />
-
         <call target="PostBuildResults_GIT" />
         <call target="PostBuildResults_FTP" />
 
