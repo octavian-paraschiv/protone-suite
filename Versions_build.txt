@@ -1,4 +1,4 @@
 [ProTONE Suite]
-Version=3.0.44
+Version=3.0.45
 [OPMedia SDK]
-Version=3.0.44
+Version=3.0.45
