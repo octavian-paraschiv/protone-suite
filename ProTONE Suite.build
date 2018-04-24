@@ -43,7 +43,6 @@
         <call target="VersionInfoUpdate" />
         <call target="BuildVSSolution" />
         <call target="BuildInstaller" />
-        <call target="BuildSDKInstaller" />
         <call target="PostBuildResults_GIT" />
         <call target="PostBuildResults_FTP" />
 
@@ -114,17 +113,6 @@
             workingdir="${build.dir}\ProTONE Suite\src\Installers"
             verbose="true">
             <arg value=".\ProtoneSuite.iss" />
-        </exec>
-    </target>
-
-    <target name="BuildSDKInstaller">
-        <!-- Build installation -->
-        <echo message="Building OPMedia SDK installer ..." />
-        <exec
-            program="${istool.executable}"
-            workingdir="${build.dir}\ProTONE Suite\src\Installers"
-            verbose="true">
-            <arg value=".\OPMediaSDK.iss" />
         </exec>
     </target>
 
