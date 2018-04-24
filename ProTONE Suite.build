@@ -14,13 +14,17 @@
     <!-- GIT binary folder -->
     <property name="git.dir" value="c:\Program Files\Git\bin\" />
     
+    <!-- Build global variables -->
+    <property name="build.globalvars.dir" value="C:\GIT" />
+    <property name="build.protone.vars" value="${build.globalvars.dir}\Protone_Build.ini" />
+    
     
     <!-- FTP -->
-    <property name = "ftp.host" value = "188.213.19.151"/>
-    <property name = "ftp.port" value="21"/>
-    <property name = "ftp.user" value = "ocparo"/>
-    <property name = "ftp.password" value="Pomr3$85"/>        
-    <property name = "ftp.remote.dir" value = "/httpdocs/ProTONE/current/" />
+    <iniread property="ftp.host" filename="${build.protone.vars}" section="FTP" key="Host" default="" />
+    <iniread property="ftp.port" filename="${build.protone.vars}" section="FTP" key="Port" default="21" />
+    <iniread property="ftp.user" filename="${build.protone.vars}" section="FTP" key="User" default="" />
+    <iniread property="ftp.password" filename="${build.protone.vars}" section="FTP" key="Password" default="" />
+    <iniread property="ftp.remote.dir" filename="${build.protone.vars}" section="FTP" key="RemoteDir" default="" />
     <property name = "ftp.local.dir" value = "${output.dir}" />
     
     <!-- WinSCP-->
