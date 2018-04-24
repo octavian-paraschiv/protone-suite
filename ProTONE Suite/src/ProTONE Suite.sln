@@ -20,7 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EE48AD0-EB1A-46F0-BF87-2587913815BF}"
 	ProjectSection(SolutionItems) = preProject
 		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
-		..\..\..\protone-suite-publish\ProTONE Suite.build = ..\..\..\protone-suite-publish\ProTONE Suite.build
+		..\..\ProTONE Suite.build = ..\..\ProTONE Suite.build
 		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
 		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
 	EndProjectSection
@@ -309,7 +309,7 @@ Global
 		{41D162BD-95F4-4348-B353-93BA1C3923B4} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 		RESX_NeutralResourcesLanguage = en-GB
+		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 	EndGlobalSection
 EndGlobal
