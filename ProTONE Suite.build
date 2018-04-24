@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <project name="ProTONE Suite" default="build" basedir=".">
     <description>ProTONE Suite</description>
+    
+    <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
+
 
     <!--<property name="debug" value="true" overwrite="false" />-->
     <property name="msbuild.executable" value="C:\Program Files\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe" />
@@ -32,7 +35,6 @@
     
 
     <target name="build" description="Rebuild ProTONE Suite">
-        <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
 
         <echo message=" BUILD STARTED !!" />
 
