@@ -31,25 +31,26 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public List<Track> LoadTracks()
         {
+            Tracks = new List<Track>();
+
             try
             {
                 string response = CurrentRuntime.ExecuteHttpGet(string.Format("/album/{0}/tracks", Id));
-
-                var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
-
-                Tracks = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());
-
-                foreach (Track track in Tracks)
+                if (string.IsNullOrEmpty(response) == false)
                 {
-                    track.CurrentRuntime = CurrentRuntime;
-                    track.Album = this;
-                }
+                    var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
+                    Tracks = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());
+
+                    foreach (Track track in Tracks)
+                    {
+                        track.CurrentRuntime = CurrentRuntime;
+                        track.Album = this;
+                    }
+                }
             }
-            catch(Exception ex)
+            catch
             {
-                Logger.LogException(ex);
-                Tracks = new List<Track>();
             }
 
             TracksCount = Tracks.Count;

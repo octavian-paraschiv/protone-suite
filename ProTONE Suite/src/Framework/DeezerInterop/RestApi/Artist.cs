@@ -49,19 +49,23 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public List<Album>  LoadAlbums()
         {
-            string responseContent = CurrentRuntime.ExecuteHttpGet(string.Format("/artist/{0}/albums", Id));
+            Albums = new List<Album>();
 
-            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseContent);
-
-            Albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
-
-            foreach (Album album in Albums)
+            string response = CurrentRuntime.ExecuteHttpGet(string.Format("/artist/{0}/albums", Id));
+            if (string.IsNullOrEmpty(response) == false)
             {
-                album.CurrentRuntime = CurrentRuntime;
-                album.Artist = this;
-            }
+                var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
-            AlbumsCount = Albums.Count;
+                Albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
+
+                foreach (Album album in Albums)
+                {
+                    album.CurrentRuntime = CurrentRuntime;
+                    album.Artist = this;
+                }
+
+                AlbumsCount = Albums.Count;
+            }
 
             return Albums;
         }

@@ -58,17 +58,10 @@ namespace OPMedia.DeezerInterop.RestApi
             _applicationCredentials = new Tuple<string, string>(applicationId, applicationSecretKey);
         }
 
-        public CountryInfos GetCountryInfos()
-        {
-            string response = _webClient.DownloadString(string.Format("{0}/infos", _apiEndpoint));
-            CheckResponseForErrors(response);
-            return JsonConvert.DeserializeObject<CountryInfos>(response);
-        }
-
         internal void CheckResponseForErrors(string response)
         {
             if (string.IsNullOrEmpty(response))
-                    throw new DeezerRuntimeException("empty response from server");
+                    throw new WebException("Empty response received from server.");
 
             var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
             if (jsonResult.ContainsKey("error"))
@@ -81,32 +74,63 @@ namespace OPMedia.DeezerInterop.RestApi
 
         internal string ExecuteHttpGet(string method)
         {
-            string response = _webClient.DownloadString(_apiEndpoint + method);
-            CheckResponseForErrors(response);
+            string response = null;
+            string url = _apiEndpoint + method;
+
+            try
+            {
+                response = _webClient.DownloadString(url);
+                CheckResponseForErrors(response);
+            }
+            catch (DeezerRuntimeException drex)
+            {
+                // Don't do anything ... mostly this would indicate that the requested objects were not found
+                // on the Deezer server. This would be part of normal app operation so no need to log them.
+                string msg = drex.Message;
+                int t = 0;
+            }
+            catch (WebException wex)
+            {
+                // This catches web-related errors (Not Found, Unaouthorized, timeout ... etc ...)
+                // Since these either indicate problems with the server or an internal app bug, we should log them
+                Logger.LogWarning($"HTTP GET error: URL={url} => {wex.Message}");
+            }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
             return response;
         }
 
         public Artist GetArtist(UInt64 artistId)
         {
+            Artist artist = null;
+
             string response = this.ExecuteHttpGet(string.Format("/artist/{0}", artistId));
-
-            Artist artist = JsonConvert.DeserializeObject<Artist>(response);
-
-            artist.CurrentRuntime = this;
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                artist = JsonConvert.DeserializeObject<Artist>(response);
+                artist.CurrentRuntime = this;
+            }
 
             return artist;
         }
 
         public Playlist GetPlaylist(UInt64 playlistId)
         {
+            Playlist playlist = null;
+
             string response = this.ExecuteHttpGet(string.Format("/playlist/{0}", playlistId));
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                // There an issue with the API. We only get the first 400 tracks from the playlist
+                // Working on that internally (because the /playlist/:id/tracks only has pages of 50 tracks...
+                playlist = JsonConvert.DeserializeObject<Playlist>(response);
 
-            // There an issue with the API. We only get the first 400 tracks from the playlist
-            // Working on that internally (because the /playlist/:id/tracks only has pages of 50 tracks...
-            Playlist playlist = JsonConvert.DeserializeObject<Playlist>(response);
-
-            playlist.CurrentRuntime = this;
-            playlist.LoadTracks();
+                playlist.CurrentRuntime = this;
+                playlist.LoadTracks();
+            }
 
             return playlist;
         }
@@ -119,30 +143,32 @@ namespace OPMedia.DeezerInterop.RestApi
                 return tracks;
 
             string response = this.ExecuteHttpGet(string.Format("/search?limit=10000&q={0}", query));
-            
-            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
-
-            List<Track> tracksChunk = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());
-            if (tracksChunk != null && tracksChunk.Count > 0)
-                tracks.AddRange(tracksChunk);
-
-            var albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
-            if (albums != null)
+            if (string.IsNullOrEmpty(response) == false)
             {
-                foreach (Album album in albums)
+                var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
+
+                List<Track> tracksChunk = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());
+                if (tracksChunk != null && tracksChunk.Count > 0)
+                    tracks.AddRange(tracksChunk);
+
+                var albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
+                if (albums != null)
                 {
-                    if (abortEvent.WaitOne(5))
-                        break;
+                    foreach (Album album in albums)
+                    {
+                        if (abortEvent.WaitOne(5))
+                            break;
 
-                    album.CurrentRuntime = this;
+                        album.CurrentRuntime = this;
 
-                    tracksChunk = album.LoadTracks();
+                        tracksChunk = album.LoadTracks();
 
-                    if (tracksChunk != null && tracksChunk.Count > 0)
-                        tracks.AddRange(tracksChunk);
+                        if (tracksChunk != null && tracksChunk.Count > 0)
+                            tracks.AddRange(tracksChunk);
+                    }
                 }
             }
-            
+
             return tracks;
         }
 
@@ -155,12 +181,14 @@ namespace OPMedia.DeezerInterop.RestApi
                 return playlists;
 
             string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}", accessToken));
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
-            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
-
-            List<Playlist> playlistsChunk = JsonConvert.DeserializeObject<List<Playlist>>(jsonResult["data"].ToString());
-            if (playlistsChunk != null && playlistsChunk.Count > 0)
-                playlists.AddRange(playlistsChunk);
+                List<Playlist> playlistsChunk = JsonConvert.DeserializeObject<List<Playlist>>(jsonResult["data"].ToString());
+                if (playlistsChunk != null && playlistsChunk.Count > 0)
+                    playlists.AddRange(playlistsChunk);
+            }
 
             return playlists;
         }
