@@ -32,6 +32,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         Removed,
         Swapped,
         ActiveChanged,
+        Shuffled,
     }
 
     public delegate void PlaylistUpdatedEventHandler(int item1, int item2, UpdateType updateType);
@@ -78,12 +79,11 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         { 
             get 
             { 
+                // When playing in loop, the playlist is never at the end
                 if (ProTONEConfig.LoopPlay)
-                    return false; // If playing in loop, it'n 
+                    return false; // If playing in loop, 
 
-                return ProTONEConfig.ShufflePlaylist ? 
-                    (randomPos == 0 && playIndex == LastIndex) :
-                    (Count > 0 && playIndex == Count - 1); 
+                return (Count > 0 && playIndex == Count - 1); 
             } 
         }
 
@@ -99,79 +99,20 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         #region Methods
 
         #region Shuffle playlist routine
-        List<int> randomIndexes = new List<int>();
-        int randomPos = 0;
 
-
-        public void SetupRandomSequence(int firstIndex)
+        public void ShufflePlaylist()
         {
-            if (ProTONEConfig.ShufflePlaylist)
+            Random rnd = new Random();
+
+            for (int i = 0; i < this.Count; i++)
             {
-                Random rnd = new Random();
-                randomIndexes.Clear();
-                randomPos = 0;
-
-                if (firstIndex >= 0)
-                {
-                    randomIndexes.Add(firstIndex);
-                }
-
-                for (; randomIndexes.Count < this.Count; )
-                {
-                    bool added = false;
-                    for (int j = 0; j < 4 * this.Count; j++)
-                    {
-                        int x = rnd.Next(this.Count);
-                        if (!randomIndexes.Contains(x))
-                        {
-                            randomIndexes.Add(x);
-                            added = true;
-                            break;
-                        }
-                    }
-
-                    if (!added)
-                    {
-                        randomIndexes.Add(rnd.Next(this.Count));
-                    }
-                }
-
-                playIndex = FirstIndex;
+                int idx1 = i;
+                int idx2 = rnd.Next(i, this.Count);
+                SwapItems(idx1, idx2, false);
             }
-        }
 
-        public int FirstIndex
-        {
-            get
-            {
-                try
-                {
-                    return (ProTONEConfig.ShufflePlaylist) ?
-                        randomIndexes[0] : 0;
-                }
-                catch
-                {
-                    return -1;
-                }
-            }
+            EventRaiser(-1, -1, UpdateType.Shuffled);
         }
-
-        public int LastIndex
-        {
-            get
-            {
-                try
-                {
-                    return (ProTONEConfig.ShufflePlaylist) ?
-                        randomIndexes[randomIndexes.Count - 1] : Count - 1;
-                }
-                catch
-                {
-                    return -1;
-                }
-            }
-        }
-
         #endregion
 
 
@@ -196,7 +137,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 playIndex = i;
             }
 
-            SetupRandomSequence(i);
             return (playIndex == i);
         }
 
@@ -209,40 +149,20 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             playIndex = 0;
 
             MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
-            SetupRandomSequence(-1);
         }
 
         public virtual bool MoveNext()
         {
-            if (ProTONEConfig.ShufflePlaylist)
+            if (Count > 0 && playIndex < Count - 1)
             {
-                if (randomIndexes.Count > 0 && randomPos < randomIndexes.Count - 1)
-                {
-                    randomPos++;
-                    playIndex = randomIndexes[randomPos];
-                    return true;
-                }
-
-                if (randomIndexes.Count > 0 && randomPos == randomIndexes.Count - 1 && ProTONEConfig.LoopPlay)
-                {
-                    randomPos = 0;
-                    playIndex = FirstIndex;
-                    return true;
-                }
+                playIndex++;
+                return true;
             }
-            else
-            {
-                if (Count > 0 && playIndex < Count - 1)
-                {
-                    playIndex++;
-                    return true;
-                }
 
-                if (Count > 0 && playIndex == Count - 1 && ProTONEConfig.LoopPlay)
-                {
-                    playIndex = FirstIndex;
-                    return true;
-                }
+            if (Count > 0 && playIndex == Count - 1 && ProTONEConfig.LoopPlay)
+            {
+                playIndex = 0;
+                return true;
             }
 
             return false;
@@ -250,36 +170,16 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         public virtual bool MovePrevious()
         {
-            
-            if (ProTONEConfig.ShufflePlaylist)
+            if (Count > 0 && playIndex > 0)
             {
-                if (randomIndexes.Count > 0 && randomPos > 0)
-                {
-                    randomPos--;
-                    playIndex = randomIndexes[randomPos];
-                    return true;
-                }
-
-                if (randomIndexes.Count > 0 && randomPos == 0 && ProTONEConfig.LoopPlay)
-                {
-                    randomPos = randomIndexes.Count - 1;
-                    playIndex = LastIndex;
-                    return true;
-                }
+                playIndex--;
+                return true;
             }
-            else
-            {
-                if (Count > 0 && playIndex > 0)
-                {
-                    playIndex--;
-                    return true;
-                }
 
-                if (Count > 0 && playIndex == 0 && ProTONEConfig.LoopPlay)
-                {
-                    playIndex = LastIndex;
-                    return true;
-                }
+            if (Count > 0 && playIndex == 0 && ProTONEConfig.LoopPlay)
+            {
+                playIndex = Count - 1;
+                return true;
             }
 
             return false;
@@ -290,14 +190,13 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             if (Count > 0 && item < Count && item >= 0)
             {
                 playIndex = item;
-                SetupRandomSequence(item);
                 return true;
             }
 
             return false;
         }
 
-        public virtual bool SwapItems(int item1, int item2)
+        public virtual bool SwapItems(int item1, int item2, bool raiseSwapEvent = true)
         {
             if (item1 >= 0 && item2 >= 0 &&
                 item1 != item2 && item1 < Count &&
@@ -322,8 +221,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     }
                 }
 
-                EventRaiser(item1, item2, UpdateType.Swapped);
-                //SetupRandomSequence(-1);
+                if (raiseSwapEvent)
+                    EventRaiser(item1, item2, UpdateType.Swapped);
 
                 return true;
             }
@@ -372,9 +271,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 else if (omi is DeezerTrackItem)
                     Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
                    
-
                 EventRaiser(Count - 1, -1, UpdateType.Added);
-                SetupRandomSequence(-1);
             }
             catch (Exception ex)
             {
@@ -427,7 +324,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 }
 
                 EventRaiser(Count - 1, -1, UpdateType.Added);
-                SetupRandomSequence(-1);
             }
             catch (Exception ex)
             {
@@ -443,7 +339,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             RemoveAt(item);
             EventRaiser(item, -1, UpdateType.Removed);
-            SetupRandomSequence(-1);
         }
 
         public virtual void RemoveItems(IEnumerable<PlaylistItem> items)

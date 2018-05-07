@@ -91,8 +91,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 OPMToolStripMenuItem item = new OPMToolStripMenuItem(plItem.DisplayName);
                 item.Tag = plItem;
                 item.Click += clickHandler;
-                item.Checked = _pnlPlaylist.IsActiveItem(plItem);
-                menu.AddSingleEntry(item);
+                
+                int idx = menu.AddSingleEntry(item);
+                item.Checked = (idx == _pnlPlaylist.PlayIndex);
+
 
                 menuToAlter = new MenuWrapper<OPMToolStripMenuItem>(item) as MenuWrapper<T>;
             }

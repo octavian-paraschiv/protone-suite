@@ -158,7 +158,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             tsmLoopPlay.Checked = ProTONEConfig.LoopPlay;
             tsmPlaylistEnd.Checked = SystemScheduler.PlaylistEventEnabled;
-            tsmToggleShuffle.Checked = ProTONEConfig.ShufflePlaylist;
             tsmPlayPause.InactiveImage = Resources.btnPlay;
             tsmStop.InactiveImage = Resources.btnStop;
             tsmNext.InactiveImage = Resources.btnNext;

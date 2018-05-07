@@ -672,18 +672,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
-        public static bool ShufflePlaylist
-        {
-            get
-            {
-                return PersistenceProxy.ReadObject(true, "ShufflePlaylist", false);
-            }
-
-            set
-            {
-                PersistenceProxy.SaveObject(true, "ShufflePlaylist", value);
-            }
-        }
 
         public static int PlaylistEventHandler
         {

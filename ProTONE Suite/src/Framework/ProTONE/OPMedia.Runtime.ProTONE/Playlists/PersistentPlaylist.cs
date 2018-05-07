@@ -5,6 +5,7 @@ using OPMedia.Runtime.ProTONE.Playlists;
 using System.IO;
 using System.Windows.Forms;
 using OPMedia.Core;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -41,6 +42,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             else
             {
+                Logger.LogTrace("PersistentPlaylist::Save called to persist current playlist ...");
                 string persistedPlaylist = playlist.SaveM3UPlaylistAsString();
                 PersistenceProxy.SaveObject(true, "PersistentPlaylist", persistedPlaylist);
             }

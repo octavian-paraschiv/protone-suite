@@ -55,9 +55,9 @@ namespace OPMedia.UI.Menus
             }
         }
 
-        public void AddSingleEntry(ToolStripItem tsi)
+        public int AddSingleEntry(ToolStripItem tsi)
         {
-            MenuItems.Add(tsi);
+            return MenuItems.Add(tsi);
         }
 
         public void InsertSingleEntry(int index, ToolStripItem tsi)

@@ -436,9 +436,6 @@ namespace OPMedia.ProTONE
                 {
                     switch((OPMShortcut)tsi.Tag)
                     {
-                        case OPMShortcut.CmdToggleShuffle:
-                            (tsi as OPMToolStripMenuItem).Checked = ProTONEConfig.ShufflePlaylist;
-                            break;
                         case OPMShortcut.CmdPlaylistEnd:
                             (tsi as OPMToolStripMenuItem).Checked = SystemScheduler.PlaylistEventEnabled;
                             break;

@@ -319,7 +319,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 switch(args.cmd)
                 {
                     case OPMShortcut.CmdPlaylistEnd:
-                    case OPMShortcut.CmdToggleShuffle:
                     case OPMShortcut.CmdLoopPlay:
                         dispatchCmd = true;
                         break;

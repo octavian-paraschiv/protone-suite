@@ -57,8 +57,18 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public event TotalTimeChangedHandler TotalTimeChanged = null;
         public event SelectedItemChangedHandler SelectedItemChanged = null;
 
+        public System.Windows.Forms.Timer _tmrSavePlaylist = null;
+
         public bool IsPlaylistAtEnd
         { get { return playlist.IsAtEnd; } }
+
+        public int PlayIndex
+        {
+            get
+            {
+                return playlist.PlayIndex;
+            }
+        }
 
         private bool _compactMode = false;
         public bool CompactMode
@@ -102,6 +112,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             InitializeComponent();
 
+            _tmrSavePlaylist = new System.Windows.Forms.Timer();
+            _tmrSavePlaylist.Enabled = false;
+            _tmrSavePlaylist.Interval = 500;
+            _tmrSavePlaylist.Tick += _tmrSavePlaylist_Tick;
+
             _ttm = new OPMToolTipManager(lvPlaylist);
 
             ThemeManager.SetFont(lvPlaylist, FontSizes.Normal);
@@ -111,8 +126,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             lvPlaylist.ItemMouseHover += new ListViewItemMouseHoverEventHandler(lvPlaylist_ItemMouseHover);
             
-            playlist.PlaylistUpdated += 
-                new PlaylistUpdatedEventHandler(playlist_PlaylistUpdated);
+            playlist.PlaylistUpdated += new PlaylistUpdatedEventHandler(playlist_PlaylistUpdated);
 
             this.HandleDestroyed += new EventHandler(PlaylistPanel_HandleDestroyed);
 
@@ -184,7 +198,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     plItem.MediaFileInfo.Rebuild(true);
                 }
 
-                bool isActive = (plItem != null && IsActiveItem(plItem));
                 if (plItem != null)
                 {
                     lvi.SubItems[colFile.Index].Text = plItem.DisplayName;
@@ -197,6 +210,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
                 {
+                    bool isActive = (lvi.Index == playlist.PlayIndex);
                     lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
                     lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
                 }
@@ -215,8 +229,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (plItem != null)
             {
-                string renderFile = MediaRenderer.DefaultInstance.GetRenderFile();
-                bool isActiveItem = string.Compare(renderFile, plItem.Path, true) == 0;
+                bool isActive = (lvi.Index == playlist.PlayIndex);
 
                 if (plItem.IsVideo)
                 {
@@ -236,7 +249,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE");
                     }
                 }
-                else if (isActiveItem)
+                else if (isActive)
                 {
                     Image img = null;
                     switch (MediaRenderer.DefaultInstance.FilterState)
@@ -261,7 +274,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     imgMisc = null;
                 }
 
-                if (isActiveItem)
+                if (isActive)
                 {
                     _prevActiveItem = plItem.Path;
                     retVal = string.Compare(_prevActiveItem, plItem.Path, true) == 0;
@@ -384,7 +397,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (playlist.Count > 0)
             {
-                return playlist[playlist.FirstIndex].Path;
+                return playlist[0].Path;
             }
 
             return string.Empty;
@@ -659,49 +672,84 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void playlist_PlaylistUpdated(int item1, int item2, UpdateType updateType)
         {
-            switch (updateType)
+            if (_compactMode)
+                return;
+
+            try
             {
-                case UpdateType.Added:
-                    {
-                        PlaylistItem plItem = playlist[item1];
-
-                        ListViewItem item = new ListViewItem(new string[] { "", "", "", "", "" });
-                        lvPlaylist.Items.Add(item);
-                        SetItemRelation(item, plItem);
-                    }
-                    break;
-
-                case UpdateType.Removed:
-                    if (item1 >= 0 && item1 < lvPlaylist.Items.Count)
-                    {
-                        lvPlaylist.Items.RemoveAt(item1);
-                        if (item1 < lvPlaylist.Items.Count)
+                switch (updateType)
+                {
+                    case UpdateType.Added:
                         {
-                            lvPlaylist.Items[item1].Selected = true;
+                            PlaylistItem plItem = playlist[item1];
+
+                            ListViewItem item = new ListViewItem(new string[] { "", "", "", "", "" });
+                            lvPlaylist.Items.Add(item);
+                            SetItemRelation(item, plItem);
                         }
-                    }
-                    break;
+                        break;
 
-                case UpdateType.Swapped:
-                    if (item1 >= 0 && item1 < lvPlaylist.Items.Count &&
-                        item2 >= 0 && item2 < lvPlaylist.Items.Count)
-                    {
-                        ListViewItem lvItem1 = lvPlaylist.Items[item1];
-                        ListViewItem lvItem2 = lvPlaylist.Items[item2];
+                    case UpdateType.Removed:
+                        if (item1 >= 0 && item1 < lvPlaylist.Items.Count)
+                        {
+                            lvPlaylist.Items.RemoveAt(item1);
+                            if (item1 < lvPlaylist.Items.Count)
+                            {
+                                lvPlaylist.Items[item1].Selected = true;
+                            }
+                        }
+                        break;
 
-                        PlaylistItem plItem1 = lvItem1.Tag as PlaylistItem;
-                        PlaylistItem plItem2 = lvItem2.Tag as PlaylistItem;
+                    case UpdateType.Swapped:
+                        if (item1 >= 0 && item1 < lvPlaylist.Items.Count &&
+                            item2 >= 0 && item2 < lvPlaylist.Items.Count)
+                        {
+                            ListViewItem lvItem1 = lvPlaylist.Items[item1];
+                            ListViewItem lvItem2 = lvPlaylist.Items[item2];
 
-                        SetItemRelation(lvItem1, plItem2);
-                        SetItemRelation(lvItem2, plItem1);
+                            PlaylistItem plItem1 = lvItem1.Tag as PlaylistItem;
+                            PlaylistItem plItem2 = lvItem2.Tag as PlaylistItem;
 
-                        lvItem1.Selected = false;
-                        lvItem2.Selected = true;
-                    }
-                    break;
+                            SetItemRelation(lvItem1, plItem2);
+                            SetItemRelation(lvItem2, plItem1);
+
+                            lvItem1.Selected = false;
+                            lvItem2.Selected = true;
+                        }
+                        break;
+
+                    case UpdateType.Shuffled:
+                        lvPlaylist.Items.Clear();
+                        foreach (PlaylistItem plItem in playlist)
+                        {
+                            ListViewItem item = new ListViewItem(new string[] { "", "", "", "", "" });
+                            lvPlaylist.Items.Add(item);
+                            SetItemRelation(item, plItem);
+                        }
+                        break;
+                }
+
+                UpdateTotalTime(playlist.TotalPlaylistTime);
+
+                // This will toggle a delayed save operation for the playlist.
+                // If events are coming in fast this guarantees that the save operation will only be done once.
+                _tmrSavePlaylist.Stop();
+                _tmrSavePlaylist.Start();
             }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
 
-            UpdateTotalTime(playlist.TotalPlaylistTime);
+        private void _tmrSavePlaylist_Tick(object sender, EventArgs e)
+        {
+            _tmrSavePlaylist.Stop();
+
+            if (_compactMode)
+                return;
+
+            PersistentPlaylist.Save(playlist);
         }
 
         private void SetItemRelation(ListViewItem lvItem, PlaylistItem plItem)
@@ -712,7 +760,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 lvItem.SubItems[colFile.Index].Text = plItem.DisplayName;
 
                 TimeSpan duration = plItem.Duration;
-                bool isActive = IsActiveItem(plItem);
+                bool isActive = (lvItem.Index == playlist.PlayIndex);
 
                 if (duration.TotalMilliseconds == 0 && isActive)
                 {
@@ -742,6 +790,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImageEx(false), null);
                 UpdateMiscIcon(lvItem);
+
+                foreach (ListViewItem.ListViewSubItem lvsi in lvItem.SubItems)
+                {
+                    lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
+                    lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
+                }
             }
         }
 
@@ -840,9 +894,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case OPMShortcut.CmdToggleShuffle:
-                    ProTONEConfig.ShufflePlaylist ^= true;
-                    
-                    playlist.SetupRandomSequence(playlist.PlayIndex);
+                    playlist.ShufflePlaylist();
                     args.Handled = true;
                     refreshButtonState = true;
                     break;
@@ -907,10 +959,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             return playlist.MoveToItem(plItem);
         }
 
-        internal bool IsActiveItem(PlaylistItem plItem)
-        {
-            return playlist.ActivePlaylistItem == plItem;
-        }
+        //internal bool IsActiveItem(PlaylistItem plItem)
+        //{
+        //    string renderFile = MediaRenderer.DefaultInstance.GetRenderFile();
+        //    bool isActive = string.Compare(renderFile, plItem.Path, true) == 0;
+
+        //    return isActive;
+        //}
 
         private void lvPlaylist_MouseClick(object sender, MouseEventArgs e)
         {
