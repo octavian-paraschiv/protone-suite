@@ -67,7 +67,19 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             bool newWindow = chkNewBrowser.Checked;
 
-            wbDeezer.Navigate(url, newWindow);
+            if (newWindow)
+                Process.Start(url);
+            else
+            {
+                try
+                {
+                    wbDeezer.Navigate(url);
+                }
+                catch
+                {
+                    Process.Start(url);
+                }
+            }
         }
     }
 }
