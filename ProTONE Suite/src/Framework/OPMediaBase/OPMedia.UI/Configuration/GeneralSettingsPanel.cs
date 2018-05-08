@@ -19,7 +19,7 @@ using System.Diagnostics;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Utilities;
 using OPMedia.UI.Generic;
-
+using OPMedia.Core.InstanceManagement;
 
 namespace OPMedia.UI.Configuration
 {
@@ -42,7 +42,7 @@ namespace OPMedia.UI.Configuration
             this.Title= "TXT_S_GENERALSETTINGS";
             InitializeComponent();
 
-            bool allowGUISetup = AppConfig.AllowRealtimeGUISetup;
+            bool allowGUISetup = OpMediaApplication.AllowRealTimeGUIUpdate;
 
             #region Languages
 

@@ -51,7 +51,7 @@ namespace OPMedia.Services.RCCService
 
         protected override void OnStart(string[] args)
         {
-            LoggedApplication.Start(this.ServiceName);
+            LoggedApplication.Start(this.ServiceName, false);
             Logger.LogInfo("Service preparing to start ...");
 
             try

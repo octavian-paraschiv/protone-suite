@@ -25,6 +25,8 @@ using System.Xml.Linq;
 using System.Linq;
 using OPMedia.UI.Controls.ThemedScrollBars;
 using System.Threading;
+using System.Diagnostics;
+using OPMedia.Core.InstanceManagement;
 
 #endregion
 
@@ -314,7 +316,7 @@ namespace OPMedia.UI.Themes
         { 
             get 
             {
-                string currentTheme = AppConfig.AllowRealtimeGUISetup ? AppConfig.SkinType : "Black";
+                string currentTheme = AppConfig.SkinType;
                 return ThemeElement("ResourcesFolder", currentTheme); 
             } 
         }
@@ -521,8 +523,9 @@ namespace OPMedia.UI.Themes
                 RecreateFonts();
                 SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
             }
-            catch
+            catch(Exception ex)
             {
+                Logger.LogException(ex);
             }
         }
 
@@ -633,7 +636,7 @@ namespace OPMedia.UI.Themes
 
         static void OnFileChanged(object sender, FileSystemEventArgs e)
         {
-            if (AppConfig.AllowRealtimeGUISetup)
+            if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
                 string themeFile = Path.Combine(AppConfig.InstallationPath, "Themes\\Themes.thm");
                 if (e.ChangeType == WatcherChangeTypes.Changed && e.FullPath == themeFile)
@@ -726,20 +729,18 @@ namespace OPMedia.UI.Themes
             return Color.Empty;
         }
 
-        static string _previousTheme = "Black";
+        static string _previousTheme = AppConfig.UnconfiguredThemeName;
 
         private static string ThemeElement(string elementName, string defaultValue = null)
         {
             lock (_loadThemeLock)
             {
-                string currentTheme = AppConfig.AllowRealtimeGUISetup ? AppConfig.SkinType : "Black";
+                string currentTheme = AppConfig.SkinType;
+
                 string elementValue = defaultValue;
 
                 if (_previousTheme != currentTheme)
-                {
                     _previousTheme = currentTheme;
-                    //RecreateFonts();
-                }
 
                 if (_allThemesElements == null)
                     _allThemesElements = new Dictionary<string, Dictionary<string, string>>();
@@ -747,6 +748,10 @@ namespace OPMedia.UI.Themes
                 if (string.IsNullOrEmpty(currentTheme) || _allThemesElements.ContainsKey(currentTheme) == false)
                 {
                     currentTheme = _defaultTheme;
+
+                    if (string.IsNullOrEmpty(currentTheme))
+                        currentTheme = AppConfig.UnconfiguredThemeName;
+
                     AppConfig.SkinType = _defaultTheme;
                 }
 

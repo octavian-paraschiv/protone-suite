@@ -55,7 +55,7 @@ namespace OPMedia.ProTONE
                 {
                     try
                     {
-                        RemoteControllableApplication.Start(ProTONEConstants.PlayerName);
+                        RemoteControllableApplication.Start(ProTONEConstants.PlayerName, true);
 
                         ProcessCommandLine(false);
 

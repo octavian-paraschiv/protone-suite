@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using OPMedia.Core;
 using OPMedia.Core.Utilities;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.InstanceManagement;
 #endregion
 
 namespace OPMedia.Core.TranslationSupport
@@ -183,7 +184,7 @@ namespace OPMedia.Core.TranslationSupport
         /// <param name="languageId">The language id.</param>
         public static void SetInterfaceLanguage(string languageId)
         {
-            if (AppConfig.AllowRealtimeGUISetup == false ||
+            if (OpMediaApplication.AllowRealTimeGUIUpdate == false ||
                 string.IsNullOrEmpty(languageId))
             {
                 languageId = "en";

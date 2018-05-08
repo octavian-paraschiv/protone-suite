@@ -13,19 +13,33 @@ namespace OPMedia.Core.InstanceManagement
     {
         protected static OpMediaApplication appInstance = null;
 
-        protected string appName;
+        protected string _appName;
+        protected bool _allowRealTimeGUIUpdate = false;
+
+        public static bool AllowRealTimeGUIUpdate
+        {
+            get
+            {
+                if (appInstance == null)
+                    return false;
+
+                return appInstance._allowRealTimeGUIUpdate;
+            }
+        }
 
         protected OpMediaApplication()
         {
         }
 
-        public void Start(string appName)
+        protected void DoStart(string appName, bool allowRealTimeGUIUpdate)
         {
-            this.appName = appName;
-            DoInitialize(appName);
+            _appName = appName;
+            _allowRealTimeGUIUpdate = allowRealTimeGUIUpdate;
+
+            DoInitialize();
         }
 
-        public void Stop()
+        protected void DoStop()
         {
             DoTerminate();
         }
@@ -41,7 +55,7 @@ namespace OPMedia.Core.InstanceManagement
             Process.GetCurrentProcess().Kill();
         }
 
-        protected abstract void DoInitialize(string appName);
+        protected abstract void DoInitialize();
         protected abstract void DoTerminate();
     }
 }

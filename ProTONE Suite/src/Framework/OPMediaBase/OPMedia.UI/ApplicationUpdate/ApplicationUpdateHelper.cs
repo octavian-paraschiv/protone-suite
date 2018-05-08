@@ -15,6 +15,7 @@ using OPMedia.UI.Dialogs;
 using OPMedia.Runtime.AssemblyInfo;
 using System.Reflection;
 using System.ComponentModel;
+using OPMedia.Core.InstanceManagement;
 
 namespace OPMedia.UI.ApplicationUpdate
 {
@@ -37,7 +38,7 @@ namespace OPMedia.UI.ApplicationUpdate
             _bwDetect.DoWork += new DoWorkEventHandler(OnBackgroundDetect);
             _bwDetect.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnBackgroundDetectComplete);
 
-            if (AppConfig.AllowRealtimeGUISetup && AppConfig.AllowAutomaticUpdates)
+            if (AppConfig.AllowAutomaticUpdates)
             {
                 _bwDetect.RunWorkerAsync(false);
             }

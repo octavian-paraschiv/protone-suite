@@ -40,7 +40,7 @@ namespace OPMedia.RCCManager
                 Translator.RegisterTranslationAssembly(typeof(SerialDeviceCfgDlg).Assembly);
                 Translator.RegisterTranslationAssembly(typeof(MediaPlayer).Assembly);
 
-                LoggedApplication.Start(ProTONEConstants.RCCManagerName);
+                LoggedApplication.Start(ProTONEConstants.RCCManagerName, true);
 
                 if (!AppConfig.CurrentUserIsAdministrator)
                 {

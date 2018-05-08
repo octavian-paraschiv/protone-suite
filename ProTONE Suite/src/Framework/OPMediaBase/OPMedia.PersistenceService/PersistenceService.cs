@@ -52,7 +52,7 @@ namespace OPMedia.PersistenceService
 
         protected override void OnStart(string[] args)
         {
-            LoggedApplication.Start(this.ServiceName);
+            LoggedApplication.Start(this.ServiceName, false);
             Logger.LogInfo("Service preparing to start ...");
 
             TicToc ticToc = new TicToc("Persistence.Service.OnStart", 1);

@@ -18,12 +18,12 @@ namespace OPMedia.Core.Logging
         protected Mutex _appMutex = null;
         protected string _appMutexName = null;
 
-        public new static void Start(string appName)
+        public static void Start(string appName, bool allowRealtimeGUISetup)
         {
             if (appInstance == null)
             {
                 appInstance = new LoggedApplication();
-                appInstance.Start(appName);
+                (appInstance as LoggedApplication).DoStart(appName, allowRealtimeGUISetup);
             }
             else
             {
@@ -32,12 +32,11 @@ namespace OPMedia.Core.Logging
             }
         }
 
-        public new static void Stop()
+        public static void Stop()
         {
-            if (appInstance != null)
-            {
-                appInstance.Stop();
-            }
+            LoggedApplication app = appInstance as LoggedApplication;
+            if (app != null)
+                app.DoStop();
         }
 
         public new static void Restart()
@@ -60,17 +59,17 @@ namespace OPMedia.Core.Logging
             ErrorDispatcher.DispatchFatalError(e.Exception);
         }
 
-        protected override void DoInitialize(string appName)
+        protected override void DoInitialize()
         {
             Logger.LogInfo("Application is starting up ...");
 
-            _appMutexName = appName.Replace(" ", "").ToLowerInvariant() + @".mutex";
+            _appMutexName = _appName.Replace(" ", "").ToLowerInvariant() + @".mutex";
 
             InstallApplicationEventHandlers();
-            RegisterAppMutex(appName);
+            RegisterAppMutex();
         }
 
-        protected virtual void RegisterAppMutex(string appName)
+        protected virtual void RegisterAppMutex()
         {
             bool isNew = false;
             _appMutex = new Mutex(false, "Global\\" + _appMutexName, out isNew);

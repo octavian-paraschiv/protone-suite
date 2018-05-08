@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -18,6 +18,7 @@ using System.Security.Principal;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using OPMedia.Core.Win32;
+using OPMedia.Core.InstanceManagement;
 
 namespace OPMedia.Core.Configuration
 {
@@ -84,6 +85,8 @@ namespace OPMedia.Core.Configuration
         const string DefaultDownloadUriBase = "http://ocpa.ro/protone/current";
         const string DefaultHelpUriBase = "http://ocpa.ro/protone/protone-suite-docs/#VERSION#/";
 
+        public const string UnconfiguredThemeName = "Deezer";
+
         static AppConfig()
         {
             if (string.Compare(Constants.PersistenceServiceShortName,
@@ -94,7 +97,7 @@ namespace OPMedia.Core.Configuration
                 _cultures.Add("fr", new CultureInfo("fr"));
                 _cultures.Add("ro", new CultureInfo("ro"));
 
-                _skinType = PersistenceProxy.ReadObject("SkinType", "Black");
+                _skinType = PersistenceProxy.ReadObject("SkinType", UnconfiguredThemeName);
 
                 string defLangId = Regedit.InstallLanguageID;
                 _languageId = PersistenceProxy.ReadObject("LanguageID", defLangId);
@@ -106,7 +109,7 @@ namespace OPMedia.Core.Configuration
             if (changeType != ChangeType.Saved)
                 return;
 
-            if (DetectSettingsChanges)
+            if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
                 lock (_settingsChangesLock)
                 {
@@ -146,27 +149,6 @@ namespace OPMedia.Core.Configuration
         }
 
         #region Generic Purpose API (Level 0 settings)
-
-        private static bool _allowGUISetup = true;
-        private static object _allowGUISetupLock = new object();
-        public static bool AllowRealtimeGUISetup
-        {
-            get
-            {
-                lock (_allowGUISetupLock)
-                {
-                    return _allowGUISetup;
-                }
-            }
-            set
-            {
-                lock (_allowGUISetupLock)
-                {
-                    _allowGUISetup = value;
-                    DetectSettingsChanges = value;
-                }
-            }
-        }
 
         private static bool _detectSettingsChanges = true;
         private static object _settingsChangesLock = new object();
@@ -309,15 +291,21 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return _skinType;
+                if (OpMediaApplication.AllowRealTimeGUIUpdate)
+                    return _skinType;
+
+                return UnconfiguredThemeName;
             }
 
             set
             {
-                if (value != _skinType)
+                if (OpMediaApplication.AllowRealTimeGUIUpdate && value != _skinType)
                 {
                     _skinType = value;
+
+                    Logger.LogTrace("AllowRealTimeGUIUpdate => PersistenceProxy.SaveObject(SkinType) called ...");
                     PersistenceProxy.SaveObject("SkinType", value);
+
                     EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
                 }
             }
@@ -384,12 +372,16 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject("AllowAutomaticUpdates", false);
+                if (OpMediaApplication.AllowRealTimeGUIUpdate)
+                    return PersistenceProxy.ReadObject("AllowAutomaticUpdates", false);
+
+                return false;
             }
 
             set
             {
-                PersistenceProxy.SaveObject("AllowAutomaticUpdates", value);
+                if (OpMediaApplication.AllowRealTimeGUIUpdate)
+                    PersistenceProxy.SaveObject("AllowAutomaticUpdates", value);
             }
         }
 

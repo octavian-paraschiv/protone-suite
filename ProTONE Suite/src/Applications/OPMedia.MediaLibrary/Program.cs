@@ -36,7 +36,7 @@ namespace OPMedia.MediaLibrary
 
             try
             {
-                LoggedApplication.Start(ProTONEConstants.LibraryName);
+                LoggedApplication.Start(ProTONEConstants.LibraryName, true);
 
                 string[] cmdLineArgs = Environment.GetCommandLineArgs();
 

@@ -23,12 +23,12 @@ namespace OPMedia.Core.InstanceManagement
     public class SingleInstanceApplication : LoggedApplication
     {
         #region Methods
-        public static new void Start(string appName)
+        public new static void Start(string appName, bool allowRealTimeGUIUpdate)
         {
             if (appInstance == null)
             {
                 appInstance = new SingleInstanceApplication();
-                appInstance.Start(appName);
+                (appInstance as SingleInstanceApplication).DoStart(appName, allowRealTimeGUIUpdate);
             }
             else
             {
@@ -39,7 +39,9 @@ namespace OPMedia.Core.InstanceManagement
 
         public new static void Stop()
         {
-            appInstance.Stop();
+            SingleInstanceApplication app = appInstance as SingleInstanceApplication;
+            if (app != null)
+                app.DoStop();
         }
         #endregion
 
@@ -50,7 +52,7 @@ namespace OPMedia.Core.InstanceManagement
         #endregion
 
         #region Implementation
-        protected override void RegisterAppMutex(string appName)
+        protected override void RegisterAppMutex()
         {
             bool isPrimaryInstance = false;
 
@@ -85,7 +87,7 @@ namespace OPMedia.Core.InstanceManagement
                 // Raise exception to notify the secondary instance that it must terminate.
                 ReleaseAppMutex();
                 throw new MultipleInstancesException(
-                    string.Format("Another instance of app: {0} is already running.", appName));
+                    string.Format("Another instance of app: {0} is already running.", _appName));
             }
         }
        

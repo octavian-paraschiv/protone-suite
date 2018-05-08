@@ -9,6 +9,7 @@ using OPMedia.Core.InstanceManagement;
 //using OPMedia.Runtime.UdpCommunication;
 using OPMedia.Core;
 using OPMedia.Runtime.InterProcessCommunication;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
@@ -22,12 +23,12 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         #endregion
 
         #region Methods
-        public new static void Start(string appName)
+        public new static void Start(string appName, bool allowRealtimeGUISetup)
         {
             if (appInstance == null)
             {
                 appInstance = new RemoteControllableApplication(appName);
-                appInstance.Start(appName);
+                (appInstance as RemoteControllableApplication).DoStart(appName, allowRealtimeGUISetup);
             }
             else
             {
@@ -35,16 +36,16 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
         }
 
-        protected override void DoInitialize(string appName)
+        protected override void DoInitialize()
         {
-            base.DoInitialize(appName);
+            base.DoInitialize();
 
-            _wcdReceiver = new WmCopyDataReceiver(appName);
+            _wcdReceiver = new WmCopyDataReceiver(_appName);
             _wcdReceiver.DataReceived += new DataReceivedHandler(_wcdReceiver_DataReceived);
 
             try
             {
-                _ipcReceiver = new IPCRemoteControlHost(appName);
+                _ipcReceiver = new IPCRemoteControlHost(_appName);
                 _ipcReceiver.OnSendRequest += new OnSendRequestHandler(_receiver_OnSendRequest);
                 _ipcReceiver.OnPostRequest += new OnPostRequestHandler(_receiver_OnPostRequest);
             }

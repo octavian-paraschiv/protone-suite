@@ -25,7 +25,7 @@ namespace OPMedia.RemoteControlEmulator
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoggedApplication.Start("OPMedia.RemoteControlEmulator");
+            LoggedApplication.Start("OPMedia.RemoteControlEmulator", false);
 
             try
             {

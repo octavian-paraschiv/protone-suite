@@ -26,7 +26,7 @@ namespace OPMedia.SkinBuilder
 
             try
             {
-                LoggedApplication.Start("SkinBuilder");
+                LoggedApplication.Start("SkinBuilder", false);
 
                 string[] cmdLineArgs = Environment.GetCommandLineArgs();
 
@@ -44,8 +44,6 @@ namespace OPMedia.SkinBuilder
                             break;
                     }
                 }
-
-                AppConfig.AllowRealtimeGUISetup = false;
 
                 Translator.RegisterTranslationAssembly(typeof(SkinBuilderForm).Assembly);
                 Translator.SetInterfaceLanguage("en"); // Only English
