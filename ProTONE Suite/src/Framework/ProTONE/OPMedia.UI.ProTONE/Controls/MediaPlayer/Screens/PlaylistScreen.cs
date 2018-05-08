@@ -148,20 +148,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void OnFilterStateChanged(FilterState oldState, string oldMedia, FilterState newState, string newMedia)
         {
-            OnMediaRendererHeartbeat();
-        }
-
-        void MainWindow_Shown(object sender, EventArgs e)
-        {
-            if (!DesignMode && initialState && !_compactMode)
-            {
-                initialState = false;
-                PersistentPlaylist.Load(ref playlist);
-            }
-        }
-
-        public void OnMediaRendererHeartbeat()
-        {
             if (_compactMode)
                 return;
 
@@ -177,6 +163,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             finally
             {
                 UpdatePlaylistNames(false);
+            }
+        }
+
+        void MainWindow_Shown(object sender, EventArgs e)
+        {
+            if (!DesignMode && initialState && !_compactMode)
+            {
+                initialState = false;
+                PersistentPlaylist.Load(ref playlist);
             }
         }
 
@@ -203,16 +198,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     lvi.SubItems[colFile.Index].Text = plItem.DisplayName;
                 }
 
-                if (UpdateMiscIcon(lvi))
+                if (_compactMode == false)
                 {
-                    lvPlaylist.EnsureVisible(lvi.Index);
-                }
+                    if (UpdateMiscIcon(lvi))
+                    {
+                        lvPlaylist.EnsureVisible(lvi.Index);
+                    }
 
-                foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
-                {
-                    bool isActive = (lvi.Index == playlist.PlayIndex);
-                    lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
-                    lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
+                    foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
+                    {
+                        bool isActive = (lvi.Index == playlist.PlayIndex);
+                        lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
+                        lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
+                    }
                 }
             }
         }
@@ -295,11 +293,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     _abortLoad = true;
                     PersistentPlaylist.Save(playlist);
-                }
-
-                if (!DesignMode)
-                {
-                    MediaRenderer.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
                 }
             }
             catch (Exception ex)
@@ -672,9 +665,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void playlist_PlaylistUpdated(int item1, int item2, UpdateType updateType)
         {
-            if (_compactMode)
-                return;
-
             try
             {
                 switch (updateType)
@@ -729,12 +719,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         break;
                 }
 
-                UpdateTotalTime(playlist.TotalPlaylistTime);
+                if (_compactMode)
+                    return;
 
-                // This will toggle a delayed save operation for the playlist.
-                // If events are coming in fast this guarantees that the save operation will only be done once.
-                _tmrSavePlaylist.Stop();
-                _tmrSavePlaylist.Start();
+                UpdateTotalTime(playlist.TotalPlaylistTime);
             }
             catch(Exception ex)
             {
@@ -789,8 +777,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 }
 
                 lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImageEx(false), null);
-                UpdateMiscIcon(lvItem);
 
+                if (_compactMode)
+                    return;
+
+                UpdateMiscIcon(lvItem);
                 foreach (ListViewItem.ListViewSubItem lvsi in lvItem.SubItems)
                 {
                     lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
