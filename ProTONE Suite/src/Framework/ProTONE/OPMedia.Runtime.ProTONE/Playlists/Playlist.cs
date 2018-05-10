@@ -338,6 +338,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         public virtual void RemoveItem(int item)
         {
             RemoveAt(item);
+
+            if (item <= playIndex)
+                playIndex--;
+
+            if (playIndex < 0)
+                playIndex = 0;
+            if (playIndex >= Count)
+                playIndex = Count - 1;
+
             EventRaiser(item, -1, UpdateType.Removed);
         }
 
