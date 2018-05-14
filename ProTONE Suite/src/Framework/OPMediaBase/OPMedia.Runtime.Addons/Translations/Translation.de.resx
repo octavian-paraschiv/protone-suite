@@ -181,9 +181,7 @@ Eine gültige OPMedia Addon-Bibliothek Dateiname sollte die Namenskonvention fol
   </data>
   <data name="TXT_SHAREDADDONS" xml:space="preserve">
     <value>All diese Addons sind in der Addon-Bibliothek Sie versuchen, zu deinstallieren sind integriert:
-
 {0}
-
 Wenn Sie fortfahren, werden alle diese Addons nicht mehr verfügbar sein. Ist es OK, um fortzufahren?</value>
   </data>
   <data name="TXT_NO_NAV_ADDONS" xml:space="preserve">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -191,112 +191,90 @@
   </data>
   <data name="TXT_BTNCLEAR">
     <value>Delete entire playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNDELETE">
     <value>Delete selected items.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNFULLSCREEN">
     <value>Toggle Full Screen
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNFWD">
     <value>Fast forward with 5 seconds.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNJUMPTOITEM">
     <value>Open the 'Jump to playlist item' dialog.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOAD">
     <value>Load new file(s).
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOADPLAYLIST">
     <value>Load a new playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
     <value>Toggles on/off playing in loop.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
     <value>Move selected items with one position down in playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNMOVEUP">
     <value>Move selected items with one position up in playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNNEXT">
     <value>Move to next file in playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNOPENDISK">
     <value>Opens the Load DVD media dialog.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNOPENSETTINGS">
     <value>Displays the Settings dialog.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPLAYPAUSE">
     <value>Play/Pause
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPLAYLISTEND">
     <value>Activates the 'action on playlist end'
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNPREV">
     <value>Move to previous file in playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNREW">
     <value>Rewind  with 5 seconds.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNSAVEPLAYLIST">
     <value>Save the current playlist.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNSTOP">
     <value>Stop playback.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNTOGGLESHUFFLE">
     <value>Activates playlist shuffle mode.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNVOLDN">
     <value>Volume down by 5%.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNVOLUP">
     <value>Volume up by 5%.
-
 Shortcut: {0}</value>
   </data>
   <data name="TXT_CAUTION_REALTIME">
@@ -439,7 +417,6 @@ Shortcut: {0}</value>
   </data>
   <data name="TXT_DISPLAY_FILENAME">
     <value>No formatting options are specified.
-
 The program will display the file name in playlist entry.</value>
   </data>
   <data name="TXT_DURATION">
@@ -450,7 +427,6 @@ The program will display the file name in playlist entry.</value>
   </data>
   <data name="TXT_ELAPSED_TIME">
     <value>Elapsed time.
-
 Double click to toggle remaining time</value>
   </data>
   <data name="TXT_ENABLE_PLAYLISTEVT">
@@ -549,7 +525,6 @@ Double click to toggle remaining time</value>
   </data>
   <data name="TXT_METADATAPATTERNS">
     <value>The patterns available for playlist item names formatting are based on combinations of these keywords:
-
 &lt;A&gt; = artist name (from media tag);
 &lt;B&gt; = album name (from media tag);
 &lt;T&gt; = title (from media  tag);
@@ -701,7 +676,6 @@ Double click to toggle remaining time</value>
   </data>
   <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW">
     <value>This option is not available at this moment.
-
 You must install the FFDShow codec suite in order to have actions to this option.</value>
   </data>
   <data name="TXT_NOTIFICATIONSENABLED">
@@ -836,7 +810,6 @@ In order to access these settings, you must launch ProTONE Player under a user a
   </data>
   <data name="TXT_PROCEED_SCHEDULED_ACTION">
     <value>ProTONE Player is attempting to {0}. This is happening because you have configured the player to do so when {1}. Do you want to proceed ?
-
 You can abort this operation if you click Abort within the remaining time frame (see counter below). If this time elapses and you have not chosen any action, it will be assumed you have chosen to proceed.</value>
   </data>
   <data name="TXT_PROTONE_ENQUEUE">
@@ -847,7 +820,6 @@ You can abort this operation if you click Abort within the remaining time frame 
   </data>
   <data name="TXT_REMAINING_TIME">
     <value>Remaining time. 
-
 Double click to toggle elapsed time</value>
   </data>
   <data name="TXT_REMOTECONTROLCFG">
@@ -1060,7 +1032,6 @@ prio (server order = order of subtitle servers in Subtitles/OSD Settings page). 
   </data>
   <data name="TXT_TAGGINGPATTERNS">
     <value>The tagging patterns are based on combinations of these keywords:
-
 &lt;N&gt; = file name;
 &lt;F&gt; = folder name;
 &lt;A&gt; = artist name (from tag)
@@ -1070,7 +1041,6 @@ prio (server order = order of subtitle servers in Subtitles/OSD Settings page). 
 &lt;G&gt; = genre (from tag)
 &lt;#&gt; = track number (from tag)
 &lt;Y&gt; = year (from tag)
-
 Character ranges such as &lt;N2-12,14-20&gt; are also allowed.</value>
   </data>
   <data name="TXT_TAGINFO">
@@ -1078,14 +1048,11 @@ Character ranges such as &lt;N2-12,14-20&gt; are also allowed.</value>
   </data>
   <data name="TXT_TIMESCALE">
     <value>Time scale.
-
 Click to play from position: {0}</value>
   </data>
   <data name="TXT_TIMESCALE_BOOKMARK">
     <value>Time scale.
-
 Click to play from bookmark: "{1}"
-
 Bookmark time: {0}</value>
   </data>
   <data name="TXT_TITLE">
@@ -1132,8 +1099,6 @@ Bookmark time: {0}</value>
   </data>
   <data name="TXT_VOLSCALE">
     <value>Volume scale.
-
-
 Click to set volume to: {0} %</value>
   </data>
   <data name="TXT_YEAR">
@@ -1180,33 +1145,6 @@ Click to set volume to: {0} %</value>
   </data>
   <data name="TXT_DEEZER_CONTENT">
     <value>Deezer</value>
-  </data>
-  <data name="TXT_SELECT_CONTENT_SOURCE">
-    <value>Step 1: Select an online media content source
-Step 2: Type some keywords that identify the online media content that you search
-Step 3: Press Search button or Enter key
-Step 4: Right click on search results and choose the actions you want to do.
-
-</value>
-  </data>
-  <data name="TXT_DEEZERFILTER_HINT">
-    <value>Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red.
-In "normal search mode", it will return entries that contain fields matching any of the words that you entered. This may even not include what you are looking for as it can only return a limited amount of results.
-In "advanced search mode", you can search by artist name, album name or song name by using the keywords "artist:", "album:" or "track:", respectively. You can even combine these keywords in the same search text.
-Some examples (you are welcome to try them out):
-
-If you search by: "artist:"Nirvana" track:"Polly"", it will return all records associated with songs named "Polly" played by artist(s) named "Nirvana".
-If you search by: "artist:"Nirvana" album:"Nevermind"", it will return all records associated with songs played by artist(s) named "Nirvana" included on album(s) named "Nevermind".
-But if you enter text: "Nirvana Polly", it will return all records that contain fields matching any of the words "Nirvana" or "Polly". You can expect this to return a large number of results. </value>
-  </data>
-  <data name="TXT_SHOUTCASTFILTER_HINT">
-    <value>Search is case-insensitive (that is, letter case does not matter). If the search text is not valid, it will be highlighted in red.
-In "normal search mode", it will return radio stations that contain fields matching any of the words that you entered.
-In "advanced search mode", you can search radio stations that are currently playing certain content, by using the keyword "now:".
-Some examples (you are welcome to try them out):
-
-If you search by: "now:Nirvana", it will return radio stations records for which the Current Content field are matching "Nirvana" (entirely or patially).
-But if you enter text: "Nirvana", it will return all radio stations for which any of the fields are matching "Nirvana" (entirely or patially).</value>
   </data>
   <data name="TXT_LOOKUP_THIS_ALBUM">
     <value>Look up this album</value>

@@ -81,10 +81,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             MediaBrowserPage selectedPage = GetSelectedPage();
             if (selectedPage != null)
-            {
-                _tt.SetSimpleToolTip(cmbSearch, selectedPage.GetSearchBoxTip());
                 validText = selectedPage.PreValidateSearch(cmbSearch.Text);
-            }
 
             btnSearch.Enabled = validText;
             cmbSearch.BackColor = validText ? ThemeManager.WndValidColor : ThemeManager.ColorValidationFailed;

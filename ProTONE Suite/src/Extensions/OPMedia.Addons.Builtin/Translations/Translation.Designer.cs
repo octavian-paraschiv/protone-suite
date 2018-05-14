@@ -19,7 +19,7 @@ namespace OPMedia.Addons.Builtin.Translations {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Translation {
@@ -1101,9 +1101,8 @@ namespace OPMedia.Addons.Builtin.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A non-fatal error occured while scanning object: &apos;{0}&apos;.
+        ///   Looks up a localized string similar to A non-fatal error occurred while scanning object: &apos;{0}&apos;.
         ///The error message is: {1}.
-        ///
         ///Do you want to continue scanning ?.
         /// </summary>
         internal static string TXT_SCAN_ERROR_MSG {

@@ -261,11 +261,6 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         {
         }
 
-        public virtual string GetSearchBoxTip()
-        {
-            return null;
-        }
-
         protected virtual List<string> GetSearchHistory()
         {
             return null;

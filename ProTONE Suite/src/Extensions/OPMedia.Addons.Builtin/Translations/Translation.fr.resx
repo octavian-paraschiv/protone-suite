@@ -352,7 +352,6 @@
   <data name="TXT_SCAN_ERROR_MSG">
     <value>Une erreur non fatale s'est produite lors de la balayage d'objet:. {0}
 Le message d'erreur est le suivant:. {1}
-
 Voulez-vous continuer la balayage?</value>
   </data>
   <data name="TXT_SEARCHFOLDER">

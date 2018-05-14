@@ -204,9 +204,7 @@ Sélectionnez un autre élément ou appuyez sur Entrée pour prévisualiser l'é
   </data>
   <data name="TXT_SHAREDADDONS" xml:space="preserve">
     <value>La module complementaire vous essayez de désinstaller offre des fonctions multiples:
-
 {0}
-
 Si vous continuez, toutes ces fonctionnalités ne seront plus disponibles. Est-il OK pour continuer?</value>
   </data>
   <data name="TXT_UNINSTALL_ADDONLIB" xml:space="preserve">

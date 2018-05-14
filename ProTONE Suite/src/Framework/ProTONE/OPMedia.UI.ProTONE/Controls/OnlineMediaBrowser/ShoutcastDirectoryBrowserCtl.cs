@@ -115,11 +115,6 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             return valid;
         }
 
-        public override string GetSearchBoxTip()
-        {
-            return Translator.Translate("TXT_SHOUTCASTFILTER_HINT");
-        }
-
         protected override List<string> GetSearchHistory()
         {
             return ProTONEConfig.Media_Browser_History_Shoutcast;

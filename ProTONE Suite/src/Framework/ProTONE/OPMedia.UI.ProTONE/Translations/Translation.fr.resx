@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -191,112 +191,90 @@
   </data>
   <data name="TXT_BTNCLEAR">
     <value>Effacer toute la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNDELETE">
     <value>Supprimer les éléments sélectionnés
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNFULLSCREEN">
     <value>Basculer plein écran
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNFWD">
     <value>Avance rapide. Avec 5 secondes
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNJUMPTOITEM">
     <value>Ouvrez le 'Saut au liste de lecture article' dialogue
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNLOAD">
     <value>Chargez nouveau fichier (s)
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNLOADPLAYLIST">
     <value>Chargez une nouvelle liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
     <value>Active / désactive la lecture en boucle
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
     <value>Déplacez les éléments sélectionnés avec une position basse dans la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNMOVEUP">
     <value>Déplacez les éléments sélectionnés avec une position vers le haut dans la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNNEXT">
     <value>Aller à l'image suivante dans la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNOPENDISK">
     <value>Ouvre la boîte de dialogue Charger un support DVD
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNOPENSETTINGS">
     <value>Affiche la boîte de dialogue de Paramètres
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNPLAYPAUSE">
     <value>Lire/Pause
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNPLAYLISTEND">
     <value>Active l'action liste de lecture fin'
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNPREV">
     <value>Aller à l'image précédente dans la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNREW">
     <value>Rembobinez de 5 secondes
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNSAVEPLAYLIST">
     <value>Enregistrer la liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNSTOP">
     <value>Arrêt de la lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNTOGGLESHUFFLE">
     <value>Active le mode aléatoire liste de lecture
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNVOLDN">
     <value>Réduction de volume de 5%
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_BTNVOLUP">
     <value>Volume en hausse de 5%
-
 Raccourci: {0}</value>
   </data>
   <data name="TXT_CAUTION_REALTIME">
@@ -439,7 +417,6 @@ Raccourci: {0}</value>
   </data>
   <data name="TXT_DISPLAY_FILENAME">
     <value>Pas options de formatage sont spécifiées.
-
 Le programme affiche le nom du fichier en entrée liste de lecture.</value>
   </data>
   <data name="TXT_DURATION">
@@ -450,7 +427,6 @@ Le programme affiche le nom du fichier en entrée liste de lecture.</value>
   </data>
   <data name="TXT_ELAPSED_TIME">
     <value>Temps écoulé.
-
 Double click to toggle temps restant</value>
   </data>
   <data name="TXT_ENABLE_PLAYLISTEVT">
@@ -549,7 +525,6 @@ Double click to toggle temps restant</value>
   </data>
   <data name="TXT_METADATAPATTERNS">
     <value>Les modèles disponibles pour le formatage élément de la liste de lecture sont basées sur des combinaisons de ces mots-clés:
-
 &lt;A&gt; = nom de l'artiste (de etiquette);
 &lt;B&gt; = nom de l'album (de etiquette);
 &lt;T&gt; = titre (de etiquette);
@@ -701,7 +676,6 @@ Double click to toggle temps restant</value>
   </data>
   <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW">
     <value>Cette option n'est pas disponible en ce moment.
-
 Vous devez installer l'ensemble des codecs FFDShow afin d'avoir des actions à cette option.</value>
   </data>
   <data name="TXT_NOTIFICATIONSENABLED">
@@ -835,7 +809,6 @@ Pour accéder à ces paramètres, vous devez lancer ProTone Joueur sous un compt
   </data>
   <data name="TXT_PROCEED_SCHEDULED_ACTION">
     <value>ProTONE Lecteur tente de {0}. Ce qui se passe parce que vous avez configuré le joueur à le faire lorsque {1}. Voulez-vous continuer?
-
 Vous pouvez annuler cette opération si vous cliquez sur Annuler dans le délai restant (voir ci-dessous contre). Si ce temps s'écoule et que vous n'avez pas choisi une action, il sera considéré que vous avez choisi de procéder.</value>
   </data>
   <data name="TXT_PROTONE_ENQUEUE">
@@ -846,7 +819,6 @@ Vous pouvez annuler cette opération si vous cliquez sur Annuler dans le délai 
   </data>
   <data name="TXT_REMAINING_TIME">
     <value>Le temps restant.
-
 Double click to toggle temps écoulé</value>
   </data>
   <data name="TXT_REMOTECONTROLCFG">
@@ -1059,7 +1031,6 @@ prio (serveur order = ordre de serveurs de sous-titres Sous-titres en / page Par
   </data>
   <data name="TXT_TAGGINGPATTERNS">
     <value>Les motifs de marquage sont basés sur des combinaisons de ces mots-clés:
-
 &lt;N&gt; = nom de fichier;
 &lt;F&gt; = nom du dossier;
 &lt;A&gt; = nom de l'artiste (de etiquette)
@@ -1069,7 +1040,6 @@ prio (serveur order = ordre de serveurs de sous-titres Sous-titres en / page Par
 &lt;G&gt; = genre (de etiquette)
 &lt;#&gt; = numéro de piste (de etiquette)
 &lt;Y&gt; = année (de etiquette)
-
 Gammes de caractères comme &lt;N2-12,14-20&gt; sont également autorisées.</value>
   </data>
   <data name="TXT_TAGINFO">
@@ -1077,14 +1047,11 @@ Gammes de caractères comme &lt;N2-12,14-20&gt; sont également autorisées.</va
   </data>
   <data name="TXT_TIMESCALE">
     <value>Échelle de temps
-
 Cliquez pour jouer à partir de la position: {0}</value>
   </data>
   <data name="TXT_TIMESCALE_BOOKMARK">
     <value>Échelle de temps
-
 Cliquez pour jouer à partir de signet: "{1}"
-
 Temps de signet: {0}</value>
   </data>
   <data name="TXT_TITLE">
@@ -1131,7 +1098,6 @@ Temps de signet: {0}</value>
   </data>
   <data name="TXT_VOLSCALE">
     <value>Échelle de volume
-
 Cliquez pour régler le volume d': {0}%</value>
   </data>
   <data name="TXT_YEAR">
@@ -1200,5 +1166,44 @@ To get your own credentials, please access:</value>
   </data>
   <data name="TXT_REQUEST_NEW_TOKEN" xml:space="preserve">
     <value>Request new token</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST" xml:space="preserve">
+    <value>Les playlists suivants ont été trouvés, veuillez choisir une :</value>
+  </data>
+  <data name="TXT_SELECT_ONLINE_PLAYLIST" xml:space="preserve">
+    <value>Sélectionnez une playlist en ligne !</value>
+  </data>
+  <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
+    <value>Mes playlists en ligne</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ALBUM" xml:space="preserve">
+    <value>Chercher cet album</value>
+  </data>
+  <data name="TXT_WAIT_SEARCH" xml:space="preserve">
+    <value>S’il vous plaît attendez que la tâche de recherche se termine. Vous pouvez appuyer sur ÉCHAP pour annuler la recherche.</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ARTIST" xml:space="preserve">
+    <value>Chercher cet artiste</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_TRACK" xml:space="preserve">
+    <value>Chercher cette chanson</value>
+  </data>
+  <data name="TXT_SHOUTCAST_DIR" xml:space="preserve">
+    <value>Répertoire de Shoutcast</value>
+  </data>
+  <data name="TXT_ADD_FAV_LIST" xml:space="preserve">
+    <value>Ajouter aux favoris</value>
+  </data>
+  <data name="TXT_PLAY" xml:space="preserve">
+    <value>Lire</value>
+  </data>
+  <data name="TXT_ENQUEUE" xml:space="preserve">
+    <value>Ajouter à la playlist</value>
+  </data>
+  <data name="TXT_DEL_FAV_LIST" xml:space="preserve">
+    <value>Supprimer des favoris</value>
+  </data>
+  <data name="TXT_LOCAL_DB" xml:space="preserve">
+    <value>Favoris</value>
   </data>
 </root>

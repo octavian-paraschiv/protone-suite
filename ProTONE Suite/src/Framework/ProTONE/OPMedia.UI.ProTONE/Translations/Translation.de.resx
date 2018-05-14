@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -191,37 +191,30 @@
   </data>
   <data name="TXT_BTNCLEAR">
     <value>Löschen gesamte Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNDELETE">
     <value>Ausgewählte Elemente löschen
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNFULLSCREEN">
     <value>Vollbild umschalten
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNFWD">
     <value>Schneller Vorlauf mit 5 Sekunden
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNJUMPTOITEM">
     <value>Öffnen Sie das 'Jump to wiedergabelist item' Dialog
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNLOAD">
     <value>Legen Sie neue Datei (en)
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNLOADPLAYLIST">
     <value>Legen Sie eine neue Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
@@ -231,72 +224,58 @@ Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
     <value>Bewegen Sie mit ausgewählten Elemente eine Position nach unten in der Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNMOVEUP">
     <value>Bewegen Sie mit ausgewählten Elemente eine Position nach oben in der Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNNEXT">
     <value>Zum nächsten Datei in der Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNOPENDISK">
     <value>Öffnet das Load-DVD-Medien Dialog
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNOPENSETTINGS">
     <value>Zeigt den Dialog Einstellungen
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNPLAYPAUSE">
     <value>Spielen/Anhalten
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNPLAYLISTEND">
     <value>Aktiviert die 'Aktion am Ende Wiedergabelist'
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNPREV">
     <value>Zum vorherigen Datei in der Wiedergabeliste
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNREW">
     <value>Mit 5 Sekunden zurückspulen
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNSAVEPLAYLIST">
     <value>Speichern Sie die aktuelle Wiedergabelist
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNSTOP">
     <value>Stoppen Sie die Wiedergabe
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNTOGGLESHUFFLE">
     <value>Aktiviert Wiedergabelist Mischen-Modus
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNVOLDN">
     <value>Lauter um 5%.
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNVOLUP">
     <value>Leiser um 5%.
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_CAUTION_REALTIME">
@@ -439,7 +418,6 @@ Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_DISPLAY_FILENAME">
     <value>Keine Formatierungsoptionen angegeben sind.
-
 Das Programm wird den Namen der Datei in der Wiedergabeliste Eintrag anzuzeigen.</value>
   </data>
   <data name="TXT_DURATION">
@@ -450,7 +428,6 @@ Das Programm wird den Namen der Datei in der Wiedergabeliste Eintrag anzuzeigen.
   </data>
   <data name="TXT_ELAPSED_TIME">
     <value>Abgelaufene Zeit.
-
 Doppelklick verbleibende Zeit zu wechseln</value>
   </data>
   <data name="TXT_ENABLE_PLAYLISTEVT">
@@ -550,7 +527,6 @@ Eltern sein):</value>
   </data>
   <data name="TXT_METADATAPATTERNS">
     <value>Die Muster für Wiedergabelistenobjekt Formatierung werden auf Kombinationen aus diesen Schlüsselwörtern:
-
 &lt;A&gt; = Name des Interpreten (von Etikett);
 &lt;B&gt; = Name des Albums (von Etikett);
 &lt;T&gt;=Titel (von Etikett);
@@ -702,7 +678,6 @@ Eltern sein):</value>
   </data>
   <data name="TXT_NOT_CONFIGURABLE_NOFFDSHOW">
     <value>Diese Option ist in diesem Moment nicht verfügbar.
-
 Sie müssen die FFDShow-Codec-Suite zu installieren, um Aktionen an dieser Option haben.</value>
   </data>
   <data name="TXT_NOTIFICATIONSENABLED">
@@ -836,7 +811,6 @@ Um diese Einstellungen zuzugreifen, müssen Sie starten ProTONE Spieler unter ei
   </data>
   <data name="TXT_PROCEED_SCHEDULED_ACTION">
     <value>ProTone Player an {0} versucht. Dies geschieht, weil Sie den Player so konfiguriert haben, dies zu tun, wenn {1}. Wollen Sie vorgehen?
-
 Sie können diesen Vorgang abbrechen, wenn Sie auf Abbrechen klicken innerhalb des verbleibenden Zeitrahmen (siehe Zähler unten). Wenn diese Zeit abgelaufen ist, und Sie haben keine Aktion gewählt wird, wird davon ausgegangen, die Sie gewählt haben, um fortzufahren werden.</value>
   </data>
   <data name="TXT_PROTONE_ENQUEUE">
@@ -847,7 +821,6 @@ Sie können diesen Vorgang abbrechen, wenn Sie auf Abbrechen klicken innerhalb d
   </data>
   <data name="TXT_REMAINING_TIME">
     <value>Verbleibende Zeit.
-
 Doppelklick verstrichene Zeit zu wechseln</value>
   </data>
   <data name="TXT_REMOTECONTROLCFG">
@@ -1060,7 +1033,6 @@ prio (Server order = Reihenfolge der Untertitel-Servern in Untertitel / OSD-Eins
   </data>
   <data name="TXT_TAGGINGPATTERNS">
     <value>Die Etikettieren-Muster werden auf Kombinationen dieser Schlüsselwörtern:
-
 &lt;N&gt; = Dateiname;
 &lt;F&gt; = Ordnername;
 &lt;A&gt; = Künstlername (von Etikett)
@@ -1070,7 +1042,6 @@ prio (Server order = Reihenfolge der Untertitel-Servern in Untertitel / OSD-Eins
 &lt;G&gt; = Genre (von Etikett)
 &lt;#&gt; = Track-Nummer (von Etikett)
 &lt;Y&gt; = Jahr (von Etikett)
-
 Zeichenbereiche wie &lt;N2-12,14-20&gt; sind ebenfalls erlaubt.</value>
   </data>
   <data name="TXT_TAGINFO">
@@ -1078,14 +1049,11 @@ Zeichenbereiche wie &lt;N2-12,14-20&gt; sind ebenfalls erlaubt.</value>
   </data>
   <data name="TXT_TIMESCALE">
     <value>Zeitskala.
-
 Klicken, um von Position zu spielen: {0}</value>
   </data>
   <data name="TXT_TIMESCALE_BOOKMARK">
     <value>Zeitskala.
-
 Klicken Sie auf das Lesezeichen aus spielen: "{1}"
-
 Bookmark Zeit: {0}</value>
   </data>
   <data name="TXT_TITLE">
@@ -1132,7 +1100,6 @@ Bookmark Zeit: {0}</value>
   </data>
   <data name="TXT_VOLSCALE">
     <value>Volumenskala.
-
 Klicken Sie auf das Volumen eingestellt werden: {0}%</value>
   </data>
   <data name="TXT_YEAR">
@@ -1201,5 +1168,44 @@ To get your own credentials, please access:</value>
   </data>
   <data name="TXT_REQUEST_NEW_TOKEN" xml:space="preserve">
     <value>Request new token</value>
+  </data>
+  <data name="TXT_PLAY" xml:space="preserve">
+    <value>Wiedergeben</value>
+  </data>
+  <data name="TXT_ENQUEUE" xml:space="preserve">
+    <value>Zur Wiedergabeliste hinzufügen</value>
+  </data>
+  <data name="TXT_ADD_FAV_LIST" xml:space="preserve">
+    <value>Zu Favoriten</value>
+  </data>
+  <data name="TXT_DEL_FAV_LIST" xml:space="preserve">
+    <value>Aus Favoriten entfernen</value>
+  </data>
+  <data name="TXT_LOCAL_DB" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="TXT_SHOUTCAST_DIR" xml:space="preserve">
+    <value>Shoutcast Verzeichnis!</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ALBUM" xml:space="preserve">
+    <value>Schlagen Sie dieses Album!</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_ARTIST" xml:space="preserve">
+    <value>Schlagen Sie dieses Künstlers!</value>
+  </data>
+  <data name="TXT_LOOKUP_THIS_TRACK" xml:space="preserve">
+    <value>Schauen Sie sich dieses Lied!</value>
+  </data>
+  <data name="TXT_WAIT_SEARCH" xml:space="preserve">
+    <value>Bitte warten Sie, bis die Suche Aufgabe abgeschlossen ist. Drücken Sie ESC, um den Suchvorgang abzubrechen.!</value>
+  </data>
+  <data name="TXT_SELECT_ONLINE_PLAYLIST" xml:space="preserve">
+    <value>Wählen Sie eine Online-Playlist!</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST" xml:space="preserve">
+    <value>Die folgenden Playlisten wurden gefunden, bitte wählen Sie:!</value>
+  </data>
+  <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
+    <value>Durchsuchen Sie meine Online-Playlists!</value>
   </data>
 </root>

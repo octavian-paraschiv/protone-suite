@@ -181,9 +181,7 @@ O bibliotecă de extensii OPMedia validă trebuie să respecte convenţia de num
   </data>
   <data name="TXT_SHAREDADDONS" xml:space="preserve">
     <value>Biblioteca de extensii pe care doriţi să o dezinstalaţi ofera mai multe functionalităţi: 
-
 {0}
-
 Daca veţi continua, aceste funcţionalităţi nu vor mai fi disponibile. Doriţi să continuaţi ?</value>
   </data>
   <data name="TXT_NO_NAV_ADDONS" xml:space="preserve">

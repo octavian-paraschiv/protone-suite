@@ -350,9 +350,8 @@
     <value>Scan error</value>
   </data>
   <data name="TXT_SCAN_ERROR_MSG">
-    <value>A non-fatal error occured while scanning object: '{0}'.
+    <value>A non-fatal error occurred while scanning object: '{0}'.
 The error message is: {1}.
-
 Do you want to continue scanning ?</value>
   </data>
   <data name="TXT_SEARCHFOLDER">

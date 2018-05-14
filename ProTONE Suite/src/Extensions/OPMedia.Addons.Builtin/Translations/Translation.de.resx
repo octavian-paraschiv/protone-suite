@@ -352,7 +352,6 @@
   <data name="TXT_SCAN_ERROR_MSG">
     <value>Ein nicht-tödlicher Fehler beim absuchen Objekt:. {0}
 Die Fehlermeldung lautet:. {1}
-
 Möchten Sie fortfahren absuchen wollen?</value>
   </data>
   <data name="TXT_SEARCHFOLDER">

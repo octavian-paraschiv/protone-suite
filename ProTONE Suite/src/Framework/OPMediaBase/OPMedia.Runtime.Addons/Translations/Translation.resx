@@ -181,9 +181,7 @@ A valid OPMedia extension library should follow the naming convention: &lt;Libra
   </data>
   <data name="TXT_SHAREDADDONS" xml:space="preserve">
     <value>The addon library you are trying to uninstall provides multiple features:
-
 {0}
-
 If you continue, all these features will no longer be available. Is it OK to proceed ?</value>
   </data>
   <data name="TXT_NO_NAV_ADDONS" xml:space="preserve">

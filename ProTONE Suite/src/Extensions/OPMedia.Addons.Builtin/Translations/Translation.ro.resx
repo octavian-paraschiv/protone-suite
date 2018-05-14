@@ -352,7 +352,6 @@
   <data name="TXT_SCAN_ERROR_MSG">
     <value>O eroare non-fatală s-a produs la scanarea obiectului: {0}.
 Mesajul de eroare este: {1}. 
-
 Doriţi continuarea scanării ?</value>
   </data>
   <data name="TXT_SEARCHFOLDER">

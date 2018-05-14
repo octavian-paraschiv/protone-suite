@@ -1082,7 +1082,7 @@ Do you want to create it ?</value>
     <value>Choose a font:</value>
   </data>
   <data name="TXT_WORST">
-    <value>Mi</value>
+    <value>Worst</value>
   </data>
   <data name="TXT_BEST">
     <value>Best</value>
