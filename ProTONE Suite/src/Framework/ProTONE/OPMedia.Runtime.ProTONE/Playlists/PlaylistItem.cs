@@ -353,7 +353,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         public override string ToString()
         {
-            return mi.Name;
+            return this.DisplayName;
         }
 
 

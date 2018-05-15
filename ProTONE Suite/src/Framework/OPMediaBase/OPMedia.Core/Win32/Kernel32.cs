@@ -414,6 +414,9 @@ namespace OPMedia.Core
 
         #region OS_Dependent
 
+        [DllImport(KERNEL32)]
+        public static extern Int32 GetCurrentThreadId();
+
         [DllImport(KERNEL32, EntryPoint = "OutputDebugStringW", CharSet = CharSet.Unicode)]
         public static extern void OutputDebugString(string _text);
 
