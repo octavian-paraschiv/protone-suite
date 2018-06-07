@@ -21,6 +21,7 @@ namespace OPMedia.PersistenceService
 
         static Dictionary<string, IPersistenceNotification> _notifiedApps = new Dictionary<string,IPersistenceNotification>();
 
+
         public void Subscribe(string appId)
         {
             lock (_notifyLock)
@@ -104,7 +105,7 @@ namespace OPMedia.PersistenceService
             try
             {
                 _readTicToc.Tic();
-                return CacheStore.Instance.ReadObject(persistenceId, persistenceContext);
+                return SingletonCacheStore.Instance.ReadObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
@@ -125,7 +126,7 @@ namespace OPMedia.PersistenceService
             {
                 _saveTicToc.Tic();
                 
-                bool ok = CacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
+                bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
                 if (ok)
                     Notify(ChangeType.Saved, persistenceId, persistenceContext, objectContent);
             }
@@ -145,7 +146,7 @@ namespace OPMedia.PersistenceService
             {
                 _deleteTicToc.Tic();
 
-                bool ok = CacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
+                bool ok = SingletonCacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
                 if (ok)
                     Notify(ChangeType.Deleted, persistenceId, persistenceContext, string.Empty);
             }

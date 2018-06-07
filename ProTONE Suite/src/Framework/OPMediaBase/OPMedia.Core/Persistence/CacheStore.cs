@@ -6,7 +6,7 @@ using OPMedia.Core;
 using OPMedia.Core.Logging;
 using System.Threading;
 
-namespace OPMedia.PersistenceService
+namespace OPMedia.Core.Persistence
 {
     public class CacheItem
     {
@@ -61,25 +61,19 @@ namespace OPMedia.PersistenceService
     {
         // Poll for expired items at each 10 seconds.
         const int ExpiredItemsPollTimer = 10 * 1000;
-
         const int IterationsUntilGarbageCollection = (10 * 60 * 1000) / ExpiredItemsPollTimer;
 
-        private static CacheStore _instance = new CacheStore();
-        public static CacheStore Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        private IPersistenceService _persistence = null;       
 
         private Dictionary<string, CacheItem> _cache = new Dictionary<string, CacheItem>();
 
         private System.Timers.Timer _tmrCachePoller = null;
         private object _cachePollerLock = new object();
 
-        private CacheStore()
+        public CacheStore(IPersistenceService persistence)
         {
+            _persistence = persistence;
+
             _tmrCachePoller = new System.Timers.Timer();
             _tmrCachePoller.Interval = ExpiredItemsPollTimer;
             _tmrCachePoller.Elapsed += new System.Timers.ElapsedEventHandler(_tmrCachePoller_Elapsed);
@@ -148,6 +142,11 @@ namespace OPMedia.PersistenceService
             if (string.IsNullOrEmpty(persistenceContext))
                 persistenceContext = "*";
 
+            if (persistenceId.Contains("Format"))
+            {
+                int ss = 0;
+            }
+
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
             lock (_cachePollerLock)
@@ -165,25 +164,22 @@ namespace OPMedia.PersistenceService
             Logger.LogTrace("ReadObject: Object with key {0} was not found in cache.", key);
 
             // If it is not, get it from the persistence DB and also add it in the cache.
-            string s = DbStore.ReadObject(persistenceId, persistenceContext);
+            string s = _persistence.ReadObject(persistenceId, persistenceContext);
             if (s != null)
-            {
                 Logger.LogTrace("ReadObject: Object with key {0} was found in DB.", key);
+            else
+                Logger.LogTrace("ReadObject: Object with key {0} was not found in DB also.", key);
 
-                CacheItem ci = new CacheItem(key, s);
 
-                lock (_cachePollerLock)
-                {
-                    Logger.LogTrace("ReadObject: Object with key {0} was added to cache with a TTL of 5 sec", key);
-                    _cache.Add(key, ci);
-                }
+            CacheItem ci = new CacheItem(key, s);
 
-                return ci.Value;
+            lock (_cachePollerLock)
+            {
+                Logger.LogTrace("ReadObject: Object with key {0} was added to cache with a TTL of 5 sec", key);
+                _cache.Add(key, ci);
             }
 
-            Logger.LogTrace("ReadObject: Object with key {0} was not found in DB also.", key);
-
-            return null;
+            return ci.Value;
         }
 
         public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
@@ -230,7 +226,7 @@ namespace OPMedia.PersistenceService
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
                         Logger.LogTrace("SaveObject: Object with key {0} is now saved also in DB.", key);
-                        DbStore.SaveObject(persistenceId, persistenceContext, objectContent);
+                        _persistence.SaveObject(persistenceId, persistenceContext, objectContent);
                     });
             }
             catch
@@ -266,7 +262,7 @@ namespace OPMedia.PersistenceService
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
                         Logger.LogTrace("DeleteObject: Object with key {0} is now removed also from the DB.", key);
-                        DbStore.DeleteObject(persistenceId, persistenceContext);
+                        _persistence.DeleteObject(persistenceId, persistenceContext);
                     });
             }
             catch

@@ -11,11 +11,11 @@ using System.IO;
 
 namespace OPMedia.PersistenceService
 {
-    public class DbStore
+    public class DbStore : IPersistenceService
     {
         private static string __peristenceDbPath = @"..\\Persistence.db";
 
-        static DbStore()
+        public DbStore()
         {
             if (File.Exists(__peristenceDbPath) == false)
                 __peristenceDbPath = "Persistence.db";
@@ -24,7 +24,7 @@ namespace OPMedia.PersistenceService
                 db.Shrink();
         }
 
-        public static string ReadObject(string persistenceId, string persistenceContext)
+        public string ReadObject(string persistenceId, string persistenceContext)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
-        public static void SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public static void DeleteObject(string persistenceId, string persistenceContext)
+        public void DeleteObject(string persistenceId, string persistenceContext)
         {
             try
             {
@@ -98,14 +98,14 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        private static LiteCollection<T> GetObjects<T>(LiteDatabase db)
+        private LiteCollection<T> GetObjects<T>(LiteDatabase db)
         {
             string typeName = typeof(T).Name;
             string pluralizedTypeName = string.Format("{0}s", typeName);
             return db.GetCollection<T>(pluralizedTypeName);
         }
 
-        private static Query GetQuery(string persistenceId, string persistenceContext)
+        private Query GetQuery(string persistenceId, string persistenceContext)
         {
             if (string.IsNullOrEmpty(persistenceContext))
             {
@@ -119,6 +119,14 @@ namespace OPMedia.PersistenceService
                     Query.EQ("PersistenceContext", persistenceContext)
                 );
             }
+        }
+
+        public void Subscribe(string appId)
+        {
+        }
+
+        public void Unsubscribe(string appId)
+        {
         }
     }
 }
