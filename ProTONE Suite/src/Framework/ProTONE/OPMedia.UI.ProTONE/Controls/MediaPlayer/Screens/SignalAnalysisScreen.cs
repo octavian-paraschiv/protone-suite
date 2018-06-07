@@ -124,7 +124,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                         if (_prevWaveform == null)
                             _prevWaveform = new double[waveformData[0].Length];
 
-                        for(int k = 0; k < _prevWaveform.Length; k++)
+                        for (int k = 0; k < _prevWaveform.Length; k++)
                             _prevWaveform[k] = 0.5 * (_prevWaveform[k] + waveformData[0][k]);
 
                         gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
@@ -183,6 +183,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                         Array.Clear(_bands, 0, _bands.Length);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
             finally
             {

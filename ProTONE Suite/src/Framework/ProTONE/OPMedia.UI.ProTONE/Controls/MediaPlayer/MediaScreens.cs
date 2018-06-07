@@ -245,6 +245,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (_activeScreen == this.PlaylistScreen)
             {
+                this.PlaylistScreen.Reselect();
             }
             else if (_activeScreen == this.BookmarkScreen)
             {

@@ -442,13 +442,7 @@ namespace OPMedia.UI.Themes
                         PersistPosition();
                     }
                     break;
-
-                case FormWindowState.Minimized:
-                    // Entering Maximized -- must hide the window.
-                    // ConcealWindow takes care if this actually must happen 
-                    // (As indicated by CanSendToTray app setting).
-                    ConcealWindow();
-                    break;
+            
             }
 
             previousState = WindowState;
@@ -457,12 +451,8 @@ namespace OPMedia.UI.Themes
         void OnHandleDestroyed(object sender, EventArgs e)
         {
             // When exiting save everything.
-
-            PersistTrayState();
             PersistState();
             PersistPosition();
-
-            
         }
 
         void OnShown(object sender, EventArgs e)
@@ -470,7 +460,6 @@ namespace OPMedia.UI.Themes
             if (!DesignMode)
             {
                 // Restore previous state / position when starting up.
-                RestoreTrayState();
                 RestoreState();
                 RestorePosition();
 
@@ -481,38 +470,26 @@ namespace OPMedia.UI.Themes
             }
         }
 
-        protected void ConcealWindow()
+        FormWindowState _prevState = FormWindowState.Normal;
+
+        protected void MinimizeWindow()
         {
-            if (AppConfig.CanSendToTray)
-            {
-                PersistPosition();
-                //PersistState();
-
-                Hide();
-
-                PersistTrayState();
-
-                OnConcealWindow();
-            }
+            _prevState = this.WindowState;
+            this.WindowState = FormWindowState.Minimized;
+            OnWindowMinimized();
         }
 
-        protected void RevealWindow()
+        protected void RestoreWindow()
         {
-            Show();
-            ApplyIcons();
+            this.WindowState = _prevState;
+
             BringToFront();
-
-            PersistTrayState();
-            RestoreState();
-            RestorePosition();
-
             Activate();
-
-            OnRevealWindow();
+            OnWindowRestored();
         }
 
-        protected virtual void OnRevealWindow() { }
-        protected virtual void OnConcealWindow() { }
+        protected virtual void OnWindowRestored() { }
+        protected virtual void OnWindowMinimized() { }
 
         protected void PersistPosition()
         {
@@ -533,13 +510,6 @@ namespace OPMedia.UI.Themes
             {
                 AppConfig.WindowState = this.WindowState;
             }
-        }
-
-        protected void PersistTrayState()
-        {
-            if (!_trayStateRestored) return;
-
-            AppConfig.MimimizedToTray = !Visible;
         }
 
         bool _positionRestored = false;
@@ -590,17 +560,6 @@ namespace OPMedia.UI.Themes
             }
 
             _stateRestored = true;
-        }
-
-        bool _trayStateRestored = false;
-        protected void RestoreTrayState()
-        {
-            if (AppConfig.MimimizedToTray)
-                Hide();
-            else
-                Show();
-
-            _trayStateRestored = true;
         }
 
         protected override bool AllowCloseOnKeyDown(Keys keyDown)

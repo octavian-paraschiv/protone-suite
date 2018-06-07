@@ -67,9 +67,6 @@ namespace OPMedia.ProTONE
         public MainForm()
             : base("TXT_APP_NAME")
         {
-            AppConfig.CanSendToTray = true;
-            
-
             InitializeComponent();
 
             mnuMediaState.ForeColor = ThemeManager.MenuTextColor;
@@ -279,7 +276,7 @@ namespace OPMedia.ProTONE
             switch (cmd.CommandType)
             {
                 case CommandType.Activate:
-                    RevealWindow();
+                    RestoreWindow();
                     mediaPlayer.DoLayout();
                     break;
                 case CommandType.Terminate:
@@ -334,18 +331,18 @@ namespace OPMedia.ProTONE
                 return;
             }
 
-            if (Visible)
+            if (this.WindowState == FormWindowState.Minimized)
             {
-                ConcealWindow();
+                RestoreWindow();
+                //mediaPlayer.DoLayout();
             }
             else
             {
-                RevealWindow();
-                mediaPlayer.DoLayout();
+                MinimizeWindow();
             }
         }
 
-        protected override void OnRevealWindow()
+        protected override void OnWindowRestored()
         {
             BuildThumbnailButtons(true);
         }

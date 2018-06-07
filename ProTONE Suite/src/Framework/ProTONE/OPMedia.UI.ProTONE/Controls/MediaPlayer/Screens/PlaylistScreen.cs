@@ -283,6 +283,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             return retVal;
         }
 
+        internal void Reselect()
+        {
+            this.Invalidate(true);
+            lvPlaylist.Invalidate(true);
+        }
+
         bool _abortLoad = false;
 
         void PlaylistPanel_HandleDestroyed(object sender, EventArgs e)
