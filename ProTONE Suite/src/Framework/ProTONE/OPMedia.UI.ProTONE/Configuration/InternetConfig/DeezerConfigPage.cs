@@ -60,6 +60,8 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
+
             new DeezerCredentialsForm().ShowDialog();
             DeezerConfigPage_HandleCreated(sender, e);
         }

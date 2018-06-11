@@ -65,20 +65,13 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             string url = string.Format("https://connect.deezer.com/oauth/auth.php?app_id={0}&redirect_uri={1}&perms=basic_access,offline_access&response_type=token",
                 appId, _redirectUri);
 
-            bool newWindow = chkNewBrowser.Checked;
-
-            if (newWindow)
-                Process.Start(url);
-            else
+            try
             {
-                try
-                {
-                    wbDeezer.Navigate(url);
-                }
-                catch
-                {
-                    Process.Start(url);
-                }
+                wbDeezer.Navigate(url);
+            }
+            catch
+            {
+                Process.Start(url);
             }
         }
     }

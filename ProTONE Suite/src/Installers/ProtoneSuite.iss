@@ -275,6 +275,7 @@ Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flag
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstRCCService}; RunOnceId: _id8
 
 [Registry]
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION; ValueType: dword; ValueName: OPMedia.ProTONE.exe; ValueData: 8000; Flags: createvalueifdoesntexist noerror
 Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: InstallLanguageID; ValueData: {language}; Flags: uninsdeletevalue noerror
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: noDxvaDecoder; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: cscd; ValueData: $00000001; Components: itemCodecs\itemFFDShow
@@ -1553,7 +1554,6 @@ Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; Val
 ; Enable using MPG1/MPG2 codecs in Windows 8 and higher
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
-
 
 [UninstallDelete]
 Name: {app}\InstallUtil.InstallLog; Type: files

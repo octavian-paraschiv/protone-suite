@@ -35,7 +35,6 @@
             this.btnRequest = new OPMedia.UI.Controls.OPMButton();
             this.opmPanel1 = new OPMedia.UI.Controls.OPMPanel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
-            this.chkNewBrowser = new OPMedia.UI.Controls.OPMCheckBox();
             this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.opmPanel1.SuspendLayout();
@@ -96,7 +95,6 @@
             this.opmTableLayoutPanel1.Controls.Add(this.btnRequest, 1, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.opmPanel1, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel2, 1, 1);
-            this.opmTableLayoutPanel1.Controls.Add(this.chkNewBrowser, 2, 2);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
@@ -167,19 +165,6 @@
             this.opmLabel2.TabIndex = 14;
             this.opmLabel2.Text = "TXT_REDIRECTURL_HINT";
             // 
-            // chkNewBrowser
-            // 
-            this.chkNewBrowser.AutoSize = true;
-            this.chkNewBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkNewBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkNewBrowser.Location = new System.Drawing.Point(288, 43);
-            this.chkNewBrowser.Name = "chkNewBrowser";
-            this.chkNewBrowser.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkNewBrowser.Size = new System.Drawing.Size(912, 27);
-            this.chkNewBrowser.TabIndex = 15;
-            this.chkNewBrowser.Text = "Open new browser window";
-            this.chkNewBrowser.UseVisualStyleBackColor = true;
-            // 
             // DeezerCredentialsForm
             // 
             this.ClientSize = new System.Drawing.Size(1205, 477);
@@ -202,7 +187,6 @@
         private UI.Controls.OPMButton btnRequest;
         private UI.Controls.OPMPanel opmPanel1;
         private UI.Controls.OPMLabel opmLabel2;
-        private UI.Controls.OPMCheckBox chkNewBrowser;
 
     }
 }

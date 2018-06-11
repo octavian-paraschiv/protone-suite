@@ -98,7 +98,7 @@
             this.txtDeezerToken.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtDeezerToken.Padding = new System.Windows.Forms.Padding(3);
             this.txtDeezerToken.PasswordChar = '●';
-            this.txtDeezerToken.ReadOnly = true;
+            this.txtDeezerToken.ReadOnly = false;
             this.txtDeezerToken.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDeezerToken.ShortcutsEnabled = true;
             this.txtDeezerToken.Size = new System.Drawing.Size(424, 20);
