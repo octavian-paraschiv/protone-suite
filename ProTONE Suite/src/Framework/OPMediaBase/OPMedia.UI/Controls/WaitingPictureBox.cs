@@ -97,11 +97,7 @@ namespace OPMedia.UI.Controls
         {
             Bitmap frame = GetNextFrame() as Bitmap;
             if (frame != null)
-            {
                 base.Image = frame;
-            }
-            Application.DoEvents();
-
         }
 
         private Image GetNextFrame()
