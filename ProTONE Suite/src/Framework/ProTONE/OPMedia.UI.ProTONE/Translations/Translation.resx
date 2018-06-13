@@ -1207,4 +1207,8 @@ To get your own credentials, please access:</value>
   <data name="TXT_REQUEST_NEW_TOKEN" xml:space="preserve">
     <value>Request new token</value>
   </data>
+  <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
+    <value>You need to have Internet Explorer 9.0 or higher installed in order to be able to auto-register the token.
+Otherwise, you will need to copy it from the URL displayed in the default browser and manually copy it into the application.</value>
+  </data>
 </root>

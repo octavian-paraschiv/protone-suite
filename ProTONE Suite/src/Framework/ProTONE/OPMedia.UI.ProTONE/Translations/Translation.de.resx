@@ -1208,4 +1208,8 @@ To get your own credentials, please access:</value>
   <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
     <value>Durchsuchen Sie meine Online-Playlists!</value>
   </data>
+  <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
+    <value>Sie müssen Internet Explorer 9.0 oder höher installiert um autoregister-Token können.
+Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und manuell in die Anwendung kopieren/</value>
+  </data>
 </root>

@@ -1203,6 +1203,16 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to have Internet Explorer 9.0 or higher installed in order to be able to auto-register the token.
+        ///Otherwise, you will need to copy it from the URL displayed in the default browser and manually copy it into the application..
+        /// </summary>
+        internal static string TXT_INTERNET_EXPLORER_HINT {
+            get {
+                return ResourceManager.GetString("TXT_INTERNET_EXPLORER_HINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have specified an invalid DVD volume. Please reselect..
         /// </summary>
         internal static string TXT_INVALIDDVDVOLUME {

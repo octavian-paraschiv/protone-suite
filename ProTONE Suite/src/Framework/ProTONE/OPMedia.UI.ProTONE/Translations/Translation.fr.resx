@@ -1206,4 +1206,8 @@ To get your own credentials, please access:</value>
   <data name="TXT_LOCAL_DB" xml:space="preserve">
     <value>Favoris</value>
   </data>
+  <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
+    <value>Vous devez avoir Internet Explorer 9.0 ou une version plus récente afin de pouvoir s’auto-enregistrer le jeton.
+Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le navigateur par défaut et le copier manuellement dans l’application. </value>
+  </data>
 </root>

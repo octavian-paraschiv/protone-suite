@@ -85,7 +85,7 @@
             this.txtDeezerToken.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDeezerToken.Enabled = false;
+            this.txtDeezerToken.Enabled = true;
             this.txtDeezerToken.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtDeezerToken.Location = new System.Drawing.Point(122, 35);
             this.txtDeezerToken.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);

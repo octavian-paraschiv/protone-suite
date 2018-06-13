@@ -1208,4 +1208,8 @@ Pentru a obține propriile dvs. setări de identitate, accesați:</value>
   <data name="TXT_LOOKUP_MY_PLAYLISTS" xml:space="preserve">
     <value>Listele mele de redare online</value>
   </data>
+  <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
+    <value>Aveţi nevoie de Internet Explorer 9.0 sau mai nou instalat pentru a putea auto-inregistra tokenul.
+În caz contrar, va trebui să-l copiaţi din adresa URL afişată în browserul implicit și apoi sa-l copiaţi manual în aplicaţie.</value>
+  </data>
 </root>
