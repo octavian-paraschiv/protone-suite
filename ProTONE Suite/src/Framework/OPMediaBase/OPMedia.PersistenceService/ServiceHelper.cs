@@ -29,7 +29,8 @@ namespace OPMedia.PersistenceService
             binding.OpenTimeout = TimeSpan.FromSeconds(4);
             binding.CloseTimeout = TimeSpan.FromSeconds(4);
             binding.SendTimeout = TimeSpan.FromMilliseconds(500);
-            binding.ReceiveTimeout = TimeSpan.FromSeconds(4);
+            binding.ReceiveTimeout = TimeSpan.FromSeconds(30);
+            binding.ReliableSession.InactivityTimeout = TimeSpan.FromSeconds(30);
 
             _host = new ServiceHost(typeof(PersistenceServiceImpl));
             _host.AddServiceEndpoint(typeof(IPersistenceService), binding, PersistenceConstants.PersistenceServiceAddress);

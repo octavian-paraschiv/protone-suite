@@ -91,7 +91,8 @@ namespace OPMedia.Core
                 myBinding.OpenTimeout = TimeSpan.FromSeconds(4);
                 myBinding.CloseTimeout = TimeSpan.FromSeconds(4);
                 myBinding.SendTimeout = TimeSpan.FromMilliseconds(500);
-                myBinding.ReceiveTimeout = TimeSpan.FromSeconds(4);
+                myBinding.ReceiveTimeout = TimeSpan.FromSeconds(30);
+                myBinding.ReliableSession.InactivityTimeout = TimeSpan.FromSeconds(30);
 
                 var instanceContext = new InstanceContext(this);
                 var myEndpoint = new EndpointAddress(PersistenceConstants.PersistenceServiceAddress);
@@ -355,8 +356,29 @@ namespace OPMedia.Core
             throw new NotSupportedException();
         }
 
+        void IPersistenceService.Ping(string appid)
+        {
+            try
+            {
+                if (_channel != null)
+                    _channel.Ping(_appId.ToString());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+        }
+        
         void IPersistenceNotification.Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
+            if (changeType == ChangeType.None && objectContent == "ping")
+            {
+                Logger.LogTrace("Ping received from PersistenceService");
+                return;
+            }
+
             if (persistenceContext == null || persistenceContext == "*" || persistenceContext == _persistenceContext)
                 ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
         }

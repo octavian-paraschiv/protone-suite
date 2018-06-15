@@ -51,6 +51,11 @@ namespace OPMedia.PersistenceService
 
         public void Unsubscribe(string appId)
         {
+            DoUnsubscribe(appId);
+        }
+
+        static void DoUnsubscribe(string appId)
+        {
             lock (_notifyLock)
             {
                 try
@@ -68,37 +73,47 @@ namespace OPMedia.PersistenceService
             }
         }
 
+
         public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
-            ThreadPool.QueueUserWorkItem((c) =>
-                {
-                    lock (_notifyLock)
-                    {
-
-                        List<string> appsToRemove = new List<string>();
-
-                        foreach (KeyValuePair<string, IPersistenceNotification> appRecord in _notifiedApps)
-                        {
-                            try
-                            {
-                                appRecord.Value.Notify(changeType, persistenceId, persistenceContext, objectContent);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.LogTrace("Notify: Marking record for appId {0} for deletion, it looks faulted ...",
-                                    appRecord.Key);
-
-                                appsToRemove.Add(appRecord.Key);
-                                Logger.LogException(ex);
-                            }
-                        }
-
-                        appsToRemove.ForEach((appId) => Unsubscribe(appId));
-                    }
-
-                }, null);
+            DoNotify(changeType, persistenceId, persistenceContext, objectContent);
         }
 
+        static void DoNotify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        {
+            ThreadPool.QueueUserWorkItem((c) =>
+            {
+                lock (_notifyLock)
+                {
+
+                    List<string> appsToRemove = new List<string>();
+
+                    foreach (KeyValuePair<string, IPersistenceNotification> appRecord in _notifiedApps)
+                    {
+                        try
+                        {
+                            if (changeType == ChangeType.None && objectContent == "ping")
+                            {
+                                Logger.LogTrace("Sending Ping to appId {0}", appRecord.Key);
+                            }
+
+                            appRecord.Value.Notify(changeType, persistenceId, persistenceContext, objectContent);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogTrace("Notify: Marking record for appId {0} for deletion, it looks faulted ...",
+                                appRecord.Key);
+
+                            appsToRemove.Add(appRecord.Key);
+                            Logger.LogException(ex);
+                        }
+                    }
+
+                    appsToRemove.ForEach((appId) => DoUnsubscribe(appId));
+                }
+
+            }, null);
+        }
 
         public string ReadObject(string persistenceId, string persistenceContext)
         {
@@ -158,6 +173,16 @@ namespace OPMedia.PersistenceService
             {
                 _deleteTicToc.Toc();
             }
+        }
+
+        public void Ping(string appId)
+        {
+            Logger.LogTrace($"Ping received from appId={appId}");
+        }
+
+        public static void ReversePing()
+        {
+            DoNotify(ChangeType.None, string.Empty, string.Empty, "ping");
         }
     }
 }

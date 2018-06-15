@@ -87,6 +87,9 @@ namespace OPMedia.Core.Persistence
             {
                 _tmrCachePoller.Stop();
                 PollForExpiredCachedItems();
+
+                _persistence.Ping(null);
+
             }
             catch(Exception ex)
             {

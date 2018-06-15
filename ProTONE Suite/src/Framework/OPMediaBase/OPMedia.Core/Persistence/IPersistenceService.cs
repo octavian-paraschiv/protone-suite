@@ -46,6 +46,9 @@ namespace OPMedia.Core
 
         [OperationContract(IsOneWay = true)]
         void DeleteObject(string persistenceId, string persistenceContext);
+
+        [OperationContract(IsOneWay = true)]
+        void Ping(string appId);
     }
 
     public interface IPersistenceNotification

@@ -123,10 +123,17 @@ namespace OPMedia.PersistenceService
 
         public void Subscribe(string appId)
         {
+            // Do nothing
         }
 
         public void Unsubscribe(string appId)
         {
+            // Do nothing
+        }
+
+        public void Ping(string appid)
+        {
+            PersistenceServiceImpl.ReversePing();
         }
     }
 }
