@@ -5,11 +5,7 @@ using System.Text;
 using OPMedia.Runtime.ServiceHelpers;
 using System.ServiceModel;
 using OPMedia.Core;
-
 using OPMedia.Core.Configuration;
-using System.ServiceModel.Security;
-using System.IdentityModel.Selectors;
-using System.Security.Cryptography.X509Certificates;
 
 namespace OPMedia.PersistenceService
 {
