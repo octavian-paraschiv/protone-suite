@@ -142,11 +142,6 @@ namespace OPMedia.Core.Persistence
             if (string.IsNullOrEmpty(persistenceContext))
                 persistenceContext = "*";
 
-            if (persistenceId.Contains("Format"))
-            {
-                int ss = 0;
-            }
-
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
             lock (_cachePollerLock)
@@ -278,6 +273,66 @@ namespace OPMedia.Core.Persistence
             return string.Format("{0}_{1}", persistenceId, persistenceContext);
         }
 
+        internal bool RefreshObject(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        {
+            bool success = false;
+
+            try
+            {
+                Logger.LogTrace($"RefreshObject request: ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent}");
+
+                string key = BuildCacheKey(persistenceId, persistenceContext);
+                lock (_cachePollerLock)
+                {
+                    bool isInCache = _cache.ContainsKey(key);
+
+                    switch (changeType)
+                    {
+                        case ChangeType.Deleted:
+                            if (isInCache)
+                            {
+                                Logger.LogTrace($"ForceUpdate({changeType}): Object with key {key} was found in cache and removed");
+                                success = _cache.Remove(key);
+                            }
+                            else
+                            {
+                                Logger.LogTrace($"ForceUpdate({changeType}): Object with key {key} was not found in cache. Ignoring event.");
+                            }
+                            break;
+
+                        case ChangeType.Saved:
+                            {
+                                CacheItem ci = new CacheItem(key, objectContent);
+
+                                if (isInCache)
+                                {
+                                    Logger.LogTrace($"ForceUpdate({changeType}): Object with key {key} was found in cache and assigned to value={objectContent}");
+                                    _cache[key] = ci;
+                                    success = true;
+                                }
+                                else
+                                {
+                                    Logger.LogTrace($"ForceUpdate({changeType}): Object with key {key} was NOT found in cache and added now with value={objectContent}");
+                                    _cache.Add(key, ci);
+                                    success = true;
+                                }
+                            }
+                            break;
+
+                        default:
+                            Logger.LogTrace($"ForceUpdate({changeType}): Ignoring event.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                success = false;
+            }
+
+            return success;
+        }
     }
 
 }

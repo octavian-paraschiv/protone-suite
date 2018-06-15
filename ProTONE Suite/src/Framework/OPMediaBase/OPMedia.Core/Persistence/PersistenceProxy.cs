@@ -363,7 +363,15 @@ namespace OPMedia.Core
 
         void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
-            AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);
+            if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
+            {
+                Logger.LogTrace($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
+                AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);
+            }
+            else
+            {
+                Logger.LogTrace($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Ignored, as we failed to update the cache.");
+            }
         }
     }
 }
