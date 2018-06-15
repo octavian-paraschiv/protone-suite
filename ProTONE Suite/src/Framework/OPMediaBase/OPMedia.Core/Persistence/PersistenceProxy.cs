@@ -84,12 +84,17 @@ namespace OPMedia.Core
         {
             try
             {
-                var myBinding = new WSDualHttpBinding();
+                var myBinding = new NetTcpBinding();
                 myBinding.MaxReceivedMessageSize = int.MaxValue;
                 myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
+                myBinding.OpenTimeout = TimeSpan.FromSeconds(4);
+                myBinding.CloseTimeout = TimeSpan.FromSeconds(4);
+                myBinding.SendTimeout = TimeSpan.FromMilliseconds(500);
+                myBinding.ReceiveTimeout = TimeSpan.FromSeconds(4);
+
                 var instanceContext = new InstanceContext(this);
-                var myEndpoint = new EndpointAddress("http://localhost/PersistenceService.svc");
+                var myEndpoint = new EndpointAddress(PersistenceConstants.PersistenceServiceAddress);
                 var myChannelFactory = new DuplexChannelFactory<IPersistenceService>(instanceContext, myBinding, myEndpoint);
 
                 _channel = myChannelFactory.CreateChannel();

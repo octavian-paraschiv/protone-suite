@@ -53,4 +53,17 @@ namespace OPMedia.Core
         [OperationContract(IsOneWay = true)]
         void Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent);
     }
+
+    public static class PersistenceConstants
+    {
+        public const int TcpPort = 10200;
+
+        public static string PersistenceServiceAddress
+        {
+            get
+            {
+                return $"net.tcp://localhost:{PersistenceConstants.TcpPort}/PersistenceService.svc";
+            }
+        }
+    }
 }
