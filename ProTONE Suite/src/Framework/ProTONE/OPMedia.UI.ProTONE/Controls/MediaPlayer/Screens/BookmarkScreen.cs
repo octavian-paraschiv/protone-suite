@@ -268,6 +268,7 @@ namespace OPMedia.UI.ProTONE.Controls.BookmarkManagement
 
                         pbAdd.Visible = pbDelete.Visible = _plItem.IsBookmarkInfoEditable;
                         lvBookmarks.AllowEditing = _plItem.IsBookmarkInfoEditable;
+                        lvBookmarks.Enabled = _plItem.IsBookmarkInfoEditable; ;
 
                         List<Bookmark> bmkList =
                             new List<Bookmark>(_plItem.MediaFileInfo.Bookmarks.Values);
