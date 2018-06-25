@@ -398,7 +398,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
                 }
 
                 bool selectFirst = (this.Items.Count > 0);
-                int lastVisibleIndex = 0;
+                int lastVisibleIndex = -1;
 
                 foreach (ListViewItem item in this.Items)
                 {
@@ -415,14 +415,14 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
                     }
                 }
 
-                if (selectFirst)
+                if (lastVisibleIndex > 0)
+                {
+                    EnsureVisible(lastVisibleIndex);
+                }
+                else if (selectFirst)
                 {
                     Items[0].Selected = true;
                     Items[0].Focused = true;
-                }
-                else
-                {
-                    EnsureVisible(lastVisibleIndex);
                 }
 
                 this.Select();
