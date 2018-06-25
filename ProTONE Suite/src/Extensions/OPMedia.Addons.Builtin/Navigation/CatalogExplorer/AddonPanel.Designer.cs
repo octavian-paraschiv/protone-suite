@@ -304,11 +304,11 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbSearch.CheckedImage = null;
             this.tsbSearch.DisabledImage = null;
             this.tsbSearch.Enabled = false;
-            this.tsbSearch.Image = global::OPMedia.UI.Properties.Resources.Search;
+            this.tsbSearch.Image = ((System.Drawing.Image)(resources.GetObject("tsbSearch.Image")));
             this.tsbSearch.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.tsbSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSearch.InactiveImage = global::OPMedia.UI.Properties.Resources.Search;
+            this.tsbSearch.InactiveImage = ((System.Drawing.Image)(resources.GetObject("tsbSearch.InactiveImage")));
             this.tsbSearch.Name = "tsbSearch";
             this.tsbSearch.Size = new System.Drawing.Size(40, 40);
             this.tsbSearch.Tag = "ToolActionSearch";
@@ -429,7 +429,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsmiProTONEPlay,
             this.tsmiProTONEEnqueue});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(210, 320);
+            this.contextMenuStrip.Size = new System.Drawing.Size(210, 342);
             // 
             // tsmiBack
             // 
@@ -472,7 +472,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // tsmiSearch
             // 
             this.tsmiSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiSearch.Image = global::OPMedia.UI.Properties.Resources.Search16;
+            this.tsmiSearch.Image = ((System.Drawing.Image)(resources.GetObject("tsmiSearch.Image")));
             this.tsmiSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiSearch.Name = "tsmiSearch";
             this.tsmiSearch.Size = new System.Drawing.Size(209, 22);
@@ -568,7 +568,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsmiCatalog.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmiCatalog.Name = "tsmiCatalog";
             this.tsmiCatalog.Size = new System.Drawing.Size(209, 22);
-            this.tsmiCatalog.Tag = "";
+            this.tsmiCatalog.Tag = "ToolActionCatalog";
             this.tsmiCatalog.Text = "TXT_CATALOG";
             this.tsmiCatalog.Click += new System.EventHandler(this.OnToolAction);
             // 
