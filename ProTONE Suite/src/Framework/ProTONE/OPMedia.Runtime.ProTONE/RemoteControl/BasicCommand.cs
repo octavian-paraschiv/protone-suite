@@ -49,12 +49,15 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         [EventSink(BasicCommand.EventName)]
         public void RunCommand(BasicCommand cmd)
         {
+            Logger.LogTrace("BasicCommand.RunCommand: {0}", cmd);
+
             if (cmd == null)
                 return;
 
             if (cmd.RequiresAnswer)
             {
                 RunExtendedCommand(cmd);
+                return;
             }
 
             if (_target != null)
@@ -63,23 +66,20 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
         }
 
-        private static void RunExtendedCommand(BasicCommand cmd)
+        private static string RunExtendedCommand(BasicCommand cmd)
         {
             try
             {
                 switch (cmd.CommandType)
                 {
                     case CommandType.BrowseRemoteFiles:
-                        (cmd as BrowseRemoteFilesCommand).Execute();
-                        break;
+                        return (cmd as BrowseRemoteFilesCommand).Execute();
 
                     case CommandType.GetDriveList:
-                        (cmd as GetDriveListCommand).Execute();
-                        break;
+                        return (cmd as GetDriveListCommand).Execute();
 
                     case CommandType.QueryMediaRenderer:
-                        (cmd as QueryMediaRendererCommand).Execute();
-                        break;
+                        return (cmd as QueryMediaRendererCommand).Execute();
                 }
 
                 throw new ArgumentException("Uncomprehensible command", "cmd");
@@ -88,6 +88,8 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             {
                 Logger.LogException(exception);
             }
+
+            return null;
         }
     }
 

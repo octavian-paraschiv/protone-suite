@@ -50,6 +50,7 @@ namespace OPMedia.ProTONE
         {
             if (cmd != null)
             {
+                Logger.LogTrace("MainForm.EnqueueCommand: {0}", cmd);
                 commandQueue.Enqueue(cmd);
             }
         }
@@ -267,12 +268,17 @@ namespace OPMedia.ProTONE
             if (commandQueue.Count > 0)
             {
                 BasicCommand cmd = commandQueue.Dequeue();
-                ProcessCommand(cmd);
+                if (cmd != null)
+                {
+                    ProcessCommand(cmd);
+                }
             }
         }
 
         private void ProcessCommand(BasicCommand cmd)
         {
+            Logger.LogTrace("MainForm.ProcessCommand: {0}", cmd);
+
             switch (cmd.CommandType)
             {
                 case CommandType.Activate:

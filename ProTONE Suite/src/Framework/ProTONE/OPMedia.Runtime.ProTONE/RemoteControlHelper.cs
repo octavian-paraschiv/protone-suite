@@ -59,7 +59,7 @@ namespace OPMedia.Runtime.ProTONE
                 {
                     Process.Start(ProTONEConfig.PlayerInstallationPath);
                     i++;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                 }
             }
 
@@ -67,7 +67,8 @@ namespace OPMedia.Runtime.ProTONE
             {
                 if (!playerWasAlreadyRunning)
                 {
-                    Thread.Sleep(400);
+                    // The player has just been launched. Give it some time to boot up.
+                    Thread.Sleep(2000);
                 }
 
                 //// If we came to this poin the player is running. 

@@ -81,6 +81,9 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         void _wcdReceiver_DataReceived(string data)
         {
             BasicCommand cmd = BasicCommand.Create(data);
+
+            Logger.LogTrace("_wcdReceiver_DataReceived: {0} => cmd: {1}", data, cmd);
+
             EventDispatch.DispatchEvent(BasicCommand.EventName, cmd);
         }
 
