@@ -237,10 +237,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             Image img = null;
 
             if (_pli != null)
+            {
                 img = _pli.GetImageEx(true);
 
-            if (img == null)
-                img = ImageProvider.GetIcon(_pli.Path, true);
+                if (img == null)
+                    img = ImageProvider.GetIcon(_pli.Path, true);
+            }
 
             tslFileType.Image = img;
             tslFileType.Tag = _pli;
