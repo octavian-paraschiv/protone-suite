@@ -65,8 +65,9 @@ namespace OPMedia.UI.ProTONE
         public void ShowTrayMessage(string message, string title, int icon)
         {
             string dispMsg = string.Format("{0}_{1}_{2}", message, title, icon);
-            Image dispIcon = GetTrayToolTipIcon(icon);
+            Logger.LogTrace("ShowTrayMessage: oldMsg={0}, msg={1}", _dispMessage ?? "<null>", dispMsg);
 
+            Image dispIcon = GetTrayToolTipIcon(icon);
             if (dispMsg != _dispMessage)
             {
                 _dispMessage = dispMsg;
@@ -80,7 +81,28 @@ namespace OPMedia.UI.ProTONE
 
                 TrayNotificationBox box = new TrayNotificationBox();
                 box.HideDelay = 5000;
+                box.FormClosed += Box_FormClosed;
+                box.Shown += Box_Shown;
+
                 box.Show(title, d, dispIcon);
+            }
+        }
+
+        private void Box_Shown(object sender, EventArgs e)
+        {
+            Logger.LogTrace("Tray message box shown");
+        }
+
+        private void Box_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Logger.LogTrace("Tray message box closed");
+            _dispMessage = null;
+
+            TrayNotificationBox box = sender as TrayNotificationBox;
+            if (box != null)
+            {
+                box.FormClosed -= Box_FormClosed;
+                box.Shown -= Box_Shown;
             }
         }
     }

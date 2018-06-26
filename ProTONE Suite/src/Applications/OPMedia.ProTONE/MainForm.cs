@@ -217,6 +217,9 @@ namespace OPMedia.ProTONE
         {
             message = MediaRenderer.DefaultInstance.TranslatedFilterState;
 
+            if (_hasMediaStateChangedAtLeastOnce == false)
+                return false;
+
             try
             {
                 if (!string.IsNullOrEmpty(mediaPlayer.PlayedFileTitle))
@@ -375,13 +378,10 @@ namespace OPMedia.ProTONE
 
             string info = string.Empty;
 
-            if (_hasMediaStateChangedAtLeastOnce == false)
-                return;
+            BuildMediaStateString(true, ref info);
 
-            if (BuildMediaStateString(true, ref info))
-            {
-                EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, info, Translator.Translate("TXT_APP_NAME"), 0);
-            }
+            Logger.LogTrace("_notifyIconMoveTimer_Tick => Text: {0}", info);
+            EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, info, Translator.Translate("TXT_APP_NAME"), 0);
         }
 
         public void NotifyMenuClick(object sender, System.EventArgs e)
