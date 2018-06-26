@@ -83,7 +83,7 @@ namespace OPMedia.ProTONE
                         Logger.LogWarning(ex.Message);
 
                         // Send an activate command to the main instance
-                        RemoteControlHelper.SendPlayerCommand(CommandType.Activate, null);
+                        RemoteControlHelper.SendPlayerCommand(CommandType.Activate, null, false, false);
                     }
                     catch (Exception ex)
                     {
@@ -125,7 +125,7 @@ namespace OPMedia.ProTONE
                         {
                             // There is another player instance that is running.
                             // Just pass the command to that instance and exit.
-                            RemoteControlHelper.SendPlayerCommand(cmdType, files.ToArray());
+                            RemoteControlHelper.SendPlayerCommand(cmdType, files.ToArray(), false, false);
                         }
                         else
                         {

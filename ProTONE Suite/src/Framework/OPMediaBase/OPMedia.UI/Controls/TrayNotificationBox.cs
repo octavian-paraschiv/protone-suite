@@ -39,7 +39,7 @@ namespace OPMedia.UI.Controls
             AssignData(title, values, img);
             
             User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
-            User32.SetWindowOnTop(Handle, false);
+            User32.SetWindowOnTop(Handle, false, false);
 
             _tmrHide.Interval = HideDelay;
             _tmrHide.Start();

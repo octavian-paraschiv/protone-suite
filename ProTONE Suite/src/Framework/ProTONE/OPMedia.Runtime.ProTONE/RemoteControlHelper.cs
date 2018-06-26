@@ -17,6 +17,7 @@ using System.Security.AccessControl;
 using OPMedia.Runtime.InterProcessCommunication;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE
 {
@@ -32,61 +33,66 @@ namespace OPMedia.Runtime.ProTONE
         const int MaxStartupAttempts = 20;
 
         #region Player commands
-        public static void SendPlayerCommand(BasicCommand command, bool useIpc = false)
+        public static void SendPlayerCommand(BasicCommand command, bool async, bool useIpc)
         {
-            ThreadPool.QueueUserWorkItem(c =>
-                {
-                    int i = 0;
-
-                    bool playerWasAlreadyRunning = IsPlayerRunning();
-                    if (!useIpc)
-                    {
-                        // See if player is started; if not - start it
-                        while ((!IsPlayerRunning() && i < MaxStartupAttempts))
-                        {
-                            Process.Start(ProTONEConfig.PlayerInstallationPath);
-                            i++;
-                            Thread.Sleep(1000);
-                        }
-                    }
-
-                    if (IsPlayerRunning())
-                    {
-                        if (!playerWasAlreadyRunning)
-                        {
-                        	Thread.Sleep(400);
-                        }
-
-                        //// If we came to this poin the player is running. 
-                        //// Send the command (it should arrive to player).
-                        if (useIpc)
-                        {
-                            IPCRemoteControlProxy.PostRequest(ProTONEConstants.PlayerName, command.ToString());
-                        }
-                        else
-                        {
-                            WmCopyDataSender.SendData(ProTONEConstants.PlayerName, command.ToString());
-                        }
-                    }
-                    else
-                    {
-                        if (useIpc)
-                        {
-                            Logger.LogError("Could not send command because the player is not running.");
-                        }
-                        else
-                        {
-                            Logger.LogError("Could not send command because the player could not be launched from path: {0}",
-                                ProTONEConfig.PlayerInstallationPath);
-                        }
-                    }
-                }
-            );
+            if (async)
+                Task.Factory.StartNew(() => SendPlayerCommandInternal(command, useIpc));
+            else
+                SendPlayerCommandInternal(command, useIpc);
         }
 
-        public static void SendPlayerCommand(CommandType cmdType, string[] args, bool useIpc = false)
+        public static void SendPlayerCommand(CommandType cmdType, string[] args, bool async, bool useIpc)
         {
-            SendPlayerCommand(BasicCommand.Create(cmdType, args), useIpc);
+            var cmd = BasicCommand.Create(cmdType, args);
+            SendPlayerCommand(cmd, async, useIpc);
+        }
+
+        private static void SendPlayerCommandInternal(BasicCommand command, bool useIpc)
+        {
+            int i = 0;
+
+            bool playerWasAlreadyRunning = IsPlayerRunning();
+            if (!useIpc)
+            {
+                // See if player is started; if not - start it
+                while ((!IsPlayerRunning() && i < MaxStartupAttempts))
+                {
+                    Process.Start(ProTONEConfig.PlayerInstallationPath);
+                    i++;
+                    Thread.Sleep(1000);
+                }
+            }
+
+            if (IsPlayerRunning())
+            {
+                if (!playerWasAlreadyRunning)
+                {
+                    Thread.Sleep(400);
+                }
+
+                //// If we came to this poin the player is running. 
+                //// Send the command (it should arrive to player).
+                if (useIpc)
+                {
+                    IPCRemoteControlProxy.PostRequest(ProTONEConstants.PlayerName, command.ToString());
+                }
+                else
+                {
+                    WmCopyDataSender.SendData(ProTONEConstants.PlayerName, command.ToString());
+                }
+            }
+            else
+            {
+                if (useIpc)
+                {
+                    Logger.LogError("Could not send command because the player is not running.");
+                }
+                else
+                {
+                    Logger.LogError("Could not send command because the player could not be launched from path: {0}",
+                        ProTONEConfig.PlayerInstallationPath);
+                }
+            }
         }
         #endregion
 

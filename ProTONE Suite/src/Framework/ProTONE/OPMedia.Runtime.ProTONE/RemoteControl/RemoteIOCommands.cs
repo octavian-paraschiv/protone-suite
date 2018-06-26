@@ -102,7 +102,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
                 else
                     hWnd = MainThread.MainWindow.Handle;
 
-                if (User32.SetWindowOnTop(hWnd, true))
+                if (User32.SetWindowOnTop(hWnd, true, false))
                 {
                     SendKeys.SendWait(key);
                     return "ACK\r\n";

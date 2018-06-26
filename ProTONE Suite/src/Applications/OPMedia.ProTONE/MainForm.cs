@@ -277,6 +277,7 @@ namespace OPMedia.ProTONE
             {
                 case CommandType.Activate:
                     RestoreWindow();
+                    User32.SetWindowOnTop(this.Handle, true, false);
                     mediaPlayer.DoLayout();
                     break;
                 case CommandType.Terminate:

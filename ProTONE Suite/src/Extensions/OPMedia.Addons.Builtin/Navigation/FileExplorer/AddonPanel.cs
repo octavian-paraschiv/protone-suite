@@ -590,7 +590,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         {
                                             RemoteControlHelper.SendPlayerCommand(
                                                 OPMedia.Runtime.ProTONE.RemoteControl.CommandType.EnqueueFiles,
-                                                taskSearch.MatchingItems.ToArray());
+                                                taskSearch.MatchingItems.ToArray(), true, false);
                                         }
                                     }
                                     break;
@@ -601,7 +601,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         {
                                             RemoteControlHelper.SendPlayerCommand(
                                                 OPMedia.Runtime.ProTONE.RemoteControl.CommandType.PlayFiles,
-                                                taskSearch.MatchingItems.ToArray());
+                                                taskSearch.MatchingItems.ToArray(), true, false);
                                         }
                                     }
                                     break;
@@ -746,7 +746,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             {
                                 RemoteControlHelper.SendPlayerCommand(
                                     OPMedia.Runtime.ProTONE.RemoteControl.CommandType.EnqueueFiles,
-                                    items.ToArray());
+                                    items.ToArray(), true, false);
                             }
                         }
                         break;
@@ -758,7 +758,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             {
                                 RemoteControlHelper.SendPlayerCommand(
                                     OPMedia.Runtime.ProTONE.RemoteControl.CommandType.PlayFiles,
-                                    items.ToArray());
+                                    items.ToArray(), true, false);
                             }
                         }
                         break;

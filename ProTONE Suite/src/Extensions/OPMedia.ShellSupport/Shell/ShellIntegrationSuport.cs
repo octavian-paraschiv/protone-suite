@@ -227,7 +227,7 @@ namespace OPMedia.ShellSupport
                 {
                     case (int)CommandType.PlayFiles:
                     case (int)CommandType.EnqueueFiles:
-                        RemoteControlHelper.SendPlayerCommand((CommandType)cmd, fileList.ToArray()); 
+                        RemoteControlHelper.SendPlayerCommand((CommandType)cmd, fileList.ToArray(), true, false); 
                         break;
 
                     default:

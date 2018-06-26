@@ -991,38 +991,40 @@ namespace OPMedia.Core
             return res;
         }
 
-
-        public static bool SetWindowOnTop(IntPtr fgWnd, bool bSetFocusToWindow)
+        public static bool SetWindowOnTop(IntPtr fgWnd, bool bSetFocusToWindow, bool makeTopMost)
 		{
-			IntPtr bkWnd = GetForegroundWindow();
-			if (fgWnd == bkWnd)
+			IntPtr bgWnd = GetForegroundWindow();
+			if (fgWnd == bgWnd)
 				return true;
 
-			IntPtr ThreadID1 = GetWindowThreadProcessId(bkWnd, IntPtr.Zero);
+			IntPtr ThreadID1 = GetWindowThreadProcessId(bgWnd, IntPtr.Zero);
 			IntPtr ThreadID2 = GetWindowThreadProcessId(fgWnd, IntPtr.Zero);
 
             bool retVal = false;
 
-			if (ThreadID1 != ThreadID2)
+            if (makeTopMost)
+                bgWnd = (IntPtr)(-1);
+
+            if (ThreadID1 != ThreadID2)
 			{
 				AttachThreadInput(ThreadID1, ThreadID2, 1);
-                retVal = MoveToForeground(fgWnd, bSetFocusToWindow);
+                retVal = MoveToForeground(fgWnd, bgWnd, bSetFocusToWindow);
 				AttachThreadInput(ThreadID1, ThreadID2, 0);
 			}
 			else
-                retVal = MoveToForeground(fgWnd, bSetFocusToWindow);
+                retVal = MoveToForeground(fgWnd, bgWnd, bSetFocusToWindow);
 
             return retVal;
 		}
 
-        private static bool MoveToForeground(IntPtr fgWnd, bool bSetFocusToWindow)
-	    {
+        private static bool MoveToForeground(IntPtr fgWnd, IntPtr bgWnd, bool bSetFocusToWindow)
+        {
             SetWindowPosFlags uFlags = SetWindowPosFlags.SWP_NOMOVE | SetWindowPosFlags.SWP_NOSIZE | SetWindowPosFlags.SWP_SHOWWINDOW;
             if (!bSetFocusToWindow)
                 uFlags |= SetWindowPosFlags.SWP_NOACTIVATE;
 
             return SetWindowPos(fgWnd, 
-			    (IntPtr)(-1),
+			    bgWnd,
 			    0, 0, 0, 0,
                 uFlags);
 	    }

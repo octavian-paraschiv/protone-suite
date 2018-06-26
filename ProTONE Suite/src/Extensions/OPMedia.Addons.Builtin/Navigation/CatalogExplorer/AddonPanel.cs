@@ -711,7 +711,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
             if (launchPaths.Count > 0)
             {
-                RemoteControlHelper.SendPlayerCommand(commandType, launchPaths.ToArray());
+                RemoteControlHelper.SendPlayerCommand(commandType, launchPaths.ToArray(), true, false);
             }
         }
 

@@ -186,7 +186,7 @@ namespace OPMedia.RemoteControlEmulator
                 switch (cmbDestination.SelectedIndex)
                 {
                     case 0:
-                        RemoteControlHelper.SendPlayerCommand(cmdType, args);
+                        RemoteControlHelper.SendPlayerCommand(cmdType, args, true, true);
                         txtResult.Text = "[ Player commands do not return results. ]";
                         break;
 
