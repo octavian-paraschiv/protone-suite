@@ -10,6 +10,7 @@ using System.IO;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.Logging;
 using OPMedia.UI.FileOperations.Tasks;
+using System.Collections.Concurrent;
 
 namespace OPMedia.UI.FileTasks
 {
@@ -58,6 +59,14 @@ namespace OPMedia.UI.FileTasks
         public long TotalFileSize { get; private set; }
         public long TotalBytesTransferred { get; private set; }
 
+        public bool IsDone
+        {
+            get
+            {
+                return (TotalBytesTransferred >= TotalFileSize);
+            }
+        }
+
         private UpdateProgressData()
         {
             this.TotalFileSize = 0;
@@ -72,7 +81,7 @@ namespace OPMedia.UI.FileTasks
 
         public override string ToString()
         {
-            return string.Format("t/T: {0}/{1}", TotalBytesTransferred, TotalFileSize);
+            return string.Format("transf={0}, Total={1}, Done={2}", TotalBytesTransferred, TotalFileSize, IsDone);
         }
     }
 
@@ -91,9 +100,18 @@ namespace OPMedia.UI.FileTasks
         public List<string> SrcFiles { get; private set; }
         public string SrcFolder { get; private set; }
         public string DestFolder { get; private set; }
-        public int ObjectsCount { get; private set; }
 
-        public long ProcessedObjects { get; private set; }
+        public int TotalObjects { get; private set; }
+        public int ProcessedObjects
+        {
+            get
+            {
+                return _processedFiles.Count;
+            }
+        }
+
+
+        ConcurrentDictionary<string, int> _processedFiles = new ConcurrentDictionary<string, int>();
 
         protected Thread _fileTaskThread;
         protected FileTaskSupport _support = null;
@@ -146,12 +164,18 @@ namespace OPMedia.UI.FileTasks
             }
         }
 
+        
+
         public void FireTaskProgress(ProgressEventType eventType, string file, UpdateProgressData data)
         {
             if (eventType == ProgressEventType.Progress &&
                 data == UpdateProgressData.FileDone)
             {
-                ProcessedObjects++;
+                string lowercaseFile = file.ToLowerInvariant();
+                if (_processedFiles.ContainsKey(lowercaseFile))
+                    return;
+
+                _processedFiles.TryAdd(lowercaseFile, 0);
             }
 
             if (FileTaskProgress != null)
@@ -203,22 +227,35 @@ namespace OPMedia.UI.FileTasks
         {
             try
             {
-                ProcessedObjects = 0;
-                ObjectsCount = 0;
+                _processedFiles.Clear();
+
+                TotalObjects = 0;
                 ErrorMap.Clear();
 
-                List<string> allLinkedFiles = new List<string>();
+                List<string> allLinkedFiles_Lowercase = new List<string>();
                 foreach (string path in SrcFiles)
                 {
                     if (File.Exists(path))
                     {
                         List<String> linkedFiles = _support.GetChildFiles(path, TaskType);
-                        if (linkedFiles != null && linkedFiles.Count > 0)
+                        if (linkedFiles != null)
                         {
-                            var linkedFilesLowercase = (from s in linkedFiles
-                                                        select s.ToLowerInvariant()).ToList();
+                            foreach (string f in linkedFiles)
+                            {
+                                string fl = f.ToLowerInvariant();
 
-                            allLinkedFiles.AddRange(linkedFilesLowercase);
+                                if (allLinkedFiles_Lowercase.Contains(fl) == false)
+                                    allLinkedFiles_Lowercase.Add(fl);
+                            }
+                        }
+
+                        string parentFile = _support.GetParentFile(path, TaskType);
+                        if (File.Exists(parentFile) && SrcFiles.Contains(parentFile) == false)
+                        {
+                            string fl = parentFile.ToLowerInvariant();
+
+                            if (allLinkedFiles_Lowercase.Contains(fl) == false)
+                                allLinkedFiles_Lowercase.Add(fl);
                         }
                     }
                 }
@@ -227,27 +264,27 @@ namespace OPMedia.UI.FileTasks
 
                 foreach (string srcFile in srcFilesClone)
                 {
-                    if (allLinkedFiles.Contains(srcFile.ToLowerInvariant()))
+                    string fl = srcFile.ToLowerInvariant();
+
+                    if (allLinkedFiles_Lowercase.Contains(fl))
                         SrcFiles.Remove(srcFile);
                 }
 
                 foreach (string path in SrcFiles)
                 {
+                    TotalObjects++;
+
                     if (Directory.Exists(path))
                     {
                         List<string> entries = PathUtils.EnumFileSystemEntries(path, "*", SearchOption.AllDirectories);
                         if (entries != null && entries.Count > 0)
                         {
-                            ObjectsCount += entries.Count;
+                            TotalObjects += entries.Count;
                         }
-                    }
-                    else
-                    {
-                        ObjectsCount++;
                     }
                 }
 
-                ObjectsCount += allLinkedFiles.Count;
+                TotalObjects += allLinkedFiles_Lowercase.Count;
 
                 FireTaskProgress(ProgressEventType.Started, string.Empty, UpdateProgressData.Empty);
 

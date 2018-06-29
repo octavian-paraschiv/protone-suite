@@ -127,7 +127,7 @@ namespace OPMedia.UI.FileTasks
                     case ProgressEventType.Started:
                         pbOperation.Value = 0;
                         pbOperation.Maximum = 10000;
-                        pbOperation.Visible = (_task.ObjectsCount > 1);
+                        pbOperation.Visible = (_task.TotalObjects > 1);
                         TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Indeterminate);
                         TaskbarThumbnailManager.Instance.UpdateProgress(0, 10000);
                         break;
@@ -175,14 +175,14 @@ namespace OPMedia.UI.FileTasks
             }
         }
 
-        private void UpdateProgress(UpdateProgressData state)
+        private void UpdateProgress(UpdateProgressData data)
         {
-            if (state.TotalFileSize > 0)
+            if (data.TotalFileSize > 0)
             {
                 try
                 {
-                    long totalFileSize = (state as UpdateProgressData).TotalFileSize;
-                    long totalBytesTransferred = (state as UpdateProgressData).TotalBytesTransferred;
+                    long totalFileSize = data.TotalFileSize;
+                    long totalBytesTransferred = data.TotalBytesTransferred;
 
                     double fractionTransfer = 0;
 
@@ -192,19 +192,24 @@ namespace OPMedia.UI.FileTasks
                     }
 
                     long processedObjectCount = _task.ProcessedObjects;
-                    long totalObjectCount = _task.ObjectsCount;
+                    long totalObjectCount = _task.TotalObjects;
 
-                    int percent = (int)((100 * (processedObjectCount + fractionTransfer)) / totalObjectCount);
+                    int percent = 0;
+                    if (data.IsDone)
+                        percent = (int)((100 * processedObjectCount) / totalObjectCount);
+                    else
+                        percent = (int)((100 * (processedObjectCount + fractionTransfer)) / totalObjectCount);
 
                     pbCurrent.Value = 10000 * fractionTransfer;
-                    pbOperation.Value = (10000 * processedObjectCount) / totalObjectCount;
+                    pbOperation.Value = 100 * percent;
+
+                    Logger.LogTrace($"Progress: percent={percent} proc={processedObjectCount} total={totalObjectCount} {data} file={txtCurFile.Text}");
 
                     lblCurrentProgress.Text = string.Format(_taskProgress, _taskDesc, processedObjectCount,
                             totalObjectCount, percent);
 
                     TaskbarThumbnailManager.Instance.SetProgressStatus(TaskbarProgressBarStatus.Normal);
-                    TaskbarThumbnailManager.Instance.UpdateProgress(
-                        (ulong)((10000 * processedObjectCount) / totalObjectCount), 10000);
+                    TaskbarThumbnailManager.Instance.UpdateProgress((ulong)pbOperation.Value, (ulong)pbOperation.Maximum);
                 }
                 catch (Exception ex)
                 {

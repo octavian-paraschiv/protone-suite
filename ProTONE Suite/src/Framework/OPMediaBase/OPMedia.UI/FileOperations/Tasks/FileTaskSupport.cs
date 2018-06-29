@@ -129,7 +129,7 @@ namespace OPMedia.UI.FileOperations.Tasks
                 {
                     DialogResult dr = DialogResult.Abort;
 
-                    if (_task.ObjectsCount == 1)
+                    if (_task.TotalObjects == 1)
                     {
                         dr = MessageDisplay.Query(
                         Translator.Translate(tag, objectName), "TXT_CONFIRM");
@@ -138,7 +138,7 @@ namespace OPMedia.UI.FileOperations.Tasks
                     {
                         dr = MessageDisplay.QueryWithCancelAndAbort(
                         Translator.Translate(tag, objectName),
-                        "TXT_CONFIRM", (_task.ObjectsCount > 1));
+                        "TXT_CONFIRM", (_task.TotalObjects > 1));
                     }
 
                     switch (dr)
