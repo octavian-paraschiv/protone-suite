@@ -1342,7 +1342,7 @@ namespace OPMedia.UI.Controls
         {
             get
             {
-                return this.Width - VisibleVerticalScrollbarWidth - 3;
+                return this.Width - VisibleVerticalScrollbarWidth - 5;
             }
         }
 

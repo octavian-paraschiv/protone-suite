@@ -431,12 +431,50 @@ namespace OPMedia.UI.Controls
 
         void OPMShellListView_Resize(object sender, EventArgs e)
         {
-            colSize.Width = 75;
-            colAttr.Width = 65;
-            colLastAccess.Width = 160;
-            colName.Width = this.EffectiveWidth - colSize.Width - 
-                (ShowLastAccess ? colLastAccess.Width : 0) - 
-                (ShowAttributes ? colAttr.Width : 0);
+            try
+            {
+                this.Resize -= OPMShellListView_Resize;
+
+                HandleColsVisibility();
+
+                colSize.Width = 120;
+
+                colAttr.Width = ShowAttributes ? 65 : 0;
+                colLastAccess.Width = ShowLastAccess ? 160 : 0;
+
+                colName.Width = this.EffectiveWidth - colSize.Width -
+                    (ShowLastAccess ? colLastAccess.Width : 0) -
+                    (ShowAttributes ? colAttr.Width : 0);
+            }
+            finally
+            {
+                this.Resize += OPMShellListView_Resize;
+            }
+        }
+
+        void HandleColsVisibility()
+        {
+            if (ShowAttributes)
+            {
+                if (Columns.Contains(colAttr) == false)
+                    Columns.Add(colAttr);
+            }
+            else
+            {
+                if (Columns.Contains(colAttr))
+                    Columns.Remove(colAttr);
+            }
+
+            if (ShowLastAccess)
+            {
+                if (Columns.Contains(colLastAccess) == false)
+                    Columns.Add(colLastAccess);
+            }
+            else
+            {
+                if (Columns.Contains(colLastAccess))
+                    Columns.Remove(colLastAccess);
+            }
         }
 
         #endregion
@@ -559,12 +597,6 @@ namespace OPMedia.UI.Controls
             fwdPaths.Clear();
 
             EventDispatch.RegisterHandler(this);
-
-            if (ShowAttributes == false)
-                this.Columns.Remove(colAttr);
-
-            if (ShowLastAccess == false)
-                this.Columns.Remove(colLastAccess);
         }
 
         void OPMShellListView_HandleDestroyed(object sender, EventArgs e)
