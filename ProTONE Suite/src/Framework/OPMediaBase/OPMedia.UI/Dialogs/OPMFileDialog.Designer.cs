@@ -38,13 +38,15 @@
             this.btnCancel = new OPMedia.UI.Controls.OPMButton();
             this.lvExplorer = new OPMedia.UI.Controls.OPMShellListView();
             this.lblCurrentPath = new OPMedia.UI.Controls.OPMLabel();
-            this.tsSpecialFolders = new OPMedia.UI.Controls.OPMToolStrip();
             this.pnlButtons = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.btnNewFolder = new OPMedia.UI.Controls.OPMButton();
             this.btnAddToFavorites = new OPMedia.UI.Controls.OPMButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tsSpecialFolders = new OPMedia.UI.Controls.OPMToolStrip();
             this.pnlContent.SuspendLayout();
             this.pnlLayout.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
@@ -55,7 +57,7 @@
             // 
             this.pnlLayout.AutoSize = true;
             this.pnlLayout.ColumnCount = 5;
-            this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -68,8 +70,8 @@
             this.pnlLayout.Controls.Add(this.btnCancel, 3, 3);
             this.pnlLayout.Controls.Add(this.lvExplorer, 1, 1);
             this.pnlLayout.Controls.Add(this.lblCurrentPath, 0, 0);
-            this.pnlLayout.Controls.Add(this.tsSpecialFolders, 0, 1);
             this.pnlLayout.Controls.Add(this.pnlButtons, 4, 0);
+            this.pnlLayout.Controls.Add(this.panel1, 0, 1);
             this.pnlLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
             this.pnlLayout.Name = "pnlLayout";
@@ -79,7 +81,6 @@
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.pnlLayout.Size = new System.Drawing.Size(648, 496);
             this.pnlLayout.TabIndex = 0;
             // 
@@ -93,7 +94,7 @@
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(91, 33);
+            this.opmLabel2.Size = new System.Drawing.Size(97, 33);
             this.opmLabel2.TabIndex = 4;
             this.opmLabel2.Text = "TXT_FILENAME:";
             this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -108,7 +109,7 @@
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(91, 33);
+            this.opmLabel3.Size = new System.Drawing.Size(97, 33);
             this.opmLabel3.TabIndex = 6;
             this.opmLabel3.Text = "TXT_FILE_TYPE:";
             this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -119,11 +120,11 @@
             this.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFilter.FormattingEnabled = true;
-            this.cmbFilter.Location = new System.Drawing.Point(94, 468);
+            this.cmbFilter.Location = new System.Drawing.Point(100, 468);
             this.cmbFilter.Margin = new System.Windows.Forms.Padding(0, 5, 10, 0);
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbFilter.Size = new System.Drawing.Size(448, 24);
+            this.cmbFilter.Size = new System.Drawing.Size(442, 24);
             this.cmbFilter.TabIndex = 7;
             this.cmbFilter.SelectedIndexChanged += new System.EventHandler(this.cmbFilter_SelectedIndexChanged);
             // 
@@ -134,7 +135,7 @@
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFileNames.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtFileNames.Location = new System.Drawing.Point(94, 435);
+            this.txtFileNames.Location = new System.Drawing.Point(100, 435);
             this.txtFileNames.Margin = new System.Windows.Forms.Padding(0, 5, 10, 0);
             this.txtFileNames.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtFileNames.MaxLength = 32767;
@@ -148,7 +149,7 @@
             this.txtFileNames.ReadOnly = false;
             this.txtFileNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtFileNames.ShortcutsEnabled = true;
-            this.txtFileNames.Size = new System.Drawing.Size(448, 20);
+            this.txtFileNames.Size = new System.Drawing.Size(442, 20);
             this.txtFileNames.TabIndex = 5;
             this.txtFileNames.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtFileNames.UseSystemPasswordChar = false;
@@ -201,12 +202,12 @@
             this.lvExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvExplorer.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.lvExplorer.LabelEdit = true;
-            this.lvExplorer.Location = new System.Drawing.Point(94, 26);
+            this.lvExplorer.Location = new System.Drawing.Point(100, 26);
             this.lvExplorer.Margin = new System.Windows.Forms.Padding(0, 0, 3, 5);
             this.lvExplorer.MultiSelect = false;
             this.lvExplorer.Name = "lvExplorer";
             this.lvExplorer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvExplorer.Size = new System.Drawing.Size(551, 399);
+            this.lvExplorer.Size = new System.Drawing.Size(545, 399);
             this.lvExplorer.TabIndex = 3;
             this.lvExplorer.UseCompatibleStateImageBehavior = false;
             this.lvExplorer.View = System.Windows.Forms.View.Details;
@@ -227,24 +228,6 @@
             this.lblCurrentPath.TabIndex = 9;
             this.lblCurrentPath.Text = "opmLabel4";
             this.lblCurrentPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tsSpecialFolders
-            // 
-            this.tsSpecialFolders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.tsSpecialFolders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsSpecialFolders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.tsSpecialFolders.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.tsSpecialFolders.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.tsSpecialFolders.Location = new System.Drawing.Point(0, 26);
-            this.tsSpecialFolders.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.tsSpecialFolders.MaximumSize = new System.Drawing.Size(110, 3700);
-            this.tsSpecialFolders.MinimumSize = new System.Drawing.Size(80, 300);
-            this.tsSpecialFolders.Name = "tsSpecialFolders";
-            this.tsSpecialFolders.ShowBorder = true;
-            this.tsSpecialFolders.Size = new System.Drawing.Size(94, 399);
-            this.tsSpecialFolders.TabIndex = 2;
-            this.tsSpecialFolders.Text = "opmToolStrip1";
-            this.tsSpecialFolders.VerticalGradient = false;
             // 
             // pnlButtons
             // 
@@ -291,6 +274,35 @@
             this.btnAddToFavorites.UseVisualStyleBackColor = true;
             this.btnAddToFavorites.Click += new System.EventHandler(this.btnAddToFavorites_Click);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.tsSpecialFolders);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 26);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 404);
+            this.panel1.TabIndex = 11;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // tsSpecialFolders
+            // 
+            this.tsSpecialFolders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.tsSpecialFolders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.tsSpecialFolders.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tsSpecialFolders.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.tsSpecialFolders.Location = new System.Drawing.Point(0, 0);
+            this.tsSpecialFolders.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.tsSpecialFolders.MaximumSize = new System.Drawing.Size(110, 3700);
+            this.tsSpecialFolders.MinimumSize = new System.Drawing.Size(80, 300);
+            this.tsSpecialFolders.Name = "tsSpecialFolders";
+            this.tsSpecialFolders.ShowBorder = true;
+            this.tsSpecialFolders.Size = new System.Drawing.Size(100, 300);
+            this.tsSpecialFolders.TabIndex = 2;
+            this.tsSpecialFolders.Text = "opmToolStrip1";
+            this.tsSpecialFolders.VerticalGradient = false;
+            // 
             // OPMFileDialog
             // 
             this.ClientSize = new System.Drawing.Size(650, 520);
@@ -301,6 +313,8 @@
             this.pnlLayout.ResumeLayout(false);
             this.pnlLayout.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -320,5 +334,6 @@
         private OPMButton btnAddToFavorites;
         private OPMFlowLayoutPanel pnlButtons;
         private OPMButton btnNewFolder;
+        private System.Windows.Forms.Panel panel1;
     }
 }

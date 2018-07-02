@@ -14,6 +14,7 @@ using System.IO;
 using OPMedia.UI.Controls;
 using OPMedia.UI;
 using OPMedia.UI.Properties;
+using System.Drawing.Drawing2D;
 
 namespace OPMedia.UI.Controls.Dialogs
 {
@@ -819,6 +820,17 @@ namespace OPMedia.UI.Controls.Dialogs
         private void btnNewFolder_Click(object sender, EventArgs e)
         {
             lvExplorer.CreateNewFolder();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ThemeManager.PrepareGraphics(e.Graphics);
+
+            using (LinearGradientBrush br = new LinearGradientBrush(panel1.ClientRectangle, ThemeManager.GradientNormalColor1, ThemeManager.GradientNormalColor2, 0f))
+            {
+                e.Graphics.FillRectangle(br, panel1.ClientRectangle);
+            }
+
         }
     }
 

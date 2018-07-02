@@ -125,6 +125,9 @@ namespace OPMedia.Core
 
         public static bool IsRootPath(string path)
         {
+            if (path.StartsWith("\\\\"))
+                return false;
+
             string strRootSpec = Path.GetPathRoot(path).TrimEnd(new char[] { Path.DirectorySeparatorChar });
             string strDirSpec = path.TrimEnd(new char[] { Path.DirectorySeparatorChar });
 
