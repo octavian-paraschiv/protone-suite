@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Diagnostics;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-
+using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -23,7 +23,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             try
             {
                 string str;
-                DsError.ThrowExceptionForHR(GetRunningObjectTable(0, out pprot));
+                DsError.ThrowExceptionForHR(Ole32.GetRunningObjectTable(0, out pprot));
                 int id = Process.GetCurrentProcess().Id;
                 IntPtr iUnknownForObject = Marshal.GetIUnknownForObject(graph);
                 try
@@ -39,7 +39,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     Marshal.Release(iUnknownForObject);
                 }
                 string item = string.Format("FilterGraph {0} pid {1}", str, id.ToString("x8"));
-                DsError.ThrowExceptionForHR(CreateItemMoniker("!", item, out ppmk));
+                DsError.ThrowExceptionForHR(Ole32.CreateItemMoniker("!", item, out ppmk));
                 this.m_cookie = pprot.Register(1, graph, ppmk);
             }
             finally
@@ -57,15 +57,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             }
         }
 
-        [SuppressUnmanagedCodeSecurity, DllImport("ole32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-        private static extern int CreateItemMoniker(string delim, string item, out IMoniker ppmk);
         public void Dispose()
         {
             if (this.m_cookie != 0)
             {
                 GC.SuppressFinalize(this);
                 IRunningObjectTable pprot = null;
-                DsError.ThrowExceptionForHR(GetRunningObjectTable(0, out pprot));
+                DsError.ThrowExceptionForHR(Ole32.GetRunningObjectTable(0, out pprot));
                 try
                 {
                     pprot.Revoke(this.m_cookie);
@@ -83,9 +81,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             this.Dispose();
         }
-
-        [SuppressUnmanagedCodeSecurity, DllImport("ole32.dll", ExactSpelling = true)]
-        private static extern int GetRunningObjectTable(int r, out IRunningObjectTable pprot);
 
         // Nested Types
         [Flags]

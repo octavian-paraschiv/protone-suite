@@ -310,11 +310,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     public interface IDvdGraphBuilder
     {
         [PreserveSig]
-        void GetFiltergraph(out IMediaControl pMC);
+        int GetFiltergraph(out IMediaControl pMC);
         [PreserveSig]
-        void GetDvdInterface([In, MarshalAs(UnmanagedType.LPStruct)] Guid riid, [MarshalAs(UnmanagedType.Interface)] out object ppvIF);
+        int GetDvdInterface([In, MarshalAs(UnmanagedType.LPStruct)] Guid riid, [MarshalAs(UnmanagedType.Interface)] out object ppvIF);
         [PreserveSig]
-        void RenderDvdVideoVolume([In, MarshalAs(UnmanagedType.LPWStr)] string lpcwszPathName, [In] AMDvdGraphFlags dwFlags, out AMDvdRenderStatus pStatus);
+        int RenderDvdVideoVolume([In, MarshalAs(UnmanagedType.LPWStr)] string lpcwszPathName, [In] AMDvdGraphFlags dwFlags, out AMDvdRenderStatus pStatus);
     }
 
     [ComImport, Guid("34151510-EEC0-11D2-8201-00A0C9D74842"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

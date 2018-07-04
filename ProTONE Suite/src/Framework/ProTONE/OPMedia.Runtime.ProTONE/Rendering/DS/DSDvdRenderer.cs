@@ -44,33 +44,22 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             DvdRenderingStartHint hint = startHint as DvdRenderingStartHint;
 
-            if (dvdGraphBuilder == null)
-            {
-                _vdi = new VideoDvdInformation(renderMediaName);
+            _vdi = new VideoDvdInformation(renderMediaName);
 
-                InitMedia();
-                InitAudioAndVideo();
+            InitMedia();
+            InitAudioAndVideo();
 
-                // Run the graph to play the media file
-                int hr = mediaControl.Run();
-                DsError.ThrowExceptionForHR(hr);
-
-                // Give enough time for the filter graph to be completely built
-                Thread.Sleep(500);
-
-                rotEntry = new DsROTEntry(mediaControl as IFilterGraph);
-
-            }
+            // Run the graph to play the media file
+            int hr = mediaControl.Run();
+            DsError.ThrowExceptionForHR(hr);
 
             if (hint == DvdRenderingStartHint.MainMenu)
             {
-                int hr = dvdControl2.ShowMenu(DvdMenuId.Title, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
+                hr = dvdControl2.ShowMenu(DvdMenuId.Title, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
                 DsError.ThrowExceptionForHR(hr);
             }
             else if (hint == DvdRenderingStartHint.Beginning)
             {
-                int hr = 0;
-
                 if (ProTONEConfig.DisableDVDMenu)
                     hr = dvdControl2.PlayTitle(1, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
                 else
@@ -81,12 +70,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             }
             else if (hint.Location.ChapterNum == 0)
             {
-                int hr = dvdControl2.PlayTitle(hint.Location.TitleNum, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
+                hr = dvdControl2.PlayTitle(hint.Location.TitleNum, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
                 DsError.ThrowExceptionForHR(hr);
             }
             else
             {
-                int hr = dvdControl2.PlayChapterInTitle(hint.Location.TitleNum, hint.Location.ChapterNum,
+                hr = dvdControl2.PlayChapterInTitle(hint.Location.TitleNum, hint.Location.ChapterNum,
                     DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
                 DsError.ThrowExceptionForHR(hr);
             }
@@ -123,10 +112,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             dvdGraphBuilder.TryRenderDVD(volumePath, out status);
 
+            Logger.LogTrace("Failed to open DVD streams: {0}", status.dwFailedStreamsFlag);
+
             if (status.bDvdVolInvalid)
                 throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);
-
-            Logger.LogTrace("Failed to open DVD streams: {0}", status.dwFailedStreamsFlag);
 
             dvdInfo = GetInterface(typeof(IDvdInfo2)) as IDvdInfo2;
 
@@ -140,13 +129,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             hr = dvdControl2.SetOption(DvdOptionFlag.AudioDuringFFwdRew, false);
             DsError.ThrowExceptionForHR(hr);
-            
-            //dvdControl.SelectVideoModePreference(DvdPreferredDisplayMode.DisplayContentDefault);
 
             dvdGraphBuilder.GetFiltergraph(out mediaControl);
 
             if (mediaControl == null)
                 throw new RenderingException("Unable to render the file: " + renderMediaName);
+
+            RebuildFilterGraph();
 
 #if HAVE_SAMPLES
             InitAudioSampleGrabber_v2();
@@ -167,7 +156,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             renderRegion.MouseDown += new MouseEventHandler(renderRegion_MouseDown);
 
         }
-        
+
         private object GetInterface(Type interfaceType)
         {
             object comobj = null;
@@ -175,7 +164,63 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             return comobj;
         }
 
-        
+        private void RebuildFilterGraph()
+        {
+            // Get the graph builder
+            IGraphBuilder graphBuilder = (mediaControl as IGraphBuilder);
+            if (graphBuilder == null)
+                return;
+
+            try
+            {
+                IEnumFilters enumFilters = null;
+                int hr = graphBuilder.EnumFilters(out enumFilters);
+                DsError.ThrowExceptionForHR(hr);
+
+                IBaseFilter[] filters = new IBaseFilter[1];
+
+                List<IBaseFilter> filtersToRemove = new List<IBaseFilter>();
+
+                IBaseFilter dvdNavigator = null;
+
+                hr = enumFilters.Next(1, filters, IntPtr.Zero);
+                while (hr == HRESULT.S_OK)
+                {
+                    FilterInfo fi;
+                    int hr2 = filters[0].QueryFilterInfo(out fi);
+                    if (hr2 == HRESULT.S_OK)
+                    {
+                        if (fi.achName != "DVD Navigator")
+                            filtersToRemove.Add(filters[0]);
+                        else
+                            dvdNavigator = filters[0];
+                    }
+
+                    hr = enumFilters.Next(1, filters, IntPtr.Zero);
+                }
+
+                filtersToRemove.ForEach((f) => graphBuilder.RemoveFilter(f));
+
+                IEnumPins enumPins;
+                hr = dvdNavigator.EnumPins(out enumPins);
+                DsError.ThrowExceptionForHR(hr);
+
+                IPin[] pins = new IPin[1];
+                hr = enumPins.Next(1, pins, IntPtr.Zero);
+                while (hr == HRESULT.S_OK)
+                {
+                    graphBuilder.Render(pins[0]);
+
+                    hr = enumPins.Next(1, pins, IntPtr.Zero);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+
         void renderRegion_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((dvdControl2 == null) || (menuMode != MenuMode.Buttons))

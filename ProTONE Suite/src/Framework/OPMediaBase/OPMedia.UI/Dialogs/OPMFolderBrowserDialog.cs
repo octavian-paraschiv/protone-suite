@@ -23,16 +23,21 @@ namespace OPMedia.UI.Dialogs
         public bool ShowNewFolderButton { get; set; }
         public string SelectedPath { get; set; }
         public string Description { get; set; }
-
+        
         public event PerformPathValidationHandler PerformPathValidation = null;
 
-        public OPMFolderBrowserDialog()
+        string _title = null;
+
+        public OPMFolderBrowserDialog(string title = null)
         {
             InitializeComponent();
+
+            _title = title;
 
             this.InheritAppIcon = false;
 
             this.Description = Translator.Translate("TXT_SELECT_FOLDER");
+            
 
             this.ShowNewFolderButton = true;
             this.SelectedPath = PathUtils.CurrentDir;
@@ -73,7 +78,10 @@ namespace OPMedia.UI.Dialogs
 
         void OPMFolderBrowserDialog_Load(object sender, EventArgs e)
         {
-            SetTitle("TXT_SELECT_FOLDER");
+            if (string.IsNullOrEmpty(_title))
+                SetTitle("TXT_SELECT_FOLDER");
+            else
+                SetTitle(_title);
 
             btnNewFolder.Visible = this.ShowNewFolderButton;
             lblDescription.Text = this.Description;

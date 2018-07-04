@@ -263,9 +263,6 @@
     <Compile Include="Dialogs\ID3ArtworkDlg.Designer.cs">
       <DependentUpon>ID3ArtworkDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SelectDvdDriveDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GlobalEvents\EventNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\MediaPlayer\MediaPlayer.cs">
@@ -487,10 +484,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dialogs\SelectDvdDriveDlg.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SelectDvdDriveDlg.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Translations\Translation.ro.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

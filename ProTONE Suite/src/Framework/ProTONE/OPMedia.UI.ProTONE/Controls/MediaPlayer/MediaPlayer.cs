@@ -47,6 +47,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.UI.Dialogs;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -520,21 +521,36 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (VideoDVDHelpers.IsOSSupported)
             {
-                SelectDvdMediaDlg dlg = new SelectDvdMediaDlg();
+                OPMFolderBrowserDialog dlg = new OPMFolderBrowserDialog("TXT_SELECT_DVD");
+                dlg.ShowNewFolderButton = false;
+                dlg.Description = Translator.Translate("TXT_LOAD_DVD_FOLDER");
+
+                dlg.PerformPathValidation += (p) => 
+                {
+                    var dvdInfo = DvdMedia.FromPath(p);
+                    return (dvdInfo != null);
+                };
+
+                dlg.InheritAppIcon = false;
+                dlg.Icon = OPMedia.Core.Properties.Resources.DVD.ToIcon();
+
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    if (dlg.SelectedMedia != null)
+                    var dvd = DvdMedia.FromPath(dlg.SelectedPath);
+                    if (dvd != null)
                     {
-                        string[] dvdDrive = new string[] { dlg.SelectedMedia.DvdPath };
-
                         pnlScreens.PlaylistScreen.Clear();
-                        pnlScreens.PlaylistScreen.AddFiles(dvdDrive);
+                        pnlScreens.PlaylistScreen.AddFiles(new string[] { dvd.DvdPath });
 
                         if (Autoplay)
                         {
                             PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
                         }
-
+                    }
+                    else
+                    {
+                        MessageDisplay.Show(Translator.Translate("TXT_INVALIDDVDVOLUME"),
+                            Translator.Translate("TXT_ERROR"), MessageBoxIcon.Warning);
                     }
                 }
             }

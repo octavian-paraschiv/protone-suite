@@ -45,53 +45,6 @@ namespace OPMedia.Core
             CLSCTX_ALL = CLSCTX_SERVER | CLSCTX_INPROC_HANDLER
         }
 
-#if HAVE_MONO
-        public static void CoUninitialize() { }
-
-        public static void ReleaseStgMedium(ref STGMEDIUM pmedium) { }
-
-        public static int OleCreatePropertyFrame(
-            IntPtr hwndOwner,
-            int x,
-            int y,
-            [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
-            int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)] 
-			ref object ppUnk,
-            int cPages,
-            IntPtr lpPageClsID,
-            int lcid,
-            int dwReserved,
-            IntPtr lpvReserved
-            )
-        {
-            return -1;
-        }
-
-        public static int CreateBindCtx(int reserved, out IBindCtx ppbc)
-        {
-            ppbc = null;
-            return -1;
-        }
-
-        public static int MkParseDisplayName(IBindCtx pbc, string szUserName, ref int pchEaten, out IMoniker ppmk)
-        {
-            ppmk = null;
-            return -1;
-        }
-
-        public static int CoCreateInstance(
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid rclsid,
-            IntPtr pUnkOuter,
-            CLSCTX dwClsContext,
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid,
-            out IntPtr rReturnedComObject
-            )
-        {
-            rReturnedComObject = IntPtr.Zero;
-            return -1;
-        }
-#else  
         [DllImport(OLE32)]
         public static extern void CoUninitialize();
 
@@ -131,7 +84,12 @@ namespace OPMedia.Core
             [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid,
             out IntPtr rReturnedComObject
             );
-#endif
+
+        [DllImport(OLE32)]
+        public static extern int CreateItemMoniker(string delim, string item, out IMoniker ppmk);
+
+        [DllImport(OLE32)]
+        public static extern int GetRunningObjectTable(int r, out IRunningObjectTable pprot);
     }
 
     public class Quartz

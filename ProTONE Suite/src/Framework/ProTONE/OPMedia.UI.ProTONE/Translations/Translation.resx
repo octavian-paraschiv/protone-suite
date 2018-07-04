@@ -496,7 +496,7 @@ Double click to toggle remaining time</value>
     <value>LVOL</value>
   </data>
   <data name="TXT_LOAD_DVD_FOLDER">
-    <value>Please click 'Browse' to select a video DVD content folder.
+    <value>Please select a video DVD content folder.
 (It must be either a VIDEO_TS folder, or its parent):</value>
   </data>
   <data name="TXT_LOADMEDIAFILES">

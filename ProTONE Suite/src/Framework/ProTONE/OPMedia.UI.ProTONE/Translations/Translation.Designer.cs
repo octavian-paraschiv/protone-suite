@@ -1258,7 +1258,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please click &apos;Browse&apos; to select a video DVD content folder.
+        ///   Looks up a localized string similar to Please select a video DVD content folder.
         ///(It must be either a VIDEO_TS folder, or its parent):.
         /// </summary>
         internal static string TXT_LOAD_DVD_FOLDER {

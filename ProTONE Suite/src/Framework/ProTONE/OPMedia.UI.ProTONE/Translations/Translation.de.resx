@@ -496,11 +496,6 @@ Doppelklick verbleibende Zeit zu wechseln</value>
   <data name="TXT_LEFTVOL">
     <value>LVOL</value>
   </data>
-  <data name="TXT_LOAD_DVD_FOLDER">
-    <value>Klicken Sie auf "Durchsuchen", um einen Video-DVD-Inhaltsordner
-auszuwählen (Es muss entweder ein VIDEO_TS-Ordner oder dessen 
-Eltern sein):</value>
-  </data>
   <data name="TXT_LOADMEDIAFILES">
     <value>Laden Sie die Medien-Dateien ...</value>
   </data>
@@ -1211,5 +1206,9 @@ To get your own credentials, please access:</value>
   <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
     <value>Sie müssen Internet Explorer 9.0 oder höher installiert um autoregister-Token können.
 Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und manuell in die Anwendung kopieren/</value>
+  </data>
+  <data name="TXT_LOAD_DVD_FOLDER" xml:space="preserve">
+    <value>Bitte wählen Sie eine video DVD Inhaltsordner.
+(Es muss entweder eine VIDEOTS Ordner oder das übergeordnete Element):</value>
   </data>
 </root>

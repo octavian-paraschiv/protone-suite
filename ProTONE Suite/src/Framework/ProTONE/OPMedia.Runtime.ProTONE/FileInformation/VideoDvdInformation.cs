@@ -18,6 +18,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
     {
         public const string UnsupportedWindows = "Sorry, ProTONE does not support playing video DVD's in the current Windows v.({0}).";
         public const string ErrDvdVolume = "An invalid DVD volume was specified";
+        public const string ErrDvdBadVideo = "DVD video stream could not be rendered";
 
         string _dvdPath = string.Empty;
         string _label = string.Empty;
@@ -122,12 +123,13 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             if (status.bDvdVolInvalid)
                 throw new COMException(ErrDvdVolume, -1);
 
-            object comobj = null;
+            object comobj1 = null, comobj2 = null;
 
-            dvdGraphBuilder.GetDvdInterface(typeof(IDvdInfo2).GUID, out comobj);
+            dvdGraphBuilder.GetDvdInterface(typeof(IDvdInfo2).GUID, out comobj1);
+            dvdGraphBuilder.GetDvdInterface(typeof(IDvdControl2).GUID, out comobj2);
 
-            IDvdInfo2 dvdInfo = comobj as IDvdInfo2;
-            IDvdControl2 dvdControl = comobj as IDvdControl2;
+            IDvdInfo2 dvdInfo = comobj1 as IDvdInfo2;
+            IDvdControl2 dvdControl = comobj2 as IDvdControl2;
 
             dvdControl.SetOption(DvdOptionFlag.HMSFTimeCodeEvents, true);	// use new HMSF timecode format
             dvdControl.SetOption(DvdOptionFlag.ResetOnStop, false);
@@ -214,17 +216,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 var ver = AppConfig.OSVersion;
 
-                switch (ver)
-                {
-                    case AppConfig.VerWin10:
-                    case AppConfig.VerWin7:
-                        retVal = true;
-                        break;
-
-                    default:
-                        break;
-
-                }
+                retVal = (ver >= AppConfig.VerWinVista);
 
                 Logger.LogTrace("[Windows {0}.{1}] - VideoDVDHelpers::IsOSSupported={2}",
                     ver / 10, ver % 10, retVal);
@@ -233,32 +225,19 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             }
         }
 
-        private static AMDvdGraphFlags DvdRenderingFlags
-        {
-            get
-            {
-                AMDvdGraphFlags retVal = AMDvdGraphFlags.None;
-                var ver = AppConfig.OSVersion;
+        //private static AMDvdGraphFlags DvdRenderingFlags
+        //{
+        //    get
+        //    {
+        //        AMDvdGraphFlags retVal = AMDvdGraphFlags.SWDecPrefer;
+        //        var ver = AppConfig.OSVersion;
 
-                switch (ver)
-                {
-                    case AppConfig.VerWin10:
-                    case AppConfig.VerWin8:
-                    case AppConfig.VerWin8_1:
-                        retVal = AMDvdGraphFlags.SWDecPrefer;
-                        break;
+        //        Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.",
+        //            ver / 10, ver % 10, retVal);
 
-                    default:
-                        retVal = AMDvdGraphFlags.VMR9Only;
-                        break;
-                }
-
-                Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.",
-                    ver / 10, ver % 10, retVal);
-
-                return retVal;
-            }
-        }
+        //        return retVal;
+        //    }
+        //}
 
         public static void TryRenderDVD(this IDvdGraphBuilder dvdGraphBuilder, string volumePath, out AMDvdRenderStatus latestStatus)
         {
@@ -271,10 +250,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             }
 
             // First we try with the default flags per current OS
-            AMDvdGraphFlags defaultFlags = DvdRenderingFlags;
-            dvdGraphBuilder.RenderDvdVideoVolume(volumePath, defaultFlags, out latestStatus);
-            if (latestStatus.bDvdVolInvalid)
-                throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);
+            AMDvdGraphFlags defaultFlags = AMDvdGraphFlags.SWDecPrefer;
+            int hr = dvdGraphBuilder.RenderDvdVideoVolume(volumePath, defaultFlags, out latestStatus);
 
             if (latestStatus.iNumStreamsFailed == 0)
             {
@@ -282,23 +259,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 return;
             }
 
-            Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using default flags  {0} => failed to open DVD streams: {1}.",
-                defaultFlags, latestStatus.dwFailedStreamsFlag);
+            if (latestStatus.bDvdVolInvalid)
+                throw new COMException(VideoDvdInformation.ErrDvdVolume, -1);
 
-            // If no success, we iterate through all possible rendering flags
-            foreach (AMDvdGraphFlags flags in Enum.GetValues(typeof(AMDvdGraphFlags)))
-            {
-                if (latestStatus.iNumStreamsFailed == 0)
-                {
-                    Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using flags {0} => SUCCESS !", flags);
-                    return;
-                }
+            Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using default flags  {0} => failed to open DVD streams: {1}, result: 0x{2:x8}",
+                defaultFlags, latestStatus.dwFailedStreamsFlag, hr);
 
-                Logger.LogTrace("VideoDVDHelpers::TryRenderDVD: Using flags {0} => failed to open DVD streams: {1}", 
-                    flags, latestStatus.dwFailedStreamsFlag);
-            }
-
-            
+            if (latestStatus.dwFailedStreamsFlag.HasFlag(AMDvdStreamFlags.Video))
+                throw new COMException(VideoDvdInformation.ErrDvdBadVideo, -1);
         }
     }
 }

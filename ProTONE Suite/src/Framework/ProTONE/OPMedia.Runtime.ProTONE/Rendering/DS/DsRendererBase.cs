@@ -597,6 +597,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             rotEntry = new DsROTEntry(graphBuilder as IFilterGraph);
         }*/
 
+
         protected void InitAudioSampleGrabber_v2()
         {
             // Get the graph builder
@@ -690,6 +691,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 hr = graphBuilder.Connect(sampleGrabberOutput, soundDeviceInput);
                 DsError.ThrowExceptionForHR(hr);
 
+                graphBuilder.ReportGraph();
 
                 AMMediaType mtAudio = new AMMediaType();
                 mtAudio.majorType = MediaType.Audio;

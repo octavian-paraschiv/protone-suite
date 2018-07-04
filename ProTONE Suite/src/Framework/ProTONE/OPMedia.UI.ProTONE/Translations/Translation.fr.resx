@@ -495,10 +495,6 @@ Double click to toggle temps restant</value>
   <data name="TXT_LEFTVOL">
     <value>Lvol</value>
   </data>
-  <data name="TXT_LOAD_DVD_FOLDER">
-    <value>Cliquez sur "Parcourir" pour sélectionner un dossier de contenu de DVD vidéo.
-(Il doit s'agir d'un dossier VIDEO_TS ou de son parent):</value>
-  </data>
   <data name="TXT_LOADMEDIAFILES">
     <value>Charger des fichiers multimédia ...</value>
   </data>
@@ -1209,5 +1205,9 @@ To get your own credentials, please access:</value>
   <data name="TXT_INTERNET_EXPLORER_HINT" xml:space="preserve">
     <value>Vous devez avoir Internet Explorer 9.0 ou une version plus récente afin de pouvoir s’auto-enregistrer le jeton.
 Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le navigateur par défaut et le copier manuellement dans l’application. </value>
+  </data>
+  <data name="TXT_LOAD_DVD_FOLDER" xml:space="preserve">
+    <value>Veuillez sélectionner un dossier de contenu vidéo de DVD.
+(Il doit être un dossier VIDEOTS, ou son parent):</value>
   </data>
 </root>

@@ -496,7 +496,7 @@ Dublu click pentru a comuta pe timp rămas.</value>
     <value>VOLS</value>
   </data>
   <data name="TXT_LOAD_DVD_FOLDER">
-    <value>Dați click pe "Răsfoire" pentru a selecta un director cu conţinut DVD video
+    <value>Selectați un director cu conţinut DVD video
 (Trebuie să fie un director VIDEO_TS, sau părintele acestuia):</value>
   </data>
   <data name="TXT_LOADMEDIAFILES">
