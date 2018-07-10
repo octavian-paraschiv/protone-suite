@@ -1,3 +1,5 @@
+#define HAVE_TRACE_TRANSLATIONs
+
 #region Using directives
 using System;
 using System.Collections.Generic;
@@ -23,13 +25,30 @@ namespace OPMedia.Core.Logging
     {
 
         #region Methods
-        
 
-        public static void LogTranslationTrace(string format, params object[] args)
+        public static void LogUntranslatable(string format, params object[] args)
         {
-#if HAVE_TRACE_UNTRANSLATED
+#if HAVE_TRACE_TRANSLATIONs
             string message = string.Format(format, args);
-            Debug.WriteLine("UNTRANSLATED: " + message);
+            Debug.WriteLine("TRANSLATE: BAD: " + message);
+            Debug.Flush();
+#endif
+        }
+
+    public static void LogTranslated(string format, params object[] args)
+        {
+#if HAVE_TRACE_TRANSLATIONs
+            string message = string.Format(format, args);
+            Debug.WriteLine("TRANSLATE: ACK: " + message);
+            Debug.Flush();
+#endif
+        }
+
+        public static void LogUntranslated(string format, params object[] args)
+        {
+#if HAVE_TRACE_TRANSLATIONs
+            string message = string.Format(format, args);
+            Debug.WriteLine("TRANSLATE: NAK: " + message);
             Debug.Flush();
 #endif
         }

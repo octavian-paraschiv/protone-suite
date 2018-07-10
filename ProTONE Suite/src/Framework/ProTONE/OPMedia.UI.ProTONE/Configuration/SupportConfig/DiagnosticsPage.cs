@@ -61,12 +61,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             if (ok)
             {
-                lblHDSupport.Text = "HD support (Haali media splitter) is installed";
+                lblHDSupport.Text = Translator.Translate("TXT_DIAG_HDSUPPORT_OK");
                 lblActHDSupport.Visible = false;
             }
             else
             {
-                lblHDSupport.Text = "HD support (Haali media splitter) not detected";
+                lblHDSupport.Text = Translator.Translate("TXT_DIAG_HDSUPPORT_NG");
                 lblActHDSupport.Visible = true;
             }
 
@@ -81,12 +81,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             if (!ok)
             {
-                lblCodecSupport.Text = "FFDShow not detected";
+                lblCodecSupport.Text = Translator.Translate("TXT_DIAG_CODECSUPPORT_NG");
                 lblActCodecSupport.Visible = true;
             }
             else
             {
-                lblCodecSupport.Text = "FFDShow is installed";
+                lblCodecSupport.Text = Translator.Translate("TXT_DIAG_CODECSUPPORT_OK");
                 lblActCodecSupport.Visible = false;
             }
 
@@ -106,10 +106,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             isOk = (actualVersion.CompareTo(minimumVersion) >= 0);
 
-            lblDirectX.Text = string.Format("DirectX: {0} (actual: {1})", dxFriendlyName, actualVersion);
+            lblDirectX.Text = Translator.Translate("TXT_DIAG_DIRECTX_ACTUAL", dxFriendlyName, actualVersion);
             if (!isOk)
             {
-                lblDirectX.Text += "\nRequired: DirectX 9.0c [" + minimumVersion.ToString() + "]";
+                lblDirectX.Text += "\n" + Translator.Translate("TXT_DIAG_DIRECTX_REQUIRED", minimumVersion);
                 lblActDirectX.Visible = true;
             }
             else
@@ -152,11 +152,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
         }
 
-        private void DiagnosticsPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private Image GetStatusImage(bool isOK)
         {
             Bitmap bmp = isOK ? Resources.OK : Resources.Error;
@@ -169,10 +164,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
             ProTONEConfig.DetachedWindowLocation = new Point(100, 100);
             ProTONEConfig.DetachedWindowSize = new Size(800, 600);
-            
-
             EventDispatch.DispatchEvent(OPMedia.UI.ProTONE.GlobalEvents.EventNames.RestoreRenderingRegionPosition);
-
         }
     }
 }

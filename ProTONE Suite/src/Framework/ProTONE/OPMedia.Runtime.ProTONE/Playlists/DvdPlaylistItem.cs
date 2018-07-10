@@ -7,6 +7,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using System.Globalization;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -60,14 +61,14 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             Dictionary<PlaylistSubItem, List<PlaylistSubItem>> submenu = 
                 new Dictionary<PlaylistSubItem, List<PlaylistSubItem>>();
 
-            DvdSubItem title = new DvdSubItem("Menu", DvdRenderingStartHint.MainMenu, this);
+            DvdSubItem title = new DvdSubItem(Translator.Translate("TXT_DVD_MAIN_MENU"), DvdRenderingStartHint.MainMenu, this);
             submenu.Add(title, null);
 
             if (vdi.AvailableSubtitles.Count > 0 &&
                 MediaRenderer.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped &&
                 MediaRenderer.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened)
             {
-                title = new DvdSubItem("Subtitles", DvdRenderingStartHint.SubtitleStream, this);
+                title = new DvdSubItem(Translator.Translate("TXT_DVD_SUBTITLES"), DvdRenderingStartHint.SubtitleStream, this);
                 List<PlaylistSubItem> subtitles = new List<PlaylistSubItem>();
 
                 for (int i = 0; i < vdi.AvailableSubtitles.Count; i++)
@@ -98,7 +99,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         private DvdSubItem CreateTitleSubItem(int titleIndex)
         {
             int dvdTitleIndex = titleIndex + 1;
-            string titleName = "Title " + dvdTitleIndex;
+            string titleName = Translator.Translate("TXT_DVD_TITLE", dvdTitleIndex);
 
             DvdRenderingStartHint hint = new DvdRenderingStartHint(new DvdPlaybackLocation(dvdTitleIndex, 0, 0));
             return new DvdSubItem(titleName, hint, this);
@@ -108,7 +109,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             int dvdTitleIndex = titleIndex + 1;
             int dvdChapterIndex = chapterIndex + 1;
-            string chapterName = "Chapter " + dvdChapterIndex;
+            string chapterName = Translator.Translate("TXT_DVD_CHAPTER", dvdChapterIndex);
 
             DvdRenderingStartHint hint = new DvdRenderingStartHint(new DvdPlaybackLocation(dvdTitleIndex, dvdChapterIndex, 0));
             return new DvdSubItem(chapterName, hint, this);

@@ -58,7 +58,7 @@ namespace OPMedia.Runtime.ProTONE.DirectX
             _dxVersionMap.Add(new Version("6.03.9600.16384"), "11.2");
 
             _dxVersionMap.Add(new Version("10.00.10240.16384"), "12.0");
-            _dxVersionMap.Add(new Version("10.00.16299.15"),    "12.0 updated");
+            _dxVersionMap.Add(new Version("10.00.16299.15"),    "12.0.1");
 
             _dxVersionMap.Add(new Version(int.MaxValue, int.MaxValue), "????");
         }
@@ -127,7 +127,7 @@ namespace OPMedia.Runtime.ProTONE.DirectX
                     break;
             }
 
-            return string.Format("Newer than {0}", _dxVersionMap[v1]);
+            return string.Format("{0}+", _dxVersionMap[v1]);
         }
     }
 }

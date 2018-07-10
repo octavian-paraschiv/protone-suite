@@ -40,14 +40,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             ApplyColors();
 
             this.Load += new EventHandler(SchedulerSettingsPanel_Load);
-            opmLayoutPanel1.Resize += new EventHandler(OnResize);
-        }
-
-        void OnResize(object sender, EventArgs e)
-        {
-            layoutPanel.AutoScrollMinSize = new Size(
-                opmLayoutPanel1.Width - SystemInformation.VerticalScrollBarWidth,
-                opmLayoutPanel1.Height - SystemInformation.HorizontalScrollBarHeight);
         }
 
         protected override void OnThemeUpdatedInternal()
@@ -59,8 +51,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         public void ApplyColors()
         {
-           
             lblCaution.OverrideForeColor = ThemeManager.HighlightColor;
+            lblSep1.BackColor = lblSep2.BackColor = ThemeManager.BorderColor;
         }
 
         void SchedulerSettingsPanel_Load(object sender, EventArgs e)
@@ -96,7 +88,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             nudSchedulerWaitTimerProceed.Value = ProTONEConfig.SchedulerWaitTimerProceed;
 
-            ManageVisibility();
+            UpdateAvailability();
+
             SubscribeAll();
         }
 
@@ -119,37 +112,17 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         private void OnSettingsChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Modified = true;
+            UpdateAvailability();
 
-                if (sender == chkEnablePlaylistEvt)
-                {
-                    ShortcutMapper.DispatchCommand(OPMShortcut.CmdPlaylistEnd);
-                }
-
-                UnsubscribeAll();
-
-                SystemScheduler.PlaylistEventEnabled = chkEnablePlaylistEvt.Checked;
-                ManageVisibility();
-
-            }
-            finally
-            {
-                SubscribeAll();
-            }
+            this.Modified = true;
         }
 
-        private void ManageVisibility()
+        private void UpdateAvailability()
         {
-            grpPlaylistEvt.Enabled = chkEnablePlaylistEvt.Checked;
-            grpPlaylistEvt.Visible = chkEnablePlaylistEvt.Checked;
-
-            grpScheduledEvt.Enabled = chkEnableScheduledEvt.Checked;
-            grpScheduledEvt.Visible = chkEnableScheduledEvt.Checked;
-
-            pnlProceedTimerOptions.Visible = (chkEnablePlaylistEvt.Checked || chkEnableScheduledEvt.Checked);
-            lblSep3.Visible = (chkEnablePlaylistEvt.Checked || chkEnableScheduledEvt.Checked);
+            cmbScheduledEvtHandler.Enabled = chkEnableScheduledEvt.Checked;
+            nudSchedulerWaitTimerProceed.Enabled = chkEnableScheduledEvt.Checked;
+            wsScheduledEvtDays.Enabled = chkEnableScheduledEvt.Checked;
+            cmbPlaylistEvtHandler.Enabled = chkEnablePlaylistEvt.Checked;
         }
 
         private void SubscribeAll()

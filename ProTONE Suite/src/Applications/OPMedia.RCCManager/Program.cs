@@ -34,13 +34,13 @@ namespace OPMedia.RCCManager
 
             try
             {
+                LoggedApplication.Start(ProTONEConstants.RCCManagerName, true);
+
                 Translator.SetInterfaceLanguage(AppConfig.LanguageID);
 
                 Translator.RegisterTranslationAssembly(typeof(MainForm).Assembly);
                 Translator.RegisterTranslationAssembly(typeof(SerialDeviceCfgDlg).Assembly);
                 Translator.RegisterTranslationAssembly(typeof(MediaPlayer).Assembly);
-
-                LoggedApplication.Start(ProTONEConstants.RCCManagerName, true);
 
                 if (!AppConfig.CurrentUserIsAdministrator)
                 {

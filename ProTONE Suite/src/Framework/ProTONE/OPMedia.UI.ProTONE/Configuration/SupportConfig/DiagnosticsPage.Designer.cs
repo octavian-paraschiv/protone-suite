@@ -290,7 +290,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "DiagnosticsPage";
             this.Size = new System.Drawing.Size(647, 425);
-            this.Load += new System.EventHandler(this.DiagnosticsPage_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDirectX)).EndInit();

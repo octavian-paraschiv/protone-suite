@@ -82,7 +82,7 @@
             this.lblItem.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblItem.Size = new System.Drawing.Size(527, 13);
             this.lblItem.TabIndex = 1;
-            this.lblItem.Text = "[ item ]";
+            this.lblItem.Text = "TXT_ITEM";
             this.lblItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // layoutPanelInner

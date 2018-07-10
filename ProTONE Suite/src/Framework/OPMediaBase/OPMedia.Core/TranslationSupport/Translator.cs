@@ -8,6 +8,8 @@
 //
 #endregion
 
+//#define _NO_TRANSLATIONS
+
 #region Using directives
 using System;
 using System.Resources;
@@ -74,6 +76,8 @@ namespace OPMedia.Core.TranslationSupport
         private static List<Assembly> _assemblies = new List<Assembly>();
         #endregion
 
+        static List<string> __knownUntranslatableStrings = new List<string>();
+
         #region Methods
         /// <summary>
         /// Static constructor.
@@ -83,6 +87,13 @@ namespace OPMedia.Core.TranslationSupport
 #if _NO_TRANSLATIONS
      translate = false;
 #endif
+            __knownUntranslatableStrings.AddRange(new string[]
+            {
+                "ColumnHeader",
+                "...",
+                "URL",
+            });
+
         }
 
         /// <summary>
@@ -114,19 +125,22 @@ namespace OPMedia.Core.TranslationSupport
 		{
             string retVal = tag;
 
-            if (translate && !string.IsNullOrEmpty(tag) && tag.StartsWith("TXT_"))
+            if (translate)
             {
-                string translatedTag = Translate(tag);
+                if (IsTranslatable(tag))
+                {
+                    string translatedTag = Translate(tag);
 
-                retVal = string.Format(
-                    (translatedTag == null) ? tag : translatedTag,
-                    (args == null || args.Length > 0) ? args : new object[] { string.Empty });
-            }
+                    retVal = string.Format(
+                        (translatedTag == null) ? tag : translatedTag,
+                        (args == null || args.Length > 0) ? args : new object[] { string.Empty });
 
-            if (retVal == tag)
-            {
-                // Not translated
-                Logger.LogTranslationTrace(tag);
+                    if (retVal == tag)
+                    {
+                        // Not translated
+                        Logger.LogUntranslated(tag);
+                    }
+                }
             }
             
             return retVal;
@@ -135,44 +149,53 @@ namespace OPMedia.Core.TranslationSupport
         public static string Translate(string tag)
         {
             string retVal = tag;
+            string log = string.Empty;
 
-            if (translate && !string.IsNullOrEmpty(tag) && tag.StartsWith("TXT_"))
+            if (translate)
             {
-                bool hasTrailingColon = tag.TrimEnd().EndsWith(":");
-                tag = tag.TrimEnd(':');
-
-                string translatedTag = null;
-                
-                foreach (ResourceManager rm in _resManagers)
+                if (IsTranslatable(tag))
                 {
-                    try
-                    {
-                        translatedTag = rm.GetString(tag, Thread.CurrentThread.CurrentCulture);
-                        if (translatedTag != null)
-                        {
-                            retVal = translatedTag;
+                    bool hasTrailingColon = tag.TrimEnd().EndsWith(":");
+                    tag = tag.TrimEnd(':');
 
-                            if (hasTrailingColon && !retVal.EndsWith(":"))
+                    string translatedTag = null;
+
+                    foreach (ResourceManager rm in _resManagers)
+                    {
+                        try
+                        {
+                            translatedTag = rm.GetString(tag, Thread.CurrentThread.CurrentCulture);
+                            if (translatedTag != null)
                             {
-                                retVal += ": ";
+                                log = $"{rm.BaseName.Replace("Translations.Translation", "").Trim('.')}=>{tag}";
+
+                                retVal = translatedTag;
+
+                                if (hasTrailingColon && !retVal.EndsWith(":"))
+                                {
+                                    retVal += ": ";
+                                }
+
+                                break;
                             }
 
-                            break;
                         }
-
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                            retVal = tag;
+                        }
                     }
-                    catch (Exception ex)
+
+                    if (retVal == tag)
                     {
-                        Logger.LogException(ex);
-                        retVal = tag;
+                        Logger.LogUntranslated(tag);
+                    }
+                    else
+                    {
+                        Logger.LogTranslated($"{log}");
                     }
                 }
-            }
-            
-            if (retVal == tag)
-            {
-                // Not translated
-                Logger.LogTranslationTrace(tag);
             }
 
             return retVal;
@@ -234,14 +257,16 @@ namespace OPMedia.Core.TranslationSupport
                     {
                         foreach (ColumnHeader ch in (ctl as ListView).Columns)
                         {
-                            ch.Text = Translator.Translate(ch.Text);
+                            if (IsTranslatable(ch.Text))
+                                ch.Text = Translator.Translate(ch.Text);
                         }
                     }
                     else if (ctl is DataGridView)
                     {
                         foreach (DataGridViewColumn col in (ctl as DataGridView).Columns)
                         {
-                            col.HeaderText = Translator.Translate(col.HeaderText);
+                            if (IsTranslatable(col.HeaderText))
+                                col.HeaderText = Translator.Translate(col.HeaderText);
                         }
                     }
                     else if (ctl is ComboBox)
@@ -249,7 +274,8 @@ namespace OPMedia.Core.TranslationSupport
                     }
                     else
                     {
-                        ctl.Text = Translator.Translate(ctl.Text);
+                        if (IsTranslatable(ctl.Text))
+                            ctl.Text = Translator.Translate(ctl.Text);
                     }
 
                 }
@@ -291,9 +317,10 @@ namespace OPMedia.Core.TranslationSupport
                         }
                     }
 
-                   
-                    tsi.Text = Translator.Translate(tsi.Text);
-                    tsi.ToolTipText = tsi.Text;
+                   if (IsTranslatable(tsi.Text))
+                        tsi.Text = Translator.Translate(tsi.Text);
+
+                   tsi.ToolTipText = tsi.Text;
                    
                 }
             }
@@ -306,7 +333,7 @@ namespace OPMedia.Core.TranslationSupport
         {
             string retVal = taggedString;
 
-            if (translate && !string.IsNullOrEmpty(taggedString))
+            if (translate && IsTranslatable(taggedString))
             {
                 retVal = taggedString;
 
@@ -328,5 +355,18 @@ namespace OPMedia.Core.TranslationSupport
             return retVal;
         }
         #endregion
+
+        private static bool IsTranslatable(string s)
+        {
+            if (string.IsNullOrEmpty(s) || 
+                __knownUntranslatableStrings.Contains(s))
+                return false;
+
+            if (s.StartsWith("TXT_"))
+                return true;
+
+            Logger.LogUntranslatable(s);
+            return false;
+        }
     }
 }

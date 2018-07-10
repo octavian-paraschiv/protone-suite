@@ -69,7 +69,7 @@ namespace OPMedia.UI.ProTONE.Controls.BookmarkManagement
             this.lblItem.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblItem.Size = new System.Drawing.Size(572, 13);
             this.lblItem.TabIndex = 1;
-            this.lblItem.Text = "[ item ]";
+            this.lblItem.Text = "TXT_ITEM";
             this.lblItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lvBookmarks
