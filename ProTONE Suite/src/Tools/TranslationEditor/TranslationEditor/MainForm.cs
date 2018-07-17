@@ -250,23 +250,34 @@ namespace TranslationEditor
 
             if (listViewItem != null)
             {
+                string untranslatedText = listViewItem.SubItems[hdrBaseText.Index].Text;
+                string translatedText = listViewItem.SubItems[hdrTranslatedText.Index].Text;
+
                 try
                 {
-                    lblBaseText.Rtf = listViewItem.SubItems[hdrBaseText.Index].Text;
+                    lblBaseText.Rtf = untranslatedText;
                 }
                 catch
                 {
-                    lblBaseText.Text = listViewItem.SubItems[hdrBaseText.Index].Text;
+                    lblBaseText.Text = untranslatedText;
                 }
 
                 try
                 {
-                    lblTranslatedText.Rtf = listViewItem.SubItems[hdrTranslatedText.Index].Text;
+                    lblTranslatedText.Rtf = translatedText;
                 }
                 catch
                 {
-                    lblTranslatedText.Text = listViewItem.SubItems[hdrTranslatedText.Index].Text;
+                    lblTranslatedText.Text = translatedText;
                 }
+
+                int baseLines = lblBaseText.Lines.Length;
+                int translatedLines = lblTranslatedText.Lines.Length;
+
+                if (baseLines != translatedLines)
+                    lblTranslatedText.BackColor = lblBaseText.BackColor = Color.Coral;
+                else
+                    lblTranslatedText.BackColor = lblBaseText.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
 
             EnableMenus();
