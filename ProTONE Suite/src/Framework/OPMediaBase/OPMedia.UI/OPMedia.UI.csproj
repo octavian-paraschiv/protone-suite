@@ -186,9 +186,7 @@
     <Compile Include="Controls\OPMBaseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\OPMListView.cs" />
     <Compile Include="Controls\OPMListViewSubItem.cs" />
     <Compile Include="Controls\ISelfValidable.cs" />
     <Compile Include="Controls\IValidator.cs" />
@@ -198,9 +196,7 @@
     <Compile Include="Controls\OPMShellTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMStatusStrip.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\OPMStatusStrip.cs" />
     <Compile Include="Controls\OPMTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -254,9 +250,7 @@
     <Compile Include="Controls\FileAttributesBrowserCtl.Designer.cs">
       <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OPMToolTip.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\OPMToolTip.cs" />
     <Compile Include="Controls\OPMTimePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -394,9 +388,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ThemedScrollBars\ScrollBarSkinner.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ThemedScrollBars\ScrollBarSkinner.cs" />
     <Compile Include="TaskRunner.cs">
     </Compile>
     <Compile Include="MessageDisplay.cs">

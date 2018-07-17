@@ -154,7 +154,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         private StepDetail ProcessFile(string file)
         {
             StepDetail detail = new StepDetail();
-            detail.Description = "TXT_PROCESSING_FILE: " + file;
+            detail.Description = $"{Translator.Translate("TXT_PROCESSING_FILE")} :{file}";
             RaiseTaskStepInitEvent(detail);
 
             detail.Results = Translator.Translate("TXT_UNHANDLED");

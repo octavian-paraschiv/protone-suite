@@ -1089,10 +1089,10 @@ Doriţi să fie creat ?</value>
   <value>Cel mai bun</value>
 </data>
 <data name="TXT_UNCHECK_ALL">
-  <value>Bifați tot</value>
+  <value>Debifați tot</value>
 </data>
 <data name="TXT_CHECK_ALL">
-  <value>Debifați tot</value>
+  <value>Bifați tot</value>
 </data>
 <data name="TXT_THEN">
   <value>atunci</value>

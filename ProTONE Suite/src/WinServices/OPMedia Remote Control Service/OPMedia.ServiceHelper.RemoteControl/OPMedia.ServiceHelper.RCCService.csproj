@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="RCCServiceConfig.cs">
       <DependentUpon>RCCServiceConfig.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RCCServiceConfig.Designer.cs">
       <AutoGen>True</AutoGen>

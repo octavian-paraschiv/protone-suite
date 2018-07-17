@@ -87,6 +87,14 @@ namespace OPMedia.Core.Configuration
 
         public const string UnconfiguredThemeName = "Deezer";
 
+        public static CultureInfo GetCulture(string name)
+        {
+            if (_cultures.ContainsKey(name))
+                return _cultures[name];
+
+            return new CultureInfo("en");
+        }
+
         static AppConfig()
         {
             if (string.Compare(Constants.PersistenceServiceShortName,

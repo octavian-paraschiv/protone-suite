@@ -164,7 +164,7 @@ namespace OPMedia.Core.TranslationSupport
                     {
                         try
                         {
-                            translatedTag = rm.GetString(tag, Thread.CurrentThread.CurrentCulture);
+                            translatedTag = rm.GetString(tag, AppConfig.GetCulture(_languageId));
                             if (translatedTag != null)
                             {
                                 log = $"{rm.BaseName.Replace("Translations.Translation", "").Trim('.')}=>{tag}";
@@ -201,34 +201,28 @@ namespace OPMedia.Core.TranslationSupport
             return retVal;
         }
 
+        static string _languageId = "en";
+
         /// <summary>
         /// Sets the interface language.
         /// </summary>
         /// <param name="languageId">The language id.</param>
         public static void SetInterfaceLanguage(string languageId)
         {
-            if (OpMediaApplication.AllowRealTimeGUIUpdate == false ||
-                string.IsNullOrEmpty(languageId))
-            {
-                languageId = "en";
-            }
-
-            Logger.LogTrace("SetInterfaceLanguage: Requested UI language is: {0}", languageId);
-
             try
             {
-                Logger.LogTrace("SetInterfaceLanguage: Previous UI language was: {0}",
-                    Thread.CurrentThread.CurrentCulture.Name);
+                if (OpMediaApplication.AllowRealTimeGUIUpdate == false ||
+                    string.IsNullOrEmpty(languageId))
+                {
+                    languageId = "en";
+                }
 
-                CultureInfo culture = new CultureInfo(languageId);
-                Thread.CurrentThread.CurrentCulture = culture;
-                Thread.CurrentThread.CurrentUICulture = culture;
+                Logger.LogTrace("SetInterfaceLanguage: Requested UI language is: {0}", languageId);
+                Logger.LogTrace("SetInterfaceLanguage: Previous UI language was: {0}", _languageId);
+
+                _languageId = languageId;
 
                 StringUtils.RebuildDateTimeFormatString();
-
-                Logger.LogTrace("SetInterfaceLanguage: Current UI language was: {0}",
-                    Thread.CurrentThread.CurrentCulture.Name);
-
                 EventDispatch.DispatchEvent(EventNames.PerformTranslation);
             }
             catch (Exception ex)
@@ -239,7 +233,7 @@ namespace OPMedia.Core.TranslationSupport
 
         public static string GetInterfaceLanguage()
         {
-            return Thread.CurrentThread.CurrentUICulture.Name;
+            return _languageId;
         }
 
         public static void TranslateControl(Control ctl, bool designMode)

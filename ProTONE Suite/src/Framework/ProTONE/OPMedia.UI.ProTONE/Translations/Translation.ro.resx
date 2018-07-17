@@ -1159,8 +1159,7 @@ Daţi click pentru a seta volumul la {0} %</value>
 <data name="TXT_SHOUTCAST_DEV_ID_HINT">
   <value>Cheia privată ShoutCastAPI Device ID reprezintă identitatea dvs. unică pentru ShoutCast API.&#xD;
 Este destinată să fie folosită individual, deci vă rugăm să nu o împărțiți  cu nimeni.&#xD;
-Pentru a obține propria dvs. cheie, accesați:&#xD;
-</value>
+Pentru a obține propria dvs. cheie, accesați:</value>
 </data>
 <data name="TXT_SHOUTCAST_SEARCH_URL">
   <value>URL ShoutCast pt. căutare stație:</value>
