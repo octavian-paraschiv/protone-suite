@@ -22,8 +22,8 @@ namespace OPMedia.UI.HelpSupport
     {
         BackgroundWorker _loader;
         private Controls.OPMToolStrip tsMain;
-        private OPMToolStripButton tsbPrev;
-        private OPMToolStripButton tsbNext;
+        private OPMTriStateToolStripButton tsbPrev;
+        private OPMTriStateToolStripButton tsbNext;
         private System.Windows.Forms.WebBrowser wbHelpDisplay;
 
         private Stack<string> bckUrls = new Stack<string>();
@@ -35,8 +35,8 @@ namespace OPMedia.UI.HelpSupport
             this.wbHelpDisplay = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMain = new OPMedia.UI.Controls.OPMToolStrip();
-            this.tsbPrev = new OPMedia.UI.Controls.OPMToolStripButton();
-            this.tsbNext = new OPMedia.UI.Controls.OPMToolStripButton();
+            this.tsbPrev = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
+            this.tsbNext = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
             this.pnlContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -52,12 +52,12 @@ namespace OPMedia.UI.HelpSupport
             this.wbHelpDisplay.CausesValidation = false;
             this.wbHelpDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wbHelpDisplay.IsWebBrowserContextMenuEnabled = false;
-            this.wbHelpDisplay.Location = new System.Drawing.Point(3, 25);
+            this.wbHelpDisplay.Location = new System.Drawing.Point(3, 40);
             this.wbHelpDisplay.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.wbHelpDisplay.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbHelpDisplay.Name = "wbHelpDisplay";
             this.wbHelpDisplay.ScriptErrorsSuppressed = true;
-            this.wbHelpDisplay.Size = new System.Drawing.Size(792, 549);
+            this.wbHelpDisplay.Size = new System.Drawing.Size(792, 533);
             this.wbHelpDisplay.TabIndex = 0;
             this.wbHelpDisplay.TabStop = false;
             this.wbHelpDisplay.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.wbHelpDisplay_PreviewKeyDown);
@@ -77,45 +77,58 @@ namespace OPMedia.UI.HelpSupport
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(798, 577);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(798, 576);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tsMain
             // 
-            this.tsMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.tsMain.AutoSize = false;
             this.tsMain.ForeColor = System.Drawing.Color.Black;
             this.tsMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMain.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbPrev,
             this.tsbNext});
             this.tsMain.Location = new System.Drawing.Point(1, 0);
             this.tsMain.Name = "tsMain";
             this.tsMain.ShowBorder = true;
-            this.tsMain.Size = new System.Drawing.Size(796, 25);
+            this.tsMain.Size = new System.Drawing.Size(796, 40);
             this.tsMain.TabIndex = 1;
             this.tsMain.Text = "opmToolStrip1";
-            this.tsMain.VerticalGradient = true;
+            this.tsMain.VerticalGradient = false;
             // 
             // tsbPrev
             // 
+            this.tsbPrev.ActiveImage = null;
+            this.tsbPrev.AutoSize = false;
             this.tsbPrev.AutoToolTip = false;
+            this.tsbPrev.CheckedImage = null;
+            this.tsbPrev.DisabledImage = null;
             this.tsbPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbPrev.Image = global::OPMedia.UI.Properties.Resources.Back;
             this.tsbPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPrev.InactiveImage = global::OPMedia.UI.Properties.Resources.Back;
+            this.tsbPrev.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.tsbPrev.Name = "tsbPrev";
-            this.tsbPrev.Size = new System.Drawing.Size(23, 22);
+            this.tsbPrev.Size = new System.Drawing.Size(30, 30);
             this.tsbPrev.Text = "toolStripButton1";
             this.tsbPrev.Click += new System.EventHandler(this.tsbPrev_Click);
             // 
             // tsbNext
             // 
+            this.tsbNext.ActiveImage = null;
+            this.tsbNext.AutoSize = false;
             this.tsbNext.AutoToolTip = false;
+            this.tsbNext.CheckedImage = null;
+            this.tsbNext.DisabledImage = null;
             this.tsbNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbNext.Image = global::OPMedia.UI.Properties.Resources.Forward;
             this.tsbNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNext.InactiveImage = global::OPMedia.UI.Properties.Resources.Forward;
+            this.tsbNext.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.tsbNext.Name = "tsbNext";
-            this.tsbNext.Size = new System.Drawing.Size(23, 22);
+            this.tsbNext.Size = new System.Drawing.Size(30, 30);
             this.tsbNext.Text = "toolStripButton2";
             this.tsbNext.Click += new System.EventHandler(this.tsbNext_Click);
             // 
@@ -128,7 +141,6 @@ namespace OPMedia.UI.HelpSupport
             this.Shown += new System.EventHandler(this.HelpViewer_Shown);
             this.pnlContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
             this.ResumeLayout(false);

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Persistence;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.Core
 {
@@ -178,34 +179,7 @@ namespace OPMedia.Core
                     {
                         try
                         {
-                            if (typeof(T).IsSubclassOf(typeof(Enum)))
-                            {
-                                retVal = (T)Enum.Parse(typeof(T), content);
-                            }
-
-                            else if (typeof(T) == typeof(TimeSpan))
-                            {
-                                TimeSpan ts = TimeSpan.Parse(content);
-                                retVal = (T)Convert.ChangeType(ts, typeof(T));
-                            }
-
-                            else if (typeof(T) == typeof(DateTime))
-                            {
-                                DateTime dt = DateTime.Parse(content);
-                                retVal = (T)Convert.ChangeType(dt, typeof(T));
-                            }
-
-                            else
-                            {
-                                try
-                                {
-                                    retVal = (T)Convert.ChangeType(content, typeof(T));
-                                }
-                                catch (InvalidCastException)
-                                {
-                                    retVal = (T)Enum.Parse(typeof(T), content);
-                                }
-                            }
+                            retVal = StringUtils.Coalesce<T>(content);
                         }
                         catch (Exception ex)
                         {

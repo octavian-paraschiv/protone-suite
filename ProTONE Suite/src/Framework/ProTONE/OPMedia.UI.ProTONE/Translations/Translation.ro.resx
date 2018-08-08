@@ -1243,5 +1243,8 @@ vă rugăm să  alegeți una:</value>
 <data name="TXT_DIAG_DIRECTX_REQUIRED">
   <value>Obligatoriu: DirectX 9.0c [{0}] sau mai nou</value>
 </data>
+<data name="TXT_USE_WORKER_PROCESS">
+  <value>Redați conținutul Deezer în modul izolare</value>
+</data>
     
 </root>

@@ -36,6 +36,7 @@
             this.txtDeezerAppID = new OPMedia.UI.Controls.OPMTextBox();
             this.opmLinkLabel1 = new OPMedia.UI.Controls.OPMLinkLabel();
             this.btnNew = new OPMedia.UI.Controls.OPMButton();
+            this.chkUseWorkerProcess = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,16 +69,20 @@
             this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerAppID, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLinkLabel1, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.btnNew, 2, 1);
+            this.opmTableLayoutPanel1.Controls.Add(this.chkUseWorkerProcess, 0, 5);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmTableLayoutPanel1.RowCount = 4;
+            this.opmTableLayoutPanel1.RowCount = 7;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(574, 238);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(574, 212);
             this.opmTableLayoutPanel1.TabIndex = 1;
             // 
             // txtDeezerToken
@@ -85,7 +90,6 @@
             this.txtDeezerToken.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDeezerToken.Enabled = true;
             this.txtDeezerToken.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtDeezerToken.Location = new System.Drawing.Point(122, 35);
             this.txtDeezerToken.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
@@ -172,7 +176,6 @@
             this.opmLinkLabel1.TabIndex = 7;
             this.opmLinkLabel1.TabStop = true;
             this.opmLinkLabel1.Text = "https://developers.deezer.com/sdk/native#_main_features_and_changes";
-            this.opmLinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.opmLinkLabel1_LinkClicked);
             // 
             // btnNew
             // 
@@ -189,13 +192,28 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // chkUseWorkerProcess
+            // 
+            this.chkUseWorkerProcess.AutoSize = true;
+            this.opmTableLayoutPanel1.SetColumnSpan(this.chkUseWorkerProcess, 3);
+            this.chkUseWorkerProcess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkUseWorkerProcess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkUseWorkerProcess.Location = new System.Drawing.Point(3, 148);
+            this.chkUseWorkerProcess.Name = "chkUseWorkerProcess";
+            this.chkUseWorkerProcess.OverrideForeColor = System.Drawing.Color.Empty;
+            this.chkUseWorkerProcess.Size = new System.Drawing.Size(568, 19);
+            this.chkUseWorkerProcess.TabIndex = 13;
+            this.chkUseWorkerProcess.Text = "TXT_USE_WORKER_PROCESS";
+            this.chkUseWorkerProcess.UseVisualStyleBackColor = true;
+            this.chkUseWorkerProcess.CheckedChanged += new System.EventHandler(this.chkUseWorkerProcess_CheckedChanged);
+            // 
             // DeezerConfigPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.opmTableLayoutPanel1);
             this.Name = "DeezerConfigPage";
-            this.Size = new System.Drawing.Size(574, 238);
+            this.Size = new System.Drawing.Size(574, 212);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -212,5 +230,6 @@
         private UI.Controls.OPMTextBox txtDeezerAppID;
         private UI.Controls.OPMLinkLabel opmLinkLabel1;
         private UI.Controls.OPMButton btnNew;
+        private UI.Controls.OPMCheckBox chkUseWorkerProcess;
     }
 }

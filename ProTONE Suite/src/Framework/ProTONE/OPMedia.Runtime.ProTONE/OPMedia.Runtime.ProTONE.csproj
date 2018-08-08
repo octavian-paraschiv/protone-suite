@@ -145,6 +145,7 @@
     <Compile Include="Rendering\DS\BaseClasses\DirectShow.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DSHelper.cs" />
     <Compile Include="Rendering\DS\DeezerRenderer.cs" />
+    <Compile Include="Rendering\DS\DeezerWorkerRenderer.cs" />
     <Compile Include="Rendering\DS\DSExtensionMethods.cs" />
     <Compile Include="Rendering\DS\DsFilters\ShoutCast.cs" />
     <Compile Include="Rendering\DS\DSAudioCDRenderer.cs" />

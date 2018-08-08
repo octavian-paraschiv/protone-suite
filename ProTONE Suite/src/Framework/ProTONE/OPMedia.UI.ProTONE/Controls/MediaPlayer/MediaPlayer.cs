@@ -65,7 +65,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         const int PanelOffset = 20;
 
         public bool compactView = false;
-        public bool Autoplay = true;
+        
         //string playedFileTitle = string.Empty;
         int playlistWidth = 0;
         #endregion
@@ -124,10 +124,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             int initialCount = pnlScreens.PlaylistScreen.GetFileCount();
             pnlScreens.PlaylistScreen.AddFiles(fileNames);
-            if (initialCount < 1 && Autoplay)
-            {
+
+            if (initialCount < 1)
                 PlayFile(pnlScreens.PlaylistScreen.GetActiveFile(), null);
-            }
         }
 
         public void ClearPlaylist()
@@ -268,10 +267,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                     pnlScreens.PlaylistScreen.AddFiles(droppedFiles);
 
-                    if (initialCount < 1 && Autoplay)
-                    {
+                    if (initialCount < 1)
                         PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-                    }
                 }
             }
         }
@@ -380,10 +377,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             //pnlRendering.FilterStateChanged(newState, newMedia, MediaRenderer.DefaultInstance.RenderedMediaType);
             pnlRendering.FilterStateChanged(newState, pli, MediaRenderer.DefaultInstance.RenderedMediaType);
 
-            if (newState == FilterState.NotOpened && Autoplay && pnlScreens.PlaylistScreen.GetFileCount() >= 1)
+            bool playerNotActive = (newState == FilterState.NotOpened || newState == FilterState.Stopped);
+
+            if (playerNotActive && pnlScreens.PlaylistScreen.GetFileCount() >= 1)
             {
                 MediaRenderer.DefaultInstance.PlaylistAtEnd = pnlScreens.PlaylistScreen.IsPlaylistAtEnd;
-                MoveNext();
+
+                if (MediaRenderer.DefaultInstance.IsStopFromGui == false)
+                    MoveNext();
             }
             else
             {
@@ -542,10 +543,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         pnlScreens.PlaylistScreen.Clear();
                         pnlScreens.PlaylistScreen.AddFiles(new string[] { dvd.DvdPath });
 
-                        if (Autoplay)
-                        {
-                            PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-                        }
+                        PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
                     }
                     else
                     {
@@ -644,10 +642,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             pnlScreens.PlaylistScreen.Clear();
             pnlScreens.PlaylistScreen.AddFiles(fileNames);
 
-            if (Autoplay)
-            {
-                PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-            }
+            PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
         }
 
         internal void PlayFile(string strFile, PlaylistSubItem subItem)
@@ -986,10 +981,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             pnlScreens.PlaylistScreen.AddOnlineContent(onlineContent);
 
-            if (doEnqueue == false && Autoplay)
-            {
+            if (doEnqueue == false)
                 PlayFile(pnlScreens.PlaylistScreen.GetFirstFile(), null);
-            }
         }
 
         private void ToggleFullScreen()

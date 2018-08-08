@@ -88,6 +88,9 @@ namespace OPMedia.DeezerInterop.PlayerApi
         DZ_ERROR_PLAYER_PAUSE_TIMEOUT,
         DZ_ERROR_PLAYER_SEEK_TIMEOUT,
         DZ_ERROR_PLAYER_STOP_TIMEOUT,
+
+        DZ_ERROR_BAD_OPERATION_REQ,
+        DZ_ERROR_BAD_OPERATION_RSP,
     }
 
     /// <summary>

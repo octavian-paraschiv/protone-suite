@@ -31,12 +31,14 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             this.Title = "Deezer";
             this.HandleCreated += new EventHandler(DeezerConfigPage_HandleCreated);
 
-            txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
-            txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnTextChanged);
+            txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
+            txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
+            chkUseWorkerProcess.CheckedChanged += new EventHandler(OnSettingsChanged);
+
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
         }
 
-        void OnTextChanged(object sender, EventArgs e)
+        void OnSettingsChanged(object sender, EventArgs e)
         {
             base.Modified = true;
         }
@@ -45,17 +47,14 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
+            chkUseWorkerProcess.Checked = ProTONEConfig.DeezerUseWorkerProcess;
         }
 
         protected override void SaveInternal()
         {
             ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
-        }
-
-        private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://developers.deezer.com/sdk/native#_main_features_and_changes");
+            ProTONEConfig.DeezerUseWorkerProcess = chkUseWorkerProcess.Checked;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -64,6 +63,11 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             new DeezerCredentialsForm().ShowDialog();
             DeezerConfigPage_HandleCreated(sender, e);
+        }
+
+        private void chkUseWorkerProcess_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

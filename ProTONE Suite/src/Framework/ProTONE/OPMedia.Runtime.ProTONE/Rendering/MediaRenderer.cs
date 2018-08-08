@@ -612,7 +612,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (uri.OriginalString.StartsWith("dzmedia:///track/"))
                     {
-                        CreateNewRenderer<DeezerRenderer>();
+                        if (ProTONEConfig.DeezerUseWorkerProcess)
+                            CreateNewRenderer<DeezerWorkerRenderer>();
+                        else
+                            CreateNewRenderer<DeezerRenderer>();
                     }
                     else
                     {
@@ -765,6 +768,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
         bool _isStopFromGui = false;
+
+        public bool IsStopFromGui
+        {
+            get
+            {
+                return _isStopFromGui;
+            }
+        }
 
         public void StopRenderer(bool isStopFromGui)
         {

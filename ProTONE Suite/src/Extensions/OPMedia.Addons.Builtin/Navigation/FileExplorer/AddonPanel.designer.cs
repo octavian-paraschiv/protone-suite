@@ -34,9 +34,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddonPanel));
-            this.ilAddon = new System.Windows.Forms.ImageList(this.components);
+            this.ilAddon = new System.Windows.Forms.ImageList();
             this.opmShellList = new OPMedia.UI.Controls.OPMShellListView();
             this.contextMenuStrip = new OPMedia.UI.Controls.OPMContextMenuStrip();
             this.tsmiNewFolder = new OPMedia.UI.Controls.OPMToolStripMenuItem();
@@ -258,7 +257,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // tsmiSearch
             // 
             this.tsmiSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiSearch.Image = global::OPMedia.UI.Properties.Resources.Search16;
+            this.tsmiSearch.Image = ((System.Drawing.Image)(resources.GetObject("tsmiSearch.Image")));
             this.tsmiSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiSearch.Name = "tsmiSearch";
             this.tsmiSearch.Size = new System.Drawing.Size(209, 22);
@@ -598,11 +597,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbSearch.DisabledImage = null;
             this.tsbSearch.Enabled = false;
             this.tsbSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsbSearch.Image = global::OPMedia.UI.Properties.Resources.Search;
+            this.tsbSearch.Image = ((System.Drawing.Image)(resources.GetObject("tsbSearch.Image")));
             this.tsbSearch.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.tsbSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSearch.InactiveImage = global::OPMedia.UI.Properties.Resources.Search;
+            this.tsbSearch.InactiveImage = ((System.Drawing.Image)(resources.GetObject("tsbSearch.InactiveImage")));
             this.tsbSearch.Name = "tsbSearch";
             this.tsbSearch.Size = new System.Drawing.Size(40, 40);
             this.tsbSearch.Tag = "ToolActionSearch";

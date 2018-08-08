@@ -1243,5 +1243,8 @@ Otherwise, you will need to copy it from the URL displayed in the default browse
 <data name="TXT_DIAG_DIRECTX_REQUIRED">
   <value>Required: DirectX 9.0c [{0}] or higher</value>
 </data>
+<data name="TXT_USE_WORKER_PROCESS">
+  <value>Play Deezer content in isolation mode</value>
+</data>
     
 </root>

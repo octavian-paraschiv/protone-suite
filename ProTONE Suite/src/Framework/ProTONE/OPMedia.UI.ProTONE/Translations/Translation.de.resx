@@ -1243,5 +1243,8 @@ Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und 
 <data name="TXT_DIAG_DIRECTX_REQUIRED">
   <value>Erforderlich: DirectX 9.0c [{0}] oder neuer</value>
 </data>
+<data name="TXT_USE_WORKER_PROCESS">
+  <value>Spielen Sie den Deezer-Inhalt im Isolationsmodus ab</value>
+</data>
     
 </root>

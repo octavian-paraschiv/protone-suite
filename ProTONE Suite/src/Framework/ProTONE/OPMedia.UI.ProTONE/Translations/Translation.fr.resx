@@ -1242,5 +1242,8 @@ Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le
 <data name="TXT_DIAG_DIRECTX_REQUIRED">
   <value>Obligatoire: DirectX 9.0c [{0}] ou supérieur</value>
 </data>
+<data name="TXT_USE_WORKER_PROCESS">
+  <value>Lecture du contenu Deezer en mode d'isolation</value>
+</data>
     
 </root>
