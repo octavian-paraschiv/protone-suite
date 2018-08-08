@@ -65,9 +65,9 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             DeezerConfigPage_HandleCreated(sender, e);
         }
 
-        private void chkUseWorkerProcess_CheckedChanged(object sender, EventArgs e)
+        private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Process.Start("https://developers.deezer.com/sdk/native#_main_features_and_changes");
         }
     }
 }

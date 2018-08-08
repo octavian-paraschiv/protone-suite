@@ -50,19 +50,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\DeezerInterop\OPMedia.DeezerInterop.csproj">
+    <ProjectReference Include="..\..\Framework\DeezerInterop\OPMedia.DeezerInterop.csproj">
       <Project>{41d162bd-95f4-4348-b353-93ba1c3923b4}</Project>
       <Name>OPMedia.DeezerInterop</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
+    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
+    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0a0114c0-4409-42f3-940c-31038104261c}</Project>
       <Name>OPMedia.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj">
+    <ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj">
       <Project>{8c047807-786e-4b9c-8df5-1df99f75c874}</Project>
       <Name>OPMedia.Runtime.ProTONE</Name>
     </ProjectReference>

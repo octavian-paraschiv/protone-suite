@@ -176,6 +176,7 @@
             this.opmLinkLabel1.TabIndex = 7;
             this.opmLinkLabel1.TabStop = true;
             this.opmLinkLabel1.Text = "https://developers.deezer.com/sdk/native#_main_features_and_changes";
+            this.opmLinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.opmLinkLabel1_LinkClicked);
             // 
             // btnNew
             // 
@@ -205,7 +206,6 @@
             this.chkUseWorkerProcess.TabIndex = 13;
             this.chkUseWorkerProcess.Text = "TXT_USE_WORKER_PROCESS";
             this.chkUseWorkerProcess.UseVisualStyleBackColor = true;
-            this.chkUseWorkerProcess.CheckedChanged += new System.EventHandler(this.chkUseWorkerProcess_CheckedChanged);
             // 
             // DeezerConfigPage
             // 
