@@ -20,6 +20,8 @@
     <!-- Build global variables -->
     <property name="build.globalvars.dir" value="C:\GIT" />
     <property name="build.protone.vars" value="${build.globalvars.dir}\Protone_Build.ini" />
+
+    <property name="build.timestamp" value="${datetime::format-to-string(datetime::now(), 'yyyy-MM-dd')}" />
     
     
     <!-- FTP -->
@@ -36,7 +38,7 @@
 
     <target name="build" description="Rebuild ProTONE Suite">
 
-        <echo message=" BUILD STARTED !!" />
+        <echo message=" BUILD STARTED at ${build.timestamp}" />
 
         <call target="cleanup" />
         <call target="ScmCheckout" />
@@ -146,9 +148,7 @@
         
         <copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
         
-        <echo file="${output.dir}\ProTONE Suite ${newversion}.buildinfo.txt" append="false"/>
-            datetime::to-string(datetime::now())
-        <echo/>
+        <echo file="${output.dir}\ProTONE Suite ${newversion}.buildinfo.txt" message="${build.timestamp}" />
     
         <exec program="${winscp.run}" workingdir="${output.dir}">
             <arg value="/command" />
