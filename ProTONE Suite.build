@@ -56,8 +56,8 @@
         <echo message="Cleaning up autobuild directory ..." />
         <delete dir="${build.dir}" failonerror="false" />
         
-	<echo message="Cleaning up output directory ..." />
-	<delete dir="${output.dir}" failonerror="false" />
+    <echo message="Cleaning up output directory ..." />
+    <delete dir="${output.dir}" failonerror="false" />
         
         <echo message="Source code cleanup done" />
     </target>
@@ -120,16 +120,14 @@
         <!-- Post build results -->
         <echo message="    -> [PREP] Updating Versions_build.txt ..." />
         <iniwrite filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" value="${newversion}" />
-        <iniwrite filename="${build.dir}\Versions_build.txt" section="OPMedia SDK" key="Version" value="${newversion}" />
         
-         
-	<echo message="    -> [STAGE 1] Commiting build versions to GIT (Version_build.txt) ..." />
-	<exec program="${git.dir}git.exe" workingdir="${build.dir}">
-	    <arg value="commit" />
-	    <arg value="-a" />
-	    <arg value="-m" />
-	    <arg value="build_${newversion}" />
-	</exec>
+    <echo message="    -> [STAGE 1] Commiting build versions to GIT (Version_build.txt) ..." />
+    <exec program="${git.dir}git.exe" workingdir="${build.dir}">
+        <arg value="commit" />
+        <arg value="-a" />
+        <arg value="-m" />
+        <arg value="build_${newversion}" />
+    </exec>
 
         <!-- NOTE: This needs to have GIT credentials cached by means of a credential helper i.e wincred -->
         <echo message="    -> [STAGE 1] Pushing build versions to GIT (Versions_build.txt) ..." />
@@ -144,20 +142,24 @@
     
     
     <target name="PostBuildResults_FTP">
-    	<echo message="    -> [STAGE 3] Uploading build output to ocpa.ro FTP ..." />
-    	
-    	<copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
-    	
-    	<exec program="${winscp.run}" workingdir="${output.dir}">
-			<arg value="/command" />
-			<arg value="option batch abort" />
-			<arg value="option confirm off" />
-			<arg value="option transfer binary" />
-			<arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
-			<arg value="put *.* ${ftp.remote.dir}" />         
-			<arg value="close" />
-		<arg value="exit" />
-		
+        <echo message="    -> [STAGE 3] Uploading build output to ocpa.ro FTP ..." />
+        
+        <copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
+        
+        <echo file="${output.dir}\ProTONE Suite ${newversion}.buildinfo.txt" append="false"/>
+            datetime::to-string(datetime::now())
+        <echo/>
+    
+        <exec program="${winscp.run}" workingdir="${output.dir}">
+            <arg value="/command" />
+            <arg value="option batch abort" />
+            <arg value="option confirm off" />
+            <arg value="option transfer binary" />
+            <arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
+            <arg value="put *.* ${ftp.remote.dir}" />         
+            <arg value="close" />
+        <arg value="exit" />
+        
     </exec>     
     </target>
 
