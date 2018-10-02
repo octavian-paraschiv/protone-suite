@@ -9,17 +9,14 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using NAudio.Lame;
+using NAudio.Wave;
 
 namespace OPMedia.Addons.Builtin.Shared.Compression
 {
     class GrabberToMP3 : CdRipper
     {
         public Mp3ConversionOptions Options { get; set; }
-
-        private uint m_hLameStream = 0;
-        private uint m_InputSamples = 0;
-        private uint m_OutBufferSize = 0;
-        private byte[] m_OutBuffer = null;
 
         public override void Grab(CDDrive cd, Track track, string destFile, bool generateTags)
         {
@@ -42,6 +39,8 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
             if (short.TryParse(track.Year, out year))
                 ifiSlim.Year = year;
 
+            ifiSlim.Comments = $"Grabbed with OPMedia Library from CDDA ID {cd.GetCDDBDiskID()}";
+
             this.Options.WaveFormat = WaveFormatEx.Cdda;
 
             EncodeBuffer(buff, destFile, generateTags, ifiSlim);
@@ -49,71 +48,56 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
 
         public void EncodeBuffer(byte[] buff, string destFile, bool generateTags, ID3FileInfoSlim ifiSlim)
         {
-            string summary = "";
+            LAMEPreset preset = LAMEPreset.STANDARD;
+            LameMP3FileWriter w = null;
+
+            WaveFormat fmt = new WaveFormat(this.Options.ResampleFrequency,
+                this.Options.ChannelMode == ChannelMode.SingleChannel ? 1 : 2);
             
-            LameEncConfig cfg = this.Options.GetConfig(ref summary);
-            if (ifiSlim != null && ifiSlim.Frequency.HasValue)
-                cfg.format.dwSampleRate = (uint)ifiSlim.Frequency;
-
-            uint LameResult = Lame_encDll.Init(cfg, ref m_InputSamples, ref m_OutBufferSize, ref m_hLameStream);
-            if (LameResult != Lame_encDll.ERR_SUCCESSFUL)
+            switch (this.Options.BitrateMode)
             {
-                throw new ApplicationException(string.Format("Lame_encDll.Init failed with the error code {0}", LameResult));
-            } 
-            
-            using (FileStream fs = new FileStream(destFile, FileMode.Create, FileAccess.Write, FileShare.None))
-            using (BinaryWriter bw = new BinaryWriter(fs))
-            {
-                uint EncodedSize = 0;
-                m_OutBuffer = new byte[m_OutBufferSize];
+                case BitrateMode.CBR:
+                    w = new LameMP3FileWriter(destFile, fmt, this.Options.BitrateCBR, null);
+                    break;
 
-                if (MustCancel())
-                    return;
+                case BitrateMode.ABR:
+                    // ABR == VBR bitrate-based
+                    preset = (LAMEPreset)this.Options.BitrateABR;
+                    w = new LameMP3FileWriter(destFile, fmt, preset, null);
+                    break;
 
-                try
-                {
-                    int buffPos = 0;
-                    while (buffPos < buff.Length)
-                    {
-                        if (MustCancel())
-                            return;
+                case BitrateMode.VBR:
+                    // VBR quality-based
+                    w = new LameMP3FileWriter(destFile, fmt, (LAMEPreset)this.Options.VBRQuality, null);
+                    break;
 
-                        m_OutBuffer = new byte[m_OutBufferSize];
-
-                        uint bytesToCopy = Math.Min(2 * m_InputSamples, (uint)buff.Length - (uint)buffPos);
-
-                        if ((LameResult = Lame_encDll.Encode(m_hLameStream, buff, buffPos, (uint)bytesToCopy, m_OutBuffer, ref EncodedSize)) == Lame_encDll.ERR_SUCCESSFUL)
-                        {
-                            if (EncodedSize > 0)
-                            {
-                                bw.Write(m_OutBuffer, 0, (int)EncodedSize);
-                            }
-                        }
-                        else
-                        {
-                            throw new ApplicationException(string.Format("Lame_encDll.Encode failed with the error code {0}", LameResult));
-                        }
-
-                        buffPos += (int)bytesToCopy;
-                    }
-                }
-                finally
-                {
-                    EncodedSize = 0;
-                    if (Lame_encDll.Release(m_hLameStream, m_OutBuffer, ref EncodedSize) == Lame_encDll.ERR_SUCCESSFUL)
-                    {
-                        if (EncodedSize > 0)
-                        {
-                            bw.Write(m_OutBuffer, 0, (int)EncodedSize);
-                        }
-                    }
-                    Lame_encDll.Close(m_hLameStream);
-                }
+                case BitrateMode.Preset:
+                    w = new LameMP3FileWriter(destFile, fmt, this.Options.Preset, null);
+                    break;
             }
 
-            if (!MustCancel() && cfg.format.bWriteVBRHeader != 0)
+            if (MustCancel())
+                return;
+            
+            try
             {
-                uint err = Lame_encDll.WriteVBRHeader(destFile);
+                int buffPos = 0;
+                while (buffPos < buff.Length)
+                {
+                    if (MustCancel())
+                        return;
+
+                    int bytesToCopy = (int)Math.Min(2 * fmt.AverageBytesPerSecond, buff.Length - buffPos);
+
+                    w.Write(buff, buffPos, bytesToCopy);
+
+                    buffPos += (int)bytesToCopy;
+                }
+            }
+            finally
+            {
+                w.Close();
+                w = null;
             }
 
             if (!MustCancel() && generateTags && ifiSlim != null)
@@ -125,6 +109,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
                 ifi.Title = StringUtils.Capitalize(ifiSlim.Title, WordCasing.CapitalizeWords);
                 ifi.Track = ifiSlim.Track.GetValueOrDefault();
                 ifi.Year = ifiSlim.Year.GetValueOrDefault();
+                ifi.Comments = ifiSlim.Comments;
                 ifi.Save();
             }
         }

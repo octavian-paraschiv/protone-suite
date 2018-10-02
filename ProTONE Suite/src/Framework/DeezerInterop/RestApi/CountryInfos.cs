@@ -26,7 +26,5 @@ namespace OPMedia.DeezerInterop.RestApi
         /// </summary>
         [JsonProperty("open")]
         public bool IsDeezerServiceOpen { get; internal set; }
-        
-        // TODO: Add offers node support
     }
 }

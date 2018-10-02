@@ -1347,7 +1347,7 @@ namespace OPMedia.Addons.Builtin.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The MP3 files will be saved as {0}, with sampling rate {2} Hz and a variable bit rate with quality &apos;{1}&apos; (0=max, 9=min)..
+        ///   Looks up a localized string similar to The MP3 files will be saved as {0}, with sampling rate {2} Hz and a variable bit rate with quality &apos;{1}&apos; (VBR_10=min, VBR_100=max)..
         /// </summary>
         internal static string TXT_VBR_SUMMARY {
             get {

@@ -12,6 +12,7 @@ using OPMedia.Addons.Builtin.Translations;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Addons.Builtin.Shared.Compression;
+using NAudio.Lame;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
@@ -47,8 +48,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         private void UpdateSummary(bool fireSettingsChanged = true)
         {
-            string summary = "";
-            this.Options.GetConfig(ref summary);
+            string summary = this.Options.GetSummary();
             lblOutputBitrateHint.Text = summary;
 
             if (fireSettingsChanged)
@@ -60,42 +60,32 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             switch (this.Options.BitrateMode)
             {
                 case BitrateMode.CBR:
-                    lblBitrate.Visible = cmbBitrate.Visible = true;
+                    lblBitrate.Visible = cmbBitrateCBR.Visible = true;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
+                    lblVbrQuality.Visible = cmbVbrQuality.Visible = false;
+                    cmbBitrateABR.Visible = false;
                     break;
 
                 case BitrateMode.ABR:
-                    lblBitrate.Visible = cmbBitrate.Visible = true;
+                    lblBitrate.Visible = cmbBitrateABR.Visible = true;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
+                    lblVbrQuality.Visible = cmbVbrQuality.Visible = false;
+                    cmbBitrateCBR.Visible = false;
                     break;
 
                 case BitrateMode.Preset:
-                    lblBitrate.Visible = cmbBitrate.Visible = false;
+                    lblBitrate.Visible = cmbBitrateCBR.Visible = false;
                     lblPreset.Visible = cmbPreset.Visible = true;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = false;
+                    lblVbrQuality.Visible = cmbVbrQuality.Visible = false;
+                    cmbBitrateABR.Visible = false;
                     break;
 
                 case BitrateMode.VBR:
-                    lblBitrate.Visible = cmbBitrate.Visible = false;
+                    lblBitrate.Visible = cmbBitrateCBR.Visible = false;
                     lblPreset.Visible = cmbPreset.Visible = false;
-                    lblVbrQuality.Visible = cgVbrQuality.Visible = true;
+                    lblVbrQuality.Visible = cmbVbrQuality.Visible = true;
+                    cmbBitrateABR.Visible = false;
                     break;
-            }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (this.Options != null)
-            {
-                string summary = "";
-                string conversionFlags = this.Options.GetConfig(ref summary).ToString();
-
-                // TODO fixme
-                //LogFileConsoleDetail dlg = new LogFileConsoleDetail(conversionFlags);
-                //dlg.Text = "MP3 Conversion Flags";
-                //dlg.ShowDialog();
             }
         }
 
@@ -153,11 +143,30 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             // ------------------------
 
             // ------------------------
-            // CBR and ABR bit rate
-            cmbBitrate.SelectedIndex = cmbBitrate.FindStringExact(this.Options.Bitrate.ToString());
-            cmbBitrate.SelectedIndexChanged += (s, a) =>
+            // CBR bit rate
+            cmbBitrateCBR.SelectedIndex = cmbBitrateCBR.FindStringExact(this.Options.BitrateCBR.ToString());
+            cmbBitrateCBR.SelectedIndexChanged += (s, a) =>
             {
-                this.Options.Bitrate = int.Parse(cmbBitrate.Text);
+                this.Options.BitrateCBR = int.Parse(cmbBitrateCBR.Text);
+                UpdateSummary();
+            };
+            // ------------------------
+
+            // ------------------------
+            // ABR bit rate
+            cmbBitrateABR.Items.Clear();
+            foreach (LAMEPreset x in Enum.GetValues(typeof(LAMEPreset)))
+            {
+                if (x > LAMEPreset.ABR_320)
+                    break;
+
+                cmbBitrateABR.Items.Add((int)x);
+            }
+
+            cmbBitrateABR.SelectedIndex = cmbBitrateABR.FindStringExact(this.Options.BitrateABR.ToString());
+            cmbBitrateABR.SelectedIndexChanged += (s, a) =>
+            {
+                this.Options.BitrateABR = int.Parse(cmbBitrateABR.Text);
                 UpdateSummary();
             };
             // ------------------------
@@ -165,25 +174,32 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             // ------------------------
             // VBR "preset-based"
             cmbPreset.Items.Clear();
-            foreach (var x in Enum.GetValues(typeof(Preset)))
+            foreach (LAMEPreset x in Enum.GetValues(typeof(LAMEPreset)))
             {
+                if (x < LAMEPreset.R3MIX)
+                    continue;
+
                 cmbPreset.Items.Add(x);
             }
-            cmbPreset.SelectedIndex = cmbPreset.FindStringExact(this.Options.VBRPreset.ToString());
+            cmbPreset.SelectedIndex = cmbPreset.FindStringExact(this.Options.Preset.ToString());
             cmbPreset.SelectedIndexChanged += (s, a) =>
             {
-                this.Options.VBRPreset =
-                    (Preset)Enum.Parse(typeof(Preset), cmbPreset.Text);
+                this.Options.Preset =
+                    (LAMEPreset)Enum.Parse(typeof(LAMEPreset), cmbPreset.Text);
                 UpdateSummary();
             };
             // ------------------------
 
             // ------------------------
             // VBR "quality-based"
-            cgVbrQuality.Value = this.Options.VBRQuality;
-            cgVbrQuality.PositionChanged += (pos) =>
+            cmbVbrQuality.Items.Clear();
+            foreach (VBRQuality x in Enum.GetValues(typeof(VBRQuality)))
+                cmbVbrQuality.Items.Add(x);
+
+            cmbVbrQuality.SelectedIndex = cmbVbrQuality.FindStringExact(this.Options.VBRQuality.ToString());
+            cmbVbrQuality.SelectedIndexChanged += (s, a) =>
             {
-                this.Options.VBRQuality = (int)Math.Round(cgVbrQuality.Value);
+                this.Options.VBRQuality = (VBRQuality)Enum.Parse(typeof(VBRQuality), cmbVbrQuality.Text);
                 UpdateSummary();
             };
             // ------------------------

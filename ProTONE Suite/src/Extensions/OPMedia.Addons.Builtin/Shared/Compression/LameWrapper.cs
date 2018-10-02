@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NAudio.Lame;
 using OPMedia.Core.TranslationSupport;
 
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
@@ -24,19 +25,18 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
         SingleChannel,
     }
 
-    public enum Preset
+    public enum VBRQuality
     {
-        Normal_Quality = 0,
-        Low_Quality = 1,
-        High_Quality = 2,
-        Very_High_Quality = 5,
-        Standard = 6,
-        Fast_Standard = 7,
-        Extreme = 8,
-        Fast_Extreme = 9,
-        Insane = 10,
-        Medium = 13,
-        Fast_Medium = 14,
+        VBR_10 = 410,
+        VBR_20 = 420,
+        VBR_30 = 430,
+        VBR_40 = 440,
+        VBR_50 = 450,
+        VBR_60 = 460,
+        VBR_70 = 470,
+        VBR_80 = 480,
+        VBR_90 = 490,
+        VBR_100 = 500,
     }
 
     public class Mp3ConversionOptions
@@ -44,11 +44,13 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
         public BitrateMode BitrateMode { get; set; }
         public ChannelMode ChannelMode { get; set; }
 
-        public int Bitrate { get; set; }
+        public int BitrateCBR { get; set; }
 
-        public Preset VBRPreset { get; set; }
+        public int BitrateABR { get; set; }
 
-        public int VBRQuality { get; set; }
+        public LAMEPreset Preset { get; set; }
+
+        public VBRQuality VBRQuality { get; set; }
             
         public WaveFormatEx WaveFormat { get; set; }
 
@@ -58,62 +60,45 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
         {
             this.BitrateMode = BitrateMode.CBR;
             this.ChannelMode = ChannelMode.Stereo;
-            this.Bitrate = 192;
-            this.VBRPreset = Preset.Standard;
-            this.VBRQuality = 7;
+            this.BitrateCBR = 192;
+            this.BitrateABR = (int)LAMEPreset.ABR_128;
+            this.Preset = LAMEPreset.STANDARD;
+            this.VBRQuality = VBRQuality.VBR_60;
             this.WaveFormat = WaveFormatEx.Cdda;
             this.ResampleFrequency = WaveFormatEx.Cdda.nSamplesPerSec;
         }
 
-        public LameEncConfig GetConfig(ref string summary)
+        public string GetSummary()
         {
-            LameEncConfig cfg = new LameEncConfig(this.WaveFormat, (uint)this.Bitrate);
-            cfg.format.nMode = (MpegMode)this.ChannelMode;
-            cfg.format.dwReSampleRate = (uint)this.ResampleFrequency;
-            cfg.format.bStrictIso = 1; // Audacity does the same
-            cfg.format.nPreset = LAME_QUALITY_PRESET.LQP_NOPRESET;
-            cfg.format.bWriteVBRHeader = cfg.format.bEnableVBR = 1;
-            cfg.format.dwBitrate = cfg.format.dwMaxBitrate = 0;
-                                
+            string summary = string.Empty;
+
             switch (BitrateMode)
             {
                 case BitrateMode.CBR:
-                cfg.format.bWriteVBRHeader = cfg.format.bEnableVBR = 0;
-                cfg.format.dwBitrate = (uint)this.Bitrate;
-                cfg.format.nVbrMethod = VBRMETHOD.VBR_METHOD_NONE;
-                summary = Translator.Translate("TXT_CBR_SUMMARY", this.ChannelMode, this.Bitrate, this.ResampleFrequency);
-                break;
+                    summary = Translator.Translate("TXT_CBR_SUMMARY", this.ChannelMode, this.BitrateCBR, this.ResampleFrequency);
+                    break;
 
                 case BitrateMode.ABR:
-                // ABR == VBR bitrate-based
-                // Caution: LAME DLL calculates avg bitrate as (dwVbrAbr_bps + 500) / 1000
-                cfg.format.dwVbrAbr_bps = (uint)this.Bitrate * 1000 - 500;
-                cfg.format.nVBRQuality = 4;  // Audacity does the same
-                cfg.format.nVbrMethod = VBRMETHOD.VBR_METHOD_ABR;
-                summary = Translator.Translate("TXT_ABR_SUMMARY", this.ChannelMode, this.Bitrate, this.ResampleFrequency);
-                break;
+                    // ABR == VBR bitrate-based
+                    summary = Translator.Translate("TXT_ABR_SUMMARY", this.ChannelMode, this.BitrateABR, this.ResampleFrequency);
+                    break;
 
                 case BitrateMode.VBR:
-                // VBR quality-based
-                int q = 9 - this.VBRQuality;
-                cfg.format.nVBRQuality = (int)Math.Max(0, Math.Min(9, q));
-                cfg.format.nVbrMethod = VBRMETHOD.VBR_METHOD_NEW;
-                summary = Translator.Translate("TXT_VBR_SUMMARY", this.ChannelMode, cfg.format.nVBRQuality, this.ResampleFrequency);
-                break;
+                    // VBR quality-based
+                    summary = Translator.Translate("TXT_VBR_SUMMARY", this.ChannelMode, this.VBRQuality, this.ResampleFrequency);
+                    break;
 
                 case BitrateMode.Preset:
-                // Preset mode is VBR or CBR/320 in case that VBRPreset == INSANE
-                cfg.format.nPreset = (LAME_QUALITY_PRESET)this.VBRPreset;
-                if (this.VBRPreset != Preset.Insane)
-                    summary = Translator.Translate("TXT_PRESET_SUMMARY", this.ChannelMode, this.VBRPreset, this.ResampleFrequency);
-                else
-                    summary = Translator.Translate("TXT_PRESET_INSANE", this.ChannelMode, this.VBRPreset, this.ResampleFrequency);
-                break;
+                    // Preset mode is VBR or CBR/320 in case that VBRPreset == INSANE
+                    if (this.Preset != LAMEPreset.INSANE)
+                        summary = Translator.Translate("TXT_PRESET_SUMMARY", this.ChannelMode, this.Preset, this.ResampleFrequency);
+                    else
+                        summary = Translator.Translate("TXT_PRESET_INSANE", this.ChannelMode, this.Preset, this.ResampleFrequency);
+                    break;
             }
 
-            return cfg;
+            return summary;
         }
 
     }
-
 }

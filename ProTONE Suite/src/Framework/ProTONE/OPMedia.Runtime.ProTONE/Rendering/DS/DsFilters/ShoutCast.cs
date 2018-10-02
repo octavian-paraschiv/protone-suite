@@ -9,7 +9,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using OPMedia.Runtime.ProTONE.Rendering.SHOUTCast;
 using OPMedia.Core.Logging;
-using NAudio.Wave;
+
 using OPMedia.Runtime.ProTONE.Compression;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters

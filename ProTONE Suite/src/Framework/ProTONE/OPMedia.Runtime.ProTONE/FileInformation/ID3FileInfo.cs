@@ -21,6 +21,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using System.Threading;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using System.Reflection;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -355,11 +356,34 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             get
             {
                 if (AudioHeader != null)
+                {
+                    try
+                    {
+                        // This is an ugly hack but we do this to avoid making changes in the code of TagLib#.
+                        // Refer to http://www.mp3-tech.org/programmer/frame_header.html
+                        // The bitwise structure of the frame header is: AAAAAAAAAAABBCCDEEEEFFGHIIJJKLMM
+                        // Channel mode is represented by the II bits so we need to right-shift with 6 bits.
+                        // The original source code of the library is right-shifting with 14 bits which is not correct.
+
+                        FieldInfo fi = typeof(AudioHeader).GetField("flags", BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (fi != null)
+                        {
+                            // Get the flags bits exactly as read from the file
+                            uint flags = (uint)fi.GetValue(AudioHeader.Value);
+
+                            // Right-shifty with 6 bits and bitwise mask with 0x03 = (11) to get the two II bits for channel mode.
+                            return (ChannelMode)((flags >> 6) & 0x03);
+                        }
+                    }
+                    catch { }
+
                     return AudioHeader.Value.ChannelMode;
-                else if (_prop != null)
-                    return (_prop.AudioChannels == 1) ? ChannelMode.SingleChannel : ChannelMode.JointStereo;
-                else
-                    return null;
+                }
+
+                if (_prop != null)
+                    return (_prop.AudioChannels == 1) ? ChannelMode.SingleChannel : ChannelMode.Stereo;
+                
+                return ChannelMode.SingleChannel;
             }
         }
 
@@ -459,6 +483,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     {
                         af.RemoveTags(TagTypes.AllTags);
                     }
+                    
 
                     try
                     {

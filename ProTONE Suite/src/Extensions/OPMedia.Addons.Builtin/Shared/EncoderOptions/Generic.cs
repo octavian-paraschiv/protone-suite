@@ -43,8 +43,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 
         public override string ToString()
         {
-            string summary = "";
-            return this.Options.GetConfig(ref summary).ToString();
+            return this.Options.ToString();
         }
 
         public Mp3EncoderSettings() 

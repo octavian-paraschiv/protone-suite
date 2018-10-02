@@ -572,7 +572,7 @@ Beim Check Bildern zu entscheiden, ob eine Spur oder nicht greifen Doppelklick.<
     <value>Die MP3-Dateien werden als {0} gespeichert werden, mit Abtastrate {2} Hz, kodiert mit dem '{1}' Voreinstellung.</value>
   </data>
   <data name="TXT_VBR_SUMMARY">
-    <value>Die MP3-Dateien werden als {0} gespeichert werden, mit Abtastrate {2} Hz und einer variablen Bitrate mit Qualität '{1}' (0=max, 9=min).</value>
+    <value>Die MP3-Dateien werden als {0} gespeichert werden, mit Abtastrate {2} Hz und einer variablen Bitrate mit Qualität '{1}' (VBR_10=min, VBR_100=max).</value>
   </data>
   <data name="TXT_CHANGEENCODINGPANEL">
     <value>Ändern Sie Dateiformat und Kodierungs</value>

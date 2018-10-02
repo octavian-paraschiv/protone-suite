@@ -13,6 +13,8 @@ using System.Net.Configuration;
 using System.Collections.Specialized;
 using TagLib.Mpeg;
 using TagLib;
+using static TagLib.File;
+using System.Linq;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
 {
@@ -130,19 +132,27 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                     while (passes < 100 * 1024)
                     {
                         passes++;
-                        byte[] buff = new byte[sizeof(int)];
+                        byte[] buff = new byte[1024];
                         int result = netStream.Read(buff, 0, buff.Length);
                         if (result > 0)
                         {
-                            ByteVector vector = new ByteVector(buff, result);
-                            AudioHeader hdr = AudioHeader.Unknown;
-                            if (AudioHeader.Find(out hdr, vector) == true
-                                && hdr.Version == TagLib.Mpeg.Version.Version1
-                                && hdr.AudioLayer == 3)
+                            try
                             {
-                                sampleRate = hdr.AudioSampleRate;
-                                bitrate = hdr.AudioBitrate;
-                                break;
+                                using (BufferFileAbstraction bfa = new BufferFileAbstraction(buff))
+                                {
+                                    AudioFile f = new AudioFile(bfa);
+                                    AudioHeader hdr = (AudioHeader)f.Properties.Codecs.FirstOrDefault();
+
+                                    if (hdr.Version == TagLib.Mpeg.Version.Version1 && hdr.AudioLayer == 3)
+                                    {
+                                        sampleRate = hdr.AudioSampleRate;
+                                        bitrate = hdr.AudioBitrate;
+                                        break;
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
                             }
                         }
                     }
@@ -369,4 +379,31 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
             throw new NotSupportedException();
         }
     }
+
+    public class BufferFileAbstraction : IFileAbstraction, IDisposable
+    {
+        public string Name => "";
+
+        public Stream ReadStream => _ms;
+
+        public Stream WriteStream => throw new NotImplementedException();
+
+        private MemoryStream _ms = null;
+
+        public BufferFileAbstraction(byte[] buffer)
+        {
+            _ms = new MemoryStream(buffer);
+        }
+
+        public void CloseStream(Stream stream)
+        {
+        }
+
+        public void Dispose()
+        {
+            _ms.Close();
+            _ms = null;
+        }
+    }
+
 }

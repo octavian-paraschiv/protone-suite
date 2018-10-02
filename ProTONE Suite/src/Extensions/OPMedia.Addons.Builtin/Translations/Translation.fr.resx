@@ -572,7 +572,7 @@ Double-cliquez sur les images de chèques de choisir de saisir une piste ou pas.
     <value>Les fichiers MP3 seront enregistrés en tant que {0}, avec taux d'échantillonnage {2} Hz, codée en utilisant le '{1}' préréglage.</value>
   </data>
   <data name="TXT_VBR_SUMMARY">
-    <value>Les fichiers MP3 seront enregistrés en tant que {0}, avec taux d'échantillonnage {2} Hz et un débit binaire variable avec le qualité '{1}' (0=max, 9=min).</value>
+    <value>Les fichiers MP3 seront enregistrés en tant que {0}, avec taux d'échantillonnage {2} Hz et un débit binaire variable avec le qualité '{1}' (VBR_10=min, VBR_100=max).</value>
   </data>
   <data name="TXT_CHANGEENCODINGPANEL">
     <value>Changement de format de fichier et encodage</value>

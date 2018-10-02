@@ -56,9 +56,12 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\protone-suite-externals\NAudio.dll</HintPath>
+      <HintPath>..\..\packages\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>..\..\packages\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -95,9 +98,6 @@
       <DependentUpon>ChangeEncodingPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Property\TaggedFileProp\TaggingWizard\Helpers\Transcoder.cs" />
-    <Compile Include="Shared\Compression\LameEncoder.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Shared\Compression\LameWrapper.cs" />
     <Compile Include="Shared\EncoderOptions\EncoderConfiguratorCtl.cs">
       <SubType>UserControl</SubType>
@@ -520,13 +520,13 @@
     <None Include="Resources\lame-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lame_enc.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Tagging.png" />
     <Content Include="Resources\Tagging16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)packages\libmp3lame.*.dll" "$(SolutionDir)bin"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

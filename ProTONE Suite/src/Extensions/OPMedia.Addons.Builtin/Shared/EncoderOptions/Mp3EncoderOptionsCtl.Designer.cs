@@ -36,9 +36,10 @@
             this.lblBitrate = new OPMedia.UI.Controls.OPMLabel();
             this.lblVbrQuality = new OPMedia.UI.Controls.OPMLabel();
             this.lblPreset = new OPMedia.UI.Controls.OPMLabel();
-            this.cmbBitrate = new OPMedia.UI.Controls.OPMComboBox();
+            this.cmbBitrateCBR = new OPMedia.UI.Controls.OPMComboBox();
+            this.cmbBitrateABR = new OPMedia.UI.Controls.OPMComboBox();
             this.cmbPreset = new OPMedia.UI.Controls.OPMComboBox();
-            this.cgVbrQuality = new OPMedia.UI.Controls.ControlGauge();
+            this.cmbVbrQuality = new OPMedia.UI.Controls.OPMComboBox();
             this.lblOutputBitrateHint = new OPMedia.UI.Controls.OPMLabel();
             this.lblFrequency = new OPMedia.UI.Controls.OPMLabel();
             this.cmbFrequency = new OPMedia.UI.Controls.OPMComboBox();
@@ -167,12 +168,12 @@
             this.lblPreset.Text = "TXT_PRESET";
             this.lblPreset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // cmbBitrate
+            // cmbBitrateCBR
             // 
-            this.cmbBitrate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbBitrate.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbBitrate.FormattingEnabled = true;
-            this.cmbBitrate.Items.AddRange(new object[] {
+            this.cmbBitrateCBR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBitrateCBR.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbBitrateCBR.FormattingEnabled = true;
+            this.cmbBitrateCBR.Items.AddRange(new object[] {
             "32",
             "40",
             "48",
@@ -187,34 +188,32 @@
             "224",
             "256",
             "320"});
-            this.cmbBitrate.Location = new System.Drawing.Point(232, 64);
-            this.cmbBitrate.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.cmbBitrate.MinimumSize = new System.Drawing.Size(85, 0);
-            this.cmbBitrate.Name = "cmbBitrate";
-            this.cmbBitrate.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbBitrate.Size = new System.Drawing.Size(249, 24);
-            this.cmbBitrate.TabIndex = 7;
+            this.cmbBitrateCBR.Location = new System.Drawing.Point(232, 64);
+            this.cmbBitrateCBR.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.cmbBitrateCBR.MinimumSize = new System.Drawing.Size(85, 0);
+            this.cmbBitrateCBR.Name = "cmbBitrateCBR";
+            this.cmbBitrateCBR.OverrideForeColor = System.Drawing.Color.Empty;
+            this.cmbBitrateCBR.Size = new System.Drawing.Size(249, 24);
+            this.cmbBitrateCBR.TabIndex = 7;
+            // 
+            // cmbBitrateABR
+            // 
+            this.cmbBitrateABR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBitrateABR.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbBitrateABR.FormattingEnabled = true;
+            this.cmbBitrateABR.Location = new System.Drawing.Point(232, 64);
+            this.cmbBitrateABR.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.cmbBitrateABR.MinimumSize = new System.Drawing.Size(85, 0);
+            this.cmbBitrateABR.Name = "cmbBitrateABR";
+            this.cmbBitrateABR.OverrideForeColor = System.Drawing.Color.Empty;
+            this.cmbBitrateABR.Size = new System.Drawing.Size(249, 24);
+            this.cmbBitrateABR.TabIndex = 7;
             // 
             // cmbPreset
             // 
             this.cmbPreset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPreset.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbPreset.FormattingEnabled = true;
-            this.cmbPreset.Items.AddRange(new object[] {
-            "32",
-            "40",
-            "48",
-            "56",
-            "64",
-            "80",
-            "96",
-            "112",
-            "128",
-            "160",
-            "192",
-            "224",
-            "256",
-            "320"});
             this.cmbPreset.Location = new System.Drawing.Point(135, 64);
             this.cmbPreset.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbPreset.MinimumSize = new System.Drawing.Size(85, 0);
@@ -223,24 +222,18 @@
             this.cmbPreset.Size = new System.Drawing.Size(97, 24);
             this.cmbPreset.TabIndex = 4;
             // 
-            // cgVbrQuality
+            // cmbVbrQuality
             // 
-            this.cgVbrQuality.AllowDragging = false;
-            this.cgVbrQuality.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cgVbrQuality.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cgVbrQuality.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.cgVbrQuality.Location = new System.Drawing.Point(0, 64);
-            this.cgVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.cgVbrQuality.Maximum = 9D;
-            this.cgVbrQuality.Name = "cgVbrQuality";
-            this.cgVbrQuality.NrTicks = 8;
-            this.cgVbrQuality.OverrideBackColor = System.Drawing.Color.Empty;
-            this.cgVbrQuality.OverrideElapsedBackColor = System.Drawing.Color.Empty;
-            this.cgVbrQuality.ShowTicks = true;
-            this.cgVbrQuality.Size = new System.Drawing.Size(135, 25);
-            this.cgVbrQuality.TabIndex = 11;
-            this.cgVbrQuality.Value = 7D;
-            this.cgVbrQuality.Vertical = false;
+            this.cmbVbrQuality.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbVbrQuality.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbVbrQuality.FormattingEnabled = true;
+            this.cmbVbrQuality.Location = new System.Drawing.Point(135, 64);
+            this.cmbVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.cmbVbrQuality.MinimumSize = new System.Drawing.Size(85, 0);
+            this.cmbVbrQuality.Name = "cmbVbrQuality";
+            this.cmbVbrQuality.OverrideForeColor = System.Drawing.Color.Empty;
+            this.cmbVbrQuality.Size = new System.Drawing.Size(97, 24);
+            this.cmbVbrQuality.TabIndex = 4;
             // 
             // lblOutputBitrateHint
             // 
@@ -256,7 +249,6 @@
             this.lblOutputBitrateHint.TabIndex = 12;
             this.lblOutputBitrateHint.Text = "dfsdsfdsfsdfdsf";
             this.lblOutputBitrateHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblOutputBitrateHint.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblFrequency
             // 
@@ -308,9 +300,10 @@
             this.opmTableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel4.Controls.Add(this.chkGenerateTag, 0, 4);
             this.opmTableLayoutPanel4.Controls.Add(this.lblOutputBitrateHint, 0, 5);
-            this.opmTableLayoutPanel4.Controls.Add(this.cgVbrQuality, 3, 1);
+            this.opmTableLayoutPanel4.Controls.Add(this.cmbVbrQuality, 3, 1);
             this.opmTableLayoutPanel4.Controls.Add(this.cmbPreset, 3, 1);
-            this.opmTableLayoutPanel4.Controls.Add(this.cmbBitrate, 3, 1);
+            this.opmTableLayoutPanel4.Controls.Add(this.cmbBitrateCBR, 3, 1);
+            this.opmTableLayoutPanel4.Controls.Add(this.cmbBitrateABR, 3, 1);
             this.opmTableLayoutPanel4.Controls.Add(this.lblVbrQuality, 2, 1);
             this.opmTableLayoutPanel4.Controls.Add(this.lblBitrate, 2, 1);
             this.opmTableLayoutPanel4.Controls.Add(this.lblPreset, 2, 1);
@@ -357,14 +350,15 @@
         private UI.Controls.OPMComboBox cmbBitrateMode;
         private UI.Controls.OPMLabel opmLabel3;
         private UI.Controls.OPMComboBox cmbChannelMode;
-        private UI.Controls.OPMComboBox cmbBitrate;
+        private UI.Controls.OPMComboBox cmbBitrateCBR;
+        private UI.Controls.OPMComboBox cmbBitrateABR;
         private UI.Controls.OPMLabel lblBitrate;
         private UI.Controls.OPMLabel lblVbrQuality;
         private UI.Controls.OPMComboBox cmbPreset;
         private UI.Controls.OPMCheckBox chkGenerateTag;
         private UI.Controls.OPMLabel lblPreset;
         private UI.Controls.OPMLabel lblOutputBitrateHint;
-        private UI.Controls.ControlGauge cgVbrQuality;
+        private UI.Controls.OPMComboBox cmbVbrQuality;
         private UI.Controls.OPMLabel lblFrequency;
         private UI.Controls.OPMComboBox cmbFrequency;
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel4;

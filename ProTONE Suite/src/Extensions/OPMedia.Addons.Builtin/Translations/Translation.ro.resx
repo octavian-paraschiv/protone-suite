@@ -572,7 +572,7 @@ Daţi dublu-clic pe imagini pentru a alege dacă importaţi o pistă sau nu.</va
     <value>Fișierele MP3 vor fi salvate ca {0}, cu rata de eşsantionare {2} Hz, si codificate folosind presetarea '{1}'.</value>
   </data>
   <data name="TXT_VBR_SUMMARY">
-    <value>Fişierele MP3 vor fi salvate ca {0}, eşantionate la {2} Hz, şi codate cu o rata binară variabilă, cu calitatea '{1}' (0=max, 9=min). </value>
+    <value>Fişierele MP3 vor fi salvate ca {0}, eşantionate la {2} Hz, şi codate cu o rata binară variabilă, cu calitatea '{1}' (VBR_10=min, VBR_100=max). </value>
   </data>
   <data name="TXT_CHANGEENCODINGPANEL">
     <value>Schimbare format de fișier și codare</value>

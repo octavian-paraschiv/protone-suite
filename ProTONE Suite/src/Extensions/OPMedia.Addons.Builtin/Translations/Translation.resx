@@ -572,7 +572,7 @@ Double-click on check images to choose whether to grab a track or not.</value>
     <value>The MP3 files will be saved as {0}, with sampling rate {2} Hz, encoded using the '{1}' preset.</value>
   </data>
   <data name="TXT_VBR_SUMMARY">
-    <value>The MP3 files will be saved as {0}, with sampling rate {2} Hz and a variable bit rate with quality '{1}' (0=max, 9=min).</value>
+    <value>The MP3 files will be saved as {0}, with sampling rate {2} Hz and a variable bit rate with quality '{1}' (VBR_10=min, VBR_100=max).</value>
   </data>
   <data name="TXT_CHANGEENCODINGPANEL">
     <value>Change file format and encoding</value>
