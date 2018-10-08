@@ -7,6 +7,7 @@
 
     <!--<property name="debug" value="true" overwrite="false" />-->
     <property name="msbuild.executable" value="C:\Program Files\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe" />
+    <property name="nuget.executable" value="C:\NuGet\nuget.exe" />
     <property name="istool.executable" value="C:\Program Files\Inno Setup 5\iscc.exe" />
     
     <property name="root" value=".." />
@@ -42,6 +43,7 @@
 
         <call target="cleanup" />
         <call target="ScmCheckout" />
+        <call target="RestoreNuGetPackages" />
         <call target="VersionInfoUpdate" />
         <call target="BuildVSSolution" />
         <call target="BuildInstaller" />
@@ -94,6 +96,16 @@
 
         <echo message="${file.contents}" file="${build.dir}\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs" />
 
+    </target>
+
+    <target name="RestoreNuGetPackages">
+        <echo message="Restoring NuGet packages from ProTONE Suite solution ..." />
+        <exec
+            program="${nuget.executable}"
+            verbose="true"
+            workingdir="${build.dir}\ProTONE Suite\src"
+            commandline="restore &quot;ProTONE Suite.sln&quot;"
+            />
     </target>
 
     <target name="BuildVSSolution">
