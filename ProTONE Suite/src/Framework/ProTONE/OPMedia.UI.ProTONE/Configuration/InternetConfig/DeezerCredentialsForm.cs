@@ -96,9 +96,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
                             }
                         }
 
-                        // Open with default browser
                         wbDeezer.Navigate(url);
-                        //Process.Start(url);
                         bFailed = false;
                     }
                 }

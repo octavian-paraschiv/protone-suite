@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using System.Drawing;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using System.Reflection;
 
 namespace OPMedia.Runtime.ProTONE.Configuration
 {
@@ -1002,6 +1003,30 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                     string.IsNullOrEmpty(deezerApiEndpoint) == false &&
                     string.IsNullOrEmpty(userAccessToken) == false &&
                     string.IsNullOrEmpty(applicationId) == false);
+            }
+        }
+
+        static bool? _enableExtendedDeezerFeatures = null;
+
+        public static bool EnableExtendedDeezerFeatures
+        {
+            get
+            {
+                if (_enableExtendedDeezerFeatures == null)
+                {
+                    try
+                    {
+                        Assembly thisAssembly = Assembly.GetEntryAssembly();
+                        Version v = thisAssembly.GetName().Version;
+                        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 1));
+                    }
+                    catch
+                    {
+                        _enableExtendedDeezerFeatures = false;
+                    }
+                }
+
+                return _enableExtendedDeezerFeatures.GetValueOrDefault();
             }
         }
 

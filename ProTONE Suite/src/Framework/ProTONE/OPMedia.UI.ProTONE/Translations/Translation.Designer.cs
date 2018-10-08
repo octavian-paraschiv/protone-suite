@@ -115,11 +115,29 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to an existing playlist ....
+        /// </summary>
+        internal static string TXT_ADD_EXISTING_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_ADD_EXISTING_PLAYLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add to Favorites.
         /// </summary>
         internal static string TXT_ADD_FAV_LIST {
             get {
                 return ResourceManager.GetString("TXT_ADD_FAV_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to a new playlist ....
+        /// </summary>
+        internal static string TXT_ADD_NEW_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_ADD_NEW_PLAYLIST", resourceCulture);
             }
         }
         
@@ -985,6 +1003,60 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FFDShow not detected.
+        /// </summary>
+        internal static string TXT_DIAG_CODECSUPPORT_NG {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_CODECSUPPORT_NG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FFDShow is installed.
+        /// </summary>
+        internal static string TXT_DIAG_CODECSUPPORT_OK {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_CODECSUPPORT_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DirectX: {0} (actual version: {1}).
+        /// </summary>
+        internal static string TXT_DIAG_DIRECTX_ACTUAL {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_DIRECTX_ACTUAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required: DirectX 9.0c [{0}] or higher.
+        /// </summary>
+        internal static string TXT_DIAG_DIRECTX_REQUIRED {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_DIRECTX_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HD support (Haali media splitter) not detected.
+        /// </summary>
+        internal static string TXT_DIAG_HDSUPPORT_NG {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_HDSUPPORT_NG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HD support (Haali media splitter) is installed..
+        /// </summary>
+        internal static string TXT_DIAG_HDSUPPORT_OK {
+            get {
+                return ResourceManager.GetString("TXT_DIAG_HDSUPPORT_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CD/DVD.
         /// </summary>
         internal static string TXT_DISKS_OPTIONS {
@@ -1013,6 +1085,42 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chapter #{0}.
+        /// </summary>
+        internal static string TXT_DVD_CHAPTER {
+            get {
+                return ResourceManager.GetString("TXT_DVD_CHAPTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main DVD Menu.
+        /// </summary>
+        internal static string TXT_DVD_MAIN_MENU {
+            get {
+                return ResourceManager.GetString("TXT_DVD_MAIN_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Embedded DVD Subtitles.
+        /// </summary>
+        internal static string TXT_DVD_SUBTITLES {
+            get {
+                return ResourceManager.GetString("TXT_DVD_SUBTITLES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title #{0}.
+        /// </summary>
+        internal static string TXT_DVD_TITLE {
+            get {
+                return ResourceManager.GetString("TXT_DVD_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ID3 Image Editor.
         /// </summary>
         internal static string TXT_EDITID3ARTWORK {
@@ -1032,7 +1140,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Action on &apos;playlist ended&apos; event.
+        ///   Looks up a localized string similar to When the playback stopped, and the playlist has reached its end:.
         /// </summary>
         internal static string TXT_ENABLE_PLAYLISTEVT {
             get {
@@ -1041,7 +1149,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Action on scheduled moment.
+        ///   Looks up a localized string similar to When the current computer time is:.
         /// </summary>
         internal static string TXT_ENABLE_SCHEDULEDEVT {
             get {
@@ -1888,7 +1996,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to in weekdays:.
+        ///   Looks up a localized string similar to , and the current week day is:.
         /// </summary>
         internal static string TXT_ONDAYS {
             get {
@@ -2484,7 +2592,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the event has occurred:.
+        ///   Looks up a localized string similar to then: .
         /// </summary>
         internal static string TXT_SCHEDULEDEVT_DESC {
             get {
@@ -2493,7 +2601,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scheduled event time:.
+        ///   Looks up a localized string similar to When the current computer time is:.
         /// </summary>
         internal static string TXT_SCHEDULEDEVT_TIME {
             get {
@@ -2584,7 +2692,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following playlists were found, please choose one:.
+        ///   Looks up a localized string similar to The following playlists were found, 
+        ///please choose one:.
         /// </summary>
         internal static string TXT_SELECT_PLAYLIST {
             get {
@@ -2977,7 +3086,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Multimedia codecs are not installed and configured OK..
+        ///   Looks up a localized string similar to The multimedia system is not correctly installed and configured..
         /// </summary>
         internal static string TXT_SYSTEM_NOT_OK {
             get {
@@ -2986,7 +3095,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Multimedia codecs are installed and configured OK..
+        ///   Looks up a localized string similar to Entire multimedia system is installed and configured OK..
         /// </summary>
         internal static string TXT_SYSTEM_OK {
             get {
@@ -3130,6 +3239,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_USE_METADATA {
             get {
                 return ResourceManager.GetString("TXT_USE_METADATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play Deezer content in isolation mode.
+        /// </summary>
+        internal static string TXT_USE_WORKER_PROCESS {
+            get {
+                return ResourceManager.GetString("TXT_USE_WORKER_PROCESS", resourceCulture);
             }
         }
         
