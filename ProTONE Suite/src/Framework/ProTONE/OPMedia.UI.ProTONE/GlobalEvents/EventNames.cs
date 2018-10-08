@@ -19,5 +19,8 @@ namespace OPMedia.UI.ProTONE.GlobalEvents
         public const string StartDeezerSearch = "StartDeezerSearch";
 
         public const string ManageOnlineContent = "ManageOnlineContent";
+
+        public const string AddToPlaylist = "AddToPlaylist";
+        public const string AddToDeezerPlaylist = "AddToDeezerPlaylist";
     }
 }

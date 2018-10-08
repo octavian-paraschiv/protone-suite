@@ -63,7 +63,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             _redirectUri = txtAppId.Text.ToLowerInvariant();
             string appId = ProTONEConfig.DeezerApplicationId;
 
-            string url = string.Format("https://connect.deezer.com/oauth/auth.php?app_id={0}&redirect_uri={1}&perms=basic_access,offline_access&response_type=token",
+            string url = string.Format("https://connect.deezer.com/oauth/auth.php?app_id={0}&redirect_uri={1}&perms=basic_access,offline_access,manage_library&response_type=token",
                 appId, _redirectUri);
 
             bool bFailed = true;
@@ -96,7 +96,9 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
                             }
                         }
 
+                        // Open with default browser
                         wbDeezer.Navigate(url);
+                        //Process.Start(url);
                         bFailed = false;
                     }
                 }

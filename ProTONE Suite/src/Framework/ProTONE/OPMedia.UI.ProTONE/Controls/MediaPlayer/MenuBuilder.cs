@@ -18,6 +18,7 @@ using OPMedia.UI.ProTONE.Properties;
 using System.Drawing;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.UI.Generic;
+using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -95,8 +96,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 int idx = menu.AddSingleEntry(item);
                 item.Checked = (idx == _pnlPlaylist.PlayIndex);
 
-
                 menuToAlter = new MenuWrapper<OPMToolStripMenuItem>(item) as MenuWrapper<T>;
+            }
+
+            if (ProTONEConfig.DeezerHasValidConfig)
+            {
+                OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
+                tsmi.Click += clickHandler;
+                tsmi.Text = Translator.Translate("TXT_ADD_NEW_DEEZER_PLAYLIST");
+                tsmi.Tag = "AddNewDeezerPlaylist";
+                tsmi.Image = Resources.deezer16;
+                menuToAlter.AddSingleEntry(tsmi);
+
+                tsmi = new OPMToolStripMenuItem();
+                tsmi.Click += clickHandler;
+                tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_DEEZER_PLAYLIST");
+                tsmi.Tag = "AddExistingDeezerPlaylist";
+                tsmi.Image = Resources.deezer16;
+                menuToAlter.AddSingleEntry(tsmi);
             }
 
             if (plItem != null && menuType != MenuType.MultipleItems)

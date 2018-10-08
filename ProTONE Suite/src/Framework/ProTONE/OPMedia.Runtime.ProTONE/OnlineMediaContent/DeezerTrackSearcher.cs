@@ -79,14 +79,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         {
             get
             {
-                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-
-                return (
-                    string.IsNullOrEmpty(deezerApiEndpoint) == false &&
-                    string.IsNullOrEmpty(userAccessToken) == false &&
-                    string.IsNullOrEmpty(applicationId) == false);
+                return ProTONEConfig.DeezerHasValidConfig;
             }
         }
 

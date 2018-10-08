@@ -15,6 +15,7 @@ using OPMedia.UI.Generic;
 using OPMedia.UI.ProTONE.Dialogs;
 using System.Windows.Forms;
 using OPMedia.Core.Logging;
+using OPMedia.Runtime.ProTONE.Playlists;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -181,6 +182,21 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 cms.Items.Add(tsmi);
             }
 
+            cms.Items.Add(sep);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_ADD_NEW_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddNewPlaylist;
+            tsmi.Image = ImageProcessing.Playlist16;
+            cms.Items.Add(tsmi);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddExistingPlaylist;
+            tsmi.Image = ImageProcessing.Playlist16;
+            cms.Items.Add(tsmi);
 
 
             return cms;
@@ -249,6 +265,32 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                             case MediaBrowserAction.DelFav:
                                 EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, false);
                                 return;
+
+                            case MediaBrowserAction.AddExistingPlaylist:
+                                EventDispatch.DispatchEvent(LocalEventNames.AddToPlaylist, selItems, true);
+                                return;
+
+                            case MediaBrowserAction.AddNewPlaylist:
+                                EventDispatch.DispatchEvent(LocalEventNames.AddToPlaylist, selItems, false);
+                                return;
+
+                            case MediaBrowserAction.AddExistingDeezerPlaylist:
+                            case MediaBrowserAction.AddNewDeezerPlaylist:
+                                {
+                                    bool existing = (act == MediaBrowserAction.AddExistingDeezerPlaylist);
+
+                                    List<DeezerTrackPlaylistItem> deezerItems = new List<DeezerTrackPlaylistItem>();
+
+                                    selItems.ForEach((omi) =>
+                                    {
+                                        if (omi is DeezerTrackItem)
+                                            deezerItems.Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
+                                    });
+
+                                    EventDispatch.DispatchEvent(LocalEventNames.AddToDeezerPlaylist, deezerItems, FindForm(), existing);
+                                }
+                                return;
+
                         }
                     }
 
@@ -277,5 +319,10 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public const string Enqueue = "Enqueue";
         public const string AddFav = "AddFav";
         public const string DelFav = "DelFav";
+        public const string AddNewPlaylist = "AddNewPlaylist";
+        public const string AddExistingPlaylist = "AddExistingPlaylist";
+
+        public const string AddNewDeezerPlaylist = "AddNewDeezerPlaylist";
+        public const string AddExistingDeezerPlaylist = "AddExistingDeezerPlaylist";
     }
 }

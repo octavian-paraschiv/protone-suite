@@ -990,6 +990,21 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set { PersistenceProxy.SaveObject("DeezerUseWorkerProcess", value); }
         }
 
+        public static bool DeezerHasValidConfig
+        {
+            get
+            {
+                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
+                string applicationId = ProTONEConfig.DeezerApplicationId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
+
+                return (
+                    string.IsNullOrEmpty(deezerApiEndpoint) == false &&
+                    string.IsNullOrEmpty(userAccessToken) == false &&
+                    string.IsNullOrEmpty(applicationId) == false);
+            }
+        }
+
 
         #endregion
 

@@ -18,6 +18,11 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.GlobalEvents;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Core.TranslationSupport;
+using System.IO;
+using OPMedia.Runtime.ProTONE.Playlists;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {
@@ -264,8 +269,66 @@ namespace OPMedia.UI.ProTONE.Dialogs
                     StartDeezerSearch(null);
             }
         }
+
+        [EventSink(LocalEventNames.AddToPlaylist)]
+        public void AddToPlaylist(List<OnlineMediaItem> onlineContent, bool addToExisting)
+        {
+            string filter = string.Empty;
+
+            filter += MediaRenderer.DefaultInstance.PlaylistsFilter;
+            filter += Translator.Translate("TXT_ALL_FILES_FILTER");
+            filter = filter.Replace("TXT_PLAYLISTS", Translator.Translate("TXT_PLAYLISTS"));
+
+            OPMSaveFileDialog dlg = new OPMSaveFileDialog();
+            dlg.Title = Translator.Translate(addToExisting ? "TXT_ADD_EXISTING_PLAYLIST" : "TXT_ADD_NEW_PLAYLIST");
+            dlg.Filter = filter;
+            dlg.DefaultExt = "m3u";
+            dlg.FilterIndex = ProTONEConfig.PL_LastFilterIndex;
+            dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
+
+            dlg.InheritAppIcon = false;
+            dlg.Icon = OPMedia.UI.Properties.Resources.Save16.ToIcon();
+
+            dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
+            dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
+            dlg.ShowAddToFavorites = true;
+
+            dlg.ShowNewFolder = true;
+
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                ProTONEConfig.PL_LastFilterIndex = dlg.FilterIndex;
+
+                SaveToPlaylist(dlg.FileName, onlineContent, addToExisting);
+
+                try
+                {
+                    string file = dlg.FileNames[0];
+                    ProTONEConfig.PL_LastOpenedFolder = Path.GetDirectoryName(file);
+                }
+                catch
+                {
+                    ProTONEConfig.PL_LastOpenedFolder = dlg.InitialDirectory;
+                }
+            }
+        }
+
+        private void SaveToPlaylist(string fileName, List<OnlineMediaItem> onlineContent, bool addToExisting)
+        {
+            Playlist pl = new Playlist();
+
+            if (addToExisting)
+                pl.LoadPlaylist(fileName);
+
+            onlineContent.ForEach((omi) =>
+            {
+                if (omi is DeezerTrackItem)
+                    pl.Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
+                else if (omi is RadioStation)
+                    pl.Add(new RadioStationPlaylistItem(omi as RadioStation));
+            });
+
+            pl.SavePlaylist(fileName);
+        }
     }
-
-    
-
 }

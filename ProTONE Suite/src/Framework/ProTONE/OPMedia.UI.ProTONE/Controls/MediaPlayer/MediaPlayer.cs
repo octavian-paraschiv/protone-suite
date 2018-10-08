@@ -1174,7 +1174,22 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         }
                         else
                         {
-                            ShortcutMapper.DispatchCommand((OPMShortcut)senderMenu.Tag);
+                            switch (senderMenu.Tag as string)
+                            {
+                                case "AddNewDeezerPlaylist":
+                                    pnlScreens.PlaylistScreen.AddToDeezerPlaylist(false);
+                                    break;
+
+                                case "AddExistingDeezerPlaylist":
+                                    pnlScreens.PlaylistScreen.AddToDeezerPlaylist(true);
+                                    break;
+
+                                default:
+                                    ShortcutMapper.DispatchCommand((OPMShortcut)senderMenu.Tag);
+                                    break;
+
+                            }
+
                         }
                     }
                 }

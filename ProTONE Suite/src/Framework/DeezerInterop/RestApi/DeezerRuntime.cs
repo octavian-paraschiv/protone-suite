@@ -87,7 +87,6 @@ namespace OPMedia.DeezerInterop.RestApi
                 // Don't do anything ... mostly this would indicate that the requested objects were not found
                 // on the Deezer server. This would be part of normal app operation so no need to log them.
                 string msg = drex.Message;
-                int t = 0;
             }
             catch (WebException wex)
             {
@@ -96,6 +95,36 @@ namespace OPMedia.DeezerInterop.RestApi
                 Logger.LogWarning($"HTTP GET error: URL={url} => {wex.Message}");
             }
             catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return response;
+        }
+
+        internal string ExecuteHttPost(string method, string data)
+        {
+            string response = null;
+            string url = _apiEndpoint + method;
+
+            try
+            {
+                response = _webClient.UploadString(url, data);
+                CheckResponseForErrors(response);
+            }
+            catch (DeezerRuntimeException drex)
+            {
+                // Don't do anything ... mostly this would indicate that the requested objects were not found
+                // on the Deezer server. This would be part of normal app operation so no need to log them.
+                string msg = drex.Message;
+            }
+            catch (WebException wex)
+            {
+                // This catches web-related errors (Not Found, Unaouthorized, timeout ... etc ...)
+                // Since these either indicate problems with the server or an internal app bug, we should log them
+                Logger.LogWarning($"HTTP POST error: URL={url} => {wex.Message}");
+            }
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -191,6 +220,19 @@ namespace OPMedia.DeezerInterop.RestApi
             }
 
             return playlists;
+        }
+
+        public UInt64 CreatePlaylist(string accessToken, string playlistName, ManualResetEvent abortEvent)
+        {
+            if (abortEvent.WaitOne(5))
+                return 0;
+
+            return 0;
+        }
+
+        public void AddToPlaylist(string accessToken, UInt64 playlistId, List<Track> tracks, ManualResetEvent abortEvent)
+        {
+            
         }
     }
 }

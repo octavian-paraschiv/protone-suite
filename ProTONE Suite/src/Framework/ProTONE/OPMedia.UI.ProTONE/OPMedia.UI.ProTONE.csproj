@@ -443,6 +443,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
+      <Project>{41D162BD-95F4-4348-B353-93BA1C3923B4}</Project>
+      <Name>OPMedia.DeezerInterop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
       <Name>OPMedia.Core</Name>

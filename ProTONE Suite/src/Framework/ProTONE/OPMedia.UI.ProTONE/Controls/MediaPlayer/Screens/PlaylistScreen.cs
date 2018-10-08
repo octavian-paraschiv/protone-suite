@@ -38,6 +38,9 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
+using System.Linq;
+
+
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
     public delegate void LaunchFileEventHandler(string path);
@@ -1076,6 +1079,60 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 TotalTimeChanged(TimeSpan.FromSeconds((int)totalSeconds));
             }
 
+        }
+
+        internal void AddToDeezerPlaylist(bool addToExisting)
+        {
+            var deezerPlaylistItems = from pli in playlist.AllItems
+                                      where pli is DeezerTrackPlaylistItem
+                                      select (pli as DeezerTrackPlaylistItem);
+
+            if (deezerPlaylistItems != null)
+            {
+                var list = deezerPlaylistItems.ToList();
+                if (list.Count > 0)
+                    AddToDeezerPlaylist(list, FindForm(), addToExisting);
+            }
+
+        }
+
+        [EventSink(LocalEventNames.AddToDeezerPlaylist)]
+        public void AddToDeezerPlaylist(List<DeezerTrackPlaylistItem> plItems, Form parent, bool addToExisting)
+        {
+            if (ProTONEConfig.DeezerHasValidConfig)
+            {
+                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
+                string applicationId = ProTONEConfig.DeezerApplicationId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
+
+                DeezerInterop.RestApi.DeezerRuntime dzr = new DeezerInterop.RestApi.DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
+                if (dzr != null)
+                {
+                    ManualResetEvent abortEvent = new ManualResetEvent(false);
+
+                    var playlists = OnlineContentSearcher.GetMyPlaylists(OnlineMediaSource.Deezer, abortEvent);
+
+                    string playlistName = ChooseDeeezerPlaylistName(playlists, addToExisting);
+                    if (string.IsNullOrEmpty(playlistName) == false)
+                    {
+                        if (addToExisting)
+                        {
+                        }
+                        else
+                        {
+                            // Create the new playlist
+                            UInt64 playlistId = dzr.CreatePlaylist(userAccessToken, playlistName, abortEvent);
+                            if (playlistId > 0)
+                                dzr.AddToPlaylist(userAccessToken, playlistId, null, abortEvent);
+                        }
+                    }
+                }
+            }
+        }
+
+        private string ChooseDeeezerPlaylistName(List<OnlinePlaylist> playlist, bool addToExisting)
+        {
+            return "";
         }
     }
 }

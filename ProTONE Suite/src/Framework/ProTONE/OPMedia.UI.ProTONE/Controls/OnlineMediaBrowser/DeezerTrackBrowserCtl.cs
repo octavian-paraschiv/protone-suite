@@ -35,13 +35,28 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             OPMContextMenuStrip cms = BuildCommonMenuStrip(true);
 
             OPMMenuStripSeparator sep = new OPMMenuStripSeparator();
-           cms.Items.Add(sep);
-            
-            OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
+            cms.Items.Add(sep);
 
+            OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_ADD_NEW_DEEZER_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddNewDeezerPlaylist;
+            tsmi.Image = Resources.deezer16;
+            cms.Items.Add(tsmi);
+
+            tsmi = new OPMToolStripMenuItem();
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_DEEZER_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddExistingDeezerPlaylist;
+            tsmi.Image = Resources.deezer16;
+            cms.Items.Add(tsmi);
+
+            cms.Items.Add(sep);
+                        
             Bitmap searchIcon = OPMedia.UI.Properties.Resources.Search16;
             searchIcon.MakeTransparent(Color.Magenta);
 
+            tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ARTIST");
             tsmi.Tag = "LookupDeezerArtist";
