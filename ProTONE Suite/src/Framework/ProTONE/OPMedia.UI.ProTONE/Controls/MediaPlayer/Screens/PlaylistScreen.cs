@@ -39,7 +39,7 @@ using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 using System.Linq;
-
+using OPMedia.Runtime.ProTONE.RemoteControl;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -653,13 +653,42 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
             dlg.ShowAddToFavorites = true;
 
+            dlg.OpenDropDownOptions = new List<OpenOption>(new OpenOption[]
+            {
+                new MediaPlayerOpenOption(CommandType.PlayFiles),
+                new MediaPlayerOpenOption(CommandType.EnqueueFiles)
+            });
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 ProTONEConfig.PL_LastFilterIndex = dlg.FilterIndex;
 
-                Clear();
-                playlist.LoadPlaylist(dlg.FileName);
+                CommandType openOption = CommandType.PlayFiles;
+                try
+                {
+                    openOption = (CommandType)dlg.OpenOption;
+                }
+                catch
+                {
+                    openOption = CommandType.PlayFiles;
+                }
 
+                bool doEnqueue = (openOption == CommandType.EnqueueFiles);
+
+                if (doEnqueue)
+                {
+                    Playlist pl = new Playlist();
+                    pl.LoadPlaylist(dlg.FileName);
+
+                    if (pl.AllItems != null)
+                        pl.AllItems.ForEach(pli => playlist.AddItem(pli));
+                }
+                else
+                {
+                    Clear();
+                    playlist.LoadPlaylist(dlg.FileName);
+                }
+                
                 try
                 {
                     string file = dlg.FileNames[0];

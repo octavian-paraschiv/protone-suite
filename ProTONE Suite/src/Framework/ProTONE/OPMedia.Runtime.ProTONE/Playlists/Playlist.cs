@@ -21,6 +21,7 @@ using OPMedia.Core.Utilities;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using System.Linq;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -280,6 +281,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             finally
             {
                 Application.DoEvents();
+            }
+        }
+
+        public void AddItem(PlaylistItem pli)
+        {
+            if (pli != null)
+            {
+                base.Add(pli);
+                EventRaiser(Count - 1, -1, UpdateType.Added);
             }
         }
 

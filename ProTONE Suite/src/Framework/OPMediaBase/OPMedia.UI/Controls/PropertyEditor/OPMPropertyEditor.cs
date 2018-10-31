@@ -14,6 +14,45 @@ namespace OPMedia.UI.Controls.PropertyEditor
 {
     public partial class OPMPropertyEditor : OPMBaseControl
     {
+        private List<object> _objects = new List<object>();
+        public event PropertyValueChangedEventHandler PropertyValueChanged = null;
+
+        public object SelectedObject
+        {
+            get
+            {
+                return (_objects.Count > 0) ? _objects[0] : null;
+            }
+
+            set
+            {
+                _objects.Clear();
+
+                if (value != null)
+                    _objects.Add(value);
+
+                DisplayProperties(_objects);
+            }
+        }
+
+        public object[] SelectedObjects
+        {
+            get
+            {
+                return _objects.ToArray();
+            }
+
+            set
+            {
+                _objects.Clear();
+
+                if (value != null)
+                    _objects.AddRange(value);
+
+                DisplayProperties(_objects);
+            }
+        }
+
         public void DisplayProperties(List<object> objects)
         {
             pnlPropertyChoosers.Controls.Clear();
@@ -71,10 +110,18 @@ namespace OPMedia.UI.Controls.PropertyEditor
                         c.Dock = DockStyle.Fill;
                         pnlPropertyChoosers.Controls.Add(c, 0, row);
                     }
+
+                    chooser.PropertyChanged += Chooser_PropertyChanged;
                 }
             }
 
             Translator.TranslateControl(this, DesignMode);
+        }
+
+        private void Chooser_PropertyChanged(object sender, EventArgs e)
+        {
+            if (PropertyValueChanged != null)
+                PropertyValueChanged(sender, null);
         }
 
         private void DisplayNothing()
