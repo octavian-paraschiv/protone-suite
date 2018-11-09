@@ -22,5 +22,7 @@ namespace OPMedia.UI.ProTONE.GlobalEvents
 
         public const string AddToPlaylist = "AddToPlaylist";
         public const string AddToDeezerPlaylist = "AddToDeezerPlaylist";
+
+        public const string MediaPlaybackStateChanged = "MediaPlaybackStateChanged";
     }
 }

@@ -424,6 +424,9 @@
     <EmbeddedResource Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.resx">
       <DependentUpon>ShoutcastDirectoryBrowserCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SpectrogramPlotter.resx">
+      <DependentUpon>SpectrogramPlotter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\SelectOnlinePlaylistDlg.resx">
       <DependentUpon>SelectOnlinePlaylistDlg.cs</DependentUpon>
       <SubType>Designer</SubType>

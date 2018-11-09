@@ -49,7 +49,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         protected override void SaveInternal()
         {
             MediaScreen mediaScreen = MediaScreen.None;
-            SignalAnalisysFunction functions = SignalAnalisysFunction.None;
+            SignalAnalisysFunction functions = SignalAnalisysFunction.VUMeter;
 
             if (chkShowPlaylist.Checked) 
                 mediaScreen |= MediaScreen.Playlist;
@@ -62,8 +62,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             {
                 mediaScreen |= MediaScreen.SignalAnalisys;
 
-                if (chkVuMeter.Checked)
-                    functions |= SignalAnalisysFunction.VUMeter;
                 if (chkWaveform.Checked)
                     functions |= SignalAnalisysFunction.Waveform;
                 if (chkSpectrogram.Checked)

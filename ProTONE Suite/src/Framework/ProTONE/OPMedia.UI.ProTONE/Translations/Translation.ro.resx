@@ -931,22 +931,18 @@ dacă este posibil.</value>
   <data name="TXT_SHOW_PLAYLIST">
     <value>Arată pagina "Listă de redare". Această pagină permite interacțiunea cu lista de redare.</value>
   </data>
-  <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Arată pagina "Analiză Semnal". Această pagină afișează grafice ca VU-Metrul, forma de undă 
-și spectrograma.</value>
-  </data>
   <data name="TXT_SHOW_SPECTROGRAM">
-    <value>Arată spectograma</value>
+    <value>Spectogramă</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
     <value>Arată pagina "Info Piesă". Această pagină afișează informații despre media și permite editarea
 parțială a acestor informații, acolo unde este posibil (ex. câmpurile ID3 pentru MP3).</value>
   </data>
   <data name="TXT_SHOW_VUMETER">
-    <value>Arată VU-Metrul</value>
+    <value>VU-Metru</value>
   </data>
   <data name="TXT_SHOW_WAVEFORM">
-    <value>Arată forma de undă</value>
+    <value>Forma de undă</value>
   </data>
   <data name="TXT_SHUFFLE">
     <value>Aleator</value>
@@ -1250,5 +1246,11 @@ vă rugăm să  alegeți una:</value>
   </data>
   <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
     <value>Adauga la o listă de redare existentă ...</value>
+  </data>
+  <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
+    <value>Forma de undă şi spectrograma nu sunt suportate pentru coținutul media redat în acest moment.</value>
+  </data>
+  <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
+    <value>Activvează funcţiile de Analiză Semnal</value>
   </data>
 </root>

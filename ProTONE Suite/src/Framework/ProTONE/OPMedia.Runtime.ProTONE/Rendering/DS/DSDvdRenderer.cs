@@ -137,12 +137,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             RebuildFilterGraph();
 
-#if HAVE_SAMPLES
-            InitAudioSampleGrabber_v2();
-            CompleteAudioSampleGrabberIntialization();
-#else
-            rotEntry = new DsROTEntry(graphBuilder as IFilterGraph);
-#endif
+            InitAudioSampleCollector();
+            CompleteAudioSampleCollectorIntialization();
 
             mediaEvent = mediaControl as IMediaEventEx;
             mediaPosition = mediaControl as IMediaPosition;

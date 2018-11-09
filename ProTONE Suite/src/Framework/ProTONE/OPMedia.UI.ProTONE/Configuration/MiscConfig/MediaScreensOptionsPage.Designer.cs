@@ -161,7 +161,11 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // chkVuMeter
             // 
+            this.chkVuMeter.AutoSize = true;
+            this.chkVuMeter.Checked = true;
+            this.chkVuMeter.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVuMeter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkVuMeter.Enabled = false;
             this.chkVuMeter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkVuMeter.Location = new System.Drawing.Point(0, 0);
             this.chkVuMeter.Margin = new System.Windows.Forms.Padding(0);
@@ -174,6 +178,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // chkWaveform
             // 
+            this.chkWaveform.AutoSize = true;
             this.chkWaveform.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkWaveform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkWaveform.Location = new System.Drawing.Point(141, 0);
@@ -187,6 +192,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // chkSpectrogram
             // 
+            this.chkSpectrogram.AutoSize = true;
             this.chkSpectrogram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkSpectrogram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSpectrogram.Location = new System.Drawing.Point(294, 0);
@@ -200,6 +206,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // chkWCFInterface
             // 
+            this.chkWCFInterface.AutoSize = true;
             this.pnlSignalAnalisysOptions.SetColumnSpan(this.chkWCFInterface, 4);
             this.chkWCFInterface.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkWCFInterface.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -222,6 +229,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.pnlSignalAnalisysOptions.ResumeLayout(false);
+            this.pnlSignalAnalisysOptions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,9 +243,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMCheckBox chkShowSignalAnalisys;
         private OPMCheckBox chkShowBookmarkInfo;
         private OPMTableLayoutPanel pnlSignalAnalisysOptions;
-        private OPMCheckBox chkVuMeter;
         private OPMCheckBox chkWaveform;
         private OPMCheckBox chkSpectrogram;
         private OPMCheckBox chkWCFInterface;
+        private OPMCheckBox chkVuMeter;
     }
 }

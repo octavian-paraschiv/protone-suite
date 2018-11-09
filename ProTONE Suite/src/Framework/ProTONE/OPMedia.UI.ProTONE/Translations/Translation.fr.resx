@@ -930,22 +930,15 @@ si cela est possible.</value>
   <data name="TXT_SHOW_PLAYLIST">
     <value>Afficher le page "Liste de lecture". Cette page permet l'interaction avec la liste de lecture.</value>
   </data>
-  <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Afficher le page "Analyse du signal". Cette page affiche signalent diagrammes tels que les VU-mètre,
-de forme d'onde et spectrogramme.</value>
-  </data>
   <data name="TXT_SHOW_SPECTROGRAM">
-    <value>Afficher spectrogramme</value>
+    <value>Spectrogramme</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
     <value>Afficher le page "Info de Piste". Cette page affiche les informations de la piste et permet
 d'éditer certaines parties de ces informations, le cas échéant (p.e, les champs ID3 de MP3).</value>
   </data>
-  <data name="TXT_SHOW_VUMETER">
-    <value>Afficher VU-mètre</value>
-  </data>
   <data name="TXT_SHOW_WAVEFORM">
-    <value>Afficher la forme d'onde</value>
+    <value>Forme d'onde</value>
   </data>
   <data name="TXT_SHUFFLE">
     <value>Battage</value>
@@ -954,7 +947,7 @@ d'éditer certaines parties de ces informations, le cas échéant (p.e, les cham
     <value>l'arrêt du PC</value>
   </data>
   <data name="TXT_SIGNALANALYSIS">
-    <value>Signal Analyse</value>
+    <value>Analyse de Signal</value>
   </data>
   <data name="TXT_SIGNALLEVEL">
     <value>Niveau du signal:</value>
@@ -1249,5 +1242,14 @@ Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le
   </data>
   <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
     <value>Ajouter à une liste de lecture existant ...</value>
+  </data>
+  <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
+    <value>Le Forme d’onde et le Spectrogramme ne sont pas supportés pour le contenu des médias qui se joue actuellement.</value>
+  </data>
+  <data name="TXT_SHOW_VUMETER" xml:space="preserve">
+    <value>VU-Mètre</value>
+  </data>
+  <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
+    <value>Activer les fonctions d’Analyse de Signal</value>
   </data>
 </root>

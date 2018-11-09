@@ -22,6 +22,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.ProTONE.Translations;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
@@ -39,17 +40,54 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             InitializeComponent();
             OnUpdateMediaScreens();
 
+            this.HandleDestroyed += SignalAnalysisScreen_HandleDestroyed;
+
             _tmrUpdate.Interval = 10;
             _tmrUpdate.Tick += new EventHandler(_tmrUpdate_Tick);
             _tmrUpdate.Start();
+
+            if (!DesignMode)
+            {
+                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
+                MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+                MediaRenderer.DefaultInstance.MediaRenderingException += new MediaRenderingExceptionHandler(OnMediaRenderingException);
+            }
         }
 
+        private void SignalAnalysisScreen_HandleDestroyed(object sender, EventArgs e)
+        {
+            MediaRenderer.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
+            MediaRenderer.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+            MediaRenderer.DefaultInstance.MediaRenderingException -= new MediaRenderingExceptionHandler(OnMediaRenderingException);
+        }
+
+        private void OnMediaRendererHeartbeat()
+        {
+            OnUpdateMediaScreens();
+        }
+
+        private void OnMediaRenderingException(RenderingExceptionEventArgs args)
+        {
+            OnUpdateMediaScreens();
+        }
+
+        private void OnMediaStateChanged(FilterState oldState, string oldMedia, FilterState newState, string newMedia)
+        {
+            OnUpdateMediaScreens();
+        }
+
+        [EventSink(EventNames.ThemeUpdated)]
         [EventSink(LocalEventNames.UpdateMediaScreens)]
         public void OnUpdateMediaScreens()
         {
             bool showVU = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter);
             bool showWaveform = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform);
             bool showSpectrogram = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram);
+
+            bool sampleGrabberSupported = MediaRenderer.DefaultInstance.SampleGrabberSupported;
+
+            showWaveform &= sampleGrabberSupported;
+            showSpectrogram &= sampleGrabberSupported;
 
             pnlVuMeter.Visible = showVU;
 
@@ -81,6 +119,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             }
 
             UpdateLabels();
+
+            lblUnsupportedFunctionsHint.Visible = !sampleGrabberSupported;
         }
 
         [EventSink(EventNames.PerformTranslation)]

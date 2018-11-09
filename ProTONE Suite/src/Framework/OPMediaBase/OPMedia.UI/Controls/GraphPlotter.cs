@@ -62,7 +62,7 @@ namespace OPMedia.UI.Controls
 
             rc.Inflate(-1, -1);
             if (IsHistogram)
-                rc.Height -= 15;
+                rc.Height -= 17;
 
             using (Pen p = new Pen(ThemeManager.ForeColor))
             using (Pen p2 = new Pen(ThemeManager.ForeColor))

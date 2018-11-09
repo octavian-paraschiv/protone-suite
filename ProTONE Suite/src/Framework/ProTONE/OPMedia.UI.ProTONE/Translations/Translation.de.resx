@@ -931,22 +931,15 @@ falls dies möglich ist.</value>
   <data name="TXT_SHOW_PLAYLIST">
     <value>Zeigen Sie die Seite "Wiedergabeliste". Diese Seite ermöglicht die Interaktion mit der Wiedergabeliste.</value>
   </data>
-  <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Zeigen Sie die Seite "Signalanalyse". Diese Seite zeigt Signaldiagramme wie VU-Meter, Wellenform 
-und Spektrogramm.</value>
-  </data>
   <data name="TXT_SHOW_SPECTROGRAM">
-    <value>Zeigen Sie die Spektrogramm</value>
+    <value>Spektrogramm</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
     <value>Zeigen Sie die Seite "Titel-Info". Diese Seite zeigt die Titelinformationen und ermöglicht das 
 Bearbeiten einiger Teile dieser Informationen (z.B die ID3-Felder von MP3).</value>
   </data>
-  <data name="TXT_SHOW_VUMETER">
-    <value>Zeigen Sie die VU-Meter</value>
-  </data>
   <data name="TXT_SHOW_WAVEFORM">
-    <value>Zeigen Sie die Wellenform</value>
+    <value>Wellenform</value>
   </data>
   <data name="TXT_SHUFFLE">
     <value>Mischen</value>
@@ -1250,5 +1243,14 @@ Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und 
   </data>
   <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
     <value>Hinzufügen einer vorhandenen Wiedergabelisten ...</value>
+  </data>
+  <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
+    <value>Wellenform und Spektrogramm werden nicht unterstützt, für die Medieninhalte, die derzeit wiedergegeben wird.</value>
+  </data>
+  <data name="TXT_SHOW_VUMETER" xml:space="preserve">
+    <value>VU-Meter</value>
+  </data>
+  <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
+    <value>Aktivieren Signalanalyse Funktionen</value>
   </data>
 </root>

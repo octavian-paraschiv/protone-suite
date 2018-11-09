@@ -100,9 +100,23 @@ namespace OPMedia.UI.ProTONE.Controls
                     if (pt3.X + sz.Width > rc.Right)
                         pt3.X = (int)(rc.Right - sz.Width);
 
+                    Rectangle rc3 = new Rectangle(pt3, sz.ToSize());
+
                     g.DrawString(decadeLineText, ThemeManager.SmallestFont, b, pt3);
                 }
             }
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // SpectrogramPlotter
+            // 
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "SpectrogramPlotter";
+            this.ResumeLayout(false);
+
         }
     }
 }

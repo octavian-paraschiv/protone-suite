@@ -38,6 +38,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         const int DZ_SESSION_TIMEOUT = 60000;
         const int DZ_OPERATION_TIMEOUT = 10000;
 
+        public override bool SupportsSampleGrabber => false;
+
         protected override void DoDispose()
         {
             Logger.LogTrace("DeezerRenderer::~DoDispose => Cleanup ...");
@@ -249,7 +251,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             
             Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
-           
+
+            InitAudioSampleCollector();
+            CompleteAudioSampleCollectorIntialization();
         }
 
         ManualResetEvent _evtAppUserOfflineAvailable = new ManualResetEvent(false);
@@ -297,6 +301,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     RenderPosition = 0;
 
                     Logger.LogTrace("dz_player_stop => Success");
+
+                    ReleaseAudioSampleCollector();
                 }
             }
         }
@@ -390,10 +396,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             return true;
         }
 
-        int _volume = -5000;
+        volatile int _volume = -5000;
 
 
         protected override int GetAudioVolume()
+        {
+            return _volume;
+        }
+
+        protected override int GetProjectedVolume()
         {
             return _volume;
         }
@@ -409,6 +420,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 err = DeezerApi.dz_player_set_output_volume(_dzPlayer, null, IntPtr.Zero, vol);
 
                 DeezerApi.HandleDzErrorCode("dz_player_set_output_volume", err);
+
+                _volume = vol;
             }
         }
 

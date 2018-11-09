@@ -539,7 +539,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                     if (_signalAnalisysFunctions == null)
                         return SignalAnalisysFunction.All;
 
-                    return _signalAnalisysFunctions.Value;
+                    return _signalAnalisysFunctions.Value | SignalAnalisysFunction.VUMeter;
                 }
             }
             
@@ -549,7 +549,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 {
                     if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
                     {
-                        _signalAnalisysFunctions = value;
+                        _signalAnalisysFunctions = value | SignalAnalisysFunction.VUMeter;
                         PersistenceProxy.SaveObject(true, "SignalAnalisysFunctions", (int)value);
                     }
                 }

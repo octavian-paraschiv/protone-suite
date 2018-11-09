@@ -369,7 +369,7 @@ namespace OPMedia.DeezerWorker
             }
         }
 
-        int _volume = -5000;
+        volatile int _volume = -5000;
 
         public int GetVolume()
         {
@@ -387,6 +387,8 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_player_set_output_volume(_dzPlayer, null, IntPtr.Zero, vol);
 
                 DeezerApi.HandleDzErrorCode("dz_player_set_output_volume", err);
+
+                _volume = vol;
             }
         }
 

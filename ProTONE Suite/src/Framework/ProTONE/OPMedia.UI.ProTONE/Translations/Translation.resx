@@ -932,21 +932,20 @@ if this is possible.</value>
     <value>Show the "Playlist " page. This page allows interaction with the playlist.</value>
   </data>
   <data name="TXT_SHOW_SIGNALANALISYS">
-    <value>Show the "Signal Analisys" page. This page displays signal graphics such as VU-Meter, Waveform
-and Spectrogram.</value>
+    <value>Activate Signal Analisys functions</value>
   </data>
   <data name="TXT_SHOW_SPECTROGRAM">
-    <value>Show spectrogram</value>
+    <value>Spectrogram</value>
   </data>
   <data name="TXT_SHOW_TRACKINFO">
     <value>Show the "Track Info" page. This page displays the track information and allows editing some
 parts of this information, where applicable (e.g. the ID3 fields of MP3).</value>
   </data>
   <data name="TXT_SHOW_VUMETER">
-    <value>Show VU-Meter</value>
+    <value>VU-Meter</value>
   </data>
   <data name="TXT_SHOW_WAVEFORM">
-    <value>Show waveform</value>
+    <value>Waveform</value>
   </data>
   <data name="TXT_SHUFFLE">
     <value>Shuffle</value>
@@ -1250,5 +1249,8 @@ Otherwise, you will need to copy it from the URL displayed in the default browse
   </data>
   <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
     <value>Add to an existing playlist ...</value>
+  </data>
+  <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
+    <value>Waveform and Spectrogram are not supported for the media content that is currently played.</value>
   </data>
 </root>

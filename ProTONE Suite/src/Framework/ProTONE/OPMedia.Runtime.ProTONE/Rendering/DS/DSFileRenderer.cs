@@ -124,10 +124,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             int hr = (mediaControl as IGraphBuilder).RenderFile(renderMediaName, null);
             DsError.ThrowExceptionForHR(hr);
 
-#if HAVE_SAMPLES
-            InitAudioSampleGrabber_v2();
-            CompleteAudioSampleGrabberIntialization();
-#endif
+            InitAudioSampleCollector();
+            CompleteAudioSampleCollectorIntialization();
 
             mediaPosition = mediaControl as IMediaPosition;
             videoWindow = mediaControl as IVideoWindow;

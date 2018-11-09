@@ -21,6 +21,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     {
         WorkerProcess _wp = null;
 
+        public override bool SupportsSampleGrabber => false;
+
         private void ResetWorker()
         {
             if (_wp != null)
@@ -86,6 +88,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             ResetWorker();
 
             _wp.Play(renderMediaName);
+
+            InitAudioSampleCollector();
+            CompleteAudioSampleCollectorIntialization();
         }
 
 
@@ -97,9 +102,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             if (FilterState != FilterState.Stopped)
             {
                 if (_wp != null)
+                {
                     _wp.Stop();
+                    ReleaseAudioSampleCollector();
+                }
             }
-                
         }
 
         protected override void DoPauseRenderer()
@@ -131,10 +138,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             return true;
         }
 
+        volatile int _projVol = -5000;
+
+        protected override int GetProjectedVolume()
+        {
+            return _projVol;
+        }
 
         protected override void SetAudioVolume(int vol)
         {
             _wp?.SetVolume(vol);
+            _projVol = vol;
         }
 
 

@@ -2813,8 +2813,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show the &quot;Signal Analisys&quot; page. This page displays signal graphics such as VU-Meter, Waveform
-        ///and Spectrogram..
+        ///   Looks up a localized string similar to Activate Signal Analisys functions.
         /// </summary>
         internal static string TXT_SHOW_SIGNALANALISYS {
             get {
@@ -2823,7 +2822,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show spectrogram.
+        ///   Looks up a localized string similar to Spectrogram.
         /// </summary>
         internal static string TXT_SHOW_SPECTROGRAM {
             get {
@@ -2842,7 +2841,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show VU-Meter.
+        ///   Looks up a localized string similar to VU-Meter.
         /// </summary>
         internal static string TXT_SHOW_VUMETER {
             get {
@@ -2851,7 +2850,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show waveform.
+        ///   Looks up a localized string similar to Waveform.
         /// </summary>
         internal static string TXT_SHOW_WAVEFORM {
             get {
@@ -3230,6 +3229,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_UNSELECT_ALLVIDEO {
             get {
                 return ResourceManager.GetString("TXT_UNSELECT_ALLVIDEO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waveform and Spectrogram are not supported for the media content that is currently played..
+        /// </summary>
+        internal static string TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS {
+            get {
+                return ResourceManager.GetString("TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS", resourceCulture);
             }
         }
         

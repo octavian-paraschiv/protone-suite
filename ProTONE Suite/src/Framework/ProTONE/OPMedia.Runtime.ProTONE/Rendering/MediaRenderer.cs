@@ -527,6 +527,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
+        public bool SampleGrabberSupported
+        {
+            get
+            {
+                return (streamRenderer != null) ?
+                   streamRenderer.SupportsSampleGrabber : false;
+            }
+        }
+
         #endregion
 
         #region Methods

@@ -53,6 +53,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         internal Control RenderRegion
         { get { return renderRegion; } set { renderRegion = value; } }
 
+        public virtual bool SupportsSampleGrabber
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         internal bool MediaSeekable
         { 
             get 
@@ -93,7 +101,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         protected virtual double DoGetMediaPosition()
         {
-            return _elapsedSeconds;
+            lock (_syncElapsedSeconds)
+            {
+                return _elapsedSeconds;
+            }
         }
 
         internal bool AudioMediaAvailable
@@ -444,6 +455,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected virtual int GetScaledVolume(int rawVolume)
         {
             return rawVolume;
+        }
+
+        protected virtual int GetProjectedVolume()
+        {
+            return GetAudioVolume();
         }
     }
 }
