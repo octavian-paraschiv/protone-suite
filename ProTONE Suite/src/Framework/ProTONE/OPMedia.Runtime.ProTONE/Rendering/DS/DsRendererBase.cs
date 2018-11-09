@@ -841,23 +841,38 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 if (ProTONEConfig.IsSignalAnalisysActive())
                 {
-                    if (SupportsSampleGrabber)
+                    try
                     {
-                        AudioSample smp = null;
-                        if (samples.TryDequeue(out smp) && smp != null)
-                            ExtractSamples(smp);
-                    }
-                    else
-                    {
-                        double mul = 100f / GetProjectedVolume();
-                        bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
-                        double percL = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[0]));
-                        double percR = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
-                     
-                        lock (_vuLock)
+                        if (SupportsSampleGrabber)
                         {
-                            _vuMeterData = new AudioSampleData(percL, percR);
+                            AudioSample smp = null;
+                            if (samples.TryDequeue(out smp) && smp != null)
+                                ExtractSamples(smp);
                         }
+                        else
+                        {
+                            double percVolL = 0, percVolR = 0;
+
+                            if (device != null &&
+                                device.AudioMeterInformation != null &&
+                                device.AudioMeterInformation.PeakValues != null &&
+                                device.AudioMeterInformation.PeakValues.Count > 0)
+                            {
+                                double mul = 100f / GetProjectedVolume();
+                                bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
+                                percVolL = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[0]));
+                                percVolR = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+                            }
+
+                            lock (_vuLock)
+                            {
+                                _vuMeterData = new AudioSampleData(percVolL, percVolR);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogException(ex);
                     }
 
                     Thread.Yield();
