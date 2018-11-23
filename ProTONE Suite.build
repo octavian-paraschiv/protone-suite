@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <project name="ProTONE Suite" default="build" basedir=".">
     <description>ProTONE Suite</description>
-    
     <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
 
-
-    <!--<property name="debug" value="true" overwrite="false" />-->
     <property name="msbuild.executable" value="C:\Program Files\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe" />
     <property name="nuget.executable" value="C:\NuGet\nuget.exe" />
     <property name="istool.executable" value="C:\Program Files\Inno Setup 5\iscc.exe" />
-    
+
     <property name="root" value=".." />
     <property name="build.dir" value="${root}\protone-suite-build" />
     <property name="externals.dir" value="${root}\protone-suite-externals" />
@@ -21,7 +18,6 @@
     <!-- Build global variables -->
     <property name="build.globalvars.dir" value="C:\GIT" />
     <property name="build.protone.vars" value="${build.globalvars.dir}\Protone_Build.ini" />
-
     <property name="build.timestamp" value="${datetime::format-to-string(datetime::now(), 'yyyy-MM-dd')}" />
     
     
@@ -36,11 +32,8 @@
     <!-- WinSCP-->
     <property name = "winscp.run" value ="c:\winscp577\WinSCP.com"/>
     
-
     <target name="build" description="Rebuild ProTONE Suite">
-
         <echo message=" BUILD STARTED at ${build.timestamp}" />
-
         <call target="cleanup" />
         <call target="ScmCheckout" />
         <call target="RestoreNuGetPackages" />
@@ -49,21 +42,17 @@
         <call target="BuildInstaller" />
         <call target="PostBuildResults_GIT" />
         <call target="PostBuildResults_FTP" />
-
         <echo message=" BUILD DONE !!" />
-
     </target>
-
 
     <target name="cleanup">
         <!-- Delete folders -->
         <echo message="Cleaning up autobuild directory ..." />
         <delete dir="${build.dir}" failonerror="false" />
         
-    <echo message="Cleaning up output directory ..." />
-    <delete dir="${output.dir}" failonerror="false" />
-        
-        <echo message="Source code cleanup done" />
+		<echo message="Cleaning up output directory ..." />
+		<delete dir="${output.dir}" failonerror="false" />
+		<echo message="Source code cleanup done" />
     </target>
 
     <target name="ScmCheckout">
@@ -77,13 +66,12 @@
             <arg value="https://github.com/octavian-paraschiv/protone-suite.git" />
             <arg value="${build.dir}" />
         </exec>
-        
         <echo message="Fetching source code from GITHUB: done" />
     </target>
 
     <target name="VersionInfoUpdate">
         <!-- Version info increment -->
-        <iniread property="oldversion" filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" default="3.0.0" />
+        <iniread property="oldversion" filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" default="3.1.0" />
         <property name="oldversion.build" value="${string::substring(oldversion, 4, string::get-length(oldversion) - 4)}" />
         <property name="newversion.build" value="${int::parse(oldversion.build) + 1}" />
         <property name="newversion" value="${string::substring(oldversion, 0, 4) + newversion.build}" />
@@ -105,7 +93,7 @@
             verbose="true"
             workingdir="${build.dir}\ProTONE Suite\src"
             commandline="restore &quot;ProTONE Suite.sln&quot;"
-            />
+        />
     </target>
 
     <target name="BuildVSSolution">
@@ -116,7 +104,7 @@
             verbose="true"
             workingdir="${build.dir}\ProTONE Suite\src"
             commandline="/restore /p:Configuration=Debug /t:Rebuild &quot;ProTONE Suite.sln&quot; /v:normal"
-            />
+        />
     </target>
 
     <target name="BuildInstaller">
@@ -135,13 +123,13 @@
         <echo message="    -> [PREP] Updating Versions_build.txt ..." />
         <iniwrite filename="${build.dir}\Versions_build.txt" section="ProTONE Suite" key="Version" value="${newversion}" />
         
-    <echo message="    -> [STAGE 1] Commiting build versions to GIT (Version_build.txt) ..." />
-    <exec program="${git.dir}git.exe" workingdir="${build.dir}">
-        <arg value="commit" />
-        <arg value="-a" />
-        <arg value="-m" />
-        <arg value="build_${newversion}" />
-    </exec>
+		<echo message="    -> [STAGE 1] Commiting build versions to GIT (Version_build.txt) ..." />
+		<exec program="${git.dir}git.exe" workingdir="${build.dir}">
+			<arg value="commit" />
+			<arg value="-a" />
+			<arg value="-m" />
+			<arg value="build_${newversion}" />
+		</exec>
 
         <!-- NOTE: This needs to have GIT credentials cached by means of a credential helper i.e wincred -->
         <echo message="    -> [STAGE 1] Pushing build versions to GIT (Versions_build.txt) ..." />
@@ -151,15 +139,12 @@
             <arg value="--progress" />
             <arg value="origin" />
         </exec>
-        
     </target>
     
     
     <target name="PostBuildResults_FTP">
-        <echo message="    -> [STAGE 3] Uploading build output to ocpa.ro FTP ..." />
-        
+        <echo message="    -> [STAGE 3] Posting build results to FTP site ..." />
         <copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
-        
         <echo file="${output.dir}\ProTONE Suite ${newversion}.buildinfo.txt" message="${build.timestamp}" />
     
         <exec program="${winscp.run}" workingdir="${output.dir}">
@@ -171,7 +156,6 @@
             <arg value="put *.* ${ftp.remote.dir}" />         
             <arg value="close" />
         <arg value="exit" />
-        
     </exec>     
     </target>
 

@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\ProTONE Suite.build = ..\..\ProTONE Suite.build
 		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
 		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
+		..\..\Versions_build.txt = ..\..\Versions_build.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.MediaLibrary", "Applications\OPMedia.MediaLibrary\OPMedia.MediaLibrary.csproj", "{83EB55B7-DC25-4D02-B6A1-282D29033829}"
@@ -313,7 +314,7 @@ Global
 		{881231F8-0F43-453B-81A3-04C8A44F08DB} = {114014C8-9E85-476A-9BD3-036DE649D6CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-GB
 		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
+		RESX_NeutralResourcesLanguage = en-GB
 	EndGlobalSection
 EndGlobal
