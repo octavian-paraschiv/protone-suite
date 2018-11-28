@@ -18,8 +18,11 @@ namespace OPMedia.DeezerInterop.RestApi
         [JsonProperty("link")]
         public string WebUri { get; set; }
         
-        [JsonProperty("picture")]
-        public Uri ArtistImageUri { get; set; }
+        [JsonProperty("picture_medium")]
+        public Uri ImageUriSmall { get; set; }
+
+        [JsonProperty("picture_big")]
+        public Uri ImageUriLarge { get; set; }
 
         [JsonProperty("nb_fan")]
         public int FansCount { get; set; }

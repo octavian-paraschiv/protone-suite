@@ -15,11 +15,17 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public string Title { get; set; }
 
-        [JsonProperty("cover")]
-        public Uri AlbumImageUri { get; set; }
+        [JsonProperty("cover_medium")]
+        public Uri ImageUriSmall { get; set; }
+
+        [JsonProperty("cover_big")]
+        public Uri ImageUriLarge { get; set; }
 
         [JsonProperty("genre_id")]
         public MusicGenre Genre { get; set; }
+
+        [JsonProperty("release_date")]
+        public string ReleaseDate { get; set; }
 
         public int TracksCount { get; set; }
 

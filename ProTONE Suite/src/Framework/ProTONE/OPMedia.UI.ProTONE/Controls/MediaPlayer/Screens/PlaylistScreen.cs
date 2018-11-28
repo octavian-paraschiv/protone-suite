@@ -1047,7 +1047,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                             {
                                 pli.Rebuild();
 
-                                Image customImage = pli.MediaFileInfo.CustomImage;
+                                Image customImage = pli.CustomImage;
 
                                 _ttm.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, pli.GetImageEx(true), customImage);
                                 set = true;

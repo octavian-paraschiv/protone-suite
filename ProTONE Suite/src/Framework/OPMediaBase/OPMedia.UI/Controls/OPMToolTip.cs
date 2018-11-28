@@ -30,7 +30,7 @@ namespace OPMedia.UI.Controls
 
     public class OPMToolTip : ToolTip
     {
-        const int ImageMaxHeight = 80;
+        const int ImageMaxHeight = 150;
 
         static Control __generic = new Control();
 

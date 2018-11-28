@@ -132,6 +132,20 @@ namespace OPMedia.DeezerInterop.RestApi
             return response;
         }
 
+        public Track GetTrack(UInt64 trackId)
+        {
+            Track track = null;
+
+            string response = this.ExecuteHttpGet(string.Format("/track/{0}", trackId));
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                track = JsonConvert.DeserializeObject<Track>(response);
+                track.CurrentRuntime = this;
+            }
+
+            return track;
+        }
+
         public Artist GetArtist(UInt64 artistId)
         {
             Artist artist = null;
@@ -178,24 +192,33 @@ namespace OPMedia.DeezerInterop.RestApi
 
                 List<Track> tracksChunk = JsonConvert.DeserializeObject<List<Track>>(jsonResult["data"].ToString());
                 if (tracksChunk != null && tracksChunk.Count > 0)
-                    tracks.AddRange(tracksChunk);
-
-                var albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
-                if (albums != null)
                 {
-                    foreach (Album album in albums)
+                    tracksChunk.ForEach(t =>
                     {
-                        if (abortEvent.WaitOne(5))
-                            break;
-
-                        album.CurrentRuntime = this;
-
-                        tracksChunk = album.LoadTracks();
-
-                        if (tracksChunk != null && tracksChunk.Count > 0)
-                            tracks.AddRange(tracksChunk);
-                    }
+                        Track actualTrack = this.GetTrack(t.Id);
+                        if (actualTrack != null)
+                            tracks.Add(actualTrack);
+                        else
+                            tracks.Add(t);
+                    });
                 }
+
+                //var albums = JsonConvert.DeserializeObject<List<Album>>(jsonResult["data"].ToString());
+                //if (albums != null)
+                //{
+                //    foreach (Album album in albums)
+                //    {
+                //        if (abortEvent.WaitOne(5))
+                //            break;
+
+                //        album.CurrentRuntime = this;
+
+                //        tracksChunk = album.LoadTracks();
+
+                //        if (tracksChunk != null && tracksChunk.Count > 0)
+                //            tracks.AddRange(tracksChunk);
+                //    }
+                //}
             }
 
             return tracks;

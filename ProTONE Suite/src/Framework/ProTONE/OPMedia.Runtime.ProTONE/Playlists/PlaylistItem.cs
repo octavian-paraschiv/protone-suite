@@ -47,6 +47,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             get { return mi; }
         }
 
+
+
         public bool SupportsTrackInfo
         {
             get { return _SupportsTrackInfo(); }
@@ -233,7 +235,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 if (mi.ExtendedInfo != null && mi.ExtendedInfo.Count > 0)
                 {
-                    info.Add(" ", null); // separator
                     foreach (KeyValuePair<string, string> kvp in mi.ExtendedInfo)
                     {
                         try
@@ -245,6 +246,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 }
 
                 return info;
+            }
+        }
+
+        public virtual Image CustomImage
+        {
+            get
+            {
+                if (MediaFileInfo != null)
+                    return MediaFileInfo.CustomImage;
+
+                return null;
             }
         }
 

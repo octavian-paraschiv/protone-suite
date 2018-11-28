@@ -11,6 +11,9 @@ namespace OPMedia.DeezerInterop.RestApi
         public UInt64 Id { get; set; }
         public string Title { get; set; }
 
+        [JsonProperty("release_date")]
+        public string ReleaseDate { get; set; }
+
         [JsonProperty("duration")]
         private double InternalDuration
         {
@@ -30,10 +33,11 @@ namespace OPMedia.DeezerInterop.RestApi
         public Artist Artist { get; set; }
         public Album Album { get; set; }
 
+
         public override string ToString()
         {
             return string.Format("[ID={0}, Artist={1}, Album={2}, Title={3}, Duration={4}]", 
-                this.Id, this.Artist, this.Title, (int)this.Duration.TotalSeconds);
+                this.Id, this.Artist, this.Album, this.Title, (int)this.Duration.TotalSeconds);
         }
 
     }

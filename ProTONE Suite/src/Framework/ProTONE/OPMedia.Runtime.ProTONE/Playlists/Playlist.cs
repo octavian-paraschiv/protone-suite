@@ -602,9 +602,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                                     if (idx < (s.Length - 2))
                                     {
                                         string[] fields2 = s.Substring(idx + 1).Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                                        dti.Artist = fields2[0];
-                                        dti.Title = fields2[1];
-                                        dti.Album = fields2[2];
+
+                                        int i = 0;
+
+                                        dti.Artist = fields2.Field(i++);
+                                        dti.Title = fields2.Field(i++);
+                                        dti.Album = fields2.Field(i++);
+                                        dti.ReleaseDate = fields2.Field(i++);
+                                        dti.AlbumUriImageSmall =  fields2.Field(i++);
+                                        dti.AlbumUriImageLarge =  fields2.Field(i++);
+                                        dti.ArtistUriImageSmall = fields2.Field(i++);
+                                        dti.ArtistUriImageLarge = fields2.Field(i++);
                                     }
 
                                     omi = dti;

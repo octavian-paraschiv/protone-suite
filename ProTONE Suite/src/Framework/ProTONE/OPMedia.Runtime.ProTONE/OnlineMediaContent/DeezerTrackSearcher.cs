@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -127,8 +128,34 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                                 Artist = (t.Artist != null) ? t.Artist.Name : string.Empty,
                                 Title = t.Title ?? string.Empty,
                                 Url = string.Format("dzmedia:///track/{0}", t.Id),
-                                Duration = t.Duration
+                                Duration = t.Duration,
+                                ReleaseDate = t.ReleaseDate,
                             };
+
+                            if (t.Album != null)
+                            {
+                                string uri = t.Album.ImageUriSmall.ToUrl();
+                                if (string.IsNullOrEmpty(uri) == false)
+                                    dti.AlbumUriImageSmall = uri;
+
+                                uri = t.Album.ImageUriLarge.ToUrl();
+                                if (string.IsNullOrEmpty(uri) == false)
+                                    dti.AlbumUriImageLarge = uri;
+
+                                if (string.IsNullOrEmpty(dti.ReleaseDate))
+                                    dti.ReleaseDate = t.Album.ReleaseDate;
+                            }
+
+                            if (t.Artist != null)
+                            {
+                                string uri = t.Artist.ImageUriSmall.ToUrl();
+                                if (string.IsNullOrEmpty(uri) == false)
+                                    dti.ArtistUriImageSmall = uri;
+
+                                uri = t.Artist.ImageUriLarge.ToUrl();
+                                if (string.IsNullOrEmpty(uri) == false)
+                                    dti.ArtistUriImageLarge = uri;
+                            }
 
                             bool shouldAddTrack = true;
 
@@ -163,6 +190,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             return results;
         }
+
 
         protected override List<OnlinePlaylist> GetMyPlaylists(ManualResetEvent abortEvent)
         {

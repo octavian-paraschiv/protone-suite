@@ -57,6 +57,21 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         [DataMember(Order = 9)]
         public TimeSpan Duration { get; set; }
 
+        [DataMember(Order = 10)]
+        public string ReleaseDate { get; set; }
+
+        [DataMember(Order = 11)]
+        public string AlbumUriImageSmall { get; set; }
+
+        [DataMember(Order = 12)]
+        public string AlbumUriImageLarge { get; set; }
+
+        [DataMember(Order = 13)]
+        public string ArtistUriImageSmall { get; set; }
+
+        [DataMember(Order = 14)]
+        public string ArtistUriImageLarge { get; set; }
+
         public override bool Equals(object obj)
         {
             OnlineMediaItem item = obj as OnlineMediaItem;
