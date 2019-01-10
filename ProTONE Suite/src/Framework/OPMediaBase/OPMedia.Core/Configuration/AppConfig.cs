@@ -19,6 +19,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using OPMedia.Core.Win32;
 using OPMedia.Core.InstanceManagement;
+using Microsoft.Win32;
 
 namespace OPMedia.Core.Configuration
 {
@@ -83,6 +84,8 @@ namespace OPMedia.Core.Configuration
         static string _languageId = string.Empty;
 
         const string DefaultDownloadUriBase = "http://ocpa.ro/protone/current";
+        const string ReleaseDownloadUriBase = "http://ocpa.ro/protone/release";
+
         const string DefaultHelpUriBase = "http://ocpa.ro/protone/protone-suite-docs/#VERSION#/";
 
         public const string UnconfiguredThemeName = "Deezer";
@@ -372,7 +375,15 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return DefaultDownloadUriBase;
+                // If the installed version is not a release version or we're running
+                // on a development machine (either DEV or QA), then allow downloading
+                // from the current/test channel. Otherwise download from the release 
+                // channel. Builds will be published to release channel only after they
+                // are passing a minimum set of tests.
+                if (SuiteVersion.IsRelease == false || Regedit.IsDevelopmentMachine)
+                    return DefaultDownloadUriBase;
+
+                return ReleaseDownloadUriBase;
             }
         }
 

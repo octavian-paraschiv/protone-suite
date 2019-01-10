@@ -27,13 +27,29 @@
     <iniread property="ftp.user" filename="${build.protone.vars}" section="FTP" key="User" default="" />
     <iniread property="ftp.password" filename="${build.protone.vars}" section="FTP" key="Password" default="" />
     <iniread property="ftp.remote.dir" filename="${build.protone.vars}" section="FTP" key="RemoteDir" default="" />
+	<iniread property="ftp.release.dir" filename="${build.protone.vars}" section="FTP" key="ReleaseDir" default="" />
     <property name = "ftp.local.dir" value = "${output.dir}" />
     
-    <!-- WinSCP-->
-    <property name = "winscp.run" value ="c:\winscp577\WinSCP.com"/>
+    <!-- WinSCP (assumed to be in PATH) -->
+    <property name = "winscp.run" value ="WinSCP.com"/>
     
-    <target name="build" description="Rebuild ProTONE Suite">
+    <target name="build" description="Rebuild ProTONE Suite (Test)">
         <echo message=" BUILD STARTED at ${build.timestamp}" />
+		<property name="release" value="false" />
+        <call target="cleanup" />
+        <call target="ScmCheckout" />
+        <call target="RestoreNuGetPackages" />
+        <call target="VersionInfoUpdate" />
+        <call target="BuildVSSolution" />
+        <call target="BuildInstaller" />
+        <call target="PostBuildResults_GIT" />
+        <call target="PostBuildResults_FTP" />
+        <echo message=" BUILD DONE !!" />
+    </target>
+	
+	<target name="release" description="Rebuild ProTONE Suite (Release)">
+        <echo message=" RELEASE BUILD STARTED at ${build.timestamp}" />
+		<property name="release" value="true" />
         <call target="cleanup" />
         <call target="ScmCheckout" />
         <call target="RestoreNuGetPackages" />
@@ -81,6 +97,7 @@
 
         <loadfile file="${build.dir}\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs" property="file.contents" />
         <property name="file.contents" value="${string::replace(file.contents, 'VERSION', newversion)}" />
+		<property name="file.contents" value="${string::replace(file.contents, 'RELEASE', release)}" />
 
         <echo message="${file.contents}" file="${build.dir}\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs" />
 
@@ -147,6 +164,7 @@
         <copy file="${build.dir}\Versions_build.txt" tofile="${output.dir}\Versions_build.txt" />
         <echo file="${output.dir}\ProTONE Suite ${newversion}.buildinfo.txt" message="${build.timestamp}" />
     
+		<echo>Posting build to current (test) folder ...</echo>
         <exec program="${winscp.run}" workingdir="${output.dir}">
             <arg value="/command" />
             <arg value="option batch abort" />
@@ -155,8 +173,23 @@
             <arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
             <arg value="put *.* ${ftp.remote.dir}" />         
             <arg value="close" />
-        <arg value="exit" />
-    </exec>     
+			<arg value="exit" />
+		</exec> 
+		
+		<if propertytrue="release">
+			<echo>Posting build to release folder ...</echo>
+			<exec program="${winscp.run}" workingdir="${output.dir}">
+				<arg value="/command" />
+				<arg value="option batch abort" />
+				<arg value="option confirm off" />
+				<arg value="option transfer binary" />
+				<arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
+				<arg value="put *.* ${ftp.release.dir}" />         
+				<arg value="close" />
+				<arg value="exit" />
+			</exec> 
+		</if>
+        
     </target>
 
 </project>

@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.DeezerWorker", "App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "package-builder", "package-builder\package-builder.csproj", "{76033137-7758-4B97-B2A5-D7C135419E72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.AudioWorker", "OPMedia.AudioWorker\OPMedia.AudioWorker.csproj", "{5A705454-4DDA-42CE-ABEE-03B9899C91F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -288,6 +290,18 @@ Global
 		{76033137-7758-4B97-B2A5-D7C135419E72}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{76033137-7758-4B97-B2A5-D7C135419E72}.Release|x86.ActiveCfg = Release|Any CPU
 		{76033137-7758-4B97-B2A5-D7C135419E72}.Release|x86.Build.0 = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -312,9 +326,10 @@ Global
 		{9603D04E-CCD3-471A-A454-24CE2D48F047} = {7AFB26AE-EB50-4A26-AB45-26BA28563E7F}
 		{41D162BD-95F4-4348-B353-93BA1C3923B4} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 		{881231F8-0F43-453B-81A3-04C8A44F08DB} = {114014C8-9E85-476A-9BD3-036DE649D6CB}
+		{5A705454-4DDA-42CE-ABEE-03B9899C91F6} = {114014C8-9E85-476A-9BD3-036DE649D6CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 		RESX_NeutralResourcesLanguage = en-GB
+		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 	EndGlobalSection
 EndGlobal

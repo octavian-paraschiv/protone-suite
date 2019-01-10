@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using System.Reflection;
+using OPMedia.Core.Win32;
 
 namespace OPMedia.Runtime.ProTONE.Configuration
 {
@@ -1012,13 +1013,16 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
+                if (Regedit.IsDevelopmentMachine)
+                    return true;
+
                 if (_enableExtendedDeezerFeatures == null)
                 {
                     try
                     {
                         Assembly thisAssembly = Assembly.GetEntryAssembly();
                         Version v = thisAssembly.GetName().Version;
-                        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 1));
+                        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 2));
                     }
                     catch
                     {
