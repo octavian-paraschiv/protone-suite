@@ -173,22 +173,23 @@
             <arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
             <arg value="put *.* ${ftp.remote.dir}" />         
             <arg value="close" />
-        <arg value="exit" />
+			<arg value="exit" />
+		</exec> 
 		
 		<if propertytrue="release">
 			<echo>Posting build to release folder ...</echo>
 			<exec program="${winscp.run}" workingdir="${output.dir}">
-            <arg value="/command" />
-            <arg value="option batch abort" />
-            <arg value="option confirm off" />
-            <arg value="option transfer binary" />
-            <arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
-            <arg value="put *.* ${ftp.release.dir}" />         
-            <arg value="close" />
-        <arg value="exit" />
+				<arg value="/command" />
+				<arg value="option batch abort" />
+				<arg value="option confirm off" />
+				<arg value="option transfer binary" />
+				<arg value="open ftp://${ftp.user}:${ftp.password}@${ftp.host}:${ftp.port}" />
+				<arg value="put *.* ${ftp.release.dir}" />         
+				<arg value="close" />
+				<arg value="exit" />
+			</exec> 
 		</if>
-		
-    </exec>     
+        
     </target>
 
 </project>
