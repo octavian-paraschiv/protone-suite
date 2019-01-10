@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPMedia.DeezerInterop.WorkerSupport
+namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public enum WorkerCommandType
     {

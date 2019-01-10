@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OPMedia.DeezerInterop.WorkerSupport
+namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
-    public interface IDeezerPlayer
+    public interface IWorkerPlayer
     {
         void Play(string url);
         void Stop();

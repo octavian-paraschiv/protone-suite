@@ -13,7 +13,7 @@ using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Core.Logging;
 using System.Diagnostics;
 using OPMedia.Runtime.Shortcuts;
-using OPMedia.DeezerInterop.WorkerSupport;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -39,7 +39,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (_wp == null)
             {
-                _wp = new WorkerProcess();
+                _wp = new WorkerProcess(WorkerType.Deezer);
                 _wp.WorkerTerminated += _wp_OnWorkerTerminated;
                 _wp.RenderEvent += _wp_RenderEvent;
                 _wp.StateChanged += _wp_StateChanged;

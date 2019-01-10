@@ -14,11 +14,11 @@ using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Core.Logging;
 using System.Diagnostics;
 using OPMedia.Runtime.Shortcuts;
-using OPMedia.DeezerInterop.WorkerSupport;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
 
 namespace OPMedia.DeezerWorker
 {
-    public class DeezerPlayer : IDeezerPlayer
+    public class DeezerPlayer : IWorkerPlayer
     {
         dz_connect_configuration _dzConfig = null;
 

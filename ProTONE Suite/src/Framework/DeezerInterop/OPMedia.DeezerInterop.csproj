@@ -79,11 +79,6 @@
     <Compile Include="RestApi\MusicGenre.cs" />
     <Compile Include="RestApi\Playlist.cs" />
     <Compile Include="RestApi\Track.cs" />
-    <Compile Include="WorkerSupport\IDeezerPlayer.cs" />
-    <Compile Include="WorkerSupport\WorkerCommand.cs" />
-    <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
-    <Compile Include="WorkerSupport\WorkerCommandType.cs" />
-    <Compile Include="WorkerSupport\WorkerProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">

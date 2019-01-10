@@ -185,6 +185,13 @@
     <Compile Include="SubtitleDownload\SubtitleDownloader.cs" />
     <Compile Include="SystemScheduler\SystemScheduler.cs" />
     <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
+    <Compile Include="WorkerSupport\ICommandProcessor.cs" />
+    <Compile Include="WorkerSupport\IWorkerPlayer.cs" />
+    <Compile Include="WorkerSupport\WorkerCommand.cs" />
+    <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
+    <Compile Include="WorkerSupport\WorkerCommandType.cs" />
+    <Compile Include="WorkerSupport\Worker.cs" />
+    <Compile Include="WorkerSupport\WorkerProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">

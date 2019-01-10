@@ -1,6 +1,6 @@
 ﻿using OPMedia.DeezerInterop.PlayerApi;
-using OPMedia.DeezerInterop.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +9,18 @@ using System.Text;
 
 namespace OPMedia.DeezerWorker
 {
-    public class CommandProcessor
+    public class CommandProcessor : ICommandProcessor
     {
         private DeezerPlayer _player = null;
         private StreamWriter _evtStream = null;
 
-        public CommandProcessor(StreamWriter evtStream)
+        public CommandProcessor()
         {
             _player = new DeezerPlayer(this);
+        }
+
+        public void SetEventStream(StreamWriter evtStream)
+        {
             _evtStream = evtStream;
         }
 

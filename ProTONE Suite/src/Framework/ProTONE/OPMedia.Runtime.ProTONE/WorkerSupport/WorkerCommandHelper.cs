@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPMedia.DeezerInterop.WorkerSupport
+namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public class WorkerCommandHelper
     {

@@ -9,13 +9,41 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace OPMedia.DeezerInterop.WorkerSupport
+namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public delegate void WorkerTerminatedHandler(int pid);
     public delegate void StateEventHandler(string state);
     public delegate void RenderEventHandler(int pos);
 
-    public class WorkerProcess : IDisposable, IDeezerPlayer
+    public enum WorkerType
+    {
+        /// <summary>
+        /// OPMedia.DeezerWorker.exe
+        /// </summary>
+        Deezer,
+        /// <summary>
+        /// OPMedia.AudioCdWorker.exe
+        /// </summary>
+        AudioCd,
+        /// <summary>
+        /// OPMedia.VideoDvdWorker.exe
+        /// </summary>
+        VideoDvd,
+        /// <summary>
+        /// OPMedia.AudioWorker.exe
+        /// </summary>
+        Audio,
+        /// <summary>
+        /// OPMedia.VideoWorker.exe
+        /// </summary>
+        Video,
+        /// <summary>
+        /// OPMedia.ShoutcastWorker.exe
+        /// </summary>
+        Shoutcast,
+    }
+
+    public class WorkerProcess : IDisposable, IWorkerPlayer
     {
         Process _wp = null;
 
@@ -25,9 +53,9 @@ namespace OPMedia.DeezerInterop.WorkerSupport
 
         public int Pid { get; private set; }
 
-        public WorkerProcess()
+        public WorkerProcess(WorkerType workerType)
         {
-            ProcessStartInfo psi = new ProcessStartInfo(@".\OPMedia.DeezerWorker.exe");
+            ProcessStartInfo psi = new ProcessStartInfo($".\\OPMedia.{workerType}Worker.exe");
             psi.CreateNoWindow = true;
             psi.RedirectStandardInput = true;
             psi.RedirectStandardOutput = true;

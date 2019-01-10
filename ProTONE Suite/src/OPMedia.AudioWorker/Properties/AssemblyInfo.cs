@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OPMedia.DeezerWorker")]
-[assembly: AssemblyDescription("OPMedia Deezer Renderer Process")]
+[assembly: AssemblyTitle("OPMedia.AudioWorker")]
+[assembly: AssemblyDescription("OPMedia Audio Renderer Process")]
 
 [assembly: ComVisible(false)]
 [assembly: AssemblyCompany(Constants.CompanyName)]
