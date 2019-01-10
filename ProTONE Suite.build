@@ -29,8 +29,8 @@
     <iniread property="ftp.remote.dir" filename="${build.protone.vars}" section="FTP" key="RemoteDir" default="" />
     <property name = "ftp.local.dir" value = "${output.dir}" />
     
-    <!-- WinSCP-->
-    <property name = "winscp.run" value ="c:\winscp577\WinSCP.com"/>
+    <!-- WinSCP (assumed to be in PATH) -->
+    <property name = "winscp.run" value ="WinSCP.com"/>
     
     <target name="build" description="Rebuild ProTONE Suite">
         <echo message=" BUILD STARTED at ${build.timestamp}" />
