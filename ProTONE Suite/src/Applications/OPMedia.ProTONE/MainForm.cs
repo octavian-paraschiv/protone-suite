@@ -68,6 +68,9 @@ namespace OPMedia.ProTONE
         public MainForm()
             : base("TXT_APP_NAME")
         {
+            AppConfig.CanSendToTray = true;
+            
+
             InitializeComponent();
 
             mnuMediaState.ForeColor = ThemeManager.MenuTextColor;
@@ -285,8 +288,7 @@ namespace OPMedia.ProTONE
             switch (cmd.CommandType)
             {
                 case CommandType.Activate:
-                    RestoreWindow();
-                    User32.SetWindowOnTop(this.Handle, true, false);
+                    RevealWindow();
                     mediaPlayer.DoLayout();
                     break;
                 case CommandType.Terminate:
@@ -341,18 +343,18 @@ namespace OPMedia.ProTONE
                 return;
             }
 
-            if (this.WindowState == FormWindowState.Minimized)
+            if (Visible)
             {
-                RestoreWindow();
-                //mediaPlayer.DoLayout();
+                ConcealWindow();
             }
             else
             {
-                MinimizeWindow();
+                RevealWindow();
+                mediaPlayer.DoLayout();
             }
         }
 
-        protected override void OnWindowRestored()
+        protected override void OnRevealWindow()
         {
             BuildThumbnailButtons(true);
         }
@@ -378,10 +380,13 @@ namespace OPMedia.ProTONE
 
             string info = string.Empty;
 
-            BuildMediaStateString(true, ref info);
+            if (_hasMediaStateChangedAtLeastOnce == false)
+                return;
 
-            Logger.LogTrace("_notifyIconMoveTimer_Tick => Text: {0}", info);
-            EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, info, Translator.Translate("TXT_APP_NAME"), 0);
+            if (BuildMediaStateString(true, ref info))
+            {
+                EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, info, Translator.Translate("TXT_APP_NAME"), 0);
+            }
         }
 
         public void NotifyMenuClick(object sender, System.EventArgs e)

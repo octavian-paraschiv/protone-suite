@@ -388,7 +388,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ThemedScrollBars\ScrollBarSkinner.cs" />
     <Compile Include="TaskRunner.cs">
     </Compile>
     <Compile Include="MessageDisplay.cs">

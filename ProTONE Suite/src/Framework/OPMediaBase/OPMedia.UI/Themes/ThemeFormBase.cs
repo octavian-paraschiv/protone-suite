@@ -19,7 +19,6 @@ using OPMedia.Core.Logging;
 using System.Threading;
 using OPMedia.Core.GlobalEvents;
 using System.Drawing.Text;
-using OPMedia.UI.Controls.ThemedScrollBars;
 using System.Reflection;
 using System.IO;
 
@@ -328,20 +327,9 @@ namespace OPMedia.UI.Themes
             ApplyWindowParams(false);
             ApplyTitlebarValues();
             ApplyDrawingValues();
-            ApplyScrollBarTheme();
             Invalidate(true);
 
             OnThemeUpdatedInternal();
-        }
-
-        private void ApplyScrollBarTheme()
-        {
-            ScrollBarSkinner.BackColor = ThemeManager.BorderColor;
-            ScrollBarSkinner.HoverColor = ThemeManager.CheckedMenuColor;
-            ScrollBarSkinner.NormalColor = ThemeManager.BackColor;
-            ScrollBarSkinner.PressedColor = ThemeManager.FocusBorderColor;
-            ScrollBarSkinner.TrackColor = ThemeManager.GradientNormalColor1;
-            ScrollBarSkinner.TrackPressedColor = ThemeManager.GradientFocusHoverColor1;
         }
 
         #region InitializeComponent
@@ -508,7 +496,6 @@ namespace OPMedia.UI.Themes
             this.MinimumSize = new Size(minW, minH);
 
             ApplyWindowParams(true);
-            ApplyScrollBarTheme();
 
             ThemeManager.SetDoubleBuffer(this);
         }

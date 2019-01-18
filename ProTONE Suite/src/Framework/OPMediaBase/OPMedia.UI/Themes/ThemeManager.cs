@@ -23,7 +23,6 @@ using OPMedia.UI.Properties;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
-using OPMedia.UI.Controls.ThemedScrollBars;
 using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.InstanceManagement;

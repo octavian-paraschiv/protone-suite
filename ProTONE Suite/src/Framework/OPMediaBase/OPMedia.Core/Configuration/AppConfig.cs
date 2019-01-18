@@ -602,6 +602,32 @@ namespace OPMedia.Core.Configuration
             }
         }
 
+        public static bool MimimizedToTray
+        {
+            get
+            {
+                return (PersistenceProxy.ReadObject(true, "MimimizedToTray", false) && CanSendToTray);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(true, "MimimizedToTray", value && CanSendToTray);
+            }
+        }
+
+        public static bool CanSendToTray
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject(true, "CanSendToTray", false);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(true, "CanSendToTray", value);
+            }
+        }
+        
         #endregion
 
         #region Application state persistence
