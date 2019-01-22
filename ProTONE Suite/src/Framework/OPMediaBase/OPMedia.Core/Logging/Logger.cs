@@ -1,4 +1,4 @@
-#define HAVE_TRACE_TRANSLATIONs
+//#define HAVE_TRACE_TRANSLATIONs
 
 #region Using directives
 using System;

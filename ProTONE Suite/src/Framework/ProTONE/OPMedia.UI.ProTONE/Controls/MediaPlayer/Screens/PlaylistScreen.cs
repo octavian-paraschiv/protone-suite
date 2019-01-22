@@ -162,7 +162,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 UpdateTotalTime(playlist.TotalPlaylistTime);
             }
-            catch { }
+            catch(Exception ex)
+            {
+                Logger.LogException(ex);
+            }
             finally
             {
                 UpdatePlaylistNames(false);
@@ -187,6 +190,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         [EventSink(LocalEventNames.UpdatePlaylistNames)]
         public void UpdatePlaylistNames(bool rebuildFileInfos)
         {
+            int idxVisible = -1;
+
             foreach (ListViewItem lvi in lvPlaylist.Items)
             {
                 PlaylistItem plItem = lvi.Tag as PlaylistItem;
@@ -205,7 +210,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     if (UpdateMiscIcon(lvi))
                     {
-                        lvPlaylist.EnsureVisible(lvi.Index);
+                        idxVisible = lvi.Index;
                     }
 
                     foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
@@ -215,6 +220,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
                     }
                 }
+            }
+
+            if (idxVisible >= 0)
+            {
+                lvPlaylist.EnsureVisible(idxVisible);
             }
         }
 
