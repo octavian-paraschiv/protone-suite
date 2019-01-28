@@ -10,46 +10,60 @@ using System.ComponentModel;
 
 namespace OPMedia.Core.NetworkAccess
 {
-    public delegate void FileRetrieveCompleteEventHandler(string path, bool success, string errorDetails);
+    public delegate void FileRetrieveCompleteEventHandler(string path, bool success, bool cancelled, string errorDetails);
+    public delegate void ProgressEventHandler(int percentage, long bytesReceived, long totalBytes);
 
     public class WebFileRetriever : IDisposable
     {
         ProxySettings _ns = null;
         string _downloadUrl = string.Empty;
         string _destinationPath = string.Empty;
-        WebClient _retriever = null;
+        WebClient _wc = null;
 
         public event FileRetrieveCompleteEventHandler FileRetrieveComplete = null;
+        public event ProgressEventHandler DownloadProgress = null;
 
-        BackgroundWorker _bw = null;
-
-        public WebFileRetriever(ProxySettings ns, string downloadUrl, string destinationPath, bool runAsBackgroundThread)
+        public WebFileRetriever(ProxySettings ns, string downloadUrl, string destinationPath)
         {
             _ns = ns;
             _downloadUrl = downloadUrl;
             _destinationPath = destinationPath;
+        }
 
-            if (runAsBackgroundThread)
+        public void PerformDownload(bool isAsync)
+        {
+            string destFolder = Path.GetDirectoryName(_destinationPath);
+
+            if (!Directory.Exists(destFolder))
             {
-                _bw = new BackgroundWorker();
-                _bw.WorkerReportsProgress = _bw.WorkerSupportsCancellation = false;
-                _bw.DoWork += new DoWorkEventHandler(OnBackgroundDownload);
-                _bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnBackgroundDownloadCompleted);
-                _bw.RunWorkerAsync();
+                Directory.CreateDirectory(destFolder);
+            }
+
+            _wc = new WebClient();
+            _wc.Proxy = AppConfig.GetWebProxy();
+
+            if (isAsync)
+            {
+                _wc.DownloadProgressChanged += OnDownloadProgressChanged;
+                _wc.DownloadFileCompleted += OnDownloadFileCompleted;
+                _wc.DownloadFileAsync(new Uri(_downloadUrl), _destinationPath);
             }
             else
             {
-                // Exceptions will be caught at top level
-                PerformUnsafeDownload();
+                try
+                {
+                    _wc.DownloadFile(new Uri(_downloadUrl), _destinationPath);
+                    FileRetrieveComplete?.Invoke(_destinationPath, true, false, string.Empty);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+                    FileRetrieveComplete?.Invoke(_destinationPath, false, false, ex.Message);
+                }
             }
         }
 
-        void OnBackgroundDownload(object sender, DoWorkEventArgs e)
-        {
-            PerformUnsafeDownload();
-        }
-
-        void OnBackgroundDownloadCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             bool isSuccess = true;
             string message = string.Empty;
@@ -61,35 +75,24 @@ namespace OPMedia.Core.NetworkAccess
                 Logger.LogWarning(message);
             }
 
-            if (FileRetrieveComplete != null)
-            {
-                FileRetrieveComplete(_destinationPath, isSuccess, message);
-            }
-
+            FileRetrieveComplete?.Invoke(_destinationPath, isSuccess, e.Cancelled, message);
         }
 
-        private void PerformUnsafeDownload()
+        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            string destFolder = Path.GetDirectoryName(_destinationPath);
-
-            if (!Directory.Exists(destFolder))
-            {
-                Directory.CreateDirectory(destFolder);
-            }
-
-            _retriever = new WebClient();
-            _retriever.Proxy = AppConfig.GetWebProxy();
-            _retriever.DownloadFile(new Uri(_downloadUrl), _destinationPath);
+            DownloadProgress?.Invoke(e.ProgressPercentage, e.BytesReceived, e.TotalBytesToReceive);
         }
 
         #region IDisposable Members
 
         public void Dispose()
         {
-            if (_retriever != null)
+            if (_wc != null)
             {
-                _retriever.Dispose();
-                _retriever = null;
+                _wc.CancelAsync();
+
+                _wc.Dispose();
+                _wc = null;
             }
         }
 

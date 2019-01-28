@@ -67,9 +67,9 @@ namespace OPMedia.Runtime.Processors
                 string fileName = "~" + _descName + ".frtmp";
                 _pendingDownloadFile = Path.Combine(_repositoryPath, fileName);
 
-                using (WebFileRetriever downloader =
-                    new WebFileRetriever(_ns, _downloadUrl, _pendingDownloadFile, false))
+                using (WebFileRetriever wfr = new WebFileRetriever(_ns, _downloadUrl, _pendingDownloadFile))
                 {
+                    wfr.PerformDownload(false);
                 }
 
                 string ext = PathUtils.GetExtension(_downloadUrl);
@@ -83,7 +83,7 @@ namespace OPMedia.Runtime.Processors
 
                     if (NewFileRetrieved != null)
                     {
-                        NewFileRetrieved(newFilePath, true, string.Empty);
+                        NewFileRetrieved(newFilePath, true, false, string.Empty);
                     }
                 }
 

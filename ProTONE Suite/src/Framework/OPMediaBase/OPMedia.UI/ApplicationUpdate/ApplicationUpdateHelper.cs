@@ -16,6 +16,7 @@ using OPMedia.Runtime.AssemblyInfo;
 using System.Reflection;
 using System.ComponentModel;
 using OPMedia.Core.InstanceManagement;
+using System.Net;
 
 namespace OPMedia.UI.ApplicationUpdate
 {
@@ -54,45 +55,49 @@ namespace OPMedia.UI.ApplicationUpdate
 
         void OnBackgroundDetect(object sender, DoWorkEventArgs e)
         {
-            string versionFile = "/Versions_build.txt";
-            string versionFileUri = AppConfig.DownloadUriBase + versionFile;
-            string tempVersionFile = Path.GetTempFileName();
             bool detectOnDemand = (bool)e.Argument;
-
-            WebFileRetriever retriever = null;
 
             try
             {
-                retriever = new WebFileRetriever(AppConfig.ProxySettings, versionFileUri, tempVersionFile, false);
-                StringBuilder sb = new StringBuilder();
+                Version current = new Version(SuiteVersion.Version);
 
-                if (Kernel32.GetPrivateProfileString(Constants.SuiteName, "Version", "1.0.0.0", sb, 255, tempVersionFile) > 0)
+                using (WebClient wc = new WebClient())
                 {
-                    Version current = new Version(SuiteVersion.Version);
-                    Version available = new Version(sb.ToString());
+                    string availableVersion = wc.DownloadString(AppConfig.VersionApiUri);
 
-                    if (available.CompareTo(current) > 0)
+                    if (string.IsNullOrEmpty(availableVersion))
                     {
-                        Logger.LogInfo("Current version: {0}, available on server: {1}. Update is required.",
-                            current, available);
+                        // This version cannot be automatically updated.
+                        Logger.LogInfo("Current version: {0} cannot be automatically updated.", current);
 
-                        EventDispatch.DispatchEvent(EventNames.NewVersionAvailable, sb.ToString());
+                        if (detectOnDemand)
+                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEPOSSIBLE", "TXT_APP_NAME", MessageBoxIcon.Information);
                     }
                     else
                     {
-                        Logger.LogInfo("Current version: {0}, available on server: {1}. Update is NOT required.",
-                           current, available);
+                        Version available = new Version(availableVersion);
 
-                        if (detectOnDemand)
-                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
+                        if (available.CompareTo(current) > 0)
+                        {
+                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is required.",
+                                current, available);
+
+                            EventDispatch.DispatchEvent(EventNames.NewVersionAvailable, availableVersion);
+                        }
+                        else
+                        {
+                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is NOT required.",
+                               current, available);
+
+                            if (detectOnDemand)
+                                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
+                        }
                     }
                 }
-
             }
-            finally
+            catch(Exception ex)
             {
-                if (retriever != null)
-                    retriever.Dispose();
+                Logger.LogException(ex);
             }
         }
     

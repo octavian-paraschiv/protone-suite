@@ -33,6 +33,7 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText = new OPMedia.UI.Controls.OPMLabel();
             this.pictureBox1 = new OPMedia.UI.Controls.WaitingPictureBox();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
+            this.pbProgress = new OPMedia.UI.Controls.OPMProgressBar();
             this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.opmTableLayoutPanel1.SuspendLayout();
@@ -51,7 +52,7 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lblNotifyText, 3);
-            this.lblNotifyText.Size = new System.Drawing.Size(208, 47);
+            this.lblNotifyText.Size = new System.Drawing.Size(208, 50);
             this.lblNotifyText.TabIndex = 8;
             this.lblNotifyText.Text = "fdsfdsf";
             this.lblNotifyText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -60,7 +61,7 @@ namespace OPMedia.UI.Dialogs
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -74,27 +75,51 @@ namespace OPMedia.UI.Dialogs
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.Controls.Add(this.lblNotifyText, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 1);
+            this.opmTableLayoutPanel1.Controls.Add(this.pbProgress, 1, 3);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmTableLayoutPanel1.RowCount = 3;
+            this.opmTableLayoutPanel1.RowCount = 4;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(252, 47);
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(252, 69);
             this.opmTableLayoutPanel1.TabIndex = 9;
+            // 
+            // pbProgress
+            // 
+            this.pbProgress.AllowDragging = false;
+            this.pbProgress.AutoSize = true;
+            this.pbProgress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pbProgress.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pbProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbProgress.Enabled = false;
+            this.pbProgress.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.pbProgress.Location = new System.Drawing.Point(41, 53);
+            this.pbProgress.Maximum = 100D;
+            this.pbProgress.MinimumSize = new System.Drawing.Size(10, 12);
+            this.pbProgress.Name = "pbProgress";
+            this.pbProgress.NrTicks = 10;
+            this.pbProgress.OverrideBackColor = System.Drawing.Color.Empty;
+            this.pbProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
+            this.pbProgress.ShowTicks = false;
+            this.pbProgress.Size = new System.Drawing.Size(208, 13);
+            this.pbProgress.TabIndex = 9;
+            this.pbProgress.Value = 0D;
+            this.pbProgress.Vertical = false;
             // 
             // GenericWaitDialog
             // 
-            this.ClientSize = new System.Drawing.Size(254, 70);
+            this.ClientSize = new System.Drawing.Size(254, 93);
             this.MinimumSize = new System.Drawing.Size(200, 70);
             this.Name = "GenericWaitDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pnlContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.opmTableLayoutPanel1.ResumeLayout(false);
+            this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -104,5 +129,6 @@ namespace OPMedia.UI.Dialogs
         private OPMLabel lblNotifyText;
         private WaitingPictureBox pictureBox1;
         private OPMTableLayoutPanel opmTableLayoutPanel1;
+        private OPMProgressBar pbProgress;
     }
 }

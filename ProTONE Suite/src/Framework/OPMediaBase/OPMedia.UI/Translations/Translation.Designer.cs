@@ -1894,6 +1894,16 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This program version cannot be automatically updated.
+        ///You need to manually download and install {0} from web site {1}..
+        /// </summary>
+        internal static string TXT_NOUPDATEPOSSIBLE {
+            get {
+                return ResourceManager.GetString("TXT_NOUPDATEPOSSIBLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This program has the latest available version.
         ///For the moment, you do not need to update the program..
         /// </summary>
@@ -2255,7 +2265,7 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Network.
+        ///   Looks up a localized string similar to Proxy.
         /// </summary>
         internal static string TXT_S_NETWORK_SETTINGS {
             get {
@@ -2611,6 +2621,15 @@ namespace OPMedia.UI.Translations {
         internal static string TXT_TCPIPURI {
             get {
                 return ResourceManager.GetString("TXT_TCPIPURI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to then.
+        /// </summary>
+        internal static string TXT_THEN {
+            get {
+                return ResourceManager.GetString("TXT_THEN", resourceCulture);
             }
         }
         

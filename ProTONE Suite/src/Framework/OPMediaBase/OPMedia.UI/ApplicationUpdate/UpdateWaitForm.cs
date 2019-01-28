@@ -30,10 +30,15 @@ namespace OPMedia.UI.ApplicationUpdate
 
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ShowProgress = true;
 
-            StartDownload();
-
+            this.Shown += OnShown;
             this.FormClosing += new FormClosingEventHandler(UpdateWaitForm_FormClosing);
+        }
+
+        private void OnShown(object sender, EventArgs e)
+        {
+            StartDownload();
         }
 
         protected override bool AllowCloseOnKeyDown(Keys key)
@@ -43,10 +48,7 @@ namespace OPMedia.UI.ApplicationUpdate
 
         void UpdateWaitForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_wfr != null)
-            {
-                AbortDownload();
-            }
+            AbortDownload();
         }
 
         private void StartDownload()
@@ -57,11 +59,19 @@ namespace OPMedia.UI.ApplicationUpdate
 
             Logger.LogInfo("Downloading update file from {0} ...", fileUri);
 
-            _wfr = new WebFileRetriever(AppConfig.ProxySettings, fileUri, tempFile, true);
-            _wfr.FileRetrieveComplete += new FileRetrieveCompleteEventHandler(OnDownloadComplete);
+            _wfr = new WebFileRetriever(AppConfig.ProxySettings, fileUri, tempFile);
+            _wfr.FileRetrieveComplete += OnDownloadComplete;
+            _wfr.DownloadProgress += OnDownloadProgress;
+            _wfr.PerformDownload(true);
         }
 
-        void OnDownloadComplete(string path, bool success, string errorDetails)
+        private void OnDownloadProgress(int percentage, long bytesReceived, long totalBytes)
+        {
+            double perc = (100f * (double)bytesReceived / (double)totalBytes);
+            base.SetProgress(perc);
+        }
+
+        void OnDownloadComplete(string path, bool success, bool cancelled, string errorDetails)
         {
             if (success)
             {
@@ -69,17 +79,22 @@ namespace OPMedia.UI.ApplicationUpdate
 
                 AbortDownload();
                 if (LaunchSetup(path))
-                {
                     Process.GetCurrentProcess().Kill();
-                    Application.Restart();
-                }
             }
             else
             {
-                Logger.LogInfo("Failed to download update file. Details: ", errorDetails);
-                MessageDisplay.Show(errorDetails, "TXT_APP_NAME", MessageBoxIcon.Question);
+                if (cancelled)
+                {
+                    // Manually cancelled.
+                    Logger.LogInfo("Update process was manually cancelled.");
+                }
+                else
+                {
+                    Logger.LogInfo("Failed to download update file. Details: ", errorDetails);
+                    MessageDisplay.Show(errorDetails, "TXT_APP_NAME", MessageBoxIcon.Question);
+                    AbortDownload();
+                }
 
-                AbortDownload();
                 Close();
             }
         }

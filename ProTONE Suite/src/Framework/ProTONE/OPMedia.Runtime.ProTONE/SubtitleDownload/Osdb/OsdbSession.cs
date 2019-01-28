@@ -194,42 +194,35 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
             string destPath = Path.ChangeExtension(fileName, subtitle.SubFormat);
             string downloadPath = Path.ChangeExtension(fileName, "gz");
 
-            bool downloaded = false;
-            using (WebFileRetriever wfr = new WebFileRetriever(AppConfig.ProxySettings,
-                subtitle.SubDownloadLink, downloadPath, false))
+            using (WebFileRetriever wfr = new WebFileRetriever(AppConfig.ProxySettings, subtitle.SubDownloadLink, downloadPath))
             {
-                downloaded = true;
+                wfr.PerformDownload(false);
             }
 
-            if (downloaded)
+            using (FileStream compressedSubtitle = new FileStream(downloadPath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))
             {
-                using (FileStream compressedSubtitle = new FileStream(downloadPath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))
+                using (GZipStream str = new GZipStream(compressedSubtitle, CompressionMode.Decompress, false))
                 {
-                    using (GZipStream str = new GZipStream(compressedSubtitle, CompressionMode.Decompress, false))
+                    using (FileStream outputSubtitle = new FileStream(destPath, FileMode.Create, FileAccess.Write, FileShare.Read))
                     {
-                        using (FileStream outputSubtitle = new FileStream(destPath, FileMode.Create, FileAccess.Write, FileShare.Read))
+                        byte[] buffer = new byte[65536];
+                        int read = 0;
+                        do
                         {
-                            byte[] buffer = new byte[65536];
-                            int read = 0;
-                            do
+                            read = str.Read(buffer, 0, buffer.Length);
+                            if (read > 0)
                             {
-                                read = str.Read(buffer, 0, buffer.Length);
-                                if (read > 0)
-                                {
-                                    outputSubtitle.Write(buffer, 0, read);
-                                }
+                                outputSubtitle.Write(buffer, 0, read);
                             }
-                            while (read > 0);
                         }
+                        while (read > 0);
                     }
                 }
-
-                File.Delete(downloadPath);
-
-                return destPath;
             }
 
-            return string.Empty;
+            File.Delete(downloadPath);
+
+            return destPath;
         }
 
         #endregion

@@ -117,15 +117,13 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
             string destPath = Path.ChangeExtension(fileName, subtitle.SubFormat);
             string downloadPath = Path.ChangeExtension(fileName, "gz");
 
-            bool downloaded = false;
-            using (WebFileRetriever wfr = new WebFileRetriever(AppConfig.ProxySettings,
-                subtitle.SubDownloadLink, downloadPath, false))
+            try
             {
-                downloaded = true;
-            }
+                using (WebFileRetriever wfr = new WebFileRetriever(AppConfig.ProxySettings, subtitle.SubDownloadLink, downloadPath))
+                {
+                    wfr.PerformDownload(false);
+                }
 
-            if (downloaded)
-            {
                 using (FileStream compressedSubtitle = new FileStream(downloadPath, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))
                 {
                     using (GZipStream str = new GZipStream(compressedSubtitle, CompressionMode.Decompress, false))
@@ -151,9 +149,11 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
 
                 return destPath;
             }
-
-            return string.Empty;
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                return string.Empty;
+            }
         }
     }
-
 }

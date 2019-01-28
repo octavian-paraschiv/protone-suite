@@ -68,21 +68,22 @@ namespace OPMedia.Core.Configuration
 
     public static class AppConfig
     {
-        public const int VerWin2000 =  50;
-        public const int VerWinXP =    51;
-        
+        public const int VerWin2000 = 50;
+        public const int VerWinXP = 51;
+
         public const int VerWinVista = 60;
-        public const int VerWin7 =     61;
-        
-        public const int VerWin8 =     62;
-        public const int VerWin8_1 =   63;
-        public const int VerWin10 =   100;
+        public const int VerWin7 = 61;
+
+        public const int VerWin8 = 62;
+        public const int VerWin8_1 = 63;
+        public const int VerWin10 = 100;
 
         static Dictionary<string, CultureInfo> _cultures = new Dictionary<string, CultureInfo>();
 
         static string _skinType = string.Empty;
         static string _languageId = string.Empty;
 
+        const string VersionApiUriBase = "http://ocpa.ro/protone?version={0}&release={1}";
         const string DefaultDownloadUriBase = "http://ocpa.ro/protone/current";
         const string ReleaseDownloadUriBase = "http://ocpa.ro/protone/release";
 
@@ -126,7 +127,7 @@ namespace OPMedia.Core.Configuration
                 {
                     try
                     {
-                        switch(persistenceId)
+                        switch (persistenceId)
                         {
                             case "LanguageID":
                                 {
@@ -164,21 +165,21 @@ namespace OPMedia.Core.Configuration
         private static bool _detectSettingsChanges = true;
         private static object _settingsChangesLock = new object();
         public static bool DetectSettingsChanges
-        { 
-            get 
+        {
+            get
             {
                 lock (_settingsChangesLock)
                 {
                     return _detectSettingsChanges;
                 }
-            } 
-            set 
+            }
+            set
             {
                 lock (_settingsChangesLock)
                 {
                     _detectSettingsChanges = value;
                 }
-            } 
+            }
         }
 
         public static uint OSVersion
@@ -186,7 +187,7 @@ namespace OPMedia.Core.Configuration
             get
             {
                 uint winVer = 0;
-                
+
                 winVer += (uint)Environment.OSVersion.Version.Major * 10;
                 winVer += (uint)Environment.OSVersion.Version.Minor;
 
@@ -248,7 +249,7 @@ namespace OPMedia.Core.Configuration
                     }
                     finally
                     {
-                        if (tokenInformation != IntPtr.Zero) 
+                        if (tokenInformation != IntPtr.Zero)
                             Marshal.FreeHGlobal(tokenInformation);
                     }
                 }
@@ -384,6 +385,15 @@ namespace OPMedia.Core.Configuration
                     return DefaultDownloadUriBase;
 
                 return ReleaseDownloadUriBase;
+            }
+        }
+
+        public static string VersionApiUri
+        {
+            get
+            {
+                bool release = (SuiteVersion.IsRelease && !Regedit.IsDevelopmentMachine);
+                return string.Format(VersionApiUriBase, SuiteVersion.Version, release).ToLowerInvariant();
             }
         }
 

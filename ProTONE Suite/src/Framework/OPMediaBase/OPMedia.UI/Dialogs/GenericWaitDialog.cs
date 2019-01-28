@@ -17,6 +17,8 @@ namespace OPMedia.UI.Dialogs
 {
     public partial class GenericWaitDialog : ToolForm, IDisposable
     {
+        protected bool ShowProgress { get; set; }
+
         public void SetText(string msg)
         {
             this.lblNotifyText.Text = Translator.Translate(msg);
@@ -36,12 +38,32 @@ namespace OPMedia.UI.Dialogs
         {
             InitializeComponent();
 
+            this.ShowProgress = false;
             this.TitleBarVisible = false;
+
+            this.Shown += OnShown;
+        }
+
+        private void OnShown(object sender, EventArgs e)
+        {
+            SetProgress(0);
         }
 
         protected override bool AllowCloseOnKeyDown(Keys key)
         {
             return false;
+        }
+
+        protected void SetProgress(double percentage)
+        {
+            bool progress = this.ShowProgress;
+            pbProgress.Visible = progress;
+            pictureBox1.Visible = !progress;
+
+            if (progress)
+            {
+                pbProgress.Value = percentage;
+            }
         }
     }
 
