@@ -224,7 +224,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (idxVisible >= 0)
             {
-                lvPlaylist.EnsureVisible(idxVisible);
+            	// THis generates issue #264
+                // TODO: fix #264 while still keep the capability to auto-scroll to the active item...
+                //lvPlaylist.EnsureVisible(idxVisible);
             }
         }
 
