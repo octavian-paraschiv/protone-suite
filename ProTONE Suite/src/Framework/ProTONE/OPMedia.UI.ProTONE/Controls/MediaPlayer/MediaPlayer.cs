@@ -780,8 +780,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             if (MediaRenderer.DefaultInstance.RenderedMediaType != MediaTypes.Video &&
                 MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
             {
-                MediaRenderer.DefaultInstance.AudioVolume = (int)volume;
-                MediaRenderer.DefaultInstance.DisplayOsdMessage(Translator.Translate("TXT_OSD_VOL", (int)volume / 100));
+                MediaRenderer.DefaultInstance.AudioVolume = (int)(volume / 100);
+                MediaRenderer.DefaultInstance.DisplayOsdMessage(Translator.Translate("TXT_OSD_VOL", (int)(volume / 100)));
 
                 MediaRenderer.DefaultInstance.AudioBalance = ProTONEConfig.LastBalance;
             }

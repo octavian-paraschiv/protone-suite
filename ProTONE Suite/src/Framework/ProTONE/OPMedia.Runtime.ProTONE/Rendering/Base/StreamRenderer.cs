@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.Configuration;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Base
@@ -47,19 +48,25 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected System.Timers.Timer _tmrInternalClock = null;
         protected Int64 _elapsedSeconds = 0;
         protected object _syncElapsedSeconds = new object();
-        
+
+        public virtual bool Valid
+        {
+            get
+            {
+                return (IsVideoMediaAvailable() || IsAudioMediaAvailable());
+            }
+        }
+
+
+        public override string ToString()
+        {
+            return $"{GetType().Name} Media={renderMediaName} VOL={AudioVolume}";
+        }
+
         #region Properties
 
         internal Control RenderRegion
         { get { return renderRegion; } set { renderRegion = value; } }
-
-        public virtual bool SupportsSampleGrabber
-        {
-            get
-            {
-                return true;
-            }
-        }
 
         internal bool MediaSeekable
         { 
@@ -131,15 +138,30 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             } 
         }
 
+        public virtual double PercentualVolume
+        {
+            get
+            {
+                return (double)ProTONEConfig.LastVolume / 10000f;
+            }
+        }
+
         internal int AudioVolume
         {
             get 
             {
-                return GetAudioVolume(); 
+                int vol = GetAudioVolume();
+                return vol;
             } 
             set 
             {
-                int scaledVolume = GetScaledVolume(value);
+                int vol = value;
+                if (vol < 0)
+                    vol = 0;
+                if (vol > 100)
+                    vol = 100;
+
+                int scaledVolume = GetScaledVolume(vol);
                 SetAudioVolume(scaledVolume); 
             } 
         }
@@ -176,14 +198,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         internal object GraphFilter
         { get { return DoGetGraphFilter(); } }
-
-        public WaveFormatEx ActualAudioFormat
-        {
-            get
-            {
-                return DoGetActualAudioFormat();
-            }
-        }
 
         public AudioSampleData VuMeterData
         {
@@ -447,8 +461,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected abstract void DoSetFullScreen(bool fullScreen);
 
         protected abstract object DoGetGraphFilter();
-
-        protected abstract WaveFormatEx DoGetActualAudioFormat();
+        
 
         #endregion
 
@@ -457,9 +470,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             return rawVolume;
         }
 
-        protected virtual int GetProjectedVolume()
+        public virtual bool IsStreamedMedia
         {
-            return GetAudioVolume();
+            get
+            {
+                return false;
+            }
         }
     }
 }

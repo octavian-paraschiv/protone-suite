@@ -146,10 +146,12 @@
     <Compile Include="Rendering\DS\BaseClasses\BaseClasses.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DirectShow.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DSHelper.cs" />
-    <Compile Include="Rendering\DS\DeezerRenderer.cs" />
-    <Compile Include="Rendering\DS\DeezerWorkerRenderer.cs" />
+    <Compile Include="Rendering\DS\shoutcast\ShoutCastStream.cs" />
+    <Compile Include="Rendering\DS\shoutcast\ShoutcastStreamParser.cs" />
+    <Compile Include="WorkerSupport\CommandProcessor.cs" />
+    <Compile Include="WorkerSupport\WorkerError.cs" />
+    <Compile Include="WorkerSupport\WorkerRenderer.cs" />
     <Compile Include="Rendering\DS\DSExtensionMethods.cs" />
-    <Compile Include="Rendering\DS\DsFilters\ShoutCast.cs" />
     <Compile Include="Rendering\DS\DSAudioCDRenderer.cs" />
     <Compile Include="Rendering\DS\DSDvdRenderer.cs" />
     <Compile Include="Rendering\DS\DShowTypes.cs">
@@ -157,7 +159,6 @@
     </Compile>
     <Compile Include="Rendering\DS\DsRendererBase.cs" />
     <Compile Include="Rendering\DS\DSRotEntry.cs" />
-    <Compile Include="Rendering\DS\DSShoutcastRenderer.cs" />
     <Compile Include="Rendering\DS\DSFileRenderer.cs" />
     <Compile Include="Rendering\DS\DvdTypes.cs">
       <SubType>Code</SubType>
@@ -168,7 +169,6 @@
     <Compile Include="Rendering\Base\StreamRenderer.cs" />
     <Compile Include="RemoteControlHelper.cs" />
     <Compile Include="RemoteControl\RemoteControllableApplication.cs" />
-    <Compile Include="Rendering\SHOUTCast\ShoutCastStream.cs" />
     <Compile Include="ServiceHelpers\ProTONERemoteConfig.cs" />
     <Compile Include="SubtitleDownload\Base\SubtitleDataTypes.cs" />
     <Compile Include="SubtitleDownload\Base\SubtitleServerSession.cs" />
@@ -185,7 +185,6 @@
     <Compile Include="SubtitleDownload\SubtitleDownloader.cs" />
     <Compile Include="SystemScheduler\SystemScheduler.cs" />
     <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
-    <Compile Include="WorkerSupport\ICommandProcessor.cs" />
     <Compile Include="WorkerSupport\IWorkerPlayer.cs" />
     <Compile Include="WorkerSupport\WorkerCommand.cs" />
     <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
@@ -248,6 +247,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

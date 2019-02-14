@@ -85,6 +85,24 @@ namespace OPMedia.Core
             return path.Replace(parentDir, string.Empty).Trim('\\');
         }
 
+        public static string LocalAppDataFolder
+        {
+            get
+            {
+                try
+                {
+                    string localAppDataDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    string relativeAppDataDir = Path.Combine(Constants.CompanyName, Constants.SuiteName);
+                    return Path.Combine(localAppDataDir, relativeAppDataDir);
+                }
+                catch
+                {
+                }
+
+                return CurrentDir;
+            }
+        }
+
         public static string GetExtension(string path)
         {
             try

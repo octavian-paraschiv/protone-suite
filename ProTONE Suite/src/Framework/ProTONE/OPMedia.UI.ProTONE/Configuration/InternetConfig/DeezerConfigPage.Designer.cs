@@ -36,7 +36,6 @@
             this.txtDeezerAppID = new OPMedia.UI.Controls.OPMTextBox();
             this.opmLinkLabel1 = new OPMedia.UI.Controls.OPMLinkLabel();
             this.btnNew = new OPMedia.UI.Controls.OPMButton();
-            this.chkUseWorkerProcess = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +68,6 @@
             this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerAppID, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLinkLabel1, 0, 3);
             this.opmTableLayoutPanel1.Controls.Add(this.btnNew, 2, 1);
-            this.opmTableLayoutPanel1.Controls.Add(this.chkUseWorkerProcess, 0, 5);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
@@ -193,20 +191,6 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // chkUseWorkerProcess
-            // 
-            this.chkUseWorkerProcess.AutoSize = true;
-            this.opmTableLayoutPanel1.SetColumnSpan(this.chkUseWorkerProcess, 3);
-            this.chkUseWorkerProcess.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkUseWorkerProcess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkUseWorkerProcess.Location = new System.Drawing.Point(3, 148);
-            this.chkUseWorkerProcess.Name = "chkUseWorkerProcess";
-            this.chkUseWorkerProcess.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkUseWorkerProcess.Size = new System.Drawing.Size(568, 19);
-            this.chkUseWorkerProcess.TabIndex = 13;
-            this.chkUseWorkerProcess.Text = "TXT_USE_WORKER_PROCESS";
-            this.chkUseWorkerProcess.UseVisualStyleBackColor = true;
-            // 
             // DeezerConfigPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -230,6 +214,5 @@
         private UI.Controls.OPMTextBox txtDeezerAppID;
         private UI.Controls.OPMLinkLabel opmLinkLabel1;
         private UI.Controls.OPMButton btnNew;
-        private UI.Controls.OPMCheckBox chkUseWorkerProcess;
     }
 }

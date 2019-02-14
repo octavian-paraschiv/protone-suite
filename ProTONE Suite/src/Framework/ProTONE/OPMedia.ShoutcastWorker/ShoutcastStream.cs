@@ -11,12 +11,12 @@ using OPMedia.Core.Logging;
 using System.Reflection;
 using System.Net.Configuration;
 using System.Collections.Specialized;
-using TagLib.Mpeg;
-using TagLib;
 using static TagLib.File;
-using System.Linq;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Rendering;
+using TagLib.Mpeg;
 
-namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
+namespace OPMedia.ShoutcastWorker
 {
     /// <summary>
     /// Provides the functionality to receive a shoutcast media stream
@@ -119,7 +119,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                         break;
 
                     default:
-                        throw new NotSupportedException(string.Format("Unsupported content type: {0}.", contentType));
+                        WorkerException.ThrowForErrorCode(WorkerError.UnsupportedMediaType, 
+                            $"Unsupported stream type: {ContentType}");
+                        break;
                 }
 
                 receivedBytes = 0;
@@ -162,7 +164,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                     data.Add("TXT_BITRATE", bitrate.ToString());
                     data.Add("Content-Type", contentType);
 
-                    MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
+                    // TODO: fix
+                    //MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
                 }
 
                 connected = true;
@@ -170,7 +173,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
             catch(Exception ex)
             {
                 connected = false;
-                throw;
+                WorkerException.ThrowForErrorCode(WorkerError.CannotConnectToMedia, ex.Message);
             }
             finally
             {
@@ -225,7 +228,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.SHOUTCast
                 Dictionary<string, string> data = new Dictionary<string,string>();
                 data.Add("TXT_TITLE", streamTitle);
 
-                MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
+                // TODO: fix
+                //MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
             }
         }
 

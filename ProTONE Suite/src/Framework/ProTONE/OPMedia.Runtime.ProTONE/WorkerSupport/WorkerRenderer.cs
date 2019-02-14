@@ -14,14 +14,50 @@ using OPMedia.Core.Logging;
 using System.Diagnostics;
 using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 
-namespace OPMedia.Runtime.ProTONE.Rendering.DS
+namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 {
-    public class DeezerWorkerRenderer : DsCustomRenderer
+    public class WorkerRenderer : DsCustomRenderer
     {
         WorkerProcess _wp = null;
+        WorkerType _wt = WorkerType.Deezer;
 
-        public override bool SupportsSampleGrabber => false;
+        public override bool IsStreamedMedia
+        {
+            get
+            {
+                switch (_wt)
+                {
+                    case WorkerType.Shoutcast:
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        public override bool Valid
+        {
+            get
+            {
+                return (_wp != null && !_workerKilledOrCrashed);
+            }
+        }
+
+        public WorkerRenderer(WorkerType workerType)
+        {
+            _wt = workerType;
+        }
+
+        public string MyType
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
 
         private void ResetWorker()
         {
@@ -39,7 +75,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (_wp == null)
             {
-                _wp = new WorkerProcess(WorkerType.Deezer);
+                _wp = new WorkerProcess(_wt);
                 _wp.WorkerTerminated += _wp_OnWorkerTerminated;
                 _wp.RenderEvent += _wp_RenderEvent;
                 _wp.StateChanged += _wp_StateChanged;
@@ -73,14 +109,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoDispose()
         {
-            Logger.LogTrace("DeezerRenderer::~DoDispose => Cleanup ...");
+            Logger.LogTrace($"BaseWorkerRenderer::~DoDispose => Cleanup ...");
             DoStopRenderer();
         }
         
 
         protected override void DoStartRendererWithHint(RenderingStartHint startHint)
         {
-            Logger.LogTrace("DeezerRenderer::DoStartRendererWithHint startHint={0}", startHint);
+            Logger.LogTrace("BaseWorkerRenderer::DoStartRendererWithHint startHint={0}", startHint);
 
             if (renderMediaName == null || renderMediaName.Length <= 0)
                 return;
@@ -88,30 +124,24 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             ResetWorker();
 
             _wp.Play(renderMediaName);
-
-            InitAudioSampleCollector();
-            CompleteAudioSampleCollectorIntialization();
         }
 
 
         protected override void DoStopRenderer()
         {
             StackTrace st = new StackTrace();
-            Logger.LogTrace("DeezerRenderer::DoStopRenderer call Stack = {0}", st.ToString());
+            Logger.LogTrace("BaseWorkerRenderer::DoStopRenderer call Stack = {0}", st.ToString());
 
             if (FilterState != FilterState.Stopped)
             {
                 if (_wp != null)
-                {
                     _wp.Stop();
-                    ReleaseAudioSampleCollector();
-                }
             }
         }
 
         protected override void DoPauseRenderer()
         {
-            Logger.LogTrace("DeezerRenderer::DoPauseRenderer");
+            Logger.LogTrace("BaseWorkerRenderer::DoPauseRenderer");
 
             if (FilterState == FilterState.Running)
                 _wp?.Pause();
@@ -119,7 +149,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void DoResumeRenderer(double fromPosition)
         {
-            Logger.LogTrace("DeezerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
+            Logger.LogTrace("BaseWorkerRenderer::DoResumeRenderer fromPosition={0}", fromPosition);
 
             if (FilterState == FilterState.Paused)
                 _wp?.Resume((int)fromPosition);
@@ -127,7 +157,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void SetMediaPosition(double pos)
         {
-            Logger.LogTrace("DeezerRenderer::SetMediaPosition pos={0}", pos);
+            Logger.LogTrace("BaseWorkerRenderer::SetMediaPosition pos={0}", pos);
 
             if (FilterState != FilterState.Stopped)
                 _wp?.SetMediaPosition((int)pos);
@@ -135,20 +165,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override bool IsMediaSeekable()
         {
-            return true;
-        }
-
-        volatile int _projVol = -5000;
-
-        protected override int GetProjectedVolume()
-        {
-            return _projVol;
+            return (_wt != WorkerType.Shoutcast);
         }
 
         protected override void SetAudioVolume(int vol)
         {
             _wp?.SetVolume(vol);
-            _projVol = vol;
         }
 
 
@@ -163,6 +185,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override bool IsEndOfMedia()
         {
+            if (_wt == WorkerType.Shoutcast)
+                return false;
+
             if (_wp == null)
                 return true;
 
@@ -224,9 +249,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             if (_wp != null)
             {
-                string s = _wp.GetFilterState();
-                Enum.TryParse<FilterState>(s, out fs);
-                return fs;
+                return _wp.FilterState;
             }
 
             return fs;
@@ -234,8 +257,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override int GetScaledVolume(int rawVolume)
         {
-            int dz_vol = (int)(0.01 * rawVolume);
-            return dz_vol;
+            if (_wt == WorkerType.Deezer)
+                return rawVolume;
+
+            return base.GetScaledVolume(rawVolume);
+        }
+
+        public override double PercentualVolume
+        {
+            get
+            {
+                if (_wt == WorkerType.Deezer)
+                    return base.PercentualVolume;
+
+                return base.PercentualVolume;
+            }
         }
     }
 }

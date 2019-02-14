@@ -1,6 +1,9 @@
 ﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +25,16 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         /// </summary>
         Deezer,
         /// <summary>
+        /// OPMedia.ShoutcastWorker.exe
+        /// </summary>
+        Shoutcast,
+
+        /// <summary>
+        /// OPMedia.AudioWorker.exe
+        /// </summary>
+        Audio,
+
+        /// <summary>
         /// OPMedia.AudioCdWorker.exe
         /// </summary>
         AudioCd,
@@ -29,22 +42,17 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         /// OPMedia.VideoDvdWorker.exe
         /// </summary>
         VideoDvd,
-        /// <summary>
-        /// OPMedia.AudioWorker.exe
-        /// </summary>
-        Audio,
+      
         /// <summary>
         /// OPMedia.VideoWorker.exe
         /// </summary>
         Video,
-        /// <summary>
-        /// OPMedia.ShoutcastWorker.exe
-        /// </summary>
-        Shoutcast,
     }
 
     public class WorkerProcess : IDisposable, IWorkerPlayer
     {
+        public const long GenericErrorCode = 0x10000000;
+
         Process _wp = null;
 
         public event WorkerTerminatedHandler WorkerTerminated = null;
@@ -53,8 +61,12 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         public int Pid { get; private set; }
 
+        WorkerType _wt = WorkerType.Deezer;
+
         public WorkerProcess(WorkerType workerType)
         {
+            _wt = workerType;
+
             ProcessStartInfo psi = new ProcessStartInfo($".\\OPMedia.{workerType}Worker.exe");
             psi.CreateNoWindow = true;
             psi.RedirectStandardInput = true;
@@ -161,11 +173,13 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             SetCommand(WorkerCommandType.StopReq);
         }
 
-        public string GetFilterState()
+        public FilterState FilterState
         {
-            return GetCommand<string>(WorkerCommandType.GetStateReq);
+            get
+            {
+                return GetCommand<FilterState>(WorkerCommandType.GetStateReq);
+            }
         }
-
 
         private T GetCommand<T>(WorkerCommandType wct)
         {
@@ -208,11 +222,19 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                     }
                 }
 
-                DeezerApi.HandleDzErrorCode(wct.ToString(), dz_error_t.DZ_ERROR_BAD_OPERATION_RSP);
+                if (wct != WorkerCommandType.StopReq)
+                    // The worker process will die when StopReq is sent so don't bother processing the response.
+                    HandleErrorCode(wct.ToString(), (WorkerError)dz_error_t.DZ_ERROR_BAD_OPERATION_RSP);
             }
-            catch (Exception ex)
+            catch
             {
-                Logger.LogException(ex);
+                if (_wp != null)
+                {
+                    _wp.Kill();
+                    _wp = null;
+                }
+
+                throw;
             }
         }
 
@@ -228,12 +250,46 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             // Decode reply code as integer
             int replyCode = cmd.Args<int>(0);
-            if (replyCode >= 0x10000000)
+            if (replyCode >= GenericErrorCode)
             {
                 // The reply command wraps an error code
-                dz_error_t dzError = (dz_error_t)(replyCode - 0x10000000);
-                DeezerApi.HandleDzErrorCode(operation, dzError);
+                WorkerError error = (WorkerError)(replyCode - GenericErrorCode);
+
+                int hr = 0;
+                if (error == WorkerError.RenderingError)
+                {
+                    // Decode HR from the second argument
+                    hr = cmd.Args<int>(1);
+                }
+
+                HandleErrorCode(operation, error, hr);
             }
+        }
+
+        private void HandleErrorCode(string operation, WorkerError errCode, int hr = 0)
+        {
+            switch (_wt)
+            {
+                case WorkerType.Deezer:
+                    DeezerApi.HandleDzErrorCode(operation, (dz_error_t)errCode);
+                    break;
+
+                default:
+                    {
+                        if (errCode == (WorkerError)dz_error_t.DZ_ERROR_BAD_OPERATION_RSP)
+                            errCode = WorkerError.Generic;
+
+                        // Try to recompose the original exception
+                        WorkerException.ThrowForHResult(hr);
+                        WorkerException.ThrowForErrorCode(errCode);
+                    }
+                    break;
+            }
+        }
+
+        public void SetCommandProcessor(CommandProcessor proc)
+        {
+            // Not needed here ...
         }
     }
 }

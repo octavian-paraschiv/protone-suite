@@ -7,12 +7,12 @@ using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using OPMedia.Core;
 using System.IO;
 using System.Runtime.InteropServices;
-using OPMedia.Runtime.ProTONE.Rendering.SHOUTCast;
+
 using OPMedia.Core.Logging;
 
 using OPMedia.Runtime.ProTONE.Compression;
 
-namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
+namespace dummy
 {
     public class ShoutcastStreamParser : FileParser
     {
@@ -46,7 +46,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
                 case "audio/mpg":
                 case "audio/mpeg":
                     {
-                        BaseClasses.Mp3WaveFormat wfex = new BaseClasses.Mp3WaveFormat();
+                        Mp3WaveFormat wfex = new Mp3WaveFormat();
                         wfex.cbSize = 12; // MPEGLAYER3_WFX_EXTRA_BYTES
                         wfex.fdwFlags = 0; // MPEGLAYER3_FLAG_PADDING_ISO
 

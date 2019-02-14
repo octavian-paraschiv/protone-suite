@@ -23,15 +23,17 @@ using OPMedia.UI.ProTONE.Translations;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
+using System.Threading.Tasks;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
     public partial class SignalAnalysisScreen : OPMBaseControl
     {
-        private System.Windows.Forms.Timer _tmrUpdate = new System.Windows.Forms.Timer();
-
         public const int BandCount = DsRendererBase.MAX_SPECTROGRAM_BANDS;
         private double[] _bands = new double[BandCount];
+
+        private object _updateLock = new object();
+        private ManualResetEvent _evt = new ManualResetEvent(false);
 
         #region Constructor
 
@@ -40,11 +42,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             InitializeComponent();
             OnUpdateMediaScreens();
 
+            this.HandleCreated += SignalAnalysisScreen_HandleCreated;
             this.HandleDestroyed += SignalAnalysisScreen_HandleDestroyed;
-
-            _tmrUpdate.Interval = 10;
-            _tmrUpdate.Tick += new EventHandler(_tmrUpdate_Tick);
-            _tmrUpdate.Start();
 
             if (!DesignMode)
             {
@@ -54,8 +53,21 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             }
         }
 
+        private void SignalAnalysisScreen_HandleCreated(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (_evt.WaitOne(5) == false)
+                {
+                    Invoke(new MethodInvoker(OnUpdate));
+                }
+            });
+
+        }
+
         private void SignalAnalysisScreen_HandleDestroyed(object sender, EventArgs e)
         {
+            _evt.Set();
             MediaRenderer.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
             MediaRenderer.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
             MediaRenderer.DefaultInstance.MediaRenderingException -= new MediaRenderingExceptionHandler(OnMediaRenderingException);
@@ -84,7 +96,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             bool showWaveform = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform);
             bool showSpectrogram = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram);
 
-            bool sampleGrabberSupported = MediaRenderer.DefaultInstance.SampleGrabberSupported;
+            bool sampleGrabberSupported = false;// MediaRenderer.DefaultInstance.SampleGrabberSupported;
 
             showWaveform &= sampleGrabberSupported;
             showSpectrogram &= sampleGrabberSupported;
@@ -133,12 +145,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
         double[] _prevWaveform = null;
 
-        void _tmrUpdate_Tick(object sender, EventArgs e)
+        void OnUpdate()
         {
             try
             {
-                _tmrUpdate.Stop();
-
                 if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter))
                 {
                     AudioSampleData vuData = MediaRenderer.DefaultInstance.VuMeterData;
@@ -146,6 +156,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     {
                         vuLeft.Value = 0.5 * (vuLeft.Value + vuLeft.Maximum * vuData.LVOL);
                         vuRight.Value = 0.5 * (vuRight.Value + vuRight.Maximum * vuData.RVOL);
+                        //vuLeft.Value = vuLeft.Maximum * vuData.LVOL;
+                        //vuRight.Value = vuRight.Maximum * vuData.RVOL;
                     }
                     else
                     {
@@ -154,6 +166,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     }
                 }
 
+                #region disabled code
+#if DUMMY
                 if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform))
                 {
                     gpWaveform.Reset(false);
@@ -223,6 +237,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                         Array.Clear(_bands, 0, _bands.Length);
                     }
                 }
+#endif
+                #endregion
             }
             catch (Exception ex)
             {
@@ -230,7 +246,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             }
             finally
             {
-                _tmrUpdate.Start();
             }
         }
 

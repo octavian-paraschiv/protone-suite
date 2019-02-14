@@ -986,12 +986,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set { PersistenceProxy.SaveObject("DeezerApiEndpoint", value); }
         }
 
-        public static bool DeezerUseWorkerProcess
-        {
-            get { return PersistenceProxy.ReadObject("DeezerUseWorkerProcess", true); }
-            set { PersistenceProxy.SaveObject("DeezerUseWorkerProcess", value); }
-        }
-
         public static bool DeezerHasValidConfig
         {
             get

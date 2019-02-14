@@ -37,6 +37,11 @@ using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
+using NAudio.CoreAudioApi;
+using System.Threading.Tasks;
+using System.Threading;
 
 #endregion
 
@@ -111,6 +116,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     {
         public const int VolumeFull = 0;
         public const int VolumeSilence = -10000;
+
+        private MMDeviceEnumerator _mmEnumerator = null;
+        private MMDevice _mmDevice = null;
+
 
         #region Supported file types
         static List<string> __supportedAudioMediaTypes = new List<string>(new string[] 
@@ -194,7 +203,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         private static MediaRenderer __defaultInstance = new MediaRenderer(true);
 
         private StreamRenderer streamRenderer = null;
-        private Timer timerCheckState = null;
+        private System.Windows.Forms.Timer timerCheckState = null;
 
         private OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState = 
             OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
@@ -228,10 +237,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         internal object GraphFilter 
         { get { return (streamRenderer != null) ? streamRenderer.GraphFilter : null; } }
-
-        public WaveFormatEx ActualAudioFormat
-        { get { return (streamRenderer != null) ? streamRenderer.ActualAudioFormat : null; } }
-
 
         public double[] EqFrequencies
         {
@@ -310,7 +315,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (streamRenderer == null)
                     return false;
 
-                return streamRenderer.EndOfMedia;
+                bool isEnd = streamRenderer.EndOfMedia;
+
+                if (!isEnd && _useCrossFading && !streamRenderer.IsStreamedMedia)
+                {
+                    double pos = streamRenderer.MediaPosition;
+                    double len = streamRenderer.MediaLength;
+                    if (len - pos <= (1 + _crossFadeLength))
+                    {
+                        Logger.LogTrace($"[XFADE] End of media is approaching. Triggering cross fading....");
+                        isEnd = true;
+                    }
+                }
+
+                return isEnd;
             }
         }
 
@@ -322,7 +340,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public int AudioVolume
         {
-            get { return (streamRenderer == null) ? (int)VolumeRange.Minimum : streamRenderer.AudioVolume; }
+            get
+            { return (streamRenderer == null) ? (int)VolumeRange.Minimum : streamRenderer.AudioVolume; }
             set { if (streamRenderer != null) { streamRenderer.AudioVolume = value; } }
         }
 
@@ -466,12 +485,39 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-       public AudioSampleData VuMeterData
+        public AudioSampleData VuMeterData
         {
             get
             {
-                return (streamRenderer != null) ?
-                    streamRenderer.VuMeterData : null;
+                if (ProTONEConfig.IsSignalAnalisysActive())
+                {
+                    double percVolL = 0, percVolR = 0;
+
+                    if (streamRenderer != null)
+                    {
+                        if (_mmDevice != null &&
+                            _mmDevice.AudioMeterInformation != null &&
+                            _mmDevice.AudioMeterInformation.PeakValues != null &&
+                            _mmDevice.AudioMeterInformation.PeakValues.Count > 0)
+                        {
+                            var percVol = streamRenderer.PercentualVolume;
+                            double mul = 1f / percVol;
+
+                            if (double.IsInfinity(mul) || double.IsNaN(mul))
+                                mul = double.MaxValue;
+
+                            Logger.LogTrace("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
+
+                            bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
+                            percVolL = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
+                            percVolR = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+                        }
+
+                        return new AudioSampleData(percVolL, percVolR);
+                    }
+                }
+
+                return null;
             }
         }
 
@@ -527,21 +573,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public bool SampleGrabberSupported
-        {
-            get
-            {
-                return (streamRenderer != null) ?
-                   streamRenderer.SupportsSampleGrabber : false;
-            }
-        }
-
         #endregion
 
         #region Methods
 
-        public bool IsStreamedMedia { get { return (streamRenderer is DSShoutcastRenderer); } }
+        public bool IsStreamedMedia
+        {
+            get
+            {
+                if (streamRenderer != null)
+                    return streamRenderer.IsStreamedMedia;
 
+                return false;
+            }
+        }
+        
         public Dictionary<string, string> StreamData { get; private set; }
 
         internal void FireStreamPropertyChanged(Dictionary<string, string> newData)
@@ -620,16 +666,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (uri != null && !uri.IsFile)
                 {
                     if (uri.OriginalString.StartsWith("dzmedia:///track/"))
-                    {
-                        if (ProTONEConfig.DeezerUseWorkerProcess)
-                            CreateNewRenderer<DeezerWorkerRenderer>();
-                        else
-                            CreateNewRenderer<DeezerRenderer>();
-                    }
+                        CreateNewRenderer<WorkerRenderer>(WorkerType.Deezer);
                     else
-                    {
-                        CreateNewRenderer<DSShoutcastRenderer>();
-                    }
+                        CreateNewRenderer<WorkerRenderer>(WorkerType.Shoutcast);
                 }
                 else
                 {
@@ -646,7 +685,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         }
                         else
                         {
-                            CreateNewRenderer<DSFileRenderer>();
+                            if (SupportedAudioTypes.Contains(streamType))
+                                // audio file
+                                CreateNewRenderer<WorkerRenderer>(WorkerType.Audio);
+                            else
+                                // video file
+                                CreateNewRenderer<DSFileRenderer>();
                         }
                     }
                 }
@@ -657,7 +701,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 { 
                     streamRenderer.RenderRegion = renderPanel;
 
-                    if (this.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
+                    if (this.FilterState == FilterState.Stopped)
                     {
                         streamRenderer.RenderMediaName = file;
                     }
@@ -669,9 +713,30 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        private void CreateNewRenderer<T>() where T : StreamRenderer
+        bool _useCrossFading = true;
+        int _crossFadeLength = 10; // sec
+        StreamRenderer _oldRenderer = null;
+
+        private void CreateNewRenderer<T>(WorkerType? workerType = null) where T : StreamRenderer
         {
-            if (streamRenderer as T == null)
+            if (_useCrossFading && streamRenderer != null)
+            {
+                // Cleanup the older renderer
+                if (_oldRenderer != null)
+                {
+                    _oldRenderer.Dispose();
+                    _oldRenderer = null;
+                }
+
+                _oldRenderer = streamRenderer;
+
+                // Set up new one
+                if (workerType == null)
+                    streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
+                else
+                    streamRenderer = Activator.CreateInstance(typeof(T), workerType.GetValueOrDefault()) as StreamRenderer;
+            }
+            else
             {
                 // Cleanup old renderer
                 if (streamRenderer != null)
@@ -681,7 +746,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 }
 
                 // Set up new one
-                streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
+                if (workerType == null)
+                    streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
+                else
+                    streamRenderer = Activator.CreateInstance(typeof(T), workerType.GetValueOrDefault()) as StreamRenderer;
             }
         }
 
@@ -701,12 +769,63 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 else if (streamRenderer != null)
                 {
                     streamRenderer.StartRendererWithHint(startHint);
+                    HandleCrossFading();
                 }
             }
             catch (Exception ex)
             {
                 ReportRenderingException(ex);
             }
+        }
+
+        private void HandleCrossFading()
+        {
+            if (_useCrossFading == false)
+                return;
+
+            if (_oldRenderer == null || _oldRenderer.Valid == false)
+                return;
+
+            int startVol = _oldRenderer.AudioVolume;
+            int quant = startVol / 10;
+            streamRenderer.AudioVolume = 0;
+
+            Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+            Task.Factory.StartNew(() =>
+            {
+                DateTime dtStart = DateTime.Now;
+                while (true)
+                {
+                    _oldRenderer.AudioVolume -= quant;
+                    streamRenderer.AudioVolume += quant;
+
+                    Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+                    // _crossFadeLength is in sec
+                    // To sleep for _crossFadeLength/10 sec, need to multiply with 100
+                    Thread.Sleep(100 * _crossFadeLength);
+
+                    DateTime dtNow = DateTime.Now;
+                    if (dtNow.Subtract(dtStart).TotalSeconds >= _crossFadeLength)
+                        break;
+                }
+
+                Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+                _oldRenderer.AudioVolume = 0;
+                streamRenderer.AudioVolume = startVol;
+
+                Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+                // Cleanup old renderer
+                if (_oldRenderer != null)
+                {
+                    _oldRenderer.StopRenderer();
+                    _oldRenderer.Dispose();
+                    _oldRenderer = null;
+                }
+            });
         }
 
         public void StartRenderer()
@@ -724,6 +843,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     if (this.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
                         streamRenderer.StartRenderer();
+                        HandleCrossFading();
                     }
                     else if (streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
                     {
@@ -788,6 +908,22 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public void StopRenderer(bool isStopFromGui)
         {
+            // TODO test if rendering video - cross fading not supported for video
+
+            if (isStopFromGui)
+            {
+                if (_oldRenderer != null)
+                {
+                    _oldRenderer.StopRenderer();
+                    _oldRenderer.Dispose();
+                    _oldRenderer = null;
+                }
+            }
+            else if (_useCrossFading)
+            {
+                return;
+            }
+
             try
             {
                 _hasRenderingErrors = false;
@@ -938,7 +1074,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             SuiteRegistrationSupport.Init(GetSupportedFileProvider());
 
-            timerCheckState = new Timer();
+            _mmEnumerator = new MMDeviceEnumerator();
+            _mmDevice = _mmEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+
+            timerCheckState = new System.Windows.Forms.Timer();
             timerCheckState.Enabled = true;
             timerCheckState.Interval = 500;
             timerCheckState.Start();
@@ -1081,7 +1220,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        void ReportRenderingException(Exception ex)
+        public void ReportRenderingException(Exception ex)
         {
              _hasRenderingErrors = true;
 

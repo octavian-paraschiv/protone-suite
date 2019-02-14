@@ -13,11 +13,13 @@ namespace OPMedia.DeezerInterop.PlayerApi
     {
         public dz_error_t DzErrorCode { get; private set; }
 
-        public static DeezerPlayerException FromDzErrorCode(dz_error_t err)
+        public static DeezerPlayerException FromDzErrorCode(dz_error_t err, string msg = "")
         {
-            DeezerPlayerException ex = new DeezerPlayerException();
-            ex.DzErrorCode = err;
+            if (string.IsNullOrEmpty(msg))
+                msg = err.ToString();
 
+            DeezerPlayerException ex = new DeezerPlayerException(msg);
+            ex.DzErrorCode = err;
             throw ex;
         }
 
@@ -28,6 +30,11 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
         private DeezerPlayerException() 
             : base()
+        {
+        }
+
+        private DeezerPlayerException(string msg)
+            : base(msg)
         {
         }
     }

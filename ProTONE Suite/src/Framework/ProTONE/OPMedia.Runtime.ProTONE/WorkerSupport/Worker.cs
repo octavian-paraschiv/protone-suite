@@ -11,12 +11,20 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     {
         private string _appName;
 
-        public Worker(string appName)
+        public static void Run(IWorkerPlayer player)
+        {
+            CommandProcessor cmdProcessor = new CommandProcessor(player);
+            string appName = player.GetType().Namespace;
+            Worker worker = new Worker(appName);
+            worker.Run(cmdProcessor);
+        }
+
+        private Worker(string appName)
         {
             _appName = appName;
         }
 
-        public void Run(ICommandProcessor proc)
+        private void Run(CommandProcessor proc)
         {
             LoggedApplication.Start(_appName, false);
 
@@ -44,10 +52,12 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                             break;
                         }
 
+                        Logger.LogTrace($"Worker loop processing command: {cmd}");
+
                         WorkerCommand replyCmd = proc.Process(cmd);
                         if (replyCmd == null)
                         {
-                            Logger.LogTrace("Worker loop broken after responding with null command.");
+                            Logger.LogTrace("Worker loop broken after responding with null command");
                             break;
                         }
                         if (replyCmd.IsValid == false)

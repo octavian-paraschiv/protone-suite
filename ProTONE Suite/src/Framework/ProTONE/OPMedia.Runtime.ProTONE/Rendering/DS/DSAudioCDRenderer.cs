@@ -66,8 +66,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             int hr = (int)_source.OutputPin.Render();
             DsError.ThrowExceptionForHR(hr);
 
-            InitAudioSampleCollector();
-
             mediaPosition = mediaControl as IMediaPosition;
             videoWindow = null;
             basicVideo = null;
@@ -78,8 +76,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
                 isAudioAvailable = (hr >= 0);
-
-                CompleteAudioSampleCollectorIntialization();
             }
             catch
             {

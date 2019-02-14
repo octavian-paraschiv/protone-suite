@@ -15,6 +15,8 @@ using OPMedia.Core.Logging;
 using System.Diagnostics;
 using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
+using System.IO;
+using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.DeezerWorker
 {
@@ -36,14 +38,14 @@ namespace OPMedia.DeezerWorker
 
         bool _connected = false;
 
-        const string USER_CACHE_PATH = "c:\\dzr\\dzrcache_NDK_SAMPLE";
+        string _userCachePath = null;
 
         const int DZ_SESSION_TIMEOUT = 60000;
         const int DZ_OPERATION_TIMEOUT = 10000;
 
-        public DeezerPlayer(CommandProcessor proc)
+        public DeezerPlayer()
         {
-            _proc = proc;
+            _userCachePath = Path.Combine(PathUtils.LocalAppDataFolder, "dzrcache");
         }
 
         private void CheckIfInitialized()
@@ -66,7 +68,7 @@ namespace OPMedia.DeezerWorker
                 _dzConfig.app_id = ProTONEConfig.DeezerApplicationId;
                 _dzConfig.product_id = ApplicationInfo.ApplicationName;
                 _dzConfig.product_build_id = SuiteVersion.Version;
-                _dzConfig.user_profile_path = USER_CACHE_PATH;          // TODO SET THE USER CACHE PATH
+                _dzConfig.user_profile_path = _userCachePath;
                 _dzConfig.connect_event_cb = new dz_connect_onevent_cb(OnApplicationConnectEvent);
                 _dzConfig.app_has_crashed_delegate = new dz_connect_crash_reporting_delegate(OnAppCrashed);
             }
@@ -103,7 +105,7 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_activate(_dzConnect, IntPtr.Zero);
                 DeezerApi.HandleDzErrorCode("dz_connect_activate", err);
 
-                err = DeezerApi.dz_connect_cache_path_set(_dzConnect, null, IntPtr.Zero, USER_CACHE_PATH);
+                err = DeezerApi.dz_connect_cache_path_set(_dzConnect, null, IntPtr.Zero, _userCachePath);
                 DeezerApi.HandleDzErrorCode("dz_connect_cache_path_set", err);
 
                 _dzPlayer = DeezerApi.dz_player_new(_dzConnect);
@@ -136,57 +138,57 @@ namespace OPMedia.DeezerWorker
             }
         }
 
-        private void CleanupAppContext()
-        {
-            Logger.LogTrace("DeezerPlayer::CleanupAppContext => Cleaning up app context ...");
+        //private void CleanupAppContext()
+        //{
+        //    Logger.LogTrace("DeezerPlayer::CleanupAppContext => Cleaning up app context ...");
 
-            dz_error_t err;
+        //    dz_error_t err;
 
-            if (_dzPlayer != IntPtr.Zero)
-            {
-                //_evtPlayerDeactivated.Reset();
-                //_dzPlayerDeactivatedCB = new dz_activity_operation_callback(OnPlayerDeactivated);
+        //    if (_dzPlayer != IntPtr.Zero)
+        //    {
+        //        //_evtPlayerDeactivated.Reset();
+        //        //_dzPlayerDeactivatedCB = new dz_activity_operation_callback(OnPlayerDeactivated);
 
-                err = DeezerApi.dz_player_deactivate(_dzPlayer, _dzPlayerDeactivatedCB, IntPtr.Zero);
+        //        err = DeezerApi.dz_player_deactivate(_dzPlayer, _dzPlayerDeactivatedCB, IntPtr.Zero);
 
-                DeezerApi.HandleDzErrorCode("dz_player_deactivate", err, false);
+        //        DeezerApi.HandleDzErrorCode("dz_player_deactivate", err, false);
 
-                //_evtPlayerDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
-                Thread.Sleep(2000);
+        //        //_evtPlayerDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
+        //        Thread.Sleep(2000);
 
-                Logger.LogTrace("dz_player_deactivate => Assuming Success");
+        //        Logger.LogTrace("dz_player_deactivate => Assuming Success");
 
-                DeezerApi.dz_object_release(_dzPlayer);
-                _dzPlayer = IntPtr.Zero;
-            }
+        //        DeezerApi.dz_object_release(_dzPlayer);
+        //        _dzPlayer = IntPtr.Zero;
+        //    }
 
-            if (_dzConnect != IntPtr.Zero)
-            {
-                //_evtConnectDeactivated.Reset();
-                //_dzConnectDeactivatedCB = new dz_activity_operation_callback(OnConnectDeactivated);
+        //    if (_dzConnect != IntPtr.Zero)
+        //    {
+        //        //_evtConnectDeactivated.Reset();
+        //        //_dzConnectDeactivatedCB = new dz_activity_operation_callback(OnConnectDeactivated);
 
-                err = DeezerApi.dz_connect_deactivate(_dzConnect, _dzConnectDeactivatedCB, IntPtr.Zero);
+        //        err = DeezerApi.dz_connect_deactivate(_dzConnect, _dzConnectDeactivatedCB, IntPtr.Zero);
 
-                DeezerApi.HandleDzErrorCode("dz_connect_deactivate", err, false);
+        //        DeezerApi.HandleDzErrorCode("dz_connect_deactivate", err, false);
 
-                //_evtConnectDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
-                Thread.Sleep(2000);
+        //        //_evtConnectDeactivated.WaitOne(DZ_OPERATION_TIMEOUT);
+        //        Thread.Sleep(2000);
 
-                Logger.LogTrace("dz_connect_deactivate => Assuming Success");
+        //        Logger.LogTrace("dz_connect_deactivate => Assuming Success");
 
-                DeezerApi.dz_object_release(_dzConnect);
-                _dzConnect = IntPtr.Zero;
-            }
-        }
+        //        DeezerApi.dz_object_release(_dzConnect);
+        //        _dzConnect = IntPtr.Zero;
+        //    }
+        //}
 
-        private void CleanupConfig()
-        {
-            if (_dzConfig != null)
-            {
-                Logger.LogTrace("DeezerPlayer::CleanupConfig => Cleaning up config ...");
-                _dzConfig = null;
-            }
-        }
+        //private void CleanupConfig()
+        //{
+        //    if (_dzConfig != null)
+        //    {
+        //        Logger.LogTrace("DeezerPlayer::CleanupConfig => Cleaning up config ...");
+        //        _dzConfig = null;
+        //    }
+        //}
 
         public void OnConnectDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
         {
@@ -281,6 +283,12 @@ namespace OPMedia.DeezerWorker
                     RenderPosition = 0;
 
                     Logger.LogTrace("dz_player_stop => Success");
+
+                    // Cleanup cache
+                    if (Directory.Exists(_userCachePath))
+                    {
+                        Directory.Delete(_userCachePath, true);
+                    }
                 }
             }
         }
@@ -566,6 +574,11 @@ namespace OPMedia.DeezerWorker
         public int GetMediaPosition()
         {
             return RenderPosition;
+        }
+
+        public void SetCommandProcessor(CommandProcessor proc)
+        {
+            _proc = proc;
         }
         #endregion
     }

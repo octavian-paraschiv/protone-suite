@@ -137,9 +137,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             RebuildFilterGraph();
 
-            InitAudioSampleCollector();
-            CompleteAudioSampleCollectorIntialization();
-
             mediaEvent = mediaControl as IMediaEventEx;
             mediaPosition = mediaControl as IMediaPosition;
             videoWindow = mediaControl as IVideoWindow;

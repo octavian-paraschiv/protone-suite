@@ -4,19 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{881231F8-0F43-453B-81A3-04C8A44F08DB}</ProjectGuid>
+    <ProjectGuid>{5A705454-4DDA-42CE-ABEE-03B9899C91F6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OPMedia.DeezerWorker</RootNamespace>
-    <AssemblyName>OPMedia.DeezerWorker</AssemblyName>
+    <RootNamespace>OPMedia.AudioWorker</RootNamespace>
+    <AssemblyName>OPMedia.AudioWorker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>..\..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,38 +26,35 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeezerPlayer.cs" />
+    <Compile Include="AudioFilePlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DeezerInterop\OPMedia.DeezerInterop.csproj">
-      <Project>{41d162bd-95f4-4348-b353-93ba1c3923b4}</Project>
-      <Name>OPMedia.DeezerInterop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
+      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
       <Name>OPMedia.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0a0114c0-4409-42f3-940c-31038104261c}</Project>
       <Name>OPMedia.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj">
+    <ProjectReference Include="..\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj">
       <Project>{8c047807-786e-4b9c-8df5-1df99f75c874}</Project>
       <Name>OPMedia.Runtime.ProTONE</Name>
     </ProjectReference>

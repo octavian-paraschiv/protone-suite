@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Net;
 using System.IO;
 using OPMedia.Core.NetworkAccess;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -133,24 +134,32 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             {
                 if (_customImage == null)
                 {
-                    string url = AlbumUriImageSmall;
-                    if (string.IsNullOrEmpty(url))
-                        url = ArtistUriImageSmall;
-
-                    if (string.IsNullOrEmpty(url) == false)
+                    try
                     {
-                        using (WebClientWithTimeout wc = new WebClientWithTimeout(1000))
+                        string url = AlbumUriImageSmall;
+                        if (string.IsNullOrEmpty(url))
+                            url = ArtistUriImageSmall;
+
+                        if (string.IsNullOrEmpty(url) == false)
                         {
-                            byte[] data = wc.DownloadData(url);
-                            if (data != null && data.Length > 0)
+                            using (WebClientWithTimeout wc = new WebClientWithTimeout(1000))
                             {
-                                using (MemoryStream ms = new MemoryStream(data))
+                                byte[] data = wc.DownloadData(url);
+                                if (data != null && data.Length > 0)
                                 {
-                                    _customImage = Image.FromStream(ms);
+                                    using (MemoryStream ms = new MemoryStream(data))
+                                    {
+                                        _customImage = Image.FromStream(ms);
+                                    }
                                 }
+
                             }
-                            
                         }
+                    }
+                    catch(Exception ex)
+                    {
+                        Logger.LogException(ex);
+                        _customImage = null;
                     }
                 }
 

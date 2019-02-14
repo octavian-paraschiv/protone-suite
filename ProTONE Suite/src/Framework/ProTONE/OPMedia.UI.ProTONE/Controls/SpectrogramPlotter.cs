@@ -77,8 +77,8 @@ namespace OPMedia.UI.ProTONE.Controls
                     {
                         try
                         {
-                            int maxFq = FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
-                                DsRendererBase.MAX_SPECTROGRAM_BANDS);
+                            int maxFq = 20500;// FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
+                                //DsRendererBase.MAX_SPECTROGRAM_BANDS);
                             decadeLineText = string.Format("{0}K", (int)(maxFq / 1000));
                         }
                         catch

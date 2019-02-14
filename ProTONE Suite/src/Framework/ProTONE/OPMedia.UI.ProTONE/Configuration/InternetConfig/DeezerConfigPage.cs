@@ -33,7 +33,6 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
             txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
-            chkUseWorkerProcess.CheckedChanged += new EventHandler(OnSettingsChanged);
 
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
         }
@@ -47,14 +46,12 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
-            chkUseWorkerProcess.Checked = ProTONEConfig.DeezerUseWorkerProcess;
         }
 
         protected override void SaveInternal()
         {
             ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
-            ProTONEConfig.DeezerUseWorkerProcess = chkUseWorkerProcess.Checked;
         }
 
         private void btnNew_Click(object sender, EventArgs e)

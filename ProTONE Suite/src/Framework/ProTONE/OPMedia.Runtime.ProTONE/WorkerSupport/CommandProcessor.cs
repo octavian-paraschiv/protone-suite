@@ -1,5 +1,5 @@
 ﻿using OPMedia.Core.Logging;
-using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System;
@@ -8,16 +8,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OPMedia.DeezerWorker
+namespace OPMedia.Runtime.ProTONE
 {
-    public class CommandProcessor : ICommandProcessor
+    public class CommandProcessor
     {
-        private DeezerPlayer _player = null;
+        private IWorkerPlayer _player = null;
         private StreamWriter _evtStream = null;
 
-        public CommandProcessor()
+        public CommandProcessor(IWorkerPlayer player)
         {
-            _player = new DeezerPlayer(this);
+            _player = player;
+            _player.SetCommandProcessor(this);
         }
 
         public void SetEventStream(StreamWriter evtStream)
@@ -30,6 +31,7 @@ namespace OPMedia.DeezerWorker
             WorkerCommand replyCmd = null;
 
             string replyArg = "0";
+            string replyArg2 = null;
 
             try
             {
@@ -83,11 +85,14 @@ namespace OPMedia.DeezerWorker
                         break;
                 }
             }
-            catch (DeezerPlayerException dpe)
+            catch (WorkerException ex)
             {
-                Logger.LogException(dpe);
-                long code = WorkerProcess.GenericErrorCode + (long)dpe.DzErrorCode;
+                Logger.LogException(ex);
+                long code = WorkerProcess.GenericErrorCode + (long)ex.WorkerErrorCode;
                 replyArg = code.ToString();
+
+                if (ex.WorkerErrorCode == WorkerError.RenderingError)
+                    replyArg2 = ex.HResult.ToString();
             }
             catch(Exception ex)
             {
@@ -95,7 +100,13 @@ namespace OPMedia.DeezerWorker
                 return null;
             }
 
-            replyCmd?.AddParameter(replyArg);
+            if (replyCmd != null)
+            {
+                replyCmd.AddParameter(replyArg);
+
+                if (string.IsNullOrEmpty(replyArg2) == false)
+                    replyCmd.AddParameter(replyArg2);
+            }
 
             return replyCmd;
         }
