@@ -349,7 +349,7 @@ namespace OPMedia.Core
         {
             if (changeType == ChangeType.None && objectContent == "ping")
             {
-                Logger.LogTrace("Ping received from PersistenceService");
+                Logger.LogToConsole("Ping received from PersistenceService");
                 return;
             }
 
@@ -361,12 +361,12 @@ namespace OPMedia.Core
         {
             if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
             {
-                Logger.LogTrace($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
                 AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);
             }
             else
             {
-                Logger.LogTrace($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Ignored, as we failed to update the cache.");
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Ignored, as we failed to update the cache.");
             }
         }
     }

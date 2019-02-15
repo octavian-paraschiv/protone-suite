@@ -151,6 +151,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anticipate current track end with:.
+        /// </summary>
+        internal static string TXT_ANTICIPATEDEND {
+            get {
+                return ResourceManager.GetString("TXT_ANTICIPATEDEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artist.
         /// </summary>
         internal static string TXT_ARTIST {
@@ -365,7 +374,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggles on/off playing in loop.
+        ///   Looks up a localized string similar to Enables/Disables playing in loop.
         ///Shortcut: {0}.
         /// </summary>
         internal static string TXT_BTNLOOPPLAY {
@@ -520,6 +529,16 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_BTNVOLUP {
             get {
                 return ResourceManager.GetString("TXT_BTNVOLUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enables/Disables Cross Fading
+        ///Shortcut: {0}.
+        /// </summary>
+        internal static string TXT_BTNXFADE {
+            get {
+                return ResourceManager.GetString("TXT_BTNXFADE", resourceCulture);
             }
         }
         
@@ -862,6 +881,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_CMDVOLUP {
             get {
                 return ResourceManager.GetString("TXT_CMDVOLUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enables/Disables Cross Fading.
+        /// </summary>
+        internal static string TXT_CMDXFADE {
+            get {
+                return ResourceManager.GetString("TXT_CMDXFADE", resourceCulture);
             }
         }
         
@@ -1838,6 +1866,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_MNUVOLUP {
             get {
                 return ResourceManager.GetString("TXT_MNUVOLUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cross Fading.
+        /// </summary>
+        internal static string TXT_MNUXFADE {
+            get {
+                return ResourceManager.GetString("TXT_MNUXFADE", resourceCulture);
             }
         }
         
@@ -3320,6 +3357,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_WAIT_SEARCH {
             get {
                 return ResourceManager.GetString("TXT_WAIT_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cross fading transition duration:.
+        /// </summary>
+        internal static string TXT_XFADELENGTH {
+            get {
+                return ResourceManager.GetString("TXT_XFADELENGTH", resourceCulture);
             }
         }
         

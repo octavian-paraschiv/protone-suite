@@ -942,7 +942,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 case OPMShortcut.CmdLoopPlay:
                     ProTONEConfig.LoopPlay ^= true;
-                    
+                    args.Handled = true;
+                    refreshButtonState = true;
+                    break;
+
+                case OPMShortcut.CmdXFade:
+                    ProTONEConfig.XFade ^= true;
                     args.Handled = true;
                     refreshButtonState = true;
                     break;

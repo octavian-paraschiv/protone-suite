@@ -218,7 +218,7 @@ Scurtătură: {0}</value>
 Scurtătură: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
-    <value>Comută redarea în bucla.
+    <value>Activează/dezactivează redarea în bucla.
 Scurtătură: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
@@ -1252,5 +1252,21 @@ vă rugăm să  alegeți una:</value>
   </data>
   <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
     <value>Activvează funcţiile de Analiză Semnal</value>
+  </data>
+  <data name="TXT_MNUXFADE" xml:space="preserve">
+    <value>Cross Fading</value>
+  </data>
+  <data name="TXT_BTNXFADE" xml:space="preserve">
+    <value>Activează/dezactivează Cross Fading
+Scurtătura: {0}</value>
+  </data>
+  <data name="TXT_CMDXFADE" xml:space="preserve">
+    <value>Activează/dezactivează Cross Fading</value>
+  </data>
+  <data name="TXT_XFADELENGTH" xml:space="preserve">
+    <value>Durata de tranziție pt. cross fading:</value>
+  </data>
+  <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
+    <value>Anticipați sfârșitul melodiei curente cu:</value>
   </data>
 </root>

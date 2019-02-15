@@ -38,6 +38,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             
             PopulatePlaylistEntryFormats(true);
             PopulateFileNameFormats(true);
+            PopulatePlaylistOptions();
 
             EnableDisableFields();
 
@@ -47,6 +48,16 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cmbFileNameFormat.SelectedIndexChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.cmbFileNameFormat.TextChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.chkFileNameFormat.CheckedChanged += new System.EventHandler(this.chkFileNameFormat_CheckedChanged);
+
+            this.chkLoopPlay.CheckedChanged += OnPlaylistSettingsChanged;
+            this.chkXFade.CheckedChanged += OnPlaylistSettingsChanged;
+            this.nudAnticipatedEnd.ValueChanged += OnPlaylistSettingsChanged;
+            this.nudXFadeLength.ValueChanged += OnPlaylistSettingsChanged;
+        }
+
+        private void OnPlaylistSettingsChanged(object sender, EventArgs e)
+        {
+            Modified = true;
         }
 
         private void chkUseMetadata_CheckedChanged(object sender, EventArgs e)
@@ -118,6 +129,14 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             }
         }
 
+        private void PopulatePlaylistOptions()
+        {
+            chkLoopPlay.Checked = ProTONEConfig.LoopPlay;
+            chkXFade.Checked = ProTONEConfig.XFade;
+            nudXFadeLength.Value = ProTONEConfig.XFadeLength;
+            nudAnticipatedEnd.Value = ProTONEConfig.XFadeAnticipation;
+        }
+
         private void PopulatePlaylistEntryFormats(bool fillCustomFormats)
         {
             cmbPlaylistEntryFormat.Items.Clear();
@@ -175,9 +194,13 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             ProTONEConfig.CustomFileNameFormats =
                 StringUtils.FromStringArray(customFileNameFormats, '?');
 
-            EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
+            ProTONEConfig.LoopPlay = chkLoopPlay.Checked;
+            ProTONEConfig.XFade = chkXFade.Checked;
+            ProTONEConfig.XFadeLength = (int)nudXFadeLength.Value;
+            ProTONEConfig.XFadeAnticipation = (int)nudAnticipatedEnd.Value;
 
-            
+            EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
+            EventDispatch.DispatchEvent(LocalEventNames.UpdateStateButtons);
         }
 
         private string[] GetCustomFormats(OPMEditableComboBox cmb)

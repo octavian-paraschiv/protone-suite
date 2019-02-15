@@ -279,6 +279,7 @@ namespace OPMedia.Runtime.Shortcuts
                     new KeyEventArgs(Keys.Control | Keys.N),
                     new KeyEventArgs(Keys.Control | Keys.S),
                     new KeyEventArgs(Keys.Control | Keys.L),
+                    new KeyEventArgs(Keys.Control | Keys.X),
                     new KeyEventArgs(Keys.Control | Keys.E),
                     new KeyEventArgs(Keys.Control | Keys.H),
                     new KeyEventArgs(Keys.Control | Keys.J),
@@ -359,6 +360,7 @@ namespace OPMedia.Runtime.Shortcuts
                 new KeyEventArgs(Keys.Control | Keys.SelectMedia),
                 new KeyEventArgs(Keys.Control | Keys.S),
                 new KeyEventArgs(Keys.Control | Keys.L),
+                new KeyEventArgs(Keys.Control | Keys.X),
                 new KeyEventArgs(Keys.Control | Keys.E),
                 new KeyEventArgs(Keys.Control | Keys.H),
                 new KeyEventArgs(Keys.Control | Keys.J),
@@ -466,6 +468,7 @@ namespace OPMedia.Runtime.Shortcuts
         CmdSavePlaylist,
 
         CmdLoopPlay,
+        CmdXFade,
         CmdPlaylistEnd,
         CmdToggleShuffle,
         CmdJumpToItem,

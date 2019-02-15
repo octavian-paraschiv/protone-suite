@@ -52,7 +52,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                             break;
                         }
 
-                        Logger.LogTrace($"Worker loop processing command: {cmd}");
+                        Logger.LogToConsole($"Worker loop processing command: {cmd}");
 
                         WorkerCommand replyCmd = proc.Process(cmd);
                         if (replyCmd == null)

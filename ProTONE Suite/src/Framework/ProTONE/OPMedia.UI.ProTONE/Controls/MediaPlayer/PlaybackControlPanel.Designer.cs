@@ -51,12 +51,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmToggleShuffle = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
             this.opmToolStripSeparator5 = new OPMedia.UI.Controls.OPMToolStripSeparator();
             this.tslTime = new System.Windows.Forms.ToolStripLabel();
-            this.tslFileType = new System.Windows.Forms.ToolStripLabel();
-            this.tslFilterState = new System.Windows.Forms.ToolStripLabel();
-            this.tslAudioOn = new System.Windows.Forms.ToolStripLabel();
-            this.tslVideoOn = new System.Windows.Forms.ToolStripLabel();
             this.tsmOpenSettings = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
             this.opmToolStripSeparator4 = new OPMedia.UI.Controls.OPMToolStripSeparator();
+            this.tslVideoOn = new System.Windows.Forms.ToolStripLabel();
+            this.tslAudioOn = new System.Windows.Forms.ToolStripLabel();
+            this.tslFileType = new System.Windows.Forms.ToolStripLabel();
+            this.tslFilterState = new System.Windows.Forms.ToolStripLabel();
+            this.tsmToggleXFade = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
             this.opmToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.pnlButtons.AutoSize = true;
             this.pnlButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlButtons.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.pnlButtons.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.pnlButtons.Location = new System.Drawing.Point(0, 0);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(0);
             this.pnlButtons.Name = "pnlButtons";
@@ -77,7 +78,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.opmToolStrip1.AutoSize = false;
             this.opmToolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.opmToolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmToolStrip1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.opmToolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.opmToolStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.opmToolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.opmToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -95,6 +96,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.opmToolStripSeparator3,
             this.tsmPlaylistEnd,
             this.tsmLoopPlay,
+            this.tsmToggleXFade,
             this.tsmToggleShuffle,
             this.opmToolStripSeparator5,
             this.tslTime,
@@ -119,12 +121,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmPlayPause.CheckedImage = null;
             this.tsmPlayPause.DisabledImage = null;
             this.tsmPlayPause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmPlayPause.Image = ((System.Drawing.Image)(resources.GetObject("tsmPlayPause.Image")));
+            this.tsmPlayPause.Image = null;
             this.tsmPlayPause.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.tsmPlayPause.InactiveImage = null;
             this.tsmPlayPause.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.tsmPlayPause.Name = "tsmPlayPause";
-            this.tsmPlayPause.Size = new System.Drawing.Size(24, 22);
+            this.tsmPlayPause.Size = new System.Drawing.Size(23, 22);
             this.tsmPlayPause.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdPlayPause;
             this.tsmPlayPause.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmPlayPause.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -137,12 +139,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmStop.CheckedImage = null;
             this.tsmStop.DisabledImage = null;
             this.tsmStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmStop.Image = ((System.Drawing.Image)(resources.GetObject("tsmStop.Image")));
+            this.tsmStop.Image = null;
             this.tsmStop.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmStop.InactiveImage = null;
             this.tsmStop.Margin = new System.Windows.Forms.Padding(0);
             this.tsmStop.Name = "tsmStop";
-            this.tsmStop.Size = new System.Drawing.Size(24, 25);
+            this.tsmStop.Size = new System.Drawing.Size(23, 25);
             this.tsmStop.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdStop;
             this.tsmStop.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmStop.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -160,12 +162,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmPrev.CheckedImage = null;
             this.tsmPrev.DisabledImage = null;
             this.tsmPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmPrev.Image = ((System.Drawing.Image)(resources.GetObject("tsmPrev.Image")));
+            this.tsmPrev.Image = null;
             this.tsmPrev.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmPrev.InactiveImage = null;
             this.tsmPrev.Margin = new System.Windows.Forms.Padding(0);
             this.tsmPrev.Name = "tsmPrev";
-            this.tsmPrev.Size = new System.Drawing.Size(24, 25);
+            this.tsmPrev.Size = new System.Drawing.Size(23, 25);
             this.tsmPrev.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdPrev;
             this.tsmPrev.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmPrev.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -178,12 +180,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmNext.CheckedImage = null;
             this.tsmNext.DisabledImage = null;
             this.tsmNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmNext.Image = ((System.Drawing.Image)(resources.GetObject("tsmNext.Image")));
+            this.tsmNext.Image = null;
             this.tsmNext.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmNext.InactiveImage = null;
             this.tsmNext.Margin = new System.Windows.Forms.Padding(0);
             this.tsmNext.Name = "tsmNext";
-            this.tsmNext.Size = new System.Drawing.Size(24, 25);
+            this.tsmNext.Size = new System.Drawing.Size(23, 25);
             this.tsmNext.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdNext;
             this.tsmNext.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmNext.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -202,12 +204,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmLoad.CheckedImage = null;
             this.tsmLoad.DisabledImage = null;
             this.tsmLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmLoad.Image = ((System.Drawing.Image)(resources.GetObject("tsmLoad.Image")));
+            this.tsmLoad.Image = null;
             this.tsmLoad.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmLoad.InactiveImage = null;
             this.tsmLoad.Margin = new System.Windows.Forms.Padding(0);
             this.tsmLoad.Name = "tsmLoad";
-            this.tsmLoad.Size = new System.Drawing.Size(24, 25);
+            this.tsmLoad.Size = new System.Drawing.Size(23, 25);
             this.tsmLoad.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdLoad;
             this.tsmLoad.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmLoad.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -220,12 +222,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmOpenDisk.CheckedImage = null;
             this.tsmOpenDisk.DisabledImage = null;
             this.tsmOpenDisk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmOpenDisk.Image = ((System.Drawing.Image)(resources.GetObject("tsmOpenDisk.Image")));
+            this.tsmOpenDisk.Image = null;
             this.tsmOpenDisk.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmOpenDisk.InactiveImage = null;
             this.tsmOpenDisk.Margin = new System.Windows.Forms.Padding(0);
             this.tsmOpenDisk.Name = "tsmOpenDisk";
-            this.tsmOpenDisk.Size = new System.Drawing.Size(24, 24);
+            this.tsmOpenDisk.Size = new System.Drawing.Size(23, 4);
             this.tsmOpenDisk.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdOpenDisk;
             this.tsmOpenDisk.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmOpenDisk.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -238,12 +240,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmOpenURL.CheckedImage = null;
             this.tsmOpenURL.DisabledImage = null;
             this.tsmOpenURL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmOpenURL.Image = ((System.Drawing.Image)(resources.GetObject("tsmOpenURL.Image")));
+            this.tsmOpenURL.Image = null;
             this.tsmOpenURL.ImageTransparentColor = System.Drawing.Color.White;
             this.tsmOpenURL.InactiveImage = null;
             this.tsmOpenURL.Margin = new System.Windows.Forms.Padding(0);
             this.tsmOpenURL.Name = "tsmOpenURL";
-            this.tsmOpenURL.Size = new System.Drawing.Size(24, 24);
+            this.tsmOpenURL.Size = new System.Drawing.Size(23, 4);
             this.tsmOpenURL.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdOpenURL;
             this.tsmOpenURL.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmOpenURL.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -266,7 +268,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmPlaylistEnd.InactiveImage = ((System.Drawing.Image)(resources.GetObject("tsmPlaylistEnd.InactiveImage")));
             this.tsmPlaylistEnd.Margin = new System.Windows.Forms.Padding(0);
             this.tsmPlaylistEnd.Name = "tsmPlaylistEnd";
-            this.tsmPlaylistEnd.Size = new System.Drawing.Size(24, 24);
+            this.tsmPlaylistEnd.Size = new System.Drawing.Size(23, 4);
             this.tsmPlaylistEnd.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdPlaylistEnd;
             this.tsmPlaylistEnd.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmPlaylistEnd.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -284,7 +286,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmLoopPlay.InactiveImage = ((System.Drawing.Image)(resources.GetObject("tsmLoopPlay.InactiveImage")));
             this.tsmLoopPlay.Margin = new System.Windows.Forms.Padding(0);
             this.tsmLoopPlay.Name = "tsmLoopPlay";
-            this.tsmLoopPlay.Size = new System.Drawing.Size(24, 24);
+            this.tsmLoopPlay.Size = new System.Drawing.Size(23, 4);
             this.tsmLoopPlay.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdLoopPlay;
             this.tsmLoopPlay.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmLoopPlay.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -302,7 +304,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tsmToggleShuffle.InactiveImage = ((System.Drawing.Image)(resources.GetObject("tsmToggleShuffle.InactiveImage")));
             this.tsmToggleShuffle.Margin = new System.Windows.Forms.Padding(0);
             this.tsmToggleShuffle.Name = "tsmToggleShuffle";
-            this.tsmToggleShuffle.Size = new System.Drawing.Size(24, 24);
+            this.tsmToggleShuffle.Size = new System.Drawing.Size(23, 4);
             this.tsmToggleShuffle.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdToggleShuffle;
             this.tsmToggleShuffle.Click += new System.EventHandler(this.OnButtonPressed);
             this.tsmToggleShuffle.MouseLeave += new System.EventHandler(this.OnMouseLeave);
@@ -320,6 +322,53 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tslTime.Name = "tslTime";
             this.tslTime.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.tslTime.Size = new System.Drawing.Size(0, 25);
+            // 
+            // tsmOpenSettings
+            // 
+            this.tsmOpenSettings.ActiveImage = null;
+            this.tsmOpenSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsmOpenSettings.CheckedImage = null;
+            this.tsmOpenSettings.DisabledImage = null;
+            this.tsmOpenSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsmOpenSettings.Image = null;
+            this.tsmOpenSettings.ImageTransparentColor = System.Drawing.Color.White;
+            this.tsmOpenSettings.InactiveImage = null;
+            this.tsmOpenSettings.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
+            this.tsmOpenSettings.Name = "tsmOpenSettings";
+            this.tsmOpenSettings.Size = new System.Drawing.Size(23, 4);
+            this.tsmOpenSettings.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdOpenSettings;
+            this.tsmOpenSettings.Click += new System.EventHandler(this.OnButtonPressed);
+            this.tsmOpenSettings.MouseLeave += new System.EventHandler(this.OnMouseLeave);
+            this.tsmOpenSettings.MouseHover += new System.EventHandler(this.OnMouseHover);
+            this.tsmOpenSettings.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            // 
+            // opmToolStripSeparator4
+            // 
+            this.opmToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.opmToolStripSeparator4.Name = "opmToolStripSeparator4";
+            this.opmToolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tslVideoOn
+            // 
+            this.tslVideoOn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslVideoOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tslVideoOn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.tslVideoOn.Name = "tslVideoOn";
+            this.tslVideoOn.Size = new System.Drawing.Size(0, 0);
+            this.tslVideoOn.Text = "tslVideoOn";
+            this.tslVideoOn.MouseLeave += new System.EventHandler(this.OnMouseLeave);
+            this.tslVideoOn.MouseHover += new System.EventHandler(this.OnLabelMouseHover);
+            // 
+            // tslAudioOn
+            // 
+            this.tslAudioOn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslAudioOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tslAudioOn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.tslAudioOn.Name = "tslAudioOn";
+            this.tslAudioOn.Size = new System.Drawing.Size(0, 0);
+            this.tslAudioOn.Text = "tslAudioOn";
+            this.tslAudioOn.MouseLeave += new System.EventHandler(this.OnMouseLeave);
+            this.tslAudioOn.MouseHover += new System.EventHandler(this.OnLabelMouseHover);
             // 
             // tslFileType
             // 
@@ -343,52 +392,22 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tslFilterState.MouseLeave += new System.EventHandler(this.OnMouseLeave);
             this.tslFilterState.MouseHover += new System.EventHandler(this.OnLabelMouseHover);
             // 
-            // tslAudioOn
+            // tsmToggleXFade
             // 
-            this.tslAudioOn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslAudioOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tslAudioOn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.tslAudioOn.Name = "tslAudioOn";
-            this.tslAudioOn.Size = new System.Drawing.Size(0, 0);
-            this.tslAudioOn.Text = "tslAudioOn";
-            this.tslAudioOn.MouseLeave += new System.EventHandler(this.OnMouseLeave);
-            this.tslAudioOn.MouseHover += new System.EventHandler(this.OnLabelMouseHover);
-            // 
-            // tslVideoOn
-            // 
-            this.tslVideoOn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslVideoOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tslVideoOn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.tslVideoOn.Name = "tslVideoOn";
-            this.tslVideoOn.Size = new System.Drawing.Size(0, 0);
-            this.tslVideoOn.Text = "tslVideoOn";
-            this.tslVideoOn.MouseLeave += new System.EventHandler(this.OnMouseLeave);
-            this.tslVideoOn.MouseHover += new System.EventHandler(this.OnLabelMouseHover);
-            // 
-            // tsmOpenSettings
-            // 
-            this.tsmOpenSettings.ActiveImage = null;
-            this.tsmOpenSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsmOpenSettings.CheckedImage = null;
-            this.tsmOpenSettings.DisabledImage = null;
-            this.tsmOpenSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsmOpenSettings.Image = ((System.Drawing.Image)(resources.GetObject("tsmOpenSettings.Image")));
-            this.tsmOpenSettings.ImageTransparentColor = System.Drawing.Color.White;
-            this.tsmOpenSettings.InactiveImage = null;
-            this.tsmOpenSettings.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
-            this.tsmOpenSettings.Name = "tsmOpenSettings";
-            this.tsmOpenSettings.Size = new System.Drawing.Size(24, 24);
-            this.tsmOpenSettings.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdOpenSettings;
-            this.tsmOpenSettings.Click += new System.EventHandler(this.OnButtonPressed);
-            this.tsmOpenSettings.MouseLeave += new System.EventHandler(this.OnMouseLeave);
-            this.tsmOpenSettings.MouseHover += new System.EventHandler(this.OnMouseHover);
-            this.tsmOpenSettings.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // opmToolStripSeparator4
-            // 
-            this.opmToolStripSeparator4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.opmToolStripSeparator4.Name = "opmToolStripSeparator4";
-            this.opmToolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            this.tsmToggleXFade.ActiveImage = null;
+            this.tsmToggleXFade.CheckedImage = null;
+            this.tsmToggleXFade.DisabledImage = null;
+            this.tsmToggleXFade.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsmToggleXFade.Image = global::OPMedia.UI.ProTONE.Properties.Resources.XFade;
+            this.tsmToggleXFade.ImageTransparentColor = System.Drawing.Color.White;
+            this.tsmToggleXFade.InactiveImage = global::OPMedia.UI.ProTONE.Properties.Resources.XFade;
+            this.tsmToggleXFade.Name = "tsmToggleXFade";
+            this.tsmToggleXFade.Size = new System.Drawing.Size(23, 4);
+            this.tsmToggleXFade.Tag = OPMedia.Runtime.Shortcuts.OPMShortcut.CmdXFade;
+            this.tsmToggleXFade.Click += new System.EventHandler(this.OnButtonPressed);
+            this.tsmToggleXFade.MouseLeave += new System.EventHandler(this.OnMouseLeave);
+            this.tsmToggleXFade.MouseHover += new System.EventHandler(this.OnMouseHover);
+            this.tsmToggleXFade.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // PlaybackControlPanel
             // 
@@ -433,5 +452,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private ToolStripLabel tslVideoOn;
         private OPMTriStateToolStripButton tsmOpenDisk;
         private ToolStripLabel tslTime;
+        private OPMTriStateToolStripButton tsmToggleXFade;
     }
 }

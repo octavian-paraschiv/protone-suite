@@ -156,13 +156,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         [EventSink(LocalEventNames.UpdateStateButtons)]
         public void UpdateStateButtons()
         {
+            tsmToggleXFade.Checked = ProTONEConfig.XFade;
             tsmLoopPlay.Checked = ProTONEConfig.LoopPlay;
             tsmPlaylistEnd.Checked = SystemScheduler.PlaylistEventEnabled;
-            tsmPlayPause.InactiveImage = Resources.btnPlay;
+
+            UpdatePlayPauseButton();
+
             tsmStop.InactiveImage = Resources.btnStop;
             tsmNext.InactiveImage = Resources.btnNext;
             tsmPrev.InactiveImage = Resources.btnPrev;
-
+            
             if (VideoDVDHelpers.IsOSSupported)
                 tsmOpenDisk.InactiveImage = ImageProcessing.DVD;
             else
@@ -178,6 +181,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmLoopPlay.InactiveImage = Resources.btnLoopPlay;
             tsmToggleShuffle.InactiveImage = Resources.btnToggleShuffle;
             tsmPlaylistEnd.InactiveImage = Resources.btnPlaylistEnd;
+            tsmToggleXFade.InactiveImage = Resources.XFade;
 
             tslTime.Font = ThemeManager.VeryLargeFont;
             tslTime.ForeColor = ThemeManager.WndTextColor;
@@ -267,10 +271,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             switch(_FilterState)
             {
-                case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
-                    img = Resources.btnPlay;
-                    break;
-
                 case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running:
                     img = Resources.btnPause;
                     break;

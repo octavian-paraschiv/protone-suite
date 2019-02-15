@@ -55,6 +55,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\packages\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -67,6 +70,10 @@
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <None Include="VersionTemplate.cs" />
+    <Compile Include="Logging\LogEntry.cs" />
+    <Compile Include="Logging\LoggedApplication.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggingConfiguration.cs" />
     <Compile Include="MainThread.cs" />
     <Compile Include="NetworkAccess\Shares.cs" />
     <Compile Include="NetworkAccess\WebClientWithTimeout.cs">
@@ -93,8 +100,6 @@
     <Compile Include="InstanceManagement\OpMediaApplication.cs" />
     <Compile Include="InstanceManagement\SingleInstanceApplication.cs" />
     <Compile Include="Logging\ErrorDispatcher.cs" />
-    <Compile Include="Logging\LoggedApplication.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="TranslationSupport\TranslatableAttributes.cs" />
     <Compile Include="TranslationSupport\Translator.cs" />

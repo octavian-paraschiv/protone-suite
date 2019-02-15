@@ -10,6 +10,7 @@ using System.IO;
 using System.Security.AccessControl;
 using OPMedia.Core.NetworkAccess;
 using OPMedia.Core.Configuration;
+using System.Diagnostics;
 
 namespace OPMedia.Core.Logging
 {
@@ -84,6 +85,7 @@ namespace OPMedia.Core.Logging
         protected override void DoTerminate()
         {
             ReleaseAppMutex();
+            Logger.StopLogger();
         }
 
         protected void ReleaseAppMutex()

@@ -674,6 +674,53 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+        public static bool XFade
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject(true, "XFade", false);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(true, "XFade", value);
+            }
+        }
+
+        public static int XFadeLength
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject(true, "XFadeLength", 10);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(true, "XFadeLength", value);
+            }
+        }
+
+        public static int XFadeAnticipation
+        {
+            get
+            {
+                return PersistenceProxy.ReadObject(true, "XFadeAnticipation", 5);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(true, "XFadeAnticipation", value);
+            }
+        }
+
+        public static int XFadeAnticipatedEnd
+        {
+            get
+            {
+                return XFadeAnticipation + XFadeLength;
+            }
+        }
+
 
         public static int PlaylistEventHandler
         {

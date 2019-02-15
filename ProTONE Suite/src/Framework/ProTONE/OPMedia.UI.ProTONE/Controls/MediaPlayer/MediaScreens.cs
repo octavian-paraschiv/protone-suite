@@ -321,6 +321,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     case OPMShortcut.CmdPlaylistEnd:
                     case OPMShortcut.CmdLoopPlay:
+                    case OPMShortcut.CmdXFade:
                         dispatchCmd = true;
                         break;
 

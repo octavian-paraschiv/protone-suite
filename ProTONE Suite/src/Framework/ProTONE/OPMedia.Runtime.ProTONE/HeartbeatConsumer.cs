@@ -40,15 +40,9 @@ namespace OPMedia.Runtime.ProTONE
         {
             _timer.Stop();
 
-            Logger.LogTrace("Creating a new instance for task: " + _instanceName);
-
             try
             {
-                if (_isStopRequested.WaitOne(10, true))
-                {
-                    Logger.LogTrace("Application is stopping. Not creating a new instance for task: " + _instanceName);
-                }
-                else
+                if (_isStopRequested.WaitOne(10, true) == false)
                 {
                     RunTask();
                 }

@@ -317,14 +317,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                 bool isEnd = streamRenderer.EndOfMedia;
 
-                if (!isEnd && _useCrossFading && !streamRenderer.IsStreamedMedia)
+                if (UseCrossFading)
                 {
-                    double pos = streamRenderer.MediaPosition;
-                    double len = streamRenderer.MediaLength;
-                    if (len - pos <= (1 + _crossFadeLength))
+                    // Check if we are "anticipating" the end of current media so that we can toggle XFade...
+                    if (!isEnd && !streamRenderer.IsStreamedMedia)
                     {
-                        Logger.LogTrace($"[XFADE] End of media is approaching. Triggering cross fading....");
-                        isEnd = true;
+                        double pos = streamRenderer.MediaPosition;
+                        double len = streamRenderer.MediaLength;
+
+                        if ((len - pos) <= (ProTONEConfig.XFadeAnticipatedEnd))
+                        {
+                            Logger.LogTrace($"[XFADE] End of media is approaching. Triggering cross fading....");
+                            isEnd = true;
+                        }
                     }
                 }
 
@@ -439,7 +444,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState FilterState
          { 
             get 
-            { 
+            {
+                if (UseCrossFading && _crossFadePendingStop)
+                    return FilterState.Stopped;
+
                 return (streamRenderer == null) ?
                     OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped : 
                     streamRenderer.FilterState; 
@@ -506,7 +514,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                             if (double.IsInfinity(mul) || double.IsNaN(mul))
                                 mul = double.MaxValue;
 
-                            Logger.LogTrace("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
+                            Logger.LogToConsole("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
 
                             bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
                             percVolL = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
@@ -713,14 +721,26 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        bool _useCrossFading = true;
-        int _crossFadeLength = 10; // sec
         StreamRenderer _oldRenderer = null;
+
+        internal bool UseCrossFading
+        {
+            get
+            {
+                // TODO: Figure out how to prevent CrossFading when a video file is involved.
+                return ProTONEConfig.XFade;
+            }
+        }
 
         private void CreateNewRenderer<T>(WorkerType? workerType = null) where T : StreamRenderer
         {
-            if (_useCrossFading && streamRenderer != null)
+            if (UseCrossFading && streamRenderer != null)
             {
+                if (workerType.HasValue)
+                    Logger.LogTrace($"[XFADE] Creating a new WorkerRenderer of type {workerType}");
+                else
+                    Logger.LogTrace($"[XFADE] Creating a new {typeof(T)}");
+
                 // Cleanup the older renderer
                 if (_oldRenderer != null)
                 {
@@ -728,6 +748,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     _oldRenderer = null;
                 }
 
+                _crossFadePendingStop = false;
                 _oldRenderer = streamRenderer;
 
                 // Set up new one
@@ -744,6 +765,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     streamRenderer.Dispose();
                     streamRenderer = null;
                 }
+
+                if (workerType.HasValue)
+                    Logger.LogTrace($"Creating a new WorkerRenderer of type {workerType}");
+                else
+                    Logger.LogTrace($"Creating a new {typeof(T)}");
 
                 // Set up new one
                 if (workerType == null)
@@ -780,7 +806,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         private void HandleCrossFading()
         {
-            if (_useCrossFading == false)
+            if (UseCrossFading == false)
                 return;
 
             if (_oldRenderer == null || _oldRenderer.Valid == false)
@@ -795,19 +821,23 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             Task.Factory.StartNew(() =>
             {
                 DateTime dtStart = DateTime.Now;
+                int i = 0;
+
                 while (true)
                 {
-                    _oldRenderer.AudioVolume -= quant;
-                    streamRenderer.AudioVolume += quant;
+                    i++;
+                    int delta = i * quant;
+                    _oldRenderer.AudioVolume = startVol - delta;
+                    streamRenderer.AudioVolume = delta;
 
                     Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
 
                     // _crossFadeLength is in sec
                     // To sleep for _crossFadeLength/10 sec, need to multiply with 100
-                    Thread.Sleep(100 * _crossFadeLength);
+                    Thread.Sleep(100 * ProTONEConfig.XFadeLength);
 
                     DateTime dtNow = DateTime.Now;
-                    if (dtNow.Subtract(dtStart).TotalSeconds >= _crossFadeLength)
+                    if (dtNow.Subtract(dtStart).TotalSeconds >= ProTONEConfig.XFadeLength)
                         break;
                 }
 
@@ -906,10 +936,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
+        private bool _crossFadePendingStop = false;
+
         public void StopRenderer(bool isStopFromGui)
         {
-            // TODO test if rendering video - cross fading not supported for video
-
             if (isStopFromGui)
             {
                 if (_oldRenderer != null)
@@ -919,8 +949,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     _oldRenderer = null;
                 }
             }
-            else if (_useCrossFading)
+            else if (UseCrossFading)
             {
+                _crossFadePendingStop = true;
                 return;
             }
 
@@ -1137,13 +1168,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running && oldMediaPosition == newMediaPosition)
                 {
                     nofPasses++;
-                    Logger.LogTrace("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
+                    Logger.LogToConsole("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
                         nofPasses, oldMediaPosition, newMediaPosition);
                 }
                 else
                 {
                     nofPasses = 0;
-                    Logger.LogTrace("Media position changed ... old={0}, new={1}",
+                    Logger.LogToConsole("Media position changed ... old={0}, new={1}",
                         oldMediaPosition, newMediaPosition);
 
                     oldMediaPosition = newMediaPosition;

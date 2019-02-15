@@ -451,6 +451,9 @@ namespace OPMedia.ProTONE
                         case OPMShortcut.CmdLoopPlay:
                             (tsi as OPMToolStripMenuItem).Checked = ProTONEConfig.LoopPlay;
                             break;
+                        case OPMShortcut.CmdXFade:
+                            (tsi as OPMToolStripMenuItem).Checked = ProTONEConfig.XFade;
+                            break;
                     }
 
                     if (tsi.Tag != null)

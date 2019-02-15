@@ -219,7 +219,6 @@ Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
     <value>Schaltet ein / aus Spielen in Schleife
-
 Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
@@ -1252,5 +1251,21 @@ Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und 
   </data>
   <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
     <value>Aktivieren Signalanalyse Funktionen</value>
+  </data>
+  <data name="TXT_MNUXFADE" xml:space="preserve">
+    <value>Überblendung</value>
+  </data>
+  <data name="TXT_BTNXFADE" xml:space="preserve">
+    <value>Schaltet ein / aus die Überblendung
+Tastenkürzel: {0}</value>
+  </data>
+  <data name="TXT_CMDXFADE" xml:space="preserve">
+    <value>Schaltet ein / aus die Überblendung</value>
+  </data>
+  <data name="TXT_XFADELENGTH" xml:space="preserve">
+    <value>Überblendungs Übergangs Dauer:</value>
+  </data>
+  <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
+    <value>Aktuelles Trackende vorwegnehmen mit:</value>
   </data>
 </root>

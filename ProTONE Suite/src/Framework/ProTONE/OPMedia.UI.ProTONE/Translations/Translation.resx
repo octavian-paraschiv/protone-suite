@@ -218,7 +218,7 @@ Shortcut: {0}</value>
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNLOOPPLAY">
-    <value>Toggles on/off playing in loop.
+    <value>Enables/Disables playing in loop.
 Shortcut: {0}</value>
   </data>
   <data name="TXT_BTNMOVEDOWN">
@@ -1252,5 +1252,21 @@ Otherwise, you will need to copy it from the URL displayed in the default browse
   </data>
   <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
     <value>Waveform and Spectrogram are not supported for the media content that is currently played.</value>
+  </data>
+  <data name="TXT_MNUXFADE" xml:space="preserve">
+    <value>Cross Fading</value>
+  </data>
+  <data name="TXT_BTNXFADE" xml:space="preserve">
+    <value>Enables/Disables Cross Fading
+Shortcut: {0}</value>
+  </data>
+  <data name="TXT_CMDXFADE" xml:space="preserve">
+    <value>Enables/Disables Cross Fading</value>
+  </data>
+  <data name="TXT_XFADELENGTH" xml:space="preserve">
+    <value>Cross fading transition duration:</value>
+  </data>
+  <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
+    <value>Anticipate current track end with:</value>
   </data>
 </root>

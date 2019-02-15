@@ -46,7 +46,7 @@ namespace OPMedia.Core
             long diff = _sw.ElapsedMilliseconds;
 
             if (diff > _longOpThreshold)
-                Logger.LogTrace(string.Format("Last \"{0}\" operation took {1:0.000} msec", _opName, diff));
+                Logger.LogToConsole(string.Format("Last \"{0}\" operation took {1:0.000} msec", _opName, diff));
 
             lock (_syncRoot)
             {
@@ -55,7 +55,7 @@ namespace OPMedia.Core
                 double avg = _totalTime / _totalCount;
 
                 if (disposing || _totalCount % _avgReportCount == 0)
-                    Logger.LogTrace(string.Format("\"{0}\" operation takes {1:0.000} msec in average", _opName, diff));
+                    Logger.LogToConsole(string.Format("\"{0}\" operation takes {1:0.000} msec in average", _opName, diff));
             }
         }
 

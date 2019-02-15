@@ -103,6 +103,38 @@ namespace OPMedia.Core
             }
         }
 
+        public static bool CanWriteToFolder(string path)
+        {
+            try
+            {
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string randomName = StringUtils.GenerateRandomToken(32);
+                string randomFilePath = Path.Combine(path, randomName);
+
+                StreamWriter sw = File.CreateText(randomFilePath);
+                if (sw != null)
+                {
+                    sw.WriteLine(randomName);
+                    sw.Close();
+                }
+
+                if (File.Exists(randomFilePath))
+                {
+                    File.Delete(randomFilePath);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static string GetExtension(string path)
         {
             try

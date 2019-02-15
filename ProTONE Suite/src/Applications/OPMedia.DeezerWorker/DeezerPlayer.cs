@@ -563,7 +563,7 @@ namespace OPMedia.DeezerWorker
 
             if (curRenderPos != RenderPosition && curRenderPos > 0)
             {
-                Logger.LogTrace("DeezerPlayer::OnRenderProgress curRenderPos={0}", curRenderPos);
+                Logger.LogToConsole("DeezerPlayer::OnRenderProgress curRenderPos={0}", curRenderPos);
                 RenderPosition = curRenderPos;
                 FilterState = FilterState.Running;
 

@@ -1252,4 +1252,20 @@ Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le
   <data name="TXT_SHOW_SIGNALANALISYS" xml:space="preserve">
     <value>Activer les fonctions d’Analyse de Signal</value>
   </data>
+  <data name="TXT_MNUXFADE" xml:space="preserve">
+    <value>Fondu enchaîné</value>
+  </data>
+  <data name="TXT_BTNXFADE" xml:space="preserve">
+    <value>Active / désactive le fondu enchaîné
+Raccourci: {0}</value>
+  </data>
+  <data name="TXT_CMDXFADE" xml:space="preserve">
+    <value>Active / désactive le fondu enchaîné</value>
+  </data>
+  <data name="TXT_XFADELENGTH" xml:space="preserve">
+    <value>Durée de la transition en fondu enchaîné:</value>
+  </data>
+  <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
+    <value>Anticiper la fin de la piste en cours avec:</value>
+  </data>
 </root>

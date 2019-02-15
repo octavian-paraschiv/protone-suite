@@ -18,7 +18,6 @@ namespace OPMedia.Core.Logging
         public static void DispatchFatalError(Exception ex)
         {
             Logger.LogException(ex);
-
             string msg = GetErrorMessageForException(ex);
             InnerDisplayFatalError(
                 "The application has encountered a fatal error.\nWe are sorry for the inconvenience. Details: \n\n" + msg + "\n\n" +
@@ -50,7 +49,6 @@ namespace OPMedia.Core.Logging
             Logger.LogError(msg);
             InnerDisplayNonFatalError(msg, Translator.Translate("TXT_APP_NAME"), showInTray);
         }
-
 
         private static void InnerDisplayFatalError(string message, string title, bool showInTray)
         {
