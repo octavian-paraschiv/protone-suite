@@ -24,6 +24,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using System.Threading.Tasks;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
@@ -34,6 +35,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
         private object _updateLock = new object();
         private ManualResetEvent _evt = new ManualResetEvent(false);
+
+        System.Windows.Forms.Timer _tmrUpdate = null;
 
         #region Constructor
 
@@ -55,14 +58,21 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
         private void SignalAnalysisScreen_HandleCreated(object sender, EventArgs e)
         {
+            //_tmrUpdate = new System.Windows.Forms.Timer();
+            //_tmrUpdate.Interval = 5;
+            //_tmrUpdate.Tick += (ss, ee) =>
+            //{
+            //    OnUpdate();
+            //};
+            //_tmrUpdate.Start();
+
             Task.Factory.StartNew(() =>
             {
-                while (_evt.WaitOne(5) == false)
+                while (_evt.WaitOne(10) == false)
                 {
                     Invoke(new MethodInvoker(OnUpdate));
                 }
             });
-
         }
 
         private void SignalAnalysisScreen_HandleDestroyed(object sender, EventArgs e)
@@ -96,10 +106,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             bool showWaveform = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform);
             bool showSpectrogram = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram);
 
-            bool sampleGrabberSupported = false;// MediaRenderer.DefaultInstance.SampleGrabberSupported;
-
-            showWaveform &= sampleGrabberSupported;
-            showSpectrogram &= sampleGrabberSupported;
+            showVU &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Levels);
+            showWaveform &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Waveform);
+            showSpectrogram &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Spectrogram);
 
             pnlVuMeter.Visible = showVU;
 
@@ -132,7 +141,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
             UpdateLabels();
 
-            lblUnsupportedFunctionsHint.Visible = !sampleGrabberSupported;
+            //lblUnsupportedFunctionsHint.Visible = !sampleGrabberSupported;
         }
 
         [EventSink(EventNames.PerformTranslation)]
@@ -149,49 +158,39 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         {
             try
             {
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter))
+                double[] vuData = MediaRenderer.DefaultInstance.LevelsData;
+                if (vuData != null)
                 {
-                    AudioSampleData vuData = MediaRenderer.DefaultInstance.VuMeterData;
-                    if (vuData != null)
-                    {
-                        vuLeft.Value = 0.5 * (vuLeft.Value + vuLeft.Maximum * vuData.LVOL);
-                        vuRight.Value = 0.5 * (vuRight.Value + vuRight.Maximum * vuData.RVOL);
-                        //vuLeft.Value = vuLeft.Maximum * vuData.LVOL;
-                        //vuRight.Value = vuRight.Maximum * vuData.RVOL;
-                    }
-                    else
-                    {
-                        vuLeft.Value = 0;
-                        vuRight.Value = 0;
-                    }
+                    vuLeft.Value = 0.5 * (vuLeft.Value + vuLeft.Maximum * vuData[0]);
+                    vuRight.Value = 0.5 * (vuRight.Value + vuRight.Maximum * vuData[1]);
+                }
+                else
+                {
+                    vuLeft.Value = 0;
+                    vuRight.Value = 0;
                 }
 
-                #region disabled code
-#if DUMMY
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform))
+                gpWaveform.Reset(false);
+                double[] waveformData = MediaRenderer.DefaultInstance.WaveformData;
+                if (waveformData != null && waveformData.Length > 0)
                 {
-                    gpWaveform.Reset(false);
+                    if (_prevWaveform == null)
+                        _prevWaveform = new double[waveformData.Length];
 
-                    double[][] waveformData = MediaRenderer.DefaultInstance.WaveformData;
-                    if (waveformData != null && waveformData[0].Length > 0)
-                    {
-                        if (_prevWaveform == null)
-                            _prevWaveform = new double[waveformData[0].Length];
+                    for (int k = 0; k < _prevWaveform.Length; k++)
+                        _prevWaveform[k] = 0.5 * (_prevWaveform[k] + waveformData[k]);
 
-                        for (int k = 0; k < _prevWaveform.Length; k++)
-                            _prevWaveform[k] = 0.5 * (_prevWaveform[k] + waveformData[0][k]);
-
-                        gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
-                        gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
-                        gpWaveform.AddDataRange(_prevWaveform, ThemeManager.GradientGaugeColor1);
-                    }
-                    else
-                    {
-                        gpWaveform.Reset(true);
-                    }
+                    gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
+                    gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
+                    gpWaveform.AddDataRange(_prevWaveform, ThemeManager.GradientGaugeColor1);
+                }
+                else
+                {
+                    gpWaveform.Reset(true);
                 }
 
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram))
+                double[] spectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
+                if (spectrogramData != null && spectrogramData.Length > 0)
                 {
                     double maxFftLevel = SpectrogramTransferFunction(MediaRenderer.DefaultInstance.MaxFFTLevel);
 
@@ -199,46 +198,37 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                     spSpectrogram.MinVal = maxFftLevel / 2; // Min level = -6 dBM
                     spSpectrogram.MaxVal = maxFftLevel; // Max level = 0 dBM
 
-                    double[] spectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
-                    if (spectrogramData != null && spectrogramData.Length > 0)
+                    double[] spectrogramData2 = new double[spectrogramData.Length];
+                    Array.Clear(spectrogramData2, 0, spectrogramData.Length);
+
+                    double[] bands = new double[BandCount];
+                    Array.Clear(bands, 0, BandCount);
+
+                    int div = spectrogramData.Length / (BandCount);
+
+                    try
                     {
-
-                        double[] spectrogramData2 = new double[spectrogramData.Length];
-                        Array.Clear(spectrogramData2, 0, spectrogramData.Length);
-
-                        double[] bands = new double[BandCount];
-                        Array.Clear(bands, 0, BandCount);
-
-                        int jBand = 0;
-
-                        int div = spectrogramData.Length / (BandCount);
-
-                        try
+                        int maxSize = (int)Math.Min(BandCount, spectrogramData.Length);
+                        for (int i = 0; i < maxSize; i++)
                         {
-                            int maxSize = (int)Math.Min(BandCount, spectrogramData.Length);
-                            for (int i = 0; i < maxSize; i++)
-                            {
-                                bands[i] = Math.Max(0, Math.Min(maxFftLevel, SpectrogramTransferFunction(spectrogramData[i])));
-                                _bands[i] = 0.5 * (_bands[i] + bands[i]);
-                            }
+                            bands[i] = Math.Max(0, Math.Min(maxFftLevel, SpectrogramTransferFunction(spectrogramData[i])));
+                            _bands[i] = 0.5 * (_bands[i] + bands[i]);
+                        }
 
-                            spSpectrogram.AddDataRange(_bands, Color.Transparent);
-                        }
-                        catch (Exception ex)
-                        {
-                            string s = ex.Message;
-                            spSpectrogram.Reset(true);
-                            Array.Clear(_bands, 0, _bands.Length);
-                        }
+                        spSpectrogram.AddDataRange(_bands, Color.Transparent);
                     }
-                    else
+                    catch (Exception ex)
                     {
+                        string s = ex.Message;
                         spSpectrogram.Reset(true);
                         Array.Clear(_bands, 0, _bands.Length);
                     }
                 }
-#endif
-                #endregion
+                else
+                {
+                    spSpectrogram.Reset(true);
+                    Array.Clear(_bands, 0, _bands.Length);
+                }
             }
             catch (Exception ex)
             {
@@ -252,7 +242,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         private double SpectrogramTransferFunction(double d)
         {
             return Math.Log(d);
-            //return d;
         }
 
         #endregion

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 {
@@ -49,14 +50,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
         public WorkerRenderer(WorkerType workerType)
         {
             _wt = workerType;
-        }
-
-        public string MyType
-        {
-            get
-            {
-                return GetType().Name;
-            }
         }
 
         private void ResetWorker()
@@ -123,7 +116,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             ResetWorker();
 
-            _wp.Play(renderMediaName);
+            int delayStart = 0;
+
+            var hh = startHint as BookmarkStartHint;
+            if (hh != null)
+            {
+                delayStart = (int)hh.Bookmark.PlaybackTimeInSeconds;
+            }
+
+            _wp.Play(renderMediaName, delayStart);
         }
 
 
@@ -249,13 +250,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             FilterState fs = FilterState.Stopped;
 
             if (_wp != null)
-            {
-                return _wp.FilterState;
-            }
+                return _wp.GetFilterState();
 
             return fs;
         }
-
         protected override int GetScaledVolume(int rawVolume)
         {
             if (_wt == WorkerType.Deezer)
@@ -274,5 +272,38 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 return base.PercentualVolume;
             }
         }
+
+        public override SupportedMeteringData GetSupportedMeteringData()
+        {
+            if (_wp != null)
+                return (SupportedMeteringData.Levels | _wp.GetSupportedMeteringData());
+
+            return SupportedMeteringData.None;
+        }
+
+        public override double[] GetLevelsData()
+        {
+            if (_wp != null)
+                return _wp.GetLevels();
+
+            return null;
+        }
+
+        public override double[] GetWaveform()
+        {
+            if (_wp != null)
+                return _wp.GetWaveform();
+
+            return null;
+        }
+
+        public override double[] GetSpectrogram()
+        {
+            if (_wp != null)
+                return _wp.GetSpectrogram();
+
+            return null;
+        }
+
     }
 }

@@ -15,6 +15,7 @@ using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Base
@@ -36,7 +37,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected object _waveformLock = new object();
         protected object _spectrogramLock = new object();
         protected AudioSampleData _vuMeterData = null;
-        protected double[][] _waveformData = null;
+        protected double[,] _waveformData = null;
         protected double[] _spectrogramData = null;
 
         protected int _waveformWindowSize = 512;
@@ -210,7 +211,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             }
         }
 
-        public double[][] WaveformData
+        public double[,] WaveformData
         {
             get
             {
@@ -476,6 +477,26 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             {
                 return false;
             }
+        }
+
+        public virtual SupportedMeteringData GetSupportedMeteringData()
+        {
+            return SupportedMeteringData.Levels;
+        }
+
+        public virtual double[] GetLevelsData()
+        {
+            return null;
+        }
+
+        public virtual double[] GetWaveform()
+        {
+            return null;
+        }
+
+        public virtual double[] GetSpectrogram()
+        {
+            return null;
         }
     }
 }

@@ -89,7 +89,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     public class SignalAnalisysData
     {
         [DataMember]
-        public AudioSampleData MomentarySampleData { get; set; }
+        public double[] LevelsData { get; set; }
 
         [DataMember]
         public double[] SpectrogramData { get; set; }
@@ -97,8 +97,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public override string ToString()
         {
             return string.Format("MomSample: L={0},R={1}, Spectrogram: len={2}, data[0]={3:0.00}",
-                (MomentarySampleData != null) ? MomentarySampleData.LVOL : 0, 
-                (MomentarySampleData != null) ? MomentarySampleData.RVOL : 0, 
+                (LevelsData != null) ? LevelsData[0] : 0, 
+                (LevelsData != null) ? LevelsData[1] : 0, 
                 (SpectrogramData != null) ? SpectrogramData.Length : 0, 
                 (SpectrogramData != null) ? SpectrogramData[0] : 0);
         }
@@ -396,6 +396,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public double MediaLength
         { get { return (streamRenderer == null) ? 0 : streamRenderer.MediaLength; } }
 
+        public double EffectiveMediaLength
+        {
+            get
+            {
+                return Math.Max(MediaLength - ProTONEConfig.XFadeAnticipatedEnd, 1);
+            }
+        }
+
         public string RenderMediaName
         {
             get
@@ -454,6 +462,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             } 
         }
 
+        public SupportedMeteringData SupportedMeteringData
+        {
+            get
+            {
+                if (streamRenderer == null)
+                    return SupportedMeteringData.None;
+
+                return streamRenderer.GetSupportedMeteringData();
+            }
+        }
+
         public string TranslatedFilterState
         { get { return Translator.Translate("TXT_" + FilterState.ToString().ToUpperInvariant()); } }
 
@@ -493,35 +512,41 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public AudioSampleData VuMeterData
+        public double[] LevelsData
         {
             get
             {
-                if (ProTONEConfig.IsSignalAnalisysActive())
+                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter))
                 {
-                    double percVolL = 0, percVolR = 0;
-
-                    if (streamRenderer != null)
+                    if (streamRenderer != null && 
+                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
                     {
-                        if (_mmDevice != null &&
-                            _mmDevice.AudioMeterInformation != null &&
-                            _mmDevice.AudioMeterInformation.PeakValues != null &&
-                            _mmDevice.AudioMeterInformation.PeakValues.Count > 0)
+                        double[] levels = streamRenderer.GetLevelsData();
+
+                        if (levels == null)
                         {
-                            var percVol = streamRenderer.PercentualVolume;
-                            double mul = 1f / percVol;
+                            if (_mmDevice != null &&
+                                _mmDevice.AudioMeterInformation != null &&
+                                _mmDevice.AudioMeterInformation.PeakValues != null &&
+                                _mmDevice.AudioMeterInformation.PeakValues.Count > 0)
+                            {
+                                var percVol = streamRenderer.PercentualVolume;
+                                double mul = 1f / percVol;
 
-                            if (double.IsInfinity(mul) || double.IsNaN(mul))
-                                mul = double.MaxValue;
+                                if (double.IsInfinity(mul) || double.IsNaN(mul))
+                                    mul = double.MaxValue;
 
-                            Logger.LogToConsole("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
+                                Logger.LogToConsole("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
 
-                            bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
-                            percVolL = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
-                            percVolR = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+                                bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
+                                double left = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
+                                double right = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+
+                                levels = new double[] { left, right };
+                            }
                         }
 
-                        return new AudioSampleData(percVolL, percVolR);
+                        return levels;
                     }
                 }
 
@@ -529,12 +554,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public double[][] WaveformData
+        public double[] WaveformData
         {
             get
             {
-                return (streamRenderer != null) ?
-                    streamRenderer.WaveformData : null;
+                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform))
+                {
+                    if (streamRenderer != null &&
+                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Waveform))
+                    {
+                        return streamRenderer.GetWaveform();
+                    }
+                }
+
+                return null;
             }
         }
 
@@ -542,8 +575,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                return (streamRenderer != null) ?
-                    streamRenderer.SpectrogramData : null;
+                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram))
+                {
+                    if (streamRenderer != null &&
+                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Spectrogram))
+                    {
+                        return streamRenderer.GetSpectrogram();
+                    }
+                }
+
+                return null;
             }
         }
 
@@ -682,6 +723,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (DvdMedia.FromPath(file) != null)
                     {
+                        // TODO: use worker renderer
                         CreateNewRenderer<DSDvdRenderer>();
                     }
                     else
@@ -689,6 +731,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         string streamType = PathUtils.GetExtension(file).ToLowerInvariant();
                         if (streamType == "cda")
                         {
+                            // TODO: use worker renderer
                             CreateNewRenderer<DSAudioCDRenderer>();
                         }
                         else
@@ -698,6 +741,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                                 CreateNewRenderer<WorkerRenderer>(WorkerType.Audio);
                             else
                                 // video file
+                                // TODO: use worker renderer
                                 CreateNewRenderer<DSFileRenderer>();
                         }
                     }
@@ -951,6 +995,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
             else if (UseCrossFading)
             {
+                _isStopFromGui = false;
                 _crossFadePendingStop = true;
                 return;
             }
@@ -1607,7 +1652,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             public SignalAnalisysData GetSignalAnalisysData()
             {
                 SignalAnalisysData data = new SignalAnalisysData();
-                data.MomentarySampleData = MediaRenderer.DefaultInstance.VuMeterData;
+                data.LevelsData = MediaRenderer.DefaultInstance.LevelsData;
                 data.SpectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
                 return data;
             }

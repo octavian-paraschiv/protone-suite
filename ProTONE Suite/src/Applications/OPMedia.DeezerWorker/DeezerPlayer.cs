@@ -203,7 +203,7 @@ namespace OPMedia.DeezerWorker
         }
 
 
-        public void Play(string url)
+        public void Play(string url, int delayStart)
         {
             dz_error_t err;
 
@@ -246,6 +246,16 @@ namespace OPMedia.DeezerWorker
             Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
 
+            //if (delayStart > 0)
+            //{
+            //    Task.Factory.StartNew(() =>
+            //    {
+            //        Thread.Sleep(500);
+            //        Pause();
+            //        Thread.Sleep(500);
+            //        Resume(delayStart);
+            //    });
+            //}
         }
 
         ManualResetEvent _evtAppUserOfflineAvailable = new ManualResetEvent(false);
@@ -528,10 +538,11 @@ namespace OPMedia.DeezerWorker
 
         #region FilterState
 
+
         FilterState _filterState = FilterState.Stopped;
         object _fsLock = new object();
 
-        public FilterState FilterState
+        private FilterState FilterState
         {
             get
             {
@@ -541,7 +552,7 @@ namespace OPMedia.DeezerWorker
                 }
             }
 
-            private set
+            set
             {
                 lock (_fsLock)
                 {
@@ -581,5 +592,32 @@ namespace OPMedia.DeezerWorker
             _proc = proc;
         }
         #endregion
+
+        public FilterState GetFilterState()
+        {
+            return this.FilterState;
+        }
+
+        public SupportedMeteringData GetSupportedMeteringData()
+        {
+            // Let the MediaRenderer figure out the levels based on NAudio
+            return SupportedMeteringData.OutputLevels;
+        }
+
+        public double[] GetLevels()
+        {
+            // Let the MediaRenderer figure out the levels based on NAudio
+            return null;
+        }
+
+        public double[] GetWaveform()
+        {
+            return null;
+        }
+
+        public double[] GetSpectrogram()
+        {
+            return null;
+        }
     }
 }

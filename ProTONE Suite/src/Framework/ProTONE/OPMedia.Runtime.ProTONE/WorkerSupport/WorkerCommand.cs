@@ -31,7 +31,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public T Args<T>(int idx)
         {
             if (_args.Count > idx)
-                return StringUtils.Coalesce<T>(_args[idx]);
+                return StringUtils.Coerce<T>(_args[idx]);
 
             return default(T);
         }

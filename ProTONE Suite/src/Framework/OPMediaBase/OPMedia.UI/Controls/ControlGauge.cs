@@ -45,6 +45,8 @@ namespace OPMedia.UI.Controls
         protected GaugeMode _gaugeMode = GaugeMode.BandToStart;
 
         protected double _max = 10000;
+
+        protected double _effMax = 0;
         protected double _pos = 0;
         protected int _nrTicks = 20;
         protected bool _vert = false;
@@ -78,6 +80,9 @@ namespace OPMedia.UI.Controls
 
         public double Value
         { get { return _pos; } set { UpdateValue(ref _pos, value); } }
+
+        public double EffectiveMaximum
+        { get { return _effMax; } set { UpdateValue(ref _effMax, value); } }
 
         public bool Vertical
         {
@@ -239,9 +244,14 @@ namespace OPMedia.UI.Controls
                 ThemeManager.PrepareGraphics(g);
 
                 Rectangle rcMinor, rcMajor, rcDot = Rectangle.Empty;
-                Color c1 = ThemeManager.GradientNormalColor1;
-                Color c2 = ThemeManager.GradientNormalColor2;
+                Color c1 = ThemeManager.GradientNormalColor2;
+                Color c2 = ThemeManager.BorderColor;
                 Color cBack = ThemeManager.BackColor;
+
+                Color c3 = ThemeManager.GradientNormalColor1;
+                Color c4 = ThemeManager.GradientNormalColor2;
+
+                Rectangle rcMajorEff = Rectangle.Empty;
 
                 if (_overrideElapsedBackColor != Color.Empty)
                 {
@@ -259,6 +269,9 @@ namespace OPMedia.UI.Controls
                     rcMinor = new Rectangle(0, (int)(this.Height * (1 - _pos / _max)), Width, Height);
                     rcMajor = new Rectangle(0, 0, Width, (int)(this.Height * _pos / _max));
 
+                    if (_effMax > 0)
+                        rcMajorEff = new Rectangle(0, 0, Width, (int)(this.Height * _effMax / _max));
+
                     rcDot = new Rectangle(0, (int)(this.Height * (1 - _pos / _max)) - 14, Width, 14);
 
                     a = 0f;
@@ -269,6 +282,10 @@ namespace OPMedia.UI.Controls
                     rcMajor = new Rectangle((int)(this.Width * _pos / _max), 0,
                         (int)(this.Width * (1 - _pos / _max)), Height);
 
+                    if (_effMax > 0)
+                        rcMajorEff = new Rectangle((int)(this.Width * _effMax / _max), 0,
+                            (int)(this.Width * (1 - _effMax / _max)), Height);
+                    
                     rcDot = new Rectangle((int)(this.Width * _pos / _max) - 7, 0, 14, Height);
 
                     a = 90f;
@@ -276,14 +293,23 @@ namespace OPMedia.UI.Controls
 
                 AdjustRectangle(ref rcMinor);
                 AdjustRectangle(ref rcMajor);
+                AdjustRectangle(ref rcMajorEff);
 
                 using (Brush b = new SolidBrush(cBack))
                     g.FillRectangle(b, ClientRectangle);
 
+                if (!rcMajorEff.IsEmpty)
+                {
+                    using (Brush b = new LinearGradientBrush(rcMajorEff, c3, c4, a))
+                    {
+                        g.FillRectangle(b, rcMajorEff);
+                    }
+                }
+
                 switch (_gaugeMode)
                 {
                     case UI.Controls.GaugeMode.Point:
-                        using (Brush b = new LinearGradientBrush(rcDot, c2, ThemeManager.BorderColor, a))
+                        using (Brush b = new LinearGradientBrush(rcDot, c1, c2, a))
                         {
                             g.FillRectangle(b, rcDot);
                         }

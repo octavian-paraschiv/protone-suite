@@ -16,6 +16,8 @@ using System.Diagnostics;
 
 namespace OPMedia.UI
 {
+
+
     public partial class MessageDisplay : ThemeForm
     {
         string message = string.Empty;

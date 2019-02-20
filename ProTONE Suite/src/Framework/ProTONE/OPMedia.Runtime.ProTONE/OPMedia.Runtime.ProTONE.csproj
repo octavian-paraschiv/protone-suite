@@ -146,24 +146,21 @@
     <Compile Include="Rendering\DS\BaseClasses\BaseClasses.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DirectShow.cs" />
     <Compile Include="Rendering\DS\BaseClasses\DSHelper.cs" />
-    <Compile Include="Rendering\DS\shoutcast\ShoutCastStream.cs" />
-    <Compile Include="Rendering\DS\shoutcast\ShoutcastStreamParser.cs" />
-    <Compile Include="WorkerSupport\CommandProcessor.cs" />
-    <Compile Include="WorkerSupport\WorkerError.cs" />
-    <Compile Include="WorkerSupport\WorkerRenderer.cs" />
-    <Compile Include="Rendering\DS\DSExtensionMethods.cs" />
     <Compile Include="Rendering\DS\DSAudioCDRenderer.cs" />
     <Compile Include="Rendering\DS\DSDvdRenderer.cs" />
+    <Compile Include="Rendering\DS\DSFileRenderer.cs" />
+    <Compile Include="Rendering\DS\DsFilters\AudioCD.cs" />
     <Compile Include="Rendering\DS\DShowTypes.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Rendering\DS\DsRendererBase.cs" />
-    <Compile Include="Rendering\DS\DSRotEntry.cs" />
-    <Compile Include="Rendering\DS\DSFileRenderer.cs" />
     <Compile Include="Rendering\DS\DvdTypes.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Rendering\DS\DsFilters\AudioCD.cs" />
+    <Compile Include="Rendering\SampleGrabberUtils.cs" />
+    <Compile Include="WorkerSupport\CommandProcessor.cs" />
+    <Compile Include="WorkerSupport\WorkerError.cs" />
+    <Compile Include="WorkerSupport\WorkerRenderer.cs" />
     <Compile Include="Rendering\MediaRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Base\StreamRenderer.cs" />

@@ -60,7 +60,7 @@ namespace OPMedia.ShoutcastWorker
             }
         }
 
-        public void Play(string url)
+        public void Play(string url, int delayStart)
         {
             if (url == null || url.Length <= 0)
                 return;
@@ -150,20 +150,36 @@ namespace OPMedia.ShoutcastWorker
             _proc = proc;
         }
 
-        public FilterState FilterState
+        public FilterState GetFilterState()
         {
-            get
+            FilterState fs = FilterState.Stopped;
+            if (mediaControl != null)
             {
-                FilterState fs = FilterState.Stopped;
-                if (mediaControl != null)
-                {
-                    int hr = mediaControl.GetState(0, out fs);
-                    WorkerException.ThrowForHResult(hr);
-                }
-
-                return fs;
-
+                int hr = mediaControl.GetState(0, out fs);
+                WorkerException.ThrowForHResult(hr);
             }
+
+            return fs;
+        }
+
+        public SupportedMeteringData GetSupportedMeteringData()
+        {
+            return SupportedMeteringData.Levels;
+        }
+
+        public double[] GetLevels()
+        {
+            return null;
+        }
+
+        public double[] GetWaveform()
+        {
+            return null;
+        }
+
+        public double[] GetSpectrogram()
+        {
+            return null;
         }
     }
 }

@@ -71,7 +71,10 @@ namespace OPMedia.UI.ApplicationUpdate
                         Logger.LogInfo("Current version: {0} cannot be automatically updated.", current);
 
                         if (detectOnDemand)
-                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEPOSSIBLE", "TXT_APP_NAME", MessageBoxIcon.Information);
+                        {
+                            string msg = Translator.Translate("TXT_NOUPDATEPOSSIBLE", Constants.SuiteName, AppConfig.UriBase);
+                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, msg, "TXT_APP_NAME", MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {

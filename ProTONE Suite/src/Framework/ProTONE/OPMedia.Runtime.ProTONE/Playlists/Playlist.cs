@@ -263,15 +263,21 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return true;
         }
 
-        public void AddOnlineMediaItem(OnlineMediaItem omi)
+        public void AddOnlineMediaItem(OnlineMediaItem omi, int delayStart = 0)
         {
             try
             {
+                PlaylistItem pli = null;
+
                 if (omi is RadioStation)
-                    Add(new RadioStationPlaylistItem(omi as RadioStation));
+                    pli = new RadioStationPlaylistItem(omi as RadioStation);
                 else if (omi is DeezerTrackItem)
-                    Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
-                   
+                    pli = new DeezerTrackPlaylistItem(omi as DeezerTrackItem);
+
+                pli.DelayStart = delayStart;
+
+                Add(pli);
+
                 EventRaiser(Count - 1, -1, UpdateType.Added);
             }
             catch (Exception ex)
@@ -293,7 +299,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public virtual void AddItem(string itemPath)
+        public virtual void AddItem(string itemPath, int delayStart = 0)
         {
             try
             {
@@ -316,21 +322,24 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     }
                     else
                     {
-                        Add(new UrlPlaylistItem(itemPath));
+                        var pli = new UrlPlaylistItem(itemPath);
+                        pli.DelayStart = delayStart;
+                        Add(pli);
+
                         added = true;
                     }
                 }
 
                 if (!added)
                 {
+                    PlaylistItem pli = null;
                     if (DvdMedia.FromPath(itemPath) != null)
-                    {
-                        Add(new DvdPlaylistItem(itemPath));
-                    }
+                        pli = new DvdPlaylistItem(itemPath);
                     else
-                    {
-                        Add(new PlaylistItem(itemPath, false));
-                    }
+                        pli = new PlaylistItem(itemPath, false);
+
+                    pli.DelayStart = delayStart;
+                    Add(pli);
                 }
 
                 EventRaiser(Count - 1, -1, UpdateType.Added);
@@ -539,7 +548,12 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 sb.AppendLine(string.Format(fmt, item.Duration.TotalSeconds, item.PersistentPlaylistName));
 
-                sb.AppendLine(item.Path);
+                var path = item.Path;
+
+                if (item.DelayStart > 0)
+                    path += $">{item.DelayStart}";
+
+                sb.AppendLine(path);
             }
 
             return sb.ToString();
@@ -621,13 +635,25 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                         }
                         else
                         {
+                            // This is a path line
+                            var path = line;
+                            int delayStart = 0;
+
+                            if (line.Contains(">"))
+                            {
+                                // The line contains a delay start indication
+                                string[] fields = line.Split('>');
+                                path = fields[0];
+                                int.TryParse(fields[1], out delayStart);
+                            }
+
                             if (omi != null)
                             {
-                                omi.Url = line;
-                                AddOnlineMediaItem(omi);
+                                omi.Url = path;
+                                AddOnlineMediaItem(omi, delayStart);
                             }
                             else
-                                AddItem(GetAbsoluteItemPath(line, playlistFileName));
+                                AddItem(GetAbsoluteItemPath(path, playlistFileName), delayStart);
 
                             omi = null;
                         }

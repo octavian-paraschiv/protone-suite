@@ -58,6 +58,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
+        public double EffectiveSeconds
+        {
+            get
+            {
+                return timeScale.EffectiveSeconds;
+            }
+
+            set
+            {
+                timeScale.EffectiveSeconds = value;
+            }
+        }
+
         public int ProjectedVolume
         {
             get

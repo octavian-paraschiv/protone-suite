@@ -2,6 +2,7 @@
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
@@ -19,6 +20,8 @@ namespace OPMedia.AudioWorker
 
         protected double durationScaleFactor = 1;
         protected MediaFileInfo renderMediaInfo = MediaFileInfo.Empty;
+
+        protected SampleGrabberProbe _probe = null;
 
 
         public AudioFilePlayer()
@@ -100,7 +103,7 @@ namespace OPMedia.AudioWorker
             }
         }
 
-        public void Play(string url)
+        public void Play(string url, int delayStart)
         {
             if (url == null || url.Length <= 0)
                 return;
@@ -121,11 +124,20 @@ namespace OPMedia.AudioWorker
         private void InitMedia(string url)
         {
             mediaControl = BuildMediaControl();
-
             mediaPosition = mediaControl as IMediaPosition;
             basicAudio = mediaControl as IBasicAudio;
 
             int hr = mediaControl.RenderFile(url);
+
+
+            try
+            {
+                _probe = new SampleGrabberProbe(mediaControl);
+            }
+            catch
+            {
+                _probe = null;
+            }
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
             WorkerException.ThrowForHResult(hr);
@@ -172,6 +184,12 @@ namespace OPMedia.AudioWorker
 
         public void Stop()
         {
+            if (_probe != null)
+            {
+                _probe.Dispose();
+                _probe = null;
+            }
+
             mediaControl?.Stop();
 
             mediaControl = null;
@@ -184,20 +202,48 @@ namespace OPMedia.AudioWorker
             _proc = proc;
         }
 
-        public FilterState FilterState
+        public FilterState GetFilterState()
         {
-            get
+            FilterState fs = FilterState.Stopped;
+            if (mediaControl != null)
             {
-                FilterState fs = FilterState.Stopped;
-                if (mediaControl != null)
-                {
-                    int hr = mediaControl.GetState(0, out fs);
-                    WorkerException.ThrowForHResult(hr);
-                }
-
-                return fs;
-
+                int hr = mediaControl.GetState(0, out fs);
+                WorkerException.ThrowForHResult(hr);
             }
+
+            return fs;
+        }
+
+        public SupportedMeteringData GetSupportedMeteringData()
+        {
+            if (_probe != null)
+                return SupportedMeteringData.Levels | SupportedMeteringData.Spectrogram | SupportedMeteringData.Waveform;
+
+            return SupportedMeteringData.OutputLevels;
+        }
+
+        public double[] GetLevels()
+        {
+            if (_probe != null)
+                return _probe.GetLevels();
+
+            return null;
+        }
+
+        public double[] GetWaveform()
+        {
+            if (_probe != null)
+                return _probe.GetWaveform();
+
+            return null;
+        }
+
+        public double[] GetSpectrogram()
+        {
+            if (_probe != null)
+                return _probe.GetSpectrogram();
+
+            return null;
         }
     }
 }

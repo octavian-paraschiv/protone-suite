@@ -79,6 +79,21 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
+        double _effective = 0f;
+        public double EffectiveSeconds
+        {
+            get
+            {
+                return _effective;
+            }
+
+            set
+            {
+                _effective = value;
+                UpdateTime();
+            }
+        }
+
         void UpdateTime()
         {
             if (this.IsOnMenuBar)
@@ -98,7 +113,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 lblTime.Text = sElapsed + sTotal;
             }
 
-            timeProgress.Value = (timeProgress.Maximum * _elapsed) / _total;
+            if (_total > 0)
+            {
+                timeProgress.Value = (timeProgress.Maximum * _elapsed) / _total;
+                timeProgress.EffectiveMaximum = (timeProgress.Maximum * _effective) / _total;
+            }
+            else
+            {
+                timeProgress.Value = 0;
+                timeProgress.EffectiveMaximum = 0;
+            }
         }
 
         #region Construction
@@ -106,7 +130,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             InitializeComponent();
 
-            //timeProgress.GaugeMode = GaugeMode.Point;
+            timeProgress.GaugeMode = GaugeMode.BandToStart;
             
             timeProgress.PositionChanged += 
                 new ValueChangedEventHandler(timeProgress_PositionChanged);

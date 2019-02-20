@@ -43,7 +43,7 @@ using OPMedia.Runtime.ProTONE.RemoteControl;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
-    public delegate void LaunchFileEventHandler(string path);
+    public delegate void LaunchFileEventHandler(PlaylistItem path);
     public delegate void StopRequestEventHandler();
     public delegate void TotalTimeChangedHandler(TimeSpan tsTotalTime);
     public delegate void SelectedItemChangedHandler(PlaylistItem newSelectedItem);
@@ -407,48 +407,48 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        internal string GetFirstFile()
+        internal PlaylistItem GetFirstItem()
         {
             if (playlist.Count > 0)
             {
-                return playlist[0].Path;
+                return playlist[0];
             }
 
-            return string.Empty;
+            return null;
         }
 
-        internal string GetNextFile()
+        internal PlaylistItem GetNextItem()
         {
-            string retVal = null;
+            PlaylistItem retVal = null;
 
             if (playlist.MoveNext())
             {
-                retVal = GetActiveFile();
+                retVal = GetActiveItem();
             }
 
             return retVal;
         }
 
-        internal string GetPreviousFile()
+        internal PlaylistItem GetPreviousItem()
         {
-            string retVal = null;
+            PlaylistItem retVal = null;
 
             if (playlist.MovePrevious())
             {
-                retVal = GetActiveFile();
+                retVal = GetActiveItem();
             }
 
             return retVal;
         }
 
-        internal string GetActiveFile()
+        internal PlaylistItem GetActiveItem()
         {
             try
             {
                 if (playlist.Count <= 0)
                     return null;
     
-                return GetActivePlaylistItem().Path;
+                return GetActivePlaylistItem();
             }
             catch { }
 
@@ -859,7 +859,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 int sel = lvPlaylist.SelectedItems[0].Index;
                 if (playlist.MoveToItem(sel) && LaunchFile != null)
                 {
-                    LaunchFile(GetActiveFile());
+                    LaunchFile(GetActiveItem());
                 }
             }
         }
@@ -973,7 +973,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 if (dlg.SelectedItem != null)
                 {
                     JumpToPlaylistItem(dlg.SelectedItem);
-                    LaunchFile(GetActiveFile());
+                    LaunchFile(GetActiveItem());
                 }
             }
         }

@@ -83,11 +83,12 @@ namespace OPMedia.Core.Configuration
         static string _skinType = string.Empty;
         static string _languageId = string.Empty;
 
-        const string VersionApiUriBase = "http://ocpa.ro/protone?version={0}&release={1}";
-        const string DefaultDownloadUriBase = "http://ocpa.ro/protone/current";
-        const string ReleaseDownloadUriBase = "http://ocpa.ro/protone/release";
+        public const string UriBase = "http://ocpa.ro/protone/";
 
-        const string DefaultHelpUriBase = "http://ocpa.ro/protone/protone-suite-docs/#VERSION#/";
+        const string VersionApiUriBase = UriBase + "?version={0}&release={1}";
+        const string DefaultDownloadUriBase = UriBase + "current";
+        const string ReleaseDownloadUriBase = UriBase + "release";
+        const string DefaultHelpUriBase = UriBase + "protone-suite-docs/#VERSION#/";
 
         public const string UnconfiguredThemeName = "Deezer";
 

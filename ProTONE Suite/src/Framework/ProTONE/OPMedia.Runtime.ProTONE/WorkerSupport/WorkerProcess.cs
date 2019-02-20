@@ -1,5 +1,6 @@
 ﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
 using OPMedia.DeezerInterop.PlayerApi;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
@@ -52,6 +53,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     public class WorkerProcess : IDisposable, IWorkerPlayer
     {
         public const long GenericErrorCode = 0x10000000;
+        public const char InnerArrayDelim = ';';
 
         Process _wp = null;
 
@@ -107,14 +109,57 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             return GetCommand<int>(WorkerCommandType.GetVolReq);
         }
 
+        public double[] GetLevels()
+        {
+            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
+            {
+                string rsp = GetCommand<string>(WorkerCommandType.GetLevelsReq);
+                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
+            }
+
+            return null;
+        }
+
+        public double[] GetWaveform()
+        {
+            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Waveform))
+            {
+                string rsp = GetCommand<string>(WorkerCommandType.GetWaveformReq);
+                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
+            }
+
+            return null;
+        }
+
+        public double[] GetSpectrogram()
+        {
+            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Spectrogram))
+            {
+                string rsp = GetCommand<string>(WorkerCommandType.GetSpectrogramReq);
+                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
+            }
+
+            return null;
+        }
+
+        SupportedMeteringData? _sup = null;
+
+        public SupportedMeteringData GetSupportedMeteringData()
+        {
+            if (_sup == null)
+                _sup = GetCommand<SupportedMeteringData>(WorkerCommandType.GetSupportedMeteringDataReq);
+
+            return _sup.GetValueOrDefault();
+        }
+
         public void Pause()
         {
             SetCommand(WorkerCommandType.PauseReq);
         }
 
-        public void Play(string url)
+        public void Play(string url, int delayStart)
         {
-            SetCommand(WorkerCommandType.PlayReq, url);
+            SetCommand(WorkerCommandType.PlayReq, url, delayStart);
 
             ThreadPool.QueueUserWorkItem((c) => ReadEvents());
         }
@@ -173,12 +218,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             SetCommand(WorkerCommandType.StopReq);
         }
 
-        public FilterState FilterState
+        public FilterState GetFilterState()
         {
-            get
-            {
-                return GetCommand<FilterState>(WorkerCommandType.GetStateReq);
-            }
+            return GetCommand<FilterState>(WorkerCommandType.GetStateReq);
         }
 
         private T GetCommand<T>(WorkerCommandType wct)

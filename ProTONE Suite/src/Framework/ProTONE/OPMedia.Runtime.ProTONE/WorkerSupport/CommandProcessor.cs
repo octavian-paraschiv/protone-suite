@@ -1,4 +1,5 @@
 ﻿using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
@@ -40,7 +41,11 @@ namespace OPMedia.Runtime.ProTONE
                 switch (cmd.Type)
                 {
                     case WorkerCommandType.PlayReq:
-                        _player.Play(cmd.Args<string>(0));
+                        {
+                            string path = cmd.Args<string>(0);
+                            int delayStart = cmd.Args<int>(1);
+                            _player.Play(path, delayStart);
+                        }
                         break;
 
                     case WorkerCommandType.PauseReq:
@@ -70,7 +75,7 @@ namespace OPMedia.Runtime.ProTONE
                         break;
 
                     case WorkerCommandType.GetStateReq:
-                        replyArg = _player.FilterState.ToString();
+                        replyArg = _player.GetFilterState().ToString();
                         break;
 
                     case WorkerCommandType.GetVolReq:
@@ -79,6 +84,22 @@ namespace OPMedia.Runtime.ProTONE
 
                     case WorkerCommandType.GetLenReq:
                         replyArg = _player.GetLength().ToString();
+                        break;
+
+                    case WorkerCommandType.GetSupportedMeteringDataReq:
+                        replyArg = _player.GetSupportedMeteringData().ToString();
+                        break;
+
+                    case WorkerCommandType.GetLevelsReq:
+                        replyArg = _player.GetLevels().ToString(WorkerProcess.InnerArrayDelim);
+                        break;
+
+                    case WorkerCommandType.GetSpectrogramReq:
+                        replyArg = _player.GetSpectrogram().ToString(WorkerProcess.InnerArrayDelim);
+                        break;
+
+                    case WorkerCommandType.GetWaveformReq:
+                        replyArg = _player.GetWaveform().ToString(WorkerProcess.InnerArrayDelim);
                         break;
 
                     default:

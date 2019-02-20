@@ -33,6 +33,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
     {
         protected MediaFileInfo mi = MediaFileInfo.Empty;
 
+        public int DelayStart { get; set; }
+
         public bool IsVideo
         {
             get

@@ -179,7 +179,7 @@ namespace OPMedia.Core
                     {
                         try
                         {
-                            retVal = StringUtils.Coalesce<T>(content);
+                            retVal = StringUtils.Coerce<T>(content);
                         }
                         catch (Exception ex)
                         {
