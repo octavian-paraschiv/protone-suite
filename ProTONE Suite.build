@@ -3,6 +3,7 @@
     <description>ProTONE Suite</description>
     <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
 
+
     <property name="msbuild.executable" value="C:\Program Files\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe" />
     <property name="nuget.executable" value="C:\NuGet\nuget.exe" />
     <property name="istool.executable" value="C:\Program Files\Inno Setup 5\iscc.exe" />
