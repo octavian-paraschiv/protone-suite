@@ -157,9 +157,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             SetCommand(WorkerCommandType.PauseReq);
         }
 
-        public void Play(string url, int delayStart)
+        public void Play(string url, string userId, int delayStart)
         {
-            SetCommand(WorkerCommandType.PlayReq, url, delayStart);
+            SetCommand(WorkerCommandType.PlayReq, url, userId, delayStart);
 
             ThreadPool.QueueUserWorkItem((c) => ReadEvents());
         }

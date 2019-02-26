@@ -43,8 +43,9 @@ namespace OPMedia.Runtime.ProTONE
                     case WorkerCommandType.PlayReq:
                         {
                             string path = cmd.Args<string>(0);
-                            int delayStart = cmd.Args<int>(1);
-                            _player.Play(path, delayStart);
+                            string userId = cmd.Args<string>(1);
+                            int delayStart = cmd.Args<int>(2);
+                            _player.Play(path, userId, delayStart);
                         }
                         break;
 

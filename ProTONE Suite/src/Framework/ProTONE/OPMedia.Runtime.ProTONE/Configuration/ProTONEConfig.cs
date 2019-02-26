@@ -1015,6 +1015,22 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Deezer settings
 
+        public static string GetDeezerUserAccessToken(string userId)
+        {
+            if (string.Compare(userId, DeezerApplicationId2, true) == 0)
+                return DeezerUserAccessToken2;
+
+            return DeezerUserAccessToken;
+        }
+
+        public static string GetNextDeezerIdentity(string userId)
+        {
+            if (string.Compare(userId, DeezerApplicationId, true) == 0)
+                return DeezerApplicationId2;
+
+            return DeezerApplicationId;
+        }
+
         public static string DeezerUserAccessToken
         {
             get { return PersistenceProxy.ReadObject("DeezerUserAccessToken", string.Empty); }
@@ -1025,6 +1041,18 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get { return PersistenceProxy.ReadObject("DeezerApplicationId", string.Empty); }
             set { PersistenceProxy.SaveObject("DeezerApplicationId", value); }
+        }
+
+        public static string DeezerUserAccessToken2
+        {
+            get { return PersistenceProxy.ReadObject("DeezerUserAccessToken2", string.Empty); }
+            set { PersistenceProxy.SaveObject("DeezerUserAccessToken2", value); }
+        }
+
+        public static string DeezerApplicationId2
+        {
+            get { return PersistenceProxy.ReadObject("DeezerApplicationId2", string.Empty); }
+            set { PersistenceProxy.SaveObject("DeezerApplicationId2", value); }
         }
 
         public static string DeezerApiEndpoint

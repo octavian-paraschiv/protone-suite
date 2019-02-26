@@ -22,6 +22,7 @@ using OPMedia.Runtime.DSP;
 using System.Collections.Concurrent;
 using OPMedia.Runtime.ProTONE.Configuration;
 using NAudio.CoreAudioApi;
+using System.IO;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -75,12 +76,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             GraphNotifyWnd.Instance.FilterGraphMessage +=
                 new System.Windows.Forms.MethodInvoker(OnFilterGraphMessage);
-
-            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
-        }
-
-        void Application_ApplicationExit(object sender, EventArgs e)
-        {
         }
 
         private void OnFilterGraphMessage()

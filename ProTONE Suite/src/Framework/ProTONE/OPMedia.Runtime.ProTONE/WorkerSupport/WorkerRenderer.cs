@@ -124,9 +124,30 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 delayStart = (int)hh.Bookmark.PlaybackTimeInSeconds;
             }
 
-            _wp.Play(renderMediaName, delayStart);
+            string userId = GetNextIdentity();
+
+            _wp.Play(renderMediaName, userId, delayStart);
         }
 
+        static string _userId = string.Empty;
+
+        private string GetNextIdentity()
+        {
+            if (_wt == WorkerType.Deezer)
+            {
+                if (ProTONEConfig.XFade)
+                {
+                    _userId = ProTONEConfig.GetNextDeezerIdentity(_userId);
+                }
+                else
+                {
+                    _userId = ProTONEConfig.DeezerApplicationId;
+                }
+            }
+
+            Logger.LogToConsole($"Next user identity for playback is: {_userId}");
+            return _userId;
+        }
 
         protected override void DoStopRenderer()
         {

@@ -25,7 +25,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     {
         void SetCommandProcessor(CommandProcessor proc);
 
-        void Play(string url, int delayStart);
+        void Play(string url, string userId, int delayStart);
         void Stop();
         void Pause();
         void Resume(int pos);

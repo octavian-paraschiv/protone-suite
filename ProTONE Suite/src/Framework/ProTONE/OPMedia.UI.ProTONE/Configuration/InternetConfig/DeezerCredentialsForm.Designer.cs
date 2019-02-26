@@ -65,7 +65,7 @@
             this.txtAppId.ReadOnly = false;
             this.txtAppId.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtAppId.ShortcutsEnabled = true;
-            this.txtAppId.Size = new System.Drawing.Size(1091, 20);
+            this.txtAppId.Size = new System.Drawing.Size(218, 20);
             this.txtAppId.TabIndex = 10;
             this.txtAppId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtAppId.UseSystemPasswordChar = false;
@@ -80,7 +80,7 @@
             this.wbDeezer.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbDeezer.Name = "wbDeezer";
             this.wbDeezer.ScriptErrorsSuppressed = true;
-            this.wbDeezer.Size = new System.Drawing.Size(1189, 366);
+            this.wbDeezer.Size = new System.Drawing.Size(316, 20);
             this.wbDeezer.TabIndex = 9;
             this.wbDeezer.WebBrowserShortcutsEnabled = false;
             // 
@@ -104,7 +104,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(1203, 453);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(330, 82);
             this.opmTableLayoutPanel1.TabIndex = 2;
             // 
             // opmLabel1
@@ -147,7 +147,7 @@
             this.opmPanel1.Location = new System.Drawing.Point(3, 76);
             this.opmPanel1.Name = "opmPanel1";
             this.opmPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.opmPanel1.Size = new System.Drawing.Size(1197, 374);
+            this.opmPanel1.Size = new System.Drawing.Size(324, 3);
             this.opmPanel1.TabIndex = 13;
             // 
             // opmLabel2
@@ -161,13 +161,13 @@
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(1085, 20);
+            this.opmLabel2.Size = new System.Drawing.Size(212, 20);
             this.opmLabel2.TabIndex = 14;
             this.opmLabel2.Text = "TXT_REDIRECTURL_HINT";
             // 
             // DeezerCredentialsForm
             // 
-            this.ClientSize = new System.Drawing.Size(1205, 477);
+            this.ClientSize = new System.Drawing.Size(332, 106);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "DeezerCredentialsForm";
             this.pnlContent.ResumeLayout(false);

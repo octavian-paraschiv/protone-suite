@@ -23,9 +23,10 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         public DeezerCredentialsForm()
         {
             InitializeComponent();
-            wbDeezer.Navigated += new WebBrowserNavigatedEventHandler(wbDeezer_Navigated);
+            //wbDeezer.Navigated += new WebBrowserNavigatedEventHandler(wbDeezer_Navigated);
         }
 
+        /*
         void wbDeezer_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             string url = e.Url.ToString();
@@ -56,7 +57,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
                     }
                 }
             }
-        }
+        }*/
 
         private void btnRequest_Click(object sender, EventArgs e)
         {
@@ -68,6 +69,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             bool bFailed = true;
 
+            /*
             try
             {
                 string ieVer = "";
@@ -109,14 +111,17 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             {
                 Logger.LogException(ex);
                 bFailed = true;
-            }
+            }*/
 
             if (bFailed)
             {
-                MessageDisplay.Show("TXT_INTERNET_EXPLORER_HINT", "TXT_APP_NAME", MessageBoxIcon.Exclamation);
+                //MessageDisplay.Show("TXT_INTERNET_EXPLORER_HINT", "TXT_APP_NAME", MessageBoxIcon.Exclamation);
 
                 // Open with default browser
                 Process.Start(url);
+
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
     }

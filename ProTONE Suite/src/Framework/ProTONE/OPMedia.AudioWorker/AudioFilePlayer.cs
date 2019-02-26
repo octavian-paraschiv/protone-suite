@@ -103,7 +103,7 @@ namespace OPMedia.AudioWorker
             }
         }
 
-        public void Play(string url, int delayStart)
+        public void Play(string url, string userId, int delayStart)
         {
             if (url == null || url.Length <= 0)
                 return;
