@@ -8,8 +8,7 @@ before_build:
 
 build_script:
 - echo "Building ProTONE Suite solution ..."
-- cd ".\ProTONE Suite\src"
-- msbuild /restore /p:Configuration=Debug /t:Rebuild "ProTONE Suite.sln" /v:normal 
+- msbuild /restore /p:Configuration=Debug /t:Rebuild ".\ProTONE Suite\src\ProTONE Suite.sln" /v:normal 
   
 after_build:
 - echo "Copying Romanian language file for Inno Setup"
@@ -17,5 +16,6 @@ after_build:
 - echo "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
-- tree /F ".\output"
+- tree /F ".\ProTONE Suite\output"
+
 

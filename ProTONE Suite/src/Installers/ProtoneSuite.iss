@@ -1,7 +1,7 @@
 ;------------------------------
 ; macrodefinitions
 #define BINDIR "..\bin"
-#define OUTDIR "..\..\..\output"
+#define OUTDIR "..\..\output"
 #define EXTDIR "..\externals"
 
 #define VERSION GetStringFileInfo(BINDIR + "\OPMedia.Core.dll", FILE_VERSION)
