@@ -17,7 +17,7 @@ after_build:
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
 - CALL create_buildinfo.bat
-- copy .\*.txt" ".\ProTONE Suite\output"
+- copy .\*.txt ".\ProTONE Suite\output"
 - dir ".\ProTONE Suite\output"
 - 7z a protone-setup.zip ".\ProTONE Suite\output\*.*"
 
