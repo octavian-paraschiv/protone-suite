@@ -16,10 +16,13 @@ after_build:
 - echo "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
+- 7z a protone-setup.zip ".\ProTONE Suite\output\*.*"
 - dir ".\ProTONE Suite\output"
 
+
+
 artifacts:
-- path: ".\ProTONE Suite\output\*"
+- path: protone-setup.zip
 - name: protone-setup
 
 deploy:
