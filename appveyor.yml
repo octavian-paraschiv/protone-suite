@@ -3,7 +3,7 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
-- nuget restore .\ProTONE Suite\src\ProTONE Suite.sln
+- nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln"
 
 build:
   project: .\ProTONE Suite\src\ProTONE Suite.sln
