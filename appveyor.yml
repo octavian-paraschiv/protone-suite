@@ -10,4 +10,6 @@ build:
   verbosity: minimal
   
 after_build:
-- tree /F ".\ProTONE Suite\src\bin"
+- set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
+- ISCC /Q  ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
+
