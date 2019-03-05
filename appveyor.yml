@@ -3,6 +3,7 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
+- copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 5\Languages"
 - nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln"
 
 build:
