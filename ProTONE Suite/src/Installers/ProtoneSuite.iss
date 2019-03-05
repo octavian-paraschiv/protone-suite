@@ -1,9 +1,8 @@
 ;------------------------------
 ; macrodefinitions
 #define BINDIR "..\bin"
-
-#define OUTDIR "..\..\..\..\protone-suite-output"
-#define EXTDIR "..\..\..\..\protone-suite-externals"
+#define OUTDIR "..\..\..\output"
+#define EXTDIR "..\externals"
 
 #define VERSION GetStringFileInfo(BINDIR + "\OPMedia.Core.dll", FILE_VERSION)
 #define COMPANY GetStringFileInfo(BINDIR + "\OPMedia.Core.dll", COMPANY_NAME)
