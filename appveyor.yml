@@ -16,5 +16,24 @@ after_build:
 - echo "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
+- dir ".\ProTONE Suite\output"
+
+artifacts:
+- path: ".\ProTONE Suite\output\*"
+- name: protone-setup
+
+deploy:
+    provider: FTP
+    protocol: ftp
+    host: 
+        secure: ALADPEGH8w9Rf9Y68/VfGg==
+    username: 
+        secure: 6/oR8gHd/tadZ97TJLkTg==
+    password:
+        secure: WLrEKSe6D0A7YU3E96co+w==
+    folder: httpdocs/ProTONE/current/
+    application: protone-setup
+
+    
 
 
