@@ -28,10 +28,8 @@ artifacts:
 deploy:
     provider: FTP
     protocol: ftp
-    host: 
-        secure: ALADPEGH8w9Rf9Y68/VfGg==
-    username: 
-        secure: 6/oR8gHd/tadZ97TJLkTg==
+    host: 188.213.19.151
+    username: ocparo
     password:
         secure: WLrEKSe6D0A7YU3E96co+w==
     folder: httpdocs/ProTONE/current/
