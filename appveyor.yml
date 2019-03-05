@@ -3,14 +3,18 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
-- copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 5\Languages"
+- echo "Restoring NuGet packages from ProTONE Suite solution ..."
 - nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln"
 
-build:
-  project: .\ProTONE Suite\src\ProTONE Suite.sln
-  verbosity: minimal
+build_script:
+- echo "Building ProTONE Suite solution ..."
+- cd ".\ProTONE Suite\src"
+- msbuild /restore /p:Configuration=Debug /t:Rebuild "ProTONE Suite.sln" /v:normal 
   
 after_build:
+- echo "Copying Romanian language file for Inno Setup"
+- copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 5\Languages"
+- echo "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
 - tree /F ".\output"
