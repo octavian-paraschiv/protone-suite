@@ -23,7 +23,7 @@ after_build:
 
 artifacts:
 - path: protone-setup.zip
-- name: protone-setup
+  name: protone-setup
 
 deploy:
     provider: FTP
