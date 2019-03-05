@@ -8,3 +8,6 @@ before_build:
 build:
   project: .\ProTONE Suite\src\ProTONE Suite.sln
   verbosity: minimal
+  
+after_build:
+- tree /F ".\ProTONE Suite\src\bin"
