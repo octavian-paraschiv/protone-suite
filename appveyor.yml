@@ -2,7 +2,7 @@ version: 3.1.{build}
 skip_tags: true
 image: Visual Studio 2017
 
-before-build:
+before_build:
 - nuget restore .\ProTONE Suite\src\ProTONE Suite.sln
 
 build:
