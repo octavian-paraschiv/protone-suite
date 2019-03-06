@@ -1,3 +1,2 @@
 # protone-suite
-ProTONE Suite
-[![Codeship Status for octavian-paraschiv/protone-suite](https://app.codeship.com/projects/6be338b0-1bfb-0137-1b70-162f0f3cc304/status?branch=master)](https://app.codeship.com/projects/328784)
+[![ProTONE Suite - Appveyor Build Status](https://ci.appveyor.com/api/projects/status/ifocbjuv3btx2spu?svg=true)](https://ci.appveyor.com/project/octavian-paraschiv/protone-suite)
