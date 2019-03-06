@@ -3,8 +3,8 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
-- call init_version.bat VERSION %APPVEYOR_BUILD_VERSION% ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs"
-- copy /y ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs" ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
+- rem "Initializing build version ..."
+- ps: prep_build.ps1 env:APPVEYOR_BUILD_VERSION false
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
 - rem "Restoring NuGet packages from ProTONE Suite solution ..."
@@ -23,7 +23,6 @@ after_build:
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
 
 - rem "Generating artifacts ..."
-- CALL create_buildinfo.bat
 - copy .\*.txt ".\ProTONE Suite\output"
 - dir ".\ProTONE Suite\output"
 - 7z a protone-setup.zip ".\ProTONE Suite\output\*.*"
