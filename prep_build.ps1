@@ -8,5 +8,5 @@ $content = (Get-Content $templateFile).replace('VERSION', $version).Replace('REL
 $content | Set-Content $versionFile
 
 $buildInfoFile = ".\ProTONE Suite $version.buildinfo.txt"
-$content = (Get-Date -Format 'yyyy-MM-dd')
+$content = (Get-Date -Format 'yyyy-MM-dd') + ", $isRelease"
 $content | Set-Content $buildInfoFile
