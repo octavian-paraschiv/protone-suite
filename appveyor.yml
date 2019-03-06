@@ -3,19 +3,27 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
-- echo "Restoring NuGet packages from ProTONE Suite solution ..."
+- rem "Initializing build version: %APPVEYOR_BUILD_VERSION%"
+- call init_version.bat VERSION %APPVEYOR_BUILD_VERSION% ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs"
+- copy /y ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs" ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
+- type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
+
+- rem "Restoring NuGet packages from ProTONE Suite solution ..."
 - nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln" -Verbosity Quiet
 
 build_script:
-- echo "Building ProTONE Suite solution ..."
+- rem "Building ProTONE Suite solution ..."
 - msbuild /restore /p:Configuration=Debug /t:Rebuild ".\ProTONE Suite\src\ProTONE Suite.sln" /v:minimal 
   
 after_build:
-- echo "Copying Romanian language file for Inno Setup"
+- rem "Copying Romanian language file for Inno Setup"
 - copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 5\Languages"
-- echo "Building ProTONE Suite installer ..."
+
+- rem "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
+
+- rem "Generating artifacts ..."
 - CALL create_buildinfo.bat
 - copy .\*.txt ".\ProTONE Suite\output"
 - dir ".\ProTONE Suite\output"
