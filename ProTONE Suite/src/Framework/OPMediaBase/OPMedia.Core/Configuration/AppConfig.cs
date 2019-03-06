@@ -85,9 +85,7 @@ namespace OPMedia.Core.Configuration
 
         public const string UriBase = "http://ocpa.ro/protone/";
 
-        const string VersionApiUriBase = UriBase + "?version={0}&release={1}";
-        const string DefaultDownloadUriBase = UriBase + "current";
-        const string ReleaseDownloadUriBase = UriBase + "release";
+        const string VersionApiUriBase = UriBase + "?release={0}";
         const string DefaultHelpUriBase = UriBase + "protone-suite-docs/#VERSION#/";
 
         public const string UnconfiguredThemeName = "Deezer";
@@ -373,28 +371,13 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static string DownloadUriBase
-        {
-            get
-            {
-                // If the installed version is not a release version or we're running
-                // on a development machine (either DEV or QA), then allow downloading
-                // from the current/test channel. Otherwise download from the release 
-                // channel. Builds will be published to release channel only after they
-                // are passing a minimum set of tests.
-                if (SuiteVersion.IsRelease == false || Regedit.IsDevelopmentMachine)
-                    return DefaultDownloadUriBase;
-
-                return ReleaseDownloadUriBase;
-            }
-        }
-
         public static string VersionApiUri
         {
             get
             {
                 bool release = (SuiteVersion.IsRelease && !Regedit.IsDevelopmentMachine);
-                return string.Format(VersionApiUriBase, SuiteVersion.Version, release).ToLowerInvariant();
+                return string.Format(VersionApiUriBase, SuiteVersion.Version, 
+                    release ? "true" : "all").ToLowerInvariant();
             }
         }
 

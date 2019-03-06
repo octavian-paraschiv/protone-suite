@@ -20,11 +20,11 @@ namespace OPMedia.UI.ApplicationUpdate
     public partial class UpdateWaitForm : GenericWaitDialog
     {
         WebFileRetriever _wfr = null;
-        string _version = string.Empty;
+        string _file = string.Empty;
 
-        public UpdateWaitForm(string version) : base()
+        public UpdateWaitForm(string file) : base()
         {
-            _version = version;
+            _file = file;
 
             InitializeComponent();
 
@@ -53,13 +53,12 @@ namespace OPMedia.UI.ApplicationUpdate
 
         private void StartDownload()
         {
-            string file = string.Format("{0} {1}.exe", Constants.SuiteName, _version);
-            string fileUri = AppConfig.DownloadUriBase + "/" + file;
-            string tempFile = Path.Combine(Path.GetTempPath(), file);
+            string tmpFileName = Path.GetFileName(_file);
+            string tempFile = Path.Combine(Path.GetTempPath(), tmpFileName);
 
-            Logger.LogInfo("Downloading update file from {0} ...", fileUri);
+            Logger.LogInfo("Downloading update file from {0} ...", _file);
 
-            _wfr = new WebFileRetriever(AppConfig.ProxySettings, fileUri, tempFile);
+            _wfr = new WebFileRetriever(AppConfig.ProxySettings, _file, tempFile);
             _wfr.FileRetrieveComplete += OnDownloadComplete;
             _wfr.DownloadProgress += OnDownloadProgress;
             _wfr.PerformDownload(true);

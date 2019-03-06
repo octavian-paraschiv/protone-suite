@@ -17,6 +17,7 @@ using System.Reflection;
 using System.ComponentModel;
 using OPMedia.Core.InstanceManagement;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace OPMedia.UI.ApplicationUpdate
 {
@@ -63,9 +64,33 @@ namespace OPMedia.UI.ApplicationUpdate
 
                 using (WebClient wc = new WebClient())
                 {
-                    string availableVersion = wc.DownloadString(AppConfig.VersionApiUri);
+                    var json = wc.DownloadString(AppConfig.VersionApiUri);
+                    var builds = JsonConvert.DeserializeObject<List<BuildInfo>>(json);
 
-                    if (string.IsNullOrEmpty(availableVersion))
+                    if (builds != null && builds.Count > 0)
+                    {
+                        builds.Sort((b1, b2) =>
+                        {
+                            return b2.Version.CompareTo(b1.Version);
+                        });
+
+                        if (builds[0].Version.CompareTo(current) > 0)
+                        {
+                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is required.",
+                                current, builds[0].Version);
+
+                            EventDispatch.DispatchEvent(EventNames.NewVersionAvailable, builds[0]);
+                        }
+                        else
+                        {
+                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is NOT required.",
+                             current, builds[0].Version);
+
+                            if (detectOnDemand)
+                                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
+                        }
+                    }
+                    else
                     {
                         // This version cannot be automatically updated.
                         Logger.LogInfo("Current version: {0} cannot be automatically updated.", current);
@@ -74,26 +99,6 @@ namespace OPMedia.UI.ApplicationUpdate
                         {
                             string msg = Translator.Translate("TXT_NOUPDATEPOSSIBLE", Constants.SuiteName, AppConfig.UriBase);
                             EventDispatch.DispatchEvent(EventNames.ShowMessageBox, msg, "TXT_APP_NAME", MessageBoxIcon.Information);
-                        }
-                    }
-                    else
-                    {
-                        Version available = new Version(availableVersion);
-
-                        if (available.CompareTo(current) > 0)
-                        {
-                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is required.",
-                                current, available);
-
-                            EventDispatch.DispatchEvent(EventNames.NewVersionAvailable, availableVersion);
-                        }
-                        else
-                        {
-                            Logger.LogInfo("Current version: {0}, available on server: {1}. Update is NOT required.",
-                               current, available);
-
-                            if (detectOnDemand)
-                                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
                         }
                     }
                 }
@@ -106,13 +111,13 @@ namespace OPMedia.UI.ApplicationUpdate
     
 
         [EventSink(EventNames.NewVersionAvailable)]
-        public void ProcessNewVersionAvailable(string newVersion)
+        public void ProcessNewVersionAvailable(BuildInfo build)
         {
             DialogResult dlgRes = DialogResult.None;
             bool addCheck = false;
 
             dlgRes = MessageDisplay.QueryEx(
-                Translator.Translate("TXT_NOTIFYUPDATE", newVersion),
+                Translator.Translate("TXT_NOTIFYUPDATE", build.Version),
                 Translator.Translate("TXT_APP_NAME"),
                 Translator.Translate("TXT_DISABLEAUTODOWNLOADS"), 
                 ref addCheck,
@@ -125,8 +130,8 @@ namespace OPMedia.UI.ApplicationUpdate
 
             if (dlgRes == DialogResult.Yes)
             {
-                Logger.LogInfo("Started update process to version: {0}", newVersion);
-                new UpdateWaitForm(newVersion).ShowDialog("TXT_WAITDOWNLOADUPDATE");
+                Logger.LogInfo("Started update process to version: {0} from url: {1}", build.Version, build.URL);
+                new UpdateWaitForm(build.URL).ShowDialog("TXT_WAITDOWNLOADUPDATE");
             }
 
             
