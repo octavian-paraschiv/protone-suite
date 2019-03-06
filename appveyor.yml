@@ -3,7 +3,6 @@ skip_tags: true
 image: Visual Studio 2017
 
 before_build:
-- rem "Initializing build version: %APPVEYOR_BUILD_VERSION%"
 - call init_version.bat VERSION %APPVEYOR_BUILD_VERSION% ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs"
 - copy /y ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs" ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
