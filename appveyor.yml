@@ -4,7 +4,7 @@ image: Visual Studio 2017
 
 before_build:
 - rem "Initializing build version ..."
-- ps: prep_build.ps1 env:APPVEYOR_BUILD_VERSION false
+- ps: .\prep_build.ps1 env:APPVEYOR_BUILD_VERSION false
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
 - rem "Restoring NuGet packages from ProTONE Suite solution ..."
