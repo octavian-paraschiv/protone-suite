@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <project name="ProTONE Suite" default="build" basedir=".">
     <description>ProTONE Suite</description>
     <loadtasks assembly="C:\NANT\nantcontrib-0.92\bin\NAnt.Contrib.Tasks.dll" />
