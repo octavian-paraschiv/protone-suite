@@ -7,6 +7,6 @@ $versionFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.c
 $content = (Get-Content $templateFile).replace('VERSION', $version).Replace('RELEASE', "$isRelease")
 $content | Set-Content $versionFile
 
-$buildInfoFile = "ProTONE Suite $version.buildinfo.txt"
+$buildInfoFile = ".\ProTONE Suite $version.buildinfo.txt"
 $content = (Get-Date -Format 'yyyy-MM-dd')
 $content | Set-Content $buildInfoFile
