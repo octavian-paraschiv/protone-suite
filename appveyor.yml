@@ -43,11 +43,11 @@ deploy:
 
 environment:
   access_token:
-    secure: q5T1rZCQBkgSA0/G7P2vXQ==
+    secure: xCkCCVZJoHFjrrsoPxZ2dFopZ1+h7/TDLPWp49kYMbA=
     
 on_success:
     - git config --global credential.helper store
-    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    - ps: Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     - git config --global user.email "octavian.paraschiv@gmail.com"
     - git config --global user.name "octavian-paraschiv"
     - git commit -a -m "build_%APPVEYOR_BUILD_VERSION%"
