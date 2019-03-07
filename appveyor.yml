@@ -3,13 +3,8 @@ skip_tags: true
 image: Visual Studio 2017
 
 environment:
-  ftp_host: 188.213.19.151
-  ftp_user: ocparo
-  ftp_remote_dir: httpdocs/ProTONE/current/
-  ftp_pass:
-    secure: WLrEKSe6D0A7YU3E96co+w==
-  git_access_token:
-    secure: AdNddFLS8qRKDQ0iJayURTbXSMKvCJ7nXbME8W/wmCL9xF2MAGMC89a1NqZ03Hpg
+    git_access_token:
+        secure: AdNddFLS8qRKDQ0iJayURTbXSMKvCJ7nXbME8W/wmCL9xF2MAGMC89a1NqZ03Hpg
     
 before_build:
 - git checkout master
@@ -44,10 +39,11 @@ artifacts:
 deploy:
     provider: FTP
     protocol: ftp
-    host: $env:ftp_host
-    username: $env:ftp_user
-    password: $env:ftp_pass
-    folder: $env:ftp_remote_dir
+    host: 188.213.19.151
+    username: ocparo
+    password: 
+        secure: WLrEKSe6D0A7YU3E96co+w==
+    folder: httpdocs/ProTONE/current/
     application: protone-setup
   
 on_success:
