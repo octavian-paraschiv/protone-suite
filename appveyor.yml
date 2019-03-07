@@ -2,6 +2,19 @@ version: 3.1.{build}
 skip_tags: true
 image: Visual Studio 2017
 
+environment:
+  access_token:
+    secure: AdNddFLS8qRKDQ0iJayURTbXSMKvCJ7nXbME8W/wmCL9xF2MAGMC89a1NqZ03Hpg
+  ftp_host: 
+    secure: ALADPEGH8w9Rf9Y68/VfGg==
+  ftp_user: 
+    secure: Y6/oR8gHd/tadZ97TJLkTg==
+  ftp_pass:
+    secure: WLrEKSe6D0A7YU3E96co+w==
+  ftp_folder: 
+    secure: amy8jP385jc3l1gSkkG2cQCcTSRWo4IQdFF2BrUu6T4=
+    
+
 before_build:
 - git checkout master
 - rem "Initializing build version ..."
@@ -35,27 +48,17 @@ artifacts:
 deploy:
     provider: FTP
     protocol: ftp
-    host: 188.213.19.151
-    username: ocparo
-    password:
-        secure: WLrEKSe6D0A7YU3E96co+w==
-    folder: httpdocs/ProTONE/current/
+    host: $env:ftp_host
+    username: $env:ftp_user
+    password: $env:ftp_pass
+    folder: $env:ftp_folder
     application: protone-setup
-
-environment:
-  access_token:
-    secure: AdNddFLS8qRKDQ0iJayURTbXSMKvCJ7nXbME8W/wmCL9xF2MAGMC89a1NqZ03Hpg
-    
+  
 on_success:
     - dir
     - git config --global credential.helper store
     - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     - git config --global user.email "octavian.paraschiv@gmail.com"
     - git config --global user.name "octavian-paraschiv"
-    - git commit -a -m "build_%APPVEYOR_BUILD_VERSION%"
+    - git commit -a -m "build_%APPVEYOR_BUILD_VERSION% (release:%IS_RELEASE%)"
     - git push --all --progress origin
-
-    
-    
-
-
