@@ -46,6 +46,7 @@ environment:
     secure: AdNddFLS8qRKDQ0iJayURTbXSMKvCJ7nXbME8W/wmCL9xF2MAGMC89a1NqZ03Hpg
     
 on_success:
+    - dir
     - git config --global credential.helper store
     - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     - git config --global user.email "octavian.paraschiv@gmail.com"
