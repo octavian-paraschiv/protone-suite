@@ -11,8 +11,6 @@ environment:
     secure: Y6/oR8gHd/tadZ97TJLkTg==
   ftp_pass:
     secure: WLrEKSe6D0A7YU3E96co+w==
-  ftp_folder: 
-    secure: amy8jP385jc3l1gSkkG2cQCcTSRWo4IQdFF2BrUu6T4=
     
 
 before_build:
@@ -51,7 +49,7 @@ deploy:
     host: $env:ftp_host
     username: $env:ftp_user
     password: $env:ftp_pass
-    folder: $env:ftp_folder
+    folder: httpdocs/ProTONE/current/
     application: protone-setup
   
 on_success:
