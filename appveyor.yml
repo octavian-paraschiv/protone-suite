@@ -8,28 +8,18 @@ environment:
     
 before_build:
 - git checkout master
-- rem "Initializing build version ..."
 - ps: .\prep_build.ps1 "$env:APPVEYOR_BUILD_VERSION" "$env:IS_RELEASE"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
-
-- rem "Restoring NuGet packages from ProTONE Suite solution ..."
 - nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln" -Verbosity Quiet
 
 build_script:
-- rem "Building ProTONE Suite solution ..."
 - msbuild /restore /p:Configuration=Debug /t:Rebuild ".\ProTONE Suite\src\ProTONE Suite.sln" /v:minimal 
   
 after_build:
-- rem "Copying Romanian language file for Inno Setup"
 - copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 5\Languages"
-
-- rem "Building ProTONE Suite installer ..."
 - set PATH=%PATH%;"C:\Program Files (x86)\Inno Setup 5"
 - ISCC /Q ".\ProTONE Suite\src\Installers\ProtoneSuite.iss"
-
-- rem "Generating artifacts ..."
 - copy .\*.txt ".\ProTONE Suite\output"
-- dir ".\ProTONE Suite\output"
 - 7z a protone-setup.zip ".\ProTONE Suite\output\*.*"
 
 artifacts:
@@ -47,7 +37,6 @@ deploy:
     application: protone-setup
   
 on_success:
-    - dir
     - git config --global credential.helper store
     - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_access_token):x-oauth-basic@github.com`n"
     - git config --global user.email "octavian.paraschiv@gmail.com"
