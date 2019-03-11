@@ -273,6 +273,15 @@ begin
    Sleep(750);
 end;
 
+//---------------------------------------------------------------------------------
+procedure StopPersistenceService;
+var
+   ResultCode: Integer;
+begin
+   Exec('cmd.exe', '/c "sc stop OPMedia.PersistenceService"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+   Sleep(750);
+end;
+
 //--------------------------------------------------------------------------------
 function IsApplicationRunning(appName : String) : Boolean;
 begin
@@ -376,6 +385,9 @@ begin
 
    DependencyPage.SetText(CustomMessage('RCCServiceCheck'), '');
    StopRCCService;
+   
+   DependencyPage.SetText(CustomMessage('PersistenceServiceCheck'), '');
+   StopPersistenceService;
 
    DependencyPage.SetText(CustomMessage('DotNetInstalling'), '');
    DependencyPage.SetProgress(0, 2);

@@ -74,9 +74,13 @@ namespace OPMedia.ShellSupport
 
                 Logger.LogInfo("OPMedia.ShellSupport was succesfully registered !");
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                ErrorDispatcher.DispatchFatalError("Fatal registration error: " + exception.Message);
+                Logger.LogException(ex);
+            }
+            finally
+            {
+                Logger.StopLogger();
             }
         }
 
@@ -94,9 +98,13 @@ namespace OPMedia.ShellSupport
 
                 Logger.LogInfo("OPMedia.ShellSupport was succesfully unregistered !");
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                ErrorDispatcher.DispatchFatalError("Fatal unregistration error: " + exception.Message);
+                Logger.LogException(ex);
+            }
+            finally
+            {
+                Logger.StopLogger();
             }
         }
         #endregion
