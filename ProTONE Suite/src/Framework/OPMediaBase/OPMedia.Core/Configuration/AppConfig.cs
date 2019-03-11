@@ -376,8 +376,7 @@ namespace OPMedia.Core.Configuration
             get
             {
                 bool release = (SuiteVersion.IsRelease && !Regedit.IsDevelopmentMachine);
-                return string.Format(VersionApiUriBase, SuiteVersion.Version, 
-                    release ? "true" : "all").ToLowerInvariant();
+                return string.Format(VersionApiUriBase, release ? "true" : "all").ToLowerInvariant();
             }
         }
 
