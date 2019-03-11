@@ -275,14 +275,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             return fs;
         }
-        protected override int GetScaledVolume(int rawVolume)
-        {
-            if (_wt == WorkerType.Deezer)
-                return rawVolume;
-
-            return base.GetScaledVolume(rawVolume);
-        }
-
+       
         public override double PercentualVolume
         {
             get

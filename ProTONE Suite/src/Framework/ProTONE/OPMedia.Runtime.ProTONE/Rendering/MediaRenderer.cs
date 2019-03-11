@@ -346,8 +346,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public int AudioVolume
         {
             get
-            { return (streamRenderer == null) ? (int)VolumeRange.Minimum : streamRenderer.AudioVolume; }
-            set { if (streamRenderer != null) { streamRenderer.AudioVolume = value; } }
+            {
+                return (streamRenderer == null) ? (int)VolumeRange.Minimum : streamRenderer.AudioVolume;
+            }
+
+            set
+            {
+                if (streamRenderer != null)
+                    streamRenderer.AudioVolume = value;
+            }
         }
 
         public int AudioBalance

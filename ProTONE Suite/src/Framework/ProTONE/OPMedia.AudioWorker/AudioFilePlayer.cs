@@ -85,13 +85,7 @@ namespace OPMedia.AudioWorker
 
         public int GetVolume()
         {
-            int val = -1;
-
-            int hr = basicAudio.get_Volume(out val);
-            WorkerException.ThrowForHResult(hr);
-
-            return val;
-
+            return _vol;
         }
 
         public void Pause()
@@ -169,17 +163,17 @@ namespace OPMedia.AudioWorker
             }
         }
 
+        int _vol = 0;
+
         public void SetVolume(int vol)
         {
             Logger.LogTrace($"SetVolume to {vol}");
 
-            if (vol < -10000)
-                vol = -10000;
-            else if (vol > 0)
-                vol = 0;
-
-            int hr = basicAudio.put_Volume(vol);
+            var dsVolume = MapVolume(vol);
+            int hr = basicAudio.put_Volume(dsVolume);
             WorkerException.ThrowForHResult(hr);
+
+            _vol = vol;
         }
 
         public void Stop()
@@ -244,6 +238,26 @@ namespace OPMedia.AudioWorker
                 return _probe.GetSpectrogram();
 
             return null;
+        }
+
+        private int MapVolume(int rawVolume)
+        {
+            double a = (-1000 / Math.Log10(0.5));
+            double b = 0.01;
+            double c = 0.0976;
+            double x = (double)(rawVolume);
+            double logVolume = a * Math.Log10(b * (x + c));
+            int scaledVolume = (int)logVolume;
+            if (logVolume < -10000)
+            {
+                scaledVolume = -10000;
+            }
+            else if (logVolume > 0)
+            {
+                scaledVolume = 0;
+            }
+
+            return scaledVolume;
         }
     }
 }

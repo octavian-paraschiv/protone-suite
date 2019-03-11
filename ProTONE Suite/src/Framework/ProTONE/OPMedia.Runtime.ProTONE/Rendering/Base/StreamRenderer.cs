@@ -162,8 +162,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
                 if (vol > 100)
                     vol = 100;
 
-                int scaledVolume = GetScaledVolume(vol);
-                SetAudioVolume(scaledVolume); 
+                SetAudioVolume(vol); 
             } 
         }
 
@@ -465,11 +464,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         
 
         #endregion
-
-        protected virtual int GetScaledVolume(int rawVolume)
-        {
-            return rawVolume;
-        }
 
         public virtual bool IsStreamedMedia
         {
