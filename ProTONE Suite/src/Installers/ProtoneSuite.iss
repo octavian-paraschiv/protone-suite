@@ -262,8 +262,8 @@ Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flag
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstRCCService}; RunOnceId: _id8
 
 [Registry]
-Root: HKCU; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer; ValueType: dword; ValueName: DesktopProcess; ValueData: $00000001, Flags: createvalueifdoesntexist noerror
-Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer; ValueType: dword; ValueName: AlwaysUnloadDLL; ValueData: $00000001, Flags: createvalueifdoesntexist noerror
+Root: HKCU; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer; ValueType: dword; ValueName: DesktopProcess; ValueData: 1; Flags: createvalueifdoesntexist noerror
+Root: HKLM; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer; ValueType: dword; ValueName: AlwaysUnloadDLL; ValueData: 1; Flags: createvalueifdoesntexist noerror
 Root: HKLM; Subkey: SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION; ValueType: dword; ValueName: OPMedia.ProTONE.exe; ValueData: 9000; Flags: createvalueifdoesntexist noerror
 Root: HKLM; Subkey: {#REGENTRY}; ValueType: string; ValueName: InstallLanguageID; ValueData: {language}; Flags: uninsdeletevalue noerror
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: noDxvaDecoder; ValueData: $00000001; Components: itemCodecs\itemFFDShow
