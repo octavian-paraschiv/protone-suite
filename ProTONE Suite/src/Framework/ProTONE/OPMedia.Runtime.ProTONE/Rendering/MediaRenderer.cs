@@ -528,7 +528,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     if (streamRenderer != null && 
                         streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
                     {
-                        double[] levels = streamRenderer.GetLevelsData();
+                        double[] levels = null;
+
+                        if (_xfadeInProgress.WaitOne(0) == false)
+                            levels = streamRenderer.GetLevelsData();
 
                         if (levels == null)
                         {
@@ -542,8 +545,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                                 if (double.IsInfinity(mul) || double.IsNaN(mul))
                                     mul = double.MaxValue;
-
-                                Logger.LogToConsole("VOL: " + _mmDevice.AudioMeterInformation.PeakValues[0]);
 
                                 bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
                                 double left = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
@@ -570,7 +571,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     if (streamRenderer != null &&
                         streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Waveform))
                     {
-                        return streamRenderer.GetWaveform();
+                        if (_xfadeInProgress.WaitOne(0) == false)
+                            return streamRenderer.GetWaveform();
                     }
                 }
 
@@ -587,7 +589,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     if (streamRenderer != null &&
                         streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Spectrogram))
                     {
-                        return streamRenderer.GetSpectrogram();
+                        if (_xfadeInProgress.WaitOne(0) == false)
+                            return streamRenderer.GetSpectrogram();
                     }
                 }
 
@@ -855,6 +858,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
+        private ManualResetEvent _xfadeInProgress = new ManualResetEvent(false);
+
         private void HandleCrossFading()
         {
             if (UseCrossFading == false)
@@ -868,43 +873,55 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             streamRenderer.AudioVolume = 0;
 
             Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+            _xfadeInProgress.Set();
 
             Task.Factory.StartNew(() =>
             {
-                DateTime dtStart = DateTime.Now;
-                int i = 0;
-
-                while (true)
+                try
                 {
-                    i++;
-                    int delta = i * quant;
-                    _oldRenderer.AudioVolume = startVol - delta;
-                    streamRenderer.AudioVolume = delta;
+                    DateTime dtStart = DateTime.Now;
+                    int i = 0;
 
-                    Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+                    while (true)
+                    {
+                        i++;
+                        int delta = i * quant;
+                        _oldRenderer.AudioVolume = startVol - delta;
+                        streamRenderer.AudioVolume = delta;
 
-                    // _crossFadeLength is in sec
-                    // To sleep for _crossFadeLength/10 sec, need to multiply with 100
-                    Thread.Sleep(100 * ProTONEConfig.XFadeLength);
+                        Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
 
-                    DateTime dtNow = DateTime.Now;
-                    if (dtNow.Subtract(dtStart).TotalSeconds >= ProTONEConfig.XFadeLength)
-                        break;
+                        // _crossFadeLength is in sec
+                        // To sleep for _crossFadeLength/10 sec, need to multiply with 100
+                        Thread.Sleep(100 * ProTONEConfig.XFadeLength);
+
+                        DateTime dtNow = DateTime.Now;
+                        if (dtNow.Subtract(dtStart).TotalSeconds >= ProTONEConfig.XFadeLength)
+                            break;
+                    }
+
+                    Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+                    _oldRenderer.AudioVolume = 0;
+                    streamRenderer.AudioVolume = startVol;
+
+                    Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{streamRenderer}]");
+
+                    // Cleanup old renderer
+                    if (_oldRenderer != null && _oldRenderer.Valid)
+                    {
+                        _oldRenderer.StopRenderer();
+                        _oldRenderer.Dispose();
+                        _oldRenderer = null;
+                    }
                 }
-
-                Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{streamRenderer}]");
-
-                _oldRenderer.AudioVolume = 0;
-                streamRenderer.AudioVolume = startVol;
-
-                Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{streamRenderer}]");
-
-                // Cleanup old renderer
-                if (_oldRenderer != null)
+                catch (Exception ex)
                 {
-                    _oldRenderer.StopRenderer();
-                    _oldRenderer.Dispose();
-                    _oldRenderer = null;
+                    Logger.LogException(ex);
+                }
+                finally
+                {
+                    _xfadeInProgress.Reset();
                 }
             });
         }

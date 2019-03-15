@@ -245,9 +245,11 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         private void SetCommand(WorkerCommandType wct, params object[] args)
         {
+            WorkerCommand cmd = new WorkerCommand(wct);
+            WorkerCommand replyCmd = null;
+
             try
             {
-                var cmd = new WorkerCommand(wct);
                 if (args != null && args.Length > 0)
                 {
                     foreach (object arg in args)
@@ -256,7 +258,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
                 if (WorkerCommandHelper.WriteCommand(_wp?.StandardInput, cmd))
                 {
-                    var replyCmd = WorkerCommandHelper.ReadCommand(_wp?.StandardOutput);
+                    replyCmd = WorkerCommandHelper.ReadCommand(_wp?.StandardOutput);
                     if (replyCmd != null && replyCmd.Type == (WorkerCommandType)(wct + 1))
                     {
                         CheckReply(wct.ToString(), replyCmd);
@@ -268,10 +270,15 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                     // The worker process will die when StopReq is sent so don't bother processing the response.
                     HandleErrorCode(wct.ToString(), (WorkerError)dz_error_t.DZ_ERROR_BAD_OPERATION_RSP);
             }
-            catch
+            catch(Exception ex)
             {
-                if (_wp != null)
+                if (_wp != null && _wp.HasExited == false)
                 {
+                    if (replyCmd != null)
+                        Logger.LogError($"Killing worker process after exception, last command: {cmd}, reply: {replyCmd}");
+                    else
+                        Logger.LogError($"Killing worker process after exception, last command: {cmd}, no reply");
+
                     _wp.Kill();
                     _wp = null;
                 }
