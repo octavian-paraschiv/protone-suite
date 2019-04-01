@@ -32,7 +32,7 @@ deploy:
     host: 188.213.19.151
     username: ocparo
     password: 
-        secure: WLrEKSe6D0A7YU3E96co+w==
+        secure: Ni2Gm2mHimeSMAgzkaHXJA==
     folder: httpdocs/ProTONE/current/
     application: protone-setup
   
