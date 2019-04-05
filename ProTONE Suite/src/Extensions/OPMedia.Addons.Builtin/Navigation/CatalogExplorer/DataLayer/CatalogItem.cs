@@ -186,6 +186,54 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             }
         }
 
+        [TranslatableDisplayName("TXT_ARTIST")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public string Artist
+        {
+            get { return currentRow.Artist; }
+            set { currentRow.Artist = value; }
+        }
+
+        [TranslatableDisplayName("TXT_ALBUM")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public string Album
+        {
+            get { return currentRow.Album; }
+            set { currentRow.Album = value; }
+        }
+
+        [TranslatableDisplayName("TXT_TITLE")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public string Title
+        {
+            get { return currentRow.Title; }
+            set { currentRow.Title = value; }
+        }
+
+        [TranslatableDisplayName("TXT_TRACK")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public string Track
+        {
+            get { return currentRow.Track; }
+            set { currentRow.Track = value; }
+        }
+
+        [TranslatableDisplayName("TXT_YEAR")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public string Year
+        {
+            get { return currentRow.Year; }
+            set { currentRow.Year = value; }
+        }
+
+        [TranslatableDisplayName("TXT_IMAGE")]
+        [TranslatableCategory("TXT_CATALOGITEMINFO")]
+        public byte[] Image
+        {
+            get { return currentRow.Image; }
+            set { currentRow.Image = value; }
+        }
+
 #if HAVE_COUNTERS_DISPLAY
         int _totalChildrenCount = 0;
         [TranslatableDisplayName("TXT_TOTALCHILDRENCOUNT")]

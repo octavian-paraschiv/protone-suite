@@ -238,6 +238,15 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                     if (nfi != null)
                     {
                         ci.Description = nfi.Details;
+                        var mfi = nfi as MediaFileInfo;
+                        if (mfi != null)
+                        {
+                            ci.Album = mfi.Album;
+                            ci.Artist = mfi.Artist;
+                            ci.Title = mfi.Title;
+                            ci.Track = mfi.Track.GetValueOrDefault().ToString();
+                            ci.Year = mfi.Year.GetValueOrDefault().ToString();
+                        }
                     }
                 }
                 catch(Exception ex)

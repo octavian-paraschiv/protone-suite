@@ -221,6 +221,12 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             newItem.ItemType = origItem.ItemType;
             newItem.Description = origItem.Description;
 
+            newItem.Album = origItem.Album;
+            newItem.Artist = origItem.Artist;
+            newItem.Title = origItem.Title;
+            newItem.Track = origItem.Track;
+            newItem.Year = origItem.Year;
+
             if (parentItem != null)
             {
                 newItem.ParentItemID = parentItem.ItemID;
