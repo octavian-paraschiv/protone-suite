@@ -81,6 +81,7 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -111,6 +112,7 @@
     <Compile Include="FileInformation\MediaFileInfo.cs" />
     <Compile Include="FileInformation\VideoDvdInformation.cs" />
     <Compile Include="FileInformation\VideoFileInfo.cs" />
+    <Compile Include="Galaxy\IGalaxyService.cs" />
     <Compile Include="Haali\HaaliConfig.cs" />
     <Compile Include="HeartbeatConsumer.cs" />
     <Compile Include="OnlineMediaContent\BaseClasses.cs" />
