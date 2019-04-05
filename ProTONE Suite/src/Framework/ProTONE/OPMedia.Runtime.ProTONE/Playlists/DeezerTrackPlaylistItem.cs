@@ -10,6 +10,7 @@ using System.Net;
 using System.IO;
 using OPMedia.Core.NetworkAccess;
 using OPMedia.Core.Logging;
+using Newtonsoft.Json;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -73,15 +74,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get
             {
-                return string.Format("{0}`{1}`{2}`{3}`{4}`{5}`{6}`{7}", 
-                    _dti.Artist ?? "", 
-                    _dti.Title ?? "", 
-                    _dti.Album ?? "",
-                    _dti.ReleaseDate ?? "",
-                    _dti.AlbumUriImageSmall ?? "",
-                    _dti.AlbumUriImageLarge ?? "",
-                    _dti.ArtistUriImageSmall ?? "",
-                    _dti.ArtistUriImageLarge ?? "");
+                //return string.Format("{0}`{1}`{2}`{3}`{4}`{5}`{6}`{7}", 
+                //    _dti.Artist ?? "", 
+                //    _dti.Title ?? "", 
+                //    _dti.Album ?? "",
+                //    _dti.ReleaseDate ?? "",
+                //    _dti.AlbumUriImageSmall ?? "",
+                //    _dti.AlbumUriImageLarge ?? "",
+                //    _dti.ArtistUriImageSmall ?? "",
+                //    _dti.ArtistUriImageLarge ?? "");
+
+                return JsonConvert.SerializeObject(_dti);
             }
         }
 

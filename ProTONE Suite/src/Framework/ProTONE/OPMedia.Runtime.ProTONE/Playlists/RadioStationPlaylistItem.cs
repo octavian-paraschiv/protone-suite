@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Rendering;
 
@@ -67,7 +68,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get
             {
-                return _rs.Title;
+                //return _rs.Title;
+                return JsonConvert.SerializeObject(_rs);
             }
         }
 

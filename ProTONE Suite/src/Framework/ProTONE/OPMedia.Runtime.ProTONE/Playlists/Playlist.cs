@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
+using Newtonsoft.Json;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -539,19 +540,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             sb.AppendLine("#EXTM3U");
             foreach (PlaylistItem item in this.AsReadOnly())
             {
-                string fmt = "#EXTINF:{0},{1}";
-
                 if (item is RadioStationPlaylistItem)
-                    fmt = "#RADIO:{0},{1}";
+                    sb.AppendLine($"#RADIO:JSON:{item.PersistentPlaylistName}");
                 else if (item is DeezerTrackPlaylistItem)
-                    fmt = "#DZMEDIA:{0},{1}";
-
-                sb.AppendLine(string.Format(fmt, item.Duration.TotalSeconds, item.PersistentPlaylistName));
+                    sb.AppendLine($"#DZMEDIA:JSON:{item.PersistentPlaylistName}");
+                else
+                    sb.AppendLine($"#EXTINF:{item.Duration.TotalSeconds},{item.PersistentPlaylistName}");
 
                 var path = item.Path;
 
-                if (item.DelayStart > 0)
-                    path += $">{item.DelayStart}";
+                //if (item.DelayStart > 0)
+                  //  path += $">{item.DelayStart}";
 
                 sb.AppendLine(path);
             }
@@ -589,48 +588,71 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                         if (line.StartsWith("#"))
                         {
-                            if (line.StartsWith("#RADIO:"))
+                            try
                             {
-                                string s = line.Replace("#RADIO:", "").Trim();
-                                string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                                if (fields != null && fields.Length > 1)
+                                if (line.StartsWith("#RADIO:"))
                                 {
-                                    omi = new RadioStation(OnlineMediaSource.ShoutCast);
-                                    omi.Title = fields[1];
+                                    if (line.StartsWith("#RADIO:JSON:"))
+                                    {
+                                        string s = line.Replace("#RADIO:JSON:", "").Trim();
+                                        omi = JsonConvert.DeserializeObject<RadioStation>(s);
+                                    }
+                                    else
+                                    {
+                                        string s = line.Replace("#RADIO:", "").Trim();
+                                        string[] fields = s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                                        if (fields != null && fields.Length > 1)
+                                        {
+                                            omi = new RadioStation(OnlineMediaSource.ShoutCast);
+                                            omi.Title = fields[1];
+                                        }
+                                    }
+                                }
+                                else if (line.StartsWith("#DZMEDIA:"))
+                                {
+                                    if (line.StartsWith("#DZMEDIA:JSON:"))
+                                    {
+                                        string s = line.Replace("#DZMEDIA:JSON:", "").Trim();
+                                        omi = JsonConvert.DeserializeObject<DeezerTrackItem>(s);
+                                    }
+                                    else
+                                    {
+                                        string s = line.Replace("#DZMEDIA:", "").Trim();
+                                        int idx = s.IndexOf(',');
+                                        if (idx > 0)
+                                        {
+                                            string durStr = s.Substring(0, idx);
+
+                                            DeezerTrackItem dti = new DeezerTrackItem();
+
+                                            int sec = 0;
+                                            int.TryParse(durStr, out sec);
+                                            dti.Duration = TimeSpan.FromSeconds(sec);
+
+                                            if (idx < (s.Length - 2))
+                                            {
+                                                string[] fields2 = s.Substring(idx + 1).Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                                                int i = 0;
+
+                                                dti.Artist = fields2.Field(i++);
+                                                dti.Title = fields2.Field(i++);
+                                                dti.Album = fields2.Field(i++);
+                                                dti.ReleaseDate = fields2.Field(i++);
+                                                dti.AlbumUriImageSmall = fields2.Field(i++);
+                                                dti.AlbumUriImageLarge = fields2.Field(i++);
+                                                dti.ArtistUriImageSmall = fields2.Field(i++);
+                                                dti.ArtistUriImageLarge = fields2.Field(i++);
+                                            }
+
+                                            omi = dti;
+                                        }
+                                    }
                                 }
                             }
-                            else if (line.StartsWith("#DZMEDIA:"))
+                            catch (Exception ex)
                             {
-                                string s = line.Replace("#DZMEDIA:", "").Trim();
-                                int idx = s.IndexOf(',');
-                                if (idx > 0)
-                                {
-                                    string durStr = s.Substring(0, idx);
-
-                                    DeezerTrackItem dti = new DeezerTrackItem();
-
-                                    int sec = 0;
-                                    int.TryParse(durStr, out sec);
-                                    dti.Duration = TimeSpan.FromSeconds(sec);
-
-                                    if (idx < (s.Length - 2))
-                                    {
-                                        string[] fields2 = s.Substring(idx + 1).Split("`".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-                                        int i = 0;
-
-                                        dti.Artist = fields2.Field(i++);
-                                        dti.Title = fields2.Field(i++);
-                                        dti.Album = fields2.Field(i++);
-                                        dti.ReleaseDate = fields2.Field(i++);
-                                        dti.AlbumUriImageSmall =  fields2.Field(i++);
-                                        dti.AlbumUriImageLarge =  fields2.Field(i++);
-                                        dti.ArtistUriImageSmall = fields2.Field(i++);
-                                        dti.ArtistUriImageLarge = fields2.Field(i++);
-                                    }
-
-                                    omi = dti;
-                                }
+                                Logger.LogException(ex);
                             }
                         }
                         else
