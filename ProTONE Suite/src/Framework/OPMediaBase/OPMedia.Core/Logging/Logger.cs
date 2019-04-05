@@ -89,7 +89,7 @@ namespace OPMedia.Core.Logging
         public static void LogTranslationTrace(string format, params object[] args)
         {
 #if HAVE_TRACE_UNTRANSLATED
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("UNTRANSLATED: " + message);
             Debug.Flush();
 #endif
@@ -98,7 +98,7 @@ namespace OPMedia.Core.Logging
         public static void LogHelpTrace(string format, params object[] args)
         {
 #if HAVE_TRACE_HELP
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("HELP: " + message);
             Debug.Flush();
 #endif
@@ -107,7 +107,7 @@ namespace OPMedia.Core.Logging
         public static void LogUntranslatable(string format, params object[] args)
         {
 #if HAVE_TRACE_TRANSLATIONs
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("TRANSLATE: BAD: " + message);
             Debug.Flush();
 #endif
@@ -116,7 +116,7 @@ namespace OPMedia.Core.Logging
         public static void LogTranslated(string format, params object[] args)
         {
 #if HAVE_TRACE_TRANSLATIONs
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("TRANSLATE: ACK: " + message);
             Debug.Flush();
 #endif
@@ -125,7 +125,7 @@ namespace OPMedia.Core.Logging
         public static void LogUntranslated(string format, params object[] args)
         {
 #if HAVE_TRACE_TRANSLATIONs
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("TRANSLATE: NAK: " + message);
             Debug.Flush();
 #endif
@@ -133,7 +133,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogToConsole(string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine(message);
             Debug.Flush();
         }
@@ -141,7 +141,7 @@ namespace OPMedia.Core.Logging
         public static void LogTrace_WithStackDump(string format, params object[] args)
         {
             StackTrace st = new StackTrace();
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             message += st.ToString();
 
             string[] lines = message.Split('\n');
@@ -160,7 +160,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogTrace(string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("TRC: " + message);
 
             if (LoggingConfiguration.TraceLevelEnabled)
@@ -173,7 +173,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogInfo(string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("INF: " + message);
 
             if (LoggingConfiguration.InfoLevelEnabled)
@@ -186,7 +186,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogWarning(string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("WRN: " + message);
 
             if (LoggingConfiguration.WarningLevelEnabled)
@@ -199,7 +199,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogError(string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("ERR: " + message);
 
             if (LoggingConfiguration.ErrorLevelEnabled)
@@ -217,7 +217,7 @@ namespace OPMedia.Core.Logging
 
         public static void LogException(Exception ex, string format, params object[] args)
         {
-            string message = string.Format(format, args);
+            string message = FormatMessage(format, args);
             Debug.WriteLine("EXC: " + ErrorDispatcher.GetErrorMessageForException(ex, true));
 
             if (LoggingConfiguration.LoggingEnabled)
@@ -524,6 +524,17 @@ namespace OPMedia.Core.Logging
             }
         }
         #endregion
+
+        private static string FormatMessage(string fmt, params object[] args)
+        {
+            if (fmt == null)
+                return "<null>";
+
+            if (args == null || args.Length < 1)
+                return fmt;
+
+            return string.Format(fmt, args);
+        }
     }
     #endregion
 }

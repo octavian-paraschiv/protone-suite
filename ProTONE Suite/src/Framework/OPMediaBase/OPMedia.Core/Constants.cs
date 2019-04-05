@@ -20,5 +20,10 @@ namespace OPMedia.Core
         public const string PersistenceServiceLongName = "OPMedia Persistence Service";
         public const string PersistenceServiceDescription = "Provides caching and long-time persistence support for OPMedia applications settings.";
         public const string PersistenceServiceBinary = Constants.PersistenceServiceShortName + ".exe";
+
+        public const string GalaxyServiceShortName = "OPMedia.GalaxyService";
+        public const string GalaxyServiceLongName = "OPMedia Galaxy Backend Service";
+        public const string GalaxyServiceDescription = "Provides backend services for ProTONE Galaxy database.";
+        public const string GalaxyServiceBinary = Constants.GalaxyServiceShortName + ".exe";
     }
 }

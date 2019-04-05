@@ -98,10 +98,22 @@ namespace OPMedia.Core.Configuration
             return new CultureInfo("en");
         }
 
+        private static bool IsAppUsingPersistence
+        {
+            get
+            {
+                bool ret = false;
+
+                ret |= ApplicationInfo.ApplicationName.ToLowerInvariant().Contains("player");
+                ret |= ApplicationInfo.ApplicationName.ToLowerInvariant().Contains("library");
+
+                return ret;
+            }
+        }
+
         static AppConfig()
         {
-            if (string.Compare(Constants.PersistenceServiceShortName,
-                ApplicationInfo.ApplicationName, true) != 0)
+            if (IsAppUsingPersistence)
             {
                 _cultures.Add("en", new CultureInfo("en"));
                 _cultures.Add("de", new CultureInfo("de"));
