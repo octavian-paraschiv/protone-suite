@@ -229,6 +229,8 @@ namespace OPMedia.DeezerWorker
 
             // --------------------------------------------------------------------
 
+            SetVolume(0);
+
             // --------------------------------------------------------------------
             // Start playback using dz_player_play
             // This will trigger DZ_PLAYER_EVENT_RENDER_TRACK_START
