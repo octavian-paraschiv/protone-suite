@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OPMedia.UI.Controls;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens;
 using OPMedia.UI.Themes;
 using OPMedia.Runtime.DSP;
 using OPMedia.Runtime.ProTONE.Rendering;
@@ -24,6 +23,8 @@ namespace OPMedia.UI.ProTONE.Controls
         static readonly double[] DecadeLinesRelativePositions = { 0, 9, 15, 22, 30, 36, 43, 51, 57, 64 };
         static readonly string[] DecadeLinesText = { "20", "50", "100", "200", "500", "1K", "2K", "5K", "10K", "a" };
 
+        public int BandCount { get; set; }
+
         public SpectrogramPlotter() : base()
         {
             RecreateBrush();
@@ -32,6 +33,8 @@ namespace OPMedia.UI.ProTONE.Controls
                 DecadeLinesRelativePositions[i] /= DsRendererBase.MAX_SPECTROGRAM_BANDS;
 
             this.Resize += new EventHandler(SpectrogramPlotter_Resize);
+
+            this.BandCount = DsRendererBase.MAX_SPECTROGRAM_BANDS;
         }
 
         void SpectrogramPlotter_Resize(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace OPMedia.UI.ProTONE.Controls
             if (_b != null)
                 _b.Dispose();
 
-            _w = (int)(_f * (float)this.Width / (float)SignalAnalysisScreen.BandCount);
+            _w = (int)(_f * (float)this.Width / (float)this.BandCount);
             if (_w < 1)
                 _w = 1;
 

@@ -1100,4 +1100,13 @@ Wollen Sie es schaffen?</value>
     <value>Diese Programmversion kann nicht automatisch aktualisiert werden.
 Sie müssen {0} manuell von der Website {1} herunterladen und installieren.</value>
   </data>
+  <data name="TXT_NEXT" xml:space="preserve">
+    <value>Nächste</value>
+  </data>
+  <data name="TXT_NOW" xml:space="preserve">
+    <value>Jetzt</value>
+  </data>
+  <data name="TXT_PREV" xml:space="preserve">
+    <value>Vorig</value>
+  </data>
 </root>

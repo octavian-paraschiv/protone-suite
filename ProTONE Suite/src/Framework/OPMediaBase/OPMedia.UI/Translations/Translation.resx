@@ -1100,4 +1100,13 @@ Do you want to create it ?</value>
     <value>This program version cannot be automatically updated.
 You need to manually download and install {0} from web site {1}.</value>
   </data>
+  <data name="TXT_PREV" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="TXT_NEXT" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="TXT_NOW" xml:space="preserve">
+    <value>Now</value>
+  </data>
 </root>

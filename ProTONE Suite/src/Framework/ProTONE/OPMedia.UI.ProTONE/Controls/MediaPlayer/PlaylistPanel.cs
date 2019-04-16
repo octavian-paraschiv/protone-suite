@@ -40,6 +40,7 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 using System.Linq;
 using OPMedia.Runtime.ProTONE.RemoteControl;
+using System.Threading.Tasks;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -48,10 +49,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
     public delegate void TotalTimeChangedHandler(TimeSpan tsTotalTime);
     public delegate void SelectedItemChangedHandler(PlaylistItem newSelectedItem);
 
-    public partial class PlaylistScreen : OPMBaseControl
+    public partial class PlaylistPanel : OPMBaseControl
     {
-        OPMToolTipManager _ttm = null;
-        OPMToolTip _tip = new OPMToolTip();
+        //OPMToolTipManager _ttm = null;
+        //OPMToolTip _tip = new OPMToolTip();
 
         Playlist playlist = new Playlist();
         
@@ -61,6 +62,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public event SelectedItemChangedHandler SelectedItemChanged = null;
 
         public System.Windows.Forms.Timer _tmrSavePlaylist = null;
+        private System.Windows.Forms.Timer _tmrUpdateItemsDesc = null;
 
         public bool IsPlaylistAtEnd
         { get { return playlist.IsAtEnd; } }
@@ -73,6 +75,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
+        /*
         private bool _compactMode = false;
         public bool CompactMode
         {
@@ -83,15 +86,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 if (value)
                 {
-                    pnlLayout.Controls.Remove(lblSep);
-                    pnlLayout.Controls.Remove(lblTotal);
+                    pnlLayout.Controls.Remove(piNext);
+                    pnlLayout.Controls.Remove(piCurrent);
+                    pnlLayout.Controls.Remove(piNext);
                 }
 
                 lvPlaylist.MultiSelect = !_compactMode;
                 lvPlaylist.ContextMenuStrip = _compactMode ? null : cmsPlaylist;
                 lvPlaylist_Resize(this, null); 
             }
-        }
+        }*/
 
         public void FocusOnList()
         {
@@ -99,7 +103,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             lvPlaylist.Focus();
         }
 
-        public void CopyPlaylist(PlaylistScreen source)
+        public void CopyPlaylist(PlaylistPanel source)
         {
             this.Clear();
             foreach (PlaylistItem pi in source.playlist)
@@ -111,7 +115,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        public PlaylistScreen() : base()
+        public PlaylistPanel() : base()
         {
             InitializeComponent();
 
@@ -120,15 +124,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrSavePlaylist.Interval = 500;
             _tmrSavePlaylist.Tick += _tmrSavePlaylist_Tick;
 
-            _ttm = new OPMToolTipManager(lvPlaylist);
+           
+            _tmrUpdateItemsDesc = new System.Windows.Forms.Timer();
+            _tmrUpdateItemsDesc.Interval = 300;
+            _tmrUpdateItemsDesc.Tick += OnTimerUpdateItemsDesc;
 
             ThemeManager.SetFont(lvPlaylist, FontSizes.Normal);
-            lvPlaylist.ShowItemToolTips = false;
             lvPlaylist.MultiSelect = true;
             lvPlaylist.Items.Clear();
 
-            lvPlaylist.ItemMouseHover += new ListViewItemMouseHoverEventHandler(lvPlaylist_ItemMouseHover);
-            
             playlist.PlaylistUpdated += new PlaylistUpdatedEventHandler(playlist_PlaylistUpdated);
 
             this.HandleDestroyed += new EventHandler(PlaylistPanel_HandleDestroyed);
@@ -147,13 +151,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
 
             OnThemeUpdatedInternal();
+
+            OnTimerUpdateItemsDesc(null, null);
         }
 
         void OnFilterStateChanged(FilterState oldState, string oldMedia, FilterState newState, string newMedia)
         {
-            if (_compactMode)
-                return;
-
             try
             {
                 ListViewItem lvi = lvPlaylist.Items[playlist.PlayIndex];
@@ -174,10 +177,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void MainWindow_Shown(object sender, EventArgs e)
         {
-            if (!DesignMode && initialState && !_compactMode)
+            if (!DesignMode && initialState)
             {
                 initialState = false;
                 PersistentPlaylist.Load(ref playlist);
+                UpdateItemsDesc();
             }
         }
 
@@ -206,19 +210,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     lvi.SubItems[colFile.Index].Text = plItem.DisplayName;
                 }
 
-                if (_compactMode == false)
+                if (UpdateMiscIcon(lvi))
                 {
-                    if (UpdateMiscIcon(lvi))
-                    {
-                        idxVisible = lvi.Index;
-                    }
+                    idxVisible = lvi.Index;
+                }
 
-                    foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
-                    {
-                        bool isActive = (lvi.Index == playlist.PlayIndex);
-                        lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
-                        lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
-                    }
+                foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
+                {
+                    bool isActive = (lvi.Index == playlist.PlayIndex);
+                    lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
+                    lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
                 }
             }
 
@@ -228,7 +229,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 // TODO: fix #264 while still keep the capability to auto-scroll to the active item...
                 //lvPlaylist.EnsureVisible(idxVisible);
             }
+
+            UpdateItemsDesc();
         }
+
+        private void UpdateItemsDesc()
+        {
+            _tmrUpdateItemsDesc.Stop();
+            _tmrUpdateItemsDesc.Start();
+        }
+
+        private void OnTimerUpdateItemsDesc(object sender, EventArgs e)
+        {
+            _tmrUpdateItemsDesc.Stop();
+            piPrev.Item = playlist.GetPrevious();
+            piNext.Item = playlist.GetNext();
+            piCurrent.Item = playlist.ActivePlaylistItem;
+        }
+
 
         private string _prevActiveItem = null;
         private bool UpdateMiscIcon(ListViewItem lvi)
@@ -310,11 +328,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             try
             {
-                if (!_compactMode)
-                {
-                    _abortLoad = true;
-                    PersistentPlaylist.Save(playlist);
-                }
+                _abortLoad = true;
+                PersistentPlaylist.Save(playlist);
             }
             catch (Exception ex)
             {
@@ -769,10 +784,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         break;
                 }
 
-                if (_compactMode)
-                    return;
-
                 UpdateTotalTime(playlist.TotalPlaylistTime);
+                UpdateItemsDesc();
             }
             catch(Exception ex)
             {
@@ -783,10 +796,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void _tmrSavePlaylist_Tick(object sender, EventArgs e)
         {
             _tmrSavePlaylist.Stop();
-
-            if (_compactMode)
-                return;
-
             PersistentPlaylist.Save(playlist);
         }
 
@@ -827,9 +836,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 }
 
                 lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImageEx(false), null);
-
-                if (_compactMode)
-                    return;
 
                 UpdateMiscIcon(lvItem);
                 foreach (ListViewItem.ListViewSubItem lvsi in lvItem.SubItems)
@@ -891,7 +897,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         protected override void OnThemeUpdatedInternal()
         {
-            lblSep.OverrideBackColor = ThemeManager.BorderColor;
+            //lblSep.OverrideBackColor = ThemeManager.BorderColor;
             base.OnThemeUpdatedInternal();
         }
 
@@ -1035,62 +1041,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             return null;
         }
 
-        void lvPlaylist_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e)
-        {
-            if (_compactMode)
-                return;
-
-            ListViewItem item = e.Item;
-            bool set = false;
-            Point p = lvPlaylist.PointToClient(MousePosition);
-
-            try
-            {
-                if (item != null && MouseButtons == MouseButtons.None)
-                {
-                    ListViewItem.ListViewSubItem lvsi = item.GetSubItemAt(p.X, p.Y);
-                    if (lvsi != null)
-                    {
-                        ExtendedSubItemDetail esid = lvsi.Tag as ExtendedSubItemDetail;
-                        if (esid != null && !string.IsNullOrEmpty(esid.Text))
-                        {
-                            _ttm.ShowSimpleToolTip(esid.Text, ImageProcessing.Subtitle);
-                            set = true;
-                        }
-                        else
-                        {
-                            PlaylistItem pli = item.Tag as PlaylistItem;
-                            if (pli != null)
-                            {
-                                pli.Rebuild();
-
-                                Image customImage = pli.CustomImage;
-
-                                _ttm.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, pli.GetImageEx(true), customImage);
-                                set = true;
-                            }
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                if (!set)
-                {
-                    Debug.WriteLine("PL: lvPlaylist_ItemMouseHover no tip to set ...");
-                    _ttm.RemoveAll();
-                }
-            }
-        }
-
-        
-
         private void cmsPlaylist_Opening(object sender, CancelEventArgs e)
         {
             cmsPlaylist.Items.Clear();
-
-            if (_compactMode)
-                return;
 
             PlaylistItem plItem = GetPlaylistItemForEditing();
 
@@ -1103,22 +1056,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void lvPlaylist_Resize(object sender, EventArgs e)
         {
             colDummy.Width = 0;
-            colIcon.Width = _compactMode ? 0 : 20;
-            colMisc.Width = _compactMode ? 0 : 20;
-            colTime.Width = _compactMode ? 0 : 55;
+            colIcon.Width = 20;
+            colMisc.Width = 20;
+            colTime.Width = 55;
             colFile.Width = lvPlaylist.EffectiveWidth - colIcon.Width - colMisc.Width - colTime.Width;
         }
 
         private void UpdateTotalTime(double totalSeconds)
         {
-            if (_compactMode == false)
-            {
-                TimeSpan ts = TimeSpan.FromSeconds((int)totalSeconds);
-                int h = ts.Days * 24 + ts.Hours;
+            TimeSpan ts = TimeSpan.FromSeconds((int)totalSeconds);
+            int h = ts.Days * 24 + ts.Hours;
 
-                lblTotal.Text = string.Format("Total: {0}:{1:d2}:{2:d2}",
-                    h, ts.Minutes, ts.Seconds);
-            }
+            piTotal.AltDisplay = string.Format("Total: {0}:{1:d2}:{2:d2}",
+                h, ts.Minutes, ts.Seconds);
 
             if (TotalTimeChanged != null)
             {

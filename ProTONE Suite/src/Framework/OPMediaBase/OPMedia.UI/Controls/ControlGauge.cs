@@ -244,6 +244,7 @@ namespace OPMedia.UI.Controls
                 ThemeManager.PrepareGraphics(g);
 
                 Rectangle rcMinor, rcMajor, rcDot = Rectangle.Empty;
+
                 Color c1 = ThemeManager.GradientNormalColor2;
                 Color c2 = ThemeManager.BorderColor;
                 Color cBack = ThemeManager.BackColor;
@@ -278,15 +279,15 @@ namespace OPMedia.UI.Controls
                 }
                 else
                 {
-                    rcMinor = new Rectangle(0, 0, (int)(this.Width * _pos / _max), Height);
-                    rcMajor = new Rectangle((int)(this.Width * _pos / _max), 0,
-                        (int)(this.Width * (1 - _pos / _max)), Height);
+                    rcMinor = new Rectangle(1, 1, (int)(this.Width * _pos / _max) - 2, Height - 3);
+                    rcMajor = new Rectangle((int)(this.Width * _pos / _max), 1,
+                        (int)(this.Width * (1 - _pos / _max)), Height - 3);
 
                     if (_effMax > 0)
-                        rcMajorEff = new Rectangle((int)(this.Width * _effMax / _max), 0,
-                            (int)(this.Width * (1 - _effMax / _max)), Height);
+                        rcMajorEff = new Rectangle((int)(this.Width * _effMax / _max), 1,
+                            (int)(this.Width * (1 - _effMax / _max)), Height - 3);
                     
-                    rcDot = new Rectangle((int)(this.Width * _pos / _max) - 7, 0, 14, Height);
+                    rcDot = new Rectangle((int)(this.Width * _pos / _max) - 7 + 1, 1, 14, Height - 3);
 
                     a = 90f;
                 }

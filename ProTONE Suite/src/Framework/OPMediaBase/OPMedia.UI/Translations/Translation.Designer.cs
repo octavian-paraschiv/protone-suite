@@ -1830,6 +1830,15 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string TXT_NEXT {
+            get {
+                return ResourceManager.GetString("TXT_NEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string TXT_NO {
@@ -1910,6 +1919,15 @@ namespace OPMedia.UI.Translations {
         internal static string TXT_NOUPDATEREQUIRED {
             get {
                 return ResourceManager.GetString("TXT_NOUPDATEREQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now.
+        /// </summary>
+        internal static string TXT_NOW {
+            get {
+                return ResourceManager.GetString("TXT_NOW", resourceCulture);
             }
         }
         
@@ -2045,6 +2063,15 @@ namespace OPMedia.UI.Translations {
         internal static string TXT_PORT_SETTINGS {
             get {
                 return ResourceManager.GetString("TXT_PORT_SETTINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string TXT_PREV {
+            get {
+                return ResourceManager.GetString("TXT_PREV", resourceCulture);
             }
         }
         

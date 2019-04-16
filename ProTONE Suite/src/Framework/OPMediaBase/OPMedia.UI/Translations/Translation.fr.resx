@@ -1100,4 +1100,13 @@ Voulez-vous le créer?</value>
     <value>Cette version du programme ne peut pas être mise à jour automatiquement.
 Vous devez télécharger et installer {0} manuellement à partir du site Web {1}.</value>
   </data>
+  <data name="TXT_NEXT" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="TXT_NOW" xml:space="preserve">
+    <value>Maintenant</value>
+  </data>
+  <data name="TXT_PREV" xml:space="preserve">
+    <value>Précédent</value>
+  </data>
 </root>

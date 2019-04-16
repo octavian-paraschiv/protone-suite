@@ -54,8 +54,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.layoutPanel1.Name = "layoutPanel1";
             this.layoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel1.RowCount = 2;
-            this.layoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.layoutPanel1.RowStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.layoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
+            this.layoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel1.Size = new System.Drawing.Size(270, 19);
             this.layoutPanel1.TabIndex = 1;
             // 
@@ -65,13 +65,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblMax.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMax.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.lblMax.Location = new System.Drawing.Point(149, 8);
+            this.lblMax.Location = new System.Drawing.Point(150, 6);
             this.lblMax.Margin = new System.Windows.Forms.Padding(0);
             this.lblMax.MaximumSize = new System.Drawing.Size(0, 20);
             this.lblMax.Name = "lblMax";
             this.lblMax.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblMax.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblMax.Size = new System.Drawing.Size(121, 11);
+            this.lblMax.Size = new System.Drawing.Size(120, 13);
             this.lblMax.TabIndex = 3;
             this.lblMax.Text = "100%";
             this.lblMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -82,6 +82,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.layoutPanel1.SetColumnSpan(this.volumeProgress, 3);
             this.volumeProgress.Cursor = System.Windows.Forms.Cursors.Default;
             this.volumeProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.volumeProgress.EffectiveMaximum = 0D;
             this.volumeProgress.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.volumeProgress.Location = new System.Drawing.Point(0, 0);
             this.volumeProgress.Margin = new System.Windows.Forms.Padding(0);
@@ -91,7 +92,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.volumeProgress.OverrideBackColor = System.Drawing.Color.Empty;
             this.volumeProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.volumeProgress.ShowTicks = true;
-            this.volumeProgress.Size = new System.Drawing.Size(270, 8);
+            this.volumeProgress.Size = new System.Drawing.Size(270, 6);
             this.volumeProgress.TabIndex = 0;
             this.volumeProgress.Value = 5000D;
             this.volumeProgress.Vertical = false;
@@ -102,13 +103,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblMin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMin.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.lblMin.Location = new System.Drawing.Point(0, 8);
+            this.lblMin.Location = new System.Drawing.Point(0, 6);
             this.lblMin.Margin = new System.Windows.Forms.Padding(0);
             this.lblMin.MaximumSize = new System.Drawing.Size(0, 20);
             this.lblMin.Name = "lblMin";
             this.lblMin.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblMin.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblMin.Size = new System.Drawing.Size(120, 11);
+            this.lblMin.Size = new System.Drawing.Size(119, 13);
             this.lblMin.TabIndex = 1;
             this.lblMin.Text = "0%";
             this.lblMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -119,13 +120,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCurrent.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.lblCurrent.Location = new System.Drawing.Point(120, 8);
+            this.lblCurrent.Location = new System.Drawing.Point(119, 6);
             this.lblCurrent.Margin = new System.Windows.Forms.Padding(0);
             this.lblCurrent.MaximumSize = new System.Drawing.Size(0, 20);
             this.lblCurrent.Name = "lblCurrent";
             this.lblCurrent.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblCurrent.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblCurrent.Size = new System.Drawing.Size(29, 11);
+            this.lblCurrent.Size = new System.Drawing.Size(31, 13);
             this.lblCurrent.TabIndex = 2;
             this.lblCurrent.Text = "25%";
             this.lblCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

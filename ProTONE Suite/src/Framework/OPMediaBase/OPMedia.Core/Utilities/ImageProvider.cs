@@ -19,6 +19,8 @@ using System.Resources;
 using OPMedia.Core.Properties;
 using System.Reflection;
 using OPMedia.Core.Utilities;
+using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
 #endregion
 
 
@@ -377,6 +379,58 @@ namespace OPMedia.Core
             }
 
             return null;
+        }
+
+        public static Image GetImageFromURL(string url, int timeout)
+        {
+            Image img = null;
+
+            try
+            {
+                if (string.IsNullOrEmpty(url) == false)
+                {
+                    url = url.ToLowerInvariant();
+                    string imgBase64 = null;
+
+                    if (url.StartsWith("base64:"))
+                    {
+                        imgBase64 = url.Replace("base64:", "");
+                    }
+                    else if (url.StartsWith("http"))
+                    {
+                        imgBase64 = PersistenceProxy.ReadObject(url, string.Empty);
+                        if (string.IsNullOrEmpty(imgBase64))
+                        {
+                            using (WebClientWithTimeout wc = new WebClientWithTimeout(timeout))
+                            {
+                                byte[] data = wc.DownloadData(url);
+                                imgBase64 = Convert.ToBase64String(data);
+                            }
+
+                            PersistenceProxy.SaveObject(url, imgBase64);
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(imgBase64) == false)
+                    {
+                        byte[] imgBytes = Convert.FromBase64String(imgBase64);
+                        if (imgBytes != null && imgBytes.Length > 0)
+                        {
+                            using (MemoryStream ms = new MemoryStream(imgBytes))
+                            {
+                                img = Image.FromStream(ms);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+
+            return img;
         }
     }
 

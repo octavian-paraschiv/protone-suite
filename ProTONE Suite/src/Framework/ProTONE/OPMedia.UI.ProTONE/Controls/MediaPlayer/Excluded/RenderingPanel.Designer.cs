@@ -35,9 +35,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pbTimeIcon = new System.Windows.Forms.PictureBox();
-            this.pbVolIcon = new System.Windows.Forms.PictureBox();
             this.volumeScale = new OPMedia.UI.ProTONE.Controls.MediaPlayer.VolumeScale();
             this.timeScale = new OPMedia.UI.ProTONE.Controls.MediaPlayer.TimeScale();
+            this.pbVolIcon = new System.Windows.Forms.PictureBox();
             this.playbackPanel = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaybackControlPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).BeginInit();
@@ -46,6 +46,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -58,17 +59,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.tableLayoutPanel1.Controls.Add(this.timeScale, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pbVolIcon, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.playbackPanel, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(100, 54);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(481, 54);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(619, 166);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // pbTimeIcon
@@ -81,16 +81,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pbTimeIcon.TabIndex = 7;
             this.pbTimeIcon.TabStop = false;
             // 
-            // pbVolIcon
-            // 
-            this.pbVolIcon.Location = new System.Drawing.Point(311, 1);
-            this.pbVolIcon.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.pbVolIcon.Name = "pbVolIcon";
-            this.pbVolIcon.Size = new System.Drawing.Size(20, 20);
-            this.pbVolIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbVolIcon.TabIndex = 6;
-            this.pbVolIcon.TabStop = false;
-            // 
             // volumeScale
             // 
             this.volumeScale.AutoSize = true;
@@ -98,7 +88,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.volumeScale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.volumeScale.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.volumeScale.IsOnMenuBar = false;
-            this.volumeScale.Location = new System.Drawing.Point(331, 7);
+            this.volumeScale.Location = new System.Drawing.Point(469, 7);
             this.volumeScale.Margin = new System.Windows.Forms.Padding(0, 7, 3, 0);
             this.volumeScale.Name = "volumeScale";
             this.volumeScale.OverrideBackColor = System.Drawing.Color.Empty;
@@ -111,6 +101,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.timeScale.AutoSize = true;
             this.timeScale.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.timeScale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timeScale.EffectiveSeconds = 0D;
             this.timeScale.ElapsedSeconds = 0D;
             this.timeScale.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.timeScale.IsOnMenuBar = false;
@@ -119,9 +110,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.timeScale.Name = "timeScale";
             this.timeScale.OverrideBackColor = System.Drawing.Color.Empty;
             this.timeScale.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.timeScale.Size = new System.Drawing.Size(290, 14);
+            this.timeScale.Size = new System.Drawing.Size(428, 14);
             this.timeScale.TabIndex = 4;
             this.timeScale.TotalSeconds = 0D;
+            // 
+            // pbVolIcon
+            // 
+            this.pbVolIcon.Location = new System.Drawing.Point(449, 1);
+            this.pbVolIcon.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.pbVolIcon.Name = "pbVolIcon";
+            this.pbVolIcon.Size = new System.Drawing.Size(20, 20);
+            this.pbVolIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbVolIcon.TabIndex = 6;
+            this.pbVolIcon.TabStop = false;
             // 
             // playbackPanel
             // 
@@ -135,11 +136,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.playbackPanel.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.playbackPanel.Location = new System.Drawing.Point(0, 24);
             this.playbackPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.playbackPanel.MediaType = OPMedia.Runtime.ProTONE.Rendering.Base.MediaTypes.None;
-            this.playbackPanel.MinimumSize = new System.Drawing.Size(200, 30);
+            this.playbackPanel.MinimumSize = new System.Drawing.Size(170, 45);
             this.playbackPanel.Name = "playbackPanel";
             this.playbackPanel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.playbackPanel.Size = new System.Drawing.Size(481, 30);
+            this.playbackPanel.Size = new System.Drawing.Size(619, 142);
             this.playbackPanel.TabIndex = 2;
             this.playbackPanel.TotalSeconds = 0D;
             // 
@@ -151,12 +151,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(481, 55);
             this.Name = "RenderingPanel";
-            this.Size = new System.Drawing.Size(481, 55);
+            this.Size = new System.Drawing.Size(619, 166);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolIcon)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

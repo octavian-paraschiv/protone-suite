@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OPMedia.UI.Controls;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens;
-using OPMedia.UI.ProTONE.Controls.BookmarkManagement;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;

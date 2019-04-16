@@ -32,7 +32,7 @@ namespace OPMedia.UI.Controls
     {
         const int ImageMaxHeight = 150;
 
-        static Control __generic = new Control();
+        public static readonly Control Generic = new Control();
 
         private Dictionary<Control, OPMToolTipData> _data = new Dictionary<Control, OPMToolTipData>();
 
@@ -60,8 +60,6 @@ namespace OPMedia.UI.Controls
             base.SetToolTip(ctl, fake);
         }
 
-       
-
         private string AssignData(Control ctl, string title, Dictionary<string, string> values, Image titleImage, Image customImage)
         {
             titleImage = GetScaledImage(titleImage);
@@ -69,7 +67,7 @@ namespace OPMedia.UI.Controls
 
             if (ctl == null)
             {
-                ctl = __generic;
+                ctl = Generic;
             }
 
             if (_data.ContainsKey(ctl))
@@ -354,7 +352,7 @@ namespace OPMedia.UI.Controls
 
         public void ShowSimpleToolTip(string text, Image img = null)
         {
-            //Logger.LogTrace("ShowSimpleToolTip");
+            Logger.LogToConsole("TIP: ShowSimpleToolTip");
 
             if (ToolTipCreated())
             {
@@ -365,11 +363,11 @@ namespace OPMedia.UI.Controls
 
         public void ShowToolTip(string title, Dictionary<string, string> values = null, Image img = null, Image customImage = null)
         {
-            //Logger.LogTrace("ShowToolTip");
+            Logger.LogToConsole("TIP: ShowToolTip");
 
             if (ToolTipCreated())
             {
-                //Logger.LogTrace("    > before SetToolTip");
+                Logger.LogToConsole("TIP: > before SetToolTip");
                 _tip.SetToolTip(_ctl, title, values, img, customImage);
             }
         }
@@ -382,13 +380,17 @@ namespace OPMedia.UI.Controls
             this.InitialDelay = 2 * autoDelay;
             this.ReshowDelay = 2 * autoDelay;
 
-            _ctl = ctl;
+            if (ctl != null)
+                _ctl = ctl;
+            else
+                _ctl = OPMToolTip.Generic;
+
             _ctl.MouseMove += new MouseEventHandler(_ctl_MouseMove);
         }
 
         void _ctl_MouseMove(object sender, MouseEventArgs e)
         {
-            //Logger.LogTrace("_ctl_MouseMove");
+            //Logger.LogToConsole("TIP: _ctl_MouseMove");
 
             Point pos = new Point(Cursor.Position.X, Cursor.Position.Y);
             if (_pos != Point.Empty)
@@ -405,7 +407,7 @@ namespace OPMedia.UI.Controls
 
         private bool ToolTipCreated()
         {
-            //Logger.LogTrace("ToolTipCreated");
+            //Logger.LogToConsole("TIP: ToolTipCreated");
 
             try
             {
@@ -420,14 +422,14 @@ namespace OPMedia.UI.Controls
                 _tip.Disposed += new EventHandler(_tip_Disposed);
                 _tip.Popup += new PopupEventHandler(_tip_Popup);
 
-                //Logger.LogTrace("ToolTipCreated -> return True");
+                //Logger.LogToConsole("TIP: ToolTipCreated -> return True");
 
                 return true;
             }
             catch(Exception ex)
             {
-                //Logger.LogTrace("ToolTipCreated esxception: {0}", ex.ToString());
-                //Logger.LogTrace("ToolTipCreated -> return False");
+                //Logger.LogToConsole("TIP: ToolTipCreated esxception: {0}", ex.ToString());
+                //Logger.LogToConsole("TIP: ToolTipCreated -> return False");
                 return false;
             }
         }
@@ -436,7 +438,7 @@ namespace OPMedia.UI.Controls
 
         void _tip_Popup(object sender, PopupEventArgs e)
         {
-            //Logger.LogTrace("_tip_Popup");
+            //Logger.LogToConsole("TIP: _tip_Popup");
             _pos = new Point(Cursor.Position.X, Cursor.Position.Y);
         }
 
@@ -444,7 +446,7 @@ namespace OPMedia.UI.Controls
         {
             if (sender == _tip)
             {
-                //Logger.LogTrace("_tip_Disposed");
+                //Logger.LogToConsole("TIP: _tip_Disposed");
 
                 _tip = null;
                 _pos = Point.Empty;
@@ -453,11 +455,11 @@ namespace OPMedia.UI.Controls
 
         public void RemoveAll()
         {
-            //Logger.LogTrace_WithStackDump("RemoveAll");
+            //Logger.LogToConsole("TIP: RemoveAll");
 
             if (_tip != null)
             {
-                //Logger.LogTrace("RemoveAll => Hide");
+                //Logger.LogToConsole("TIP: RemoveAll => Hide");
 
                 _tip.Hide(_ctl);
                 _tip.Dispose();

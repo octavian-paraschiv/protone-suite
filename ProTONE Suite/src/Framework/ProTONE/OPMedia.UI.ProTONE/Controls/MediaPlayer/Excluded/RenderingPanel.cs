@@ -200,9 +200,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         internal void FilterStateChanged(FilterState filterState, PlaylistItem pli, MediaTypes mediaType)
         {
-            playbackPanel.PlaylistItem = pli;
             playbackPanel.FilterState = filterState;
-            playbackPanel.MediaType = mediaType;
         }
     }
 }

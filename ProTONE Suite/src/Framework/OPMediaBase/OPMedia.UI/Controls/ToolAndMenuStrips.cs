@@ -187,16 +187,7 @@ namespace OPMedia.UI.Controls
 
             Image imgDraw = GetImageToDraw();
 
-            if (imgDraw != null)
-            {
-                Bitmap bmp = new Bitmap(imgDraw);
-                bmp.MakeTransparent(this.ImageTransparentColor);
-
-                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
-                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
-
-                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
-            }
+            this.DrawImageUnscaled(e.Graphics, imgDraw);
 
             if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
             {
@@ -408,16 +399,7 @@ namespace OPMedia.UI.Controls
 
             Image imgDraw = GetImageToDraw();
 
-            if (imgDraw != null)
-            {
-                Bitmap bmp = new Bitmap(imgDraw);
-                bmp.MakeTransparent(this.ImageTransparentColor);
-
-                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
-                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
-
-                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
-            }
+            this.DrawImageUnscaled(e.Graphics, imgDraw);
         }
     }
     #endregion
@@ -509,16 +491,7 @@ namespace OPMedia.UI.Controls
 
             Image imgDraw = GetImageToDraw();
 
-            if (imgDraw != null)
-            {
-                Bitmap bmp = new Bitmap(imgDraw);
-                bmp.MakeTransparent(this.ImageTransparentColor);
-
-                int ypos = 2 + (this.Height - this.Owner.ImageScalingSize.Height) / 2 - 2;
-                int xpos = 2 + (this.Width - this.Owner.ImageScalingSize.Width) / 2 - 2;
-
-                e.Graphics.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, this.Owner.ImageScalingSize), new Point(xpos, ypos));
-            }
+            this.DrawImageUnscaled(e.Graphics, imgDraw);
 
             if (DropDownItems != null && DropDownItems.Count >= 0 && ddw > 2)
             {
@@ -967,5 +940,25 @@ namespace OPMedia.UI.Controls
     #endregion
 
     #endregion
+
+    internal static class Helpers
+    {
+        public static void DrawImageUnscaled(this ToolStripItem tsi, Graphics g, Image imgDraw)
+        {
+            if (imgDraw != null)
+            {
+                Bitmap bmp = new Bitmap(imgDraw);
+                bmp.MakeTransparent(tsi.ImageTransparentColor);
+
+                int eh = Math.Min(bmp.Height, tsi.Owner.ImageScalingSize.Height);
+                int ew = Math.Min(bmp.Width, tsi.Owner.ImageScalingSize.Width);
+
+                int ypos = 2 + (tsi.Height - eh) / 2 - 2;
+                int xpos = 2 + (tsi.Width - ew) / 2 - 2;
+
+                g.DrawImageUnscaled(ImageProvider.ScaleImage(bmp, tsi.Owner.ImageScalingSize), new Point(xpos, ypos));
+            }
+        }
+    }
 }
 

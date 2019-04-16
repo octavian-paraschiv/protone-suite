@@ -48,7 +48,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.layoutPanel.Name = "layoutPanel";
             this.layoutPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel.RowCount = 2;
-            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel.Size = new System.Drawing.Size(270, 21);
             this.layoutPanel.TabIndex = 3;
@@ -58,6 +58,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.timeProgress.AllowDragging = false;
             this.timeProgress.Cursor = System.Windows.Forms.Cursors.Default;
             this.timeProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.timeProgress.EffectiveMaximum = 0D;
             this.timeProgress.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.timeProgress.Location = new System.Drawing.Point(0, 0);
             this.timeProgress.Margin = new System.Windows.Forms.Padding(0);
@@ -67,7 +68,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.timeProgress.OverrideBackColor = System.Drawing.Color.Empty;
             this.timeProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.timeProgress.ShowTicks = true;
-            this.timeProgress.Size = new System.Drawing.Size(270, 8);
+            this.timeProgress.Size = new System.Drawing.Size(270, 6);
             this.timeProgress.TabIndex = 0;
             this.timeProgress.Value = 0D;
             this.timeProgress.Vertical = false;
@@ -78,12 +79,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
-            this.lblTime.Location = new System.Drawing.Point(0, 8);
+            this.lblTime.Location = new System.Drawing.Point(0, 6);
             this.lblTime.Margin = new System.Windows.Forms.Padding(0);
             this.lblTime.Name = "lblTime";
             this.lblTime.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblTime.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblTime.Size = new System.Drawing.Size(270, 13);
+            this.lblTime.Size = new System.Drawing.Size(270, 15);
             this.lblTime.TabIndex = 1;
             this.lblTime.Text = "00:00:00";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

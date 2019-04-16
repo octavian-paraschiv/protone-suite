@@ -641,9 +641,6 @@ namespace OPMedia.UI.Controls.Dialogs
 
             if (VerifyFolder(path))
             {
-                // TODO fix
-                //SelectDrive(path);
-
                 lvExplorer.Path = path;
             }
             else
@@ -755,9 +752,6 @@ namespace OPMedia.UI.Controls.Dialogs
                 SpecialFolderButton sfb = tsb as SpecialFolderButton;
                 if (sfb != null)
                 {
-                    // TODO fix
-                    //SelectDrive(sfb.Path);
-
                     lvExplorer.Path = sfb.Path;
                 }
                 else
@@ -765,9 +759,6 @@ namespace OPMedia.UI.Controls.Dialogs
                     string path = tsb.Tag as string;
                     if (Directory.Exists(path))
                     {
-                        // TODO fix
-                        //SelectDrive(path);
-
                         lvExplorer.Path = path;
                     }
                 }

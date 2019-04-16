@@ -35,7 +35,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnAddFiles = new OPMButton();
             this.btnAddFolder = new OPMButton();
             this.btnRemoveItems = new OPMButton();
-            this.lvFiles = new OPMListView(ColumnHeaderStyle.None);
+            this.lvFiles = new HeaderlessListView();
             this.colPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new OPMTableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
@@ -157,7 +157,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         private OPMButton btnAddFiles;
         private OPMButton btnAddFolder;
         private OPMButton btnRemoveItems;
-        private OPMListView lvFiles;
+        private HeaderlessListView lvFiles;
         private ColumnHeader colPath;
         private OPMTableLayoutPanel tableLayoutPanel1;
     }

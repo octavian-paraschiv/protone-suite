@@ -151,6 +151,15 @@
     <Compile Include="Configuration\UrlCfgDlg.Designer.cs">
       <DependentUpon>UrlCfgDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NameValueDisplayCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NameValueDisplayCtl.Designer.cs">
+      <DependentUpon>NameValueDisplayCtl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OPMFontChooserCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -480,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\TroubleshootingPanel.resx">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NameValueDisplayCtl.resx">
+      <DependentUpon>NameValueDisplayCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OPMFontChooserCtl.resx">
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>

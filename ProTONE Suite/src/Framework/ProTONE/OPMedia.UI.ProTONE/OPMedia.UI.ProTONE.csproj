@@ -120,21 +120,18 @@
     <Compile Include="Controls\Equalizer\TenBandEqualizer.Designer.cs">
       <DependentUpon>TenBandEqualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\MediaScreens.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\MediaPlayer\MenuBuilder.cs" />
-    <Compile Include="Controls\MediaPlayer\Screens\TrackInfoScreen.cs">
+    <Compile Include="Controls\MediaPlayer\PlaybackPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\TrackInfoScreen.Designer.cs">
-      <DependentUpon>TrackInfoScreen.cs</DependentUpon>
+    <Compile Include="Controls\MediaPlayer\PlaybackPanel.Designer.cs">
+      <DependentUpon>PlaybackPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\SignalAnalysisScreen.cs">
+    <Compile Include="Controls\MediaPlayer\PlaylistItemInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\SignalAnalysisScreen.Designer.cs">
-      <DependentUpon>SignalAnalysisScreen.cs</DependentUpon>
+    <Compile Include="Controls\MediaPlayer\PlaylistItemInfo.Designer.cs">
+      <DependentUpon>PlaylistItemInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\OnlineMediaBrowser\DeezerTrackBrowserCtl.cs">
       <SubType>UserControl</SubType>
@@ -245,12 +242,6 @@
     <Compile Include="Configuration\SubtitlesConfig\SubtitleFontsPage.Designer.cs">
       <DependentUpon>SubtitleFontsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\BookmarkScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\BookmarkScreen.Designer.cs">
-      <DependentUpon>BookmarkScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\JumpToItemDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,29 +259,17 @@
     <Compile Include="Controls\MediaPlayer\MediaPlayer.Designer.cs">
       <DependentUpon>MediaPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\PlaybackControlPanel.cs">
+    <Compile Include="Controls\MediaPlayer\PlaylistPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MediaPlayer\PlaybackControlPanel.Designer.cs">
-      <DependentUpon>PlaybackControlPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\PlaylistScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\Screens\PlaylistScreen.Designer.cs">
-      <DependentUpon>PlaylistScreen.cs</DependentUpon>
+    <Compile Include="Controls\MediaPlayer\PlaylistPanel.Designer.cs">
+      <DependentUpon>PlaylistPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MediaPlayer\RenderingFrame.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\MediaPlayer\RenderingFrame.Designer.cs">
       <DependentUpon>RenderingFrame.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\RenderingPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MediaPlayer\RenderingPanel.Designer.cs">
-      <DependentUpon>RenderingPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MediaPlayer\RenderingZone.cs">
       <SubType>UserControl</SubType>
@@ -368,9 +347,6 @@
     <EmbeddedResource Include="Configuration\SubtitlesConfig\SubtitleSubtitlePage.resx">
       <DependentUpon>SubtitleSubtitlePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\Screens\BookmarkScreen.resx">
-      <DependentUpon>BookmarkScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Equalizer\EqualizerBand.resx">
       <DependentUpon>EqualizerBand.cs</DependentUpon>
     </EmbeddedResource>
@@ -381,31 +357,23 @@
       <DependentUpon>MediaPlayer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\PlaybackControlPanel.resx">
-      <DependentUpon>PlaybackControlPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Controls\MediaPlayer\PlaybackPanel.resx">
+      <DependentUpon>PlaybackPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\Screens\PlaylistScreen.resx">
-      <DependentUpon>PlaylistScreen.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\MediaPlayer\PlaylistItemInfo.resx">
+      <DependentUpon>PlaylistItemInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MediaPlayer\PlaylistPanel.resx">
+      <DependentUpon>PlaylistPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MediaPlayer\RenderingFrame.resx">
       <DependentUpon>RenderingFrame.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\RenderingPanel.resx">
-      <DependentUpon>RenderingPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MediaPlayer\RenderingZone.resx">
       <DependentUpon>RenderingZone.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\Screens\TrackInfoScreen.resx">
-      <DependentUpon>TrackInfoScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MediaPlayer\Screens\SignalAnalysisScreen.resx">
-      <DependentUpon>SignalAnalysisScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MediaPlayer\TimeScale.resx">
       <DependentUpon>TimeScale.cs</DependentUpon>
@@ -587,6 +555,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\XFade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnLargePlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnLargePause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\MediaPlayer\Excluded\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

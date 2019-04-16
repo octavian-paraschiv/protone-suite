@@ -79,12 +79,14 @@ namespace OPMedia.MediaLibrary
                     Translator.SetInterfaceLanguage(AppConfig.LanguageID);
                     Application.Run(new MediaLibraryForm());
                 }
-
-                
             }
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchFatalError(ex);
+            }
+            finally
+            {
+                LoggedApplication.Stop();
             }
         }
     }

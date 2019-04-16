@@ -1386,6 +1386,14 @@ namespace OPMedia.UI.Controls
         }
     }
 
+    public class HeaderlessListView: OPMListView
+    {
+        public HeaderlessListView()
+            : base(ColumnHeaderStyle.None)
+        {
+        }
+    }
+
     public class OPMListViewHeaderWrapper : NativeWindow
     {
         OPMListView _parent;

@@ -31,7 +31,7 @@ using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
-
+using System.Threading.Tasks;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -40,9 +40,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         OPMToolTipManager _tip = null;
         ToolStripItem _hoveredItem = null;
 
-        private PlaylistItem _pli = null;
-        private FilterState _FilterState = FilterState.Stopped;
-        private MediaTypes _mediaType = MediaTypes.None;
+        private FilterState _filterState = FilterState.Stopped;
 
         private bool _compactView = false;
         public bool CompactView
@@ -55,32 +53,42 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             set
             {
                 _compactView = value;
-                foreach (ToolStripItem tsi in opmToolStrip1.Items)
+                UpdateButtonSize();
+            }
+        }
+
+        private void UpdateButtonSize()
+        {
+            foreach (ToolStripItem tsi in opmToolStrip1.Items)
+            {
+                if (tsi is ToolStripSeparator)
+                    tsi.Visible = !_compactView;
+                else if (tsi is ToolStripButton)
                 {
-                    if (tsi is ToolStripSeparator)
-                        tsi.Visible = !_compactView;
-                    else if (tsi is ToolStripButton)
+                    ToolStripButton btn = tsi as ToolStripButton;
+                    if (btn != null)
                     {
-                        ToolStripButton btn = tsi as ToolStripButton;
-                        if (btn != null)
+                        OPMShortcut cmd = (OPMShortcut)btn.Tag;
+                        btn.Visible = (!_compactView || cmd <= OPMShortcut.CmdStop);
+
+                        if (btn.Image != null)
                         {
-                            OPMShortcut cmd = (OPMShortcut)btn.Tag;
-                            btn.Visible = (!_compactView || cmd <= OPMShortcut.CmdStop);
+                            int h = Math.Min(40, btn.Image.Height);
+                            btn.Size = new Size(h, h);
+                            btn.ImageAlign = ContentAlignment.MiddleCenter;
                         }
+
+                        
+                        btn.AutoSize = false;
                     }
                 }
             }
         }
 
         #region Properties
-        public PlaylistItem PlaylistItem
-        { get { return _pli; } set { _pli = value; UpdateFileType(); } }
 
         public FilterState FilterState
-        { get { return _FilterState; } set { _FilterState = value; UpdateFilterState(); } }
-
-        public MediaTypes MediaType
-        { get { return _mediaType; } set { _mediaType = value; UpdateMediaType(); } }
+        { get { return _filterState; } set { _filterState = value; UpdatePlayPauseButton(); } }
 
         double _elapsedSeconds = 0, _totalSeconds = 0;
 
@@ -116,7 +124,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
 
             tslTime.Text = sElapsed + sTotal;
-            tslTime.Font = ThemeManager.VeryLargeFont;
             tslTime.ForeColor = ThemeManager.WndTextColor;
         }
 
@@ -183,8 +190,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             tsmPlaylistEnd.InactiveImage = Resources.btnPlaylistEnd;
             tsmToggleXFade.InactiveImage = Resources.XFade;
 
-            tslTime.Font = ThemeManager.VeryLargeFont;
+            tslTime.Font = ThemeManager.ExtremeLargeFont;
             tslTime.ForeColor = ThemeManager.WndTextColor;
+
+            UpdateButtonSize();
         }
 
         private void OnButtonPressed(object sender, EventArgs e)
@@ -236,40 +245,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             //}
         }
 
-        private void UpdateFileType()
-        {
-            Image img = null;
-
-            if (_pli != null)
-            {
-                img = _pli.GetImageEx(true);
-
-                if (img == null)
-                    img = ImageProvider.GetIcon(_pli.Path, true);
-            }
-
-            tslFileType.Image = img;
-            tslFileType.Tag = _pli;
-        }
-
-        private void UpdateFilterState()
-        {
-            Image img = null;
-
-            if (_pli != null)
-                img = Resources.ResourceManager.GetImage(_FilterState.ToString().ToLowerInvariant());
-
-            tslFilterState.Image = img;
-            tslFilterState.Tag = Translator.Translate("TXT_MEDIA_STATE", MediaRenderer.DefaultInstance.TranslatedFilterState);
-
-            UpdatePlayPauseButton();
-        }
-
         private void UpdatePlayPauseButton()
         {
-            Image img = null, img2 = null;
+            Image img = null;
 
-            switch(_FilterState)
+            switch(_filterState)
             {
                 case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running:
                     img = Resources.btnPause;
@@ -283,70 +263,5 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             tsmPlayPause.InactiveImage = img;
         }
-
-        private void UpdateMediaType()
-        {
-            string tipAudio = Translator.Translate("TXT_AUDIO_AVAILABLE");
-            string tipVideo = Translator.Translate("TXT_VIDEO_AVAILABLE");
-
-            if (_pli == null)
-                _mediaType = MediaTypes.None;
-
-            switch (_mediaType)
-            {
-                case MediaTypes.None:
-                    tslAudioOn.Image = null;
-                    tslVideoOn.Image = null;
-                    break;
-
-                case MediaTypes.Audio:
-                    tslAudioOn.Image = ImageProcessing.AudioFile;
-                    tslVideoOn.Image = null;
-                    break;
-
-                case MediaTypes.Video:
-                    tslAudioOn.Image = null;
-                    tslAudioOn.Image = ImageProcessing.VideoFile;
-                    break;
-
-                case MediaTypes.Both:
-                    tslAudioOn.Image = ImageProcessing.AudioFile;
-                    tslVideoOn.Image = ImageProcessing.VideoFile;
-                    break;
-            }
-
-            tslAudioOn.Tag = tipAudio;
-            tslVideoOn.Tag = tipVideo;
-        }
-
-        private void OnLabelMouseHover(object sender, EventArgs args)
-        {
-            ToolStripLabel lbl = sender as ToolStripLabel;
-            if (lbl != null)
-            {
-                _hoveredItem = lbl;
-
-                if (lbl == tslAudioOn || lbl == tslVideoOn || lbl == tslFilterState)
-                {
-                    _tip.ShowSimpleToolTip(lbl.Tag as string, lbl.Image);
-                }
-                else if (lbl == tslFileType)
-                {
-                    PlaylistItem pli = lbl.Tag as PlaylistItem;
-                    if (pli != null)
-                    {
-                        var mediaInfo = pli.MediaInfo;
-
-                        _tip.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), mediaInfo, pli.GetImageEx(true), 
-                            pli.MediaFileInfo.CustomImage);
-                    }
-                    else
-                    {
-                        //Image img = ImageProvider.GetIcon(_mediaName, true); 
-                        //_tip.ShowSimpleToolTip(_mediaName, img);
-                    } 
-                }
-            }
-        }
-    }
+   }
 }

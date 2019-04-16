@@ -40,6 +40,7 @@ namespace OPMedia.UI.Themes
         Large,
         VeryLarge,
         ExtremeLarge,
+        Huge
     }
 
     public static class ResourceManagerExtension
@@ -79,7 +80,8 @@ namespace OPMedia.UI.Themes
             12, 
             14, 
             16, 
-            32 
+            20,
+            24 
         };
         
         static readonly FontStyle[] fontStyles = 
@@ -89,7 +91,8 @@ namespace OPMedia.UI.Themes
             FontStyle.Regular, 
             FontStyle.Bold, 
             FontStyle.Bold, 
-            FontStyle.Bold, 
+            FontStyle.Bold,
+            FontStyle.Bold,
             FontStyle.Bold 
         };
 
@@ -100,8 +103,8 @@ namespace OPMedia.UI.Themes
         private static Font _normalBoldFont = null;
         private static Font _largeFont = null;
         private static Font _veryLargeFont = null;
-
         private static Font _extremeLargeFont = null;
+        private static Font _hugeFont = null;
 
         private static ColorConverter cc = new ColorConverter();
 
@@ -294,20 +297,6 @@ namespace OPMedia.UI.Themes
         public static Color AltRowColor
         { get { return ThemeElement("AltRowColor", SafeColorFromString("250, 250, 250")); } }
 
-        //public static int CornerSize
-        //{ get { return ThemeElement("CornerSize", 0); } }
-
-        //public static int FormCornerSize
-        //{ 
-        //    get 
-        //    {
-        //        if (CornerSize > 0)
-        //            return CornerSize + FormBorderWidth;
-        //
-        //        return 0;
-        //    } 
-        //}
-
         public static int FormBorderWidth
         { get { return ThemeElement("FormBorderWidth", 1); } }
 
@@ -338,7 +327,6 @@ namespace OPMedia.UI.Themes
         public static Color TransparentColor
         { get { return Color.White; } }
 
-
         public static Font SmallFont
         { get { return _smallFont; } }
 
@@ -359,6 +347,9 @@ namespace OPMedia.UI.Themes
 
         public static Font ExtremeLargeFont
         { get { return _extremeLargeFont; } }
+
+        public static Font HugeFont
+        { get { return _hugeFont; } }
 
         public static bool IsDarkTheme
         {
@@ -390,6 +381,8 @@ namespace OPMedia.UI.Themes
                     return ThemeManager.NormalBoldFont;
                 case FontSizes.ExtremeLarge:
                     return ThemeManager.ExtremeLargeFont;
+                case FontSizes.Huge:
+                    return ThemeManager.HugeFont;
             }
 
             return ThemeManager.NormalFont;
@@ -463,6 +456,8 @@ namespace OPMedia.UI.Themes
                     _veryLargeFont =
                         new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                     _extremeLargeFont =
+                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                    _hugeFont =
                         new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                 }
             }

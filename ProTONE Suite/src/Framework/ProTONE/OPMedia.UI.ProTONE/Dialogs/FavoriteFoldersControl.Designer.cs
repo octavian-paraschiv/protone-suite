@@ -29,7 +29,7 @@ namespace OPMedia.UI.Dialogs
             this.btnAdd = new OPMedia.UI.Controls.OPMButton();
             this.btnDelete = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.lvFavorites = new OPMedia.UI.Controls.OPMListView(ColumnHeaderStyle.None);
+            this.lvFavorites = new OPMedia.UI.Controls.HeaderlessListView();
             this.colPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel1.SuspendLayout();
@@ -144,7 +144,7 @@ namespace OPMedia.UI.Dialogs
         private OPMButton btnAdd;
         private OPMButton btnDelete;
         private OPMTableLayoutPanel tableLayoutPanel1;
-        private OPMListView lvFavorites;
+        private HeaderlessListView lvFavorites;
         private ColumnHeader colPath;
         private OPMButton btnOK;
     }
