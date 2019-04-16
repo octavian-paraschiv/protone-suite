@@ -129,44 +129,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        private Image _customImage = null;
-
-        public override Image CustomImage
+        public override string ImageURL
         {
             get
             {
-                if (_customImage == null)
-                {
-                    try
-                    {
-                        string url = AlbumUriImageSmall;
-                        if (string.IsNullOrEmpty(url))
-                            url = ArtistUriImageSmall;
+                string url = AlbumUriImageSmall;
+                if (string.IsNullOrEmpty(url))
+                    url = ArtistUriImageSmall;
 
-                        if (string.IsNullOrEmpty(url) == false)
-                        {
-                            using (WebClientWithTimeout wc = new WebClientWithTimeout(1000))
-                            {
-                                byte[] data = wc.DownloadData(url);
-                                if (data != null && data.Length > 0)
-                                {
-                                    using (MemoryStream ms = new MemoryStream(data))
-                                    {
-                                        _customImage = Image.FromStream(ms);
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        Logger.LogException(ex);
-                        _customImage = null;
-                    }
-                }
-
-                return _customImage;
+                return url;
             }
         }
 

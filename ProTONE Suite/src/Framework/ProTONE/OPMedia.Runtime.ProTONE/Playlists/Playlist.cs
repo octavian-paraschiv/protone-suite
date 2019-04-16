@@ -153,6 +153,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
         }
 
+        public virtual PlaylistItem GetNext()
+        {
+            if (Count > 0 && playIndex < Count - 1)
+                return this[playIndex + 1];
+
+            if (Count > 0 && playIndex == Count - 1 && ProTONEConfig.LoopPlay)
+                return this[0];
+
+            return null;
+        }
+
         public virtual bool MoveNext()
         {
             if (Count > 0 && playIndex < Count - 1)
@@ -185,6 +196,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
 
             return false;
+        }
+
+        public virtual PlaylistItem GetPrevious()
+        {
+            if (Count > 0 && playIndex > 0)
+                return this[playIndex - 1];
+
+            if (Count > 0 && playIndex == 0 && ProTONEConfig.LoopPlay)
+                return this[Count - 1];
+
+            return null;
         }
 
         public virtual bool MoveToItem(int item)

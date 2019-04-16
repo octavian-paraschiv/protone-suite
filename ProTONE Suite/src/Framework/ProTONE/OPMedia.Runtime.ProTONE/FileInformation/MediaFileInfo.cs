@@ -135,7 +135,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         }
 
         [Browsable(false)]
-        public virtual Image CustomImage
+        public virtual string ImageURL
         {
             get { return null; }
         }

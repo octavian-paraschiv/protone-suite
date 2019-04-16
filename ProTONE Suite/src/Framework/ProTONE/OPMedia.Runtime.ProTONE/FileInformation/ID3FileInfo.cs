@@ -447,15 +447,25 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             }
         }
 
-        public override Image CustomImage
+        public override string ImageURL
         {
             get
             {
+                Image img = null;
+
                 if (ArtworkInfo != null &&
                     ArtworkInfo.ArtworkImages != null &&
                     ArtworkInfo.ArtworkImages.Count > 0)
                 {
-                    return ArtworkInfo.ArtworkImages[0].Picture;
+                    img = ArtworkInfo.ArtworkImages[0].Picture;
+                }
+
+                if (img != null)
+                {
+                    ImageConverter ic = new ImageConverter();
+                    byte[] imgBytes = (byte[])ic.ConvertTo(img, typeof(byte[]));
+                    string imgBase64 = Convert.ToBase64String(imgBytes);
+                    return $"base64:{imgBase64}";
                 }
 
                 return null;

@@ -79,6 +79,17 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            PlaylistItem pi = obj as PlaylistItem;
+            if (pi != null)
+            {
+                return (string.Compare(pi.Path, this.Path, true) == 0);
+            }
+
+            return false;
+        }
+
         public virtual string PersistentPlaylistName
         {
             get
@@ -251,12 +262,12 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public virtual Image CustomImage
+        public virtual string ImageURL
         {
             get
             {
                 if (MediaFileInfo != null)
-                    return MediaFileInfo.CustomImage;
+                    return MediaFileInfo.ImageURL;
 
                 return null;
             }
