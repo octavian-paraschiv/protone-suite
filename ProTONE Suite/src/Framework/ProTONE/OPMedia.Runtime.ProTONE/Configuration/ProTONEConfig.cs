@@ -678,12 +678,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "XFade", false);
+                return PersistenceProxy.ReadObject(false, "XFade", false);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "XFade", value);
+                PersistenceProxy.SaveObject(false, "XFade", value);
             }
         }
 
@@ -691,12 +691,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "XFadeLength", 10);
+                return PersistenceProxy.ReadObject(false, "XFadeLength", 10);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "XFadeLength", value);
+                PersistenceProxy.SaveObject(false, "XFadeLength", value);
             }
         }
 
@@ -704,12 +704,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "XFadeAnticipation", 5);
+                return PersistenceProxy.ReadObject(false, "XFadeAnticipation", 5);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "XFadeAnticipation", value);
+                PersistenceProxy.SaveObject(false, "XFadeAnticipation", value);
             }
         }
 

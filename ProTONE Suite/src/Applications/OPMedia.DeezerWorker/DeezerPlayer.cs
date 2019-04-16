@@ -276,7 +276,6 @@ namespace OPMedia.DeezerWorker
 
         public void Stop()
         {
-            StackTrace st = new StackTrace();
             Logger.LogTrace("DeezerPlayer::Stop");
 
             if (FilterState != FilterState.Stopped)

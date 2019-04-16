@@ -1,15 +1,21 @@
 ﻿using OPMedia.Core.Logging;
+using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public class Worker
     {
         private string _appName;
+
+        private System.Timers.Timer _tmrCheckWorkerLoop = null;
+        private ManualResetEvent _evtCmdReceived = new ManualResetEvent(false);
 
         public static void Run(IWorkerPlayer player)
         {
@@ -22,6 +28,42 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         private Worker(string appName)
         {
             _appName = appName;
+
+            int interval = 5000;
+
+            if (ProTONEConfig.XFade)
+            {
+                interval = Math.Max(1000 * ProTONEConfig.XFadeLength, interval);
+            }
+
+            _tmrCheckWorkerLoop = new System.Timers.Timer();
+            _tmrCheckWorkerLoop.Interval = interval;
+            _tmrCheckWorkerLoop.Elapsed += _tmrCheckWorkerLoop_Elapsed;
+            _tmrCheckWorkerLoop.Start();
+        }
+
+        private void _tmrCheckWorkerLoop_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                _tmrCheckWorkerLoop.Stop();
+
+                if (_evtCmdReceived.WaitOne(0) == false)
+                {
+                    Logger.LogTrace($"Worker loop has not received any command in {_tmrCheckWorkerLoop.Interval / 1000 } sec ... Exiting worker process.");
+
+                    // Kill worker process
+                    Process.GetCurrentProcess().Kill();
+                    return;
+                }
+
+                _evtCmdReceived.Reset();
+            }
+            catch { }
+            finally
+            {
+                _tmrCheckWorkerLoop.Start();
+            }
         }
 
         private void Run(CommandProcessor proc)
@@ -51,6 +93,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                             Logger.LogTrace("Worker loop broken after reading invalid command.");
                             break;
                         }
+
+                        // Signal that the worker loop received a command
+                        _evtCmdReceived.Set();
 
                         Logger.LogToConsole($"Worker loop processing command: {cmd}");
 

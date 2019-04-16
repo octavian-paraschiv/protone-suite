@@ -10,7 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OPMedia.WinService.RemoteControl</RootNamespace>
     <AssemblyName>OPMedia.RCCService</AssemblyName>
-    <ApplicationIcon>ir_remote.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>

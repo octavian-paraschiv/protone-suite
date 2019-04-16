@@ -151,9 +151,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
         protected override void DoStopRenderer()
         {
-            StackTrace st = new StackTrace();
-            Logger.LogTrace("BaseWorkerRenderer::DoStopRenderer");
-            Logger.LogToConsole(st.ToString());
+            //StackTrace st = new StackTrace();
+            //Logger.LogTrace("BaseWorkerRenderer::DoStopRenderer");
+            //Logger.LogToConsole(st.ToString());
 
             if (FilterState != FilterState.Stopped)
             {

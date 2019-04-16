@@ -104,7 +104,7 @@ namespace OPMedia.Core.Configuration
             {
                 bool ret = false;
 
-                ret |= ApplicationInfo.ApplicationName.ToLowerInvariant().Contains("player");
+                ret |= ApplicationInfo.ApplicationName.ToLowerInvariant().Contains("protone");
                 ret |= ApplicationInfo.ApplicationName.ToLowerInvariant().Contains("library");
 
                 return ret;
