@@ -20,6 +20,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
     {
         private PlaylistItem _item = null;
 
+        private readonly int ImageSize = 250;
+
         public PlaylistItemType ItemType { get; set; } 
 
         public PlaylistItem Item
@@ -63,8 +65,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.ItemType = PlaylistItemType.None;
 
             InitializeComponent();
-            OnThemeUpdatedInternal();
 
+            OnThemeUpdatedInternal();
             UpdateItem();
         }
 
@@ -113,6 +115,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         propDisplay.Visible = true;
                         propDisplay.Visible = true;
                         pbInfo.Visible = true;
+                        pbInfo.Width = 1;
 
                         Image image = null;
 
@@ -123,6 +126,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         }).ContinueWith(_ =>
                         {
                             pbInfo.Image = image;
+                            pbInfo.Width = ImageSize;
+
                         }, TaskScheduler.FromCurrentSynchronizationContext());
 
                     }

@@ -48,27 +48,31 @@
             this.pnlLayout.Controls.Add(this.pbInfo, 0, 1);
             this.pnlLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
+            this.pnlLayout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLayout.Name = "pnlLayout";
             this.pnlLayout.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlLayout.RowCount = 2;
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlLayout.Size = new System.Drawing.Size(259, 269);
+            this.pnlLayout.Size = new System.Drawing.Size(263, 273);
             this.pnlLayout.TabIndex = 0;
             // 
             // lblDesc
             // 
+            this.lblDesc.AutoEllipsis = true;
             this.lblDesc.AutoSize = true;
             this.pnlLayout.SetColumnSpan(this.lblDesc, 2);
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.lblDesc.Location = new System.Drawing.Point(3, 0);
+            this.lblDesc.MaximumSize = new System.Drawing.Size(3500, 20);
+            this.lblDesc.MinimumSize = new System.Drawing.Size(20, 20);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(253, 19);
+            this.lblDesc.Size = new System.Drawing.Size(257, 20);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "opmLabel1";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -79,8 +83,8 @@
             this.propDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propDisplay.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.propDisplay.Location = new System.Drawing.Point(3, 19);
-            this.propDisplay.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.propDisplay.Location = new System.Drawing.Point(260, 20);
+            this.propDisplay.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.propDisplay.Name = "propDisplay";
             this.propDisplay.OverrideBackColor = System.Drawing.Color.Empty;
             this.propDisplay.RequiredSize = new System.Drawing.Size(0, 0);
@@ -90,10 +94,10 @@
             // pbInfo
             // 
             this.pbInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbInfo.Location = new System.Drawing.Point(6, 19);
-            this.pbInfo.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.pbInfo.Location = new System.Drawing.Point(4, 20);
+            this.pbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 3, 3);
             this.pbInfo.MaximumSize = new System.Drawing.Size(250, 250);
-            this.pbInfo.MinimumSize = new System.Drawing.Size(250, 250);
+            this.pbInfo.MinimumSize = new System.Drawing.Size(1, 250);
             this.pbInfo.Name = "pbInfo";
             this.pbInfo.Size = new System.Drawing.Size(250, 250);
             this.pbInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -107,8 +111,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.pnlLayout);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PlaylistItemInfo";
-            this.Size = new System.Drawing.Size(259, 269);
+            this.Size = new System.Drawing.Size(263, 273);
             this.pnlLayout.ResumeLayout(false);
             this.pnlLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).EndInit();

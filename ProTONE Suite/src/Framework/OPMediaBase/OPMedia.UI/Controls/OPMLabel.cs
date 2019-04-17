@@ -134,37 +134,42 @@ namespace OPMedia.UI.Controls
                 rc.Offset(Image.Width + 5, 0);
             }
 
+            // --- string formatting ------------------
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignments.FromContentAlignment(TextAlign).Alignment;
+            sf.LineAlignment = StringAlignments.FromContentAlignment(TextAlign).LineAlignment;
+            sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
+            sf.FormatFlags = StringFormatFlags.NoWrap;
+
+            if (this.VerticalText)
+            {
+                sf.FormatFlags |= StringFormatFlags.DirectionVertical;
+                try
+                {
+                    e.Graphics.RotateTransform(180);
+                    e.Graphics.TranslateTransform(-Width, -Height);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            var requiredSize = e.Graphics.MeasureString(this.Text, this.Font);
+            var availableSize = rc.Size;
+            bool fits = false;
+
+            if (this.VerticalText)
+                fits |= (requiredSize.Height <= availableSize.Height);
+            else
+                fits |= (requiredSize.Width <= availableSize.Width);
+
+            sf.Trimming = (fits) ? 
+                sf.Trimming = StringTrimming.None : StringTrimming.EllipsisWord;
+
+            // ----------------------------------------
+
             using (Brush b = new SolidBrush(cText))
             {
-                StringFormat sf = new StringFormat();
-                sf.Alignment = StringAlignments.FromContentAlignment(TextAlign).Alignment;
-                sf.LineAlignment = StringAlignments.FromContentAlignment(TextAlign).LineAlignment;
-
-                if (base.AutoSize)
-                {
-                    sf.Trimming = StringTrimming.None;
-                    sf.FormatFlags = StringFormatFlags.NoWrap;
-                }
-                else
-                {
-                    sf.Trimming = StringTrimming.EllipsisWord;
-                }
-                
-                sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
-
-                if (this.VerticalText)
-                {
-                    sf.FormatFlags |= StringFormatFlags.DirectionVertical;
-                    try
-                    {
-                        e.Graphics.RotateTransform(180);
-                        e.Graphics.TranslateTransform(-Width, -Height);
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                }
-
                 e.Graphics.DrawString(this.Text, this.Font, b, rc, sf);
             }
         }

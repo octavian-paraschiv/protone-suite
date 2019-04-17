@@ -163,7 +163,6 @@
             this.btnPlayPause.Checked = false;
             this.btnPlayPause.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPlayPause.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnLargePlay;
-            this.btnPlayPause.TipImage = global::OPMedia.UI.ProTONE.Properties.Resources.btnPlay;
             this.btnPlayPause.Location = new System.Drawing.Point(33, 25);
             this.btnPlayPause.Margin = new System.Windows.Forms.Padding(0);
             this.btnPlayPause.Name = "btnPlayPause";
@@ -171,6 +170,7 @@
             this.btnPlayPause.TabIndex = 0;
             this.btnPlayPause.TabStop = false;
             this.btnPlayPause.Tag = "CmdPlayPause";
+            this.btnPlayPause.TipImage = global::OPMedia.UI.ProTONE.Properties.Resources.btnPlay;
             // 
             // btnPrev
             // 
@@ -184,6 +184,7 @@
             this.btnPrev.TabIndex = 1;
             this.btnPrev.TabStop = false;
             this.btnPrev.Tag = "CmdPrev";
+            this.btnPrev.TipImage = null;
             // 
             // btnNext
             // 
@@ -197,6 +198,7 @@
             this.btnNext.TabIndex = 4;
             this.btnNext.TabStop = false;
             this.btnNext.Tag = "CmdNext";
+            this.btnNext.TipImage = null;
             // 
             // btnStop
             // 
@@ -210,6 +212,7 @@
             this.btnStop.TabIndex = 5;
             this.btnStop.TabStop = false;
             this.btnStop.Tag = "CmdStop";
+            this.btnStop.TipImage = null;
             // 
             // btnToggleXFade
             // 
@@ -222,6 +225,7 @@
             this.btnToggleXFade.TabIndex = 6;
             this.btnToggleXFade.TabStop = false;
             this.btnToggleXFade.Tag = "CmdXFade";
+            this.btnToggleXFade.TipImage = null;
             // 
             // btnLoopPlay
             // 
@@ -234,6 +238,7 @@
             this.btnLoopPlay.TabIndex = 7;
             this.btnLoopPlay.TabStop = false;
             this.btnLoopPlay.Tag = "CmdLoopPlay";
+            this.btnLoopPlay.TipImage = null;
             // 
             // btnPlaylistEnd
             // 
@@ -246,6 +251,7 @@
             this.btnPlaylistEnd.TabIndex = 8;
             this.btnPlaylistEnd.TabStop = false;
             this.btnPlaylistEnd.Tag = "CmdPlaylistEnd";
+            this.btnPlaylistEnd.TipImage = null;
             // 
             // btnToggleShuffle
             // 
@@ -257,6 +263,7 @@
             this.btnToggleShuffle.TabIndex = 9;
             this.btnToggleShuffle.TabStop = false;
             this.btnToggleShuffle.Tag = "CmdToggleShuffle";
+            this.btnToggleShuffle.TipImage = null;
             // 
             // pbVolIcon
             // 
@@ -278,13 +285,15 @@
             this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
             this.lblTime.Location = new System.Drawing.Point(413, 0);
+            this.lblTime.MaximumSize = new System.Drawing.Size(3500, 25);
+            this.lblTime.MinimumSize = new System.Drawing.Size(150, 25);
             this.lblTime.Name = "lblTime";
             this.lblTime.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblTime.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblTime.Size = new System.Drawing.Size(142, 25);
+            this.lblTime.Size = new System.Drawing.Size(150, 25);
             this.lblTime.TabIndex = 14;
             this.lblTime.Text = "00:00:00 / 00:00:00";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSettings
             // 
@@ -297,6 +306,7 @@
             this.btnSettings.TabIndex = 15;
             this.btnSettings.TabStop = false;
             this.btnSettings.Tag = "CmdOpenSettings";
+            this.btnSettings.TipImage = null;
             // 
             // btnOpenURL
             // 
@@ -309,6 +319,7 @@
             this.btnOpenURL.TabIndex = 16;
             this.btnOpenURL.TabStop = false;
             this.btnOpenURL.Tag = "CmdOpenURL";
+            this.btnOpenURL.TipImage = null;
             // 
             // btnOpenDisk
             // 
@@ -321,6 +332,7 @@
             this.btnOpenDisk.TabIndex = 17;
             this.btnOpenDisk.TabStop = false;
             this.btnOpenDisk.Tag = "CmdOpenDisk";
+            this.btnOpenDisk.TipImage = null;
             // 
             // btnLoad
             // 
@@ -333,6 +345,7 @@
             this.btnLoad.TabIndex = 18;
             this.btnLoad.TabStop = false;
             this.btnLoad.Tag = "CmdLoad";
+            this.btnLoad.TipImage = null;
             // 
             // PlaybackPanel
             // 
