@@ -1054,9 +1054,6 @@ Timpul reperului: {0}</value>
   <data name="TXT_TITLE">
     <value>Titlu</value>
   </data>
-  <data name="TXT_TOTAL_TIME">
-    <value>Timp total.</value>
-  </data>
   <data name="TXT_TRACK">
     <value>Index piesă</value>
   </data>
@@ -1268,5 +1265,14 @@ Scurtătura: {0}</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
     <value>Anticipați sfârșitul melodiei curente cu:</value>
+  </data>
+  <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
+    <value>Durata totală de redare</value>
+  </data>
+  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Adăugați la o nouă listă de redare Deezer ...</value>
+  </data>
+  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Adăugați la o listă de redare Deezer existentă ...</value>
   </data>
 </root>

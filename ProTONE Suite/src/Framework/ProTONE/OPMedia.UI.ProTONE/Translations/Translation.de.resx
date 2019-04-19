@@ -1050,9 +1050,6 @@ Bookmark Zeit: {0}</value>
   <data name="TXT_TITLE">
     <value>Titel</value>
   </data>
-  <data name="TXT_TOTAL_TIME">
-    <value>Insgesamt benötigte Zeit.</value>
-  </data>
   <data name="TXT_TRACK">
     <value>Verfolgen Index</value>
   </data>
@@ -1267,5 +1264,14 @@ Tastenkürzel: {0}</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
     <value>Aktuelles Trackende vorwegnehmen mit:</value>
+  </data>
+  <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
+    <value>Gesamtwiedergabezeit</value>
+  </data>
+  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Hinzufügen einer neuen Deezer Wiedergabelisten  ...</value>
+  </data>
+  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Hinzufügen einer bestehenden Deezer Wiedergabelisten ...</value>
   </data>
 </root>

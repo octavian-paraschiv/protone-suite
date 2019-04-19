@@ -1050,9 +1050,6 @@ Temps de signet: {0}</value>
   <data name="TXT_TITLE">
     <value>Titre</value>
   </data>
-  <data name="TXT_TOTAL_TIME">
-    <value>Temps total.</value>
-  </data>
   <data name="TXT_TRACK">
     <value>Index de piste</value>
   </data>
@@ -1267,5 +1264,14 @@ Raccourci: {0}</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
     <value>Anticiper la fin de la piste en cours avec:</value>
+  </data>
+  <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
+    <value>Temps total de lecture</value>
+  </data>
+  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Ajouter à une nouvelle liste de lecture Deezer ...</value>
+  </data>
+  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Ajouter à une liste de lecture Deezer existante ...</value>
   </data>
 </root>

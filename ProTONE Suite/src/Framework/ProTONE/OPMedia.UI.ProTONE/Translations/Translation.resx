@@ -1057,9 +1057,6 @@ Bookmark time: {0}</value>
   <data name="TXT_TITLE">
     <value>Title</value>
   </data>
-  <data name="TXT_TOTAL_TIME">
-    <value>Total time.</value>
-  </data>
   <data name="TXT_TRACK">
     <value>Track Index</value>
   </data>
@@ -1268,5 +1265,14 @@ Shortcut: {0}</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
     <value>Anticipate current track end with:</value>
+  </data>
+  <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
+    <value>Total playback time</value>
+  </data>
+  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Add to a new Deezer playlist ...</value>
+  </data>
+  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Add to an existing Deezer playlist ...</value>
   </data>
 </root>

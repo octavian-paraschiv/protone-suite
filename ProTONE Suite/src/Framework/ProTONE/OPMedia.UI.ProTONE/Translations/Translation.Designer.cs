@@ -115,6 +115,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to an existing Deezer playlist ....
+        /// </summary>
+        internal static string TXT_ADD_EXISTING_DEEZER_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_ADD_EXISTING_DEEZER_PLAYLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add to an existing playlist ....
         /// </summary>
         internal static string TXT_ADD_EXISTING_PLAYLIST {
@@ -129,6 +138,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_ADD_FAV_LIST {
             get {
                 return ResourceManager.GetString("TXT_ADD_FAV_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to a new Deezer playlist ....
+        /// </summary>
+        internal static string TXT_ADD_NEW_DEEZER_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_ADD_NEW_DEEZER_PLAYLIST", resourceCulture);
             }
         }
         
@@ -3207,11 +3225,11 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total time..
+        ///   Looks up a localized string similar to Total playback time.
         /// </summary>
-        internal static string TXT_TOTAL_TIME {
+        internal static string TXT_TOTAL_PLAYBACK_TIME {
             get {
-                return ResourceManager.GetString("TXT_TOTAL_TIME", resourceCulture);
+                return ResourceManager.GetString("TXT_TOTAL_PLAYBACK_TIME", resourceCulture);
             }
         }
         

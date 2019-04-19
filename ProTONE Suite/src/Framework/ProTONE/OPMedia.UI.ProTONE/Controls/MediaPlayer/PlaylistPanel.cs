@@ -1073,14 +1073,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             TimeSpan ts = TimeSpan.FromSeconds((int)totalSeconds);
             int h = ts.Days * 24 + ts.Hours;
 
-            piTotal.AltDisplay = string.Format("Total: {0}:{1:d2}:{2:d2}",
-                h, ts.Minutes, ts.Seconds);
+            string head = Translator.Translate("TXT_TOTAL_PLAYBACK_TIME");
+            piTotal.AltDisplay = $"{head}: {h}:{ts.Minutes:d2}:{ts.Seconds:d2}";
 
-            if (TotalTimeChanged != null)
-            {
-                TotalTimeChanged(TimeSpan.FromSeconds((int)totalSeconds));
-            }
-
+            TotalTimeChanged?.Invoke(TimeSpan.FromSeconds((int)totalSeconds));
         }
 
         internal void AddToDeezerPlaylist(bool addToExisting)

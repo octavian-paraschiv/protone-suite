@@ -22,7 +22,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private readonly int ImageSize = 250;
 
-        public PlaylistItemType ItemType { get; set; } 
+        public PlaylistItemType ItemType { get; set; }
 
         public PlaylistItem Item
         {
@@ -84,8 +84,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 pbInfo.Image = null;
                 pbInfo.Visible = false;
 
-                lblDesc.FontSize = (this.ItemType == PlaylistItemType.None) ?
-                    FontSizes.NormalBold : FontSizes.Large;
+                lblDesc.FontSize = (this.ItemType == PlaylistItemType.Current) ?
+                    FontSizes.Large : FontSizes.NormalBold;
 
                 switch (this.ItemType)
                 {
