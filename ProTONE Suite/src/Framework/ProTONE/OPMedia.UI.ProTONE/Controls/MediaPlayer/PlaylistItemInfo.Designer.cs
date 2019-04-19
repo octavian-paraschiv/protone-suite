@@ -60,8 +60,6 @@
             // 
             // lblDesc
             // 
-            this.lblDesc.AutoEllipsis = true;
-            this.lblDesc.AutoSize = true;
             this.pnlLayout.SetColumnSpan(this.lblDesc, 2);
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -72,6 +70,7 @@
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
+            this.lblDesc.SingleLine = true;
             this.lblDesc.Size = new System.Drawing.Size(257, 20);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "opmLabel1";
