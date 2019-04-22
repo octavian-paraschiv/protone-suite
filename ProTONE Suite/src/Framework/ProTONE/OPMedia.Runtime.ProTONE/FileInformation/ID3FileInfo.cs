@@ -22,6 +22,7 @@ using System.Threading;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System.Reflection;
+using System.Drawing.Imaging;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -451,21 +452,30 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         {
             get
             {
-                Image img = null;
+                Bitmap bmp = null;
 
-                if (ArtworkInfo != null &&
-                    ArtworkInfo.ArtworkImages != null &&
-                    ArtworkInfo.ArtworkImages.Count > 0)
+                try
                 {
-                    img = ArtworkInfo.ArtworkImages[0].Picture;
+                    if (ArtworkInfo != null &&
+                        ArtworkInfo.ArtworkImages != null &&
+                        ArtworkInfo.ArtworkImages.Count > 0)
+                    {
+                        bmp = ArtworkInfo.ArtworkImages[0].Picture;
+                        if (bmp != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                bmp.Save(ms, ImageFormat.Png);
+                                byte[] imgBytes = ms.ToArray();
+                                string imgBase64 = Convert.ToBase64String(imgBytes);
+                                return $"base64:{imgBase64}";
+                            }
+                        }
+                    }
                 }
-
-                if (img != null)
+                catch (Exception ex)
                 {
-                    ImageConverter ic = new ImageConverter();
-                    byte[] imgBytes = (byte[])ic.ConvertTo(img, typeof(byte[]));
-                    string imgBase64 = Convert.ToBase64String(imgBytes);
-                    return $"base64:{imgBase64}";
+                    Logger.LogException(ex);
                 }
 
                 return null;

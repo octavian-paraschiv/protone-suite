@@ -206,7 +206,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 {
                     // We're trying to make use of advanced search filters.
                     // If the Deezer Searcher can build a non-empty filter from the user input, then we're OK.
-                    DeezerJsonFilter filter = DeezerTrackSearcher.BuildFilterFromQuery(search);
+                    DeezerJsonFilter filter = DeezerJsonFilter.FromSearchText(search);
                     valid = DeezerJsonFilter.IsNullOrEmpty(filter) == false;
                 }
             }

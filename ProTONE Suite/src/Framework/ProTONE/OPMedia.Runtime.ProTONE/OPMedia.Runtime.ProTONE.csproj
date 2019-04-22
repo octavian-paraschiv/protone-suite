@@ -116,6 +116,7 @@
     <Compile Include="Haali\HaaliConfig.cs" />
     <Compile Include="HeartbeatConsumer.cs" />
     <Compile Include="OnlineMediaContent\BaseClasses.cs" />
+    <Compile Include="OnlineMediaContent\DeezerRuntimeFactory.cs" />
     <Compile Include="OnlineMediaContent\DeezerTrackItem.cs" />
     <Compile Include="OnlineMediaContent\DeezerTrackSearcher.cs" />
     <Compile Include="OnlineMediaContent\LocalDatabaseSearcher.cs" />

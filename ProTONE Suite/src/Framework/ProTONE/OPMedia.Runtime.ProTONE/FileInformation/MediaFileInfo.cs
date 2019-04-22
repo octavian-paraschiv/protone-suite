@@ -135,10 +135,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         }
 
         [Browsable(false)]
-        public virtual string ImageURL
-        {
-            get { return null; }
-        }
+        public virtual string ImageURL { get; set; }
 
         [Browsable(false)]
         public virtual Bitrate? Bitrate

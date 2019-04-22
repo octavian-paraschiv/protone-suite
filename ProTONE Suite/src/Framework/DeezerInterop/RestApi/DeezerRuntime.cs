@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Net;
 using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
 
 namespace OPMedia.DeezerInterop.RestApi
 {
@@ -14,9 +15,11 @@ namespace OPMedia.DeezerInterop.RestApi
     {
         private string _apiEndpoint = "http://api.deezer.com/";
 
-        private WebClient _webClient;
+        private WebClientWithTimeout _webClient;
 
-        private Tuple<string, string> _applicationCredentials;
+        public string UserAccessToken { get; set; }
+        public string ApplicationId { get; set; }
+
 
         public override bool Equals(object obj)
         {
@@ -25,10 +28,10 @@ namespace OPMedia.DeezerInterop.RestApi
             DeezerRuntime dzr = obj as DeezerRuntime;
             if (dzr != null)
             {
-                if (dzr._applicationCredentials != null && this._applicationCredentials != null)
+                if (dzr.UserAccessToken != null && this.ApplicationId != null)
                 {
-                    bEq = (dzr._applicationCredentials.Item1 == this._applicationCredentials.Item1 &&
-                        dzr._applicationCredentials.Item2 == this._applicationCredentials.Item2);
+                    bEq = (dzr.UserAccessToken == this.UserAccessToken &&
+                        dzr.ApplicationId == this.ApplicationId);
                 }
             }
 
@@ -42,20 +45,21 @@ namespace OPMedia.DeezerInterop.RestApi
         public DeezerRuntime(string apiEndpoint)
         {
             _apiEndpoint = apiEndpoint;
-            _webClient = new WebClient();
-            _applicationCredentials = null;
+            _webClient = new WebClientWithTimeout(30000);
+
+            this.UserAccessToken = null;
+            this.ApplicationId = null;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DeezerRuntime"/> class.
         /// Sets the application credentials for use with needed requests.
         /// </summary>
-        /// <param name="applicationId">Your Application ID.</param>
-        /// <param name="applicationSecretKey">Your Application secret key.</param>
-        public DeezerRuntime(string apiEndpoint, string applicationId, string applicationSecretKey)
+        public DeezerRuntime(string apiEndpoint, string applicationId, string userAccessToken)
             : this(apiEndpoint)
         {
-            _applicationCredentials = new Tuple<string, string>(applicationId, applicationSecretKey);
+            this.ApplicationId = applicationId;
+            this.UserAccessToken = userAccessToken;
         }
 
         internal void CheckResponseForErrors(string response)
@@ -178,14 +182,17 @@ namespace OPMedia.DeezerInterop.RestApi
             return playlist;
         }
 
-        public List<Track> ExecuteSearch(string query, ManualResetEvent abortEvent)
+        public List<Track> ExecuteSearch(string query, int limit, ManualResetEvent abortEvent)
         {
             List<Track> tracks = new List<Track>();
 
             if (abortEvent.WaitOne(5))
                 return tracks;
 
-            string response = this.ExecuteHttpGet(string.Format("/search?limit=10000&q={0}", query));
+            if (limit < 0)
+                limit = 10000;
+
+            string response = this.ExecuteHttpGet(string.Format("/search?limit={0}&q={1}", limit, query));
             if (string.IsNullOrEmpty(response) == false)
             {
                 var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
@@ -225,14 +232,14 @@ namespace OPMedia.DeezerInterop.RestApi
         }
 
 
-        public List<Playlist> GetMyPlaylists(string accessToken, ManualResetEvent abortEvent)
+        public List<Playlist> GetMyPlaylists(ManualResetEvent abortEvent)
         {
             List<Playlist> playlists = new List<Playlist>();
 
             if (abortEvent.WaitOne(5))
                 return playlists;
 
-            string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}", accessToken));
+            string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}", this.UserAccessToken));
             if (string.IsNullOrEmpty(response) == false)
             {
                 var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);

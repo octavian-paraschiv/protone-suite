@@ -42,6 +42,7 @@ using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
 using NAudio.CoreAudioApi;
 using System.Threading.Tasks;
 using System.Threading;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 #endregion
 
@@ -724,7 +725,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                 if (uri != null && !uri.IsFile)
                 {
-                    if (uri.OriginalString.StartsWith("dzmedia:///track/"))
+                    if (uri.OriginalString.StartsWith(DeezerTrackItem.DeezerTrackUrlBase))
                         CreateNewRenderer<WorkerRenderer>(WorkerType.Deezer);
                     else
                         CreateNewRenderer<WorkerRenderer>(WorkerType.Shoutcast);

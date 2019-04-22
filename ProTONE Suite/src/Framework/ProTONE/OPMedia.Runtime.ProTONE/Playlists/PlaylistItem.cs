@@ -24,6 +24,9 @@ using OPMedia.Core;
 using System.Linq;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.DeezerInterop.RestApi;
+using Newtonsoft.Json;
+using System.Threading;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -266,11 +269,106 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get
             {
-                if (MediaFileInfo != null)
-                    return MediaFileInfo.ImageURL;
+                string url = null;
 
-                return null;
+                if (MediaFileInfo != null)
+                    url = MediaFileInfo.ImageURL;
+
+                if (string.IsNullOrEmpty(url))
+                    url = _altImageUrl;
+
+                return url;
             }
+        }
+
+        string _altImageUrl = null;
+
+        public virtual void Rebuild()
+        {
+            // Query the Deezer API with params extracted from the media file info
+            if (ProTONEConfig.DeezerHasValidConfig && ProTONEConfig.DeezerUseServicesForFileMetadata)
+            {
+                // First - parse the file name
+                string name = mi.Name;
+                if (!string.IsNullOrEmpty(mi.Extension))
+                {
+                    name = name.Replace(mi.Extension, string.Empty);
+                }
+
+                Dictionary<string, string> fileTokens = StringUtils.Tokenize(name, ProTONEConfig.FileNameFormat);
+
+                DeezerJsonFilter filter = new DeezerJsonFilter
+                {
+                    Album = MediaFileInfo.Album,
+                    Artist = MediaFileInfo.Artist,
+                    Title = MediaFileInfo.Title
+                };
+
+                bool needsMediaFileInfoCorrection = false;
+
+                // Second - replace formatting fields with data from file name where available
+                if (fileTokens != null && fileTokens.Count > 0)
+                {
+                    if (string.IsNullOrEmpty(filter.Album))
+                    {
+                        filter.Album = GetTokenValue(fileTokens, "<A>");
+                        needsMediaFileInfoCorrection = true;
+                    }
+
+                    if (string.IsNullOrEmpty(filter.Artist))
+                    {
+                        filter.Artist = GetTokenValue(fileTokens, "<B>");
+                        needsMediaFileInfoCorrection = true;
+                    }
+
+                    if (string.IsNullOrEmpty(filter.Title))
+                    {
+                        filter.Title = GetTokenValue(fileTokens, "<T>");
+                        needsMediaFileInfoCorrection = true;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(filter.Artist) &&
+                    string.IsNullOrEmpty(filter.Album) == false)
+                {
+                    // Could be a file where these two fields are reversed
+                    filter.Artist = filter.Album;
+                }
+
+                filter.Album = string.Empty;
+
+                DeezerRuntime dzr = DeezerRuntimeFactory.GetRuntime();
+
+                if (DeezerJsonFilter.IsNullOrEmpty(filter) == false)
+                {
+                    var evt = new ManualResetEvent(false);
+
+                    List<Track> tracks = dzr.ExecuteSearch(filter.SearchText, 1, evt);
+                    if (tracks != null && tracks.Count > 0)
+                    {
+                        DeezerTrackItem dti = new DeezerTrackItem();
+                        dti.LoadTrackData(tracks[0]);
+
+                        _altImageUrl = dti.AlbumUriImageSmall;
+                        if (string.IsNullOrEmpty(_altImageUrl))
+                            _altImageUrl = dti.ArtistUriImageSmall;
+
+                        if (needsMediaFileInfoCorrection)
+                        {
+                            mi.Album = dti.Album;
+                            mi.Artist = dti.Artist;
+                            mi.Title = dti.Title;
+
+                            try
+                            {
+                                mi.Save();
+                            }
+                            catch { }
+                        }
+                    }
+                }
+            }
+
         }
 
         public Image GetImage(bool large)
@@ -381,14 +479,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return this.DisplayName;
         }
 
-
-        public void Rebuild()
-        {
-            if (mi != null)
-            {
-                mi.Rebuild(true);
-            }
-        }
 
         public PlaylistItem(string itemPath, bool deepLoad) : this(itemPath, false, deepLoad)
         {

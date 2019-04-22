@@ -29,30 +29,31 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         {
             get
             {
-                bool val = true;
-
-                val &= string.IsNullOrEmpty(this.Album);
-                val &= string.IsNullOrEmpty(this.Artist);
-                val &= string.IsNullOrEmpty(this.Title);
-
-                return val;
+                return (this.SearchText.Length == 0);
             }
         }
 
-        public static bool IsNullOrEmpty(DeezerJsonFilter flt)
+        public string SearchText
         {
-            return (flt == null || flt.IsEmpty);
+            get
+            {
+                string text = "";
+
+                if (string.IsNullOrEmpty(Artist) == false)
+                    text += $"artist:\"{Artist}\" ";
+
+                if (string.IsNullOrEmpty(Album) == false)
+                    text += $"album:\"{Album}\" ";
+
+                if (string.IsNullOrEmpty(Title) == false)
+                    text += $"track:\"{Title}\" ";
+
+                return text.Trim();
+            }
         }
-    }
 
-    public class DeezerTrackSearcher : OnlineContentSearcher
-    {
-        private static DeezerRuntime _dzr = null;
-
-        public static DeezerJsonFilter BuildFilterFromQuery(string query)
+        public static DeezerJsonFilter FromSearchText(string query)
         {
-            DeezerJsonFilter filter = null;
-
             try
             {
                 // A filter string was specified by the user, so try to parse its fields ...
@@ -66,16 +67,21 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
                 string jsonSearch = string.Format("{{{0}}}", jsonSearchBody);
 
-                filter = JsonConvert.DeserializeObject<DeezerJsonFilter>(jsonSearch);
+                return JsonConvert.DeserializeObject<DeezerJsonFilter>(jsonSearch);
             }
-            catch
-            {
-                filter = null;
-            }
+            catch { }
 
-            return filter;
+            return null;
         }
-        
+
+        public static bool IsNullOrEmpty(DeezerJsonFilter flt)
+        {
+            return (flt == null || flt.IsEmpty);
+        }
+    }
+
+    public class DeezerTrackSearcher : OnlineContentSearcher
+    {
         protected override bool HasValidConfig
         {
             get
@@ -93,13 +99,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             if (HasValidConfig)
             {
-                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-
-                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
-                if (_dzr != dzr)
-                    _dzr = dzr;
+                DeezerRuntime dzr = DeezerRuntimeFactory.GetRuntime();
 
                 searchParams.Filter = OnlineContentSearchFilter.None;
 
@@ -112,9 +112,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 DeezerJsonFilter filter = null;
 
                 if (isFilteredSearch)
-                    filter = BuildFilterFromQuery(searchParams.SearchText);
+                    filter = DeezerJsonFilter.FromSearchText(searchParams.SearchText);
 
-                List<Track> tracks = _dzr.ExecuteSearch(searchParams.SearchText, abortEvent);
+                List<Track> tracks = dzr.ExecuteSearch(searchParams.SearchText, -1, abortEvent);
 
                 if (tracks != null)
                 {
@@ -122,40 +122,8 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     {
                         try
                         {
-                            DeezerTrackItem dti = new DeezerTrackItem
-                            {
-                                Album = (t.Album != null) ? t.Album.Title : String.Empty,
-                                Artist = (t.Artist != null) ? t.Artist.Name : string.Empty,
-                                Title = t.Title ?? string.Empty,
-                                Url = string.Format("dzmedia:///track/{0}", t.Id),
-                                Duration = t.Duration,
-                                ReleaseDate = t.ReleaseDate,
-                            };
-
-                            if (t.Album != null)
-                            {
-                                string uri = t.Album.ImageUriSmall.ToUrl();
-                                if (string.IsNullOrEmpty(uri) == false)
-                                    dti.AlbumUriImageSmall = uri;
-
-                                uri = t.Album.ImageUriLarge.ToUrl();
-                                if (string.IsNullOrEmpty(uri) == false)
-                                    dti.AlbumUriImageLarge = uri;
-
-                                if (string.IsNullOrEmpty(dti.ReleaseDate))
-                                    dti.ReleaseDate = t.Album.ReleaseDate;
-                            }
-
-                            if (t.Artist != null)
-                            {
-                                string uri = t.Artist.ImageUriSmall.ToUrl();
-                                if (string.IsNullOrEmpty(uri) == false)
-                                    dti.ArtistUriImageSmall = uri;
-
-                                uri = t.Artist.ImageUriLarge.ToUrl();
-                                if (string.IsNullOrEmpty(uri) == false)
-                                    dti.ArtistUriImageLarge = uri;
-                            }
+                            DeezerTrackItem dti = new DeezerTrackItem();
+                            dti.LoadTrackData(t);
 
                             bool shouldAddTrack = true;
 
@@ -201,15 +169,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             if (HasValidConfig)
             {
-                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
+                DeezerRuntime dzr = DeezerRuntimeFactory.GetRuntime();
 
-                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
-                if (_dzr != dzr)
-                    _dzr = dzr;
-
-                List<Playlist> playlists = _dzr.GetMyPlaylists(userAccessToken, abortEvent);
+                List<Playlist> playlists = dzr.GetMyPlaylists(abortEvent);
                 if (playlists != null)
                 {
                     foreach (var p in playlists)
@@ -238,15 +200,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             if (HasValidConfig)
             {
-                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
+                DeezerRuntime dzr = DeezerRuntimeFactory.GetRuntime();
 
-                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
-                if (_dzr != dzr)
-                    _dzr = dzr;
-
-                Playlist p = _dzr.GetPlaylist(op.Id);
+                Playlist p = dzr.GetPlaylist(op.Id);
                 if (p != null && p.Tracks != null)
                 {
                     foreach (var t in p.Tracks)
@@ -258,7 +214,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                                 Album = (t.Album != null) ? t.Album.Title : String.Empty,
                                 Artist = (t.Artist != null) ? t.Artist.Name : string.Empty,
                                 Title = t.Title ?? string.Empty,
-                                Url = string.Format("dzmedia:///track/{0}", t.Id),
+                                Url = string.Format(DeezerTrackItem.DeezerTrackUrlFmt, t.Id),
                                 Duration = t.Duration
                             };
 

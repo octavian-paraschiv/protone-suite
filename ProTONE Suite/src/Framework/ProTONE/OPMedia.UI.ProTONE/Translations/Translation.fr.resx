@@ -1274,4 +1274,14 @@ Raccourci: {0}</value>
   <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
     <value>Ajouter à une liste de lecture Deezer existante ...</value>
   </data>
+  <data name="TXT_DEEZER_APP_ID_ALT" xml:space="preserve">
+    <value>Deezer Application ID [2]:</value>
+  </data>
+  <data name="TXT_DEEZER_TOKEN_ALT" xml:space="preserve">
+    <value>Deezer User Access Token [2]:</value>
+  </data>
+  <data name="TXT_DEEZER_USE_SERVICES_FOR_METADATA" xml:space="preserve">
+    <value>Use Deezer services to correct
+file metadata (ID3, images)</value>
+  </data>
 </root>

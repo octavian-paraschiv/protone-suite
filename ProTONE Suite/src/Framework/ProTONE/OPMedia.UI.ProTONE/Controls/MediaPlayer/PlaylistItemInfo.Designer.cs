@@ -82,12 +82,12 @@
             this.propDisplay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.propDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propDisplay.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.propDisplay.Location = new System.Drawing.Point(260, 20);
+            this.propDisplay.Location = new System.Drawing.Point(258, 20);
             this.propDisplay.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.propDisplay.Name = "propDisplay";
             this.propDisplay.OverrideBackColor = System.Drawing.Color.Empty;
             this.propDisplay.RequiredSize = new System.Drawing.Size(0, 0);
-            this.propDisplay.Size = new System.Drawing.Size(1, 250);
+            this.propDisplay.Size = new System.Drawing.Size(2, 250);
             this.propDisplay.TabIndex = 2;
             // 
             // pbInfo

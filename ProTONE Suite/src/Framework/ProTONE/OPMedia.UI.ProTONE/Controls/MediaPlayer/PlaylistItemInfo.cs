@@ -13,6 +13,7 @@ using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.Themes;
 using System.Threading.Tasks;
 using OPMedia.Core;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -106,6 +107,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     string.IsNullOrEmpty(this.Item.DisplayName) == false)
                 {
                     name = this.Item.DisplayName;
+                    string url = this.Item.ImageURL;
 
                     if (this.ItemType == PlaylistItemType.Current)
                     {
@@ -116,17 +118,37 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         propDisplay.Visible = true;
                         pbInfo.Visible = true;
                         pbInfo.Width = 1;
+                        pbInfo.Margin = new System.Windows.Forms.Padding(0);
 
                         Image image = null;
 
                         Task.Factory.StartNew(() =>
                         {
-                            image = ImageProvider.GetImageFromURL(this.Item.ImageURL, 10000);
+                            if (string.IsNullOrEmpty(url))
+                            {
+                                // this call is blocking
+                                this.Item.Rebuild();
+
+                                url = this.Item.ImageURL ?? "";
+
+                                int len = Math.Min(url.Length, 100);
+                                Logger.LogToConsole($"ImageURL: {url.Substring(0, 100)}");
+                            }
+
+                            // this call is blocking
+                            image = ImageProvider.GetImageFromURL(url, 10000);
 
                         }).ContinueWith(_ =>
                         {
                             pbInfo.Image = image;
-                            pbInfo.Width = ImageSize;
+                            if (image != null)
+                            {
+                                pbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 3, 3);
+                                pbInfo.Width = ImageSize;
+                            }
+
+                            values = this.Item.MediaInfo;
+                            propDisplay.AssignData(null, values, null);
 
                         }, TaskScheduler.FromCurrentSynchronizationContext());
 

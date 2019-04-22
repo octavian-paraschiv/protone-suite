@@ -141,6 +141,11 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
+        public override void Rebuild()
+        {
+            _dti?.Rebuild();
+        }
+
         public override Dictionary<string, string> MediaInfo
         {
             get            

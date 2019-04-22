@@ -389,25 +389,30 @@ namespace OPMedia.Core
             {
                 if (string.IsNullOrEmpty(url) == false)
                 {
-                    url = url.ToLowerInvariant();
+                    var url2 = url.ToLowerInvariant();
                     string imgBase64 = null;
 
-                    if (url.StartsWith("base64:"))
+                    if (url2.StartsWith("base64:"))
                     {
                         imgBase64 = url.Replace("base64:", "");
                     }
-                    else if (url.StartsWith("http"))
+                    else if (url2.StartsWith("http"))
                     {
                         imgBase64 = PersistenceProxy.ReadObject(url, string.Empty);
                         if (string.IsNullOrEmpty(imgBase64))
                         {
                             using (WebClientWithTimeout wc = new WebClientWithTimeout(timeout))
                             {
+                                Logger.LogToConsole("    => ImageURL: downloading from Internet");
                                 byte[] data = wc.DownloadData(url);
                                 imgBase64 = Convert.ToBase64String(data);
                             }
 
                             PersistenceProxy.SaveObject(url, imgBase64);
+                        }
+                        else
+                        {
+                            Logger.LogToConsole("    => ImageURL: loading from Persistence Service");
                         }
                     }
 

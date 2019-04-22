@@ -1076,6 +1076,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+        public static bool DeezerUseServicesForFileMetadata
+        {
+            get { return PersistenceProxy.ReadObject("DeezerUseServicesForFileMetadata", false); }
+            set { PersistenceProxy.SaveObject("DeezerUseServicesForFileMetadata", value); }
+        }
+
         static bool? _enableExtendedDeezerFeatures = null;
 
         public static bool EnableExtendedDeezerFeatures

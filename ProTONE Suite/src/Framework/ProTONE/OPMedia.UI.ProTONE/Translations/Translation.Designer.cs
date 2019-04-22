@@ -984,6 +984,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deezer Application ID [2]:.
+        /// </summary>
+        internal static string TXT_DEEZER_APP_ID_ALT {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_APP_ID_ALT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deezer.
         /// </summary>
         internal static string TXT_DEEZER_CONTENT {
@@ -1018,6 +1027,25 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_DEEZER_TOKEN {
             get {
                 return ResourceManager.GetString("TXT_DEEZER_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deezer User Access Token [2]:.
+        /// </summary>
+        internal static string TXT_DEEZER_TOKEN_ALT {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_TOKEN_ALT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Deezer services to correct
+        ///file metadata (ID3, images).
+        /// </summary>
+        internal static string TXT_DEEZER_USE_SERVICES_FOR_METADATA {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_USE_SERVICES_FOR_METADATA", resourceCulture);
             }
         }
         

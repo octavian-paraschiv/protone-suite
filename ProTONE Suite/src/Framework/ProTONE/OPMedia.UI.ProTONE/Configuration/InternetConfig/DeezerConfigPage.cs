@@ -35,6 +35,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
             txtDeezerAppID2.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
             txtDeezerToken2.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
+            chkUseServices.CheckedChanged += new EventHandler(OnSettingsChanged);
 
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
             btnNew2.Image = OPMedia.UI.Properties.Resources.Reload16;
@@ -51,6 +52,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
             txtDeezerAppID2.Text = ProTONEConfig.DeezerApplicationId2;
             txtDeezerToken2.Text = ProTONEConfig.DeezerUserAccessToken2;
+            chkUseServices.Checked = ProTONEConfig.DeezerUseServicesForFileMetadata;
         }
 
         protected override void SaveInternal()
@@ -59,6 +61,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
             ProTONEConfig.DeezerApplicationId2 = txtDeezerAppID2.Text;
             ProTONEConfig.DeezerUserAccessToken2 = txtDeezerToken2.Text;
+            ProTONEConfig.DeezerUseServicesForFileMetadata = chkUseServices.Checked;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
