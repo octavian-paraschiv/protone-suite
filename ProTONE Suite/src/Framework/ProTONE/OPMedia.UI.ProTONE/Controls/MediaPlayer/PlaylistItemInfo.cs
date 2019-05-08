@@ -21,7 +21,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
     {
         private PlaylistItem _item = null;
 
-        private readonly int ImageSize = 250;
+        private readonly int ImageSize = 200;
 
         public PlaylistItemType ItemType { get; set; }
 
@@ -71,6 +71,17 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             UpdateItem();
         }
 
+        private string _oldUrl = null;
+
+        protected override void OnThemeUpdatedInternal()
+        {
+            base.OnThemeUpdatedInternal();
+
+            propDisplay.ForeColor = ThemeManager.ForeColor;
+            propDisplay.BackColor = ThemeManager.GradientNormalColor1;
+            pnlDisplay.BackColor = ThemeManager.GradientNormalColor1;
+        }
+
         private void UpdateItem()
         {
             try
@@ -79,11 +90,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 string prefix = string.Empty;
                 string name = Translator.Translate("TXT_NA");
 
-                propDisplay.ClearData();
-                propDisplay.Visible = false;
+                propDisplay.SetInfo(null, null);
 
-                pbInfo.Image = null;
-                pbInfo.Visible = false;
+                if (this.ItemType != PlaylistItemType.Current)
+                {
+                    pnlDisplay.Visible = false;
+                    pbInfo.Image = null;
+                    pbInfo.Visible = false;
+                }
+                else
+                {
+                    pnlDisplay.Visible = true;
+                    pbInfo.Visible = true;
+                }
 
                 lblDesc.FontSize = (this.ItemType == PlaylistItemType.Current) ?
                     FontSizes.Large : FontSizes.NormalBold;
@@ -112,15 +131,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     if (this.ItemType == PlaylistItemType.Current)
                     {
                         var values = this.Item.MediaInfo;
-                        propDisplay.AssignData(null, values, null);
-
-                        propDisplay.Visible = true;
-                        propDisplay.Visible = true;
-                        pbInfo.Visible = true;
-                        pbInfo.Width = 1;
-                        pbInfo.Margin = new System.Windows.Forms.Padding(0);
+                        propDisplay.SetInfo(null, values);
 
                         Image image = null;
+                        bool isInfoRebuilt = false;
+                        bool isImageChanged = (string.Compare(_oldUrl, url, false) != 0);
+
 
                         Task.Factory.StartNew(() =>
                         {
@@ -133,25 +149,43 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                                 int len = Math.Min(url.Length, 100);
                                 Logger.LogToConsole($"ImageURL: {url.Substring(0, 100)}");
+
+                                isInfoRebuilt = true;
                             }
 
                             // this call is blocking
-                            image = ImageProvider.GetImageFromURL(url, 10000);
+                            Size sz = new Size(ImageSize, ImageSize);
+                            image = ImageProvider.GetImageFromURL(url, 10000, sz);
 
                         }).ContinueWith(_ =>
                         {
-                            pbInfo.Image = image;
-                            if (image != null)
+                            if (isImageChanged)
                             {
-                                pbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 3, 3);
-                                pbInfo.Width = ImageSize;
+                                _oldUrl = url;
+
+                                // Image has changed
+                                pbInfo.Image = image;
+
+                                if (image != null)
+                                {
+                                    pbInfo.Width = ImageSize;
+                                    pbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 3, 3);
+                                }
+                                else
+                                {
+                                    pbInfo.Width = 1;
+                                    pbInfo.Margin = new System.Windows.Forms.Padding(0);
+                                }
                             }
 
-                            values = this.Item.MediaInfo;
-                            propDisplay.AssignData(null, values, null);
+                            if (isInfoRebuilt)
+                            {
+                                // Media info has been rebuilt so reload it
+                                values = this.Item.MediaInfo;
+                                propDisplay.SetInfo(null, values);
+                            }
 
                         }, TaskScheduler.FromCurrentSynchronizationContext());
-
                     }
                 }
 

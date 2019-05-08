@@ -62,6 +62,8 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     if (string.IsNullOrEmpty(uri) == false)
                         this.ArtistUriImageLarge = uri;
                 }
+
+                this.Url = string.Format(DeezerTrackItem.DeezerTrackUrlFmt, t.Id);
             }
         }
 

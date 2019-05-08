@@ -202,11 +202,15 @@ namespace OPMedia.DeezerInterop.RestApi
                 {
                     tracksChunk.ForEach(t =>
                     {
-                        Track actualTrack = this.GetTrack(t.Id);
-                        if (actualTrack != null)
-                            tracks.Add(actualTrack);
-                        else
-                            tracks.Add(t);
+                        Track trackToAdd = t;
+                        if (t.HasDetails == false)
+                        {
+                            Track actualTrack = this.GetTrack(t.Id);
+                            if (actualTrack != null)
+                                trackToAdd = actualTrack;
+                        }
+
+                        tracks.Add(trackToAdd);
                     });
                 }
 

@@ -33,6 +33,15 @@ namespace OPMedia.DeezerInterop.RestApi
         public Artist Artist { get; set; }
         public Album Album { get; set; }
 
+        [JsonIgnore]
+        public bool HasDetails
+        {
+            get
+            {
+                return (this.Artist != null && this.Album != null);
+            }
+        }
+
 
         public override string ToString()
         {
