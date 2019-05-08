@@ -50,11 +50,8 @@ namespace OPMedia.UI.Controls
         {
         }
 
-        protected override void OnRenderGraphics(PaintEventArgs e)
+        protected override void OnRenderGraphics(Graphics g, Rectangle clipRect)
         {
-            Graphics g = e.Graphics;
-            ThemeManager.PrepareGraphics(g);
-
             Rectangle rc = this.ClientRectangle;
 
             using (Brush b = new SolidBrush(ThemeManager.BackColor))

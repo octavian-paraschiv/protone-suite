@@ -223,7 +223,9 @@ namespace OPMedia.UI.Themes
                 //return SystemInformation.CaptionButtonSize;
             }
         }
-        
+
+        private SmoothGraphics _sg = null;
+
         public ThemeFormBase()
         {
             //Initialize the main thread
@@ -296,6 +298,9 @@ namespace OPMedia.UI.Themes
             this.Activated += new EventHandler(OnActivated);
             this.Deactivate += new EventHandler(OnDeactivated);
             this.HandleCreated += new EventHandler(ThemeFormBase_HandleCreated);
+
+            _sg = new SmoothGraphics(this);
+            _sg.RenderGraphics += OnRenderGraphics;
         }
 
         void ThemeFormBase_Shown(object sender, EventArgs e)
@@ -908,9 +913,13 @@ namespace OPMedia.UI.Themes
         {
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    OnRenderGraphics(e.Graphics, e.ClipRectangle, null);
+        //}
+
+        private void OnRenderGraphics(Graphics g, Rectangle rc, object customData)
         {
-            Graphics g = e.Graphics;
             ThemeManager.PrepareGraphics(g);
 
             if (_rcTitleBar != Rectangle.Empty)

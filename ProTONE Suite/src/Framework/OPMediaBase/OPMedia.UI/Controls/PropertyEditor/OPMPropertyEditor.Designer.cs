@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlPropertyChoosers = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.opmPanel1 = new OPMedia.UI.Controls.OPMPanel();
+            this.opmPanel1 = new System.Windows.Forms.Panel();
             this.opmPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +73,6 @@
         #endregion
 
         private OPMTableLayoutPanel pnlPropertyChoosers;
-        private OPMPanel opmPanel1;
+        private System.Windows.Forms.Panel opmPanel1;
     }
 }

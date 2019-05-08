@@ -33,7 +33,7 @@
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.btnRequest = new OPMedia.UI.Controls.OPMButton();
-            this.opmPanel1 = new OPMedia.UI.Controls.OPMPanel();
+            this.opmPanel1 = new System.Windows.Forms.Panel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
@@ -185,7 +185,7 @@
         private System.Windows.Forms.WebBrowser wbDeezer;
         private UI.Controls.OPMTextBox txtAppId;
         private UI.Controls.OPMButton btnRequest;
-        private UI.Controls.OPMPanel opmPanel1;
+        private System.Windows.Forms.Panel opmPanel1;
         private UI.Controls.OPMLabel opmLabel2;
 
     }

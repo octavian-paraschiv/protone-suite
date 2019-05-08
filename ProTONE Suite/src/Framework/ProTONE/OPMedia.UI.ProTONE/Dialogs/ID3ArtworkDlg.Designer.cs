@@ -38,7 +38,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblItem = new OPMedia.UI.Controls.OPMLabel();
             this.btnBrowse = new OPMedia.UI.Controls.OPMButton();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.opmPanel1 = new OPMedia.UI.Controls.OPMPanel();
+            this.opmPanel1 = new System.Windows.Forms.Panel();
             this.btnSave = new OPMedia.UI.Controls.OPMButton();
             this.lblSep = new OPMedia.UI.Controls.OPMLabel();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -359,7 +359,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private OPMLabel lblItem;
         private OPMButton btnBrowse;
         private OPMTableLayoutPanel opmLayoutPanel1;
-        private OPMPanel opmPanel1;
+        private System.Windows.Forms.Panel opmPanel1;
         private OPMLabel lblSep;
         private OPMListView lvPictures;
         private ColumnHeader colImage;

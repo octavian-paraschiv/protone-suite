@@ -30,15 +30,6 @@ namespace OPMedia.UI.Controls
             this.ReadOnly = true;
             //this.StateCommon.Border.DrawBorders = PaletteDrawBorders.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.None;
-
-            OnThemeChanged();
-        }
-
-        void OnThemeChanged()
-        {
-            base.ForeColor = ThemeManager.ForeColor;
-            base.BackColor = ThemeManager.BackColor;
-            Invalidate(true);
         }
 
         /// <summary>
@@ -54,40 +45,71 @@ namespace OPMedia.UI.Controls
 
     public class InfoTextBox : TransparentRichTextBox
     {
+        public FontSizes _fs = FontSizes.Normal;
+        private string _desc = null;
+        private Dictionary<string, string> _info = null;
+
+
+        public FontSizes FontSize
+        {
+            get
+            {
+                return _fs;
+            }
+
+            set
+            {
+                if (_fs != value)
+                {
+                    _fs = value;
+                    ThemeManager.SetFont(this, value);
+                    Rebuild();
+                }
+            }
+        }
+
         public InfoTextBox()
             : base()
         {
-            ThemeManager.SetFont(this, FontSizes.Small);
+            Rebuild();
         }
 
         public void SetInfo(string desc, Dictionary<string, string> info)
         {
+            _desc = desc;
+            _info = info;
+            Rebuild();
+        }
+
+        public void Rebuild()
+        {
             string text = @"{\rtf1\ansi\ansicpg1252\deff0\deflang1033";
 
-            string fontFamily = "Segoe UI";// ThemeManager.NormalFont.FontFamily.Name;
+            string fontFamily = this.Font.FontFamily.Name;
+            int fontSize = (int)(2 * this.Font.SizeInPoints);
 
-            switch (AppConfig.LanguageID)
-            {
-                case "ro":
+            //switch (AppConfig.LanguageID)
+            //{
+            //    case "ro":
                     {
                         string format = @"{\fonttbl{\f0\fswiss\fprq2\fcharset238 #FF#;}}";
                         text += format.Replace("#FF#", fontFamily);
-                        text += @"\viewkind4\uc1\pard\lang1048\f0\fs15";
+                        text += @"\viewkind4\uc1\pard\lang1048\f0\fs" + fontSize;
                     }
-                    break;
-            }
+            //        break;
+            //}
 
-            if (!string.IsNullOrEmpty(desc))
+            if (!string.IsNullOrEmpty(_desc))
             {
-                text += GenerateRtfLabel(desc.Replace("\r\n", @" \par ").Replace("\n", @" \par "));
+                text += GenerateRtfLabel(_desc.Replace("\r\n", @" \par ").Replace("\n", @" \par "));
                 text += @" \par ";
                 text += @" \par ";
             }
 
-            if (info != null && info.Count > 0)
+            if (_info != null && _info.Count > 0)
             {
-                int i = info.Count;
-                foreach (KeyValuePair<string, string> kvp in info)
+                int i = _info.Count;
+                foreach (KeyValuePair<string, string> kvp in _info)
                 {
                     i--;
 
@@ -112,7 +134,6 @@ namespace OPMedia.UI.Controls
             this.Rtf = text;
             
             this.ForeColor = ThemeManager.ForeColor;
-            //this.ForeColor = ThemeManager.BorderColor;
         }
 
         private string GenerateRtfLabel(string p)

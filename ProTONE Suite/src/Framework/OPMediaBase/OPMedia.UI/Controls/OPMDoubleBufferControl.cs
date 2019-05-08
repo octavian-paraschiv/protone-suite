@@ -16,64 +16,24 @@ namespace OPMedia.UI.Controls
 {
     public class OPMDoubleBufferedControl : OPMBaseControl
     {
-        const BufferedGraphics NO_MANAGED_BACK_BUFFER = null;
-
-        BufferedGraphicsContext GraphicManager;
-        BufferedGraphics ManagedBackBuffer;
+        private SmoothGraphics _sg = null;
 
         public OPMDoubleBufferedControl()
             : base()
         {
-            this.HandleDestroyed += new EventHandler(OnHandleDestroyed);
-            this.Resize += new EventHandler(OnResize);
-
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
-            GraphicManager = BufferedGraphicsManager.Current;
-            GraphicManager.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
-            ManagedBackBuffer = GraphicManager.Allocate(this.CreateGraphics(), ClientRectangle);
+            _sg = new SmoothGraphics(this);
+            _sg.RenderGraphics += _sg_RenderGraphics;
         }
 
-        void OnResize(object sender, EventArgs e)
+        private void _sg_RenderGraphics(Graphics g, Rectangle clipRect, object data)
         {
-            if (ManagedBackBuffer != NO_MANAGED_BACK_BUFFER)
-                ManagedBackBuffer.Dispose();
-
-            GraphicManager.MaximumBuffer = new Size(this.Width + 1, this.Height + 1);
-
-            ManagedBackBuffer = GraphicManager.Allocate(this.CreateGraphics(), ClientRectangle);
-
-            this.Invalidate();
+            OnRenderGraphics(g, clipRect);
         }
 
-        void OnHandleDestroyed(object sender, EventArgs e)
+        protected virtual void OnRenderGraphics(Graphics g, Rectangle clipRect)
         {
-            // clean up the memory
-            if (ManagedBackBuffer != NO_MANAGED_BACK_BUFFER)
-                ManagedBackBuffer.Dispose();
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            // we draw the progressbar into the image in 
-            // the memory
-            PaintEventArgs e1 = new PaintEventArgs(ManagedBackBuffer.Graphics, e.ClipRectangle);
-
-            using (Brush b = new SolidBrush(this.BackColor))
-            {
-                e1.Graphics.FillRectangle(b, ClientRectangle);
-            }
-
-            OnRenderGraphics(e1);
-
-            // now we draw the image into the screen
-            ManagedBackBuffer.Render(e.Graphics);
-        }
-
-        protected virtual void OnRenderGraphics(PaintEventArgs e)
-        {
-            base.OnPaint(e);
         }
     }
-
 }

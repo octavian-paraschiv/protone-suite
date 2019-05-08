@@ -170,131 +170,130 @@ namespace OPMedia.UI.Controls
             Invalidate(true);
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs pevent)
         {
-            using (SmoothGraphics sg = SmoothGraphics.New(e.Graphics, this.ClientRectangle))
+            Graphics g = pevent.Graphics;
+            ThemeManager.PrepareGraphics(g);
+
+            int pw = 1;
+            Color c1 = Color.Empty, c2 = Color.Empty, cb = Color.Empty, cText = Color.Empty;
+
+            c1 = Enabled ? ThemeManager.GradientNormalColor1 : ThemeManager.BackColor;
+            c2 = Enabled ? ThemeManager.GradientNormalColor2 : ThemeManager.BackColor;
+            cb = Enabled ? ThemeManager.BorderColor : ThemeManager.GradientNormalColor2;
+            cText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
+
+            if (Enabled && (_isHovered || Focused))
             {
-
-                int pw = 1;
-                Color c1 = Color.Empty, c2 = Color.Empty, cb = Color.Empty, cText = Color.Empty;
-
-                c1 = Enabled ? ThemeManager.GradientNormalColor1 : ThemeManager.BackColor;
-                c2 = Enabled ? ThemeManager.GradientNormalColor2 : ThemeManager.BackColor;
-                cb = Enabled ? ThemeManager.BorderColor : ThemeManager.GradientNormalColor2;
-                cText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
-
-                if (Enabled && (_isHovered || Focused))
+                if (_isHovered && Focused)
                 {
-                    if (_isHovered && Focused)
-                    {
-                        c1 = ThemeManager.GradientFocusHoverColor1;
-                        c2 = ThemeManager.GradientFocusHoverColor2;
-                        cb = ThemeManager.FocusBorderColor;
-                        //pw = 2;
-                    }
-                    else if (Focused)
-                    {
-                        c1 = ThemeManager.GradientFocusColor1;
-                        c2 = ThemeManager.GradientFocusColor2;
-                        cb = ThemeManager.FocusBorderColor;
-                        //pw = 2;
-                    }
-                    else
-                    {
-                        c1 = ThemeManager.GradientHoverColor1;
-                        c2 = ThemeManager.GradientHoverColor2;
-                        cText = ThemeManager.SelectedTextColor;
-                    }
+                    c1 = ThemeManager.GradientFocusHoverColor1;
+                    c2 = ThemeManager.GradientFocusHoverColor2;
+                    cb = ThemeManager.FocusBorderColor;
+                    //pw = 2;
                 }
-
-                if (_overrideBackColor != Color.Empty)
+                else if (Focused)
                 {
-                    c1 = c2 = _overrideBackColor;
-                }
-                if (_overrideForeColor != Color.Empty)
-                {
-                    cText = _overrideForeColor;
-                }
-
-                Rectangle rcb = ClientRectangle;
-                rcb.Inflate(1, 1);
-
-                using (Brush b = new SolidBrush(ThemeManager.BackColor))
-                using (Pen p = new Pen(b, 4))
-                {
-                    sg.Graphics.FillRectangle(b, rcb);
-                }
-
-                Rectangle rc = ClientRectangle;
-
-                if (_isMouseDown || _isKeyDown)
-                {
-                    rc = new Rectangle(2, 2, Width - 4, Height - 4);
+                    c1 = ThemeManager.GradientFocusColor1;
+                    c2 = ThemeManager.GradientFocusColor2;
+                    cb = ThemeManager.FocusBorderColor;
+                    //pw = 2;
                 }
                 else
                 {
-                    rc = new Rectangle(1, 1, Width - 2, Height - 2);
+                    c1 = ThemeManager.GradientHoverColor1;
+                    c2 = ThemeManager.GradientHoverColor2;
+                    cText = ThemeManager.SelectedTextColor;
                 }
+            }
 
-                using (Brush b = new LinearGradientBrush(rc, c1, c2, 90f))
-                using (Pen p = new Pen(cb, pw))
+            if (_overrideBackColor != Color.Empty)
+            {
+                c1 = c2 = _overrideBackColor;
+            }
+            if (_overrideForeColor != Color.Empty)
+            {
+                cText = _overrideForeColor;
+            }
+
+            Rectangle rcb = ClientRectangle;
+            rcb.Inflate(1, 1);
+
+            using (Brush b = new SolidBrush(ThemeManager.BackColor))
+            using (Pen p = new Pen(b, 4))
+            {
+                g.FillRectangle(b, rcb);
+            }
+
+            Rectangle rc = ClientRectangle;
+
+            if (_isMouseDown || _isKeyDown)
+            {
+                rc = new Rectangle(2, 2, Width - 4, Height - 4);
+            }
+            else
+            {
+                rc = new Rectangle(1, 1, Width - 2, Height - 2);
+            }
+
+            using (Brush b = new LinearGradientBrush(rc, c1, c2, 90f))
+            using (Pen p = new Pen(cb, pw))
+            {
+                g.FillRectangle(b, rc);
+                g.DrawRectangle(p, rc);
+            }
+
+            if (this.Image != null)
+            {
+                rc = ClientRectangle;
+
+                Rectangle rcImage = new Rectangle(
+                    (rc.Size.Width - Image.Size.Width) / 2,
+                    (rc.Size.Height - Image.Size.Height) / 2,
+                    rc.Size.Width, rc.Size.Height);
+
+                int l = rcImage.Left;
+                int t = rcImage.Top;
+                rcImage.Location = new Point(l, t);
+
+                int w = Math.Min(Image.Width, rcImage.Size.Width);
+                int h = Math.Min(Image.Height, rcImage.Size.Height);
+                rcImage.Size = new System.Drawing.Size(w, h);
+
+                g.DrawImage(Image, rcImage);
+            }
+            else
+            {
+                using (Brush b = new SolidBrush(cText))
                 {
-                    sg.Graphics.FillRectangle(b, rc);
-                    sg.Graphics.DrawRectangle(p, rc);
-                }
+                    StringFormat sf = new StringFormat();
+                    sf.Alignment = StringAlignments.FromContentAlignment(TextAlign).Alignment;
+                    sf.LineAlignment = StringAlignments.FromContentAlignment(TextAlign).LineAlignment;
+                    sf.Trimming = StringTrimming.EllipsisWord;
+                    //sf.FormatFlags = StringFormatFlags.NoWrap;
 
-                if (this.Image != null)
-                {
-                    rc = ClientRectangle;
+                    sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
 
-                    Rectangle rcImage = new Rectangle(
-                        (rc.Size.Width - Image.Size.Width) / 2,
-                        (rc.Size.Height - Image.Size.Height) / 2,
-                        rc.Size.Width, rc.Size.Height);
-
-                    int l = rcImage.Left;
-                    int t = rcImage.Top;
-                    rcImage.Location = new Point(l, t);
-
-                    int w = Math.Min(Image.Width, rcImage.Size.Width);
-                    int h = Math.Min(Image.Height, rcImage.Size.Height);
-                    rcImage.Size = new System.Drawing.Size(w, h);
-
-                    sg.Graphics.DrawImage(Image, rcImage);
-                }
-                else
-                {
-                    using (Brush b = new SolidBrush(cText))
-                    {
-                        StringFormat sf = new StringFormat();
-                        sf.Alignment = StringAlignments.FromContentAlignment(TextAlign).Alignment;
-                        sf.LineAlignment = StringAlignments.FromContentAlignment(TextAlign).LineAlignment;
-                        sf.Trimming = StringTrimming.EllipsisWord;
-                        //sf.FormatFlags = StringFormatFlags.NoWrap;
-
-                        sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
-
-                        Rectangle rcText = rc;
-                        if (ShowDropDown)
-                            rcText = new Rectangle(0, 0, this.Width - ArrowSize, this.Height);
-
-                        sg.Graphics.DrawString(this.Text, this.Font, b, rcText, sf);
-                    }
-
+                    Rectangle rcText = rc;
                     if (ShowDropDown)
-                    {
-                        Rectangle rcArrow = new Rectangle(this.Width - ArrowSize, 0, ArrowSize, this.Height);
-                        using (GraphicsPath gp = ImageProcessing.GenerateCenteredArrow(rcArrow))
-                        using (Brush b = new SolidBrush(cText))
-                        using (Pen p = new Pen(b, 1))
-                        {
-                            sg.Graphics.FillPath(b, gp);
-                            sg.Graphics.DrawPath(p, gp);
+                        rcText = new Rectangle(0, 0, this.Width - ArrowSize, this.Height);
 
-                            Point p1 = new Point(this.Width - ArrowSize + 2, 2);
-                            Point p2 = new Point(this.Width - ArrowSize + 2, this.Height - 4);
-                            sg.Graphics.DrawLine(p, p1, p2);
-                        }
+                    g.DrawString(this.Text, this.Font, b, rcText, sf);
+                }
+
+                if (ShowDropDown)
+                {
+                    Rectangle rcArrow = new Rectangle(this.Width - ArrowSize, 0, ArrowSize, this.Height);
+                    using (GraphicsPath gp = ImageProcessing.GenerateCenteredArrow(rcArrow))
+                    using (Brush b = new SolidBrush(cText))
+                    using (Pen p = new Pen(b, 1))
+                    {
+                        g.FillPath(b, gp);
+                        g.DrawPath(p, gp);
+
+                        Point p1 = new Point(this.Width - ArrowSize + 2, 2);
+                        Point p2 = new Point(this.Width - ArrowSize + 2, this.Height - 4);
+                        g.DrawLine(p, p1, p2);
                     }
                 }
             }

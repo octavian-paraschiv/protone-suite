@@ -5,72 +5,77 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Themes
 {
+    public delegate void RenderSmoothGraphicsEventHandler(Graphics g, Rectangle rc, object customData);
+
     public class SmoothGraphics : IDisposable
     {
-        Graphics _g = null;
-        Graphics _g2 = null;
+        const BufferedGraphics NO_MANAGED_BACK_BUFFER = null;
 
-        Rectangle _rc = Rectangle.Empty;
-        Image _i = null;
+        BufferedGraphicsContext _graphicManager;
+        BufferedGraphics _managedBackBuffer;
 
-        public Graphics Graphics
+        Control _ctl = null;
+
+        public event RenderSmoothGraphicsEventHandler RenderGraphics = null;
+
+        public SmoothGraphics(Control ctl, bool useCustomRenderer = false)
         {
-            get
-            {
-                return _g2;
-            }
+            _ctl = ctl;
+
+            _graphicManager = BufferedGraphicsManager.Current;
+            _graphicManager.MaximumBuffer = new Size(ctl.Width, ctl.Height);
+            _managedBackBuffer = _graphicManager.Allocate(ctl.CreateGraphics(), ctl.ClientRectangle);
+
+            ctl.HandleDestroyed += Ctl_HandleDestroyed;
+            ctl.Resize += Ctl_Resize;
+
+            if (useCustomRenderer == false)
+                ctl.Paint += Ctl_Paint;
         }
 
-        public static SmoothGraphics New(Graphics g, Rectangle rc)
+        private void Ctl_Paint(object sender, PaintEventArgs e)
         {
-            if (g != null)
-            {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                g.CompositingMode = CompositingMode.SourceOver;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                return new SmoothGraphics(g, rc);
-            }
-
-            return null;
+            CustomRenderer(e.Graphics, e.ClipRectangle, null);
         }
 
-        private SmoothGraphics(Graphics g, Rectangle rc)
+        public void CustomRenderer(Graphics g, Rectangle clipRect, object customData)
         {
-            _g = g;
-            _rc = rc;
+            ThemeManager.PrepareGraphics(_managedBackBuffer.Graphics);
 
-            _i = new Bitmap(rc.Width, rc.Height);
-            _g2 = Graphics.FromImage(_i);
+            RenderGraphics?.Invoke(_managedBackBuffer.Graphics, clipRect, customData);
 
-            _g2.SmoothingMode = SmoothingMode.AntiAlias;
-            _g2.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            _g2.CompositingMode = CompositingMode.SourceOver;
-            _g2.CompositingQuality = CompositingQuality.HighQuality;
-            _g2.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            // now we draw the image into the screen
+            _managedBackBuffer.Render(g);
+        }
+
+        private void Ctl_Resize(object sender, EventArgs e)
+        {
+            if (_managedBackBuffer != NO_MANAGED_BACK_BUFFER)
+                _managedBackBuffer.Dispose();
+
+            _graphicManager.MaximumBuffer = new Size(_ctl.Width, _ctl.Height);
+
+            _managedBackBuffer = _graphicManager.Allocate(_ctl.CreateGraphics(), _ctl.ClientRectangle);
+
+            _ctl.Invalidate();
+        }
+
+        private void Ctl_HandleDestroyed(object sender, EventArgs e)
+        {
+            // clean up the memory
+            if (_managedBackBuffer != NO_MANAGED_BACK_BUFFER)
+                _managedBackBuffer.Dispose();
         }
 
         public void Dispose()
         {
-            try
-            {
-                if (_g != null && _i != null && _rc != Rectangle.Empty)
-                    _g.DrawImage(_i, _rc);
-
-                _g2 = null;
-                _i = null;
-                _g = null;
-            }
-            catch (Exception ex)
-            {
-                string s = ex.Message;
-            }
-
+            // clean up the memory
+            if (_managedBackBuffer != NO_MANAGED_BACK_BUFFER)
+                _managedBackBuffer.Dispose();
         }
     }
 }

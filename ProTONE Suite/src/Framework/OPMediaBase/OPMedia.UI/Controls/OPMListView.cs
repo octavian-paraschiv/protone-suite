@@ -350,9 +350,8 @@ namespace OPMedia.UI.Controls
             this.DoubleBuffered = true;
 
             base.OwnerDraw = true;
-            base.DrawItem += new DrawListViewItemEventHandler(OnDrawItem);
-            //base.DrawSubItem += new DrawListViewSubItemEventHandler(OnDrawSubItem);
-            base.DrawColumnHeader += new DrawListViewColumnHeaderEventHandler(OPMListView_DrawColumnHeader);
+            base.DrawItem += OnDrawItem;
+            base.DrawColumnHeader += OnDrawColumnHeader;
 
             base.BackColor = ThemeManager.BackColor;
             base.ForeColor = ThemeManager.ForeColor;
@@ -424,8 +423,16 @@ namespace OPMedia.UI.Controls
             }
         }
 
-        void OPMListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        void OnDrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
+            //_sgListHeader.CustomRenderer(e.Graphics, e.Bounds, e);
+            OnRenderHeader(e.Graphics, e.Bounds, e);
+        }
+
+        void OnRenderHeader(Graphics g, Rectangle clipRectangle, object data)
+        {
+            DrawListViewColumnHeaderEventArgs e = data as DrawListViewColumnHeaderEventArgs;
+
             if (base.HeaderStyle == ColumnHeaderStyle.None)
             {
                 e.DrawDefault = true;
@@ -719,6 +726,14 @@ namespace OPMedia.UI.Controls
 
         private void OnDrawItem(object sender, DrawListViewItemEventArgs e)
         {
+            //_sgListItems.CustomRenderer(e.Graphics, e.Bounds, e);
+            OnRenderItems(e.Graphics, e.Bounds, e);
+        }
+
+        private void OnRenderItems(Graphics g, Rectangle clipRectangle, object data)
+        {
+            DrawListViewItemEventArgs e = data as DrawListViewItemEventArgs;
+
             for (int col = 0; col < e.Item.SubItems.Count; col++)
             {
                 ListViewItem.ListViewSubItem subitem = e.Item.SubItems[col];
@@ -739,7 +754,7 @@ namespace OPMedia.UI.Controls
                             this.Columns[col],
                             e.State);
 
-                        OnDrawSubItem(sender, e2);
+                        OnDrawSubItem(null, e2);
                     }
                     catch (Exception ex)
                     {
@@ -912,7 +927,7 @@ namespace OPMedia.UI.Controls
                             imgSize = this.StateImageList.ImageSize;
                         }
 
-                        Image imgToDraw = ImageProvider.ScaleImage(esid.Image, imgSize, false);
+                        var imgToDraw = ImageProvider.ScaleImage(esid.Image, imgSize, false);
 
                         Rectangle rc = new Rectangle(e.Bounds.Location, imgToDraw.Size);
                         rc.Offset(0, (e.Bounds.Height - imgToDraw.Height) / 2);

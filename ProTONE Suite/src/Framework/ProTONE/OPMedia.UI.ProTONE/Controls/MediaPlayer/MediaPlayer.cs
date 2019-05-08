@@ -127,7 +127,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
         }
 
-        public void DoLayout()
+        protected void DoLayout()
         {
             playlist.Visible = !compactView;
 

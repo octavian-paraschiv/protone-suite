@@ -34,7 +34,7 @@ namespace OPMedia.UI.Wizards
             this.pnlWizardStep = new System.Windows.Forms.Panel();
             this.pnlWizardLayout = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblSeparator2 = new System.Windows.Forms.Label();
-            this.pnlWizImage = new OPMedia.UI.Controls.OPMPanel();
+            this.pnlWizImage = new System.Windows.Forms.Panel();
             this.pbWizImage = new System.Windows.Forms.PictureBox();
             this.pnlContent.SuspendLayout();
             this.pnlWizardLayout.SuspendLayout();
@@ -172,7 +172,7 @@ namespace OPMedia.UI.Wizards
         private OPMTableLayoutPanel pnlWizardLayout;
         private System.Windows.Forms.PictureBox pbWizImage;
         private System.Windows.Forms.Label lblSeparator2;
-        private OPMPanel pnlWizImage;
+        private System.Windows.Forms.Panel pnlWizImage;
 
 
 

@@ -32,7 +32,7 @@
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
             this.cmbOutputFormat = new OPMedia.UI.Controls.OPMComboBox();
-            this.pnlEncoderOptions = new OPMedia.UI.Controls.OPMPanel();
+            this.pnlEncoderOptions = new System.Windows.Forms.Panel();
             this.opmGroupBox1.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -126,6 +126,6 @@
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
         private UI.Controls.OPMLabel opmLabel3;
         private UI.Controls.OPMComboBox cmbOutputFormat;
-        private UI.Controls.OPMPanel pnlEncoderOptions;
+        private System.Windows.Forms.Panel pnlEncoderOptions;
     }
 }

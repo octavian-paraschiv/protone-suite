@@ -164,12 +164,12 @@ namespace OPMedia.ProTONE
             this.mediaPlayer.MinimumSize = new System.Drawing.Size(160, 0);
             this.mediaPlayer.Name = "mediaPlayer";
             this.mediaPlayer.OverrideBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.mediaPlayer.Size = new System.Drawing.Size(412, 241);
+            this.mediaPlayer.Size = new System.Drawing.Size(548, 441);
             this.mediaPlayer.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(550, 315);
+            this.ClientSize = new System.Drawing.Size(550, 465);
             this.MinimumSize = new System.Drawing.Size(550, 315);
             this.Name = "MainForm";
             this.Controls.SetChildIndex(this.pnlContent, 0);

@@ -34,7 +34,7 @@ namespace OPMedia.UI.Configuration
             this.btnOk = new OPMedia.UI.Controls.OPMButton();
             this.cfgPanel = new OPMedia.UI.Configuration.SerialPortCfgPanel();
             this.pnlPortSettings = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.pnlExtension = new OPMedia.UI.Controls.OPMPanel();
+            this.pnlExtension = new System.Windows.Forms.Panel();
             this.pnlContent.SuspendLayout();
             this.pnlPortSettings.SuspendLayout();
             this.SuspendLayout();
@@ -140,7 +140,7 @@ namespace OPMedia.UI.Configuration
         protected OPMButton btnOk;
         protected SerialPortCfgPanel cfgPanel;
         private OPMTableLayoutPanel pnlPortSettings;
-        protected OPMPanel pnlExtension;
+        protected System.Windows.Forms.Panel pnlExtension;
 
 
 

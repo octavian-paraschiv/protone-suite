@@ -21,6 +21,7 @@ using System.Reflection;
 using OPMedia.Core.Utilities;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
+using System.Drawing.Imaging;
 #endregion
 
 
@@ -178,14 +179,14 @@ namespace OPMedia.Core
                     Icon icon = _GetIcon(strPath, largeIcon);
                     if (icon != null)
                     {
-                        Image img = icon.ToBitmap();
+                        Bitmap img = icon.ToBitmap();
                         if (img == null)
                         {
                             retVal = GetShell32Icon(Shell32Icon.GenericFolder, largeIcon);
                         }
                         else
                         {
-                            retVal = img.Resize(largeIcon);
+                            retVal = img.Resize(largeIcon) as Image;
                         }
                     }
                 }
@@ -248,7 +249,7 @@ namespace OPMedia.Core
 
         public static Image GetShell32Icon(Shell32Icon type, bool largeIcon)
         {
-            Image img = null;
+            Bitmap img = null;
 
             switch (type)
             {
@@ -280,7 +281,7 @@ namespace OPMedia.Core
             }
 
             if (img != null)
-                return img.Resize(largeIcon);
+                return img.Resize(largeIcon) as Image;
 
             // Use icons provided by Shell32.dll itself
             return GetIcon(Environment.SystemDirectory + PathUtils.DirectorySeparator + "shell32.dll",
@@ -381,9 +382,10 @@ namespace OPMedia.Core
             return null;
         }
 
-        public static Image GetImageFromURL(string url, int timeout)
+        public static Image GetImageFromURL(string url, int timeout, Size requiredSize)
         {
-            Image img = null;
+            Bitmap bmp = null;
+            byte[] imgBytes = null;
 
             try
             {
@@ -404,8 +406,30 @@ namespace OPMedia.Core
                             using (WebClientWithTimeout wc = new WebClientWithTimeout(timeout))
                             {
                                 Logger.LogToConsole("    => ImageURL: downloading from Internet");
-                                byte[] data = wc.DownloadData(url);
-                                imgBase64 = Convert.ToBase64String(data);
+                                imgBytes = wc.DownloadData(url);
+
+                                if (imgBytes != null && imgBytes.Length > 0)
+                                {
+                                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                                    {
+                                        bmp = Image.FromStream(ms) as Bitmap;
+                                    }
+
+                                    if (bmp.Size != requiredSize)
+                                    {
+                                        var img2 = ScaleImage(bmp, requiredSize) as Bitmap;
+                                        if (img2 != null)
+                                        {
+                                            using (MemoryStream ms = new MemoryStream())
+                                            {
+                                                bmp.Save(ms, ImageFormat.Png);
+                                                imgBytes = ms.ToArray();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                imgBase64 = Convert.ToBase64String(imgBytes);
                             }
 
                             PersistenceProxy.SaveObject(url, imgBase64);
@@ -418,12 +442,12 @@ namespace OPMedia.Core
 
                     if (string.IsNullOrEmpty(imgBase64) == false)
                     {
-                        byte[] imgBytes = Convert.FromBase64String(imgBase64);
+                        imgBytes = Convert.FromBase64String(imgBase64);
                         if (imgBytes != null && imgBytes.Length > 0)
                         {
                             using (MemoryStream ms = new MemoryStream(imgBytes))
                             {
-                                img = Image.FromStream(ms);
+                                bmp = Image.FromStream(ms) as Bitmap;
                             }
                         }
                     }
@@ -434,8 +458,7 @@ namespace OPMedia.Core
                 Logger.LogException(ex);
             }
 
-
-            return img;
+            return bmp;
         }
     }
 

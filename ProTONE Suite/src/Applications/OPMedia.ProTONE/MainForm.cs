@@ -93,7 +93,6 @@ namespace OPMedia.ProTONE
 
                 _msgTarget = new TrayNotificationTarget(notifyIcon, this);
 
-                this.Resize += new EventHandler(MainForm_Resize);
                 this.Shown += new EventHandler(MainForm_Shown);
                 this.HandleDestroyed += new EventHandler(MainForm_HandleDestroyed);
 
@@ -124,8 +123,6 @@ namespace OPMedia.ProTONE
 
             _commandTarget = new BasicCommandTarget(this);
 
-            mediaPlayer.DoLayout();
-
             BuildThumbnailButtons(true);
         }
 
@@ -155,11 +152,6 @@ namespace OPMedia.ProTONE
 
                 TaskbarThumbnailManager.Instance.SubmitThumbnailButtons(add);
             }
-        }
-
-        void MainForm_Resize(object sender, EventArgs e)
-        {
-            mediaPlayer.DoLayout();
         }
 
         void OnStreamTitleChanged(Dictionary<string, string> data)
@@ -289,7 +281,6 @@ namespace OPMedia.ProTONE
             {
                 case CommandType.Activate:
                     RevealWindow();
-                    mediaPlayer.DoLayout();
                     break;
                 case CommandType.Terminate:
                     if (CanTerminate())
@@ -350,7 +341,6 @@ namespace OPMedia.ProTONE
             else
             {
                 RevealWindow();
-                mediaPlayer.DoLayout();
             }
         }
 

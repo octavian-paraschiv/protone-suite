@@ -48,7 +48,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblSep1 = new System.Windows.Forms.Label();
-            this.pnlAdditional = new OPMedia.UI.Controls.OPMPanel();
+            this.pnlAdditional = new System.Windows.Forms.Panel();
             this.piTotal = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
             this.piPrev = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
             this.piCurrent = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
@@ -304,6 +304,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private ColumnHeader colTime;
         private ColumnHeader colFile;
         private Label lblSep1;
-        private OPMPanel pnlAdditional;
+        private System.Windows.Forms.Panel pnlAdditional;
     }
 }
