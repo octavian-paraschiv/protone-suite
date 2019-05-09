@@ -422,7 +422,7 @@ namespace OPMedia.Core
                                         {
                                             using (MemoryStream ms = new MemoryStream())
                                             {
-                                                bmp.Save(ms, ImageFormat.Png);
+                                                img2.Save(ms, ImageFormat.Png);
                                                 imgBytes = ms.ToArray();
                                             }
                                         }

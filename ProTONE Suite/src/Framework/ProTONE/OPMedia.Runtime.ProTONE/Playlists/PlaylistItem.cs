@@ -341,6 +341,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 if (DeezerJsonFilter.IsNullOrEmpty(filter) == false)
                 {
+                    start_search:
+                    int i = 0;
                     var evt = new ManualResetEvent(false);
 
                     List<Track> tracks = dzr.ExecuteSearch(filter.SearchText, 1, evt);
@@ -364,6 +366,20 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                                 mi.Save();
                             }
                             catch { }
+                        }
+                    }
+                    else
+                    {
+                        // Lookup by artist only
+                        filter.Album = string.Empty;
+                        filter.Title = string.Empty;
+
+                        tracks = dzr.ExecuteSearch(filter.SearchText, 1, evt);
+                        if (tracks != null && tracks.Count > 0)
+                        {
+                            DeezerTrackItem dti = new DeezerTrackItem();
+                            dti.LoadTrackData(tracks[0]);
+                            _altImageUrl = dti.ArtistUriImageSmall;
                         }
                     }
                 }

@@ -159,7 +159,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                         }).ContinueWith(_ =>
                         {
-                            if (isImageChanged)
+                            if (isImageChanged || isInfoRebuilt)
                             {
                                 _oldUrl = url;
 
