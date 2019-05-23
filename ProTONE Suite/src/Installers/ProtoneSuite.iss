@@ -240,15 +240,17 @@ Name: {app}\Templates\Catalog; Languages: ; Components: itemPlayer\itemLibrary
 Name: {app}\Templates\RemoteControl; Components: itemPlayer\itemRemote
 
 [Run]
-Filename: {dotnet4032}\installutil.exe; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: {app}; StatusMsg: {cm:instRccService}; Flags: runhidden runascurrentuser
-Filename: cmd.exe; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: {app}; StatusMsg: {cm:startRccService}; Flags: runhidden runascurrentuser
-Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser
-Filename: {dotnet4064}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Check: IsWin64
-Filename: {dotnet4032}\installutil.exe; Parameters: "-i ""{app}\OPMedia.RCCService.exe"""; WorkingDir: {app}; StatusMsg: {cm:instRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
-Filename: cmd.exe; Parameters: "/c ""sc start OPMedia.RCCService"""; WorkingDir: {app}; StatusMsg: {cm:startRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
-Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; StatusMsg: {cm:firewallPlayer}; Flags: runhidden runascurrentuser
-Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCService.exe"" ""OPMedia RCC Service"" ENABLE ALL"; StatusMsg: {cm:firewallRccService}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
-Filename: {sys}\netsh.exe; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCManager.exe"" ""OPMedia RCC Manager"" ENABLE ALL"; StatusMsg: {cm:firewallRccManager}; Flags: runhidden runascurrentuser; Components: itemPlayer\itemRemote
+Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.dll /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingDLL}"
+Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.exe /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingEXE}"
+Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallPlayer}"
+Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCService.exe"" ""OPMedia RCC Service"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallRccService}"; Components: itemPlayer\itemRemote
+Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.RCCManager.exe"" ""OPMedia RCC Manager"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallRccManager}"; Components: itemPlayer\itemRemote
+Filename: "{dotnet4032}\regasm.exe"; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:cfgShellSupport}"
+Filename: "{dotnet4064}\regasm.exe"; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:cfgShellSupport}"; Check: IsWin64
+Filename: "{dotnet4032}\installutil.exe"; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:instRccService}"
+Filename: "{dotnet4032}\installutil.exe"; Parameters: "-i ""{app}\OPMedia.RCCService.exe"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:instRccService}"; Components: itemPlayer\itemRemote
+Filename: "cmd.exe"; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:startRccService}"
+Filename: "cmd.exe"; Parameters: "/c ""sc start OPMedia.RCCService"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:startRccService}"; Components: itemPlayer\itemRemote
 
 [UninstallRun]
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.RCCService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopRCCService}; RunOnceId: _id1.1; Components: itemPlayer\itemRemote
