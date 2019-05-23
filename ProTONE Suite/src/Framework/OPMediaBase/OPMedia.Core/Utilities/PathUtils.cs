@@ -23,6 +23,23 @@ namespace OPMedia.Core
         static string _networkPathStart = string.Format("{0}{1}",
             DirectorySeparator, DirectorySeparator);
 
+        public static string ProgramDataDir
+        {
+            get
+            {
+                string winRoot = Path.GetPathRoot(WinDir);
+                return Path.Combine(winRoot, "ProgramData");
+            }
+        }
+
+        public static string WinDir
+        {
+            get
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+            }
+        }
+
         public static string DirectorySeparator
         {
             get

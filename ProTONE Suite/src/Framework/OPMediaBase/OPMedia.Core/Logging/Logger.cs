@@ -31,9 +31,6 @@ namespace OPMedia.Core.Logging
         private System.Threading.Thread loggerThread = null;
         private bool loggerThreadMustRun = true;
         private static long sessionID;
-
-        private static string assemblyLocation;
-
         private static string logFileFolder = ".";
 
         #endregion
@@ -300,15 +297,13 @@ namespace OPMedia.Core.Logging
         {
             logFileFolder = LoggingConfiguration.GetDefaultLoggingFolder();
 
-            if (string.IsNullOrEmpty(logFileFolder) || logFileFolder == PathUtils.CurrentDir)
-                logFileFolder = Path.GetDirectoryName(assemblyLocation);
+            if (string.IsNullOrEmpty(logFileFolder))
+                logFileFolder = ".";
         }
 
 
         private Logger()
         {
-            assemblyLocation = Assembly.GetExecutingAssembly().Location;
-
             if (LoggingConfiguration.LoggingEnabled)
             {
                 WriteLogSessionStart();

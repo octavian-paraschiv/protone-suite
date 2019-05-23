@@ -29,21 +29,24 @@ namespace OPMedia.Core.Logging
 
         public static int DaysToKeepLogs => 2;
 
+        public const string LogSubfolder = "Logs";
+
 
         public static string GetDefaultLoggingFolder()
         {
             try
             {
-                string installPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string logFolder = PathUtils.ProgramDataDir;
+                logFolder = Path.Combine(logFolder, Constants.CompanyName);
+                logFolder = Path.Combine(logFolder, Constants.SuiteName);
+                logFolder = Path.Combine(logFolder, LogSubfolder);
 
-                string defaultPath = Path.Combine(installPath, "Logs");
+                if (PathUtils.CanWriteToFolder(logFolder))
+                    return logFolder;
 
-                if (PathUtils.CanWriteToFolder(defaultPath))
-                    return defaultPath;
-
-                defaultPath = Path.Combine(ApplicationInfo.AltLogsFolder, "Logs");
-                if (PathUtils.CanWriteToFolder(defaultPath))
-                    return defaultPath;
+                logFolder = Path.Combine(ApplicationInfo.AltLogsFolder, LogSubfolder);
+                if (PathUtils.CanWriteToFolder(logFolder))
+                    return logFolder;
             }
             catch
             {
