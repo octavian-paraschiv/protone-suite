@@ -9,7 +9,6 @@
 #define PRODUCT GetStringFileInfo(BINDIR + "\OPMedia.Core.dll", PRODUCT_NAME)
 #define REGENTRY "Software" + "\" + COMPANY + "\" + PRODUCT
 
-
 [Setup]
 ;------------------------------
 AppID={{9566B126-2205-4E61-8C1C-E6D4D0FC34F0}
@@ -45,7 +44,7 @@ DisableStartupPrompt=true
 EnableDirDoesntExistWarning=true
 LanguageDetectionMethod=locale
 
-; WinXP SP3 - miniumum OS required for .NET Framework 4.0
+; Windows Vista SP2 - miniumum OS required for ProTONE Suite
 MinVersion=0,5.01.2600sp3
 
 PrivilegesRequired=admin
@@ -61,6 +60,7 @@ WizardImageBackColor=clBlack
 WizardImageFile=..\main.bmp
 WizardImageStretch=false
 WizardSmallImageFile=..\main_small.bmp
+CloseApplications=False
 
 [Tasks]
 

@@ -109,49 +109,6 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             return GetCommand<int>(WorkerCommandType.GetVolReq);
         }
 
-        public double[] GetLevels()
-        {
-            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
-            {
-                string rsp = GetCommand<string>(WorkerCommandType.GetLevelsReq);
-                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
-            }
-
-            return null;
-        }
-
-        public double[] GetWaveform()
-        {
-            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Waveform))
-            {
-                string rsp = GetCommand<string>(WorkerCommandType.GetWaveformReq);
-                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
-            }
-
-            return null;
-        }
-
-        public double[] GetSpectrogram()
-        {
-            if (GetSupportedMeteringData().HasFlag(SupportedMeteringData.Spectrogram))
-            {
-                string rsp = GetCommand<string>(WorkerCommandType.GetSpectrogramReq);
-                return StringUtils.CoerceToVectorOf<double>(rsp, InnerArrayDelim);
-            }
-
-            return null;
-        }
-
-        SupportedMeteringData? _sup = null;
-
-        public SupportedMeteringData GetSupportedMeteringData()
-        {
-            if (_sup == null)
-                _sup = GetCommand<SupportedMeteringData>(WorkerCommandType.GetSupportedMeteringDataReq);
-
-            return _sup.GetValueOrDefault();
-        }
-
         public void Pause()
         {
             SetCommand(WorkerCommandType.PauseReq);

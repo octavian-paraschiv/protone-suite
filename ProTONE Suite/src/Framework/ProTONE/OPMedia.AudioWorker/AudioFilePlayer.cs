@@ -21,9 +21,6 @@ namespace OPMedia.AudioWorker
         protected double durationScaleFactor = 1;
         protected MediaFileInfo renderMediaInfo = MediaFileInfo.Empty;
 
-        protected SampleGrabberProbe _probe = null;
-
-
         public AudioFilePlayer()
         {
         }
@@ -122,16 +119,7 @@ namespace OPMedia.AudioWorker
             basicAudio = mediaControl as IBasicAudio;
 
             int hr = mediaControl.RenderFile(url);
-
-
-            try
-            {
-                _probe = new SampleGrabberProbe(mediaControl);
-            }
-            catch
-            {
-                _probe = null;
-            }
+            WorkerException.ThrowForHResult(hr);
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
             WorkerException.ThrowForHResult(hr);
@@ -178,12 +166,6 @@ namespace OPMedia.AudioWorker
 
         public void Stop()
         {
-            if (_probe != null)
-            {
-                _probe.Dispose();
-                _probe = null;
-            }
-
             mediaControl?.Stop();
 
             mediaControl = null;
@@ -206,38 +188,6 @@ namespace OPMedia.AudioWorker
             }
 
             return fs;
-        }
-
-        public SupportedMeteringData GetSupportedMeteringData()
-        {
-            if (_probe != null)
-                return SupportedMeteringData.Levels | SupportedMeteringData.Spectrogram | SupportedMeteringData.Waveform;
-
-            return SupportedMeteringData.OutputLevels;
-        }
-
-        public double[] GetLevels()
-        {
-            if (_probe != null)
-                return _probe.GetLevels();
-
-            return null;
-        }
-
-        public double[] GetWaveform()
-        {
-            if (_probe != null)
-                return _probe.GetWaveform();
-
-            return null;
-        }
-
-        public double[] GetSpectrogram()
-        {
-            if (_probe != null)
-                return _probe.GetSpectrogram();
-
-            return null;
         }
 
         private int MapVolume(int rawVolume)

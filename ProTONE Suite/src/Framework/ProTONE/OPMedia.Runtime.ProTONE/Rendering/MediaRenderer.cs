@@ -48,20 +48,6 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 namespace OPMedia.Runtime.ProTONE.Rendering
 {
-    public enum VideoSizeAdjustmentDirection
-    {
-        None = 0,
-        Horizontal,
-        Vertical
-    }
-    
-    public enum VideoSizeAdjustmentAction
-    {
-        None = 0,
-        Shrink,
-        Expand
-    }
-
     public delegate void MediaRendererEventHandler();
     public delegate void FilterStateChangedHandler(OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState, string oldMedia, 
         OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState newState, string newMedia);
@@ -70,7 +56,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
-    [DataContract]
     public class AudioSampleData
     {
         [DataMember]
@@ -85,33 +70,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             RVOL = rVol;
         }
     }
-
-    [DataContract]
-    public class SignalAnalisysData
-    {
-        [DataMember]
-        public double[] LevelsData { get; set; }
-
-        [DataMember]
-        public double[] SpectrogramData { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("MomSample: L={0},R={1}, Spectrogram: len={2}, data[0]={3:0.00}",
-                (LevelsData != null) ? LevelsData[0] : 0, 
-                (LevelsData != null) ? LevelsData[1] : 0, 
-                (SpectrogramData != null) ? SpectrogramData.Length : 0, 
-                (SpectrogramData != null) ? SpectrogramData[0] : 0);
-        }
-    }
-
-    [ServiceContract]
-    public interface ISignalAnalisys
-    {
-        [OperationContract]
-        SignalAnalisysData GetSignalAnalisysData();
-    }
-
 
     public sealed class MediaRenderer : IDisposable
     {
@@ -524,82 +482,44 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.VUMeter))
+                if (streamRenderer != null && 
+                    streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
                 {
-                    if (streamRenderer != null && 
-                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Levels))
+                    double[] levels = null;
+
+                    if (_xfadeInProgress.WaitOne(0) == false)
+                        levels = streamRenderer.GetLevelsData();
+
+                    if (levels == null)
                     {
-                        double[] levels = null;
-
-                        if (_xfadeInProgress.WaitOne(0) == false)
-                            levels = streamRenderer.GetLevelsData();
-
-                        if (levels == null)
+                        if (_mmDevice != null &&
+                            _mmDevice.AudioMeterInformation != null &&
+                            _mmDevice.AudioMeterInformation.PeakValues != null &&
+                            _mmDevice.AudioMeterInformation.PeakValues.Count > 0)
                         {
-                            if (_mmDevice != null &&
-                                _mmDevice.AudioMeterInformation != null &&
-                                _mmDevice.AudioMeterInformation.PeakValues != null &&
-                                _mmDevice.AudioMeterInformation.PeakValues.Count > 0)
-                            {
-                                var percVol = streamRenderer.PercentualVolume;
-                                double mul = 1f / percVol;
+                            var percVol = streamRenderer.PercentualVolume;
+                            double mul = 1f / percVol;
 
-                                if (double.IsInfinity(mul) || double.IsNaN(mul))
-                                    mul = double.MaxValue;
+                            if (double.IsInfinity(mul) || double.IsNaN(mul))
+                                mul = double.MaxValue;
 
-                                bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
-                                double left = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
-                                double right = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+                            bool isStereo = _mmDevice.AudioMeterInformation.PeakValues.Count > 1;
+                            double left = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[0]));
+                            double right = Math.Min(1, Math.Max(0, mul * _mmDevice.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
 
-                                levels = new double[] { left, right };
-                            }
+                            levels = new double[] { left, right };
                         }
-
-                        return levels;
                     }
+
+                    return levels;
                 }
 
                 return null;
             }
         }
 
-        public double[] WaveformData
-        {
-            get
-            {
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform))
-                {
-                    if (streamRenderer != null &&
-                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Waveform))
-                    {
-                        if (_xfadeInProgress.WaitOne(0) == false)
-                            return streamRenderer.GetWaveform();
-                    }
-                }
-
-                return null;
-            }
-        }
-
-        public double[] SpectrogramData
-        {
-            get
-            {
-                if (ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram))
-                {
-                    if (streamRenderer != null &&
-                        streamRenderer.GetSupportedMeteringData().HasFlag(SupportedMeteringData.Spectrogram))
-                    {
-                        if (_xfadeInProgress.WaitOne(0) == false)
-                            return streamRenderer.GetSpectrogram();
-                    }
-                }
-
-                return null;
-            }
-        }
-
-         public double MaxLevel
+       
+        public double MaxLevel
         {
             get
             {
@@ -1154,18 +1074,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             return sb.ToString();
         }
-
-        public void AdjustVideoSize(VideoSizeAdjustmentDirection direction, VideoSizeAdjustmentAction action)
-        {
-
-            if (streamRenderer != null &&
-                (this.RenderedMediaType == MediaTypes.Video ||
-                this.RenderedMediaType == MediaTypes.Both) &&
-                this.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running)
-            {
-                streamRenderer.AdjustVideoSize(direction, action);
-            }
-        }
         #endregion
 
         #region Construction
@@ -1185,13 +1093,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
 
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
-
-            if (isDefaultInstance && 
-                ProTONEConfig.IsPlayer && 
-                ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.WCFInterface))
-            {
-                InternalInitSignalAnalisysWCF();
-            }
         }
         void Application_ApplicationExit(object sender, EventArgs e)
         {
@@ -1220,7 +1121,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (ProTONEConfig.IsPlayer)
                 {
                     SystemScheduler.Stop();
-                    CleanupSignalAnalisysWCF();
                 }
 
                 __defaultInstance = null;
@@ -1608,95 +1508,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
         #endregion
-
-        #region Signal Analisys WCF Interface
-        ServiceHost _wcfHost = null;
-
-        public void InitSignalAnalisysWCF()
-        {
-            if (__defaultInstance != this)
-                throw new InvalidOperationException("InitSignalAnalisysWCF can only be done on MediaRenderer default instance !");
-
-            InternalInitSignalAnalisysWCF();
-        }
-
-        public void CleanupSignalAnalisysWCF()
-        {
-            if (__defaultInstance != this)
-                throw new InvalidOperationException("CleanupSignalAnalisysWCF can only be done on MediaRenderer default instance !");
-
-            InternalCleanupSignalAnalisysWCF();
-        }
-
-        private void InternalInitSignalAnalisysWCF()
-        {
-            try
-            {
-                Logger.LogInfo("Opening Signal Analisys WCF Interface ...");
-                if (_wcfHost == null)
-                {
-                    string address = "http://localhost/ProTONESignalAnalisys.svc";
-
-                    var binding = new WSHttpBinding();
-                    binding.MaxReceivedMessageSize = int.MaxValue;
-                    binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
-
-                    _wcfHost = new ServiceHost(typeof(ProTONESignalAnalisys));
-                    _wcfHost.AddServiceEndpoint(typeof(ISignalAnalisys), binding, address);
-
-                    _wcfHost.Open();
-
-                    Logger.LogInfo("Signal Analisys WCF Interface opened succesfully.");
-                }
-                else
-                {
-                    Logger.LogInfo("Signal Analisys WCF Interface was already open.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        private void InternalCleanupSignalAnalisysWCF()
-        {
-            try
-            {
-                Logger.LogInfo("Closing Signal Analisys WCF Interface ...");
-
-                if (_wcfHost != null)
-                {
-                    _wcfHost.Close();
-                    _wcfHost = null;
-
-                    Logger.LogInfo("Signal Analisys WCF Interface closed succesfully.");
-                }
-                else
-                {
-                    Logger.LogInfo("Signal Analisys WCF Interface was already closed.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-
-        }
-
-        #endregion
-
-        [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.PerCall)]
-        public class ProTONESignalAnalisys : ISignalAnalisys
-        {
-            public SignalAnalisysData GetSignalAnalisysData()
-            {
-                SignalAnalisysData data = new SignalAnalisysData();
-                data.LevelsData = MediaRenderer.DefaultInstance.LevelsData;
-                data.SpectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
-                return data;
-            }
-        }
     }
 
    

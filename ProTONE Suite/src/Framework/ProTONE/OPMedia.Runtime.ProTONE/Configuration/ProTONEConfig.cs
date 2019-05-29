@@ -43,20 +43,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         All = 0xFF
     }
 
-    [Flags]
-    public enum SignalAnalisysFunction
-    {
-        None = 0x00,
-
-        VUMeter = 0x01,
-        Waveform = 0x02,
-        Spectrogram = 0x04,
-
-        WCFInterface = 0x10,
-
-        All = 0xFF
-    }
-
     public static class ProTONEConfig
     {
         const string _Fallback_DefaultSubtitleURIs = 
@@ -513,61 +499,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Level 2 Settings using Settings File (Combined per-app and per-user settings)
 
-        public static MediaScreen ShowMediaScreens
-        {
-            get { return (MediaScreen)PersistenceProxy.ReadObject(true, "ShowMediaScreens", (int)MediaScreen.All); }
-            set { PersistenceProxy.SaveObject(true, "ShowMediaScreens", (int)value); }
-        }
-
-        public static bool MediaScreenActive(MediaScreen mediaScreen)
-        {
-            return ((ProTONEConfig.ShowMediaScreens & mediaScreen) == mediaScreen);
-        }
-
-        private static SignalAnalisysFunction? _signalAnalisysFunctions = null;
-        private static object _signalAnalisysFunctionsLock = new object();
-
-        public static SignalAnalisysFunction SignalAnalisysFunctions
-        {
-            get 
-            {
-                lock (_signalAnalisysFunctionsLock)
-                {
-                    if (_signalAnalisysFunctions == null)
-                        _signalAnalisysFunctions = (SignalAnalisysFunction)PersistenceProxy.ReadObject(true, "SignalAnalisysFunctions", 
-                            (int)SignalAnalisysFunction.All);
-
-                    if (_signalAnalisysFunctions == null)
-                        return SignalAnalisysFunction.All;
-
-                    return _signalAnalisysFunctions.Value | SignalAnalisysFunction.VUMeter;
-                }
-            }
-            
-            set 
-            {
-                lock (_signalAnalisysFunctionsLock)
-                {
-                    if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
-                    {
-                        _signalAnalisysFunctions = value | SignalAnalisysFunction.VUMeter;
-                        PersistenceProxy.SaveObject(true, "SignalAnalisysFunctions", (int)value);
-                    }
-                }
-            }
-        }
-
-        public static bool SignalAnalisysFunctionActive(SignalAnalisysFunction function)
-        {
-            return ((ProTONEConfig.SignalAnalisysFunctions & function) == function);
-        }
-
-        public static bool IsSignalAnalisysActive()
-        {
-            return (ProTONEConfig.SignalAnalisysFunctions != SignalAnalisysFunction.None);
-        }
-
-        
         public static string ExplorerLaunchType
         {
             get

@@ -87,22 +87,6 @@ namespace OPMedia.Runtime.ProTONE
                         replyArg = _player.GetLength().ToString();
                         break;
 
-                    case WorkerCommandType.GetSupportedMeteringDataReq:
-                        replyArg = _player.GetSupportedMeteringData().ToString();
-                        break;
-
-                    case WorkerCommandType.GetLevelsReq:
-                        replyArg = _player.GetLevels().ToString(WorkerProcess.InnerArrayDelim);
-                        break;
-
-                    case WorkerCommandType.GetSpectrogramReq:
-                        replyArg = _player.GetSpectrogram().ToString(WorkerProcess.InnerArrayDelim);
-                        break;
-
-                    case WorkerCommandType.GetWaveformReq:
-                        replyArg = _player.GetWaveform().ToString(WorkerProcess.InnerArrayDelim);
-                        break;
-
                     default:
                         break;
                 }

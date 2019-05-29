@@ -450,10 +450,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 DsError.ThrowExceptionForHR(hr);
             }
         }
-        protected override void DoAdjustVideoSize(VideoSizeAdjustmentDirection direction, VideoSizeAdjustmentAction action)
-        {
-        }
-
         protected override bool IsEndOfMedia()
         {
             long nMediaPos = (long)GetMediaPosition();
@@ -608,27 +604,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         protected override void DoSetSubtitleStream(int sid)
         {
             // Not required at this point for file renderers.
-        }
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal class AudioSample
-    {
-        public double SampleTime;
-        public byte[] RawSamples;
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("SampleTime: {0}...", SampleTime);
-
-            //if (RawSamples != null)
-            //{
-            //    for (int i = 0; i < RawSamples.Length; i++)
-            //        sb.AppendFormat("sample[{0}]={1}...", i, RawSamples[i]);
-            //}
-
-            return sb.ToString();
         }
     }
 }

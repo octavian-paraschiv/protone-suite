@@ -71,7 +71,6 @@ namespace OPMedia.UI.ProTONE.Configuration
                 tp.ImageIndex = i++;
             }
 
-            pageMediaScreens.ModifiedActive += new EventHandler(OnModifiedActive);
             pagePlaylist.ModifiedActive += new EventHandler(OnModifiedActive);
             pageFavoriteFolders.ModifiedActive += new EventHandler(OnModifiedActive);
             pageDisksOptions.ModifiedActive += new EventHandler(OnModifiedActive);
@@ -92,7 +91,6 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         protected override void SaveInternal()
         {
-            pageMediaScreens.Save();
             pageDisksOptions.Save();
             pagePlaylist.Save();
             pageScheduler.Save();

@@ -362,11 +362,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             }
         }
 
-        internal void AdjustVideoSize(VideoSizeAdjustmentDirection direction, VideoSizeAdjustmentAction action)
-        {
-            DoAdjustVideoSize(direction, action);
-        }
-
         internal bool EndOfMedia
         {
             get
@@ -449,8 +444,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         protected abstract bool IsCursorVisible();
         protected abstract void DoShowCursor(bool show);
-
-        protected abstract void DoAdjustVideoSize(VideoSizeAdjustmentDirection direction, VideoSizeAdjustmentAction action);
 
         protected abstract bool IsEndOfMedia();
 

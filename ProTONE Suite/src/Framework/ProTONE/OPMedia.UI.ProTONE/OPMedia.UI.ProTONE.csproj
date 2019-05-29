@@ -90,12 +90,6 @@
     <Compile Include="Configuration\InternetConfig\ShoutcastConfigPage.Designer.cs">
       <DependentUpon>ShoutcastConfigPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\MiscConfig\MediaScreensOptionsPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Configuration\MiscConfig\MediaScreensOptionsPage.Designer.cs">
-      <DependentUpon>MediaScreensOptionsPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\MiscConfig\DisksOptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -315,9 +309,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\InternetConfig\ShoutcastConfigPage.resx">
       <DependentUpon>ShoutcastConfigPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\MiscConfig\MediaScreensOptionsPage.resx">
-      <DependentUpon>MediaScreensOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\MiscConfig\DisksOptionsPage.resx">
       <DependentUpon>DisksOptionsPage.cs</DependentUpon>

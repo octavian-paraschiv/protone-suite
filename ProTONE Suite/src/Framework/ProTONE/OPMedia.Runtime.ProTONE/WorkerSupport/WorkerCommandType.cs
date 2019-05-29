@@ -39,18 +39,6 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         GetStateReq,
         GetStateRsp,
 
-        GetLevelsReq,
-        GetLevelsRsp,
-
-        GetWaveformReq,
-        GetWaveformRsp,
-
-        GetSpectrogramReq,
-        GetSpectrogramRsp,
-
-        GetSupportedMeteringDataReq,
-        GetSupportedMeteringDataRsp,
-
         StateEvt,
         StateAck,
 

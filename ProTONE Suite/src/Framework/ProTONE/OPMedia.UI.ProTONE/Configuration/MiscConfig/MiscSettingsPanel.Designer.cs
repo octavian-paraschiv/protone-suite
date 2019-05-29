@@ -31,8 +31,6 @@ namespace OPMedia.UI.ProTONE.Configuration
         {
             this.components = new System.ComponentModel.Container();
             this.tabMisc = new OPMedia.UI.Controls.OPMTabControl();
-            this.tpMediaScreens = new OPMedia.UI.Controls.OPMTabPage();
-            this.pageMediaScreens = new OPMedia.UI.ProTONE.Configuration.MiscConfig.MediaScreensOptionsPage();
             this.tpDisksOptions = new OPMedia.UI.Controls.OPMTabPage();
             this.pageDisksOptions = new OPMedia.UI.ProTONE.Configuration.MiscConfig.DisksOptionsPage();
             this.tpPlaylist = new OPMedia.UI.Controls.OPMTabPage();
@@ -42,7 +40,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tpFavoriteFolders = new OPMedia.UI.Controls.OPMTabPage();
             this.pageFavoriteFolders = new OPMedia.UI.ProTONE.Configuration.MiscConfig.FavoriteFoldersPage();
             this.tabMisc.SuspendLayout();
-            this.tpMediaScreens.SuspendLayout();
             this.tpDisksOptions.SuspendLayout();
             this.tpPlaylist.SuspendLayout();
             this.tpScheduler.SuspendLayout();
@@ -52,7 +49,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // tabMisc
             // 
             this.tabMisc.AccessibleName = "tabMisc";
-            this.tabMisc.Controls.Add(this.tpMediaScreens);
             this.tabMisc.Controls.Add(this.tpDisksOptions);
             this.tabMisc.Controls.Add(this.tpPlaylist);
             this.tabMisc.Controls.Add(this.tpScheduler);
@@ -67,32 +63,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tabMisc.Size = new System.Drawing.Size(764, 453);
             this.tabMisc.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabMisc.TabIndex = 0;
-            // 
-            // tpMediaScreens
-            // 
-            this.tpMediaScreens.AccessibleName = "TXT_MEDIA_SCREENS";
-            this.tpMediaScreens.AccessibleRole = System.Windows.Forms.AccessibleRole.PageTab;
-            this.tpMediaScreens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
-            this.tpMediaScreens.Controls.Add(this.pageMediaScreens);
-            this.tpMediaScreens.Location = new System.Drawing.Point(4, 23);
-            this.tpMediaScreens.Name = "tpMediaScreens";
-            this.tpMediaScreens.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tpMediaScreens.Size = new System.Drawing.Size(756, 426);
-            this.tpMediaScreens.TabIndex = 3;
-            this.tpMediaScreens.Text = "TXT_MEDIA_SCREENS";
-            // 
-            // pageMediaScreens
-            // 
-            this.pageMediaScreens.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pageMediaScreens.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.pageMediaScreens.Location = new System.Drawing.Point(5, 10);
-            this.pageMediaScreens.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
-            this.pageMediaScreens.Modified = false;
-            this.pageMediaScreens.Name = "pageMediaScreens";
-            this.pageMediaScreens.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pageMediaScreens.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.pageMediaScreens.Size = new System.Drawing.Size(746, 411);
-            this.pageMediaScreens.TabIndex = 0;
             // 
             // tpDisksOptions
             // 
@@ -203,7 +173,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.Name = "MiscellaneousSettingsPanel";
             this.Size = new System.Drawing.Size(764, 453);
             this.tabMisc.ResumeLayout(false);
-            this.tpMediaScreens.ResumeLayout(false);
             this.tpDisksOptions.ResumeLayout(false);
             this.tpPlaylist.ResumeLayout(false);
             this.tpScheduler.ResumeLayout(false);
@@ -215,12 +184,10 @@ namespace OPMedia.UI.ProTONE.Configuration
         #endregion
 
         private UI.Controls.OPMTabControl tabMisc;
-        private UI.Controls.OPMTabPage tpMediaScreens;
         private UI.Controls.OPMTabPage tpPlaylist;
         private UI.Controls.OPMTabPage tpFavoriteFolders;
         private UI.Controls.OPMTabPage tpDisksOptions;
         private UI.Controls.OPMTabPage tpScheduler;
-        private MiscConfig.MediaScreensOptionsPage pageMediaScreens;
         private MiscConfig.PlaylistOptionsPage pagePlaylist;
         private MiscConfig.FavoriteFoldersPage pageFavoriteFolders;
         private MiscConfig.DisksOptionsPage pageDisksOptions;

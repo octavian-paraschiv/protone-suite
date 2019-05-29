@@ -36,13 +36,5 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         int GetMediaPosition();
 
         FilterState GetFilterState();
-
-        SupportedMeteringData GetSupportedMeteringData();
-
-        double[] GetLevels();
-
-        double[] GetWaveform();
-
-        double[] GetSpectrogram();
     }
 }

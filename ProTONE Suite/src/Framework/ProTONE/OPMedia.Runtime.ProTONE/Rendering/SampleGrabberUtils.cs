@@ -14,7 +14,8 @@ using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.Rendering
 {
-    public class SampleGrabberProbe: ISampleGrabberCB, IDisposable
+#if BLA_BLA
+    public class SampleGrabberProbe:  IDisposable
     {
         protected IMediaControl mediaControl = null;
         protected IMediaPosition mediaPosition = null;
@@ -543,4 +544,5 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             Release();
         }
     }
+#endif
 }

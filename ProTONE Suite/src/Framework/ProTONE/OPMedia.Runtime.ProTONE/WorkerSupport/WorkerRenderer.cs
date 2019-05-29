@@ -286,38 +286,5 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 return base.PercentualVolume;
             }
         }
-
-        public override SupportedMeteringData GetSupportedMeteringData()
-        {
-            if (_wp != null)
-                return (SupportedMeteringData.Levels | _wp.GetSupportedMeteringData());
-
-            return SupportedMeteringData.None;
-        }
-
-        public override double[] GetLevelsData()
-        {
-            if (_wp != null)
-                return _wp.GetLevels();
-
-            return null;
-        }
-
-        public override double[] GetWaveform()
-        {
-            if (_wp != null)
-                return _wp.GetWaveform();
-
-            return null;
-        }
-
-        public override double[] GetSpectrogram()
-        {
-            if (_wp != null)
-                return _wp.GetSpectrogram();
-
-            return null;
-        }
-
     }
 }
