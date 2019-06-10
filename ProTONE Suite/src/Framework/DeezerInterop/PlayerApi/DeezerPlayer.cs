@@ -387,5 +387,48 @@ namespace OPMedia.DeezerInterop.PlayerApi
             
             Int32 volume);
 
+        /**
+         * @brief Setup things to be able to do cross fadings.
+         *
+         * "things" are :
+         * - Event #DZ_PLAYER_EVENT_QUEUELIST_NEED_NATURAL_NEXT fade_duration_ms before the end of current track.
+         * - Cross fading between two tracks when a natural_next happens.
+         * @note Cross fading won't be applied for free account users.
+         *
+         * @param self               Deezer player handle.
+         * @param cb                 The dz_activity_operation_callback() callback called when the async result is available.
+         * @param operation_userdata A reference to the user’s data.
+         * @param fade_duration_ms   Duration in microseconds of cross-fading (0 to remove, typically less than 10s).
+         */
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
+        public static extern dz_error_t dz_player_set_crossfading_duration(IntPtr self,
+
+            [MarshalAs(UnmanagedType.FunctionPtr)]
+            dz_activity_operation_callback cb,
+
+            IntPtr operation_userdata,
+
+            UInt32 fade_duration_ms);
+
+        /**
+         * @brief Set the track quality.
+         *
+         * @param self               Deezer player handle.
+         * @param cb                 The dz_activity_operation_callback() callback called when the async result is available.
+         * @param operation_userdata A reference to the userâ€™s data.
+         * @param quality            Audio track quality.
+        */
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
+        public static extern dz_error_t dz_player_set_track_quality(IntPtr self,
+
+            [MarshalAs(UnmanagedType.FunctionPtr)]
+            dz_activity_operation_callback cb,
+            
+            IntPtr operation_userdata,
+            
+            dz_track_quality_t quality);
     }
+
+    
+
 }

@@ -118,6 +118,8 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_player_set_event_cb(_dzPlayer, _dzPlayerEventCB);
                 DeezerApi.HandleDzErrorCode("dz_player_set_event_cb", err);
 
+                // dz_player_set_metadata_cb
+
                 err = DeezerApi.dz_player_set_render_progress_cb(_dzPlayer, _dzRenderProgressCB, (UInt64)5e5);
                 DeezerApi.HandleDzErrorCode("dz_player_set_render_progress_cb", err);
 
@@ -129,8 +131,15 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_set_access_token(_dzConnect, null, IntPtr.Zero, token);
                 DeezerApi.HandleDzErrorCode("dz_connect_set_access_token", err);
 
+                err = DeezerApi.dz_player_set_crossfading_duration(_dzPlayer, null, IntPtr.Zero, 3000);
+                DeezerApi.HandleDzErrorCode("dz_player_set_crossfading_duration", err);
+
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
                 DeezerApi.HandleDzErrorCode("dz_connect_offline_mode", err);
+
+                err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero, 
+                    dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY);
+                DeezerApi.HandleDzErrorCode("dz_player_set_track_quality", err);
 
                 if (_evtAppUserLoginOK.WaitOne(DZ_OPERATION_TIMEOUT) == false)
                     DeezerApi.HandleDzErrorCode("DeezerPlayer::SetupConfig", dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
@@ -236,6 +245,8 @@ namespace OPMedia.DeezerWorker
             // This will trigger DZ_PLAYER_EVENT_RENDER_TRACK_START
             // Upon completion, _evtPlayerPlaybackStarted will be set.
             _evtPlayerPlaybackStarted.Reset();
+
+            // for playback from offset: dz_player_resume
 
             err = DeezerApi.dz_player_play(_dzPlayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
