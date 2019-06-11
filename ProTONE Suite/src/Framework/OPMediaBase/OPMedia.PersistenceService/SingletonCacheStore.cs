@@ -1,4 +1,5 @@
-﻿using OPMedia.Core.Persistence;
+﻿using OPMedia.Core;
+using OPMedia.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,16 @@ namespace OPMedia.PersistenceService
         }
 
         private CacheStore _cache = null;
-        private DbStore _db = null;
+        private IPersistenceService _db = null;
 
         private SingletonCacheStore()
         {
+#if HAVE_LITE_DB
             _db = new DbStore();
+#else
+            _db = new SqliteDbStore();
+#endif
+
             _cache = new CacheStore(_db);
         }
 
@@ -35,6 +41,16 @@ namespace OPMedia.PersistenceService
         public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
             return _cache.SaveObject(persistenceId, persistenceContext, objectContent);
+        }
+
+        public byte[] ReadBlob(string persistenceId, string persistenceContext)
+        {
+            return _cache.ReadBlob(persistenceId, persistenceContext);
+        }
+
+        public bool SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
+        {
+            return _cache.SaveBlob(persistenceId, persistenceContext, objectContent);
         }
 
         public bool DeleteObject(string persistenceId, string persistenceContext)

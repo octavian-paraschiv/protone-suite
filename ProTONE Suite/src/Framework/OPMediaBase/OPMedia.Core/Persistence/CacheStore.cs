@@ -13,12 +13,12 @@ namespace OPMedia.Core.Persistence
         // Time-To-Live: 30 seconds
         const int MaxCachedItemTTL = 30 * 1000;
 
-        public string Key { get; private set; }
+        public object Key { get; private set; }
 
         object _accessLock = new object();
 
-        public string _value = null;
-        public string Value 
+        public object _value = null;
+        public object Value 
         {
             get
             {
@@ -50,7 +50,7 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        public CacheItem(string key, string value)
+        public CacheItem(string key, object value)
         {
             this.Key = key;
             this.Value = value;
@@ -140,7 +140,19 @@ namespace OPMedia.Core.Persistence
             }
         }
 
+        #region ReadObject / ReadBlob
+
         public string ReadObject(string persistenceId, string persistenceContext)
+        {
+            return __Read(persistenceId, persistenceContext, false) as string;
+        }
+
+        public byte[] ReadBlob(string persistenceId, string persistenceContext)
+        {
+            return __Read(persistenceId, persistenceContext, true) as byte[];
+        }
+
+        private object __Read(string persistenceId, string persistenceContext, bool isBlob)
         {
             if (string.IsNullOrEmpty(persistenceContext))
                 persistenceContext = "*";
@@ -162,7 +174,13 @@ namespace OPMedia.Core.Persistence
             Logger.LogToConsole("ReadObject: Object with key {0} was not found in cache.", key);
 
             // If it is not, get it from the persistence DB and also add it in the cache.
-            string s = _persistence.ReadObject(persistenceId, persistenceContext);
+            object s = null;
+
+            if (isBlob)
+                s = _persistence.ReadBlob(persistenceId, persistenceContext);
+            else
+                s = _persistence.ReadObject(persistenceId, persistenceContext);
+
             if (s != null)
                 Logger.LogToConsole("ReadObject: Object with key {0} was found in DB.", key);
             else
@@ -179,8 +197,21 @@ namespace OPMedia.Core.Persistence
 
             return ci.Value;
         }
+        #endregion
+
+        #region SaveObject / SaveBlob
 
         public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        {
+            return __Save(persistenceId, persistenceContext, objectContent);
+        }
+
+        public bool SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob)
+        {
+            return __Save(persistenceId, persistenceContext, objectBlob);
+        }
+
+        private bool __Save(string persistenceId, string persistenceContext, object objectContent)
         {
             bool retVal = false;
 
@@ -224,7 +255,11 @@ namespace OPMedia.Core.Persistence
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
                         Logger.LogToConsole("SaveObject: Object with key {0} is now saved also in DB.", key);
-                        _persistence.SaveObject(persistenceId, persistenceContext, objectContent);
+
+                        if (objectContent is byte[])
+                            _persistence.SaveBlob(persistenceId, persistenceContext, objectContent as byte[]);
+                        else
+                            _persistence.SaveObject(persistenceId, persistenceContext, objectContent as string);
                     });
             }
             catch
@@ -234,6 +269,8 @@ namespace OPMedia.Core.Persistence
 
             return retVal;
         }
+
+        #endregion
 
         public bool DeleteObject(string persistenceId, string persistenceContext)
         {
@@ -276,7 +313,7 @@ namespace OPMedia.Core.Persistence
             return string.Format("{0}_{1}", persistenceId, persistenceContext);
         }
 
-        internal bool RefreshObject(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        internal bool RefreshObject(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             bool success = false;
 

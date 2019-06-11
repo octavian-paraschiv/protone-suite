@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿# if HAVE_LITE_DB
+using System;
 using System.Linq;
-using System.Text;
 using OPMedia.Core;
 using LiteDB;
 using OP_Logger = OPMedia.Core.Logging.Logger;
-using OPMedia.SimpleCacheService;
-using OPMedia.Core.Configuration;
 using System.IO;
 
 namespace OPMedia.PersistenceService
@@ -45,6 +42,11 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
+        public byte[] ReadBlob(string persistenceId, string persistenceContext)
+        {
+            return null;
+        }
+
         public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
             try
@@ -78,6 +80,10 @@ namespace OPMedia.PersistenceService
             {
                 OP_Logger.LogException(ex);
             }
+        }
+
+        public void SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
+        {
         }
 
         public void DeleteObject(string persistenceId, string persistenceContext)
@@ -137,3 +143,4 @@ namespace OPMedia.PersistenceService
         }
     }
 }
+#endif

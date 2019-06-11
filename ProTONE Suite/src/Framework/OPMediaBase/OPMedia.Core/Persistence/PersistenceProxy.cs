@@ -25,7 +25,11 @@ namespace OPMedia.Core
         protected Guid _appId = Guid.NewGuid();
 
         private static int _unsuccesfulAttempts = 0;
-        
+
+        static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
+        static int _readCount = 0;
+
+
         protected PersistenceProxy()
         {
             try
@@ -156,10 +160,6 @@ namespace OPMedia.Core
             return ReadObject<T>(id, defaultValue, usePersistenceContext);
         }
 
-        static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
-
-        static int _readCount = 0;
-
         public static T ReadObject<T>(string persistenceId, T defaultValue, bool usePersistenceContext = true)
         {
             T retVal = defaultValue;
@@ -169,22 +169,33 @@ namespace OPMedia.Core
                 _readTicToc.Tic();
 
                 {
-                    string content = usePersistenceContext ?
-                        _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
-                        _cache.ReadObject(persistenceId, string.Empty);
-
-                    _readCount++;
-
-                    if (!string.IsNullOrEmpty(content))
+                    if (typeof(T) == typeof(byte[]))
                     {
-                        try
+                        byte[] blob = usePersistenceContext ?
+                            _cache.ReadBlob(persistenceId, _proxy._persistenceContext) :
+                            _cache.ReadBlob(persistenceId, string.Empty);
+
+                        _readCount++;
+                    }
+                    else
+                    {
+                        string content = usePersistenceContext ?
+                            _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
+                            _cache.ReadObject(persistenceId, string.Empty);
+
+                        _readCount++;
+
+                        if (!string.IsNullOrEmpty(content))
                         {
-                            retVal = StringUtils.Coerce<T>(content);
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.LogException(ex);
-                            retVal = defaultValue;
+                            try
+                            {
+                                retVal = StringUtils.Coerce<T>(content);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.LogException(ex);
+                                retVal = defaultValue;
+                            }
                         }
                     }
                 }
@@ -220,6 +231,25 @@ namespace OPMedia.Core
 
             return null;
         }
+
+        byte[] IPersistenceService.ReadBlob(string persistenceId, string persistenceContext)
+        {
+            try
+            {
+                Logger.LogTrace($"IPersistenceService.ReadBlob persistenceId={persistenceId} persistenceContext={persistenceContext}");
+
+                if (_channel != null)
+                    return _channel.ReadBlob(persistenceId, persistenceContext);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+
+            return null;
+        }
         #endregion
 
         #region SaveObject
@@ -239,10 +269,20 @@ namespace OPMedia.Core
                 _saveTicToc.Tic();
 
                 {
-                    if (usePersistenceContext)
-                        _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
+                    if (typeof(T) == typeof(byte[]))
+                    {
+                        if (usePersistenceContext)
+                            _cache.SaveBlob(persistenceId, _proxy._persistenceContext, objectContent as byte[]);
+                        else
+                            _cache.SaveBlob(persistenceId, string.Empty, objectContent as byte[]);
+                    }
                     else
-                        _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
+                    {
+                        if (usePersistenceContext)
+                            _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
+                        else
+                            _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
+                    }
                 }
             }
             catch (Exception ex)
@@ -261,6 +301,21 @@ namespace OPMedia.Core
             {
                 if (_channel != null)
                     _channel.SaveObject(persistenceId, persistenceContext, objectContent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
+        }
+
+        void IPersistenceService.SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob)
+        {
+            try
+            {
+                if (_channel != null)
+                    _channel.SaveBlob(persistenceId, persistenceContext, objectBlob);
             }
             catch (Exception ex)
             {
@@ -357,7 +412,13 @@ namespace OPMedia.Core
                 ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
         }
 
-        void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        void IPersistenceNotification.NotifyBlob(ChangeType changeType, string persistenceId, string persistenceContext, byte[] objectContent)
+        {
+            if (persistenceContext == null || persistenceContext == "*" || persistenceContext == _persistenceContext)
+                ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
+        }
+
+        void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
             {

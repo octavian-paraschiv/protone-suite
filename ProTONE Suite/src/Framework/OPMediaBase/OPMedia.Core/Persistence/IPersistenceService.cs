@@ -49,12 +49,21 @@ namespace OPMedia.Core
 
         [OperationContract(IsOneWay = true)]
         void Ping(string appId);
+
+        [OperationContract(IsOneWay = true)]
+        void SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob);
+
+        [OperationContract(IsOneWay = false)]
+        byte[] ReadBlob(string persistenceId, string persistenceContext);
     }
 
     public interface IPersistenceNotification
     {
         [OperationContract(IsOneWay = true)]
         void Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent);
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyBlob(ChangeType changeType, string persistenceId, string persistenceContext, byte[] objectContent);
     }
 
     public static class PersistenceConstants

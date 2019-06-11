@@ -397,42 +397,21 @@ namespace OPMedia.Core
                     if (url2.StartsWith("base64:"))
                     {
                         imgBase64 = url.Replace("base64:", "");
+                        if (string.IsNullOrEmpty(imgBase64) == false)
+                            imgBytes = Convert.FromBase64String(imgBase64);
                     }
                     else if (url2.StartsWith("http"))
                     {
-                        imgBase64 = PersistenceProxy.ReadObject(url, string.Empty);
-                        if (string.IsNullOrEmpty(imgBase64))
+                        imgBytes = PersistenceProxy.ReadObject(url, default(byte[]));
+                        if (imgBytes == null)
                         {
                             using (WebClientWithTimeout wc = new WebClientWithTimeout(timeout))
                             {
                                 Logger.LogToConsole("    => ImageURL: downloading from Internet");
                                 imgBytes = wc.DownloadData(url);
-
-                                if (imgBytes != null && imgBytes.Length > 0)
-                                {
-                                    using (MemoryStream ms = new MemoryStream(imgBytes))
-                                    {
-                                        bmp = Image.FromStream(ms) as Bitmap;
-                                    }
-
-                                    if (bmp.Size != requiredSize)
-                                    {
-                                        var img2 = ScaleImage(bmp, requiredSize) as Bitmap;
-                                        if (img2 != null)
-                                        {
-                                            using (MemoryStream ms = new MemoryStream())
-                                            {
-                                                img2.Save(ms, ImageFormat.Png);
-                                                imgBytes = ms.ToArray();
-                                            }
-                                        }
-                                    }
-                                }
-
-                                imgBase64 = Convert.ToBase64String(imgBytes);
+                                if (imgBytes != null)
+                                    PersistenceProxy.SaveObject(url, imgBytes);
                             }
-
-                            PersistenceProxy.SaveObject(url, imgBase64);
                         }
                         else
                         {
@@ -440,15 +419,11 @@ namespace OPMedia.Core
                         }
                     }
 
-                    if (string.IsNullOrEmpty(imgBase64) == false)
+                    if (imgBytes != null && imgBytes.Length > 0)
                     {
-                        imgBytes = Convert.FromBase64String(imgBase64);
-                        if (imgBytes != null && imgBytes.Length > 0)
+                        using (MemoryStream ms = new MemoryStream(imgBytes))
                         {
-                            using (MemoryStream ms = new MemoryStream(imgBytes))
-                            {
-                                bmp = Image.FromStream(ms) as Bitmap;
-                            }
+                            bmp = Image.FromStream(ms) as Bitmap;
                         }
                     }
                 }

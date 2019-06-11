@@ -127,7 +127,7 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static void OnSettingsChanged(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        public static void OnSettingsChanged(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             if (changeType != ChangeType.Saved)
                 return;
@@ -142,7 +142,7 @@ namespace OPMedia.Core.Configuration
                         {
                             case "LanguageID":
                                 {
-                                    string langId = objectContent;
+                                    string langId = objectContent as string;
                                     if (langId != _languageId)
                                     {
                                         _languageId = langId;
@@ -153,7 +153,7 @@ namespace OPMedia.Core.Configuration
 
                             case "SkinType":
                                 {
-                                    string skinType = objectContent;
+                                    string skinType = objectContent as string;
                                     if (skinType != _skinType)
                                     {
                                         _skinType = skinType;

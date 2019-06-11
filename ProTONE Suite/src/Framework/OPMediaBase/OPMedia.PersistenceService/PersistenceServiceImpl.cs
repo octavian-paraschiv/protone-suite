@@ -74,12 +74,12 @@ namespace OPMedia.PersistenceService
         }
 
 
-        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             DoNotify(changeType, persistenceId, persistenceContext, objectContent);
         }
 
-        static void DoNotify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
+        static void DoNotify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             ThreadPool.QueueUserWorkItem((c) =>
             {
@@ -92,12 +92,15 @@ namespace OPMedia.PersistenceService
                     {
                         try
                         {
-                            if (changeType == ChangeType.None && objectContent == "ping")
+                            if (changeType == ChangeType.None && (objectContent as string == "ping"))
                             {
                                 Logger.LogTrace("Sending Ping to appId {0}", appRecord.Key);
                             }
 
-                            appRecord.Value.Notify(changeType, persistenceId, persistenceContext, objectContent);
+                            if (objectContent is byte[])
+                                appRecord.Value.NotifyBlob(changeType, persistenceId, persistenceContext, objectContent as byte[]);
+                            else
+                                appRecord.Value.Notify(changeType, persistenceId, persistenceContext, objectContent as string);
                         }
                         catch (Exception ex)
                         {
@@ -134,6 +137,25 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
+        public byte[] ReadBlob(string persistenceId, string persistenceContext)
+        {
+            try
+            {
+                _readTicToc.Tic();
+                return SingletonCacheStore.Instance.ReadBlob(persistenceId, persistenceContext);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            finally
+            {
+                _readTicToc.Toc();
+            }
+
+            return null;
+        }
+
 
         public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
@@ -142,6 +164,26 @@ namespace OPMedia.PersistenceService
                 _saveTicToc.Tic();
                 
                 bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
+                if (ok)
+                    Notify(ChangeType.Saved, persistenceId, persistenceContext, objectContent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            finally
+            {
+                _saveTicToc.Toc();
+            }
+        }
+
+        public void SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
+        {
+            try
+            {
+                _saveTicToc.Tic();
+
+                bool ok = SingletonCacheStore.Instance.SaveBlob(persistenceId, persistenceContext, objectContent);
                 if (ok)
                     Notify(ChangeType.Saved, persistenceId, persistenceContext, objectContent);
             }
