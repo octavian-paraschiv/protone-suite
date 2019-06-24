@@ -165,7 +165,6 @@ Source: {#BINDIR}\Themes\Themes.thm; DestDir: {app}\Themes
 Source: {#BINDIR}\Newtonsoft.Json.dll; DestDir: {app}
 Source: {#BINDIR}\libdeezer.x86.dll; DestDir: {app}
 Source: {#BINDIR}\sqlite3.dll; DestDir: {app}
-Source: {#BINDIR}\Persistence.db3; DestDir: {app}
 
 Source: {#BINDIR}\DefaultOnlineMediaData.xml; DestDir: {app}
 
