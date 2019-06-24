@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.Runtime.Serialization;
+using Microsoft.Win32;
 
 namespace OPMedia.Core
 {
@@ -70,12 +71,71 @@ namespace OPMedia.Core
     {
         public const int TcpPort = 10200;
 
+        static string _userName = null;
+        static string _password = null;
+        static string _persistenceLocation = null;
+        static bool _useRemoteServer = false;
+
+        static PersistenceConstants()
+        {
+            string persistenceServer = null;
+
+            try
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research"))
+                {
+                    persistenceServer = key.GetValue("PersistenceServer", "localhost") as string;
+                    if (string.IsNullOrEmpty(persistenceServer) == false)
+                    {
+                        _userName = key.GetValue("userName", "") as string;
+                        _password = key.GetValue("password", "") as string;
+                    }
+                }
+            }
+            catch
+            {
+                persistenceServer = null;
+            }
+
+            if (string.IsNullOrEmpty(persistenceServer))
+                persistenceServer = "localhost";
+            else
+                _useRemoteServer = true;
+
+            _persistenceLocation = $"net.tcp://{persistenceServer}:{PersistenceConstants.TcpPort}/PersistenceService.svc";
+        }
+
         public static string PersistenceServiceAddress
         {
             get
             {
-                return $"net.tcp://localhost:{PersistenceConstants.TcpPort}/PersistenceService.svc";
+                return _persistenceLocation;
             }
         }
+
+        public static bool UseRemoteServer
+        {
+            get
+            {
+                return _useRemoteServer;
+            }
+        }
+
+        public static string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+        }
+
+        public static string Password
+        {
+            get
+            {
+                return _password;
+            }
+        }
+
     }
 }

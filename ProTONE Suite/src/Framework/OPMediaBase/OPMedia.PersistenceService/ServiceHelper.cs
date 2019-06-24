@@ -32,6 +32,10 @@ namespace OPMedia.PersistenceService
             binding.ReceiveTimeout = TimeSpan.FromSeconds(30);
             binding.ReliableSession.InactivityTimeout = TimeSpan.FromSeconds(30);
 
+            binding.Security.Mode = SecurityMode.None;
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.None;
+            binding.Security.Message.ClientCredentialType = MessageCredentialType.None;
+
             _host = new ServiceHost(typeof(PersistenceServiceImpl));
             _host.AddServiceEndpoint(typeof(IPersistenceService), binding, PersistenceConstants.PersistenceServiceAddress);
 

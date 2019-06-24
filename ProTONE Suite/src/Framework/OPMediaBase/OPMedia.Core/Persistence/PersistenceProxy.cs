@@ -61,6 +61,9 @@ namespace OPMedia.Core
 
         private bool ActivatePersistenceService()
         {
+            if (PersistenceConstants.UseRemoteServer)
+                return true;
+
             int attempts = 5;
 
             while(attempts > 0)
@@ -95,9 +98,13 @@ namespace OPMedia.Core
 
                 myBinding.OpenTimeout = TimeSpan.FromSeconds(4);
                 myBinding.CloseTimeout = TimeSpan.FromSeconds(4);
-                myBinding.SendTimeout = TimeSpan.FromMilliseconds(500);
+                myBinding.SendTimeout = TimeSpan.FromSeconds(1);
                 myBinding.ReceiveTimeout = TimeSpan.FromSeconds(30);
                 myBinding.ReliableSession.InactivityTimeout = TimeSpan.FromSeconds(30);
+
+                myBinding.Security.Mode = SecurityMode.None;
+                myBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.None;
+                myBinding.Security.Message.ClientCredentialType = MessageCredentialType.None;
 
                 var instanceContext = new InstanceContext(this);
                 var myEndpoint = new EndpointAddress(PersistenceConstants.PersistenceServiceAddress);
