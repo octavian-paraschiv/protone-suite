@@ -11,7 +11,6 @@ before_build:
 - ps: .\prep_build.ps1 "$env:APPVEYOR_BUILD_VERSION" "$env:IS_RELEASE"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.LiteCore\Version.cs"
 - nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln"
-- dir ".\ProTONE Suite\src\packages"
 
 build_script:
 - msbuild /p:Configuration=Debug /t:Rebuild ".\ProTONE Suite\src\ProTONE Suite.sln" /v:minimal 
