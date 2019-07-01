@@ -20,7 +20,7 @@ namespace OPMedia.PersistenceService
 
         protected override void StartInternal()
         {
-            Environment.CurrentDirectory = AppConfig.InstallationPath;
+            Environment.CurrentDirectory = LiteAppConfig.InstallationPath;
 
             var binding = new NetTcpBinding();
             binding.MaxReceivedMessageSize = int.MaxValue;

@@ -17,6 +17,7 @@ using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.UI.Controls;
 using OPMedia.Core;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Addons.Builtin.VideoProp
 {
@@ -55,7 +56,7 @@ namespace OPMedia.Addons.Builtin.VideoProp
         {
             get
             {
-                return MediaRenderer.SupportedVideoTypes;
+                return SupportedFileProvider.Instance.SupportedVideoTypes;
             }
         }
 

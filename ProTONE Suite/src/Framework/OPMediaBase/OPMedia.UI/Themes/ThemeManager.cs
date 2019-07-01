@@ -567,8 +567,8 @@ namespace OPMedia.UI.Themes
             {
                 try
                 {
-                    string themeFolder = Path.Combine(AppConfig.InstallationPath, "Themes");
-                    string themeFile = Path.Combine(AppConfig.InstallationPath, "Themes\\Themes.thm");
+                    string themeFolder = Path.Combine(LiteAppConfig.InstallationPath, "Themes");
+                    string themeFile = Path.Combine(LiteAppConfig.InstallationPath, "Themes\\Themes.thm");
                     XDocument doc = XDocument.Load(themeFile);
 
                     if (_fsw == null)
@@ -629,7 +629,7 @@ namespace OPMedia.UI.Themes
         {
             if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
-                string themeFile = Path.Combine(AppConfig.InstallationPath, "Themes\\Themes.thm");
+                string themeFile = Path.Combine(LiteAppConfig.InstallationPath, "Themes\\Themes.thm");
                 if (e.ChangeType == WatcherChangeTypes.Changed && e.FullPath == themeFile)
                 {
                     Logger.LogInfo("Theme file changed. Reloading themes ...");

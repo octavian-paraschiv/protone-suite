@@ -417,22 +417,6 @@ namespace OPMedia.Core
     }
 
     [Flags]
-    public enum MFMENU : uint
-    {
-        MF_BYCOMMAND = 0,
-        MF_BYPOSITION = 0x400,
-        MF_CHECKED = 8,
-        MF_DISABLED = 2,
-        MF_ENABLED = 0,
-        MF_GRAYED = 1,
-        MF_HILITE = 0x80,
-        MF_POPUP = 0x10,
-        MF_SEPARATOR = 0x800,
-        MF_STRING = 0,
-        MF_UNCHECKED = 0
-    }
-
-    [Flags]
     public enum RedrawWindowFlags : uint
     {
         RDW_INVALIDATE          = 0x0001,
@@ -888,17 +872,7 @@ namespace OPMedia.Core
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int Width, int Height, SetWindowPosFlags flags);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern bool InsertMenu(IntPtr hmenu, uint position, MFMENU uflags, IntPtr uIDNewItemOrSubmenu, string text);
-
-        [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern bool InvalidateRect(IntPtr hWnd, int ignored, bool erase);
-
-        [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern int GetMenuItemCount(IntPtr hMenu);
-
-        [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern bool SetMenuItemBitmaps(IntPtr hMenu, uint uPosition, MFMENU uFlags,
-            IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern IntPtr GetForegroundWindow();
@@ -1062,6 +1036,8 @@ namespace OPMedia.Core
             return ret;
         }
 
+        [DllImport(USER32, CharSet = CharSet.Auto)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
     }
 }
 

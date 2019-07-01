@@ -16,13 +16,39 @@ using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 {
     public class WorkerRenderer : DsCustomRenderer
     {
         WorkerProcess _wp = null;
+
         WorkerType _wt = WorkerType.Deezer;
+
+        public bool IsVideo
+        {
+            get
+            {
+                return (_wt == WorkerType.Video || _wt == WorkerType.VideoDvd);
+            }
+        }
+
+        public bool IsAudio
+        {
+            get
+            {
+                return (_wt == WorkerType.Audio || _wt == WorkerType.AudioCd);
+            }
+        }
+
+        public bool IsDiskBased
+        {
+            get
+            {
+                return (_wt == WorkerType.VideoDvd || _wt == WorkerType.AudioCd);
+            }
+        }
 
         public override bool IsStreamedMedia
         {
@@ -126,7 +152,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             string userId = GetNextIdentity();
 
-            _wp.Play(renderMediaName, userId, delayStart);
+            _wp.Play(renderMediaName, userId, delayStart, _renderHwnd, _notifyHwnd);
+
+
         }
 
         static string _userId = string.Empty;
@@ -257,6 +285,31 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 val = _wp.GetMediaPosition();
 
             return val;
+        }
+
+        #endregion
+
+        long _renderHwnd = 0;
+        long _notifyHwnd = 0;
+
+        #region Video rendering
+        internal override void SetRenderRegion(IWin32Window renderRegion, IWin32Window notifyRegion)
+        {
+            if (IsVideo)
+            {
+                _renderHwnd = renderRegion.Handle.ToInt64();
+                _notifyHwnd = notifyRegion.Handle.ToInt64();
+                Logger.LogTrace("BaseWorkerRenderer::SetRenderRegion renderRegion=0x{0:x8} notifyRegion=0x{0:x8}", _renderHwnd, _notifyHwnd);
+            }
+        }
+
+        internal override void ResizeRenderRegion()
+        {
+            if (IsVideo)
+            {
+                Logger.LogTrace("BaseWorkerRenderer::ResizeRenderRegion");
+                _wp?.ResizeRenderRegion();
+            }
         }
 
         #endregion

@@ -60,7 +60,7 @@ namespace OPMedia.ShoutcastWorker
             }
         }
 
-        public void Play(string url, string userId, int delayStart)
+        public void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd)
         {
             if (url == null || url.Length <= 0)
                 return;
@@ -162,24 +162,9 @@ namespace OPMedia.ShoutcastWorker
             return fs;
         }
 
-        public SupportedMeteringData GetSupportedMeteringData()
+        public void ResizeRenderRegion()
         {
-            return SupportedMeteringData.Levels;
         }
 
-        public double[] GetLevels()
-        {
-            return null;
-        }
-
-        public double[] GetWaveform()
-        {
-            return null;
-        }
-
-        public double[] GetSpectrogram()
-        {
-            return null;
-        }
     }
 }

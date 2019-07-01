@@ -58,7 +58,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return (string.Compare(ApplicationInfo.ApplicationName, ProTONEConstants.PlayerName) == 0);
+                return (string.Compare(ApplicationInfo.ApplicationName, OPMedia.ShellSupport.ShellConstants.PlayerName) == 0);
             }
         }
 
@@ -66,56 +66,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return (string.Compare(ApplicationInfo.ApplicationName, ProTONEConstants.LibraryName) == 0);
-            }
-        }
-
-        public static string PlayerInstallationPath
-        {
-            get
-            {
-                return Path.Combine(AppConfig.InstallationPath, ProTONEConstants.PlayerBinary);
-            }
-        }
-
-        public static string LibraryInstallationPath
-        {
-            get
-            {
-                return Path.Combine(AppConfig.InstallationPath, ProTONEConstants.LibraryBinary);
-            }
-        }
-
-        public static bool IsRCCServiceInstalled
-        {
-            get
-            {
-                try
-                {
-                    ServiceController sc = new ServiceController(ProTONEConstants.RCCServiceShortName);
-                    ServiceControllerStatus scs = sc.Status;
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-
-        public static string RCCManagerInstallationPath
-        {
-            get
-            {
-                return Path.Combine(AppConfig.InstallationPath, ProTONEConstants.RCCManagerBinary);
-            }
-        }
-
-        public static string RCCServiceInstallationPath
-        {
-            get
-            {
-                return Path.Combine(AppConfig.InstallationPath, ProTONEConstants.RCCServiceBinary);
+                return (string.Compare(ApplicationInfo.ApplicationName, OPMedia.ShellSupport.ShellConstants.LibraryName) == 0);
             }
         }
         #endregion
@@ -1097,27 +1048,26 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                try
+                if (_filterGraphGuid == Guid.Empty)
                 {
-                    if (_filterGraphGuid == Guid.Empty)
+                    Guid defaultGuid = Filters.FilterGraphNoThread;
+
+                    try
                     {
                         lock (_filterGraphGuidLock)
                         {
                             if (_filterGraphGuid == Guid.Empty)
                             {
                                 RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research\ProTONE Suite");
-                                if (key != null)
-                                {
-                                    string str = key.GetValue("SelectedFilterGraphGuid", Filters.FilterGraphNoThread.ToString()) as string;
-                                    _filterGraphGuid = Guid.Parse(str);
-                                }
+                                string str = key.GetValue("SelectedFilterGraphGuid", defaultGuid.ToString()) as string;
+                                _filterGraphGuid = Guid.Parse(str);
                             }
                         }
                     }
-                }
-                catch
-                {
-                    _filterGraphGuid = Filters.FilterGraphNoThread;
+                    catch
+                    {
+                        _filterGraphGuid = defaultGuid;
+                    }
                 }
 
                 return _filterGraphGuid;

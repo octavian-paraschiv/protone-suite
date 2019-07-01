@@ -25,17 +25,11 @@ const
    // Application Names
    PlayerAppShortName =         'opmedia.protone';
    MediaLibraryAppShortName =   'opmedia.medialibrary';
-   RCCManagerAppShortName =     'opmedia.rccmanager';
-   LogViewerAppShortName =      'opmedia.utility';
-   AppCleanerAppShortName =     'opmedia.utility';
-
+   
    // Application Long Names
    PlayerAppName =              'ProTONE Player';
    MediaLibraryAppName =        'ProTONE Media Library';
-   RCCManagerAppName =          'ProTONE RCC Manager';
-   LogViewerAppName =           'Log Viewer';
-   AppCleanerAppName =          'Application Cleaner';
-
+   
 //--------------------------------------------------------------------------------
 // External functions
 
@@ -265,15 +259,6 @@ begin
 end;
 
 //---------------------------------------------------------------------------------
-procedure StopRCCService;
-var
-   ResultCode: Integer;
-begin
-   Exec('cmd.exe', '/c "sc stop OPMedia.RCCService"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-   Sleep(750);
-end;
-
-//---------------------------------------------------------------------------------
 procedure StopPersistenceService;
 var
    ResultCode: Integer;
@@ -293,21 +278,14 @@ function VerifyApplications() : Integer;
 var
    playerRunning : Boolean;
    libraryRunning : Boolean;
-   rccManagerRunning : Boolean;
-   logViewerRunning : Boolean;
-   appCleanerRunning : Boolean;
-
    warningMessage : String;
    res: integer;
 
 begin
    playerRunning := IsApplicationRunning(PlayerAppShortName);
    libraryRunning := IsApplicationRunning(MediaLibraryAppShortName);
-   rccManagerRunning := IsApplicationRunning(RCCManagerAppShortName);
-   logViewerRunning := IsApplicationRunning(LogViewerAppShortName);
-   appCleanerRunning := IsApplicationRunning(AppCleanerAppShortName);
 
-   if (playerRunning or libraryRunning or rccManagerRunning or logViewerRunning or appCleanerRunning) then
+   if (playerRunning or libraryRunning) then
    begin
 
     warningMessage := Chr(13);
@@ -320,21 +298,6 @@ begin
     begin
         warningMessage := warningMessage + MediaLibraryAppName  + Chr(13);
     end;
-
-    if (rccManagerRunning) then
-    begin
-        warningMessage := warningMessage + RCCManagerAppName  + Chr(13);
-    end;
-
-    if (logViewerRunning) then
-    begin
-        warningMessage := warningMessage + LogViewerAppName  + Chr(13);
-    end;
-
-    //if (appCleanerRunning) then
-    //begin
-    //  warningMessage := warningMessage + AppCleanerAppName  + Chr(13);
-    //end;
 
     result := MsgBox(FmtMessage(CustomMessage('AppsStillRunning'), [ warningMessage ]), mbError, MB_RETRYCANCEL);
 
@@ -383,9 +346,6 @@ begin
 
    DependencyPage.Show;
 
-   DependencyPage.SetText(CustomMessage('RCCServiceCheck'), '');
-   StopRCCService;
-   
    DependencyPage.SetText(CustomMessage('PersistenceServiceCheck'), '');
    StopPersistenceService;
 

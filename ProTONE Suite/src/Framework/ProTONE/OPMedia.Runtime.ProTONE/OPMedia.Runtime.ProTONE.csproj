@@ -136,7 +136,6 @@
     <Compile Include="RemoteControl\MediaCommands.cs" />
     <Compile Include="RemoteControl\RemoteIOCommands.cs" />
     <Compile Include="RemoteControl\ShutdownCommand.cs" />
-    <Compile Include="RemoteControl\WcfCommunication.cs" />
     <Compile Include="Rendering\Base\BaseTypes.cs" />
     <Compile Include="Rendering\Base\RenderingException.cs" />
     <Compile Include="Rendering\Base\Types.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="Rendering\DS\BaseClasses\DSHelper.cs" />
     <Compile Include="Rendering\DS\DSAudioCDRenderer.cs" />
     <Compile Include="Rendering\DS\DSDvdRenderer.cs" />
-    <Compile Include="Rendering\DS\DSFileRenderer.cs" />
     <Compile Include="Rendering\DS\DsFilters\AudioCD.cs" />
     <Compile Include="Rendering\DS\DShowTypes.cs">
       <SubType>Code</SubType>
@@ -167,9 +165,7 @@
     <Compile Include="Rendering\MediaRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Base\StreamRenderer.cs" />
-    <Compile Include="RemoteControlHelper.cs" />
     <Compile Include="RemoteControl\RemoteControllableApplication.cs" />
-    <Compile Include="ServiceHelpers\ProTONERemoteConfig.cs" />
     <Compile Include="SubtitleDownload\Base\SubtitleDataTypes.cs" />
     <Compile Include="SubtitleDownload\Base\SubtitleServerSession.cs" />
     <Compile Include="SubtitleDownload\BSP_V1\BSPSubtitlesService.cs" />
@@ -184,7 +180,6 @@
     <Compile Include="SubtitleDownload\Osdb\OsdbStructs.cs" />
     <Compile Include="SubtitleDownload\SubtitleDownloader.cs" />
     <Compile Include="SystemScheduler\SystemScheduler.cs" />
-    <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
     <Compile Include="WorkerSupport\IWorkerPlayer.cs" />
     <Compile Include="WorkerSupport\WorkerCommand.cs" />
     <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
@@ -193,13 +188,21 @@
     <Compile Include="WorkerSupport\WorkerProcess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
+      <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
+      <Name>OPMedia.ShellSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
       <Project>{41d162bd-95f4-4348-b353-93ba1c3923b4}</Project>
       <Name>OPMedia.DeezerInterop</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
+      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>

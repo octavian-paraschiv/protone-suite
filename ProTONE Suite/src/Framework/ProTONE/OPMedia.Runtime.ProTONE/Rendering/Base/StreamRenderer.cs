@@ -33,19 +33,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected object _sync = new object();
         #endregion
 
-        protected object _vuLock = new object();
-        protected object _waveformLock = new object();
-        protected object _spectrogramLock = new object();
-        protected AudioSampleData _vuMeterData = null;
-        protected double[,] _waveformData = null;
-        protected double[] _spectrogramData = null;
-
-        protected int _waveformWindowSize = 512;
-        protected int _vuMeterWindowSize = 64;
-        protected int _fftWindowSize = 2048;
-        protected double _maxLevel = short.MaxValue;
-        protected double _maxLogLevel = Math.Log((double)short.MaxValue);
-
         protected System.Timers.Timer _tmrInternalClock = null;
         protected Int64 _elapsedSeconds = 0;
         protected object _syncElapsedSeconds = new object();
@@ -65,9 +52,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         }
 
         #region Properties
-
-        internal Control RenderRegion
-        { get { return renderRegion; } set { renderRegion = value; } }
 
         internal bool MediaSeekable
         { 
@@ -198,55 +182,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         internal object GraphFilter
         { get { return DoGetGraphFilter(); } }
-
-        public AudioSampleData VuMeterData
-        {
-            get
-            {
-                lock (_vuLock)
-                {
-                    return _vuMeterData;
-                }
-            }
-        }
-
-        public double[,] WaveformData
-        {
-            get
-            {
-                lock (_waveformLock)
-                {
-                    return _waveformData;
-                }
-            }
-        }
-
-        public double[] SpectrogramData
-        {
-            get
-            {
-                lock (_spectrogramLock)
-                {
-                    return _spectrogramData;
-                }
-            }
-        }
-
-        public double MaxLevel
-        {
-            get
-            {
-                return _maxLevel;
-            }
-        }
-
-        public double FFTWindowSize
-        {
-            get
-            {
-                return _fftWindowSize;
-            }
-        }
 
         #endregion
 
@@ -385,6 +320,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             DoSetSubtitleStream(sid);
         }
 
+        internal virtual void SetRenderRegion(IWin32Window renderRegion, IWin32Window notifyRegion)
+        {
+        }
+
+        internal virtual void ResizeRenderRegion()
+        {
+        }
+
+
         #endregion
 
         #region Construction
@@ -464,26 +408,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             {
                 return false;
             }
-        }
-
-        public virtual SupportedMeteringData GetSupportedMeteringData()
-        {
-            return SupportedMeteringData.Levels;
-        }
-
-        public virtual double[] GetLevelsData()
-        {
-            return null;
-        }
-
-        public virtual double[] GetWaveform()
-        {
-            return null;
-        }
-
-        public virtual double[] GetSpectrogram()
-        {
-            return null;
         }
     }
 }

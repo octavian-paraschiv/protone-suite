@@ -39,6 +39,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         GetStateReq,
         GetStateRsp,
 
+        ResizeRenderRegionReq,
+        ResizeRenderRegionRsp,
+
         StateEvt,
         StateAck,
 

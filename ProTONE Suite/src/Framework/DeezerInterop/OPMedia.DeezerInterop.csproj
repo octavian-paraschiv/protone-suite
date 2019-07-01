@@ -81,12 +81,6 @@
     <Compile Include="RestApi\Track.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
-      <Name>OPMedia.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -115,6 +109,16 @@
     <Content Include="libdeezer.x86.dll.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
+      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
+      <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

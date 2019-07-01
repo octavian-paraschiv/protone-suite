@@ -41,6 +41,7 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using System.Threading.Tasks;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -414,7 +415,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 Uri uri = new Uri(file);
                 string ext = PathUtils.GetExtension(uri.LocalPath);
-                return MediaRenderer.SupportedPlaylists.Contains(ext);
+                return SupportedFileProvider.Instance.SupportedPlaylists.Contains(ext);
             }
             catch
             {

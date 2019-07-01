@@ -57,7 +57,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         public static WorkerCommand FromString(string s)
         {
-            string[] fields = StringUtils.ToStringArray(s, FieldDelimiter);
+            string[] fields = StringUtils.ToStringArray(s, FieldDelimiter, StringSplitOptions.None);
             if (fields == null || fields.Length < 1)
                 return null;
 

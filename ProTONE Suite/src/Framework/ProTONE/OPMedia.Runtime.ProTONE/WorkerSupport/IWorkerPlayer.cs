@@ -7,25 +7,11 @@ using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
-    [Flags]
-    public enum SupportedMeteringData
-    {
-        None = 0x00,
-
-        OutputLevels = 0x01,
-        
-        Levels = 0x02,
-        Waveform = 0x04,
-        Spectrogram = 0x06,
-
-        All = 0xFF
-    }
-
     public interface IWorkerPlayer
     {
         void SetCommandProcessor(CommandProcessor proc);
 
-        void Play(string url, string userId, int delayStart);
+        void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd);
         void Stop();
         void Pause();
         void Resume(int pos);
@@ -36,5 +22,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         int GetMediaPosition();
 
         FilterState GetFilterState();
+
+        void ResizeRenderRegion();
     }
 }

@@ -148,7 +148,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                                 url = this.Item.ImageURL ?? "";
 
                                 int len = Math.Min(url.Length, 100);
-                                Logger.LogToConsole($"ImageURL: {url.Substring(0, 100)}");
+                                Logger.LogToConsole($"ImageURL: {url.Substring(0, len)}");
 
                                 isInfoRebuilt = true;
                             }

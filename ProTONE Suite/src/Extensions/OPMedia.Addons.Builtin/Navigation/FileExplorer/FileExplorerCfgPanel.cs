@@ -17,6 +17,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Addons.Builtin.FileExplorer
 {
@@ -56,15 +57,15 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 supChildrenForAudioTypes.Add("BMK");
 
                 List<string> supChildrenForVideoTypes = new List<string>();
-                supChildrenForVideoTypes.AddRange(MediaRenderer.GetSupportedFileProvider().SupportedSubtitles);
+                supChildrenForVideoTypes.AddRange(SupportedFileProvider.Instance.SupportedSubtitles);
                 supChildrenForVideoTypes.Add("BMK");
 
                 tableLinkedFiles.Add(
-                    StringUtils.FromStringArray(MediaRenderer.SupportedAudioTypes.ToArray(), ';'),
+                    StringUtils.FromStringArray(SupportedFileProvider.Instance.SupportedAudioTypes.ToArray(), ';'),
                     StringUtils.FromStringArray(supChildrenForAudioTypes.ToArray(), ';'));
 
                 tableLinkedFiles.Add(
-                    StringUtils.FromStringArray(MediaRenderer.SupportedVideoTypes.ToArray(), ';'),
+                    StringUtils.FromStringArray(SupportedFileProvider.Instance.SupportedVideoTypes.ToArray(), ';'),
                     StringUtils.FromStringArray(supChildrenForVideoTypes.ToArray(), ';'));
 
                 ProTONEConfig.LinkedFilesTable = new Dictionary<string, string>(tableLinkedFiles);

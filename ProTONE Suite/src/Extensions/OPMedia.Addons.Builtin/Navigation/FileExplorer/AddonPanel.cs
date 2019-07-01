@@ -54,6 +54,7 @@ using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
 using OPMedia.Addons.Builtin.Shared;
+using OPMedia.ShellSupport;
 
 #endregion
 
@@ -588,9 +589,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                     {
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
-                                            RemoteControlHelper.SendPlayerCommand(
-                                                OPMedia.Runtime.ProTONE.RemoteControl.CommandType.EnqueueFiles,
-                                                taskSearch.MatchingItems.ToArray(), true, false);
+                                            PlayerRemoteControl.SendPlayerCommand(
+                                                Runtime.ProTONE.CommandType.EnqueueFiles,
+                                                taskSearch.MatchingItems.ToArray());
                                         }
                                     }
                                     break;
@@ -599,9 +600,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                     {
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
-                                            RemoteControlHelper.SendPlayerCommand(
-                                                OPMedia.Runtime.ProTONE.RemoteControl.CommandType.PlayFiles,
-                                                taskSearch.MatchingItems.ToArray(), true, false);
+                                            PlayerRemoteControl.SendPlayerCommand(
+                                                Runtime.ProTONE.CommandType.PlayFiles,
+                                                taskSearch.MatchingItems.ToArray());
                                         }
                                     }
                                     break;
@@ -744,9 +745,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             List<String> items = opmShellList.SelectedPaths;
                             if (items.Count > 0)
                             {
-                                RemoteControlHelper.SendPlayerCommand(
-                                    OPMedia.Runtime.ProTONE.RemoteControl.CommandType.EnqueueFiles,
-                                    items.ToArray(), true, false);
+                                PlayerRemoteControl.SendPlayerCommand(
+                                    Runtime.ProTONE.CommandType.EnqueueFiles,
+                                    items.ToArray());
                             }
                         }
                         break;
@@ -756,9 +757,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             List<String> items = opmShellList.SelectedPaths;
                             if (items.Count > 0)
                             {
-                                RemoteControlHelper.SendPlayerCommand(
-                                    OPMedia.Runtime.ProTONE.RemoteControl.CommandType.PlayFiles,
-                                    items.ToArray(), true, false);
+                                PlayerRemoteControl.SendPlayerCommand(
+                                    Runtime.ProTONE.CommandType.PlayFiles,
+                                    items.ToArray());
                             }
                         }
                         break;
@@ -817,7 +818,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             if (tsic == null)
                 return;
 
-            bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
+            bool playerInstalled = File.Exists(ShellProTONEConfig.PlayerInstallationPath);
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible = 
                 playerInstalled;
 
@@ -921,7 +922,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             bool enable = false;
                             foreach (string path in opmShellList.SelectedPaths)
                             {
-                                if (MediaRenderer.IsSupportedMedia(path))
+                                if (SupportedFileProvider.Instance.IsSupportedMedia(path))
                                 {
                                     enable = true;
                                     break;

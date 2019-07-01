@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.UI.Themes;
 using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Addons.Builtin.Player
 {
@@ -31,8 +32,8 @@ namespace OPMedia.Addons.Builtin.Player
             get
             {
                 List<String> fileTypes = new List<string>();
-                fileTypes.AddRange(MediaRenderer.SupportedAudioTypes);
-                fileTypes.AddRange(MediaRenderer.SupportedVideoTypes);
+                fileTypes.AddRange(SupportedFileProvider.Instance.SupportedAudioTypes);
+                fileTypes.AddRange(SupportedFileProvider.Instance.SupportedVideoTypes);
                 return fileTypes;
             }
         }

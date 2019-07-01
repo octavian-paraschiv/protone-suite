@@ -30,6 +30,7 @@ using System.Threading;
 using System.Diagnostics;
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.UI.Generic;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 {
@@ -365,7 +366,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 else if (theTask.SearchPattern == Translator.Translate("TXT_SEARCH_MEDIAFILES"))
                 {
                     needFolderLookup = false;
-                    actualSearchPattern = MediaRenderer.AllMediaTypesMultiFilter;
+                    actualSearchPattern = SupportedFileProvider.Instance.AllMediaTypesMultiFilter;
                 }
 
                 List<string> fsEntries = new List<string>();
@@ -472,7 +473,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
             else if (SearchMediaFilesActive())
             {
-                if (!MediaRenderer.IsSupportedMedia(file))
+                if (!SupportedFileProvider.Instance.IsSupportedMedia(file))
                     return false; // not a media file
 
                 MediaFileInfo mfi = MediaFileInfo.FromPath(file);
@@ -512,7 +513,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             try
             {
                 // So far only media files can have "text" properties
-                if (MediaRenderer.IsSupportedMedia(file))
+                if (SupportedFileProvider.Instance.IsSupportedMedia(file))
                 {
                     MediaFileInfo mfi = MediaFileInfo.FromPath(file);
                     if (mfi != null)
@@ -602,14 +603,14 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
         private void OnMenuOpening(object sender, CancelEventArgs e)
         {
-            bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
+            bool playerInstalled = File.Exists(ShellProTONEConfig.PlayerInstallationPath);
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible =
                 playerInstalled;
 
             bool enable = false;
             foreach (string path in GetSelectedItems())
             {
-                if (MediaRenderer.IsSupportedMedia(path))
+                if (SupportedFileProvider.Instance.IsSupportedMedia(path))
                 {
                     enable = true;
                     break;

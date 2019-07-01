@@ -6,6 +6,7 @@ using OPMedia.Runtime.FileInformation;
 using System.IO;
 using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -14,7 +15,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public static NativeFileInfo FromPath(string path)
         {
             string fileType = PathUtils.GetExtension(path);
-            if (MediaRenderer.AllMediaTypes.Contains(fileType))
+            if (SupportedFileProvider.Instance.AllMediaTypes.Contains(fileType))
             {
                 return MediaFileInfo.FromPath(path, true);
             }

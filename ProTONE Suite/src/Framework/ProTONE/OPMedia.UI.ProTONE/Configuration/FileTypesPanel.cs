@@ -22,6 +22,8 @@ using OPMedia.UI.Generic;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -163,7 +165,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             pnlVideoFiles.Margin = new Padding(0);
             pnlPlaylists.Margin = new Padding(0);
 
-            foreach (string str in MediaRenderer.SupportedAudioTypes)
+            foreach (string str in SupportedFileProvider.Instance.SupportedAudioTypes)
             {
                 bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();
@@ -172,7 +174,7 @@ namespace OPMedia.UI.ProTONE.Configuration
                 pnlAudioFiles.Controls.Add(cb);
             }
 
-            foreach (string str in MediaRenderer.SupportedVideoTypes)
+            foreach (string str in SupportedFileProvider.Instance.SupportedVideoTypes)
             {
                 bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();
@@ -181,7 +183,7 @@ namespace OPMedia.UI.ProTONE.Configuration
                 pnlVideoFiles.Controls.Add(cb);
             }
 
-            foreach (string str in MediaRenderer.SupportedPlaylists)
+            foreach (string str in SupportedFileProvider.Instance.SupportedPlaylists)
             {
                 bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();

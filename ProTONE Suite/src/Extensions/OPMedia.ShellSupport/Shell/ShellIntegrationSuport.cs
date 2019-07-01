@@ -1,30 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Win32;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.Core;
-
-using System.Drawing;
-using System.ComponentModel;
-using OPMedia.Core.ComTypes;
-using OPMedia.Runtime;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering;
 using System.Runtime.InteropServices.ComTypes;
 using OPMedia.ShellSupport.Properties;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Utilities;
+using OPMedia.Core;
+using System.Diagnostics;
+using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Utilities;
-using OPMedia.Core.Configuration;
-
+using System.Threading;
+using System.Security.AccessControl;
 
 namespace OPMedia.ShellSupport
 {
@@ -34,7 +19,7 @@ namespace OPMedia.ShellSupport
     // If so required change it from there rather than entering a new one here.
     // because the value is used also by the install/uninstall routines.
     // Registration will fail if different GUID's are specified !!
-    [Guid(ProTONEConstants.ShellIntegrationSuportGuid)]
+    [Guid(ShellConstants.ShellIntegrationSuportGuid)]
     [ComVisible(true)]
     public class ShellIntegrationSuport : IShellExtInit, IContextMenu
     {
@@ -53,7 +38,7 @@ namespace OPMedia.ShellSupport
             }
             catch(Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex, false);
+                Debug.WriteLine(ex.ToString());
                 hBitmap = IntPtr.Zero;
             }
         }
@@ -65,22 +50,18 @@ namespace OPMedia.ShellSupport
         {
             try
             {
-                Logger.LogInfo("Attempt to register OPMedia.ShellSupport ...");
+                Debug.WriteLine("Attempt to register OPMedia.ShellSupport ...");
 
-                SuiteRegistrationSupport.Init(MediaRenderer.GetSupportedFileProvider());
+                SuiteRegistrationSupport.Init(SupportedFileProvider.Instance);
                 SuiteRegistrationSupport.RegisterContextMenuHandler();
                 SuiteRegistrationSupport.RegisterKnownFileTypes();
                 SuiteRegistrationSupport.ReloadFileAssociations();
 
-                Logger.LogInfo("OPMedia.ShellSupport was succesfully registered !");
+                Debug.WriteLine("OPMedia.ShellSupport was succesfully registered !");
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
-            }
-            finally
-            {
-                Logger.StopLogger();
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -89,22 +70,18 @@ namespace OPMedia.ShellSupport
         {
             try
             {
-                Logger.LogInfo("Attempt to unregister OPMedia.ShellSupport ...");
+                Debug.WriteLine("Attempt to unregister OPMedia.ShellSupport ...");
 
-                SuiteRegistrationSupport.Init(MediaRenderer.GetSupportedFileProvider());
+                SuiteRegistrationSupport.Init(SupportedFileProvider.Instance);
                 SuiteRegistrationSupport.UnregisterKnownFileTypes();
                 SuiteRegistrationSupport.UnregisterContextMenuHandler();
                 SuiteRegistrationSupport.ReloadFileAssociations();
 
-                Logger.LogInfo("OPMedia.ShellSupport was succesfully unregistered !");
+                Debug.WriteLine("OPMedia.ShellSupport was succesfully unregistered !");
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
-            }
-            finally
-            {
-                Logger.StopLogger();
+                Debug.WriteLine(ex.ToString());
             }
         }
         #endregion
@@ -117,12 +94,12 @@ namespace OPMedia.ShellSupport
                 throw new ArgumentException();
             }
 
-            ApplicationInfo.RegisterAppName(GetType().Assembly);
-            Translator.RegisterTranslationAssembly(GetType().Assembly);
-            Translator.SetInterfaceLanguage(AppConfig.LanguageID);
+            //ApplicationInfo.RegisterAppName(GetType().Assembly);
+            //Translator.RegisterTranslationAssembly(GetType().Assembly);
+            //Translator.SetInterfaceLanguage(AppConfig.LanguageID);
 
             FORMATETC fe = new FORMATETC();
-            fe.cfFormat = (short)CLIPFORMAT.CF_HDROP;
+            fe.cfFormat = 15;// CLIPFORMAT.CF_HDROP;
             fe.ptd = IntPtr.Zero;
             fe.dwAspect = DVASPECT.DVASPECT_CONTENT;
             fe.lindex = -1;
@@ -145,18 +122,18 @@ namespace OPMedia.ShellSupport
                 }
 
                 // Determine how many files are involved in this operation.
-                uint nFiles = Shell32.DragQueryFile(hDrop, UInt32.MaxValue, null, 0);
+                uint nFiles = DllImports.DragQueryFile(hDrop, UInt32.MaxValue, null, 0);
 
                 // Enumerate the selected files and folders.
                 if (nFiles > 0)
                 {
                     this.fileList = new List<string>();
-                    StringBuilder fileName = new StringBuilder(Kernel32.MAX_FILE_BUFFER);
-                    for (uint i = 0; i < Math.Min(nFiles, Kernel32.MAX_FILES); i++)
+                    StringBuilder fileName = new StringBuilder(ShellConstants.MAX_FILE_BUFFER);
+                    for (uint i = 0; i < Math.Min(nFiles, ShellConstants.MAX_FILES); i++)
                     {
                         // Get the next file name.
-                        if (Shell32.DragQueryFile(hDrop, i, fileName, fileName.Capacity) != 0 &&
-                            MediaRenderer.IsSupportedMedia(fileName.ToString()))
+                        if (DllImports.DragQueryFile(hDrop, i, fileName, fileName.Capacity) != 0 &&
+                            SupportedFileProvider.Instance.IsSupportedMedia(fileName.ToString()))
                         {
                             // Add the file name to the list.
                             fileList.Add(fileName.ToString());
@@ -167,23 +144,22 @@ namespace OPMedia.ShellSupport
                     // exception.
                     if (fileList.Count == 0)
                     {
-                        Marshal.ThrowExceptionForHR(WinError.E_FAIL);
+                        Marshal.ThrowExceptionForHR(ShellConstants.E_FAIL);
                     }
                 }
                 else
                 {
-                    Marshal.ThrowExceptionForHR(WinError.E_FAIL);
+                    Marshal.ThrowExceptionForHR(ShellConstants.E_FAIL);
                 }
             }
             catch(Exception ex)
             {
-                //ErrorDispatcher.DispatchException(ex);
-                Logger.LogException(ex);
+                Debug.WriteLine(ex.ToString());
                 fileList.Clear();
             }
             finally
             {
-                 Ole32.ReleaseStgMedium(ref stm);
+                 DllImports.ReleaseStgMedium(ref stm);
             }
         }
         #endregion
@@ -194,26 +170,26 @@ namespace OPMedia.ShellSupport
         {
             if (fileList != null && fileList.Count > 0)
             {
-                uint pos = (uint)User32.GetMenuItemCount(hmenu) / 2;
+                uint pos = (uint)DllImports.GetMenuItemCount(hmenu) / 2;
 
-                User32.InsertMenu(hmenu, pos, MFMENU.MF_BYPOSITION | MFMENU.MF_SEPARATOR,
+                DllImports.InsertMenu(hmenu, pos, MFMENU.MF_BYPOSITION | MFMENU.MF_SEPARATOR,
                     IntPtr.Zero, string.Empty);
 
-                User32.InsertMenu(hmenu, pos + 1, MFMENU.MF_BYPOSITION | MFMENU.MF_STRING,
+                DllImports.InsertMenu(hmenu, pos + 1, MFMENU.MF_BYPOSITION | MFMENU.MF_STRING,
                     new IntPtr(idCmdFirst + (int)CommandType.PlayFiles),
-                    Translator.Translate("TXT_PLAYMENU"));
+                    ShellConstants.PlayMenu);
 
-                User32.InsertMenu(hmenu, pos + 2, MFMENU.MF_BYPOSITION | MFMENU.MF_STRING,
+                DllImports.InsertMenu(hmenu, pos + 2, MFMENU.MF_BYPOSITION | MFMENU.MF_STRING,
                     new IntPtr(idCmdFirst + (int)CommandType.EnqueueFiles),
-                    Translator.Translate("TXT_ENQUEUEMENU"));
+                    ShellConstants.EnqueueMenu);
 
-                User32.InsertMenu(hmenu, pos + 3, MFMENU.MF_BYPOSITION | MFMENU.MF_SEPARATOR,
+                DllImports.InsertMenu(hmenu, pos + 3, MFMENU.MF_BYPOSITION | MFMENU.MF_SEPARATOR,
                     IntPtr.Zero, string.Empty);
 
                 if (hBitmap != IntPtr.Zero)
                 {
-                    User32.SetMenuItemBitmaps(hmenu, pos + 1, MFMENU.MF_BYPOSITION, hBitmap, hBitmap);
-                    User32.SetMenuItemBitmaps(hmenu, pos + 2, MFMENU.MF_BYPOSITION, hBitmap, hBitmap);
+                    DllImports.SetMenuItemBitmaps(hmenu, pos + 1, MFMENU.MF_BYPOSITION, hBitmap, hBitmap);
+                    DllImports.SetMenuItemBitmaps(hmenu, pos + 2, MFMENU.MF_BYPOSITION, hBitmap, hBitmap);
                 }
 
                 return Math.Max((int)CommandType.PlayFiles, (int)CommandType.EnqueueFiles) + 1;
@@ -235,18 +211,18 @@ namespace OPMedia.ShellSupport
                 {
                     case (int)CommandType.PlayFiles:
                     case (int)CommandType.EnqueueFiles:
-                        RemoteControlHelper.SendPlayerCommand((CommandType)cmd, fileList.ToArray(), true, false); 
+                        PlayerRemoteControl.SendPlayerCommand((CommandType)cmd, fileList.ToArray()); 
                         break;
 
                     default:
-                        Marshal.ThrowExceptionForHR(WinError.E_FAIL);
+                        Marshal.ThrowExceptionForHR(ShellConstants.E_FAIL);
                         break;
                 }
 
             }
             catch (Exception ex)
             {
-                ErrorDispatcher.DispatchError(ex, false);
+                Debug.WriteLine(ex.ToString());
             }
         }
 

@@ -31,6 +31,7 @@ using System.Drawing;
 using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Dialogs;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.ProTONE
 {
@@ -55,7 +56,7 @@ namespace OPMedia.ProTONE
                 {
                     try
                     {
-                        RemoteControllableApplication.Start(ProTONEConstants.PlayerName, true);
+                        RemoteControllableApplication.Start(ShellConstants.PlayerName, true);
 
                         ProcessCommandLine(false);
 
@@ -83,7 +84,7 @@ namespace OPMedia.ProTONE
                         Logger.LogWarning(ex.Message);
 
                         // Send an activate command to the main instance
-                        RemoteControlHelper.SendPlayerCommand(CommandType.Activate, null, false, false);
+                        PlayerRemoteControl.SendPlayerCommand(CommandType.Activate, null);
                     }
                     catch (Exception ex)
                     {
@@ -121,11 +122,11 @@ namespace OPMedia.ProTONE
                     if (SuiteRegistrationSupport.IsContextMenuHandlerRegistered() &&
                         (cmdType == CommandType.PlayFiles || cmdType == CommandType.EnqueueFiles))
                     {
-                        if (RemoteControlHelper.IsPlayerRunning())
+                        if (PlayerRemoteControl.IsPlayerRunning())
                         {
                             // There is another player instance that is running.
                             // Just pass the command to that instance and exit.
-                            RemoteControlHelper.SendPlayerCommand(cmdType, files.ToArray(), false, false);
+                            PlayerRemoteControl.SendPlayerCommand(cmdType, files.ToArray());
                         }
                         else
                         {

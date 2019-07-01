@@ -213,7 +213,7 @@ namespace OPMedia.DeezerWorker
         }
 
 
-        public void Play(string url, string userId, int delayStart)
+        public void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd)
         {
             dz_error_t err;
 
@@ -627,26 +627,8 @@ namespace OPMedia.DeezerWorker
             return this.FilterState;
         }
 
-        public SupportedMeteringData GetSupportedMeteringData()
+        public void ResizeRenderRegion()
         {
-            // Let the MediaRenderer figure out the levels based on NAudio
-            return SupportedMeteringData.OutputLevels;
-        }
-
-        public double[] GetLevels()
-        {
-            // Let the MediaRenderer figure out the levels based on NAudio
-            return null;
-        }
-
-        public double[] GetWaveform()
-        {
-            return null;
-        }
-
-        public double[] GetSpectrogram()
-        {
-            return null;
         }
     }
 }

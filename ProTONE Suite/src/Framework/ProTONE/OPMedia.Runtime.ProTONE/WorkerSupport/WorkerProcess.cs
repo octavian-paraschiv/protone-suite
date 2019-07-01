@@ -1,4 +1,5 @@
-﻿using OPMedia.Core.Configuration;
+﻿using OPMedia.Core;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using OPMedia.Core.Utilities;
 using OPMedia.DeezerInterop.PlayerApi;
@@ -74,7 +75,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             psi.RedirectStandardInput = true;
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
-            psi.WorkingDirectory = AppConfig.InstallationPath;
+            psi.WorkingDirectory = LiteAppConfig.InstallationPath;
             psi.UseShellExecute = false;
 
             _wp = Process.Start(psi);
@@ -114,9 +115,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             SetCommand(WorkerCommandType.PauseReq);
         }
 
-        public void Play(string url, string userId, int delayStart)
+        public void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd)
         {
-            SetCommand(WorkerCommandType.PlayReq, url, userId, delayStart);
+            SetCommand(WorkerCommandType.PlayReq, url, userId, delayStart, renderHwnd, notifyHwnd);
 
             ThreadPool.QueueUserWorkItem((c) => ReadEvents());
         }
@@ -178,6 +179,11 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public FilterState GetFilterState()
         {
             return GetCommand<FilterState>(WorkerCommandType.GetStateReq);
+        }
+
+        public void ResizeRenderRegion()
+        {
+            SetCommand(WorkerCommandType.ResizeRenderRegionReq);
         }
 
         private T GetCommand<T>(WorkerCommandType wct)

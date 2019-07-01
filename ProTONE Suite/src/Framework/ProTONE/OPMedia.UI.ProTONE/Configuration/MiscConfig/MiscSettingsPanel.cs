@@ -10,7 +10,6 @@ using OPMedia.UI.ProTONE.Properties;
 using OPMedia.UI.Configuration;
 using OPMedia.Core.TranslationSupport;
 
-using OPMedia.Runtime.ProTONE.ServiceHelpers;
 using OPMedia.Core;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;

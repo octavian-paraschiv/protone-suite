@@ -78,67 +78,6 @@ namespace OPMedia.Core.ComTypes
         int GetItemData(LPCSHCOLUMNID pscid, LPCSHCOLUMNDATA pscd, out object pvarData);
     }
 
-    [ComImport(), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    [Guid("000214e4-0000-0000-c000-000000000046")]
-    public interface IContextMenu
-    {
-        [PreserveSig]
-        int QueryContextMenu(
-            IntPtr /*HMENU*/ hMenu,
-            uint iMenu,
-            uint idCmdFirst,
-            uint idCmdLast,
-            uint uFlags);
-
-        void InvokeCommand(IntPtr pici);
-
-        void GetCommandString(
-            UIntPtr idCmd,
-            uint uFlags,
-            IntPtr pReserved,
-            StringBuilder pszName,
-            uint cchMax);
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    public struct CMINVOKECOMMANDINFO
-    {
-        public uint cbSize;
-        public CMIC fMask;
-        public IntPtr hwnd;
-        public IntPtr verb;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string parameters;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string directory;
-        public int nShow;
-        public uint dwHotKey;
-        public IntPtr hIcon;
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    public struct CMINVOKECOMMANDINFOEX
-    {
-        public uint cbSize;
-        public CMIC fMask;
-        public IntPtr hwnd;
-        public IntPtr verb;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string parameters;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string directory;
-        public int nShow;
-        public uint dwHotKey;
-        public IntPtr hIcon;
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string title;
-        public IntPtr verbW;
-        public string parametersW;
-        public string directoryW;
-        public string titleW;
-        POINT ptInvoke;
-    }
-
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct POINT
     {
@@ -146,32 +85,7 @@ namespace OPMedia.Core.ComTypes
         public int Y;
     }
 
-    [Flags]
-    public enum CMIC : uint
-    {
-        CMIC_MASK_ICON = 0x00000010,
-        CMIC_MASK_HOTKEY = 0x00000020,
-        CMIC_MASK_NOASYNC = 0x00000100,
-        CMIC_MASK_FLAG_NO_UI = 0x00000400,
-        CMIC_MASK_UNICODE = 0x00004000,
-        CMIC_MASK_NO_CONSOLE = 0x00008000,
-        CMIC_MASK_ASYNCOK = 0x00100000,
-        CMIC_MASK_NOZONECHECKS = 0x00800000,
-        CMIC_MASK_FLAG_LOG_USAGE = 0x04000000,
-        CMIC_MASK_SHIFT_DOWN = 0x10000000,
-        CMIC_MASK_PTINVOKE = 0x20000000,
-        CMIC_MASK_CONTROL_DOWN = 0x40000000
-    }
-
-    [ComImport(), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    [Guid("000214e8-0000-0000-c000-000000000046")]
-    public interface IShellExtInit
-    {
-        void Initialize(
-            IntPtr /*LPCITEMIDLIST*/ pidlFolder,
-            IntPtr /*LPDATAOBJECT*/ pDataObj,
-            IntPtr /*HKEY*/ hKeyProgID);
-    }
+    
 
     [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode), ComVisible(false)]
     public class LPCSHCOLUMNDATA

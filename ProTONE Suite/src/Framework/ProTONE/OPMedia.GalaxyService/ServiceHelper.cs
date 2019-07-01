@@ -22,7 +22,7 @@ namespace OPMedia.GalaxyService
 
         protected override void StartInternal()
         {
-            Environment.CurrentDirectory = AppConfig.InstallationPath;
+            Environment.CurrentDirectory = LiteAppConfig.InstallationPath;
 
             var binding = new WebHttpBinding();
             binding.MaxReceivedMessageSize = int.MaxValue;

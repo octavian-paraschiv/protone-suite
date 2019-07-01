@@ -47,8 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
+      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0a0114c0-4409-42f3-940c-31038104261c}</Project>

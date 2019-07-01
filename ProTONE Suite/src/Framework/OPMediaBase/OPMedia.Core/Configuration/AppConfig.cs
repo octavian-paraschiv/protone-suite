@@ -272,34 +272,6 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static string InstallationPath
-        {
-            get
-            {
-                string retVal = string.Empty;
-                try
-                {
-                    if (ApplicationInfo.IsSuiteApplication)
-                        retVal = Regedit.InstallPathOverride;
-
-                    if (string.IsNullOrEmpty(retVal))
-                    {
-                        Assembly asm = Assembly.GetAssembly(typeof(AppConfig));
-                        if (asm != null)
-                        {
-                            retVal = Path.GetDirectoryName(asm.Location);
-                        }
-                    }
-                }
-                catch
-                {
-                    retVal = string.Empty;
-                }
-
-                return retVal;
-            }
-        }
-
         public static CultureInfo[] SupportedCultures
         {
             get
@@ -371,7 +343,7 @@ namespace OPMedia.Core.Configuration
                 }
                 catch { }
 
-                return string.Format("file:///{0}/docs", AppConfig.InstallationPath);
+                return string.Format("file:///{0}/docs", LiteAppConfig.InstallationPath);
             }
         }
 

@@ -94,7 +94,7 @@ namespace OPMedia.AudioWorker
             }
         }
 
-        public void Play(string url, string userId, int delayStart)
+        public void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd)
         {
             if (url == null || url.Length <= 0)
                 return;
@@ -208,6 +208,10 @@ namespace OPMedia.AudioWorker
             }
 
             return scaledVolume;
+        }
+
+        public void ResizeRenderRegion()
+        {
         }
     }
 }

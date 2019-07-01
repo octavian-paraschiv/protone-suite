@@ -52,6 +52,10 @@
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0a0114c0-4409-42f3-940c-31038104261c}</Project>
       <Name>OPMedia.Runtime</Name>
@@ -60,6 +64,9 @@
       <Project>{8c047807-786e-4b9c-8df5-1df99f75c874}</Project>
       <Name>OPMedia.Runtime.ProTONE</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

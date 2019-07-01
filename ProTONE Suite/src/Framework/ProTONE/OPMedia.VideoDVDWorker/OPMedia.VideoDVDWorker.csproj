@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{687F92F3-7B8D-421A-BE43-4F2B40AEC69A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>OPMedia.VideoDVDWorker</RootNamespace>
+    <AssemblyName>OPMedia.VideoDVDWorker</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="VideoDVDPlayer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
+      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
+      <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
+      <Project>{0a0114c0-4409-42f3-940c-31038104261c}</Project>
+      <Name>OPMedia.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj">
+      <Project>{8c047807-786e-4b9c-8df5-1df99f75c874}</Project>
+      <Name>OPMedia.Runtime.ProTONE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

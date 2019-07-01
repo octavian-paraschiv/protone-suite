@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
-    <None Include="VersionTemplate.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LoggedApplication.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Utilities\HelperClasses.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Utilities\SerialPortAPI.cs" />
-    <Compile Include="Version.cs" />
     <Compile Include="Win32\Gdi32.cs" />
     <Compile Include="GlobalEvents\EventSinkAttribute.cs" />
     <Compile Include="GlobalEvents\EventNames.cs" />
@@ -97,7 +95,6 @@
     <Compile Include="InstanceManagement\OpMediaApplication.cs" />
     <Compile Include="InstanceManagement\SingleInstanceApplication.cs" />
     <Compile Include="Logging\ErrorDispatcher.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="TranslationSupport\TranslatableAttributes.cs" />
     <Compile Include="TranslationSupport\Translator.cs" />
     <Compile Include="Win32\Registry.cs" />
@@ -192,16 +189,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

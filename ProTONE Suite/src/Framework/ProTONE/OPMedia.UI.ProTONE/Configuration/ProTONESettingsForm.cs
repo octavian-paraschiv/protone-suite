@@ -72,16 +72,16 @@ namespace OPMedia.UI.ProTONE.Configuration
             return true;
         }
 
-        public override List<BaseCfgPanel> GetControlSubPages()
-        {
-            if (!AppConfig.CurrentUserIsAdministrator || !ProTONEConfig.IsRCCServiceInstalled || !ProTONEConfig.IsPlayer)
-                return null;
+        //public override List<BaseCfgPanel> GetControlSubPages()
+        //{
+        //    if (!AppConfig.CurrentUserIsAdministrator || !ProTONEConfig.IsRCCServiceInstalled || !ProTONEConfig.IsPlayer)
+        //        return null;
 
-            return new List<BaseCfgPanel> 
-            { 
-                new RemoteControlPage() 
-            };
-        }
+        //    return new List<BaseCfgPanel> 
+        //    { 
+        //        new RemoteControlPage() 
+        //    };
+        //}
 
         public override List<BaseCfgPanel> GetTroubleshootingSubPages()
         {

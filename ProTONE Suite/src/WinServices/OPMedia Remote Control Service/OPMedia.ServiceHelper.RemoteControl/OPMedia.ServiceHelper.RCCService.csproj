@@ -160,10 +160,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
-      <Name>OPMedia.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>
       <Name>OPMedia.Runtime</Name>

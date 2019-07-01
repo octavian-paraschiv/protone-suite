@@ -12,6 +12,7 @@ using System.Drawing.Design;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Core.TranslationSupport;
 using TagLib.Mpeg;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -259,7 +260,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     mediaType = base.Extension.Trim(new char[] { '.' }).ToLowerInvariant();
                     MediaRenderer renderer = MediaRenderer.DefaultInstance;
                     
-                    if (!MediaRenderer.AllMediaTypes.Contains(mediaType))
+                    if (!SupportedFileProvider.Instance.AllMediaTypes.Contains(mediaType))
                     {
                         throw new FileLoadException("Unexpected file type: " + mediaType,
                             base.Path);
@@ -311,7 +312,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             {
                 try
                 {
-                    if (!MediaRenderer.AllMediaTypes.Contains(mi.MediaType))
+                    if (!SupportedFileProvider.Instance.AllMediaTypes.Contains(mi.MediaType))
                     {
                         throw new FileLoadException("Unexpected file type: " + mi.MediaType,
                             path);
@@ -326,7 +327,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 }
             }
 
-            if (MediaRenderer.SupportedVideoTypes.Contains(mi.MediaType))
+            if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(mi.MediaType))
             {
                 // video file
                 return MediaRenderer.DefaultInstance.QueryVideoMediaInfo(path);

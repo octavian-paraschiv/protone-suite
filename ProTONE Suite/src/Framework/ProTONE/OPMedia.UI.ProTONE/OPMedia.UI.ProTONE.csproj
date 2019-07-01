@@ -203,12 +203,6 @@
     <Compile Include="Configuration\MiscConfig\PlaylistOptionsPage.Designer.cs">
       <DependentUpon>PlaylistOptionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\RemoteControlConfig\RemoteControlPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Configuration\RemoteControlConfig\RemoteControlPage.Designer.cs">
-      <DependentUpon>RemoteControlPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\MiscConfig\SchedulerSettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -325,9 +319,6 @@
     <EmbeddedResource Include="Configuration\MiscConfig\PlaylistOptionsPage.resx">
       <DependentUpon>PlaylistOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\RemoteControlConfig\RemoteControlPage.resx">
-      <DependentUpon>RemoteControlPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\SubtitlesConfig\SubtitleFontsPage.resx">
       <DependentUpon>SubtitleFontsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -405,13 +396,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
+      <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
+      <Name>OPMedia.ShellSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
       <Project>{41D162BD-95F4-4348-B353-93BA1C3923B4}</Project>
       <Name>OPMedia.DeezerInterop</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
+      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj">
       <Project>{EAD6662B-2B4A-47A8-A82B-B44463668177}</Project>

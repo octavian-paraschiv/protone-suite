@@ -47,6 +47,7 @@ using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.UI.Dialogs;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -667,7 +668,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 else
                 {
                     MediaFileInfo mfi = MediaFileInfo.FromPath(strFile);
-                    isVideoFile = MediaRenderer.SupportedVideoTypes.Contains(mfi.MediaType);
+                    isVideoFile = SupportedFileProvider.Instance.SupportedVideoTypes.Contains(mfi.MediaType);
                     
                     if (pli != null)
                         name = pli.DisplayName;

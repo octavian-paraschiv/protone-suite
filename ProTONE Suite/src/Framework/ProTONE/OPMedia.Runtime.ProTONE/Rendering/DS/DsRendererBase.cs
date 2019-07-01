@@ -390,12 +390,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override bool IsVideoMediaAvailable()
         {
-            return isVideoAvailable;
+            return isVideoAvailable && basicVideo != null;
         }
 
         protected override bool IsAudioMediaAvailable()
         {
-            return isAudioAvailable;
+            return isAudioAvailable && basicAudio != null;
         }
 
         protected override bool IsMediaSeekable()

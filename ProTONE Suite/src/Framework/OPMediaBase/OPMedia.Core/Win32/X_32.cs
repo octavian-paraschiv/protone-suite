@@ -48,8 +48,6 @@ namespace OPMedia.Core
         [DllImport(OLE32)]
         public static extern void CoUninitialize();
 
-        [DllImport(OLE32)]
-        public static extern void ReleaseStgMedium(ref STGMEDIUM pmedium);
 
         /// <summary>
         /// COM function helper for displaying properties dialog

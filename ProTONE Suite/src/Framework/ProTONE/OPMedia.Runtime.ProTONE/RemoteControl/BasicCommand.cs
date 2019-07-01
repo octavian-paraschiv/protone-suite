@@ -9,23 +9,6 @@ using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
-    public enum CommandType
-    {
-        Activate = 0,
-        Terminate,
-        PlayFiles,
-        EnqueueFiles,
-        ClearPlaylist,
-        Playback,
-
-        BrowseRemoteFiles,
-        GetDriveList,
-
-        QueryMediaRenderer,
-
-        KeyPress,
-    }
-
     public interface ICommandTarget
     {
         void EnqueueCommand(BasicCommand cmd);

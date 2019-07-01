@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO.Compression;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
 {
@@ -35,7 +36,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
         {
             _wsdl = new NuSoapWsdl(_serverUrl);
             _wsdl.Proxy = AppConfig.GetWebProxy();
-            _wsdl.UserAgent = string.Format("{0} v{1}", ProTONEConstants.PlayerName, SuiteVersion.Version);
+            _wsdl.UserAgent = string.Format("{0} v{1}", ShellConstants.PlayerName, SuiteVersion.Version);
         }
 
         protected override bool IsAuthenticationRequired()

@@ -5,6 +5,7 @@ using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,10 +43,13 @@ namespace OPMedia.Runtime.ProTONE
                 {
                     case WorkerCommandType.PlayReq:
                         {
-                            string path = cmd.Args<string>(0);
-                            string userId = cmd.Args<string>(1);
-                            int delayStart = cmd.Args<int>(2);
-                            _player.Play(path, userId, delayStart);
+                            int i = 0;
+                            string path = cmd.Args<string>(i++);
+                            string userId = cmd.Args<string>(i++);
+                            int delayStart = cmd.Args<int>(i++);
+                            long renderHwnd = cmd.Args<long>(i++);
+                            long notifyHwnd = cmd.Args<long>(i++);
+                            _player.Play(path, userId, delayStart, renderHwnd, notifyHwnd);
                         }
                         break;
 
@@ -85,6 +89,10 @@ namespace OPMedia.Runtime.ProTONE
 
                     case WorkerCommandType.GetLenReq:
                         replyArg = _player.GetLength().ToString();
+                        break;
+
+                    case WorkerCommandType.ResizeRenderRegionReq:
+                        _player.ResizeRenderRegion();
                         break;
 
                     default:

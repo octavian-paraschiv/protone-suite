@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using OPMedia.Core.Logging;
 
 namespace OPMedia.DeezerInterop.RestApi
 {
