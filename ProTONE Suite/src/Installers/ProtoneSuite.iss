@@ -95,12 +95,13 @@ Source: "{#BINDIR}\OPMedia.Runtime.dll"; DestDir: "{app}"; Flags: replacesamever
 Source: "{#BINDIR}\OPMedia.Runtime.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.UI.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.UI.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 
-Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}\shell"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist
-Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}\shell"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace onlyifdoesntexist; StrongAssemblyName: "OPMedia.ShellSupport.dll"
-
+Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}\shell"; Flags: touch uninsneveruninstall onlyifdoesntexist
+Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}\shell"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
 
 Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
 
 Source: "{#BINDIR}\Resources\player.ico"; DestDir: "{app}\Resources"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\bookmark.ico"; DestDir: "{app}\Resources"; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
