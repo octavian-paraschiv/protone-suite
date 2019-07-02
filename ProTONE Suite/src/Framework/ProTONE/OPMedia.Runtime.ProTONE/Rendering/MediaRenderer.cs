@@ -887,6 +887,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             _streamRenderer = null;
 
+            RegistrationSupport.Init();
+
             _mmEnumerator = new MMDeviceEnumerator();
             _mmDevice = _mmEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 

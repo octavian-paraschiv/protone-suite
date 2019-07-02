@@ -119,7 +119,7 @@ namespace OPMedia.ProTONE
                     CommandType cmdType = (CommandType)Enum.Parse(typeof(CommandType),
                         ProTONEConfig.ExplorerLaunchType);
 
-                    if (SuiteRegistrationSupport.IsContextMenuHandlerRegistered() &&
+                    if (RegistrationSupport.IsContextMenuHandlerRegistered() &&
                         (cmdType == CommandType.PlayFiles || cmdType == CommandType.EnqueueFiles))
                     {
                         if (PlayerRemoteControl.IsPlayerRunning())

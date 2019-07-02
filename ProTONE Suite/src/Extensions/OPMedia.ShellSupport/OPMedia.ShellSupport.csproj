@@ -65,12 +65,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ProTONEConfig.cs" />
+    <Compile Include="ShellProTONEConfig.cs" />
     <Compile Include="PlayerRemoteControl.cs" />
-    <Compile Include="Shell\ShellIntegrationSuport.cs" />
+    <Compile Include="ShellIntegrationSuport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SupportedFiles.cs" />
-    <Compile Include="Utilities\SuiteRegistrationSupport.cs" />
+    <Compile Include="SupportedFileProvider.cs" />
+    <Compile Include="RegistrationSupport.cs" />
     <Compile Include="WmCopyDataSender.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>

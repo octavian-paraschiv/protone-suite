@@ -86,7 +86,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             ThemeManager.SetFont(btnUnselAllPlaylists, FontSizes.Small);
             ThemeManager.SetFont(btnUnselAllVideo, FontSizes.Small);
 
-            cbShellIntegration.Checked = SuiteRegistrationSupport.IsContextMenuHandlerRegistered();
+            cbShellIntegration.Checked = RegistrationSupport.IsContextMenuHandlerRegistered();
             
             ActivateShellIntegration();
             FillExplorerLaunchTypes();
@@ -167,7 +167,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             foreach (string str in SupportedFileProvider.Instance.SupportedAudioTypes)
             {
-                bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
+                bool isRegistered = RegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();
 
                 OPMCheckBox cb = CreateCheckBox(type, isRegistered);
@@ -176,7 +176,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             foreach (string str in SupportedFileProvider.Instance.SupportedVideoTypes)
             {
-                bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
+                bool isRegistered = RegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();
 
                 OPMCheckBox cb = CreateCheckBox(type, isRegistered);
@@ -185,7 +185,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             foreach (string str in SupportedFileProvider.Instance.SupportedPlaylists)
             {
-                bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(str);
+                bool isRegistered = RegistrationSupport.IsFileTypeRegistered(str);
                 string type = str.ToUpperInvariant();
 
                 OPMCheckBox cb = CreateCheckBox(type, isRegistered);
@@ -538,15 +538,15 @@ namespace OPMedia.UI.ProTONE.Configuration
                 return;
             }
 
-            if (cbShellIntegration.Checked != SuiteRegistrationSupport.IsContextMenuHandlerRegistered())
+            if (cbShellIntegration.Checked != RegistrationSupport.IsContextMenuHandlerRegistered())
             {
                 if (cbShellIntegration.Checked)
                 {
-                    SuiteRegistrationSupport.RegisterContextMenuHandler();
+                    RegistrationSupport.RegisterContextMenuHandler();
                 }
                 else
                 {
-                    SuiteRegistrationSupport.UnregisterContextMenuHandler();
+                    RegistrationSupport.UnregisterContextMenuHandler();
                 }
             }
 
@@ -558,7 +558,7 @@ namespace OPMedia.UI.ProTONE.Configuration
                 (cmbExplorerLaunchType.SelectedItem as ExplorerLaunchType).CommandType.ToString();
             
 
-            SuiteRegistrationSupport.ReloadFileAssociations();
+            RegistrationSupport.ReloadFileAssociations();
         }
 
         private void SaveFileTypes(OPMFlowLayoutPanel pnl)
@@ -569,17 +569,17 @@ namespace OPMedia.UI.ProTONE.Configuration
                 if (cb != null)
                 {
                     string fileType = cb.Text;
-                    bool isRegistered = SuiteRegistrationSupport.IsFileTypeRegistered(fileType);
+                    bool isRegistered = RegistrationSupport.IsFileTypeRegistered(fileType);
 
                     if (cb.Checked != isRegistered)
                     {
                         if (cb.Checked)
                         {
-                            SuiteRegistrationSupport.RegisterFileType(fileType, false);
+                            RegistrationSupport.RegisterFileType(fileType, false);
                         }
                         else
                         {
-                            SuiteRegistrationSupport.UnregisterFileType(fileType, false);
+                            RegistrationSupport.UnregisterFileType(fileType, false);
                         }
                     }
                 }

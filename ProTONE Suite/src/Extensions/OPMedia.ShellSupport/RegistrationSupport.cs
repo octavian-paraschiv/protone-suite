@@ -19,17 +19,9 @@ namespace OPMedia.Runtime.ProTONE.Utilities
         Subtitle,
     }
 
-    public interface ISupportedFileProvider
+    public static class RegistrationSupport
     {
-        List<string> SupportedAudioTypes { get; }
-        List<string> SupportedHDVideoTypes { get; }
-        List<string> SupportedVideoTypes { get; }
-        List<string> SupportedPlaylists { get; }
-        List<string> SupportedSubtitles { get; }
-    }
-
-    public static class SuiteRegistrationSupport
-    {
+        static bool _initialized = false;
         static readonly Dictionary<string, KnownFileType> _knownFileTypes = new Dictionary<string, KnownFileType>();
         static readonly Dictionary<KnownFileType, string> _launchPaths = new Dictionary<KnownFileType, string>();
         static readonly Dictionary<KnownFileType, string> _descriptions = new Dictionary<KnownFileType, string>();
@@ -163,7 +155,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
             }
         }
 
-        static SuiteRegistrationSupport()
+        static RegistrationSupport()
         {
             _launchPaths.Add(KnownFileType.AudioFile, ShellProTONEConfig.PlayerInstallationPath);
             _launchPaths.Add(KnownFileType.VideoFile, ShellProTONEConfig.PlayerInstallationPath);
@@ -181,11 +173,14 @@ namespace OPMedia.Runtime.ProTONE.Utilities
             _descriptions.Add(KnownFileType.Subtitle, ShellConstants.SubtitleFileTypeDesc);
         }
 
-        public static void Init(ISupportedFileProvider provider)
+        public static void Init()
         {
+            if (_initialized)
+                return;
+            
             _knownFileTypes.Clear();
 
-            foreach (string s in provider.SupportedAudioTypes)
+            foreach (string s in SupportedFileProvider.Instance.SupportedAudioTypes)
             {
                 try
                 {
@@ -194,7 +189,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
                 catch { }
             }
 
-            foreach (string s in provider.SupportedVideoTypes)
+            foreach (string s in SupportedFileProvider.Instance.SupportedVideoTypes)
             {
                 try
                 {
@@ -203,7 +198,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
                 catch { }
             }
 
-            foreach (string s in provider.SupportedPlaylists)
+            foreach (string s in SupportedFileProvider.Instance.SupportedPlaylists)
             {
                 try
                 {
@@ -212,7 +207,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
                 catch { }
             }
 
-            foreach (string s in provider.SupportedSubtitles)
+            foreach (string s in SupportedFileProvider.Instance.SupportedSubtitles)
             {
                 try
                 {
@@ -255,7 +250,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
 
             if (info.IsValid)
             {
-                if (regMediaType)
+                //if (regMediaType)
                 {
                     // ==== Register media type ====
                     using (RegistryKey mediaTypeKey = Registry.ClassesRoot.CreateSubKey(info.MediaType))
@@ -310,7 +305,7 @@ namespace OPMedia.Runtime.ProTONE.Utilities
 
             if (info.IsValid)
             {
-                if (unregMediaType)
+                //if (unregMediaType)
                 {
                     // ==== Unregister media type ====
                     using (RegistryKey mediaTypeKey = Registry.ClassesRoot.CreateSubKey(info.MediaType))

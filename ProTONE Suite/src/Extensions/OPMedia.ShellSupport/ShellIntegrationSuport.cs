@@ -52,10 +52,10 @@ namespace OPMedia.ShellSupport
             {
                 Debug.WriteLine("Attempt to register OPMedia.ShellSupport ...");
 
-                SuiteRegistrationSupport.Init(SupportedFileProvider.Instance);
-                SuiteRegistrationSupport.RegisterContextMenuHandler();
-                SuiteRegistrationSupport.RegisterKnownFileTypes();
-                SuiteRegistrationSupport.ReloadFileAssociations();
+                RegistrationSupport.Init();
+                RegistrationSupport.RegisterContextMenuHandler();
+                RegistrationSupport.RegisterKnownFileTypes();
+                RegistrationSupport.ReloadFileAssociations();
 
                 Debug.WriteLine("OPMedia.ShellSupport was succesfully registered !");
             }
@@ -72,10 +72,10 @@ namespace OPMedia.ShellSupport
             {
                 Debug.WriteLine("Attempt to unregister OPMedia.ShellSupport ...");
 
-                SuiteRegistrationSupport.Init(SupportedFileProvider.Instance);
-                SuiteRegistrationSupport.UnregisterKnownFileTypes();
-                SuiteRegistrationSupport.UnregisterContextMenuHandler();
-                SuiteRegistrationSupport.ReloadFileAssociations();
+                RegistrationSupport.Init();
+                RegistrationSupport.UnregisterKnownFileTypes();
+                RegistrationSupport.UnregisterContextMenuHandler();
+                RegistrationSupport.ReloadFileAssociations();
 
                 Debug.WriteLine("OPMedia.ShellSupport was succesfully unregistered !");
             }
