@@ -26,6 +26,7 @@ using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.InstanceManagement;
+using System.Text;
 
 #endregion
 
@@ -143,8 +144,6 @@ namespace OPMedia.UI.Themes
                 return ThemeElement("ListActiveItemColor", SafeColorFromString("255, 000, 000")); 
             } 
         }
-
-
 
         public static Color ListHotItemColor
         { get { return ThemeElement("ListHotItemColor", SafeColorFromString("255, 000, 000")); } }
@@ -567,11 +566,17 @@ namespace OPMedia.UI.Themes
             {
                 try
                 {
+                    XDocument doc = null;
+
+                    using (MemoryStream ms = new MemoryStream(OPMedia.UI.Properties.Resources.Themes))
+                        doc = XDocument.Load(ms);
+
                     string themeFolder = Path.Combine(LiteAppConfig.InstallationPath, "Themes");
                     string themeFile = Path.Combine(LiteAppConfig.InstallationPath, "Themes\\Themes.thm");
-                    XDocument doc = XDocument.Load(themeFile);
+                    if (File.Exists(themeFile))
+                        doc = XDocument.Load(themeFile);
 
-                    if (_fsw == null)
+                    if (_fsw == null && Directory.Exists(themeFolder))
                     {
                         _fsw = new FileSystemWatcher(themeFolder, "Themes.thm");
                         _fsw.Changed += new FileSystemEventHandler(OnFileChanged);

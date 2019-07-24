@@ -21,7 +21,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
     {
         private PlaylistItem _item = null;
 
-        private readonly int ImageSize = 200;
+        private readonly int ImageSize = 300;
 
         public PlaylistItemType ItemType { get; set; }
 

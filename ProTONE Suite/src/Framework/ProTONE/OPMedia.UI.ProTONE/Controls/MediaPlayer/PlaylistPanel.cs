@@ -899,11 +899,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         protected override void OnThemeUpdatedInternal()
         {
             var c = ThemeManager.BorderColor;
-            lblSep1.BackColor = c;
+
             lblSep2.BackColor = c;
             lblSep3.BackColor = c;
-            lblSep4.BackColor = c;
             lblSep5.BackColor = c;
+            label1.BackColor = c;
 
             base.OnThemeUpdatedInternal();
         }

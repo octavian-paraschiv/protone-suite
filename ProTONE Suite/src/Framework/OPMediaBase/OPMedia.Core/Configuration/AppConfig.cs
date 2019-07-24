@@ -88,7 +88,7 @@ namespace OPMedia.Core.Configuration
         const string VersionApiUriBase = UriBase + "?release={0}";
         const string DefaultHelpUriBase = UriBase + "protone-suite-docs/#VERSION#/";
 
-        public const string UnconfiguredThemeName = "Deezer";
+        public const string UnconfiguredThemeName = "Light";
 
         public static CultureInfo GetCulture(string name)
         {

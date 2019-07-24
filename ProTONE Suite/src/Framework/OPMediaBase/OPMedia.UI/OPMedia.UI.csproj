@@ -767,9 +767,9 @@
     <Content Include="Resources\Troubleshooting.png" />
     <Content Include="Resources\TVState0.bmp" />
     <Content Include="Resources\TVState1.bmp" />
-    <None Include="Themes\Themes.thm">
+    <EmbeddedResource Include="Themes\Themes.thm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
