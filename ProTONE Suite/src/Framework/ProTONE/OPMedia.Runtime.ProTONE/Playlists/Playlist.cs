@@ -36,6 +36,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         Swapped,
         ActiveChanged,
         Shuffled,
+        Cleared,
     }
 
     public delegate void PlaylistUpdatedEventHandler(int item1, int item2, UpdateType updateType);
@@ -149,9 +150,14 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             {
                 this.RemoveAt(0);
             }
+
+            EventRaiser(-1, -1, UpdateType.Cleared);
+
             playIndex = 0;
 
             MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
+
+
         }
 
         public virtual PlaylistItem GetNext()

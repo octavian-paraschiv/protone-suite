@@ -1109,4 +1109,7 @@ You need to manually download and install {0} from web site {1}.</value>
   <data name="TXT_NOW" xml:space="preserve">
     <value>Now</value>
   </data>
+  <data name="TXT_UNKNOWN" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
 </root>

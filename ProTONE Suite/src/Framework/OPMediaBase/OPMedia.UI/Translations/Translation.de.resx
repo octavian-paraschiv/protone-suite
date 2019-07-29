@@ -1109,4 +1109,7 @@ Sie müssen {0} manuell von der Website {1} herunterladen und installieren.</val
   <data name="TXT_PREV" xml:space="preserve">
     <value>Vorig</value>
   </data>
+  <data name="TXT_UNKNOWN" xml:space="preserve">
+    <value>Unbekannt </value>
+  </data>
 </root>

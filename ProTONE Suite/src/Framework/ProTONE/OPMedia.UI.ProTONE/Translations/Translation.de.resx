@@ -1285,4 +1285,8 @@ Tastenkürzel: {0}</value>
 file metadata (ID3, images)
 </value>
   </data>
+  <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
+    <value>Ihre Wiedergabeliste ist leer. 
+Was würdest du gern tun?</value>
+  </data>
 </root>

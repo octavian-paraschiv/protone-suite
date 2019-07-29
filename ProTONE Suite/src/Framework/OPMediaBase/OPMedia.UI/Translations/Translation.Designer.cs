@@ -2733,6 +2733,15 @@ namespace OPMedia.UI.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        internal static string TXT_UNKNOWN {
+            get {
+                return ResourceManager.GetString("TXT_UNKNOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Up.
         /// </summary>
         internal static string TXT_UP {

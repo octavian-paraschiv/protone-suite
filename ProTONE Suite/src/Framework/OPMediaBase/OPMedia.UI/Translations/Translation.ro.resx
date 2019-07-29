@@ -1109,4 +1109,7 @@ Trebuie să descărcați manual și să instalați {0} de pe site-ul {1}.</value
   <data name="TXT_PREV" xml:space="preserve">
     <value>Anterior</value>
   </data>
+  <data name="TXT_UNKNOWN" xml:space="preserve">
+    <value>Necunoscut</value>
+  </data>
 </root>

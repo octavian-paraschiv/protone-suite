@@ -1214,6 +1214,16 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your playlist is empty.
+        ///What would you like to do?.
+        /// </summary>
+        internal static string TXT_EMPTY_PLAYLIST {
+            get {
+                return ResourceManager.GetString("TXT_EMPTY_PLAYLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When the playback stopped, and the playlist has reached its end:.
         /// </summary>
         internal static string TXT_ENABLE_PLAYLISTEVT {

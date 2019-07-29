@@ -63,6 +63,16 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap AudioDefaultImage {
+            get {
+                object obj = ResourceManager.GetObject("AudioDefaultImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap btnClear {
             get {
                 object obj = ResourceManager.GetObject("btnClear", resourceCulture);
@@ -386,6 +396,26 @@ namespace OPMedia.UI.ProTONE.Properties {
         public static System.Drawing.Bitmap TrackInfo {
             get {
                 object obj = ResourceManager.GetObject("TrackInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UnknownImage {
+            get {
+                object obj = ResourceManager.GetObject("UnknownImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VideoDefaultImage {
+            get {
+                object obj = ResourceManager.GetObject("VideoDefaultImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

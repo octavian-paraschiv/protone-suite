@@ -136,7 +136,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             playlist.PlaylistUpdated += new PlaylistUpdatedEventHandler(playlist_PlaylistUpdated);
 
+            lblEmptyPlaylist.Visible = false;
+            lblOpenFiles.Visible = false;
+            lblOpenFiles.Visible = false;
+            lvPlaylist.Visible = false;
+
             this.HandleDestroyed += new EventHandler(PlaylistPanel_HandleDestroyed);
+
+            lvPlaylist.Resize += ONPlaylistResized;
 
             if (MainThread.MainWindow != null)
             {
@@ -246,6 +253,27 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             piPrev.Item = playlist.GetPrevious();
             piNext.Item = playlist.GetNext();
             piCurrent.Item = playlist.ActivePlaylistItem;
+
+            bool empty = (lvPlaylist.Items.Count < 1);
+
+            try
+            {
+                this.SuspendLayout();
+
+                lblEmptyPlaylist.Visible = empty;
+                lblOpenFiles.Visible = empty;
+                lblOpenPlaylist.Visible = empty;
+
+
+                lvPlaylist.Visible = !empty;
+
+                if (empty)
+                    piCurrent.Item = null;
+            }
+            finally
+            {
+                this.ResumeLayout();
+            }
         }
 
 
@@ -756,6 +784,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         }
                         break;
 
+                    case UpdateType.Cleared:
+                        break;
+
                     case UpdateType.Swapped:
                         if (item1 >= 0 && item1 < lvPlaylist.Items.Count &&
                             item2 >= 0 && item2 < lvPlaylist.Items.Count)
@@ -1060,7 +1091,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     PlaylistItemMenuClick);
         }
 
-        private void lvPlaylist_Resize(object sender, EventArgs e)
+        private void ONPlaylistResized(object sender, EventArgs e)
         {
             colDummy.Width = 0;
             colIcon.Width = 20;
@@ -1132,6 +1163,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private string ChooseDeeezerPlaylistName(List<OnlinePlaylist> playlist, bool addToExisting)
         {
             return "";
+        }
+
+        private void lblOpenPlaylist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoadPlaylist));
+        }
+
+        private void lblOpenFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoad));
         }
     }
 }

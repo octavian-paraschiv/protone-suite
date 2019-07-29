@@ -1285,4 +1285,8 @@ Shortcut: {0}</value>
     <value>Use Deezer services to correct
 file metadata (ID3, images)</value>
   </data>
+  <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
+    <value>Your playlist is empty.
+What would you like to do?</value>
+  </data>
 </root>

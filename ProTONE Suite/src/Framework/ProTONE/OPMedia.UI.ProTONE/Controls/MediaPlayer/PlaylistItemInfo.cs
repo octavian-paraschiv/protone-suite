@@ -14,6 +14,10 @@ using OPMedia.UI.Themes;
 using System.Threading.Tasks;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.ShellSupport;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -34,7 +38,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             set
             {
-                if (_item != value)
+                if (_item == null || _item != value)
                 {
                     _item = value;
                     UpdateItem();
@@ -67,6 +71,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             InitializeComponent();
 
+            pbInfo.Image = Resources.UnknownImage;
+
             OnThemeUpdatedInternal();
             UpdateItem();
         }
@@ -88,7 +94,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 string desc = string.Empty;
                 string prefix = string.Empty;
-                string name = Translator.Translate("TXT_NA");
+                string name = Translator.Translate("TXT_UNKNOWN");
 
                 propDisplay.SetInfo(null, null);
 
@@ -137,7 +143,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         bool isInfoRebuilt = false;
                         bool isImageChanged = (string.Compare(_oldUrl, url, false) != 0);
 
-
                         Task.Factory.StartNew(() =>
                         {
                             if (string.IsNullOrEmpty(url))
@@ -163,19 +168,18 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                             {
                                 _oldUrl = url;
 
-                                // Image has changed
-                                pbInfo.Image = image;
+                                if (image == null)
+                                {
+                                    string itemType = (this.Item.Type ?? "").ToUpperInvariant();
+                                    if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(itemType))
+                                        image = Resources.VideoDefaultImage;
+                                    else if (itemType == "URL" || SupportedFileProvider.Instance.SupportedAudioTypes.Contains(itemType))
+                                        image = Resources.AudioDefaultImage;
+                                    else
+                                        image = Resources.UnknownImage;
+                                }
 
-                                if (image != null)
-                                {
-                                    pbInfo.Width = ImageSize;
-                                    pbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 3, 3);
-                                }
-                                else
-                                {
-                                    pbInfo.Width = 1;
-                                    pbInfo.Margin = new System.Windows.Forms.Padding(0);
-                                }
+                                pbInfo.Image = image;
                             }
 
                             if (isInfoRebuilt)
@@ -183,10 +187,19 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                                 // Media info has been rebuilt so reload it
                                 values = this.Item.MediaInfo;
                                 propDisplay.SetInfo(null, values);
+
+
                             }
 
                         }, TaskScheduler.FromCurrentSynchronizationContext());
                     }
+                }
+                else
+                {
+                    pbInfo.Image = Resources.UnknownImage;
+                    Dictionary<string, string> values = new Dictionary<string, string>();
+                    values.Add("TXT_UNKNOWN", "");
+                    propDisplay.SetInfo(null, values);
                 }
 
                 if (this.ItemType == PlaylistItemType.None)

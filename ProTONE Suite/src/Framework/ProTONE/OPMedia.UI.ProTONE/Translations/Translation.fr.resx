@@ -1180,7 +1180,7 @@ To get your own credentials, please access:</value>
 veuillez en choisir une:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS">
-    <value>Mes playlists en ligne</value>
+    <value>Parcourir mes playlists en ligne</value>
   </data>
   <data name="TXT_DEEZER_ENDPOINT">
     <value>Deezer API Endpoint URL:</value>
@@ -1283,5 +1283,9 @@ Raccourci: {0}</value>
   <data name="TXT_DEEZER_USE_SERVICES_FOR_METADATA" xml:space="preserve">
     <value>Use Deezer services to correct
 file metadata (ID3, images)</value>
+  </data>
+  <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
+    <value>Votre liste de lecture est vide. 
+Qu'est-ce que tu aimerais faire?</value>
   </data>
 </root>

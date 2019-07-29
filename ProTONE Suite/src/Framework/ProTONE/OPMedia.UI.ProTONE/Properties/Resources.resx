@@ -220,4 +220,13 @@
   <data name="btnLargePlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnLargePlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AudioDefaultImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\audiodefaultimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VideoDefaultImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\videodefaultimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnknownImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnknownImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
