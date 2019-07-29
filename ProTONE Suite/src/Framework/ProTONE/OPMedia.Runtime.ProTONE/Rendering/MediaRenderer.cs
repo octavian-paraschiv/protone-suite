@@ -57,21 +57,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
-    public class AudioSampleData
-    {
-        [DataMember]
-        public double LVOL { get; private set; }
-
-        [DataMember]
-        public double RVOL { get; private set; }
-
-        public AudioSampleData(double lVol, double rVol)
-        {
-            LVOL = lVol;
-            RVOL = rVol;
-        }
-    }
-
     public sealed class MediaRenderer : IDisposable
     {
         public const int VolumeFull = 0;

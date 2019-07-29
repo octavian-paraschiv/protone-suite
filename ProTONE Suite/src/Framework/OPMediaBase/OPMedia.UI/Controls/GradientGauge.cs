@@ -71,11 +71,13 @@ namespace OPMedia.UI.Controls
                 }
                 else
                 {
-                    p1 = new Pen(b1H, this.Height);
-                    p2 = new Pen(b2H, this.Height);
-                    ptMin = new Point(0, this.Height / 2);
-                    ptCur = new Point((int)(this.Width * _pos / _max), this.Height / 2);
-                    ptMax = new Point(this.Width, this.Height / 2);
+                    p1 = new Pen(b1H, this.Height - 4);
+                    p2 = new Pen(b2H, this.Height - 4);
+
+                    int y = this.Height / 2;
+                    ptMin = new Point(1, y);
+                    ptCur = new Point((int)(this.Width * _pos / _max), y);
+                    ptMax = new Point(this.Width - 1, y);
 
                     if (_showTicks)
                     {
@@ -85,8 +87,8 @@ namespace OPMedia.UI.Controls
                         for (int i = 0; i < _nrTicks; i++)
                         {
                             int offset = i * this.Width / _nrTicks;
-                            ptBegin[i] = new Point(offset, 2);
-                            ptEnd[i] = new Point(offset, this.Height - 3);
+                            ptBegin[i] = new Point(offset, 3);
+                            ptEnd[i] = new Point(offset, this.Height - 4);
                         }
                     }
                 }

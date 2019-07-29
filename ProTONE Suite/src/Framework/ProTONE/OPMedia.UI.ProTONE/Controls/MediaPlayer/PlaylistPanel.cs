@@ -42,6 +42,7 @@ using System.Linq;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using System.Threading.Tasks;
 using OPMedia.ShellSupport;
+using NAudio.CoreAudioApi;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -52,8 +53,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
     public partial class PlaylistPanel : OPMBaseControl
     {
-        //OPMToolTipManager _ttm = null;
-        //OPMToolTip _tip = new OPMToolTip();
+        OPMToolTipManager _ttm = null;
+        OPMToolTip _tip = new OPMToolTip();
 
         Playlist playlist = new Playlist();
         
@@ -65,6 +66,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public System.Windows.Forms.Timer _tmrSavePlaylist = null;
         private System.Windows.Forms.Timer _tmrUpdateItemsDesc = null;
 
+        private System.Windows.Forms.Timer _tmrUpdateVUMeter = null;
+
         public bool IsPlaylistAtEnd
         { get { return playlist.IsAtEnd; } }
 
@@ -75,28 +78,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 return playlist.PlayIndex;
             }
         }
-
-        /*
-        private bool _compactMode = false;
-        public bool CompactMode
-        {
-            get { return _compactMode; }
-            set 
-            { 
-                _compactMode = value;
-
-                if (value)
-                {
-                    pnlLayout.Controls.Remove(piNext);
-                    pnlLayout.Controls.Remove(piCurrent);
-                    pnlLayout.Controls.Remove(piNext);
-                }
-
-                lvPlaylist.MultiSelect = !_compactMode;
-                lvPlaylist.ContextMenuStrip = _compactMode ? null : cmsPlaylist;
-                lvPlaylist_Resize(this, null); 
-            }
-        }*/
 
         public void FocusOnList()
         {
@@ -120,6 +101,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             InitializeComponent();
 
+            _ttm = new OPMToolTipManager(lvPlaylist);
+
             _tmrSavePlaylist = new System.Windows.Forms.Timer();
             _tmrSavePlaylist.Enabled = false;
             _tmrSavePlaylist.Interval = 500;
@@ -129,6 +112,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrUpdateItemsDesc = new System.Windows.Forms.Timer();
             _tmrUpdateItemsDesc.Interval = 300;
             _tmrUpdateItemsDesc.Tick += OnTimerUpdateItemsDesc;
+
+            _tmrUpdateVUMeter = new System.Windows.Forms.Timer();
+            _tmrUpdateVUMeter.Interval = 50;
+            _tmrUpdateVUMeter.Tick += OnUpdateVUMeter;
+            _tmrUpdateVUMeter.Enabled = true;
 
             ThemeManager.SetFont(lvPlaylist, FontSizes.Normal);
             lvPlaylist.MultiSelect = true;
@@ -245,6 +233,41 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             _tmrUpdateItemsDesc.Stop();
             _tmrUpdateItemsDesc.Start();
+        }
+
+        private void OnUpdateVUMeter(object sender, EventArgs e)
+        {
+            double percVolL = 0;
+            double percVolR = 0;
+
+            try
+            {
+                if (MediaRenderer.DefaultInstance.FilterState == FilterState.Running)
+                {
+                    var enumerator = new MMDeviceEnumerator();
+                    var device = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+
+                    if (device != null &&
+                                    device.AudioMeterInformation != null &&
+                                    device.AudioMeterInformation.PeakValues != null &&
+                                    device.AudioMeterInformation.PeakValues.Count > 0)
+                    {
+                        double mul = 100f / MediaRenderer.DefaultInstance.AudioVolume;
+                        bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
+                        percVolL = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[0]));
+                        percVolR = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+                    }
+                }
+            }
+            catch
+            {
+                percVolL = 0;
+                percVolR = 0;
+            }
+
+            vuLeft.Value = percVolL * vuLeft.Maximum;
+            vuRight.Value = percVolR * vuLeft.Maximum;
+
         }
 
         private void OnTimerUpdateItemsDesc(object sender, EventArgs e)
@@ -1078,6 +1101,56 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             return null;
         }
+
+        void lvPlaylist_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e)
+        {
+            ListViewItem item = e.Item;
+            bool set = false;
+            Point p = lvPlaylist.PointToClient(MousePosition);
+
+            try
+            {
+                if (item != null && MouseButtons == MouseButtons.None)
+                {
+                    ListViewItem.ListViewSubItem lvsi = item.GetSubItemAt(p.X, p.Y);
+                    if (lvsi != null)
+                    {
+                        ExtendedSubItemDetail esid = lvsi.Tag as ExtendedSubItemDetail;
+                        if (esid != null && !string.IsNullOrEmpty(esid.Text))
+                        {
+                            _ttm.ShowSimpleToolTip(esid.Text, Resources.ResourceManager.GetImage("subtitles"));
+                            set = true;
+                        }
+                        else
+                        {
+                            PlaylistItem pli = item.Tag as PlaylistItem;
+                            if (pli != null)
+                            {
+                                pli.DeepLoad();
+
+                                string url = pli.ImageURL ?? "";
+                                Image img = ImageProvider.GetIcon(pli.Path, true);
+
+                                Size sz = new Size(100, 100);
+                                Image customImage = ImageProvider.GetImageFromURL(url, 10000, sz);
+
+                                _ttm.ShowToolTip(StringUtils.Limit(pli.DisplayName, 60), pli.MediaInfo, img, customImage);
+                                set = true;
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                if (!set)
+                {
+                    Debug.WriteLine("PL: lvPlaylist_ItemMouseHover no tip to set ...");
+                    _ttm.RemoveAll();
+                }
+            }
+        }
+
 
         private void cmsPlaylist_Opening(object sender, CancelEventArgs e)
         {

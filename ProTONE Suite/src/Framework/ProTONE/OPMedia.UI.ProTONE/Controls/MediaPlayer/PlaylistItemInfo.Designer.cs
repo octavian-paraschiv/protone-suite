@@ -94,11 +94,11 @@
             this.pnlDisplay.Controls.Add(this.propDisplay);
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.ForeColor = System.Drawing.Color.Black;
-            this.pnlDisplay.Location = new System.Drawing.Point(5, 290);
-            this.pnlDisplay.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.pnlDisplay.Location = new System.Drawing.Point(5, 295);
+            this.pnlDisplay.Margin = new System.Windows.Forms.Padding(5, 5, 5, 0);
             this.pnlDisplay.Name = "pnlDisplay";
             this.pnlDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.pnlDisplay.Size = new System.Drawing.Size(268, 185);
+            this.pnlDisplay.Size = new System.Drawing.Size(268, 180);
             this.pnlDisplay.TabIndex = 2;
             // 
             // propDisplay
@@ -113,7 +113,7 @@
             this.propDisplay.Name = "propDisplay";
             this.propDisplay.ReadOnly = true;
             this.propDisplay.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.propDisplay.Size = new System.Drawing.Size(260, 177);
+            this.propDisplay.Size = new System.Drawing.Size(260, 172);
             this.propDisplay.TabIndex = 2;
             this.propDisplay.Text = "";
             // 
