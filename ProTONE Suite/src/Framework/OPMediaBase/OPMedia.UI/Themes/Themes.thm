@@ -21,16 +21,16 @@
     <ThemeElement Name="CaptionCloseButtonColor1" Value="150, 150, 150" />
     <ThemeElement Name="CaptionCloseButtonColor2" Value="150, 150, 150" />
     <ThemeElement Name="CaptionButtonForeColor" Value="30, 30, 30" />
-    <ThemeElement Name="CaptionCloseButtonForeColor" Value="220, 23, 23" />
+    <ThemeElement Name="CaptionCloseButtonForeColor" Value="23, 23, 220" />
     <ThemeElement Name="SelectedColor" Value="193, 200, 232" />
     <ThemeElement Name="WndValidColor" Value="255, 255, 255" />
-    <ThemeElement Name="HighlightColor" Value="Maroon" />
+    <ThemeElement Name="HighlightColor" Value="163, 172, 220" />
     <ThemeElement Name="WndTextColor" Value="50, 50, 50" />
     <ThemeElement Name="LinkColor" Value="57, 149, 205" />
     <ThemeElement Name="CheckedMenuColor" Value="155, 155, 155" />
     <ThemeElement Name="SeparatorColor" Value="100, 100, 100" />
     <ThemeElement Name="MenuTextColor" Value="50, 50, 50" />
-    <ThemeElement Name="MenuBackColor" Value="180, 180, 180" />
+    <ThemeElement Name="MenuBackColor" Value="193, 200, 232" />
     <ThemeElement Name="HeaderMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="HighlightMenuTextColor" Value="50, 50, 50" />
     <ThemeElement Name="HighlightHeaderMenuTextColor" Value="50, 50, 50" />
@@ -38,8 +38,8 @@
     <ThemeElement Name="GradientGaugeColor1" Value="044, 190, 078" />
     <ThemeElement Name="GradientGaugeColor2" Value="225, 029, 033" />
     <ThemeElement Name="GradientGaugeColor1a" Value="243, 151, 018" />
-    <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
-    <ThemeElement Name="ListActiveItemColor" Value="220, 23, 23" />
+    <ThemeElement Name="ListHotItemColor" Value="0, 0, 255" />
+    <ThemeElement Name="ListActiveItemColor" Value="23, 23, 220" />
     <ThemeElement Name="DefaultButtonNormalColor1" Value="10, 172, 242" />
     <ThemeElement Name="DefaultButtonNormalColor2" Value="0, 162, 232" />
     <ThemeElement Name="DefaultButtonHoverColor1" Value="203, 210, 255" />

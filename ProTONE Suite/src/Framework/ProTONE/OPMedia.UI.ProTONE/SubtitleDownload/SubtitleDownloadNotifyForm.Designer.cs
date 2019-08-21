@@ -139,7 +139,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.opmLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmLayoutPanel1.Name = "opmLayoutPanel1";
-            this.opmLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLayoutPanel1.RowCount = 2;
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());

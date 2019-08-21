@@ -94,6 +94,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             tsmiProTONEPlay.Image = ImageProcessing.Player16;
             tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
 
+            opmShellList.BorderStyle = BorderStyle.None;
+
             opmShellList.MultiSelect = true;
             
             opmShellList.Clear();

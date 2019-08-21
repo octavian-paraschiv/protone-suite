@@ -81,11 +81,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         protected override void OnThemeUpdatedInternal()
         {
-            base.OnThemeUpdatedInternal();
-
             propDisplay.ForeColor = ThemeManager.ForeColor;
             propDisplay.BackColor = ThemeManager.GradientNormalColor1;
-            pnlDisplay.BackColor = ThemeManager.GradientNormalColor1;
         }
 
         private void UpdateItem()
@@ -170,7 +167,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                                 if (image == null)
                                 {
-                                    string itemType = (this.Item.Type ?? "").ToUpperInvariant();
+                                    string itemType = (this.Item.Type ?? "").ToLowerInvariant();
                                     if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(itemType))
                                         image = Resources.VideoDefaultImage;
                                     else if (itemType == "URL" || SupportedFileProvider.Instance.SupportedAudioTypes.Contains(itemType))

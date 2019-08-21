@@ -317,7 +317,6 @@
             this.opmTableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.opmTableLayoutPanel4.Name = "opmTableLayoutPanel4";
-            this.opmTableLayoutPanel4.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel4.RowCount = 7;
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());

@@ -55,7 +55,6 @@ namespace OPMedia.RemoteControlEmulator
             this.Load += new EventHandler(MainForm_Load);
         }
 
-        protected static ISignalAnalisys _proxy = null;
         protected static Timer _tmrWCFCheck = null;
 
         void MainForm_Load(object sender, EventArgs e)
@@ -63,10 +62,7 @@ namespace OPMedia.RemoteControlEmulator
             #region API tester tab
 
             cmbCommandType.Items.Clear();
-            foreach (var item in Enum.GetValues(typeof(RC.CommandType)))
-            {
-                cmbCommandType.Items.Add(item);
-            }
+           
 
             OPMShortcut[] cmds = new OPMShortcut[]
             {
@@ -93,8 +89,6 @@ namespace OPMedia.RemoteControlEmulator
                 cmbPlaybackCmd.Items.Add(item);
             }
 
-            cmbCommandType.SelectedIndex = 0;
-            cmbDestination.SelectedIndex = 1;
 
             txtDestinationName.Text = Environment.MachineName;
 
@@ -113,33 +107,7 @@ namespace OPMedia.RemoteControlEmulator
 
             }
             #endregion
-
-            #region WCF tab
-            WCFOpen();
-            _tmrWCFCheck = new Timer();
-            _tmrWCFCheck.Interval = 2000;
-            _tmrWCFCheck.Tick += new EventHandler(_tmrWCFCheck_Tick);
-            _tmrWCFCheck.Start();
-            #endregion
         }
-
-        private void WCFOpen()
-        {
-            var myBinding = new WSHttpBinding();
-            myBinding.MaxReceivedMessageSize = int.MaxValue;
-            myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
-
-            var myEndpoint = new EndpointAddress("http://localhost/ProTONESignalAnalisys.svc");
-            var myChannelFactory = new ChannelFactory<ISignalAnalisys>(myBinding, myEndpoint);
-            _proxy = myChannelFactory.CreateChannel();        
-        }
-
-        protected void WCFAbort()
-        {
-            ((ICommunicationObject)_proxy).Abort();
-            _proxy = null;
-        }
-
 
         #region API tester tab
 
@@ -148,59 +116,11 @@ namespace OPMedia.RemoteControlEmulator
             lblPlaybackCmd.Visible = false;
             cmbPlaybackCmd.Visible = false;
           
-
-            RC.CommandType cmdType = (RC.CommandType)cmbCommandType.SelectedIndex;
-            if (BasicCommand.RequiresArguments(cmdType))
-            {
-                switch (cmdType)
-                {
-                    case RC.CommandType.Playback:
-                        lblPlaybackCmd.Visible = true;
-                        cmbPlaybackCmd.Visible = true;
-                        break;
-                }
-            }
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
             txtResult.Text = string.Empty;
-
-            try
-            {
-                RC.CommandType cmdType = (RC.CommandType)cmbCommandType.SelectedIndex;
-                string[] args = null;
-
-                if (BasicCommand.RequiresArguments(cmdType))
-                {
-                    switch (cmdType)
-                    {
-                        case RC.CommandType.Playback:
-                            args = new string[] { cmbPlaybackCmd.Text };
-                            break;
-                    }
-                }
-
-                string restlt = string.Empty;
-
-                switch (cmbDestination.SelectedIndex)
-                {
-                    case 0:
-                        RemoteControlHelper.SendPlayerCommand(cmdType, args, true, true);
-                        txtResult.Text = "[ Player commands do not return results. ]";
-                        break;
-
-                    case 1:
-                        string dest = txtDestinationName.Text;
-                        txtResult.Text = RemoteControlHelper.SendServiceCommand(dest, cmdType, args);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                txtResult.Text = ex.Message;
-            }
         }
 
         #endregion
@@ -208,42 +128,10 @@ namespace OPMedia.RemoteControlEmulator
         #region Simulator tab 
         void OnSimulatorClick(object sender, EventArgs e)
         {
-            OPMButton btn = (sender as OPMButton);
-            if (btn != null)
-            {
-                //WmCopyDataSender.SendData("EmulatorInputPin", btn.Tag as string);
-                IPCRemoteControlProxy.PostRequest("EmulatorInputPin", btn.Tag as string);
-            }
-
-            pnlContent.Select();
-            pnlContent.Focus();
         }
         #endregion
 
         #region WCF tab
-        void _tmrWCFCheck_Tick(object sender, EventArgs e)
-        {
-            if (tabEmulator.SelectedTab != tpWCF)
-                return;
-
-            SignalAnalisysData data = null;
-            try
-            {
-                data = _proxy.GetSignalAnalisysData();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                WCFAbort();
-                WCFOpen();
-            }
-
-            if (data != null)
-                AddText(data.ToString());
-            else
-                AddText("can't read WCF data ...");
-        }
-
         private void AddText(string p)
         {
             tbWCFDetails.Text += p + "\r\n";

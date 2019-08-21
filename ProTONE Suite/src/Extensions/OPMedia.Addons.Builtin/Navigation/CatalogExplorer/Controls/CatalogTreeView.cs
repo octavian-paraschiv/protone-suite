@@ -24,14 +24,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
         public CatalogTreeView()
             : base()
         {
+            this.BorderStyle = BorderStyle.None;
+
             ilItems = new ImageList();
             ilItems.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             ilItems.ImageSize = new System.Drawing.Size(16, 16);
             ilItems.TransparentColor = System.Drawing.Color.Gainsboro;
-
-            this.BorderStyle = System.Windows.Forms.BorderStyle.None;
-
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
             ilItems.Images.Clear();
 

@@ -69,7 +69,6 @@
             this.pnlBands.Location = new System.Drawing.Point(0, 0);
             this.pnlBands.Margin = new System.Windows.Forms.Padding(1);
             this.pnlBands.Name = "pnlBands";
-            this.pnlBands.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlBands.RowCount = 1;
             this.pnlBands.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlBands.Size = new System.Drawing.Size(350, 205);

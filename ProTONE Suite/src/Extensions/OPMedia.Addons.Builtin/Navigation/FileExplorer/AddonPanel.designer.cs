@@ -107,7 +107,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.opmShellList.AllowEditing = true;
             this.opmShellList.AlternateRowColors = true;
-            this.opmShellList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.opmShellList.ContextMenuStrip = this.contextMenuStrip;
             this.opmShellList.Cursor = System.Windows.Forms.Cursors.Default;
             this.opmShellList.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -802,7 +801,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -819,7 +817,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 53);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -835,7 +832,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Margin = new System.Windows.Forms.Padding(0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlHeader.Size = new System.Drawing.Size(743, 1);
             this.pnlHeader.TabIndex = 2;
             // 

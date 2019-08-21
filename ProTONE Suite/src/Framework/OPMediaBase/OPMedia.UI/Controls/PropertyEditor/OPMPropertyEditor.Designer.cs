@@ -42,7 +42,6 @@
             this.pnlPropertyChoosers.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPropertyChoosers.Location = new System.Drawing.Point(0, 0);
             this.pnlPropertyChoosers.Name = "pnlPropertyChoosers";
-            this.pnlPropertyChoosers.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlPropertyChoosers.RowCount = 1;
             this.pnlPropertyChoosers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlPropertyChoosers.Size = new System.Drawing.Size(370, 0);

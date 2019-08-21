@@ -30,7 +30,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private void InitializeComponent()
         {
             this.favoriteFoldersControl = new OPMedia.UI.Dialogs.FavoriteFoldersControl();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new OPMTableLayoutPanel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -92,7 +92,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         #endregion
 
         private UI.Dialogs.FavoriteFoldersControl favoriteFoldersControl;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private OPMTableLayoutPanel tableLayoutPanel1;
         private OPMLabel opmLabel1;
 
     }

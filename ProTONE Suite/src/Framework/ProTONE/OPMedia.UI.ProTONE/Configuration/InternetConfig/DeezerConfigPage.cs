@@ -12,6 +12,7 @@ using System.Diagnostics;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 {
@@ -31,14 +32,15 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             this.Title = "Deezer";
             this.HandleCreated += new EventHandler(DeezerConfigPage_HandleCreated);
 
-            txtDeezerAppID.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
-            txtDeezerToken.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
-            txtDeezerAppID2.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
-            txtDeezerToken2.InnerTextBox.TextChanged += new EventHandler(OnSettingsChanged);
+            txtDeezerAppID.TextChanged += new EventHandler(OnSettingsChanged);
+            txtDeezerToken.TextChanged += new EventHandler(OnSettingsChanged);
             chkUseServices.CheckedChanged += new EventHandler(OnSettingsChanged);
-
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
-            btnNew2.Image = OPMedia.UI.Properties.Resources.Reload16;
+        }
+
+        protected override void OnThemeUpdatedInternal()
+        {
+            lblHint.OverrideForeColor = ThemeManager.LinkColor;
         }
 
         void OnSettingsChanged(object sender, EventArgs e)
@@ -50,29 +52,20 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
-            txtDeezerAppID2.Text = ProTONEConfig.DeezerApplicationId2;
-            txtDeezerToken2.Text = ProTONEConfig.DeezerUserAccessToken2;
             chkUseServices.Checked = ProTONEConfig.DeezerUseServicesForFileMetadata;
+            OnThemeUpdatedInternal();
         }
 
         protected override void SaveInternal()
         {
             ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
-            ProTONEConfig.DeezerApplicationId2 = txtDeezerAppID2.Text;
-            ProTONEConfig.DeezerUserAccessToken2 = txtDeezerToken2.Text;
             ProTONEConfig.DeezerUseServicesForFileMetadata = chkUseServices.Checked;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
-            new DeezerCredentialsForm().ShowDialog();
-        }
-
-        private void btnNew2_Click(object sender, EventArgs e)
-        {
-            ProTONEConfig.DeezerApplicationId2 = txtDeezerAppID2.Text;
             new DeezerCredentialsForm().ShowDialog();
         }
 

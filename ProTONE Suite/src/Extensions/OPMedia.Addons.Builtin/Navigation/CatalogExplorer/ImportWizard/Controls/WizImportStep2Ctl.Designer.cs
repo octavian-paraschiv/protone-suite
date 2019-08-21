@@ -86,10 +86,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.txtEntryDesc.Location = new System.Drawing.Point(0, 248);
             this.txtEntryDesc.Margin = new System.Windows.Forms.Padding(0);
             this.txtEntryDesc.MaxLength = 50;
-            this.txtEntryDesc.Multiline = false;
             this.txtEntryDesc.Name = "txtEntryDesc";
             this.txtEntryDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.txtEntryDesc.Padding = new System.Windows.Forms.Padding(5, 2, 5, 3);
             this.txtEntryDesc.PasswordChar = '\0';
             this.txtEntryDesc.ReadOnly = false;
             this.txtEntryDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;

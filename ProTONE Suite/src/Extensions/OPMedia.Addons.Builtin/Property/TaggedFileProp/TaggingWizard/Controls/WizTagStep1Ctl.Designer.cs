@@ -99,7 +99,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             // lvFiles
             // 
-            this.lvFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPath});
             this.tableLayoutPanel1.SetColumnSpan(this.lvFiles, 3);

@@ -363,7 +363,9 @@ namespace OPMedia.UI.Themes
         #endregion
 
         #region Methods
+
         
+
         public static Font GetFontBySize(FontSizes fnSize)
         {
             switch (fnSize)

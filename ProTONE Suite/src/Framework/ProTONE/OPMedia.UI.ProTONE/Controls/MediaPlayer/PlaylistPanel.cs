@@ -101,6 +101,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             InitializeComponent();
 
+            lvPlaylist.BorderStyle = BorderStyle.None;
+
             _ttm = new OPMToolTipManager(lvPlaylist);
 
             _tmrSavePlaylist = new System.Windows.Forms.Timer();
@@ -192,6 +194,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             int idxVisible = -1;
 
+            if (lvPlaylist == null || lvPlaylist.Items == null)
+                return;
+
             foreach (ListViewItem lvi in lvPlaylist.Items)
             {
                 PlaylistItem plItem = lvi.Tag as PlaylistItem;
@@ -211,9 +216,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     idxVisible = lvi.Index;
                 }
 
+                bool isActive = (lvi.Index == playlist.PlayIndex);
+
+                lvi.UseItemStyleForSubItems = !isActive;
                 foreach (ListViewItem.ListViewSubItem lvsi in lvi.SubItems)
                 {
-                    bool isActive = (lvi.Index == playlist.PlayIndex);
                     lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
                     lvsi.ForeColor = isActive ? ThemeManager.ListActiveItemColor : ThemeManager.ForeColor;
                 }
@@ -235,6 +242,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrUpdateItemsDesc.Start();
         }
 
+        int i = 0;
+
         private void OnUpdateVUMeter(object sender, EventArgs e)
         {
             double percVolL = 0;
@@ -252,10 +261,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                                     device.AudioMeterInformation.PeakValues != null &&
                                     device.AudioMeterInformation.PeakValues.Count > 0)
                     {
-                        double mul = 100f / MediaRenderer.DefaultInstance.AudioVolume;
                         bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
-                        percVolL = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[0]));
-                        percVolR = Math.Min(1, Math.Max(0, mul * device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]));
+
+                        var vol = MediaRenderer.DefaultInstance.AudioVolume;
+
+                        // Magic? No, this is just the inverse of the sound card transfer function.
+                        // For sure it's not the same between two sound cards. Not even of the same model.
+                        double mul = 1000 / Math.Pow(vol, 1.643f);
+
+                        var peakL = (device.AudioMeterInformation.PeakValues[0]);
+                        var peakR = (device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]);
+
+                        var actL = mul * peakL;
+                        var actR = mul * peakR;
+
+                        percVolL = Math.Min(1, mul * Math.Max(0, peakL));
+                        percVolR = Math.Min(1, mul * Math.Max(0, peakR));
+
+                        i++;
                     }
                 }
             }
@@ -893,6 +916,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 lvItem.SubItems[colIcon.Index].Tag = new ExtendedSubItemDetail(plItem.GetImageEx(false), null);
 
                 UpdateMiscIcon(lvItem);
+
+                lvItem.UseItemStyleForSubItems = !isActive;
                 foreach (ListViewItem.ListViewSubItem lvsi in lvItem.SubItems)
                 {
                     lvsi.Font = isActive ? ThemeManager.NormalBoldFont : ThemeManager.NormalFont;
@@ -952,13 +977,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         protected override void OnThemeUpdatedInternal()
         {
-            var c = ThemeManager.BorderColor;
+            UpdatePlaylistNames(false);
 
-            lblSep2.BackColor = c;
-            lblSep3.BackColor = c;
-            lblSep5.BackColor = c;
-            label1.BackColor = c;
-
+            var c = ThemeManager.ForeColor;
+            lblSep2.OverrideBackColor = c;
+            lblSep3.OverrideBackColor = c;
+            lblSep5.OverrideBackColor = c;
+            lblSep1.OverrideBackColor = c;
             base.OnThemeUpdatedInternal();
         }
 
@@ -1044,41 +1069,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 }
             }
         }
-
-        //private void UpdateButtonsState()
-        //{
-        //    bool singleItemSelected = (lvPlaylist.SelectedItems.Count == 1);
-        //    bool itemsSelected = (lvPlaylist.SelectedItems.Count > 0);
-        //    bool itemsPresent = (lvPlaylist.Items.Count > 0);
-
-        //    if (singleItemSelected)
-        //    {
-        //        PlaylistItem plItem = lvPlaylist.SelectedItems[0].Tag as PlaylistItem;
-        //        if (plItem != null)
-        //        {
-        //            bookmarkManagerCtl.PlaylistItem = plItem;
-        //        }
-        //    }
-        //}
-
-        //private void lvPlaylist_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    bookmarkManagerCtl.PlaylistItem = null;
-        //    UpdateButtonsState();
-        //}
-
         internal bool JumpToPlaylistItem(PlaylistItem plItem)
         {
             return playlist.MoveToItem(plItem);
         }
-
-        //internal bool IsActiveItem(PlaylistItem plItem)
-        //{
-        //    string renderFile = MediaRenderer.DefaultInstance.GetRenderFile();
-        //    bool isActive = string.Compare(renderFile, plItem.Path, true) == 0;
-
-        //    return isActive;
-        //}
 
         private void lvPlaylist_MouseClick(object sender, MouseEventArgs e)
         {

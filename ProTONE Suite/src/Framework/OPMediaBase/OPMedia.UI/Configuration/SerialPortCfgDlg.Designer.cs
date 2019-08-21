@@ -102,7 +102,6 @@ namespace OPMedia.UI.Configuration
             this.pnlPortSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPortSettings.Location = new System.Drawing.Point(0, 0);
             this.pnlPortSettings.Name = "pnlPortSettings";
-            this.pnlPortSettings.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlPortSettings.RowCount = 3;
             this.pnlPortSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlPortSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());

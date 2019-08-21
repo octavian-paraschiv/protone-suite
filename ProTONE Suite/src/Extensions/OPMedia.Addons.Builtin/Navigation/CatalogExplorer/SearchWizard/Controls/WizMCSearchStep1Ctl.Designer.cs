@@ -386,7 +386,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -427,7 +426,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 519);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.Size = new System.Drawing.Size(700, 31);
@@ -446,7 +444,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 56);
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
-            this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.RowCount = 1;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.Size = new System.Drawing.Size(345, 25);

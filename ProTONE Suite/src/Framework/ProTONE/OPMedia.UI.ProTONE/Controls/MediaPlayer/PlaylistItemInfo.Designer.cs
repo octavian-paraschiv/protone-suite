@@ -1,4 +1,6 @@
-﻿namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
+﻿using OPMedia.UI.Controls;
+
+namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
     partial class PlaylistItemInfo
     {
@@ -31,7 +33,7 @@
             this.pnlLayout = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
             this.pbInfo = new System.Windows.Forms.PictureBox();
-            this.pnlDisplay = new System.Windows.Forms.Panel();
+            this.pnlDisplay = new OPMCustomPanel();
             this.propDisplay = new OPMedia.UI.Controls.InfoTextBox();
             this.pnlLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).BeginInit();
@@ -50,7 +52,6 @@
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
             this.pnlLayout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLayout.Name = "pnlLayout";
-            this.pnlLayout.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlLayout.RowCount = 3;
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -90,7 +91,6 @@
             // 
             // pnlDisplay
             // 
-            this.pnlDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDisplay.Controls.Add(this.propDisplay);
             this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisplay.ForeColor = System.Drawing.Color.Black;
@@ -140,6 +140,6 @@
         private UI.Controls.OPMLabel lblDesc;
         private UI.Controls.InfoTextBox propDisplay;
         private System.Windows.Forms.PictureBox pbInfo;
-        private System.Windows.Forms.Panel pnlDisplay;
+        private UI.Controls.OPMCustomPanel pnlDisplay;
     }
 }

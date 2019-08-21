@@ -47,9 +47,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.dtpScheduledEvtTime = new OPMedia.UI.Controls.OPMDateTimePicker();
             this.lblSep1 = new System.Windows.Forms.Label();
             this.lblSep2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSchedulerWaitTimerProceed)).BeginInit();
+            this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // wsScheduledEvtDays
@@ -129,26 +130,43 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.label5.Name = "label5";
             this.label5.OverrideBackColor = System.Drawing.Color.Empty;
             this.label5.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label5.Size = new System.Drawing.Size(228, 23);
+            this.label5.Size = new System.Drawing.Size(228, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "TXT_SCHEDULERWAITTIMERPROCEED";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // nudSchedulerWaitTimerProceed
             // 
-            this.nudSchedulerWaitTimerProceed.AutoSize = true;
-            this.nudSchedulerWaitTimerProceed.Dock = System.Windows.Forms.DockStyle.Left;
-            this.nudSchedulerWaitTimerProceed.Location = new System.Drawing.Point(237, 220);
+            this.nudSchedulerWaitTimerProceed.DecimalPlaces = 0;
+            this.nudSchedulerWaitTimerProceed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nudSchedulerWaitTimerProceed.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.nudSchedulerWaitTimerProceed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSchedulerWaitTimerProceed.Location = new System.Drawing.Point(0, 0);
+            this.nudSchedulerWaitTimerProceed.Margin = new System.Windows.Forms.Padding(0);
             this.nudSchedulerWaitTimerProceed.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
+            this.nudSchedulerWaitTimerProceed.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.nudSchedulerWaitTimerProceed.Name = "nudSchedulerWaitTimerProceed";
+            this.nudSchedulerWaitTimerProceed.OverrideBackColor = System.Drawing.Color.Transparent;
+            this.nudSchedulerWaitTimerProceed.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudSchedulerWaitTimerProceed.ReadOnly = true;
-            this.nudSchedulerWaitTimerProceed.Size = new System.Drawing.Size(35, 23);
+            this.nudSchedulerWaitTimerProceed.Size = new System.Drawing.Size(80, 25);
             this.nudSchedulerWaitTimerProceed.TabIndex = 1;
+            this.nudSchedulerWaitTimerProceed.Text = "1";
             this.nudSchedulerWaitTimerProceed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudSchedulerWaitTimerProceed.Unit = null;
+            this.nudSchedulerWaitTimerProceed.UnitFirst = false;
             this.nudSchedulerWaitTimerProceed.Value = new decimal(new int[] {
             1,
             0,
@@ -162,7 +180,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.nudSchedulerWaitTimerProceed, 2, 9);
             this.tableLayoutPanel1.Controls.Add(this.cmbScheduledEvtHandler, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.chkEnablePlaylistEvt, 0, 0);
@@ -174,6 +191,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblSep1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblSep2, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.opmTableLayoutPanel1, 2, 9);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -306,16 +324,34 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblSep2.Size = new System.Drawing.Size(493, 3);
             this.lblSep2.TabIndex = 10;
             // 
+            // opmTableLayoutPanel1
+            // 
+            this.opmTableLayoutPanel1.AutoSize = true;
+            this.opmTableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.opmTableLayoutPanel1.ColumnCount = 1;
+            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.opmTableLayoutPanel1.Controls.Add(this.nudSchedulerWaitTimerProceed, 0, 1);
+            this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(234, 217);
+            this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
+            this.opmTableLayoutPanel1.RowCount = 3;
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(80, 25);
+            this.opmTableLayoutPanel1.TabIndex = 11;
+            // 
             // SchedulerSettingsPage
             // 
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SchedulerSettingsPage";
             this.Size = new System.Drawing.Size(499, 407);
-            ((System.ComponentModel.ISupportInitialize)(this.nudSchedulerWaitTimerProceed)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.opmTableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -338,5 +374,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private TableLayoutPanel tableLayoutPanel2;
         private Label lblSep1;
         private Label lblSep2;
+        private OPMTableLayoutPanel opmTableLayoutPanel1;
     }
 }

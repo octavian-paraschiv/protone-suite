@@ -52,7 +52,7 @@ namespace OPMedia.UI.Configuration
             this.cmbLanguages.Location = new System.Drawing.Point(3, 99);
             this.cmbLanguages.Name = "cmbLanguages";
             this.cmbLanguages.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbLanguages.Size = new System.Drawing.Size(407, 23);
+            this.cmbLanguages.Size = new System.Drawing.Size(407, 24);
             this.cmbLanguages.TabIndex = 4;
             // 
             // labelProductName
@@ -89,7 +89,6 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutPanel.Location = new System.Drawing.Point(3, 3);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel.RowCount = 14;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -115,10 +114,10 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.chkAllowAutoUpdates, 2);
             this.chkAllowAutoUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkAllowAutoUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkAllowAutoUpdates.Location = new System.Drawing.Point(3, 181);
+            this.chkAllowAutoUpdates.Location = new System.Drawing.Point(3, 182);
             this.chkAllowAutoUpdates.Name = "chkAllowAutoUpdates";
             this.chkAllowAutoUpdates.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkAllowAutoUpdates.Size = new System.Drawing.Size(287, 25);
+            this.chkAllowAutoUpdates.Size = new System.Drawing.Size(275, 27);
             this.chkAllowAutoUpdates.TabIndex = 8;
             this.chkAllowAutoUpdates.Text = "TXT_ALLOWAUTOUPDATES";
             // 
@@ -173,10 +172,10 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.cmbThemes, 3);
             this.cmbThemes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbThemes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbThemes.Location = new System.Drawing.Point(3, 147);
+            this.cmbThemes.Location = new System.Drawing.Point(3, 148);
             this.cmbThemes.Name = "cmbThemes";
             this.cmbThemes.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbThemes.Size = new System.Drawing.Size(407, 23);
+            this.cmbThemes.Size = new System.Drawing.Size(407, 24);
             this.cmbThemes.TabIndex = 6;
             // 
             // lblSetSkin
@@ -184,7 +183,7 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.lblSetSkin, 3);
             this.lblSetSkin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSetSkin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSetSkin.Location = new System.Drawing.Point(3, 125);
+            this.lblSetSkin.Location = new System.Drawing.Point(3, 126);
             this.lblSetSkin.Name = "lblSetSkin";
             this.lblSetSkin.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblSetSkin.OverrideForeColor = System.Drawing.Color.Empty;
@@ -199,12 +198,12 @@ namespace OPMedia.UI.Configuration
             this.btnCheckUpdates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCheckUpdates.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCheckUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckUpdates.Location = new System.Drawing.Point(296, 181);
+            this.btnCheckUpdates.Location = new System.Drawing.Point(284, 182);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
             this.btnCheckUpdates.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCheckUpdates.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCheckUpdates.ShowDropDown = false;
-            this.btnCheckUpdates.Size = new System.Drawing.Size(114, 25);
+            this.btnCheckUpdates.Size = new System.Drawing.Size(126, 27);
             this.btnCheckUpdates.TabIndex = 9;
             this.btnCheckUpdates.Text = "TXT_CHECKUPDATE";
             this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);

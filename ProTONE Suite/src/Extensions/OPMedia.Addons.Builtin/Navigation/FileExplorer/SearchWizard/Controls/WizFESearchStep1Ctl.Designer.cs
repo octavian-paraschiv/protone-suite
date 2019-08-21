@@ -32,6 +32,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizFESearchStep1Ctl));
             this.cmbSearchText = new OPMedia.UI.Controls.OPMEditableComboBox();
             this.cmbSearchPattern = new OPMedia.UI.Controls.OPMEditableComboBox();
             this.label3 = new OPMedia.UI.Controls.OPMLabel();
@@ -86,10 +88,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.cmbSearchText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbSearchText.DropDownWidth = 367;
             this.cmbSearchText.FormattingEnabled = true;
-            this.cmbSearchText.Location = new System.Drawing.Point(325, 56);
-            this.cmbSearchText.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.cmbSearchText.Location = new System.Drawing.Point(321, 68);
+            this.cmbSearchText.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbSearchText.Name = "cmbSearchText";
-            this.cmbSearchText.Size = new System.Drawing.Size(318, 21);
+            this.cmbSearchText.Size = new System.Drawing.Size(313, 23);
             this.cmbSearchText.TabIndex = 7;
             this.cmbSearchText.TextChanged += new System.EventHandler(this.OnSettingsChanged);
             // 
@@ -100,10 +102,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.cmbSearchPattern.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbSearchPattern.DropDownWidth = 279;
             this.cmbSearchPattern.FormattingEnabled = true;
-            this.cmbSearchPattern.Location = new System.Drawing.Point(0, 16);
-            this.cmbSearchPattern.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.cmbSearchPattern.Location = new System.Drawing.Point(0, 20);
+            this.cmbSearchPattern.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbSearchPattern.Name = "cmbSearchPattern";
-            this.cmbSearchPattern.Size = new System.Drawing.Size(317, 21);
+            this.cmbSearchPattern.Size = new System.Drawing.Size(313, 23);
             this.cmbSearchPattern.TabIndex = 1;
             this.cmbSearchPattern.TextChanged += new System.EventHandler(this.OnSettingsChanged);
             // 
@@ -112,12 +114,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Location = new System.Drawing.Point(325, 40);
-            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.label3.Location = new System.Drawing.Point(321, 48);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.OverrideBackColor = System.Drawing.Color.Empty;
             this.label3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label3.Size = new System.Drawing.Size(318, 13);
+            this.label3.Size = new System.Drawing.Size(313, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "TXT_SEARCHVALUE";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -129,11 +131,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label1.Name = "label1";
             this.label1.OverrideBackColor = System.Drawing.Color.Empty;
             this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(643, 13);
+            this.label1.Size = new System.Drawing.Size(634, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SEARCHPATTERN_FE";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -143,10 +145,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkNoCase.AutoSize = true;
             this.chkNoCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkNoCase.Location = new System.Drawing.Point(0, 0);
-            this.chkNoCase.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.chkNoCase.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkNoCase.Name = "chkNoCase";
             this.chkNoCase.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkNoCase.Size = new System.Drawing.Size(172, 17);
+            this.chkNoCase.Size = new System.Drawing.Size(186, 19);
             this.chkNoCase.TabIndex = 9;
             this.chkNoCase.Text = "TXT_CASEINSENSITIVESEARCH";
             this.chkNoCase.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
@@ -156,11 +158,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkRecursive.AutoSize = true;
             this.chkRecursive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkRecursive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkRecursive.Location = new System.Drawing.Point(0, 80);
-            this.chkRecursive.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.chkRecursive.Location = new System.Drawing.Point(0, 96);
+            this.chkRecursive.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkRecursive.Name = "chkRecursive";
             this.chkRecursive.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkRecursive.Size = new System.Drawing.Size(317, 20);
+            this.chkRecursive.Size = new System.Drawing.Size(313, 22);
             this.chkRecursive.TabIndex = 8;
             this.chkRecursive.Text = "TXT_RECURSIVESEARCH";
             this.chkRecursive.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
@@ -173,11 +175,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.lbAttributes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbAttributes.FormattingEnabled = true;
             this.lbAttributes.IntegralHeight = false;
-            this.lbAttributes.Location = new System.Drawing.Point(0, 123);
-            this.lbAttributes.Margin = new System.Windows.Forms.Padding(0);
+            this.lbAttributes.Location = new System.Drawing.Point(0, 147);
+            this.lbAttributes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lbAttributes.MultiColumn = true;
             this.lbAttributes.Name = "lbAttributes";
-            this.lbAttributes.Size = new System.Drawing.Size(643, 73);
+            this.lbAttributes.Size = new System.Drawing.Size(634, 73);
             this.lbAttributes.TabIndex = 12;
             this.lbAttributes.Click += new System.EventHandler(this.OnSettingsChanged);
             // 
@@ -186,38 +188,50 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkAttrSearch.AutoSize = true;
             this.chkAttrSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkAttrSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkAttrSearch.Location = new System.Drawing.Point(0, 103);
-            this.chkAttrSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.chkAttrSearch.Location = new System.Drawing.Point(0, 123);
+            this.chkAttrSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkAttrSearch.Name = "chkAttrSearch";
             this.chkAttrSearch.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkAttrSearch.Size = new System.Drawing.Size(317, 17);
+            this.chkAttrSearch.Size = new System.Drawing.Size(313, 19);
             this.chkAttrSearch.TabIndex = 10;
             this.chkAttrSearch.Text = "TXT_ATTRIBUTESEARCH";
             this.chkAttrSearch.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
             // 
             // txtSearchPath
             // 
-            this.txtSearchPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.txtSearchPath.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtSearchPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchPath.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.txtSearchPath.Lines = new string[0];
             this.txtSearchPath.Location = new System.Drawing.Point(0, 0);
-            this.txtSearchPath.Margin = new System.Windows.Forms.Padding(0);
+            this.txtSearchPath.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
+            this.txtSearchPath.MaximumSize = new System.Drawing.Size(3000, 22);
+            this.txtSearchPath.MaxLength = 32767;
+            this.txtSearchPath.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtSearchPath.Name = "txtSearchPath";
+            this.txtSearchPath.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtSearchPath.OverrideForeColor = System.Drawing.Color.Empty;
+            this.txtSearchPath.PasswordChar = '\0';
             this.txtSearchPath.ReadOnly = true;
-            this.txtSearchPath.Size = new System.Drawing.Size(293, 22);
+            this.txtSearchPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSearchPath.ShortcutsEnabled = true;
+            this.txtSearchPath.Size = new System.Drawing.Size(287, 22);
             this.txtSearchPath.TabIndex = 6;
+            this.txtSearchPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtSearchPath.UseSystemPasswordChar = false;
+            this.txtSearchPath.WordWrap = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Location = new System.Drawing.Point(0, 40);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.label2.Location = new System.Drawing.Point(0, 48);
+            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label2.Name = "label2";
             this.label2.OverrideBackColor = System.Drawing.Color.Empty;
             this.label2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label2.Size = new System.Drawing.Size(317, 13);
+            this.label2.Size = new System.Drawing.Size(313, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "TXT_SEARCHFOLDER";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -235,7 +249,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.statusBar.Location = new System.Drawing.Point(0, 0);
             this.statusBar.Name = "statusBar";
             this.statusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusBar.Size = new System.Drawing.Size(643, 31);
+            this.statusBar.Size = new System.Drawing.Size(634, 31);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 0;
             this.statusBar.Text = "statusStrip1";
@@ -246,9 +260,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.btnSearch.AutoSize = false;
             this.btnSearch.AutoToolTip = true;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(74, 25);
+            this.btnSearch.Size = new System.Drawing.Size(74, 26);
             this.btnSearch.Text = "TXT_SEARCH";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -258,7 +272,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.ssStatus.AutoToolTip = true;
             this.ssStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ssStatus.Name = "ssStatus";
-            this.ssStatus.Size = new System.Drawing.Size(548, 26);
+            this.ssStatus.Size = new System.Drawing.Size(554, 26);
             this.ssStatus.Spring = true;
             this.ssStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -268,13 +282,16 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pbProgress.AutoSize = false;
             this.pbProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(206)))), ((int)(((byte)(230)))));
             this.pbProgress.Enabled = false;
+            this.pbProgress.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pbProgress.Maximum = 10000;
             this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(100, 25);
+            this.pbProgress.Size = new System.Drawing.Size(100, 26);
             this.pbProgress.Visible = false;
             // 
             // lvResults
             // 
+            this.lvResults.AllowEditing = true;
+            this.lvResults.AlternateRowColors = true;
             this.lvResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colImage,
             this.colPath});
@@ -282,12 +299,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.lvResults.ContextMenuStrip = this.contextMenuStrip;
             this.lvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvResults.Font = new System.Drawing.Font("Segoe UI", 7.25F);
-            this.lvResults.Location = new System.Drawing.Point(0, 212);
-            this.lvResults.Margin = new System.Windows.Forms.Padding(0);
+            this.lvResults.Location = new System.Drawing.Point(0, 245);
+            this.lvResults.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvResults.MultiSelect = false;
             this.lvResults.Name = "lvResults";
             this.lvResults.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvResults.Size = new System.Drawing.Size(643, 307);
+            this.lvResults.Size = new System.Drawing.Size(634, 269);
             this.lvResults.TabIndex = 14;
             this.lvResults.UseCompatibleStateImageBehavior = false;
             this.lvResults.View = System.Windows.Forms.View.Details;
@@ -320,16 +337,16 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.tsmiSepProTONE,
             this.goToItemToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(202, 132);
+            this.contextMenuStrip.Size = new System.Drawing.Size(200, 132);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.OnMenuOpening);
             // 
             // tsmiDelete
             // 
             this.tsmiDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiDelete.Image = global::OPMedia.UI.Properties.Resources.Delete;
+            this.tsmiDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDelete.Image")));
             this.tsmiDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(201, 22);
+            this.tsmiDelete.Size = new System.Drawing.Size(199, 22);
             this.tsmiDelete.Tag = "ToolActionDelete";
             this.tsmiDelete.Text = "TXT_DELETE";
             this.tsmiDelete.Click += new System.EventHandler(this.OnToolAction);
@@ -337,13 +354,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
             // 
             // tsmiTaggingWizard
             // 
             this.tsmiTaggingWizard.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Tagging;
             this.tsmiTaggingWizard.Name = "tsmiTaggingWizard";
-            this.tsmiTaggingWizard.Size = new System.Drawing.Size(201, 22);
+            this.tsmiTaggingWizard.Size = new System.Drawing.Size(199, 22);
             this.tsmiTaggingWizard.Tag = "ToolActionTaggingWizard";
             this.tsmiTaggingWizard.Text = "TXT_TAGGINGWIZARD";
             this.tsmiTaggingWizard.Click += new System.EventHandler(this.OnToolAction);
@@ -351,13 +368,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // tsmiSep4
             // 
             this.tsmiSep4.Name = "tsmiSep4";
-            this.tsmiSep4.Size = new System.Drawing.Size(198, 6);
+            this.tsmiSep4.Size = new System.Drawing.Size(196, 6);
             // 
             // tsmiProTONEPlay
             // 
             this.tsmiProTONEPlay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.tsmiProTONEPlay.Name = "tsmiProTONEPlay";
-            this.tsmiProTONEPlay.Size = new System.Drawing.Size(201, 22);
+            this.tsmiProTONEPlay.Size = new System.Drawing.Size(199, 22);
             this.tsmiProTONEPlay.Tag = "ToolActionProTONEPlay";
             this.tsmiProTONEPlay.Text = "TXT_PROTONE_PLAY";
             this.tsmiProTONEPlay.Click += new System.EventHandler(this.OnToolAction);
@@ -366,7 +383,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.tsmiProTONEEnqueue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.tsmiProTONEEnqueue.Name = "tsmiProTONEEnqueue";
-            this.tsmiProTONEEnqueue.Size = new System.Drawing.Size(201, 22);
+            this.tsmiProTONEEnqueue.Size = new System.Drawing.Size(199, 22);
             this.tsmiProTONEEnqueue.Tag = "ToolActionProTONEEnqueue";
             this.tsmiProTONEEnqueue.Text = "TXT_PROTONE_ENQUEUE";
             this.tsmiProTONEEnqueue.Click += new System.EventHandler(this.OnToolAction);
@@ -374,13 +391,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // tsmiSepProTONE
             // 
             this.tsmiSepProTONE.Name = "tsmiSepProTONE";
-            this.tsmiSepProTONE.Size = new System.Drawing.Size(198, 6);
+            this.tsmiSepProTONE.Size = new System.Drawing.Size(196, 6);
             // 
             // goToItemToolStripMenuItem
             // 
             this.goToItemToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.goToItemToolStripMenuItem.Name = "goToItemToolStripMenuItem";
-            this.goToItemToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.goToItemToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.goToItemToolStripMenuItem.Tag = "ToolActionJumpToItem";
             this.goToItemToolStripMenuItem.Text = "TXT_JUMPTOITEM";
             this.goToItemToolStripMenuItem.Click += new System.EventHandler(this.OnToolAction);
@@ -389,11 +406,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.chkPropSearch.AutoSize = true;
             this.chkPropSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkPropSearch.Location = new System.Drawing.Point(175, 0);
-            this.chkPropSearch.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.chkPropSearch.Location = new System.Drawing.Point(191, 0);
+            this.chkPropSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkPropSearch.Name = "chkPropSearch";
             this.chkPropSearch.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkPropSearch.Size = new System.Drawing.Size(136, 17);
+            this.chkPropSearch.Size = new System.Drawing.Size(149, 19);
             this.chkPropSearch.TabIndex = 11;
             this.chkPropSearch.Text = "TXT_PROPERTYSEARCH";
             this.chkPropSearch.CheckedChanged += new System.EventHandler(this.OnSettingsChanged);
@@ -403,10 +420,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkOption1.AutoSize = true;
             this.chkOption1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOption1.Location = new System.Drawing.Point(0, 0);
-            this.chkOption1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.chkOption1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkOption1.Name = "chkOption1";
             this.chkOption1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkOption1.Size = new System.Drawing.Size(90, 17);
+            this.chkOption1.Size = new System.Drawing.Size(99, 19);
             this.chkOption1.TabIndex = 2;
             this.chkOption1.Text = "TXT_OPTION1";
             this.chkOption1.Visible = false;
@@ -416,11 +433,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.chkOption2.AutoSize = true;
             this.chkOption2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOption2.Location = new System.Drawing.Point(93, 0);
-            this.chkOption2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.chkOption2.Location = new System.Drawing.Point(104, 0);
+            this.chkOption2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkOption2.Name = "chkOption2";
             this.chkOption2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.chkOption2.Size = new System.Drawing.Size(90, 17);
+            this.chkOption2.Size = new System.Drawing.Size(99, 19);
             this.chkOption2.TabIndex = 3;
             this.chkOption2.Text = "TXT_OPTION2";
             this.chkOption2.Visible = false;
@@ -432,7 +449,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(337, 92);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 0);
             this.flowLayoutPanel1.TabIndex = 16;
             this.flowLayoutPanel1.WrapContents = false;
@@ -443,7 +459,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(337, 22);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.flowLayoutPanel2.Size = new System.Drawing.Size(0, 0);
             this.flowLayoutPanel2.TabIndex = 17;
             // 
@@ -460,10 +475,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 519);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(643, 31);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(634, 31);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // pnlLayoutSec
@@ -489,7 +503,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pnlLayoutSec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayoutSec.Location = new System.Drawing.Point(0, 0);
             this.pnlLayoutSec.Name = "pnlLayoutSec";
-            this.pnlLayoutSec.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlLayoutSec.RowCount = 10;
             this.pnlLayoutSec.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayoutSec.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -501,7 +514,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pnlLayoutSec.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayoutSec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayoutSec.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlLayoutSec.Size = new System.Drawing.Size(643, 550);
+            this.pnlLayoutSec.Size = new System.Drawing.Size(634, 550);
             this.pnlLayoutSec.TabIndex = 21;
             // 
             // kryptonLabel1
@@ -509,12 +522,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kryptonLabel1.Location = new System.Drawing.Point(0, 199);
-            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.kryptonLabel1.Location = new System.Drawing.Point(0, 225);
+            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.Size = new System.Drawing.Size(317, 13);
+            this.kryptonLabel1.Size = new System.Drawing.Size(313, 15);
             this.kryptonLabel1.TabIndex = 22;
             this.kryptonLabel1.Text = "TXT_RESULTS";
             this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -526,11 +539,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pnlPatternOptions.Controls.Add(this.chkOption1);
             this.pnlPatternOptions.Controls.Add(this.chkOption2);
             this.pnlPatternOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPatternOptions.Location = new System.Drawing.Point(325, 16);
-            this.pnlPatternOptions.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.pnlPatternOptions.Location = new System.Drawing.Point(321, 20);
+            this.pnlPatternOptions.Margin = new System.Windows.Forms.Padding(0);
             this.pnlPatternOptions.Name = "pnlPatternOptions";
-            this.pnlPatternOptions.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlPatternOptions.Size = new System.Drawing.Size(318, 21);
+            this.pnlPatternOptions.Size = new System.Drawing.Size(313, 28);
             this.pnlPatternOptions.TabIndex = 20;
             // 
             // pnlSearchOptions
@@ -540,11 +552,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pnlSearchOptions.Controls.Add(this.chkNoCase);
             this.pnlSearchOptions.Controls.Add(this.chkPropSearch);
             this.pnlSearchOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSearchOptions.Location = new System.Drawing.Point(325, 80);
+            this.pnlSearchOptions.Location = new System.Drawing.Point(321, 96);
             this.pnlSearchOptions.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.pnlSearchOptions.Name = "pnlSearchOptions";
-            this.pnlSearchOptions.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlSearchOptions.Size = new System.Drawing.Size(318, 20);
+            this.pnlSearchOptions.Size = new System.Drawing.Size(313, 24);
             this.pnlSearchOptions.TabIndex = 21;
             this.pnlSearchOptions.WrapContents = false;
             // 
@@ -558,26 +569,26 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.opmTableLayoutPanel1.Controls.Add(this.txtSearchPath, 0, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.btnBrowse, 1, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 56);
+            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 68);
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
-            this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.RowCount = 1;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(317, 24);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(313, 28);
             this.opmTableLayoutPanel1.TabIndex = 23;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowse.Location = new System.Drawing.Point(296, 1);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.btnBrowse.Location = new System.Drawing.Point(292, 0);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnBrowse.MaximumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.MinimumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnBrowse.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnBrowse.ShowDropDown = false;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 7;
             this.btnBrowse.Text = "...";
@@ -590,7 +601,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "WizFESearchStep1Ctl";
-            this.Size = new System.Drawing.Size(643, 550);
+            this.Size = new System.Drawing.Size(634, 550);
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
@@ -603,7 +614,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.pnlSearchOptions.ResumeLayout(false);
             this.pnlSearchOptions.PerformLayout();
             this.opmTableLayoutPanel1.ResumeLayout(false);
-            this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -21,14 +21,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         private List<EditPanelBase> panels =
             new List<EditPanelBase>();
 
-        //public override Size DesiredSize
-        //{
-        //    get
-        //    {
-        //        return new Size(640, 455);
-        //    }
-        //}
-
         public WizTagStep2Ctl()
         {
             InitializeComponent();

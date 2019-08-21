@@ -333,7 +333,6 @@ namespace OPMedia.UI.Themes
             ApplyTitlebarValues();
             ApplyDrawingValues();
             Invalidate(true);
-
             OnThemeUpdatedInternal();
         }
 

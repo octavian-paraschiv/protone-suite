@@ -172,11 +172,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        protected override void OnThemeUpdatedInternal()
-        {
-            pnlPlayback.OverrideBackColor = ThemeManager.GradientNormalColor2;
-        }
-
         [EventSink(LocalEventNames.JumpToBookmark)]
         public void OnJumpToBookmark(BookmarkSubItem subItem)
         {

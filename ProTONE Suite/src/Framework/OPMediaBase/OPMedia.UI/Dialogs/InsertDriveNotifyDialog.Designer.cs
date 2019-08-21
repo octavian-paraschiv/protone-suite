@@ -59,7 +59,7 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lblNotifyText, 3);
-            this.lblNotifyText.Size = new System.Drawing.Size(208, 46);
+            this.lblNotifyText.Size = new System.Drawing.Size(206, 44);
             this.lblNotifyText.TabIndex = 0;
             this.lblNotifyText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -67,7 +67,7 @@ namespace OPMedia.UI.Dialogs
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -84,13 +84,12 @@ namespace OPMedia.UI.Dialogs
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
-            this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.RowCount = 4;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(252, 47);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(250, 44);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // InsertDriveNotifyDialog

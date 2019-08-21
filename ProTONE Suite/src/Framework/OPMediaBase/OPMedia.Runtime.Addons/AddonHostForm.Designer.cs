@@ -43,12 +43,12 @@ namespace OPMedia.Runtime.Addons
             this.toolStripSeparator2 = new OPMedia.UI.Controls.OPMMenuStripSeparator();
             this.pnlLayoutFull = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pnlOpMedia = new OPMedia.UI.Controls.OPMSplitContainer();
-            this.pnlNavContainer = new System.Windows.Forms.Panel();
+            this.pnlNavContainer = new OPMBaseControl();
             this.lblNoItems = new OPMedia.UI.Controls.OPMLabel();
             this.pnlLocalContent = new OPMedia.UI.Controls.OPMSplitContainer();
-            this.pnlProperties = new System.Windows.Forms.Panel();
+            this.pnlProperties = new OPMBaseControl();
             this.lblNoProperties = new OPMedia.UI.Controls.OPMLabel();
-            this.pnlPreview = new System.Windows.Forms.Panel();
+            this.pnlPreview = new OPMBaseControl();
             this.lblNoPreview = new OPMedia.UI.Controls.OPMLabel();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.lblStatusMain = new System.Windows.Forms.ToolStripStatusLabel();
@@ -161,7 +161,6 @@ namespace OPMedia.Runtime.Addons
             this.pnlLayoutFull.Location = new System.Drawing.Point(0, 24);
             this.pnlLayoutFull.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLayoutFull.Name = "pnlLayoutFull";
-            this.pnlLayoutFull.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlLayoutFull.RowCount = 4;
             this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -388,11 +387,11 @@ namespace OPMedia.Runtime.Addons
         private OPMTableLayoutPanel pnlLayoutFull;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusMain;
-        private System.Windows.Forms.Panel pnlNavContainer;
+        private OPMBaseControl pnlNavContainer;
         private OPMLabel lblNoItems;
-        private System.Windows.Forms.Panel pnlProperties;
+        private OPMBaseControl pnlProperties;
         private OPMLabel lblNoProperties;
-        private System.Windows.Forms.Panel pnlPreview;
+        private OPMBaseControl pnlPreview;
         private OPMLabel lblNoPreview;
         private OPMSplitContainer pnlLocalContent;
         private OPMSplitContainer pnlOpMedia;

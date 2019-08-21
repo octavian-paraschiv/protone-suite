@@ -52,7 +52,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.layoutPanel.Location = new System.Drawing.Point(0, 0);
             this.layoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel.RowCount = 2;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -76,22 +75,27 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.playlist.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlPlaylist_DragOver);
             this.playlist.DragLeave += new System.EventHandler(this.pnlPlaylist_DragLeave);
             // 
-            // pnlRendering
+            // pnlPlayback
             // 
             this.pnlPlayback.AutoSize = true;
             this.pnlPlayback.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlPlayback.CompactView = false;
             this.pnlPlayback.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPlayback.EffectiveSeconds = 0D;
             this.pnlPlayback.ElapsedSeconds = 0D;
             this.pnlPlayback.FilterState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
             this.pnlPlayback.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pnlPlayback.Location = new System.Drawing.Point(3, 307);
             this.pnlPlayback.MaximumSize = new System.Drawing.Size(3500, 75);
             this.pnlPlayback.MinimumSize = new System.Drawing.Size(500, 75);
-            this.pnlPlayback.Name = "pnlRendering";
-            this.pnlPlayback.OverrideBackColor = System.Drawing.Color.Empty;
+            this.pnlPlayback.Name = "pnlPlayback";
+            this.pnlPlayback.OverrideBackColor = System.Drawing.Color.Transparent;
+            this.pnlPlayback.ProjectedVolume = 5000;
             this.pnlPlayback.Size = new System.Drawing.Size(567, 75);
             this.pnlPlayback.TabIndex = 1;
+            this.pnlPlayback.TimeScaleEnabled = true;
             this.pnlPlayback.TotalSeconds = 0D;
+            this.pnlPlayback.VolumeScaleEnabled = true;
             // 
             // cmsOpenFiles
             // 

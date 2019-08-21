@@ -81,6 +81,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
         {
             CreateColumns();
 
+            this.BorderStyle = BorderStyle.None;
+
             ilItems = new ImageList();
             ilItems.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             ilItems.ImageSize = new System.Drawing.Size(16, 16);
@@ -88,7 +90,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
             ilItems.Images.Clear();
 
             this.SmallImageList = ilItems;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             ilItems.Images.Add(ImageProcessing.Library16);
             

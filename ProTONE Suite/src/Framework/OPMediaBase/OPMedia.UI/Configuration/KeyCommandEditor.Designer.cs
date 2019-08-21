@@ -72,7 +72,6 @@ namespace OPMedia.UI.Configuration
             this.pnlContentAll.Controls.Add(this.btnCancel, 2, 3);
             this.pnlContentAll.Location = new System.Drawing.Point(0, 0);
             this.pnlContentAll.Name = "pnlContentAll";
-            this.pnlContentAll.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlContentAll.RowCount = 4;
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());

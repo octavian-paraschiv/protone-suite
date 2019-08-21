@@ -143,7 +143,6 @@ namespace OPMedia.UI
             this.pnlContentAll.Controls.Add(this.lblThirdPartyNotice, 0, 1);
             this.pnlContentAll.Location = new System.Drawing.Point(0, 0);
             this.pnlContentAll.Name = "pnlContentAll";
-            this.pnlContentAll.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlContentAll.RowCount = 4;
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -173,7 +172,6 @@ namespace OPMedia.UI
             this.pnlButtons.Location = new System.Drawing.Point(0, 59);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(0);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlButtons.RowCount = 1;
             this.pnlButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlButtons.Size = new System.Drawing.Size(352, 31);
@@ -225,7 +223,6 @@ namespace OPMedia.UI
             this.pnlContentMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContentMessage.Location = new System.Drawing.Point(3, 3);
             this.pnlContentMessage.Name = "pnlContentMessage";
-            this.pnlContentMessage.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlContentMessage.RowCount = 1;
             this.pnlContentMessage.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentMessage.Size = new System.Drawing.Size(346, 46);

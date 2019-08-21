@@ -145,67 +145,64 @@
     <Compile Include="Configuration\TroubleshootingPanel.designer.cs">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\UrlCfgDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configuration\UrlCfgDlg.Designer.cs">
-      <DependentUpon>UrlCfgDlg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ImageButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\OPMFontChooserCtl.cs">
+    <Compile Include="Controls\Containers\OPMCustomPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMFontChooserCtl.Designer.cs">
+    <Compile Include="Controls\Derived\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\OPMFontChooserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\OPMFontChooserCtl.Designer.cs">
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GraphPlotter.cs">
+    <Compile Include="Controls\Custom\GraphPlotter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MultilineEditTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\OPMColorChooserCtl.cs">
+    <Compile Include="Controls\Derived\MultilineEditTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMColorChooserCtl.Designer.cs">
+    <Compile Include="Controls\UserControls\OPMColorChooserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\OPMColorChooserCtl.Designer.cs">
       <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OPMDoubleBufferControl.cs">
+    <Compile Include="Controls\Derived\OPMDoubleBufferControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMPropertyGrid.cs">
+    <Compile Include="Controls\Common\OPMPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMCustomPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\OPMNumericTextBox.cs">
+    <Compile Include="Controls\Derived\OPMNumericTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ExtendedMethods.cs" />
-    <Compile Include="Controls\OPMGroupBox.cs">
+    <Compile Include="Controls\Common\OPMGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMLayoutPanel.cs">
+    <Compile Include="Controls\Containers\OPMLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMBaseControl.cs">
+    <Compile Include="Controls\Derived\OPMBaseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMListView.cs" />
-    <Compile Include="Controls\OPMListViewSubItem.cs" />
-    <Compile Include="Controls\ISelfValidable.cs" />
-    <Compile Include="Controls\IValidator.cs" />
-    <Compile Include="Controls\OPMShellListView.cs">
+    <Compile Include="Controls\ListView\OPMListView.cs" />
+    <Compile Include="Controls\ListView\OPMListViewSubItem.cs" />
+    <Compile Include="Controls\ListView\ISelfValidable.cs" />
+    <Compile Include="Controls\ListView\IValidator.cs" />
+    <Compile Include="Controls\ListView\OPMShellListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMShellTreeView.cs">
+    <Compile Include="Controls\TreeView\OPMShellTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMStatusStrip.cs" />
-    <Compile Include="Controls\OPMTextBox.cs">
+    <Compile Include="Controls\Common\OPMStatusStripTextBox.cs" />
+    <Compile Include="Controls\UserControls\OPMNumericUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\OPMTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\PropertyEditor\Choosers\BooleanChooser.cs">
@@ -242,51 +239,47 @@
     <Compile Include="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SelfValidableCollection.cs" />
-    <Compile Include="Controls\TrayNotificationBox.cs">
+    <Compile Include="TrayNotificationBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\ToolAndMenuStrips.cs">
+    <Compile Include="Controls\Derived\ToolAndMenuStrips.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMTreeView.cs">
+    <Compile Include="Controls\TreeView\OPMTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\FileAttributesBrowserCtl.cs">
+    <Compile Include="Controls\UserControls\FileAttributesBrowserCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FileAttributesBrowserCtl.Designer.cs">
+    <Compile Include="Controls\UserControls\FileAttributesBrowserCtl.Designer.cs">
       <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OPMToolTip.cs" />
-    <Compile Include="Controls\OPMTimePicker.cs">
+    <Compile Include="Controls\Common\OPMToolTip.cs" />
+    <Compile Include="Controls\UserControls\OPMTimePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OPMTimePicker.Designer.cs">
+    <Compile Include="Controls\UserControls\OPMTimePicker.Designer.cs">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WaitingPictureBox.cs">
+    <Compile Include="Controls\Derived\WaitingPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ControlGauge.cs">
+    <Compile Include="Controls\Custom\ControlGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <None Include="Controls\ControlGrid.cs">
-      <SubType>UserControl</SubType>
-    </None>
-    <Compile Include="Controls\GradientGauge.cs">
+    <Compile Include="Controls\Custom\GradientGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NetworkStatusIndicator.cs">
+    <Compile Include="Controls\UserControls\NetworkStatusIndicator.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ProxySettingsDefinitionCtl.cs">
+    <Compile Include="Controls\UserControls\ProxySettingsDefinitionCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ProxySettingsDefinitionCtl.designer.cs">
+    <Compile Include="Controls\UserControls\ProxySettingsDefinitionCtl.designer.cs">
       <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OPMTabControl.cs">
+    <Compile Include="Controls\Common\OPMTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Dialogs\OPMFontChooserDialog.cs">
@@ -313,13 +306,13 @@
     <Compile Include="Dialogs\OPMFileDialog.Designer.cs">
       <DependentUpon>OPMFileDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WeekdaySelector.cs">
+    <Compile Include="Controls\UserControls\WeekdaySelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\WeekdaySelector.Designer.cs">
+    <Compile Include="Controls\UserControls\WeekdaySelector.Designer.cs">
       <DependentUpon>WeekdaySelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TransparentRichTextBox.cs">
+    <Compile Include="Controls\Derived\TransparentRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Dialogs\GenericWaitDialog.cs">
@@ -364,28 +357,28 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menus\MenuWrapper.cs" />
-    <Compile Include="Controls\OPMButton.cs">
+    <Compile Include="Controls\Common\OPMButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMCheckBox.cs">
+    <Compile Include="Controls\Common\OPMCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMComboBox.cs">
+    <Compile Include="Controls\Common\OPMComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMDateTimePicker.cs">
+    <Compile Include="Controls\Common\OPMDateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMEditableComboBox.cs">
+    <Compile Include="Controls\Common\OPMEditableComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMLabel.cs">
+    <Compile Include="Controls\Common\OPMLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMNumericUpDown.cs">
+    <Compile Include="Controls\Derived\OPMNumericUpDownBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\OPMSplitContainer.cs">
+    <Compile Include="Controls\Containers\OPMSplitContainer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -402,7 +395,7 @@
       <DependentUpon>MessageDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\OPMContentPanel.cs">
+    <Compile Include="Controls\Containers\OPMContentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Themes\ResizeMargin.cs">
@@ -485,19 +478,22 @@
     <EmbeddedResource Include="Configuration\TroubleshootingPanel.resx">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OPMFontChooserCtl.resx">
+    <EmbeddedResource Include="Controls\UserControls\OPMFontChooserCtl.resx">
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FileAttributesBrowserCtl.resx">
+    <EmbeddedResource Include="Controls\UserControls\FileAttributesBrowserCtl.resx">
       <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OPMColorChooserCtl.resx">
+    <EmbeddedResource Include="Controls\UserControls\OPMColorChooserCtl.resx">
       <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OPMTextBox.resx">
+    <EmbeddedResource Include="Controls\UserControls\OPMNumericUpDown.resx">
+      <DependentUpon>OPMNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UserControls\OPMTextBox.resx">
       <DependentUpon>OPMTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OPMTimePicker.resx">
+    <EmbeddedResource Include="Controls\UserControls\OPMTimePicker.resx">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PropertyEditor\Choosers\BooleanChooser.resx">
@@ -622,7 +618,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\WeekdaySelector.resx">
+    <EmbeddedResource Include="Controls\UserControls\WeekdaySelector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WeekdaySelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -638,10 +634,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\SerialPortCfgDlg.resx">
       <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\UrlCfgDlg.resx">
-      <DependentUpon>UrlCfgDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Translations\Translation.ro.resx">
@@ -669,15 +661,11 @@
       <DependentUpon>BaseCfgPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ControlGauge.resx">
-      <DependentUpon>ControlGauge.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NetworkStatusIndicator.resx">
+    <EmbeddedResource Include="Controls\UserControls\NetworkStatusIndicator.resx">
       <DependentUpon>NetworkStatusIndicator.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ProxySettingsDefinitionCtl.resx">
+    <EmbeddedResource Include="Controls\UserControls\ProxySettingsDefinitionCtl.resx">
       <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

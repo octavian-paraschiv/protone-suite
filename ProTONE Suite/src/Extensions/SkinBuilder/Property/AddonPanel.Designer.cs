@@ -51,7 +51,6 @@
             this.pnlContent.Controls.Add(this.chkIsDefault, 1, 1);
             this.pnlContent.Location = new System.Drawing.Point(3, 3);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlContent.RowCount = 3;
             this.pnlContent.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -70,7 +69,6 @@
             this.pnlThemeProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlThemeProperties.Location = new System.Drawing.Point(3, 51);
             this.pnlThemeProperties.Name = "pnlThemeProperties";
-            this.pnlThemeProperties.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlThemeProperties.RowCount = 1;
             this.pnlThemeProperties.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlThemeProperties.Size = new System.Drawing.Size(457, 1);

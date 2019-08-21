@@ -68,9 +68,8 @@
             this.opmTableLayoutPanel1.Controls.Add(this.opmFlowLayoutPanel1, 2, 4);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
-            this.opmTableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.RowCount = 5;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -87,12 +86,12 @@
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmLabel3.Location = new System.Drawing.Point(6, 443);
-            this.opmLabel3.Margin = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.opmLabel3.Location = new System.Drawing.Point(5, 438);
+            this.opmLabel3.Margin = new System.Windows.Forms.Padding(5, 0, 0, 5);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(480, 19);
+            this.opmLabel3.Size = new System.Drawing.Size(500, 19);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_GRABBERHINT_STEP1";
             this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,12 +102,12 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel1, 3);
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.Location = new System.Drawing.Point(0, 3);
-            this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.opmLabel1.Location = new System.Drawing.Point(0, 0);
+            this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(697, 15);
+            this.opmLabel1.Size = new System.Drawing.Size(700, 15);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SELECTDRIVE";
             this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,11 +117,11 @@
             this.cmbAudioCDDrives.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbAudioCDDrives.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbAudioCDDrives.FormattingEnabled = true;
-            this.cmbAudioCDDrives.Location = new System.Drawing.Point(0, 27);
-            this.cmbAudioCDDrives.Margin = new System.Windows.Forms.Padding(0, 6, 0, 3);
+            this.cmbAudioCDDrives.Location = new System.Drawing.Point(0, 20);
+            this.cmbAudioCDDrives.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.cmbAudioCDDrives.Name = "cmbAudioCDDrives";
             this.cmbAudioCDDrives.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbAudioCDDrives.Size = new System.Drawing.Size(458, 24);
+            this.cmbAudioCDDrives.Size = new System.Drawing.Size(473, 24);
             this.cmbAudioCDDrives.TabIndex = 1;
             this.cmbAudioCDDrives.SelectedIndexChanged += new System.EventHandler(this.OnDriveSelected);
             // 
@@ -132,12 +131,12 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel2, 3);
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(0, 57);
-            this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.opmLabel2.Location = new System.Drawing.Point(0, 50);
+            this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(697, 15);
+            this.opmLabel2.Size = new System.Drawing.Size(700, 15);
             this.opmLabel2.TabIndex = 2;
             this.opmLabel2.Text = "TXT_SELECTTRACKS";
             this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,12 +155,12 @@
             this.colGenre});
             this.opmTableLayoutPanel1.SetColumnSpan(this.lvTracks, 3);
             this.lvTracks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvTracks.Location = new System.Drawing.Point(0, 75);
-            this.lvTracks.Margin = new System.Windows.Forms.Padding(0);
+            this.lvTracks.Location = new System.Drawing.Point(0, 70);
+            this.lvTracks.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvTracks.MultiSelect = false;
             this.lvTracks.Name = "lvTracks";
             this.lvTracks.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvTracks.Size = new System.Drawing.Size(700, 368);
+            this.lvTracks.Size = new System.Drawing.Size(700, 363);
             this.lvTracks.TabIndex = 3;
             this.lvTracks.UseCompatibleStateImageBehavior = false;
             this.lvTracks.View = System.Windows.Forms.View.Details;
@@ -200,8 +199,8 @@
             this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(459, 26);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(1, 5, 0, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(478, 20);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnRefresh.OverrideForeColor = System.Drawing.Color.Empty;
@@ -218,19 +217,19 @@
             this.opmFlowLayoutPanel1.Controls.Add(this.llCheckAll);
             this.opmFlowLayoutPanel1.Controls.Add(this.llUncheckAll);
             this.opmFlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmFlowLayoutPanel1.Location = new System.Drawing.Point(489, 446);
+            this.opmFlowLayoutPanel1.Location = new System.Drawing.Point(508, 441);
             this.opmFlowLayoutPanel1.Name = "opmFlowLayoutPanel1";
-            this.opmFlowLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmFlowLayoutPanel1.Size = new System.Drawing.Size(208, 13);
+            this.opmFlowLayoutPanel1.Size = new System.Drawing.Size(189, 18);
             this.opmFlowLayoutPanel1.TabIndex = 6;
             this.opmFlowLayoutPanel1.WrapContents = false;
             // 
             // llCheckAll
             // 
             this.llCheckAll.AutoSize = true;
+            this.llCheckAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llCheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.llCheckAll.Location = new System.Drawing.Point(3, 0);
-            this.llCheckAll.Margin = new System.Windows.Forms.Padding(3, 0, 15, 0);
+            this.llCheckAll.Location = new System.Drawing.Point(0, 0);
+            this.llCheckAll.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.llCheckAll.Name = "llCheckAll";
             this.llCheckAll.Size = new System.Drawing.Size(84, 13);
             this.llCheckAll.TabIndex = 1;
@@ -242,8 +241,10 @@
             // llUncheckAll
             // 
             this.llUncheckAll.AutoSize = true;
+            this.llUncheckAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llUncheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.llUncheckAll.Location = new System.Drawing.Point(105, 0);
+            this.llUncheckAll.Location = new System.Drawing.Point(89, 0);
+            this.llUncheckAll.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.llUncheckAll.Name = "llUncheckAll";
             this.llUncheckAll.Size = new System.Drawing.Size(100, 13);
             this.llUncheckAll.TabIndex = 0;

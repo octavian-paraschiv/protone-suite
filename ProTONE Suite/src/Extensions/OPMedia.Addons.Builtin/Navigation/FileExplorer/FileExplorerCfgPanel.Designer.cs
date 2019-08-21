@@ -35,8 +35,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudMaxProcessedFiles = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.connectedFilesConfigCtl1 = new OPMedia.UI.Configuration.ConnectedFilesConfigCtl();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPreviewTimer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMaxProcessedFiles)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,11 +43,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Location = new System.Drawing.Point(3, 27);
+            this.label5.Location = new System.Drawing.Point(0, 30);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.OverrideBackColor = System.Drawing.Color.Empty;
             this.label5.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label5.Size = new System.Drawing.Size(138, 22);
+            this.label5.Size = new System.Drawing.Size(149, 25);
             this.label5.TabIndex = 6;
             this.label5.Text = "TXT_PREVIEW_TIMER";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -59,23 +58,36 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudPreviewTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.nudPreviewTimer.DecimalPlaces = 1;
+            this.nudPreviewTimer.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudPreviewTimer.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.nudPreviewTimer.Location = new System.Drawing.Point(144, 27);
+            this.nudPreviewTimer.Location = new System.Drawing.Point(149, 30);
             this.nudPreviewTimer.Margin = new System.Windows.Forms.Padding(0);
             this.nudPreviewTimer.Maximum = new decimal(new int[] {
             2,
             0,
             0,
             0});
+            this.nudPreviewTimer.MaximumSize = new System.Drawing.Size(2000, 25);
+            this.nudPreviewTimer.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudPreviewTimer.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudPreviewTimer.Name = "nudPreviewTimer";
+            this.nudPreviewTimer.OverrideBackColor = System.Drawing.Color.Transparent;
+            this.nudPreviewTimer.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudPreviewTimer.ReadOnly = true;
-            this.nudPreviewTimer.Size = new System.Drawing.Size(53, 22);
+            this.nudPreviewTimer.Size = new System.Drawing.Size(53, 25);
             this.nudPreviewTimer.TabIndex = 7;
+            this.nudPreviewTimer.Text = "1,0";
             this.nudPreviewTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudPreviewTimer.Unit = null;
+            this.nudPreviewTimer.UnitFirst = false;
             this.nudPreviewTimer.Value = new decimal(new int[] {
             1,
             0,
@@ -88,11 +100,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kryptonLabel1.Location = new System.Drawing.Point(3, 0);
+            this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.Size = new System.Drawing.Size(138, 22);
+            this.kryptonLabel1.Size = new System.Drawing.Size(149, 25);
             this.kryptonLabel1.TabIndex = 6;
             this.kryptonLabel1.Text = "TXT_MAXPROCESSEDFILES";
             this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -101,27 +114,37 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.nudMaxProcessedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudMaxProcessedFiles.DecimalPlaces = 0;
+            this.nudMaxProcessedFiles.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudMaxProcessedFiles.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.nudMaxProcessedFiles.Location = new System.Drawing.Point(144, 0);
+            this.nudMaxProcessedFiles.Location = new System.Drawing.Point(149, 0);
             this.nudMaxProcessedFiles.Margin = new System.Windows.Forms.Padding(0);
             this.nudMaxProcessedFiles.Maximum = new decimal(new int[] {
             150,
             0,
             0,
             0});
+            this.nudMaxProcessedFiles.MaximumSize = new System.Drawing.Size(2000, 25);
             this.nudMaxProcessedFiles.Minimum = new decimal(new int[] {
             50,
             0,
             0,
             0});
+            this.nudMaxProcessedFiles.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudMaxProcessedFiles.Name = "nudMaxProcessedFiles";
-            this.nudMaxProcessedFiles.Size = new System.Drawing.Size(53, 22);
+            this.nudMaxProcessedFiles.OverrideBackColor = System.Drawing.Color.Transparent;
+            this.nudMaxProcessedFiles.OverrideForeColor = System.Drawing.Color.Empty;
+            this.nudMaxProcessedFiles.ReadOnly = false;
+            this.nudMaxProcessedFiles.Size = new System.Drawing.Size(53, 25);
             this.nudMaxProcessedFiles.TabIndex = 7;
+            this.nudMaxProcessedFiles.Text = "50";
             this.nudMaxProcessedFiles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudMaxProcessedFiles.Unit = null;
+            this.nudMaxProcessedFiles.UnitFirst = false;
             this.nudMaxProcessedFiles.Value = new decimal(new int[] {
             50,
             0,
@@ -144,7 +167,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
@@ -161,20 +183,19 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tableLayoutPanel1.SetColumnSpan(this.connectedFilesConfigCtl1, 3);
             this.connectedFilesConfigCtl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.connectedFilesConfigCtl1.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.connectedFilesConfigCtl1.Location = new System.Drawing.Point(3, 62);
+            this.connectedFilesConfigCtl1.Location = new System.Drawing.Point(0, 65);
+            this.connectedFilesConfigCtl1.Margin = new System.Windows.Forms.Padding(0);
+            this.connectedFilesConfigCtl1.Modified = false;
             this.connectedFilesConfigCtl1.Name = "connectedFilesConfigCtl1";
             this.connectedFilesConfigCtl1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.connectedFilesConfigCtl1.Size = new System.Drawing.Size(369, 273);
+            this.connectedFilesConfigCtl1.Size = new System.Drawing.Size(375, 273);
             this.connectedFilesConfigCtl1.TabIndex = 8;
             // 
             // FileExplorerCfgPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FileExplorerCfgPanel";
             this.Size = new System.Drawing.Size(375, 338);
-            ((System.ComponentModel.ISupportInitialize)(this.nudPreviewTimer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMaxProcessedFiles)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

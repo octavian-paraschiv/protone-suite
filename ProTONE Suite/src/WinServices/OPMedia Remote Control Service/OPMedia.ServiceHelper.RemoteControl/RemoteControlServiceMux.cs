@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 using System.IO;
 using OPMedia.Runtime.ServiceHelpers;
-using OPMedia.Runtime.ProTONE.ServiceHelpers;
+
 using System.Configuration;
 using System.Linq;
 
@@ -227,17 +227,6 @@ namespace OPMedia.ServiceHelper.RCCService
                         if (_outputPins.ContainsKey(row.OutputPinName + row.OutputPinCfgData))
                         {
                             // There is a valid output pin.
-
-                            // If the destination is ProTONE Player ... is this configured to be controlled remotely ?
-                            if (row.OutputPinName == typeof(ProTONEOutputPin).Name && !ProTONERemoteConfig.EnableRemoteControl)
-                            {
-                                // ProTONE player can't accept remoting comands.
-                                // so discard the command
-                                Logger.LogInfo("ProTONE has EnableRemoteControl set to False. Discarding command.");
-                                return;
-                            }
-
-                            // No restrictions.
                             OutputPin destination = _outputPins[row.OutputPinName + row.OutputPinCfgData];
                             if (destination != null)
                             {

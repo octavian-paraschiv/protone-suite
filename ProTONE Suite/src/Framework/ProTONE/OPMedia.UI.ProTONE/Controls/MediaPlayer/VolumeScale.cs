@@ -124,8 +124,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public void ApplyMenuBarColors()
         {
-            layoutPanel1.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            
             volumeProgress.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
             
             lblCurrent.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);

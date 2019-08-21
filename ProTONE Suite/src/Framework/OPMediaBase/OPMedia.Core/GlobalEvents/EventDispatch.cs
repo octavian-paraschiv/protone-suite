@@ -24,6 +24,17 @@ namespace OPMedia.Core
             _invocationMap.Add(AllEvents, new Dictionary<object, MethodInfo>());
         }
 
+        public static void RegisterAsEventSink(this Control ctl)
+        {
+            if (ctl != null)
+            {
+                RegisterHandler(ctl);
+
+                ctl.HandleDestroyed -= (s, e) => UnregisterHandler(ctl);
+                ctl.HandleDestroyed += (s, e) => UnregisterHandler(ctl);
+            }
+        }
+
         public static void RegisterHandler(object handler)
         {
             if (handler != null)

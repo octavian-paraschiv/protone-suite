@@ -13,7 +13,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.Dialogs
 {
-    public partial class FavoriteFoldersControl : UserControl
+    public partial class FavoriteFoldersControl : OPMBaseControl
     {
         public event EventHandler OnModified = null;
         private FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
@@ -132,6 +132,11 @@ namespace OPMedia.UI.Dialogs
         {
             ProTONEConfig.SetFavoriteFolders(this.FavoriteFolders,
                     this.FavoriteFoldersHiveName);
+        }
+
+        protected override void OnThemeUpdatedInternal()
+        {
+            
         }
     }
 }

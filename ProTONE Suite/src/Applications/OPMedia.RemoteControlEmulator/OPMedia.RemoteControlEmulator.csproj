@@ -90,9 +90,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
+      <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
+      <Name>OPMedia.ShellSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{D75C6E16-0208-40FD-8C54-F073667F5384}</Project>
       <Name>OPMedia.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
+      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
+      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>

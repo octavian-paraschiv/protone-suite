@@ -46,7 +46,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.layoutPanel.Location = new System.Drawing.Point(0, 0);
             this.layoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel.RowCount = 2;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

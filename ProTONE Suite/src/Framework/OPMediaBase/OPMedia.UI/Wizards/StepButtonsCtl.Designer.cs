@@ -123,7 +123,6 @@ namespace OPMedia.UI.Wizards
             this.pnlMovementButtons.Location = new System.Drawing.Point(231, 0);
             this.pnlMovementButtons.Margin = new System.Windows.Forms.Padding(0);
             this.pnlMovementButtons.Name = "pnlMovementButtons";
-            this.pnlMovementButtons.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlMovementButtons.Size = new System.Drawing.Size(325, 31);
             this.pnlMovementButtons.TabIndex = 2;
             this.pnlMovementButtons.WrapContents = false;
@@ -160,7 +159,6 @@ namespace OPMedia.UI.Wizards
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.OverrideBackColor = System.Drawing.Color.Empty;
             this.panel.RowCount = 1;
             this.panel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panel.Size = new System.Drawing.Size(556, 31);

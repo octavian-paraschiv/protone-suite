@@ -61,7 +61,7 @@ namespace OPMedia.UI.Configuration
             this.cmbSerialPort.Location = new System.Drawing.Point(205, 3);
             this.cmbSerialPort.Name = "cmbSerialPort";
             this.cmbSerialPort.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbSerialPort.Size = new System.Drawing.Size(78, 23);
+            this.cmbSerialPort.Size = new System.Drawing.Size(78, 24);
             this.cmbSerialPort.TabIndex = 1;
             // 
             // label1
@@ -88,7 +88,6 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutPanel.Location = new System.Drawing.Point(0, 0);
             this.layoutPanel.Name = "layoutPanel";
-            this.layoutPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.layoutPanel.RowCount = 2;
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

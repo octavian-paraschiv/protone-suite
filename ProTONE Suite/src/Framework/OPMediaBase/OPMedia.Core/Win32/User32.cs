@@ -788,6 +788,10 @@ namespace OPMedia.Core
             return -1;
         }
 #else
+        [DllImport("user32.dll")]
+        public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
+
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern bool ShowScrollBar(IntPtr hWnd, int wBar, bool bShow);
 

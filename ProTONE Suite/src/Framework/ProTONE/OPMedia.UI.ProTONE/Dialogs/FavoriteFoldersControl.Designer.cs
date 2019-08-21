@@ -79,7 +79,6 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -91,7 +90,6 @@ namespace OPMedia.UI.Dialogs
             // lvFavorites
             // 
             this.lvFavorites.AllowEditing = true;
-            this.lvFavorites.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvFavorites.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPath});
             this.lvFavorites.Dock = System.Windows.Forms.DockStyle.Fill;

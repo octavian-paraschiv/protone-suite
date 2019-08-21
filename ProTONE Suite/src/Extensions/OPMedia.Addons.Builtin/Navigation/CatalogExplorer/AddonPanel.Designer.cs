@@ -605,7 +605,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -636,7 +635,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // 
             // tvCatalog
             // 
-            this.tvCatalog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tvCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvCatalog.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvCatalog.FullRowSelect = true;
@@ -653,7 +651,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // 
             this.lvCatalogFolder.AllowEditing = true;
             this.lvCatalogFolder.AlternateRowColors = true;
-            this.lvCatalogFolder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvCatalogFolder.ContextMenuStrip = this.contextMenuStrip;
             this.lvCatalogFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvCatalogFolder.LabelEdit = true;

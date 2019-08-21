@@ -59,7 +59,6 @@ namespace OPMedia.UI.FileTasks
             this.pnlLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
             this.pnlLayout.Name = "pnlLayout";
-            this.pnlLayout.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlLayout.RowCount = 4;
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());

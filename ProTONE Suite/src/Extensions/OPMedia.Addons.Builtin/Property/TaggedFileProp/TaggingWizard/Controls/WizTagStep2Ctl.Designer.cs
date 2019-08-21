@@ -45,12 +45,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.label1.Name = "label1";
             this.label1.OverrideBackColor = System.Drawing.Color.Empty;
             this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(417, 17);
+            this.label1.Size = new System.Drawing.Size(414, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZTAGGINGSTEP2_DESC";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -61,10 +61,11 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEditType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbEditType.FormattingEnabled = true;
-            this.cmbEditType.Location = new System.Drawing.Point(3, 20);
+            this.cmbEditType.Location = new System.Drawing.Point(3, 17);
+            this.cmbEditType.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.cmbEditType.Name = "cmbEditType";
             this.cmbEditType.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbEditType.Size = new System.Drawing.Size(411, 23);
+            this.cmbEditType.Size = new System.Drawing.Size(414, 24);
             this.cmbEditType.TabIndex = 1;
             this.cmbEditType.SelectedIndexChanged += new System.EventHandler(this.cmbEditType_SelectedIndexChanged);
             // 
@@ -73,10 +74,10 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.pnlEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlEdit.Location = new System.Drawing.Point(0, 46);
-            this.pnlEdit.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlEdit.Location = new System.Drawing.Point(3, 44);
+            this.pnlEdit.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.pnlEdit.Name = "pnlEdit";
-            this.pnlEdit.Size = new System.Drawing.Size(417, 183);
+            this.pnlEdit.Size = new System.Drawing.Size(414, 184);
             this.pnlEdit.TabIndex = 2;
             // 
             // cmbWordCasing
@@ -85,10 +86,11 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbWordCasing.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbWordCasing.FormattingEnabled = true;
-            this.cmbWordCasing.Location = new System.Drawing.Point(3, 249);
+            this.cmbWordCasing.Location = new System.Drawing.Point(3, 248);
+            this.cmbWordCasing.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.cmbWordCasing.Name = "cmbWordCasing";
             this.cmbWordCasing.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbWordCasing.Size = new System.Drawing.Size(411, 23);
+            this.cmbWordCasing.Size = new System.Drawing.Size(414, 24);
             this.cmbWordCasing.TabIndex = 4;
             this.cmbWordCasing.SelectedIndexChanged += new System.EventHandler(this.cmbWordCasing_SelectedIndexChanged);
             // 
@@ -96,12 +98,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.lblWordHandling.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblWordHandling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblWordHandling.Location = new System.Drawing.Point(0, 229);
-            this.lblWordHandling.Margin = new System.Windows.Forms.Padding(0);
+            this.lblWordHandling.Location = new System.Drawing.Point(3, 231);
+            this.lblWordHandling.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.lblWordHandling.Name = "lblWordHandling";
             this.lblWordHandling.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblWordHandling.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblWordHandling.Size = new System.Drawing.Size(417, 17);
+            this.lblWordHandling.Size = new System.Drawing.Size(414, 17);
             this.lblWordHandling.TabIndex = 3;
             this.lblWordHandling.Text = "TXT_WORDHANDLING";
             this.lblWordHandling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -131,7 +133,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.opmLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmLayoutPanel1.Name = "opmLayoutPanel1";
-            this.opmLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLayoutPanel1.RowCount = 6;
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());

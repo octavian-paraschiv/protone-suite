@@ -36,7 +36,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.kryptonLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.flowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.nudRecentFilesCount)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +118,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(350, 28);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
@@ -133,7 +131,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.OverrideBackColor = System.Drawing.Color.Empty;
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
@@ -148,7 +145,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CatalogExplorerCfgPanel";
             this.Size = new System.Drawing.Size(350, 230);
-            ((System.ComponentModel.ISupportInitialize)(this.nudRecentFilesCount)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

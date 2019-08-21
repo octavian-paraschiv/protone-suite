@@ -29,15 +29,15 @@ namespace OPMedia.Addons.Builtin.VideoProp
         /// </summary>
         private void InitializeComponent()
         {
-            this.pgProperties = new OPMPropertyGrid();
-            this.btnSearchSubtitles = new OPMButton();
+            this.pgProperties = new OPMedia.UI.Controls.OPMPropertyGrid();
+            this.btnSearchSubtitles = new OPMedia.UI.Controls.OPMButton();
             this.SuspendLayout();
             // 
             // pgProperties
             // 
-            this.pgProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pgProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pgProperties.HelpVisible = false;
             this.pgProperties.Location = new System.Drawing.Point(5, 5);
             this.pgProperties.Margin = new System.Windows.Forms.Padding(5);
@@ -49,8 +49,13 @@ namespace OPMedia.Addons.Builtin.VideoProp
             // btnSearchSubtitles
             // 
             this.btnSearchSubtitles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchSubtitles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearchSubtitles.Location = new System.Drawing.Point(60, 196);
+            this.btnSearchSubtitles.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.btnSearchSubtitles.Name = "btnSearchSubtitles";
+            this.btnSearchSubtitles.OverrideBackColor = System.Drawing.Color.Empty;
+            this.btnSearchSubtitles.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnSearchSubtitles.ShowDropDown = false;
             this.btnSearchSubtitles.Size = new System.Drawing.Size(140, 24);
             this.btnSearchSubtitles.TabIndex = 1;
             this.btnSearchSubtitles.Text = "TXT_SEARCH_SUBTITLES";
@@ -58,6 +63,7 @@ namespace OPMedia.Addons.Builtin.VideoProp
             // 
             // AddonPanel
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.Controls.Add(this.btnSearchSubtitles);
             this.Controls.Add(this.pgProperties);
             this.Name = "AddonPanel";
