@@ -16,6 +16,9 @@ using OPMedia.UI.Menus;
 using System.Linq;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.GlobalEvents;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -43,6 +46,27 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             lvRadioStations.SmallImageList = _ilImages;
         }
+
+        [EventSink(LocalEventNames.ManageOnlineContent)]
+        public void ManageOnlineContent(List<OnlineMediaItem> onlineContent, bool doAdd)
+        {
+            var data = LocalDatabaseSearcher.LoadOnlineMediaData();
+
+            foreach (OnlineMediaItem item in onlineContent)
+            {
+                if (doAdd)
+                    data.SafeAddItem(item);
+                else
+                    data.SafeRemoveItem(item);
+            }
+
+            bool isSaved = LocalDatabaseSearcher.SaveOnlineMediaData(data);
+            if (isSaved && !doAdd)
+            {
+                StartCancellableSearch();
+            }
+        }
+
 
         private void LvRadioStations_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -72,6 +96,26 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             colName.Width = colAlbum.Width = colArtist.Width = colURL.Width = w / 4;
         }
 
+        private void OnSearchTextChanged(object sender, EventArgs e)
+        {
+            PerformValidation();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            StartCancellableSearch();
+        }
+
+        private void cmbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.None &&
+                e.KeyCode == Keys.Enter)
+            {
+                StartCancellableSearch();
+            }
+        }
+
+
         protected override void DisplaySearchResultsInternal()
         {
             lvRadioStations.Items.Clear();
@@ -88,7 +132,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                     else if (item.Source == OnlineMediaSource.Deezer)
                         ilIndex = 1;
 
-                    ListViewItem lvi = new ListViewItem(new string[] 
+                    ListViewItem lvi = new ListViewItem(new string[]
                     {
                         // Icon
                         string.Empty,
@@ -130,14 +174,58 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
         }
 
-        protected override List<string> GetSearchHistory()
+        protected override void LoadSearchHistory()
         {
-            return ProTONEConfig.Media_Browser_History_Local;
+            cmbSearch.Items.Clear();
+            var history = ProTONEConfig.Media_Browser_History_Local;
+            if (history != null && history.Count > 0)
+                cmbSearch.Items.AddRange(history.ToArray());
         }
 
-        protected override void SetSearchHistory(List<string> history)
+        protected override bool UpdateSearchHistoryInternal(string lastSearchText)
         {
-            ProTONEConfig.Media_Browser_History_Local = history;
+            try
+            {
+                if (string.IsNullOrEmpty(lastSearchText) == false)
+                {
+                    List<string> history = new List<string>(ProTONEConfig.Media_Browser_History_Local);
+
+                    // Check whether it is already in the search history.
+                    // Ignore letter case.
+                    foreach (string s in history)
+                    {
+                        if (string.Compare(s, lastSearchText, true) == 0)
+                            return false;
+                    }
+
+                    if (history.Count >= 20)
+                        history.RemoveAt(0);
+
+                    history.Add(lastSearchText);
+
+                    ProTONEConfig.Media_Browser_History_Local = history;
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return false;
         }
+
+
+        public override string GetSearchText()
+        {
+            return cmbSearch.Text;
+        }
+
+        public override void PerformValidation()
+        {
+            btnSearch.Enabled = base.PreValidateSearch();
+        }
+
     }
 }

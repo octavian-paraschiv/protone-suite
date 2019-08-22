@@ -18,11 +18,16 @@ using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.UI.ProTONE.Properties;
 using System.Diagnostics;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Runtime.ProTONE.Playlists;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
     public partial class DeezerTrackBrowserCtl : MediaBrowserPage
     {
+        string _hiddenSearch = string.Empty;
+
         public DeezerTrackBrowserCtl()
         {
             InitializeComponent();
@@ -42,15 +47,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             if (ProTONEConfig.EnableExtendedDeezerFeatures)
             {
                 tsmi.Click += new EventHandler(OnMenuClick);
-                tsmi.Text = Translator.Translate("TXT_ADD_NEW_DEEZER_PLAYLIST");
-                tsmi.Tag = MediaBrowserAction.AddNewDeezerPlaylist;
-                tsmi.Image = Resources.deezer16;
-                cms.Items.Add(tsmi);
-
-                tsmi = new OPMToolStripMenuItem();
-                tsmi.Click += new EventHandler(OnMenuClick);
-                tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_DEEZER_PLAYLIST");
-                tsmi.Tag = MediaBrowserAction.AddExistingDeezerPlaylist;
+                tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
+                tsmi.Tag = MediaBrowserAction.AddToDeezerPlaylist;
                 tsmi.Image = Resources.deezer16;
                 cms.Items.Add(tsmi);
 
@@ -126,8 +124,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                     break;
 
                 case "LookupMyPlaylists":
-                    EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, act);
-                    return;
+                    search = act;
+                    break;
 
                 case "OpenDeezerPage":
                     Process.Start("http://www.deezer.com");
@@ -135,7 +133,10 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
 
             if (string.IsNullOrEmpty(search) == false)
-                EventDispatch.DispatchEvent(LocalEventNames.StartDeezerSearch, search);
+            {
+                _hiddenSearch = search;
+                StartCancellableSearch();
+            }
         }
                 
 
@@ -163,9 +164,29 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             colAlbum.Width = colArtist.Width = colName.Width = w;
         }
 
+        private void OnSearchTextChanged(object sender, EventArgs e)
+        {
+            PerformValidation();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            StartCancellableSearch();
+        }
+
+        private void cmbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.None &&
+                e.KeyCode == Keys.Enter)
+            {
+                StartCancellableSearch();
+            }
+        }
+
         protected override void DisplaySearchResultsInternal()
         {
             lvTracks.Items.Clear();
+            _hiddenSearch = null;
 
             if (this.Items != null)
             {
@@ -196,12 +217,13 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
         }
 
-        public override bool PreValidateSearch(string search)
+        public override bool PreValidateSearch()
         {
-            bool valid = base.PreValidateSearch(search);
-
+            bool valid = base.PreValidateSearch();
             if (valid)
             {
+                string search = GetSearchText();
+
                 if (search.Contains(":") || search.Contains("\""))
                 {
                     // We're trying to make use of advanced search filters.
@@ -214,14 +236,89 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             return valid;
         }
 
-        protected override List<string> GetSearchHistory()
+        public override string GetSearchText()
         {
-            return ProTONEConfig.Media_Browser_History_Deezer;
+            if (string.IsNullOrEmpty(_hiddenSearch) == false)
+                return _hiddenSearch;
+
+            var f = new DeezerJsonFilter
+            {
+                Album = cmbAlbum.Text,
+                Artist = cmbArtist.Text,
+                Title = cmbTitle.Text
+            };
+
+            return f.SearchText;
         }
 
-        protected override void SetSearchHistory(List<string> history)
+        protected override void LoadSearchHistory()
         {
-            ProTONEConfig.Media_Browser_History_Deezer = history;
+            cmbArtist.Items.Clear();
+            cmbAlbum.Items.Clear();
+            cmbTitle.Items.Clear();
+
+            var history = ProTONEConfig.Media_Browser_History_Deezer;
+            if (history != null && history.Count > 0)
+            {
+                foreach (var h in history)
+                {
+                    DeezerJsonFilter f = DeezerJsonFilter.FromSearchText(h);
+                    if (f == null || f.IsEmpty)
+                        continue;
+
+                    if (string.IsNullOrEmpty(f.Artist) == false &&
+                        cmbArtist.Items.Contains(f.Artist) == false)
+                        cmbArtist.Items.Add(f.Artist);
+
+                    if (string.IsNullOrEmpty(f.Album) == false &&
+                        cmbAlbum.Items.Contains(f.Album) == false)
+                        cmbAlbum.Items.Add(f.Album);
+
+                    if (string.IsNullOrEmpty(f.Title) == false &&
+                        cmbTitle.Items.Contains(f.Title) == false)
+                        cmbTitle.Items.Add(f.Title);
+                }
+            }
+        }
+
+        protected override bool UpdateSearchHistoryInternal(string lastSearchText)
+        {
+            try
+            {
+                DeezerJsonFilter f = DeezerJsonFilter.FromSearchText(lastSearchText);
+                if (f != null && !f.IsEmpty)
+                {
+                    List<string> history = new List<string>(ProTONEConfig.Media_Browser_History_Deezer);
+
+                    // Check whether it is already in the search history.
+                    // Ignore letter case.
+                    foreach (string s in history)
+                    {
+                        if (string.Compare(s, lastSearchText, true) == 0)
+                            return false;
+                    }
+
+                    if (history.Count >= 100)
+                        history.RemoveAt(0);
+
+                    history.Add(lastSearchText);
+
+                    ProTONEConfig.Media_Browser_History_Deezer = history;
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return false;
+        }
+
+        public override void PerformValidation()
+        {
+            btnSearch.Enabled = base.PreValidateSearch();
         }
     }
 }

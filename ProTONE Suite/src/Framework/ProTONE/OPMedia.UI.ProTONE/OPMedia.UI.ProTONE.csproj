@@ -375,6 +375,9 @@
     <EmbeddedResource Include="Controls\OnlineMediaBrowser\LocalDatabaseBrowserCtl.resx">
       <DependentUpon>LocalDatabaseBrowserCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OnlineMediaBrowser\MediaBrowserPage.resx">
+      <DependentUpon>MediaBrowserPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\OnlineMediaBrowser\ShoutcastDirectoryBrowserCtl.resx">
       <DependentUpon>ShoutcastDirectoryBrowserCtl.cs</DependentUpon>
     </EmbeddedResource>

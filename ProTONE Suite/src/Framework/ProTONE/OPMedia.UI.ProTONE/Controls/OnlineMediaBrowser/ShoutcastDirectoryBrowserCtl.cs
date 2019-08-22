@@ -14,6 +14,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -59,6 +60,26 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             colContent.Width = colURL.Width = colName.Width = (lvRadioStations.EffectiveWidth - w) / 3;
         }
 
+
+        private void OnSearchTextChanged(object sender, EventArgs e)
+        {
+            PerformValidation();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            StartCancellableSearch();
+        }
+
+        private void cmbSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.None &&
+                e.KeyCode == Keys.Enter)
+            {
+                StartCancellableSearch();
+            }
+        }
+
         protected override void DisplaySearchResultsInternal()
         {
             lvRadioStations.Items.Clear();
@@ -95,12 +116,12 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
         }
 
-        public override bool PreValidateSearch(string search)
+        public override bool PreValidateSearch()
         {
-            bool valid = base.PreValidateSearch(search);
-
+            bool valid = base.PreValidateSearch();
             if (valid)
             {
+                string search = this.GetSearchText();
                 search = search.ToLowerInvariant();
 
                 if (search.StartsWith("now:"))
@@ -115,14 +136,58 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             return valid;
         }
 
-        protected override List<string> GetSearchHistory()
+        protected override void LoadSearchHistory()
         {
-            return ProTONEConfig.Media_Browser_History_Shoutcast;
+            cmbSearch.Items.Clear();
+            var history = ProTONEConfig.Media_Browser_History_Shoutcast;
+            if (history != null && history.Count > 0)
+                cmbSearch.Items.AddRange(history.ToArray());
         }
 
-        protected override void SetSearchHistory(List<string> history)
+        protected override bool UpdateSearchHistoryInternal(string lastSearchText)
         {
-            ProTONEConfig.Media_Browser_History_Shoutcast = history;
+            try
+            {
+                if (string.IsNullOrEmpty(lastSearchText) == false)
+                {
+                    List<string> history = new List<string>(ProTONEConfig.Media_Browser_History_Shoutcast);
+
+                    // Check whether it is already in the search history.
+                    // Ignore letter case.
+                    foreach (string s in history)
+                    {
+                        if (string.Compare(s, lastSearchText, true) == 0)
+                            return false;
+                    }
+
+                    if (history.Count >= 20)
+                        history.RemoveAt(0);
+
+                    history.Add(lastSearchText);
+
+                    ProTONEConfig.Media_Browser_History_Shoutcast = history;
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return false;
         }
+
+
+        public override string GetSearchText()
+        {
+            return cmbSearch.Text;
+        }
+
+        public override void PerformValidation()
+        {
+            btnSearch.Enabled = base.PreValidateSearch();
+        }
+
     }
 }

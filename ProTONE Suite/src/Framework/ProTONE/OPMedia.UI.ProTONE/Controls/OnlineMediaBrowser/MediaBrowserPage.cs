@@ -16,6 +16,7 @@ using OPMedia.UI.ProTONE.Dialogs;
 using System.Windows.Forms;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.UI.Dialogs;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {
@@ -27,24 +28,18 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             public ManualResetEvent AbortEvent { get; set; }
         }
 
+        CancellableWaitDialog _waitDialog = null;
+        ManualResetEvent _searchCancelled = new ManualResetEvent(false);
+
         public List<OnlineMediaItem> SelectedItems { get; protected set; }
         public List<OnlineMediaItem> Items { get; protected set; }
 
-        public event EventHandler SearchCompleted;
-
         private BackgroundWorker _bwSearch = new BackgroundWorker();
-
         protected OnlineMediaSource _searchType = OnlineMediaSource.Internal;
 
         protected OnlineContentSearchFilter SearchFilter { get; set; }
 
         public new OPMContextMenuStrip ContextMenuStrip { get; set; }
-
-        public List<string> SearchHistory
-        {
-            get { return GetSearchHistory(); }
-            set { SetSearchHistory(value); }
-        }
 
         public MediaBrowserPage() : base()
         {
@@ -73,23 +68,29 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             return UpdateSearchHistoryInternal(lastSearchText);
         }
 
-        public virtual bool PreValidateSearch(string search)
+        public void Activate()
         {
-            return string.IsNullOrEmpty(search) == false;
+            LoadSearchHistory();
+            PerformValidation();
         }
 
-        public void StartCancellableSearch(string search, ManualResetEvent abortEvent)
+        public void StartCancellableSearch()
         {
+            _searchCancelled.Reset();
+
             MediaBrowserSearchParams sp = new MediaBrowserSearchParams
             {
-                AbortEvent = abortEvent,
+                AbortEvent = _searchCancelled,
                 SearchParams = new OnlineContentSearchParameters
                 {
                     Filter = this.SearchFilter,
-                    SearchText = search
+                    SearchText = this.GetSearchText()
                 }
             };
+
             _bwSearch.RunWorkerAsync(sp);
+
+            ShowWaitDialog("TXT_WAIT_SEARCH");
         }
 
         void OnBackgroundSearch(object sender, DoWorkEventArgs e)
@@ -101,11 +102,21 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
         void OnBackgroundSearchCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (SearchCompleted != null)
-                SearchCompleted(this, EventArgs.Empty);
+            DisplaySearchResults();
+
+            string s = GetSearchText();
+
+            // Don't add "LookupMyPlaylists" in the search history 
+            if (string.Compare(s, "LookupMyPlaylists", true) != 0)
+            {
+                if (UpdateSearchHistory(s))
+                    LoadSearchHistory();
+            }
+
+            CloseWaitDialog();
         }
 
-        protected virtual void SearchInternal(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
+        private void SearchInternal(OnlineContentSearchParameters searchParams, ManualResetEvent abortEvent)
         {
             this.Items.Clear();
             this.SelectedItems.Clear();
@@ -186,57 +197,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
-            tsmi.Text = Translator.Translate("TXT_ADD_NEW_PLAYLIST");
-            tsmi.Tag = MediaBrowserAction.AddNewPlaylist;
+            tsmi.Text = Translator.Translate("TXT_ADD_TO_LOCAL_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddToLocalPlaylist;
             tsmi.Image = ImageProcessing.Playlist16;
             cms.Items.Add(tsmi);
-
-            tsmi = new OPMToolStripMenuItem();
-            tsmi.Click += new EventHandler(OnMenuClick);
-            tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_PLAYLIST");
-            tsmi.Tag = MediaBrowserAction.AddExistingPlaylist;
-            tsmi.Image = ImageProcessing.Playlist16;
-            cms.Items.Add(tsmi);
-
 
             return cms;
         }
 
-        protected virtual void DisplaySearchResultsInternal()
-        {
-        }
-
-        protected virtual bool UpdateSearchHistoryInternal(string lastSearchText)
-        {
-            try
-            {
-                List<string> history = new List<string>(SearchHistory);
-
-                // Check whether it is already in the search history.
-                // Ignore letter case.
-                foreach (string s in history)
-                {
-                    if (string.Compare(s, lastSearchText, true) == 0)
-                        return false;
-                }
-
-                if (history.Count >= 20)
-                    history.RemoveAt(0);
-
-                history.Add(lastSearchText);
-
-                SearchHistory = history;
-
-                return true;
-            }
-            catch(Exception ex)
-            {
-                Logger.LogException(ex);
-                return false;
-            }
-        }
-
-        
         protected void OnMenuClick(object sender, EventArgs e)
         {
             OPMToolStripMenuItem tsmi = sender as OPMToolStripMenuItem;
@@ -266,19 +234,12 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                                 EventDispatch.DispatchEvent(LocalEventNames.ManageOnlineContent, selItems, false);
                                 return;
 
-                            case MediaBrowserAction.AddExistingPlaylist:
-                                EventDispatch.DispatchEvent(LocalEventNames.AddToPlaylist, selItems, true);
+                            case MediaBrowserAction.AddToLocalPlaylist:
+                                EventDispatch.DispatchEvent(LocalEventNames.AddToPlaylist, selItems);
                                 return;
 
-                            case MediaBrowserAction.AddNewPlaylist:
-                                EventDispatch.DispatchEvent(LocalEventNames.AddToPlaylist, selItems, false);
-                                return;
-
-                            case MediaBrowserAction.AddExistingDeezerPlaylist:
-                            case MediaBrowserAction.AddNewDeezerPlaylist:
+                            case MediaBrowserAction.AddToDeezerPlaylist:
                                 {
-                                    bool existing = (act == MediaBrowserAction.AddExistingDeezerPlaylist);
-
                                     List<DeezerTrackPlaylistItem> deezerItems = new List<DeezerTrackPlaylistItem>();
 
                                     selItems.ForEach((omi) =>
@@ -287,7 +248,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                                             deezerItems.Add(new DeezerTrackPlaylistItem(omi as DeezerTrackItem));
                                     });
 
-                                    EventDispatch.DispatchEvent(LocalEventNames.AddToDeezerPlaylist, deezerItems, FindForm(), existing);
+                                    EventDispatch.DispatchEvent(LocalEventNames.AddToDeezerPlaylist, deezerItems, FindForm());
                                 }
                                 return;
 
@@ -299,18 +260,60 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             }
         }
 
+        protected void ShowWaitDialog(string message)
+        {
+            CloseWaitDialog();
+
+            _waitDialog = new CancellableWaitDialog();
+            _waitDialog.FormClosed += new FormClosedEventHandler(_waitDialog_FormClosed);
+            _waitDialog.ShowDialog(message, FindForm());
+        }
+
+        protected void CloseWaitDialog()
+        {
+            if (_waitDialog != null)
+            {
+                _waitDialog.Close();
+                _waitDialog = null;
+            }
+        }
+
+        void _waitDialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (_waitDialog != null && _waitDialog.EscapePressed)
+            {
+                _waitDialog.SetText("Please wait while cancelling the search task ...");
+                _searchCancelled.Set();
+            }
+        }
+
+
+        protected virtual void DisplaySearchResultsInternal()
+        {
+        }
+
+        protected virtual bool UpdateSearchHistoryInternal(string lastSearchText)
+        {
+            return false;
+        }
+
         protected virtual void HandleAction(string act)
         {
         }
 
-        protected virtual List<string> GetSearchHistory()
+        protected virtual void LoadSearchHistory()
         {
-            return null;
         }
 
-        protected virtual void SetSearchHistory(List<string> history)
+        public virtual string GetSearchText() { return string.Empty; }
+
+        public virtual bool PreValidateSearch()
         {
+            string search = GetSearchText();
+            return string.IsNullOrEmpty(search) == false;
         }
+
+        public virtual void PerformValidation() { }
     }
 
     public class MediaBrowserAction
@@ -319,10 +322,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
         public const string Enqueue = "Enqueue";
         public const string AddFav = "AddFav";
         public const string DelFav = "DelFav";
-        public const string AddNewPlaylist = "AddNewPlaylist";
-        public const string AddExistingPlaylist = "AddExistingPlaylist";
 
-        public const string AddNewDeezerPlaylist = "AddNewDeezerPlaylist";
-        public const string AddExistingDeezerPlaylist = "AddExistingDeezerPlaylist";
+        public const string AddToLocalPlaylist = "AddToLocalPlaylist";
+        public const string AddToDeezerPlaylist = "AddToDeezerPlaylist";
     }
 }
