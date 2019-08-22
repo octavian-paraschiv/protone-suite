@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -100,6 +101,16 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         public override string ToString()
         {
             return string.Format("[Id={0}, Title={1}, Desc={2}]", Id, Title, Description);
+        }
+
+        public static OnlinePlaylist AddNew()
+        {
+            return new OnlinePlaylist
+            {
+                Id = 0,
+                Description = "",
+                Title = $"( {Translator.Translate("TXT_NEW")} )"
+            };
         }
     }
 

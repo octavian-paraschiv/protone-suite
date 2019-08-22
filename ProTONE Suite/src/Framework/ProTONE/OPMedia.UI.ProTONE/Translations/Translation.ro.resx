@@ -1238,11 +1238,8 @@ vă rugăm să  alegeți una:</value>
   <data name="TXT_USE_WORKER_PROCESS">
     <value>Redați conținutul Deezer în modul izolare</value>
   </data>
-  <data name="TXT_ADD_NEW_PLAYLIST" xml:space="preserve">
-    <value>Adauga la o nouă listă de redare ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
-    <value>Adauga la o listă de redare existentă ...</value>
+  <data name="TXT_ADD_TO_LOCAL_PLAYLIST" xml:space="preserve">
+    <value>Adaugă la o listă de redare locală...</value>
   </data>
   <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
     <value>Forma de undă şi spectrograma nu sunt suportate pentru coținutul media redat în acest moment.</value>
@@ -1269,11 +1266,8 @@ Scurtătura: {0}</value>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Durata totală de redare</value>
   </data>
-  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Adăugați la o nouă listă de redare Deezer ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Adăugați la o listă de redare Deezer existentă ...</value>
+  <data name="TXT_ADD_TO_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Adaugă la o listă de redare Deezer...</value>
   </data>
   <data name="TXT_DEEZER_APP_ID_ALT" xml:space="preserve">
     <value>Deezer Application ID [2]:</value>
@@ -1289,5 +1283,8 @@ fișierelor (ID3, imagini)</value>
   <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
     <value>Lista dvs. de redare este goală. 
 Ce ați dori să faceți?</value>
+  </data>
+  <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
+    <value>Numele noii liste de redare</value>
   </data>
 </root>

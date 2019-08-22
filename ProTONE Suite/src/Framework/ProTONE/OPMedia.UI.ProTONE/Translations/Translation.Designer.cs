@@ -115,24 +115,6 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to an existing Deezer playlist ....
-        /// </summary>
-        internal static string TXT_ADD_EXISTING_DEEZER_PLAYLIST {
-            get {
-                return ResourceManager.GetString("TXT_ADD_EXISTING_DEEZER_PLAYLIST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add to an existing playlist ....
-        /// </summary>
-        internal static string TXT_ADD_EXISTING_PLAYLIST {
-            get {
-                return ResourceManager.GetString("TXT_ADD_EXISTING_PLAYLIST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add to Favorites.
         /// </summary>
         internal static string TXT_ADD_FAV_LIST {
@@ -142,20 +124,20 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to a new Deezer playlist ....
+        ///   Looks up a localized string similar to Add to a Deezer playlist ....
         /// </summary>
-        internal static string TXT_ADD_NEW_DEEZER_PLAYLIST {
+        internal static string TXT_ADD_TO_DEEZER_PLAYLIST {
             get {
-                return ResourceManager.GetString("TXT_ADD_NEW_DEEZER_PLAYLIST", resourceCulture);
+                return ResourceManager.GetString("TXT_ADD_TO_DEEZER_PLAYLIST", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to a new playlist ....
+        ///   Looks up a localized string similar to Add to a local playlist ....
         /// </summary>
-        internal static string TXT_ADD_NEW_PLAYLIST {
+        internal static string TXT_ADD_TO_LOCAL_PLAYLIST {
             get {
-                return ResourceManager.GetString("TXT_ADD_NEW_PLAYLIST", resourceCulture);
+                return ResourceManager.GetString("TXT_ADD_TO_LOCAL_PLAYLIST", resourceCulture);
             }
         }
         
@@ -1985,6 +1967,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_NEW_BOOKMARK_ADDED {
             get {
                 return ResourceManager.GetString("TXT_NEW_BOOKMARK_ADDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New playlist name.
+        /// </summary>
+        internal static string TXT_NEW_PLAYLIST_NAME {
+            get {
+                return ResourceManager.GetString("TXT_NEW_PLAYLIST_NAME", resourceCulture);
             }
         }
         

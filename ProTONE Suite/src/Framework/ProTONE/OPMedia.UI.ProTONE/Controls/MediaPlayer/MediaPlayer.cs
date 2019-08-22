@@ -1173,12 +1173,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         {
                             switch (senderMenu.Tag as string)
                             {
-                                case "AddNewDeezerPlaylist":
-                                    playlist.AddToDeezerPlaylist(false);
-                                    break;
-
-                                case "AddExistingDeezerPlaylist":
-                                    playlist.AddToDeezerPlaylist(true);
+                                case "AddToDeezerPlaylist":
+                                    playlist.AddToDeezerPlaylist();
                                     break;
 
                                 default:

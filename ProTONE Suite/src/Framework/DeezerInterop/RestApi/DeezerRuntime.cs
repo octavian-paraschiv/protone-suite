@@ -256,17 +256,34 @@ namespace OPMedia.DeezerInterop.RestApi
             return playlists;
         }
 
-        public UInt64 CreatePlaylist(string accessToken, string playlistName, ManualResetEvent abortEvent)
+        public UInt64 CreatePlaylist(string playlistName, ManualResetEvent abortEvent)
         {
             if (abortEvent.WaitOne(5))
                 return 0;
 
+            string response = this.ExecuteHttPost(string.Format("user/me/playlists?access_token={0}&title={1}", this.UserAccessToken, playlistName), string.Empty);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                var p = JsonConvert.DeserializeObject<Playlist>(response);
+                if (p != null)
+                    return p.Id;
+            }
+
             return 0;
         }
 
-        public void AddToPlaylist(string accessToken, UInt64 playlistId, List<Track> tracks, ManualResetEvent abortEvent)
+        public bool AddToPlaylist(UInt64 playlistId, string tracks, ManualResetEvent abortEvent)
         {
-            
+            if (abortEvent.WaitOne(5))
+                return false;
+
+            string response = this.ExecuteHttPost(string.Format("playlist/{0}/tracks?access_token={1}&songs={2}", playlistId, this.UserAccessToken, tracks), string.Empty);
+            if (string.IsNullOrEmpty(response) == false)
+            {
+                return bool.Parse(response);
+            }
+
+            return false;
         }
     }
 }

@@ -1234,11 +1234,8 @@ Dans le cas contraire, vous devrez copier à partir de l’URL affichée dans le
   <data name="TXT_USE_WORKER_PROCESS">
     <value>Lecture du contenu Deezer en mode d'isolation</value>
   </data>
-  <data name="TXT_ADD_NEW_PLAYLIST" xml:space="preserve">
-    <value>Ajouter à une nouveau liste de lecture ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
-    <value>Ajouter à une liste de lecture existant ...</value>
+  <data name="TXT_ADD_TO_LOCAL_PLAYLIST" xml:space="preserve">
+    <value>Ajouter à une liste de lecture locale ...</value>
   </data>
   <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
     <value>Le Forme d’onde et le Spectrogramme ne sont pas supportés pour le contenu des médias qui se joue actuellement.</value>
@@ -1268,11 +1265,8 @@ Raccourci: {0}</value>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Temps total de lecture</value>
   </data>
-  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Ajouter à une nouvelle liste de lecture Deezer ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Ajouter à une liste de lecture Deezer existante ...</value>
+  <data name="TXT_ADD_TO_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Ajouter à une liste de lecture sur Deezer ...</value>
   </data>
   <data name="TXT_DEEZER_APP_ID_ALT" xml:space="preserve">
     <value>Deezer Application ID [2]:</value>
@@ -1287,5 +1281,8 @@ file metadata (ID3, images)</value>
   <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
     <value>Votre liste de lecture est vide. 
 Qu'est-ce que tu aimerais faire?</value>
+  </data>
+  <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
+    <value>Nom de la nouvelle liste de lecture</value>
   </data>
 </root>

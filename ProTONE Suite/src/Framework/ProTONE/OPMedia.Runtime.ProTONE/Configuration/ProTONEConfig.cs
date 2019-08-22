@@ -970,24 +970,26 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                if (Regedit.IsDevelopmentMachine)
-                    return true;
+                //if (Regedit.IsDevelopmentMachine)
+                //    return true;
 
-                if (_enableExtendedDeezerFeatures == null)
-                {
-                    try
-                    {
-                        Assembly thisAssembly = Assembly.GetEntryAssembly();
-                        Version v = thisAssembly.GetName().Version;
-                        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 2));
-                    }
-                    catch
-                    {
-                        _enableExtendedDeezerFeatures = false;
-                    }
-                }
+                //if (_enableExtendedDeezerFeatures == null)
+                //{
+                //    try
+                //    {
+                //        Assembly thisAssembly = Assembly.GetEntryAssembly();
+                //        Version v = thisAssembly.GetName().Version;
+                //        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 2));
+                //    }
+                //    catch
+                //    {
+                //        _enableExtendedDeezerFeatures = false;
+                //    }
+                //}
 
-                return _enableExtendedDeezerFeatures.GetValueOrDefault();
+                //return _enableExtendedDeezerFeatures.GetValueOrDefault();
+
+                return true;
             }
         }
 

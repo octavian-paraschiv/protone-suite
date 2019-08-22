@@ -182,5 +182,13 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             _dti = dti;
         }
+
+        public DeezerTrackItem Track
+        {
+            get
+            {
+                return _dti;
+            }
+        }
     }
 }

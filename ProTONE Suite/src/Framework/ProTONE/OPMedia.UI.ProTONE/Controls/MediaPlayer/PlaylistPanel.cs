@@ -1178,58 +1178,24 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             TotalTimeChanged?.Invoke(TimeSpan.FromSeconds((int)totalSeconds));
         }
 
-        internal void AddToDeezerPlaylist(bool addToExisting)
+        internal void AddToDeezerPlaylist()
         {
-            var deezerPlaylistItems = from pli in playlist.AllItems
-                                      where pli is DeezerTrackPlaylistItem
-                                      select (pli as DeezerTrackPlaylistItem);
-
-            if (deezerPlaylistItems != null)
+            List<DeezerTrackPlaylistItem> itemsToAdd = new List<DeezerTrackPlaylistItem>();
+            if (lvPlaylist.SelectedItems.Count > 0)
             {
-                var list = deezerPlaylistItems.ToList();
-                if (list.Count > 0)
-                    AddToDeezerPlaylist(list, FindForm(), addToExisting);
-            }
-
-        }
-
-        [EventSink(LocalEventNames.AddToDeezerPlaylist)]
-        public void AddToDeezerPlaylist(List<DeezerTrackPlaylistItem> plItems, Form parent, bool addToExisting)
-        {
-            if (ProTONEConfig.DeezerHasValidConfig)
-            {
-                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-
-                DeezerInterop.RestApi.DeezerRuntime dzr = new DeezerInterop.RestApi.DeezerRuntime(deezerApiEndpoint, userAccessToken, applicationId);
-                if (dzr != null)
+                foreach (ListViewItem lvItem in lvPlaylist.SelectedItems)
                 {
-                    ManualResetEvent abortEvent = new ManualResetEvent(false);
-
-                    var playlists = OnlineContentSearcher.GetMyPlaylists(OnlineMediaSource.Deezer, abortEvent);
-
-                    string playlistName = ChooseDeeezerPlaylistName(playlists, addToExisting);
-                    if (string.IsNullOrEmpty(playlistName) == false)
+                    DeezerTrackPlaylistItem item = lvItem.Tag as DeezerTrackPlaylistItem;
+                    if (item != null)
                     {
-                        if (addToExisting)
-                        {
-                        }
-                        else
-                        {
-                            // Create the new playlist
-                            UInt64 playlistId = dzr.CreatePlaylist(userAccessToken, playlistName, abortEvent);
-                            if (playlistId > 0)
-                                dzr.AddToPlaylist(userAccessToken, playlistId, null, abortEvent);
-                        }
+                        itemsToAdd.Add(item);
                     }
                 }
             }
-        }
 
-        private string ChooseDeeezerPlaylistName(List<OnlinePlaylist> playlist, bool addToExisting)
-        {
-            return "";
+
+            if (itemsToAdd.Count > 0)
+                AddToDeezerPlaylist(itemsToAdd, FindForm());
         }
 
         private void lblOpenPlaylist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1240,6 +1206,69 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void lblOpenFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoad));
+        }
+
+
+        [EventSink(LocalEventNames.AddToDeezerPlaylist)]
+        public void AddToDeezerPlaylist(List<DeezerTrackPlaylistItem> plItems, Form parent)
+        {
+            if (ProTONEConfig.DeezerHasValidConfig)
+            {
+                string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
+                string applicationId = ProTONEConfig.DeezerApplicationId;
+                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
+
+                DeezerInterop.RestApi.DeezerRuntime dzr = new DeezerInterop.RestApi.DeezerRuntime(deezerApiEndpoint, applicationId, userAccessToken);
+                if (dzr != null)
+                {
+                    ManualResetEvent abortEvent = new ManualResetEvent(false);
+
+                    var playlists = OnlineContentSearcher.GetMyPlaylists(OnlineMediaSource.Deezer, abortEvent);
+
+                    var playlist = ChooseDeeezerPlaylistName(parent, playlists);
+                    if (playlist != null)
+                    {
+                        UInt64 playlistId = playlist.Id;
+                        if (playlistId <= 0)
+                        {
+                            // Create the new playlist
+                            playlistId = dzr.CreatePlaylist(playlist.Title, abortEvent);
+                        }
+
+                        if (playlistId > 0)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            plItems.ForEach((item) =>
+                            {
+                                OPMedia.DeezerInterop.RestApi.Track t = null;
+                                try
+                                {
+                                    sb.Append(item.Track.Url.Replace(DeezerTrackItem.DeezerTrackUrlBase, ""));
+                                    sb.Append(",");
+                                }
+                                catch
+                                {
+                                }
+                            });
+
+                            var tracks = sb.ToString().Trim(',');
+
+                            dzr.AddToPlaylist(playlistId, tracks, abortEvent);
+                        }
+                    }
+                }
+            }
+        }
+
+        private OnlinePlaylist ChooseDeeezerPlaylistName(Form parent, List<OnlinePlaylist> playlists)
+        {
+            playlists.Insert(0, OnlinePlaylist.AddNew());
+
+            SelectOnlinePlaylistDlg dlg = new SelectOnlinePlaylistDlg(playlists);
+            if (dlg.ShowDialog(parent) == DialogResult.OK)
+                return dlg.SelectedItem;
+
+            return null;
         }
     }
 }

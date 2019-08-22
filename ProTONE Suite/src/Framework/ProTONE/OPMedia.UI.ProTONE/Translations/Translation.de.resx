@@ -1234,11 +1234,8 @@ Andernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und 
   <data name="TXT_USE_WORKER_PROCESS">
     <value>Spielen Sie den Deezer-Inhalt im Isolationsmodus ab</value>
   </data>
-  <data name="TXT_ADD_NEW_PLAYLIST" xml:space="preserve">
-    <value>Hinzufügen einer neuen Wiedergabelisten ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
-    <value>Hinzufügen einer vorhandenen Wiedergabelisten ...</value>
+  <data name="TXT_ADD_TO_LOCAL_PLAYLIST" xml:space="preserve">
+    <value>Hinzufügen einer lokalen Wiedergabeliste ...</value>
   </data>
   <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
     <value>Wellenform und Spektrogramm werden nicht unterstützt, für die Medieninhalte, die derzeit wiedergegeben wird.</value>
@@ -1268,11 +1265,8 @@ Tastenkürzel: {0}</value>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Gesamtwiedergabezeit</value>
   </data>
-  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Hinzufügen einer neuen Deezer Wiedergabelisten  ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Hinzufügen einer bestehenden Deezer Wiedergabelisten ...</value>
+  <data name="TXT_ADD_TO_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Hinzufügen einer Deezer Wiedergabeliste ...</value>
   </data>
   <data name="TXT_DEEZER_APP_ID_ALT" xml:space="preserve">
     <value>Deezer Application ID [2]:</value>
@@ -1288,5 +1282,8 @@ file metadata (ID3, images)
   <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
     <value>Ihre Wiedergabeliste ist leer. 
 Was würdest du gern tun?</value>
+  </data>
+  <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
+    <value>Name der neuen Wiedergabeliste</value>
   </data>
 </root>

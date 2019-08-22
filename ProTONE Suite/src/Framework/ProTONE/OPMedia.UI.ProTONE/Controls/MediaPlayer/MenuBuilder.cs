@@ -103,15 +103,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
                 tsmi.Click += clickHandler;
-                tsmi.Text = Translator.Translate("TXT_ADD_NEW_DEEZER_PLAYLIST");
-                tsmi.Tag = "AddNewDeezerPlaylist";
-                tsmi.Image = Resources.deezer16;
-                menuToAlter.AddSingleEntry(tsmi);
-
-                tsmi = new OPMToolStripMenuItem();
-                tsmi.Click += clickHandler;
-                tsmi.Text = Translator.Translate("TXT_ADD_EXISTING_DEEZER_PLAYLIST");
-                tsmi.Tag = "AddExistingDeezerPlaylist";
+                tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
+                tsmi.Tag = "AddToDeezerPlaylist";
                 tsmi.Image = Resources.deezer16;
                 menuToAlter.AddSingleEntry(tsmi);
             }

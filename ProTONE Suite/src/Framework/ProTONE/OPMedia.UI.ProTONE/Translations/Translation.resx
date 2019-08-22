@@ -1241,11 +1241,8 @@ Otherwise, you will need to copy it from the URL displayed in the default browse
   <data name="TXT_USE_WORKER_PROCESS">
     <value>Play Deezer content in isolation mode</value>
   </data>
-  <data name="TXT_ADD_NEW_PLAYLIST" xml:space="preserve">
-    <value>Add to a new playlist ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_PLAYLIST" xml:space="preserve">
-    <value>Add to an existing playlist ...</value>
+  <data name="TXT_ADD_TO_LOCAL_PLAYLIST" xml:space="preserve">
+    <value>Add to a local playlist ...</value>
   </data>
   <data name="TXT_UNSUPPORTED_SIGNAL_ANALISYS_FUNCTIONS" xml:space="preserve">
     <value>Waveform and Spectrogram are not supported for the media content that is currently played.</value>
@@ -1269,11 +1266,8 @@ Shortcut: {0}</value>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Total playback time</value>
   </data>
-  <data name="TXT_ADD_NEW_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Add to a new Deezer playlist ...</value>
-  </data>
-  <data name="TXT_ADD_EXISTING_DEEZER_PLAYLIST" xml:space="preserve">
-    <value>Add to an existing Deezer playlist ...</value>
+  <data name="TXT_ADD_TO_DEEZER_PLAYLIST" xml:space="preserve">
+    <value>Add to a Deezer playlist ...</value>
   </data>
   <data name="TXT_DEEZER_APP_ID_ALT" xml:space="preserve">
     <value>Deezer Application ID [2]:</value>
@@ -1288,5 +1282,8 @@ file metadata (ID3, images)</value>
   <data name="TXT_EMPTY_PLAYLIST" xml:space="preserve">
     <value>Your playlist is empty.
 What would you like to do?</value>
+  </data>
+  <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
+    <value>New playlist name</value>
   </data>
 </root>
