@@ -19,7 +19,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private OPMButton btnCancel;
         private OPMButton btnOk;
         private ListBox lbPlaylists;
-        private OPMLabel label1;
+        private OPMLabel lblDesc;
         private OPMLabel lblNewName;
         private OPMTextBox txtNewName;
         private OPMTableLayoutPanel opmLayoutPanel1;
@@ -47,10 +47,57 @@ namespace OPMedia.UI.ProTONE.Dialogs
             lbPlaylists.DisplayMember = "Title";
             ThemeManager.SetFont(lbPlaylists, FontSizes.Large);
 
-            playlists.ForEach((p) => lbPlaylists.Items.Add(p));
+            if (playlists != null)
+            {
+                bool addToPlaylist = (playlists.Count > 0 && playlists[0].Id <= 0);
+                if (addToPlaylist)
+                    lblDesc.Text = Translator.Translate("TXT_SELECT_PLAYLIST_OR_NEW:");
 
-            int sel = (lbPlaylists.Items.Count > 0) ? 0 : -1;
-            lbPlaylists.SelectedIndex = sel;
+                playlists.ForEach((p) => lbPlaylists.Items.Add(p));
+                this.Shown += (s, e) =>
+                {
+                    int sel = (lbPlaylists.Items.Count > 0) ? 0 : -1;
+                    lbPlaylists.SelectedIndex = sel;
+                };
+
+                txtNewName.TextChanged += (s, e) => ActivateOKButton();
+
+                lbPlaylists.MouseDoubleClick += (s, e) =>
+                {
+                    if (IsSelectionValid())
+                    {
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                };
+            }
+        }
+
+        private void ActivateOKButton()
+        {
+            btnOk.Enabled = IsSelectionValid();
+        }
+
+        protected override bool AllowCloseOnKeyDown(Keys keyDown)
+        {
+            if (!IsSelectionValid() && keyDown == Keys.Enter)
+                return false;
+            
+            return base.AllowCloseOnKeyDown(keyDown);
+        }
+
+        private bool IsSelectionValid()
+        {
+            var sel = lbPlaylists.SelectedItem as OnlinePlaylist;
+            bool valid = (sel != null);
+
+            if (valid && sel.Id <= 0)
+            {
+                valid &= (string.IsNullOrEmpty(txtNewName.Text) == false);
+                valid &= (txtNewName.Text.StartsWith("_") == false);
+            }
+
+            return valid;
         }
 
         private void InitializeComponent()
@@ -58,7 +105,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel = new OPMedia.UI.Controls.OPMButton();
             this.btnOk = new OPMedia.UI.Controls.OPMButton();
             this.lbPlaylists = new System.Windows.Forms.ListBox();
-            this.label1 = new OPMedia.UI.Controls.OPMLabel();
+            this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblNewName = new OPMedia.UI.Controls.OPMLabel();
             this.txtNewName = new OPMedia.UI.Controls.OPMTextBox();
@@ -117,21 +164,21 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lbPlaylists.TabIndex = 3;
             this.lbPlaylists.SelectedIndexChanged += new System.EventHandler(this.lbPlaylists_SelectedIndexChanged);
             // 
-            // label1
+            // lblDesc
             // 
-            this.label1.AutoSize = true;
-            this.opmLayoutPanel1.SetColumnSpan(this.label1, 4);
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(5);
-            this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(404, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "TXT_SELECT_PLAYLIST";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDesc.AutoSize = true;
+            this.opmLayoutPanel1.SetColumnSpan(this.lblDesc, 4);
+            this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblDesc.Location = new System.Drawing.Point(5, 5);
+            this.lblDesc.Margin = new System.Windows.Forms.Padding(5);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
+            this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
+            this.lblDesc.Size = new System.Drawing.Size(404, 15);
+            this.lblDesc.TabIndex = 2;
+            this.lblDesc.Text = "TXT_SELECT_PLAYLIST";
+            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLayoutPanel1
             // 
@@ -142,7 +189,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmLayoutPanel1.Controls.Add(this.btnCancel, 3, 5);
             this.opmLayoutPanel1.Controls.Add(this.lbPlaylists, 0, 3);
-            this.opmLayoutPanel1.Controls.Add(this.label1, 0, 2);
+            this.opmLayoutPanel1.Controls.Add(this.lblDesc, 0, 2);
             this.opmLayoutPanel1.Controls.Add(this.btnOk, 2, 5);
             this.opmLayoutPanel1.Controls.Add(this.lblNewName, 0, 4);
             this.opmLayoutPanel1.Controls.Add(this.txtNewName, 1, 4);
@@ -215,13 +262,20 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
         private void lbPlaylists_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool addNew = (lbPlaylists.SelectedIndex == 0);
+            ActivateOKButton();
+
+            bool addNew = false;
+            var sel = lbPlaylists.SelectedItem as OnlinePlaylist;
+            if (sel != null)
+                addNew = (sel.Id <= 0);
+
             lblNewName.Visible = txtNewName.Visible = addNew;
             if (addNew)
             {
                 txtNewName.Select();
                 txtNewName.Focus();
             }
+
         }
     }
 }

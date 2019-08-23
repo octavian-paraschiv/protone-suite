@@ -2776,12 +2776,20 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following playlists were found, 
-        ///please choose one:.
+        ///   Looks up a localized string similar to The following playlists were found, please choose one:.
         /// </summary>
         internal static string TXT_SELECT_PLAYLIST {
             get {
                 return ResourceManager.GetString("TXT_SELECT_PLAYLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose an online playlist to add the items, or create a new one:.
+        /// </summary>
+        internal static string TXT_SELECT_PLAYLIST_OR_NEW {
+            get {
+                return ResourceManager.GetString("TXT_SELECT_PLAYLIST_OR_NEW", resourceCulture);
             }
         }
         

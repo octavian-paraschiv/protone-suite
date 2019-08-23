@@ -1180,8 +1180,7 @@ Pentru a obține propriile dvs. setări de identitate, accesați:</value>
     <value>Selectaţi o listă de redare online</value>
   </data>
   <data name="TXT_SELECT_PLAYLIST">
-    <value>S-au găsit următoarele liste de redare, 
-vă rugăm să  alegeți una:</value>
+    <value>S-au găsit următoarele liste de redare, vă rugăm să alegeți una:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS">
     <value>Listele mele de redare online</value>
@@ -1286,5 +1285,8 @@ Ce ați dori să faceți?</value>
   </data>
   <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
     <value>Numele noii liste de redare</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST_OR_NEW" xml:space="preserve">
+    <value>Alegeți o listă de redare online pentru a adăuga elementele sau creați una nouă</value>
   </data>
 </root>

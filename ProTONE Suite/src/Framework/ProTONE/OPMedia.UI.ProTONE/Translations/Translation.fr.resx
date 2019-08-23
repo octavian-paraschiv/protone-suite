@@ -1173,11 +1173,10 @@ To get your own credentials, please access:</value>
     <value>S’il vous plaît attendez que la tâche de recherche se termine. Vous pouvez appuyer sur ÉCHAP pour annuler la recherche.</value>
   </data>
   <data name="TXT_SELECT_ONLINE_PLAYLIST">
-    <value>Sélectionnez une playlist online</value>
+    <value>Sélectionnez une liste de lecture online</value>
   </data>
   <data name="TXT_SELECT_PLAYLIST">
-    <value>Les playlists suivantes ont été trouvées,
-veuillez en choisir une:</value>
+    <value>Les playlists suivantes ont été trouvées, veuillez en choisir une:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS">
     <value>Parcourir mes playlists en ligne</value>
@@ -1284,5 +1283,8 @@ Qu'est-ce que tu aimerais faire?</value>
   </data>
   <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
     <value>Nom de la nouvelle liste de lecture</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST_OR_NEW" xml:space="preserve">
+    <value>Choisissez une liste de lecture en ligne pour ajouter les éléments ou créez-en une nouvelle</value>
   </data>
 </root>

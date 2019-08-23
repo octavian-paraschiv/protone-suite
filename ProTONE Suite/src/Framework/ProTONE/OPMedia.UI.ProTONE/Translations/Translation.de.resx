@@ -1173,11 +1173,10 @@ To get your own credentials, please access:</value>
     <value>Bitte warten Sie, bis die Suche Aufgabe abgeschlossen ist. Drücken Sie ESC, um den Suchvorgang abzubrechen.!</value>
   </data>
   <data name="TXT_SELECT_ONLINE_PLAYLIST">
-    <value>Wählen Sie eine Online-Playlist!</value>
+    <value>Wählen Sie eine Online-Wiedergabeliste</value>
   </data>
   <data name="TXT_SELECT_PLAYLIST">
-    <value>Folgende Playlists wurden gefunden,
-bitte wählen Sie eine aus:</value>
+    <value>Folgende Playlists wurden gefunden, bitte wählen Sie eine aus:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS">
     <value>Durchsuchen Sie meine Online-Playlists!</value>
@@ -1285,5 +1284,8 @@ Was würdest du gern tun?</value>
   </data>
   <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
     <value>Name der neuen Wiedergabeliste</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST_OR_NEW" xml:space="preserve">
+    <value>Wählen Sie eine Online-Wiedergabeliste, um die Elemente hinzuzufügen, oder erstellen Sie eine neue</value>
   </data>
 </root>

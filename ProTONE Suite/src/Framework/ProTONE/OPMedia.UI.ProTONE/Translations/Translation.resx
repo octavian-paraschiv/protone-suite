@@ -1183,8 +1183,7 @@ To get your own credentials, please access:</value>
     <value>Select an online playlist</value>
   </data>
   <data name="TXT_SELECT_PLAYLIST">
-    <value>The following playlists were found, 
-please choose one:</value>
+    <value>The following playlists were found, please choose one:</value>
   </data>
   <data name="TXT_LOOKUP_MY_PLAYLISTS">
     <value>Browse my online playlists</value>
@@ -1285,5 +1284,8 @@ What would you like to do?</value>
   </data>
   <data name="TXT_NEW_PLAYLIST_NAME" xml:space="preserve">
     <value>New playlist name</value>
+  </data>
+  <data name="TXT_SELECT_PLAYLIST_OR_NEW" xml:space="preserve">
+    <value>Choose an online playlist to add the items, or create a new one:</value>
   </data>
 </root>
