@@ -13,6 +13,9 @@ using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.UI.Themes;
+using OPMedia.DeezerInterop.OAuth;
+using OPMedia.Core.TranslationSupport;
+using System.Threading.Tasks;
 
 namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 {
@@ -30,17 +33,12 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             InitializeComponent();
             this.Title = "Deezer";
+
             this.HandleCreated += new EventHandler(DeezerConfigPage_HandleCreated);
 
-            txtDeezerAppID.TextChanged += new EventHandler(OnSettingsChanged);
             txtDeezerToken.TextChanged += new EventHandler(OnSettingsChanged);
             chkUseServices.CheckedChanged += new EventHandler(OnSettingsChanged);
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
-        }
-
-        protected override void OnThemeUpdatedInternal()
-        {
-            lblHint.OverrideForeColor = ThemeManager.LinkColor;
         }
 
         void OnSettingsChanged(object sender, EventArgs e)
@@ -50,7 +48,6 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
         void DeezerConfigPage_HandleCreated(object sender, EventArgs e)
         {
-            txtDeezerAppID.Text = ProTONEConfig.DeezerApplicationId;
             txtDeezerToken.Text = ProTONEConfig.DeezerUserAccessToken;
             chkUseServices.Checked = ProTONEConfig.DeezerUseServicesForFileMetadata;
             OnThemeUpdatedInternal();
@@ -58,15 +55,43 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
         protected override void SaveInternal()
         {
-            ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
             ProTONEConfig.DeezerUseServicesForFileMetadata = chkUseServices.Checked;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            ProTONEConfig.DeezerApplicationId = txtDeezerAppID.Text;
-            new DeezerCredentialsForm().ShowDialog();
+            string token = null;
+
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    using (AuthApi auth = new AuthApi())
+                    {
+                        token = auth.GetOAuthAccessToken();
+                    }
+                }
+                catch
+                {
+                }
+
+            }).ContinueWith(_ =>
+            {
+                if (this.IsDisposed == false && this.Visible)
+                {
+                    if (string.IsNullOrEmpty(token))
+                    {
+                        MessageDisplay.Show("Something went wrong. Your user could not be successfully authenticated. Please retry.",
+                            Translator.Translate("TXT_ERROR"), MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        txtDeezerToken.Text = token;
+                    }
+                }
+
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

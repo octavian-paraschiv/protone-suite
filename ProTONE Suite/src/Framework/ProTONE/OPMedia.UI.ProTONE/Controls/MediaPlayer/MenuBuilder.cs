@@ -99,7 +99,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 menuToAlter = new MenuWrapper<OPMToolStripMenuItem>(item) as MenuWrapper<T>;
             }
 
-            if (ProTONEConfig.DeezerHasValidConfig && ProTONEConfig.EnableExtendedDeezerFeatures)
+            if (ProTONEConfig.DeezerHasValidConfig)
             {
                 OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
                 tsmi.Click += clickHandler;

@@ -13,13 +13,9 @@ namespace OPMedia.DeezerInterop.RestApi
 {
     public class DeezerRuntime
     {
-        private string _apiEndpoint = "http://api.deezer.com/";
-
         private WebClientWithTimeout _webClient;
 
         public string UserAccessToken { get; set; }
-        public string ApplicationId { get; set; }
-
 
         public override bool Equals(object obj)
         {
@@ -28,10 +24,9 @@ namespace OPMedia.DeezerInterop.RestApi
             DeezerRuntime dzr = obj as DeezerRuntime;
             if (dzr != null)
             {
-                if (dzr.UserAccessToken != null && this.ApplicationId != null)
+                if (dzr.UserAccessToken != null)
                 {
-                    bEq = (dzr.UserAccessToken == this.UserAccessToken &&
-                        dzr.ApplicationId == this.ApplicationId);
+                    bEq = (dzr.UserAccessToken == this.UserAccessToken);
                 }
             }
 
@@ -42,23 +37,19 @@ namespace OPMedia.DeezerInterop.RestApi
         /// <summary>
         /// Initializes a new instance of the <see cref="DeezerRuntime"/> class.
         /// </summary>
-        public DeezerRuntime(string apiEndpoint)
+        public DeezerRuntime()
         {
-            _apiEndpoint = apiEndpoint;
             _webClient = new WebClientWithTimeout(30000);
-
             this.UserAccessToken = null;
-            this.ApplicationId = null;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DeezerRuntime"/> class.
         /// Sets the application credentials for use with needed requests.
         /// </summary>
-        public DeezerRuntime(string apiEndpoint, string applicationId, string userAccessToken)
-            : this(apiEndpoint)
+        public DeezerRuntime(string userAccessToken)
+            : this()
         {
-            this.ApplicationId = applicationId;
             this.UserAccessToken = userAccessToken;
         }
 
@@ -79,7 +70,7 @@ namespace OPMedia.DeezerInterop.RestApi
         internal string ExecuteHttpGet(string method)
         {
             string response = null;
-            string url = _apiEndpoint + method;
+            string url = DeezerAppConstants.ApiEndpoint + method;
 
             try
             {
@@ -109,7 +100,7 @@ namespace OPMedia.DeezerInterop.RestApi
         internal string ExecuteHttPost(string method, string data)
         {
             string response = null;
-            string url = _apiEndpoint + method;
+            string url = DeezerAppConstants.ApiEndpoint + method;
 
             try
             {

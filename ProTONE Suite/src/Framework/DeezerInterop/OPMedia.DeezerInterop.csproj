@@ -62,6 +62,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OAuth\AuthApi.cs" />
+    <Compile Include="OAuth\RedirectHandler.cs" />
+    <Compile Include="DeezerAppConstants.cs" />
     <Compile Include="PlayerApi\DeezerApi.cs" />
     <Compile Include="PlayerApi\DeezerConnect.cs" />
     <Compile Include="PlayerApi\DeezerConstants.cs" />

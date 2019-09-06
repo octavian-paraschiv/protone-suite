@@ -897,50 +897,10 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Deezer settings
 
-        public static string GetDeezerUserAccessToken(string userId)
-        {
-            if (string.Compare(userId, DeezerApplicationId2, true) == 0)
-                return DeezerUserAccessToken2;
-
-            return DeezerUserAccessToken;
-        }
-
-        public static string GetNextDeezerIdentity(string userId)
-        {
-            if (string.Compare(userId, DeezerApplicationId, true) == 0)
-                return DeezerApplicationId2;
-
-            return DeezerApplicationId;
-        }
-
         public static string DeezerUserAccessToken
         {
             get { return PersistenceProxy.ReadObject("DeezerUserAccessToken", string.Empty); }
             set { PersistenceProxy.SaveObject("DeezerUserAccessToken", value); }
-        }
-
-        public static string DeezerApplicationId
-        {
-            get { return PersistenceProxy.ReadObject("DeezerApplicationId", string.Empty); }
-            set { PersistenceProxy.SaveObject("DeezerApplicationId", value); }
-        }
-
-        public static string DeezerUserAccessToken2
-        {
-            get { return PersistenceProxy.ReadObject("DeezerUserAccessToken2", string.Empty); }
-            set { PersistenceProxy.SaveObject("DeezerUserAccessToken2", value); }
-        }
-
-        public static string DeezerApplicationId2
-        {
-            get { return PersistenceProxy.ReadObject("DeezerApplicationId2", string.Empty); }
-            set { PersistenceProxy.SaveObject("DeezerApplicationId2", value); }
-        }
-
-        public static string DeezerApiEndpoint
-        {
-            get { return PersistenceProxy.ReadObject("DeezerApiEndpoint", "http://api.deezer.com/"); }
-            set { PersistenceProxy.SaveObject("DeezerApiEndpoint", value); }
         }
 
         public static bool DeezerHasValidConfig
@@ -948,13 +908,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             get
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-
-                return (
-                    string.IsNullOrEmpty(deezerApiEndpoint) == false &&
-                    string.IsNullOrEmpty(userAccessToken) == false &&
-                    string.IsNullOrEmpty(applicationId) == false);
+                return (string.IsNullOrEmpty(userAccessToken) == false);
             }
         }
 
@@ -963,36 +917,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             get { return PersistenceProxy.ReadObject("DeezerUseServicesForFileMetadata", false); }
             set { PersistenceProxy.SaveObject("DeezerUseServicesForFileMetadata", value); }
         }
-
-        static bool? _enableExtendedDeezerFeatures = null;
-
-        public static bool EnableExtendedDeezerFeatures
-        {
-            get
-            {
-                //if (Regedit.IsDevelopmentMachine)
-                //    return true;
-
-                //if (_enableExtendedDeezerFeatures == null)
-                //{
-                //    try
-                //    {
-                //        Assembly thisAssembly = Assembly.GetEntryAssembly();
-                //        Version v = thisAssembly.GetName().Version;
-                //        _enableExtendedDeezerFeatures = (v.Major > 3 || (v.Major == 3 && v.Minor >= 2));
-                //    }
-                //    catch
-                //    {
-                //        _enableExtendedDeezerFeatures = false;
-                //    }
-                //}
-
-                //return _enableExtendedDeezerFeatures.GetValueOrDefault();
-
-                return true;
-            }
-        }
-
 
         #endregion
 

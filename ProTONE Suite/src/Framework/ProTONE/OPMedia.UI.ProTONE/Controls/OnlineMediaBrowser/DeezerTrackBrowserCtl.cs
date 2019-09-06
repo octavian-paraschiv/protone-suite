@@ -44,17 +44,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 
             OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem();
 
-            if (ProTONEConfig.EnableExtendedDeezerFeatures)
-            {
-                tsmi.Click += new EventHandler(OnMenuClick);
-                tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
-                tsmi.Tag = MediaBrowserAction.AddToDeezerPlaylist;
-                tsmi.Image = Resources.deezer16;
-                cms.Items.Add(tsmi);
+            tsmi.Click += new EventHandler(OnMenuClick);
+            tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
+            tsmi.Tag = MediaBrowserAction.AddToDeezerPlaylist;
+            tsmi.Image = Resources.deezer16;
+            cms.Items.Add(tsmi);
 
-                cms.Items.Add(sep);
-            }
-                        
+            cms.Items.Add(sep);
+
             Bitmap searchIcon = OPMedia.UI.Properties.Resources.Search16;
             searchIcon.MakeTransparent(Color.Magenta);
 

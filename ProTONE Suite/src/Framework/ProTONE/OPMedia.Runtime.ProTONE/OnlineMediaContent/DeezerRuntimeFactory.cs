@@ -1,4 +1,5 @@
-﻿using OPMedia.DeezerInterop.RestApi;
+﻿using OPMedia.DeezerInterop;
+using OPMedia.DeezerInterop.RestApi;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             if (ProTONEConfig.DeezerHasValidConfig)
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-                DeezerRuntime dzr = new DeezerRuntime(deezerApiEndpoint, applicationId, userAccessToken);
+                DeezerRuntime dzr = new DeezerRuntime(userAccessToken);
 
                 if (_dzr != dzr)
                     _dzr = dzr;

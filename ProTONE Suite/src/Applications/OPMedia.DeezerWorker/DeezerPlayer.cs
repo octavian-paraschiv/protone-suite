@@ -126,7 +126,7 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_player_set_renderer_event_cb(_dzPlayer, _dzRendererEventCB);
                 DeezerApi.HandleDzErrorCode("dz_player_set_renderer_event_cb", err);
 
-                string token = ProTONEConfig.GetDeezerUserAccessToken(userId);
+                string token = ProTONEConfig.DeezerUserAccessToken;
 
                 err = DeezerApi.dz_connect_set_access_token(_dzConnect, null, IntPtr.Zero, token);
                 DeezerApi.HandleDzErrorCode("dz_connect_set_access_token", err);

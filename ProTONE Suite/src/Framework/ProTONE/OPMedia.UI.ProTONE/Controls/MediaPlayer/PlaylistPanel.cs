@@ -1215,10 +1215,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             if (ProTONEConfig.DeezerHasValidConfig)
             {
                 string userAccessToken = ProTONEConfig.DeezerUserAccessToken;
-                string applicationId = ProTONEConfig.DeezerApplicationId;
-                string deezerApiEndpoint = ProTONEConfig.DeezerApiEndpoint;
-
-                DeezerInterop.RestApi.DeezerRuntime dzr = new DeezerInterop.RestApi.DeezerRuntime(deezerApiEndpoint, applicationId, userAccessToken);
+                DeezerInterop.RestApi.DeezerRuntime dzr = new DeezerInterop.RestApi.DeezerRuntime(userAccessToken);
                 if (dzr != null)
                 {
                     ManualResetEvent abortEvent = new ManualResetEvent(false);

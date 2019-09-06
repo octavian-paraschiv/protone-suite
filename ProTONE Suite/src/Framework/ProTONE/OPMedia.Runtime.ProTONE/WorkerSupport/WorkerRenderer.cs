@@ -17,6 +17,7 @@ using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
 using System.Windows.Forms;
+using OPMedia.DeezerInterop;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 {
@@ -163,14 +164,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
         {
             if (_wt == WorkerType.Deezer)
             {
-                if (ProTONEConfig.XFade)
-                {
-                    _userId = ProTONEConfig.GetNextDeezerIdentity(_userId);
-                }
-                else
-                {
-                    _userId = ProTONEConfig.DeezerApplicationId;
-                }
+                _userId = DeezerAppConstants.AppId;
             }
 
             Logger.LogToConsole($"Next user identity for playback is: {_userId}");
