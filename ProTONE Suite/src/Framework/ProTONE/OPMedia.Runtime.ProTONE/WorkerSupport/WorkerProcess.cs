@@ -23,6 +23,11 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     public enum WorkerType
     {
         /// <summary>
+        /// Unsupported media
+        /// </summary>
+        Unsupported = 0,
+
+        /// <summary>
         /// OPMedia.DeezerWorker.exe
         /// </summary>
         Deezer,

@@ -417,14 +417,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     uri = null;
                 }
 
-                WorkerType wt = WorkerType.Audio;
+                WorkerType wt = WorkerType.Unsupported;
 
                 if (uri != null && !uri.IsFile)
                 {
                     if (uri.OriginalString.StartsWith(DeezerTrackItem.DeezerTrackUrlBase))
-                        CreateWorkerRenderer(WorkerType.Deezer);
+                        wt = WorkerType.Deezer;
                     else
-                        CreateWorkerRenderer(WorkerType.Shoutcast);
+                        wt = WorkerType.Shoutcast;
                 }
                 else
                 {
@@ -444,6 +444,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         }
                     }
                 }
+
+                if (wt == WorkerType.Unsupported)
+                    throw new Exception($"Unsupported media: {file}");
 
                 CreateWorkerRenderer(wt);
 
