@@ -145,7 +145,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             if (!DesignMode)
             {
                 //MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
-                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnFilterStateChanged);
+                RenderingEngine.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnFilterStateChanged);
             }
 
             OnThemeUpdatedInternal();
@@ -251,7 +251,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             try
             {
-                if (MediaRenderer.DefaultInstance.FilterState == FilterState.Running)
+                if (RenderingEngine.DefaultInstance.FilterState == FilterState.Running)
                 {
                     var enumerator = new MMDeviceEnumerator();
                     var device = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
@@ -263,7 +263,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
 
-                        var vol = MediaRenderer.DefaultInstance.AudioVolume;
+                        var vol = RenderingEngine.DefaultInstance.AudioVolume;
 
                         // Magic? No, this is just the inverse of the sound card transfer function.
                         // For sure it's not the same between two sound cards. Not even of the same model.
@@ -358,7 +358,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 else if (isActive)
                 {
                     Image img = null;
-                    switch (MediaRenderer.DefaultInstance.FilterState)
+                    switch (RenderingEngine.DefaultInstance.FilterState)
                     {
                         case FilterState.Running:
                             img = Resources.btnPlay;
@@ -669,7 +669,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             string filter = string.Empty;
 
-            filter += MediaRenderer.DefaultInstance.PlaylistsFilter;
+            filter += RenderingEngine.DefaultInstance.PlaylistsFilter;
             filter += Translator.Translate("TXT_ALL_FILES_FILTER");
             filter = filter.Replace("TXT_PLAYLISTS", Translator.Translate("TXT_PLAYLISTS"));
 
@@ -737,7 +737,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             string filter = string.Empty;
 
-            filter += MediaRenderer.DefaultInstance.PlaylistsFilter;
+            filter += RenderingEngine.DefaultInstance.PlaylistsFilter;
             filter += Translator.Translate("TXT_ALL_FILES_FILTER");
             filter = filter.Replace("TXT_PLAYLISTS", Translator.Translate("TXT_PLAYLISTS"));
 
@@ -891,7 +891,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     try
                     {
-                        duration = TimeSpan.FromSeconds((int)MediaRenderer.DefaultInstance.MediaLength);
+                        duration = TimeSpan.FromSeconds((int)RenderingEngine.DefaultInstance.MediaLength);
                     }
                     catch
                     {

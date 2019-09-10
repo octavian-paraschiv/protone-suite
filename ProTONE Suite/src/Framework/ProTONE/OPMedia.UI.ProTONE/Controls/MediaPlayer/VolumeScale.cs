@@ -182,7 +182,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.MediaRendererClock -= new MediaRendererEventHandler(OnMediaRendererClock);
+                RenderingEngine.DefaultInstance.MediaRendererClock -= new MediaRendererEventHandler(OnMediaRendererClock);
             }
         }
 
@@ -190,7 +190,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.MediaRendererClock += new MediaRendererEventHandler(OnMediaRendererClock);
+                RenderingEngine.DefaultInstance.MediaRendererClock += new MediaRendererEventHandler(OnMediaRendererClock);
             }
 
         }
@@ -199,7 +199,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                VolumeScale.Enabled = (MediaRenderer.DefaultInstance.RenderedMediaType != MediaTypes.Video);
+                VolumeScale.Enabled = (RenderingEngine.DefaultInstance.RenderedMediaType != MediaTypes.Video);
                 VolumeScale.Position = ProTONEConfig.LastVolume;
             }
         }

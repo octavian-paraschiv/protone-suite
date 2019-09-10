@@ -160,9 +160,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 double seconds = _total * newVal / timeProgress.Maximum;
 
-                int range = (int)(MediaRenderer.DefaultInstance.MediaLength / 40);
+                int range = (int)(RenderingEngine.DefaultInstance.MediaLength / 40);
                 Bookmark bmk =
-                    MediaRenderer.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange((int)seconds, range);
+                    RenderingEngine.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange((int)seconds, range);
 
                 if (bmk != null)
                 {
@@ -180,9 +180,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             double hoverSeconds = _total * val / timeProgress.Maximum;
             TimeSpan hoverTime = TimeSpan.FromSeconds((int)hoverSeconds);
 
-            int range = (int)(MediaRenderer.DefaultInstance.MediaLength / 40);
+            int range = (int)(RenderingEngine.DefaultInstance.MediaLength / 40);
             Bookmark bmk =
-                MediaRenderer.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange((int)hoverSeconds, range);
+                RenderingEngine.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange((int)hoverSeconds, range);
 
             string tip = string.Empty;
 
@@ -248,7 +248,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.MediaRendererClock -= new MediaRendererEventHandler(OnMediaRendererClock);
+                RenderingEngine.DefaultInstance.MediaRendererClock -= new MediaRendererEventHandler(OnMediaRendererClock);
             }
         }
 
@@ -256,7 +256,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.MediaRendererClock += new MediaRendererEventHandler(OnMediaRendererClock);
+                RenderingEngine.DefaultInstance.MediaRendererClock += new MediaRendererEventHandler(OnMediaRendererClock);
             }
 
         }
@@ -265,9 +265,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                TimeScale.Enabled = MediaRenderer.DefaultInstance.CanSeekMedia;
-                TimeScale.ElapsedSeconds = (int)(MediaRenderer.DefaultInstance.MediaPosition);
-                TimeScale.TotalSeconds = (int)(MediaRenderer.DefaultInstance.MediaLength);
+                TimeScale.Enabled = RenderingEngine.DefaultInstance.CanSeekMedia;
+                TimeScale.ElapsedSeconds = (int)(RenderingEngine.DefaultInstance.MediaPosition);
+                TimeScale.TotalSeconds = (int)(RenderingEngine.DefaultInstance.MediaLength);
             }             
         }
 

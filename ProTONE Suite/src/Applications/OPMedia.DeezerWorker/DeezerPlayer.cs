@@ -235,10 +235,8 @@ namespace OPMedia.DeezerWorker
                 DeezerApi.HandleDzErrorCode("dz_player_load", dz_error_t.DZ_ERROR_PLAYER_LOAD_TIMEOUT);
 
             Logger.LogTrace("dz_player_load => Success");
-
             // --------------------------------------------------------------------
 
-            SetVolume(0);
 
             // --------------------------------------------------------------------
             // Start playback using dz_player_play

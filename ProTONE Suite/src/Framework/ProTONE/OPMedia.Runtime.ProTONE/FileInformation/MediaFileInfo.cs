@@ -258,7 +258,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 {
                     string mediaName = base.Name;
                     mediaType = base.Extension.Trim(new char[] { '.' }).ToLowerInvariant();
-                    MediaRenderer renderer = MediaRenderer.DefaultInstance;
+                    RenderingEngine renderer = RenderingEngine.DefaultInstance;
                     
                     if (!SupportedFileProvider.Instance.AllMediaTypes.Contains(mediaType))
                     {
@@ -330,7 +330,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(mi.MediaType))
             {
                 // video file
-                return MediaRenderer.DefaultInstance.QueryVideoMediaInfo(path);
+                return RenderingEngine.DefaultInstance.QueryVideoMediaInfo(path);
             }
             else
             {

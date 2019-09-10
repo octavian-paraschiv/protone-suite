@@ -80,11 +80,11 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             {
                 Dictionary<string, string> info = base.MediaInfo;
 
-                if (MediaRenderer.DefaultInstance.GetRenderFile() == mi.Name &&
-                    (MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Running ||
-                    MediaRenderer.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Paused))
+                if (RenderingEngine.DefaultInstance.GetRenderFile() == mi.Name &&
+                    (RenderingEngine.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Running ||
+                    RenderingEngine.DefaultInstance.FilterState == Rendering.DS.BaseClasses.FilterState.Paused))
                 {
-                    foreach (KeyValuePair<string, string> kvp in MediaRenderer.DefaultInstance.StreamData)
+                    foreach (KeyValuePair<string, string> kvp in RenderingEngine.DefaultInstance.StreamData)
                         info.Add(kvp.Key + ":", kvp.Value);
                 }
 

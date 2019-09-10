@@ -402,7 +402,20 @@ namespace OPMedia.Core
                     }
                     else if (url2.StartsWith("http"))
                     {
-                        imgBytes = PersistenceProxy.ReadObject(url, default(byte[]));
+                        string imgFileName = url2
+                            .Replace("https://", "")
+                            .Replace("http://", "")
+                            .Replace("/", "_")
+                            .Replace(":", "_");
+
+                        string imgCacheDir = Path.Combine(PathUtils.LocalAppDataFolder, "imgcache");
+                        if (Directory.Exists(imgCacheDir) == false)
+                            Directory.CreateDirectory(imgCacheDir);
+
+                        string imgFilePath = Path.Combine(imgCacheDir, imgFileName);
+                        if (File.Exists(imgFilePath))
+                            imgBytes = File.ReadAllBytes(imgFilePath);
+
                         if (imgBytes == null)
                         {
                             using (WebClientWithTimeout wc = new WebClientWithTimeout(timeout))
@@ -410,12 +423,12 @@ namespace OPMedia.Core
                                 Logger.LogToConsole("    => ImageURL: downloading from Internet");
                                 imgBytes = wc.DownloadData(url);
                                 if (imgBytes != null)
-                                    PersistenceProxy.SaveObject(url, imgBytes);
+                                    File.WriteAllBytes(imgFilePath, imgBytes);
                             }
                         }
                         else
                         {
-                            Logger.LogToConsole("    => ImageURL: loading from Persistence Service");
+                            Logger.LogToConsole("    => ImageURL: loading from image cache file system");
                         }
                     }
 

@@ -491,11 +491,11 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 if (_tag != null && _tagModified)
                 {
                     double resumePosition = -1;
-                    if (this.Equals(MediaRenderer.DefaultInstance.RenderedMediaInfo))
+                    if (this.Equals(RenderingEngine.DefaultInstance.RenderedMediaInfo))
                     {
-                        MediaRenderer.DefaultInstance.PauseRenderer();
-                        resumePosition = MediaRenderer.DefaultInstance.MediaPosition;
-                        MediaRenderer.DefaultInstance.StopRenderer(true);
+                        RenderingEngine.DefaultInstance.PauseRenderer();
+                        resumePosition = RenderingEngine.DefaultInstance.MediaPosition;
+                        RenderingEngine.DefaultInstance.StopRenderer(true);
                         Thread.Sleep(100);
                     }
 
@@ -515,8 +515,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         if (resumePosition > 0)
                         {
                             BookmarkStartHint hint = new BookmarkStartHint(new Bookmark("default", (int)resumePosition));
-                            MediaRenderer.DefaultInstance.StartRendererWithHint(hint);
-                            MediaRenderer.DefaultInstance.AudioVolume = ProTONEConfig.LastVolume;
+                            RenderingEngine.DefaultInstance.StartRendererWithHint(hint);
+                            RenderingEngine.DefaultInstance.AudioVolume = ProTONEConfig.LastVolume;
                         }
                     }
                 }

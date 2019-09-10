@@ -84,12 +84,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             get 
             {
-                if (MediaRenderer.DefaultInstance.IsStreamedMedia)
+                if (RenderingEngine.DefaultInstance.IsStreamedMedia)
                 {
-                    if (MediaRenderer.DefaultInstance.StreamData != null &&
-                        MediaRenderer.DefaultInstance.StreamData.ContainsKey("TXT_TITLE"))
+                    if (RenderingEngine.DefaultInstance.StreamData != null &&
+                        RenderingEngine.DefaultInstance.StreamData.ContainsKey("TXT_TITLE"))
                     {
-                        return MediaRenderer.DefaultInstance.StreamData["TXT_TITLE"] ?? string.Empty;
+                        return RenderingEngine.DefaultInstance.StreamData["TXT_TITLE"] ?? string.Empty;
                     }
                 }
 
@@ -166,9 +166,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
-                MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
-                MediaRenderer.DefaultInstance.MediaRenderingException += new MediaRenderingExceptionHandler(OnMediaRenderingException);
+                RenderingEngine.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
+                RenderingEngine.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+                RenderingEngine.DefaultInstance.MediaRenderingException += new MediaRenderingExceptionHandler(OnMediaRenderingException);
             }
         }
 
@@ -277,9 +277,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
-                MediaRenderer.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
-                MediaRenderer.DefaultInstance.Dispose();
+                RenderingEngine.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
+                RenderingEngine.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
+                RenderingEngine.DefaultInstance.Dispose();
             }
         }
 
@@ -310,14 +310,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void pnlRendering_PositionChanged(double newVal)
         {
-            if (MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
+            if (RenderingEngine.DefaultInstance.FilterState != FilterState.Stopped)
             {
-                if (MediaRenderer.DefaultInstance.FilterState != FilterState.Paused)
+                if (RenderingEngine.DefaultInstance.FilterState != FilterState.Paused)
                 {
-                    MediaRenderer.DefaultInstance.PauseRenderer();
+                    RenderingEngine.DefaultInstance.PauseRenderer();
                 }
                 
-                MediaRenderer.DefaultInstance.ResumeRenderer(newVal);
+                RenderingEngine.DefaultInstance.ResumeRenderer(newVal);
 
                 NotifyGUI("TXT_OSD_SEEKTO", TimeSpan.FromSeconds((int)newVal));
             }
@@ -325,11 +325,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public void NotifyGUI(string format, params object[] args)
         {
-            if (MediaRenderer.DefaultInstance.HasRenderingErrors == false)
+            if (RenderingEngine.DefaultInstance.HasRenderingErrors == false)
             {
                string text = Translator.Translate(format, args);
    
-               MediaRenderer.DefaultInstance.DisplayOsdMessage(text);
+               RenderingEngine.DefaultInstance.DisplayOsdMessage(text);
    
                if (ProTONEConfig.MediaStateNotificationsEnabled)
                {
@@ -358,20 +358,20 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             PlaylistItem pli = playlist.GetActivePlaylistItem();
 
             //pnlRendering.FilterStateChanged(newState, newMedia, MediaRenderer.DefaultInstance.RenderedMediaType);
-            pnlPlayback.FilterStateChanged(newState, pli, MediaRenderer.DefaultInstance.RenderedMediaType);
+            pnlPlayback.FilterStateChanged(newState, pli, RenderingEngine.DefaultInstance.RenderedMediaType);
 
             bool playerNotActive = (newState == FilterState.NotOpened || newState == FilterState.Stopped);
 
             if (playerNotActive && playlist.GetFileCount() >= 1)
             {
-                MediaRenderer.DefaultInstance.PlaylistAtEnd = playlist.IsPlaylistAtEnd;
+                RenderingEngine.DefaultInstance.PlaylistAtEnd = playlist.IsPlaylistAtEnd;
 
-                if (MediaRenderer.DefaultInstance.IsStopFromGui == false)
+                if (RenderingEngine.DefaultInstance.IsStopFromGui == false)
                     MoveNext();
             }
             else
             {
-                MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
+                RenderingEngine.DefaultInstance.PlaylistAtEnd = false;
             }
         }
 
@@ -382,15 +382,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 pnlPlayback.ProjectedVolume = ProTONEConfig.LastVolume;
             }
 
-            pnlPlayback.ElapsedSeconds = (int)(MediaRenderer.DefaultInstance.MediaPosition);
-            pnlPlayback.TotalSeconds = (int)(MediaRenderer.DefaultInstance.MediaLength);
-            pnlPlayback.EffectiveSeconds = (int)(MediaRenderer.DefaultInstance.EffectiveMediaLength);
+            pnlPlayback.ElapsedSeconds = (int)(RenderingEngine.DefaultInstance.MediaPosition);
+            pnlPlayback.TotalSeconds = (int)(RenderingEngine.DefaultInstance.MediaLength);
+            pnlPlayback.EffectiveSeconds = (int)(RenderingEngine.DefaultInstance.EffectiveMediaLength);
 
-            pnlPlayback.TimeScaleEnabled = MediaRenderer.DefaultInstance.CanSeekMedia &&
-                (MediaRenderer.DefaultInstance.FilterState == FilterState.Running || 
-                MediaRenderer.DefaultInstance.FilterState == FilterState.Paused);
+            pnlPlayback.TimeScaleEnabled = RenderingEngine.DefaultInstance.CanSeekMedia &&
+                (RenderingEngine.DefaultInstance.FilterState == FilterState.Running || 
+                RenderingEngine.DefaultInstance.FilterState == FilterState.Paused);
 
-            pnlPlayback.VolumeScaleEnabled = (MediaRenderer.DefaultInstance.RenderedMediaType != MediaTypes.Video);
+            pnlPlayback.VolumeScaleEnabled = (RenderingEngine.DefaultInstance.RenderedMediaType != MediaTypes.Video);
             
             if (_renderingFrame != null)
             {
@@ -399,15 +399,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             try
             {
-                if (MediaRenderer.DefaultInstance.FilterState == FilterState.Running)
+                if (RenderingEngine.DefaultInstance.FilterState == FilterState.Running)
                 {
-                    Bookmark bmk = MediaRenderer.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange(
-                        (int)MediaRenderer.DefaultInstance.MediaPosition, 1);
+                    Bookmark bmk = RenderingEngine.DefaultInstance.RenderedMediaInfo.GetNearestBookmarkInRange(
+                        (int)RenderingEngine.DefaultInstance.MediaPosition, 1);
 
                     if (bmk != null)
                     {
                         Logger.LogTrace("Display Bookmark: " + bmk.ToString());
-                        MediaRenderer.DefaultInstance.DisplayOsdMessage(bmk.Title.Replace(";", "\r\n"));
+                        RenderingEngine.DefaultInstance.DisplayOsdMessage(bmk.Title.Replace(";", "\r\n"));
                     }
                 }
             }
@@ -425,7 +425,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 {
                     title = string.Format("{1} - [{2}] - {0}",
                         Translator.Translate("TXT_APP_NAME"),
-                        this.PlayedFileTitle, MediaRenderer.DefaultInstance.TranslatedFilterState);
+                        this.PlayedFileTitle, RenderingEngine.DefaultInstance.TranslatedFilterState);
                 }
                 else
                 {
@@ -443,9 +443,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         #region Implementation
         private void Stop(bool isStopFromGui)
         {
-            if (MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
+            if (RenderingEngine.DefaultInstance.FilterState != FilterState.Stopped)
             {
-                MediaRenderer.DefaultInstance.StopRenderer(isStopFromGui);
+                RenderingEngine.DefaultInstance.StopRenderer(isStopFromGui);
 
                 if (isStopFromGui)
                 {
@@ -462,7 +462,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void Pause()
         {
-            switch (MediaRenderer.DefaultInstance.FilterState)
+            switch (RenderingEngine.DefaultInstance.FilterState)
             {
                 case FilterState.Running:
                     {
@@ -473,18 +473,18 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         // Then we can effectively pause
                         Thread.Sleep(200);
 
-                        MediaRenderer.DefaultInstance.PauseRenderer();
+                        RenderingEngine.DefaultInstance.PauseRenderer();
                     }
                     break;
 
                 case FilterState.Paused:
                     {
-                        MediaRenderer.DefaultInstance.ResumeRenderer(MediaRenderer.DefaultInstance.MediaPosition);
+                        RenderingEngine.DefaultInstance.ResumeRenderer(RenderingEngine.DefaultInstance.MediaPosition);
 
                         // Keep this action to execute AFTER resuming playback
                         // OSD text can be updated via FFDShow only while playing, never while paused.
                         NotifyGUI("TXT_OSD_SEEKTO",
-                            TimeSpan.FromSeconds((int)MediaRenderer.DefaultInstance.MediaPosition));
+                            TimeSpan.FromSeconds((int)RenderingEngine.DefaultInstance.MediaPosition));
                     }
                     break;
             }
@@ -549,7 +549,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             string filter = string.Empty;
 
-            filter += MediaRenderer.DefaultInstance.AvailableFileTypesFilter;
+            filter += RenderingEngine.DefaultInstance.AvailableFileTypesFilter;
             filter += Translator.Translate("TXT_ALL_FILES_FILTER");
 
             filter = filter.Replace("TXT_AUDIO_FILES", Translator.Translate("TXT_AUDIO_FILES"));
@@ -639,7 +639,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (!string.IsNullOrEmpty(strFile))
             {
-                if (subItem == null && MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
+                if (subItem == null && RenderingEngine.DefaultInstance.FilterState != FilterState.Stopped)
                 {
                     Stop(false);
                 }
@@ -692,12 +692,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     NotifyMediaStateChanged(isVideoFile || isDVDVolume);
                 }
 
-                MediaRenderer.DefaultInstance.SetRenderFile(strFile);
+                RenderingEngine.DefaultInstance.SetRenderFile(strFile);
 
                 bool rendererStarted = false;
                 if (subItem != null && subItem.StartHint != null)
                 {
-                    MediaRenderer.DefaultInstance.StartRendererWithHint(subItem.StartHint);
+                    RenderingEngine.DefaultInstance.StartRendererWithHint(subItem.StartHint);
                     rendererStarted = true;
                 }
 
@@ -707,15 +707,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         Bookmark mark = new Bookmark("DelayStart", delayStart);
                         BookmarkStartHint hint = new BookmarkStartHint(mark);
-                        MediaRenderer.DefaultInstance.StartRendererWithHint(hint);
+                        RenderingEngine.DefaultInstance.StartRendererWithHint(hint);
                     }
                     else
                     {
-                        MediaRenderer.DefaultInstance.StartRenderer();
+                        RenderingEngine.DefaultInstance.StartRenderer();
                     }
                 }
 
-                if (MediaRenderer.DefaultInstance.HasRenderingErrors == false)
+                if (RenderingEngine.DefaultInstance.HasRenderingErrors == false)
                 {
                    if (_renderingFrame != null && (isVideoFile || isDVDVolume))
                    {
@@ -759,8 +759,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             try
             {
-                SubtitleDownloadProcessor.TryFindSubtitle(MediaRenderer.DefaultInstance.GetRenderFile(),
-                            (int)MediaRenderer.DefaultInstance.MediaLength, false);
+                SubtitleDownloadProcessor.TryFindSubtitle(RenderingEngine.DefaultInstance.GetRenderFile(),
+                            (int)RenderingEngine.DefaultInstance.MediaLength, false);
             }
             catch { }
             finally
@@ -774,13 +774,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void SetVolume(double volume)
         {
             ProTONEConfig.LastVolume = (int)volume;
-            if (MediaRenderer.DefaultInstance.RenderedMediaType != MediaTypes.Video &&
-                MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped)
+            if (RenderingEngine.DefaultInstance.RenderedMediaType != MediaTypes.Video &&
+                RenderingEngine.DefaultInstance.FilterState != FilterState.Stopped)
             {
-                MediaRenderer.DefaultInstance.AudioVolume = (int)(volume / 100);
-                MediaRenderer.DefaultInstance.DisplayOsdMessage(Translator.Translate("TXT_OSD_VOL", (int)(volume / 100)));
+                RenderingEngine.DefaultInstance.AudioVolume = (int)(volume / 100);
+                RenderingEngine.DefaultInstance.DisplayOsdMessage(Translator.Translate("TXT_OSD_VOL", (int)(volume / 100)));
 
-                MediaRenderer.DefaultInstance.AudioBalance = ProTONEConfig.LastBalance;
+                RenderingEngine.DefaultInstance.AudioBalance = ProTONEConfig.LastBalance;
             }
 
             if (pnlPlayback.ProjectedVolume != ProTONEConfig.LastVolume)
@@ -805,8 +805,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             switch (args.cmd)
             {
                 case OPMShortcut.CmdPlayPause:
-                    if (MediaRenderer.DefaultInstance.FilterState == FilterState.Paused || 
-                        MediaRenderer.DefaultInstance.FilterState == FilterState.Running)
+                    if (RenderingEngine.DefaultInstance.FilterState == FilterState.Paused || 
+                        RenderingEngine.DefaultInstance.FilterState == FilterState.Running)
                     {
                         Pause();
                         args.Handled = true;
@@ -984,8 +984,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void ToggleFullScreen()
         {
-            if (MediaRenderer.DefaultInstance.RenderedMediaType == MediaTypes.Video ||
-                MediaRenderer.DefaultInstance.RenderedMediaType == MediaTypes.Both &&
+            if (RenderingEngine.DefaultInstance.RenderedMediaType == MediaTypes.Video ||
+                RenderingEngine.DefaultInstance.RenderedMediaType == MediaTypes.Both &&
                 _renderingFrame != null)
             {
                 _renderingFrame.ToggleFullScreen();
@@ -995,11 +995,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public void MoveToPosition(double pos)
         {
-            if (MediaRenderer.DefaultInstance.FilterState != FilterState.Stopped && 
-                MediaRenderer.DefaultInstance.CanSeekMedia)
+            if (RenderingEngine.DefaultInstance.FilterState != FilterState.Stopped && 
+                RenderingEngine.DefaultInstance.CanSeekMedia)
             {
-                MediaRenderer.DefaultInstance.PauseRenderer();
-                MediaRenderer.DefaultInstance.ResumeRenderer(pos);
+                RenderingEngine.DefaultInstance.PauseRenderer();
+                RenderingEngine.DefaultInstance.ResumeRenderer(pos);
 
                 NotifyGUI("TXT_OSD_SEEKTO", TimeSpan.FromSeconds((int)pos));
             }
@@ -1036,7 +1036,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             _renderingFrame.SetContextMenuStrip(_menuRendering);
 
-            MediaRenderer.DefaultInstance.RenderPanel = _renderingFrame.RenderingZone;
+            RenderingEngine.DefaultInstance.RenderPanel = _renderingFrame.RenderingZone;
         }
 
         private void HideRenderingRegion()
@@ -1058,9 +1058,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void renderFrame_HandleDestroyed(object sender, EventArgs e)
         {
-            MediaRenderer.DefaultInstance.StopRenderer(true);
-            MediaRenderer.DefaultInstance.RenderPanel = null;
-            MediaRenderer.DefaultInstance.MessageDrain = null;
+            RenderingEngine.DefaultInstance.StopRenderer(true);
+            RenderingEngine.DefaultInstance.RenderPanel = null;
+            RenderingEngine.DefaultInstance.MessageDrain = null;
         
             _renderingFrame = null;
             GC.Collect();
@@ -1142,7 +1142,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                                 if (hint != null && hint.IsSubtitleHint)
                                 {
-                                    MediaRenderer.DefaultInstance.SubtitleStream = hint.SID;
+                                    RenderingEngine.DefaultInstance.SubtitleStream = hint.SID;
                                     return;
                                 }
                             }

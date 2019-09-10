@@ -94,9 +94,9 @@ namespace OPMedia.Runtime.ProTONE
 
         private void CheckForPlaylistEvent()
         {
-            if (MediaRenderer.DefaultInstance.PlaylistAtEnd)
+            if (RenderingEngine.DefaultInstance.PlaylistAtEnd)
             {
-                MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
+                RenderingEngine.DefaultInstance.PlaylistAtEnd = false;
 
                 if (!_isPlaylistEvent.WaitOne(50, true))
                 {

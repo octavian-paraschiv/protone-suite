@@ -155,7 +155,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
             playIndex = 0;
 
-            MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
+            RenderingEngine.DefaultInstance.PlaylistAtEnd = false;
 
 
         }
@@ -477,7 +477,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
             finally
             {
-                MediaRenderer.DefaultInstance.PlaylistAtEnd = false;
+                RenderingEngine.DefaultInstance.PlaylistAtEnd = false;
             }
         }
        

@@ -110,9 +110,9 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 return false;
 
             if (movieFileName.ToLowerInvariant() ==
-                MediaRenderer.DefaultInstance.GetRenderFile().ToLowerInvariant())
+                RenderingEngine.DefaultInstance.GetRenderFile().ToLowerInvariant())
             {
-                string subtitleFile = MediaRenderer.DefaultInstance.CurrentSubtitleFile;
+                string subtitleFile = RenderingEngine.DefaultInstance.CurrentSubtitleFile;
 
                 bool usingSubtitle = !string.IsNullOrEmpty(subtitleFile);
 
@@ -163,11 +163,11 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
         {
             if (string.IsNullOrEmpty(downloadedSubtitleFile))
             {
-                MediaRenderer.DefaultInstance.CurrentSubtitleFile = string.Empty;
+                RenderingEngine.DefaultInstance.CurrentSubtitleFile = string.Empty;
             }
             else
             {
-                MediaRenderer.DefaultInstance.CurrentSubtitleFile = downloadedSubtitleFile;
+                RenderingEngine.DefaultInstance.CurrentSubtitleFile = downloadedSubtitleFile;
             }
         }
 

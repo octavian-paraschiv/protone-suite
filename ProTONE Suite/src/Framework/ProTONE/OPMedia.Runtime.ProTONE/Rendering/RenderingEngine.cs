@@ -57,7 +57,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
-    public sealed class MediaRenderer : IDisposable
+    public sealed class RenderingEngine : IDisposable
     {
         public const int VolumeFull = 0;
         public const int VolumeSilence = -10000;
@@ -71,9 +71,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public event RenderedStreamPropertyChangedHandler RenderedStreamPropertyChanged = null;
 
         #region Members
-        private static MediaRenderer __defaultInstance = new MediaRenderer(true);
+        private static RenderingEngine __defaultInstance = new RenderingEngine(true);
 
-        private StreamRenderer _streamRenderer = null;
+        private WorkerRenderer _renderer = null;
         private System.Windows.Forms.Timer timerCheckState = null;
 
         private OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState = 
@@ -91,7 +91,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         #region Properties
         
-        public static MediaRenderer DefaultInstance
+        public static RenderingEngine DefaultInstance
         {
             get
             {
@@ -99,15 +99,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public static MediaRenderer NewInstance()
+        public static RenderingEngine NewInstance()
         {
-            return new MediaRenderer(false);
+            return new RenderingEngine(false);
         }
 
         
 
         internal object GraphFilter 
-        { get { return (_streamRenderer != null) ? _streamRenderer.GraphFilter : null; } }
+        { get { return (_renderer != null) ? _renderer.GraphFilter : null; } }
 
         public double[] EqFrequencies
         {
@@ -183,18 +183,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                if (_streamRenderer == null)
+                if (_renderer == null)
                     return false;
 
-                bool isEnd = _streamRenderer.EndOfMedia;
+                bool isEnd = _renderer.EndOfMedia;
 
                 if (UseCrossFading)
                 {
                     // Check if we are "anticipating" the end of current media so that we can toggle XFade...
-                    if (!isEnd && !_streamRenderer.IsStreamedMedia)
+                    if (!isEnd && !_renderer.IsStreamedMedia)
                     {
-                        double pos = _streamRenderer.MediaPosition;
-                        double len = _streamRenderer.MediaLength;
+                        double pos = _renderer.MediaPosition;
+                        double len = _renderer.MediaLength;
 
                         if ((len - pos) <= (ProTONEConfig.XFadeAnticipatedEnd))
                         {
@@ -210,57 +210,57 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public double MediaPosition
         {
-            get { return (_streamRenderer == null) ? 0 : _streamRenderer.MediaPosition; }
-            set { if (_streamRenderer != null) { _streamRenderer.MediaPosition = value; } }
+            get { return (_renderer == null) ? 0 : _renderer.MediaPosition; }
+            set { if (_renderer != null) { _renderer.MediaPosition = value; } }
         }
 
         public int AudioVolume
         {
             get
             {
-                return (_streamRenderer == null) ? (int)VolumeRange.Minimum : _streamRenderer.AudioVolume;
+                return (_renderer == null) ? (int)VolumeRange.Minimum : _renderer.AudioVolume;
             }
 
             set
             {
-                if (_streamRenderer != null)
-                    _streamRenderer.AudioVolume = value;
+                if (_renderer != null)
+                    _renderer.AudioVolume = value;
             }
         }
 
         public int AudioBalance
         {
-            get { return (_streamRenderer == null) ? 0 : _streamRenderer.AudioBalance; }
-            set { if (_streamRenderer != null) { _streamRenderer.AudioBalance = value; } }
+            get { return (_renderer == null) ? 0 : _renderer.AudioBalance; }
+            set { if (_renderer != null) { _renderer.AudioBalance = value; } }
         }
 
         public int SubtitleStream
         {
             get
             {
-                return (_streamRenderer == null &&
+                return (_renderer == null &&
                     FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped) ?
-                    -1 : _streamRenderer.GetSubtitleStream();
+                    -1 : _renderer.GetSubtitleStream();
             }
 
             set
             {
-                if (_streamRenderer != null &&
+                if (_renderer != null &&
                     FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                 {
-                    _streamRenderer.SetSubtitleStream(value);
+                    _renderer.SetSubtitleStream(value);
                 }
             }
         }
 
         public bool CanSeekMedia
-        { get { return (_streamRenderer != null && _streamRenderer.MediaSeekable && _streamRenderer.MediaLength > 0); } }
+        { get { return (_renderer != null && _renderer.MediaSeekable && _renderer.MediaLength > 0); } }
 
         public double DurationScaleFactor
-        { get { return (_streamRenderer == null) ? 0 : _streamRenderer.DurationScaleFactor; } }
+        { get { return (_renderer == null) ? 0 : _renderer.DurationScaleFactor; } }
 
         public double MediaLength
-        { get { return (_streamRenderer == null) ? 0 : _streamRenderer.MediaLength; } }
+        { get { return (_renderer == null) ? 0 : _renderer.MediaLength; } }
 
         public double EffectiveMediaLength
         {
@@ -274,10 +274,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                if (_streamRenderer == null)
+                if (_renderer == null)
                     return string.Empty;
 
-                return _streamRenderer.RenderMediaName;
+                return _renderer.RenderMediaName;
             }
         }
 
@@ -285,10 +285,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                if (_streamRenderer == null)
+                if (_renderer == null)
                     return null;
 
-                return _streamRenderer.RenderMediaInfo;
+                return _renderer.RenderMediaInfo;
             }
         }
 
@@ -298,14 +298,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 MediaTypes mediaType = MediaTypes.None;
 
-                if (_streamRenderer != null)
+                if (_renderer != null)
                 {
-                    if (_streamRenderer.AudioMediaAvailable)
+                    if (_renderer.AudioMediaAvailable)
                     {
-                        mediaType = (_streamRenderer.VideoMediaAvailable) ?
+                        mediaType = (_renderer.VideoMediaAvailable) ?
                             MediaTypes.Both : MediaTypes.Audio;
                     }
-                    else if (_streamRenderer.VideoMediaAvailable)
+                    else if (_renderer.VideoMediaAvailable)
                     {
                         mediaType = MediaTypes.Video;
                     }
@@ -322,9 +322,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (UseCrossFading && _crossFadePendingStop)
                     return FilterState.Stopped;
 
-                return (_streamRenderer == null) ?
+                return (_renderer == null) ?
                     OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped : 
-                    _streamRenderer.FilterState; 
+                    _renderer.FilterState; 
             } 
         }
 
@@ -349,8 +349,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                if (_streamRenderer != null)
-                    return _streamRenderer.IsStreamedMedia;
+                if (_renderer != null)
+                    return _renderer.IsStreamedMedia;
 
                 return false;
             }
@@ -387,10 +387,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             string retVal = string.Empty;
             try
             {
-                if (_streamRenderer == null)
+                if (_renderer == null)
                     return string.Empty;
 
-                return _streamRenderer.RenderMediaName;
+                return _renderer.RenderMediaName;
             }
             catch (Exception ex)
             {
@@ -417,54 +417,49 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     uri = null;
                 }
 
+                WorkerType wt = WorkerType.Audio;
+
                 if (uri != null && !uri.IsFile)
                 {
                     if (uri.OriginalString.StartsWith(DeezerTrackItem.DeezerTrackUrlBase))
-                        CreateNewRenderer<WorkerRenderer>(WorkerType.Deezer);
+                        CreateWorkerRenderer(WorkerType.Deezer);
                     else
-                        CreateNewRenderer<WorkerRenderer>(WorkerType.Shoutcast);
+                        CreateWorkerRenderer(WorkerType.Shoutcast);
                 }
                 else
                 {
                     if (DvdMedia.FromPath(file) != null)
-                    {
-                        // TODO: use worker renderer
-                        CreateNewRenderer<DSDvdRenderer>();
-                    }
+                        wt = WorkerType.VideoDvd;
                     else
                     {
                         string streamType = PathUtils.GetExtension(file).ToLowerInvariant();
                         if (streamType == "cda")
-                        {
-                            // TODO: use worker renderer
-                            // CreateNewRenderer<DSAudioCDRenderer>();
-                            CreateNewRenderer<WorkerRenderer>(WorkerType.AudioCd);
-                        }
+                            wt = WorkerType.AudioCd;
                         else
                         {
-                            if (SupportedFileProvider.Instance.SupportedAudioTypes.Contains(streamType))
-                                // audio file
-                                CreateNewRenderer<WorkerRenderer>(WorkerType.Audio);
+                            if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(streamType))
+                                wt = WorkerType.Video;
                             else
-                                // video file
-                                CreateNewRenderer<WorkerRenderer>(WorkerType.Video);
+                                wt = WorkerType.Audio;
                         }
                     }
                 }
 
+                CreateWorkerRenderer(wt);
+
                 Logger.LogTrace("Now playing media: {0}", file);
 
-                if (_streamRenderer != null)
+                if (_renderer != null)
                 {
                     if (this.FilterState == FilterState.Stopped)
                     {
-                        _streamRenderer.RenderMediaName = file;
+                        _renderer.RenderMediaName = file;
                     }
 
-                    var workerRenderer = _streamRenderer as WorkerRenderer;
+                    var workerRenderer = _renderer as WorkerSupport.WorkerRenderer;
                     if (workerRenderer != null && workerRenderer.IsVideo)
                     {
-                        _streamRenderer.SetRenderRegion(_renderPanel, GraphNotifyWnd.Instance);
+                        _renderer.SetRenderRegion(_renderPanel, GraphNotifyWnd.Instance);
                         _renderPanel.Resize -= RenderPanel_Resize;
                         _renderPanel.Resize += RenderPanel_Resize;
                     }
@@ -478,16 +473,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         private void RenderPanel_Resize(object sender, EventArgs e)
         {
-            var workerRenderer = _streamRenderer as WorkerRenderer;
+            var workerRenderer = _renderer as WorkerSupport.WorkerRenderer;
             if (workerRenderer != null && workerRenderer.IsVideo)
             {
                 _renderPanel.SuspendLayout();
-                _streamRenderer.ResizeRenderRegion();
+                _renderer.ResizeRenderRegion();
                 _renderPanel.ResumeLayout();
             }
         }
 
-        StreamRenderer _oldRenderer = null;
+        WorkerRenderer _oldRenderer = null;
 
         internal bool UseCrossFading
         {
@@ -498,14 +493,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        private void CreateNewRenderer<T>(WorkerType? workerType = null) where T : StreamRenderer
+        private void CreateWorkerRenderer(WorkerType workerType)
         {
-            if (UseCrossFading && _streamRenderer != null)
+            if (UseCrossFading && _renderer != null)
             {
-                if (workerType.HasValue)
-                    Logger.LogTrace($"[XFADE] Creating a new WorkerRenderer of type {workerType}");
-                else
-                    Logger.LogTrace($"[XFADE] Creating a new {typeof(T)}");
+                Logger.LogTrace($"[XFADE] Creating a new WorkerRenderer of type {workerType}");
 
                 // Cleanup the older renderer
                 if (_oldRenderer != null)
@@ -515,33 +507,23 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 }
 
                 _crossFadePendingStop = false;
-                _oldRenderer = _streamRenderer;
+                _oldRenderer = _renderer;
 
                 // Set up new one
-                if (workerType == null)
-                    _streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
-                else
-                    _streamRenderer = Activator.CreateInstance(typeof(T), workerType.GetValueOrDefault()) as StreamRenderer;
+                _renderer = new WorkerSupport.WorkerRenderer(workerType);
             }
             else
             {
                 // Cleanup old renderer
-                if (_streamRenderer != null)
+                if (_renderer != null)
                 {
-                    _streamRenderer.Dispose();
-                    _streamRenderer = null;
+                    _renderer.Dispose();
+                    _renderer = null;
                 }
 
-                if (workerType.HasValue)
-                    Logger.LogTrace($"Creating a new WorkerRenderer of type {workerType}");
-                else
-                    Logger.LogTrace($"Creating a new {typeof(T)}");
+                Logger.LogTrace($"Creating a new WorkerRenderer of type {workerType}");
 
-                // Set up new one
-                if (workerType == null)
-                    _streamRenderer = Activator.CreateInstance(typeof(T)) as StreamRenderer;
-                else
-                    _streamRenderer = Activator.CreateInstance(typeof(T), workerType.GetValueOrDefault()) as StreamRenderer;
+                _renderer = new WorkerSupport.WorkerRenderer(workerType);
             }
         }
 
@@ -558,9 +540,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     double position = this.MediaPosition;
                     this.ResumeRenderer(position);
                 }
-                else if (_streamRenderer != null)
+                else if (_renderer != null)
                 {
-                    _streamRenderer.StartRendererWithHint(startHint);
+                    _renderer.StartRendererWithHint(startHint);
                     HandleCrossFading();
                 }
             }
@@ -577,14 +559,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             if (UseCrossFading == false)
                 return;
 
-            if (_oldRenderer == null || _oldRenderer.Valid == false || _streamRenderer == null)
+            if (_oldRenderer == null || _oldRenderer.Valid == false || _renderer == null)
                 return;
 
             int startVol = _oldRenderer.AudioVolume;
             int quant = startVol / 10;
-            _streamRenderer.AudioVolume = 0;
+            _renderer.AudioVolume = 0;
 
-            Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{_streamRenderer}]");
+            Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{_renderer}]");
             _xfadeInProgress.Set();
 
             Task.Factory.StartNew(() =>
@@ -599,9 +581,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         i++;
                         int delta = i * quant;
                         _oldRenderer.AudioVolume = startVol - delta;
-                        _streamRenderer.AudioVolume = delta;
+                        _renderer.AudioVolume = delta;
 
-                        Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{_streamRenderer}]");
+                        Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{_renderer}]");
 
                         // _crossFadeLength is in sec
                         // To sleep for _crossFadeLength/10 sec, need to multiply with 100
@@ -612,12 +594,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                             break;
                     }
 
-                    Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{_streamRenderer}]");
+                    Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{_renderer}]");
 
                     _oldRenderer.AudioVolume = 0;
-                    _streamRenderer.AudioVolume = startVol;
+                    _renderer.AudioVolume = startVol;
 
-                    Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{_streamRenderer}]");
+                    Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{_renderer}]");
 
                     // Cleanup old renderer
                     if (_oldRenderer != null && _oldRenderer.Valid)
@@ -646,19 +628,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 _position = 0;
                 StreamData = new Dictionary<string, string>();
 
-                if (_streamRenderer != null)
+                if (_renderer != null)
                 {
-                    Logger.LogTrace("Media will be rendered using {0}", _streamRenderer.GetType().Name);
+                    Logger.LogTrace("Media will be rendered using {0}", _renderer.GetType().Name);
 
                     if (this.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
-                        _streamRenderer.StartRenderer();
+                        _renderer.StartRenderer();
                         HandleCrossFading();
                     }
-                    else if (_streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
+                    else if (_renderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
                     {
-                        double position = _streamRenderer.MediaPosition;
-                        _streamRenderer.ResumeRenderer(position);
+                        double position = _renderer.MediaPosition;
+                        _renderer.ResumeRenderer(position);
                     }
                 }
             }
@@ -674,10 +656,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 _hasRenderingErrors = false;
 
-                if (_streamRenderer != null &&
-                    _streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running)
+                if (_renderer != null &&
+                    _renderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running)
                 {
-                    _streamRenderer.PauseRenderer();
+                    _renderer.PauseRenderer();
                 }
             }
             catch (Exception ex)
@@ -692,11 +674,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 _hasRenderingErrors = false;
 
-                if (_streamRenderer != null &&
-                    _streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
+                if (_renderer != null &&
+                    _renderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused)
                 {
                     _position = fromPosition;
-                    _streamRenderer.ResumeRenderer(fromPosition);
+                    _renderer.ResumeRenderer(fromPosition);
                 }
             }
             catch (Exception ex)
@@ -743,11 +725,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                 _position = 0;
 
-                if (_streamRenderer != null &&
-                    (_streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running ||
-                    _streamRenderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused))
+                if (_renderer != null &&
+                    (_renderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running ||
+                    _renderer.FilterState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused))
                 {
-                    _streamRenderer.StopRenderer();
+                    _renderer.StopRenderer();
                 }
             }
             catch (Exception ex)
@@ -868,9 +850,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         #endregion
 
         #region Construction
-        private MediaRenderer(bool isDefaultInstance)
+        private RenderingEngine(bool isDefaultInstance)
         {
-            _streamRenderer = null;
+            _renderer = null;
 
             RegistrationSupport.Init();
 
@@ -900,7 +882,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
 
-        ~MediaRenderer()
+        ~RenderingEngine()
         {
             if (timerCheckState != null)
             {
@@ -917,7 +899,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 __defaultInstance = null;
             }
 
-            _streamRenderer = null;
+            _renderer = null;
         }
 
         double oldMediaPosition = 0;
@@ -996,7 +978,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                                 //break;
 
                             case OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
-                                _position = _streamRenderer.MediaPosition;
+                                _position = _renderer.MediaPosition;
                                 break;
                         }
                         break;
@@ -1053,7 +1035,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public override bool Equals(object obj)
         {
-            MediaRenderer mr = (obj as MediaRenderer);
+            RenderingEngine mr = (obj as RenderingEngine);
             if (mr != null)
             {
                 return (this._hash == mr._hash);
@@ -1071,10 +1053,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public void Dispose()
         {
-            if (_streamRenderer != null)
+            if (_renderer != null)
             {
-                _streamRenderer.Dispose();
-                _streamRenderer = null;
+                _renderer.Dispose();
+                _renderer = null;
             }
         }
 

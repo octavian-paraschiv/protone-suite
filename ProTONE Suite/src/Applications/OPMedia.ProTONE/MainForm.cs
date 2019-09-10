@@ -102,8 +102,8 @@ namespace OPMedia.ProTONE
 
                 OnPerformTranslation();
 
-                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
-                MediaRenderer.DefaultInstance.RenderedStreamPropertyChanged += new RenderedStreamPropertyChangedHandler(OnStreamTitleChanged);
+                RenderingEngine.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
+                RenderingEngine.DefaultInstance.RenderedStreamPropertyChanged += new RenderedStreamPropertyChangedHandler(OnStreamTitleChanged);
             }
         }
 
@@ -111,7 +111,7 @@ namespace OPMedia.ProTONE
         {
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
+                RenderingEngine.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
             }
         }
 
@@ -135,7 +135,7 @@ namespace OPMedia.ProTONE
                     string name = cmd.ToString().Replace("Cmd", "btn");
                     if (cmd == OPMShortcut.CmdPlayPause)
                     {
-                        if (MediaRenderer.DefaultInstance.FilterState == FilterState.Running)
+                        if (RenderingEngine.DefaultInstance.FilterState == FilterState.Running)
                             name = "btnPause";
                         else
                             name = "btnPlay";
@@ -210,7 +210,7 @@ namespace OPMedia.ProTONE
 
         bool BuildMediaStateString(bool showTime, ref string message)
         {
-            message = MediaRenderer.DefaultInstance.TranslatedFilterState;
+            message = RenderingEngine.DefaultInstance.TranslatedFilterState;
 
             if (_hasMediaStateChangedAtLeastOnce == false)
                 return false;
@@ -224,13 +224,13 @@ namespace OPMedia.ProTONE
 
                 if (showTime)
                 {
-                    bool running = (MediaRenderer.DefaultInstance.FilterState == FilterState.Running || 
-                        MediaRenderer.DefaultInstance.FilterState == FilterState.Paused);
+                    bool running = (RenderingEngine.DefaultInstance.FilterState == FilterState.Running || 
+                        RenderingEngine.DefaultInstance.FilterState == FilterState.Paused);
 
                     if (running)
                     {
-                        int pos = (int)MediaRenderer.DefaultInstance.MediaPosition;
-                        int len = (int)MediaRenderer.DefaultInstance.MediaLength;
+                        int pos = (int)RenderingEngine.DefaultInstance.MediaPosition;
+                        int len = (int)RenderingEngine.DefaultInstance.MediaLength;
 
                         const int MaxTrackerLen = 20;
                         int trackerPos = (int)(MaxTrackerLen * pos / len);

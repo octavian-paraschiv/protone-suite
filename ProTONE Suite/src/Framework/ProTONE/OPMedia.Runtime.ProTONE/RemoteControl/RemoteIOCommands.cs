@@ -73,7 +73,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
 
         public string Execute()
         {
-            return "ACK\r\n" + MediaRenderer.DefaultInstance.GetStateDescription();
+            return "ACK\r\n" + RenderingEngine.DefaultInstance.GetStateDescription();
         }
     }
 

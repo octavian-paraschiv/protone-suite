@@ -147,7 +147,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                                     if (hint != null && hint.IsSubtitleHint)
                                     {
-                                        subSubItem.Checked = (hint.SID == MediaRenderer.DefaultInstance.SubtitleStream);
+                                        subSubItem.Checked = (hint.SID == RenderingEngine.DefaultInstance.SubtitleStream);
                                     }
                                 }
                                 else if (ssitem is BookmarkSubItem)
@@ -262,7 +262,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         Bitmap img = null;
 
-                        switch (MediaRenderer.DefaultInstance.FilterState)
+                        switch (RenderingEngine.DefaultInstance.FilterState)
                         {
                             case Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
                                 img = Resources.btnPlay;

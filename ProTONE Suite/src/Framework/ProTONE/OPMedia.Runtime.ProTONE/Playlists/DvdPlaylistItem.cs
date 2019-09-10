@@ -65,8 +65,8 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             submenu.Add(title, null);
 
             if (vdi.AvailableSubtitles.Count > 0 &&
-                MediaRenderer.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped &&
-                MediaRenderer.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened)
+                RenderingEngine.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped &&
+                RenderingEngine.DefaultInstance.FilterState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened)
             {
                 title = new DvdSubItem(Translator.Translate("TXT_DVD_SUBTITLES"), DvdRenderingStartHint.SubtitleStream, this);
                 List<PlaylistSubItem> subtitles = new List<PlaylistSubItem>();

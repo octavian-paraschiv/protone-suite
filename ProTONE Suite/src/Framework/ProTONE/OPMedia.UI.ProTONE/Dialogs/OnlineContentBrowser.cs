@@ -114,7 +114,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             string filter = string.Empty;
 
-            filter += MediaRenderer.DefaultInstance.PlaylistsFilter;
+            filter += RenderingEngine.DefaultInstance.PlaylistsFilter;
             filter += Translator.Translate("TXT_ALL_FILES_FILTER");
             filter = filter.Replace("TXT_PLAYLISTS", Translator.Translate("TXT_PLAYLISTS"));
 

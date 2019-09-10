@@ -45,7 +45,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             ProTONEConfig.MediaStateNotificationsEnabled = chkFilterStateNotificationsEnabled.Checked;
 
             // Tell FFDShow to reload subtitle and OSD settings
-            MediaRenderer.DefaultInstance.ReloadFfdShowSettings();
+            RenderingEngine.DefaultInstance.ReloadFfdShowSettings();
         }
 
         public SubtitleOsdPage()
