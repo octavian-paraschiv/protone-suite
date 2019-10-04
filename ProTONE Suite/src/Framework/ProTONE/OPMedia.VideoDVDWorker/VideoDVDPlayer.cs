@@ -98,7 +98,7 @@ namespace OPMedia.VideoDVDWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Pause();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -110,11 +110,11 @@ namespace OPMedia.VideoDVDWorker
             InitMedia(url, renderHwnd, notifyHwnd);
 
             int hr = mediaPosition.put_Rate(1);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // Run the graph to play the media file
             hr = mediaControl.Run();
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // HACK: call GetLength once here to ensure that durationScaleFactor is buuilt up
             GetLength();
@@ -130,14 +130,14 @@ namespace OPMedia.VideoDVDWorker
             mediaEvent = mediaControl as IMediaEventEx;
 
             int hr = mediaControl.RenderFile(url);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.MediaReadError, hr);
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             int w = 0;
             hr = basicVideo.get_VideoWidth(out w);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             SetRenderRegion(renderHwnd, notifyHwnd);
         }
@@ -155,7 +155,7 @@ namespace OPMedia.VideoDVDWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Run();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -176,7 +176,7 @@ namespace OPMedia.VideoDVDWorker
 
             var dsVolume = MapVolume(vol);
             int hr = basicAudio.put_Volume(dsVolume);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             _vol = vol;
         }
@@ -201,7 +201,7 @@ namespace OPMedia.VideoDVDWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.GetState(0, out fs);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             return fs;
@@ -240,10 +240,10 @@ namespace OPMedia.VideoDVDWorker
             if (videoWindow != null)
             {
                 hr = videoWindow.put_Owner(_renderHandle);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
                 hr = videoWindow.put_MessageDrain(_renderHandle);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             if (videoWindow != null)
@@ -251,13 +251,13 @@ namespace OPMedia.VideoDVDWorker
                 hr = videoWindow.put_WindowStyle((int)(WindowStyle.Child |
                     WindowStyle.ClipSiblings |
                     WindowStyle.ClipChildren));
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             if (mediaEvent != null)
             {
                 hr = mediaEvent.SetNotifyWindow(_notifyHandle, (int)Messages.WM_GRAPH_EVENT, IntPtr.Zero);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 

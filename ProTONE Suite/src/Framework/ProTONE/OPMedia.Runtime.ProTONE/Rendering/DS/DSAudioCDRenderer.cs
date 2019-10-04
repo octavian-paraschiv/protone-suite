@@ -34,11 +34,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             InitMedia();
 
             int hr = mediaPosition.put_Rate(1);
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // Run the graph to play the media file
             hr = mediaControl.Run();
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // HACK: call GetMedialenght once here to ensure that durationScaleFactor is buuilt up
             double len = GetMediaLength();
@@ -64,7 +64,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             // Render the output pin
             int hr = (int)_source.OutputPin.Render();
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             mediaPosition = mediaControl as IMediaPosition;
             videoWindow = null;

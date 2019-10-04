@@ -1,4 +1,6 @@
 ﻿using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.DeezerInterop.PlayerApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,54 +11,46 @@ namespace OPMedia.Runtime.ProTONE
     public enum WorkerError
     {
         Ok = 0,
-
         Generic = 1,
-
         RenderingError,
-
         UnsupportedMediaType,
-
         CannotConnectToMedia,
-
         MediaReadError,
     }
 
     public class WorkerException : Exception
     {
-        public WorkerError WorkerErrorCode { get; private set; }
+        public WorkerError ErrorType { get; private set; }
 
-        public new int HResult { get; set; }
-
-        public static void ThrowForErrorCode(WorkerError err, string msg = "")
-        {
-            if (string.IsNullOrEmpty(msg))
-                msg = err.ToString();
-
-            WorkerException ex = new WorkerException(msg);
-            ex.WorkerErrorCode = err;
-            ex.HResult = WinError.E_FAIL;
-            throw ex;
-        }
-
-        public static void ThrowForHResult(int hr)
+        public static void ThrowForHResult(WorkerError errorType, int hr)
         {
             if (hr < 0)
-                throw new WorkerException { HResult = hr, WorkerErrorCode = WorkerError.RenderingError };
+            {
+                const int MAX_ERROR_TEXT_LEN = 255;
+                StringBuilder sb = new StringBuilder(MAX_ERROR_TEXT_LEN);
+                string msg = hr.ToString();
+
+                if (Quartz.AMGetErrorText(hr, sb, MAX_ERROR_TEXT_LEN) > 0)
+                    msg = sb.ToString();
+
+                Throw(errorType, msg);
+            }
+        }
+
+        public static void Throw(WorkerError errorType, object error)
+        {
+            throw new WorkerException(error.ToString()) { ErrorType = errorType };
         }
 
         public override string ToString()
         {
-            return string.Format("Error raised by Worker Process: {0} / HResult={1}", WorkerErrorCode, HResult);
-        }
-
-        private WorkerException()
-            : base()
-        {
+            return $"{ErrorType} ({Message})";
         }
 
         private WorkerException(string msg)
             : base(msg)
         {
         }
+
     }
 }

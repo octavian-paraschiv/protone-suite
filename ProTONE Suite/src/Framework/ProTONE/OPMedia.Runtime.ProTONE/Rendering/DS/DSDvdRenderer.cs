@@ -51,12 +51,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             // Run the graph to play the media file
             int hr = mediaControl.Run();
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             if (hint == DvdRenderingStartHint.MainMenu)
             {
                 hr = dvdControl2.ShowMenu(DvdMenuId.Title, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
             else if (hint == DvdRenderingStartHint.Beginning)
             {
@@ -66,18 +66,18 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     //dvdControl.PlayForwards(1f, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
                     hr = dvdControl2.ShowMenu(DvdMenuId.Title, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
 
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
             else if (hint.Location.ChapterNum == 0)
             {
                 hr = dvdControl2.PlayTitle(hint.Location.TitleNum, DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
             else
             {
                 hr = dvdControl2.PlayChapterInTitle(hint.Location.TitleNum, hint.Location.ChapterNum,
                     DvdCmdFlags.Flush | DvdCmdFlags.Block, _lastCmd);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             if (ProTONEConfig.PrefferedSubtitleLang > 0)
@@ -122,13 +122,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             dvdControl2 = GetInterface(typeof(IDvdControl2)) as IDvdControl2;
 
             int hr = dvdControl2.SetOption(DvdOptionFlag.HMSFTimeCodeEvents, true);	// use new HMSF timecode format
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             
             hr = dvdControl2.SetOption(DvdOptionFlag.ResetOnStop, false);
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             hr = dvdControl2.SetOption(DvdOptionFlag.AudioDuringFFwdRew, false);
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             dvdGraphBuilder.GetFiltergraph(out mediaControl);
 
@@ -168,7 +168,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 IEnumFilters enumFilters = null;
                 int hr = graphBuilder.EnumFilters(out enumFilters);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
                 IBaseFilter[] filters = new IBaseFilter[1];
 
@@ -196,7 +196,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
                 IEnumPins enumPins;
                 hr = dvdNavigator.EnumPins(out enumPins);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
                 IPin[] pins = new IPin[1];
                 hr = enumPins.Next(1, pins, IntPtr.Zero);
@@ -220,7 +220,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 return;
             
             int hr = dvdControl2.ActivateAtPosition(DsPOINT.FromPoint(e.Location));
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         void renderRegion_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -229,7 +229,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 return;
 
             int hr = dvdControl2.SelectAtPosition(DsPOINT.FromPoint(e.Location));
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         //protected override void  DoStopInternal(object state)
@@ -239,7 +239,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         //        if (mediaControl != null)
         //        {
         //            int hr = mediaControl.Stop();
-        //            DsError.ThrowExceptionForHR(hr);
+        //            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
         //            if (dvdControl2 != null)
         //            {
@@ -282,7 +282,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 if (mediaControl != null)
                 {
                 int hr = mediaControl.Run();
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             if (fromPosition > 0)
@@ -311,7 +311,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             timeCode.bFrames = 1;
 
             int hr = dvdControl2.PlayAtTime(ref timeCode, DvdCmdFlags.None, _lastCmd);
-            DsError.ThrowExceptionForHR(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         protected override bool IsMediaSeekable()
@@ -382,7 +382,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                     if (dvdControl2 != null)
                     {
                         int hr = dvdControl2.PlayTitle(1, DvdCmdFlags.None, _lastCmd);
-                        DsError.ThrowExceptionForHR(hr);
+                        WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
                     }
                     break;
                 }
@@ -409,10 +409,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                 try
                 {
                     int hr = dvdControl2.SelectSubpictureStream(sid, DvdCmdFlags.None, _lastCmd);
-                    DsError.ThrowExceptionForHR(hr);
+                    WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
                     
                     hr = dvdControl2.SetSubpictureState(true, DvdCmdFlags.None, _lastCmd);
-                    DsError.ThrowExceptionForHR(hr);
+                    WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
                 }
                 catch (Exception exception)
                 {

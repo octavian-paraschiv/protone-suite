@@ -58,7 +58,6 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
     public class WorkerProcess : IDisposable, IWorkerPlayer
     {
-        public const long GenericErrorCode = 0x10000000;
         public const char InnerArrayDelim = ';';
 
         Process _wp = null;
@@ -236,9 +235,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
                 if (wct != WorkerCommandType.StopReq)
                     // The worker process will die when StopReq is sent so don't bother processing the response.
-                    HandleErrorCode(wct.ToString(), (WorkerError)dz_error_t.DZ_ERROR_BAD_OPERATION_RSP);
+                    WorkerException.Throw(WorkerError.Generic, dz_error_t.DZ_ERROR_BAD_OPERATION_RSP.ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (_wp != null && _wp.HasExited == false)
                 {
@@ -251,7 +250,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                     _wp = null;
                 }
 
-                throw;
+                throw ex;
             }
         }
 
@@ -265,42 +264,17 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         private void CheckReply(string operation, WorkerCommand cmd)
         {
-            // Decode reply code as integer
-            int replyCode = cmd.Args<int>(0);
-            if (replyCode >= GenericErrorCode)
+            // Decode reply code as string
+            string replyCode = cmd.Args<string>(0);
+            if (replyCode.StartsWith("err_"))
             {
                 // The reply command wraps an error code
-                WorkerError error = (WorkerError)(replyCode - GenericErrorCode);
+                WorkerError errorType = WorkerError.Generic;
+                Enum.TryParse<WorkerError>(replyCode.Replace("err_", ""), out errorType);
 
-                int hr = 0;
-                if (error == WorkerError.RenderingError)
-                {
-                    // Decode HR from the second argument
-                    hr = cmd.Args<int>(1);
-                }
+                string errorCode = cmd.Args<string>(1);
 
-                HandleErrorCode(operation, error, hr);
-            }
-        }
-
-        private void HandleErrorCode(string operation, WorkerError errCode, int hr = 0)
-        {
-            switch (_wt)
-            {
-                case WorkerType.Deezer:
-                    DeezerApi.HandleDzErrorCode(operation, (dz_error_t)errCode);
-                    break;
-
-                default:
-                    {
-                        if (errCode == (WorkerError)dz_error_t.DZ_ERROR_BAD_OPERATION_RSP)
-                            errCode = WorkerError.Generic;
-
-                        // Try to recompose the original exception
-                        WorkerException.ThrowForHResult(hr);
-                        WorkerException.ThrowForErrorCode(errCode);
-                    }
-                    break;
+                WorkerException.Throw(errorType, errorCode);
             }
         }
 

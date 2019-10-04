@@ -1019,7 +1019,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             try
             {
                 RenderingException rex = RenderingException.FromException(ex);
-                rex.RenderedFile = this.GetRenderFile();
+                //rex.RenderedFile = this.GetRenderFile();
+                rex.RenderedFile = "__DESC__";
 
                 RenderingExceptionEventArgs args = new RenderingExceptionEventArgs(rex);
                 FireMediaRenderingException(args);

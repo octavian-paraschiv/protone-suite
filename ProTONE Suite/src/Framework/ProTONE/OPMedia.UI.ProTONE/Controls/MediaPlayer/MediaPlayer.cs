@@ -346,7 +346,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         void OnMediaRenderingException(RenderingExceptionEventArgs args)
         {
             string msg = args.RenderingException.ToString();
-            ErrorDispatcher.DispatchError(msg, false);
+            string desc = this.playlist.GetActiveItem().ToString();
+            ErrorDispatcher.DispatchError(msg.Replace("__DESC__", desc), false);
             args.Handled = true;
         }
 

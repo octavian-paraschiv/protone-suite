@@ -63,7 +63,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         //    return ErrorDispatcher.GetErrorMessageForException(new COMException("Error: ", hr), true);
         //}
     }
-
+    
     public static class Filters		// uuids.h  :  CLSID_*
     {
         public static readonly Guid FileSource = new Guid("e436ebb5-524f-11ce-9f53-0020af0ba770");

@@ -537,9 +537,12 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             // Read the audio header if not already done
             if (!_deepLoad)
             {
-                // This will actually toggle reading the audio header
-                TimeSpan duration = af.Properties.Duration;
-                _deepLoad = true;
+                if (af != null && af.Properties != null)
+                {
+                    // This will actually toggle reading the audio header
+                    TimeSpan duration = af.Properties.Duration;
+                    _deepLoad = true;
+                }
             }
         }
 

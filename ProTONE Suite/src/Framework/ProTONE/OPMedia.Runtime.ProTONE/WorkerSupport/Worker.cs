@@ -12,6 +12,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public class Worker
     {
+        public const int SessionTimeout = 60000;
+        public const int OperationTimeout = 10000;
+
         private string _appName;
 
         private System.Timers.Timer _tmrCheckWorkerLoop = null;
@@ -29,7 +32,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             _appName = appName;
 
-            int interval = 5000;
+            int interval = 1000 + OperationTimeout;
 
             if (ProTONEConfig.XFade)
             {

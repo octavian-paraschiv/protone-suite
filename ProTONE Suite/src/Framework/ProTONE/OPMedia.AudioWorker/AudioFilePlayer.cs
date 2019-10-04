@@ -74,7 +74,7 @@ namespace OPMedia.AudioWorker
             if (mediaPosition != null)
             {
                 int hr = mediaPosition.get_CurrentPosition(out val);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             return (int)(val * durationScaleFactor);
@@ -90,7 +90,7 @@ namespace OPMedia.AudioWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Pause();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -102,11 +102,11 @@ namespace OPMedia.AudioWorker
             InitMedia(url);
 
             int hr = mediaPosition.put_Rate(1);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // Run the graph to play the media file
             hr = mediaControl.Run();
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // HACK: call GetLength once here to ensure that durationScaleFactor is buuilt up
             GetLength();
@@ -119,10 +119,10 @@ namespace OPMedia.AudioWorker
             basicAudio = mediaControl as IBasicAudio;
 
             int hr = mediaControl.RenderFile(url);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         private IMediaControl BuildMediaControl()
@@ -138,7 +138,7 @@ namespace OPMedia.AudioWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Run();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -147,7 +147,7 @@ namespace OPMedia.AudioWorker
             if (mediaPosition != null)
             {
                 int hr = mediaPosition.put_CurrentPosition(pos / durationScaleFactor);
-                DsError.ThrowExceptionForHR(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -159,7 +159,7 @@ namespace OPMedia.AudioWorker
 
             var dsVolume = MapVolume(vol);
             int hr = basicAudio.put_Volume(dsVolume);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             _vol = vol;
         }
@@ -184,7 +184,7 @@ namespace OPMedia.AudioWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.GetState(0, out fs);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             return fs;

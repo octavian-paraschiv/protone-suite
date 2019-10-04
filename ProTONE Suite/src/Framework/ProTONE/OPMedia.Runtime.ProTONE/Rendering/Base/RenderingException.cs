@@ -23,10 +23,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             {
                 return new RenderingException(
                     ErrorDispatcher.GetErrorMessageForException(ex, false),
-                    ex.InnerException);
+                    ex);
+            }
+            else if (ex is WorkerException)
+            {
+                return new RenderingException(
+                    ex.ToString(), ex);
             }
 
-            return new RenderingException(ex.Message, ex.InnerException);
+            return new RenderingException(ex.Message, ex);
         }
 
         public override string ToString()

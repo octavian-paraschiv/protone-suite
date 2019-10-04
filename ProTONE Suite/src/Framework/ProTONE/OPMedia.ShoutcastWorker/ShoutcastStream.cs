@@ -119,8 +119,7 @@ namespace OPMedia.ShoutcastWorker
                         break;
 
                     default:
-                        WorkerException.ThrowForErrorCode(WorkerError.UnsupportedMediaType, 
-                            $"Unsupported stream type: {ContentType}");
+                        WorkerException.Throw(WorkerError.UnsupportedMediaType, -1);
                         break;
                 }
 
@@ -173,7 +172,7 @@ namespace OPMedia.ShoutcastWorker
             catch(Exception ex)
             {
                 connected = false;
-                WorkerException.ThrowForErrorCode(WorkerError.CannotConnectToMedia, ex.Message);
+                WorkerException.Throw(WorkerError.CannotConnectToMedia, -1);
             }
             finally
             {

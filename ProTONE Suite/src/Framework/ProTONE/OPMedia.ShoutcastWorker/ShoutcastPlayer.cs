@@ -34,7 +34,7 @@ namespace OPMedia.ShoutcastWorker
             if (mediaPosition != null)
             {
                 int hr = mediaPosition.get_CurrentPosition(out val);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             return (int)val;
@@ -50,7 +50,7 @@ namespace OPMedia.ShoutcastWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Pause();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -62,11 +62,11 @@ namespace OPMedia.ShoutcastWorker
             InitMedia(url);
 
             int hr = mediaPosition.put_Rate(1);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             // Run the graph to play the media file
             hr = mediaControl.Run();
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         private void InitMedia(string url)
@@ -83,18 +83,17 @@ namespace OPMedia.ShoutcastWorker
             _source.FilterGraph = (mediaControl) as IGraphBuilder;
 
             if (_source.OutputPin == null)
-                WorkerException.ThrowForErrorCode(WorkerError.MediaReadError, 
-                    $"Unable to stream media from URL: {url}");
+                WorkerException.Throw(WorkerError.MediaReadError, -1);
 
             // Render the output pin
             int hr = (int)_source.OutputPin.Render();
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             mediaPosition = mediaControl as IMediaPosition;
             basicAudio = mediaControl as IBasicAudio;
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
 
         private IMediaControl BuildMediaControl()
@@ -108,7 +107,7 @@ namespace OPMedia.ShoutcastWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.Run();
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
         }
 
@@ -125,7 +124,7 @@ namespace OPMedia.ShoutcastWorker
 
             var dsVolume = MapVolume(vol);
             int hr = basicAudio.put_Volume(dsVolume);
-            WorkerException.ThrowForHResult(hr);
+            WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
             _vol = vol;
         }
@@ -150,7 +149,7 @@ namespace OPMedia.ShoutcastWorker
             if (mediaControl != null)
             {
                 int hr = mediaControl.GetState(0, out fs);
-                WorkerException.ThrowForHResult(hr);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
 
             return fs;

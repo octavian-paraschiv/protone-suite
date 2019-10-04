@@ -102,11 +102,8 @@ namespace OPMedia.Runtime.ProTONE
             catch (WorkerException ex)
             {
                 Logger.LogException(ex);
-                long code = WorkerProcess.GenericErrorCode + (long)ex.WorkerErrorCode;
-                replyArg = code.ToString();
-
-                if (ex.WorkerErrorCode == WorkerError.RenderingError)
-                    replyArg2 = ex.HResult.ToString();
+                replyArg = $"err_{ex.ErrorType}";
+                replyArg2 = ex.Message;
             }
             catch(Exception ex)
             {
