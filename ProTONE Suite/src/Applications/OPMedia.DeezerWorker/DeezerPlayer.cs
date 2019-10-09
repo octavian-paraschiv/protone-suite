@@ -42,7 +42,7 @@ namespace OPMedia.DeezerWorker
 
         public DeezerPlayer()
         {
-            _userCachePath = Path.Combine(PathUtils.ProgramDataDir, "dzrcache");
+            _userCachePath = PathUtils.GetCacheFolderPath("dzrcache");
         }
 
         private void CheckIfInitialized(string userId)

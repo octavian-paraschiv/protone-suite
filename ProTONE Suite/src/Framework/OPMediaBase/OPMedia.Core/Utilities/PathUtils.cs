@@ -23,6 +23,20 @@ namespace OPMedia.Core
         static string _networkPathStart = string.Format("{0}{1}",
             DirectorySeparator, DirectorySeparator);
 
+        static string _cacheBaseFolder = null;
+
+        public static string GetCacheFolderPath(string cacheFolderName)
+        {
+            if (string.IsNullOrEmpty(_cacheBaseFolder))
+            {
+                _cacheBaseFolder = PathUtils.ProgramDataDir;
+                _cacheBaseFolder = Path.Combine(_cacheBaseFolder, Constants.CompanyName);
+                _cacheBaseFolder = Path.Combine(_cacheBaseFolder, Constants.SuiteName);
+            }
+
+            return Path.Combine(_cacheBaseFolder, cacheFolderName);
+        }
+
         public static string ProgramDataDir
         {
             get

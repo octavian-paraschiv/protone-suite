@@ -874,7 +874,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             if (ProTONEConfig.IsPlayer && ProTONEConfig.DeezerHasValidConfig)
             {
-                string deezerCachePath = Path.Combine(PathUtils.ProgramDataDir, "dzrcache");
+                string deezerCachePath = PathUtils.GetCacheFolderPath("dzrcache");
                 // Cleanup cache
                 if (Directory.Exists(deezerCachePath))
                 {
