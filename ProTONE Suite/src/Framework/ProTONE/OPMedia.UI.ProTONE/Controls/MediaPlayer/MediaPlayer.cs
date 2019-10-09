@@ -357,12 +357,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             OnMediaRendererHeartbeat();
 
             PlaylistItem pli = playlist.GetActivePlaylistItem();
-
-            //pnlRendering.FilterStateChanged(newState, newMedia, MediaRenderer.DefaultInstance.RenderedMediaType);
             pnlPlayback.FilterStateChanged(newState, pli, RenderingEngine.DefaultInstance.RenderedMediaType);
 
             bool playerNotActive = (newState == FilterState.NotOpened || newState == FilterState.Stopped);
-
             if (playerNotActive && playlist.GetFileCount() >= 1)
             {
                 RenderingEngine.DefaultInstance.PlaylistAtEnd = playlist.IsPlaylistAtEnd;

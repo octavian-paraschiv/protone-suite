@@ -408,7 +408,7 @@ namespace OPMedia.Core
                             .Replace("/", "_")
                             .Replace(":", "_");
 
-                        string imgCacheDir = Path.Combine(PathUtils.LocalAppDataFolder, "imgcache");
+                        string imgCacheDir = Path.Combine(PathUtils.ProgramDataDir, "imgcache");
                         if (Directory.Exists(imgCacheDir) == false)
                             Directory.CreateDirectory(imgCacheDir);
 
