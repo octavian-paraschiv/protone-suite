@@ -232,7 +232,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             if (abortEvent.WaitOne(5))
                 return results;
 
-            SortResults(ref results);
+            // SortResults(ref results);
 
             return results;
         }
