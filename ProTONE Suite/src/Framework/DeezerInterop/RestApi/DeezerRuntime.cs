@@ -234,7 +234,7 @@ namespace OPMedia.DeezerInterop.RestApi
             if (abortEvent.WaitOne(5))
                 return playlists;
 
-            string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}", this.UserAccessToken));
+            string response = this.ExecuteHttpGet(string.Format("user/me/playlists?access_token={0}&limit=10000", this.UserAccessToken));
             if (string.IsNullOrEmpty(response) == false)
             {
                 var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);

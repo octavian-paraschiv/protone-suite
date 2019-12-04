@@ -243,6 +243,10 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
             {
                 int cmp = 0;
 
+                cmp = string.Compare(r1.Url, r2.Url, true);
+                if (cmp != 0)
+                    return cmp;
+
                 DeezerTrackItem dti1 = r1 as DeezerTrackItem;
                 DeezerTrackItem dti2 = r2 as DeezerTrackItem;
                 if (dti1 != null && dti2 != null)
@@ -254,10 +258,6 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     if (cmp != 0)
                         return cmp;
                 }
-
-                cmp = string.Compare(r1.Url, r2.Url, true);
-                if (cmp != 0)
-                    return cmp;
 
                 cmp = string.Compare(r1.Title, r2.Title, true);
                 if (cmp != 0)
