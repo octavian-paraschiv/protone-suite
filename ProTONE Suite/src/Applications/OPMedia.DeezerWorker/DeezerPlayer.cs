@@ -201,6 +201,8 @@ namespace OPMedia.DeezerWorker
             Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
 
+            SetVolume(0);
+
             //if (delayStart > 0)
             //{
             //    Task.Factory.StartNew(() =>
@@ -547,8 +549,6 @@ namespace OPMedia.DeezerWorker
                 Logger.LogToConsole("DeezerPlayer::OnRenderProgress curRenderPos={0}", curRenderPos);
                 RenderPosition = curRenderPos;
                 FilterState = FilterState.Running;
-
-                _proc.RenderEvt(curRenderPos);
             }
         }
 

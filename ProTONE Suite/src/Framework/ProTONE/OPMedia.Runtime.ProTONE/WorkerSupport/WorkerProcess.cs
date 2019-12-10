@@ -69,29 +69,32 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public int Pid { get; private set; }
 
         WorkerType _wt = WorkerType.Deezer;
+        string _fileName = null;
 
-        public WorkerProcess(WorkerType workerType)
+        public WorkerProcess(WorkerType workerType, string args = null)
         {
             _wt = workerType;
+            _fileName = $"OPMedia.{workerType}Worker.exe";
 
-            ProcessStartInfo psi = new ProcessStartInfo($".\\OPMedia.{workerType}Worker.exe");
+            ProcessStartInfo psi = new ProcessStartInfo($".\\{_fileName}");
             psi.CreateNoWindow = true;
             psi.RedirectStandardInput = true;
             psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
             psi.WorkingDirectory = LiteAppConfig.InstallationPath;
             psi.UseShellExecute = false;
+            psi.Arguments = args;
 
             _wp = Process.Start(psi);
-            _wp.Exited += _wp_Exited;
+            
+            //_wp.Exited += _wp_Exited;
 
             this.Pid = _wp.Id;
         }
 
-        private void _wp_Exited(object sender, EventArgs e)
-        {
-            WorkerTerminated?.Invoke(Pid);
-        }
+        //private void _wp_Exited(object sender, EventArgs e)
+        //{
+        //    WorkerTerminated?.Invoke(Pid);
+        //}
 
         public void Dispose()
         {
@@ -123,35 +126,32 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             SetCommand(WorkerCommandType.PlayReq, url, userId, delayStart, renderHwnd, notifyHwnd);
 
-            ThreadPool.QueueUserWorkItem((c) => ReadEvents());
+            ThreadPool.QueueUserWorkItem((c) => MonitorWorkerProcess());
         }
 
-        void ReadEvents()
+        void MonitorWorkerProcess()
         {
             try
             {
                 while (true)
                 {
-                    var evt = WorkerCommandHelper.ReadCommand(_wp?.StandardError);
-                    if (evt == null)
+                    var proc = Process.GetProcessById(Pid);
+                    if (proc != null && 
+                        proc.MainModule != null)
                     {
-                        // process exited ??
-                        WorkerTerminated?.Invoke(Pid);
-                        return;
+                        if (string.Compare(proc.MainModule.ModuleName, _fileName, true) == 0)
+                        {
+                            // worker process still running
+                            Thread.Sleep(500);
+                            continue;
+                        }
                     }
-                    //else if (evt.IsValid)
-                    //{
-                    //    switch (evt.Type)
-                    //    {
-                    //        case WorkerCommandType.StateEvt:
-                    //            StateChanged?.Invoke(evt.Args<string>(0));
-                    //            break;
 
-                    //        case WorkerCommandType.RenderEvt:
-                    //            RenderEvent?.Invoke(evt.Args<int>(0));
-                    //            break;
-                    //    }
-                    //}
+                    Logger.LogTrace($"The worker process spawned as {_fileName} with PID={Pid} has exited.");
+
+                    // worker process exited
+                    WorkerTerminated?.Invoke(Pid);
+                    return;
                 }
             }
             catch

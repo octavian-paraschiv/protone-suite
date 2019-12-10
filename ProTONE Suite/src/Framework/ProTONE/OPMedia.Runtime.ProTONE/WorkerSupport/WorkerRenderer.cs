@@ -79,7 +79,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             _wt = workerType;
         }
 
-        private void ResetWorker()
+        private void ResetWorker(string args)
         {
             if (_wp != null)
             {
@@ -95,7 +95,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             if (_wp == null)
             {
-                _wp = new WorkerProcess(_wt);
+                _wp = new WorkerProcess(_wt, args);
                 _wp.WorkerTerminated += _wp_OnWorkerTerminated;
                 _wp.RenderEvent += _wp_RenderEvent;
                 _wp.StateChanged += _wp_StateChanged;
@@ -141,7 +141,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             if (renderMediaName == null || renderMediaName.Length <= 0)
                 return;
 
-            ResetWorker();
+            ResetWorker($"{renderMediaName}");
 
             int delayStart = 0;
 

@@ -15,17 +15,11 @@ namespace OPMedia.Runtime.ProTONE
     public class CommandProcessor
     {
         private IWorkerPlayer _player = null;
-        private StreamWriter _evtStream = null;
 
         public CommandProcessor(IWorkerPlayer player)
         {
             _player = player;
             _player.SetCommandProcessor(this);
-        }
-
-        public void SetEventStream(StreamWriter evtStream)
-        {
-            _evtStream = evtStream;
         }
 
         public WorkerCommand Process(WorkerCommand cmd)
@@ -120,20 +114,6 @@ namespace OPMedia.Runtime.ProTONE
             }
 
             return replyCmd;
-        }
-
-        public void StateEvt(FilterState state)
-        {
-            var cmd = new WorkerCommand(WorkerCommandType.StateEvt);
-            cmd.AddParameter(cmd.ToString());
-            WorkerCommandHelper.WriteCommand(_evtStream, cmd);
-        }
-
-        public void RenderEvt(int pos)
-        {
-            var cmd = new WorkerCommand(WorkerCommandType.RenderEvt);
-            cmd.AddParameter(pos.ToString());
-            WorkerCommandHelper.WriteCommand(_evtStream, cmd);
         }
     }
 }

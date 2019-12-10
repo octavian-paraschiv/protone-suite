@@ -263,7 +263,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     {
                         bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
 
-                        var vol = RenderingEngine.DefaultInstance.AudioVolume;
+                        var vol = Math.Max(1, RenderingEngine.DefaultInstance.AudioVolume);
 
                         // Magic? No, this is just the inverse of the sound card transfer function.
                         // For sure it's not the same between two sound cards. Not even of the same model.

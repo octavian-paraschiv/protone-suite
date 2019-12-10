@@ -11,7 +11,7 @@ namespace OPMedia.Core.Persistence
     public class CacheItem
     {
         // Time-To-Live: 30 seconds
-        const int MaxCachedItemTTL = 30 * 1000;
+        public const int MaxCachedItemTTL = 30 * 1000;
 
         public object Key { get; private set; }
 
@@ -191,7 +191,7 @@ namespace OPMedia.Core.Persistence
 
             lock (_cachePollerLock)
             {
-                Logger.LogToConsole("ReadObject: Object with key {0} was added to cache with a TTL of 5 sec", key);
+                Logger.LogToConsole("ReadObject: Object with key {0} was added to cache with a TTL of {1} sec", key, CacheItem.MaxCachedItemTTL);
                 _cache.Add(key, ci);
             }
 

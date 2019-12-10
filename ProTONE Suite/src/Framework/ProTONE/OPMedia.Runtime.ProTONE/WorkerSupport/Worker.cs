@@ -79,10 +79,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
                 using (StreamReader stdin = new StreamReader(Console.OpenStandardInput()))
                 using (StreamWriter stdout = new StreamWriter(Console.OpenStandardOutput()))
-                using (StreamWriter stderr = new StreamWriter(Console.OpenStandardError()))
                 {
-                    proc.SetEventStream(stderr);
-
                     while (true)
                     {
                         WorkerCommand cmd = WorkerCommandHelper.ReadCommand(stdin);
