@@ -189,7 +189,7 @@ namespace OPMedia.DeezerWorker
 
             // for playback from offset: dz_player_resume
 
-            SetVolume(0);
+            err = DeezerApi.dz_player_set_output_mute(_dzPlayer, null, IntPtr.Zero, true);
 
             err = DeezerApi.dz_player_play(_dzPlayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
@@ -361,6 +361,11 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_player_set_output_volume(_dzPlayer, null, IntPtr.Zero, vol);
 
                 HandleDzErrorCode("dz_player_set_output_volume", WorkerError.RenderingError, err);
+
+                if (vol > 0)
+                {
+                    err = DeezerApi.dz_player_set_output_mute(_dzPlayer, null, IntPtr.Zero, false);
+                }
 
                 _volume = vol;
             }

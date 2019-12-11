@@ -427,8 +427,16 @@ namespace OPMedia.DeezerInterop.PlayerApi
             IntPtr operation_userdata,
             
             dz_track_quality_t quality);
+
+        [DllImport(DLL_NAME_X86, CallingConvention = CallingConvention.Cdecl)]
+        public static extern dz_error_t dz_player_set_output_mute(IntPtr self,
+
+            [MarshalAs(UnmanagedType.FunctionPtr)]
+            dz_activity_operation_callback cb,
+
+            IntPtr operation_userdata,
+
+            bool muted
+        );
     }
-
-    
-
 }
