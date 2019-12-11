@@ -189,6 +189,8 @@ namespace OPMedia.DeezerWorker
 
             // for playback from offset: dz_player_resume
 
+            SetVolume(0);
+
             err = DeezerApi.dz_player_play(_dzPlayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
                        DeezerInterop.PlayerApi.Constants.DZ_INDEX_IN_QUEUELIST_CURRENT);
@@ -200,8 +202,6 @@ namespace OPMedia.DeezerWorker
 
             Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
-
-            SetVolume(0);
 
             //if (delayStart > 0)
             //{
