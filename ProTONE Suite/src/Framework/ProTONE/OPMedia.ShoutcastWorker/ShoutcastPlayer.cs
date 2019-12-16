@@ -67,6 +67,8 @@ namespace OPMedia.ShoutcastWorker
             // Run the graph to play the media file
             hr = mediaControl.Run();
             WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
+
+            SetVolume(0);
         }
 
         private void InitMedia(string url)

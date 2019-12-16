@@ -118,6 +118,8 @@ namespace OPMedia.VideoWorker
 
             // HACK: call GetLength once here to ensure that durationScaleFactor is buuilt up
             GetLength();
+
+            SetVolume(0);
         }
 
         private void InitMedia(string url, long renderHwnd, long notifyHwnd)

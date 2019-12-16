@@ -172,6 +172,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         public void SetVolume(int vol)
         {
+            Logger.LogToConsole($"WorkerProcess::SetVolume: pid={Pid}, vol={vol}");
             SetCommand(WorkerCommandType.SetVolReq, vol);
         }
 

@@ -189,11 +189,14 @@ namespace OPMedia.DeezerWorker
 
             // for playback from offset: dz_player_resume
 
-            err = DeezerApi.dz_player_set_output_mute(_dzPlayer, null, IntPtr.Zero, true);
-
             err = DeezerApi.dz_player_play(_dzPlayer, null, IntPtr.Zero,
                        dz_player_play_command_t.DZ_PLAYER_PLAY_CMD_START_TRACKLIST,
                        DeezerInterop.PlayerApi.Constants.DZ_INDEX_IN_QUEUELIST_CURRENT);
+
+            err = DeezerApi.dz_player_set_output_mute(_dzPlayer, null, IntPtr.Zero, true);
+            HandleDzErrorCode("dz_player_set_output_mute", WorkerError.RenderingError, err);
+
+            Logger.LogTrace("dz_player_set_output_mute => Success");
 
             HandleDzErrorCode("dz_player_play", WorkerError.RenderingError, err);
 

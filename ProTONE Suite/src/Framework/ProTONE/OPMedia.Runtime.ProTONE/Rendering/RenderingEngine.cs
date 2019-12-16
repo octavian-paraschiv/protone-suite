@@ -223,7 +223,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             set
             {
-                if (_renderer != null)
+                if (_oldRenderer == null && _renderer != null)
                     _renderer.AudioVolume = value;
             }
         }
