@@ -214,20 +214,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             set { if (_renderer != null) { _renderer.MediaPosition = value; } }
         }
 
-        public int AudioVolume
-        {
-            get
-            {
-                return (_renderer == null) ? (int)VolumeRange.Minimum : _renderer.AudioVolume;
-            }
-
-            set
-            {
-                if (_oldRenderer == null && _renderer != null)
-                    _renderer.AudioVolume = value;
-            }
-        }
-
         public int AudioBalance
         {
             get { return (_renderer == null) ? 0 : _renderer.AudioBalance; }
@@ -254,7 +240,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
         public bool CanSeekMedia
-        { get { return (_renderer != null && _renderer.MediaSeekable && _renderer.MediaLength > 0); } }
+        {
+            get
+            {
+                return (_renderer != null && _renderer.MediaSeekable && _renderer.MediaLength > 0 && _xfadeInProgress.WaitOne(0) == false);
+            }
+        }
 
         public double DurationScaleFactor
         { get { return (_renderer == null) ? 0 : _renderer.DurationScaleFactor; } }
@@ -557,6 +548,28 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         private ManualResetEvent _xfadeInProgress = new ManualResetEvent(false);
 
+        public int AudioVolume
+        {
+            get
+            {
+                return (_renderer == null) ? (int)VolumeRange.Minimum : _renderer.AudioVolume;
+            }
+
+            set
+            {
+                if (_renderer != null)
+                {
+                    Task.Factory.StartNew(() =>
+                    {
+                        while (_xfadeInProgress.WaitOne(0))
+                            Thread.Sleep(100);
+
+                        _renderer.AudioVolume = value;
+                    });
+                }
+            }
+        }
+
         private void HandleCrossFading()
         {
             if (UseCrossFading == false)
@@ -569,11 +582,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             int quant = startVol / 10;
             _renderer.AudioVolume = 0;
 
-            Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{_renderer}]");
-            _xfadeInProgress.Set();
-
             Task.Factory.StartNew(() =>
             {
+                Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{_renderer}]");
+                _xfadeInProgress.Set();
+
                 try
                 {
                     DateTime dtStart = DateTime.Now;
