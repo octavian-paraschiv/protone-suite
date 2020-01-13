@@ -243,6 +243,16 @@ namespace OPMedia.UI.ProTONE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap btnXFade {
+            get {
+                object obj = ResourceManager.GetObject("btnXFade", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap deezer {
             get {
                 object obj = ResourceManager.GetObject("deezer", resourceCulture);
@@ -416,16 +426,6 @@ namespace OPMedia.UI.ProTONE.Properties {
         public static System.Drawing.Bitmap VideoDefaultImage {
             get {
                 object obj = ResourceManager.GetObject("VideoDefaultImage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap XFade {
-            get {
-                object obj = ResourceManager.GetObject("XFade", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

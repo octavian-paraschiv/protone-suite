@@ -216,7 +216,7 @@
             // btnToggleXFade
             // 
             this.btnToggleXFade.Checked = true;
-            this.btnToggleXFade.Image = global::OPMedia.UI.ProTONE.Properties.Resources.XFade;
+            this.btnToggleXFade.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnXFade;
             this.btnToggleXFade.Location = new System.Drawing.Point(131, 28);
             this.btnToggleXFade.Name = "btnToggleXFade";
             this.btnToggleXFade.Padding = new System.Windows.Forms.Padding(3);
