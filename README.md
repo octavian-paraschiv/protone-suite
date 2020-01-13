@@ -3,4 +3,4 @@
 
 Personal use media player written in C#.
 
-Download it from site: http://ocpa.ro/protone
+Installation files are available on site: http://ocpa.ro/protone
