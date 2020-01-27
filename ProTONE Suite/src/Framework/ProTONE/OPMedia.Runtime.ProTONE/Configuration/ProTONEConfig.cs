@@ -586,7 +586,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(false, "XFadeAnticipation", 5);
+                return PersistenceProxy.ReadObject(false, "XFadeAnticipation", 10);
             }
 
             set
