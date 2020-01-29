@@ -36,23 +36,16 @@ namespace OPMedia.UI.FileTasks
             this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
             this.pbWarn = new System.Windows.Forms.PictureBox();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWarn)).BeginInit();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmTableLayoutPanel1);
-            this.pnlContent.Controls.Add(this.btnOK);
-            this.pnlContent.TabIndex = 0;
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(1040, 1025);
+            this.btnOK.Location = new System.Drawing.Point(1036, 1025);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
@@ -63,6 +56,7 @@ namespace OPMedia.UI.FileTasks
             // 
             // tvReports
             // 
+            this.tvReports.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.opmTableLayoutPanel1.SetColumnSpan(this.tvReports, 2);
             this.tvReports.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvReports.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
@@ -70,7 +64,7 @@ namespace OPMedia.UI.FileTasks
             this.tvReports.Location = new System.Drawing.Point(5, 43);
             this.tvReports.Margin = new System.Windows.Forms.Padding(5);
             this.tvReports.Name = "tvReports";
-            this.tvReports.Size = new System.Drawing.Size(532, 373);
+            this.tvReports.Size = new System.Drawing.Size(686, 552);
             this.tvReports.TabIndex = 1;
             // 
             // lblDesc
@@ -82,7 +76,7 @@ namespace OPMedia.UI.FileTasks
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(495, 38);
+            this.lblDesc.Size = new System.Drawing.Size(649, 38);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "TXT_ERRORSFOUND";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -113,16 +107,17 @@ namespace OPMedia.UI.FileTasks
             this.opmTableLayoutPanel1.RowCount = 2;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(542, 421);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(696, 600);
             this.opmTableLayoutPanel1.TabIndex = 9;
             // 
             // FileTaskErrorReport
             // 
-            this.ClientSize = new System.Drawing.Size(700, 600);
+            this.ClientSize = new System.Drawing.Size(696, 600);
+            this.Controls.Add(this.opmTableLayoutPanel1);
+            this.Controls.Add(this.btnOK);
             this.MaximumSize = new System.Drawing.Size(1024, 800);
             this.MinimumSize = new System.Drawing.Size(500, 300);
             this.Name = "FileTaskErrorReport";
-            this.pnlContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbWarn)).EndInit();
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();

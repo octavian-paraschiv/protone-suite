@@ -35,14 +35,9 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText = new OPMedia.UI.Controls.OPMLabel();
             this.pictureBox1 = new OPMedia.UI.Controls.WaitingPictureBox();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmTableLayoutPanel1);
             // 
             // tmrRescan
             // 
@@ -59,7 +54,7 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lblNotifyText, 3);
-            this.lblNotifyText.Size = new System.Drawing.Size(206, 44);
+            this.lblNotifyText.Size = new System.Drawing.Size(201, 52);
             this.lblNotifyText.TabIndex = 0;
             this.lblNotifyText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -67,7 +62,7 @@ namespace OPMedia.UI.Dialogs
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,22 +77,22 @@ namespace OPMedia.UI.Dialogs
             this.opmTableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.lblNotifyText, 1, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.opmTableLayoutPanel1.Location = new System.Drawing.Point(3, 30);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.RowCount = 4;
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(250, 44);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(245, 52);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // InsertDriveNotifyDialog
             // 
-            this.ClientSize = new System.Drawing.Size(254, 70);
+            this.ClientSize = new System.Drawing.Size(251, 85);
+            this.Controls.Add(this.opmTableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 70);
             this.Name = "InsertDriveNotifyDialog";
-            this.pnlContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

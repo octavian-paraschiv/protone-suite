@@ -43,15 +43,10 @@
             this.btnAddToFavorites = new OPMedia.UI.Controls.OPMButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tsSpecialFolders = new OPMedia.UI.Controls.OPMToolStrip();
-            this.pnlContent.SuspendLayout();
             this.pnlLayout.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.pnlLayout);
             // 
             // pnlLayout
             // 
@@ -86,7 +81,7 @@
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.pnlLayout.Size = new System.Drawing.Size(646, 494);
+            this.pnlLayout.Size = new System.Drawing.Size(649, 520);
             this.pnlLayout.TabIndex = 0;
             // 
             // opmLabel2
@@ -94,7 +89,7 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.Location = new System.Drawing.Point(3, 433);
+            this.opmLabel2.Location = new System.Drawing.Point(3, 459);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
@@ -109,7 +104,7 @@
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.Location = new System.Drawing.Point(3, 464);
+            this.opmLabel3.Location = new System.Drawing.Point(3, 490);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
@@ -125,11 +120,11 @@
             this.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFilter.FormattingEnabled = true;
-            this.cmbFilter.Location = new System.Drawing.Point(100, 465);
+            this.cmbFilter.Location = new System.Drawing.Point(100, 491);
             this.cmbFilter.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.cmbFilter.Name = "cmbFilter";
             this.cmbFilter.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cmbFilter.Size = new System.Drawing.Size(453, 24);
+            this.cmbFilter.Size = new System.Drawing.Size(456, 24);
             this.cmbFilter.TabIndex = 7;
             this.cmbFilter.SelectedIndexChanged += new System.EventHandler(this.cmbFilter_SelectedIndexChanged);
             // 
@@ -141,7 +136,8 @@
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFileNames.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.txtFileNames.Location = new System.Drawing.Point(100, 434);
+            this.txtFileNames.Lines = new string[0];
+            this.txtFileNames.Location = new System.Drawing.Point(100, 460);
             this.txtFileNames.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.txtFileNames.MaximumSize = new System.Drawing.Size(3000, 22);
             this.txtFileNames.MaxLength = 32767;
@@ -153,7 +149,7 @@
             this.txtFileNames.ReadOnly = false;
             this.txtFileNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtFileNames.ShortcutsEnabled = true;
-            this.txtFileNames.Size = new System.Drawing.Size(453, 22);
+            this.txtFileNames.Size = new System.Drawing.Size(456, 22);
             this.txtFileNames.TabIndex = 5;
             this.txtFileNames.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtFileNames.UseSystemPasswordChar = false;
@@ -165,7 +161,7 @@
             this.pnlLayout.SetColumnSpan(this.btnOK, 2);
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(561, 433);
+            this.btnOK.Location = new System.Drawing.Point(564, 459);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
@@ -181,7 +177,7 @@
             this.pnlLayout.SetColumnSpan(this.btnCancel, 2);
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(561, 464);
+            this.btnCancel.Location = new System.Drawing.Point(564, 490);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -196,6 +192,7 @@
             // 
             this.lvExplorer.AllowEditing = true;
             this.lvExplorer.AlternateRowColors = true;
+            this.lvExplorer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlLayout.SetColumnSpan(this.lvExplorer, 5);
             this.lvExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvExplorer.Font = new System.Drawing.Font("Segoe UI", 8.25F);
@@ -205,7 +202,7 @@
             this.lvExplorer.MultiSelect = false;
             this.lvExplorer.Name = "lvExplorer";
             this.lvExplorer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvExplorer.Size = new System.Drawing.Size(541, 397);
+            this.lvExplorer.Size = new System.Drawing.Size(544, 423);
             this.lvExplorer.TabIndex = 3;
             this.lvExplorer.UseCompatibleStateImageBehavior = false;
             this.lvExplorer.View = System.Windows.Forms.View.Details;
@@ -222,7 +219,7 @@
             this.lblCurrentPath.Name = "lblCurrentPath";
             this.lblCurrentPath.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblCurrentPath.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblCurrentPath.Size = new System.Drawing.Size(592, 20);
+            this.lblCurrentPath.Size = new System.Drawing.Size(595, 20);
             this.lblCurrentPath.TabIndex = 9;
             this.lblCurrentPath.Text = "opmLabel4";
             this.lblCurrentPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -234,7 +231,7 @@
             this.pnlButtons.Controls.Add(this.btnNewFolder);
             this.pnlButtons.Controls.Add(this.btnAddToFavorites);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtons.Location = new System.Drawing.Point(600, 3);
+            this.pnlButtons.Location = new System.Drawing.Point(603, 3);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(41, 20);
@@ -280,7 +277,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 26);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 397);
+            this.panel1.Size = new System.Drawing.Size(100, 423);
             this.panel1.TabIndex = 11;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -303,17 +300,17 @@
             // 
             // OPMFileDialog
             // 
-            this.ClientSize = new System.Drawing.Size(650, 520);
+            this.ClientSize = new System.Drawing.Size(649, 520);
+            this.Controls.Add(this.pnlLayout);
             this.MinimumSize = new System.Drawing.Size(650, 520);
             this.Name = "OPMFileDialog";
-            this.pnlContent.ResumeLayout(false);
-            this.pnlContent.PerformLayout();
             this.pnlLayout.ResumeLayout(false);
             this.pnlLayout.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

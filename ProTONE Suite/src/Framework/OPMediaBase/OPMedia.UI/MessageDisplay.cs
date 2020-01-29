@@ -123,7 +123,6 @@ namespace OPMedia.UI
             this.ControlBox = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.IsToolWindow = true;
 
             chkAdditionalCheck.Visible = false;
 
@@ -160,9 +159,6 @@ namespace OPMedia.UI
             {
                 chkAdditionalCheck.Margin = new Padding(pbImage.Right + 15, 8, 3, 3);
             }
-
-            this.Height = pnlContentAll.Height + CaptionButtonSize.Height + pnlContentAll.Margin.Vertical;
-            this.Width = pnlContentAll.Width + pnlContentAll.Margin.Horizontal;
         }
 
         private void UpdateThirdPartyNotice()

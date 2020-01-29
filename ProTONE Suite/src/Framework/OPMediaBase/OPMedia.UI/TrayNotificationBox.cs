@@ -90,10 +90,11 @@ namespace OPMedia.UI.Controls
             // 
             // TrayNotificationBox
             // 
-            this.ClientSize = new System.Drawing.Size(172, 153);
+            this.ClientSize = new System.Drawing.Size(173, 153);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TrayNotificationBox";
             this.ResumeLayout(false);
+
         }
 
 

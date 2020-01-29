@@ -37,14 +37,9 @@ namespace OPMedia.UI.HelpSupport
             this.tsMain = new OPMedia.UI.Controls.OPMToolStrip();
             this.tsbPrev = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
             this.tsbNext = new OPMedia.UI.Controls.OPMTriStateToolStripButton();
-            this.pnlContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.tableLayoutPanel1);
             // 
             // wbHelpDisplay
             // 
@@ -57,7 +52,7 @@ namespace OPMedia.UI.HelpSupport
             this.wbHelpDisplay.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbHelpDisplay.Name = "wbHelpDisplay";
             this.wbHelpDisplay.ScriptErrorsSuppressed = true;
-            this.wbHelpDisplay.Size = new System.Drawing.Size(792, 533);
+            this.wbHelpDisplay.Size = new System.Drawing.Size(791, 557);
             this.wbHelpDisplay.TabIndex = 0;
             this.wbHelpDisplay.TabStop = false;
             this.wbHelpDisplay.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.wbHelpDisplay_PreviewKeyDown);
@@ -77,12 +72,13 @@ namespace OPMedia.UI.HelpSupport
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(798, 576);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(797, 600);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tsMain
             // 
             this.tsMain.AutoSize = false;
+            this.tsMain.BackColor = System.Drawing.Color.White;
             this.tsMain.ForeColor = System.Drawing.Color.Black;
             this.tsMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -93,7 +89,7 @@ namespace OPMedia.UI.HelpSupport
             this.tsMain.Location = new System.Drawing.Point(1, 0);
             this.tsMain.Name = "tsMain";
             this.tsMain.ShowBorder = true;
-            this.tsMain.Size = new System.Drawing.Size(796, 40);
+            this.tsMain.Size = new System.Drawing.Size(795, 40);
             this.tsMain.TabIndex = 1;
             this.tsMain.Text = "opmToolStrip1";
             this.tsMain.VerticalGradient = false;
@@ -134,12 +130,12 @@ namespace OPMedia.UI.HelpSupport
             // 
             // HelpViewer
             // 
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(797, 600);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "HelpViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Shown += new System.EventHandler(this.HelpViewer_Shown);
-            this.pnlContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
@@ -153,7 +149,6 @@ namespace OPMedia.UI.HelpSupport
         {
             InitializeComponent();
 
-            base.AllowResize = true;
             UpdatePrevnextDocuments();
 
             SetTitle("TXT_APP_NAME");

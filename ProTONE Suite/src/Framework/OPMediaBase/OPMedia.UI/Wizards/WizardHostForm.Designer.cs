@@ -36,25 +36,19 @@ namespace OPMedia.UI.Wizards
             this.lblSeparator2 = new System.Windows.Forms.Label();
             this.pnlWizImage = new System.Windows.Forms.Panel();
             this.pbWizImage = new System.Windows.Forms.PictureBox();
-            this.pnlContent.SuspendLayout();
             this.pnlWizardLayout.SuspendLayout();
             this.pnlWizImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWizImage)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.pnlWizardLayout);
-            this.pnlContent.TabIndex = 1;
-            // 
             // lblSeparator
             // 
             this.lblSeparator.BackColor = System.Drawing.Color.Maroon;
             this.lblSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSeparator.Location = new System.Drawing.Point(65, 334);
+            this.lblSeparator.Location = new System.Drawing.Point(65, 327);
             this.lblSeparator.Margin = new System.Windows.Forms.Padding(0);
             this.lblSeparator.Name = "lblSeparator";
-            this.lblSeparator.Size = new System.Drawing.Size(466, 3);
+            this.lblSeparator.Size = new System.Drawing.Size(464, 3);
             this.lblSeparator.TabIndex = 1;
             // 
             // stepButtons
@@ -68,7 +62,7 @@ namespace OPMedia.UI.Wizards
             this.pnlWizardLayout.SetColumnSpan(this.stepButtons, 2);
             this.stepButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stepButtons.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.stepButtons.Location = new System.Drawing.Point(3, 340);
+            this.stepButtons.Location = new System.Drawing.Point(3, 333);
             this.stepButtons.Name = "stepButtons";
             this.stepButtons.OKButtonText = "TXT_WIZARDOK";
             this.stepButtons.OverrideBackColor = System.Drawing.Color.Empty;
@@ -76,7 +70,7 @@ namespace OPMedia.UI.Wizards
             this.stepButtons.ShowMovementButtons = true;
             this.stepButtons.ShowOKButton = false;
             this.stepButtons.ShowRepeatWizard = false;
-            this.stepButtons.Size = new System.Drawing.Size(525, 31);
+            this.stepButtons.Size = new System.Drawing.Size(523, 31);
             this.stepButtons.TabIndex = 2;
             // 
             // pnlWizardStep
@@ -85,7 +79,7 @@ namespace OPMedia.UI.Wizards
             this.pnlWizardStep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWizardStep.Location = new System.Drawing.Point(68, 3);
             this.pnlWizardStep.Name = "pnlWizardStep";
-            this.pnlWizardStep.Size = new System.Drawing.Size(460, 328);
+            this.pnlWizardStep.Size = new System.Drawing.Size(458, 321);
             this.pnlWizardStep.TabIndex = 0;
             // 
             // pnlWizardLayout
@@ -99,21 +93,21 @@ namespace OPMedia.UI.Wizards
             this.pnlWizardLayout.Controls.Add(this.pnlWizardStep, 1, 0);
             this.pnlWizardLayout.Controls.Add(this.pnlWizImage, 0, 0);
             this.pnlWizardLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlWizardLayout.Location = new System.Drawing.Point(0, 0);
+            this.pnlWizardLayout.Location = new System.Drawing.Point(3, 30);
             this.pnlWizardLayout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlWizardLayout.Name = "pnlWizardLayout";
             this.pnlWizardLayout.RowCount = 3;
             this.pnlWizardLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlWizardLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlWizardLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlWizardLayout.Size = new System.Drawing.Size(531, 374);
+            this.pnlWizardLayout.Size = new System.Drawing.Size(529, 367);
             this.pnlWizardLayout.TabIndex = 2;
             // 
             // lblSeparator2
             // 
             this.lblSeparator2.BackColor = System.Drawing.Color.Maroon;
             this.lblSeparator2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSeparator2.Location = new System.Drawing.Point(0, 334);
+            this.lblSeparator2.Location = new System.Drawing.Point(0, 327);
             this.lblSeparator2.Margin = new System.Windows.Forms.Padding(0);
             this.lblSeparator2.Name = "lblSeparator2";
             this.lblSeparator2.Size = new System.Drawing.Size(65, 3);
@@ -148,13 +142,13 @@ namespace OPMedia.UI.Wizards
             // WizardHostForm
             // 
             this.ClientSize = new System.Drawing.Size(535, 400);
+            this.Controls.Add(this.pnlWizardLayout);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "WizardHostForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.WizardHostForm_Load);
             this.Shown += new System.EventHandler(this.OnShown);
-            this.pnlContent.ResumeLayout(false);
             this.pnlWizardLayout.ResumeLayout(false);
             this.pnlWizardLayout.PerformLayout();
             this.pnlWizImage.ResumeLayout(false);

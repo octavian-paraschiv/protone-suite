@@ -27,7 +27,7 @@ namespace OPMedia.UI.Controls
 
         #region GUI Properties
 
-        #region Font Size
+#region Font Size
 
         [ReadOnly(true)]
         [Browsable(false)]
@@ -48,9 +48,9 @@ namespace OPMedia.UI.Controls
                 Invalidate(true);
             }
         }
-        #endregion
+#endregion
 
-        #region Override settings
+#region Override settings
 
         [ReadOnly(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -72,12 +72,11 @@ namespace OPMedia.UI.Controls
             set { _overrideBackColor = value; Invalidate(true); }
         }
 
-        #endregion
+#endregion
 
         public bool ShowDropDown { get; set; }
 
-        #endregion
-
+#endregion
 
         public OPMButton()
             : base()

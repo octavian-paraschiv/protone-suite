@@ -20,6 +20,7 @@ using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Utilities;
 using OPMedia.UI.Generic;
 using OPMedia.Core.InstanceManagement;
+using OPMedia.UI.Dialogs;
 
 namespace OPMedia.UI.Configuration
 {
@@ -152,7 +153,10 @@ namespace OPMedia.UI.Configuration
     
         private void btnCheckUpdates_Click(object sender, EventArgs e)
         {
-            EventDispatch.DispatchEvent(EventNames.CheckForUpdates);
+            // EventDispatch.DispatchEvent(EventNames.CheckForUpdates);
+
+            var waitDialog = new GenericWaitDialog();
+            waitDialog.ShowDialog("Please wait while doing something you do not know.");
         }
 
        

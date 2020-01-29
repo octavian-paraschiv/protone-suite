@@ -238,8 +238,6 @@ namespace OPMedia.Runtime.Addons
 
             this.VSplitterDistance = AddonAppConfig.VSplitterDistance;
             this.HSplitterDistance = AddonAppConfig.HSplitterDistance;
-
-            pnlContent.BringToFront();
         }
 
         protected override bool IsShortcutAllowed(OPMShortcut cmd)

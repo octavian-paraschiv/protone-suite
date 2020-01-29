@@ -103,7 +103,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         {
             base.OnPageEnter_Initializing();
 
-            Wizard.AllowResize = true;
 
             ssStatus.BackColor = ThemeManager.BackColor;
             pbProgress.BackColor = ThemeManager.BackColor;

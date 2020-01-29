@@ -31,21 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.tabContentBrowser = new OPMedia.UI.Controls.OPMTabControl();
             this.tpLocalDatabase = new System.Windows.Forms.TabPage();
-            this.tpShoutcastDir = new System.Windows.Forms.TabPage();
-            this.tpDeezerContent = new System.Windows.Forms.TabPage();
             this.localDbBrowser = new OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser.LocalDatabaseBrowserCtl();
+            this.tpShoutcastDir = new System.Windows.Forms.TabPage();
             this.shoutcastDirBrowser = new OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser.ShoutcastDirectoryBrowserCtl();
+            this.tpDeezerContent = new System.Windows.Forms.TabPage();
             this.deezerTrackBrowser = new OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser.DeezerTrackBrowserCtl();
-            this.pnlContent.SuspendLayout();
             this.tabContentBrowser.SuspendLayout();
             this.tpLocalDatabase.SuspendLayout();
             this.tpShoutcastDir.SuspendLayout();
             this.tpDeezerContent.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.tabContentBrowser);
             // 
             // tabContentBrowser
             // 
@@ -59,7 +54,7 @@
             this.tabContentBrowser.Margin = new System.Windows.Forms.Padding(3, 5, 1, 0);
             this.tabContentBrowser.Name = "tabContentBrowser";
             this.tabContentBrowser.SelectedIndex = 0;
-            this.tabContentBrowser.Size = new System.Drawing.Size(943, 650);
+            this.tabContentBrowser.Size = new System.Drawing.Size(943, 676);
             this.tabContentBrowser.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabContentBrowser.TabIndex = 3;
             this.tabContentBrowser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -71,31 +66,9 @@
             this.tpLocalDatabase.Location = new System.Drawing.Point(4, 59);
             this.tpLocalDatabase.Margin = new System.Windows.Forms.Padding(0);
             this.tpLocalDatabase.Name = "tpLocalDatabase";
-            this.tpLocalDatabase.Size = new System.Drawing.Size(935, 587);
+            this.tpLocalDatabase.Size = new System.Drawing.Size(935, 613);
             this.tpLocalDatabase.TabIndex = 0;
             this.tpLocalDatabase.Text = "TXT_LOCAL_DB";
-            // 
-            // tpShoutcastDir
-            // 
-            this.tpShoutcastDir.BackColor = System.Drawing.Color.White;
-            this.tpShoutcastDir.Controls.Add(this.shoutcastDirBrowser);
-            this.tpShoutcastDir.Location = new System.Drawing.Point(4, 59);
-            this.tpShoutcastDir.Margin = new System.Windows.Forms.Padding(0);
-            this.tpShoutcastDir.Name = "tpShoutcastDir";
-            this.tpShoutcastDir.Size = new System.Drawing.Size(929, 603);
-            this.tpShoutcastDir.TabIndex = 1;
-            this.tpShoutcastDir.Text = "TXT_SHOUTCAST_DIR";
-            // 
-            // tpDeezerContent
-            // 
-            this.tpDeezerContent.BackColor = System.Drawing.Color.White;
-            this.tpDeezerContent.Controls.Add(this.deezerTrackBrowser);
-            this.tpDeezerContent.Location = new System.Drawing.Point(4, 59);
-            this.tpDeezerContent.Margin = new System.Windows.Forms.Padding(0);
-            this.tpDeezerContent.Name = "tpDeezerContent";
-            this.tpDeezerContent.Size = new System.Drawing.Size(929, 603);
-            this.tpDeezerContent.TabIndex = 2;
-            this.tpDeezerContent.Text = "TXT_DEEZER_CONTENT";
             // 
             // localDbBrowser
             // 
@@ -108,8 +81,19 @@
             this.localDbBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.localDbBrowser.Name = "localDbBrowser";
             this.localDbBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.localDbBrowser.Size = new System.Drawing.Size(935, 587);
+            this.localDbBrowser.Size = new System.Drawing.Size(935, 613);
             this.localDbBrowser.TabIndex = 0;
+            // 
+            // tpShoutcastDir
+            // 
+            this.tpShoutcastDir.BackColor = System.Drawing.Color.White;
+            this.tpShoutcastDir.Controls.Add(this.shoutcastDirBrowser);
+            this.tpShoutcastDir.Location = new System.Drawing.Point(4, 23);
+            this.tpShoutcastDir.Margin = new System.Windows.Forms.Padding(0);
+            this.tpShoutcastDir.Name = "tpShoutcastDir";
+            this.tpShoutcastDir.Size = new System.Drawing.Size(192, 73);
+            this.tpShoutcastDir.TabIndex = 1;
+            this.tpShoutcastDir.Text = "TXT_SHOUTCAST_DIR";
             // 
             // shoutcastDirBrowser
             // 
@@ -119,8 +103,19 @@
             this.shoutcastDirBrowser.Location = new System.Drawing.Point(0, 0);
             this.shoutcastDirBrowser.Name = "shoutcastDirBrowser";
             this.shoutcastDirBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.shoutcastDirBrowser.Size = new System.Drawing.Size(929, 603);
+            this.shoutcastDirBrowser.Size = new System.Drawing.Size(192, 73);
             this.shoutcastDirBrowser.TabIndex = 0;
+            // 
+            // tpDeezerContent
+            // 
+            this.tpDeezerContent.BackColor = System.Drawing.Color.White;
+            this.tpDeezerContent.Controls.Add(this.deezerTrackBrowser);
+            this.tpDeezerContent.Location = new System.Drawing.Point(4, 23);
+            this.tpDeezerContent.Margin = new System.Windows.Forms.Padding(0);
+            this.tpDeezerContent.Name = "tpDeezerContent";
+            this.tpDeezerContent.Size = new System.Drawing.Size(192, 73);
+            this.tpDeezerContent.TabIndex = 2;
+            this.tpDeezerContent.Text = "TXT_DEEZER_CONTENT";
             // 
             // deezerTrackBrowser
             // 
@@ -131,16 +126,16 @@
             this.deezerTrackBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.deezerTrackBrowser.Name = "deezerTrackBrowser";
             this.deezerTrackBrowser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.deezerTrackBrowser.Size = new System.Drawing.Size(929, 603);
+            this.deezerTrackBrowser.Size = new System.Drawing.Size(192, 73);
             this.deezerTrackBrowser.TabIndex = 0;
             // 
             // OnlineContentBrowser
             // 
-            this.ClientSize = new System.Drawing.Size(947, 676);
+            this.ClientSize = new System.Drawing.Size(943, 676);
+            this.Controls.Add(this.tabContentBrowser);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "OnlineContentBrowser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.pnlContent.ResumeLayout(false);
             this.tabContentBrowser.ResumeLayout(false);
             this.tpLocalDatabase.ResumeLayout(false);
             this.tpLocalDatabase.PerformLayout();

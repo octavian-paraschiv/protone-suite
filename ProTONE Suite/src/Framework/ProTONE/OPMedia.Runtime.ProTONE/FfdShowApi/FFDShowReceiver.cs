@@ -117,6 +117,18 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             }
             base.WndProc(ref m);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FFDShowReceiver
+            // 
+            this.ClientSize = new System.Drawing.Size(287, 261);
+            this.Name = "FFDShowReceiver";
+            this.ResumeLayout(false);
+
+        }
     }
 }
 #endif

@@ -604,9 +604,6 @@ namespace OPMedia.UI.Wizards
 
             Translator.TranslateControl(wizardPage, DesignMode);
 
-            pnlContent.Margin = new Padding(0);
-            pnlContent.Padding = new Padding(0);
-            
             wizardPage.Margin = new Padding(0);
             wizardPage.Padding = new Padding(0);
 
@@ -651,7 +648,7 @@ namespace OPMedia.UI.Wizards
                 previousPage = wizardPage;
 
                 // Remove the previous wizard page.
-                pnlContent.Controls.Remove(wizardPage);
+                this.Controls.Remove(wizardPage);
             }
 
             wizardPage = _finishPage;

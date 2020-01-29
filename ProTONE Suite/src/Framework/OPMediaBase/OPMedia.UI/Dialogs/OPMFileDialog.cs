@@ -106,7 +106,6 @@ namespace OPMedia.UI.Controls.Dialogs
         {
             InitializeComponent();
             
-            this.AllowResize = true;
             this.FilterIndex = -1;
 
             this.ShowAddToFavorites = false;

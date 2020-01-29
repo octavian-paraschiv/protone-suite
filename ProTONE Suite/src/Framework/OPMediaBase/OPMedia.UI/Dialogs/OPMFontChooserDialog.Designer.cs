@@ -33,13 +33,8 @@ namespace OPMedia.UI.Dialogs
             this.btnCancel = new OPMedia.UI.Controls.OPMButton();
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.ctlFontChooser = new OPMedia.UI.Controls.OPMFontChooserCtl();
-            this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmTableLayoutPanel1);
             // 
             // opmTableLayoutPanel1
             // 
@@ -57,7 +52,7 @@ namespace OPMedia.UI.Dialogs
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(414, 234);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(410, 257);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
@@ -66,12 +61,12 @@ namespace OPMedia.UI.Dialogs
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(331, 206);
+            this.btnCancel.Location = new System.Drawing.Point(317, 227);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
-            this.btnCancel.Size = new System.Drawing.Size(80, 25);
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "TXT_CANCEL";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -82,12 +77,12 @@ namespace OPMedia.UI.Dialogs
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(270, 206);
+            this.btnOK.Location = new System.Drawing.Point(250, 227);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
-            this.btnOK.Size = new System.Drawing.Size(55, 25);
+            this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -102,17 +97,18 @@ namespace OPMedia.UI.Dialogs
             this.ctlFontChooser.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.ctlFontChooser.Name = "ctlFontChooser";
             this.ctlFontChooser.OverrideBackColor = System.Drawing.Color.Empty;
-            this.ctlFontChooser.Size = new System.Drawing.Size(411, 200);
+            this.ctlFontChooser.SelectedFont = new System.Drawing.Font("Segoe UI", 9F);
+            this.ctlFontChooser.Size = new System.Drawing.Size(407, 221);
             this.ctlFontChooser.TabIndex = 2;
             // 
             // OPMFontChooserDialog
             // 
             this.AcceptButton = this.btnOK;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(416, 257);
+            this.ClientSize = new System.Drawing.Size(410, 257);
+            this.Controls.Add(this.opmTableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "OPMFontChooserDialog";
-            this.pnlContent.ResumeLayout(false);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

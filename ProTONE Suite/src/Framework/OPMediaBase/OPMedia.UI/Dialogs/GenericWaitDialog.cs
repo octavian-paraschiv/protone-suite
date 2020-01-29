@@ -39,8 +39,6 @@ namespace OPMedia.UI.Dialogs
             InitializeComponent();
 
             this.ShowProgress = false;
-            this.TitleBarVisible = false;
-
             this.Shown += OnShown;
         }
 

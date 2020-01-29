@@ -239,6 +239,7 @@
     <Compile Include="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Themes\SmoothGraphics.cs" />
     <Compile Include="TrayNotificationBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,10 +399,6 @@
     <Compile Include="Controls\Containers\OPMContentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Themes\ResizeMargin.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Themes\SmoothGraphics.cs" />
     <Compile Include="Themes\ThemeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -536,9 +533,6 @@
       <DependentUpon>MessageDisplay.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Themes\ResizeMargin.resx">
-      <DependentUpon>ResizeMargin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Themes\ThemeForm.resx">
       <DependentUpon>ThemeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -550,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Translations\Translation.fr.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrayNotificationBox.resx">
+      <DependentUpon>TrayNotificationBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wizards\StepButtonsCtl.resx">
       <DependentUpon>StepButtonsCtl.cs</DependentUpon>

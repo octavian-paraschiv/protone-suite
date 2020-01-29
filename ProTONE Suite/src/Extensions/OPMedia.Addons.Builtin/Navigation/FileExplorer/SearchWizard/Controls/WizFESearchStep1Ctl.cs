@@ -159,7 +159,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         {
             base.OnPageEnter_Initializing();
 
-            Wizard.AllowResize = true;
 
             pbProgress.BackColor = ThemeManager.BackColor;
 

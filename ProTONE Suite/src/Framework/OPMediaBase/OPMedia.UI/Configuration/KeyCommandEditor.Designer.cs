@@ -33,14 +33,8 @@ namespace OPMedia.UI.Configuration
             this.btnCancel = new OPMedia.UI.Controls.OPMButton();
             this.pnlContentAll = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
-            this.pnlContent.SuspendLayout();
             this.pnlContentAll.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.pnlContentAll);
-            this.pnlContent.TabIndex = 0;
             // 
             // btnCancel
             // 
@@ -48,13 +42,13 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(5, 41);
+            this.btnCancel.Location = new System.Drawing.Point(5, 45);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
-            this.btnCancel.Size = new System.Drawing.Size(80, 25);
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "TXT_CANCEL";
             // 
@@ -70,14 +64,14 @@ namespace OPMedia.UI.Configuration
             this.pnlContentAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlContentAll.Controls.Add(this.lblDesc, 1, 1);
             this.pnlContentAll.Controls.Add(this.btnCancel, 2, 3);
-            this.pnlContentAll.Location = new System.Drawing.Point(0, 0);
+            this.pnlContentAll.Location = new System.Drawing.Point(6, 33);
             this.pnlContentAll.Name = "pnlContentAll";
             this.pnlContentAll.RowCount = 4;
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlContentAll.Size = new System.Drawing.Size(90, 66);
+            this.pnlContentAll.Size = new System.Drawing.Size(100, 72);
             this.pnlContentAll.TabIndex = 2;
             // 
             // lblDesc
@@ -91,7 +85,7 @@ namespace OPMedia.UI.Configuration
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(75, 26);
+            this.lblDesc.Size = new System.Drawing.Size(85, 30);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "qqqq\r\neeee";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -99,15 +93,15 @@ namespace OPMedia.UI.Configuration
             // KeyCommandEditor
             // 
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(478, 200);
+            this.ClientSize = new System.Drawing.Size(472, 200);
+            this.Controls.Add(this.pnlContentAll);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(50, 50);
             this.Name = "KeyCommandEditor";
-            this.pnlContent.ResumeLayout(false);
-            this.pnlContent.PerformLayout();
             this.pnlContentAll.ResumeLayout(false);
             this.pnlContentAll.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -1,26 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using OPMedia.UI.Themes;
 using OPMedia.Core;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using OPMedia.UI.Properties;
-
-using OPMedia.UI.Generic;
 using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Logging;
-using System.Threading;
 using OPMedia.Core.GlobalEvents;
-using System.Drawing.Text;
-using System.Reflection;
-using System.IO;
 
 namespace OPMedia.UI.Themes
 {
@@ -50,49 +36,20 @@ namespace OPMedia.UI.Themes
 
     public partial class ThemeFormBase : Form
     {
+        public const int TitleBarHeight = 24;
+        public const int BorderWidth = 3;
+
         public const int IconOffset = 4;
         public static readonly Font CaptionButtonFont = new Font("Webdings", 10, FontStyle.Bold);
 
-        const int HTLEFT           = 10;
-        const int HTRIGHT          = 11;
-        const int HTTOP            = 12;
-        const int HTTOPLEFT        = 13;
-        const int HTTOPRIGHT       = 14;
-        const int HTBOTTOM         = 15;
-        const int HTBOTTOMLEFT     = 16;
-        const int HTBOTTOMRIGHT = 17;
-        private ResizeMargin _rmTop;
-        private ResizeMargin _rmBottom;
-        private ResizeMargin _rmLeft;
-        private ResizeMargin _rmRight;
-        private ResizeMargin _rmLT;
-        private ResizeMargin _rmRT;
-        private ResizeMargin _rmLB;
-        private ResizeMargin _rmRB;
-
         private Rectangle _rcBorder = Rectangle.Empty;
-
-        Color _overrideBackColor = Color.Empty;
-        public Color OverrideBackColor
-        {
-            get { return _overrideBackColor; }
-            set { _overrideBackColor = value; Invalidate(true); }
-        }
-
-        private Color GetBackColor()
-        {
-            if (_overrideBackColor != Color.Empty)
-                return _overrideBackColor;
-
-            return base.BackColor;
-        }
 
         string _text = "ABCDE";
         public new string Text
-        { 
-            get { return _text; } 
-            set 
-            { 
+        {
+            get { return _text; }
+            set
+            {
                 _text = value;
 
                 try
@@ -101,8 +58,13 @@ namespace OPMedia.UI.Themes
                 }
                 catch { }
 
-                ApplyWindowParams(false);
-            } 
+                ApplyWindowParams();
+            }
+        }
+
+        protected override Padding DefaultPadding
+        {
+            get { return new Padding(BorderWidth + 1, TitleBarHeight + 1, BorderWidth + 1, BorderWidth + 1); }
         }
 
         [ReadOnly(true)]
@@ -119,12 +81,12 @@ namespace OPMedia.UI.Themes
         [Browsable(false)]
         public new SizeF AutoScaleFactor
         { get { return base.AutoScaleFactor; } }
-        
+
 
         bool _controlBox = true;
         public new bool ControlBox
         { get { return _controlBox; } set { _controlBox = value; } }
-                    
+
         [ReadOnly(true)]
         [Browsable(false)]
         public new FormBorderStyle FormBorderStyle
@@ -135,20 +97,10 @@ namespace OPMedia.UI.Themes
 
         private bool _allowResize = true;
         [DefaultValue(true)]
-        public bool AllowResize 
-        { 
+        public bool AllowResize
+        {
             get { return _allowResize; }
-            set
-            {
-                _allowResize = value;
-                foreach (Control ctl in Controls)
-                {
-                    if (ctl is ResizeMargin)
-                    {
-                        ctl.Visible = value;
-                    }
-                }
-            }
+            set { _allowResize = value; }
         }
 
         private bool _isToolWindow = false;
@@ -167,15 +119,15 @@ namespace OPMedia.UI.Themes
 
         bool _titleBarVisible = true;
         [Browsable(true)]
-        public bool TitleBarVisible 
+        public bool TitleBarVisible
         {
             get { return _titleBarVisible; }
-            
-            set 
-            { 
+
+            set
+            {
                 _titleBarVisible = value;
-                ApplyWindowParams(true); 
-                Invalidate(true); 
+                ApplyWindowParams();
+                Invalidate(true);
             }
         }
 
@@ -195,13 +147,12 @@ namespace OPMedia.UI.Themes
         int _btnMinimizeLeft = 0;
         int _btnMaximizeLeft = 0;
         int _titleWidth = 0;
-        protected ContentPanel pnlContent;
 
         FormButtons _hoveredButtons = FormButtons.None;
 
-        private bool _isActive =false;
-        public bool IsActive 
-        { 
+        private bool _isActive = false;
+        public bool IsActive
+        {
             get
             {
                 return _isActive;
@@ -219,8 +170,7 @@ namespace OPMedia.UI.Themes
         {
             get
             {
-                return new Size(22, 22);
-                //return SystemInformation.CaptionButtonSize;
+                return new Size(TitleBarHeight - 2, TitleBarHeight - 2);
             }
         }
 
@@ -230,31 +180,16 @@ namespace OPMedia.UI.Themes
         {
             //Initialize the main thread
             if (!DesignMode)
-            {
                 MainThread.Initialize(this);
 
-                //ThreadPool.QueueUserWorkItem((c) =>
-                //{
-                //    Thread.Sleep(1000);
-                //    MainThread.Send((c2) => ScrollBarSkinner.SkinTopWindow(this));
-                //});
-            }
+            SetStyle(ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw |
+                     ControlStyles.UserPaint, true);
 
             base.AutoScaleDimensions = new SizeF(1, 1);
             base.AutoScaleMode = AutoScaleMode.None;
             base.FormBorderStyle = FormBorderStyle.None;
-
-            InitializeComponent();
-
-            _rmBottom.Cursor = Cursors.SizeNS;
-            _rmLeft.Cursor = Cursors.SizeWE;
-            _rmRight.Cursor = Cursors.SizeWE;
-            _rmTop.Cursor = Cursors.SizeNS;
-
-            _rmLT.Cursor = Cursors.SizeNWSE;
-            _rmLB.Cursor = Cursors.SizeNESW;
-            _rmRT.Cursor = Cursors.SizeNESW;
-            _rmRB.Cursor = Cursors.SizeNWSE;
 
             _ttm = new OPMToolTipManager(this);
 
@@ -265,24 +200,6 @@ namespace OPMedia.UI.Themes
             this.ControlBox = false;
 
             this.StartPosition = FormStartPosition.CenterParent;
-
-            foreach(Control ctl in this.Controls)
-            {
-                if (ctl is ResizeMargin)
-                {
-                    ctl.BringToFront();
-                    ctl.BackColor = Color.Transparent;
-                }
-            }
-
-            _rmBottom.Tag = HTBOTTOM;
-            _rmLB.Tag = HTBOTTOMLEFT;
-            _rmLeft.Tag = HTLEFT;
-            _rmLT.Tag = HTTOPLEFT;
-            _rmRB.Tag = HTBOTTOMRIGHT;
-            _rmRight.Tag = HTRIGHT;
-            _rmRT.Tag = HTTOPRIGHT;
-            _rmTop.Tag = HTTOP;
 
             this.BackColor = ThemeManager.BackColor;
 
@@ -329,155 +246,12 @@ namespace OPMedia.UI.Themes
         public void OnThemeUpdated()
         {
             base.BackColor = ThemeManager.BackColor;
-            ApplyWindowParams(false);
+            ApplyWindowParams();
             ApplyTitlebarValues();
             ApplyDrawingValues();
             Invalidate(true);
             OnThemeUpdatedInternal();
         }
-
-        #region InitializeComponent
-        private void InitializeComponent()
-        {
-            this.pnlContent = new OPMedia.UI.Themes.ContentPanel();
-            this._rmTop = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmLT = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmRT = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmRB = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmLeft = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmLB = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmBottom = new OPMedia.UI.Themes.ResizeMargin();
-            this._rmRight = new OPMedia.UI.Themes.ResizeMargin();
-            this.SuspendLayout();
-            this.pnlContent.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.TabIndex = 8;
-            // 
-            // _rmTop
-            // 
-            this._rmTop.BackColor = System.Drawing.Color.Blue;
-            this._rmTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this._rmTop.Location = new System.Drawing.Point(0, 0);
-            this._rmTop.Margin = new System.Windows.Forms.Padding(0);
-            this._rmTop.Name = "_rmTop";
-            this._rmTop.Size = new System.Drawing.Size(423, 5);
-            this._rmTop.TabIndex = 0;
-            this._rmTop.TabStop = false;
-            this._rmTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmTop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmLT
-            // 
-            this._rmLT.BackColor = System.Drawing.Color.Blue;
-            this._rmLT.Location = new System.Drawing.Point(0, 0);
-            this._rmLT.Margin = new System.Windows.Forms.Padding(0);
-            this._rmLT.Name = "_rmLT";
-            this._rmLT.Size = new System.Drawing.Size(5, 5);
-            this._rmLT.TabIndex = 4;
-            this._rmLT.TabStop = false;
-            this._rmLT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmLT.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmLT.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmRT
-            // 
-            this._rmRT.BackColor = System.Drawing.Color.Blue;
-            this._rmRT.Location = new System.Drawing.Point(271, 0);
-            this._rmRT.Margin = new System.Windows.Forms.Padding(0);
-            this._rmRT.Name = "_rmRT";
-            this._rmRT.Size = new System.Drawing.Size(5, 5);
-            this._rmRT.TabIndex = 5;
-            this._rmRT.TabStop = false;
-            this._rmRT.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmRT.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmRT.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmRB
-            // 
-            this._rmRB.BackColor = System.Drawing.Color.Blue;
-            this._rmRB.Location = new System.Drawing.Point(271, 235);
-            this._rmRB.Margin = new System.Windows.Forms.Padding(0);
-            this._rmRB.Name = "_rmRB";
-            this._rmRB.Size = new System.Drawing.Size(5, 5);
-            this._rmRB.TabIndex = 7;
-            this._rmRB.TabStop = false;
-            this._rmRB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmRB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmRB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmLeft
-            // 
-            this._rmLeft.BackColor = System.Drawing.Color.Blue;
-            this._rmLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this._rmLeft.Location = new System.Drawing.Point(0, 5);
-            this._rmLeft.Margin = new System.Windows.Forms.Padding(0);
-            this._rmLeft.Name = "_rmLeft";
-            this._rmLeft.Size = new System.Drawing.Size(5, 387);
-            this._rmLeft.TabIndex = 2;
-            this._rmLeft.TabStop = false;
-            this._rmLeft.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmLeft.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmLB
-            // 
-            this._rmLB.BackColor = System.Drawing.Color.Blue;
-            this._rmLB.Location = new System.Drawing.Point(10, 235);
-            this._rmLB.Margin = new System.Windows.Forms.Padding(0);
-            this._rmLB.Name = "_rmLB";
-            this._rmLB.Size = new System.Drawing.Size(5, 5);
-            this._rmLB.TabIndex = 6;
-            this._rmLB.TabStop = false;
-            this._rmLB.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmLB.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmLB.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmBottom
-            // 
-            this._rmBottom.BackColor = System.Drawing.Color.Blue;
-            this._rmBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._rmBottom.Location = new System.Drawing.Point(5, 387);
-            this._rmBottom.Margin = new System.Windows.Forms.Padding(0);
-            this._rmBottom.Name = "_rmBottom";
-            this._rmBottom.Size = new System.Drawing.Size(418, 5);
-            this._rmBottom.TabIndex = 1;
-            this._rmBottom.TabStop = false;
-            this._rmBottom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmBottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmBottom.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // _rmRight
-            // 
-            this._rmRight.BackColor = System.Drawing.Color.Blue;
-            this._rmRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this._rmRight.Location = new System.Drawing.Point(418, 5);
-            this._rmRight.Margin = new System.Windows.Forms.Padding(0);
-            this._rmRight.Name = "_rmRight";
-            this._rmRight.Size = new System.Drawing.Size(5, 382);
-            this._rmRight.TabIndex = 3;
-            this._rmRight.TabStop = false;
-            this._rmRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
-            this._rmRight.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnResizeMouseMove);
-            this._rmRight.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // ThemeFormBase
-            // 
-            this.ClientSize = new System.Drawing.Size(423, 392);
-            this.Controls.Add(this._rmRight);
-            this.Controls.Add(this._rmBottom);
-            this.Controls.Add(this._rmLB);
-            this.Controls.Add(this._rmLeft);
-            this.Controls.Add(this._rmRB);
-            this.Controls.Add(this._rmRT);
-            this.Controls.Add(this._rmLT);
-            this.Controls.Add(this._rmTop);
-            this.Controls.Add(this.pnlContent);
-            this.Name = "ThemeFormBase";
-            this.ResumeLayout(false);
-
-        }
-        #endregion
 
         #region Form resize and move operations
 
@@ -499,7 +273,7 @@ namespace OPMedia.UI.Themes
             int minH = Math.Max(85, this.MinimumSize.Height);
             this.MinimumSize = new Size(minW, minH);
 
-            ApplyWindowParams(true);
+            ApplyWindowParams();
 
             ThemeManager.SetDoubleBuffer(this);
         }
@@ -510,7 +284,7 @@ namespace OPMedia.UI.Themes
         {
             if (Handle != null)
             {
-                ApplyWindowParams(false);
+                ApplyWindowParams();
             }
 
             if (this.WindowState != _previousState)
@@ -530,26 +304,12 @@ namespace OPMedia.UI.Themes
         public virtual void OnWindowStateChanged(FormWindowState oldState, FormWindowState newState)
         {
         }
-        
-        private void OnResizeMouseMove(object sender, MouseEventArgs e)
-        {
-            if (sender is ResizeMargin && e.Button == MouseButtons.Left)
-            {
-                int dir = (int)(sender as ResizeMargin).Tag;
-                User32.ReleaseCapture();
-                User32.SendMessage(Handle, (int)Messages.WM_NCLBUTTONDOWN, dir, 0);
-            }
-        }
-        
+
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (sender is ResizeMargin)
-                {
-                    (sender as ResizeMargin).Capture = true;
-                }
-                else if (sender == this && _rcTitle.Contains(e.Location))
+                if (sender == this && _rcTitle.Contains(e.Location))
                 {
                     this.Capture = true;
                     _titleDragOperation = true;
@@ -567,7 +327,7 @@ namespace OPMedia.UI.Themes
                 {
                     Close();
                 }
-                else if (_rcTitle.Contains(e.Location) && _allowResize && 
+                else if (_rcTitle.Contains(e.Location) && _allowResize &&
                     (FormButtons & FormButtons.Maximize) == FormButtons.Maximize)
                 {
                     if (this.WindowState != FormWindowState.Maximized)
@@ -586,11 +346,7 @@ namespace OPMedia.UI.Themes
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (sender is ResizeMargin)
-                {
-                    (sender as ResizeMargin).Capture = false;
-                }
-                else if (sender == this)
+                if (sender == this)
                 {
                     this.Capture = false;
                     _titleDragOperation = false;
@@ -625,7 +381,7 @@ namespace OPMedia.UI.Themes
 
         void OnMouseHover(object sender, EventArgs e)
         {
-            MainThread.Post(delegate(object x)
+            MainThread.Post(delegate (object x)
             {
                 Point pt = PointToClient(MousePosition);
                 if (_rcTitle != Rectangle.Empty && _rcTitle.Contains(pt))
@@ -644,8 +400,8 @@ namespace OPMedia.UI.Themes
 
                 if (_rcMaximize != Rectangle.Empty && _rcMaximize.Contains(pt))
                 {
-                    string tip = (WindowState != FormWindowState.Maximized) ? 
-                        Translator.Translate("TXT_BTNMAXIMIZE") : 
+                    string tip = (WindowState != FormWindowState.Maximized) ?
+                        Translator.Translate("TXT_BTNMAXIMIZE") :
                         Translator.Translate("TXT_BTNRESTOREDOWN");
 
                     _ttm.ShowSimpleToolTip(tip);
@@ -714,7 +470,7 @@ namespace OPMedia.UI.Themes
 
         #region Drawing code
 
-       
+
 
         private void DrawTitleBar(Graphics g)
         {
@@ -785,7 +541,7 @@ namespace OPMedia.UI.Themes
                 case ButtonIcons.Minimize:
                     letter = "0";
                     break;
-                
+
                 case ButtonIcons.MinimizeHovered:
                     letter = "0";
                     cl1 = ControlPaint.Light(cl1, percLight);
@@ -795,17 +551,17 @@ namespace OPMedia.UI.Themes
                 case ButtonIcons.Maximize:
                     letter = "1";
                     break;
-                
+
                 case ButtonIcons.MaximizeHovered:
                     letter = "1";
                     cl1 = ControlPaint.Light(cl1, percLight);
                     cl2 = ControlPaint.Light(cl2, percLight);
                     break;
-                
+
                 case ButtonIcons.Restore:
                     letter = "2";
                     break;
-                
+
                 case ButtonIcons.RestoreHovered:
                     letter = "2";
                     cl1 = ControlPaint.Light(cl1, percLight);
@@ -818,7 +574,7 @@ namespace OPMedia.UI.Themes
                     cl2 = ThemeManager.CaptionCloseButtonColor2;
                     clText = ThemeManager.CaptionCloseButtonForeColor;
                     break;
-                
+
                 case ButtonIcons.CloseHovered:
                     letter = "r";
                     cl1 = ControlPaint.Light(ThemeManager.CaptionCloseButtonColor1, percLight);
@@ -855,18 +611,8 @@ namespace OPMedia.UI.Themes
 
         #region helper methods
 
-        private void ApplyWindowParams(bool repositionContentPanel)
+        private void ApplyWindowParams()
         {
-            _rmRT.Location = new Point(Width - _rmRT.Width, 0);
-            _rmRB.Location = new Point(Width - _rmRB.Width, Height - _rmRB.Height);
-            _rmLB.Location = new Point(0, Height - _rmLB.Height);
-            _rmLT.Location = new Point(0, 0);
-
-            if (repositionContentPanel)
-            {
-                RepositionContentPanel();
-            }
-
             _rcTitleBar = (TitleBarVisible) ? new Rectangle(
                 ClientRectangle.Left,
                 ClientRectangle.Top,
@@ -877,7 +623,7 @@ namespace OPMedia.UI.Themes
 
             if (FormWindowState.Maximized != WindowState)
             {
-                Rectangle rcRegion = new Rectangle(0, 0, Width, Height); 
+                Rectangle rcRegion = new Rectangle(0, 0, Width, Height);
                 base.Region = new Region(rcRegion);
             }
             else
@@ -891,31 +637,14 @@ namespace OPMedia.UI.Themes
             Invalidate(true);
         }
 
-        protected void RepositionContentPanel()
-        {
-            try
-            {
-                pnlContent.SuspendLayoutEx();
-
-                int spacing = ThemeManager.FormBorderWidth;
-                int th = TitleBarVisible ? CaptionButtonSize.Height : 0;
-                pnlContent.SetLocation(new Point(spacing, th + spacing));
-                pnlContent.SetSize(new Size(this.Width - 2 * spacing, this.Height - th - 2 * spacing));
-            }
-            finally
-            {
-                pnlContent.ResumeLayoutEx();
-            }
-        }
-
         protected override void OnPaintBackground(PaintEventArgs e)
         {
         }
 
-        //protected override void OnPaint(PaintEventArgs e)
-        //{
-        //    OnRenderGraphics(e.Graphics, e.ClipRectangle, null);
-        //}
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            OnRenderGraphics(e.Graphics, e.ClipRectangle, null);
+        }
 
         private void OnRenderGraphics(Graphics g, Rectangle rc, object customData)
         {
@@ -949,7 +678,7 @@ namespace OPMedia.UI.Themes
             if (_brBackground != null)
                 _brBackground.Dispose();
 
-                _brBackground = new SolidBrush(GetBackColor());
+            _brBackground = new SolidBrush(ThemeManager.BackColor);
 
             if (_brTitlebar != null)
                 _brTitlebar.Dispose();
@@ -962,14 +691,14 @@ namespace OPMedia.UI.Themes
                         ThemeManager.CaptionBarColor1,
                         ThemeManager.CaptionBarColor2, 90f);
 
-                    
+
 
                 }
                 else
                 {
                     _brTitlebar = new LinearGradientBrush(_rcTitleBar,
                         ControlPaint.Light(ThemeManager.CaptionBarColor1, inactiveLightPercent),
-                        ControlPaint.Light(ThemeManager.CaptionBarColor2, inactiveLightPercent), 
+                        ControlPaint.Light(ThemeManager.CaptionBarColor2, inactiveLightPercent),
                         90f);
                 }
             }
@@ -980,13 +709,13 @@ namespace OPMedia.UI.Themes
             if (IsActive)
             {
                 _penBorder = new Pen(
-                    ThemeManager.BorderColor, 
+                    ThemeManager.BorderColor,
                     ThemeManager.FormBorderWidth);
             }
             else
             {
                 _penBorder = new Pen(
-                     ControlPaint.Light(ThemeManager.BorderColor, inactiveLightPercent), 
+                     ControlPaint.Light(ThemeManager.BorderColor, inactiveLightPercent),
                      ThemeManager.FormBorderWidth);
             }
         }
@@ -1050,7 +779,7 @@ namespace OPMedia.UI.Themes
                 new Rectangle(_iconLeft, (CaptionButtonSize.Height + IconOffset - 16) / 2 - ThemeManager.FormBorderWidth, 16, 16) : Rectangle.Empty;
             _rcTitle = (_titleLeft > 0) ?
                 new Rectangle(_titleLeft, 0, _titleWidth, CaptionButtonSize.Height) : Rectangle.Empty;
-            
+
             _rcMinimize = (_btnMinimizeLeft > 0) ?
                 new Rectangle(_btnMinimizeLeft, 0,
                     CaptionButtonSize.Width, CaptionButtonSize.Height - ThemeManager.FormBorderWidth) : Rectangle.Empty;
@@ -1063,24 +792,74 @@ namespace OPMedia.UI.Themes
         }
 
         #endregion
-    }
 
-    public class ToolForm : ThemeForm
-    {
-        public ToolForm()
-            : base()
+        #region Resize Margins
+
+        protected override void WndProc(ref Message m)
         {
-            this.IsToolWindow = true;
-            this.AllowResize = false;
-            this.Icon = null;
+            if (!DesignMode)
+            {
+                if (m.Msg == (int)Messages.WM_NCHITTEST && (int)m.Result == 0)
+                {
+                    m.Result = HitTestNCA(m.HWnd, m.WParam, m.LParam);
+                    return;
+                }
+            }
+            
+            base.WndProc(ref m);
         }
 
-        public ToolForm(string title)
-            : base(title)
+        private IntPtr HitTestNCA(IntPtr hwnd, IntPtr wparam, IntPtr lparam)
         {
-            this.IsToolWindow = true;
-            this.AllowResize = false;
-            this.Icon = null;
+            Rectangle testRect = Rectangle.Empty;
+
+            Point p = new Point((Int16)lparam, (Int16)((int)lparam >> 16));
+            int vPadding = Math.Max(Padding.Right, Padding.Bottom);
+
+            testRect = RectangleToScreen(new Rectangle(0, 0, BorderWidth, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTTOPLEFT);
+
+            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, 0, BorderWidth, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTTOPRIGHT);
+
+            testRect = RectangleToScreen(new Rectangle(0, Height - BorderWidth, BorderWidth, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTBOTTOMLEFT);
+
+            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, Height - BorderWidth, BorderWidth, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTBOTTOMRIGHT);
+
+            if (this.AllowResize)
+            {
+                if (RectangleToScreen(new Rectangle(ClientRectangle.Width - vPadding, ClientRectangle.Height - vPadding, vPadding, vPadding)).Contains(p))
+                    return new IntPtr((int)HitTest.HTBOTTOMRIGHT);
+            }
+
+            testRect = RectangleToScreen(new Rectangle(0, 0, Width, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTTOP);
+
+            testRect = RectangleToScreen(new Rectangle(0, BorderWidth, Width, BorderWidth - BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTCAPTION);
+
+            testRect = RectangleToScreen(new Rectangle(0, 0, BorderWidth, Height));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTLEFT);
+
+            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, 0, BorderWidth, Height));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTRIGHT);
+
+            testRect = RectangleToScreen(new Rectangle(0, Height - BorderWidth, Width, BorderWidth));
+            if (testRect.Contains(p))
+                return new IntPtr((int)HitTest.HTBOTTOM);
+
+            return new IntPtr((int)HitTest.HTCLIENT);
         }
+        #endregion
     }
 }

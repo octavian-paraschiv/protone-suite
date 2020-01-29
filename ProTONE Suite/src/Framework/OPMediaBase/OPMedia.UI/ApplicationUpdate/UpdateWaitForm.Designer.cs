@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            
             this.SuspendLayout();
             // 
-            // UpdateNotifyForm
+            // UpdateWaitForm
             // 
-            this.Name = "UpdateNotifyForm";
-            
-            
+            this.ClientSize = new System.Drawing.Size(258, 93);
+            this.MinimumSize = new System.Drawing.Size(200, 85);
+            this.Name = "UpdateWaitForm";
             this.ResumeLayout(false);
 
         }

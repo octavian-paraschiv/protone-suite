@@ -50,13 +50,8 @@ namespace OPMedia.ProTONE
             this.mnuAbout = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.mnuExit = new OPMedia.UI.Controls.OPMToolStripMenuItem();
             this.mediaPlayer = new OPMedia.UI.ProTONE.Controls.MediaPlayer.MediaPlayer();
-            this.pnlContent.SuspendLayout();
             this.cmsMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.mediaPlayer);
             // 
             // notifyIcon
             // 
@@ -164,16 +159,16 @@ namespace OPMedia.ProTONE
             this.mediaPlayer.MinimumSize = new System.Drawing.Size(160, 0);
             this.mediaPlayer.Name = "mediaPlayer";
             this.mediaPlayer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.mediaPlayer.Size = new System.Drawing.Size(646, 574);
+            this.mediaPlayer.Size = new System.Drawing.Size(650, 600);
             this.mediaPlayer.TabIndex = 0;
             // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(650, 600);
+            this.Controls.Add(this.mediaPlayer);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(650, 600);
             this.Name = "MainForm";
-            this.Controls.SetChildIndex(this.pnlContent, 0);
-            this.pnlContent.ResumeLayout(false);
             this.cmsMain.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -173,7 +173,6 @@ namespace OPMedia.UI.Themes
             {
                 if (this.WindowState != FormWindowState.Minimized)
                 {
-                    RepositionContentPanel();
                 }
             }
         }
@@ -184,10 +183,9 @@ namespace OPMedia.UI.Themes
             // 
             // ThemeForm
             // 
-            this.ClientSize = new System.Drawing.Size(254, 124);
+            this.ClientSize = new System.Drawing.Size(250, 124);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
-            this.Location = new System.Drawing.Point(0, 0);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(200, 50);
@@ -613,6 +611,28 @@ namespace OPMedia.UI.Themes
         }
     }
 
+    #endregion
+
+    #region ToolForm
+
+    public class ToolForm : ThemeForm
+    {
+        public ToolForm()
+            : base()
+        {
+            this.IsToolWindow = true;
+            this.AllowResize = false;
+            this.Icon = null;
+        }
+
+        public ToolForm(string title)
+            : base(title)
+        {
+            this.IsToolWindow = true;
+            this.AllowResize = false;
+            this.Icon = null;
+        }
+    }
     #endregion
 }
 

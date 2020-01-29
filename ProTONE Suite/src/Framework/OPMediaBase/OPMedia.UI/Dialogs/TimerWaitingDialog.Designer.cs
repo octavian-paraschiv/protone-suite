@@ -38,15 +38,10 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.tableLayoutPanel2 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.flowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
-            this.pnlContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.tableLayoutPanel1);
             // 
             // lblNotifyText
             // 
@@ -56,7 +51,7 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.Name = "lblNotifyText";
             this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblNotifyText.Size = new System.Drawing.Size(399, 126);
+            this.lblNotifyText.Size = new System.Drawing.Size(405, 154);
             this.lblNotifyText.TabIndex = 1;
             this.lblNotifyText.Text = "bla\r\nblabla\r\nblablabla\r\n\r\nblablablabla\r\nblablablablabla";
             this.lblNotifyText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -66,15 +61,17 @@ namespace OPMedia.UI.Dialogs
             this.pbWaiting.AllowDragging = false;
             this.pbWaiting.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbWaiting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbWaiting.EffectiveMaximum = 0D;
             this.pbWaiting.Enabled = false;
             this.pbWaiting.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbWaiting.Location = new System.Drawing.Point(3, 3);
             this.pbWaiting.Maximum = 100D;
             this.pbWaiting.Name = "pbWaiting";
             this.pbWaiting.NrTicks = 20;
+            this.pbWaiting.OverrideBackColor = System.Drawing.Color.Empty;
             this.pbWaiting.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbWaiting.ShowTicks = false;
-            this.pbWaiting.Size = new System.Drawing.Size(344, 14);
+            this.pbWaiting.Size = new System.Drawing.Size(350, 14);
             this.pbWaiting.TabIndex = 0;
             this.pbWaiting.Value = 0D;
             this.pbWaiting.Vertical = false;
@@ -88,6 +85,7 @@ namespace OPMedia.UI.Dialogs
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "TXT_ABORT";
@@ -101,6 +99,7 @@ namespace OPMedia.UI.Dialogs
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
+            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "TXT_PROCEED";
@@ -110,7 +109,7 @@ namespace OPMedia.UI.Dialogs
             this.lblTimer.AutoSize = true;
             this.lblTimer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblTimer.Location = new System.Drawing.Point(353, 0);
+            this.lblTimer.Location = new System.Drawing.Point(359, 0);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblTimer.OverrideForeColor = System.Drawing.Color.Empty;
@@ -134,7 +133,7 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(405, 182);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(411, 210);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -145,12 +144,12 @@ namespace OPMedia.UI.Dialogs
             this.tableLayoutPanel2.Controls.Add(this.lblTimer, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.pbWaiting, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 126);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 154);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(405, 20);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(411, 20);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -161,7 +160,7 @@ namespace OPMedia.UI.Dialogs
             this.flowLayoutPanel1.Controls.Add(this.btnOK);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(246, 149);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(252, 177);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(156, 30);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -169,11 +168,11 @@ namespace OPMedia.UI.Dialogs
             // 
             // TimerWaitingDialog
             // 
-            this.AllowResize = true;
-            this.ClientSize = new System.Drawing.Size(415, 210);
+            this.ClientSize = new System.Drawing.Size(411, 210);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "TimerWaitingDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.pnlContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

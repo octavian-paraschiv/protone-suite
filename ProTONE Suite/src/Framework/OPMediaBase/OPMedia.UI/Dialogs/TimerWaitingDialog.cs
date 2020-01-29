@@ -25,7 +25,6 @@ namespace OPMedia.UI.Dialogs
         {
             InitializeComponent();
 
-            this.AllowResize = true;
 
             StartPosition = FormStartPosition.CenterScreen;
 

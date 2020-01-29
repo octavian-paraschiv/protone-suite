@@ -74,14 +74,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.label2 = new OPMedia.UI.Controls.OPMLabel();
             this.txtKeyword = new OPMedia.UI.Controls.OPMTextBox();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.pnlContent.SuspendLayout();
             this.opmLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmLayoutPanel1);
-            this.pnlContent.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -89,7 +83,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(394, 335);
+            this.btnCancel.Location = new System.Drawing.Point(403, 361);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -105,7 +99,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(317, 335);
+            this.btnOk.Location = new System.Drawing.Point(326, 361);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
             this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
@@ -120,10 +114,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.SetColumnSpan(this.lbMatchingItems, 3);
             this.lbMatchingItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbMatchingItems.FormattingEnabled = true;
-            this.lbMatchingItems.Location = new System.Drawing.Point(5, 65);
+            this.lbMatchingItems.Location = new System.Drawing.Point(5, 67);
             this.lbMatchingItems.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.lbMatchingItems.Name = "lbMatchingItems";
-            this.lbMatchingItems.Size = new System.Drawing.Size(479, 265);
+            this.lbMatchingItems.Size = new System.Drawing.Size(488, 289);
             this.lbMatchingItems.TabIndex = 3;
             this.lbMatchingItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbMatchingItems_MouseDoubleClick);
             // 
@@ -133,12 +127,12 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(5, 45);
+            this.label1.Location = new System.Drawing.Point(5, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.label1.Name = "label1";
             this.label1.OverrideBackColor = System.Drawing.Color.Empty;
             this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(479, 15);
+            this.label1.Size = new System.Drawing.Size(488, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "TXT_MATCHING_ITEMS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,7 +148,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.label2.Name = "label2";
             this.label2.OverrideBackColor = System.Drawing.Color.Empty;
             this.label2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label2.Size = new System.Drawing.Size(479, 15);
+            this.label2.Size = new System.Drawing.Size(488, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "TXT_ENTER_KEYWORD";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -171,6 +165,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.txtKeyword.MaximumSize = new System.Drawing.Size(2000, 20);
             this.txtKeyword.MaxLength = 32767;
+            this.txtKeyword.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtKeyword.OverrideForeColor = System.Drawing.Color.Empty;
@@ -178,7 +173,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.ReadOnly = false;
             this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtKeyword.ShortcutsEnabled = true;
-            this.txtKeyword.Size = new System.Drawing.Size(479, 20);
+            this.txtKeyword.Size = new System.Drawing.Size(488, 22);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtKeyword.UseSystemPasswordChar = false;
@@ -208,16 +203,16 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmLayoutPanel1.Size = new System.Drawing.Size(489, 378);
+            this.opmLayoutPanel1.Size = new System.Drawing.Size(498, 404);
             this.opmLayoutPanel1.TabIndex = 6;
             // 
             // JumpToItemDlg
             // 
-            this.ClientSize = new System.Drawing.Size(493, 404);
+            this.ClientSize = new System.Drawing.Size(498, 404);
+            this.Controls.Add(this.opmLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "JumpToItemDlg";
             this.ShowIcon = false;
-            this.pnlContent.ResumeLayout(false);
             this.opmLayoutPanel1.ResumeLayout(false);
             this.opmLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

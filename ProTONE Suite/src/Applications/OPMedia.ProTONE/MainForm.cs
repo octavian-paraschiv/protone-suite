@@ -74,7 +74,6 @@ namespace OPMedia.ProTONE
             InitializeComponent();
 
             mnuMediaState.ForeColor = ThemeManager.MenuTextColor;
-            this.OverrideBackColor = ThemeManager.GradientNormalColor2;
 
             mediaPlayer.MinimumSize = new Size(0, 0);
 
@@ -533,7 +532,6 @@ namespace OPMedia.ProTONE
         protected override void OnThemeUpdatedInternal()
         {
             mnuMediaState.ForeColor = ThemeManager.MenuTextColor;
-            this.OverrideBackColor = ThemeManager.GradientNormalColor2;
         }
 
     }

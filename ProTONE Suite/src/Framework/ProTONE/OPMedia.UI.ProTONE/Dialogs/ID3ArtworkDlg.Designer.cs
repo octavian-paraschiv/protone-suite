@@ -52,7 +52,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmFlowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.pbAdd = new System.Windows.Forms.PictureBox();
             this.pbDelete = new System.Windows.Forms.PictureBox();
-            this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.opmLayoutPanel1.SuspendLayout();
             this.opmPanel1.SuspendLayout();
@@ -62,11 +61,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             ((System.ComponentModel.ISupportInitialize)(this.pbDelete)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmLayoutPanel1);
-            this.pnlContent.TabIndex = 1;
-            // 
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
@@ -75,7 +69,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(516, 252);
+            this.btnCancel.Location = new System.Drawing.Point(524, 278);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -93,7 +87,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(450, 252);
+            this.btnOK.Location = new System.Drawing.Point(458, 278);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
@@ -111,7 +105,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.pbPicture.Location = new System.Drawing.Point(0, 0);
             this.pbPicture.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pbPicture.Name = "pbPicture";
-            this.pbPicture.Size = new System.Drawing.Size(218, 223);
+            this.pbPicture.Size = new System.Drawing.Size(218, 249);
             this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPicture.TabIndex = 29;
             this.pbPicture.TabStop = false;
@@ -130,7 +124,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblItem.Name = "lblItem";
             this.lblItem.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblItem.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblItem.Size = new System.Drawing.Size(601, 15);
+            this.lblItem.Size = new System.Drawing.Size(609, 15);
             this.lblItem.TabIndex = 0;
             this.lblItem.Text = "label1";
             this.lblItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,7 +136,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowse.Image")));
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowse.Location = new System.Drawing.Point(194, 198);
+            this.btnBrowse.Location = new System.Drawing.Point(194, 224);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
@@ -176,7 +170,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmLayoutPanel1.Size = new System.Drawing.Size(606, 284);
+            this.opmLayoutPanel1.Size = new System.Drawing.Size(614, 310);
             this.opmLayoutPanel1.TabIndex = 0;
             // 
             // opmPanel1
@@ -188,9 +182,9 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmPanel1.Controls.Add(this.btnBrowse);
             this.opmPanel1.Controls.Add(this.pbPicture);
             this.opmPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmPanel1.Location = new System.Drawing.Point(385, 23);
+            this.opmPanel1.Location = new System.Drawing.Point(393, 23);
             this.opmPanel1.Name = "opmPanel1";
-            this.opmPanel1.Size = new System.Drawing.Size(218, 223);
+            this.opmPanel1.Size = new System.Drawing.Size(218, 249);
             this.opmPanel1.TabIndex = 1;
             // 
             // btnSave
@@ -200,7 +194,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSave.Location = new System.Drawing.Point(172, 198);
+            this.btnSave.Location = new System.Drawing.Point(172, 224);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.OverrideBackColor = System.Drawing.Color.Empty;
@@ -216,11 +210,11 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.SetColumnSpan(this.lblSep, 4);
             this.lblSep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSep.Location = new System.Drawing.Point(3, 249);
+            this.lblSep.Location = new System.Drawing.Point(3, 275);
             this.lblSep.Name = "lblSep";
             this.lblSep.OverrideBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.lblSep.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblSep.Size = new System.Drawing.Size(600, 3);
+            this.lblSep.Size = new System.Drawing.Size(608, 3);
             this.lblSep.TabIndex = 32;
             this.lblSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -243,13 +237,14 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(376, 223);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(384, 249);
             this.opmTableLayoutPanel1.TabIndex = 34;
             // 
             // lvPictures
             // 
             this.lvPictures.AllowEditing = true;
             this.lvPictures.AlternateRowColors = true;
+            this.lvPictures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvPictures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colImage,
             this.colImageType,
@@ -262,7 +257,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lvPictures.Name = "lvPictures";
             this.lvPictures.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lvPictures, 4);
-            this.lvPictures.Size = new System.Drawing.Size(376, 202);
+            this.lvPictures.Size = new System.Drawing.Size(384, 228);
             this.lvPictures.TabIndex = 0;
             this.lvPictures.UseCompatibleStateImageBehavior = false;
             this.lvPictures.View = System.Windows.Forms.View.Details;
@@ -291,12 +286,12 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.lblDesc.Location = new System.Drawing.Point(0, 207);
+            this.lblDesc.Location = new System.Drawing.Point(0, 233);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(0);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(341, 16);
+            this.lblDesc.Size = new System.Drawing.Size(349, 16);
             this.lblDesc.TabIndex = 1;
             this.lblDesc.Text = "TXT_CLICK_LIST_TO_EDIT";
             // 
@@ -306,7 +301,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmFlowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.opmFlowLayoutPanel1.Controls.Add(this.pbAdd);
             this.opmFlowLayoutPanel1.Controls.Add(this.pbDelete);
-            this.opmFlowLayoutPanel1.Location = new System.Drawing.Point(341, 207);
+            this.opmFlowLayoutPanel1.Location = new System.Drawing.Point(349, 233);
             this.opmFlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.opmFlowLayoutPanel1.Name = "opmFlowLayoutPanel1";
             this.opmFlowLayoutPanel1.Size = new System.Drawing.Size(35, 16);
@@ -343,10 +338,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             // ID3ArtworkDlg
             // 
-            this.ClientSize = new System.Drawing.Size(610, 310);
+            this.ClientSize = new System.Drawing.Size(614, 310);
+            this.Controls.Add(this.opmLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "ID3ArtworkDlg";
-            this.pnlContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).EndInit();
             this.opmLayoutPanel1.ResumeLayout(false);
             this.opmLayoutPanel1.PerformLayout();

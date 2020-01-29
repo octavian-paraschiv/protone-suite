@@ -35,14 +35,8 @@ namespace OPMedia.UI.Configuration
             this.cfgPanel = new OPMedia.UI.Configuration.SerialPortCfgPanel();
             this.pnlPortSettings = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pnlExtension = new System.Windows.Forms.Panel();
-            this.pnlContent.SuspendLayout();
             this.pnlPortSettings.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.pnlPortSettings);
-            this.pnlContent.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -51,11 +45,12 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(170, 242);
+            this.btnCancel.Location = new System.Drawing.Point(171, 268);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
-            this.btnCancel.Size = new System.Drawing.Size(80, 25);
+            this.btnCancel.ShowDropDown = false;
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "TXT_CANCEL";
             // 
@@ -66,12 +61,13 @@ namespace OPMedia.UI.Configuration
             this.btnOk.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(104, 242);
+            this.btnOk.Location = new System.Drawing.Point(104, 268);
             this.btnOk.MinimumSize = new System.Drawing.Size(60, 25);
             this.btnOk.Name = "btnOk";
             this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
-            this.btnOk.Size = new System.Drawing.Size(60, 25);
+            this.btnOk.ShowDropDown = false;
+            this.btnOk.Size = new System.Drawing.Size(61, 27);
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = "TXT_OK";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -86,7 +82,7 @@ namespace OPMedia.UI.Configuration
             this.cfgPanel.Name = "cfgPanel";
             this.cfgPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.cfgPanel.PortName = "COM1";
-            this.cfgPanel.Size = new System.Drawing.Size(253, 209);
+            this.cfgPanel.Size = new System.Drawing.Size(264, 235);
             this.cfgPanel.TabIndex = 0;
             // 
             // pnlPortSettings
@@ -106,7 +102,7 @@ namespace OPMedia.UI.Configuration
             this.pnlPortSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlPortSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlPortSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlPortSettings.Size = new System.Drawing.Size(253, 270);
+            this.pnlPortSettings.Size = new System.Drawing.Size(264, 298);
             this.pnlPortSettings.TabIndex = 3;
             // 
             // pnlExtension
@@ -115,18 +111,19 @@ namespace OPMedia.UI.Configuration
             this.pnlExtension.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlPortSettings.SetColumnSpan(this.pnlExtension, 3);
             this.pnlExtension.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExtension.Location = new System.Drawing.Point(0, 209);
+            this.pnlExtension.Location = new System.Drawing.Point(0, 235);
             this.pnlExtension.Margin = new System.Windows.Forms.Padding(0);
             this.pnlExtension.MinimumSize = new System.Drawing.Size(10, 30);
             this.pnlExtension.Name = "pnlExtension";
-            this.pnlExtension.Size = new System.Drawing.Size(253, 30);
+            this.pnlExtension.Size = new System.Drawing.Size(264, 30);
             this.pnlExtension.TabIndex = 1;
             // 
             // SerialPortCfgDlg
             // 
-            this.ClientSize = new System.Drawing.Size(263, 298);
+            this.ClientSize = new System.Drawing.Size(264, 298);
+            this.Controls.Add(this.pnlPortSettings);
+            this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "SerialPortCfgDlg";
-            this.pnlContent.ResumeLayout(false);
             this.pnlPortSettings.ResumeLayout(false);
             this.pnlPortSettings.PerformLayout();
             this.ResumeLayout(false);

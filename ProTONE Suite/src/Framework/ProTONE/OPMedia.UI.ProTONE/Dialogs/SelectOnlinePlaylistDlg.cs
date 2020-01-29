@@ -109,14 +109,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblNewName = new OPMedia.UI.Controls.OPMLabel();
             this.txtNewName = new OPMedia.UI.Controls.OPMTextBox();
-            this.pnlContent.SuspendLayout();
             this.opmLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmLayoutPanel1);
-            this.pnlContent.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -125,7 +119,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(319, 301);
+            this.btnCancel.Location = new System.Drawing.Point(326, 327);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -142,7 +136,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(253, 301);
+            this.btnOk.Location = new System.Drawing.Point(260, 327);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
             this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
@@ -160,7 +154,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lbPlaylists.Location = new System.Drawing.Point(5, 25);
             this.lbPlaylists.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.lbPlaylists.Name = "lbPlaylists";
-            this.lbPlaylists.Size = new System.Drawing.Size(404, 244);
+            this.lbPlaylists.Size = new System.Drawing.Size(411, 270);
             this.lbPlaylists.TabIndex = 3;
             this.lbPlaylists.SelectedIndexChanged += new System.EventHandler(this.lbPlaylists_SelectedIndexChanged);
             // 
@@ -175,7 +169,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(404, 15);
+            this.lblDesc.Size = new System.Drawing.Size(411, 15);
             this.lblDesc.TabIndex = 2;
             this.lblDesc.Text = "TXT_SELECT_PLAYLIST";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -204,7 +198,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.opmLayoutPanel1.Size = new System.Drawing.Size(414, 333);
+            this.opmLayoutPanel1.Size = new System.Drawing.Size(421, 359);
             this.opmLayoutPanel1.TabIndex = 6;
             // 
             // lblNewName
@@ -212,7 +206,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblNewName.AutoSize = true;
             this.lblNewName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNewName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblNewName.Location = new System.Drawing.Point(0, 274);
+            this.lblNewName.Location = new System.Drawing.Point(0, 300);
             this.lblNewName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 5);
             this.lblNewName.Name = "lblNewName";
             this.lblNewName.OverrideBackColor = System.Drawing.Color.Empty;
@@ -229,7 +223,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNewName.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.txtNewName.Lines = new string[0];
-            this.txtNewName.Location = new System.Drawing.Point(158, 274);
+            this.txtNewName.Location = new System.Drawing.Point(158, 300);
             this.txtNewName.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.txtNewName.MaximumSize = new System.Drawing.Size(3000, 22);
             this.txtNewName.MaxLength = 32767;
@@ -241,7 +235,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.ReadOnly = false;
             this.txtNewName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtNewName.ShortcutsEnabled = true;
-            this.txtNewName.Size = new System.Drawing.Size(251, 22);
+            this.txtNewName.Size = new System.Drawing.Size(258, 22);
             this.txtNewName.TabIndex = 7;
             this.txtNewName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtNewName.UseSystemPasswordChar = false;
@@ -249,11 +243,11 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             // SelectOnlinePlaylistDlg
             // 
-            this.ClientSize = new System.Drawing.Size(418, 359);
+            this.ClientSize = new System.Drawing.Size(421, 359);
+            this.Controls.Add(this.opmLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "SelectOnlinePlaylistDlg";
             this.ShowIcon = false;
-            this.pnlContent.ResumeLayout(false);
             this.opmLayoutPanel1.ResumeLayout(false);
             this.opmLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

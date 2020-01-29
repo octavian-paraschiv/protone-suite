@@ -29,12 +29,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private void InitializeComponent()
         {
             this.renderingZone = new OPMedia.UI.ProTONE.Controls.MediaPlayer.RenderingZone();
-            this.pnlContent.SuspendLayout();
+            this.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
             // 
-            this.pnlContent.Controls.Add(this.renderingZone);
+            this.Controls.Add(this.renderingZone);
             // 
             // renderingZone
             // 
@@ -56,7 +56,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "";
-            this.pnlContent.ResumeLayout(false);
+            this.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

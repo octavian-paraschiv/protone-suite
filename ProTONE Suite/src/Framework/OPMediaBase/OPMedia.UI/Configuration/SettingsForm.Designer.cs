@@ -42,15 +42,10 @@ namespace OPMedia.UI
             this.tabOptions = new OPMedia.UI.Controls.OPMTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pnlContent.SuspendLayout();
             this.layoutPanel.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.tabOptions.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.layoutPanel);
             // 
             // layoutPanel
             // 
@@ -66,7 +61,7 @@ namespace OPMedia.UI
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutPanel.Size = new System.Drawing.Size(596, 444);
+            this.layoutPanel.Size = new System.Drawing.Size(604, 470);
             this.layoutPanel.TabIndex = 4;
             // 
             // pnlButtons
@@ -78,10 +73,10 @@ namespace OPMedia.UI
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.pnlButtons.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.pnlButtons.Location = new System.Drawing.Point(0, 414);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 440);
             this.pnlButtons.Margin = new System.Windows.Forms.Padding(0);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(596, 30);
+            this.pnlButtons.Size = new System.Drawing.Size(604, 30);
             this.pnlButtons.TabIndex = 3;
             // 
             // btnCancel
@@ -89,7 +84,7 @@ namespace OPMedia.UI
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(522, 3);
+            this.btnCancel.Location = new System.Drawing.Point(530, 3);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -104,7 +99,7 @@ namespace OPMedia.UI
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(444, 3);
+            this.btnOk.Location = new System.Drawing.Point(452, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
@@ -127,7 +122,7 @@ namespace OPMedia.UI
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(596, 1);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(604, 1);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tabOptions
@@ -141,7 +136,7 @@ namespace OPMedia.UI
             this.tabOptions.Margin = new System.Windows.Forms.Padding(2, 1, 1, 0);
             this.tabOptions.Name = "tabOptions";
             this.tabOptions.SelectedIndex = 0;
-            this.tabOptions.Size = new System.Drawing.Size(593, 410);
+            this.tabOptions.Size = new System.Drawing.Size(601, 436);
             this.tabOptions.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabOptions.TabIndex = 4;
             this.tabOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -152,7 +147,7 @@ namespace OPMedia.UI
             this.tabPage1.Location = new System.Drawing.Point(4, 59);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
-            this.tabPage1.Size = new System.Drawing.Size(585, 347);
+            this.tabPage1.Size = new System.Drawing.Size(593, 373);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -168,10 +163,10 @@ namespace OPMedia.UI
             // 
             // SettingsForm
             // 
-            this.ClientSize = new System.Drawing.Size(600, 470);
+            this.ClientSize = new System.Drawing.Size(604, 470);
+            this.Controls.Add(this.layoutPanel);
             this.MinimumSize = new System.Drawing.Size(600, 470);
             this.Name = "SettingsForm";
-            this.pnlContent.ResumeLayout(false);
             this.layoutPanel.ResumeLayout(false);
             this.layoutPanel.PerformLayout();
             this.pnlButtons.ResumeLayout(false);

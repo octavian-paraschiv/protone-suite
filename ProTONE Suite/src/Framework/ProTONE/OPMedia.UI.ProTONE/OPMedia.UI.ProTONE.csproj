@@ -305,6 +305,9 @@
     <EmbeddedResource Include="Configuration\MiscConfig\FavoriteFoldersPage.resx">
       <DependentUpon>FavoriteFoldersPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\ProTONESettingsForm.resx">
+      <DependentUpon>ProTONESettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\SupportConfig\DiagnosticsPage.resx">
       <DependentUpon>DiagnosticsPage.cs</DependentUpon>
     </EmbeddedResource>

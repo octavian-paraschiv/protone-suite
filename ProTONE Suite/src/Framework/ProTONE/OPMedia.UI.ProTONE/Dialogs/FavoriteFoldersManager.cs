@@ -46,21 +46,18 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         {
             this.favoriteFoldersControl = new OPMedia.UI.Dialogs.FavoriteFoldersControl();
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
-            this.pnlContent.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.btnOK);
-            this.pnlContent.Controls.Add(this.favoriteFoldersControl);
             // 
             // favoriteFoldersControl
             // 
             this.favoriteFoldersControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.favoriteFoldersControl.FavoriteFoldersHiveName = null;
+            this.favoriteFoldersControl.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.favoriteFoldersControl.Location = new System.Drawing.Point(0, 0);
             this.favoriteFoldersControl.Name = "favoriteFoldersControl";
-            this.favoriteFoldersControl.Size = new System.Drawing.Size(398, 176);
+            this.favoriteFoldersControl.OverrideBackColor = System.Drawing.Color.Empty;
+            this.favoriteFoldersControl.ShowOKButton = true;
+            this.favoriteFoldersControl.Size = new System.Drawing.Size(398, 200);
             this.favoriteFoldersControl.TabIndex = 0;
             // 
             // btnOK
@@ -70,12 +67,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(478, 221);
+            this.btnOK.Location = new System.Drawing.Point(470, 219);
             this.btnOK.Name = "btnOK";
             this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
-            this.btnOK.Size = new System.Drawing.Size(55, 25);
+            this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -83,12 +80,13 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             // FavoriteFoldersManager
             // 
-            this.ClientSize = new System.Drawing.Size(400, 200);
+            this.ClientSize = new System.Drawing.Size(398, 200);
+            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.favoriteFoldersControl);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "FavoriteFoldersManager";
-            this.pnlContent.ResumeLayout(false);
-            this.pnlContent.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
     }

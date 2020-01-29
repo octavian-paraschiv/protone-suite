@@ -38,7 +38,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.VisibleChanged += new EventHandler(RenderingFrame_VisibleChanged);
             this.Resize += new EventHandler(RenderingFrame_Resize);
 
-            this.FormButtons = Themes.FormButtons.Close;
             this.ShowInTaskbar = true;
             this.TopMost = (ProTONEConfig.IsMediaLibrary);
 
@@ -128,7 +127,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 _fullScreen = fullScreen && ProTONEConfig.IsPlayer;
                 _settingFullScreenState = true;
 
-                this.TitleBarVisible = !fullScreen;
 
                 if (_fullScreen)
                 {

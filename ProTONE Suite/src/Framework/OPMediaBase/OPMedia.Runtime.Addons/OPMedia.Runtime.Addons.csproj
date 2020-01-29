@@ -167,6 +167,9 @@
     <EmbeddedResource Include="AddonsBase\Navigation\NavBaseCtl.resx">
       <DependentUpon>NavBaseCtl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\AddonAppSettingsForm.resx">
+      <DependentUpon>AddonAppSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\AddonCfgPanel.resx">
       <DependentUpon>AddonCfgPanel.cs</DependentUpon>
     </EmbeddedResource>

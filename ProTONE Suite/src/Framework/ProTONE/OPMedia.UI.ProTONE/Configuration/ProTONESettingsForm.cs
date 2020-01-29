@@ -16,7 +16,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 {
     public class ProTONESettingsForm : SettingsForm
     {
-
+        private UI.Controls.OPMTabPage opmTabPage1;
 
         public new static DialogResult Show()
         {
@@ -101,6 +101,33 @@ namespace OPMedia.UI.ProTONE.Configuration
                 new ShoutcastConfigPage(),
                 new DeezerConfigPage(),
             };
+        }
+
+        private void InitializeComponent()
+        {
+            this.opmTabPage1 = new OPMedia.UI.Controls.OPMTabPage();
+            this.SuspendLayout();
+            // 
+            // opmTabPage1
+            // 
+            this.opmTabPage1.BackColor = System.Drawing.Color.White;
+            this.opmTabPage1.ImageIndex = 0;
+            this.opmTabPage1.Location = new System.Drawing.Point(4, 59);
+            this.opmTabPage1.Margin = new System.Windows.Forms.Padding(0);
+            this.opmTabPage1.Name = "opmTabPage1";
+            this.opmTabPage1.Padding = new System.Windows.Forms.Padding(5, 10, 5, 5);
+            this.opmTabPage1.Size = new System.Drawing.Size(586, 373);
+            this.opmTabPage1.TabIndex = 0;
+            this.opmTabPage1.Text = "Support";
+            this.opmTabPage1.Visible = false;
+            // 
+            // ProTONESettingsForm
+            // 
+            this.ClientSize = new System.Drawing.Size(597, 470);
+            this.Name = "ProTONESettingsForm";
+            this.Text = "";
+            this.ResumeLayout(false);
+
         }
     }
 }

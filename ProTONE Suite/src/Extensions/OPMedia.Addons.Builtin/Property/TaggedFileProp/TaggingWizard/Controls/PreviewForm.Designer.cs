@@ -30,18 +30,13 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.okButton = new OPMedia.UI.Controls.OPMButton();
             this.label1 = new OPMedia.UI.Controls.OPMLabel();
             this.lvPreview = new OPMedia.UI.Controls.OPMListView();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.Controls.Add(this.opmTableLayoutPanel1);
-            this.pnlContent.TabIndex = 1;
             // 
             // okButton
             // 
@@ -50,12 +45,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.okButton.Location = new System.Drawing.Point(808, 337);
+            this.okButton.Location = new System.Drawing.Point(799, 358);
             this.okButton.Name = "okButton";
             this.okButton.OverrideBackColor = System.Drawing.Color.Empty;
             this.okButton.OverrideForeColor = System.Drawing.Color.Empty;
             this.okButton.ShowDropDown = false;
-            this.okButton.Size = new System.Drawing.Size(55, 25);
+            this.okButton.Size = new System.Drawing.Size(61, 27);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "TXT_OK";
             // 
@@ -69,7 +64,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.label1.Name = "label1";
             this.label1.OverrideBackColor = System.Drawing.Color.Empty;
             this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(860, 13);
+            this.label1.Size = new System.Drawing.Size(857, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_PREVIEW_DESC";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -77,14 +72,16 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             // lvPreview
             // 
             this.lvPreview.AllowEditing = false;
+            this.lvPreview.AlternateRowColors = true;
+            this.lvPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lvPreview, 2);
             this.lvPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvPreview.Location = new System.Drawing.Point(3, 16);
+            this.lvPreview.Location = new System.Drawing.Point(3, 18);
             this.lvPreview.MultiSelect = false;
             this.lvPreview.Name = "lvPreview";
             this.lvPreview.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvPreview.ShowItemToolTips = true;
-            this.lvPreview.Size = new System.Drawing.Size(860, 315);
+            this.lvPreview.Size = new System.Drawing.Size(857, 334);
             this.lvPreview.TabIndex = 1;
             this.lvPreview.UseCompatibleStateImageBehavior = false;
             this.lvPreview.View = System.Windows.Forms.View.Details;
@@ -104,15 +101,15 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(866, 365);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(863, 388);
             this.opmTableLayoutPanel1.TabIndex = 3;
             // 
             // PreviewForm
             // 
-            this.ClientSize = new System.Drawing.Size(868, 388);
+            this.ClientSize = new System.Drawing.Size(863, 388);
+            this.Controls.Add(this.opmTableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "PreviewForm";
-            this.pnlContent.ResumeLayout(false);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

@@ -28,10 +28,6 @@ namespace OPMedia.UI.Configuration
             _primary = primary;
 
             this.TopMost = true;
-            this.ControlBox = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.IsToolWindow = true;
 
             this.Load += new EventHandler(OnLoad);
             this.Shown += new EventHandler(KeyCommandEditor_Shown);
@@ -55,12 +51,8 @@ namespace OPMedia.UI.Configuration
                 kc.ConvertToInvariantString(ShortcutMapper.KeyCommands[(int)_cmd].KeyData) :
                 kc.ConvertToInvariantString(ShortcutMapper.AltKeyCommands[(int)_cmd].KeyData);
 
-
             lblDesc.Text = Translator.Translate("TXT_EDITKEYDESC",
                 _cmd.ToString().Replace("Cmd", string.Empty), key);
-
-            this.Height = pnlContentAll.Height + CaptionButtonSize.Height + pnlContentAll.Margin.Vertical + 2;
-            this.Width = pnlContentAll.Width + pnlContentAll.Margin.Horizontal;
         }
 
         void KeyCommandEditor_Shown(object sender, EventArgs e)
