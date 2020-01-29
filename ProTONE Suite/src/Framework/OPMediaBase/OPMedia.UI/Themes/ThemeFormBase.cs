@@ -532,55 +532,66 @@ namespace OPMedia.UI.Themes
             Color clPen = ThemeManager.BorderColor;
             Color clText = ThemeManager.CaptionButtonForeColor;
 
-            float percLight = 0.4f;
             string letter = "";
-
-            int i = (int)index;
             switch (index)
             {
                 case ButtonIcons.Minimize:
-                    letter = "0";
-                    break;
-
                 case ButtonIcons.MinimizeHovered:
                     letter = "0";
-                    cl1 = ControlPaint.Light(cl1, percLight);
-                    cl2 = ControlPaint.Light(cl2, percLight);
                     break;
 
                 case ButtonIcons.Maximize:
-                    letter = "1";
-                    break;
-
                 case ButtonIcons.MaximizeHovered:
                     letter = "1";
-                    cl1 = ControlPaint.Light(cl1, percLight);
-                    cl2 = ControlPaint.Light(cl2, percLight);
                     break;
 
                 case ButtonIcons.Restore:
-                    letter = "2";
-                    break;
-
                 case ButtonIcons.RestoreHovered:
                     letter = "2";
-                    cl1 = ControlPaint.Light(cl1, percLight);
-                    cl2 = ControlPaint.Light(cl2, percLight);
                     break;
 
                 case ButtonIcons.Close:
-                    letter = "r";
-                    cl1 = ThemeManager.CaptionCloseButtonColor1;
-                    cl2 = ThemeManager.CaptionCloseButtonColor2;
-                    clText = ThemeManager.CaptionCloseButtonForeColor;
-                    break;
-
                 case ButtonIcons.CloseHovered:
                     letter = "r";
-                    cl1 = ControlPaint.Light(ThemeManager.CaptionCloseButtonColor1, percLight);
-                    cl2 = ControlPaint.Light(ThemeManager.CaptionCloseButtonColor2, percLight);
-                    clText = ThemeManager.CaptionCloseButtonForeColor;
                     break;
+            }
+
+            if (IsActive)
+            {
+                float percLight = 0.4f;
+                switch (index)
+                {
+                    case ButtonIcons.MinimizeHovered:
+                        cl1 = ControlPaint.Light(cl1, percLight);
+                        cl2 = ControlPaint.Light(cl2, percLight);
+                        break;
+
+                    case ButtonIcons.MaximizeHovered:
+                        cl1 = ControlPaint.Light(cl1, percLight);
+                        cl2 = ControlPaint.Light(cl2, percLight);
+                        break;
+
+                    case ButtonIcons.RestoreHovered:
+                        cl1 = ControlPaint.Light(cl1, percLight);
+                        cl2 = ControlPaint.Light(cl2, percLight);
+                        break;
+
+                    case ButtonIcons.Close:
+                        clText = ThemeManager.CaptionCloseButtonForeColor;
+                        break;
+
+                    case ButtonIcons.CloseHovered:
+                        cl1 = ControlPaint.Light(cl1, percLight);
+                        cl2 = ControlPaint.Light(cl2, percLight);
+                        clText = ThemeManager.CaptionCloseButtonForeColor;
+                        break;
+                }
+            }
+            else
+            {
+                float percLight = 0.9f;
+                cl1 = ControlPaint.Light(cl1, percLight);
+                cl2 = ControlPaint.Light(cl2, percLight);
             }
 
             Rectangle rcBorder = new Rectangle(rc.Location, rc.Size);
@@ -593,18 +604,12 @@ namespace OPMedia.UI.Themes
                 rcBorder.Top + (rcBorder.Height - szText.Height) / 2 - 2,
                 szText.Width, szText.Height);
 
-            using (Pen p = new Pen(ThemeManager.BorderColor, 1))
             using (Brush bt = new SolidBrush(clText))
             using (Brush br = new LinearGradientBrush(rc, cl1, cl2, 90f))
             {
                 g.FillRectangle(br, rcBorder);
                 g.DrawString(letter, CaptionButtonFont, bt, rcText);
-                g.DrawRectangle(p, rcBorder);
             }
-
-
-
-            //g.DrawImageUnscaled(_btnImgList.Images[(int)index], rc);
         }
 
         #endregion
@@ -742,7 +747,7 @@ namespace OPMedia.UI.Themes
 
             if ((FormButtons & FormButtons.Close) == FormButtons.Close)
             {
-                _btnCloseLeft = Width - CaptionButtonSize.Width - ThemeManager.FormBorderWidth;
+                _btnCloseLeft = Width - CaptionButtonSize.Width - 2 * ThemeManager.FormBorderWidth;
             }
             if ((FormButtons & FormButtons.Maximize) == FormButtons.Maximize)
             {
@@ -781,14 +786,16 @@ namespace OPMedia.UI.Themes
                 new Rectangle(_titleLeft, 0, _titleWidth, CaptionButtonSize.Height) : Rectangle.Empty;
 
             _rcMinimize = (_btnMinimizeLeft > 0) ?
-                new Rectangle(_btnMinimizeLeft, 0,
-                    CaptionButtonSize.Width, CaptionButtonSize.Height - ThemeManager.FormBorderWidth) : Rectangle.Empty;
+                new Rectangle(_btnMinimizeLeft, ThemeManager.FormBorderWidth,
+                    CaptionButtonSize.Width, CaptionButtonSize.Height - 2 * ThemeManager.FormBorderWidth) : Rectangle.Empty;
+
             _rcMaximize = (_btnMaximizeLeft > 0) ?
-                new Rectangle(_btnMaximizeLeft, 0,
-                    CaptionButtonSize.Width, CaptionButtonSize.Height - ThemeManager.FormBorderWidth) : Rectangle.Empty;
+                new Rectangle(_btnMaximizeLeft, ThemeManager.FormBorderWidth,
+                    CaptionButtonSize.Width, CaptionButtonSize.Height - 2 * ThemeManager.FormBorderWidth) : Rectangle.Empty;
+
             _rcClose = (_btnCloseLeft > 0) ?
-                new Rectangle(_btnCloseLeft, 0,
-                    CaptionButtonSize.Width, CaptionButtonSize.Height - ThemeManager.FormBorderWidth) : Rectangle.Empty;
+                new Rectangle(_btnCloseLeft, ThemeManager.FormBorderWidth,
+                    CaptionButtonSize.Width, CaptionButtonSize.Height - 2 * ThemeManager.FormBorderWidth) : Rectangle.Empty;
         }
 
         #endregion
@@ -816,19 +823,21 @@ namespace OPMedia.UI.Themes
             Point p = new Point((Int16)lparam, (Int16)((int)lparam >> 16));
             int vPadding = Math.Max(Padding.Right, Padding.Bottom);
 
-            testRect = RectangleToScreen(new Rectangle(0, 0, BorderWidth, BorderWidth));
+            int mw = ThemeManager.FormBorderWidth;
+
+            testRect = RectangleToScreen(new Rectangle(0, 0, mw, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTTOPLEFT);
 
-            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, 0, BorderWidth, BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(Width - mw, 0, mw, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTTOPRIGHT);
 
-            testRect = RectangleToScreen(new Rectangle(0, Height - BorderWidth, BorderWidth, BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(0, Height - mw, mw, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTBOTTOMLEFT);
 
-            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, Height - BorderWidth, BorderWidth, BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(Width - mw, Height - mw, mw, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTBOTTOMRIGHT);
 
@@ -838,23 +847,23 @@ namespace OPMedia.UI.Themes
                     return new IntPtr((int)HitTest.HTBOTTOMRIGHT);
             }
 
-            testRect = RectangleToScreen(new Rectangle(0, 0, Width, BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(0, 0, Width, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTTOP);
 
-            testRect = RectangleToScreen(new Rectangle(0, BorderWidth, Width, BorderWidth - BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(0, mw, Width, mw - mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTCAPTION);
 
-            testRect = RectangleToScreen(new Rectangle(0, 0, BorderWidth, Height));
+            testRect = RectangleToScreen(new Rectangle(0, 0, mw, Height));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTLEFT);
 
-            testRect = RectangleToScreen(new Rectangle(Width - BorderWidth, 0, BorderWidth, Height));
+            testRect = RectangleToScreen(new Rectangle(Width - mw, 0, mw, Height));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTRIGHT);
 
-            testRect = RectangleToScreen(new Rectangle(0, Height - BorderWidth, Width, BorderWidth));
+            testRect = RectangleToScreen(new Rectangle(0, Height - mw, Width, mw));
             if (testRect.Contains(p))
                 return new IntPtr((int)HitTest.HTBOTTOM);
 
