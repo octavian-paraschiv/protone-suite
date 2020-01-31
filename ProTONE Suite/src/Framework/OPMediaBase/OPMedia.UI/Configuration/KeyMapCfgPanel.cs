@@ -89,7 +89,7 @@ namespace OPMedia.UI.Configuration
                 lvShortcuts.Items.Clear();
 
                 List<OPMShortcut> shortcuts = new List<OPMShortcut>();
-                for (OPMShortcut cmd = ShortcutMapper.CmdFirst; cmd < ShortcutMapper.CmdLast; cmd++)
+                for (OPMShortcut cmd = ShortcutMapper.CmdFirst; cmd <= ShortcutMapper.CmdLast; cmd++)
                 {
                     shortcuts.Add(cmd);
                 }

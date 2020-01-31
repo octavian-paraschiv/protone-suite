@@ -42,7 +42,7 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(5, 45);
+            this.btnCancel.Location = new System.Drawing.Point(187, 45);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
@@ -64,14 +64,15 @@ namespace OPMedia.UI.Configuration
             this.pnlContentAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlContentAll.Controls.Add(this.lblDesc, 1, 1);
             this.pnlContentAll.Controls.Add(this.btnCancel, 2, 3);
-            this.pnlContentAll.Location = new System.Drawing.Point(6, 33);
+            this.pnlContentAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContentAll.Location = new System.Drawing.Point(4, 25);
             this.pnlContentAll.Name = "pnlContentAll";
             this.pnlContentAll.RowCount = 4;
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlContentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlContentAll.Size = new System.Drawing.Size(100, 72);
+            this.pnlContentAll.Size = new System.Drawing.Size(464, 171);
             this.pnlContentAll.TabIndex = 2;
             // 
             // lblDesc
@@ -85,16 +86,19 @@ namespace OPMedia.UI.Configuration
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblDesc.Size = new System.Drawing.Size(85, 30);
+            this.lblDesc.Size = new System.Drawing.Size(449, 30);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "qqqq\r\neeee";
             this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // KeyCommandEditor
             // 
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(472, 200);
             this.Controls.Add(this.pnlContentAll);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(50, 50);
             this.Name = "KeyCommandEditor";

@@ -38,6 +38,9 @@ namespace OPMedia.UI.Dialogs
         {
             InitializeComponent();
 
+            // TODO: fixme
+            // base.TitleBarVisible = false;
+
             this.ShowProgress = false;
             this.Shown += OnShown;
         }
