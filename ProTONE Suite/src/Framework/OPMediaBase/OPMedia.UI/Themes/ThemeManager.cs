@@ -297,7 +297,7 @@ namespace OPMedia.UI.Themes
         { get { return ThemeElement("AltRowColor", SafeColorFromString("250, 250, 250")); } }
 
         public static int FormBorderWidth
-        { get { return ThemeElement("FormBorderWidth", 1); } }
+        { get { return ThemeElement("FormBorderWidth", 3); } }
 
         public static string ResourcesFolder
         { 
@@ -393,11 +393,13 @@ namespace OPMedia.UI.Themes
         {
             if (g != null)
             {
+                // g.CompositingMode = CompositingMode.SourceOver;
+                g.CompositingQuality = CompositingQuality.AssumeLinear;
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                g.CompositingMode = CompositingMode.SourceOver;
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.TextContrast = 1;
+                
             }
         }
 

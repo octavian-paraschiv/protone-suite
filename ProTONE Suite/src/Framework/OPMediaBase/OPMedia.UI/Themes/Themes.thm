@@ -49,7 +49,7 @@
     <ThemeElement Name="DefaultButtonFocusHoverColor1" Value="210, 210, 255" />
     <ThemeElement Name="DefaultButtonFocusHoverColor2" Value="200, 200, 245" />
     <ThemeElement Name="AltRowColor" Value="245, 245, 255" />
-    <ThemeElement Name="FormBorderWidth" Value="2" />
+    <ThemeElement Name="FormBorderWidth" Value="3" />
   </Theme>
   <Theme Name="Dark" IsDefault="false">
     <ThemeElement Name="BorderColor" Value="25, 25, 25" />
@@ -100,6 +100,6 @@
     <ThemeElement Name="ListHotItemColor" Value="255, 000, 000" />
     <ThemeElement Name="ListActiveItemColor" Value="255, 209, 24" />
     <ThemeElement Name="AltRowColor" Value="90, 90, 90" />
-    <ThemeElement Name="FormBorderWidth" Value="2" />
+    <ThemeElement Name="FormBorderWidth" Value="3" />
   </Theme>
 </Themes>

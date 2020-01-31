@@ -823,7 +823,8 @@ namespace OPMedia.UI.Themes
             Point p = new Point((Int16)lparam, (Int16)((int)lparam >> 16));
             int vPadding = Math.Max(Padding.Right, Padding.Bottom);
 
-            int mw = ThemeManager.FormBorderWidth;
+            bool canResize = (_allowResize && !_isToolWindow);
+            int mw = canResize ? ThemeManager.FormBorderWidth : 0;
 
             testRect = RectangleToScreen(new Rectangle(0, 0, mw, mw));
             if (testRect.Contains(p))
