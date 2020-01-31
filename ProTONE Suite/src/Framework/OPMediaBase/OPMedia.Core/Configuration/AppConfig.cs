@@ -48,21 +48,14 @@ namespace OPMedia.Core.Configuration
 
         private ProxySettings()
         {
-            EventDispatch.RegisterHandler(this);
-            InitDefaults();
+            PerformTranslation();
         }
 
-        [EventSink(EventNames.PerformTranslation)]
-        public void InitDefaults()
+        public void PerformTranslation()
         {
             ProxyAddress = Translator.Translate("TXT_DEFINE_PROXYSERVERADDRESS");
             ProxyUser = Translator.Translate("TXT_DEFINE_PROXYSERVERUSERNAME");
             ProxyPassword = string.Empty;
-        }
-
-        ~ProxySettings()
-        {
-            EventDispatch.UnregisterHandler(this);
         }
     }
 

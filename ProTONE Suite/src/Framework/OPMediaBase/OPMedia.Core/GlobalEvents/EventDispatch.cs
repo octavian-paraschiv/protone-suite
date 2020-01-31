@@ -8,30 +8,60 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Collections.Specialized;
 using OPMedia.Core.Logging;
+using System.Threading;
 
 namespace OPMedia.Core
 {
     public static class EventDispatch
     {
-        private static Dictionary<string, Dictionary<object, MethodInfo>> _invocationMap =
-            new Dictionary<string, Dictionary<object, MethodInfo>>();
-
-        public const string AllEvents = "*";
+        private static Dictionary<string, Dictionary<object, EventSinkMethodInfo>> _invocationMap =
+            new Dictionary<string, Dictionary<object, EventSinkMethodInfo>>();
 
         static EventDispatch()
         {
-            // Add the entry for "all" events
-            _invocationMap.Add(AllEvents, new Dictionary<object, MethodInfo>());
         }
 
         public static void RegisterAsEventSink(this Control ctl)
         {
             if (ctl != null)
             {
-                RegisterHandler(ctl);
+                ctl.HandleCreated -= RegisterAsEventSink;
+                ctl.HandleCreated += RegisterAsEventSink;
 
-                ctl.HandleDestroyed -= (s, e) => UnregisterHandler(ctl);
-                ctl.HandleDestroyed += (s, e) => UnregisterHandler(ctl);
+                ctl.HandleDestroyed -= UnregisterAsEventSink;
+                ctl.HandleDestroyed += UnregisterAsEventSink;
+            }
+        }
+
+        private static void RegisterAsEventSink(object s, EventArgs e)
+        {
+            try
+            {
+                Control ctl = s as Control;
+                if (ctl != null)
+                {
+                    RegisterHandler(ctl);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
+
+        private static void UnregisterAsEventSink(object s, EventArgs e)
+        {
+            try
+            {
+                Control ctl = s as Control;
+                if (ctl != null)
+                {
+                    UnregisterHandler(ctl);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
@@ -56,16 +86,15 @@ namespace OPMedia.Core
                         {
                             foreach (EventSinkAttribute attr in attrList)
                             {
-                                List<string> eventNames = attr.EventNames;
+                                string eventName = attr.EventName;
 
-                                if (eventNames == null || eventNames.Count < 1)
+                                EventSinkMethodInfo esmi = new EventSinkMethodInfo
                                 {
-                                    SafeAddToInvocationMap(string.Empty, handler, info);
-                                }
-                                else foreach(string eventName in eventNames)
-                                {
-                                    SafeAddToInvocationMap(eventName, handler, info);
-                                }
+                                    ExecutionType = attr.ExecutionType,
+                                    MethodInfo = info,
+                                };
+
+                                SafeAddToInvocationMap(eventName, handler, esmi);
                             }
                         }
                     }
@@ -75,18 +104,16 @@ namespace OPMedia.Core
             }
         }
 
-        private static void SafeAddToInvocationMap(string eventName, object handler, MethodInfo info)
+        private static void SafeAddToInvocationMap(string eventName, object handler, EventSinkMethodInfo info)
         {
             lock (_invocationMap)
             {
-                              
-
                 if (!_invocationMap.ContainsKey(eventName))
                 {
-                    _invocationMap.Add(eventName, new Dictionary<object, MethodInfo>());
+                    _invocationMap.Add(eventName, new Dictionary<object, EventSinkMethodInfo>());
                 }
 
-                Dictionary<object, MethodInfo> table = _invocationMap[eventName];
+                Dictionary<object, EventSinkMethodInfo> table = _invocationMap[eventName];
                 if (table != null)
                 {
                     if (table.ContainsKey(handler))
@@ -107,7 +134,7 @@ namespace OPMedia.Core
             {
                 lock (_invocationMap)
                 {
-                    foreach (Dictionary<object, MethodInfo> table in _invocationMap.Values)
+                    foreach (Dictionary<object, EventSinkMethodInfo> table in _invocationMap.Values)
                     {
                         if (table.ContainsKey(handler))
                         {
@@ -120,15 +147,15 @@ namespace OPMedia.Core
             GC.Collect();
         }
 
-        private static Dictionary<object, MethodInfo> SafeCopy(Dictionary<object, MethodInfo> original)
+        private static Dictionary<object, EventSinkMethodInfo> SafeCopy(Dictionary<object, EventSinkMethodInfo> original)
         {
-            Dictionary<object, MethodInfo> retVal = null;
+            Dictionary<object, EventSinkMethodInfo> retVal = null;
 
             if (original != null)
             {
-                retVal = new Dictionary<object, MethodInfo>();
+                retVal = new Dictionary<object, EventSinkMethodInfo>();
 
-                foreach (KeyValuePair<object, MethodInfo> kvp in original)
+                foreach (KeyValuePair<object, EventSinkMethodInfo> kvp in original)
                 {
                     if (retVal.ContainsKey(kvp.Key))
                     {
@@ -146,8 +173,7 @@ namespace OPMedia.Core
 
         public static void DispatchEvent(string eventName, params object[] eventData)
         {
-            Dictionary<object, MethodInfo> tableEvent = null;
-            Dictionary<object, MethodInfo> tableAll = null;
+            Dictionary<object, EventSinkMethodInfo> tableEvent = null;
 
             bool handlerNotFound = true; ;
 
@@ -155,49 +181,49 @@ namespace OPMedia.Core
             {
                 if (_invocationMap.ContainsKey(eventName))
                 {
-                    //try
-                    //{
-                        tableEvent = SafeCopy(_invocationMap[eventName]);
-                        tableAll = SafeCopy(_invocationMap[AllEvents]);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //}
-
+                    tableEvent = SafeCopy(_invocationMap[eventName]);
                     handlerNotFound = false;
                 }
             }
 
             if (tableEvent != null)
             {
-                foreach (KeyValuePair<object, MethodInfo> kvp in tableEvent)
+                foreach (KeyValuePair<object, EventSinkMethodInfo> kvp in tableEvent)
                 {
                     try
                     {
-                        MainThread.Post(delegate(object x)
+                        object handler = kvp.Key;
+                        EventSinkMethodInfo esmi = kvp.Value;
+                        MethodInfo func = esmi.MethodInfo;
+
+                        switch (esmi.ExecutionType)
                         {
-                            kvp.Value.Invoke(kvp.Key, eventData);
+                            case ExecutionType.CallerThread:
+                                func.Invoke(handler, eventData);
+                                break;
 
-                        });
-                    }
-                    catch (TargetInvocationException ex)
-                    {
-                        Logger.LogException(ex.InnerException);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogException(ex);
-                    }
-                }
-            }
+                            case ExecutionType.PoolThread:
+                                ThreadPool.QueueUserWorkItem((c) =>
+                                {
+                                    func.Invoke(handler, eventData);
+                                });
+                                break;
 
-            if (tableAll != null)
-            {
-                foreach (KeyValuePair<object, MethodInfo> kvp in tableAll)
-                {
-                    try
-                    {
-                        kvp.Value.Invoke(kvp.Key, eventData);
+                            case ExecutionType.MainThreadSend:
+                                MainThread.Send(delegate (object x)
+                                {
+                                    func.Invoke(kvp.Key, eventData);
+                                });
+                                break;
+
+                            case ExecutionType.MainThreadPost:
+                            default:
+                                MainThread.Post(delegate (object x)
+                                {
+                                    func.Invoke(kvp.Key, eventData);
+                                });
+                                break;
+                        }
                     }
                     catch (TargetInvocationException ex)
                     {
@@ -247,7 +273,7 @@ namespace OPMedia.Core
             Debug.WriteLine("EventDispatch: # of registered events: {0}", _invocationMap.Count);
 
             int objectCount = 0;
-            foreach (KeyValuePair<string, Dictionary<object, MethodInfo>> kvp in _invocationMap)
+            foreach (KeyValuePair<string, Dictionary<object, EventSinkMethodInfo>> kvp in _invocationMap)
             {
                 Debug.WriteLine("    EventDispatch: Event: {0} has {1} registered objects: ", 
                     kvp.Key, kvp.Value.Count);

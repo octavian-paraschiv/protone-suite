@@ -16,8 +16,7 @@ namespace OPMedia.Core
 
         public const string SetMainStatusBar =      "SetMainStatusBar";
 
-        public const string NewVersionAvailable =   "NewVersionAvailable";
-        public const string CheckForUpdates =       "CheckForUpdates";
+        public const string UpdateCheckCompleted  = "UpdateCheckCompleted";
 
         public const string RefreshItems =          "RefreshItems";
 

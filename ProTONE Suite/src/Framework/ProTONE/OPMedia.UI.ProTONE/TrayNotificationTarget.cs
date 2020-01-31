@@ -13,7 +13,7 @@ using OPMedia.Core.Logging;
 
 namespace OPMedia.UI.ProTONE
 {
-    public class TrayNotificationTarget
+    public class TrayNotificationTarget : SelfRegisteredEventSinkObject
     {
         private NotifyIcon _notifyIcon = null;
         private bool _tipVisible = false;
@@ -21,15 +21,9 @@ namespace OPMedia.UI.ProTONE
 
         private TrayNotificationBox _box = new TrayNotificationBox();
 
-        ~TrayNotificationTarget()
-        {
-            EventDispatch.UnregisterHandler(this);
-        }
-
-        public TrayNotificationTarget(NotifyIcon notifyIcon, Form hostForm)
+        public TrayNotificationTarget(NotifyIcon notifyIcon, Form hostForm) : base()
         {
             _notifyIcon = notifyIcon;
-            EventDispatch.RegisterHandler(this);
         }
 
         private Image GetTrayToolTipIcon(int icon)

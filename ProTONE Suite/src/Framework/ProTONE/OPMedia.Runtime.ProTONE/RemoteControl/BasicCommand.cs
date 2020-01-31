@@ -14,7 +14,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         void EnqueueCommand(BasicCommand cmd);
     }
 
-    public class BasicCommandTarget
+    public class BasicCommandTarget : SelfRegisteredEventSinkObject
     {
         ICommandTarget _target = null;
 
@@ -23,10 +23,9 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             EventDispatch.UnregisterHandler(this);
         }
 
-        public BasicCommandTarget(ICommandTarget target)
+        public BasicCommandTarget(ICommandTarget target) : base()
         {
             _target = target;
-            EventDispatch.RegisterHandler(this);
         }
 
         [EventSink(BasicCommand.EventName)]

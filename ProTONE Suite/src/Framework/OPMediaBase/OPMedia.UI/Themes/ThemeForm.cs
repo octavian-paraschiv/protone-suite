@@ -112,11 +112,12 @@ namespace OPMedia.UI.Themes
             this.KeyDown += new KeyEventHandler(ThemeForm_KeyDown);
             this.Load += new EventHandler(ThemeForm_Load);
             this.HandleCreated += new EventHandler(ThemeForm_HandleCreated);
-            this.FormClosed += new FormClosedEventHandler(ThemeForm_FormClosed);
             this.Resize += new EventHandler(ThemeForm_Resize);
             this.Shown += new EventHandler(ThemeForm_Shown);
 
             this.ShowInTaskbar = false;
+
+            this.RegisterAsEventSink();
         }
 
         protected virtual bool AutoCenterEnabled
@@ -271,6 +272,11 @@ namespace OPMedia.UI.Themes
             }
             else
             {
+                if (key == (Keys.Control | Keys.F12))
+                {
+                    int ss = 0;
+                }
+
                 OPMShortcut cmd = ShortcutMapper.MapCommand(key);
                 if (IsShortcutAllowed(cmd))
                 {
@@ -319,12 +325,6 @@ namespace OPMedia.UI.Themes
         void ThemeForm_HandleCreated(object sender, EventArgs e)
         {
             ApplyIcons();
-            EventDispatch.RegisterHandler(this);
-        }
-
-        void ThemeForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            EventDispatch.UnregisterHandler(this);
         }
 
         void ThemeForm_Load(object sender, EventArgs e)
@@ -370,8 +370,6 @@ namespace OPMedia.UI.Themes
 
     public class MainFrame : ThemeFrame
     {
-        private ApplicationUpdateHelper _updateHelper;
-
         public MainFrame(string title) : base(title)
         {
             base.MinimizeBox = true;
@@ -402,8 +400,6 @@ namespace OPMedia.UI.Themes
                 this.Shown += new EventHandler(OnShown);
                 this.HandleDestroyed += new EventHandler(OnHandleDestroyed);
             }
-
-            _updateHelper = new ApplicationUpdateHelper();
         }
 
         void OnMove(object sender, EventArgs e)
@@ -475,6 +471,9 @@ namespace OPMedia.UI.Themes
                 this.Resize += new EventHandler(OnResize);
                 this.Move += new EventHandler(OnMove);
             }
+
+            if (AppConfig.AllowAutomaticUpdates)
+                ApplicationUpdateHelper.Instance.CheckUpdates(false);
         }
 
         protected void ConcealWindow()

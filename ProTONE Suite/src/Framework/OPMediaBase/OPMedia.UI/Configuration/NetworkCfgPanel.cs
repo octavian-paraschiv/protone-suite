@@ -9,6 +9,8 @@ using System.Net;
 using OPMedia.UI.Themes;
 using OPMedia.Core.Configuration;
 using OPMedia.UI.Properties;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core;
 
 namespace OPMedia.UI.Configuration
 {
@@ -49,6 +51,11 @@ namespace OPMedia.UI.Configuration
             
         }
 
+        [EventSink(EventNames.PerformTranslation)]
+        public void PerformTranslation()
+        {
+            ctlProxy.ProxySettings.PerformTranslation();
+        }
         
     }
 }
