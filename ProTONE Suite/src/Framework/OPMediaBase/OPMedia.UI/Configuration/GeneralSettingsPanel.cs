@@ -21,6 +21,8 @@ using OPMedia.Core.Utilities;
 using OPMedia.UI.Generic;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.UI.Dialogs;
+using System.Threading.Tasks;
+using OPMedia.UI.ApplicationUpdate;
 
 namespace OPMedia.UI.Configuration
 {
@@ -93,6 +95,13 @@ namespace OPMedia.UI.Configuration
 
             chkAllowAutoUpdates.Visible = allowGUISetup;
             btnCheckUpdates.Visible = allowGUISetup;
+
+            this.Load += GeneralSettingsPanel_Load;
+        }
+
+        private void GeneralSettingsPanel_Load(object sender, EventArgs e)
+        {
+            btnCheckUpdates.Enabled = !ApplicationUpdateHelper.Instance.IsBusy;
         }
 
         [EventSink(EventNames.PerformTranslation)]
@@ -150,17 +159,18 @@ namespace OPMedia.UI.Configuration
             cmbLanguages.Focus();
         }
 
-    
         private void btnCheckUpdates_Click(object sender, EventArgs e)
         {
-            // EventDispatch.DispatchEvent(EventNames.CheckForUpdates);
-
-            var waitDialog = new GenericWaitDialog();
-            waitDialog.ShowDialog("Please wait while doing something you do not know.");
+            btnCheckUpdates.Enabled = false;
+            ApplicationUpdateHelper.Instance.CheckUpdates(true);
         }
 
-       
+        [EventSink(EventNames.UpdateCheckCompleted)]
+        public void UpdateCheckCompleted(BuildInfo build, string msg, bool onDemand)
+        {
+            btnCheckUpdates.Enabled = true;
+            btnCheckUpdates.Select();
+            btnCheckUpdates.Focus();
+        }
     }
-
-    
 }

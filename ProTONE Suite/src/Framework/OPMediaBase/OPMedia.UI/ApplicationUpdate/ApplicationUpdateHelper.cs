@@ -21,29 +21,50 @@ using Newtonsoft.Json;
 
 namespace OPMedia.UI.ApplicationUpdate
 {
-    public class ApplicationUpdateHelper
+    public class ApplicationUpdateHelper : SelfRegisteredEventSinkObject
     {
+        static ApplicationUpdateHelper _instance = null;
+
         BackgroundWorker _bwDetect = null;
 
-        [EventSink(EventNames.CheckForUpdates)]
-        public void CheckUpdates()
+        public static ApplicationUpdateHelper Instance
         {
-            _bwDetect.RunWorkerAsync(true);
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (typeof(ApplicationUpdateHelper))
+                    {
+                        if (_instance == null)
+                            _instance = new ApplicationUpdateHelper();
+                    }
+                }
+                return _instance;
+            }
         }
 
-        public ApplicationUpdateHelper()
+        public bool IsBusy
         {
-            EventDispatch.RegisterHandler(this);
+            get
+            {
+                return _bwDetect.IsBusy;
+            }
+        }
 
+        public void CheckUpdates(bool onDemand)
+        {
+            if (IsBusy)
+                return;
+
+            _bwDetect.RunWorkerAsync(onDemand);
+        }
+
+        private ApplicationUpdateHelper() : base()
+        {
             _bwDetect = new BackgroundWorker();
             _bwDetect.WorkerReportsProgress = _bwDetect.WorkerSupportsCancellation = false;
             _bwDetect.DoWork += new DoWorkEventHandler(OnBackgroundDetect);
             _bwDetect.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnBackgroundDetectComplete);
-
-            if (AppConfig.AllowAutomaticUpdates)
-            {
-                _bwDetect.RunWorkerAsync(false);
-            }
         }
 
         void OnBackgroundDetectComplete(object sender, RunWorkerCompletedEventArgs e)
@@ -57,6 +78,11 @@ namespace OPMedia.UI.ApplicationUpdate
         void OnBackgroundDetect(object sender, DoWorkEventArgs e)
         {
             bool detectOnDemand = (bool)e.Argument;
+            BuildInfo build = null;
+            string msg = null;
+
+            if (detectOnDemand)
+                ShowWaitDialog("Please wait while checking for updates ...");
 
             try
             {
@@ -79,7 +105,7 @@ namespace OPMedia.UI.ApplicationUpdate
                             Logger.LogInfo("Current version: {0}, available on server: {1}. Update is required.",
                                 current, builds[0].Version);
 
-                            EventDispatch.DispatchEvent(EventNames.NewVersionAvailable, builds[0]);
+                            build = builds[0];
                         }
                         else
                         {
@@ -87,7 +113,7 @@ namespace OPMedia.UI.ApplicationUpdate
                              current, builds[0].Version);
 
                             if (detectOnDemand)
-                                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, "TXT_NOUPDATEREQUIRED", "TXT_APP_NAME", MessageBoxIcon.Information);
+                                msg = "TXT_NOUPDATEREQUIRED";
                         }
                     }
                     else
@@ -96,50 +122,105 @@ namespace OPMedia.UI.ApplicationUpdate
                         Logger.LogInfo("Current version: {0} cannot be automatically updated.", current);
 
                         if (detectOnDemand)
-                        {
-                            string msg = Translator.Translate("TXT_NOUPDATEPOSSIBLE", Constants.SuiteName, AppConfig.UriBase);
-                            EventDispatch.DispatchEvent(EventNames.ShowMessageBox, msg, "TXT_APP_NAME", MessageBoxIcon.Information);
-                        }
+                            msg = Translator.Translate("TXT_NOUPDATEPOSSIBLE", Constants.SuiteName, AppConfig.UriBase);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
+            finally
+            {
+                if (detectOnDemand)
+                {
+                    CloseWaitDialog();
+                    _waitDialogClosed.WaitOne();
+                }
+
+                EventDispatch.DispatchEvent(EventNames.UpdateCheckCompleted, build, msg, detectOnDemand);
+            }
         }
-    
 
-        [EventSink(EventNames.NewVersionAvailable)]
-        public void ProcessNewVersionAvailable(BuildInfo build)
+
+        [EventSink(EventNames.UpdateCheckCompleted)]
+        public void ProcessNewVersionAvailable(BuildInfo build, string msg, bool onDemand)
         {
-            DialogResult dlgRes = DialogResult.None;
-            bool addCheck = false;
-
-            dlgRes = MessageDisplay.QueryEx(
-                Translator.Translate("TXT_NOTIFYUPDATE", build.Version),
-                Translator.Translate("TXT_APP_NAME"),
-                Translator.Translate("TXT_DISABLEAUTODOWNLOADS"), 
-                ref addCheck,
-                MessageBoxIcon.Question);
-
-            if (addCheck)
+            if (build != null)
             {
-                AppConfig.AllowAutomaticUpdates = false;
-            }
+                DialogResult dlgRes = DialogResult.None;
 
-            if (dlgRes == DialogResult.Yes)
+                if (onDemand)
+                {
+                    dlgRes = MessageDisplay.Query(
+                        Translator.Translate("TXT_NOTIFYUPDATE", build.Version),
+                        Translator.Translate("TXT_APP_NAME"),
+                        MessageBoxIcon.Question);
+                }
+                else
+                {
+                    bool addCheck = false;
+
+                    dlgRes = MessageDisplay.QueryEx(
+                        Translator.Translate("TXT_NOTIFYUPDATE", build.Version),
+                        Translator.Translate("TXT_APP_NAME"),
+                        Translator.Translate("TXT_DISABLEAUTODOWNLOADS"),
+                        ref addCheck,
+                        MessageBoxIcon.Question);
+
+                    AppConfig.AllowAutomaticUpdates = !addCheck;
+                }
+
+                if (dlgRes == DialogResult.Yes)
+                {
+                    Logger.LogInfo("Started update process to version: {0} from url: {1}", build.Version, build.URL);
+                    new UpdateWaitForm(build.URL).ShowDialog("TXT_WAITDOWNLOADUPDATE");
+                }
+            }
+            else if (msg != null)
             {
-                Logger.LogInfo("Started update process to version: {0} from url: {1}", build.Version, build.URL);
-                new UpdateWaitForm(build.URL).ShowDialog("TXT_WAITDOWNLOADUPDATE");
+                EventDispatch.DispatchEvent(EventNames.ShowMessageBox, msg, "TXT_APP_NAME", MessageBoxIcon.Information);
             }
-
-            
         }
 
         ~ApplicationUpdateHelper()
         {
             EventDispatch.UnregisterHandler(this);
+        }
+
+
+        GenericWaitDialog _waitDialog = null;
+        ManualResetEvent _waitDialogClosed = new ManualResetEvent(false);
+
+        private delegate void ShowWaitDialogDG(string message);
+        protected void ShowWaitDialog(string message)
+        {
+            MainThread.Post((d) =>
+            {
+                CloseWaitDialog();
+
+                _waitDialogClosed.Reset();
+                _waitDialog = new GenericWaitDialog();
+
+                _waitDialog.FormClosed -= OnWaitDialogClosed;
+                _waitDialog.FormClosed += OnWaitDialogClosed;
+
+                _waitDialog.ShowDialog(message);
+            });
+        }
+
+        private void OnWaitDialogClosed(object sender, FormClosedEventArgs e)
+        {
+            _waitDialogClosed.Set();
+        }
+
+        protected void CloseWaitDialog()
+        {
+            MainThread.Post((d) =>
+            {
+                if (_waitDialog != null)
+                    _waitDialog.Close();
+            });
         }
     }
 }
