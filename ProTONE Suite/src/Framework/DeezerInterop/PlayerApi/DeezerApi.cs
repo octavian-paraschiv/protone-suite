@@ -39,9 +39,13 @@ namespace OPMedia.DeezerInterop.PlayerApi
         }
     }
 
-    public partial class DeezerApi
+    internal partial class DeezerApi32
     {
-        const string DLL_NAME_X86 = "libdeezer.x86.dll";
-        const string DLL_NAME_X64 = "libdeezer.x64.dll";
+        const string DLL_NAME = "libdeezer.x86.dll";
+    }
+
+    internal partial class DeezerApi64
+    {
+        const string DLL_NAME = "libdeezer.x64.dll";
     }
 }

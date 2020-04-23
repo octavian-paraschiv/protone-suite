@@ -154,14 +154,4 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
         #endregion
     }
-
-
-    public partial class DeezerApi
-    {
-        /*
-        dz_track_metadata_t dz_track_metadata_get_type(IntPtr self);
-        IntPtr  dz_track_metadata_get_format_header(IntPtr self);
-        UInt32 dz_track_metadata_get_duration(IntPtr self);
-         */ 
-    }
 }
