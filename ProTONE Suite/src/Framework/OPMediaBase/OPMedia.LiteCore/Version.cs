@@ -7,7 +7,7 @@ namespace OPMedia.Core
 {
     public class SuiteVersion
     {
-        public const string Version = "3.3.7";
+        public const string Version = "3.3.8";
         public const bool IsRelease = false;
     }
 }
