@@ -45,7 +45,7 @@ EnableDirDoesntExistWarning=true
 LanguageDetectionMethod=locale
 
 ; Windows Vista SP2 - miniumum OS required for ProTONE Suite
-MinVersion=0,5.01.2600sp3
+MinVersion=0,6.0.6001sp2
 
 PrivilegesRequired=admin
 SetupIconFile=Installer.ico
