@@ -1,6 +1,6 @@
 version: 3.4.{build}
 skip_tags: true
-image: Visual Studio 2019
+image: Visual Studio 2017
 
 environment:
     git_access_token:
