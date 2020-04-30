@@ -303,6 +303,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             return true;
         }
 
+        protected override bool IsVideoMediaAvailable()
+        {
+
+            return IsVideo;
+        }
+
         protected override FilterState GetFilterState()
         {
             FilterState fs = FilterState.Stopped;

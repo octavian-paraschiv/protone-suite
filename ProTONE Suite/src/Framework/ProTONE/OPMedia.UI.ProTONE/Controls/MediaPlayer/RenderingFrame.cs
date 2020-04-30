@@ -140,12 +140,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     }
 
                     this.WindowState = FormWindowState.Maximized;
+                    this.TitleBarVisible = false;
                 }
                 else
                 {
                     this.WindowState = FormWindowState.Normal;
                     this.Location = ProTONEConfig.DetachedWindowLocation;
                     this.Size = ProTONEConfig.DetachedWindowSize;
+                    this.TitleBarVisible = true;
                 }
             }
             finally
