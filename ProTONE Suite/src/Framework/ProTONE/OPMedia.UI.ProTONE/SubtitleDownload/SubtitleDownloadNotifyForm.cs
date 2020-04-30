@@ -48,6 +48,9 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
             SetTitle(Translator.Translate("TXT_SUBTITLEDOWNLOADNOTIFY", 0, Path.GetFileName(_movieFilePath)));
 
+            this.Width = Math.Min(1024, SystemInformation.PrimaryMonitorSize.Width - 200);
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             this.Load += new EventHandler(SubtitleDownloadNotifyForm_Load);
             lvSubtitles.Resize += new EventHandler(lvSubtitles_Resize);
         }
@@ -86,40 +89,36 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         string[] data = new string[] 
                         { 
                             string.IsNullOrEmpty(si.SubFileName) ? none : si.SubFileName,
-                            string.IsNullOrEmpty(sd.ServerUrl) ? none : sd.ServerUrl, 
+                            string.IsNullOrEmpty(sd.DisplayName) ? none : sd.DisplayName, 
                             sd.Priority.ToString(), 
                             string.IsNullOrEmpty(si.LanguageName) ? none : si.LanguageName, 
                             string.IsNullOrEmpty(si.SubSize) ? none : si.SubSize
                         };
 
                         ListViewItem item = new ListViewItem(data);
+
                         SubtitleDownloadInfo sdi = new SubtitleDownloadInfo();
                         sdi.sd = sd;
                         sdi.si = si;
                         item.Tag = sdi;
                         lvSubtitles.Items.Add(item);
 
-                        //item.UseItemStyleForSubItems = true;
+                        item.Font = ThemeManager.SmallestFont;
+                        item.UseItemStyleForSubItems = true;
 
                         if (SubtitleLanguage.IsPrefferedLanguage(si.LanguageName))
                         {
-                            item.ForeColor = ThemeManager.HighlightColor;
-                            foreach (ListViewItem.ListViewSubItem lvsi in item.SubItems)
-                            {
-                                lvsi.ForeColor = ThemeManager.HighlightColor;
-                            }
+                            item.UseItemStyleForSubItems = false;
+                            item.ForeColor = ThemeManager.ListActiveItemColor;
                         }
 
                         if (_highestPrio == sd.Priority)
                         {
+                            item.UseItemStyleForSubItems = false;
                             item.Font = ThemeManager.SmallFont;
-                            foreach (ListViewItem.ListViewSubItem lvsi in item.SubItems)
-                            {
+                            foreach(ListViewItem.ListViewSubItem lvsi in item.SubItems)
                                 lvsi.Font = ThemeManager.SmallFont;
-                            }
                         }
-
-                        
                     }
                 }
             }

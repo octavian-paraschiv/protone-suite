@@ -22,6 +22,7 @@ using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.FfdShowApi;
 using System.Drawing;
 using OPMedia.Runtime.ProTONE.Configuration;
+using System.Threading.Tasks;
 
 namespace OPMedia.UI.ProTONE.SubtitleDownload
 {
@@ -46,7 +47,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
         {
             try
             {
-                if (SubtitleDownloadProcessor.TestForExistingSubtitle(strFile))
+                if (TestForExistingSubtitle(strFile))
                 {
                     if (!askToOverwrite || MessageDisplay.Query(Translator.Translate("TXT_OVERWRITE_SUBTITLE"),
                         Translator.Translate("TXT_CONFIRM_OVERWRITE_SUBTITLE"), MessageBoxIcon.Information) != DialogResult.Yes)
@@ -55,12 +56,59 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                     }
                 }
 
-                if (SubtitleDownloadProcessor.CanPerformSubtitleDownload(strFile, duration))
+                if (CanPerformSubtitleDownload(strFile, duration))
                 {
-                    // We should display a subtitle but we don't have one.
-                    // Try to grab one from internet.
-                    ThreadPool.QueueUserWorkItem(
-                        new WaitCallback(SubtitleDownloadProcessor.AttemptDownload), strFile);
+                    Dictionary<SubtitleDownloader, List<SubtitleInfo>> subs = null;
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        subs = GetSubtitles(strFile);
+
+                    }).ContinueWith(_ =>
+                    {
+                        if (subs.Count > 0)
+                        {
+                            SubtitleDownloadNotifyForm dlg = new SubtitleDownloadNotifyForm(strFile, subs);
+                            dlg.SubtitleDownloadNotify += new SubtitleDownloadNotifyHandler(dlg_SubtitleDownloadNotify);
+                            dlg.Show();
+
+                            dlg.FormClosed += (ss, ee) =>
+                            {
+                                foreach (SubtitleDownloader sd in subs.Keys)
+                                {
+                                    if (sd != null)
+                                    {
+                                        sd.Dispose();
+                                    }
+                                }
+
+                                // Perform cleanup
+                                lock (__filesInProgress)
+                                {
+                                    __filesInProgress.Remove(strFile.ToLowerInvariant());
+
+                                    // This is for enforcing playlist refresh
+                                    EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                                }
+                            };
+                        }
+                        else
+                        {
+                            // No subtitles found, give message and exit
+                            FireNotify(Translator.Translate("TXT_NO_SUBS_FOUND"),
+                                Translator.Translate("TXT_CAUTION"), MessageBoxIcon.Warning);
+
+                            // Perform cleanup
+                            lock (__filesInProgress)
+                            {
+                                __filesInProgress.Remove(strFile.ToLowerInvariant());
+
+                                // This is for enforcing playlist refresh
+                                EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                            }
+                        }
+
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
                 }
             }
             finally
@@ -171,7 +219,74 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             }
         }
 
-        public static void AttemptDownload(object state)
+        private static Dictionary<SubtitleDownloader, List<SubtitleInfo>> GetSubtitles(string movieFilePath)
+        {
+            Dictionary<SubtitleDownloader, List<SubtitleInfo>> subs =
+                new Dictionary<SubtitleDownloader, List<SubtitleInfo>>();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(movieFilePath))
+                {
+                    SetCurrentSubtitle(movieFilePath, string.Empty);
+
+                    lock (__filesInProgress)
+                    {
+                        __filesInProgress.Add(movieFilePath.ToLowerInvariant());
+
+                        // This is for enforcing playlist refresh
+                        EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                    }
+
+                    Logger.LogTrace("A subtitle was not found for this movie. Attempting to find one ...");
+
+                    string[] subtitleDownloadURIs = StringUtils.ToStringArray(ProTONEConfig.SubtitleDownloadURIs, '\\');
+                    if (subtitleDownloadURIs != null)
+                    {
+                        int prio = 1;
+
+                        foreach (string subtitleDownloadURI in subtitleDownloadURIs)
+                        {
+                            SubtitleDownloader sd = null;
+                            List<SubtitleInfo> foundSubtitles = null;
+
+                            try
+                            {
+                                sd = SubtitleDownloader.FromDownloadURI(subtitleDownloadURI);
+                                if (sd.IsActive)
+                                {
+                                    sd.Priority = prio++;
+                                    foundSubtitles = sd.GetSubtitles(movieFilePath);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.LogException(ex);
+                            }
+                            finally
+                            {
+                                if (sd != null)
+                                {
+                                    if (foundSubtitles != null && foundSubtitles.Count > 0)
+                                    {
+                                        subs.Add(sd, foundSubtitles);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return subs;
+        }
+
+        /*
+        private static void AttemptDownload(string movieFilePath)
         {
             try
             {
@@ -179,8 +294,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                     new Dictionary<SubtitleDownloader, List<SubtitleInfo>>();
 
                 int totalSubtitlesFound = 0;
-
-                string movieFilePath = state as string;
 
                 if (!string.IsNullOrEmpty(movieFilePath))
                 {
@@ -285,7 +398,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 // This is for enforcing playlist refresh
                 EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
             }
-        }
+        }*/
 
         static void dlg_SubtitleDownloadNotify(string movieFile, string subtitleFile)
         {

@@ -32,6 +32,25 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 
         public bool IsActive { get; set; }
 
+        public string DisplayName
+        {
+            get
+            {
+                string dn = null;
+                try
+                {
+                    Uri uri = new Uri(_serverUrl);
+                    dn = StringUtils.ToStringArray(uri.Host, '.')[1];
+                }
+                catch
+                {
+                    dn = null;
+                }
+                
+                return $"[{_serverType}] {dn}";
+            }
+        }
+
         SubtitleServerSession _session = null;
 
         public static SubtitleDownloader FromDownloadURI(string downloadURI)

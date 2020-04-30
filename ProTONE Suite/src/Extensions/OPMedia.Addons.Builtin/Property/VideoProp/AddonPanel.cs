@@ -115,33 +115,7 @@ namespace OPMedia.Addons.Builtin.VideoProp
             VideoFileInfo vi = pgProperties.SelectedObject as VideoFileInfo;
             if (vi != null)
             {
-                TryFindSubtitle(vi.Path, (int)vi.Duration.GetValueOrDefault().TotalSeconds);
-            }
-        }
-
-        private void TryFindSubtitle(string strFile, int duration)
-        {
-            // If strFile indicates only a disk root, the movie is actually a DVD
-            // We don't want to look up on Internet for DVD subtitles. Usually DVD's 
-            // come with their builtin subtitles.
-            if (PathUtils.IsRootPath(strFile))
-                return;
-
-            if (SubtitleDownloadProcessor.TestForExistingSubtitle(strFile))
-            {
-                if (MessageDisplay.Query(Translator.Translate("TXT_OVERWRITE_SUBTITLE"),
-                    Translator.Translate("TXT_QUESTION"), MessageBoxIcon.Information) != DialogResult.Yes)
-                {
-                    return;
-                }
-            }
-
-            if (SubtitleDownloadProcessor.CanPerformSubtitleDownload(strFile, duration))
-            {
-                // We should display a subtitle but we don't have one.
-                // Try to grab one from internet.
-                ThreadPool.QueueUserWorkItem(
-                    new WaitCallback(SubtitleDownloadProcessor.AttemptDownload), strFile);
+                SubtitleDownloadProcessor.TryFindSubtitle(vi.Path, (int)vi.Duration.GetValueOrDefault().TotalSeconds, true);
             }
         }
     }

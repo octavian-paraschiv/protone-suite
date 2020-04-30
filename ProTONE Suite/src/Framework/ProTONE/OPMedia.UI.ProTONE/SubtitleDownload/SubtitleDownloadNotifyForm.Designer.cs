@@ -62,7 +62,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.lvSubtitles.MultiSelect = false;
             this.lvSubtitles.Name = "lvSubtitles";
             this.lvSubtitles.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvSubtitles.Size = new System.Drawing.Size(810, 330);
+            this.lvSubtitles.Size = new System.Drawing.Size(936, 454);
             this.lvSubtitles.TabIndex = 0;
             this.lvSubtitles.UseCompatibleStateImageBehavior = false;
             this.lvSubtitles.View = System.Windows.Forms.View.Details;
@@ -103,7 +103,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.btnDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Location = new System.Drawing.Point(711, 339);
+            this.btnDownload.Location = new System.Drawing.Point(837, 463);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.OverrideBackColor = System.Drawing.Color.Empty;
             this.btnDownload.OverrideForeColor = System.Drawing.Color.Empty;
@@ -119,11 +119,11 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.label1.Location = new System.Drawing.Point(3, 336);
+            this.label1.Location = new System.Drawing.Point(3, 460);
             this.label1.Name = "label1";
             this.label1.OverrideBackColor = System.Drawing.Color.Empty;
             this.label1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.label1.Size = new System.Drawing.Size(702, 33);
+            this.label1.Size = new System.Drawing.Size(828, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "TXT_SUB_HINTS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,18 +137,19 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.opmLayoutPanel1.Controls.Add(this.lvSubtitles, 0, 0);
             this.opmLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.opmLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.opmLayoutPanel1.Location = new System.Drawing.Point(4, 25);
             this.opmLayoutPanel1.Name = "opmLayoutPanel1";
             this.opmLayoutPanel1.RowCount = 2;
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmLayoutPanel1.Size = new System.Drawing.Size(816, 369);
+            this.opmLayoutPanel1.Size = new System.Drawing.Size(942, 493);
             this.opmLayoutPanel1.TabIndex = 0;
             // 
             // SubtitleDownloadNotifyForm
             // 
-            this.ClientSize = new System.Drawing.Size(816, 369);
+            this.ClientSize = new System.Drawing.Size(950, 522);
             this.Controls.Add(this.opmLayoutPanel1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(200, 85);
             this.Name = "SubtitleDownloadNotifyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
