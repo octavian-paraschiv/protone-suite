@@ -7,6 +7,7 @@ using OPMedia.Core;
 using OP_Logger = OPMedia.Core.Logging.Logger;
 using System.IO;
 using SQLite;
+using OPMedia.Core.Win32;
 
 namespace OPMedia.PersistenceService
 {
@@ -17,6 +18,8 @@ namespace OPMedia.PersistenceService
 
         public SqliteDbStore()
         {
+            DllUtility.SelectProperDllVersion("sqlite3");
+
             if (File.Exists(__peristenceDbPath) == false)
                 __peristenceDbPath = "Persistence.db3";
 

@@ -54,7 +54,6 @@
     <Compile Include="OAuth\RedirectHandler.cs" />
     <Compile Include="DeezerAppConstants.cs" />
     <Compile Include="PlayerApi\DeezerApi.cs" />
-    <Compile Include="PlayerApi\DeezerApiX.cs" />
     <Compile Include="PlayerApi\DeezerConnect.cs" />
     <Compile Include="PlayerApi\DeezerConstants.cs" />
     <Compile Include="PlayerApi\DeezerObject.cs" />

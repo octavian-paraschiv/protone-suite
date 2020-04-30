@@ -79,6 +79,7 @@
     <Compile Include="Utilities\HelperClasses.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Utilities\SerialPortAPI.cs" />
+    <Compile Include="Win32\DllUtility.cs" />
     <Compile Include="Win32\Gdi32.cs" />
     <Compile Include="GlobalEvents\EventSinkAttribute.cs" />
     <Compile Include="GlobalEvents\EventNames.cs" />
