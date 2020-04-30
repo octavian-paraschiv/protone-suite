@@ -72,85 +72,93 @@ Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: "{#BINDIR}\NAudio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\NAudio.Lame.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\libmp3lame.32.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\libmp3lame.64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
-
-Source: "{#BINDIR}\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\CookComputing.XmlRpcV2.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\taglib-sharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\OPMedia.DeezerInterop.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.DeezerWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\OPMedia.AudioWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.VideoWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
+;--------------------------------------
+; Application executables
 Source: "{#BINDIR}\OPMedia.ProTONE.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.Runtime.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.Runtime.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.UI.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.UI.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
+Source: "{#BINDIR}\OPMedia.MediaLibrary.exe"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+;--------------------------------------
+; Rendering workers
+Source: "{#BINDIR}\OPMedia.AudioCdWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.AudioWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.DeezerWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.VideoWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; Services
+Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; shell extension
 Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}\shell"; Flags: touch uninsneveruninstall onlyifdoesntexist
 Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}\shell"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
-
-Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; OPMedia DLL's
+Source: "{#BINDIR}\OPMedia.Addons.Builtin.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\OPMedia.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.DeezerInterop.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.Runtime.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.Runtime.Addons.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\OPMedia.Runtime.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.UI.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.UI.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; Satellite assemblies for localization
+; -- ro --
+Source: "{#BINDIR}\ro\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\ro\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\ro\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\ro\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\ro\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\ro\OPMedia.UI.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+; -- de --
+Source: "{#BINDIR}\de\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\de\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\de\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\de\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\de\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\de\OPMedia.UI.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+; -- fr --
+Source: "{#BINDIR}\fr\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\fr\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\fr\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\fr\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\fr\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\fr\OPMedia.UI.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; Database and support DLL's
 Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
-
+Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"
+;--------------------------------------
+; Icons and themes
+Source: "{#BINDIR}\Themes\Themes.thm"; DestDir: "{app}\Themes"
+Source: "{#BINDIR}\DefaultOnlineMediaData.xml"; DestDir: "{app}"
 Source: "{#BINDIR}\Resources\player.ico"; DestDir: "{app}\Resources"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\bookmark.ico"; DestDir: "{app}\Resources"; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\AudioFile.ico"; DestDir: "{app}\Resources"; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\VideoFile.ico"; DestDir: "{app}\Resources"; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\Playlist.ico"; DestDir: "{app}\Resources"; Flags: promptifolder uninsremovereadonly replacesameversion uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Resources\Subtitle.ico"; DestDir: "{app}\Resources\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace
-
-Source: "{#BINDIR}\ro\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\ro\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\ro\OPMedia.UI.resources.dll"; DestDir: "{app}\ro\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\de\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\de\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\de\OPMedia.UI.resources.dll"; DestDir: "{app}\de\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\fr\OPMedia.ProTONE.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\fr\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\fr\OPMedia.UI.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-
-Source: "{#BINDIR}\OPMedia.Addons.Builtin.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\OPMedia.MediaLibrary.exe"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\OPMedia.Runtime.Addons.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-
 Source: "{#BINDIR}\Resources\catalog.ico"; DestDir: "{app}\Resources\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-
-Source: "{#BINDIR}\ro\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\ro\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\de\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\de\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\fr\OPMedia.Addons.Builtin.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\fr\OPMedia.MediaLibrary.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-
-Source: "{#BINDIR}\ro\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\ro\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\de\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\de\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-Source: "{#BINDIR}\fr\OPMedia.Runtime.Addons.resources.dll"; DestDir: "{app}\fr\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
-
-Source: "isxdl.dll"; DestDir: "{tmp}"; Flags: dontcopy
-
-Source: "{#BINDIR}\Themes\Themes.thm"; DestDir: "{app}\Themes"
-
-Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
+;--------------------------------------
+; Third party libraries
+Source: "{#BINDIR}\CookComputing.XmlRpcV2.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\libdeezer.x86.dll"; DestDir: "{app}"
-Source: "{#BINDIR}\sqlite3.dll"; DestDir: "{app}"
-
-Source: "{#BINDIR}\DefaultOnlineMediaData.xml"; DestDir: "{app}"
-
+Source: "{#BINDIR}\libdeezer.x64.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\libmp3lame.32.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\libmp3lame.64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\NAudio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\NAudio.Lame.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; Components: itemPlayer\itemLibrary
+Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\taglib-sharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
+; Support DLL's for setup
+Source: "isxdl.dll"; DestDir: "{tmp}"; Flags: dontcopy
+;--------------------------------------
+; FFDShow codec files
 Source: "{#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
 Source: "{#EXTDIR}\ffdshow\ff_kernelDeint.dll"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
 Source: "{#EXTDIR}\ffdshow\ff_liba52.dll"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
@@ -172,6 +180,8 @@ Source: "{#EXTDIR}\ffdshow\libmpeg2_ff.dll"; DestDir: "{app}\Codecs"; Components
 Source: "{#EXTDIR}\ffdshow\makeAVIS.exe"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
 Source: "{#EXTDIR}\ffdshow\openIE.js"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
 Source: "{#EXTDIR}\ffdshow\TomsMoComp_ff.dll"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
+;--------------------------------------
+; Haali codec files
 Source: "{#EXTDIR}\haali\avi.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\avs.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\avss.dll"; DestDir: "{app}\HDSupport"; Components: itemCodecs\itemHaali
@@ -187,6 +197,7 @@ Source: "{#EXTDIR}\haali\mp4.dll"; DestDir: "{app}\HDSupport"; Flags: regserver;
 Source: "{#EXTDIR}\haali\ogm.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\splitter.ax"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\ts.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
+;--------------------------------------
 
 [Icons]
 Name: {group}\{cm:UninstallProgram,ProTONE Suite}; Filename: {uninstallexe}
@@ -675,8 +686,7 @@ Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: a
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: showAvisynth; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: avisynthFfdshowSource; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScriptMULTI_SZ; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,36,00,38,00,2c,00,30,00,30,00,2c,00,36,00,35,00,2c,00,30,00,30,00,2c,00,37,00,38,00,2c,00,30,00,30,00,2c,00,32,00,38,00,2c,00,30,00,30,00,2c,00,33,00,37,00,2c,00,30,00,30,00,2c,00,32,00,39,00,2c,00,30,00,30,00,2c,00,33,00,61,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,32,00,63,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,33,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00; Components: itemCodecs\itemFFDShow
-Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScript; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00
-; Components: itemCodecs\itemFFDShow
+Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: string; ValueName: avisynthScript; ValueData: hex(7):68,00,65,00,78,00,28,00,37,00,29,00,3a,00,30,00,30,00,2c,00,30,00,30,00,00,00,00,00; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: isVis; ValueData: $00000000; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: showVis; ValueData: $00000001; Components: itemCodecs\itemFFDShow
 Root: HKCU; SubKey: Software\GNU\ffdshow\default; ValueType: dword; ValueName: orderShowMV; ValueData: $0000000f; Components: itemCodecs\itemFFDShow
