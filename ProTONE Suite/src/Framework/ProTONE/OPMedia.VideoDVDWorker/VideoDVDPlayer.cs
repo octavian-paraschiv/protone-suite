@@ -83,6 +83,8 @@ namespace OPMedia.VideoDVDWorker
             {
                 int hr = mediaPosition.get_CurrentPosition(out val);
                 DsError.ThrowExceptionForHR(hr);
+
+                ResizeRenderRegion();
             }
 
             return (int)(val * durationScaleFactor);

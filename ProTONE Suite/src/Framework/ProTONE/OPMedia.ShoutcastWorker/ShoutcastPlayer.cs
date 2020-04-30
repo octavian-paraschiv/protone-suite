@@ -157,10 +157,6 @@ namespace OPMedia.ShoutcastWorker
             return fs;
         }
 
-        public void ResizeRenderRegion()
-        {
-        }
-
         private int MapVolume(int rawVolume)
         {
             double a = (-1000 / Math.Log10(0.5));

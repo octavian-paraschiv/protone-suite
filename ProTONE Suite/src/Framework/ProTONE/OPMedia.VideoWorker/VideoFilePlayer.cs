@@ -83,6 +83,8 @@ namespace OPMedia.VideoWorker
             {
                 int hr = mediaPosition.get_CurrentPosition(out val);
                 DsError.ThrowExceptionForHR(hr);
+
+                ResizeRenderRegion();
             }
 
             return (int)(val * durationScaleFactor);
@@ -291,39 +293,45 @@ namespace OPMedia.VideoWorker
 
         public void ResizeRenderRegion()
         {
-            int width = 0, height = 0;
-            int left = 0, top = 0;
-
-            Size sz = GetWindowSize(_renderHandle);
-
-            double videoAspectRatio = (double)(VideoWidth) / (double)(VideoHeight);
-            double panelAspectRatio = (double)sz.Width / (double)sz.Height;
-
-            if (videoAspectRatio >= panelAspectRatio)
+            try
             {
-                // "wide" video, use width as basis
-                width = sz.Width;
-                height = (int)(width / videoAspectRatio);
-                left = 0;
-                top = (sz.Height - height) / 2;
+                int width = 0, height = 0;
+                int left = 0, top = 0;
+
+                Size sz = GetWindowSize(_renderHandle);
+
+                double videoAspectRatio = (double)(VideoWidth) / (double)(VideoHeight);
+                double panelAspectRatio = (double)sz.Width / (double)sz.Height;
+
+                if (videoAspectRatio >= panelAspectRatio)
+                {
+                    // "wide" video, use width as basis
+                    width = sz.Width;
+                    height = (int)(width / videoAspectRatio);
+                    left = 0;
+                    top = (sz.Height - height) / 2;
+                }
+                else
+                {
+                    // "tall" video, use height as basis
+                    height = sz.Height;
+                    width = (int)(videoAspectRatio * height);
+                    left = (sz.Width - width) / 2;
+                    top = 0;
+                }
+
+                int w, h, l, t;
+
+                int hr = videoWindow.GetWindowPosition(out l, out t, out w, out h);
+                if (hr == 0)
+
+                    if (w != width || h != height || l != left || h != height)
+                    {
+                        hr = videoWindow.SetWindowPosition(left, top, width, height);
+                    }
             }
-            else
-            {
-                // "tall" video, use height as basis
-                height = sz.Height;
-                width = (int)(videoAspectRatio * height);
-                left = (sz.Width - width) / 2;
-                top = 0;
-            }
-
-            int w, h, l, t;
-
-            int hr = videoWindow.GetWindowPosition(out l, out t, out w, out h);
-            if (hr == 0)
-
-            if (w != width || h != height || l != left || h != height)
-            {
-                hr = videoWindow.SetWindowPosition(left, top, width, height);
+            catch
+            { 
             }
         }
 

@@ -324,11 +324,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         {
         }
 
-        internal virtual void ResizeRenderRegion()
-        {
-        }
-
-
         #endregion
 
         #region Construction

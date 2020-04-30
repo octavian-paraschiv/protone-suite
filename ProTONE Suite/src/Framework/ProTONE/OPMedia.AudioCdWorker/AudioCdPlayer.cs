@@ -229,9 +229,5 @@ namespace OPMedia.AudioCdWorker
 
             return scaledVolume;
         }
-
-        public void ResizeRenderRegion()
-        {
-        }
     }
 }

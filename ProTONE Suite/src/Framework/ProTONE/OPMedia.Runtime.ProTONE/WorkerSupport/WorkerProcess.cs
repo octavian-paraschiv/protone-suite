@@ -186,11 +186,6 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             return GetCommand<FilterState>(WorkerCommandType.GetStateReq);
         }
 
-        public void ResizeRenderRegion()
-        {
-            SetCommand(WorkerCommandType.ResizeRenderRegionReq);
-        }
-
         private T GetCommand<T>(WorkerCommandType wct)
         {
             try

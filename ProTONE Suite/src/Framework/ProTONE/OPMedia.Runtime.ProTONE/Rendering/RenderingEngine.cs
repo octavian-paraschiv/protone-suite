@@ -454,25 +454,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     if (workerRenderer != null && workerRenderer.IsVideo)
                     {
                         _renderer.SetRenderRegion(_renderPanel, GraphNotifyWnd.Instance);
-                        _renderPanel.Resize -= RenderPanel_Resize;
-                        _renderPanel.Resize += RenderPanel_Resize;
                     }
                 }
             }
             catch (Exception ex)
             {
                 ReportRenderingException(ex);
-            }
-        }
-
-        private void RenderPanel_Resize(object sender, EventArgs e)
-        {
-            var workerRenderer = _renderer as WorkerSupport.WorkerRenderer;
-            if (workerRenderer != null && workerRenderer.IsVideo)
-            {
-                _renderPanel.SuspendLayout();
-                _renderer.ResizeRenderRegion();
-                _renderPanel.ResumeLayout();
             }
         }
 

@@ -85,10 +85,6 @@ namespace OPMedia.Runtime.ProTONE
                         replyArg = _player.GetLength().ToString();
                         break;
 
-                    case WorkerCommandType.ResizeRenderRegionReq:
-                        _player.ResizeRenderRegion();
-                        break;
-
                     default:
                         break;
                 }

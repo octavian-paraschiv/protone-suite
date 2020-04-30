@@ -22,7 +22,5 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         int GetMediaPosition();
 
         FilterState GetFilterState();
-
-        void ResizeRenderRegion();
     }
 }

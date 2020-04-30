@@ -211,9 +211,5 @@ namespace OPMedia.AudioWorker
 
             return scaledVolume;
         }
-
-        public void ResizeRenderRegion()
-        {
-        }
     }
 }

@@ -296,16 +296,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 Logger.LogTrace("BaseWorkerRenderer::SetRenderRegion renderRegion=0x{0:x8} notifyRegion=0x{0:x8}", _renderHwnd, _notifyHwnd);
             }
         }
-
-        internal override void ResizeRenderRegion()
-        {
-            if (IsVideo)
-            {
-                Logger.LogTrace("BaseWorkerRenderer::ResizeRenderRegion");
-                _wp?.ResizeRenderRegion();
-            }
-        }
-
         #endregion
 
         protected override bool IsAudioMediaAvailable()

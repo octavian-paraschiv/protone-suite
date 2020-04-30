@@ -575,9 +575,5 @@ namespace OPMedia.DeezerWorker
         {
             return this.FilterState;
         }
-
-        public void ResizeRenderRegion()
-        {
-        }
     }
 }
