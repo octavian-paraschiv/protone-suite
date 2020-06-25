@@ -868,21 +868,21 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             timerCheckState.Start();
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
 
-            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
+            //Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
         }
-        void Application_ApplicationExit(object sender, EventArgs e)
-        {
-            if (ProTONEConfig.IsPlayer && ProTONEConfig.DeezerHasValidConfig)
-            {
-                string deezerCachePath = PathUtils.GetCacheFolderPath("dzrcache");
-                // Cleanup cache
-                if (Directory.Exists(deezerCachePath))
-                {
-                    Logger.LogInfo($"Purging Deezer cache folder at {deezerCachePath}");
-                    Directory.Delete(deezerCachePath, true);
-                }
-            }
-        }
+        //void Application_ApplicationExit(object sender, EventArgs e)
+        //{
+        //    if (ProTONEConfig.IsPlayer && ProTONEConfig.DeezerHasValidConfig)
+        //    {
+        //        string deezerCachePath = PathUtils.GetCacheFolderPath("dzrcache");
+        //        // Cleanup cache
+        //        if (Directory.Exists(deezerCachePath))
+        //        {
+        //            Logger.LogInfo($"Purging Deezer cache folder at {deezerCachePath}");
+        //            Directory.Delete(deezerCachePath, true);
+        //        }
+        //    }
+        //}
 
 
         ~RenderingEngine()
