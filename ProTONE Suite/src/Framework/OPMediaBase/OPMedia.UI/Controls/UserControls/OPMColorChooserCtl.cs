@@ -25,10 +25,10 @@ namespace OPMedia.UI.Controls
 
         public Color Color
         {
-            get { return lblResultingColor.OverrideBackColor; }
+            get { return lblResultingColor.BackColor; }
             set 
             { 
-                lblResultingColor.OverrideBackColor = value;
+                lblResultingColor.BackColor = value;
                 ApplyColor(false, false);
             }
         }
@@ -39,7 +39,7 @@ namespace OPMedia.UI.Controls
             {
                 UnsubscribeEvents();
 
-                Color c = lblResultingColor.OverrideBackColor;
+                Color c = lblResultingColor.BackColor;
                 cgR.Value = c.R;
                 cgG.Value = c.G;
                 cgB.Value = c.B;
@@ -114,14 +114,14 @@ namespace OPMedia.UI.Controls
         private void ColorChangedByNumericFields(object sender, EventArgs e)
         {
             Color c = Color.FromArgb((int)nudR.Value, (int)nudG.Value, (int)nudB.Value);
-            lblResultingColor.OverrideBackColor = c;
+            lblResultingColor.BackColor = c;
             ApplyColor(true, false);
         }
 
         private void ColorChangedByGauges(double val)
         {
             Color c = Color.FromArgb((int)cgR.Value, (int)cgG.Value, (int)cgB.Value);
-            lblResultingColor.OverrideBackColor = c;
+            lblResultingColor.BackColor = c;
             ApplyColor(true, false);
         }
 
@@ -142,14 +142,14 @@ namespace OPMedia.UI.Controls
             }
 
             Color c = Color.FromArgb(r, g, b);
-            lblResultingColor.OverrideBackColor = c;
+            lblResultingColor.BackColor = c;
             ApplyColor(true, true);
         }
 
         private void ColorChangedByComboBox(object sender, EventArgs e)
         {
             Color c = (Color)cmbKnownColors.Items[cmbKnownColors.SelectedIndex];
-            lblResultingColor.OverrideBackColor = c;
+            lblResultingColor.BackColor = c;
             ApplyColor(true, false);
         }
     }

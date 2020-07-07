@@ -116,7 +116,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.opmShellList.Margin = new System.Windows.Forms.Padding(0);
             this.opmShellList.MultiSelect = false;
             this.opmShellList.Name = "opmShellList";
-            this.opmShellList.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmShellList.Size = new System.Drawing.Size(743, 372);
             this.opmShellList.TabIndex = 1;
             this.opmShellList.UseCompatibleStateImageBehavior = false;

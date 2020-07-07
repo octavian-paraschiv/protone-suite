@@ -52,8 +52,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(357, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZCATSTEP1_DESC";
@@ -68,8 +66,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.lblX.Location = new System.Drawing.Point(3, 93);
             this.lblX.Margin = new System.Windows.Forms.Padding(3);
             this.lblX.Name = "lblX";
-            this.lblX.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblX.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblX.Size = new System.Drawing.Size(357, 13);
             this.lblX.TabIndex = 5;
             this.lblX.Text = "TXT_SELECTINSERTPOINT";
@@ -80,12 +76,9 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.lblCatalogPath.AutoSize = true;
             this.lblCatalogPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCatalogPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblCatalogPath.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.lblCatalogPath.Location = new System.Drawing.Point(3, 22);
             this.lblCatalogPath.Margin = new System.Windows.Forms.Padding(3);
             this.lblCatalogPath.Name = "lblCatalogPath";
-            this.lblCatalogPath.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblCatalogPath.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblCatalogPath.Size = new System.Drawing.Size(271, 24);
             this.lblCatalogPath.TabIndex = 1;
             this.lblCatalogPath.Text = "TXT_NO_CATALOG";
@@ -101,8 +94,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(0);
             this.btnBrowse.MinimumSize = new System.Drawing.Size(30, 30);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnBrowse.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnBrowse.Size = new System.Drawing.Size(86, 30);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "TXT_BROWSE";
@@ -118,7 +109,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.txtCatDesc.Margin = new System.Windows.Forms.Padding(0);
             this.txtCatDesc.MaxLength = 50;
             this.txtCatDesc.Name = "txtCatDesc";
-            this.txtCatDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtCatDesc.Size = new System.Drawing.Size(363, 22);
             this.txtCatDesc.TabIndex = 4;
             // 
@@ -131,8 +121,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.label2.Location = new System.Drawing.Point(3, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(357, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "TXT_CATALOG_DESC";

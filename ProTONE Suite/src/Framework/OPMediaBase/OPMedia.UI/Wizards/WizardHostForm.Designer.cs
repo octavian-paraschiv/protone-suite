@@ -61,11 +61,9 @@ namespace OPMedia.UI.Wizards
             this.stepButtons.CanMoveNext = true;
             this.pnlWizardLayout.SetColumnSpan(this.stepButtons, 2);
             this.stepButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stepButtons.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.stepButtons.Location = new System.Drawing.Point(3, 333);
             this.stepButtons.Name = "stepButtons";
             this.stepButtons.OKButtonText = "TXT_WIZARDOK";
-            this.stepButtons.OverrideBackColor = System.Drawing.Color.Empty;
             this.stepButtons.RepeatWizard = false;
             this.stepButtons.ShowMovementButtons = true;
             this.stepButtons.ShowOKButton = false;

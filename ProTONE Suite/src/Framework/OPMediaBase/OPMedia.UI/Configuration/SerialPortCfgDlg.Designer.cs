@@ -47,8 +47,6 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(171, 268);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 3;
@@ -64,8 +62,6 @@ namespace OPMedia.UI.Configuration
             this.btnOk.Location = new System.Drawing.Point(104, 268);
             this.btnOk.MinimumSize = new System.Drawing.Size(60, 25);
             this.btnOk.Name = "btnOk";
-            this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(61, 27);
             this.btnOk.TabIndex = 2;
@@ -76,11 +72,9 @@ namespace OPMedia.UI.Configuration
             // 
             this.pnlPortSettings.SetColumnSpan(this.cfgPanel, 3);
             this.cfgPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cfgPanel.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cfgPanel.Location = new System.Drawing.Point(0, 0);
             this.cfgPanel.Margin = new System.Windows.Forms.Padding(0);
             this.cfgPanel.Name = "cfgPanel";
-            this.cfgPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.cfgPanel.PortName = "COM1";
             this.cfgPanel.Size = new System.Drawing.Size(264, 235);
             this.cfgPanel.TabIndex = 0;

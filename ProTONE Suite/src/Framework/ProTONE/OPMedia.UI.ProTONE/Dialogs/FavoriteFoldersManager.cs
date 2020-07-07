@@ -52,10 +52,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.favoriteFoldersControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.favoriteFoldersControl.FavoriteFoldersHiveName = null;
-            this.favoriteFoldersControl.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.favoriteFoldersControl.Location = new System.Drawing.Point(0, 0);
             this.favoriteFoldersControl.Name = "favoriteFoldersControl";
-            this.favoriteFoldersControl.OverrideBackColor = System.Drawing.Color.Empty;
             this.favoriteFoldersControl.ShowOKButton = true;
             this.favoriteFoldersControl.Size = new System.Drawing.Size(398, 200);
             this.favoriteFoldersControl.TabIndex = 0;
@@ -69,8 +67,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(470, 219);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;

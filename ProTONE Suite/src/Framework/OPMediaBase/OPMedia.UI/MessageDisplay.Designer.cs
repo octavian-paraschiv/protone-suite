@@ -57,8 +57,6 @@ namespace OPMedia.UI
             this.btn2.Location = new System.Drawing.Point(195, 3);
             this.btn2.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn2.Name = "btn2";
-            this.btn2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btn2.OverrideForeColor = System.Drawing.Color.Empty;
             this.btn2.ShowDropDown = false;
             this.btn2.Size = new System.Drawing.Size(60, 27);
             this.btn2.TabIndex = 2;
@@ -86,8 +84,6 @@ namespace OPMedia.UI
             this.lblText.Location = new System.Drawing.Point(48, 0);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
-            this.lblText.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblText.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblText.Size = new System.Drawing.Size(418, 46);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "label1 gv gdsrg fstg ret tre";
@@ -101,8 +97,6 @@ namespace OPMedia.UI
             this.btn1.Location = new System.Drawing.Point(129, 3);
             this.btn1.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn1.Name = "btn1";
-            this.btn1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btn1.OverrideForeColor = System.Drawing.Color.Empty;
             this.btn1.ShowDropDown = false;
             this.btn1.Size = new System.Drawing.Size(60, 27);
             this.btn1.TabIndex = 1;
@@ -117,8 +111,6 @@ namespace OPMedia.UI
             this.btn3.Location = new System.Drawing.Point(261, 3);
             this.btn3.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn3.Name = "btn3";
-            this.btn3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btn3.OverrideForeColor = System.Drawing.Color.Empty;
             this.btn3.ShowDropDown = false;
             this.btn3.Size = new System.Drawing.Size(60, 27);
             this.btn3.TabIndex = 3;
@@ -182,8 +174,6 @@ namespace OPMedia.UI
             this.btn4.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
             this.btn4.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn4.Name = "btn4";
-            this.btn4.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btn4.OverrideForeColor = System.Drawing.Color.Empty;
             this.btn4.ShowDropDown = false;
             this.btn4.Size = new System.Drawing.Size(60, 27);
             this.btn4.TabIndex = 4;
@@ -198,8 +188,6 @@ namespace OPMedia.UI
             this.btn5.Location = new System.Drawing.Point(63, 3);
             this.btn5.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn5.Name = "btn5";
-            this.btn5.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btn5.OverrideForeColor = System.Drawing.Color.Empty;
             this.btn5.ShowDropDown = false;
             this.btn5.Size = new System.Drawing.Size(60, 27);
             this.btn5.TabIndex = 0;

@@ -65,7 +65,6 @@ namespace OPMedia.UI.Configuration
             this.lvConnFiles.Margin = new System.Windows.Forms.Padding(0);
             this.lvConnFiles.MultiSelect = false;
             this.lvConnFiles.Name = "lvConnFiles";
-            this.lvConnFiles.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvConnFiles.Size = new System.Drawing.Size(378, 307);
             this.lvConnFiles.TabIndex = 10;
             this.lvConnFiles.UseCompatibleStateImageBehavior = false;

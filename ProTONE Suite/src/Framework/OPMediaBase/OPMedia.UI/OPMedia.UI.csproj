@@ -14,7 +14,6 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
@@ -47,6 +46,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
@@ -138,6 +141,9 @@
     </Compile>
     <Compile Include="Controls\Containers\OPMCustomPanel.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Converted.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Derived\ImageButton.cs">
       <SubType>Component</SubType>
@@ -362,9 +368,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Common\OPMEditableComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Common\OPMLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Derived\OPMNumericUpDownBase.cs">

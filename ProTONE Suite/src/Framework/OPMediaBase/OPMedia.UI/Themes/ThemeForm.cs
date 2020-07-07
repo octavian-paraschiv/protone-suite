@@ -29,44 +29,7 @@ namespace OPMedia.UI.Themes
 
     public partial class ThemeForm : ThemeFormBase
     {
-        private FontSizes _fontSize = FontSizes.Normal;
-
-        public FontSizes FontSize
-        {
-            get
-            {
-                return _fontSize;
-            }
-
-            set
-            {
-                _fontSize = value;
-
-                base.Font = this.Font;
-
-                foreach (Control ctl in this.Controls)
-                {
-                    if (ctl is OPMBaseControl)
-                    {
-                        (ctl as OPMBaseControl).FontSize = value;
-                    }
-                    else
-                    {
-                        ctl.Font = this.Font;
-                    }
-                }
-            }
-        }
-
-        [ReadOnly(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Font Font
-        {
-            get
-            {
-                return ThemeManager.GetFontBySize(_fontSize);
-            }
-        }
+        
 
         bool _inheritAppIcon = true;
         [DefaultValue(true)]

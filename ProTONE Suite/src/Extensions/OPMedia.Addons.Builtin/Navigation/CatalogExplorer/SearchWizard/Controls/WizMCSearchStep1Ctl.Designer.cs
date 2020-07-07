@@ -120,8 +120,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.label3.Location = new System.Drawing.Point(355, 40);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.label3.Name = "label3";
-            this.label3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label3.OverrideForeColor = System.Drawing.Color.Empty;
             this.label3.Size = new System.Drawing.Size(345, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "TXT_SEARCHVALUE";
@@ -136,8 +134,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(700, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SEARCHPATTERN_MC";
@@ -163,7 +159,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.txtSearchPath.Location = new System.Drawing.Point(0, 0);
             this.txtSearchPath.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.txtSearchPath.Name = "txtSearchPath";
-            this.txtSearchPath.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtSearchPath.ReadOnly = true;
             this.txtSearchPath.Size = new System.Drawing.Size(321, 22);
             this.txtSearchPath.TabIndex = 5;
@@ -184,8 +179,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.label2.Location = new System.Drawing.Point(0, 40);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(345, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "TXT_SEARCHFOLDER";
@@ -337,7 +330,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.lvResults.Location = new System.Drawing.Point(3, 120);
             this.lvResults.MultiSelect = false;
             this.lvResults.Name = "lvResults";
-            this.lvResults.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvResults.Size = new System.Drawing.Size(694, 396);
             this.lvResults.TabIndex = 10;
             this.lvResults.UseCompatibleStateImageBehavior = false;
@@ -406,8 +398,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 104);
             this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.Size = new System.Drawing.Size(345, 13);
             this.kryptonLabel1.TabIndex = 23;
             this.kryptonLabel1.Text = "TXT_RESULTS";
@@ -460,8 +450,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.btnBrowse.MaximumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.MinimumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnBrowse.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 6;
             this.btnBrowse.Text = "---";

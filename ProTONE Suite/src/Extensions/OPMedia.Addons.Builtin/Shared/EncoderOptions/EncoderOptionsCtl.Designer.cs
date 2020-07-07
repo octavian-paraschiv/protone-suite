@@ -74,8 +74,6 @@
             this.opmLabel3.Location = new System.Drawing.Point(0, 0);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(111, 24);
             this.opmLabel3.TabIndex = 1;
             this.opmLabel3.Text = "TXT_OUTPUT_FORMAT";
@@ -91,7 +89,6 @@
             this.cmbOutputFormat.MaximumSize = new System.Drawing.Size(85, 0);
             this.cmbOutputFormat.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbOutputFormat.Name = "cmbOutputFormat";
-            this.cmbOutputFormat.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbOutputFormat.Size = new System.Drawing.Size(85, 24);
             this.cmbOutputFormat.TabIndex = 0;
             this.cmbOutputFormat.SelectedIndexChanged += new System.EventHandler(this.OnSelectOutputFormat);

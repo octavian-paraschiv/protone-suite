@@ -122,8 +122,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(326, 327);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 5;
@@ -139,8 +137,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.Location = new System.Drawing.Point(260, 327);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
-            this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(61, 27);
             this.btnOk.TabIndex = 4;
@@ -167,8 +163,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblDesc.Location = new System.Drawing.Point(5, 5);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(5);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblDesc.Size = new System.Drawing.Size(411, 15);
             this.lblDesc.TabIndex = 2;
             this.lblDesc.Text = "TXT_SELECT_PLAYLIST";
@@ -209,8 +203,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblNewName.Location = new System.Drawing.Point(0, 300);
             this.lblNewName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 5);
             this.lblNewName.Name = "lblNewName";
-            this.lblNewName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNewName.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNewName.Size = new System.Drawing.Size(155, 22);
             this.lblNewName.TabIndex = 6;
             this.lblNewName.Text = "TXT_NEW_PLAYLIST_NAME:";
@@ -221,7 +213,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.opmLayoutPanel1.SetColumnSpan(this.txtNewName, 3);
             this.txtNewName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNewName.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.txtNewName.Lines = new string[0];
             this.txtNewName.Location = new System.Drawing.Point(158, 300);
             this.txtNewName.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -229,8 +220,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.MaxLength = 32767;
             this.txtNewName.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtNewName.Name = "txtNewName";
-            this.txtNewName.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtNewName.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtNewName.PasswordChar = '\0';
             this.txtNewName.ReadOnly = false;
             this.txtNewName.ScrollBars = System.Windows.Forms.ScrollBars.None;

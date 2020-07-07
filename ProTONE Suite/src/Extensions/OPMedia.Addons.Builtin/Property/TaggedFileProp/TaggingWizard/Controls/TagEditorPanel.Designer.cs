@@ -41,7 +41,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtHints.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.txtHints.Lines = new string[] {
         "TXT_TAGGINGPATTERNS"};
             this.txtHints.Location = new System.Drawing.Point(140, 0);
@@ -50,8 +49,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.MultiLineText = "TXT_TAGGINGPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
             this.txtHints.ScrollBars = System.Windows.Forms.ScrollBars.None;

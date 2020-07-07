@@ -53,8 +53,6 @@ namespace OPMedia.Addons.Builtin.VideoProp
             this.btnSearchSubtitles.Location = new System.Drawing.Point(60, 196);
             this.btnSearchSubtitles.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.btnSearchSubtitles.Name = "btnSearchSubtitles";
-            this.btnSearchSubtitles.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSearchSubtitles.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSearchSubtitles.ShowDropDown = false;
             this.btnSearchSubtitles.Size = new System.Drawing.Size(140, 24);
             this.btnSearchSubtitles.TabIndex = 1;

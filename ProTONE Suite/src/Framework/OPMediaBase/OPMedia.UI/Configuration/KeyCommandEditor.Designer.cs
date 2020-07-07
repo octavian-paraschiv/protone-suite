@@ -45,8 +45,6 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.Location = new System.Drawing.Point(187, 45);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 1;
@@ -84,8 +82,6 @@ namespace OPMedia.UI.Configuration
             this.lblDesc.Location = new System.Drawing.Point(10, 5);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(5, 0, 0, 10);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblDesc.Size = new System.Drawing.Size(449, 30);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "qqqq\r\neeee";

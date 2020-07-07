@@ -63,7 +63,6 @@
             this.lvTracks.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvTracks.MultiSelect = false;
             this.lvTracks.Name = "lvTracks";
-            this.lvTracks.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvTracks.Size = new System.Drawing.Size(663, 466);
             this.lvTracks.TabIndex = 2;
             this.lvTracks.UseCompatibleStateImageBehavior = false;
@@ -125,12 +124,9 @@
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmLabel1.Location = new System.Drawing.Point(0, 471);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(78, 23);
             this.opmLabel1.TabIndex = 3;
             this.opmLabel1.Text = "TXT_ARTIST:";
@@ -141,12 +137,9 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmLabel2.Location = new System.Drawing.Point(199, 471);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(79, 23);
             this.opmLabel2.TabIndex = 4;
             this.opmLabel2.Text = "TXT_ALBUM:";
@@ -157,12 +150,9 @@
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmLabel3.Location = new System.Drawing.Point(399, 471);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(67, 23);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_TITLE:";
@@ -217,8 +207,6 @@
             this.btnSearch.Location = new System.Drawing.Point(587, 471);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSearch.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSearch.ShowDropDown = false;
             this.btnSearch.Size = new System.Drawing.Size(76, 23);
             this.btnSearch.TabIndex = 9;

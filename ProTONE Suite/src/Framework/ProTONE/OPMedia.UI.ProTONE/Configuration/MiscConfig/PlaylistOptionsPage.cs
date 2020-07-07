@@ -31,7 +31,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         {
             InitializeComponent();
 
-            lblDisplayFileName.OverrideBackColor = ThemeManager.ColorValidationFailed;
+            lblDisplayFileName.BackColor = ThemeManager.ColorValidationFailed;
 
             chkFileNameFormat.Checked = ProTONEConfig.UseFileNameFormat;
             chkUseMetadata.Checked = ProTONEConfig.UseMetadata;

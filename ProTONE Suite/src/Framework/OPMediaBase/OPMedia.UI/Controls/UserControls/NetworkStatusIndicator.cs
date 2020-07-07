@@ -31,7 +31,7 @@ namespace OPMedia.UI.Controls
         {
             InitializeComponent();
 
-            label1.OverrideForeColor = Color.Red;
+            label1.ForeColor = Color.Red;
             ThemeManager.SetFont(label1, FontSizes.Large);
 
             tmrCheckNetwork.Enabled = true;
@@ -58,11 +58,9 @@ namespace OPMedia.UI.Controls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.label1.Location = new System.Drawing.Point(34, 1);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.OverrideForeColor = System.Drawing.Color.Red;
             this.label1.Size = new System.Drawing.Size(245, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_NO_NETWORK";

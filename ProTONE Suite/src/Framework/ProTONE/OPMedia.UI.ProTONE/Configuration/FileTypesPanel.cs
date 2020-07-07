@@ -240,8 +240,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.label3.Location = new System.Drawing.Point(0, 24);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
-            this.label3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label3.OverrideForeColor = System.Drawing.Color.Empty;
             this.label3.Size = new System.Drawing.Size(573, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "TXT_HANDLEEXPLORERLAUNCH";
@@ -254,7 +252,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 44);
             this.cmbExplorerLaunchType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbExplorerLaunchType.Name = "cmbExplorerLaunchType";
-            this.cmbExplorerLaunchType.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbExplorerLaunchType.Size = new System.Drawing.Size(275, 24);
             this.cmbExplorerLaunchType.TabIndex = 3;
             // 
@@ -265,8 +262,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllAudio.Location = new System.Drawing.Point(2, 2);
             this.btnSelAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllAudio.Name = "btnSelAllAudio";
-            this.btnSelAllAudio.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSelAllAudio.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSelAllAudio.ShowDropDown = false;
             this.btnSelAllAudio.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllAudio.TabIndex = 0;
@@ -280,8 +275,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllAudio.Location = new System.Drawing.Point(2, 26);
             this.btnUnselAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllAudio.Name = "btnUnselAllAudio";
-            this.btnUnselAllAudio.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnUnselAllAudio.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnUnselAllAudio.ShowDropDown = false;
             this.btnUnselAllAudio.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllAudio.TabIndex = 3;
@@ -295,8 +288,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllVideo.Location = new System.Drawing.Point(141, 26);
             this.btnUnselAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllVideo.Name = "btnUnselAllVideo";
-            this.btnUnselAllVideo.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnUnselAllVideo.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnUnselAllVideo.ShowDropDown = false;
             this.btnUnselAllVideo.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllVideo.TabIndex = 4;
@@ -310,8 +301,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllVideo.Location = new System.Drawing.Point(141, 2);
             this.btnSelAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllVideo.Name = "btnSelAllVideo";
-            this.btnSelAllVideo.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSelAllVideo.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSelAllVideo.ShowDropDown = false;
             this.btnSelAllVideo.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllVideo.TabIndex = 1;
@@ -325,8 +314,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllPlaylists.Location = new System.Drawing.Point(279, 26);
             this.btnUnselAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllPlaylists.Name = "btnUnselAllPlaylists";
-            this.btnUnselAllPlaylists.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnUnselAllPlaylists.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnUnselAllPlaylists.ShowDropDown = false;
             this.btnUnselAllPlaylists.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllPlaylists.TabIndex = 5;
@@ -340,8 +327,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllPlaylists.Location = new System.Drawing.Point(279, 2);
             this.btnSelAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllPlaylists.Name = "btnSelAllPlaylists";
-            this.btnSelAllPlaylists.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSelAllPlaylists.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSelAllPlaylists.ShowDropDown = false;
             this.btnSelAllPlaylists.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllPlaylists.TabIndex = 2;
@@ -474,8 +459,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblFileTypes.Location = new System.Drawing.Point(0, 73);
             this.lblFileTypes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblFileTypes.Name = "lblFileTypes";
-            this.lblFileTypes.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblFileTypes.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblFileTypes.Size = new System.Drawing.Size(573, 15);
             this.lblFileTypes.TabIndex = 4;
             this.lblFileTypes.Text = "TXT_S_FILETYPES_ASSOCIATIONS";

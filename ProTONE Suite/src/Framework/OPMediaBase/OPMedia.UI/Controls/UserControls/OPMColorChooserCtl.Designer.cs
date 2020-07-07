@@ -88,12 +88,9 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel4, 2);
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel4.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmLabel4.Location = new System.Drawing.Point(3, 153);
             this.opmLabel4.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.opmLabel4.Name = "opmLabel4";
-            this.opmLabel4.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel4.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel4.Size = new System.Drawing.Size(168, 28);
             this.opmLabel4.TabIndex = 12;
             this.opmLabel4.Text = "TXT_RESULTING_COLOR:";
@@ -105,12 +102,9 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblColorName, 4);
             this.lblColorName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblColorName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblColorName.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.lblColorName.Location = new System.Drawing.Point(9, 6);
             this.lblColorName.Margin = new System.Windows.Forms.Padding(9, 6, 3, 3);
             this.lblColorName.Name = "lblColorName";
-            this.lblColorName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblColorName.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblColorName.Size = new System.Drawing.Size(377, 15);
             this.lblColorName.TabIndex = 10;
             this.lblColorName.Text = "[ edited color description ]";
@@ -120,12 +114,9 @@
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.opmLabel1.Location = new System.Drawing.Point(3, 27);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(29, 25);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "R";
@@ -136,12 +127,9 @@
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.opmLabel2.Location = new System.Drawing.Point(3, 55);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(29, 25);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "G";
@@ -152,12 +140,9 @@
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.opmLabel3.Location = new System.Drawing.Point(3, 83);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(29, 25);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "B";
@@ -170,14 +155,11 @@
             this.cgR.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cgR.Dock = System.Windows.Forms.DockStyle.Top;
             this.cgR.EffectiveMaximum = 0D;
-            this.cgR.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cgR.Location = new System.Drawing.Point(35, 27);
             this.cgR.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.cgR.Maximum = 255D;
             this.cgR.Name = "cgR";
             this.cgR.NrTicks = 10;
-            this.cgR.OverrideBackColor = System.Drawing.Color.Empty;
-            this.cgR.OverrideElapsedBackColor = System.Drawing.Color.Red;
             this.cgR.ShowTicks = true;
             this.cgR.Size = new System.Drawing.Size(293, 23);
             this.cgR.TabIndex = 3;
@@ -191,14 +173,11 @@
             this.cgG.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cgG.Dock = System.Windows.Forms.DockStyle.Top;
             this.cgG.EffectiveMaximum = 0D;
-            this.cgG.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cgG.Location = new System.Drawing.Point(35, 55);
             this.cgG.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.cgG.Maximum = 255D;
             this.cgG.Name = "cgG";
             this.cgG.NrTicks = 10;
-            this.cgG.OverrideBackColor = System.Drawing.Color.Empty;
-            this.cgG.OverrideElapsedBackColor = System.Drawing.Color.Green;
             this.cgG.ShowTicks = true;
             this.cgG.Size = new System.Drawing.Size(293, 23);
             this.cgG.TabIndex = 4;
@@ -212,14 +191,11 @@
             this.cgB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cgB.Dock = System.Windows.Forms.DockStyle.Top;
             this.cgB.EffectiveMaximum = 0D;
-            this.cgB.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cgB.Location = new System.Drawing.Point(35, 83);
             this.cgB.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.cgB.Maximum = 255D;
             this.cgB.Name = "cgB";
             this.cgB.NrTicks = 10;
-            this.cgB.OverrideBackColor = System.Drawing.Color.Empty;
-            this.cgB.OverrideElapsedBackColor = System.Drawing.Color.Blue;
             this.cgB.ShowTicks = true;
             this.cgB.Size = new System.Drawing.Size(293, 23);
             this.cgB.TabIndex = 5;
@@ -230,7 +206,6 @@
             // 
             this.nudR.DecimalPlaces = 0;
             this.nudR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudR.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudR.Increment = new decimal(new int[] {
             1,
             0,
@@ -251,8 +226,6 @@
             0});
             this.nudR.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudR.Name = "nudR";
-            this.nudR.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudR.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudR.ReadOnly = false;
             this.nudR.Size = new System.Drawing.Size(55, 25);
             this.nudR.TabIndex = 6;
@@ -270,7 +243,6 @@
             // 
             this.nudG.DecimalPlaces = 0;
             this.nudG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudG.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudG.Increment = new decimal(new int[] {
             1,
             0,
@@ -291,8 +263,6 @@
             0});
             this.nudG.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudG.Name = "nudG";
-            this.nudG.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudG.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudG.ReadOnly = false;
             this.nudG.Size = new System.Drawing.Size(55, 25);
             this.nudG.TabIndex = 7;
@@ -310,7 +280,6 @@
             // 
             this.nudB.DecimalPlaces = 0;
             this.nudB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudB.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudB.Increment = new decimal(new int[] {
             1,
             0,
@@ -331,8 +300,6 @@
             0});
             this.nudB.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudB.Name = "nudB";
-            this.nudB.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudB.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudB.ReadOnly = false;
             this.nudB.Size = new System.Drawing.Size(55, 25);
             this.nudB.TabIndex = 8;
@@ -4021,7 +3988,6 @@
             this.cmbKnownColors.Location = new System.Drawing.Point(177, 117);
             this.cmbKnownColors.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.cmbKnownColors.Name = "cmbKnownColors";
-            this.cmbKnownColors.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbKnownColors.Size = new System.Drawing.Size(209, 24);
             this.cmbKnownColors.TabIndex = 11;
             // 
@@ -4035,8 +4001,6 @@
             this.lblResultingColor.Location = new System.Drawing.Point(177, 153);
             this.lblResultingColor.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.lblResultingColor.Name = "lblResultingColor";
-            this.lblResultingColor.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblResultingColor.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblResultingColor.Size = new System.Drawing.Size(209, 28);
             this.lblResultingColor.TabIndex = 13;
             // 
@@ -4045,12 +4009,9 @@
             this.opmLabel5.AutoSize = true;
             this.opmLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel5.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.opmLabel5.Location = new System.Drawing.Point(3, 117);
             this.opmLabel5.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             this.opmLabel5.Name = "opmLabel5";
-            this.opmLabel5.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel5.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel5.Size = new System.Drawing.Size(29, 27);
             this.opmLabel5.TabIndex = 14;
             this.opmLabel5.Text = "RGB";

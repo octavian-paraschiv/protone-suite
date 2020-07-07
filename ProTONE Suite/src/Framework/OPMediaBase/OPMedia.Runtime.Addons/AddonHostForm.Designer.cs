@@ -189,11 +189,9 @@ namespace OPMedia.Runtime.Addons
             // 
             this.pnlNavContainer.Controls.Add(this.lblNoItems);
             this.pnlNavContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlNavContainer.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pnlNavContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlNavContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNavContainer.Name = "pnlNavContainer";
-            this.pnlNavContainer.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlNavContainer.Size = new System.Drawing.Size(824, 491);
             this.pnlNavContainer.TabIndex = 0;
             // 
@@ -204,8 +202,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoItems.Location = new System.Drawing.Point(0, 0);
             this.lblNoItems.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoItems.Name = "lblNoItems";
-            this.lblNoItems.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNoItems.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoItems.Padding = new System.Windows.Forms.Padding(5);
             this.lblNoItems.Size = new System.Drawing.Size(824, 60);
             this.lblNoItems.TabIndex = 0;
@@ -238,11 +234,9 @@ namespace OPMedia.Runtime.Addons
             this.pnlProperties.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlProperties.Controls.Add(this.lblNoProperties);
             this.pnlProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProperties.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(0);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlProperties.Size = new System.Drawing.Size(822, 25);
             this.pnlProperties.TabIndex = 0;
             // 
@@ -253,8 +247,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoProperties.Location = new System.Drawing.Point(0, 0);
             this.lblNoProperties.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoProperties.Name = "lblNoProperties";
-            this.lblNoProperties.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNoProperties.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoProperties.Padding = new System.Windows.Forms.Padding(5);
             this.lblNoProperties.Size = new System.Drawing.Size(822, 60);
             this.lblNoProperties.TabIndex = 0;
@@ -266,11 +258,9 @@ namespace OPMedia.Runtime.Addons
             this.pnlPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pnlPreview.Controls.Add(this.lblNoPreview);
             this.pnlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPreview.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pnlPreview.Location = new System.Drawing.Point(0, 0);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
             this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlPreview.Size = new System.Drawing.Size(822, 26);
             this.pnlPreview.TabIndex = 0;
             // 
@@ -281,8 +271,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoPreview.Location = new System.Drawing.Point(0, 0);
             this.lblNoPreview.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoPreview.Name = "lblNoPreview";
-            this.lblNoPreview.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNoPreview.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoPreview.Padding = new System.Windows.Forms.Padding(5);
             this.lblNoPreview.Size = new System.Drawing.Size(822, 60);
             this.lblNoPreview.TabIndex = 0;
@@ -339,8 +327,6 @@ namespace OPMedia.Runtime.Addons
             this.lblStatusBarSep.Location = new System.Drawing.Point(0, 519);
             this.lblStatusBarSep.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.lblStatusBarSep.Name = "lblStatusBarSep";
-            this.lblStatusBarSep.OverrideBackColor = System.Drawing.Color.Red;
-            this.lblStatusBarSep.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblStatusBarSep.Size = new System.Drawing.Size(824, 3);
             this.lblStatusBarSep.TabIndex = 7;
             this.lblStatusBarSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

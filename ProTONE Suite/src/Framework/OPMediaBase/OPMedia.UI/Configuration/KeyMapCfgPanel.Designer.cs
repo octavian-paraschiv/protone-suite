@@ -53,8 +53,6 @@ namespace OPMedia.UI.Configuration
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(333, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_S_KEYMAP_DESC";
@@ -71,7 +69,6 @@ namespace OPMedia.UI.Configuration
             this.lvShortcuts.Location = new System.Drawing.Point(3, 16);
             this.lvShortcuts.MultiSelect = false;
             this.lvShortcuts.Name = "lvShortcuts";
-            this.lvShortcuts.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvShortcuts.ShowItemToolTips = true;
             this.lvShortcuts.Size = new System.Drawing.Size(327, 195);
             this.lvShortcuts.TabIndex = 1;
@@ -109,8 +106,6 @@ namespace OPMedia.UI.Configuration
             this.kryptonButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonButton1.Location = new System.Drawing.Point(3, 3);
             this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonButton1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonButton1.Size = new System.Drawing.Size(137, 25);
             this.kryptonButton1.TabIndex = 1;
             this.kryptonButton1.Text = "TXT_RESTOREDEFAULTS";
@@ -121,11 +116,8 @@ namespace OPMedia.UI.Configuration
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kryptonLabel1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.kryptonLabel1.Location = new System.Drawing.Point(146, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.Size = new System.Drawing.Size(184, 31);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Text = "TXT_RESTORESHORTCUTSDESC";

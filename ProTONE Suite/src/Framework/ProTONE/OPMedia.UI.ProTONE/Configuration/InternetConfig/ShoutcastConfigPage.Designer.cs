@@ -71,12 +71,9 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblHint, 2);
             this.lblHint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblHint.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.lblHint.Location = new System.Drawing.Point(3, 100);
             this.lblHint.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.lblHint.Name = "lblHint";
-            this.lblHint.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblHint.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblHint.Size = new System.Drawing.Size(417, 50);
             this.lblHint.TabIndex = 6;
             this.lblHint.Text = "TXT_SHOUTCAST_DEV_ID_HINT";
@@ -88,7 +85,6 @@
             this.txtShoutcastDevId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastDevId.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastDevId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtShoutcastDevId.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtShoutcastDevId.Lines = new string[0];
             this.txtShoutcastDevId.Location = new System.Drawing.Point(181, 65);
             this.txtShoutcastDevId.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
@@ -96,8 +92,6 @@
             this.txtShoutcastDevId.MaxLength = 32767;
             this.txtShoutcastDevId.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtShoutcastDevId.Name = "txtShoutcastDevId";
-            this.txtShoutcastDevId.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtShoutcastDevId.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtShoutcastDevId.PasswordChar = '\0';
             this.txtShoutcastDevId.ReadOnly = false;
             this.txtShoutcastDevId.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -114,7 +108,6 @@
             this.txtShoutcastTuneinURL.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastTuneinURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastTuneinURL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtShoutcastTuneinURL.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtShoutcastTuneinURL.Lines = new string[] {
         "http://yp.shoutcast.com"};
             this.txtShoutcastTuneinURL.Location = new System.Drawing.Point(181, 35);
@@ -123,8 +116,6 @@
             this.txtShoutcastTuneinURL.MaxLength = 32767;
             this.txtShoutcastTuneinURL.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtShoutcastTuneinURL.Name = "txtShoutcastTuneinURL";
-            this.txtShoutcastTuneinURL.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtShoutcastTuneinURL.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtShoutcastTuneinURL.PasswordChar = '\0';
             this.txtShoutcastTuneinURL.ReadOnly = false;
             this.txtShoutcastTuneinURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -143,8 +134,6 @@
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(3, 0);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(175, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SHOUTCAST_SEARCH_URL";
@@ -157,8 +146,6 @@
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 30);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(175, 30);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_SHOUTCAST_TUNEIN_URL";
@@ -171,8 +158,6 @@
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(3, 60);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(175, 30);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "TXT_SHOUTCAST_DEV_ID";
@@ -184,7 +169,6 @@
             this.txtShoutcastSearchURL.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastSearchURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastSearchURL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtShoutcastSearchURL.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtShoutcastSearchURL.Lines = new string[] {
         "http://api.shoutcast.com/station"};
             this.txtShoutcastSearchURL.Location = new System.Drawing.Point(181, 5);
@@ -193,8 +177,6 @@
             this.txtShoutcastSearchURL.MaxLength = 32767;
             this.txtShoutcastSearchURL.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtShoutcastSearchURL.Name = "txtShoutcastSearchURL";
-            this.txtShoutcastSearchURL.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtShoutcastSearchURL.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtShoutcastSearchURL.PasswordChar = '\0';
             this.txtShoutcastSearchURL.ReadOnly = false;
             this.txtShoutcastSearchURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -218,7 +200,7 @@
             this.opmLinkLabel1.TabIndex = 7;
             this.opmLinkLabel1.TabStop = true;
             this.opmLinkLabel1.Text = "https://shoutcast.com/Developer";
-            this.opmLinkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.opmLinkLabel1_LinkClicked);
+            this.opmLinkLabel1.Click += new System.EventHandler(this.opmLinkLabel1_LinkClicked);
             // 
             // ShoutcastConfigPage
             // 

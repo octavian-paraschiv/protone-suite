@@ -62,10 +62,10 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
         protected override void OnThemeUpdatedInternal()
         {
-            lblHint.OverrideForeColor = ThemeManager.LinkColor;
+            lblHint.ForeColor = ThemeManager.LinkColor;
         }
 
-        private void opmLinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void opmLinkLabel1_LinkClicked(object sender, EventArgs e)
         {
             Process.Start("https://www.shoutcast.com/Developer");
         }

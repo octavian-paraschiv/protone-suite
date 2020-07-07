@@ -47,8 +47,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(379, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZCATSTEP2_DESC";
@@ -72,8 +70,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.label2.Location = new System.Drawing.Point(3, 232);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(379, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "TXT_ENTRY_DESC";
@@ -87,7 +83,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.txtEntryDesc.Margin = new System.Windows.Forms.Padding(0);
             this.txtEntryDesc.MaxLength = 50;
             this.txtEntryDesc.Name = "txtEntryDesc";
-            this.txtEntryDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtEntryDesc.PasswordChar = '\0';
             this.txtEntryDesc.ReadOnly = false;
             this.txtEntryDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;

@@ -61,7 +61,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.lvSubtitles.Location = new System.Drawing.Point(3, 3);
             this.lvSubtitles.MultiSelect = false;
             this.lvSubtitles.Name = "lvSubtitles";
-            this.lvSubtitles.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvSubtitles.Size = new System.Drawing.Size(936, 454);
             this.lvSubtitles.TabIndex = 0;
             this.lvSubtitles.UseCompatibleStateImageBehavior = false;
@@ -105,8 +104,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Location = new System.Drawing.Point(837, 463);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnDownload.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnDownload.ShowDropDown = false;
             this.btnDownload.Size = new System.Drawing.Size(102, 27);
             this.btnDownload.TabIndex = 2;
@@ -118,11 +115,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.label1.Location = new System.Drawing.Point(3, 460);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(828, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "TXT_SUB_HINTS";

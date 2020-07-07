@@ -47,8 +47,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(354, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_FILENAMEPATTERN";
@@ -61,8 +59,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label3.Location = new System.Drawing.Point(0, 46);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label3.OverrideForeColor = System.Drawing.Color.Empty;
             this.label3.Size = new System.Drawing.Size(354, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "TXT_FOLDERNAMEPATTERN";
@@ -127,7 +123,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtHints.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.txtHints.Lines = new string[] {
         "TXT_TAGGINGPATTERNS"};
             this.txtHints.Location = new System.Drawing.Point(0, 92);
@@ -136,8 +131,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.MultiLineText = "TXT_TAGGINGPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
             this.txtHints.ScrollBars = System.Windows.Forms.ScrollBars.None;

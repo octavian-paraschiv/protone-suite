@@ -39,11 +39,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // renderingZone
             // 
             this.renderingZone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.renderingZone.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.renderingZone.ForeColor = System.Drawing.Color.YellowGreen;
             this.renderingZone.Location = new System.Drawing.Point(0, 0);
             this.renderingZone.Name = "renderingZone";
-            this.renderingZone.OverrideBackColor = System.Drawing.Color.Empty;
             this.renderingZone.Size = new System.Drawing.Size(387, 295);
             this.renderingZone.TabIndex = 0;
             // 

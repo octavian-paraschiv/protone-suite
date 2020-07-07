@@ -51,8 +51,6 @@ namespace OPMedia.UI.Wizards
             this.btnPrevious.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnPrevious.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnPrevious.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnPrevious.ShowDropDown = false;
             this.btnPrevious.Size = new System.Drawing.Size(75, 25);
             this.btnPrevious.TabIndex = 0;
@@ -68,8 +66,6 @@ namespace OPMedia.UI.Wizards
             this.btnNext.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnNext.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnNext.Name = "btnNext";
-            this.btnNext.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnNext.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnNext.ShowDropDown = false;
             this.btnNext.Size = new System.Drawing.Size(75, 25);
             this.btnNext.TabIndex = 1;
@@ -85,8 +81,6 @@ namespace OPMedia.UI.Wizards
             this.btnCancel.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
             this.btnCancel.TabIndex = 3;
@@ -102,8 +96,6 @@ namespace OPMedia.UI.Wizards
             this.btnFinish.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnFinish.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnFinish.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnFinish.ShowDropDown = false;
             this.btnFinish.Size = new System.Drawing.Size(75, 25);
             this.btnFinish.TabIndex = 2;
@@ -136,8 +128,6 @@ namespace OPMedia.UI.Wizards
             this.btnOK.Location = new System.Drawing.Point(123, 3);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(105, 25);
             this.btnOK.TabIndex = 1;

@@ -122,8 +122,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblPlaylistFormat.Location = new System.Drawing.Point(0, 96);
             this.lblPlaylistFormat.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblPlaylistFormat.Name = "lblPlaylistFormat";
-            this.lblPlaylistFormat.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblPlaylistFormat.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblPlaylistFormat.Size = new System.Drawing.Size(229, 15);
             this.lblPlaylistFormat.TabIndex = 3;
             this.lblPlaylistFormat.Text = "TXT_PLAYLIST_FORMAT";
@@ -167,7 +165,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtHints.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.txtHints.Lines = new string[] {
         "TXT_METADATAPATTERNS"};
             this.txtHints.Location = new System.Drawing.Point(234, 20);
@@ -176,8 +173,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.MultiLineText = "TXT_METADATAPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
             this.tableLayoutPanel1.SetRowSpan(this.txtHints, 11);
@@ -199,8 +194,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblDisplayFileName.Location = new System.Drawing.Point(0, 0);
             this.lblDisplayFileName.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblDisplayFileName.Name = "lblDisplayFileName";
-            this.lblDisplayFileName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDisplayFileName.OverrideForeColor = System.Drawing.Color.Red;
             this.lblDisplayFileName.Size = new System.Drawing.Size(472, 15);
             this.lblDisplayFileName.TabIndex = 5;
             this.lblDisplayFileName.Text = "TXT_DISPLAY_FILENAME";
@@ -243,8 +236,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel1.Location = new System.Drawing.Point(0, 192);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(229, 15);
             this.opmLabel1.TabIndex = 9;
             this.opmLabel1.Text = "TXT_XFADELENGTH";
@@ -257,8 +248,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel2.Location = new System.Drawing.Point(0, 242);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(229, 15);
             this.opmLabel2.TabIndex = 10;
             this.opmLabel2.Text = "TXT_ANTICIPATEDEND";
@@ -267,7 +256,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.nudXFadeLength.DecimalPlaces = 0;
             this.nudXFadeLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudXFadeLength.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudXFadeLength.Increment = new decimal(new int[] {
             1,
             0,
@@ -287,8 +275,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0});
             this.nudXFadeLength.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudXFadeLength.Name = "nudXFadeLength";
-            this.nudXFadeLength.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudXFadeLength.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudXFadeLength.ReadOnly = false;
             this.nudXFadeLength.Size = new System.Drawing.Size(229, 25);
             this.nudXFadeLength.TabIndex = 11;
@@ -306,7 +292,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.nudAnticipatedEnd.DecimalPlaces = 0;
             this.nudAnticipatedEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudAnticipatedEnd.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudAnticipatedEnd.Increment = new decimal(new int[] {
             1,
             0,
@@ -326,8 +311,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0});
             this.nudAnticipatedEnd.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudAnticipatedEnd.Name = "nudAnticipatedEnd";
-            this.nudAnticipatedEnd.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudAnticipatedEnd.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudAnticipatedEnd.ReadOnly = false;
             this.nudAnticipatedEnd.Size = new System.Drawing.Size(229, 25);
             this.nudAnticipatedEnd.TabIndex = 12;

@@ -47,8 +47,6 @@ namespace OPMedia.UI.Wizards
             this.lblWizardResults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblWizardResults.Location = new System.Drawing.Point(3, 0);
             this.lblWizardResults.Name = "lblWizardResults";
-            this.lblWizardResults.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblWizardResults.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblWizardResults.Size = new System.Drawing.Size(212, 19);
             this.lblWizardResults.TabIndex = 0;
             this.lblWizardResults.Text = "TXT_WIZTASKSFINISHED";
@@ -60,14 +58,11 @@ namespace OPMedia.UI.Wizards
             this.pbProgress.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbProgress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbProgress.Enabled = false;
-            this.pbProgress.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbProgress.Location = new System.Drawing.Point(3, 29);
             this.pbProgress.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.pbProgress.Maximum = 10000D;
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.NrTicks = 20;
-            this.pbProgress.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pbProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbProgress.ShowTicks = false;
             this.pbProgress.Size = new System.Drawing.Size(212, 10);
             this.pbProgress.TabIndex = 1;
@@ -115,8 +110,6 @@ namespace OPMedia.UI.Wizards
             this.lblStepDetails.Location = new System.Drawing.Point(3, 52);
             this.lblStepDetails.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.lblStepDetails.Name = "lblStepDetails";
-            this.lblStepDetails.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblStepDetails.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblStepDetails.Size = new System.Drawing.Size(212, 13);
             this.lblStepDetails.TabIndex = 3;
             // 

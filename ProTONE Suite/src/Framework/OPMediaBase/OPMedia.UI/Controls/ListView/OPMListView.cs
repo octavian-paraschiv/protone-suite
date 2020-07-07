@@ -261,18 +261,6 @@ namespace OPMedia.UI.Controls
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color BackColor { get { return base.BackColor; } }
-
-        [ReadOnly(true)]
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color ForeColor { get { return base.ForeColor; } }
-
-        [ReadOnly(true)]
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public new bool OwnerDraw { get { return base.OwnerDraw; } }
 
         [ReadOnly(true)]
@@ -285,26 +273,6 @@ namespace OPMedia.UI.Controls
         {
             get;
             set;
-        }
-
-        Color _overrideBackColor = Color.Empty;
-        public Color OverrideBackColor
-        {
-            get { return _overrideBackColor; }
-            set 
-            { 
-                _overrideBackColor = value; 
-                base.BackColor = GetBackColor();
-                Invalidate(true); 
-            }
-        }
-
-        private Color GetBackColor()
-        {
-            if (_overrideBackColor != Color.Empty)
-                return _overrideBackColor;
-
-            return ThemeManager.BackColor;
         }
 
         #endregion
@@ -790,10 +758,10 @@ namespace OPMedia.UI.Controls
 
                 Color altRowColor = ThemeManager.AltRowColor;
                 if (altRowColor == Color.Empty)
-                    altRowColor = GetBackColor();
+                    altRowColor = this.BackColor;
 
                 Color bColor = isSelected ? ThemeManager.SelectedColor :
-                    (alt ? altRowColor : GetBackColor());
+                    (alt ? altRowColor : this.BackColor);
 
                 Color fColor = e.Item.ForeColor;
                 if (e.Item.UseItemStyleForSubItems)
@@ -856,7 +824,7 @@ namespace OPMedia.UI.Controls
                 Rectangle rcHot = new Rectangle(e.Bounds.Left + d - 1, e.Bounds.Top + 1, e.Bounds.Width - d - 2, e.Bounds.Height - 2);
 
                 using (Brush b1 = new SolidBrush(bColor))
-                using (Brush b2 = new SolidBrush(GetBackColor()))
+                using (Brush b2 = new SolidBrush(this.BackColor))
                 using (Brush bt = new SolidBrush(fColor))
                 using (Pen pEditableItemsBorder = new Pen(ThemeManager.BorderColor))
                 using (Pen pHotItemsBorder = new Pen(ThemeManager.ListHotItemColor, 2))

@@ -92,8 +92,6 @@
             this.opmLabel2.Location = new System.Drawing.Point(3, 459);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(93, 23);
             this.opmLabel2.TabIndex = 4;
             this.opmLabel2.Text = "TXT_FILENAME:";
@@ -107,8 +105,6 @@
             this.opmLabel3.Location = new System.Drawing.Point(3, 490);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(93, 25);
             this.opmLabel3.TabIndex = 6;
             this.opmLabel3.Text = "TXT_FILE_TYPE:";
@@ -123,7 +119,6 @@
             this.cmbFilter.Location = new System.Drawing.Point(100, 491);
             this.cmbFilter.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.cmbFilter.Name = "cmbFilter";
-            this.cmbFilter.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbFilter.Size = new System.Drawing.Size(456, 24);
             this.cmbFilter.TabIndex = 7;
             this.cmbFilter.SelectedIndexChanged += new System.EventHandler(this.cmbFilter_SelectedIndexChanged);
@@ -135,7 +130,6 @@
             this.txtFileNames.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFileNames.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtFileNames.Lines = new string[0];
             this.txtFileNames.Location = new System.Drawing.Point(100, 460);
             this.txtFileNames.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
@@ -143,8 +137,6 @@
             this.txtFileNames.MaxLength = 32767;
             this.txtFileNames.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtFileNames.Name = "txtFileNames";
-            this.txtFileNames.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtFileNames.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtFileNames.PasswordChar = '\0';
             this.txtFileNames.ReadOnly = false;
             this.txtFileNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -164,8 +156,6 @@
             this.btnOK.Location = new System.Drawing.Point(564, 459);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(80, 23);
             this.btnOK.TabIndex = 8;
@@ -180,8 +170,6 @@
             this.btnCancel.Location = new System.Drawing.Point(564, 490);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(80, 25);
             this.btnCancel.TabIndex = 9;
@@ -201,7 +189,6 @@
             this.lvExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.lvExplorer.MultiSelect = false;
             this.lvExplorer.Name = "lvExplorer";
-            this.lvExplorer.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvExplorer.Size = new System.Drawing.Size(544, 423);
             this.lvExplorer.TabIndex = 3;
             this.lvExplorer.UseCompatibleStateImageBehavior = false;
@@ -213,12 +200,9 @@
             this.pnlLayout.SetColumnSpan(this.lblCurrentPath, 5);
             this.lblCurrentPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCurrentPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblCurrentPath.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.lblCurrentPath.Location = new System.Drawing.Point(5, 3);
             this.lblCurrentPath.Margin = new System.Windows.Forms.Padding(5, 3, 0, 3);
             this.lblCurrentPath.Name = "lblCurrentPath";
-            this.lblCurrentPath.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblCurrentPath.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblCurrentPath.Size = new System.Drawing.Size(595, 20);
             this.lblCurrentPath.TabIndex = 9;
             this.lblCurrentPath.Text = "opmLabel4";
@@ -244,8 +228,6 @@
             this.btnNewFolder.Location = new System.Drawing.Point(0, 0);
             this.btnNewFolder.Margin = new System.Windows.Forms.Padding(0);
             this.btnNewFolder.Name = "btnNewFolder";
-            this.btnNewFolder.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnNewFolder.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnNewFolder.ShowDropDown = false;
             this.btnNewFolder.Size = new System.Drawing.Size(20, 20);
             this.btnNewFolder.TabIndex = 11;
@@ -261,8 +243,6 @@
             this.btnAddToFavorites.MaximumSize = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.MinimumSize = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.Name = "btnAddToFavorites";
-            this.btnAddToFavorites.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnAddToFavorites.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnAddToFavorites.ShowDropDown = false;
             this.btnAddToFavorites.Size = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.TabIndex = 10;

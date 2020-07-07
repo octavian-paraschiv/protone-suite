@@ -162,7 +162,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             btnOpenURL.Image = OPMedia.Core.Properties.Resources.Internet;
             btnSettings.Image = OPMedia.UI.Properties.Resources.Settings;
 
-            this.HandleCreated += PlaybackPanel_HandleCreated;
+            //this.HandleCreated += PlaybackPanel_HandleCreated;
 
             timeScale.PositionChanged += new ValueChangedEventHandler(timeScale_PositionChanged);
             volumeScale.PositionChanged += new ValueChangedEventHandler(volumeScale_PositionChanged);
@@ -189,7 +189,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        private void PlaybackPanel_HandleCreated(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             BindEventHandlers(this);
             UpdateStateButtons();

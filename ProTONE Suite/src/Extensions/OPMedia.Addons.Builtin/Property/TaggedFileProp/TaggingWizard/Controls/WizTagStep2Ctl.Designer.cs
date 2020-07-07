@@ -48,8 +48,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(414, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZTAGGINGSTEP2_DESC";
@@ -64,7 +62,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.cmbEditType.Location = new System.Drawing.Point(3, 17);
             this.cmbEditType.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.cmbEditType.Name = "cmbEditType";
-            this.cmbEditType.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbEditType.Size = new System.Drawing.Size(414, 24);
             this.cmbEditType.TabIndex = 1;
             this.cmbEditType.SelectedIndexChanged += new System.EventHandler(this.cmbEditType_SelectedIndexChanged);
@@ -89,7 +86,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.cmbWordCasing.Location = new System.Drawing.Point(3, 248);
             this.cmbWordCasing.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.cmbWordCasing.Name = "cmbWordCasing";
-            this.cmbWordCasing.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbWordCasing.Size = new System.Drawing.Size(414, 24);
             this.cmbWordCasing.TabIndex = 4;
             this.cmbWordCasing.SelectedIndexChanged += new System.EventHandler(this.cmbWordCasing_SelectedIndexChanged);
@@ -101,8 +97,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.lblWordHandling.Location = new System.Drawing.Point(3, 231);
             this.lblWordHandling.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.lblWordHandling.Name = "lblWordHandling";
-            this.lblWordHandling.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblWordHandling.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblWordHandling.Size = new System.Drawing.Size(414, 17);
             this.lblWordHandling.TabIndex = 3;
             this.lblWordHandling.Text = "TXT_WORDHANDLING";

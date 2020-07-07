@@ -44,8 +44,6 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNotifyText.Location = new System.Drawing.Point(41, 0);
             this.lblNotifyText.Name = "lblNotifyText";
-            this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lblNotifyText, 3);
             this.lblNotifyText.Size = new System.Drawing.Size(211, 74);
             this.lblNotifyText.TabIndex = 8;
@@ -91,14 +89,11 @@ namespace OPMedia.UI.Dialogs
             this.pbProgress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbProgress.EffectiveMaximum = 0D;
             this.pbProgress.Enabled = false;
-            this.pbProgress.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbProgress.Location = new System.Drawing.Point(41, 77);
             this.pbProgress.Maximum = 100D;
             this.pbProgress.MinimumSize = new System.Drawing.Size(10, 12);
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.NrTicks = 10;
-            this.pbProgress.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pbProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbProgress.ShowTicks = false;
             this.pbProgress.Size = new System.Drawing.Size(211, 13);
             this.pbProgress.TabIndex = 9;

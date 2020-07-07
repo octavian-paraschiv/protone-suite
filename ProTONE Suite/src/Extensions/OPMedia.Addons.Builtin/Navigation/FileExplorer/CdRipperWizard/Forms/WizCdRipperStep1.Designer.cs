@@ -85,12 +85,9 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel3, 2);
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
             this.opmLabel3.Location = new System.Drawing.Point(5, 438);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(5, 0, 0, 5);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(500, 19);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_GRABBERHINT_STEP1";
@@ -105,8 +102,6 @@
             this.opmLabel1.Location = new System.Drawing.Point(0, 0);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(700, 15);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SELECTDRIVE";
@@ -120,7 +115,6 @@
             this.cmbAudioCDDrives.Location = new System.Drawing.Point(0, 20);
             this.cmbAudioCDDrives.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.cmbAudioCDDrives.Name = "cmbAudioCDDrives";
-            this.cmbAudioCDDrives.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbAudioCDDrives.Size = new System.Drawing.Size(473, 24);
             this.cmbAudioCDDrives.TabIndex = 1;
             this.cmbAudioCDDrives.SelectedIndexChanged += new System.EventHandler(this.OnDriveSelected);
@@ -134,8 +128,6 @@
             this.opmLabel2.Location = new System.Drawing.Point(0, 50);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(700, 15);
             this.opmLabel2.TabIndex = 2;
             this.opmLabel2.Text = "TXT_SELECTTRACKS";
@@ -159,7 +151,6 @@
             this.lvTracks.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvTracks.MultiSelect = false;
             this.lvTracks.Name = "lvTracks";
-            this.lvTracks.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvTracks.Size = new System.Drawing.Size(700, 363);
             this.lvTracks.TabIndex = 3;
             this.lvTracks.UseCompatibleStateImageBehavior = false;
@@ -202,8 +193,6 @@
             this.btnRefresh.Location = new System.Drawing.Point(478, 20);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnRefresh.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnRefresh.ShowDropDown = false;
             this.btnRefresh.Size = new System.Drawing.Size(27, 25);
             this.btnRefresh.TabIndex = 4;
@@ -227,7 +216,6 @@
             // 
             this.llCheckAll.AutoSize = true;
             this.llCheckAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llCheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
             this.llCheckAll.Location = new System.Drawing.Point(0, 0);
             this.llCheckAll.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.llCheckAll.Name = "llCheckAll";
@@ -236,13 +224,12 @@
             this.llCheckAll.TabStop = true;
             this.llCheckAll.Text = "TXT_CHECK_ALL";
             this.llCheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.llCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OnCheckAll);
+            this.llCheckAll.Click += new System.EventHandler(this.OnCheckAll);
             // 
             // llUncheckAll
             // 
             this.llUncheckAll.AutoSize = true;
             this.llUncheckAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llUncheckAll.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
             this.llUncheckAll.Location = new System.Drawing.Point(89, 0);
             this.llUncheckAll.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.llUncheckAll.Name = "llUncheckAll";
@@ -251,7 +238,7 @@
             this.llUncheckAll.TabStop = true;
             this.llUncheckAll.Text = "TXT_UNCHECK_ALL";
             this.llUncheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.llUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OnUncheckAll);
+            this.llUncheckAll.Click += new System.EventHandler(this.OnUncheckAll);
             // 
             // pbWaiting
             // 

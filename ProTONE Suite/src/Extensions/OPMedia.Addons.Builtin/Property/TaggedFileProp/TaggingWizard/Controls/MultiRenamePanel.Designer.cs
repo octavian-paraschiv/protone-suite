@@ -45,8 +45,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(350, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_RENAMEPATTERN";
@@ -56,7 +54,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.txtRenamePattern.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtRenamePattern.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtRenamePattern.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtRenamePattern.Lines = new string[] {
         "<N>"};
             this.txtRenamePattern.Location = new System.Drawing.Point(0, 20);
@@ -65,8 +62,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtRenamePattern.MaxLength = 32767;
             this.txtRenamePattern.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtRenamePattern.Name = "txtRenamePattern";
-            this.txtRenamePattern.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtRenamePattern.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtRenamePattern.PasswordChar = '\0';
             this.txtRenamePattern.ReadOnly = false;
             this.txtRenamePattern.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -82,7 +77,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtHints.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.txtHints.Lines = new string[] {
         "TXT_TAGGINGPATTERNS"};
             this.txtHints.Location = new System.Drawing.Point(0, 45);
@@ -91,8 +85,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.MultiLineText = "TXT_TAGGINGPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
             this.txtHints.ScrollBars = System.Windows.Forms.ScrollBars.None;

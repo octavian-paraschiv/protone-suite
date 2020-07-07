@@ -71,7 +71,6 @@
             this.txtDeezerToken.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDeezerToken.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtDeezerToken.Lines = new string[0];
             this.txtDeezerToken.Location = new System.Drawing.Point(247, 5);
             this.txtDeezerToken.Margin = new System.Windows.Forms.Padding(0);
@@ -79,8 +78,6 @@
             this.txtDeezerToken.MaxLength = 100;
             this.txtDeezerToken.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDeezerToken.Name = "txtDeezerToken";
-            this.txtDeezerToken.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtDeezerToken.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtDeezerToken.PasswordChar = '\0';
             this.txtDeezerToken.ReadOnly = false;
             this.txtDeezerToken.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -99,8 +96,6 @@
             this.opmLabel2.Location = new System.Drawing.Point(0, 5);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(244, 22);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_DEEZER_TOKEN";
@@ -114,8 +109,6 @@
             this.btnNew.MaximumSize = new System.Drawing.Size(22, 22);
             this.btnNew.MinimumSize = new System.Drawing.Size(22, 22);
             this.btnNew.Name = "btnNew";
-            this.btnNew.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnNew.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnNew.ShowDropDown = false;
             this.btnNew.Size = new System.Drawing.Size(22, 22);
             this.btnNew.TabIndex = 12;
@@ -130,8 +123,6 @@
             this.opmLabel6.Location = new System.Drawing.Point(0, 32);
             this.opmLabel6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel6.Name = "opmLabel6";
-            this.opmLabel6.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel6.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel6.Size = new System.Drawing.Size(244, 15);
             this.opmLabel6.TabIndex = 18;
             this.opmLabel6.Text = "TXT_DEEZER_USE_SERVICES_FOR_METADATA";

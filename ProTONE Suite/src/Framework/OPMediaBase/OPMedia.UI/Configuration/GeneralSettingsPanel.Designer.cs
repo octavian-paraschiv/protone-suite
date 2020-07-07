@@ -51,7 +51,6 @@ namespace OPMedia.UI.Configuration
             this.cmbLanguages.FormattingEnabled = true;
             this.cmbLanguages.Location = new System.Drawing.Point(3, 99);
             this.cmbLanguages.Name = "cmbLanguages";
-            this.cmbLanguages.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbLanguages.Size = new System.Drawing.Size(407, 24);
             this.cmbLanguages.TabIndex = 4;
             // 
@@ -60,12 +59,9 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.labelProductName, 3);
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelProductName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelProductName.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.labelProductName.Location = new System.Drawing.Point(0, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(0);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.labelProductName.OverrideForeColor = System.Drawing.Color.Empty;
             this.labelProductName.Size = new System.Drawing.Size(413, 23);
             this.labelProductName.TabIndex = 0;
             this.labelProductName.Text = "[ Product Name ]";
@@ -126,12 +122,9 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.labelVersion, 3);
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelVersion.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.labelVersion.Location = new System.Drawing.Point(0, 23);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(0);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.OverrideBackColor = System.Drawing.Color.Empty;
-            this.labelVersion.OverrideForeColor = System.Drawing.Color.Empty;
             this.labelVersion.Size = new System.Drawing.Size(413, 23);
             this.labelVersion.TabIndex = 1;
             this.labelVersion.Text = "[ Product Version ]";
@@ -142,12 +135,9 @@ namespace OPMedia.UI.Configuration
             this.layoutPanel.SetColumnSpan(this.labelCopyright, 3);
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCopyright.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelCopyright.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.labelCopyright.Location = new System.Drawing.Point(0, 46);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(0);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.OverrideBackColor = System.Drawing.Color.Empty;
-            this.labelCopyright.OverrideForeColor = System.Drawing.Color.Empty;
             this.labelCopyright.Size = new System.Drawing.Size(413, 23);
             this.labelCopyright.TabIndex = 2;
             this.labelCopyright.Text = "[ Copyright Notice ]";
@@ -160,8 +150,6 @@ namespace OPMedia.UI.Configuration
             this.lblSetLanguage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSetLanguage.Location = new System.Drawing.Point(3, 77);
             this.lblSetLanguage.Name = "lblSetLanguage";
-            this.lblSetLanguage.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblSetLanguage.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblSetLanguage.Size = new System.Drawing.Size(407, 19);
             this.lblSetLanguage.TabIndex = 3;
             this.lblSetLanguage.Text = "TXT_SETUILANGUAGE";
@@ -174,7 +162,6 @@ namespace OPMedia.UI.Configuration
             this.cmbThemes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbThemes.Location = new System.Drawing.Point(3, 148);
             this.cmbThemes.Name = "cmbThemes";
-            this.cmbThemes.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbThemes.Size = new System.Drawing.Size(407, 24);
             this.cmbThemes.TabIndex = 6;
             // 
@@ -185,8 +172,6 @@ namespace OPMedia.UI.Configuration
             this.lblSetSkin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSetSkin.Location = new System.Drawing.Point(3, 126);
             this.lblSetSkin.Name = "lblSetSkin";
-            this.lblSetSkin.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblSetSkin.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblSetSkin.Size = new System.Drawing.Size(407, 19);
             this.lblSetSkin.TabIndex = 5;
             this.lblSetSkin.Text = "TXT_SETSKIN";
@@ -200,8 +185,6 @@ namespace OPMedia.UI.Configuration
             this.btnCheckUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckUpdates.Location = new System.Drawing.Point(284, 182);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
-            this.btnCheckUpdates.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCheckUpdates.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCheckUpdates.ShowDropDown = false;
             this.btnCheckUpdates.Size = new System.Drawing.Size(126, 27);
             this.btnCheckUpdates.TabIndex = 9;

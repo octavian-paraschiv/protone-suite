@@ -58,8 +58,6 @@
             this.lblValueName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblValueName.Location = new System.Drawing.Point(3, 0);
             this.lblValueName.Name = "lblValueName";
-            this.lblValueName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblValueName.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblValueName.Size = new System.Drawing.Size(39, 29);
             this.lblValueName.TabIndex = 0;
             this.lblValueName.Text = "Value:";
@@ -72,7 +70,6 @@
             this.cmbValue.FormattingEnabled = true;
             this.cmbValue.Location = new System.Drawing.Point(48, 3);
             this.cmbValue.Name = "cmbValue";
-            this.cmbValue.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbValue.Size = new System.Drawing.Size(96, 23);
             this.cmbValue.TabIndex = 1;
             // 

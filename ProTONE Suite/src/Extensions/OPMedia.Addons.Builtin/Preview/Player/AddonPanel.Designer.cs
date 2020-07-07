@@ -35,12 +35,10 @@ namespace OPMedia.Addons.Builtin.Player
             // 
             this.mediaPlayer.CompactView = true;
             this.mediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaPlayer.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.mediaPlayer.Location = new System.Drawing.Point(0, 4);
             this.mediaPlayer.Margin = new System.Windows.Forms.Padding(0);
             this.mediaPlayer.MinimumSize = new System.Drawing.Size(481, 68);
             this.mediaPlayer.Name = "mediaPlayer";
-            this.mediaPlayer.OverrideBackColor = System.Drawing.Color.Empty;
             this.mediaPlayer.Size = new System.Drawing.Size(523, 68);
             this.mediaPlayer.TabIndex = 0;
             // 

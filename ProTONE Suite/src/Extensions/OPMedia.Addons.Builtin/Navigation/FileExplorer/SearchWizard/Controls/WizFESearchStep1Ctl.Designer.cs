@@ -117,8 +117,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.label3.Location = new System.Drawing.Point(321, 48);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
-            this.label3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label3.OverrideForeColor = System.Drawing.Color.Empty;
             this.label3.Size = new System.Drawing.Size(313, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "TXT_SEARCHVALUE";
@@ -133,8 +131,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(634, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SEARCHPATTERN_FE";
@@ -201,7 +197,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.txtSearchPath.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtSearchPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearchPath.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtSearchPath.Lines = new string[0];
             this.txtSearchPath.Location = new System.Drawing.Point(0, 0);
             this.txtSearchPath.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -209,8 +204,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.txtSearchPath.MaxLength = 32767;
             this.txtSearchPath.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtSearchPath.Name = "txtSearchPath";
-            this.txtSearchPath.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtSearchPath.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtSearchPath.PasswordChar = '\0';
             this.txtSearchPath.ReadOnly = true;
             this.txtSearchPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -229,8 +222,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.label2.Location = new System.Drawing.Point(0, 48);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(313, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "TXT_SEARCHFOLDER";
@@ -303,7 +294,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.lvResults.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvResults.MultiSelect = false;
             this.lvResults.Name = "lvResults";
-            this.lvResults.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvResults.Size = new System.Drawing.Size(634, 269);
             this.lvResults.TabIndex = 14;
             this.lvResults.UseCompatibleStateImageBehavior = false;
@@ -525,8 +515,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 225);
             this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.Size = new System.Drawing.Size(313, 15);
             this.kryptonLabel1.TabIndex = 22;
             this.kryptonLabel1.Text = "TXT_RESULTS";
@@ -586,8 +574,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.btnBrowse.MaximumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.MinimumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnBrowse.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnBrowse.ShowDropDown = false;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 7;

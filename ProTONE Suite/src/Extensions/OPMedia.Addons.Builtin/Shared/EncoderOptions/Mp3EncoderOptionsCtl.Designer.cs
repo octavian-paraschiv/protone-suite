@@ -57,8 +57,6 @@
             this.opmLabel3.MaximumSize = new System.Drawing.Size(130, 24);
             this.opmLabel3.MinimumSize = new System.Drawing.Size(130, 24);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(130, 24);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_CHANNEL_MODE";
@@ -73,7 +71,6 @@
             this.cmbChannelMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbChannelMode.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbChannelMode.Name = "cmbChannelMode";
-            this.cmbChannelMode.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbChannelMode.Size = new System.Drawing.Size(97, 24);
             this.cmbChannelMode.TabIndex = 6;
             // 
@@ -85,8 +82,6 @@
             this.opmLabel1.Location = new System.Drawing.Point(0, 29);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(130, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_BITRATE_MODE";
@@ -119,7 +114,6 @@
             this.cmbBitrateMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbBitrateMode.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbBitrateMode.Name = "cmbBitrateMode";
-            this.cmbBitrateMode.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbBitrateMode.Size = new System.Drawing.Size(97, 24);
             this.cmbBitrateMode.TabIndex = 1;
             // 
@@ -131,8 +125,6 @@
             this.lblBitrate.Location = new System.Drawing.Point(578, 29);
             this.lblBitrate.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblBitrate.Name = "lblBitrate";
-            this.lblBitrate.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblBitrate.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblBitrate.Size = new System.Drawing.Size(128, 30);
             this.lblBitrate.TabIndex = 8;
             this.lblBitrate.Text = "TXT_BITRATE";
@@ -146,8 +138,6 @@
             this.lblVbrQuality.Location = new System.Drawing.Point(481, 29);
             this.lblVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblVbrQuality.Name = "lblVbrQuality";
-            this.lblVbrQuality.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblVbrQuality.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblVbrQuality.Size = new System.Drawing.Size(92, 30);
             this.lblVbrQuality.TabIndex = 6;
             this.lblVbrQuality.Text = "TXT_VBRQUALITY";
@@ -161,8 +151,6 @@
             this.lblPreset.Location = new System.Drawing.Point(232, 29);
             this.lblPreset.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblPreset.Name = "lblPreset";
-            this.lblPreset.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblPreset.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblPreset.Size = new System.Drawing.Size(244, 30);
             this.lblPreset.TabIndex = 10;
             this.lblPreset.Text = "TXT_PRESET";
@@ -192,7 +180,6 @@
             this.cmbBitrateCBR.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbBitrateCBR.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbBitrateCBR.Name = "cmbBitrateCBR";
-            this.cmbBitrateCBR.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbBitrateCBR.Size = new System.Drawing.Size(249, 24);
             this.cmbBitrateCBR.TabIndex = 7;
             // 
@@ -205,7 +192,6 @@
             this.cmbBitrateABR.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbBitrateABR.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbBitrateABR.Name = "cmbBitrateABR";
-            this.cmbBitrateABR.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbBitrateABR.Size = new System.Drawing.Size(249, 24);
             this.cmbBitrateABR.TabIndex = 7;
             // 
@@ -218,7 +204,6 @@
             this.cmbPreset.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbPreset.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbPreset.Name = "cmbPreset";
-            this.cmbPreset.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbPreset.Size = new System.Drawing.Size(97, 24);
             this.cmbPreset.TabIndex = 4;
             // 
@@ -231,7 +216,6 @@
             this.cmbVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbVbrQuality.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbVbrQuality.Name = "cmbVbrQuality";
-            this.cmbVbrQuality.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbVbrQuality.Size = new System.Drawing.Size(97, 24);
             this.cmbVbrQuality.TabIndex = 4;
             // 
@@ -243,8 +227,6 @@
             this.lblOutputBitrateHint.Location = new System.Drawing.Point(0, 128);
             this.lblOutputBitrateHint.Margin = new System.Windows.Forms.Padding(0);
             this.lblOutputBitrateHint.Name = "lblOutputBitrateHint";
-            this.lblOutputBitrateHint.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblOutputBitrateHint.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblOutputBitrateHint.Size = new System.Drawing.Size(711, 206);
             this.lblOutputBitrateHint.TabIndex = 12;
             this.lblOutputBitrateHint.Text = "dfsdsfdsfsdfdsf";
@@ -258,8 +240,6 @@
             this.lblFrequency.Location = new System.Drawing.Point(232, 0);
             this.lblFrequency.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblFrequency.Name = "lblFrequency";
-            this.lblFrequency.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblFrequency.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblFrequency.Size = new System.Drawing.Size(244, 24);
             this.lblFrequency.TabIndex = 8;
             this.lblFrequency.Text = "Freq:";
@@ -284,7 +264,6 @@
             this.cmbFrequency.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbFrequency.MinimumSize = new System.Drawing.Size(85, 0);
             this.cmbFrequency.Name = "cmbFrequency";
-            this.cmbFrequency.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbFrequency.Size = new System.Drawing.Size(97, 24);
             this.cmbFrequency.TabIndex = 7;
             // 

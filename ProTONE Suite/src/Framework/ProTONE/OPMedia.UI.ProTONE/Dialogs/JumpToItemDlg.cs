@@ -86,8 +86,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(403, 361);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 38);
             this.btnCancel.TabIndex = 5;
@@ -102,8 +100,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.Location = new System.Drawing.Point(326, 361);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
-            this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(72, 38);
             this.btnOk.TabIndex = 4;
@@ -130,8 +126,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.label1.Location = new System.Drawing.Point(5, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(488, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "TXT_MATCHING_ITEMS";
@@ -146,8 +140,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.label2.Location = new System.Drawing.Point(5, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(488, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "TXT_ENTER_KEYWORD";
@@ -159,7 +151,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.opmLayoutPanel1.SetColumnSpan(this.txtKeyword, 3);
             this.txtKeyword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtKeyword.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtKeyword.Lines = new string[0];
             this.txtKeyword.Location = new System.Drawing.Point(5, 20);
             this.txtKeyword.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
@@ -167,8 +158,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.MaxLength = 32767;
             this.txtKeyword.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtKeyword.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtKeyword.PasswordChar = '\0';
             this.txtKeyword.ReadOnly = false;
             this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;

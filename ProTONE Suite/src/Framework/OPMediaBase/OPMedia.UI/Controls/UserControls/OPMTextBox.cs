@@ -18,34 +18,6 @@ namespace OPMedia.UI.Controls
         protected TextBox txtField;
         public new event EventHandler TextChanged = null;
 
-        #region GUI Properties
-
-
-        #region Override settings
-
-        [ReadOnly(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color ForeColor { get { return base.ForeColor; } }
-
-        Color _overrideForeColor = Color.Empty;
-        public Color OverrideForeColor
-        {
-            get { return _overrideForeColor; }
-            set { _overrideForeColor = value; Invalidate(true); }
-        }
-
-        private Color GetForeColor()
-        {
-            if (_overrideForeColor != Color.Empty)
-                return _overrideForeColor;
-
-            return ThemeManager.WndTextColor;
-        }
-        #endregion
-
-        #endregion
 
         #region TextBoxBase-like properties
         [Browsable(false)]
@@ -118,7 +90,7 @@ namespace OPMedia.UI.Controls
         public new Color BackColor
         {
             get { return txtField.BackColor; }
-            set { txtField.BackColor = value; }
+            set { /*txtField.BackColor = value;*/ }
         }
 
         public bool UseSystemPasswordChar
@@ -240,9 +212,9 @@ namespace OPMedia.UI.Controls
 
         private void UpdateColors()
         {
-            this.OverrideBackColor = Color.Transparent;
+            this.BackColor = Color.Transparent;
             txtField.BackColor = ThemeManager.WndValidColor;
-            txtField.ForeColor = GetForeColor();
+            txtField.ForeColor = ThemeManager.WndTextColor;
             Invalidate(true);
         }
 

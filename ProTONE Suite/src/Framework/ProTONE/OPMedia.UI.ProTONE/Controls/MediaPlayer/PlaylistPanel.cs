@@ -980,10 +980,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             UpdatePlaylistNames(false);
 
             var c = ThemeManager.ForeColor;
-            lblSep2.OverrideBackColor = c;
-            lblSep3.OverrideBackColor = c;
-            lblSep5.OverrideBackColor = c;
-            lblSep1.OverrideBackColor = c;
+            lblSep2.BackColor = c;
+            lblSep3.BackColor = c;
+            lblSep5.BackColor = c;
+            lblSep1.BackColor = c;
             base.OnThemeUpdatedInternal();
         }
 
@@ -1198,12 +1198,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 AddToDeezerPlaylist(itemsToAdd, FindForm());
         }
 
-        private void lblOpenPlaylist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lblOpenPlaylist_LinkClicked(object sender, EventArgs e)
         {
             EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoadPlaylist));
         }
 
-        private void lblOpenFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lblOpenFiles_LinkClicked(object sender, EventArgs e)
         {
             EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoad));
         }

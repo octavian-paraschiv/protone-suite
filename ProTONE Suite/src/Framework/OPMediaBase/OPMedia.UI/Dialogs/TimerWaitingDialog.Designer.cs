@@ -49,8 +49,6 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNotifyText.Location = new System.Drawing.Point(3, 0);
             this.lblNotifyText.Name = "lblNotifyText";
-            this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNotifyText.Size = new System.Drawing.Size(405, 154);
             this.lblNotifyText.TabIndex = 1;
             this.lblNotifyText.Text = "bla\r\nblabla\r\nblablabla\r\n\r\nblablablabla\r\nblablablablabla";
@@ -63,13 +61,10 @@ namespace OPMedia.UI.Dialogs
             this.pbWaiting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbWaiting.EffectiveMaximum = 0D;
             this.pbWaiting.Enabled = false;
-            this.pbWaiting.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbWaiting.Location = new System.Drawing.Point(3, 3);
             this.pbWaiting.Maximum = 100D;
             this.pbWaiting.Name = "pbWaiting";
             this.pbWaiting.NrTicks = 20;
-            this.pbWaiting.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pbWaiting.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbWaiting.ShowTicks = false;
             this.pbWaiting.Size = new System.Drawing.Size(350, 14);
             this.pbWaiting.TabIndex = 0;
@@ -83,8 +78,6 @@ namespace OPMedia.UI.Dialogs
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(81, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
             this.btnCancel.TabIndex = 1;
@@ -97,8 +90,6 @@ namespace OPMedia.UI.Dialogs
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(3, 3);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 0;
@@ -111,8 +102,6 @@ namespace OPMedia.UI.Dialogs
             this.lblTimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTimer.Location = new System.Drawing.Point(359, 0);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblTimer.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblTimer.Size = new System.Drawing.Size(49, 20);
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "00:00:00";

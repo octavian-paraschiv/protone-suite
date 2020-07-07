@@ -65,7 +65,6 @@
             this.lvRadioStations.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvRadioStations.MultiSelect = false;
             this.lvRadioStations.Name = "lvRadioStations";
-            this.lvRadioStations.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvRadioStations.Size = new System.Drawing.Size(449, 349);
             this.lvRadioStations.TabIndex = 1;
             this.lvRadioStations.UseCompatibleStateImageBehavior = false;
@@ -134,12 +133,9 @@
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmLabel1.Location = new System.Drawing.Point(0, 354);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(82, 27);
             this.opmLabel1.TabIndex = 2;
             this.opmLabel1.Text = "TXT_SEARCH:";
@@ -166,8 +162,6 @@
             this.btnSearch.Location = new System.Drawing.Point(360, 354);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSearch.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSearch.ShowDropDown = false;
             this.btnSearch.Size = new System.Drawing.Size(89, 27);
             this.btnSearch.TabIndex = 4;

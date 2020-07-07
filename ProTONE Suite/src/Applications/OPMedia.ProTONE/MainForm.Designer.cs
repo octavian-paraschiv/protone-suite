@@ -153,12 +153,10 @@ namespace OPMedia.ProTONE
             // 
             this.mediaPlayer.CompactView = false;
             this.mediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaPlayer.FontSize = OPMedia.UI.Themes.FontSizes.Large;
             this.mediaPlayer.Location = new System.Drawing.Point(0, 0);
             this.mediaPlayer.Margin = new System.Windows.Forms.Padding(0);
             this.mediaPlayer.MinimumSize = new System.Drawing.Size(160, 0);
             this.mediaPlayer.Name = "mediaPlayer";
-            this.mediaPlayer.OverrideBackColor = System.Drawing.Color.Empty;
             this.mediaPlayer.Size = new System.Drawing.Size(650, 600);
             this.mediaPlayer.TabIndex = 0;
             // 

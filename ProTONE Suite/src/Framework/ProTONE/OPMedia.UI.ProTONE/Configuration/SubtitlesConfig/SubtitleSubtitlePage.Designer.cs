@@ -87,7 +87,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lvDownloadAddresses.Margin = new System.Windows.Forms.Padding(0);
             this.lvDownloadAddresses.MultiSelect = false;
             this.lvDownloadAddresses.Name = "lvDownloadAddresses";
-            this.lvDownloadAddresses.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvDownloadAddresses.Size = new System.Drawing.Size(521, 96);
             this.lvDownloadAddresses.TabIndex = 0;
             this.lvDownloadAddresses.UseCompatibleStateImageBehavior = false;
@@ -135,8 +134,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
-            this.label3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label3.OverrideForeColor = System.Drawing.Color.Empty;
             this.label3.Size = new System.Drawing.Size(185, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "TXT_PREFFEREDSUBTITLELANG";
@@ -151,7 +148,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.cmbLanguages.Location = new System.Drawing.Point(191, 0);
             this.cmbLanguages.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbLanguages.Name = "cmbLanguages";
-            this.cmbLanguages.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbLanguages.Size = new System.Drawing.Size(355, 24);
             this.cmbLanguages.TabIndex = 1;
             // 
@@ -219,8 +215,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel1.Location = new System.Drawing.Point(3, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.Size = new System.Drawing.Size(7, 2);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -294,13 +288,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblClickHint.AutoSize = true;
             this.lblClickHint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblClickHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblClickHint.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
             this.lblClickHint.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblClickHint.Location = new System.Drawing.Point(0, 0);
             this.lblClickHint.Margin = new System.Windows.Forms.Padding(0);
             this.lblClickHint.Name = "lblClickHint";
-            this.lblClickHint.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblClickHint.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblClickHint.Size = new System.Drawing.Size(343, 30);
             this.lblClickHint.TabIndex = 0;
             this.lblClickHint.Text = "TXT_CLICK_LIST_TO_EDIT";
@@ -311,12 +302,9 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnRestoreDefaults.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRestoreDefaults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRestoreDefaults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestoreDefaults.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
             this.btnRestoreDefaults.Location = new System.Drawing.Point(343, 0);
             this.btnRestoreDefaults.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRestoreDefaults.Name = "btnRestoreDefaults";
-            this.btnRestoreDefaults.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnRestoreDefaults.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnRestoreDefaults.ShowDropDown = false;
             this.btnRestoreDefaults.Size = new System.Drawing.Size(178, 25);
             this.btnRestoreDefaults.TabIndex = 1;
@@ -354,8 +342,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblMinDuration.Location = new System.Drawing.Point(0, 0);
             this.lblMinDuration.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.lblMinDuration.Name = "lblMinDuration";
-            this.lblMinDuration.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblMinDuration.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblMinDuration.Size = new System.Drawing.Size(150, 25);
             this.lblMinDuration.TabIndex = 0;
             this.lblMinDuration.Text = "TXT_MINMOVIEDURATION";
@@ -366,7 +352,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudMinMovieDuration.AccessibleName = "nudMinMovieDuration";
             this.nudMinMovieDuration.DecimalPlaces = 0;
             this.nudMinMovieDuration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudMinMovieDuration.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudMinMovieDuration.Increment = new decimal(new int[] {
             1,
             0,
@@ -387,8 +372,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             0});
             this.nudMinMovieDuration.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudMinMovieDuration.Name = "nudMinMovieDuration";
-            this.nudMinMovieDuration.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudMinMovieDuration.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudMinMovieDuration.ReadOnly = false;
             this.nudMinMovieDuration.Size = new System.Drawing.Size(50, 25);
             this.nudMinMovieDuration.TabIndex = 1;
@@ -411,8 +394,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.kryptonLabel2.Location = new System.Drawing.Point(206, 0);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel2.Size = new System.Drawing.Size(340, 25);
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Text = "TXT_MINUTES";

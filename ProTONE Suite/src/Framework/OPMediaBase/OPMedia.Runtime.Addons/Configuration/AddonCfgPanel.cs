@@ -49,12 +49,12 @@ namespace OPMedia.Runtime.Addons.Configuration
             if (AddonsConfig.IsInitialConfig)
             {
                 lblAddonDesc.Text = Translator.Translate("TXT_ADDONSLIST_NORESTART");
-                lblAddonDesc.OverrideForeColor = Color.LightCoral;
+                lblAddonDesc.ForeColor = Color.LightCoral;
             }
             else
             {
                 lblAddonDesc.Text = Translator.Translate("TXT_ADDONSLIST");
-                lblAddonDesc.OverrideForeColor = Color.Empty;
+                lblAddonDesc.ForeColor = Color.Empty;
             }
 
             this.HandleCreated += new EventHandler(AddonCfgPanel_HandleCreated);

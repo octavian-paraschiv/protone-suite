@@ -47,8 +47,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Location = new System.Drawing.Point(799, 358);
             this.okButton.Name = "okButton";
-            this.okButton.OverrideBackColor = System.Drawing.Color.Empty;
-            this.okButton.OverrideForeColor = System.Drawing.Color.Empty;
             this.okButton.ShowDropDown = false;
             this.okButton.Size = new System.Drawing.Size(61, 27);
             this.okButton.TabIndex = 2;
@@ -62,8 +60,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(857, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_PREVIEW_DESC";
@@ -79,7 +75,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.lvPreview.Location = new System.Drawing.Point(3, 18);
             this.lvPreview.MultiSelect = false;
             this.lvPreview.Name = "lvPreview";
-            this.lvPreview.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvPreview.ShowItemToolTips = true;
             this.lvPreview.Size = new System.Drawing.Size(857, 334);
             this.lvPreview.TabIndex = 1;

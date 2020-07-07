@@ -72,8 +72,6 @@
             this.opmLabel1.Location = new System.Drawing.Point(0, 0);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(579, 15);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SAVETOFOLDER";
@@ -88,8 +86,6 @@
             this.opmLabel2.Location = new System.Drawing.Point(0, 46);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(579, 15);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_FILENAMEPATTERN";
@@ -100,7 +96,6 @@
             this.txtDestFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDestFolder.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDestFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDestFolder.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.txtDestFolder.Lines = new string[0];
             this.txtDestFolder.Location = new System.Drawing.Point(0, 20);
             this.txtDestFolder.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -108,8 +103,6 @@
             this.txtDestFolder.MaxLength = 32767;
             this.txtDestFolder.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDestFolder.Name = "txtDestFolder";
-            this.txtDestFolder.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.txtDestFolder.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtDestFolder.PasswordChar = '\0';
             this.txtDestFolder.ReadOnly = true;
             this.txtDestFolder.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -125,12 +118,9 @@
             // 
             this.opmButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmButton1.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.opmButton1.Location = new System.Drawing.Point(550, 20);
             this.opmButton1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmButton1.Name = "opmButton1";
-            this.opmButton1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmButton1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmButton1.ShowDropDown = false;
             this.opmButton1.Size = new System.Drawing.Size(29, 21);
             this.opmButton1.TabIndex = 3;

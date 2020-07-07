@@ -21,58 +21,6 @@ namespace OPMedia.UI.Controls
     {
         protected bool _isHovered = false;
 
-        #region GUI Properties
-
-        #region Font Size
-
-        [ReadOnly(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Font Font { get { return base.Font; } }
-
-        FontSizes _fontSizes = FontSizes.Normal;
-        [DefaultValue(FontSizes.Normal)]
-        public FontSizes FontSize
-        {
-            get { return _fontSizes; }
-            set
-            {
-                ThemeManager.SetFont(this, value);
-                _fontSizes = value;
-
-                Invalidate(true);
-            }
-        }
-        #endregion
-
-        #region Override settings
-
-        [ReadOnly(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color ForeColor { get { return base.ForeColor; } }
-
-        protected Color _overrideForeColor = Color.Empty;
-        public Color OverrideForeColor
-        {
-            get { return _overrideForeColor; }
-            set { _overrideForeColor = value; Invalidate(true); }
-        }
-
-        protected Color GetForeColor()
-        {
-            if (_overrideForeColor != Color.Empty)
-                return _overrideForeColor;
-
-            return ThemeManager.WndTextColor;
-        }
-        #endregion
-
-        #endregion
-
-
         public new object SelectedItem
         {
             get { return base.SelectedItem; }
@@ -104,8 +52,6 @@ namespace OPMedia.UI.Controls
             this.SetStyle(ControlStyles.DoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.DoubleBuffered = true;
-
-            this.FontSize = FontSizes.Normal;
 
             this.HandleCreated += OPMComboBox_HandleCreated;
         }
@@ -167,7 +113,7 @@ namespace OPMedia.UI.Controls
                 img = item.Image;
             }
 
-            Color cText = Enabled ? GetForeColor() : Color.FromKnownColor(KnownColor.ControlDark);
+            Color cText = Enabled ? this.BackColor : Color.FromKnownColor(KnownColor.ControlDark);
 
             bool hot = false;
             if (e.State.HasFlag(DrawItemState.Selected) ||
@@ -254,11 +200,6 @@ namespace OPMedia.UI.Controls
                 }
             }
            
-            if (_overrideForeColor != Color.Empty)
-            {
-                cText = _overrideForeColor;
-            }
-
             Rectangle rc = ClientRectangle;
             rc.Inflate(2, 2);
             using (Brush b = new SolidBrush(ThemeManager.BackColor))
@@ -385,7 +326,7 @@ namespace OPMedia.UI.Controls
             FontFamily ff = (FontFamily)this.Items[e.Index];
             string text = ff.Name;
 
-            Color cText = Enabled ? base.GetForeColor() : Color.FromKnownColor(KnownColor.ControlDark);
+            Color cText = Enabled ? this.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
 
             bool hot = false;
             if (e.State.HasFlag(DrawItemState.Selected) ||
@@ -465,11 +406,6 @@ namespace OPMedia.UI.Controls
                     c2 = ThemeManager.GradientHoverColor2;
                     cText = ThemeManager.SelectedTextColor;
                 }
-            }
-
-            if (_overrideForeColor != Color.Empty)
-            {
-                cText = _overrideForeColor;
             }
 
             Rectangle rc = ClientRectangle;
@@ -605,11 +541,6 @@ namespace OPMedia.UI.Controls
                     c2 = ThemeManager.GradientHoverColor2;
                     cText = ThemeManager.SelectedTextColor;
                 }
-            }
-
-            if (_overrideForeColor != Color.Empty)
-            {
-                cText = _overrideForeColor;
             }
 
             Color c = Color.Empty;

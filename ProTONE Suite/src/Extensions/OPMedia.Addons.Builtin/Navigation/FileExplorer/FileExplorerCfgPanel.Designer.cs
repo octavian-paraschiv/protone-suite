@@ -46,8 +46,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.label5.Location = new System.Drawing.Point(0, 30);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label5.OverrideForeColor = System.Drawing.Color.Empty;
             this.label5.Size = new System.Drawing.Size(149, 25);
             this.label5.TabIndex = 6;
             this.label5.Text = "TXT_PREVIEW_TIMER";
@@ -58,7 +56,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudPreviewTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.nudPreviewTimer.DecimalPlaces = 1;
-            this.nudPreviewTimer.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudPreviewTimer.Increment = new decimal(new int[] {
             1,
             0,
@@ -79,8 +76,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             0});
             this.nudPreviewTimer.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudPreviewTimer.Name = "nudPreviewTimer";
-            this.nudPreviewTimer.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudPreviewTimer.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudPreviewTimer.ReadOnly = true;
             this.nudPreviewTimer.Size = new System.Drawing.Size(53, 25);
             this.nudPreviewTimer.TabIndex = 7;
@@ -103,8 +98,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel1.Size = new System.Drawing.Size(149, 25);
             this.kryptonLabel1.TabIndex = 6;
             this.kryptonLabel1.Text = "TXT_MAXPROCESSEDFILES";
@@ -115,7 +108,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudMaxProcessedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.nudMaxProcessedFiles.DecimalPlaces = 0;
-            this.nudMaxProcessedFiles.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudMaxProcessedFiles.Increment = new decimal(new int[] {
             10,
             0,
@@ -136,8 +128,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             0});
             this.nudMaxProcessedFiles.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudMaxProcessedFiles.Name = "nudMaxProcessedFiles";
-            this.nudMaxProcessedFiles.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudMaxProcessedFiles.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudMaxProcessedFiles.ReadOnly = false;
             this.nudMaxProcessedFiles.Size = new System.Drawing.Size(53, 25);
             this.nudMaxProcessedFiles.TabIndex = 7;
@@ -182,12 +172,10 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.connectedFilesConfigCtl1, 3);
             this.connectedFilesConfigCtl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.connectedFilesConfigCtl1.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.connectedFilesConfigCtl1.Location = new System.Drawing.Point(0, 65);
             this.connectedFilesConfigCtl1.Margin = new System.Windows.Forms.Padding(0);
             this.connectedFilesConfigCtl1.Modified = false;
             this.connectedFilesConfigCtl1.Name = "connectedFilesConfigCtl1";
-            this.connectedFilesConfigCtl1.OverrideBackColor = System.Drawing.Color.Empty;
             this.connectedFilesConfigCtl1.Size = new System.Drawing.Size(375, 273);
             this.connectedFilesConfigCtl1.TabIndex = 8;
             // 

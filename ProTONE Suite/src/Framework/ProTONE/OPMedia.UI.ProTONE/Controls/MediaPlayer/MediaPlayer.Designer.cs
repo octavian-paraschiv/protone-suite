@@ -62,12 +62,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.playlist.AllowDrop = true;
             this.playlist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playlist.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.playlist.Location = new System.Drawing.Point(0, 0);
             this.playlist.Margin = new System.Windows.Forms.Padding(0);
             this.playlist.MinimumSize = new System.Drawing.Size(160, 160);
             this.playlist.Name = "playlist";
-            this.playlist.OverrideBackColor = System.Drawing.Color.Empty;
             this.playlist.Size = new System.Drawing.Size(573, 304);
             this.playlist.TabIndex = 0;
             this.playlist.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlPlaylist_DragDrop);
@@ -84,12 +82,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlPlayback.EffectiveSeconds = 0D;
             this.pnlPlayback.ElapsedSeconds = 0D;
             this.pnlPlayback.FilterState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
-            this.pnlPlayback.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pnlPlayback.Location = new System.Drawing.Point(3, 307);
             this.pnlPlayback.MaximumSize = new System.Drawing.Size(3500, 75);
             this.pnlPlayback.MinimumSize = new System.Drawing.Size(500, 75);
             this.pnlPlayback.Name = "pnlPlayback";
-            this.pnlPlayback.OverrideBackColor = System.Drawing.Color.Transparent;
             this.pnlPlayback.ProjectedVolume = 5000;
             this.pnlPlayback.Size = new System.Drawing.Size(567, 75);
             this.pnlPlayback.TabIndex = 1;

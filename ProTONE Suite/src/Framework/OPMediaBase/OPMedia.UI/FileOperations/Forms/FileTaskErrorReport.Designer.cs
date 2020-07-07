@@ -47,8 +47,6 @@ namespace OPMedia.UI.FileTasks
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(1036, 1025);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 2;
@@ -74,8 +72,6 @@ namespace OPMedia.UI.FileTasks
             this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(44, 0);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblDesc.Size = new System.Drawing.Size(649, 38);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "TXT_ERRORSFOUND";

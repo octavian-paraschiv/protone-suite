@@ -60,7 +60,6 @@ namespace OPMedia.UI.Configuration
             this.cmbSerialPort.FormattingEnabled = true;
             this.cmbSerialPort.Location = new System.Drawing.Point(205, 3);
             this.cmbSerialPort.Name = "cmbSerialPort";
-            this.cmbSerialPort.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbSerialPort.Size = new System.Drawing.Size(78, 24);
             this.cmbSerialPort.TabIndex = 1;
             // 
@@ -70,8 +69,6 @@ namespace OPMedia.UI.Configuration
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(196, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SERIAL_PORT_NAME";

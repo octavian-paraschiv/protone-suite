@@ -51,8 +51,6 @@ namespace OPMedia.UI.Dialogs
             this.lblNotifyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNotifyText.Location = new System.Drawing.Point(41, 0);
             this.lblNotifyText.Name = "lblNotifyText";
-            this.lblNotifyText.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblNotifyText.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lblNotifyText, 3);
             this.lblNotifyText.Size = new System.Drawing.Size(201, 52);
             this.lblNotifyText.TabIndex = 0;

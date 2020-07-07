@@ -107,8 +107,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     pbInfo.Visible = true;
                 }
 
-                lblDesc.FontSize = (this.ItemType == PlaylistItemType.Current) ?
-                    FontSizes.Large : FontSizes.NormalBold;
+                //lblDesc.FontSize = (this.ItemType == PlaylistItemType.Current) ?
+                //    FontSizes.Large : FontSizes.NormalBold;
 
                 switch (this.ItemType)
                 {

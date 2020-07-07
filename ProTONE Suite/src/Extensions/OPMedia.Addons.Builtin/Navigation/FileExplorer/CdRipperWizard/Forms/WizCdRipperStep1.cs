@@ -329,7 +329,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
         }
 
 
-        private void OnUncheckAll(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OnUncheckAll(object sender, EventArgs e)
         {
             foreach (ListViewItem lvi in lvTracks.Items)
                 lvi.ImageIndex = 0;
@@ -337,7 +337,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
             CheckNextButton();
         }
 
-        private void OnCheckAll(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OnCheckAll(object sender, EventArgs e)
         {
             foreach (ListViewItem lvi in lvTracks.Items)
                 lvi.ImageIndex = 1;

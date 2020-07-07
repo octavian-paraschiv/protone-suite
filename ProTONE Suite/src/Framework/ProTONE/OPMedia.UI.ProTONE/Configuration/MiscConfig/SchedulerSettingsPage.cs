@@ -51,7 +51,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         public void ApplyColors()
         {
-            lblCaution.OverrideForeColor = ThemeManager.HighlightColor;
+            lblCaution.ForeColor = ThemeManager.HighlightColor;
             lblSep1.BackColor = lblSep2.BackColor = ThemeManager.BorderColor;
         }
 

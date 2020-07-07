@@ -97,7 +97,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudOsdTmr.AccessibleName = "nudOsdTmr";
             this.nudOsdTmr.DecimalPlaces = 0;
             this.nudOsdTmr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudOsdTmr.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudOsdTmr.Increment = new decimal(new int[] {
             2,
             0,
@@ -117,8 +116,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             0});
             this.nudOsdTmr.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudOsdTmr.Name = "nudOsdTmr";
-            this.nudOsdTmr.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudOsdTmr.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudOsdTmr.ReadOnly = true;
             this.nudOsdTmr.Size = new System.Drawing.Size(56, 29);
             this.nudOsdTmr.TabIndex = 2;
@@ -276,8 +273,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.label2.Location = new System.Drawing.Point(246, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 5, 3);
             this.label2.Name = "label2";
-            this.label2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label2.OverrideForeColor = System.Drawing.Color.Empty;
             this.label2.Size = new System.Drawing.Size(241, 29);
             this.label2.TabIndex = 1;
             this.label2.Text = "TXT_OSDTIMER";

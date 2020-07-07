@@ -63,8 +63,6 @@ namespace OPMedia.UI.Dialogs
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(317, 227);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 0;
@@ -79,8 +77,6 @@ namespace OPMedia.UI.Dialogs
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(250, 227);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;
@@ -92,11 +88,9 @@ namespace OPMedia.UI.Dialogs
             this.opmTableLayoutPanel1.SetColumnSpan(this.ctlFontChooser, 3);
             this.ctlFontChooser.Description = "[ edited color description ]";
             this.ctlFontChooser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctlFontChooser.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.ctlFontChooser.Location = new System.Drawing.Point(0, 0);
             this.ctlFontChooser.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.ctlFontChooser.Name = "ctlFontChooser";
-            this.ctlFontChooser.OverrideBackColor = System.Drawing.Color.Empty;
             this.ctlFontChooser.SelectedFont = new System.Drawing.Font("Segoe UI", 9F);
             this.ctlFontChooser.Size = new System.Drawing.Size(407, 221);
             this.ctlFontChooser.TabIndex = 2;

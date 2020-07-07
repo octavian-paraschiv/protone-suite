@@ -142,7 +142,7 @@ namespace OPMedia.Runtime.Addons
             statusBar.ForeColor = ThemeManager.ForeColor;
             lblStatusMain.BackColor = ThemeManager.BackColor;
             statusBar.BackColor = ThemeManager.BackColor;
-            lblStatusBarSep.OverrideBackColor = ThemeManager.SeparatorColor;
+            lblStatusBarSep.BackColor = ThemeManager.SeparatorColor;
         }
         
         [EventSink(EventNames.SetMainStatusBar)]

@@ -72,8 +72,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(524, 278);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 3;
@@ -90,8 +88,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOK.Location = new System.Drawing.Point(458, 278);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOK.Name = "btnOK";
-            this.btnOK.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOK.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 2;
@@ -117,13 +113,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.opmLayoutPanel1.SetColumnSpan(this.lblItem, 4);
             this.lblItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblItem.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.lblItem.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblItem.Location = new System.Drawing.Point(5, 0);
             this.lblItem.Margin = new System.Windows.Forms.Padding(5, 0, 0, 5);
             this.lblItem.Name = "lblItem";
-            this.lblItem.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblItem.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblItem.Size = new System.Drawing.Size(609, 15);
             this.lblItem.TabIndex = 0;
             this.lblItem.Text = "label1";
@@ -139,8 +132,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnBrowse.Location = new System.Drawing.Point(194, 224);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnBrowse.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnBrowse.ShowDropDown = false;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 1;
@@ -197,8 +188,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnSave.Location = new System.Drawing.Point(172, 224);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnSave.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnSave.ShowDropDown = false;
             this.btnSave.Size = new System.Drawing.Size(21, 21);
             this.btnSave.TabIndex = 0;
@@ -212,8 +201,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep.Location = new System.Drawing.Point(3, 275);
             this.lblSep.Name = "lblSep";
-            this.lblSep.OverrideBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.lblSep.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblSep.Size = new System.Drawing.Size(608, 3);
             this.lblSep.TabIndex = 32;
             this.lblSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -255,7 +242,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lvPictures.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lvPictures.MultiSelect = false;
             this.lvPictures.Name = "lvPictures";
-            this.lvPictures.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmTableLayoutPanel1.SetRowSpan(this.lvPictures, 4);
             this.lvPictures.Size = new System.Drawing.Size(384, 228);
             this.lvPictures.TabIndex = 0;
@@ -285,12 +271,9 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblDesc.AutoSize = true;
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblDesc.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.lblDesc.Location = new System.Drawing.Point(0, 233);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(0);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblDesc.Size = new System.Drawing.Size(349, 16);
             this.lblDesc.TabIndex = 1;
             this.lblDesc.Text = "TXT_CLICK_LIST_TO_EDIT";

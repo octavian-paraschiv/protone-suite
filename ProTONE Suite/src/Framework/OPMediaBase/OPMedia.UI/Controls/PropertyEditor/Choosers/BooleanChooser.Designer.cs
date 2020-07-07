@@ -58,8 +58,6 @@
             this.lblValueName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblValueName.Location = new System.Drawing.Point(3, 0);
             this.lblValueName.Name = "opmLabel1";
-            this.lblValueName.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblValueName.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblValueName.Size = new System.Drawing.Size(39, 17);
             this.lblValueName.TabIndex = 0;
             this.lblValueName.Text = "Value:";

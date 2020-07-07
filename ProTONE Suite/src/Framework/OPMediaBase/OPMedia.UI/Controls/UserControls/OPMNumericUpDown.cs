@@ -22,30 +22,6 @@ namespace OPMedia.UI.Controls
         #region GUI Properties
 
 
-        #region Override settings
-
-        [ReadOnly(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color ForeColor { get { return base.ForeColor; } }
-
-        Color _overrideForeColor = Color.Empty;
-        public Color OverrideForeColor
-        {
-            get { return _overrideForeColor; }
-            set { _overrideForeColor = value; Invalidate(true); }
-        }
-
-        private Color GetForeColor()
-        {
-            if (_overrideForeColor != Color.Empty)
-                return _overrideForeColor;
-
-            return ThemeManager.WndTextColor;
-        }
-        #endregion
-
         #endregion
 
         #region NumericUpDown-like properties
@@ -70,7 +46,7 @@ namespace OPMedia.UI.Controls
         public new Color BackColor
         {
             get { return nudField.BackColor; }
-            set { nudField.BackColor = value; }
+            set { /*nudField.BackColor = value;*/ }
         }
 
         public bool ReadOnly
@@ -212,9 +188,9 @@ namespace OPMedia.UI.Controls
 
         private void UpdateColors()
         {
-            this.OverrideBackColor = Color.Transparent;
+            this.BackColor = Color.Transparent;
             nudField.BackColor = ThemeManager.WndValidColor;
-            nudField.ForeColor = GetForeColor();
+            nudField.ForeColor = ThemeManager.WndTextColor;
             Invalidate(true);
         }
 

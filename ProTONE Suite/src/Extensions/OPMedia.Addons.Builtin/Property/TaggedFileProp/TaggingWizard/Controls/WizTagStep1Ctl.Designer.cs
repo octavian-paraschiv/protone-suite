@@ -49,7 +49,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.OverrideForeColor = System.Drawing.Color.Empty;
             this.label1.Size = new System.Drawing.Size(390, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZTAGGINGSTEP1_DESC";
@@ -63,7 +62,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnAddFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFiles.Location = new System.Drawing.Point(3, 212);
             this.btnAddFiles.Name = "btnAddFiles";
-            this.btnAddFiles.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnAddFiles.Size = new System.Drawing.Size(94, 25);
             this.btnAddFiles.TabIndex = 2;
             this.btnAddFiles.Text = "TXT_ADD_FILES";
@@ -77,7 +75,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnAddFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFolder.Location = new System.Drawing.Point(103, 212);
             this.btnAddFolder.Name = "btnAddFolder";
-            this.btnAddFolder.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnAddFolder.Size = new System.Drawing.Size(109, 25);
             this.btnAddFolder.TabIndex = 3;
             this.btnAddFolder.Text = "TXT_ADD_FOLDER";
@@ -91,7 +88,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnRemoveItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveItems.Location = new System.Drawing.Point(277, 212);
             this.btnRemoveItems.Name = "btnRemoveItems";
-            this.btnRemoveItems.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnRemoveItems.Size = new System.Drawing.Size(116, 25);
             this.btnRemoveItems.TabIndex = 4;
             this.btnRemoveItems.Text = "TXT_REMOVE_FILES";

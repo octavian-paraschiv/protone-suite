@@ -49,8 +49,6 @@ namespace OPMedia.Runtime.Addons.Configuration
             this.lblAddonDesc.Location = new System.Drawing.Point(3, 0);
             this.lblAddonDesc.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
             this.lblAddonDesc.Name = "lblAddonDesc";
-            this.lblAddonDesc.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblAddonDesc.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblAddonDesc.Size = new System.Drawing.Size(340, 39);
             this.lblAddonDesc.TabIndex = 0;
             this.lblAddonDesc.Text = "Available addons.\r\nAvailable addons.\r\nAvailable addons.\r";
@@ -129,11 +127,9 @@ namespace OPMedia.Runtime.Addons.Configuration
             this.addonList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.SetColumnSpan(this.addonList, 4);
             this.addonList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addonList.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.addonList.Location = new System.Drawing.Point(0, 46);
             this.addonList.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.addonList.Name = "addonList";
-            this.addonList.OverrideBackColor = System.Drawing.Color.Empty;
             this.addonList.Size = new System.Drawing.Size(346, 248);
             this.addonList.TabIndex = 1;
             // 

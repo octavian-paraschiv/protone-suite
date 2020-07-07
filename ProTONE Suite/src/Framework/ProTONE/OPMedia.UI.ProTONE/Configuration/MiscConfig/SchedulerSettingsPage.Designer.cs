@@ -59,12 +59,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.wsScheduledEvtDays.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.SetColumnSpan(this.wsScheduledEvtDays, 4);
             this.wsScheduledEvtDays.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wsScheduledEvtDays.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.wsScheduledEvtDays.Location = new System.Drawing.Point(3, 119);
             this.wsScheduledEvtDays.MaximumSize = new System.Drawing.Size(4270, 50);
             this.wsScheduledEvtDays.MinimumSize = new System.Drawing.Size(400, 45);
             this.wsScheduledEvtDays.Name = "wsScheduledEvtDays";
-            this.wsScheduledEvtDays.OverrideBackColor = System.Drawing.Color.Empty;
             this.wsScheduledEvtDays.Size = new System.Drawing.Size(493, 50);
             this.wsScheduledEvtDays.TabIndex = 3;
             // 
@@ -74,7 +72,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cmbPlaylistEvtHandler.FormattingEnabled = true;
             this.cmbPlaylistEvtHandler.Location = new System.Drawing.Point(76, 28);
             this.cmbPlaylistEvtHandler.Name = "cmbPlaylistEvtHandler";
-            this.cmbPlaylistEvtHandler.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbPlaylistEvtHandler.Size = new System.Drawing.Size(155, 24);
             this.cmbPlaylistEvtHandler.TabIndex = 1;
             // 
@@ -84,12 +81,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.SetColumnSpan(this.lblCaution, 4);
             this.lblCaution.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblCaution.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblCaution.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.lblCaution.Location = new System.Drawing.Point(3, 58);
             this.lblCaution.Margin = new System.Windows.Forms.Padding(3);
             this.lblCaution.Name = "lblCaution";
-            this.lblCaution.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblCaution.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblCaution.Size = new System.Drawing.Size(493, 13);
             this.lblCaution.TabIndex = 3;
             this.lblCaution.Text = "TXT_PLAYLISTEVT_CAUTION";
@@ -115,7 +109,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cmbScheduledEvtHandler.FormattingEnabled = true;
             this.cmbScheduledEvtHandler.Location = new System.Drawing.Point(76, 175);
             this.cmbScheduledEvtHandler.Name = "cmbScheduledEvtHandler";
-            this.cmbScheduledEvtHandler.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbScheduledEvtHandler.Size = new System.Drawing.Size(155, 24);
             this.cmbScheduledEvtHandler.TabIndex = 5;
             // 
@@ -128,8 +121,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.label5.Location = new System.Drawing.Point(3, 220);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label5.OverrideForeColor = System.Drawing.Color.Empty;
             this.label5.Size = new System.Drawing.Size(228, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "TXT_SCHEDULERWAITTIMERPROCEED";
@@ -139,7 +130,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.nudSchedulerWaitTimerProceed.DecimalPlaces = 0;
             this.nudSchedulerWaitTimerProceed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudSchedulerWaitTimerProceed.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.nudSchedulerWaitTimerProceed.Increment = new decimal(new int[] {
             1,
             0,
@@ -158,8 +148,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0,
             0});
             this.nudSchedulerWaitTimerProceed.Name = "nudSchedulerWaitTimerProceed";
-            this.nudSchedulerWaitTimerProceed.OverrideBackColor = System.Drawing.Color.Transparent;
-            this.nudSchedulerWaitTimerProceed.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudSchedulerWaitTimerProceed.ReadOnly = true;
             this.nudSchedulerWaitTimerProceed.Size = new System.Drawing.Size(80, 25);
             this.nudSchedulerWaitTimerProceed.TabIndex = 1;
@@ -218,8 +206,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel1.Location = new System.Drawing.Point(3, 28);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(67, 24);
             this.opmLabel1.TabIndex = 6;
             this.opmLabel1.Text = "TXT_THEN:";
@@ -233,8 +219,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel2.Location = new System.Drawing.Point(3, 175);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(67, 24);
             this.opmLabel2.TabIndex = 7;
             this.opmLabel2.Text = "TXT_THEN:";
@@ -266,12 +250,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label4.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.label4.Location = new System.Drawing.Point(292, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.OverrideBackColor = System.Drawing.Color.Empty;
-            this.label4.OverrideForeColor = System.Drawing.Color.Empty;
             this.label4.Size = new System.Drawing.Size(204, 21);
             this.label4.TabIndex = 2;
             this.label4.Text = "TXT_ONDAYS";

@@ -69,8 +69,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmLabel1.Location = new System.Drawing.Point(3, 3);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(458, 13);
             this.opmLabel1.TabIndex = 1;
             this.opmLabel1.Text = "TXT_MANAGE_FAVORITES";

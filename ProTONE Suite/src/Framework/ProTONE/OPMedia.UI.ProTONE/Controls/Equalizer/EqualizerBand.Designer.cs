@@ -60,7 +60,6 @@
             this.txtFrequency.MaxLength = 5;
             this.txtFrequency.Name = "txtFrequency";
             this.txtFrequency.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
-            this.txtFrequency.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtFrequency.Size = new System.Drawing.Size(33, 22);
             this.txtFrequency.TabIndex = 1;
             this.txtFrequency.Text = "99999";
@@ -71,14 +70,12 @@
             this.cgLevel.AllowDragging = true;
             this.cgLevel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cgLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cgLevel.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.cgLevel.GaugeMode = OPMedia.UI.Controls.GaugeMode.Point;
             this.cgLevel.Location = new System.Drawing.Point(10, 3);
             this.cgLevel.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.cgLevel.Maximum = 10000D;
             this.cgLevel.Name = "cgLevel";
             this.cgLevel.NrTicks = 4;
-            this.cgLevel.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.cgLevel.ShowTicks = true;
             this.cgLevel.Size = new System.Drawing.Size(13, 272);
             this.cgLevel.TabIndex = 2;

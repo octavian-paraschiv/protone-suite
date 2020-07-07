@@ -87,8 +87,6 @@ namespace OPMedia.UI
             this.btnCancel.Location = new System.Drawing.Point(530, 3);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
             this.btnCancel.TabIndex = 1;
@@ -101,8 +99,6 @@ namespace OPMedia.UI
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Location = new System.Drawing.Point(452, 3);
             this.btnOk.Name = "btnOk";
-            this.btnOk.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnOk.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(72, 24);
             this.btnOk.TabIndex = 0;

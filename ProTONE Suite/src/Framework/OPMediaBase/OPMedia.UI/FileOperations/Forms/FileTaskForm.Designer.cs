@@ -70,14 +70,11 @@ namespace OPMedia.UI.FileTasks
             this.pbCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbCurrent.EffectiveMaximum = 0D;
             this.pbCurrent.Enabled = false;
-            this.pbCurrent.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbCurrent.Location = new System.Drawing.Point(5, 70);
             this.pbCurrent.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pbCurrent.Maximum = 10000D;
             this.pbCurrent.Name = "pbCurrent";
             this.pbCurrent.NrTicks = 20;
-            this.pbCurrent.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pbCurrent.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbCurrent.ShowTicks = false;
             this.pbCurrent.Size = new System.Drawing.Size(510, 14);
             this.pbCurrent.TabIndex = 3;
@@ -91,8 +88,6 @@ namespace OPMedia.UI.FileTasks
             this.lblCurrentProgress.Location = new System.Drawing.Point(5, 10);
             this.lblCurrentProgress.Margin = new System.Windows.Forms.Padding(5, 10, 0, 5);
             this.lblCurrentProgress.Name = "lblCurrentProgress";
-            this.lblCurrentProgress.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblCurrentProgress.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblCurrentProgress.Size = new System.Drawing.Size(515, 13);
             this.lblCurrentProgress.TabIndex = 0;
             this.lblCurrentProgress.Text = "TXT_CUR_PROGRESS";
@@ -108,8 +103,6 @@ namespace OPMedia.UI.FileTasks
             this.btnCancel.Location = new System.Drawing.Point(433, 117);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 10, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.OverrideBackColor = System.Drawing.Color.Empty;
-            this.btnCancel.OverrideForeColor = System.Drawing.Color.Empty;
             this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(82, 27);
             this.btnCancel.TabIndex = 4;
@@ -123,14 +116,11 @@ namespace OPMedia.UI.FileTasks
             this.pbOperation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbOperation.EffectiveMaximum = 0D;
             this.pbOperation.Enabled = false;
-            this.pbOperation.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pbOperation.Location = new System.Drawing.Point(5, 28);
             this.pbOperation.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.pbOperation.Maximum = 10000D;
             this.pbOperation.Name = "pbOperation";
             this.pbOperation.NrTicks = 20;
-            this.pbOperation.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pbOperation.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbOperation.ShowTicks = false;
             this.pbOperation.Size = new System.Drawing.Size(510, 14);
             this.pbOperation.TabIndex = 1;
@@ -144,8 +134,6 @@ namespace OPMedia.UI.FileTasks
             this.txtCurFile.Location = new System.Drawing.Point(5, 52);
             this.txtCurFile.Margin = new System.Windows.Forms.Padding(5, 10, 0, 5);
             this.txtCurFile.Name = "txtCurFile";
-            this.txtCurFile.OverrideBackColor = System.Drawing.Color.Empty;
-            this.txtCurFile.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtCurFile.Size = new System.Drawing.Size(515, 13);
             this.txtCurFile.TabIndex = 2;
             this.txtCurFile.Text = "TXT_WAIT_COPY";

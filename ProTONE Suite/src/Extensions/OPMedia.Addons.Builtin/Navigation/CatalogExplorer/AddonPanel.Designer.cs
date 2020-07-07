@@ -658,7 +658,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.lvCatalogFolder.Margin = new System.Windows.Forms.Padding(0);
             this.lvCatalogFolder.MultiSelect = false;
             this.lvCatalogFolder.Name = "lvCatalogFolder";
-            this.lvCatalogFolder.OverrideBackColor = System.Drawing.Color.Empty;
             this.lvCatalogFolder.ShowItemToolTips = true;
             this.lvCatalogFolder.Size = new System.Drawing.Size(618, 425);
             this.lvCatalogFolder.TabIndex = 0;

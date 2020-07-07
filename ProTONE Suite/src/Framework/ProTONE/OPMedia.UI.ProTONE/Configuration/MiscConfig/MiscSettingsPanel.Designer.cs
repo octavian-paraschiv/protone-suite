@@ -80,12 +80,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             // pageDisksOptions
             // 
             this.pageDisksOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pageDisksOptions.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pageDisksOptions.Location = new System.Drawing.Point(5, 10);
             this.pageDisksOptions.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageDisksOptions.Modified = false;
             this.pageDisksOptions.Name = "pageDisksOptions";
-            this.pageDisksOptions.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageDisksOptions.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageDisksOptions.Size = new System.Drawing.Size(617, 411);
             this.pageDisksOptions.TabIndex = 0;
@@ -106,12 +104,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             // pagePlaylist
             // 
             this.pagePlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pagePlaylist.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pagePlaylist.Location = new System.Drawing.Point(5, 10);
             this.pagePlaylist.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pagePlaylist.Modified = false;
             this.pagePlaylist.Name = "pagePlaylist";
-            this.pagePlaylist.OverrideBackColor = System.Drawing.Color.Empty;
             this.pagePlaylist.Size = new System.Drawing.Size(617, 411);
             this.pagePlaylist.TabIndex = 0;
             // 
@@ -129,12 +125,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             // pageScheduler
             // 
             this.pageScheduler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pageScheduler.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pageScheduler.Location = new System.Drawing.Point(5, 10);
             this.pageScheduler.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageScheduler.Modified = true;
             this.pageScheduler.Name = "pageScheduler";
-            this.pageScheduler.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageScheduler.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageScheduler.Size = new System.Drawing.Size(617, 411);
             this.pageScheduler.TabIndex = 0;
@@ -155,12 +149,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             // pageFavoriteFolders
             // 
             this.pageFavoriteFolders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pageFavoriteFolders.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.pageFavoriteFolders.Location = new System.Drawing.Point(5, 10);
             this.pageFavoriteFolders.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageFavoriteFolders.Modified = false;
             this.pageFavoriteFolders.Name = "pageFavoriteFolders";
-            this.pageFavoriteFolders.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageFavoriteFolders.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageFavoriteFolders.Size = new System.Drawing.Size(617, 411);
             this.pageFavoriteFolders.TabIndex = 0;

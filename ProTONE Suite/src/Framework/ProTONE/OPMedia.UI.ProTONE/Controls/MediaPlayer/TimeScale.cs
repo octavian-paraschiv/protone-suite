@@ -147,9 +147,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public void ApplyMenuBarColors()
         {
-            timeProgress.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            lblTime.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            lblTime.OverrideForeColor = ThemeManager.MenuTextColor;
+            timeProgress.BackColor = Color.FromKnownColor(KnownColor.Window);
+            lblTime.BackColor = Color.FromKnownColor(KnownColor.Window);
+            lblTime.ForeColor = ThemeManager.MenuTextColor;
         }
         #endregion
 

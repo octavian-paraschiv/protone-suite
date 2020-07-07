@@ -79,8 +79,6 @@
             this.opmLabel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel5.Location = new System.Drawing.Point(3, 139);
             this.opmLabel5.Name = "opmLabel5";
-            this.opmLabel5.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel5.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel5.Size = new System.Drawing.Size(102, 68);
             this.opmLabel5.TabIndex = 8;
             this.opmLabel5.Text = "TXT_RESULTS";
@@ -93,8 +91,6 @@
             this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(3, 23);
             this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel1.Size = new System.Drawing.Size(102, 29);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_FONTFAMILY";
@@ -107,8 +103,6 @@
             this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 52);
             this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel2.Size = new System.Drawing.Size(102, 29);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_FONT_STYLE";
@@ -121,8 +115,6 @@
             this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(3, 81);
             this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel3.Size = new System.Drawing.Size(102, 29);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "TXT_FONTSIZE";
@@ -136,7 +128,6 @@
             this.cmbFontFamily.Location = new System.Drawing.Point(111, 26);
             this.cmbFontFamily.MinimumSize = new System.Drawing.Size(180, 0);
             this.cmbFontFamily.Name = "cmbFontFamily";
-            this.cmbFontFamily.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbFontFamily.Size = new System.Drawing.Size(225, 23);
             this.cmbFontFamily.TabIndex = 3;
             // 
@@ -148,7 +139,6 @@
             this.cmbFontStyle.Location = new System.Drawing.Point(111, 55);
             this.cmbFontStyle.MinimumSize = new System.Drawing.Size(180, 0);
             this.cmbFontStyle.Name = "cmbFontStyle";
-            this.cmbFontStyle.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbFontStyle.Size = new System.Drawing.Size(225, 23);
             this.cmbFontStyle.TabIndex = 4;
             // 
@@ -160,7 +150,6 @@
             this.cmbFontSize.Location = new System.Drawing.Point(111, 84);
             this.cmbFontSize.MinimumSize = new System.Drawing.Size(180, 0);
             this.cmbFontSize.Name = "cmbFontSize";
-            this.cmbFontSize.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbFontSize.Size = new System.Drawing.Size(225, 23);
             this.cmbFontSize.TabIndex = 5;
             // 
@@ -171,8 +160,6 @@
             this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel4.Location = new System.Drawing.Point(3, 110);
             this.opmLabel4.Name = "opmLabel4";
-            this.opmLabel4.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel4.OverrideForeColor = System.Drawing.Color.Empty;
             this.opmLabel4.Size = new System.Drawing.Size(102, 29);
             this.opmLabel4.TabIndex = 6;
             this.opmLabel4.Text = "TXT_FONTCHARSET";
@@ -186,7 +173,6 @@
             this.cmbCharset.Location = new System.Drawing.Point(111, 113);
             this.cmbCharset.MinimumSize = new System.Drawing.Size(180, 0);
             this.cmbCharset.Name = "cmbCharset";
-            this.cmbCharset.OverrideForeColor = System.Drawing.Color.Empty;
             this.cmbCharset.Size = new System.Drawing.Size(225, 23);
             this.cmbCharset.TabIndex = 7;
             // 
@@ -209,12 +195,9 @@
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblDescription, 2);
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblDescription.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.lblDescription.Location = new System.Drawing.Point(8, 5);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(8, 5, 3, 5);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lblDescription.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblDescription.Size = new System.Drawing.Size(328, 13);
             this.lblDescription.TabIndex = 10;
             this.lblDescription.Text = "opmLabel6";

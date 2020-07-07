@@ -100,8 +100,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.kryptonLabel2.Location = new System.Drawing.Point(157, 6);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.kryptonLabel2.OverrideForeColor = System.Drawing.Color.Empty;
             this.kryptonLabel2.Size = new System.Drawing.Size(111, 13);
             this.kryptonLabel2.TabIndex = 5;
             this.kryptonLabel2.Text = "TXT_OPENCATALOGS";

@@ -79,7 +79,6 @@
             this.equalizerBand10.AutoSize = true;
             this.equalizerBand10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand10.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand10.Frequency = 1000;
             this.equalizerBand10.Level = 0D;
             this.equalizerBand10.Location = new System.Drawing.Point(316, 1);
@@ -87,7 +86,6 @@
             this.equalizerBand10.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand10.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand10.Name = "equalizerBand10";
-            this.equalizerBand10.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand10.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand10.TabIndex = 8;
             this.equalizerBand10.Tag = "9";
@@ -97,7 +95,6 @@
             this.equalizerBand9.AutoSize = true;
             this.equalizerBand9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand9.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand9.Frequency = 1000;
             this.equalizerBand9.Level = 0D;
             this.equalizerBand9.Location = new System.Drawing.Point(281, 1);
@@ -105,7 +102,6 @@
             this.equalizerBand9.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand9.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand9.Name = "equalizerBand9";
-            this.equalizerBand9.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand9.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand9.TabIndex = 7;
             this.equalizerBand9.Tag = "8";
@@ -115,7 +111,6 @@
             this.equalizerBand8.AutoSize = true;
             this.equalizerBand8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand8.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand8.Frequency = 1000;
             this.equalizerBand8.Level = 0D;
             this.equalizerBand8.Location = new System.Drawing.Point(246, 1);
@@ -123,7 +118,6 @@
             this.equalizerBand8.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand8.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand8.Name = "equalizerBand8";
-            this.equalizerBand8.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand8.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand8.TabIndex = 6;
             this.equalizerBand8.Tag = "7";
@@ -133,7 +127,6 @@
             this.equalizerBand7.AutoSize = true;
             this.equalizerBand7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand7.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand7.Frequency = 1000;
             this.equalizerBand7.Level = 0D;
             this.equalizerBand7.Location = new System.Drawing.Point(211, 1);
@@ -141,7 +134,6 @@
             this.equalizerBand7.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand7.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand7.Name = "equalizerBand7";
-            this.equalizerBand7.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand7.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand7.TabIndex = 5;
             this.equalizerBand7.Tag = "6";
@@ -151,7 +143,6 @@
             this.equalizerBand6.AutoSize = true;
             this.equalizerBand6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand6.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand6.Frequency = 1000;
             this.equalizerBand6.Level = 0D;
             this.equalizerBand6.Location = new System.Drawing.Point(176, 1);
@@ -159,7 +150,6 @@
             this.equalizerBand6.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand6.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand6.Name = "equalizerBand6";
-            this.equalizerBand6.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand6.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand6.TabIndex = 4;
             this.equalizerBand6.Tag = "5";
@@ -169,7 +159,6 @@
             this.equalizerBand5.AutoSize = true;
             this.equalizerBand5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand5.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand5.Frequency = 1000;
             this.equalizerBand5.Level = 0D;
             this.equalizerBand5.Location = new System.Drawing.Point(141, 1);
@@ -177,7 +166,6 @@
             this.equalizerBand5.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand5.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand5.Name = "equalizerBand5";
-            this.equalizerBand5.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand5.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand5.TabIndex = 3;
             this.equalizerBand5.Tag = "4";
@@ -187,7 +175,6 @@
             this.equalizerBand4.AutoSize = true;
             this.equalizerBand4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand4.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand4.Frequency = 1000;
             this.equalizerBand4.Level = 0D;
             this.equalizerBand4.Location = new System.Drawing.Point(106, 1);
@@ -195,7 +182,6 @@
             this.equalizerBand4.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand4.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand4.Name = "equalizerBand4";
-            this.equalizerBand4.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand4.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand4.TabIndex = 2;
             this.equalizerBand4.Tag = "3";
@@ -205,7 +191,6 @@
             this.equalizerBand2.AutoSize = true;
             this.equalizerBand2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand2.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand2.Frequency = 1000;
             this.equalizerBand2.Level = 0D;
             this.equalizerBand2.Location = new System.Drawing.Point(36, 1);
@@ -213,7 +198,6 @@
             this.equalizerBand2.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand2.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand2.Name = "equalizerBand2";
-            this.equalizerBand2.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand2.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand2.TabIndex = 1;
             this.equalizerBand2.Tag = "1";
@@ -223,7 +207,6 @@
             this.equalizerBand1.AutoSize = true;
             this.equalizerBand1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand1.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand1.Frequency = 1000;
             this.equalizerBand1.Level = 0D;
             this.equalizerBand1.Location = new System.Drawing.Point(1, 1);
@@ -231,7 +214,6 @@
             this.equalizerBand1.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand1.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand1.Name = "equalizerBand1";
-            this.equalizerBand1.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand1.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand1.TabIndex = 0;
             this.equalizerBand1.Tag = "0";
@@ -241,7 +223,6 @@
             this.equalizerBand3.AutoSize = true;
             this.equalizerBand3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equalizerBand3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equalizerBand3.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.equalizerBand3.Frequency = 1000;
             this.equalizerBand3.Level = 0D;
             this.equalizerBand3.Location = new System.Drawing.Point(71, 1);
@@ -249,7 +230,6 @@
             this.equalizerBand3.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand3.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand3.Name = "equalizerBand3";
-            this.equalizerBand3.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand3.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand3.TabIndex = 1;
             this.equalizerBand3.Tag = "2";
