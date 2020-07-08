@@ -143,7 +143,6 @@ namespace OPMedia.UI.Configuration
             // txtProxyPassword
             // 
             this.txtProxyPassword.AutoSize = true;
-            this.txtProxyPassword.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtProxyPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtProxyPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyPassword.Location = new System.Drawing.Point(136, 106);
@@ -160,12 +159,10 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPassword.TabIndex = 9;
             this.txtProxyPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtProxyPassword.UseSystemPasswordChar = true;
-            this.txtProxyPassword.WordWrap = true;
             // 
             // txtProxyUser
             // 
             this.txtProxyUser.AutoSize = true;
-            this.txtProxyUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtProxyUser.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtProxyUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyUser.Location = new System.Drawing.Point(136, 79);
@@ -182,12 +179,10 @@ namespace OPMedia.UI.Configuration
             this.txtProxyUser.TabIndex = 7;
             this.txtProxyUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtProxyUser.UseSystemPasswordChar = false;
-            this.txtProxyUser.WordWrap = true;
             // 
             // txtProxyPort
             // 
             this.txtProxyPort.AutoSize = true;
-            this.txtProxyPort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtProxyPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProxyPort.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyPort.Location = new System.Drawing.Point(136, 52);
@@ -196,7 +191,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPort.MaxLength = 5;
             this.txtProxyPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPort.Name = "txtProxyPort";
-            this.txtProxyPort.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
             this.txtProxyPort.PasswordChar = '\0';
             this.txtProxyPort.ReadOnly = false;
             this.txtProxyPort.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -205,12 +199,10 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPort.TabIndex = 5;
             this.txtProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtProxyPort.UseSystemPasswordChar = false;
-            this.txtProxyPort.WordWrap = true;
             // 
             // txtProxyServer
             // 
             this.txtProxyServer.AutoSize = true;
-            this.txtProxyServer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtProxyServer.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtProxyServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyServer.Location = new System.Drawing.Point(136, 25);
@@ -227,7 +219,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyServer.TabIndex = 3;
             this.txtProxyServer.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtProxyServer.UseSystemPasswordChar = false;
-            this.txtProxyServer.WordWrap = true;
             // 
             // cmbProxyType
             // 

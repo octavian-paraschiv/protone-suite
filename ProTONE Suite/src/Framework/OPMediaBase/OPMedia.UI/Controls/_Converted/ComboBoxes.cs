@@ -17,11 +17,21 @@ using System.Drawing.Text;
 
 namespace OPMedia.UI.Controls
 {
+    public class OPMEditableComboBox : OPMComboBox
+    {
+        public OPMEditableComboBox()
+            : base()
+        {
+        }
+    }
+
     public class OPMComboBox : MetroFramework.Controls.MetroComboBox
     {
         public OPMComboBox()
             : base()
         {
+            this.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.FontWeight = MetroFramework.MetroComboBoxWeight.Regular;
         }
 
         public void AddUniqueItem(object item)

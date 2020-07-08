@@ -255,7 +255,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.opmButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton1.Location = new System.Drawing.Point(481, 372);
             this.opmButton1.Name = "opmButton1";
-            this.opmButton1.ShowDropDown = false;
             this.opmButton1.Size = new System.Drawing.Size(163, 27);
             this.opmButton1.TabIndex = 9;
             this.opmButton1.Text = "TXT_RESETVIDEOPOSITION";

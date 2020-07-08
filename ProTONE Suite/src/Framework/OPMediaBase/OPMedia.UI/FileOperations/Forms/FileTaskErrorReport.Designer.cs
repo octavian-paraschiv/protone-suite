@@ -47,7 +47,6 @@ namespace OPMedia.UI.FileTasks
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(1036, 1025);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(72, 24);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "TXT_OK";

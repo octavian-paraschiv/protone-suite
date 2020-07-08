@@ -126,7 +126,6 @@
             // txtFileNames
             // 
             this.txtFileNames.AutoSize = true;
-            this.txtFileNames.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtFileNames.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -145,7 +144,6 @@
             this.txtFileNames.TabIndex = 5;
             this.txtFileNames.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtFileNames.UseSystemPasswordChar = false;
-            this.txtFileNames.WordWrap = true;
             this.txtFileNames.TextChanged += new System.EventHandler(this.txtFileNames_TextChanged);
             // 
             // btnOK
@@ -156,7 +154,6 @@
             this.btnOK.Location = new System.Drawing.Point(564, 459);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(80, 23);
             this.btnOK.TabIndex = 8;
             this.btnOK.Text = "TXT_OK";
@@ -170,7 +167,6 @@
             this.btnCancel.Location = new System.Drawing.Point(564, 490);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(80, 25);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -228,7 +224,6 @@
             this.btnNewFolder.Location = new System.Drawing.Point(0, 0);
             this.btnNewFolder.Margin = new System.Windows.Forms.Padding(0);
             this.btnNewFolder.Name = "btnNewFolder";
-            this.btnNewFolder.ShowDropDown = false;
             this.btnNewFolder.Size = new System.Drawing.Size(20, 20);
             this.btnNewFolder.TabIndex = 11;
             this.btnNewFolder.UseVisualStyleBackColor = true;
@@ -243,7 +238,6 @@
             this.btnAddToFavorites.MaximumSize = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.MinimumSize = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.Name = "btnAddToFavorites";
-            this.btnAddToFavorites.ShowDropDown = false;
             this.btnAddToFavorites.Size = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.TabIndex = 10;
             this.btnAddToFavorites.UseVisualStyleBackColor = true;

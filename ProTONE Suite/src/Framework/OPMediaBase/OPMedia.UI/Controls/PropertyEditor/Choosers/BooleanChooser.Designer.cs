@@ -70,7 +70,6 @@
             this.chkValue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkValue.Location = new System.Drawing.Point(48, 3);
             this.chkValue.Name = "chkValue";
-            this.chkValue.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkValue.Size = new System.Drawing.Size(12, 11);
             this.chkValue.TabIndex = 1;
             this.chkValue.CheckedChanged += new System.EventHandler(this.chkValue_CheckedChanged);

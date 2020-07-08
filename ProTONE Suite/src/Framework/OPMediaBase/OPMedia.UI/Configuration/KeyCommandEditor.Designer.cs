@@ -45,7 +45,6 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.Location = new System.Drawing.Point(187, 45);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "TXT_CANCEL";

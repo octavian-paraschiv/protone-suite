@@ -30,7 +30,7 @@
         {
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblValueName = new OPMedia.UI.Controls.OPMLabel();
-            this.opmNumericUpDown1 = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.opmNumericUpDown1 = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.opmNumericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -100,6 +100,6 @@
 
         private OPMedia.UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
         private OPMedia.UI.Controls.OPMLabel lblValueName;
-        private OPMedia.UI.Controls.OPMNumericUpDown opmNumericUpDown1;
+        private OPMedia.UI.Controls.OPMNumericTextBox opmNumericUpDown1;
     }
 }

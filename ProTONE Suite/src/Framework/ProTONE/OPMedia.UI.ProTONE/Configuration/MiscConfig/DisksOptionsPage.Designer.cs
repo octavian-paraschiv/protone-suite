@@ -102,7 +102,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cbDisableDVDMenu.Location = new System.Drawing.Point(0, 0);
             this.cbDisableDVDMenu.Margin = new System.Windows.Forms.Padding(0, 0, 0, 12);
             this.cbDisableDVDMenu.Name = "cbDisableDVDMenu";
-            this.cbDisableDVDMenu.OverrideForeColor = System.Drawing.Color.Empty;
             this.cbDisableDVDMenu.Size = new System.Drawing.Size(533, 19);
             this.cbDisableDVDMenu.TabIndex = 3;
             this.cbDisableDVDMenu.Text = "TXT_SKIP_DVD_MENU";
@@ -199,7 +198,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // txtCddbServerName
             // 
             this.txtCddbServerName.AutoSize = true;
-            this.txtCddbServerName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtCddbServerName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtCddbServerName.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtCddbServerName.Lines = new string[0];
@@ -217,11 +215,9 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerName.TabIndex = 4;
             this.txtCddbServerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCddbServerName.UseSystemPasswordChar = false;
-            this.txtCddbServerName.WordWrap = true;
             // 
             // txtCddbServerPort
             // 
-            this.txtCddbServerPort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtCddbServerPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCddbServerPort.Lines = new string[] {
         "ABGYT"};
@@ -241,7 +237,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerPort.Text = "ABGYT";
             this.txtCddbServerPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCddbServerPort.UseSystemPasswordChar = false;
-            this.txtCddbServerPort.WordWrap = true;
             // 
             // DisksOptionsPage
             // 

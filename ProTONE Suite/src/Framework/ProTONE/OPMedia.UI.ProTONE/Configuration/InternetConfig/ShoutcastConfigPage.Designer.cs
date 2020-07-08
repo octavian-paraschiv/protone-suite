@@ -82,7 +82,6 @@
             // txtShoutcastDevId
             // 
             this.txtShoutcastDevId.AutoSize = true;
-            this.txtShoutcastDevId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastDevId.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastDevId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastDevId.Lines = new string[0];
@@ -100,12 +99,10 @@
             this.txtShoutcastDevId.TabIndex = 5;
             this.txtShoutcastDevId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastDevId.UseSystemPasswordChar = false;
-            this.txtShoutcastDevId.WordWrap = true;
             // 
             // txtShoutcastTuneinURL
             // 
             this.txtShoutcastTuneinURL.AutoSize = true;
-            this.txtShoutcastTuneinURL.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastTuneinURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastTuneinURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastTuneinURL.Lines = new string[] {
@@ -125,7 +122,6 @@
             this.txtShoutcastTuneinURL.Text = "http://yp.shoutcast.com";
             this.txtShoutcastTuneinURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastTuneinURL.UseSystemPasswordChar = false;
-            this.txtShoutcastTuneinURL.WordWrap = true;
             // 
             // opmLabel1
             // 
@@ -166,7 +162,6 @@
             // txtShoutcastSearchURL
             // 
             this.txtShoutcastSearchURL.AutoSize = true;
-            this.txtShoutcastSearchURL.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtShoutcastSearchURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastSearchURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastSearchURL.Lines = new string[] {
@@ -186,7 +181,6 @@
             this.txtShoutcastSearchURL.Text = "http://api.shoutcast.com/station";
             this.txtShoutcastSearchURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastSearchURL.UseSystemPasswordChar = false;
-            this.txtShoutcastSearchURL.WordWrap = true;
             // 
             // opmLinkLabel1
             // 

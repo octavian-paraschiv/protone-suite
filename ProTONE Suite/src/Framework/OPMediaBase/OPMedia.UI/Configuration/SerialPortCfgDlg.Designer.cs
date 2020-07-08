@@ -47,7 +47,6 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(171, 268);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -62,7 +61,6 @@ namespace OPMedia.UI.Configuration
             this.btnOk.Location = new System.Drawing.Point(104, 268);
             this.btnOk.MinimumSize = new System.Drawing.Size(60, 25);
             this.btnOk.Name = "btnOk";
-            this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(61, 27);
             this.btnOk.TabIndex = 2;
             this.btnOk.Text = "TXT_OK";

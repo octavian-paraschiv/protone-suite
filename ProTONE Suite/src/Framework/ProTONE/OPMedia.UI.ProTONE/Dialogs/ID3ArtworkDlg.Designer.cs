@@ -72,7 +72,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(524, 278);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -88,7 +87,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOK.Location = new System.Drawing.Point(458, 278);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "TXT_OK";
@@ -132,7 +130,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnBrowse.Location = new System.Drawing.Point(194, 224);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.ShowDropDown = false;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 1;
             this.btnBrowse.TabStop = false;
@@ -188,7 +185,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnSave.Location = new System.Drawing.Point(172, 224);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.ShowDropDown = false;
             this.btnSave.Size = new System.Drawing.Size(21, 21);
             this.btnSave.TabIndex = 0;
             this.btnSave.TabStop = false;

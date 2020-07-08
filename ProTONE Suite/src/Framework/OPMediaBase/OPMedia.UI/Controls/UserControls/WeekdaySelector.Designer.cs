@@ -50,7 +50,6 @@ namespace OPMedia.UI.Controls
             this.chkMon.Location = new System.Drawing.Point(0, 3);
             this.chkMon.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkMon.Name = "chkMon";
-            this.chkMon.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkMon.Size = new System.Drawing.Size(109, 17);
             this.chkMon.TabIndex = 0;
             this.chkMon.Tag = "Monday";
@@ -65,7 +64,6 @@ namespace OPMedia.UI.Controls
             this.chkWed.Location = new System.Drawing.Point(226, 3);
             this.chkWed.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkWed.Name = "chkWed";
-            this.chkWed.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkWed.Size = new System.Drawing.Size(109, 17);
             this.chkWed.TabIndex = 2;
             this.chkWed.Tag = "Wednesday";
@@ -80,7 +78,6 @@ namespace OPMedia.UI.Controls
             this.chkFri.Location = new System.Drawing.Point(0, 26);
             this.chkFri.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkFri.Name = "chkFri";
-            this.chkFri.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkFri.Size = new System.Drawing.Size(109, 17);
             this.chkFri.TabIndex = 4;
             this.chkFri.Tag = "Friday";
@@ -95,7 +92,6 @@ namespace OPMedia.UI.Controls
             this.chkSun.Location = new System.Drawing.Point(226, 26);
             this.chkSun.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkSun.Name = "chkSun";
-            this.chkSun.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkSun.Size = new System.Drawing.Size(109, 17);
             this.chkSun.TabIndex = 6;
             this.chkSun.Tag = "Sunday";
@@ -110,7 +106,6 @@ namespace OPMedia.UI.Controls
             this.chkTue.Location = new System.Drawing.Point(113, 3);
             this.chkTue.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkTue.Name = "chkTue";
-            this.chkTue.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkTue.Size = new System.Drawing.Size(109, 17);
             this.chkTue.TabIndex = 1;
             this.chkTue.Tag = "Tuesday";
@@ -125,7 +120,6 @@ namespace OPMedia.UI.Controls
             this.chkThu.Location = new System.Drawing.Point(339, 3);
             this.chkThu.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkThu.Name = "chkThu";
-            this.chkThu.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkThu.Size = new System.Drawing.Size(109, 17);
             this.chkThu.TabIndex = 3;
             this.chkThu.Tag = "Thursday";
@@ -140,7 +134,6 @@ namespace OPMedia.UI.Controls
             this.chkSat.Location = new System.Drawing.Point(113, 26);
             this.chkSat.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkSat.Name = "chkSat";
-            this.chkSat.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkSat.Size = new System.Drawing.Size(109, 17);
             this.chkSat.TabIndex = 5;
             this.chkSat.Tag = "Saturday";
@@ -155,7 +148,6 @@ namespace OPMedia.UI.Controls
             this.chkAll.Location = new System.Drawing.Point(339, 26);
             this.chkAll.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkAll.Name = "chkAll";
-            this.chkAll.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkAll.Size = new System.Drawing.Size(109, 17);
             this.chkAll.TabIndex = 7;
             this.chkAll.Tag = "";

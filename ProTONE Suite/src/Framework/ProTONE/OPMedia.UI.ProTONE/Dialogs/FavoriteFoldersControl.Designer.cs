@@ -43,7 +43,6 @@ namespace OPMedia.UI.Dialogs
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Location = new System.Drawing.Point(241, 3);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ShowDropDown = false;
             this.btnAdd.Size = new System.Drawing.Size(76, 25);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "TXT_ADD";
@@ -57,7 +56,6 @@ namespace OPMedia.UI.Dialogs
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Location = new System.Drawing.Point(241, 34);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.ShowDropDown = false;
             this.btnDelete.Size = new System.Drawing.Size(76, 25);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "TXT_DELETE";
@@ -114,7 +112,6 @@ namespace OPMedia.UI.Dialogs
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(241, 92);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(76, 25);
             this.btnOK.TabIndex = 5;
             this.btnOK.Text = "TXT_OK";

@@ -95,10 +95,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.tableLayoutPanel1.SetColumnSpan(this.chkEnablePlaylistEvt, 4);
             this.chkEnablePlaylistEvt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkEnablePlaylistEvt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkEnablePlaylistEvt.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.chkEnablePlaylistEvt.Location = new System.Drawing.Point(3, 3);
             this.chkEnablePlaylistEvt.Name = "chkEnablePlaylistEvt";
-            this.chkEnablePlaylistEvt.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkEnablePlaylistEvt.Size = new System.Drawing.Size(493, 19);
             this.chkEnablePlaylistEvt.TabIndex = 0;
             this.chkEnablePlaylistEvt.Text = "TXT_ENABLE_PLAYLISTEVT";
@@ -263,10 +261,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkEnableScheduledEvt.AutoSize = true;
             this.chkEnableScheduledEvt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkEnableScheduledEvt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkEnableScheduledEvt.FontSize = OPMedia.UI.Themes.FontSizes.NormalBold;
             this.chkEnableScheduledEvt.Location = new System.Drawing.Point(3, 3);
             this.chkEnableScheduledEvt.Name = "chkEnableScheduledEvt";
-            this.chkEnableScheduledEvt.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkEnableScheduledEvt.Size = new System.Drawing.Size(203, 21);
             this.chkEnableScheduledEvt.TabIndex = 0;
             this.chkEnableScheduledEvt.Text = "TXT_ENABLE_SCHEDULEDEVT";

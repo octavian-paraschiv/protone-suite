@@ -122,7 +122,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(326, 327);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -137,7 +136,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.Location = new System.Drawing.Point(260, 327);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
-            this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(61, 27);
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "TXT_OK";
@@ -228,7 +226,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.TabIndex = 7;
             this.txtNewName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtNewName.UseSystemPasswordChar = false;
-            this.txtNewName.WordWrap = false;
             // 
             // SelectOnlinePlaylistDlg
             // 

@@ -113,7 +113,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             OPMCheckBox cb = new OPMCheckBox();
             cb.Checked = isChecked;
             cb.Margin = new Padding(0);
-            cb.FontSize = FontSizes.Small;
             cb.Padding = new Padding(0);
             cb.AutoSize = false;
             cb.Text = fileType;
@@ -227,7 +226,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.cbShellIntegration.Location = new System.Drawing.Point(0, 0);
             this.cbShellIntegration.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cbShellIntegration.Name = "cbShellIntegration";
-            this.cbShellIntegration.OverrideForeColor = System.Drawing.Color.Empty;
             this.cbShellIntegration.Size = new System.Drawing.Size(573, 19);
             this.cbShellIntegration.TabIndex = 0;
             this.cbShellIntegration.Text = "TXT_SHELL_INTEGRATION";
@@ -262,7 +260,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllAudio.Location = new System.Drawing.Point(2, 2);
             this.btnSelAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllAudio.Name = "btnSelAllAudio";
-            this.btnSelAllAudio.ShowDropDown = false;
             this.btnSelAllAudio.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllAudio.TabIndex = 0;
             this.btnSelAllAudio.Text = "TXT_SELECT_ALLAUDIO";
@@ -275,7 +272,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllAudio.Location = new System.Drawing.Point(2, 26);
             this.btnUnselAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllAudio.Name = "btnUnselAllAudio";
-            this.btnUnselAllAudio.ShowDropDown = false;
             this.btnUnselAllAudio.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllAudio.TabIndex = 3;
             this.btnUnselAllAudio.Text = "TXT_UNSELECT_ALLAUDIO";
@@ -288,7 +284,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllVideo.Location = new System.Drawing.Point(141, 26);
             this.btnUnselAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllVideo.Name = "btnUnselAllVideo";
-            this.btnUnselAllVideo.ShowDropDown = false;
             this.btnUnselAllVideo.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllVideo.TabIndex = 4;
             this.btnUnselAllVideo.Text = "TXT_UNSELECT_ALLVIDEO";
@@ -301,7 +296,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllVideo.Location = new System.Drawing.Point(141, 2);
             this.btnSelAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllVideo.Name = "btnSelAllVideo";
-            this.btnSelAllVideo.ShowDropDown = false;
             this.btnSelAllVideo.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllVideo.TabIndex = 1;
             this.btnSelAllVideo.Text = "TXT_SELECT_ALLVIDEO";
@@ -314,7 +308,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnUnselAllPlaylists.Location = new System.Drawing.Point(279, 26);
             this.btnUnselAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllPlaylists.Name = "btnUnselAllPlaylists";
-            this.btnUnselAllPlaylists.ShowDropDown = false;
             this.btnUnselAllPlaylists.Size = new System.Drawing.Size(135, 22);
             this.btnUnselAllPlaylists.TabIndex = 5;
             this.btnUnselAllPlaylists.Text = "TXT_UNSELECT_ALLPLAYLISTS";
@@ -327,7 +320,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnSelAllPlaylists.Location = new System.Drawing.Point(279, 2);
             this.btnSelAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllPlaylists.Name = "btnSelAllPlaylists";
-            this.btnSelAllPlaylists.ShowDropDown = false;
             this.btnSelAllPlaylists.Size = new System.Drawing.Size(135, 22);
             this.btnSelAllPlaylists.TabIndex = 2;
             this.btnSelAllPlaylists.Text = "TXT_SELECT_ALLPLAYLISTS";

@@ -140,7 +140,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.Text = "TXT_TAGGINGPATTERNS";
             this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
-            this.txtHints.WordWrap = true;
             // 
             // FSTagEditorPanel
             // 

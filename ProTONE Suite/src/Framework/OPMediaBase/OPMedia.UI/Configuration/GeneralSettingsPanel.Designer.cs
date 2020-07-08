@@ -112,7 +112,6 @@ namespace OPMedia.UI.Configuration
             this.chkAllowAutoUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAllowAutoUpdates.Location = new System.Drawing.Point(3, 182);
             this.chkAllowAutoUpdates.Name = "chkAllowAutoUpdates";
-            this.chkAllowAutoUpdates.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkAllowAutoUpdates.Size = new System.Drawing.Size(275, 27);
             this.chkAllowAutoUpdates.TabIndex = 8;
             this.chkAllowAutoUpdates.Text = "TXT_ALLOWAUTOUPDATES";
@@ -185,7 +184,6 @@ namespace OPMedia.UI.Configuration
             this.btnCheckUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckUpdates.Location = new System.Drawing.Point(284, 182);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
-            this.btnCheckUpdates.ShowDropDown = false;
             this.btnCheckUpdates.Size = new System.Drawing.Size(126, 27);
             this.btnCheckUpdates.TabIndex = 9;
             this.btnCheckUpdates.Text = "TXT_CHECKUPDATE";

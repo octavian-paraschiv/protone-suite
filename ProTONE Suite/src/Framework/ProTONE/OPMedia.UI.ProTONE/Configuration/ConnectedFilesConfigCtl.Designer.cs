@@ -48,7 +48,6 @@ namespace OPMedia.UI.Configuration
             this.chkUseLinkedFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkUseLinkedFiles.Location = new System.Drawing.Point(3, 3);
             this.chkUseLinkedFiles.Name = "chkUseLinkedFiles";
-            this.chkUseLinkedFiles.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkUseLinkedFiles.Size = new System.Drawing.Size(394, 17);
             this.chkUseLinkedFiles.TabIndex = 9;
             this.chkUseLinkedFiles.Text = "TXT_USE_LINKEDFILES";

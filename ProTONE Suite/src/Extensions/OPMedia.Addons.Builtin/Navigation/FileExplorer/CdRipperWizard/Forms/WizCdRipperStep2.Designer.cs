@@ -93,7 +93,6 @@
             // 
             // txtDestFolder
             // 
-            this.txtDestFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDestFolder.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDestFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDestFolder.Lines = new string[0];
@@ -111,7 +110,6 @@
             this.txtDestFolder.TabIndex = 2;
             this.txtDestFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDestFolder.UseSystemPasswordChar = false;
-            this.txtDestFolder.WordWrap = true;
             this.txtDestFolder.TextChanged += new System.EventHandler(this.OnOutputFolderChanged);
             // 
             // opmButton1
@@ -121,7 +119,6 @@
             this.opmButton1.Location = new System.Drawing.Point(550, 20);
             this.opmButton1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmButton1.Name = "opmButton1";
-            this.opmButton1.ShowDropDown = false;
             this.opmButton1.Size = new System.Drawing.Size(29, 21);
             this.opmButton1.TabIndex = 3;
             this.opmButton1.Text = "...";

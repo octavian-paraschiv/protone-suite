@@ -51,7 +51,6 @@ namespace OPMedia.UI.Wizards
             this.btnPrevious.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnPrevious.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.ShowDropDown = false;
             this.btnPrevious.Size = new System.Drawing.Size(75, 25);
             this.btnPrevious.TabIndex = 0;
             this.btnPrevious.Text = "TXT_WIZARDBACK";
@@ -66,7 +65,6 @@ namespace OPMedia.UI.Wizards
             this.btnNext.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnNext.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnNext.Name = "btnNext";
-            this.btnNext.ShowDropDown = false;
             this.btnNext.Size = new System.Drawing.Size(75, 25);
             this.btnNext.TabIndex = 1;
             this.btnNext.Text = "TXT_WIZARDNEXT";
@@ -81,7 +79,6 @@ namespace OPMedia.UI.Wizards
             this.btnCancel.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(75, 25);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "TXT_WIZARDCANCEL";
@@ -96,7 +93,6 @@ namespace OPMedia.UI.Wizards
             this.btnFinish.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnFinish.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.ShowDropDown = false;
             this.btnFinish.Size = new System.Drawing.Size(75, 25);
             this.btnFinish.TabIndex = 2;
             this.btnFinish.Text = "TXT_WIZARDFINISH";
@@ -128,7 +124,6 @@ namespace OPMedia.UI.Wizards
             this.btnOK.Location = new System.Drawing.Point(123, 3);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(105, 25);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_WIZARDOK";
@@ -162,7 +157,6 @@ namespace OPMedia.UI.Wizards
             this.chkRepeatWizard.Location = new System.Drawing.Point(3, 3);
             this.chkRepeatWizard.MinimumSize = new System.Drawing.Size(110, 25);
             this.chkRepeatWizard.Name = "chkRepeatWizard";
-            this.chkRepeatWizard.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkRepeatWizard.Size = new System.Drawing.Size(110, 25);
             this.chkRepeatWizard.TabIndex = 0;
             this.chkRepeatWizard.Text = "TXT_WIZARDREPEAT";

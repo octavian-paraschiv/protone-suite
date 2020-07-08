@@ -68,7 +68,6 @@
             // txtDeezerToken
             // 
             this.txtDeezerToken.AutoSize = true;
-            this.txtDeezerToken.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDeezerToken.Lines = new string[0];
@@ -86,7 +85,6 @@
             this.txtDeezerToken.TabIndex = 4;
             this.txtDeezerToken.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDeezerToken.UseSystemPasswordChar = false;
-            this.txtDeezerToken.WordWrap = true;
             // 
             // opmLabel2
             // 
@@ -109,7 +107,6 @@
             this.btnNew.MaximumSize = new System.Drawing.Size(22, 22);
             this.btnNew.MinimumSize = new System.Drawing.Size(22, 22);
             this.btnNew.Name = "btnNew";
-            this.btnNew.ShowDropDown = false;
             this.btnNew.Size = new System.Drawing.Size(22, 22);
             this.btnNew.TabIndex = 12;
             this.btnNew.UseVisualStyleBackColor = true;
@@ -136,7 +133,6 @@
             this.chkUseServices.Location = new System.Drawing.Point(247, 32);
             this.chkUseServices.Margin = new System.Windows.Forms.Padding(0);
             this.chkUseServices.Name = "chkUseServices";
-            this.chkUseServices.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkUseServices.Size = new System.Drawing.Size(166, 15);
             this.chkUseServices.TabIndex = 19;
             this.chkUseServices.UseVisualStyleBackColor = true;

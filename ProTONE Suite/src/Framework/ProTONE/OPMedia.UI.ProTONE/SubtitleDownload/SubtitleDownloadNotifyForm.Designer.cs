@@ -104,7 +104,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Location = new System.Drawing.Point(837, 463);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.ShowDropDown = false;
             this.btnDownload.Size = new System.Drawing.Size(102, 27);
             this.btnDownload.TabIndex = 2;
             this.btnDownload.Text = "TXT_SUB_LOAD";

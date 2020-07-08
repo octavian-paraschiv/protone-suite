@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace OPMedia.UI.Controls
 {
+    public class OPMCheckBox : MetroFramework.Controls.MetroCheckBox
+    {
+        public OPMCheckBox()
+            : base()
+        {
+            this.FontSize = MetroFramework.MetroCheckBoxSize.Small;
+            this.FontWeight = MetroFramework.MetroCheckBoxWeight.Regular;
+        }
+    }
+
     public class OPMLabel : MetroFramework.Controls.MetroLabel
     {
         public OPMLabel()
@@ -33,6 +43,17 @@ namespace OPMedia.UI.Controls
         {
             this.FontSize = MetroFramework.MetroLabelSize.Medium;
             this.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+        }
+    }
+
+    public class OPMButton : MetroFramework.Controls.MetroDropDownButton
+    {
+        public OPMButton()
+            : base()
+        {
+            this.FontSize = MetroFramework.MetroButtonSize.Small;
+            this.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+
         }
     }
 }

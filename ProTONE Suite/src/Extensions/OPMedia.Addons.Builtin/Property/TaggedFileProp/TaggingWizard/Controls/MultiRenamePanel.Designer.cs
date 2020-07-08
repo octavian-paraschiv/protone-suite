@@ -71,7 +71,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtRenamePattern.Text = "<N>";
             this.txtRenamePattern.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtRenamePattern.UseSystemPasswordChar = false;
-            this.txtRenamePattern.WordWrap = true;
             // 
             // txtHints
             // 
@@ -94,7 +93,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.Text = "TXT_TAGGINGPATTERNS";
             this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
-            this.txtHints.WordWrap = true;
             // 
             // opmTableLayoutPanel1
             // 

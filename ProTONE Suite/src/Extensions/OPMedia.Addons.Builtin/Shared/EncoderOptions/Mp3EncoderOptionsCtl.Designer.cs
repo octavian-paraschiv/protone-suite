@@ -96,7 +96,6 @@
             this.chkGenerateTag.Location = new System.Drawing.Point(0, 109);
             this.chkGenerateTag.Margin = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.chkGenerateTag.Name = "chkGenerateTag";
-            this.chkGenerateTag.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkGenerateTag.Size = new System.Drawing.Size(711, 19);
             this.chkGenerateTag.TabIndex = 10;
             this.chkGenerateTag.Text = "TXT_GENERATE_TAG";

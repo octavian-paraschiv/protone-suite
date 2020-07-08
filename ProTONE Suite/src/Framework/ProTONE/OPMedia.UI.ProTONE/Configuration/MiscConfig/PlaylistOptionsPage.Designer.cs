@@ -96,7 +96,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkUseMetadata.Location = new System.Drawing.Point(0, 20);
             this.chkUseMetadata.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkUseMetadata.Name = "chkUseMetadata";
-            this.chkUseMetadata.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkUseMetadata.Size = new System.Drawing.Size(229, 19);
             this.chkUseMetadata.TabIndex = 0;
             this.chkUseMetadata.Text = "TXT_USE_METADATA";
@@ -109,7 +108,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkFileNameFormat.Location = new System.Drawing.Point(0, 44);
             this.chkFileNameFormat.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkFileNameFormat.Name = "chkFileNameFormat";
-            this.chkFileNameFormat.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkFileNameFormat.Size = new System.Drawing.Size(229, 19);
             this.chkFileNameFormat.TabIndex = 1;
             this.chkFileNameFormat.Text = "TXT_FILENAME_FORMAT";
@@ -162,7 +160,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // txtHints
             // 
             this.txtHints.AutoSize = true;
-            this.txtHints.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtHints.Lines = new string[] {
@@ -183,7 +180,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.Text = "TXT_METADATAPATTERNS";
             this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
-            this.txtHints.WordWrap = true;
             // 
             // lblDisplayFileName
             // 
@@ -208,7 +204,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkXFade.Location = new System.Drawing.Point(0, 168);
             this.chkXFade.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkXFade.Name = "chkXFade";
-            this.chkXFade.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkXFade.Size = new System.Drawing.Size(229, 19);
             this.chkXFade.TabIndex = 8;
             this.chkXFade.Text = "TXT_MNUXFADE";
@@ -222,7 +217,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkLoopPlay.Location = new System.Drawing.Point(0, 144);
             this.chkLoopPlay.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkLoopPlay.Name = "chkLoopPlay";
-            this.chkLoopPlay.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkLoopPlay.Size = new System.Drawing.Size(229, 19);
             this.chkLoopPlay.TabIndex = 7;
             this.chkLoopPlay.Text = "TXT_MNULOOPPLAY";

@@ -71,7 +71,6 @@
             this.btnOK.Location = new System.Drawing.Point(232, 370);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(70, 27);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "TXT_OK";
@@ -87,7 +86,6 @@
             this.btnCancel.Location = new System.Drawing.Point(308, 370);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -128,7 +126,6 @@
             this.btnNewFolder.Location = new System.Drawing.Point(3, 370);
             this.btnNewFolder.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnNewFolder.Name = "btnNewFolder";
-            this.btnNewFolder.ShowDropDown = false;
             this.btnNewFolder.Size = new System.Drawing.Size(118, 27);
             this.btnNewFolder.TabIndex = 2;
             this.btnNewFolder.Text = "TXT_NEW_FOLDER";

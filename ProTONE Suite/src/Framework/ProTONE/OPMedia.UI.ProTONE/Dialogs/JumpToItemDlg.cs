@@ -86,7 +86,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.Location = new System.Drawing.Point(403, 361);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(90, 38);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "TXT_CANCEL";
@@ -100,7 +99,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.Location = new System.Drawing.Point(326, 361);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
-            this.btnOk.ShowDropDown = false;
             this.btnOk.Size = new System.Drawing.Size(72, 38);
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "TXT_OK";
@@ -147,7 +145,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             // txtKeyword
             // 
-            this.txtKeyword.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.txtKeyword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.opmLayoutPanel1.SetColumnSpan(this.txtKeyword, 3);
             this.txtKeyword.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -166,7 +163,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtKeyword.UseSystemPasswordChar = false;
-            this.txtKeyword.WordWrap = true;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);
             // 

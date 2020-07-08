@@ -143,7 +143,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkNoCase.Location = new System.Drawing.Point(0, 0);
             this.chkNoCase.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkNoCase.Name = "chkNoCase";
-            this.chkNoCase.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkNoCase.Size = new System.Drawing.Size(186, 19);
             this.chkNoCase.TabIndex = 9;
             this.chkNoCase.Text = "TXT_CASEINSENSITIVESEARCH";
@@ -157,7 +156,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkRecursive.Location = new System.Drawing.Point(0, 96);
             this.chkRecursive.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkRecursive.Name = "chkRecursive";
-            this.chkRecursive.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkRecursive.Size = new System.Drawing.Size(313, 22);
             this.chkRecursive.TabIndex = 8;
             this.chkRecursive.Text = "TXT_RECURSIVESEARCH";
@@ -187,7 +185,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkAttrSearch.Location = new System.Drawing.Point(0, 123);
             this.chkAttrSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkAttrSearch.Name = "chkAttrSearch";
-            this.chkAttrSearch.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkAttrSearch.Size = new System.Drawing.Size(313, 19);
             this.chkAttrSearch.TabIndex = 10;
             this.chkAttrSearch.Text = "TXT_ATTRIBUTESEARCH";
@@ -212,7 +209,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.txtSearchPath.TabIndex = 6;
             this.txtSearchPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSearchPath.UseSystemPasswordChar = false;
-            this.txtSearchPath.WordWrap = true;
             // 
             // label2
             // 
@@ -399,7 +395,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkPropSearch.Location = new System.Drawing.Point(191, 0);
             this.chkPropSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkPropSearch.Name = "chkPropSearch";
-            this.chkPropSearch.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkPropSearch.Size = new System.Drawing.Size(149, 19);
             this.chkPropSearch.TabIndex = 11;
             this.chkPropSearch.Text = "TXT_PROPERTYSEARCH";
@@ -412,7 +407,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkOption1.Location = new System.Drawing.Point(0, 0);
             this.chkOption1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkOption1.Name = "chkOption1";
-            this.chkOption1.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkOption1.Size = new System.Drawing.Size(99, 19);
             this.chkOption1.TabIndex = 2;
             this.chkOption1.Text = "TXT_OPTION1";
@@ -426,7 +420,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.chkOption2.Location = new System.Drawing.Point(104, 0);
             this.chkOption2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkOption2.Name = "chkOption2";
-            this.chkOption2.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkOption2.Size = new System.Drawing.Size(99, 19);
             this.chkOption2.TabIndex = 3;
             this.chkOption2.Text = "TXT_OPTION2";
@@ -574,7 +567,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.btnBrowse.MaximumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.MinimumSize = new System.Drawing.Size(21, 21);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.ShowDropDown = false;
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 7;
             this.btnBrowse.Text = "...";

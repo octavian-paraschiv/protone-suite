@@ -49,17 +49,26 @@ namespace OPMedia.UI.Controls.Dialogs
         {
             get
             {
-                return ((this is OPMOpenFileDialog) && btnOK.ShowDropDown) ? _openDropDownOptions : null;
+                return (this is OPMOpenFileDialog) ? _openDropDownOptions : null;
             }
 
             set
             {
+                _cmsDynamic.Items.Clear();
                 if ((this is OPMOpenFileDialog) && value != null && value.Count > 0)
                 {
                     _openDropDownOptions = value;
-                }
+                    foreach (OpenOption opt in _openDropDownOptions)
+                    {
+                        OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem(opt.OptionTitle);
+                        tsmi.Tag = opt.OptionTag;
 
-                btnOK.ShowDropDown = ((this is OPMOpenFileDialog) && _openDropDownOptions != null && _openDropDownOptions.Count > 0);
+                        tsmi.Click -= new EventHandler(tsmi_Click);
+                        tsmi.Click += new EventHandler(tsmi_Click);
+
+                        _cmsDynamic.Items.Add(tsmi);
+                    }
+                }
             }
         }
 
@@ -129,7 +138,7 @@ namespace OPMedia.UI.Controls.Dialogs
             _tt = new OPMToolTipManager(btnAddToFavorites);
             _tt2 = new OPMToolTipManager(btnNewFolder);
 
-            btnOK.OnDropDownClicked += new EventHandler(btnOK_OnDropDownClicked);
+            btnOK.SplitMenuStrip = _cmsDynamic;
         }
 
         string lvExplorer_QueryDisplayName(string fsi)
@@ -145,48 +154,6 @@ namespace OPMedia.UI.Controls.Dialogs
             }
 
             return string.Empty;
-        }
-
-        void btnOK_OnDropDownClicked(object sender, EventArgs e)
-        {
-            _cmsDynamic.Items.Clear();
-            foreach (OpenOption opt in _openDropDownOptions)
-            {
-                OPMToolStripMenuItem tsmi = new OPMToolStripMenuItem(opt.OptionTitle);
-                tsmi.Tag = opt.OptionTag;
-
-                tsmi.Click -= new EventHandler(tsmi_Click);
-                tsmi.Click += new EventHandler(tsmi_Click);
-                
-                _cmsDynamic.Items.Add(tsmi);
-            }
-
-            _cmsDynamic.Opened -= new EventHandler(_cmsDynamic_Opened);
-            _cmsDynamic.Opened += new EventHandler(_cmsDynamic_Opened);
-
-            Point p = new Point(0, btnOK.Height);
-            _cmsDynamic.Show(btnOK, p, ToolStripDropDownDirection.Default);
-            
-        }
-
-        void _cmsDynamic_Opened(object sender, EventArgs e)
-        {
-            _cmsDynamic.Opened -= new EventHandler(_cmsDynamic_Opened);
-
-            Point ptButton = PointToScreen(btnOK.Location);
-            Point ptMenu = _cmsDynamic.PointToScreen(_cmsDynamic.DisplayRectangle.Location);
-
-            Screen scButton = Screen.FromPoint(ptButton);
-            Screen scMenu = Screen.FromPoint(ptMenu);
-
-            if (scButton != null && scMenu != null &&
-                scButton.DeviceName != scMenu.DeviceName)
-            {
-                int dx = ptButton.X - ptMenu.X;
-
-                Point p = new Point(dx, btnOK.Height);
-                _cmsDynamic.Show(btnOK, p, ToolStripDropDownDirection.Default);
-            }
         }
 
         void tsmi_Click(object sender, EventArgs e)

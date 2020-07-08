@@ -63,11 +63,9 @@
             this.chkS.AutoSize = true;
             this.chkS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkS.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.chkS.Location = new System.Drawing.Point(0, 48);
             this.chkS.Margin = new System.Windows.Forms.Padding(0);
             this.chkS.Name = "chkS";
-            this.chkS.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkS.Size = new System.Drawing.Size(89, 16);
             this.chkS.TabIndex = 3;
             this.chkS.Text = "TXT_SYSTEM";
@@ -77,11 +75,9 @@
             this.chkH.AutoSize = true;
             this.chkH.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkH.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkH.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.chkH.Location = new System.Drawing.Point(0, 32);
             this.chkH.Margin = new System.Windows.Forms.Padding(0);
             this.chkH.Name = "chkH";
-            this.chkH.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkH.Size = new System.Drawing.Size(89, 16);
             this.chkH.TabIndex = 2;
             this.chkH.Text = "TXT_HIDDEN";
@@ -91,11 +87,9 @@
             this.chkA.AutoSize = true;
             this.chkA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkA.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.chkA.Location = new System.Drawing.Point(0, 16);
             this.chkA.Margin = new System.Windows.Forms.Padding(0);
             this.chkA.Name = "chkA";
-            this.chkA.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkA.Size = new System.Drawing.Size(89, 16);
             this.chkA.TabIndex = 1;
             this.chkA.Text = "TXT_ARCHIVE";
@@ -105,11 +99,9 @@
             this.chkR.AutoSize = true;
             this.chkR.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkR.FontSize = OPMedia.UI.Themes.FontSizes.Small;
             this.chkR.Location = new System.Drawing.Point(0, 0);
             this.chkR.Margin = new System.Windows.Forms.Padding(0);
             this.chkR.Name = "chkR";
-            this.chkR.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkR.Size = new System.Drawing.Size(89, 16);
             this.chkR.TabIndex = 0;
             this.chkR.Text = "TXT_READONLY";

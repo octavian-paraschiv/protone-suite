@@ -207,7 +207,6 @@
             this.btnSearch.Location = new System.Drawing.Point(587, 471);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.ShowDropDown = false;
             this.btnSearch.Size = new System.Drawing.Size(76, 23);
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "TXT_SEARCH";

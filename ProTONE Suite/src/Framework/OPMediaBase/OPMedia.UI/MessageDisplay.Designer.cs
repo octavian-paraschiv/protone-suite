@@ -57,7 +57,6 @@ namespace OPMedia.UI
             this.btn2.Location = new System.Drawing.Point(195, 3);
             this.btn2.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn2.Name = "btn2";
-            this.btn2.ShowDropDown = false;
             this.btn2.Size = new System.Drawing.Size(60, 27);
             this.btn2.TabIndex = 2;
             this.btn2.Text = "[2]";
@@ -97,7 +96,6 @@ namespace OPMedia.UI
             this.btn1.Location = new System.Drawing.Point(129, 3);
             this.btn1.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn1.Name = "btn1";
-            this.btn1.ShowDropDown = false;
             this.btn1.Size = new System.Drawing.Size(60, 27);
             this.btn1.TabIndex = 1;
             this.btn1.Text = "[1]";
@@ -111,7 +109,6 @@ namespace OPMedia.UI
             this.btn3.Location = new System.Drawing.Point(261, 3);
             this.btn3.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn3.Name = "btn3";
-            this.btn3.ShowDropDown = false;
             this.btn3.Size = new System.Drawing.Size(60, 27);
             this.btn3.TabIndex = 3;
             this.btn3.Text = "[3]";
@@ -174,7 +171,6 @@ namespace OPMedia.UI
             this.btn4.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
             this.btn4.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn4.Name = "btn4";
-            this.btn4.ShowDropDown = false;
             this.btn4.Size = new System.Drawing.Size(60, 27);
             this.btn4.TabIndex = 4;
             this.btn4.Text = "[4]";
@@ -188,7 +184,6 @@ namespace OPMedia.UI
             this.btn5.Location = new System.Drawing.Point(63, 3);
             this.btn5.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn5.Name = "btn5";
-            this.btn5.ShowDropDown = false;
             this.btn5.Size = new System.Drawing.Size(60, 27);
             this.btn5.TabIndex = 0;
             this.btn5.Text = "[5]";
@@ -218,7 +213,6 @@ namespace OPMedia.UI
             this.chkAdditionalCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAdditionalCheck.Location = new System.Drawing.Point(3, 95);
             this.chkAdditionalCheck.Name = "chkAdditionalCheck";
-            this.chkAdditionalCheck.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkAdditionalCheck.Size = new System.Drawing.Size(466, 69);
             this.chkAdditionalCheck.TabIndex = 3;
             this.chkAdditionalCheck.Text = "TXT_XYZ";

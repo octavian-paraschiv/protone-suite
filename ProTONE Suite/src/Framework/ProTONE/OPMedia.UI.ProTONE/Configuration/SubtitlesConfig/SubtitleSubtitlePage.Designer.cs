@@ -160,7 +160,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubtitleDownload.Location = new System.Drawing.Point(0, 29);
             this.chkSubtitleDownload.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkSubtitleDownload.Name = "chkSubtitleDownload";
-            this.chkSubtitleDownload.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkSubtitleDownload.Size = new System.Drawing.Size(546, 19);
             this.chkSubtitleDownload.TabIndex = 1;
             this.chkSubtitleDownload.Text = "TXT_SUBTITLE_DOWNLOAD";
@@ -305,7 +304,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnRestoreDefaults.Location = new System.Drawing.Point(343, 0);
             this.btnRestoreDefaults.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRestoreDefaults.Name = "btnRestoreDefaults";
-            this.btnRestoreDefaults.ShowDropDown = false;
             this.btnRestoreDefaults.Size = new System.Drawing.Size(178, 25);
             this.btnRestoreDefaults.TabIndex = 1;
             this.btnRestoreDefaults.Text = "TXT_RESTORE_DEFAULTSERVERS";
@@ -408,7 +406,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkNotifySubDownloaded.Location = new System.Drawing.Point(0, 181);
             this.chkNotifySubDownloaded.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkNotifySubDownloaded.Name = "chkNotifySubDownloaded";
-            this.chkNotifySubDownloaded.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkNotifySubDownloaded.Size = new System.Drawing.Size(546, 19);
             this.chkNotifySubDownloaded.TabIndex = 2;
             this.chkNotifySubDownloaded.Text = "TXT_NOTIFYSUBDOWNLOADED";

@@ -147,7 +147,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             this.chkRecursive.Location = new System.Drawing.Point(0, 81);
             this.chkRecursive.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkRecursive.Name = "chkRecursive";
-            this.chkRecursive.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkRecursive.Size = new System.Drawing.Size(345, 17);
             this.chkRecursive.TabIndex = 6;
             this.chkRecursive.Text = "TXT_RECURSIVESEARCH";

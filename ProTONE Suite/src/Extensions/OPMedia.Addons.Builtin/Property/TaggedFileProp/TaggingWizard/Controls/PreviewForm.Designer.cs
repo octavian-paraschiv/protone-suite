@@ -47,7 +47,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Location = new System.Drawing.Point(799, 358);
             this.okButton.Name = "okButton";
-            this.okButton.ShowDropDown = false;
             this.okButton.Size = new System.Drawing.Size(61, 27);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "TXT_OK";

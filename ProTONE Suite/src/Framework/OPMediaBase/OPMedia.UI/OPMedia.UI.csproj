@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
@@ -142,10 +146,13 @@
     <Compile Include="Controls\Containers\OPMCustomPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Converted.cs">
+    <Compile Include="Controls\_Converted\Common.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Derived\ImageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Metro.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\UserControls\OPMFontChooserCtl.cs">
@@ -155,9 +162,6 @@
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Custom\GraphPlotter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Derived\MultilineEditTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\UserControls\OPMColorChooserCtl.cs">
@@ -171,9 +175,6 @@
     </Compile>
     <Compile Include="Controls\Common\OPMPropertyGrid.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Derived\OPMNumericTextBox.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ExtendedMethods.cs" />
     <Compile Include="Controls\Common\OPMGroupBox.cs">
@@ -196,12 +197,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Common\OPMStatusStripTextBox.cs" />
-    <Compile Include="Controls\UserControls\OPMNumericUpDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UserControls\OPMTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Controls\PropertyEditor\Choosers\BooleanChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -235,6 +230,9 @@
     </Compile>
     <Compile Include="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\_Converted\TextBoxes.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Themes\SmoothGraphics.cs" />
     <Compile Include="TrayNotificationBox.cs">
@@ -355,22 +353,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Menus\MenuWrapper.cs" />
-    <Compile Include="Controls\Common\OPMButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Common\OPMCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Common\OPMComboBox.cs">
+    <Compile Include="Controls\_Converted\ComboBoxes.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Common\OPMDateTimePicker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Common\OPMEditableComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Derived\OPMNumericUpDownBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Containers\OPMSplitContainer.cs">
@@ -477,12 +463,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UserControls\OPMColorChooserCtl.resx">
       <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMNumericUpDown.resx">
-      <DependentUpon>OPMNumericUpDown.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMTextBox.resx">
-      <DependentUpon>OPMTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UserControls\OPMTimePicker.resx">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>

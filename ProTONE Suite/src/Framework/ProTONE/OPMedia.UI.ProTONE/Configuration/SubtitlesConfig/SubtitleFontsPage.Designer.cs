@@ -61,7 +61,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkFilterStateNotificationsEnabled.Location = new System.Drawing.Point(0, 390);
             this.chkFilterStateNotificationsEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkFilterStateNotificationsEnabled.Name = "chkFilterStateNotificationsEnabled";
-            this.chkFilterStateNotificationsEnabled.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkFilterStateNotificationsEnabled.Size = new System.Drawing.Size(548, 21);
             this.chkFilterStateNotificationsEnabled.TabIndex = 8;
             this.chkFilterStateNotificationsEnabled.Text = "TXT_NOTIFICATIONSENABLED";
@@ -172,7 +171,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubEnabled.Location = new System.Drawing.Point(0, 0);
             this.chkSubEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkSubEnabled.Name = "chkSubEnabled";
-            this.chkSubEnabled.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkSubEnabled.Size = new System.Drawing.Size(548, 19);
             this.chkSubEnabled.TabIndex = 0;
             this.chkSubEnabled.Text = "TXT_SUBENABLED";
@@ -259,7 +257,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkOsdEnabled.Location = new System.Drawing.Point(0, 0);
             this.chkOsdEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkOsdEnabled.Name = "chkOsdEnabled";
-            this.chkOsdEnabled.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkOsdEnabled.Size = new System.Drawing.Size(246, 29);
             this.chkOsdEnabled.TabIndex = 0;
             this.chkOsdEnabled.Text = "TXT_OSDENABLED";

@@ -103,7 +103,6 @@ namespace OPMedia.UI.FileTasks
             this.btnCancel.Location = new System.Drawing.Point(433, 117);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 10, 5, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ShowDropDown = false;
             this.btnCancel.Size = new System.Drawing.Size(82, 27);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "TXT_ABORT";

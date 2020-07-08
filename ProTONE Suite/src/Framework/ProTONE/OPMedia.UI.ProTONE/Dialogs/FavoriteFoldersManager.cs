@@ -67,7 +67,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(470, 219);
             this.btnOK.Name = "btnOK";
-            this.btnOK.ShowDropDown = false;
             this.btnOK.Size = new System.Drawing.Size(61, 27);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "TXT_OK";

@@ -193,7 +193,6 @@
             this.btnRefresh.Location = new System.Drawing.Point(478, 20);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.ShowDropDown = false;
             this.btnRefresh.Size = new System.Drawing.Size(27, 25);
             this.btnRefresh.TabIndex = 4;
             this.btnRefresh.UseVisualStyleBackColor = true;

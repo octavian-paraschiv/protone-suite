@@ -48,7 +48,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.chkReopenLastCatalog.Location = new System.Drawing.Point(0, 38);
             this.chkReopenLastCatalog.Margin = new System.Windows.Forms.Padding(0);
             this.chkReopenLastCatalog.Name = "chkReopenLastCatalog";
-            this.chkReopenLastCatalog.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkReopenLastCatalog.Size = new System.Drawing.Size(350, 17);
             this.chkReopenLastCatalog.TabIndex = 1;
             this.chkReopenLastCatalog.Text = "TXT_REOPEN_LAST_CATALOG";
@@ -63,7 +62,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.chkRememberRecentFiles.Location = new System.Drawing.Point(0, 3);
             this.chkRememberRecentFiles.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.chkRememberRecentFiles.Name = "chkRememberRecentFiles";
-            this.chkRememberRecentFiles.OverrideForeColor = System.Drawing.Color.Empty;
             this.chkRememberRecentFiles.Size = new System.Drawing.Size(108, 17);
             this.chkRememberRecentFiles.TabIndex = 2;
             this.chkRememberRecentFiles.Text = "TXT_RETAIN_LAST";
