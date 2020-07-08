@@ -59,7 +59,6 @@
             this.txtFrequency.Margin = new System.Windows.Forms.Padding(0);
             this.txtFrequency.MaxLength = 5;
             this.txtFrequency.Name = "txtFrequency";
-            this.txtFrequency.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
             this.txtFrequency.Size = new System.Drawing.Size(33, 22);
             this.txtFrequency.TabIndex = 1;
             this.txtFrequency.Text = "99999";

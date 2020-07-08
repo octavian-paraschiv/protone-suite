@@ -29,14 +29,14 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 
         public string PropertyValue
         {
-            get { return ((int)opmNumericUpDown1.Value).ToString(); }
+            get { return ((int)OPMNumericTextBox1.Value).ToString(); }
             set
             {
                 int val = 0;
                 if (int.TryParse(value, out val) == false)
                     val = 0;
 
-                opmNumericUpDown1.Value = val;
+                OPMNumericTextBox1.Value = val;
             }
         }
 
@@ -76,11 +76,11 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
             else if (integerType == typeof(UInt64) || integerType == typeof(UInt64?))
             { min = UInt64.MinValue; max = UInt64.MaxValue; }
 
-            opmNumericUpDown1.Minimum = min;
-            opmNumericUpDown1.Maximum = max;
+            OPMNumericTextBox1.Minimum = min;
+            OPMNumericTextBox1.Maximum = max;
         }
 
-        private void opmNumericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void OPMNumericTextBox1_ValueChanged(object sender, EventArgs e)
         {
             if (PropertyChanged != null)
             {

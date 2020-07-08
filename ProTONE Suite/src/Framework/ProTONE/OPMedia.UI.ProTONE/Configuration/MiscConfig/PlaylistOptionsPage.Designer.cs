@@ -42,8 +42,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkLoopPlay = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudXFadeLength = new OPMedia.UI.Controls.OPMNumericUpDown();
-            this.nudAnticipatedEnd = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudXFadeLength = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudAnticipatedEnd = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.buttonSpecAny3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -127,8 +127,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // cmbFileNameFormat
             // 
-            this.cmbFileNameFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbFileNameFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbFileNameFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbFileNameFormat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbFileNameFormat.DropDownWidth = 292;
             this.cmbFileNameFormat.FormattingEnabled = true;
@@ -143,8 +143,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // cmbPlaylistEntryFormat
             // 
-            this.cmbPlaylistEntryFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbPlaylistEntryFormat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbPlaylistEntryFormat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbPlaylistEntryFormat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbPlaylistEntryFormat.DropDownWidth = 292;
             this.cmbPlaylistEntryFormat.FormattingEnabled = true;
@@ -248,13 +248,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // nudXFadeLength
             // 
-            this.nudXFadeLength.DecimalPlaces = 0;
             this.nudXFadeLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudXFadeLength.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudXFadeLength.Location = new System.Drawing.Point(0, 212);
             this.nudXFadeLength.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.nudXFadeLength.Maximum = new decimal(new int[] {
@@ -274,8 +268,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudXFadeLength.TabIndex = 11;
             this.nudXFadeLength.Text = "3 (sec)";
             this.nudXFadeLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.nudXFadeLength.Unit = "sec";
-            this.nudXFadeLength.UnitFirst = false;
             this.nudXFadeLength.Value = new decimal(new int[] {
             10,
             0,
@@ -284,13 +276,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // nudAnticipatedEnd
             // 
-            this.nudAnticipatedEnd.DecimalPlaces = 0;
             this.nudAnticipatedEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudAnticipatedEnd.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudAnticipatedEnd.Location = new System.Drawing.Point(0, 262);
             this.nudAnticipatedEnd.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.nudAnticipatedEnd.Maximum = new decimal(new int[] {
@@ -310,8 +296,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudAnticipatedEnd.TabIndex = 12;
             this.nudAnticipatedEnd.Text = "3 (sec)";
             this.nudAnticipatedEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.nudAnticipatedEnd.Unit = "sec";
-            this.nudAnticipatedEnd.UnitFirst = false;
             this.nudAnticipatedEnd.Value = new decimal(new int[] {
             10,
             0,
@@ -353,7 +337,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMCheckBox chkLoopPlay;
         private OPMLabel opmLabel1;
         private OPMLabel opmLabel2;
-        private OPMNumericUpDown nudXFadeLength;
-        private OPMNumericUpDown nudAnticipatedEnd;
+        private OPMNumericTextBox nudXFadeLength;
+        private OPMNumericTextBox nudAnticipatedEnd;
     }
 }

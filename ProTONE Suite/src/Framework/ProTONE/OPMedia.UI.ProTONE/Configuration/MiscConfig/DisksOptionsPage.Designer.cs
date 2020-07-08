@@ -227,7 +227,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerPort.MaxLength = 5;
             this.txtCddbServerPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtCddbServerPort.Name = "txtCddbServerPort";
-            this.txtCddbServerPort.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
             this.txtCddbServerPort.PasswordChar = '\0';
             this.txtCddbServerPort.ReadOnly = false;
             this.txtCddbServerPort.ScrollBars = System.Windows.Forms.ScrollBars.None;

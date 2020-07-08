@@ -30,9 +30,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         private void InitializeComponent()
         {
             this.label5 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudPreviewTimer = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudPreviewTimer = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.kryptonLabel1 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudMaxProcessedFiles = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudMaxProcessedFiles = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.connectedFilesConfigCtl1 = new OPMedia.UI.Configuration.ConnectedFilesConfigCtl();
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,12 +55,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.nudPreviewTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudPreviewTimer.DecimalPlaces = 1;
-            this.nudPreviewTimer.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
             this.nudPreviewTimer.Location = new System.Drawing.Point(149, 30);
             this.nudPreviewTimer.Margin = new System.Windows.Forms.Padding(0);
             this.nudPreviewTimer.Maximum = new decimal(new int[] {
@@ -81,8 +75,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudPreviewTimer.TabIndex = 7;
             this.nudPreviewTimer.Text = "1,0";
             this.nudPreviewTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudPreviewTimer.Unit = null;
-            this.nudPreviewTimer.UnitFirst = false;
             this.nudPreviewTimer.Value = new decimal(new int[] {
             1,
             0,
@@ -107,12 +99,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.nudMaxProcessedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudMaxProcessedFiles.DecimalPlaces = 0;
-            this.nudMaxProcessedFiles.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
             this.nudMaxProcessedFiles.Location = new System.Drawing.Point(149, 0);
             this.nudMaxProcessedFiles.Margin = new System.Windows.Forms.Padding(0);
             this.nudMaxProcessedFiles.Maximum = new decimal(new int[] {
@@ -133,8 +119,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudMaxProcessedFiles.TabIndex = 7;
             this.nudMaxProcessedFiles.Text = "50";
             this.nudMaxProcessedFiles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudMaxProcessedFiles.Unit = null;
-            this.nudMaxProcessedFiles.UnitFirst = false;
             this.nudMaxProcessedFiles.Value = new decimal(new int[] {
             50,
             0,
@@ -193,9 +177,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         #endregion
 
         private OPMLabel label5;
-        private OPMNumericUpDown nudPreviewTimer;
+        private OPMNumericTextBox nudPreviewTimer;
         private OPMLabel kryptonLabel1;
-        private OPMNumericUpDown nudMaxProcessedFiles;
+        private OPMNumericTextBox nudMaxProcessedFiles;
         private OPMTableLayoutPanel tableLayoutPanel1;
         private UI.Configuration.ConnectedFilesConfigCtl connectedFilesConfigCtl1;
     }

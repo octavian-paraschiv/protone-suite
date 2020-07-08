@@ -47,6 +47,8 @@ namespace OPMedia.UI.Configuration
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
@@ -63,25 +65,26 @@ namespace OPMedia.UI.Configuration
             this.tableLayoutPanel1.Controls.Add(this.cmbProxyType, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 152);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 154);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Location = new System.Drawing.Point(0, 106);
-            this.label9.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label9.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.label9.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.label9.Location = new System.Drawing.Point(3, 111);
+            this.label9.MaximumSize = new System.Drawing.Size(10000, 22);
+            this.label9.MinimumSize = new System.Drawing.Size(22, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(131, 22);
             this.label9.TabIndex = 8;
@@ -92,9 +95,11 @@ namespace OPMedia.UI.Configuration
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Location = new System.Drawing.Point(0, 79);
-            this.label7.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label7.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.label7.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.label7.Location = new System.Drawing.Point(3, 84);
+            this.label7.MaximumSize = new System.Drawing.Size(10000, 22);
+            this.label7.MinimumSize = new System.Drawing.Size(22, 22);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 22);
             this.label7.TabIndex = 6;
@@ -105,9 +110,11 @@ namespace OPMedia.UI.Configuration
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label6.Location = new System.Drawing.Point(0, 52);
-            this.label6.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label6.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.label6.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.label6.Location = new System.Drawing.Point(3, 57);
+            this.label6.MaximumSize = new System.Drawing.Size(10000, 22);
+            this.label6.MinimumSize = new System.Drawing.Size(22, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(131, 22);
             this.label6.TabIndex = 4;
@@ -118,9 +125,11 @@ namespace OPMedia.UI.Configuration
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Location = new System.Drawing.Point(0, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.label3.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.label3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.label3.Location = new System.Drawing.Point(3, 30);
+            this.label3.MaximumSize = new System.Drawing.Size(10000, 22);
+            this.label3.MinimumSize = new System.Drawing.Size(22, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 22);
             this.label3.TabIndex = 2;
@@ -131,105 +140,188 @@ namespace OPMedia.UI.Configuration
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label5.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.label5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.MaximumSize = new System.Drawing.Size(10000, 22);
+            this.label5.MinimumSize = new System.Drawing.Size(22, 22);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 15);
+            this.label5.Size = new System.Drawing.Size(131, 22);
             this.label5.TabIndex = 0;
             this.label5.Text = "TXT_PROXYTYPE";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtProxyPassword
             // 
-            this.txtProxyPassword.AutoSize = true;
-            this.txtProxyPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            // 
+            // 
+            // 
+            this.txtProxyPassword.CustomButton.Image = null;
+            this.txtProxyPassword.CustomButton.Location = new System.Drawing.Point(168, 2);
+            this.txtProxyPassword.CustomButton.Name = "";
+            this.txtProxyPassword.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.txtProxyPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyPassword.CustomButton.TabIndex = 1;
+            this.txtProxyPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyPassword.CustomButton.UseSelectable = true;
+            this.txtProxyPassword.CustomButton.Visible = false;
             this.txtProxyPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProxyPassword.Location = new System.Drawing.Point(136, 106);
+            this.txtProxyPassword.Lines = new string[0];
+            this.txtProxyPassword.Location = new System.Drawing.Point(142, 111);
             this.txtProxyPassword.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.txtProxyPassword.MaximumSize = new System.Drawing.Size(3000, 22);
+            this.txtProxyPassword.MaximumSize = new System.Drawing.Size(10000, 22);
             this.txtProxyPassword.MaxLength = 512;
             this.txtProxyPassword.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPassword.Name = "txtProxyPassword";
             this.txtProxyPassword.PasswordChar = '●';
-            this.txtProxyPassword.ReadOnly = false;
             this.txtProxyPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyPassword.SelectedText = "";
+            this.txtProxyPassword.SelectionLength = 0;
+            this.txtProxyPassword.SelectionStart = 0;
             this.txtProxyPassword.ShortcutsEnabled = true;
-            this.txtProxyPassword.Size = new System.Drawing.Size(194, 22);
+            this.txtProxyPassword.Size = new System.Drawing.Size(188, 22);
             this.txtProxyPassword.TabIndex = 9;
-            this.txtProxyPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtProxyPassword.UseSelectable = true;
             this.txtProxyPassword.UseSystemPasswordChar = true;
+            this.txtProxyPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyUser
             // 
-            this.txtProxyUser.AutoSize = true;
-            this.txtProxyUser.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            // 
+            // 
+            // 
+            this.txtProxyUser.CustomButton.Image = null;
+            this.txtProxyUser.CustomButton.Location = new System.Drawing.Point(168, 2);
+            this.txtProxyUser.CustomButton.Name = "";
+            this.txtProxyUser.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.txtProxyUser.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyUser.CustomButton.TabIndex = 1;
+            this.txtProxyUser.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyUser.CustomButton.UseSelectable = true;
+            this.txtProxyUser.CustomButton.Visible = false;
             this.txtProxyUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProxyUser.Location = new System.Drawing.Point(136, 79);
+            this.txtProxyUser.Lines = new string[0];
+            this.txtProxyUser.Location = new System.Drawing.Point(142, 84);
             this.txtProxyUser.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.txtProxyUser.MaximumSize = new System.Drawing.Size(3000, 22);
+            this.txtProxyUser.MaximumSize = new System.Drawing.Size(10000, 22);
             this.txtProxyUser.MaxLength = 512;
             this.txtProxyUser.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyUser.Name = "txtProxyUser";
             this.txtProxyUser.PasswordChar = '\0';
-            this.txtProxyUser.ReadOnly = false;
             this.txtProxyUser.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyUser.SelectedText = "";
+            this.txtProxyUser.SelectionLength = 0;
+            this.txtProxyUser.SelectionStart = 0;
             this.txtProxyUser.ShortcutsEnabled = true;
-            this.txtProxyUser.Size = new System.Drawing.Size(194, 22);
+            this.txtProxyUser.Size = new System.Drawing.Size(188, 22);
             this.txtProxyUser.TabIndex = 7;
-            this.txtProxyUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtProxyUser.UseSystemPasswordChar = false;
+            this.txtProxyUser.UseSelectable = true;
+            this.txtProxyUser.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyUser.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyPort
             // 
-            this.txtProxyPort.AutoSize = true;
+            this.txtProxyPort.AllowDecimals = false;
             this.txtProxyPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            // 
+            // 
+            // 
+            this.txtProxyPort.CustomButton.Image = null;
+            this.txtProxyPort.CustomButton.Location = new System.Drawing.Point(168, 2);
+            this.txtProxyPort.CustomButton.Name = "";
+            this.txtProxyPort.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.txtProxyPort.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyPort.CustomButton.TabIndex = 1;
+            this.txtProxyPort.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyPort.CustomButton.UseSelectable = true;
+            this.txtProxyPort.CustomButton.Visible = false;
             this.txtProxyPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProxyPort.Location = new System.Drawing.Point(136, 52);
+            this.txtProxyPort.Lines = new string[] {
+        "1"};
+            this.txtProxyPort.Location = new System.Drawing.Point(142, 57);
             this.txtProxyPort.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.txtProxyPort.MaximumSize = new System.Drawing.Size(3000, 22);
+            this.txtProxyPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.txtProxyPort.MaximumSize = new System.Drawing.Size(10000, 22);
             this.txtProxyPort.MaxLength = 5;
+            this.txtProxyPort.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txtProxyPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPort.Name = "txtProxyPort";
             this.txtProxyPort.PasswordChar = '\0';
-            this.txtProxyPort.ReadOnly = false;
             this.txtProxyPort.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyPort.SelectedText = "";
+            this.txtProxyPort.SelectionLength = 0;
+            this.txtProxyPort.SelectionStart = 0;
             this.txtProxyPort.ShortcutsEnabled = false;
-            this.txtProxyPort.Size = new System.Drawing.Size(194, 22);
+            this.txtProxyPort.Size = new System.Drawing.Size(188, 22);
             this.txtProxyPort.TabIndex = 5;
-            this.txtProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtProxyPort.UseSystemPasswordChar = false;
+            this.txtProxyPort.Text = "1";
+            this.txtProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtProxyPort.UseSelectable = true;
+            this.txtProxyPort.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtProxyPort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyPort.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyServer
             // 
-            this.txtProxyServer.AutoSize = true;
-            this.txtProxyServer.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            // 
+            // 
+            // 
+            this.txtProxyServer.CustomButton.Image = null;
+            this.txtProxyServer.CustomButton.Location = new System.Drawing.Point(168, 2);
+            this.txtProxyServer.CustomButton.Name = "";
+            this.txtProxyServer.CustomButton.Size = new System.Drawing.Size(17, 17);
+            this.txtProxyServer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyServer.CustomButton.TabIndex = 1;
+            this.txtProxyServer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyServer.CustomButton.UseSelectable = true;
+            this.txtProxyServer.CustomButton.Visible = false;
             this.txtProxyServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProxyServer.Location = new System.Drawing.Point(136, 25);
-            this.txtProxyServer.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.txtProxyServer.MaximumSize = new System.Drawing.Size(3000, 22);
+            this.txtProxyServer.Lines = new string[0];
+            this.txtProxyServer.Location = new System.Drawing.Point(142, 30);
+            this.txtProxyServer.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.txtProxyServer.MaximumSize = new System.Drawing.Size(10000, 22);
             this.txtProxyServer.MaxLength = 512;
             this.txtProxyServer.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyServer.Name = "txtProxyServer";
             this.txtProxyServer.PasswordChar = '\0';
-            this.txtProxyServer.ReadOnly = false;
             this.txtProxyServer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyServer.SelectedText = "";
+            this.txtProxyServer.SelectionLength = 0;
+            this.txtProxyServer.SelectionStart = 0;
             this.txtProxyServer.ShortcutsEnabled = true;
-            this.txtProxyServer.Size = new System.Drawing.Size(194, 22);
+            this.txtProxyServer.Size = new System.Drawing.Size(188, 22);
             this.txtProxyServer.TabIndex = 3;
-            this.txtProxyServer.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtProxyServer.UseSystemPasswordChar = false;
+            this.txtProxyServer.UseSelectable = true;
+            this.txtProxyServer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyServer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // cmbProxyType
             // 
-            this.cmbProxyType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cmbProxyType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbProxyType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbProxyType.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cmbProxyType.FormattingEnabled = true;
-            this.cmbProxyType.Location = new System.Drawing.Point(136, 0);
-            this.cmbProxyType.Margin = new System.Windows.Forms.Padding(0);
+            this.cmbProxyType.ItemHeight = 19;
+            this.cmbProxyType.Location = new System.Drawing.Point(142, 0);
+            this.cmbProxyType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.cmbProxyType.MaximumSize = new System.Drawing.Size(10000, 0);
+            this.cmbProxyType.MinimumSize = new System.Drawing.Size(22, 0);
             this.cmbProxyType.Name = "cmbProxyType";
-            this.cmbProxyType.Size = new System.Drawing.Size(194, 20);
+            this.cmbProxyType.Size = new System.Drawing.Size(188, 25);
             this.cmbProxyType.TabIndex = 1;
+            this.cmbProxyType.UseSelectable = true;
             // 
             // ProxySettingsDefinitionCtl
             // 
@@ -237,10 +329,11 @@ namespace OPMedia.UI.Configuration
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ProxySettingsDefinitionCtl";
-            this.Size = new System.Drawing.Size(330, 152);
+            this.Size = new System.Drawing.Size(330, 154);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

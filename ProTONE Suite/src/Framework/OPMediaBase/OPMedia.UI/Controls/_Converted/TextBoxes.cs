@@ -114,17 +114,48 @@ namespace OPMedia.UI.Controls
 
             // Add event handler to filter the input.
             base.KeyDown += new KeyEventHandler(OnKeyDown);
+            base.TextChanged += OPMNumericTextBox_TextChanged;
+
+            base.Enter += OPMNumericTextBox_Enter;
+            base.Leave += OPMNumericTextBox_Leave;
+        }
+
+        private void OPMNumericTextBox_Leave(object sender, EventArgs e)
+        {
+            UpdateValue();
+        }
+
+        private void OPMNumericTextBox_Enter(object sender, EventArgs e)
+        {
+            UpdateValue();
+        }
+
+        private void OPMNumericTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(base.Text))
+                return;
+
+            try
+            {
+                _value = decimal.Parse(base.Text);
+                UpdateValue(false);
+            }
+            catch
+            {
+            }
         }
         #endregion
 
-        private void UpdateValue()
+        private void UpdateValue(bool updateText = true)
         {
             if (_value < _min)
                 _value = _min;
             if (_value > _max)
                 _value = _max;
 
-            base.Text = _value.ToString();
+            if (updateText)
+                base.Text = _value.ToString();
+
             ValueChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -144,6 +175,9 @@ namespace OPMedia.UI.Controls
                 case Keys.Right:
                 case Keys.End:
                 case Keys.Home:
+                    e.SuppressKeyPress = false;
+                    break;
+
                 case Keys.NumPad0:
                 case Keys.NumPad1:
                 case Keys.NumPad2:

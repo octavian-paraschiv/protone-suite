@@ -53,7 +53,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnRestoreDefaults = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel3 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblMinDuration = new OPMedia.UI.Controls.OPMLabel();
-            this.nudMinMovieDuration = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudMinMovieDuration = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.kryptonLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.chkNotifySubDownloaded = new OPMedia.UI.Controls.OPMCheckBox();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -348,13 +348,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             // nudMinMovieDuration
             // 
             this.nudMinMovieDuration.AccessibleName = "nudMinMovieDuration";
-            this.nudMinMovieDuration.DecimalPlaces = 0;
             this.nudMinMovieDuration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudMinMovieDuration.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudMinMovieDuration.Location = new System.Drawing.Point(153, 0);
             this.nudMinMovieDuration.Margin = new System.Windows.Forms.Padding(0);
             this.nudMinMovieDuration.Maximum = new decimal(new int[] {
@@ -375,8 +369,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudMinMovieDuration.TabIndex = 1;
             this.nudMinMovieDuration.Text = "20";
             this.nudMinMovieDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudMinMovieDuration.Unit = null;
-            this.nudMinMovieDuration.UnitFirst = false;
             this.nudMinMovieDuration.Value = new decimal(new int[] {
             20,
             0,
@@ -482,7 +474,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMTableLayoutPanel pnlOnlineSubtitles;
         private OPMTableLayoutPanel tableLayoutPanel3;
         private OPMLabel lblMinDuration;
-        private OPMNumericUpDown nudMinMovieDuration;
+        private OPMNumericTextBox nudMinMovieDuration;
         private OPMLabel kryptonLabel2;
         private OPMListView lvDownloadAddresses;
         private System.Windows.Forms.ColumnHeader colEmpty;

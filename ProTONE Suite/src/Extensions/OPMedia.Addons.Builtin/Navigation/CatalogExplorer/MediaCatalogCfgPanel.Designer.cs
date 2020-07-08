@@ -32,7 +32,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         {
             this.chkReopenLastCatalog = new OPMedia.UI.Controls.OPMCheckBox();
             this.chkRememberRecentFiles = new OPMedia.UI.Controls.OPMCheckBox();
-            this.nudRecentFilesCount = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudRecentFilesCount = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.kryptonLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.flowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -153,7 +153,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
         private OPMCheckBox chkReopenLastCatalog;
         private OPMCheckBox chkRememberRecentFiles;
-        private OPMNumericUpDown nudRecentFilesCount;
+        private OPMNumericTextBox nudRecentFilesCount;
         private OPMLabel kryptonLabel2;
         private OPMFlowLayoutPanel flowLayoutPanel1;
         private OPMTableLayoutPanel tableLayoutPanel1;

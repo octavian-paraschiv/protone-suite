@@ -56,7 +56,7 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
             }
         }
 
-        private void opmNumericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void OPMNumericTextBox1_ValueChanged(object sender, EventArgs e)
         {
             if (PropertyChanged != null)
             {

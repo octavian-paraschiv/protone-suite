@@ -23,10 +23,9 @@ namespace OPMedia.UI.Configuration
         public ProxySettingsDefinitionCtl()
         {
             InitializeComponent();
-            this.Load += new EventHandler(OnLoad);
         }
 
-        private void OnLoad(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             this.Modified = false;
 

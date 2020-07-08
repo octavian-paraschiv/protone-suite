@@ -57,13 +57,11 @@ namespace OPMedia.UI.Controls
 
         Point _lastPos = new Point();
 
-        Color _overrideElapsedBackColor = Color.Empty;
-        //Color _overrideBackColor = Color.Empty;
-
-
         #endregion
 
         #region Properties
+
+        public Color ElapsedBackColor { get; set; } = Color.Empty;
 
         [DefaultValue(GaugeMode.BandToStart)]
         public GaugeMode GaugeMode
@@ -248,9 +246,9 @@ namespace OPMedia.UI.Controls
 
                 Rectangle rcMajorEff = Rectangle.Empty;
 
-                if (_overrideElapsedBackColor != Color.Empty)
+                if (ElapsedBackColor != Color.Empty)
                 {
-                    c1 = c2 = _overrideElapsedBackColor;
+                    c1 = c2 = ElapsedBackColor;
                 }
 
                 float a;

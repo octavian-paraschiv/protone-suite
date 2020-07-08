@@ -32,7 +32,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkFilterStateNotificationsEnabled = new OPMedia.UI.Controls.OPMCheckBox();
             this.lblOsdFont = new OPMedia.UI.Controls.OPMLinkLabel();
             this.lblOsdColor = new OPMedia.UI.Controls.OPMLinkLabel();
-            this.nudOsdTmr = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudOsdTmr = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.chkSubEnabled = new OPMedia.UI.Controls.OPMCheckBox();
             this.flowLayoutPanel2 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
@@ -94,13 +94,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             // nudOsdTmr
             // 
             this.nudOsdTmr.AccessibleName = "nudOsdTmr";
-            this.nudOsdTmr.DecimalPlaces = 0;
             this.nudOsdTmr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudOsdTmr.Increment = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
             this.nudOsdTmr.Location = new System.Drawing.Point(492, 0);
             this.nudOsdTmr.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.nudOsdTmr.Maximum = new decimal(new int[] {
@@ -120,8 +114,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudOsdTmr.TabIndex = 2;
             this.nudOsdTmr.Text = "0";
             this.nudOsdTmr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudOsdTmr.Unit = null;
-            this.nudOsdTmr.UnitFirst = false;
             this.nudOsdTmr.Value = new decimal(new int[] {
             0,
             0,
@@ -355,7 +347,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMCheckBox chkFilterStateNotificationsEnabled;
         private OPMLinkLabel lblOsdFont;
         private OPMLinkLabel lblOsdColor;
-        private OPMNumericUpDown nudOsdTmr;
+        private OPMNumericTextBox nudOsdTmr;
         private OPMTableLayoutPanel tableLayoutPanel1;
         private Controls.OSD.OSDLabel lblOsdText2;
         private Controls.OSD.OSDLabel lblOsdText;

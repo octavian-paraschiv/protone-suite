@@ -37,7 +37,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkEnablePlaylistEvt = new OPMedia.UI.Controls.OPMCheckBox();
             this.cmbScheduledEvtHandler = new OPMedia.UI.Controls.OPMComboBox();
             this.label5 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudSchedulerWaitTimerProceed = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudSchedulerWaitTimerProceed = new OPMedia.UI.Controls.OPMNumericTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
@@ -126,13 +126,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // nudSchedulerWaitTimerProceed
             // 
-            this.nudSchedulerWaitTimerProceed.DecimalPlaces = 0;
             this.nudSchedulerWaitTimerProceed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudSchedulerWaitTimerProceed.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudSchedulerWaitTimerProceed.Location = new System.Drawing.Point(0, 0);
             this.nudSchedulerWaitTimerProceed.Margin = new System.Windows.Forms.Padding(0);
             this.nudSchedulerWaitTimerProceed.Maximum = new decimal(new int[] {
@@ -151,8 +145,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudSchedulerWaitTimerProceed.TabIndex = 1;
             this.nudSchedulerWaitTimerProceed.Text = "1";
             this.nudSchedulerWaitTimerProceed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudSchedulerWaitTimerProceed.Unit = null;
-            this.nudSchedulerWaitTimerProceed.UnitFirst = false;
             this.nudSchedulerWaitTimerProceed.Value = new decimal(new int[] {
             1,
             0,
@@ -340,7 +332,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMComboBox cmbPlaylistEvtHandler;
         private OPMComboBox cmbScheduledEvtHandler;
         private OPMLabel label5;
-        private OPMNumericUpDown nudSchedulerWaitTimerProceed;
+        private OPMNumericTextBox nudSchedulerWaitTimerProceed;
         private OPMLabel lblCaution;
         private TableLayoutPanel tableLayoutPanel1;
         private OPMLabel opmLabel1;
