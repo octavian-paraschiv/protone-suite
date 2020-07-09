@@ -68,7 +68,6 @@
             // txtDeezerToken
             // 
             this.txtDeezerToken.AutoSize = true;
-            this.txtDeezerToken.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDeezerToken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDeezerToken.Lines = new string[0];
             this.txtDeezerToken.Location = new System.Drawing.Point(247, 5);
@@ -80,7 +79,6 @@
             this.txtDeezerToken.PasswordChar = '\0';
             this.txtDeezerToken.ReadOnly = false;
             this.txtDeezerToken.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDeezerToken.ShortcutsEnabled = true;
             this.txtDeezerToken.Size = new System.Drawing.Size(166, 22);
             this.txtDeezerToken.TabIndex = 4;
             this.txtDeezerToken.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

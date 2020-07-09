@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.txtFrequency = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.txtFrequency = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.cgLevel = new OPMedia.UI.Controls.GradientGauge();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,11 +53,9 @@
             // txtFrequency
             // 
             this.txtFrequency.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.txtFrequency.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFrequency.Location = new System.Drawing.Point(0, 278);
             this.txtFrequency.Margin = new System.Windows.Forms.Padding(0);
-            this.txtFrequency.MaxLength = 5;
             this.txtFrequency.Name = "txtFrequency";
             this.txtFrequency.Size = new System.Drawing.Size(33, 22);
             this.txtFrequency.TabIndex = 1;
@@ -98,7 +96,7 @@
         #endregion
 
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
-        private UI.Controls.OPMNumericTextBox txtFrequency;
+        private UI.Controls.OPMNumericUpDown txtFrequency;
         private UI.Controls.GradientGauge cgLevel;
     }
 }

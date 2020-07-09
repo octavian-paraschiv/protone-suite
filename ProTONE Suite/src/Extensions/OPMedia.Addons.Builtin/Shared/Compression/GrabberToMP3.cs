@@ -9,8 +9,8 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using NAudio.Lame;
 using NAudio.Wave;
+using NAudio.Lame;
 
 namespace OPMedia.Addons.Builtin.Shared.Compression
 {

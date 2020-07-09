@@ -38,10 +38,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -81,6 +77,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ModernUI\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
       <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
       <Name>OPMedia.ShellSupport</Name>

@@ -126,7 +126,6 @@
             // txtFileNames
             // 
             this.txtFileNames.AutoSize = true;
-            this.txtFileNames.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.pnlLayout.SetColumnSpan(this.txtFileNames, 2);
             this.txtFileNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtFileNames.Lines = new string[0];
@@ -139,7 +138,6 @@
             this.txtFileNames.PasswordChar = '\0';
             this.txtFileNames.ReadOnly = false;
             this.txtFileNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtFileNames.ShortcutsEnabled = true;
             this.txtFileNames.Size = new System.Drawing.Size(456, 22);
             this.txtFileNames.TabIndex = 5;
             this.txtFileNames.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

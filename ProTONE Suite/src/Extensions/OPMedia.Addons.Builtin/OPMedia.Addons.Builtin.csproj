@@ -46,16 +46,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NAudio.dll</HintPath>
+      <HintPath>..\..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="NAudio.Lame">
-      <HintPath>..\..\packages\NAudio.Lame.dll</HintPath>
+      <HintPath>..\..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -450,6 +446,10 @@
     <None Include="Resources\none.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ModernUI\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>

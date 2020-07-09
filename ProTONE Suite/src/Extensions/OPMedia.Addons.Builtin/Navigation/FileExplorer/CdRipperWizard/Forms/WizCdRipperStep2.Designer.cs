@@ -93,7 +93,6 @@
             // 
             // txtDestFolder
             // 
-            this.txtDestFolder.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtDestFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDestFolder.Lines = new string[0];
             this.txtDestFolder.Location = new System.Drawing.Point(0, 20);
@@ -105,7 +104,6 @@
             this.txtDestFolder.PasswordChar = '\0';
             this.txtDestFolder.ReadOnly = true;
             this.txtDestFolder.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDestFolder.ShortcutsEnabled = true;
             this.txtDestFolder.Size = new System.Drawing.Size(545, 20);
             this.txtDestFolder.TabIndex = 2;
             this.txtDestFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

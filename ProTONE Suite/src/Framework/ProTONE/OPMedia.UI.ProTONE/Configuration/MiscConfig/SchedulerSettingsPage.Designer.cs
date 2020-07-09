@@ -37,7 +37,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkEnablePlaylistEvt = new OPMedia.UI.Controls.OPMCheckBox();
             this.cmbScheduledEvtHandler = new OPMedia.UI.Controls.OPMComboBox();
             this.label5 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudSchedulerWaitTimerProceed = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudSchedulerWaitTimerProceed = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
@@ -332,7 +332,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMComboBox cmbPlaylistEvtHandler;
         private OPMComboBox cmbScheduledEvtHandler;
         private OPMLabel label5;
-        private OPMNumericTextBox nudSchedulerWaitTimerProceed;
+        private OPMNumericUpDown nudSchedulerWaitTimerProceed;
         private OPMLabel lblCaution;
         private TableLayoutPanel tableLayoutPanel1;
         private OPMLabel opmLabel1;

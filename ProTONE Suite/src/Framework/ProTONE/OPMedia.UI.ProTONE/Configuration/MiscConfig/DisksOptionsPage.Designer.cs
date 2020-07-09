@@ -41,7 +41,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCddbServerName = new OPMedia.UI.Controls.OPMLabel();
             this.lblCddbServerPort = new OPMedia.UI.Controls.OPMLabel();
             this.txtCddbServerName = new OPMedia.UI.Controls.OPMTextBox();
-            this.txtCddbServerPort = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.txtCddbServerPort = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.dvdGroupBox.SuspendLayout();
             this.opmTableLayoutPanel2.SuspendLayout();
@@ -198,7 +198,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // txtCddbServerName
             // 
             this.txtCddbServerName.AutoSize = true;
-            this.txtCddbServerName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtCddbServerName.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtCddbServerName.Lines = new string[0];
             this.txtCddbServerName.Location = new System.Drawing.Point(164, 29);
@@ -210,7 +209,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerName.PasswordChar = '\0';
             this.txtCddbServerName.ReadOnly = false;
             this.txtCddbServerName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtCddbServerName.ShortcutsEnabled = true;
             this.txtCddbServerName.Size = new System.Drawing.Size(369, 22);
             this.txtCddbServerName.TabIndex = 4;
             this.txtCddbServerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -218,24 +216,16 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // txtCddbServerPort
             // 
-            this.txtCddbServerPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCddbServerPort.Lines = new string[] {
-        "ABGYT"};
             this.txtCddbServerPort.Location = new System.Drawing.Point(164, 56);
             this.txtCddbServerPort.Margin = new System.Windows.Forms.Padding(0);
             this.txtCddbServerPort.MaximumSize = new System.Drawing.Size(3000, 22);
-            this.txtCddbServerPort.MaxLength = 5;
             this.txtCddbServerPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtCddbServerPort.Name = "txtCddbServerPort";
-            this.txtCddbServerPort.PasswordChar = '\0';
             this.txtCddbServerPort.ReadOnly = false;
-            this.txtCddbServerPort.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtCddbServerPort.ShortcutsEnabled = true;
             this.txtCddbServerPort.Size = new System.Drawing.Size(127, 22);
             this.txtCddbServerPort.TabIndex = 6;
             this.txtCddbServerPort.Text = "ABGYT";
             this.txtCddbServerPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCddbServerPort.UseSystemPasswordChar = false;
             // 
             // DisksOptionsPage
             // 
@@ -271,6 +261,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMLabel lblCddbServerName;
         private OPMLabel lblCddbServerPort;
         private OPMTextBox txtCddbServerName;
-        private OPMNumericTextBox txtCddbServerPort;
+        private OPMNumericUpDown txtCddbServerPort;
     }
 }

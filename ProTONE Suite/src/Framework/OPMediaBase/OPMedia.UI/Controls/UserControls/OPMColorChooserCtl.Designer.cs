@@ -37,9 +37,9 @@
             this.cgR = new OPMedia.UI.Controls.ControlGauge();
             this.cgG = new OPMedia.UI.Controls.ControlGauge();
             this.cgB = new OPMedia.UI.Controls.ControlGauge();
-            this.nudR = new OPMedia.UI.Controls.OPMNumericTextBox();
-            this.nudG = new OPMedia.UI.Controls.OPMNumericTextBox();
-            this.nudB = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudR = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudG = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudB = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.txtColor = new System.Windows.Forms.MaskedTextBox();
             this.cmbKnownColors = new OPMedia.UI.Controls.ColorComboBox();
             this.lblResultingColor = new OPMedia.UI.Controls.OPMLabel();
@@ -215,22 +215,7 @@
             // 
             // nudR
             // 
-            this.nudR.AllowDecimals = false;
-            // 
-            // 
-            // 
-            this.nudR.CustomButton.Image = null;
-            this.nudR.CustomButton.Location = new System.Drawing.Point(27, 2);
-            this.nudR.CustomButton.Name = "";
-            this.nudR.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.nudR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.nudR.CustomButton.TabIndex = 1;
-            this.nudR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.nudR.CustomButton.UseSelectable = true;
-            this.nudR.CustomButton.Visible = false;
             this.nudR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudR.Lines = new string[] {
-        "0"};
             this.nudR.Location = new System.Drawing.Point(283, 26);
             this.nudR.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.nudR.Maximum = new decimal(new int[] {
@@ -239,7 +224,6 @@
             0,
             0});
             this.nudR.MaximumSize = new System.Drawing.Size(2571, 22);
-            this.nudR.MaxLength = 32767;
             this.nudR.Minimum = new decimal(new int[] {
             0,
             0,
@@ -247,42 +231,18 @@
             0});
             this.nudR.MinimumSize = new System.Drawing.Size(19, 22);
             this.nudR.Name = "nudR";
-            this.nudR.PasswordChar = '\0';
-            this.nudR.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.nudR.SelectedText = "";
-            this.nudR.SelectionLength = 0;
-            this.nudR.SelectionStart = 0;
-            this.nudR.ShortcutsEnabled = true;
             this.nudR.Size = new System.Drawing.Size(47, 22);
             this.nudR.TabIndex = 6;
             this.nudR.Text = "0";
-            this.nudR.UseSelectable = true;
             this.nudR.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.nudR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.nudR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // nudG
             // 
-            this.nudG.AllowDecimals = false;
-            // 
-            // 
-            // 
-            this.nudG.CustomButton.Image = null;
-            this.nudG.CustomButton.Location = new System.Drawing.Point(27, 2);
-            this.nudG.CustomButton.Name = "";
-            this.nudG.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.nudG.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.nudG.CustomButton.TabIndex = 1;
-            this.nudG.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.nudG.CustomButton.UseSelectable = true;
-            this.nudG.CustomButton.Visible = false;
             this.nudG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudG.Lines = new string[] {
-        "0"};
             this.nudG.Location = new System.Drawing.Point(283, 51);
             this.nudG.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.nudG.Maximum = new decimal(new int[] {
@@ -291,7 +251,6 @@
             0,
             0});
             this.nudG.MaximumSize = new System.Drawing.Size(2571, 22);
-            this.nudG.MaxLength = 32767;
             this.nudG.Minimum = new decimal(new int[] {
             0,
             0,
@@ -299,42 +258,21 @@
             0});
             this.nudG.MinimumSize = new System.Drawing.Size(19, 22);
             this.nudG.Name = "nudG";
-            this.nudG.PasswordChar = '\0';
-            this.nudG.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.nudG.SelectedText = "";
-            this.nudG.SelectionLength = 0;
-            this.nudG.SelectionStart = 0;
-            this.nudG.ShortcutsEnabled = true;
             this.nudG.Size = new System.Drawing.Size(47, 22);
             this.nudG.TabIndex = 7;
             this.nudG.Text = "0";
-            this.nudG.UseSelectable = true;
             this.nudG.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.nudG.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.nudG.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // nudB
             // 
-            this.nudB.AllowDecimals = false;
             // 
             // 
             // 
-            this.nudB.CustomButton.Image = null;
-            this.nudB.CustomButton.Location = new System.Drawing.Point(27, 2);
-            this.nudB.CustomButton.Name = "";
-            this.nudB.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.nudB.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.nudB.CustomButton.TabIndex = 1;
-            this.nudB.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.nudB.CustomButton.UseSelectable = true;
-            this.nudB.CustomButton.Visible = false;
             this.nudB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nudB.Lines = new string[] {
-        "0"};
             this.nudB.Location = new System.Drawing.Point(283, 76);
             this.nudB.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.nudB.Maximum = new decimal(new int[] {
@@ -343,7 +281,6 @@
             0,
             0});
             this.nudB.MaximumSize = new System.Drawing.Size(2571, 22);
-            this.nudB.MaxLength = 32767;
             this.nudB.Minimum = new decimal(new int[] {
             0,
             0,
@@ -351,23 +288,14 @@
             0});
             this.nudB.MinimumSize = new System.Drawing.Size(19, 22);
             this.nudB.Name = "nudB";
-            this.nudB.PasswordChar = '\0';
-            this.nudB.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.nudB.SelectedText = "";
-            this.nudB.SelectionLength = 0;
-            this.nudB.SelectionStart = 0;
-            this.nudB.ShortcutsEnabled = true;
             this.nudB.Size = new System.Drawing.Size(47, 22);
             this.nudB.TabIndex = 8;
             this.nudB.Text = "0";
-            this.nudB.UseSelectable = true;
             this.nudB.Value = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.nudB.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.nudB.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtColor
             // 
@@ -384,7 +312,6 @@
             // 
             this.opmTableLayoutPanel1.SetColumnSpan(this.cmbKnownColors, 2);
             this.cmbKnownColors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbKnownColors.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cmbKnownColors.FormattingEnabled = true;
             this.cmbKnownColors.ItemHeight = 19;
             this.cmbKnownColors.Items.AddRange(new object[] {
@@ -4743,7 +4670,6 @@
             this.cmbKnownColors.Name = "cmbKnownColors";
             this.cmbKnownColors.Size = new System.Drawing.Size(171, 25);
             this.cmbKnownColors.TabIndex = 11;
-            this.cmbKnownColors.UseSelectable = true;
             // 
             // lblResultingColor
             // 
@@ -4795,9 +4721,9 @@
         private ControlGauge cgR;
         private ControlGauge cgG;
         private ControlGauge cgB;
-        private OPMNumericTextBox nudR;
-        private OPMNumericTextBox nudG;
-        private OPMNumericTextBox nudB;
+        private OPMNumericUpDown nudR;
+        private OPMNumericUpDown nudG;
+        private OPMNumericUpDown nudB;
         private System.Windows.Forms.MaskedTextBox txtColor;
         private OPMLabel lblColorName;
         private ColorComboBox cmbKnownColors;

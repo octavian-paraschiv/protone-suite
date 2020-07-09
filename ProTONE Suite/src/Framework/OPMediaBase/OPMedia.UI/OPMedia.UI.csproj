@@ -46,14 +46,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
@@ -232,6 +224,9 @@
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\_Converted\TextBoxes.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\_Converted\UpDown.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Themes\SmoothGraphics.cs" />
@@ -422,6 +417,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\ModernUI\MetroFramework\MetroFramework.csproj">
+      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
+      <Name>MetroFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>

@@ -53,7 +53,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnRestoreDefaults = new OPMedia.UI.Controls.OPMButton();
             this.tableLayoutPanel3 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblMinDuration = new OPMedia.UI.Controls.OPMLabel();
-            this.nudMinMovieDuration = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudMinMovieDuration = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.kryptonLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.chkNotifySubDownloaded = new OPMedia.UI.Controls.OPMCheckBox();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -474,7 +474,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMTableLayoutPanel pnlOnlineSubtitles;
         private OPMTableLayoutPanel tableLayoutPanel3;
         private OPMLabel lblMinDuration;
-        private OPMNumericTextBox nudMinMovieDuration;
+        private OPMNumericUpDown nudMinMovieDuration;
         private OPMLabel kryptonLabel2;
         private OPMListView lvDownloadAddresses;
         private System.Windows.Forms.ColumnHeader colEmpty;

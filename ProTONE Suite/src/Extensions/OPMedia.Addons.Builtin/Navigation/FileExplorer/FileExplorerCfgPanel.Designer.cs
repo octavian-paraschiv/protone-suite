@@ -30,9 +30,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         private void InitializeComponent()
         {
             this.label5 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudPreviewTimer = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudPreviewTimer = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.kryptonLabel1 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudMaxProcessedFiles = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudMaxProcessedFiles = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.connectedFilesConfigCtl1 = new OPMedia.UI.Configuration.ConnectedFilesConfigCtl();
             this.tableLayoutPanel1.SuspendLayout();
@@ -177,9 +177,9 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         #endregion
 
         private OPMLabel label5;
-        private OPMNumericTextBox nudPreviewTimer;
+        private OPMNumericUpDown nudPreviewTimer;
         private OPMLabel kryptonLabel1;
-        private OPMNumericTextBox nudMaxProcessedFiles;
+        private OPMNumericUpDown nudMaxProcessedFiles;
         private OPMTableLayoutPanel tableLayoutPanel1;
         private UI.Configuration.ConnectedFilesConfigCtl connectedFilesConfigCtl1;
     }

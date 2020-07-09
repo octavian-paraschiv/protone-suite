@@ -77,7 +77,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             // 
             // txtEntryDesc
             // 
-            this.txtEntryDesc.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtEntryDesc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtEntryDesc.Location = new System.Drawing.Point(0, 248);
             this.txtEntryDesc.Margin = new System.Windows.Forms.Padding(0);
@@ -86,7 +85,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             this.txtEntryDesc.PasswordChar = '\0';
             this.txtEntryDesc.ReadOnly = false;
             this.txtEntryDesc.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtEntryDesc.ShortcutsEnabled = true;
             this.txtEntryDesc.Size = new System.Drawing.Size(385, 19);
             this.txtEntryDesc.TabIndex = 3;
             this.txtEntryDesc.UseSystemPasswordChar = false;

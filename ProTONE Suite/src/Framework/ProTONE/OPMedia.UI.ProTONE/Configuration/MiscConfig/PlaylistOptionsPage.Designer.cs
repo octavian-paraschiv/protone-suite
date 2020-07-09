@@ -42,8 +42,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.chkLoopPlay = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
-            this.nudXFadeLength = new OPMedia.UI.Controls.OPMNumericTextBox();
-            this.nudAnticipatedEnd = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudXFadeLength = new OPMedia.UI.Controls.OPMNumericUpDown();
+            this.nudAnticipatedEnd = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.buttonSpecAny3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -160,7 +160,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // txtHints
             // 
             this.txtHints.AutoSize = true;
-            this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtHints.Lines = new string[] {
         "TXT_METADATAPATTERNS"};
@@ -174,7 +173,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.ReadOnly = true;
             this.tableLayoutPanel1.SetRowSpan(this.txtHints, 11);
             this.txtHints.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtHints.ShortcutsEnabled = false;
             this.txtHints.Size = new System.Drawing.Size(238, 267);
             this.txtHints.TabIndex = 6;
             this.txtHints.Text = "TXT_METADATAPATTERNS";
@@ -337,7 +335,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         private OPMCheckBox chkLoopPlay;
         private OPMLabel opmLabel1;
         private OPMLabel opmLabel2;
-        private OPMNumericTextBox nudXFadeLength;
-        private OPMNumericTextBox nudAnticipatedEnd;
+        private OPMNumericUpDown nudXFadeLength;
+        private OPMNumericUpDown nudAnticipatedEnd;
     }
 }

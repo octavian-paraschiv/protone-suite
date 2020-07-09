@@ -39,7 +39,7 @@ namespace OPMedia.UI.Configuration
             this.label5 = new OPMedia.UI.Controls.OPMLabel();
             this.txtProxyPassword = new OPMedia.UI.Controls.OPMTextBox();
             this.txtProxyUser = new OPMedia.UI.Controls.OPMTextBox();
-            this.txtProxyPort = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.txtProxyPort = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.txtProxyServer = new OPMedia.UI.Controls.OPMTextBox();
             this.cmbProxyType = new OPMedia.UI.Controls.OPMComboBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -156,15 +156,6 @@ namespace OPMedia.UI.Configuration
             // 
             // 
             // 
-            this.txtProxyPassword.CustomButton.Image = null;
-            this.txtProxyPassword.CustomButton.Location = new System.Drawing.Point(168, 2);
-            this.txtProxyPassword.CustomButton.Name = "";
-            this.txtProxyPassword.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.txtProxyPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProxyPassword.CustomButton.TabIndex = 1;
-            this.txtProxyPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProxyPassword.CustomButton.UseSelectable = true;
-            this.txtProxyPassword.CustomButton.Visible = false;
             this.txtProxyPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyPassword.Lines = new string[0];
             this.txtProxyPassword.Location = new System.Drawing.Point(142, 111);
@@ -176,30 +167,16 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPassword.PasswordChar = '●';
             this.txtProxyPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtProxyPassword.SelectedText = "";
-            this.txtProxyPassword.SelectionLength = 0;
-            this.txtProxyPassword.SelectionStart = 0;
-            this.txtProxyPassword.ShortcutsEnabled = true;
             this.txtProxyPassword.Size = new System.Drawing.Size(188, 22);
             this.txtProxyPassword.TabIndex = 9;
             this.txtProxyPassword.UseSelectable = true;
             this.txtProxyPassword.UseSystemPasswordChar = true;
-            this.txtProxyPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProxyPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyUser
             // 
             // 
             // 
             // 
-            this.txtProxyUser.CustomButton.Image = null;
-            this.txtProxyUser.CustomButton.Location = new System.Drawing.Point(168, 2);
-            this.txtProxyUser.CustomButton.Name = "";
-            this.txtProxyUser.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.txtProxyUser.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProxyUser.CustomButton.TabIndex = 1;
-            this.txtProxyUser.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProxyUser.CustomButton.UseSelectable = true;
-            this.txtProxyUser.CustomButton.Visible = false;
             this.txtProxyUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyUser.Lines = new string[0];
             this.txtProxyUser.Location = new System.Drawing.Point(142, 84);
@@ -211,34 +188,16 @@ namespace OPMedia.UI.Configuration
             this.txtProxyUser.PasswordChar = '\0';
             this.txtProxyUser.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtProxyUser.SelectedText = "";
-            this.txtProxyUser.SelectionLength = 0;
-            this.txtProxyUser.SelectionStart = 0;
-            this.txtProxyUser.ShortcutsEnabled = true;
             this.txtProxyUser.Size = new System.Drawing.Size(188, 22);
             this.txtProxyUser.TabIndex = 7;
             this.txtProxyUser.UseSelectable = true;
-            this.txtProxyUser.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProxyUser.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyPort
             // 
-            this.txtProxyPort.AllowDecimals = false;
-            this.txtProxyPort.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             // 
             // 
             // 
-            this.txtProxyPort.CustomButton.Image = null;
-            this.txtProxyPort.CustomButton.Location = new System.Drawing.Point(168, 2);
-            this.txtProxyPort.CustomButton.Name = "";
-            this.txtProxyPort.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.txtProxyPort.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProxyPort.CustomButton.TabIndex = 1;
-            this.txtProxyPort.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProxyPort.CustomButton.UseSelectable = true;
-            this.txtProxyPort.CustomButton.Visible = false;
             this.txtProxyPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProxyPort.Lines = new string[] {
-        "1"};
             this.txtProxyPort.Location = new System.Drawing.Point(142, 57);
             this.txtProxyPort.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.txtProxyPort.Maximum = new decimal(new int[] {
@@ -247,7 +206,6 @@ namespace OPMedia.UI.Configuration
             0,
             0});
             this.txtProxyPort.MaximumSize = new System.Drawing.Size(10000, 22);
-            this.txtProxyPort.MaxLength = 5;
             this.txtProxyPort.Minimum = new decimal(new int[] {
             1,
             0,
@@ -255,39 +213,20 @@ namespace OPMedia.UI.Configuration
             0});
             this.txtProxyPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPort.Name = "txtProxyPort";
-            this.txtProxyPort.PasswordChar = '\0';
-            this.txtProxyPort.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProxyPort.SelectedText = "";
-            this.txtProxyPort.SelectionLength = 0;
-            this.txtProxyPort.SelectionStart = 0;
-            this.txtProxyPort.ShortcutsEnabled = false;
             this.txtProxyPort.Size = new System.Drawing.Size(188, 22);
             this.txtProxyPort.TabIndex = 5;
             this.txtProxyPort.Text = "1";
             this.txtProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtProxyPort.UseSelectable = true;
             this.txtProxyPort.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.txtProxyPort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProxyPort.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // txtProxyServer
             // 
             // 
             // 
-            // 
-            this.txtProxyServer.CustomButton.Image = null;
-            this.txtProxyServer.CustomButton.Location = new System.Drawing.Point(168, 2);
-            this.txtProxyServer.CustomButton.Name = "";
-            this.txtProxyServer.CustomButton.Size = new System.Drawing.Size(17, 17);
-            this.txtProxyServer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProxyServer.CustomButton.TabIndex = 1;
-            this.txtProxyServer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProxyServer.CustomButton.UseSelectable = true;
-            this.txtProxyServer.CustomButton.Visible = false;
             this.txtProxyServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtProxyServer.Lines = new string[0];
             this.txtProxyServer.Location = new System.Drawing.Point(142, 30);
@@ -299,19 +238,13 @@ namespace OPMedia.UI.Configuration
             this.txtProxyServer.PasswordChar = '\0';
             this.txtProxyServer.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtProxyServer.SelectedText = "";
-            this.txtProxyServer.SelectionLength = 0;
-            this.txtProxyServer.SelectionStart = 0;
-            this.txtProxyServer.ShortcutsEnabled = true;
             this.txtProxyServer.Size = new System.Drawing.Size(188, 22);
             this.txtProxyServer.TabIndex = 3;
             this.txtProxyServer.UseSelectable = true;
-            this.txtProxyServer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProxyServer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // cmbProxyType
             // 
             this.cmbProxyType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbProxyType.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cmbProxyType.FormattingEnabled = true;
             this.cmbProxyType.ItemHeight = 19;
             this.cmbProxyType.Location = new System.Drawing.Point(142, 0);
@@ -321,7 +254,6 @@ namespace OPMedia.UI.Configuration
             this.cmbProxyType.Name = "cmbProxyType";
             this.cmbProxyType.Size = new System.Drawing.Size(188, 25);
             this.cmbProxyType.TabIndex = 1;
-            this.cmbProxyType.UseSelectable = true;
             // 
             // ProxySettingsDefinitionCtl
             // 
@@ -347,7 +279,7 @@ namespace OPMedia.UI.Configuration
         private OPMLabel label5;
         private OPMTextBox txtProxyPassword;
         private OPMTextBox txtProxyUser;
-        private OPMNumericTextBox txtProxyPort;
+        private OPMNumericUpDown txtProxyPort;
         private OPMTextBox txtProxyServer;
         private OPMComboBox cmbProxyType;
 

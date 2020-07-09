@@ -207,7 +207,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             // txtNewName
             // 
-            this.txtNewName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.opmLayoutPanel1.SetColumnSpan(this.txtNewName, 3);
             this.txtNewName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNewName.Lines = new string[0];
@@ -220,7 +219,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.PasswordChar = '\0';
             this.txtNewName.ReadOnly = false;
             this.txtNewName.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtNewName.ShortcutsEnabled = true;
             this.txtNewName.Size = new System.Drawing.Size(258, 22);
             this.txtNewName.TabIndex = 7;
             this.txtNewName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

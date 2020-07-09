@@ -30,9 +30,9 @@
         {
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblValueName = new OPMedia.UI.Controls.OPMLabel();
-            this.OPMNumericTextBox1 = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.OPMNumericUpDown1 = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.opmTableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OPMNumericTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OPMNumericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // opmTableLayoutPanel1
@@ -43,7 +43,7 @@
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.Controls.Add(this.lblValueName, 0, 0);
-            this.opmTableLayoutPanel1.Controls.Add(this.OPMNumericTextBox1, 1, 0);
+            this.opmTableLayoutPanel1.Controls.Add(this.OPMNumericUpDown1, 1, 0);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
@@ -64,20 +64,20 @@
             this.lblValueName.Text = "Value:";
             this.lblValueName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // OPMNumericTextBox1
+            // OPMNumericUpDown1
             // 
-            this.OPMNumericTextBox1.AutoSize = true;
-            this.OPMNumericTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OPMNumericTextBox1.Location = new System.Drawing.Point(48, 3);
-            this.OPMNumericTextBox1.Minimum = new decimal(new int[] {
+            this.OPMNumericUpDown1.AutoSize = true;
+            this.OPMNumericUpDown1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OPMNumericUpDown1.Location = new System.Drawing.Point(48, 3);
+            this.OPMNumericUpDown1.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.OPMNumericTextBox1.Name = "OPMNumericTextBox1";
-            this.OPMNumericTextBox1.Size = new System.Drawing.Size(41, 22);
-            this.OPMNumericTextBox1.TabIndex = 1;
-            this.OPMNumericTextBox1.ValueChanged += new System.EventHandler(this.OPMNumericTextBox1_ValueChanged);
+            this.OPMNumericUpDown1.Name = "OPMNumericUpDown1";
+            this.OPMNumericUpDown1.Size = new System.Drawing.Size(41, 22);
+            this.OPMNumericUpDown1.TabIndex = 1;
+            this.OPMNumericUpDown1.ValueChanged += new System.EventHandler(this.OPMNumericUpDown1_ValueChanged);
             // 
             // IntegerChooser
             // 
@@ -90,7 +90,7 @@
             this.Size = new System.Drawing.Size(92, 28);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OPMNumericTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OPMNumericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,6 +100,6 @@
 
         private OPMedia.UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
         private OPMedia.UI.Controls.OPMLabel lblValueName;
-        private OPMedia.UI.Controls.OPMNumericTextBox OPMNumericTextBox1;
+        private OPMedia.UI.Controls.OPMNumericUpDown OPMNumericUpDown1;
     }
 }

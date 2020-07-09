@@ -32,7 +32,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkFilterStateNotificationsEnabled = new OPMedia.UI.Controls.OPMCheckBox();
             this.lblOsdFont = new OPMedia.UI.Controls.OPMLinkLabel();
             this.lblOsdColor = new OPMedia.UI.Controls.OPMLinkLabel();
-            this.nudOsdTmr = new OPMedia.UI.Controls.OPMNumericTextBox();
+            this.nudOsdTmr = new OPMedia.UI.Controls.OPMNumericUpDown();
             this.tableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.chkSubEnabled = new OPMedia.UI.Controls.OPMCheckBox();
             this.flowLayoutPanel2 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
@@ -347,7 +347,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMCheckBox chkFilterStateNotificationsEnabled;
         private OPMLinkLabel lblOsdFont;
         private OPMLinkLabel lblOsdColor;
-        private OPMNumericTextBox nudOsdTmr;
+        private OPMNumericUpDown nudOsdTmr;
         private OPMTableLayoutPanel tableLayoutPanel1;
         private Controls.OSD.OSDLabel lblOsdText2;
         private Controls.OSD.OSDLabel lblOsdText;

@@ -192,7 +192,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             // txtSearchPath
             // 
-            this.txtSearchPath.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtSearchPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearchPath.Lines = new string[0];
             this.txtSearchPath.Location = new System.Drawing.Point(0, 0);
@@ -204,7 +203,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.txtSearchPath.PasswordChar = '\0';
             this.txtSearchPath.ReadOnly = true;
             this.txtSearchPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtSearchPath.ShortcutsEnabled = true;
             this.txtSearchPath.Size = new System.Drawing.Size(287, 22);
             this.txtSearchPath.TabIndex = 6;
             this.txtSearchPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

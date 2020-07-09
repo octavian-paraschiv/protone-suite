@@ -121,7 +121,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             // txtHints
             // 
-            this.txtHints.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtHints.Lines = new string[] {
         "TXT_TAGGINGPATTERNS"};
@@ -134,7 +133,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
             this.txtHints.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtHints.ShortcutsEnabled = false;
             this.txtHints.Size = new System.Drawing.Size(354, 184);
             this.txtHints.TabIndex = 4;
             this.txtHints.Text = "TXT_TAGGINGPATTERNS";

@@ -82,7 +82,6 @@
             // txtShoutcastDevId
             // 
             this.txtShoutcastDevId.AutoSize = true;
-            this.txtShoutcastDevId.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastDevId.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastDevId.Lines = new string[0];
             this.txtShoutcastDevId.Location = new System.Drawing.Point(181, 65);
@@ -94,7 +93,6 @@
             this.txtShoutcastDevId.PasswordChar = '\0';
             this.txtShoutcastDevId.ReadOnly = false;
             this.txtShoutcastDevId.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtShoutcastDevId.ShortcutsEnabled = true;
             this.txtShoutcastDevId.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastDevId.TabIndex = 5;
             this.txtShoutcastDevId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -103,7 +101,6 @@
             // txtShoutcastTuneinURL
             // 
             this.txtShoutcastTuneinURL.AutoSize = true;
-            this.txtShoutcastTuneinURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastTuneinURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastTuneinURL.Lines = new string[] {
         "http://yp.shoutcast.com"};
@@ -116,7 +113,6 @@
             this.txtShoutcastTuneinURL.PasswordChar = '\0';
             this.txtShoutcastTuneinURL.ReadOnly = false;
             this.txtShoutcastTuneinURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtShoutcastTuneinURL.ShortcutsEnabled = true;
             this.txtShoutcastTuneinURL.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastTuneinURL.TabIndex = 4;
             this.txtShoutcastTuneinURL.Text = "http://yp.shoutcast.com";
@@ -162,7 +158,6 @@
             // txtShoutcastSearchURL
             // 
             this.txtShoutcastSearchURL.AutoSize = true;
-            this.txtShoutcastSearchURL.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtShoutcastSearchURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtShoutcastSearchURL.Lines = new string[] {
         "http://api.shoutcast.com/station"};
@@ -175,7 +170,6 @@
             this.txtShoutcastSearchURL.PasswordChar = '\0';
             this.txtShoutcastSearchURL.ReadOnly = false;
             this.txtShoutcastSearchURL.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtShoutcastSearchURL.ShortcutsEnabled = true;
             this.txtShoutcastSearchURL.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastSearchURL.TabIndex = 3;
             this.txtShoutcastSearchURL.Text = "http://api.shoutcast.com/station";

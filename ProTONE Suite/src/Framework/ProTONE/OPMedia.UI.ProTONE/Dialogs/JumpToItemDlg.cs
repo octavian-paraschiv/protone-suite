@@ -145,7 +145,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             // txtKeyword
             // 
-            this.txtKeyword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.opmLayoutPanel1.SetColumnSpan(this.txtKeyword, 3);
             this.txtKeyword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtKeyword.Lines = new string[0];
@@ -158,7 +157,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.PasswordChar = '\0';
             this.txtKeyword.ReadOnly = false;
             this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtKeyword.ShortcutsEnabled = true;
             this.txtKeyword.Size = new System.Drawing.Size(488, 22);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;

@@ -34,17 +34,11 @@
     <Reference Include="LiteDB, Version=5.0.8.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.5.0.8\lib\net45\LiteDB.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="NAudio.Lame, Version=1.0.9.26885, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -73,11 +67,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\NAudio.Lame.1.1.2\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.1.1.2\build\NAudio.Lame.targets')" />
+  <Import Project="..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NAudio.Lame.1.1.2\build\NAudio.Lame.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NAudio.Lame.1.1.2\build\NAudio.Lame.targets'))" />
+    <Error Condition="!Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets'))" />
   </Target>
 </Project>
