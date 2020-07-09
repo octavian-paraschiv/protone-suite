@@ -23,17 +23,8 @@ namespace OPMedia.UI.Controls
         public OPMTableLayoutPanel()
             : base()
         {
-            base.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            base.BackColor = ThemeManager.BackColor;
-
-            this.RegisterAsEventSink();
-            OnThemeUpdated();
-        }
-
-        [EventSink(EventNames.ThemeUpdated)]
-        public void OnThemeUpdated()
-        {
-            base.BackColor = ThemeManager.BackColor;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            base.BackColor = Color.Transparent;
         }
     }
 
@@ -50,15 +41,6 @@ namespace OPMedia.UI.Controls
             : base()
         {
             base.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            base.BackColor = ThemeManager.BackColor;
-
-            this.RegisterAsEventSink();
-            OnThemeUpdated();
-        }
-
-        [EventSink(EventNames.ThemeUpdated)]
-        public void OnThemeUpdated()
-        {
             base.BackColor = ThemeManager.BackColor;
         }
     }

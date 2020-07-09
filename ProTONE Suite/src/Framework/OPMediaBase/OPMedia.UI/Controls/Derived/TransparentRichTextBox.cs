@@ -48,25 +48,6 @@ namespace OPMedia.UI.Controls
         private string _desc = null;
         private Dictionary<string, string> _info = null;
 
-
-        public FontSizes FontSize
-        {
-            get
-            {
-                return _fs;
-            }
-
-            set
-            {
-                if (_fs != value)
-                {
-                    _fs = value;
-                    ThemeManager.SetFont(this, value);
-                    Rebuild();
-                }
-            }
-        }
-
         public InfoTextBox()
             : base()
         {

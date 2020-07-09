@@ -426,9 +426,6 @@ namespace OPMedia.UI.Controls
             _delayedRenameTimer.Interval = 500;
             _delayedRenameTimer.Tick += _delayedRenameTimer_Tick;
             _delayedRenameTimer.Enabled = false;
-
-
-            ThemeManager.SetFont(this, FontSizes.Normal);
         }
 
         void OPMShellListView_Resize(object sender, EventArgs e)

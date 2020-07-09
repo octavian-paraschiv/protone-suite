@@ -45,7 +45,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             InitializeComponent();
 
             lbPlaylists.DisplayMember = "Title";
-            ThemeManager.SetFont(lbPlaylists, FontSizes.Large);
 
             if (playlists != null)
             {

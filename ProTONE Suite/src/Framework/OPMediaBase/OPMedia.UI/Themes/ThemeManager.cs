@@ -27,6 +27,7 @@ using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.InstanceManagement;
 using System.Text;
+using OPMedia.Core.GlobalEvents;
 
 #endregion
 
@@ -308,18 +309,6 @@ namespace OPMedia.UI.Themes
             } 
         }
 
-        public static string ThemeFontFamily
-        { 
-            get 
-            { 
-                string defFamily = AppConfig.OSVersion < AppConfig.VerWinVista ?
-                    "Trebuchet MS" : "Segoe UI";
-
-                return ThemeElement("ThemeFontFamily", defFamily); 
-            } 
-        }
-
-
         public static Color ColorValidationFailed
         { get { return Color.MistyRose; } }
 
@@ -354,9 +343,10 @@ namespace OPMedia.UI.Themes
         {
             get
             {
-                float fFore = ThemeManager.ForeColor.GetBrightness();
-                float fBack = ThemeManager.BackColor.GetBrightness();
-                return (fFore < fBack);
+                //float fFore = ThemeManager.ForeColor.GetBrightness();
+                //float fBack = ThemeManager.BackColor.GetBrightness();
+                //return (fFore < fBack);
+                return AppConfig.SkinType.ToLowerInvariant().Contains("dark");
             }
         }
 
@@ -442,7 +432,8 @@ namespace OPMedia.UI.Themes
                 using (Graphics g = Graphics.FromHwnd(l.Handle))
                 {
                     float step = 72f / g.DpiX;
-                    string themeFontFamily = ThemeManager.ThemeFontFamily;
+
+                    var themeFontFamily = MetroFramework.MetroFonts.Default(12).FontFamily;
 
                     int i = 0;
 
@@ -463,39 +454,6 @@ namespace OPMedia.UI.Themes
                     _hugeFont =
                         new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
                 }
-            }
-        }
-
-        public static void SetFont(Control ctl, FontSizes size, bool recursive = false)
-        {
-            try
-            {
-                if (ctl != null)
-                {
-                    if (recursive && ctl.Controls != null)
-                    {
-                        foreach (Control child in ctl.Controls)
-                        {
-                            SetFont(child, size);
-                        }
-                    }
-
-                    Font f = ThemeManager.GetFontBySize(size);
-                    Font newFont = new Font(f, f.Style);
-
-                    if (newFont != null)
-                    {
-                        ctl.Font = newFont;
-                        if (ctl is DataGridView)
-                        {
-                            (ctl as DataGridView).ColumnHeadersDefaultCellStyle.Font = newFont;
-                            (ctl as DataGridView).RowTemplate.DefaultCellStyle.Font = newFont;
-                        }
-                    }
-                }
-            }
-            catch
-            {
             }
         }
         #endregion
@@ -783,7 +741,6 @@ namespace OPMedia.UI.Themes
                 return null;
             }
         }
-
         #endregion
     }
 }

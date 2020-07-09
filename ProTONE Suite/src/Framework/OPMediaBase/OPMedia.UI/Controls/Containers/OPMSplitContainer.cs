@@ -22,15 +22,8 @@ namespace OPMedia.UI.Controls
         public OPMSplitContainer()
             : base()
         {
-            this.RegisterAsEventSink();
-            OnThemeUpdated();
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            base.BackColor = Color.Transparent;
         }
-        
-        [EventSink(EventNames.ThemeUpdated)]
-        public void OnThemeUpdated()
-        {
-            base.BackColor = ThemeManager.SeparatorColor;
-        }
-
     }
 }

@@ -120,7 +120,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrUpdateVUMeter.Tick += OnUpdateVUMeter;
             _tmrUpdateVUMeter.Enabled = true;
 
-            ThemeManager.SetFont(lvPlaylist, FontSizes.Normal);
             lvPlaylist.MultiSelect = true;
             lvPlaylist.Items.Clear();
 

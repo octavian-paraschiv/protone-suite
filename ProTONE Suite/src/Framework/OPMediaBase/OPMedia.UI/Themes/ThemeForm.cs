@@ -582,16 +582,12 @@ namespace OPMedia.UI.Themes
         public ToolForm()
             : base()
         {
-            this.IsToolWindow = true;
-            this.AllowResize = false;
             this.Icon = null;
         }
 
         public ToolForm(string title)
             : base(title)
         {
-            this.IsToolWindow = true;
-            this.AllowResize = false;
             this.Icon = null;
         }
     }

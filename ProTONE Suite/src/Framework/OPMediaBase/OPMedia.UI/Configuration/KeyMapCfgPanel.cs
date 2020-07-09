@@ -36,8 +36,6 @@ namespace OPMedia.UI.Configuration
 
             this.HandleCreated += new EventHandler(KeyMapCfgPanel_Load);
 
-            ThemeManager.SetFont(lvShortcuts, FontSizes.Small);
-
             _llEditKeys = new LinkLabel();
             _llEditKeys.Enabled = true;
 

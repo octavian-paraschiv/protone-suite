@@ -202,8 +202,6 @@ namespace OPMedia.ProTONE
             mnuTools.Text = Translator.Translate("TXT_MNUTOOLS");
             mnuExit.Text = Translator.Translate("TXT_BTNCLOSE");
             
-            ThemeManager.SetFont(this, FontSizes.Normal);
-
             BuildThumbnailButtons(false);
         }
 

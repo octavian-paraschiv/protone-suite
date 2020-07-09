@@ -79,12 +79,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             hdrPlaylists.Image = ImageProcessing.Playlist16;
 
             Translator.TranslateControl(this, DesignMode);
-            ThemeManager.SetFont(btnSelAllAudio, FontSizes.Small);
-            ThemeManager.SetFont(btnSelAllPlaylists, FontSizes.Small);
-            ThemeManager.SetFont(btnSelAllVideo, FontSizes.Small);
-            ThemeManager.SetFont(btnUnselAllAudio, FontSizes.Small);
-            ThemeManager.SetFont(btnUnselAllPlaylists, FontSizes.Small);
-            ThemeManager.SetFont(btnUnselAllVideo, FontSizes.Small);
 
             cbShellIntegration.Checked = RegistrationSupport.IsContextMenuHandlerRegistered();
             

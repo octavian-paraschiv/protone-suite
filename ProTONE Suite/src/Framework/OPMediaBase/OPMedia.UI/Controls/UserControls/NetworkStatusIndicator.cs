@@ -32,8 +32,6 @@ namespace OPMedia.UI.Controls
             InitializeComponent();
 
             label1.ForeColor = Color.Red;
-            ThemeManager.SetFont(label1, FontSizes.Large);
-
             tmrCheckNetwork.Enabled = true;
         }
     

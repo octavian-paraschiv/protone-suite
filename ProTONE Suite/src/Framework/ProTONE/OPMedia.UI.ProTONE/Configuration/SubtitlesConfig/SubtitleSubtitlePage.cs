@@ -78,7 +78,6 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             PopulateLanguages();
 
-            ThemeManager.SetFont(lvDownloadAddresses, FontSizes.Small);
             lblMinDuration.Text = Translator.Translate("TXT_MINMOVIEDURATION");
 
             this.HandleCreated += new EventHandler(OnLoad);
@@ -125,8 +124,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             _subtitleDownloadURIs = ProTONEConfig.SubtitleDownloadURIs;
 
             BuildListFromSubtitleDownloadURIs();
-
-            ThemeManager.SetFont(lblClickHint, FontSizes.Small);
 
             pnlOnlineSubtitles.Enabled = _subtitleDownloadEnabled;
 

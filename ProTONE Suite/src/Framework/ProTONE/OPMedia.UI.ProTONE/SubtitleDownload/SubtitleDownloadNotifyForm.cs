@@ -41,8 +41,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
         {
             InitializeComponent();
 
-            ThemeManager.SetFont(lvSubtitles, FontSizes.Smallest);
-
             _subtitleDownloadInfo = subtitleDownloadInfo;
             _movieFilePath = movieFilePath;
 

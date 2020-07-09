@@ -144,7 +144,7 @@
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Containers\OPMCustomPanel.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\_Converted\Common.cs">
       <SubType>Component</SubType>
@@ -376,9 +376,6 @@
       <DependentUpon>MessageDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\Containers\OPMContentPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Themes\ThemeForm.cs">
       <SubType>Form</SubType>
     </Compile>

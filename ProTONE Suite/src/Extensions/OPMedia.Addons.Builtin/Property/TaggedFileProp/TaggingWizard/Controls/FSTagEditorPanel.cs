@@ -15,8 +15,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         {
             this.title = "TXT_FSTAGEDITOR";
             InitializeComponent();
-
-            ThemeManager.SetFont(txtHints, FontSizes.Small);
         }
 
         protected override void DisplayTask()

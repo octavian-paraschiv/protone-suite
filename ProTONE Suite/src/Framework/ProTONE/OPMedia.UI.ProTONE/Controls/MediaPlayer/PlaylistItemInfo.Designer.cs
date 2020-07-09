@@ -102,7 +102,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.propDisplay.AutoSize = true;
             this.propDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.propDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propDisplay.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.propDisplay.ForeColor = System.Drawing.Color.Black;
             this.propDisplay.Location = new System.Drawing.Point(3, 3);
             this.propDisplay.Margin = new System.Windows.Forms.Padding(0);

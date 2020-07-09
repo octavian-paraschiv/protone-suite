@@ -96,7 +96,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
                 Logger.LogException(ex);
             }
 
-            ThemeManager.SetFont(lvPreview, FontSizes.Small);
             OnResize(sender, e);
         }
 
