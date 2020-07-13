@@ -148,7 +148,6 @@ namespace OPMedia.UI.Themes
             // ThemeForm
             // 
             this.ClientSize = new System.Drawing.Size(250, 124);
-            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

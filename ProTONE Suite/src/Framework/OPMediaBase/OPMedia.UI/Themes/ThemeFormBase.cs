@@ -8,22 +8,40 @@ using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.GlobalEvents;
 using MetroFramework.Components;
+using MetroFramework.Forms;
+using MetroFramework.Drawing;
 
 namespace OPMedia.UI.Themes
 {
-    public partial class ThemeFormBase : MetroFramework.Forms.MetroForm
+    public partial class ThemeFormBase : MetroForm
     {
         MetroStyleManager _msm = null;
 
-        public bool IsActive { get => (this == Form.ActiveForm ); }
+        public bool IsActive { get => (this == Form.ActiveForm); }
 
         public bool TitleBarVisible { get; set; }
+
+        public new bool DisplayHeader { get { return base.DisplayHeader; } }
+
+        public new string Text
+        {
+            get => base.Text;
+            set
+            {
+                base.Text = value;
+                Invalidate();
+            }
+        }
 
         public ThemeFormBase()
         {
             //Initialize the main thread
             if (!DesignMode)
                 MainThread.Initialize(this);
+
+            base.DisplayHeader = false;
+            base.ControlBox = true;
+            base.TitleBarColor = Color.LightBlue;
 
             SetStyle(ControlStyles.AllPaintingInWmPaint |
                      ControlStyles.OptimizedDoubleBuffer |
@@ -32,11 +50,10 @@ namespace OPMedia.UI.Themes
 
             base.AutoScaleDimensions = new SizeF(1, 1);
             base.AutoScaleMode = AutoScaleMode.None;
-            base.FormBorderStyle = FormBorderStyle.None;
+            base.FormBorderStyle = FormBorderStyle.Sizable;
+            base.BorderStyle = MetroFormBorderStyle.FixedSingle;
 
-     
             this.Text = string.Empty;
-            this.ControlBox = false;
 
             this.StartPosition = FormStartPosition.CenterParent;
 
@@ -46,18 +63,18 @@ namespace OPMedia.UI.Themes
         [EventSink(EventNames.ThemeUpdated)]
         public void OnThemeUpdated()
         {
-            if (ThemeManager.IsDarkTheme)
-            {
-                _msm.Style = MetroFramework.MetroColorStyle.Black;
-                _msm.Theme = MetroFramework.MetroThemeStyle.Dark;
-                _msm.Update();
-            }
-            else
-            {
-                _msm.Style = MetroFramework.MetroColorStyle.White;
-                _msm.Theme = MetroFramework.MetroThemeStyle.Light;
-                _msm.Update();
-            }
+        //    if (ThemeManager.IsDarkTheme)
+        //    {
+        //        _msm.Style = MetroFramework.MetroColorStyle.Black;
+        //        _msm.Theme = MetroFramework.MetroThemeStyle.Dark;
+        //        _msm.Update();
+        //    }
+        //    else
+        //    {
+        //        _msm.Style = MetroFramework.MetroColorStyle.White;
+        //        _msm.Theme = MetroFramework.MetroThemeStyle.Light;
+        //        _msm.Update();
+        //    }
 
             OnThemeUpdatedInternal();
         }
@@ -67,5 +84,47 @@ namespace OPMedia.UI.Themes
         }
 
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            ThemeManager.PrepareGraphics(e.Graphics);
+
+            Rectangle rcTitle = new Rectangle(0, 0, this.Width, 30);
+            Rectangle rcText = new Rectangle(0, 0, this.Width - 60, 30);
+            Rectangle rcBorder = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
+
+            var bc = GetTitleBarColorToDraw();
+            var fc = MetroPaint.ForeColor.Label.Normal(Theme);
+
+            using (Brush bb = new SolidBrush(bc))
+            using (Brush fb = new SolidBrush(fc))
+            using (Pen bp = new Pen(bc, 2))
+            {
+                e.Graphics.FillRectangle(bb, rcTitle);
+                e.Graphics.DrawRectangle(bp, rcBorder);
+
+                StringFormat sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Near,
+                    LineAlignment = StringAlignment.Center,
+                    Trimming = StringTrimming.EllipsisCharacter,
+                    FormatFlags = StringFormatFlags.NoWrap
+                };
+                
+                e.Graphics.DrawString(this.Text, ThemeManager.VeryLargeFont, fb, rcText, sf);
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ThemeFormBase
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "ThemeFormBase";
+            this.Padding = new System.Windows.Forms.Padding(5, 60, 5, 5);
+            this.ResumeLayout(false);
+
+        }
     }
 }
