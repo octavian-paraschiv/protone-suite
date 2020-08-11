@@ -41,14 +41,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(350, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_RENAMEPATTERN";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtRenamePattern
             // 
@@ -67,7 +65,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtRenamePattern.Size = new System.Drawing.Size(350, 22);
             this.txtRenamePattern.TabIndex = 1;
             this.txtRenamePattern.Text = "<N>";
-            this.txtRenamePattern.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtRenamePattern.UseSystemPasswordChar = false;
             // 
             // txtHints
@@ -87,7 +84,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.Size = new System.Drawing.Size(350, 232);
             this.txtHints.TabIndex = 2;
             this.txtHints.Text = "TXT_TAGGINGPATTERNS";
-            this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
             // 
             // opmTableLayoutPanel1

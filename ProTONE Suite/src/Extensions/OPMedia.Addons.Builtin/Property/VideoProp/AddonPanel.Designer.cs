@@ -49,7 +49,6 @@ namespace OPMedia.Addons.Builtin.VideoProp
             // btnSearchSubtitles
             // 
             this.btnSearchSubtitles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearchSubtitles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearchSubtitles.Location = new System.Drawing.Point(60, 196);
             this.btnSearchSubtitles.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.btnSearchSubtitles.Name = "btnSearchSubtitles";

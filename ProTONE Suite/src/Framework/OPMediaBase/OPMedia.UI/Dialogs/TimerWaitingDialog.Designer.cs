@@ -46,13 +46,11 @@ namespace OPMedia.UI.Dialogs
             // lblNotifyText
             // 
             this.lblNotifyText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNotifyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNotifyText.Location = new System.Drawing.Point(3, 0);
             this.lblNotifyText.Name = "lblNotifyText";
             this.lblNotifyText.Size = new System.Drawing.Size(405, 154);
             this.lblNotifyText.TabIndex = 1;
             this.lblNotifyText.Text = "bla\r\nblabla\r\nblablabla\r\n\r\nblablablabla\r\nblablablablabla";
-            this.lblNotifyText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbWaiting
             // 
@@ -75,7 +73,6 @@ namespace OPMedia.UI.Dialogs
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(81, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(72, 24);
@@ -86,7 +83,6 @@ namespace OPMedia.UI.Dialogs
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(3, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 24);
@@ -97,13 +93,11 @@ namespace OPMedia.UI.Dialogs
             // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTimer.Location = new System.Drawing.Point(359, 0);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(49, 20);
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "00:00:00";
-            this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
             // 

@@ -41,7 +41,6 @@ namespace OPMedia.UI.Controls
 
             this.ResizeRedraw = true;
             this.DoubleBuffered = true;
-            this.DrawMode = TreeViewDrawMode.OwnerDrawText;
 
             _sil.TransparentColor = Color.Magenta;
             _sil.Images.Add(Resources.TVState0);

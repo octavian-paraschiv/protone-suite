@@ -34,13 +34,11 @@
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(7, 10);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(155, 13);
             this.opmLabel1.TabIndex = 1;
             this.opmLabel1.Text = "TXT_CONFIG_NOT_REQUIRED";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // WavEncoderOptionsCtl
             // 

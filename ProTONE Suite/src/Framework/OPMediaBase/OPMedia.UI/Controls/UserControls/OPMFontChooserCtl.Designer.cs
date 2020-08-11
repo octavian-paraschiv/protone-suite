@@ -76,54 +76,45 @@
             // 
             this.opmLabel5.AutoSize = true;
             this.opmLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel5.Location = new System.Drawing.Point(3, 139);
             this.opmLabel5.Name = "opmLabel5";
             this.opmLabel5.Size = new System.Drawing.Size(102, 68);
             this.opmLabel5.TabIndex = 8;
             this.opmLabel5.Text = "TXT_RESULTS";
-            this.opmLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(3, 23);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(102, 29);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_FONTFAMILY";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 52);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(102, 29);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_FONT_STYLE";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(3, 81);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(102, 29);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "TXT_FONTSIZE";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbFontFamily
             // 
             this.cmbFontFamily.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbFontFamily.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFontFamily.FormattingEnabled = true;
             this.cmbFontFamily.Location = new System.Drawing.Point(111, 26);
             this.cmbFontFamily.MinimumSize = new System.Drawing.Size(180, 0);
@@ -134,7 +125,6 @@
             // cmbFontStyle
             // 
             this.cmbFontStyle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbFontStyle.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFontStyle.FormattingEnabled = true;
             this.cmbFontStyle.Location = new System.Drawing.Point(111, 55);
             this.cmbFontStyle.MinimumSize = new System.Drawing.Size(180, 0);
@@ -145,7 +135,6 @@
             // cmbFontSize
             // 
             this.cmbFontSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbFontSize.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFontSize.FormattingEnabled = true;
             this.cmbFontSize.Location = new System.Drawing.Point(111, 84);
             this.cmbFontSize.MinimumSize = new System.Drawing.Size(180, 0);
@@ -157,18 +146,15 @@
             // 
             this.opmLabel4.AutoSize = true;
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel4.Location = new System.Drawing.Point(3, 110);
             this.opmLabel4.Name = "opmLabel4";
             this.opmLabel4.Size = new System.Drawing.Size(102, 29);
             this.opmLabel4.TabIndex = 6;
             this.opmLabel4.Text = "TXT_FONTCHARSET";
-            this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbCharset
             // 
             this.cmbCharset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbCharset.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbCharset.FormattingEnabled = true;
             this.cmbCharset.Location = new System.Drawing.Point(111, 113);
             this.cmbCharset.MinimumSize = new System.Drawing.Size(180, 0);
@@ -187,21 +173,18 @@
             this.lblSampleText.Size = new System.Drawing.Size(225, 68);
             this.lblSampleText.TabIndex = 9;
             this.lblSampleText.Text = "TXT_SAMPLE_TEXT";
-            this.lblSampleText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblDescription, 2);
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDescription.Location = new System.Drawing.Point(8, 5);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(8, 5, 3, 5);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(328, 13);
             this.lblDescription.TabIndex = 10;
             this.lblDescription.Text = "opmLabel6";
-            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // OPMFontChooserCtl
             // 

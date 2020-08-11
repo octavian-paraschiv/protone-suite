@@ -54,7 +54,6 @@
             // btnPlus
             // 
             this.btnPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPlus.Location = new System.Drawing.Point(71, 1);
             this.btnPlus.Margin = new System.Windows.Forms.Padding(0);
             this.btnPlus.MaximumSize = new System.Drawing.Size(13, 10);
@@ -67,7 +66,6 @@
             // btnMinus
             // 
             this.btnMinus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMinus.Location = new System.Drawing.Point(71, 10);
             this.btnMinus.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinus.MaximumSize = new System.Drawing.Size(13, 10);

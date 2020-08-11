@@ -66,6 +66,8 @@ namespace OPMedia.UI.Themes
         {
             InitializeComponent();
 
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
             this.Visible = false; 
             base.MinimizeBox = false;
             base.MaximizeBox = false;

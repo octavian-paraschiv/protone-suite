@@ -68,28 +68,24 @@
             this.opmLabel1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.opmLabel1, 2);
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 0);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(579, 15);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SAVETOFOLDER";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.opmLabel2, 2);
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(0, 46);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(579, 15);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_FILENAMEPATTERN";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDestFolder
             // 
@@ -106,21 +102,18 @@
             this.txtDestFolder.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDestFolder.Size = new System.Drawing.Size(545, 20);
             this.txtDestFolder.TabIndex = 2;
-            this.txtDestFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDestFolder.UseSystemPasswordChar = false;
             this.txtDestFolder.TextChanged += new System.EventHandler(this.OnOutputFolderChanged);
             // 
             // opmButton1
             // 
             this.opmButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton1.Location = new System.Drawing.Point(550, 20);
             this.opmButton1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmButton1.Name = "opmButton1";
             this.opmButton1.Size = new System.Drawing.Size(29, 21);
             this.opmButton1.TabIndex = 3;
             this.opmButton1.Text = "...";
-            this.opmButton1.UseVisualStyleBackColor = true;
             this.opmButton1.Click += new System.EventHandler(this.opmButton1_Click);
             // 
             // cmbFilePattern

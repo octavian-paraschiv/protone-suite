@@ -44,13 +44,11 @@ namespace OPMedia.UI.Wizards
             // lblWizardResults
             // 
             this.lblWizardResults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblWizardResults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblWizardResults.Location = new System.Drawing.Point(3, 0);
             this.lblWizardResults.Name = "lblWizardResults";
             this.lblWizardResults.Size = new System.Drawing.Size(212, 19);
             this.lblWizardResults.TabIndex = 0;
             this.lblWizardResults.Text = "TXT_WIZTASKSFINISHED";
-            this.lblWizardResults.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbProgress
             // 
@@ -73,7 +71,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.tvResults.AccessibleName = "tvResults";
             this.tvResults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvResults.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvResults.FullRowSelect = true;
             this.tvResults.HideSelection = false;
             this.tvResults.Location = new System.Drawing.Point(3, 68);
@@ -106,7 +103,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.lblStepDetails.AutoSize = true;
             this.lblStepDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStepDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblStepDetails.Location = new System.Drawing.Point(3, 52);
             this.lblStepDetails.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.lblStepDetails.Name = "lblStepDetails";

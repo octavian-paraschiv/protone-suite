@@ -45,7 +45,6 @@ namespace OPMedia.UI.Configuration
             this.chkUseLinkedFiles.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.chkUseLinkedFiles, 2);
             this.chkUseLinkedFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkUseLinkedFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkUseLinkedFiles.Location = new System.Drawing.Point(3, 3);
             this.chkUseLinkedFiles.Name = "chkUseLinkedFiles";
             this.chkUseLinkedFiles.Size = new System.Drawing.Size(394, 17);

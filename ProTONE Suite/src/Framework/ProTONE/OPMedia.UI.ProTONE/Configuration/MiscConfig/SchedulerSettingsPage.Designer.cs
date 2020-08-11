@@ -68,7 +68,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // cmbPlaylistEvtHandler
             // 
-            this.cmbPlaylistEvtHandler.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbPlaylistEvtHandler.FormattingEnabled = true;
             this.cmbPlaylistEvtHandler.Location = new System.Drawing.Point(76, 28);
             this.cmbPlaylistEvtHandler.Name = "cmbPlaylistEvtHandler";
@@ -80,21 +79,18 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCaution.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblCaution, 4);
             this.lblCaution.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCaution.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCaution.Location = new System.Drawing.Point(3, 58);
             this.lblCaution.Margin = new System.Windows.Forms.Padding(3);
             this.lblCaution.Name = "lblCaution";
             this.lblCaution.Size = new System.Drawing.Size(493, 13);
             this.lblCaution.TabIndex = 3;
             this.lblCaution.Text = "TXT_PLAYLISTEVT_CAUTION";
-            this.lblCaution.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkEnablePlaylistEvt
             // 
             this.chkEnablePlaylistEvt.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.chkEnablePlaylistEvt, 4);
             this.chkEnablePlaylistEvt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkEnablePlaylistEvt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkEnablePlaylistEvt.Location = new System.Drawing.Point(3, 3);
             this.chkEnablePlaylistEvt.Name = "chkEnablePlaylistEvt";
             this.chkEnablePlaylistEvt.Size = new System.Drawing.Size(493, 19);
@@ -103,7 +99,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             // cmbScheduledEvtHandler
             // 
-            this.cmbScheduledEvtHandler.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbScheduledEvtHandler.FormattingEnabled = true;
             this.cmbScheduledEvtHandler.Location = new System.Drawing.Point(76, 175);
             this.cmbScheduledEvtHandler.Name = "cmbScheduledEvtHandler";
@@ -115,14 +110,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.label5.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label5, 2);
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Location = new System.Drawing.Point(3, 220);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(228, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "TXT_SCHEDULERWAITTIMERPROCEED";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // nudSchedulerWaitTimerProceed
             // 
@@ -144,7 +137,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudSchedulerWaitTimerProceed.Size = new System.Drawing.Size(80, 25);
             this.nudSchedulerWaitTimerProceed.TabIndex = 1;
             this.nudSchedulerWaitTimerProceed.Text = "1";
-            this.nudSchedulerWaitTimerProceed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudSchedulerWaitTimerProceed.Value = new decimal(new int[] {
             1,
             0,
@@ -192,27 +184,23 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(3, 28);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(67, 24);
             this.opmLabel1.TabIndex = 6;
             this.opmLabel1.Text = "TXT_THEN:";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 175);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(67, 24);
             this.opmLabel2.TabIndex = 7;
             this.opmLabel2.Text = "TXT_THEN:";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel2
             // 
@@ -239,20 +227,17 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Location = new System.Drawing.Point(292, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(204, 21);
             this.label4.TabIndex = 2;
             this.label4.Text = "TXT_ONDAYS";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkEnableScheduledEvt
             // 
             this.chkEnableScheduledEvt.AutoSize = true;
             this.chkEnableScheduledEvt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkEnableScheduledEvt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkEnableScheduledEvt.Location = new System.Drawing.Point(3, 3);
             this.chkEnableScheduledEvt.Name = "chkEnableScheduledEvt";
             this.chkEnableScheduledEvt.Size = new System.Drawing.Size(203, 21);

@@ -38,10 +38,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOK = new OPMedia.UI.Controls.OPMButton();
             this.pbPicture = new System.Windows.Forms.PictureBox();
             this.lblItem = new OPMedia.UI.Controls.OPMLabel();
-            this.btnBrowse = new OPMedia.UI.Controls.OPMButton();
+            this.btnBrowse = new OPMedia.UI.Controls.ImageButton();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmPanel1 = new System.Windows.Forms.Panel();
-            this.btnSave = new OPMedia.UI.Controls.OPMButton();
+            this.btnSave = new OPMedia.UI.Controls.ImageButton();
             this.lblSep = new OPMedia.UI.Controls.OPMLabel();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lvPictures = new OPMedia.UI.Controls.OPMListView();
@@ -67,7 +67,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnCancel.Location = new System.Drawing.Point(524, 278);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -82,7 +81,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnOK.Location = new System.Drawing.Point(458, 278);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -110,7 +108,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblItem.AutoSize = true;
             this.opmLayoutPanel1.SetColumnSpan(this.lblItem, 4);
             this.lblItem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblItem.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblItem.Location = new System.Drawing.Point(5, 0);
             this.lblItem.Margin = new System.Windows.Forms.Padding(5, 0, 0, 5);
@@ -118,13 +115,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblItem.Size = new System.Drawing.Size(609, 15);
             this.lblItem.TabIndex = 0;
             this.lblItem.Text = "label1";
-            this.lblItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowse.Image")));
             this.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnBrowse.Location = new System.Drawing.Point(194, 224);
@@ -178,8 +172,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnSave.Location = new System.Drawing.Point(172, 224);
@@ -194,12 +186,10 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             this.opmLayoutPanel1.SetColumnSpan(this.lblSep, 4);
             this.lblSep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep.Location = new System.Drawing.Point(3, 275);
             this.lblSep.Name = "lblSep";
             this.lblSep.Size = new System.Drawing.Size(608, 3);
             this.lblSep.TabIndex = 32;
-            this.lblSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmTableLayoutPanel1
             // 
@@ -266,7 +256,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(0, 233);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(0);
             this.lblDesc.Name = "lblDesc";
@@ -341,7 +330,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private OPMButton btnOK;
         private System.Windows.Forms.PictureBox pbPicture;
         private OPMLabel lblItem;
-        private OPMButton btnBrowse;
+        private ImageButton btnBrowse;
         private OPMTableLayoutPanel opmLayoutPanel1;
         private System.Windows.Forms.Panel opmPanel1;
         private OPMLabel lblSep;
@@ -353,7 +342,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         private PictureBox pbAdd;
         private PictureBox pbDelete;
         private OPMLabel lblDesc;
-        private OPMButton btnSave;
+        private ImageButton btnSave;
         private OPMFlowLayoutPanel opmFlowLayoutPanel1;
     }
 }

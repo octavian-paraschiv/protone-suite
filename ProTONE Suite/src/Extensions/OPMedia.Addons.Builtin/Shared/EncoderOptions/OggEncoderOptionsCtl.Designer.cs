@@ -34,13 +34,11 @@
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(16, 16);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(170, 13);
             this.opmLabel1.TabIndex = 1;
             this.opmLabel1.Text = "OGG Format not yet supported.";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // OggEncoderOptionsCtl
             // 

@@ -105,42 +105,36 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblCodecSupport.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblCodecSupport, 2);
             this.lblCodecSupport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCodecSupport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCodecSupport.Location = new System.Drawing.Point(25, 37);
             this.lblCodecSupport.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblCodecSupport.Name = "lblCodecSupport";
             this.lblCodecSupport.Size = new System.Drawing.Size(453, 19);
             this.lblCodecSupport.TabIndex = 2;
             this.lblCodecSupport.Text = "TXT_CODECSUPPORT";
-            this.lblCodecSupport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblDirectX
             // 
             this.lblDirectX.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblDirectX, 2);
             this.lblDirectX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDirectX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDirectX.Location = new System.Drawing.Point(25, 6);
             this.lblDirectX.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblDirectX.Name = "lblDirectX";
             this.lblDirectX.Size = new System.Drawing.Size(453, 19);
             this.lblDirectX.TabIndex = 0;
             this.lblDirectX.Text = "TXT_DIRECTX";
-            this.lblDirectX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblGlobalStatus
             // 
             this.lblGlobalStatus.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblGlobalStatus, 3);
             this.lblGlobalStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGlobalStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblGlobalStatus.Location = new System.Drawing.Point(25, 125);
             this.lblGlobalStatus.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblGlobalStatus.Name = "lblGlobalStatus";
             this.lblGlobalStatus.Size = new System.Drawing.Size(622, 19);
             this.lblGlobalStatus.TabIndex = 7;
             this.lblGlobalStatus.Text = "GlobalStatus";
-            this.lblGlobalStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbCodecSupport
             // 
@@ -177,14 +171,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblHDSupport.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblHDSupport, 2);
             this.lblHDSupport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHDSupport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblHDSupport.Location = new System.Drawing.Point(25, 68);
             this.lblHDSupport.Margin = new System.Windows.Forms.Padding(6, 6, 0, 6);
             this.lblHDSupport.Name = "lblHDSupport";
             this.lblHDSupport.Size = new System.Drawing.Size(453, 19);
             this.lblHDSupport.TabIndex = 4;
             this.lblHDSupport.Text = "TXT_HDSUPPORT";
-            this.lblHDSupport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblActDirectX
             // 
@@ -239,26 +231,22 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(22, 369);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(430, 33);
             this.opmLabel1.TabIndex = 8;
             this.opmLabel1.Text = "TXT_RESETVIDEOPOSITION_HINT";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmButton1
             // 
             this.opmButton1.AutoSize = true;
             this.opmButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.opmButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmButton1.Location = new System.Drawing.Point(481, 372);
             this.opmButton1.Name = "opmButton1";
             this.opmButton1.Size = new System.Drawing.Size(163, 27);
             this.opmButton1.TabIndex = 9;
             this.opmButton1.Text = "TXT_RESETVIDEOPOSITION";
-            this.opmButton1.UseVisualStyleBackColor = true;
             this.opmButton1.Click += new System.EventHandler(this.opmButton1_Click);
             // 
             // DiagnosticsPage

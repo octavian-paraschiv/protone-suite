@@ -63,7 +63,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // lblDesc
             // 
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(5, 0);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(5, 0, 3, 0);
             this.lblDesc.MaximumSize = new System.Drawing.Size(3500, 20);
@@ -72,7 +71,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblDesc.Size = new System.Drawing.Size(270, 20);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "opmLabel1";
-            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbInfo
             // 

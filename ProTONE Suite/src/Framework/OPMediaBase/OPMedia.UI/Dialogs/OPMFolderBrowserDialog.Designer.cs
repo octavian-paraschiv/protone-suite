@@ -67,14 +67,12 @@
             // 
             this.btnOK.AutoSize = true;
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(232, 370);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(70, 27);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "TXT_OK";
-            this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
@@ -82,14 +80,12 @@
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(308, 370);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "TXT_CANCEL";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // tvExplorer
@@ -97,7 +93,6 @@
             this.tvExplorer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.opmTableLayoutPanel1.SetColumnSpan(this.tvExplorer, 4);
             this.tvExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvExplorer.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvExplorer.Location = new System.Drawing.Point(0, 25);
             this.tvExplorer.Margin = new System.Windows.Forms.Padding(0);
             this.tvExplorer.Name = "tvExplorer";
@@ -110,26 +105,22 @@
             this.lblDescription.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblDescription, 4);
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDescription.Location = new System.Drawing.Point(3, 5);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(395, 15);
             this.lblDescription.TabIndex = 0;
             this.lblDescription.Text = "opmLabel1";
-            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnNewFolder
             // 
             this.btnNewFolder.AutoSize = true;
             this.btnNewFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNewFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewFolder.Location = new System.Drawing.Point(3, 370);
             this.btnNewFolder.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnNewFolder.Name = "btnNewFolder";
             this.btnNewFolder.Size = new System.Drawing.Size(118, 27);
             this.btnNewFolder.TabIndex = 2;
             this.btnNewFolder.Text = "TXT_NEW_FOLDER";
-            this.btnNewFolder.UseVisualStyleBackColor = true;
             this.btnNewFolder.Click += new System.EventHandler(this.btnNewFolder_Click);
             // 
             // OPMFolderBrowserDialog

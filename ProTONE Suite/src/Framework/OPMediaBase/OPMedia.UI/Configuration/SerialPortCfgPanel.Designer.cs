@@ -56,7 +56,6 @@ namespace OPMedia.UI.Configuration
             // cmbSerialPort
             // 
             this.cmbSerialPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbSerialPort.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbSerialPort.FormattingEnabled = true;
             this.cmbSerialPort.Location = new System.Drawing.Point(205, 3);
             this.cmbSerialPort.Name = "cmbSerialPort";
@@ -66,13 +65,11 @@ namespace OPMedia.UI.Configuration
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SERIAL_PORT_NAME";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // layoutPanel
             // 

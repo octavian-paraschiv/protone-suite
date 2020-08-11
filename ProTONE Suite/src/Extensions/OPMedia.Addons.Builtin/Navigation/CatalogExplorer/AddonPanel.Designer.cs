@@ -168,7 +168,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbNew.Size = new System.Drawing.Size(40, 40);
             this.tsbNew.Tag = "ToolActionNew";
             this.tsbNew.Text = "TXT_NEW";
-            this.tsbNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbNew.ToolTipText = "Create new catalog";
             this.tsbNew.Click += new System.EventHandler(this.OnToolAction);
@@ -187,7 +186,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbOpen.Size = new System.Drawing.Size(60, 40);
             this.tsbOpen.Tag = "ToolActionOpen";
             this.tsbOpen.Text = "TXT_OPEN";
-            this.tsbOpen.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbOpen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbOpen.ToolTipText = "Open catalog";
             this.tsbOpen.ButtonClick += new System.EventHandler(this.OnToolAction);
@@ -250,7 +248,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbBack.Size = new System.Drawing.Size(40, 40);
             this.tsbBack.Tag = "ToolActionBack";
             this.tsbBack.Text = "TXT_BACK";
-            this.tsbBack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbBack.ToolTipText = "Back to ";
             this.tsbBack.Click += new System.EventHandler(this.OnToolAction);
@@ -271,7 +268,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbForward.Size = new System.Drawing.Size(40, 40);
             this.tsbForward.Tag = "ToolActionFwd";
             this.tsbForward.Text = "TXT_FORWARD";
-            this.tsbForward.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbForward.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbForward.ToolTipText = "Forward to";
             this.tsbForward.Click += new System.EventHandler(this.OnToolAction);
@@ -292,7 +288,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbUpLevel.Size = new System.Drawing.Size(40, 40);
             this.tsbUpLevel.Tag = "ToolActionUp";
             this.tsbUpLevel.Text = "TXT_UP";
-            this.tsbUpLevel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbUpLevel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbUpLevel.ToolTipText = "Up to";
             this.tsbUpLevel.Click += new System.EventHandler(this.OnToolAction);
@@ -313,7 +308,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbSearch.Size = new System.Drawing.Size(40, 40);
             this.tsbSearch.Tag = "ToolActionSearch";
             this.tsbSearch.Text = "TXT_SEARCH";
-            this.tsbSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbSearch.ToolTipText = "Search ...";
             this.tsbSearch.Click += new System.EventHandler(this.OnToolAction);
@@ -334,7 +328,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbReload.Size = new System.Drawing.Size(40, 40);
             this.tsbReload.Tag = "ToolActionReload";
             this.tsbReload.Text = "TXT_REFRESH";
-            this.tsbReload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbReload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbReload.ToolTipText = "Reload";
             this.tsbReload.Click += new System.EventHandler(this.OnToolAction);
@@ -355,7 +348,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbRename.Size = new System.Drawing.Size(40, 40);
             this.tsbRename.Tag = "ToolActionRename";
             this.tsbRename.Text = "TXT_RENAME";
-            this.tsbRename.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbRename.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbRename.ToolTipText = "Rename Selection";
             this.tsbRename.Click += new System.EventHandler(this.OnToolAction);
@@ -376,7 +368,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.tsbDelete.Size = new System.Drawing.Size(40, 40);
             this.tsbDelete.Tag = "ToolActionDelete";
             this.tsbDelete.Text = "TXT_DELETE";
-            this.tsbDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbDelete.ToolTipText = "Delete ";
             this.tsbDelete.Click += new System.EventHandler(this.OnToolAction);
@@ -636,7 +627,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // tvCatalog
             // 
             this.tvCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvCatalog.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvCatalog.FullRowSelect = true;
             this.tvCatalog.HideSelection = false;
             this.tvCatalog.ImageIndex = 0;

@@ -54,7 +54,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.Size = new System.Drawing.Size(210, 280);
             this.txtHints.TabIndex = 1;
             this.txtHints.Text = "TXT_TAGGINGPATTERNS";
-            this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
             // 
             // pgPatterns

@@ -198,7 +198,6 @@ namespace OPMedia.Runtime.Addons
             // lblNoItems
             // 
             this.lblNoItems.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNoItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNoItems.Location = new System.Drawing.Point(0, 0);
             this.lblNoItems.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoItems.Name = "lblNoItems";
@@ -206,7 +205,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoItems.Size = new System.Drawing.Size(824, 60);
             this.lblNoItems.TabIndex = 0;
             this.lblNoItems.Text = "aaaa";
-            this.lblNoItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlLocalContent
             // 
@@ -243,7 +241,6 @@ namespace OPMedia.Runtime.Addons
             // lblNoProperties
             // 
             this.lblNoProperties.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNoProperties.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNoProperties.Location = new System.Drawing.Point(0, 0);
             this.lblNoProperties.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoProperties.Name = "lblNoProperties";
@@ -251,7 +248,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoProperties.Size = new System.Drawing.Size(822, 60);
             this.lblNoProperties.TabIndex = 0;
             this.lblNoProperties.Text = "aaaa";
-            this.lblNoProperties.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlPreview
             // 
@@ -267,7 +263,6 @@ namespace OPMedia.Runtime.Addons
             // lblNoPreview
             // 
             this.lblNoPreview.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNoPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNoPreview.Location = new System.Drawing.Point(0, 0);
             this.lblNoPreview.Margin = new System.Windows.Forms.Padding(0);
             this.lblNoPreview.Name = "lblNoPreview";
@@ -275,7 +270,6 @@ namespace OPMedia.Runtime.Addons
             this.lblNoPreview.Size = new System.Drawing.Size(822, 60);
             this.lblNoPreview.TabIndex = 0;
             this.lblNoPreview.Text = "abcdef";
-            this.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusBar
             // 
@@ -309,7 +303,6 @@ namespace OPMedia.Runtime.Addons
             // txtStatusMain
             // 
             this.txtStatusMain.AutoSize = false;
-            this.txtStatusMain.BackColor = System.Drawing.Color.Transparent;
             this.txtStatusMain.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.txtStatusMain.ForeColor = System.Drawing.Color.Black;
             this.txtStatusMain.Margin = new System.Windows.Forms.Padding(0);
@@ -323,13 +316,11 @@ namespace OPMedia.Runtime.Addons
             // lblStatusBarSep
             // 
             this.lblStatusBarSep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatusBarSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblStatusBarSep.Location = new System.Drawing.Point(0, 519);
             this.lblStatusBarSep.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.lblStatusBarSep.Name = "lblStatusBarSep";
             this.lblStatusBarSep.Size = new System.Drawing.Size(824, 3);
             this.lblStatusBarSep.TabIndex = 7;
-            this.lblStatusBarSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AddonHostForm
             // 

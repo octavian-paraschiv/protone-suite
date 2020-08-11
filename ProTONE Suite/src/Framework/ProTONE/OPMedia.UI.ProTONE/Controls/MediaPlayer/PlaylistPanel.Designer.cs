@@ -87,7 +87,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblSep2.AutoSize = true;
             this.lblSep2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep2.Location = new System.Drawing.Point(398, 439);
             this.lblSep2.Name = "lblSep2";
             this.lblSep2.Size = new System.Drawing.Size(274, 2);
@@ -98,7 +97,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblSep3.AutoSize = true;
             this.lblSep3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSep3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep3.Location = new System.Drawing.Point(398, 461);
             this.lblSep3.Name = "lblSep3";
             this.lblSep3.Size = new System.Drawing.Size(274, 2);
@@ -109,7 +107,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblSep5.AutoSize = true;
             this.pnlLayout.SetColumnSpan(this.lblSep5, 6);
             this.lblSep5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSep5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep5.Location = new System.Drawing.Point(3, 485);
             this.lblSep5.Name = "lblSep5";
             this.lblSep5.Size = new System.Drawing.Size(689, 2);
@@ -217,7 +214,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblSep1.AutoSize = true;
             this.lblSep1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSep1.Location = new System.Drawing.Point(388, 5);
             this.lblSep1.Margin = new System.Windows.Forms.Padding(5);
             this.lblSep1.Name = "lblSep1";
@@ -280,14 +276,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblEmptyPlaylist.AutoSize = true;
             this.lblEmptyPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEmptyPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblEmptyPlaylist.Location = new System.Drawing.Point(10, 5);
             this.lblEmptyPlaylist.Margin = new System.Windows.Forms.Padding(10, 5, 3, 10);
             this.lblEmptyPlaylist.Name = "lblEmptyPlaylist";
             this.lblEmptyPlaylist.Size = new System.Drawing.Size(370, 19);
             this.lblEmptyPlaylist.TabIndex = 6;
             this.lblEmptyPlaylist.Text = "TXT_EMPTY_PLAYLIST";
-            this.lblEmptyPlaylist.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblOpenPlaylist
             // 
@@ -300,7 +294,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblOpenPlaylist.TabIndex = 7;
             this.lblOpenPlaylist.TabStop = true;
             this.lblOpenPlaylist.Text = "TXT_LOADPLAYLIST";
-            this.lblOpenPlaylist.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblOpenPlaylist.Click  += new System.EventHandler(this.lblOpenPlaylist_LinkClicked);
             // 
             // lblOpenFiles
@@ -314,7 +307,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblOpenFiles.TabIndex = 8;
             this.lblOpenFiles.TabStop = true;
             this.lblOpenFiles.Text = "TXT_LOADMEDIAFILES";
-            this.lblOpenFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblOpenFiles.Click += new System.EventHandler(this.lblOpenFiles_LinkClicked);
             // 
             // vuLeft
@@ -359,53 +351,45 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 448);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(60, 13);
             this.opmLabel1.TabIndex = 18;
             this.opmLabel1.Text = "LVOL:  0%";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(0, 463);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(60, 13);
             this.opmLabel2.TabIndex = 19;
             this.opmLabel2.Text = "RVOL:  0%";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(348, 448);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(35, 13);
             this.opmLabel3.TabIndex = 20;
             this.opmLabel3.Text = "100%";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLabel4
             // 
             this.opmLabel4.AutoSize = true;
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel4.Location = new System.Drawing.Point(348, 463);
             this.opmLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.opmLabel4.Name = "opmLabel4";
             this.opmLabel4.Size = new System.Drawing.Size(35, 13);
             this.opmLabel4.TabIndex = 21;
             this.opmLabel4.Text = "100%";
-            this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlaylistPanel
             // 

@@ -57,7 +57,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkFilterStateNotificationsEnabled.AccessibleName = "chkFilterStateNotificationsEnabled";
             this.chkFilterStateNotificationsEnabled.AutoSize = true;
             this.chkFilterStateNotificationsEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkFilterStateNotificationsEnabled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkFilterStateNotificationsEnabled.Location = new System.Drawing.Point(0, 390);
             this.chkFilterStateNotificationsEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkFilterStateNotificationsEnabled.Name = "chkFilterStateNotificationsEnabled";
@@ -113,7 +112,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudOsdTmr.Size = new System.Drawing.Size(56, 29);
             this.nudOsdTmr.TabIndex = 2;
             this.nudOsdTmr.Text = "0";
-            this.nudOsdTmr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudOsdTmr.Value = new decimal(new int[] {
             0,
             0,
@@ -159,7 +157,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubEnabled.AccessibleName = "";
             this.chkSubEnabled.AutoSize = true;
             this.chkSubEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkSubEnabled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSubEnabled.Location = new System.Drawing.Point(0, 0);
             this.chkSubEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkSubEnabled.Name = "chkSubEnabled";
@@ -245,7 +242,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkOsdEnabled.AccessibleName = "chkOsdEnabled";
             this.chkOsdEnabled.AutoSize = true;
             this.chkOsdEnabled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkOsdEnabled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOsdEnabled.Location = new System.Drawing.Point(0, 0);
             this.chkOsdEnabled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkOsdEnabled.Name = "chkOsdEnabled";
@@ -258,14 +254,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.label2.AccessibleName = "label2";
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Location = new System.Drawing.Point(246, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 5, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(241, 29);
             this.label2.TabIndex = 1;
             this.label2.Text = "TXT_OSDTIMER";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblOsdText
             // 

@@ -433,7 +433,7 @@ namespace OPMedia.UI.Themes
                 {
                     float step = 72f / g.DpiX;
 
-                    var themeFontFamily = MetroFramework.MetroFonts.Default(12).FontFamily;
+                    string themeFontFamily = ThemeElement("themeFontFamily", "Segoe UI");
 
                     int i = 0;
 
@@ -743,4 +743,5 @@ namespace OPMedia.UI.Themes
         }
         #endregion
     }
+
 }

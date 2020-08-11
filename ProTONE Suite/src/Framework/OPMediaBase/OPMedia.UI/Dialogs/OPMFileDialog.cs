@@ -515,7 +515,6 @@ namespace OPMedia.UI.Controls.Dialogs
                         btn.Name = title;
                         btn.Image = ImageProvider.GetIcon(path, true);
                         btn.ToolTipText = path;
-                        btn.TextAlign = ContentAlignment.MiddleLeft;
                         btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
                         btn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.SizeToFit;
                         btn.ImageTransparentColor = System.Drawing.Color.Magenta;

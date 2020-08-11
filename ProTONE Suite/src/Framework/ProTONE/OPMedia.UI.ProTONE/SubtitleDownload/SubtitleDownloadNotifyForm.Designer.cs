@@ -101,7 +101,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.btnDownload.AutoSize = true;
             this.btnDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Location = new System.Drawing.Point(837, 463);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(102, 27);
@@ -113,13 +112,11 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 460);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(828, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "TXT_SUB_HINTS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLayoutPanel1
             // 

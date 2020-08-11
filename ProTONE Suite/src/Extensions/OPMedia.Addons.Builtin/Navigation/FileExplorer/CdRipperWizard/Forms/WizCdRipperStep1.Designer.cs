@@ -43,7 +43,7 @@
             this.colArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colGenre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnRefresh = new OPMedia.UI.Controls.OPMButton();
+            this.btnRefresh = new OPMedia.UI.Controls.ImageButton();
             this.opmFlowLayoutPanel1 = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.llCheckAll = new OPMedia.UI.Controls.OPMLinkLabel();
             this.llUncheckAll = new OPMedia.UI.Controls.OPMLinkLabel();
@@ -84,33 +84,28 @@
             this.opmLabel3.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel3, 2);
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(5, 438);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(5, 0, 0, 5);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(500, 19);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_GRABBERHINT_STEP1";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel1, 3);
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 0);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(700, 15);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SELECTDRIVE";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbAudioCDDrives
             // 
             this.cmbAudioCDDrives.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbAudioCDDrives.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbAudioCDDrives.FormattingEnabled = true;
             this.cmbAudioCDDrives.Location = new System.Drawing.Point(0, 20);
             this.cmbAudioCDDrives.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
@@ -124,14 +119,12 @@
             this.opmLabel2.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel2, 3);
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(0, 50);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(700, 15);
             this.opmLabel2.TabIndex = 2;
             this.opmLabel2.Text = "TXT_SELECTTRACKS";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lvTracks
             // 
@@ -188,14 +181,12 @@
             // btnRefresh
             // 
             this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
             this.btnRefresh.Location = new System.Drawing.Point(478, 20);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(27, 25);
             this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // opmFlowLayoutPanel1
@@ -222,7 +213,6 @@
             this.llCheckAll.TabIndex = 1;
             this.llCheckAll.TabStop = true;
             this.llCheckAll.Text = "TXT_CHECK_ALL";
-            this.llCheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.llCheckAll.Click += new System.EventHandler(this.OnCheckAll);
             // 
             // llUncheckAll
@@ -236,7 +226,6 @@
             this.llUncheckAll.TabIndex = 0;
             this.llUncheckAll.TabStop = true;
             this.llUncheckAll.Text = "TXT_UNCHECK_ALL";
-            this.llUncheckAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.llUncheckAll.Click += new System.EventHandler(this.OnUncheckAll);
             // 
             // pbWaiting
@@ -279,7 +268,7 @@
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colArtist;
         private System.Windows.Forms.ColumnHeader colGenre;
-        private UI.Controls.OPMButton btnRefresh;
+        private UI.Controls.ImageButton btnRefresh;
         private System.Windows.Forms.ColumnHeader colAlbum;
         private UI.Controls.OPMLabel opmLabel3;
         private UI.Controls.WaitingPictureBox pbWaiting;

@@ -113,33 +113,28 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Location = new System.Drawing.Point(321, 48);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(313, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "TXT_SEARCHVALUE";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.pnlLayoutSec.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(634, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_SEARCHPATTERN_FE";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkNoCase
             // 
             this.chkNoCase.AutoSize = true;
-            this.chkNoCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkNoCase.Location = new System.Drawing.Point(0, 0);
             this.chkNoCase.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkNoCase.Name = "chkNoCase";
@@ -152,7 +147,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.chkRecursive.AutoSize = true;
             this.chkRecursive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkRecursive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkRecursive.Location = new System.Drawing.Point(0, 96);
             this.chkRecursive.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkRecursive.Name = "chkRecursive";
@@ -181,7 +175,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.chkAttrSearch.AutoSize = true;
             this.chkAttrSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkAttrSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAttrSearch.Location = new System.Drawing.Point(0, 123);
             this.chkAttrSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkAttrSearch.Name = "chkAttrSearch";
@@ -205,21 +198,18 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.txtSearchPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSearchPath.Size = new System.Drawing.Size(287, 22);
             this.txtSearchPath.TabIndex = 6;
-            this.txtSearchPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtSearchPath.UseSystemPasswordChar = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Location = new System.Drawing.Point(0, 48);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(313, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "TXT_SEARCHFOLDER";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // statusBar
             // 
@@ -259,7 +249,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.ssStatus.Name = "ssStatus";
             this.ssStatus.Size = new System.Drawing.Size(554, 26);
             this.ssStatus.Spring = true;
-            this.ssStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbProgress
             // 
@@ -389,7 +378,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // chkPropSearch
             // 
             this.chkPropSearch.AutoSize = true;
-            this.chkPropSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkPropSearch.Location = new System.Drawing.Point(191, 0);
             this.chkPropSearch.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkPropSearch.Name = "chkPropSearch";
@@ -401,7 +389,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // chkOption1
             // 
             this.chkOption1.AutoSize = true;
-            this.chkOption1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOption1.Location = new System.Drawing.Point(0, 0);
             this.chkOption1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.chkOption1.Name = "chkOption1";
@@ -414,7 +401,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // chkOption2
             // 
             this.chkOption2.AutoSize = true;
-            this.chkOption2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOption2.Location = new System.Drawing.Point(104, 0);
             this.chkOption2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkOption2.Name = "chkOption2";
@@ -502,14 +488,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // 
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 225);
             this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(313, 15);
             this.kryptonLabel1.TabIndex = 22;
             this.kryptonLabel1.Text = "TXT_RESULTS";
-            this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlPatternOptions
             // 
@@ -559,7 +543,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             // btnBrowse
             // 
             this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Location = new System.Drawing.Point(292, 0);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnBrowse.MaximumSize = new System.Drawing.Size(21, 21);
@@ -568,7 +551,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.btnBrowse.Size = new System.Drawing.Size(21, 21);
             this.btnBrowse.TabIndex = 7;
             this.btnBrowse.Text = "...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // WizFESearchStep1Ctl

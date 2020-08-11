@@ -44,20 +44,17 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(414, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZTAGGINGSTEP2_DESC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbEditType
             // 
             this.cmbEditType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEditType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbEditType.FormattingEnabled = true;
             this.cmbEditType.Location = new System.Drawing.Point(3, 17);
             this.cmbEditType.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
@@ -81,7 +78,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // 
             this.cmbWordCasing.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbWordCasing.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbWordCasing.FormattingEnabled = true;
             this.cmbWordCasing.Location = new System.Drawing.Point(3, 248);
             this.cmbWordCasing.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
@@ -93,14 +89,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             // lblWordHandling
             // 
             this.lblWordHandling.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblWordHandling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblWordHandling.Location = new System.Drawing.Point(3, 231);
             this.lblWordHandling.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.lblWordHandling.Name = "lblWordHandling";
             this.lblWordHandling.Size = new System.Drawing.Size(414, 17);
             this.lblWordHandling.TabIndex = 3;
             this.lblWordHandling.Text = "TXT_WORDHANDLING";
-            this.lblWordHandling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPreview
             // 

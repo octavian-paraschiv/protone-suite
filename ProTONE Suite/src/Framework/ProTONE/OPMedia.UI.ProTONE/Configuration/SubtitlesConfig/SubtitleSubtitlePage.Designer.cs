@@ -130,20 +130,17 @@ namespace OPMedia.UI.ProTONE.Configuration
             // label3
             // 
             this.label3.AccessibleName = "label3";
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(185, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "TXT_PREFFEREDSUBTITLELANG";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbLanguages
             // 
             this.cmbLanguages.AccessibleName = "cmbLanguages";
             this.cmbLanguages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbLanguages.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbLanguages.FormattingEnabled = true;
             this.cmbLanguages.Location = new System.Drawing.Point(191, 0);
             this.cmbLanguages.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -156,7 +153,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubtitleDownload.AccessibleName = "chkSubtitleDownload";
             this.chkSubtitleDownload.AutoSize = true;
             this.chkSubtitleDownload.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkSubtitleDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSubtitleDownload.Location = new System.Drawing.Point(0, 29);
             this.chkSubtitleDownload.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.chkSubtitleDownload.Name = "chkSubtitleDownload";
@@ -211,12 +207,10 @@ namespace OPMedia.UI.ProTONE.Configuration
             // kryptonLabel1
             // 
             this.kryptonLabel1.AccessibleName = "kryptonLabel1";
-            this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel1.Location = new System.Drawing.Point(3, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(7, 2);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnAdd
             // 
@@ -286,7 +280,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblClickHint.AccessibleName = "lblClickHint";
             this.lblClickHint.AutoSize = true;
             this.lblClickHint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblClickHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblClickHint.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblClickHint.Location = new System.Drawing.Point(0, 0);
             this.lblClickHint.Margin = new System.Windows.Forms.Padding(0);
@@ -300,14 +293,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.btnRestoreDefaults.AutoSize = true;
             this.btnRestoreDefaults.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRestoreDefaults.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnRestoreDefaults.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestoreDefaults.Location = new System.Drawing.Point(343, 0);
             this.btnRestoreDefaults.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnRestoreDefaults.Name = "btnRestoreDefaults";
             this.btnRestoreDefaults.Size = new System.Drawing.Size(178, 25);
             this.btnRestoreDefaults.TabIndex = 1;
             this.btnRestoreDefaults.Text = "TXT_RESTORE_DEFAULTSERVERS";
-            this.btnRestoreDefaults.UseVisualStyleBackColor = true;
             this.btnRestoreDefaults.Click += new System.EventHandler(this.btnRestoreDefaults_Click);
             // 
             // tableLayoutPanel3
@@ -336,14 +327,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblMinDuration.AccessibleName = "lblMinDuration";
             this.lblMinDuration.AutoSize = true;
             this.lblMinDuration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMinDuration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMinDuration.Location = new System.Drawing.Point(0, 0);
             this.lblMinDuration.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.lblMinDuration.Name = "lblMinDuration";
             this.lblMinDuration.Size = new System.Drawing.Size(150, 25);
             this.lblMinDuration.TabIndex = 0;
             this.lblMinDuration.Text = "TXT_MINMOVIEDURATION";
-            this.lblMinDuration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nudMinMovieDuration
             // 
@@ -368,7 +357,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.nudMinMovieDuration.Size = new System.Drawing.Size(50, 25);
             this.nudMinMovieDuration.TabIndex = 1;
             this.nudMinMovieDuration.Text = "20";
-            this.nudMinMovieDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudMinMovieDuration.Value = new decimal(new int[] {
             20,
             0,
@@ -380,21 +368,18 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.kryptonLabel2.AccessibleName = "kryptonLabel2";
             this.kryptonLabel2.AutoSize = true;
             this.kryptonLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel2.Location = new System.Drawing.Point(206, 0);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(340, 25);
             this.kryptonLabel2.TabIndex = 2;
             this.kryptonLabel2.Text = "TXT_MINUTES";
-            this.kryptonLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkNotifySubDownloaded
             // 
             this.chkNotifySubDownloaded.AutoSize = true;
             this.pnlOnlineSubtitles.SetColumnSpan(this.chkNotifySubDownloaded, 2);
             this.chkNotifySubDownloaded.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkNotifySubDownloaded.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkNotifySubDownloaded.Location = new System.Drawing.Point(0, 181);
             this.chkNotifySubDownloaded.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkNotifySubDownloaded.Name = "chkNotifySubDownloaded";

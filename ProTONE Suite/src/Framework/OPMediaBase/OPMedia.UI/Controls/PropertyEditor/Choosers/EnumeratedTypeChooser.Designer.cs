@@ -55,18 +55,15 @@
             // 
             this.lblValueName.AutoSize = true;
             this.lblValueName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblValueName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblValueName.Location = new System.Drawing.Point(3, 0);
             this.lblValueName.Name = "lblValueName";
             this.lblValueName.Size = new System.Drawing.Size(39, 29);
             this.lblValueName.TabIndex = 0;
             this.lblValueName.Text = "Value:";
-            this.lblValueName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbValue
             // 
             this.cmbValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbValue.FormattingEnabled = true;
             this.cmbValue.Location = new System.Drawing.Point(48, 3);
             this.cmbValue.Name = "cmbValue";

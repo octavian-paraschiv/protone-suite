@@ -53,7 +53,6 @@ namespace OPMedia.UI
             this.btn2.AutoSize = true;
             this.btn2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn2.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2.Location = new System.Drawing.Point(195, 3);
             this.btn2.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn2.Name = "btn2";
@@ -79,20 +78,17 @@ namespace OPMedia.UI
             // 
             this.lblText.AutoSize = true;
             this.lblText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblText.Location = new System.Drawing.Point(48, 0);
             this.lblText.Margin = new System.Windows.Forms.Padding(0);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(418, 46);
             this.lblText.TabIndex = 0;
             this.lblText.Text = "label1 gv gdsrg fstg ret tre";
-            this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btn1
             // 
             this.btn1.AutoSize = true;
             this.btn1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn1.Location = new System.Drawing.Point(129, 3);
             this.btn1.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn1.Name = "btn1";
@@ -105,7 +101,6 @@ namespace OPMedia.UI
             this.btn3.AutoSize = true;
             this.btn3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn3.Location = new System.Drawing.Point(261, 3);
             this.btn3.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn3.Name = "btn3";
@@ -166,7 +161,6 @@ namespace OPMedia.UI
             this.btn4.AutoSize = true;
             this.btn4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn4.Location = new System.Drawing.Point(349, 3);
             this.btn4.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
             this.btn4.MinimumSize = new System.Drawing.Size(60, 25);
@@ -180,7 +174,6 @@ namespace OPMedia.UI
             // 
             this.btn5.AutoSize = true;
             this.btn5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn5.Location = new System.Drawing.Point(63, 3);
             this.btn5.MinimumSize = new System.Drawing.Size(60, 25);
             this.btn5.Name = "btn5";
@@ -210,7 +203,6 @@ namespace OPMedia.UI
             // 
             this.chkAdditionalCheck.AutoSize = true;
             this.chkAdditionalCheck.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkAdditionalCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAdditionalCheck.Location = new System.Drawing.Point(3, 95);
             this.chkAdditionalCheck.Name = "chkAdditionalCheck";
             this.chkAdditionalCheck.Size = new System.Drawing.Size(466, 69);

@@ -47,7 +47,6 @@ namespace OPMedia.UI.Configuration
             // 
             this.layoutPanel.SetColumnSpan(this.cmbLanguages, 3);
             this.cmbLanguages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbLanguages.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbLanguages.FormattingEnabled = true;
             this.cmbLanguages.Location = new System.Drawing.Point(3, 99);
             this.cmbLanguages.Name = "cmbLanguages";
@@ -58,14 +57,12 @@ namespace OPMedia.UI.Configuration
             // 
             this.layoutPanel.SetColumnSpan(this.labelProductName, 3);
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelProductName.Location = new System.Drawing.Point(0, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(0);
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(413, 23);
             this.labelProductName.TabIndex = 0;
             this.labelProductName.Text = "[ Product Name ]";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // layoutPanel
             // 
@@ -109,7 +106,6 @@ namespace OPMedia.UI.Configuration
             // 
             this.layoutPanel.SetColumnSpan(this.chkAllowAutoUpdates, 2);
             this.chkAllowAutoUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkAllowAutoUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAllowAutoUpdates.Location = new System.Drawing.Point(3, 182);
             this.chkAllowAutoUpdates.Name = "chkAllowAutoUpdates";
             this.chkAllowAutoUpdates.Size = new System.Drawing.Size(275, 27);
@@ -120,45 +116,38 @@ namespace OPMedia.UI.Configuration
             // 
             this.layoutPanel.SetColumnSpan(this.labelVersion, 3);
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelVersion.Location = new System.Drawing.Point(0, 23);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(0);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(413, 23);
             this.labelVersion.TabIndex = 1;
             this.labelVersion.Text = "[ Product Version ]";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
             // 
             this.layoutPanel.SetColumnSpan(this.labelCopyright, 3);
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelCopyright.Location = new System.Drawing.Point(0, 46);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(0);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(413, 23);
             this.labelCopyright.TabIndex = 2;
             this.labelCopyright.Text = "[ Copyright Notice ]";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblSetLanguage
             // 
             this.layoutPanel.SetColumnSpan(this.lblSetLanguage, 3);
             this.lblSetLanguage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSetLanguage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSetLanguage.Location = new System.Drawing.Point(3, 77);
             this.lblSetLanguage.Name = "lblSetLanguage";
             this.lblSetLanguage.Size = new System.Drawing.Size(407, 19);
             this.lblSetLanguage.TabIndex = 3;
             this.lblSetLanguage.Text = "TXT_SETUILANGUAGE";
-            this.lblSetLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbThemes
             // 
             this.layoutPanel.SetColumnSpan(this.cmbThemes, 3);
             this.cmbThemes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbThemes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbThemes.Location = new System.Drawing.Point(3, 148);
             this.cmbThemes.Name = "cmbThemes";
             this.cmbThemes.Size = new System.Drawing.Size(407, 24);
@@ -168,20 +157,17 @@ namespace OPMedia.UI.Configuration
             // 
             this.layoutPanel.SetColumnSpan(this.lblSetSkin, 3);
             this.lblSetSkin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSetSkin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSetSkin.Location = new System.Drawing.Point(3, 126);
             this.lblSetSkin.Name = "lblSetSkin";
             this.lblSetSkin.Size = new System.Drawing.Size(407, 19);
             this.lblSetSkin.TabIndex = 5;
             this.lblSetSkin.Text = "TXT_SETSKIN";
-            this.lblSetSkin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCheckUpdates
             // 
             this.btnCheckUpdates.AutoSize = true;
             this.btnCheckUpdates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCheckUpdates.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCheckUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckUpdates.Location = new System.Drawing.Point(284, 182);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
             this.btnCheckUpdates.Size = new System.Drawing.Size(126, 27);

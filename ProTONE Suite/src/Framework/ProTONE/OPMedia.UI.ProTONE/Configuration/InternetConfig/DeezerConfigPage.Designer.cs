@@ -31,7 +31,7 @@
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.txtDeezerToken = new OPMedia.UI.Controls.OPMTextBox();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
-            this.btnNew = new OPMedia.UI.Controls.OPMButton();
+            this.btnNew = new OPMedia.UI.Controls.ImageButton();
             this.opmLabel6 = new OPMedia.UI.Controls.OPMLabel();
             this.chkUseServices = new OPMedia.UI.Controls.OPMCheckBox();
             this.opmTableLayoutPanel1.SuspendLayout();
@@ -81,25 +81,21 @@
             this.txtDeezerToken.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtDeezerToken.Size = new System.Drawing.Size(166, 22);
             this.txtDeezerToken.TabIndex = 4;
-            this.txtDeezerToken.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtDeezerToken.UseSystemPasswordChar = false;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(0, 5);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(244, 22);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_DEEZER_TOKEN";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnNew
             // 
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Location = new System.Drawing.Point(416, 5);
             this.btnNew.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.btnNew.MaximumSize = new System.Drawing.Size(22, 22);
@@ -107,33 +103,28 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(22, 22);
             this.btnNew.TabIndex = 12;
-            this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // opmLabel6
             // 
             this.opmLabel6.AutoSize = true;
             this.opmLabel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel6.Location = new System.Drawing.Point(0, 32);
             this.opmLabel6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel6.Name = "opmLabel6";
             this.opmLabel6.Size = new System.Drawing.Size(244, 15);
             this.opmLabel6.TabIndex = 18;
             this.opmLabel6.Text = "TXT_DEEZER_USE_SERVICES_FOR_METADATA";
-            this.opmLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkUseServices
             // 
             this.chkUseServices.AutoSize = true;
             this.chkUseServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkUseServices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkUseServices.Location = new System.Drawing.Point(247, 32);
             this.chkUseServices.Margin = new System.Windows.Forms.Padding(0);
             this.chkUseServices.Name = "chkUseServices";
             this.chkUseServices.Size = new System.Drawing.Size(166, 15);
             this.chkUseServices.TabIndex = 19;
-            this.chkUseServices.UseVisualStyleBackColor = true;
             // 
             // DeezerConfigPage
             // 
@@ -152,7 +143,7 @@
         private UI.Controls.OPMTableLayoutPanel opmTableLayoutPanel1;
         private UI.Controls.OPMTextBox txtDeezerToken;
         private UI.Controls.OPMLabel opmLabel2;
-        private UI.Controls.OPMButton btnNew;
+        private UI.Controls.ImageButton btnNew;
         private UI.Controls.OPMLabel opmLabel6;
         private UI.Controls.OPMCheckBox chkUseServices;
     }

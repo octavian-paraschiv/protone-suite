@@ -37,7 +37,6 @@ namespace OPMedia.Runtime.Addons.Configuration
             // 
             this.tvAddons.CheckBoxes = true;
             this.tvAddons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvAddons.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvAddons.Location = new System.Drawing.Point(0, 0);
             this.tvAddons.Name = "tvAddons";
             this.tvAddons.Size = new System.Drawing.Size(668, 411);

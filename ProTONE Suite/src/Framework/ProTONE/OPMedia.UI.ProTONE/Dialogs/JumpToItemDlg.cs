@@ -82,7 +82,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.AutoSize = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(403, 361);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
@@ -95,7 +94,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.AutoSize = true;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Location = new System.Drawing.Point(326, 361);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
@@ -120,28 +118,24 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.label1.AutoSize = true;
             this.opmLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(5, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(488, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "TXT_MATCHING_ITEMS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.opmLayoutPanel1.SetColumnSpan(this.label2, 3);
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Location = new System.Drawing.Point(5, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(488, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "TXT_ENTER_KEYWORD";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtKeyword
             // 
@@ -159,7 +153,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtKeyword.Size = new System.Drawing.Size(488, 22);
             this.txtKeyword.TabIndex = 1;
-            this.txtKeyword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtKeyword.UseSystemPasswordChar = false;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);

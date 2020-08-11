@@ -73,14 +73,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.Location = new System.Drawing.Point(0, 6);
             this.lblTime.Margin = new System.Windows.Forms.Padding(0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(270, 15);
             this.lblTime.TabIndex = 1;
             this.lblTime.Text = "00:00:00";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TimeScale
             // 

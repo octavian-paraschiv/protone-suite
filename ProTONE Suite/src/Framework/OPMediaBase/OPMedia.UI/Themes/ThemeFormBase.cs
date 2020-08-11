@@ -7,30 +7,47 @@ using OPMedia.Core;
 using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.GlobalEvents;
-using MetroFramework.Components;
-using MetroFramework.Forms;
-using MetroFramework.Drawing;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace OPMedia.UI.Themes
 {
-    public partial class ThemeFormBase : MetroForm
+    public partial class ThemeFormBase : KryptonForm
     {
-        MetroStyleManager _msm = null;
+        protected static readonly KryptonManager _mng = null;
 
         public bool IsActive { get => (this == Form.ActiveForm); }
 
         public bool TitleBarVisible { get; set; }
 
-        public new bool DisplayHeader { get { return base.DisplayHeader; } }
-
-        public new string Text
+        static ThemeFormBase()
         {
-            get => base.Text;
-            set
-            {
-                base.Text = value;
-                Invalidate();
-            }
+            _mng = new KryptonManager();
+
+            _mng.GlobalPaletteMode = PaletteModeManager.Custom;
+
+            var pal = new KryptonPalette();
+
+            pal.FormStyles.FormCommon.StateActive.Border.Rounding = 0;
+            pal.FormStyles.FormCommon.StateActive.Border.Width = 1;
+            pal.FormStyles.FormCommon.StateActive.Border.Color1 = ThemeManager.BorderColor;
+            pal.FormStyles.FormCommon.StateActive.Back.Color1 = ThemeManager.BackColor;
+
+            pal.FormStyles.FormCommon.StateInactive.Border.Rounding = 0;
+            pal.FormStyles.FormCommon.StateInactive.Border.Width = 1;
+            pal.FormStyles.FormCommon.StateInactive.Border.Color1 = ThemeManager.BorderColor;
+            pal.FormStyles.FormCommon.StateInactive.Back.Color1 = ThemeManager.BackColor;
+
+            pal.FormStyles.FormCommon.StateCommon.Border.Rounding = 0;
+            pal.FormStyles.FormCommon.StateCommon.Border.Width = 1;
+            pal.FormStyles.FormCommon.StateCommon.Back.Color1 = ThemeManager.BackColor;
+
+            pal.FormStyles.FormCommon.StateCommon.Border.Rounding = 0;
+            pal.FormStyles.FormCommon.StateCommon.Border.Width = 1;
+            pal.FormStyles.FormCommon.StateCommon.Border.Color1 = ThemeManager.BorderColor;
+            pal.FormStyles.FormCommon.StateCommon.Back.Color1 = ThemeManager.BackColor;
+
+            _mng.GlobalPalette = pal;
+
         }
 
         public ThemeFormBase()
@@ -39,9 +56,7 @@ namespace OPMedia.UI.Themes
             if (!DesignMode)
                 MainThread.Initialize(this);
 
-            base.DisplayHeader = false;
             base.ControlBox = true;
-            base.TitleBarColor = Color.LightBlue;
 
             SetStyle(ControlStyles.AllPaintingInWmPaint |
                      ControlStyles.OptimizedDoubleBuffer |
@@ -51,13 +66,10 @@ namespace OPMedia.UI.Themes
             base.AutoScaleDimensions = new SizeF(1, 1);
             base.AutoScaleMode = AutoScaleMode.None;
             base.FormBorderStyle = FormBorderStyle.Sizable;
-            base.BorderStyle = MetroFormBorderStyle.FixedSingle;
 
             this.Text = string.Empty;
 
             this.StartPosition = FormStartPosition.CenterParent;
-
-            _msm = new MetroStyleManager();
         }
 
         [EventSink(EventNames.ThemeUpdated)]
@@ -65,14 +77,10 @@ namespace OPMedia.UI.Themes
         {
         //    if (ThemeManager.IsDarkTheme)
         //    {
-        //        _msm.Style = MetroFramework.MetroColorStyle.Black;
-        //        _msm.Theme = MetroFramework.MetroThemeStyle.Dark;
         //        _msm.Update();
         //    }
         //    else
         //    {
-        //        _msm.Style = MetroFramework.MetroColorStyle.White;
-        //        _msm.Theme = MetroFramework.MetroThemeStyle.Light;
         //        _msm.Update();
         //    }
 
@@ -83,7 +91,7 @@ namespace OPMedia.UI.Themes
         {
         }
 
-
+        /*
         protected override void OnPaint(PaintEventArgs e)
         {
             ThemeManager.PrepareGraphics(e.Graphics);
@@ -112,7 +120,7 @@ namespace OPMedia.UI.Themes
                 
                 e.Graphics.DrawString(this.Text, ThemeManager.VeryLargeFont, fb, rcText, sf);
             }
-        }
+        }*/
 
         private void InitializeComponent()
         {
@@ -122,7 +130,6 @@ namespace OPMedia.UI.Themes
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "ThemeFormBase";
-            this.Padding = new System.Windows.Forms.Padding(5, 60, 5, 5);
             this.ResumeLayout(false);
 
         }

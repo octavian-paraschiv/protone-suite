@@ -1,4 +1,6 @@
-﻿namespace OPMedia.UI.Controls.Dialogs
+﻿using System.Drawing;
+
+namespace OPMedia.UI.Controls.Dialogs
 {
     partial class OPMFileDialog
     {
@@ -34,13 +36,13 @@
             this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
             this.cmbFilter = new OPMedia.UI.Controls.OPMComboBox();
             this.txtFileNames = new OPMedia.UI.Controls.OPMTextBox();
-            this.btnOK = new OPMedia.UI.Controls.OPMButton();
+            this.btnOK = new OPMedia.UI.Controls.OPMDropButton();
             this.btnCancel = new OPMedia.UI.Controls.OPMButton();
             this.lvExplorer = new OPMedia.UI.Controls.OPMShellListView();
             this.lblCurrentPath = new OPMedia.UI.Controls.OPMLabel();
             this.pnlButtons = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
-            this.btnNewFolder = new OPMedia.UI.Controls.OPMButton();
-            this.btnAddToFavorites = new OPMedia.UI.Controls.OPMButton();
+            this.btnNewFolder = new OPMedia.UI.Controls.ImageButton();
+            this.btnAddToFavorites = new OPMedia.UI.Controls.ImageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tsSpecialFolders = new OPMedia.UI.Controls.OPMToolStrip();
             this.pnlLayout.SuspendLayout();
@@ -88,33 +90,28 @@
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 459);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(93, 23);
             this.opmLabel2.TabIndex = 4;
             this.opmLabel2.Text = "TXT_FILENAME:";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(3, 490);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(3, 0, 4, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(93, 25);
             this.opmLabel3.TabIndex = 6;
             this.opmLabel3.Text = "TXT_FILE_TYPE:";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbFilter
             // 
             this.pnlLayout.SetColumnSpan(this.cmbFilter, 2);
             this.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbFilter.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFilter.FormattingEnabled = true;
             this.cmbFilter.Location = new System.Drawing.Point(100, 491);
             this.cmbFilter.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
@@ -140,7 +137,6 @@
             this.txtFileNames.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtFileNames.Size = new System.Drawing.Size(456, 22);
             this.txtFileNames.TabIndex = 5;
-            this.txtFileNames.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtFileNames.UseSystemPasswordChar = false;
             this.txtFileNames.TextChanged += new System.EventHandler(this.txtFileNames_TextChanged);
             // 
@@ -148,7 +144,6 @@
             // 
             this.pnlLayout.SetColumnSpan(this.btnOK, 2);
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(564, 459);
             this.btnOK.Margin = new System.Windows.Forms.Padding(0);
             this.btnOK.Name = "btnOK";
@@ -161,7 +156,6 @@
             // 
             this.pnlLayout.SetColumnSpan(this.btnCancel, 2);
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(564, 490);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
@@ -193,14 +187,12 @@
             this.lblCurrentPath.AutoSize = true;
             this.pnlLayout.SetColumnSpan(this.lblCurrentPath, 5);
             this.lblCurrentPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCurrentPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCurrentPath.Location = new System.Drawing.Point(5, 3);
             this.lblCurrentPath.Margin = new System.Windows.Forms.Padding(5, 3, 0, 3);
             this.lblCurrentPath.Name = "lblCurrentPath";
             this.lblCurrentPath.Size = new System.Drawing.Size(595, 20);
             this.lblCurrentPath.TabIndex = 9;
             this.lblCurrentPath.Text = "opmLabel4";
-            this.lblCurrentPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlButtons
             // 
@@ -218,19 +210,16 @@
             // 
             // btnNewFolder
             // 
-            this.btnNewFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewFolder.Location = new System.Drawing.Point(0, 0);
             this.btnNewFolder.Margin = new System.Windows.Forms.Padding(0);
             this.btnNewFolder.Name = "btnNewFolder";
             this.btnNewFolder.Size = new System.Drawing.Size(20, 20);
             this.btnNewFolder.TabIndex = 11;
-            this.btnNewFolder.UseVisualStyleBackColor = true;
             this.btnNewFolder.Click += new System.EventHandler(this.btnNewFolder_Click);
             // 
             // btnAddToFavorites
             // 
             this.btnAddToFavorites.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnAddToFavorites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddToFavorites.Location = new System.Drawing.Point(21, 0);
             this.btnAddToFavorites.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.btnAddToFavorites.MaximumSize = new System.Drawing.Size(20, 20);
@@ -238,7 +227,6 @@
             this.btnAddToFavorites.Name = "btnAddToFavorites";
             this.btnAddToFavorites.Size = new System.Drawing.Size(20, 20);
             this.btnAddToFavorites.TabIndex = 10;
-            this.btnAddToFavorites.UseVisualStyleBackColor = true;
             this.btnAddToFavorites.Click += new System.EventHandler(this.btnAddToFavorites_Click);
             // 
             // panel1
@@ -293,14 +281,14 @@
         private OPMedia.UI.Controls.OPMLabel opmLabel3;
         private OPMedia.UI.Controls.OPMComboBox cmbFilter;
         private OPMedia.UI.Controls.OPMTextBox txtFileNames;
-        private OPMedia.UI.Controls.OPMButton btnOK;
+        private OPMedia.UI.Controls.OPMDropButton btnOK;
         private OPMedia.UI.Controls.OPMButton btnCancel;
         private OPMedia.UI.Controls.OPMLabel lblCurrentPath;
         protected internal OPMedia.UI.Controls.OPMShellListView lvExplorer;
         private OPMToolStrip tsSpecialFolders;
-        private OPMButton btnAddToFavorites;
+        private ImageButton btnAddToFavorites;
         private OPMFlowLayoutPanel pnlButtons;
-        private OPMButton btnNewFolder;
+        private ImageButton btnNewFolder;
         private System.Windows.Forms.Panel panel1;
     }
 }

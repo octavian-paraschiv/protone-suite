@@ -42,14 +42,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Location = new System.Drawing.Point(0, 30);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 25);
             this.label5.TabIndex = 6;
             this.label5.Text = "TXT_PREVIEW_TIMER";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nudPreviewTimer
             // 
@@ -74,7 +72,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudPreviewTimer.Size = new System.Drawing.Size(53, 25);
             this.nudPreviewTimer.TabIndex = 7;
             this.nudPreviewTimer.Text = "1,0";
-            this.nudPreviewTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudPreviewTimer.Value = new decimal(new int[] {
             1,
             0,
@@ -86,14 +83,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(149, 25);
             this.kryptonLabel1.TabIndex = 6;
             this.kryptonLabel1.Text = "TXT_MAXPROCESSEDFILES";
-            this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nudMaxProcessedFiles
             // 
@@ -118,7 +113,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.nudMaxProcessedFiles.Size = new System.Drawing.Size(53, 25);
             this.nudMaxProcessedFiles.TabIndex = 7;
             this.nudMaxProcessedFiles.Text = "50";
-            this.nudMaxProcessedFiles.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudMaxProcessedFiles.Value = new decimal(new int[] {
             50,
             0,

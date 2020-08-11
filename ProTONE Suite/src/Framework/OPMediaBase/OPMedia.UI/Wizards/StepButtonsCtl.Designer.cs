@@ -46,7 +46,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.AutoSize = true;
-            this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Location = new System.Drawing.Point(4, 3);
             this.btnPrevious.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnPrevious.MinimumSize = new System.Drawing.Size(70, 24);
@@ -60,7 +59,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.AutoSize = true;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Location = new System.Drawing.Point(85, 3);
             this.btnNext.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnNext.MinimumSize = new System.Drawing.Size(70, 24);
@@ -74,7 +72,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.AutoSize = true;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(247, 3);
             this.btnCancel.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 24);
@@ -88,7 +85,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinish.AutoSize = true;
-            this.btnFinish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinish.Location = new System.Drawing.Point(166, 3);
             this.btnFinish.MaximumSize = new System.Drawing.Size(75, 25);
             this.btnFinish.MinimumSize = new System.Drawing.Size(70, 24);
@@ -120,7 +116,6 @@ namespace OPMedia.UI.Wizards
             this.btnOK.AutoSize = true;
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(123, 3);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 24);
             this.btnOK.Name = "btnOK";
@@ -153,7 +148,6 @@ namespace OPMedia.UI.Wizards
             // 
             this.chkRepeatWizard.AutoSize = true;
             this.chkRepeatWizard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkRepeatWizard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkRepeatWizard.Location = new System.Drawing.Point(3, 3);
             this.chkRepeatWizard.MinimumSize = new System.Drawing.Size(110, 25);
             this.chkRepeatWizard.Name = "chkRepeatWizard";

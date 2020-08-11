@@ -87,23 +87,18 @@
             this.opmLabel4.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.opmLabel4, 2);
             this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel4.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.opmLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.opmLabel4.Location = new System.Drawing.Point(3, 142);
             this.opmLabel4.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.opmLabel4.Name = "opmLabel4";
             this.opmLabel4.Size = new System.Drawing.Size(150, 14);
             this.opmLabel4.TabIndex = 12;
             this.opmLabel4.Text = "TXT_RESULTING_COLOR:";
-            this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblColorName
             // 
             this.lblColorName.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblColorName, 4);
             this.lblColorName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblColorName.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblColorName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblColorName.Location = new System.Drawing.Point(8, 5);
             this.lblColorName.Margin = new System.Windows.Forms.Padding(8, 5, 3, 3);
             this.lblColorName.Name = "lblColorName";
@@ -115,43 +110,34 @@
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.opmLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.opmLabel1.Location = new System.Drawing.Point(3, 26);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(29, 22);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "R";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.opmLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.opmLabel2.Location = new System.Drawing.Point(3, 51);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(29, 22);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "G";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.opmLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.opmLabel3.Location = new System.Drawing.Point(3, 76);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(29, 22);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "B";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cgR
             // 
@@ -4674,11 +4660,8 @@
             // lblResultingColor
             // 
             this.lblResultingColor.AutoSize = true;
-            this.lblResultingColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblResultingColor, 2);
             this.lblResultingColor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblResultingColor.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblResultingColor.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lblResultingColor.Location = new System.Drawing.Point(159, 142);
             this.lblResultingColor.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.lblResultingColor.Name = "lblResultingColor";
@@ -4689,15 +4672,12 @@
             // 
             this.opmLabel5.AutoSize = true;
             this.opmLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel5.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.opmLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.opmLabel5.Location = new System.Drawing.Point(3, 106);
             this.opmLabel5.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.opmLabel5.Name = "opmLabel5";
             this.opmLabel5.Size = new System.Drawing.Size(29, 28);
             this.opmLabel5.TabIndex = 14;
             this.opmLabel5.Text = "RGB";
-            this.opmLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // OPMColorChooserCtl
             // 

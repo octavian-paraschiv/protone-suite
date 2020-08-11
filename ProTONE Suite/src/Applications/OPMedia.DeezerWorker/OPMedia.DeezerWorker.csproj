@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{881231F8-0F43-453B-81A3-04C8A44F08DB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>OPMedia.DeezerWorker</RootNamespace>
     <AssemblyName>OPMedia.DeezerWorker</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>

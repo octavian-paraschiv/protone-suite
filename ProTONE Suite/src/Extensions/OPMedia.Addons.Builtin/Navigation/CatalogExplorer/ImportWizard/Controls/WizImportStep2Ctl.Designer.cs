@@ -43,14 +43,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(379, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZCATSTEP2_DESC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tvImportPath
             // 
@@ -66,14 +64,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Location = new System.Drawing.Point(3, 232);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(379, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "TXT_ENTRY_DESC";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtEntryDesc
             // 

@@ -51,7 +51,6 @@
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(0, 0);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.opmLabel3.MaximumSize = new System.Drawing.Size(130, 24);
@@ -60,12 +59,10 @@
             this.opmLabel3.Size = new System.Drawing.Size(130, 24);
             this.opmLabel3.TabIndex = 5;
             this.opmLabel3.Text = "TXT_CHANNEL_MODE";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbChannelMode
             // 
             this.cmbChannelMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbChannelMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbChannelMode.FormattingEnabled = true;
             this.cmbChannelMode.Location = new System.Drawing.Point(135, 0);
             this.cmbChannelMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -78,33 +75,28 @@
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 29);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(130, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_BITRATE_MODE";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // chkGenerateTag
             // 
             this.chkGenerateTag.AutoSize = true;
             this.opmTableLayoutPanel4.SetColumnSpan(this.chkGenerateTag, 5);
             this.chkGenerateTag.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkGenerateTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkGenerateTag.Location = new System.Drawing.Point(0, 109);
             this.chkGenerateTag.Margin = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.chkGenerateTag.Name = "chkGenerateTag";
             this.chkGenerateTag.Size = new System.Drawing.Size(711, 19);
             this.chkGenerateTag.TabIndex = 10;
             this.chkGenerateTag.Text = "TXT_GENERATE_TAG";
-            this.chkGenerateTag.UseVisualStyleBackColor = true;
             // 
             // cmbBitrateMode
             // 
             this.cmbBitrateMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbBitrateMode.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbBitrateMode.FormattingEnabled = true;
             this.cmbBitrateMode.Items.AddRange(new object[] {
             "CBR",
@@ -120,45 +112,38 @@
             // 
             this.lblBitrate.AutoSize = true;
             this.lblBitrate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBitrate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblBitrate.Location = new System.Drawing.Point(578, 29);
             this.lblBitrate.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblBitrate.Name = "lblBitrate";
             this.lblBitrate.Size = new System.Drawing.Size(128, 30);
             this.lblBitrate.TabIndex = 8;
             this.lblBitrate.Text = "TXT_BITRATE";
-            this.lblBitrate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblVbrQuality
             // 
             this.lblVbrQuality.AutoSize = true;
             this.lblVbrQuality.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblVbrQuality.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblVbrQuality.Location = new System.Drawing.Point(481, 29);
             this.lblVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblVbrQuality.Name = "lblVbrQuality";
             this.lblVbrQuality.Size = new System.Drawing.Size(92, 30);
             this.lblVbrQuality.TabIndex = 6;
             this.lblVbrQuality.Text = "TXT_VBRQUALITY";
-            this.lblVbrQuality.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblPreset
             // 
             this.lblPreset.AutoSize = true;
             this.lblPreset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblPreset.Location = new System.Drawing.Point(232, 29);
             this.lblPreset.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblPreset.Name = "lblPreset";
             this.lblPreset.Size = new System.Drawing.Size(244, 30);
             this.lblPreset.TabIndex = 10;
             this.lblPreset.Text = "TXT_PRESET";
-            this.lblPreset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbBitrateCBR
             // 
             this.cmbBitrateCBR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbBitrateCBR.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbBitrateCBR.FormattingEnabled = true;
             this.cmbBitrateCBR.Items.AddRange(new object[] {
             "32",
@@ -185,7 +170,6 @@
             // cmbBitrateABR
             // 
             this.cmbBitrateABR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbBitrateABR.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbBitrateABR.FormattingEnabled = true;
             this.cmbBitrateABR.Location = new System.Drawing.Point(232, 64);
             this.cmbBitrateABR.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -197,7 +181,6 @@
             // cmbPreset
             // 
             this.cmbPreset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbPreset.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbPreset.FormattingEnabled = true;
             this.cmbPreset.Location = new System.Drawing.Point(135, 64);
             this.cmbPreset.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -209,7 +192,6 @@
             // cmbVbrQuality
             // 
             this.cmbVbrQuality.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbVbrQuality.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbVbrQuality.FormattingEnabled = true;
             this.cmbVbrQuality.Location = new System.Drawing.Point(135, 64);
             this.cmbVbrQuality.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -222,32 +204,27 @@
             // 
             this.opmTableLayoutPanel4.SetColumnSpan(this.lblOutputBitrateHint, 5);
             this.lblOutputBitrateHint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOutputBitrateHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblOutputBitrateHint.Location = new System.Drawing.Point(0, 128);
             this.lblOutputBitrateHint.Margin = new System.Windows.Forms.Padding(0);
             this.lblOutputBitrateHint.Name = "lblOutputBitrateHint";
             this.lblOutputBitrateHint.Size = new System.Drawing.Size(711, 206);
             this.lblOutputBitrateHint.TabIndex = 12;
             this.lblOutputBitrateHint.Text = "dfsdsfdsfsdfdsf";
-            this.lblOutputBitrateHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblFrequency
             // 
             this.lblFrequency.AutoSize = true;
             this.lblFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblFrequency.Location = new System.Drawing.Point(232, 0);
             this.lblFrequency.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.lblFrequency.Name = "lblFrequency";
             this.lblFrequency.Size = new System.Drawing.Size(244, 24);
             this.lblFrequency.TabIndex = 8;
             this.lblFrequency.Text = "Freq:";
-            this.lblFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbFrequency
             // 
             this.cmbFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbFrequency.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbFrequency.FormattingEnabled = true;
             this.cmbFrequency.Items.AddRange(new object[] {
             "8000",

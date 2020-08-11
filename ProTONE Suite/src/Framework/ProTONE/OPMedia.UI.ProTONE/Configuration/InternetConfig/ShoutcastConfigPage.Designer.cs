@@ -70,14 +70,12 @@
             this.lblHint.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblHint, 2);
             this.lblHint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblHint.Location = new System.Drawing.Point(3, 100);
             this.lblHint.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.lblHint.Name = "lblHint";
             this.lblHint.Size = new System.Drawing.Size(417, 50);
             this.lblHint.TabIndex = 6;
             this.lblHint.Text = "TXT_SHOUTCAST_DEV_ID_HINT";
-            this.lblHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtShoutcastDevId
             // 
@@ -95,7 +93,6 @@
             this.txtShoutcastDevId.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtShoutcastDevId.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastDevId.TabIndex = 5;
-            this.txtShoutcastDevId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastDevId.UseSystemPasswordChar = false;
             // 
             // txtShoutcastTuneinURL
@@ -116,44 +113,37 @@
             this.txtShoutcastTuneinURL.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastTuneinURL.TabIndex = 4;
             this.txtShoutcastTuneinURL.Text = "http://yp.shoutcast.com";
-            this.txtShoutcastTuneinURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastTuneinURL.UseSystemPasswordChar = false;
             // 
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(3, 0);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(175, 30);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_SHOUTCAST_SEARCH_URL";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel2
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(3, 30);
             this.opmLabel2.Name = "opmLabel2";
             this.opmLabel2.Size = new System.Drawing.Size(175, 30);
             this.opmLabel2.TabIndex = 1;
             this.opmLabel2.Text = "TXT_SHOUTCAST_TUNEIN_URL";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // opmLabel3
             // 
             this.opmLabel3.AutoSize = true;
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(3, 60);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(175, 30);
             this.opmLabel3.TabIndex = 2;
             this.opmLabel3.Text = "TXT_SHOUTCAST_DEV_ID";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtShoutcastSearchURL
             // 
@@ -173,7 +163,6 @@
             this.txtShoutcastSearchURL.Size = new System.Drawing.Size(242, 22);
             this.txtShoutcastSearchURL.TabIndex = 3;
             this.txtShoutcastSearchURL.Text = "http://api.shoutcast.com/station";
-            this.txtShoutcastSearchURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtShoutcastSearchURL.UseSystemPasswordChar = false;
             // 
             // opmLinkLabel1

@@ -435,7 +435,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbNewFolder.Size = new System.Drawing.Size(40, 40);
             this.tsbNewFolder.Tag = "ToolActionNewFolder";
             this.tsbNewFolder.Text = "TXT_NEWFOLDER";
-            this.tsbNewFolder.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbNewFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbNewFolder.Click += new System.EventHandler(this.OnToolAction);
             // 
@@ -461,7 +460,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbBack.Size = new System.Drawing.Size(40, 40);
             this.tsbBack.Tag = "ToolActionBack";
             this.tsbBack.Text = "TXT_BACK";
-            this.tsbBack.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbBack.ToolTipText = "Back to ";
             this.tsbBack.Click += new System.EventHandler(this.OnToolAction);
@@ -483,7 +481,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbForward.Size = new System.Drawing.Size(40, 40);
             this.tsbForward.Tag = "ToolActionFwd";
             this.tsbForward.Text = "TXT_FORWARD";
-            this.tsbForward.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbForward.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbForward.ToolTipText = "Forward to";
             this.tsbForward.Click += new System.EventHandler(this.OnToolAction);
@@ -504,7 +501,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbUpLevel.Size = new System.Drawing.Size(40, 40);
             this.tsbUpLevel.Tag = "ToolActionUp";
             this.tsbUpLevel.Text = "TXT_UP";
-            this.tsbUpLevel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbUpLevel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbUpLevel.ToolTipText = "Up to";
             this.tsbUpLevel.Click += new System.EventHandler(this.OnToolAction);
@@ -604,7 +600,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbSearch.Size = new System.Drawing.Size(40, 40);
             this.tsbSearch.Tag = "ToolActionSearch";
             this.tsbSearch.Text = "TXT_SEARCH";
-            this.tsbSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbSearch.ToolTipText = "Search files or folders ...";
             this.tsbSearch.Click += new System.EventHandler(this.OnToolAction);
@@ -626,7 +621,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbReload.Size = new System.Drawing.Size(40, 40);
             this.tsbReload.Tag = "ToolActionReload";
             this.tsbReload.Text = "TXT_REFRESH";
-            this.tsbReload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbReload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbReload.ToolTipText = "Refresh file list";
             this.tsbReload.Click += new System.EventHandler(this.OnToolAction);
@@ -653,7 +647,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbCopy.Size = new System.Drawing.Size(40, 40);
             this.tsbCopy.Tag = "ToolActionCopy";
             this.tsbCopy.Text = "TXT_COPY";
-            this.tsbCopy.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbCopy.ToolTipText = "Copy selection";
             this.tsbCopy.Click += new System.EventHandler(this.OnToolAction);
@@ -675,7 +668,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbCut.Size = new System.Drawing.Size(40, 40);
             this.tsbCut.Tag = "ToolActionCut";
             this.tsbCut.Text = "TXT_CUT";
-            this.tsbCut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbCut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbCut.ToolTipText = "Cut selection";
             this.tsbCut.Click += new System.EventHandler(this.OnToolAction);
@@ -697,7 +689,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbPaste.Size = new System.Drawing.Size(40, 40);
             this.tsbPaste.Tag = "ToolActionPaste";
             this.tsbPaste.Text = "TXT_PASTE";
-            this.tsbPaste.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbPaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbPaste.ToolTipText = "Paste selection";
             this.tsbPaste.Click += new System.EventHandler(this.OnToolAction);
@@ -724,7 +715,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbRename.Size = new System.Drawing.Size(40, 40);
             this.tsbRename.Tag = "ToolActionRename";
             this.tsbRename.Text = "TXT_RENAME";
-            this.tsbRename.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbRename.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbRename.ToolTipText = "Rename Selection";
             this.tsbRename.Click += new System.EventHandler(this.OnToolAction);
@@ -746,7 +736,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsbDelete.Size = new System.Drawing.Size(40, 40);
             this.tsbDelete.Tag = "ToolActionDelete";
             this.tsbDelete.Text = "TXT_DELETE";
-            this.tsbDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbDelete.ToolTipText = "Delete ";
             this.tsbDelete.Click += new System.EventHandler(this.OnToolAction);

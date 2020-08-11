@@ -117,7 +117,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(326, 327);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnCancel.Name = "btnCancel";
@@ -131,7 +130,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.btnOk.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.Location = new System.Drawing.Point(260, 327);
             this.btnOk.Margin = new System.Windows.Forms.Padding(0, 0, 5, 5);
             this.btnOk.Name = "btnOk";
@@ -156,14 +154,12 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.lblDesc.AutoSize = true;
             this.opmLayoutPanel1.SetColumnSpan(this.lblDesc, 4);
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(5, 5);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(5);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(411, 15);
             this.lblDesc.TabIndex = 2;
             this.lblDesc.Text = "TXT_SELECT_PLAYLIST";
-            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLayoutPanel1
             // 
@@ -196,14 +192,12 @@ namespace OPMedia.UI.ProTONE.Dialogs
             // 
             this.lblNewName.AutoSize = true;
             this.lblNewName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNewName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblNewName.Location = new System.Drawing.Point(0, 300);
             this.lblNewName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 5);
             this.lblNewName.Name = "lblNewName";
             this.lblNewName.Size = new System.Drawing.Size(155, 22);
             this.lblNewName.TabIndex = 6;
             this.lblNewName.Text = "TXT_NEW_PLAYLIST_NAME:";
-            this.lblNewName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtNewName
             // 
@@ -221,7 +215,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtNewName.Size = new System.Drawing.Size(258, 22);
             this.txtNewName.TabIndex = 7;
-            this.txtNewName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtNewName.UseSystemPasswordChar = false;
             // 
             // SelectOnlinePlaylistDlg

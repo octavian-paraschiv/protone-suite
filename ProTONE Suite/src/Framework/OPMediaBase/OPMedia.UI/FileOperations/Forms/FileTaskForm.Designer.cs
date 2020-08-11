@@ -84,14 +84,12 @@ namespace OPMedia.UI.FileTasks
             // lblCurrentProgress
             // 
             this.lblCurrentProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCurrentProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCurrentProgress.Location = new System.Drawing.Point(5, 10);
             this.lblCurrentProgress.Margin = new System.Windows.Forms.Padding(5, 10, 0, 5);
             this.lblCurrentProgress.Name = "lblCurrentProgress";
             this.lblCurrentProgress.Size = new System.Drawing.Size(515, 13);
             this.lblCurrentProgress.TabIndex = 0;
             this.lblCurrentProgress.Text = "TXT_CUR_PROGRESS";
-            this.lblCurrentProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
             // 
@@ -99,7 +97,6 @@ namespace OPMedia.UI.FileTasks
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.Enabled = false;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(433, 117);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 10, 5, 5);
             this.btnCancel.Name = "btnCancel";
@@ -129,14 +126,12 @@ namespace OPMedia.UI.FileTasks
             // txtCurFile
             // 
             this.txtCurFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCurFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtCurFile.Location = new System.Drawing.Point(5, 52);
             this.txtCurFile.Margin = new System.Windows.Forms.Padding(5, 10, 0, 5);
             this.txtCurFile.Name = "txtCurFile";
             this.txtCurFile.Size = new System.Drawing.Size(515, 13);
             this.txtCurFile.TabIndex = 2;
             this.txtCurFile.Text = "TXT_WAIT_COPY";
-            this.txtCurFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // timer
             // 

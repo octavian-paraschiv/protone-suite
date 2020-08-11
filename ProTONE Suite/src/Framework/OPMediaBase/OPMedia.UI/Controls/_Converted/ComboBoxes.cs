@@ -14,6 +14,7 @@ using System.Reflection;
 using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
 using System.Drawing.Text;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace OPMedia.UI.Controls
 {
@@ -25,13 +26,11 @@ namespace OPMedia.UI.Controls
         }
     }
 
-    public class OPMComboBox : MetroFramework.Controls.MetroComboBox
+    public class OPMComboBox : KryptonComboBox
     {
         public OPMComboBox()
             : base()
         {
-            this.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.FontWeight = MetroFramework.MetroComboBoxWeight.Regular;
         }
 
         public void AddUniqueItem(object item)

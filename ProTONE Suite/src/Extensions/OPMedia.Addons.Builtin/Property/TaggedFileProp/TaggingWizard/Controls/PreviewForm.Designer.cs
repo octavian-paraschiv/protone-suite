@@ -44,7 +44,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.okButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Location = new System.Drawing.Point(799, 358);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(61, 27);
@@ -56,13 +55,11 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
             this.label1.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.label1, 2);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(857, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_PREVIEW_DESC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lvPreview
             // 

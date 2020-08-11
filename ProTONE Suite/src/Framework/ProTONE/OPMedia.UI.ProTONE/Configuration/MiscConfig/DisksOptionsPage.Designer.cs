@@ -98,7 +98,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cbDisableDVDMenu.AccessibleName = "cbDisableDVDMenu";
             this.cbDisableDVDMenu.AutoSize = true;
             this.cbDisableDVDMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbDisableDVDMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbDisableDVDMenu.Location = new System.Drawing.Point(0, 0);
             this.cbDisableDVDMenu.Margin = new System.Windows.Forms.Padding(0, 0, 0, 12);
             this.cbDisableDVDMenu.Name = "cbDisableDVDMenu";
@@ -149,19 +148,16 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 0);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.opmLabel1.Name = "opmLabel1";
             this.opmLabel1.Size = new System.Drawing.Size(161, 24);
             this.opmLabel1.TabIndex = 0;
             this.opmLabel1.Text = "TXT_AUDIOCDINFO_SOURCE";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbAudioCdInfoSource
             // 
             this.cmbAudioCdInfoSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbAudioCdInfoSource.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbAudioCdInfoSource.FormattingEnabled = true;
             this.cmbAudioCdInfoSource.Location = new System.Drawing.Point(164, 0);
             this.cmbAudioCdInfoSource.Margin = new System.Windows.Forms.Padding(0);
@@ -173,27 +169,23 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.lblCddbServerName.AutoSize = true;
             this.lblCddbServerName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCddbServerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCddbServerName.Location = new System.Drawing.Point(0, 29);
             this.lblCddbServerName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.lblCddbServerName.Name = "lblCddbServerName";
             this.lblCddbServerName.Size = new System.Drawing.Size(161, 22);
             this.lblCddbServerName.TabIndex = 2;
             this.lblCddbServerName.Text = "TXT_CDDB_SERVERNAME";
-            this.lblCddbServerName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblCddbServerPort
             // 
             this.lblCddbServerPort.AutoSize = true;
             this.lblCddbServerPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCddbServerPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCddbServerPort.Location = new System.Drawing.Point(0, 56);
             this.lblCddbServerPort.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.lblCddbServerPort.Name = "lblCddbServerPort";
             this.lblCddbServerPort.Size = new System.Drawing.Size(161, 22);
             this.lblCddbServerPort.TabIndex = 3;
             this.lblCddbServerPort.Text = "TXT_CDDB_SERVERPORT";
-            this.lblCddbServerPort.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCddbServerName
             // 
@@ -211,7 +203,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtCddbServerName.Size = new System.Drawing.Size(369, 22);
             this.txtCddbServerName.TabIndex = 4;
-            this.txtCddbServerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCddbServerName.UseSystemPasswordChar = false;
             // 
             // txtCddbServerPort
@@ -225,7 +216,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerPort.Size = new System.Drawing.Size(127, 22);
             this.txtCddbServerPort.TabIndex = 6;
             this.txtCddbServerPort.Text = "ABGYT";
-            this.txtCddbServerPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // DisksOptionsPage
             // 

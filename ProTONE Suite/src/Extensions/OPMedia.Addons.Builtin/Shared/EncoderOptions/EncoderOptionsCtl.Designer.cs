@@ -70,19 +70,16 @@
             // opmLabel3
             // 
             this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel3.Location = new System.Drawing.Point(0, 0);
             this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.opmLabel3.Name = "opmLabel3";
             this.opmLabel3.Size = new System.Drawing.Size(111, 24);
             this.opmLabel3.TabIndex = 1;
             this.opmLabel3.Text = "TXT_OUTPUT_FORMAT";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbOutputFormat
             // 
             this.cmbOutputFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbOutputFormat.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbOutputFormat.FormattingEnabled = true;
             this.cmbOutputFormat.Location = new System.Drawing.Point(116, 0);
             this.cmbOutputFormat.Margin = new System.Windows.Forms.Padding(0);

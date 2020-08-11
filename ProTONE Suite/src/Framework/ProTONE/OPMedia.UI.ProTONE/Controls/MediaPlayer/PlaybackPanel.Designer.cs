@@ -277,7 +277,6 @@
             this.lblTime.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblTime, 5);
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.Location = new System.Drawing.Point(413, 0);
             this.lblTime.MaximumSize = new System.Drawing.Size(3500, 25);
             this.lblTime.MinimumSize = new System.Drawing.Size(150, 25);
@@ -285,7 +284,6 @@
             this.lblTime.Size = new System.Drawing.Size(150, 25);
             this.lblTime.TabIndex = 14;
             this.lblTime.Text = "00:00:00 / 00:00:00";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSettings
             // 

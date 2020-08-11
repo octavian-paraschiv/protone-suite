@@ -54,7 +54,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tabMisc.Controls.Add(this.tpScheduler);
             this.tabMisc.Controls.Add(this.tpFavoriteFolders);
             this.tabMisc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMisc.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabMisc.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tabMisc.InnerPadding = new System.Windows.Forms.Padding(5, 10, 5, 5);
             this.tabMisc.Location = new System.Drawing.Point(0, 0);

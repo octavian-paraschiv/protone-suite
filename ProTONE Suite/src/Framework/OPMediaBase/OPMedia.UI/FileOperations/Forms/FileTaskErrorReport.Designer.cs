@@ -44,7 +44,6 @@ namespace OPMedia.UI.FileTasks
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(1036, 1025);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 24);
@@ -56,7 +55,6 @@ namespace OPMedia.UI.FileTasks
             this.tvReports.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.opmTableLayoutPanel1.SetColumnSpan(this.tvReports, 2);
             this.tvReports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvReports.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvReports.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tvReports.Location = new System.Drawing.Point(5, 43);
             this.tvReports.Margin = new System.Windows.Forms.Padding(5);
@@ -68,13 +66,11 @@ namespace OPMedia.UI.FileTasks
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(44, 0);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(649, 38);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "TXT_ERRORSFOUND";
-            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbWarn
             // 

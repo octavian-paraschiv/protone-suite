@@ -44,7 +44,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // 
             this.chkReopenLastCatalog.AutoSize = true;
             this.chkReopenLastCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkReopenLastCatalog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkReopenLastCatalog.Location = new System.Drawing.Point(0, 38);
             this.chkReopenLastCatalog.Margin = new System.Windows.Forms.Padding(0);
             this.chkReopenLastCatalog.Name = "chkReopenLastCatalog";
@@ -58,7 +57,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.chkRememberRecentFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chkRememberRecentFiles.AutoSize = true;
-            this.chkRememberRecentFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkRememberRecentFiles.Location = new System.Drawing.Point(0, 3);
             this.chkRememberRecentFiles.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.chkRememberRecentFiles.Name = "chkRememberRecentFiles";
@@ -83,7 +81,6 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             this.nudRecentFilesCount.Name = "nudRecentFilesCount";
             this.nudRecentFilesCount.Size = new System.Drawing.Size(40, 22);
             this.nudRecentFilesCount.TabIndex = 4;
-            this.nudRecentFilesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudRecentFilesCount.Value = new decimal(new int[] {
             2,
             0,
@@ -94,14 +91,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             // kryptonLabel2
             // 
             this.kryptonLabel2.AutoSize = true;
-            this.kryptonLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel2.Location = new System.Drawing.Point(157, 6);
             this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.kryptonLabel2.Name = "kryptonLabel2";
             this.kryptonLabel2.Size = new System.Drawing.Size(111, 13);
             this.kryptonLabel2.TabIndex = 5;
             this.kryptonLabel2.Text = "TXT_OPENCATALOGS";
-            this.kryptonLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // flowLayoutPanel1
             // 

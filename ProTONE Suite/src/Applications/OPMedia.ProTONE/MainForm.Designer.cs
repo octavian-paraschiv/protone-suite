@@ -118,7 +118,6 @@ namespace OPMedia.ProTONE
             this.mnuMediaState.Name = "mnuMediaState";
             this.mnuMediaState.Size = new System.Drawing.Size(88, 13);
             this.mnuMediaState.Text = "mnuMediaState";
-            this.mnuMediaState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuMediaState.Visible = false;
             // 
             // toolStripSeparator5

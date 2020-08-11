@@ -38,13 +38,11 @@ namespace OPMedia.UI.Controls
         [EventSink(EventNames.ThemeUpdated)]
         public virtual void OnThemeUpdated()
         {
-            this.ForeColor = ThemeManager.ForeColor;
         }
     }
 
     public class InfoTextBox : TransparentRichTextBox
     {
-        public FontSizes _fs = FontSizes.Normal;
         private string _desc = null;
         private Dictionary<string, string> _info = null;
 

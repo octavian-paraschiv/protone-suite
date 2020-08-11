@@ -62,7 +62,6 @@
             // 
             this.chkS.AutoSize = true;
             this.chkS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkS.Location = new System.Drawing.Point(0, 48);
             this.chkS.Margin = new System.Windows.Forms.Padding(0);
             this.chkS.Name = "chkS";
@@ -74,7 +73,6 @@
             // 
             this.chkH.AutoSize = true;
             this.chkH.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkH.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkH.Location = new System.Drawing.Point(0, 32);
             this.chkH.Margin = new System.Windows.Forms.Padding(0);
             this.chkH.Name = "chkH";
@@ -86,7 +84,6 @@
             // 
             this.chkA.AutoSize = true;
             this.chkA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkA.Location = new System.Drawing.Point(0, 16);
             this.chkA.Margin = new System.Windows.Forms.Padding(0);
             this.chkA.Name = "chkA";
@@ -98,7 +95,6 @@
             // 
             this.chkR.AutoSize = true;
             this.chkR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkR.Location = new System.Drawing.Point(0, 0);
             this.chkR.Margin = new System.Windows.Forms.Padding(0);
             this.chkR.Name = "chkR";

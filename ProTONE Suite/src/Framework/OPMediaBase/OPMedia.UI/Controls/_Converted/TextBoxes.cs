@@ -1,4 +1,5 @@
-﻿using OPMedia.Core.Utilities;
+﻿using ComponentFactory.Krypton.Toolkit;
+using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,11 @@ using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
-    public class OPMTextBox : MetroFramework.Controls.MetroTextBox
+    public class OPMTextBox : KryptonTextBox
     {
         public OPMTextBox()
            : base()
         {
-            this.FontSize = MetroFramework.MetroTextBoxSize.Small;
-            this.FontWeight = MetroFramework.MetroTextBoxWeight.Regular;
         }
     }
 

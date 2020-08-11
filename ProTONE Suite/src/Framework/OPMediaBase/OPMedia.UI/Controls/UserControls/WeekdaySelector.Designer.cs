@@ -46,7 +46,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkMon.AutoSize = true;
             this.chkMon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkMon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkMon.Location = new System.Drawing.Point(0, 3);
             this.chkMon.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkMon.Name = "chkMon";
@@ -60,7 +59,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkWed.AutoSize = true;
             this.chkWed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkWed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkWed.Location = new System.Drawing.Point(226, 3);
             this.chkWed.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkWed.Name = "chkWed";
@@ -74,7 +72,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkFri.AutoSize = true;
             this.chkFri.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkFri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkFri.Location = new System.Drawing.Point(0, 26);
             this.chkFri.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkFri.Name = "chkFri";
@@ -88,7 +85,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkSun.AutoSize = true;
             this.chkSun.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkSun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSun.Location = new System.Drawing.Point(226, 26);
             this.chkSun.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkSun.Name = "chkSun";
@@ -102,7 +98,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkTue.AutoSize = true;
             this.chkTue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkTue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTue.Location = new System.Drawing.Point(113, 3);
             this.chkTue.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkTue.Name = "chkTue";
@@ -116,7 +111,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkThu.AutoSize = true;
             this.chkThu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkThu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkThu.Location = new System.Drawing.Point(339, 3);
             this.chkThu.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkThu.Name = "chkThu";
@@ -130,7 +124,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkSat.AutoSize = true;
             this.chkSat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkSat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSat.Location = new System.Drawing.Point(113, 26);
             this.chkSat.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkSat.Name = "chkSat";
@@ -144,7 +137,6 @@ namespace OPMedia.UI.Controls
             // 
             this.chkAll.AutoSize = true;
             this.chkAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAll.Location = new System.Drawing.Point(339, 26);
             this.chkAll.Margin = new System.Windows.Forms.Padding(0, 3, 4, 3);
             this.chkAll.Name = "chkAll";

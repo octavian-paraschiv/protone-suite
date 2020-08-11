@@ -46,20 +46,17 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.label1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(390, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_WIZTAGGINGSTEP1_DESC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnAddFiles
             // 
             this.btnAddFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddFiles.AutoSize = true;
             this.btnAddFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFiles.Location = new System.Drawing.Point(3, 212);
             this.btnAddFiles.Name = "btnAddFiles";
             this.btnAddFiles.Size = new System.Drawing.Size(94, 25);
@@ -72,7 +69,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddFolder.AutoSize = true;
             this.btnAddFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFolder.Location = new System.Drawing.Point(103, 212);
             this.btnAddFolder.Name = "btnAddFolder";
             this.btnAddFolder.Size = new System.Drawing.Size(109, 25);
@@ -85,7 +81,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.btnRemoveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveItems.AutoSize = true;
             this.btnRemoveItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnRemoveItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveItems.Location = new System.Drawing.Point(277, 212);
             this.btnRemoveItems.Name = "btnRemoveItems";
             this.btnRemoveItems.Size = new System.Drawing.Size(116, 25);

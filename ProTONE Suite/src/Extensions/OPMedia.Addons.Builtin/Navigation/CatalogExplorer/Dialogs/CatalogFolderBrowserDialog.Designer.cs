@@ -66,14 +66,12 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs
             // 
             this.btnOK.AutoSize = true;
             this.btnOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Location = new System.Drawing.Point(231, 370);
             this.btnOK.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(70, 27);
             this.btnOK.TabIndex = 8;
             this.btnOK.Text = "TXT_OK";
-            this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
@@ -81,21 +79,18 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(307, 370);
             this.btnCancel.MinimumSize = new System.Drawing.Size(70, 20);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "TXT_CANCEL";
-            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // tvExplorer
             // 
             this.tvExplorer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.opmTableLayoutPanel1.SetColumnSpan(this.tvExplorer, 4);
             this.tvExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvExplorer.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvExplorer.ImageIndex = 0;
             this.tvExplorer.Location = new System.Drawing.Point(0, 25);
             this.tvExplorer.Margin = new System.Windows.Forms.Padding(0);
@@ -109,13 +104,11 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs
             this.lblDescription.AutoSize = true;
             this.opmTableLayoutPanel1.SetColumnSpan(this.lblDescription, 4);
             this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDescription.Location = new System.Drawing.Point(3, 5);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(394, 15);
             this.lblDescription.TabIndex = 10;
             this.lblDescription.Text = "opmLabel1";
-            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CatalogFolderBrowserDialog
             // 

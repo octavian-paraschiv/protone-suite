@@ -1,59 +1,71 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
-    public class OPMCheckBox : MetroFramework.Controls.MetroCheckBox
+    public class OPMSplitContainer : KryptonSplitContainer
     {
-        public OPMCheckBox()
-            : base()
-        {
-            this.FontSize = MetroFramework.MetroCheckBoxSize.Small;
-            this.FontWeight = MetroFramework.MetroCheckBoxWeight.Regular;
-        }
     }
 
-    public class OPMLabel : MetroFramework.Controls.MetroLabel
+    public class OPMCustomPanel : KryptonPanel
     {
-        public OPMLabel()
-            : base()
-        {
-            this.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-        }
     }
 
-    public class OPMLinkLabel : MetroFramework.Controls.MetroLink
+    public class OPMGroupBox : KryptonGroupBox
     {
-        public OPMLinkLabel()
-            : base()
-        {
-            this.FontSize = MetroFramework.MetroLinkSize.Small;
-            this.FontWeight = MetroFramework.MetroLinkWeight.Regular;
-        }
     }
 
-    public class OPMHeaderLabel : MetroFramework.Controls.MetroLabel
+    public class OPMDateTimePicker : KryptonDateTimePicker
     {
+    }
+
+    public class OPMCheckBox : KryptonCheckBox
+    {
+    }
+
+    public class OPMLabel : KryptonLabel
+    {
+    }
+
+    public class OPMLinkLabel : KryptonLinkLabel
+    {
+    }
+
+    public class OPMHeaderLabel : KryptonHeader
+    {
+        public Image Image
+        {
+            get { return null; }
+            set { }
+        }
+
         public OPMHeaderLabel()
             : base()
         {
-            this.FontSize = MetroFramework.MetroLabelSize.Medium;
-            this.FontWeight = MetroFramework.MetroLabelWeight.Bold;
         }
     }
 
-    public class OPMButton : MetroFramework.Controls.MetroDropDownButton
+    public class OPMButton : KryptonButton
     {
-        public OPMButton()
+    }
+
+    public class OPMDropButton : KryptonDropButton
+    {
+        public ContextMenuStrip SplitMenuStrip
+        {
+            get { return null; }
+            set { }
+        }
+
+        public OPMDropButton()
             : base()
         {
-            this.FontSize = MetroFramework.MetroButtonSize.Small;
-            this.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-
         }
     }
 }

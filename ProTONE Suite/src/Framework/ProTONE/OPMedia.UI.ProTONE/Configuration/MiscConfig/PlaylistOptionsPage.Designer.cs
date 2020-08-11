@@ -92,7 +92,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.chkUseMetadata.AutoSize = true;
             this.chkUseMetadata.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkUseMetadata.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkUseMetadata.Location = new System.Drawing.Point(0, 20);
             this.chkUseMetadata.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkUseMetadata.Name = "chkUseMetadata";
@@ -104,7 +103,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.chkFileNameFormat.AutoSize = true;
             this.chkFileNameFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkFileNameFormat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkFileNameFormat.Location = new System.Drawing.Point(0, 44);
             this.chkFileNameFormat.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkFileNameFormat.Name = "chkFileNameFormat";
@@ -116,14 +114,12 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.lblPlaylistFormat.AutoSize = true;
             this.lblPlaylistFormat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPlaylistFormat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblPlaylistFormat.Location = new System.Drawing.Point(0, 96);
             this.lblPlaylistFormat.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblPlaylistFormat.Name = "lblPlaylistFormat";
             this.lblPlaylistFormat.Size = new System.Drawing.Size(229, 15);
             this.lblPlaylistFormat.TabIndex = 3;
             this.lblPlaylistFormat.Text = "TXT_PLAYLIST_FORMAT";
-            this.lblPlaylistFormat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbFileNameFormat
             // 
@@ -176,7 +172,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.Size = new System.Drawing.Size(238, 267);
             this.txtHints.TabIndex = 6;
             this.txtHints.Text = "TXT_METADATAPATTERNS";
-            this.txtHints.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHints.UseSystemPasswordChar = false;
             // 
             // lblDisplayFileName
@@ -184,47 +179,40 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.lblDisplayFileName.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblDisplayFileName, 3);
             this.lblDisplayFileName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDisplayFileName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDisplayFileName.Location = new System.Drawing.Point(0, 0);
             this.lblDisplayFileName.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblDisplayFileName.Name = "lblDisplayFileName";
             this.lblDisplayFileName.Size = new System.Drawing.Size(472, 15);
             this.lblDisplayFileName.TabIndex = 5;
             this.lblDisplayFileName.Text = "TXT_DISPLAY_FILENAME";
-            this.lblDisplayFileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDisplayFileName.Visible = false;
             // 
             // chkXFade
             // 
             this.chkXFade.AutoSize = true;
             this.chkXFade.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkXFade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkXFade.Location = new System.Drawing.Point(0, 168);
             this.chkXFade.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkXFade.Name = "chkXFade";
             this.chkXFade.Size = new System.Drawing.Size(229, 19);
             this.chkXFade.TabIndex = 8;
             this.chkXFade.Text = "TXT_MNUXFADE";
-            this.chkXFade.UseVisualStyleBackColor = true;
             // 
             // chkLoopPlay
             // 
             this.chkLoopPlay.AutoSize = true;
             this.chkLoopPlay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkLoopPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkLoopPlay.Location = new System.Drawing.Point(0, 144);
             this.chkLoopPlay.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.chkLoopPlay.Name = "chkLoopPlay";
             this.chkLoopPlay.Size = new System.Drawing.Size(229, 19);
             this.chkLoopPlay.TabIndex = 7;
             this.chkLoopPlay.Text = "TXT_MNULOOPPLAY";
-            this.chkLoopPlay.UseVisualStyleBackColor = true;
             // 
             // opmLabel1
             // 
             this.opmLabel1.AutoSize = true;
             this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel1.Location = new System.Drawing.Point(0, 192);
             this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel1.Name = "opmLabel1";
@@ -236,7 +224,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             // 
             this.opmLabel2.AutoSize = true;
             this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel2.Location = new System.Drawing.Point(0, 242);
             this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.opmLabel2.Name = "opmLabel2";
@@ -265,7 +252,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudXFadeLength.Size = new System.Drawing.Size(229, 25);
             this.nudXFadeLength.TabIndex = 11;
             this.nudXFadeLength.Text = "3 (sec)";
-            this.nudXFadeLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.nudXFadeLength.Value = new decimal(new int[] {
             10,
             0,
@@ -293,7 +279,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudAnticipatedEnd.Size = new System.Drawing.Size(229, 25);
             this.nudAnticipatedEnd.TabIndex = 12;
             this.nudAnticipatedEnd.Text = "3 (sec)";
-            this.nudAnticipatedEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.nudAnticipatedEnd.Value = new decimal(new int[] {
             10,
             0,

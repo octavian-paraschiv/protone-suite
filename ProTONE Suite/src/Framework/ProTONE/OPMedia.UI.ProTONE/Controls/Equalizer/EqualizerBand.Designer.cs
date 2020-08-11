@@ -60,7 +60,6 @@
             this.txtFrequency.Size = new System.Drawing.Size(33, 22);
             this.txtFrequency.TabIndex = 1;
             this.txtFrequency.Text = "99999";
-            this.txtFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cgLevel
             // 

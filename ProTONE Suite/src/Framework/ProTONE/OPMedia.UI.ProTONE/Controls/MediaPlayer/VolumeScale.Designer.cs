@@ -62,7 +62,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblMax.AutoSize = true;
             this.lblMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMax.Location = new System.Drawing.Point(150, 6);
             this.lblMax.Margin = new System.Windows.Forms.Padding(0);
             this.lblMax.MaximumSize = new System.Drawing.Size(0, 20);
@@ -70,7 +69,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblMax.Size = new System.Drawing.Size(120, 13);
             this.lblMax.TabIndex = 3;
             this.lblMax.Text = "100%";
-            this.lblMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // volumeProgress
             // 
@@ -94,7 +92,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.lblMin.AutoSize = true;
             this.lblMin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMin.Location = new System.Drawing.Point(0, 6);
             this.lblMin.Margin = new System.Windows.Forms.Padding(0);
             this.lblMin.MaximumSize = new System.Drawing.Size(0, 20);
@@ -102,13 +99,11 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblMin.Size = new System.Drawing.Size(119, 13);
             this.lblMin.TabIndex = 1;
             this.lblMin.Text = "0%";
-            this.lblMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCurrent
             // 
             this.lblCurrent.AutoSize = true;
             this.lblCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblCurrent.Location = new System.Drawing.Point(119, 6);
             this.lblCurrent.Margin = new System.Windows.Forms.Padding(0);
             this.lblCurrent.MaximumSize = new System.Drawing.Size(0, 20);
@@ -116,7 +111,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblCurrent.Size = new System.Drawing.Size(31, 13);
             this.lblCurrent.TabIndex = 2;
             this.lblCurrent.Text = "25%";
-            this.lblCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // VolumeScale
             // 

@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Krypton Toolkit, Version=5.450.2098.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -177,10 +181,6 @@
     <Compile Include="WorkerSupport\WorkerProcess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\ModernUI\MetroFramework\MetroFramework.csproj">
-      <Project>{bb41ac8b-cbed-4387-a7e0-4567edb3f57f}</Project>
-      <Name>MetroFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
       <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
       <Name>OPMedia.ShellSupport</Name>

@@ -49,14 +49,12 @@ namespace OPMedia.UI.Configuration
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(333, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "TXT_S_KEYMAP_DESC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lvShortcuts
             // 
@@ -103,7 +101,6 @@ namespace OPMedia.UI.Configuration
             this.kryptonButton1.AutoSize = true;
             this.kryptonButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonButton1.Location = new System.Drawing.Point(3, 3);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(137, 25);
@@ -115,13 +112,11 @@ namespace OPMedia.UI.Configuration
             // 
             this.kryptonLabel1.AutoSize = true;
             this.kryptonLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.kryptonLabel1.Location = new System.Drawing.Point(146, 0);
             this.kryptonLabel1.Name = "kryptonLabel1";
             this.kryptonLabel1.Size = new System.Drawing.Size(184, 31);
             this.kryptonLabel1.TabIndex = 0;
             this.kryptonLabel1.Text = "TXT_RESTORESHORTCUTSDESC";
-            this.kryptonLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tableLayoutPanel1
             // 

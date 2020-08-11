@@ -45,14 +45,12 @@ namespace OPMedia.Runtime.Addons.Configuration
             this.lblAddonDesc.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.lblAddonDesc, 4);
             this.lblAddonDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAddonDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblAddonDesc.Location = new System.Drawing.Point(3, 0);
             this.lblAddonDesc.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
             this.lblAddonDesc.Name = "lblAddonDesc";
             this.lblAddonDesc.Size = new System.Drawing.Size(340, 39);
             this.lblAddonDesc.TabIndex = 0;
             this.lblAddonDesc.Text = "Available addons.\r\nAvailable addons.\r\nAvailable addons.\r";
-            this.lblAddonDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbl_InstallAddons
             // 

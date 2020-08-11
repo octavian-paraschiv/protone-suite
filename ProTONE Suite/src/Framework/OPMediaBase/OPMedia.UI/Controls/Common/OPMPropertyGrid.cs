@@ -50,6 +50,7 @@ namespace OPMedia.UI.Controls
         [EventSink(EventNames.ThemeUpdated)]
         public void OnThemeUpdated()
         {
+            // TODO: update based on Krypton current theme colors
             base.ViewForeColor = ThemeManager.WndTextColor;
             base.ViewBackColor = ThemeManager.WndValidColor;
             base.CategoryForeColor = ThemeManager.ForeColor;

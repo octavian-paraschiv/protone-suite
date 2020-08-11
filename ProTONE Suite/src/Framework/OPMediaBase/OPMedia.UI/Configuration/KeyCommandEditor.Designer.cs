@@ -41,7 +41,6 @@ namespace OPMedia.UI.Configuration
             this.btnCancel.AutoSize = true;
             this.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Location = new System.Drawing.Point(187, 45);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancel.Name = "btnCancel";
@@ -77,14 +76,12 @@ namespace OPMedia.UI.Configuration
             this.lblDesc.AutoSize = true;
             this.pnlContentAll.SetColumnSpan(this.lblDesc, 3);
             this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblDesc.Location = new System.Drawing.Point(10, 5);
             this.lblDesc.Margin = new System.Windows.Forms.Padding(5, 0, 0, 10);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(449, 30);
             this.lblDesc.TabIndex = 0;
             this.lblDesc.Text = "qqqq\r\neeee";
-            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // KeyCommandEditor
             // 

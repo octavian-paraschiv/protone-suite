@@ -216,7 +216,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.cbShellIntegration.AutoSize = true;
             this.cbShellIntegration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbShellIntegration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbShellIntegration.Location = new System.Drawing.Point(0, 0);
             this.cbShellIntegration.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cbShellIntegration.Name = "cbShellIntegration";
@@ -228,18 +227,15 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Location = new System.Drawing.Point(0, 24);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(573, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "TXT_HANDLEEXPLORERLAUNCH";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbExplorerLaunchType
             // 
-            this.cmbExplorerLaunchType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbExplorerLaunchType.FormattingEnabled = true;
             this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 44);
             this.cmbExplorerLaunchType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -250,7 +246,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnSelAllAudio
             // 
             this.btnSelAllAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelAllAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelAllAudio.Location = new System.Drawing.Point(2, 2);
             this.btnSelAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllAudio.Name = "btnSelAllAudio";
@@ -262,7 +257,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnUnselAllAudio
             // 
             this.btnUnselAllAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnselAllAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnselAllAudio.Location = new System.Drawing.Point(2, 26);
             this.btnUnselAllAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllAudio.Name = "btnUnselAllAudio";
@@ -274,7 +268,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnUnselAllVideo
             // 
             this.btnUnselAllVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnselAllVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnselAllVideo.Location = new System.Drawing.Point(141, 26);
             this.btnUnselAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllVideo.Name = "btnUnselAllVideo";
@@ -286,7 +279,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnSelAllVideo
             // 
             this.btnSelAllVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelAllVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelAllVideo.Location = new System.Drawing.Point(141, 2);
             this.btnSelAllVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllVideo.Name = "btnSelAllVideo";
@@ -298,7 +290,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnUnselAllPlaylists
             // 
             this.btnUnselAllPlaylists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnselAllPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnselAllPlaylists.Location = new System.Drawing.Point(279, 26);
             this.btnUnselAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnUnselAllPlaylists.Name = "btnUnselAllPlaylists";
@@ -310,7 +301,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // btnSelAllPlaylists
             // 
             this.btnSelAllPlaylists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelAllPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelAllPlaylists.Location = new System.Drawing.Point(279, 2);
             this.btnSelAllPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.btnSelAllPlaylists.Name = "btnSelAllPlaylists";
@@ -338,7 +328,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.hdrAudio.AutoSize = true;
             this.hdrAudio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hdrAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hdrAudio.Location = new System.Drawing.Point(0, 0);
             this.hdrAudio.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.hdrAudio.MaximumSize = new System.Drawing.Size(4000, 20);
@@ -347,13 +336,11 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.hdrAudio.Size = new System.Drawing.Size(573, 20);
             this.hdrAudio.TabIndex = 2;
             this.hdrAudio.Text = "TXT_AUDIO_FILES";
-            this.hdrAudio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // hdrPlaylists
             // 
             this.hdrPlaylists.AutoSize = true;
             this.hdrPlaylists.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hdrPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hdrPlaylists.Location = new System.Drawing.Point(0, 60);
             this.hdrPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.hdrPlaylists.MaximumSize = new System.Drawing.Size(4000, 20);
@@ -362,13 +349,11 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.hdrPlaylists.Size = new System.Drawing.Size(573, 20);
             this.hdrPlaylists.TabIndex = 2;
             this.hdrPlaylists.Text = "TXT_PLAYLISTS";
-            this.hdrPlaylists.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // hdrVideo
             // 
             this.hdrVideo.AutoSize = true;
             this.hdrVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hdrVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hdrVideo.Location = new System.Drawing.Point(0, 30);
             this.hdrVideo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.hdrVideo.MaximumSize = new System.Drawing.Size(4000, 20);
@@ -377,7 +362,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.hdrVideo.Size = new System.Drawing.Size(573, 20);
             this.hdrVideo.TabIndex = 1;
             this.hdrVideo.Text = "TXT_VIDEO_FILES";
-            this.hdrVideo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel1
             // 
@@ -441,14 +425,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.lblFileTypes.AutoSize = true;
             this.lblFileTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFileTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblFileTypes.Location = new System.Drawing.Point(0, 73);
             this.lblFileTypes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblFileTypes.Name = "lblFileTypes";
             this.lblFileTypes.Size = new System.Drawing.Size(573, 15);
             this.lblFileTypes.TabIndex = 4;
             this.lblFileTypes.Text = "TXT_S_FILETYPES_ASSOCIATIONS";
-            this.lblFileTypes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // opmLayoutPanel1
             // 

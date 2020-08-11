@@ -55,13 +55,11 @@
             // 
             this.lblValueName.AutoSize = true;
             this.lblValueName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblValueName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblValueName.Location = new System.Drawing.Point(3, 0);
             this.lblValueName.Name = "opmLabel1";
             this.lblValueName.Size = new System.Drawing.Size(39, 28);
             this.lblValueName.TabIndex = 0;
             this.lblValueName.Text = "Value:";
-            this.lblValueName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtValue
             // 
