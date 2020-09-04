@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E4C16001-BC44-411C-987E-6301EC29BA16}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>OPMedia.ShoutcastWorker</RootNamespace>
     <AssemblyName>OPMedia.ShoutcastWorker</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>

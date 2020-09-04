@@ -61,6 +61,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public const char InnerArrayDelim = ';';
 
         Process _wp = null;
+        WorkerClientStream _wcs = null;
 
         public event WorkerTerminatedHandler WorkerTerminated = null;
         public event StateEventHandler StateChanged = null;
@@ -89,6 +90,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             //_wp.Exited += _wp_Exited;
 
             this.Pid = _wp.Id;
+            _wcs = new WorkerClientStream(this.Pid);
         }
 
         //private void _wp_Exited(object sender, EventArgs e)
@@ -100,6 +102,8 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             if (_wp != null && _wp.HasExited == false)
                 _wp.Kill();
+
+            _wcs.Dispose();
         }
 
         public int GetLength()
@@ -191,9 +195,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             try
             {
                 var cmd = new WorkerCommand(wct);
-                if (WorkerCommandHelper.WriteCommand(_wp?.StandardInput, cmd))
+                if (_wcs?.WriteCommand(cmd) == true)
                 {
-                    var replyCmd = WorkerCommandHelper.ReadCommand(_wp?.StandardOutput);
+                    var replyCmd = _wcs?.ReadCommand();
                     if (replyCmd != null && replyCmd.Type == (WorkerCommandType)(wct + 1))
                         return DecodeReply<T>(wct.ToString(), replyCmd);
                 }
@@ -216,12 +220,12 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                 if (args != null && args.Length > 0)
                 {
                     foreach (object arg in args)
-                        cmd.AddParameter(arg.ToString()); ;
+                        cmd.AddParameter(arg.ToString());
                 }
 
-                if (WorkerCommandHelper.WriteCommand(_wp?.StandardInput, cmd))
+                if (_wcs?.WriteCommand(cmd) == true)
                 {
-                    replyCmd = WorkerCommandHelper.ReadCommand(_wp?.StandardOutput);
+                    replyCmd = _wcs?.ReadCommand();
                     if (replyCmd != null && replyCmd.Type == (WorkerCommandType)(wct + 1))
                     {
                         CheckReply(wct.ToString(), replyCmd);

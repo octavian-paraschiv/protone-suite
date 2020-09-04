@@ -14,7 +14,6 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/OPMedia.Runtime.ProTONE/</PublishUrl>
@@ -150,6 +149,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="WorkerSupport\CommandProcessor.cs" />
+    <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
     <Compile Include="WorkerSupport\WorkerError.cs" />
     <Compile Include="WorkerSupport\WorkerRenderer.cs" />
     <Compile Include="Rendering\RenderingEngine.cs" />
@@ -172,10 +172,10 @@
     <Compile Include="SystemScheduler\SystemScheduler.cs" />
     <Compile Include="WorkerSupport\IWorkerPlayer.cs" />
     <Compile Include="WorkerSupport\WorkerCommand.cs" />
-    <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
     <Compile Include="WorkerSupport\WorkerCommandType.cs" />
     <Compile Include="WorkerSupport\Worker.cs" />
     <Compile Include="WorkerSupport\WorkerProcess.cs" />
+    <Compile Include="WorkerSupport\WorkerStreams.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">

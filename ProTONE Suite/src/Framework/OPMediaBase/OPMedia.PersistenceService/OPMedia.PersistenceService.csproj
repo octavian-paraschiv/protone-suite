@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B34154DC-D0F2-4D9C-9BCD-97EF4BA3E958}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OPMedia.PersistenceService</RootNamespace>
     <AssemblyName>OPMedia.PersistenceService</AssemblyName>

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{687F92F3-7B8D-421A-BE43-4F2B40AEC69A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>OPMedia.VideoDVDWorker</RootNamespace>
     <AssemblyName>OPMedia.VideoDVDWorker</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>

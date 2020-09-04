@@ -77,8 +77,8 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             {
                 Logger.LogInfo("Worker process starting");
 
-                using (StreamReader stdin = new StreamReader(Console.OpenStandardInput()))
-                using (StreamWriter stdout = new StreamWriter(Console.OpenStandardOutput()))
+                using (StreamReader stdin = WorkerServerStream.Input())
+                using (StreamWriter stdout = WorkerServerStream.Output())
                 {
                     while (true)
                     {

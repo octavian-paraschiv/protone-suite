@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{79B56F25-0D75-4EC1-A1DA-627DB46BFF3C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OPMedia.GalaxyService</RootNamespace>
     <AssemblyName>OPMedia.GalaxyService</AssemblyName>
