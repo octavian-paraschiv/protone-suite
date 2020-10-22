@@ -52,7 +52,9 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 }
 
                 // Try fall back to DefaultOnlineMediaData.xml
-                if (internalDatabase == null)
+                if (internalDatabase == null || 
+                    internalDatabase.OnlineMediaItems == null ||
+                    internalDatabase.OnlineMediaItems.Count < 1)
                 {
                     using (FileStream fs = new FileStream(@".\DefaultOnlineMediaData.xml", FileMode.Open, FileAccess.Read))
                     using (XmlReader xr = XmlReader.Create(fs))
