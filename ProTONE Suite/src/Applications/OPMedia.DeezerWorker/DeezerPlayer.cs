@@ -132,7 +132,9 @@ namespace OPMedia.DeezerWorker
                 HandleDzErrorCode("dz_connect_offline_mode", WorkerError.CannotConnectToMedia, err);
 
                 err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero, 
-                    dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY);
+                    //dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY);
+                    dz_track_quality_t.DZ_TRACK_QUALITY_HIGHQUALITY);
+
                 HandleDzErrorCode("dz_player_set_track_quality", WorkerError.CannotConnectToMedia, err);
 
                 if (_evtAppUserLoginOK.WaitOne(Worker.OperationTimeout) == false)

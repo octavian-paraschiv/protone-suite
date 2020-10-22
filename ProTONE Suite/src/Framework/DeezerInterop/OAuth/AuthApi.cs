@@ -9,7 +9,6 @@ namespace OPMedia.DeezerInterop.OAuth
 {
     public class AuthApi : IDisposable
     {
-        const string SecretKey = "60c9fa12dfbc9c6645095feaede69d6c";
         const string RedirectUrl = "http://ocpa.ro/protone/oauth.aspx";
 
         static readonly string OAuthUrl = 
@@ -18,7 +17,7 @@ namespace OPMedia.DeezerInterop.OAuth
 
         static readonly string TokenUrlBase = 
             $"https://connect.deezer.com/oauth/access_token.php?app_id={DeezerAppConstants.AppId}" + 
-            $"&secret={SecretKey}&code=";
+            $"&secret={DeezerAppConstants.SecretKey}&code=";
 
         RedirectHandler _rh = new RedirectHandler();
 
