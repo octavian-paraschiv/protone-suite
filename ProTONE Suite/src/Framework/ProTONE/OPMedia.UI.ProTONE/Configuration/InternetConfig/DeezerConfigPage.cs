@@ -16,11 +16,21 @@ using OPMedia.UI.Themes;
 using OPMedia.DeezerInterop.OAuth;
 using OPMedia.Core.TranslationSupport;
 using System.Threading.Tasks;
+using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 {
     public partial class DeezerConfigPage : BaseCfgPanel
     {
+        static readonly Dictionary<dz_track_quality_t, string> QualityTextHint = new Dictionary<dz_track_quality_t, string>()
+        {
+            { dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY, "CD Quality" },
+            { dz_track_quality_t.DZ_TRACK_QUALITY_DATA_EFFICIENT, "Data Efficient" },
+            { dz_track_quality_t.DZ_TRACK_QUALITY_HIGHQUALITY, "High Quality" },
+            { dz_track_quality_t.DZ_TRACK_QUALITY_STANDARD, "Standard" }
+        };
+
         public override Image Image
         {
             get
@@ -39,6 +49,19 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
             txtDeezerToken.TextChanged += new EventHandler(OnSettingsChanged);
             chkUseServices.CheckedChanged += new EventHandler(OnSettingsChanged);
             btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
+
+            cmbTrackQuality.DataSource = (from dz_track_quality_t q in Enum.GetValues(typeof(dz_track_quality_t))
+                                          where QualityTextHint.ContainsKey(q)
+                                          select new
+                                          {
+                                              Value = q,
+                                              Text = QualityTextHint[q]
+                                          }).ToList();
+
+            cmbTrackQuality.ValueMember = "Value";
+            cmbTrackQuality.DisplayMember = "Text";
+
+            cmbTrackQuality.SelectedValue = ProTONEConfig.DeezerTrackQuality;
         }
 
         void OnSettingsChanged(object sender, EventArgs e)
@@ -57,6 +80,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             ProTONEConfig.DeezerUserAccessToken = txtDeezerToken.Text;
             ProTONEConfig.DeezerUseServicesForFileMetadata = chkUseServices.Checked;
+            ProTONEConfig.DeezerTrackQuality = (dz_track_quality_t)cmbTrackQuality.SelectedValue;
         }
 
         private void btnNew_Click(object sender, EventArgs e)

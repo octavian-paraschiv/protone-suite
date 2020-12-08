@@ -131,11 +131,12 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
                 HandleDzErrorCode("dz_connect_offline_mode", WorkerError.CannotConnectToMedia, err);
 
-                err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero, 
-                    //dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY);
-                    dz_track_quality_t.DZ_TRACK_QUALITY_HIGHQUALITY);
+                err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero,
+                    ProTONEConfig.DeezerTrackQuality);
 
                 HandleDzErrorCode("dz_player_set_track_quality", WorkerError.CannotConnectToMedia, err);
+
+                Logger.LogTrace($"DeezerPlayer::SetupAppContext => Rendering at {ProTONEConfig.DeezerTrackQuality}");
 
                 if (_evtAppUserLoginOK.WaitOne(Worker.OperationTimeout) == false)
                     HandleDzErrorCode("DeezerPlayer::SetupConfig", WorkerError.CannotConnectToMedia, dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);

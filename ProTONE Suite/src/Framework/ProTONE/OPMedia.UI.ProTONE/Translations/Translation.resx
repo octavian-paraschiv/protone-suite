@@ -836,8 +836,8 @@ Click on the button below to launch the Remote Control Manager ...</value>
 window position</value>
   </data>
   <data name="TXT_RESETVIDEOPOSITION_HINT">
-    <value>Use this command to bring the video rendering window into the current 
-active screen.</value>
+    <value>Click this button to bring all floating windows back into the current 
+active screen. Useful in multi-monitor systems.</value>
   </data>
   <data name="TXT_RESTORE_DEFAULTSERVERS">
     <value>Load default servers</value>
@@ -1287,5 +1287,8 @@ What would you like to do?</value>
   </data>
   <data name="TXT_SELECT_PLAYLIST_OR_NEW" xml:space="preserve">
     <value>Choose an online playlist to add the items, or create a new one:</value>
+  </data>
+  <data name="TXT_DEEZER_TRACK_QUALITY" xml:space="preserve">
+    <value>Listening quality:</value>
   </data>
 </root>

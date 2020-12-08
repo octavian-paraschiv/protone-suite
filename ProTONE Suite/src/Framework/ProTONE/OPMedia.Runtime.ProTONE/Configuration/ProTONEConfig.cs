@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using System.Reflection;
 using OPMedia.Core.Win32;
+using OPMedia.DeezerInterop.PlayerApi;
 
 namespace OPMedia.Runtime.ProTONE.Configuration
 {
@@ -896,6 +897,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         #endregion
 
         #region Deezer settings
+
+        public static dz_track_quality_t DeezerTrackQuality
+        {
+            get { return PersistenceProxy.ReadObject("DeezerTrackQuality", dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY); }
+            set { PersistenceProxy.SaveObject("DeezerTrackQuality", value); }
+        }
 
         public static string DeezerUserAccessToken
         {

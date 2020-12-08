@@ -19,7 +19,7 @@ namespace OPMedia.UI.ProTONE.Translations {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Translation {
@@ -1018,6 +1018,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         internal static string TXT_DEEZER_TOKEN_ALT {
             get {
                 return ResourceManager.GetString("TXT_DEEZER_TOKEN_ALT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Listening quality:.
+        /// </summary>
+        internal static string TXT_DEEZER_TRACK_QUALITY {
+            get {
+                return ResourceManager.GetString("TXT_DEEZER_TRACK_QUALITY", resourceCulture);
             }
         }
         
@@ -2540,8 +2549,8 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use this command to bring the video rendering window into the current 
-        ///active screen..
+        ///   Looks up a localized string similar to Click this button to bring all floating windows back into the current 
+        ///active screen. Useful in multi-monitor systems..
         /// </summary>
         internal static string TXT_RESETVIDEOPOSITION_HINT {
             get {

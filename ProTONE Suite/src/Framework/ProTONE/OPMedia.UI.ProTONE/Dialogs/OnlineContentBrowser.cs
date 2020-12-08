@@ -71,6 +71,15 @@ namespace OPMedia.UI.ProTONE.Dialogs
             _tt = new OPMToolTip();
         }
 
+        [EventSink(GlobalEvents.EventNames.RestoreOnlineBrowserPosition)]
+        public void OnRestoreOnlineBrowserPosition()
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.Location = ProTONEConfig.OnlineContentBrowser_WindowLocation;
+            this.Size = ProTONEConfig.OnlineContentBrowser_WindowSize;
+            BringToFront();
+        }
+
         protected override bool AllowCloseOnKeyDown(Keys keyDown)
         {
             return (keyDown == Keys.Escape);

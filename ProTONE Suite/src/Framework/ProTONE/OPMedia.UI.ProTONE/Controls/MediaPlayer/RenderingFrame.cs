@@ -190,6 +190,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.Location = ProTONEConfig.DetachedWindowLocation;
             this.Size = ProTONEConfig.DetachedWindowSize;
             SetFullScreen(false, false);
+            BringToFront();
         }
 
         //public override void OnExecuteShortcut(OPMShortcutEventArgs args)

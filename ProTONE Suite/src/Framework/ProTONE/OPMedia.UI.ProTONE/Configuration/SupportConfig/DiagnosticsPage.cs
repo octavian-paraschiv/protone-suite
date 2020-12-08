@@ -162,9 +162,13 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
         private void opmButton1_Click(object sender, EventArgs e)
         {
-            ProTONEConfig.DetachedWindowLocation = new Point(100, 100);
+            ProTONEConfig.DetachedWindowLocation = FindForm().Location;
             ProTONEConfig.DetachedWindowSize = new Size(800, 600);
             EventDispatch.DispatchEvent(OPMedia.UI.ProTONE.GlobalEvents.EventNames.RestoreRenderingRegionPosition);
+
+            ProTONEConfig.OnlineContentBrowser_WindowLocation = FindForm().Location;
+            ProTONEConfig.OnlineContentBrowser_WindowSize = new Size(800, 600);
+            EventDispatch.DispatchEvent(OPMedia.UI.ProTONE.GlobalEvents.EventNames.RestoreOnlineBrowserPosition);
         }
     }
 }

@@ -34,6 +34,8 @@
             this.btnNew = new OPMedia.UI.Controls.OPMButton();
             this.opmLabel6 = new OPMedia.UI.Controls.OPMLabel();
             this.chkUseServices = new OPMedia.UI.Controls.OPMCheckBox();
+            this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
+            this.cmbTrackQuality = new OPMedia.UI.Controls.OPMComboBox();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,11 +45,13 @@
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.opmTableLayoutPanel1.Controls.Add(this.opmLabel1, 0, 5);
             this.opmTableLayoutPanel1.Controls.Add(this.txtDeezerToken, 1, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel2, 0, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.btnNew, 2, 2);
             this.opmTableLayoutPanel1.Controls.Add(this.opmLabel6, 0, 4);
             this.opmTableLayoutPanel1.Controls.Add(this.chkUseServices, 1, 4);
+            this.opmTableLayoutPanel1.Controls.Add(this.cmbTrackQuality, 1, 5);
             this.opmTableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmTableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
@@ -57,7 +61,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -150,6 +154,33 @@
             this.chkUseServices.TabIndex = 19;
             this.chkUseServices.UseVisualStyleBackColor = true;
             // 
+            // opmLabel1
+            // 
+            this.opmLabel1.AutoSize = true;
+            this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.opmLabel1.Location = new System.Drawing.Point(0, 57);
+            this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 10, 3, 0);
+            this.opmLabel1.Name = "opmLabel1";
+            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
+            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
+            this.opmLabel1.Size = new System.Drawing.Size(244, 27);
+            this.opmLabel1.TabIndex = 20;
+            this.opmLabel1.Text = "TXT_DEEZER_TRACK_QUALITY";
+            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cmbTrackQuality
+            // 
+            this.cmbTrackQuality.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbTrackQuality.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTrackQuality.FormattingEnabled = true;
+            this.cmbTrackQuality.Location = new System.Drawing.Point(247, 57);
+            this.cmbTrackQuality.Margin = new System.Windows.Forms.Padding(0, 10, 0, 3);
+            this.cmbTrackQuality.Name = "cmbTrackQuality";
+            this.cmbTrackQuality.OverrideForeColor = System.Drawing.Color.Empty;
+            this.cmbTrackQuality.Size = new System.Drawing.Size(166, 24);
+            this.cmbTrackQuality.TabIndex = 21;
+            // 
             // DeezerConfigPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -170,5 +201,7 @@
         private UI.Controls.OPMButton btnNew;
         private UI.Controls.OPMLabel opmLabel6;
         private UI.Controls.OPMCheckBox chkUseServices;
+        private UI.Controls.OPMLabel opmLabel1;
+        private UI.Controls.OPMComboBox cmbTrackQuality;
     }
 }
