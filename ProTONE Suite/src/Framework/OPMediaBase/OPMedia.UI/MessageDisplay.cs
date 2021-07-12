@@ -50,7 +50,7 @@ namespace OPMedia.UI
             dlg._isAboutBox = true;
             dlg.ShowDialog();
         }
-
+        
         public static DialogResult QueryWithCancelAndAbort(string message, string title, bool showForAll = false, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
             MessageDisplay dlg = new MessageDisplay(message, title, icon);
@@ -95,7 +95,7 @@ namespace OPMedia.UI
 
         public static void Show(string message, string title, MessageBoxIcon icon)
         {
-            new MessageDisplay(message, title, icon).ShowDialog();
+            new MessageDisplay(message, title, icon).Show();
         }
 
         public MessageDisplay(string message, string title, MessageBoxIcon icon)
@@ -115,10 +115,19 @@ namespace OPMedia.UI
             pbImage.Image = null;
             pbImage.Visible = false;
 
-            this.KeyDown += new KeyEventHandler(OnKeyDown);
-            btn1.KeyDown += new KeyEventHandler(OnKeyDown);
-            btn2.KeyDown += new KeyEventHandler(OnKeyDown);
-            btn3.KeyDown += new KeyEventHandler(OnKeyDown);
+            this.KeyDown += OnKeyDown;
+            
+            btn1.KeyDown += OnKeyDown;
+            btn2.KeyDown += OnKeyDown;
+            btn3.KeyDown += OnKeyDown;
+            btn4.KeyDown += OnKeyDown;
+            btn5.KeyDown += OnKeyDown;
+
+            btn1.Click += OnButtonClick;
+            btn2.Click += OnButtonClick;
+            btn3.Click += OnButtonClick;
+            btn4.Click += OnButtonClick;
+            btn5.Click += OnButtonClick;
 
             this.ControlBox = true;
             this.MaximizeBox = false;
@@ -276,6 +285,16 @@ namespace OPMedia.UI
             {
                 btn1.Text = "&" + Translator.Translate("TXT_OK");
                 btn1.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void OnButtonClick(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+            if (btn != null)
+            {
+                this.DialogResult = btn.DialogResult;
+                Close();
             }
         }
 

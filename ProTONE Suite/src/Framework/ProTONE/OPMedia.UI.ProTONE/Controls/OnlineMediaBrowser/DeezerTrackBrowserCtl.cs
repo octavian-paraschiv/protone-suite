@@ -56,10 +56,22 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             searchIcon.MakeTransparent(Color.Magenta);
 
             tsmi = new OPMToolStripMenuItem();
-            tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ARTIST");
             tsmi.Tag = "LookupDeezerArtist";
             tsmi.Image = searchIcon;
+
+            OPMToolStripMenuItem childTsmi = new OPMToolStripMenuItem();
+            childTsmi.Click += new EventHandler(OnMenuClick);
+            childTsmi.Text = "...Same ID";
+            childTsmi.Tag = "LookupDeezerArtistId";
+            tsmi.DropDownItems.Add(childTsmi);
+
+            childTsmi = new OPMToolStripMenuItem();
+            childTsmi.Click += new EventHandler(OnMenuClick);
+            childTsmi.Text = "...Same Name";
+            childTsmi.Tag = "LookupDeezerArtist";
+            tsmi.DropDownItems.Add(childTsmi);
+
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
@@ -109,7 +121,8 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             switch (act)
             {
                 case "LookupDeezerArtist":
-                    search = string.Format("artist:\"{0}\"", selItem.Artist.ToLowerInvariant());
+                    //search = string.Format("artist:\"13\"", selItem.Artist.ToLowerInvariant());
+                    search = "artist: { id: \"13\"}";
                     break;
 
                 case "LookupDeezerAlbum":
