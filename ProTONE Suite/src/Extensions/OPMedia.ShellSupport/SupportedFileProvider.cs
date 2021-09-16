@@ -124,14 +124,6 @@ namespace OPMedia.ShellSupport
         {
             try
             {
-                //// TODO fix DVD case ...
-                //if (PathUtils.IsRootPath(path))
-                //{
-                //    DvdMedia dvdMedia = DvdMedia.FromPath(path);
-                //    if (dvdMedia != null)
-                //        return true; // DVD's are supported media
-                //}
-
                 if (Directory.Exists(path))
                     return FolderContainsMediaFiles(path);
             }

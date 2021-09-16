@@ -565,8 +565,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             if (_oldRenderer == null || _oldRenderer.Valid == false || _renderer == null)
                 return;
 
-            int startVol = _oldRenderer.AudioVolume;
-            int quant = startVol / 10;
+            double steps = 100;
+            double startVol = _oldRenderer.AudioVolume;
+            double quant = startVol / steps;
+
             _renderer.AudioVolume = 0;
 
             Task.Factory.StartNew(() =>
@@ -582,15 +584,27 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     while (true)
                     {
                         i++;
-                        int delta = i * quant;
-                        _oldRenderer.AudioVolume = startVol - delta;
-                        _renderer.AudioVolume = delta;
+
+                        // Linear fade
+                        //int delta = i * quant;
+                        //_oldRenderer.AudioVolume = startVol - delta;
+                        //_renderer.AudioVolume = delta;
+
+                        // No fade
+                        //int delta = i * quant;
+                        //_oldRenderer.AudioVolume = startVol;
+                        //_renderer.AudioVolume = startVol;
+
+                        // Log fade
+                        double delta = i * quant;
+                        _oldRenderer.AudioVolume = (int)(startVol - delta);
+                        _renderer.AudioVolume = (int)delta;
 
                         Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{_renderer}]");
 
                         // _crossFadeLength is in sec
-                        // To sleep for _crossFadeLength/10 sec, need to multiply with 100
-                        Thread.Sleep(100 * ProTONEConfig.XFadeLength);
+                        // To sleep for _crossFadeLength/100 sec, need to multiply with 10
+                        Thread.Sleep(10 * ProTONEConfig.XFadeLength);
 
                         DateTime dtNow = DateTime.Now;
                         if (dtNow.Subtract(dtStart).TotalSeconds >= ProTONEConfig.XFadeLength)
@@ -600,7 +614,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     Logger.LogTrace($"[XFADE] Exited loop: old=[{_oldRenderer}] new=[{_renderer}]");
 
                     _oldRenderer.AudioVolume = 0;
-                    _renderer.AudioVolume = startVol;
+                    _renderer.AudioVolume = (int)startVol;
 
                     Logger.LogTrace($"[XFADE] Final: old=[{_oldRenderer}] new=[{_renderer}]");
 
