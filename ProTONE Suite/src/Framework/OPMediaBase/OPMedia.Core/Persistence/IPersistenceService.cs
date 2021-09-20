@@ -84,7 +84,7 @@ namespace OPMedia.Core
             {
                 using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\OPMedia Research"))
                 {
-                    persistenceServer = key.GetValue("PersistenceServer", "localhost") as string;
+                    persistenceServer = key?.GetValue("PersistenceServer", "localhost") as string;
                     if (string.IsNullOrEmpty(persistenceServer) == false)
                     {
                         _userName = key.GetValue("userName", "") as string;
