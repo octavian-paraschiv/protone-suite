@@ -32,6 +32,7 @@ using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Dialogs;
 using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.ProTONE
 {
@@ -66,6 +67,9 @@ namespace OPMedia.ProTONE
 
                         ShortcutMapper.IsPlayer = true;
 
+                        // Eager detection of multimedia audio devices
+                        RenderingEngine.DefaultInstance.CheckMMDevice();
+
                         mainFrm = new MainForm();
 
                         foreach (BasicCommand cmd in _commandQueue)
@@ -75,7 +79,6 @@ namespace OPMedia.ProTONE
 
                         Application.Run(mainFrm);
                         mainFrm.Dispose();
-
 
                         ShortcutMapper.Save();
                     }

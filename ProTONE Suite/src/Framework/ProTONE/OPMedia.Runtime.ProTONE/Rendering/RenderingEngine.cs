@@ -62,9 +62,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public const int VolumeFull = 0;
         public const int VolumeSilence = -10000;
 
-        private MMDeviceEnumerator _mmEnumerator = null;
-        private MMDevice _mmDevice = null;
-
         private int _hash = DateTime.Now.GetHashCode();
         private double _position = 0;
 
@@ -508,6 +505,19 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
+        public void CheckMMDevice()
+        {
+            try
+            {
+                var mmEnumerator = new MMDeviceEnumerator();
+                var mmDevice = mmEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            }
+            catch
+            {
+                throw new Exception("The audio subsystem failed to initialize properly (no audio devices detected).");
+            }
+        }
+
         public void StartRendererWithHint(RenderingStartHint startHint)
         {
             try
@@ -873,17 +883,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             RegistrationSupport.Init();
 
-            _mmEnumerator = new MMDeviceEnumerator();
-            _mmDevice = _mmEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
             timerCheckState = new System.Windows.Forms.Timer();
             timerCheckState.Enabled = true;
             timerCheckState.Interval = 500;
             timerCheckState.Start();
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
-
+                
             //Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
         }
+
         //void Application_ApplicationExit(object sender, EventArgs e)
         //{
         //    if (ProTONEConfig.IsPlayer && ProTONEConfig.DeezerHasValidConfig)

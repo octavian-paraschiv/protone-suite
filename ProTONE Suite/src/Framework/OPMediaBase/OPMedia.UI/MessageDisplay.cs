@@ -95,7 +95,7 @@ namespace OPMedia.UI
 
         public static void Show(string message, string title, MessageBoxIcon icon)
         {
-            new MessageDisplay(message, title, icon).Show();
+            new MessageDisplay(message, title, icon).Show(MainThread.MainWindow);
         }
 
         public MessageDisplay(string message, string title, MessageBoxIcon icon)

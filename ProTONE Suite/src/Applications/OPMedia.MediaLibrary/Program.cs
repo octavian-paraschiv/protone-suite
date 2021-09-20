@@ -17,6 +17,7 @@ using System.Diagnostics;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.MediaLibrary
 {
@@ -78,6 +79,10 @@ namespace OPMedia.MediaLibrary
                 else
                 {
                     Translator.SetInterfaceLanguage(AppConfig.LanguageID);
+
+                    // Eager detection of multimedia audio devices
+                    RenderingEngine.DefaultInstance.CheckMMDevice();
+
                     Application.Run(new MediaLibraryForm());
                 }
             }

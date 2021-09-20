@@ -76,6 +76,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
         public WorkerRenderer(WorkerType workerType)
         {
+            RenderingEngine.DefaultInstance.CheckMMDevice();
             _wt = workerType;
         }
 
