@@ -13,12 +13,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
     public delegate void WorkerTerminatedHandler(int pid);
-    public delegate void StateEventHandler(string state);
-    public delegate void RenderEventHandler(int pos);
+    public delegate void WorkerEventHandler(WorkerEvent evt);
 
     public enum WorkerType
     {
@@ -64,8 +64,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         WorkerClientStream _wcs = null;
 
         public event WorkerTerminatedHandler WorkerTerminated = null;
-        public event StateEventHandler StateChanged = null;
-        public event RenderEventHandler RenderEvent = null;
+        public event WorkerEventHandler WorkerEvent = null;
 
         public int Pid { get; private set; }
 
@@ -86,17 +85,12 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             psi.Arguments = args;
 
             _wp = Process.Start(psi);
-            
-            //_wp.Exited += _wp_Exited;
 
             this.Pid = _wp.Id;
+            
             _wcs = new WorkerClientStream(this.Pid);
-        }
 
-        //private void _wp_Exited(object sender, EventArgs e)
-        //{
-        //    WorkerTerminated?.Invoke(Pid);
-        //}
+        }
 
         public void Dispose()
         {
@@ -130,7 +124,17 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             SetCommand(WorkerCommandType.PlayReq, url, userId, delayStart, renderHwnd, notifyHwnd);
 
-            ThreadPool.QueueUserWorkItem((c) => MonitorWorkerProcess());
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                while (true)
+                {
+                    var evt = ReadEvent();
+                    if (evt != null)
+                        WorkerEvent?.Invoke(evt);
+                }
+            });
+
+            ThreadPool.QueueUserWorkItem(_ => MonitorWorkerProcess());
         }
 
         void MonitorWorkerProcess()
@@ -140,8 +144,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                 while (true)
                 {
                     var proc = Process.GetProcessById(Pid);
-                    if (proc != null && 
-                        proc.MainModule != null)
+                    if (proc != null && proc.MainModule != null)
                     {
                         if (string.Compare(proc.MainModule.ModuleName, _fileName, true) == 0)
                         {
@@ -259,20 +262,20 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             CheckReply(operation, cmd);
 
             // Since it is OK, decode reply as expected type
-            return cmd.Args<T>(0);
+            return cmd.Arg<T>(0);
         }
 
         private void CheckReply(string operation, WorkerCommand cmd)
         {
             // Decode reply code as string
-            string replyCode = cmd.Args<string>(0);
+            string replyCode = cmd.Arg<string>(0);
             if (replyCode.StartsWith("err_"))
             {
                 // The reply command wraps an error code
                 WorkerError errorType = WorkerError.Generic;
                 Enum.TryParse<WorkerError>(replyCode.Replace("err_", ""), out errorType);
 
-                string errorCode = cmd.Args<string>(1);
+                string errorCode = cmd.Arg<string>(1);
 
                 WorkerException.Throw(errorType, errorCode);
             }
@@ -281,6 +284,20 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public void SetCommandProcessor(CommandProcessor proc)
         {
             // Not needed here ...
+        }
+
+        public WorkerEvent ReadEvent()
+        {
+            try
+            {
+                var cmd = _wcs?.ReadEvent();
+                return new WorkerEvent(cmd);
+            }
+            catch
+            {
+            }
+
+            return null;
         }
     }
 }

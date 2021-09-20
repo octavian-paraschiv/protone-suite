@@ -75,6 +75,28 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             OnThemeUpdatedInternal();
             UpdateItem();
+
+            RenderingEngine.DefaultInstance.RenderedStreamPropertyChanged += DefaultInstance_RenderedStreamPropertyChanged;
+        }
+
+        private void DefaultInstance_RenderedStreamPropertyChanged(Dictionary<string, string> newData)
+        {
+            var data = this.Item?.MediaInfo;
+
+            if (data != null)
+            {
+                foreach (var kvp in newData)
+                {
+                    var key = $"{kvp.Key}:";
+
+                    if (data.ContainsKey(key))
+                        data[key] = kvp.Value;
+                    else
+                        data.Add(key, kvp.Value);
+                }
+
+                propDisplay.SetInfo(null, data);
+            }
         }
 
         private string _oldUrl = null;

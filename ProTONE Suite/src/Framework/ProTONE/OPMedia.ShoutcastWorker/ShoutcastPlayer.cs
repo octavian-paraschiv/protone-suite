@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
@@ -75,8 +78,10 @@ namespace OPMedia.ShoutcastWorker
         {
             mediaControl = BuildMediaControl();
 
+            var filter = new ShoutcastStreamSourceFilter();
+            
             // Create Filter
-            _source = new DSBaseSourceFilter(new ShoutcastStreamSourceFilter());
+            _source = new DSBaseSourceFilter(filter);
 
             // load the file
             _source.FileName = url;
@@ -96,6 +101,34 @@ namespace OPMedia.ShoutcastWorker
 
             hr = basicAudio.put_Volume((int)VolumeRange.Minimum);
             WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
+
+            var ss = filter.GetStream();
+            filter.GetStream().StreamPropertyChanged += ShoutcastPlayer_StreamPropertyChanged;
+
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("TXT_FREQUENCY", ss.SampleRate.ToString());
+            data.Add("TXT_BITRATE", ss.Bitrate.ToString());
+            data.Add("TXT_TITLE", ss.StreamTitle);
+            data.Add("Content-Type", ss.ContentType);
+            ShoutcastPlayer_StreamPropertyChanged(data);
+        }
+
+        private void ShoutcastPlayer_StreamPropertyChanged(Dictionary<string, string> props)
+        {
+            if (props?.Count > 0)
+            {
+                WorkerEvent evt = new WorkerEvent(WorkerEventType.StreamPropertyChanged);
+                foreach (var kvp in props)
+                {
+                    if (kvp.Key?.Length > 0 && kvp.Value?.Length > 0)
+                    {
+                        evt.AddParameter(kvp.Key);
+                        evt.AddParameter(kvp.Value);
+                        Logger.LogTrace($"{kvp.Key}={kvp.Value}");
+                    }
+                }
+                Worker.Instance.WriteEvent(evt);
+            }
         }
 
         private IMediaControl BuildMediaControl()

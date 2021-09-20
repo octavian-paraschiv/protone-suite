@@ -38,11 +38,11 @@ namespace OPMedia.Runtime.ProTONE
                     case WorkerCommandType.PlayReq:
                         {
                             int i = 0;
-                            string path = cmd.Args<string>(i++);
-                            string userId = cmd.Args<string>(i++);
-                            int delayStart = cmd.Args<int>(i++);
-                            long renderHwnd = cmd.Args<long>(i++);
-                            long notifyHwnd = cmd.Args<long>(i++);
+                            string path = cmd.Arg<string>(i++);
+                            string userId = cmd.Arg<string>(i++);
+                            int delayStart = cmd.Arg<int>(i++);
+                            long renderHwnd = cmd.Arg<long>(i++);
+                            long notifyHwnd = cmd.Arg<long>(i++);
                             _player.Play(path, userId, delayStart, renderHwnd, notifyHwnd);
                         }
                         break;
@@ -52,7 +52,7 @@ namespace OPMedia.Runtime.ProTONE
                         break;
 
                     case WorkerCommandType.ResumeReq:
-                        _player.Resume(cmd.Args<int>(0));
+                        _player.Resume(cmd.Arg<int>(0));
                         break;
 
                     case WorkerCommandType.StopReq:
@@ -62,7 +62,7 @@ namespace OPMedia.Runtime.ProTONE
                         break;
 
                     case WorkerCommandType.SetVolReq:
-                        _player.SetVolume(cmd.Args<int>(0));
+                        _player.SetVolume(cmd.Arg<int>(0));
                         break;
 
                     case WorkerCommandType.GetPosReq:
@@ -70,7 +70,7 @@ namespace OPMedia.Runtime.ProTONE
                         break;
 
                     case WorkerCommandType.SetPosReq:
-                        _player.SetMediaPosition(cmd.Args<int>(0));
+                        _player.SetMediaPosition(cmd.Arg<int>(0));
                         break;
 
                     case WorkerCommandType.GetStateReq:

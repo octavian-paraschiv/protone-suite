@@ -85,8 +85,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             if (_wp != null)
             {
                 _wp.WorkerTerminated -= _wp_OnWorkerTerminated;
-                _wp.RenderEvent -= _wp_RenderEvent;
-                _wp.StateChanged -= _wp_StateChanged;
+                _wp.WorkerEvent -= _wp_WorkerEvent;
 
                 _wp?.Dispose();
                 _wp = null;
@@ -98,17 +97,38 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             {
                 _wp = new WorkerProcess(_wt, args);
                 _wp.WorkerTerminated += _wp_OnWorkerTerminated;
-                _wp.RenderEvent += _wp_RenderEvent;
-                _wp.StateChanged += _wp_StateChanged;
+                _wp.WorkerEvent += _wp_WorkerEvent;
             }
         }
 
-        private void _wp_StateChanged(string state)
-        {
-        }
 
-        private void _wp_RenderEvent(int pos)
+        private void _wp_WorkerEvent(WorkerEvent evt)
         {
+            if (evt?.IsValid == true)
+            {
+                switch (evt.Type)
+                {
+                    case WorkerEventType.StreamPropertyChanged:
+                        {
+                            Dictionary<string, string> props = new Dictionary<string, string>();
+
+                            for (int i = 0; i < evt.Args.Count; i += 2)
+                            {
+                                try
+                                {
+                                    var key = evt.Args[i];
+                                    var val = evt.Args[i + 1];
+                                    props.Add(key, val);
+                                }
+                                catch { }
+                            }
+
+                            if (props.Count > 0)
+                                RenderingEngine.DefaultInstance.FireStreamPropertyChanged(props);
+                        }
+                        break;
+                }
+            }
         }
 
         bool _workerKilledOrCrashed = false;
@@ -120,8 +140,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
                 _workerKilledOrCrashed = true;
 
                 _wp.WorkerTerminated -= _wp_OnWorkerTerminated;
-                _wp.RenderEvent -= _wp_RenderEvent;
-                _wp.StateChanged -= _wp_StateChanged;
+                _wp.WorkerEvent -= _wp_WorkerEvent;
 
                 _wp?.Dispose();
                 _wp = null;

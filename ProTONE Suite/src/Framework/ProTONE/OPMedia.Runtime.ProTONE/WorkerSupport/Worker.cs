@@ -20,12 +20,19 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         private System.Timers.Timer _tmrCheckWorkerLoop = null;
         private ManualResetEvent _evtCmdReceived = new ManualResetEvent(false);
 
+        private StreamWriter _events = null;
+
+        private static Worker _worker = null;
+
+        public static Worker Instance => _worker;
+
         public static void Run(IWorkerPlayer player)
         {
             CommandProcessor cmdProcessor = new CommandProcessor(player);
             string appName = player.GetType().Namespace;
-            Worker worker = new Worker(appName);
-            worker.Run(cmdProcessor);
+
+            _worker = new Worker(appName);
+            _worker.Run(cmdProcessor);
         }
 
         private Worker(string appName)
@@ -77,6 +84,10 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             {
                 Logger.LogInfo("Worker process starting");
 
+                // This piece of code suns inside of the worker process.
+                // The worker process "writes" to the events stream.
+                _events = WorkerServerStream.Events();
+
                 using (StreamReader stdin = WorkerServerStream.Input())
                 using (StreamWriter stdout = WorkerServerStream.Output())
                 {
@@ -125,9 +136,16 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             }
             finally
             {
+                _events?.Close();
+
                 Logger.LogInfo("Worker process exiting");
                 LoggedApplication.Stop();
             }
+        }
+
+        public bool WriteEvent(WorkerCommand cmd)
+        {
+            return WorkerCommandHelper.WriteEvent(_events, cmd);
         }
     }
 }

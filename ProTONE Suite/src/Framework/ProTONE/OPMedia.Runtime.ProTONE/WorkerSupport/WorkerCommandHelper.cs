@@ -27,6 +27,23 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             }
         }
 
+        public static bool WriteEvent(StreamWriter sw, WorkerCommand cmd)
+        {
+            try
+            {
+                string s = cmd.ToString();
+                sw.WriteLine(s);
+                sw.Flush();
+
+                return true;
+            }
+            catch
+            {
+            }
+
+            return false;
+        }
+
         public static bool WriteCommand(StreamWriter sw, WorkerCommand cmd)
         {
             try

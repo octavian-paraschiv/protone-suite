@@ -5,6 +5,13 @@ using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
+    public enum WorkerEventType
+    {
+        Invalid,
+
+        StreamPropertyChanged,
+    }
+
     public enum WorkerCommandType
     {
         Invalid,
@@ -39,11 +46,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         GetStateReq,
         GetStateRsp,
 
-        StateEvt,
-        StateAck,
-
-        RenderEvt,
-        RenderAck,
+        WorkerEvt,
     }
 
     public static class WorkerCommandTypeMapper

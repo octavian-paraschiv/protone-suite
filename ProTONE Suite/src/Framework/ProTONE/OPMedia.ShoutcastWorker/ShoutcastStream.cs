@@ -15,9 +15,12 @@ using static TagLib.File;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Rendering;
 using TagLib.Mpeg;
+using System.Diagnostics;
 
 namespace OPMedia.ShoutcastWorker
 {
+    public delegate void StreamPropertyChangedDG(Dictionary<string ,string> props);
+
     /// <summary>
     /// Provides the functionality to receive a shoutcast media stream
     /// </summary>
@@ -31,7 +34,7 @@ namespace OPMedia.ShoutcastWorker
         private Stream netStream;
         private bool connected = false;
 
-        private string streamTitle;
+        private string _streamTitle;
 
         public bool Connected { get { return connected; } }
 
@@ -43,6 +46,8 @@ namespace OPMedia.ShoutcastWorker
         public string ContentType { get; private set; }
 
         List<byte> _reservoir = new List<byte>();
+
+        public event StreamPropertyChangedDG StreamPropertyChanged = null;
 
         /// <summary>
         /// Creates a new ShoutcastStream and connects to the specified Url
@@ -157,14 +162,6 @@ namespace OPMedia.ShoutcastWorker
                             }
                         }
                     }
-
-                    Dictionary<string, string> data = new Dictionary<string, string>();
-                    data.Add("TXT_FREQUENCY", sampleRate.ToString());
-                    data.Add("TXT_BITRATE", bitrate.ToString());
-                    data.Add("Content-Type", contentType);
-
-                    // TODO: fix
-                    //MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
                 }
 
                 connected = true;
@@ -217,18 +214,35 @@ namespace OPMedia.ShoutcastWorker
         private void ParseMetaInfo(byte[] metaInfo)
         {
             string metaString = Encoding.ASCII.GetString(metaInfo);
-
-            string newStreamTitle = Regex.Match(metaString, "(StreamTitle=')(.*)(';StreamUrl)").Groups[2].Value.Trim();
-            if (!newStreamTitle.Equals(streamTitle))
+            if (metaString?.Length > 0)
             {
-                streamTitle = newStreamTitle;
-                //OnStreamTitleChanged();
+                Logger.LogTrace("MetaInfo: " + metaString);
 
-                Dictionary<string, string> data = new Dictionary<string,string>();
-                data.Add("TXT_TITLE", streamTitle);
+                var grps = metaString.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                if (grps?.Length > 0)
+                {
+                    foreach (var grp in grps)
+                    {
+                        var data = grp.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        if (data?.Length == 2)
+                        {
+                            var key = (data[0] ?? "").ToUpperInvariant();
+                            if (key == "STREAMTITLE")
+                            {
+                                string newStreamTitle = data[1].Trim('\'').Trim();
+                                if (!newStreamTitle.Equals(_streamTitle))
+                                {
+                                    _streamTitle = newStreamTitle;
 
-                // TODO: fix
-                //MediaRenderer.DefaultInstance.FireStreamPropertyChanged(data);
+                                    Dictionary<string, string> props = new Dictionary<string, string>();
+                                    props.Add("TXT_TITLE", _streamTitle);
+                                    StreamPropertyChanged?.Invoke(props);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -263,7 +277,7 @@ namespace OPMedia.ShoutcastWorker
         /// </summary>
         public string StreamTitle
         {
-            get { return streamTitle; }
+            get { return _streamTitle; }
         }
 
         /// <summary>

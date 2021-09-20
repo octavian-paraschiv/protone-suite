@@ -234,6 +234,21 @@ namespace OPMedia.ShoutcastWorker
 
     public class ShoutcastStreamSourceFilter : BaseSourceFilterTemplate<ShoutcastStreamParser>
     {
+        public ShoutcastStream GetStream()
+        {
+            try
+            {
+                return (this.m_Parsers[0] as ShoutcastStreamParser).ShoutcastStream;
+            }
+            catch
+            {
+            }
+
+            return null;
+
+            
+        }
+
         public ShoutcastStreamSourceFilter()
             : base("OPM Shoutcast Stream Source Filter")
         {

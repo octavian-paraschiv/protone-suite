@@ -15,7 +15,10 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     public static class WorkerServerStream
     {
         static NamedPipeServerStream _srv;
+        static NamedPipeServerStream _srvEvents;
+
         static ManualResetEvent _evt = new ManualResetEvent(false);
+        static ManualResetEvent _evtEvents = new ManualResetEvent(false);
 
         public static StreamReader Input()
         {
@@ -29,6 +32,14 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         {
             if (_evt.WaitOne())
                 return new StreamWriter(_srv);
+
+            return null;
+        }
+
+        public static StreamWriter Events()
+        {
+            if (_evtEvents.WaitOne())
+                return new StreamWriter(_srvEvents);
 
             return null;
         }
@@ -50,8 +61,24 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                 _srv.WaitForConnection();
 
                 _evt.Set();
-            }
-            );
+            });
+
+            Task.Run(() =>
+            {
+                int pid = Process.GetCurrentProcess().Id;
+
+                PipeSecurity pipeSecurity = CreateSystemIOPipeSecurity();
+
+                _srvEvents = new NamedPipeServerStream($"OPMEDIA_EVT_{pid}", PipeDirection.Out, 1, PipeTransmissionMode.Message, PipeOptions.None,
+                    0x4000, 0x400, pipeSecurity, HandleInheritability.Inheritable);
+
+                Debug.WriteLine($"Server named pipe: OPMEDIA_EVT_{pid}");
+
+                _srvEvents.WaitForConnection();
+
+                _evtEvents.Set();
+            });
+
         }
 
         // Creates a PipeSecurity that allows users read/write access
@@ -71,11 +98,29 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
     public class WorkerClientStream : IDisposable
     {
         NamedPipeClientStream _cl;
+        NamedPipeClientStream _clEvents;
+
         StreamReader _sr;
         StreamWriter _sw;
 
+        StreamReader _srEvents;
+
         ManualResetEvent _clearToSend = new ManualResetEvent(true);
         object _uniqueSender = new object();
+
+        public WorkerCommand ReadEvent()
+        {
+            try
+            {
+                string s = _srEvents.ReadLine();
+                return WorkerCommand.FromString(s);
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+                throw;
+            }
+        }
 
         public WorkerCommand ReadCommand()
         {
@@ -130,6 +175,14 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
             _sr = new StreamReader(_cl);
             _sw = new StreamWriter(_cl);
+
+            _clEvents = new NamedPipeClientStream(".", $"OPMEDIA_EVT_{pid}",
+                PipeDirection.In, PipeOptions.None,
+                TokenImpersonationLevel.Anonymous);
+
+            _clEvents.Connect(5000);
+
+            _srEvents = new StreamReader(_clEvents);
         }
 
         public void Dispose()
@@ -137,6 +190,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             try { _sw?.Close(); } catch { }
             try { _sr?.Close(); } catch { }
             try { _cl.Close(); } catch { }
+
+            try { _srEvents?.Close(); } catch { }
+            try { _clEvents.Close(); } catch { }
         }
     }
 }
