@@ -595,17 +595,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     {
                         i++;
 
-                        // Linear fade
-                        //int delta = i * quant;
-                        //_oldRenderer.AudioVolume = startVol - delta;
-                        //_renderer.AudioVolume = delta;
-
-                        // No fade
-                        //int delta = i * quant;
-                        //_oldRenderer.AudioVolume = startVol;
-                        //_renderer.AudioVolume = startVol;
-
-                        // Log fade
                         double delta = i * quant;
                         _oldRenderer.AudioVolume = (int)(startVol - delta);
                         _renderer.AudioVolume = (int)delta;
@@ -613,8 +602,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                         Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{_renderer}]");
 
                         // _crossFadeLength is in sec
-                        // To sleep for _crossFadeLength/100 sec, need to multiply with 10
-                        Thread.Sleep(10 * ProTONEConfig.XFadeLength);
+                        Thread.Sleep((int)(1000 * ProTONEConfig.XFadeLength / steps));
 
                         DateTime dtNow = DateTime.Now;
                         if (dtNow.Subtract(dtStart).TotalSeconds >= ProTONEConfig.XFadeLength)
