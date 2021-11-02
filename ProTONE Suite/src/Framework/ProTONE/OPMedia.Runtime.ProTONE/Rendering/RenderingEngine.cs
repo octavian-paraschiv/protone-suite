@@ -188,12 +188,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (UseCrossFading)
                 {
                     // Check if we are "anticipating" the end of current media so that we can toggle XFade...
-                    if (!isEnd && !_renderer.IsStreamedMedia)
+                    if (!isEnd && !_renderer.IsStreamedMedia && !_renderer.IsVideo)
                     {
                         double pos = _renderer.MediaPosition;
                         double len = _renderer.MediaLength;
 
-                        if ((len - pos) <= (ProTONEConfig.XFadeAnticipatedEnd))
+                        // double anticipate = (ProTONEConfig.XFadeAnticipatedEnd)
+
+                        double anticipate = 0.15 * len;
+
+                        if ((len - pos) <= anticipate)
                         {
                             Logger.LogTrace($"[XFADE] End of media is approaching. Triggering cross fading....");
                             isEnd = true;
@@ -254,7 +258,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                return Math.Max(MediaLength - ProTONEConfig.XFadeAnticipatedEnd, 1);
+                // return Math.Max(MediaLength - ProTONEConfig.XFadeAnticipatedEnd, 1);
+                return Math.Max(0.85 * MediaLength, 1);
             }
         }
 
@@ -577,8 +582,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             double steps = 100;
             double startVol = _oldRenderer.AudioVolume;
-            double quant = startVol / steps;
-
+            // double quant = ;
             _renderer.AudioVolume = 0;
 
             Task.Factory.StartNew(() =>
@@ -591,13 +595,32 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     DateTime dtStart = DateTime.Now;
                     int i = 0;
 
+                    double amp = 1f;
+
                     while (true)
                     {
                         i++;
 
-                        double delta = i * quant;
+                        // Linear
+                        // double delta = startVol * i / steps;
+
+                        // Square
+                        //double delta = startVol * Math.Pow(i / steps, 2);
+
+                        // Square root
+                        // double delta = startVol * Math.Sqrt(i / steps);
+
+                        // Logarithmic
+                        // double delta = startVol * (1 + 0.5 * Math.Log10(i / steps));
+
+                        // Anti-Logarithmic
+                        double delta = startVol * (0.1 * Math.Pow(10, i / steps));
+
+                        // offset factor
+                        double offset = 0.3;
+
                         _oldRenderer.AudioVolume = (int)(startVol - delta);
-                        _renderer.AudioVolume = (int)delta;
+                        _renderer.AudioVolume = (int)(offset * startVol + (1 - offset) * delta);
 
                         Logger.LogTrace($"[XFADE] Loop: old=[{_oldRenderer}] new=[{_renderer}]");
 

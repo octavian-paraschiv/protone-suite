@@ -131,6 +131,10 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                     var evt = ReadEvent();
                     if (evt != null)
                         WorkerEvent?.Invoke(evt);
+                    else
+                        break;
+
+                    Thread.Sleep(5);
                 }
             });
 
@@ -291,7 +295,8 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             try
             {
                 var cmd = _wcs?.ReadEvent();
-                return new WorkerEvent(cmd);
+                if (cmd != null)
+                    return new WorkerEvent(cmd);
             }
             catch
             {

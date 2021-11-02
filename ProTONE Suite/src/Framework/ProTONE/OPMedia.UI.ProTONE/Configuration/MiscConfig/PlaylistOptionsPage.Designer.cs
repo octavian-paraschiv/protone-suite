@@ -276,7 +276,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudXFadeLength.Location = new System.Drawing.Point(0, 212);
             this.nudXFadeLength.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.nudXFadeLength.Maximum = new decimal(new int[] {
-            20,
+            120,
             0,
             0,
             0});
@@ -315,7 +315,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.nudAnticipatedEnd.Location = new System.Drawing.Point(0, 262);
             this.nudAnticipatedEnd.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.nudAnticipatedEnd.Maximum = new decimal(new int[] {
-            20,
+            120,
             0,
             0,
             0});
