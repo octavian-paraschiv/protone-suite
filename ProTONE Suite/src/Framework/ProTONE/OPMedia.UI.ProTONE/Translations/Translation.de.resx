@@ -1256,11 +1256,14 @@ Tastenkürzel: {0}</value>
     <value>Schaltet ein / aus die Überblendung</value>
   </data>
   <data name="TXT_XFADELENGTH" xml:space="preserve">
-    <value>Überblendungs Übergangs Dauer:</value>
+    <value>Überblendungs Dauer:</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
-    <value>Aktuelles Trackende vorwegnehmen mit:</value>
+    <value>Überblendung-Prozentsatz:</value>
   </data>
+<data name="TXT_PROFILE" xml:space="preserve">
+    <value>Profil:</value>
+  </data>	
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Gesamtwiedergabezeit</value>
   </data>

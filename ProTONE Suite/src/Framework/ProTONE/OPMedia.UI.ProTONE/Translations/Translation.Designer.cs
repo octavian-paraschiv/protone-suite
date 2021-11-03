@@ -151,7 +151,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anticipate current track end with:.
+        ///   Looks up a localized string similar to Activation percentage:.
         /// </summary>
         internal static string TXT_ANTICIPATEDEND {
             get {
@@ -885,7 +885,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enables/Disables Cross Fading.
+        ///   Looks up a localized string similar to Enables/Disables Cross-Fading.
         /// </summary>
         internal static string TXT_CMDXFADE {
             get {
@@ -2463,6 +2463,15 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile:.
+        /// </summary>
+        internal static string TXT_PROFILE {
+            get {
+                return ResourceManager.GetString("TXT_PROFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enqueue in ProTONE Player.
         /// </summary>
         internal static string TXT_PROTONE_ENQUEUE {
@@ -3425,7 +3434,7 @@ namespace OPMedia.UI.ProTONE.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cross fading transition duration:.
+        ///   Looks up a localized string similar to Transition duration:.
         /// </summary>
         internal static string TXT_XFADELENGTH {
             get {

@@ -1256,10 +1256,13 @@ Raccourci: {0}</value>
     <value>Active / désactive le fondu enchaîné</value>
   </data>
   <data name="TXT_XFADELENGTH" xml:space="preserve">
-    <value>Durée de la transition en fondu enchaîné:</value>
+    <value>Durée de transition:</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
-    <value>Anticiper la fin de la piste en cours avec:</value>
+    <value>Pourcentage de activation:</value>
+  </data>
+	<data name="TXT_PROFILE" xml:space="preserve">
+    <value>Profile:</value>
   </data>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Temps total de lecture</value>

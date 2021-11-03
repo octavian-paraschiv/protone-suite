@@ -44,7 +44,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.ShellSupport;
-
+using System.Linq;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering
@@ -56,6 +56,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
     public delegate void MediaRenderingExceptionHandler(RenderingExceptionEventArgs args);
     
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
+
+    public enum XFadeProfiles
+    {
+        Linear = 0,
+        Square,
+        Square_Root,
+        Logarithmic,
+        Anti_Logarithmic
+    }
 
     public sealed class RenderingEngine : IDisposable
     {
@@ -184,19 +193,17 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     return false;
 
                 bool isEnd = _renderer.EndOfMedia;
+                double pos = _renderer.MediaPosition;
+                double len = _renderer.MediaLength;
 
-                if (UseCrossFading)
+                double perc = ProTONEConfig.XFadeAnticipationPercentage;
+                double anticipate = (100 - perc) * len / 100;
+
+                if (UseCrossFading && anticipate >= 1f)
                 {
                     // Check if we are "anticipating" the end of current media so that we can toggle XFade...
                     if (!isEnd && !_renderer.IsStreamedMedia && !_renderer.IsVideo)
                     {
-                        double pos = _renderer.MediaPosition;
-                        double len = _renderer.MediaLength;
-
-                        // double anticipate = (ProTONEConfig.XFadeAnticipatedEnd)
-
-                        double anticipate = 0.15 * len;
-
                         if ((len - pos) <= anticipate)
                         {
                             Logger.LogTrace($"[XFADE] End of media is approaching. Triggering cross fading....");
@@ -206,6 +213,25 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 }
 
                 return isEnd;
+            }
+        }
+
+        public XFadeProfiles XFade_OperationalProfile
+        {
+            get
+            {
+                var profile = ProTONEConfig.XFadeProfile;
+                var min = (int)Enum.GetValues(typeof(XFadeProfiles)).OfType<XFadeProfiles>().Min();
+                var max = (int)Enum.GetValues(typeof(XFadeProfiles)).OfType<XFadeProfiles>().Max();
+                return (XFadeProfiles)Math.Min(max, Math.Max(min, profile));
+            }
+
+            set
+            {
+                var profile = (int)value;
+                var min = (int)Enum.GetValues(typeof(XFadeProfiles)).OfType<XFadeProfiles>().Min();
+                var max = (int)Enum.GetValues(typeof(XFadeProfiles)).OfType<XFadeProfiles>().Max();
+                ProTONEConfig.XFadeProfile = (int)Math.Min(max, Math.Max(min, profile));
             }
         }
 
@@ -258,8 +284,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         {
             get
             {
-                // return Math.Max(MediaLength - ProTONEConfig.XFadeAnticipatedEnd, 1);
-                return Math.Max(0.85 * MediaLength, 1);
+                double perc = ProTONEConfig.XFadeAnticipationPercentage;
+                return Math.Max(perc * MediaLength / 100, 1);
             }
         }
 
@@ -595,29 +621,37 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     DateTime dtStart = DateTime.Now;
                     int i = 0;
 
-                    double amp = 1f;
-
                     while (true)
                     {
                         i++;
 
-                        // Linear
-                        // double delta = startVol * i / steps;
+                        double delta = 0;
 
-                        // Square
-                        //double delta = startVol * Math.Pow(i / steps, 2);
+                        // TODO: maybe configurable?
+                        double offset = 0.15;
 
-                        // Square root
-                        // double delta = startVol * Math.Sqrt(i / steps);
+                        switch (XFade_OperationalProfile)
+                        {
+                            case XFadeProfiles.Linear:
+                                delta = startVol * i / steps;
+                                break;
 
-                        // Logarithmic
-                        // double delta = startVol * (1 + 0.5 * Math.Log10(i / steps));
+                            case XFadeProfiles.Square:
+                                delta = startVol * Math.Pow(i / steps, 2);
+                                break;
 
-                        // Anti-Logarithmic
-                        double delta = startVol * (0.1 * Math.Pow(10, i / steps));
+                            case XFadeProfiles.Square_Root:
+                                delta = startVol * Math.Sqrt(i / steps);
+                                break;
 
-                        // offset factor
-                        double offset = 0.3;
+                            case XFadeProfiles.Logarithmic:
+                                delta = startVol * (1 + 0.5 * Math.Log10(i / steps));
+                                break;
+
+                            case XFadeProfiles.Anti_Logarithmic:
+                                delta = startVol * (0.1 * Math.Pow(10, i / steps));
+                                break;
+                        }
 
                         _oldRenderer.AudioVolume = (int)(startVol - delta);
                         _renderer.AudioVolume = (int)(offset * startVol + (1 - offset) * delta);

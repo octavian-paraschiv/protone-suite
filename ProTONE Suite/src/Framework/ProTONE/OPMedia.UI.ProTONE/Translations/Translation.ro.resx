@@ -1250,17 +1250,20 @@ Pentru a obține propriile dvs. setări de identitate, accesați:</value>
     <value>Cross Fading</value>
   </data>
   <data name="TXT_BTNXFADE" xml:space="preserve">
-    <value>Activează/dezactivează Cross Fading
+    <value>Activează/dezactivează Cross-Fading
 Scurtătura: {0}</value>
   </data>
   <data name="TXT_CMDXFADE" xml:space="preserve">
-    <value>Activează/dezactivează Cross Fading</value>
+    <value>Activează/dezactivează Cross-Fading</value>
   </data>
   <data name="TXT_XFADELENGTH" xml:space="preserve">
-    <value>Durata de tranziție pt. cross fading:</value>
+    <value>Durata de tranziție:</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
-    <value>Anticipați sfârșitul melodiei curente cu:</value>
+    <value>Procentaj de activare:</value>
+  </data>
+  <data name="TXT_PROFILE" xml:space="preserve">
+    <value>Profil:</value>
   </data>
   <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Durata totală de redare</value>

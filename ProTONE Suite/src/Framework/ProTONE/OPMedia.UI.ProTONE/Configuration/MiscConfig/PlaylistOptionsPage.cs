@@ -16,6 +16,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Themes;
+using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -35,7 +36,10 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 
             chkFileNameFormat.Checked = ProTONEConfig.UseFileNameFormat;
             chkUseMetadata.Checked = ProTONEConfig.UseMetadata;
-            
+
+            cmbProfile.DataSource = Enum.GetValues(typeof(XFadeProfiles)).OfType<XFadeProfiles>().ToList();
+            cmbProfile.SelectedItem = RenderingEngine.DefaultInstance.XFade_OperationalProfile;
+
             PopulatePlaylistEntryFormats(true);
             PopulateFileNameFormats(true);
             PopulatePlaylistOptions();
@@ -48,6 +52,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cmbFileNameFormat.SelectedIndexChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.cmbFileNameFormat.TextChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.chkFileNameFormat.CheckedChanged += new System.EventHandler(this.chkFileNameFormat_CheckedChanged);
+            
+            this.cmbProfile.SelectedIndexChanged += OnPlaylistSettingsChanged;
 
             this.chkLoopPlay.CheckedChanged += OnPlaylistSettingsChanged;
             this.chkXFade.CheckedChanged += OnPlaylistSettingsChanged;
@@ -134,7 +140,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             chkLoopPlay.Checked = ProTONEConfig.LoopPlay;
             chkXFade.Checked = ProTONEConfig.XFade;
             nudXFadeLength.Value = ProTONEConfig.XFadeLength;
-            nudAnticipatedEnd.Value = ProTONEConfig.XFadeAnticipation;
+            nudAnticipatedEnd.Value = ProTONEConfig.XFadeAnticipationPercentage;
         }
 
         private void PopulatePlaylistEntryFormats(bool fillCustomFormats)
@@ -197,7 +203,8 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             ProTONEConfig.LoopPlay = chkLoopPlay.Checked;
             ProTONEConfig.XFade = chkXFade.Checked;
             ProTONEConfig.XFadeLength = (int)nudXFadeLength.Value;
-            ProTONEConfig.XFadeAnticipation = (int)nudAnticipatedEnd.Value;
+            ProTONEConfig.XFadeAnticipationPercentage = (int)nudAnticipatedEnd.Value;
+            RenderingEngine.DefaultInstance.XFade_OperationalProfile = (XFadeProfiles)cmbProfile.SelectedItem;
 
             EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
             EventDispatch.DispatchEvent(LocalEventNames.UpdateStateButtons);

@@ -1254,15 +1254,18 @@ Otherwise, you will need to copy it from the URL displayed in the default browse
 Shortcut: {0}</value>
   </data>
   <data name="TXT_CMDXFADE" xml:space="preserve">
-    <value>Enables/Disables Cross Fading</value>
+    <value>Enables/Disables Cross-Fading</value>
   </data>
   <data name="TXT_XFADELENGTH" xml:space="preserve">
-    <value>Cross fading transition duration:</value>
+    <value>Transition duration:</value>
   </data>
   <data name="TXT_ANTICIPATEDEND" xml:space="preserve">
-    <value>Anticipate current track end with:</value>
+    <value>Activation percentage:</value>
   </data>
-  <data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
+	<data name="TXT_PROFILE" xml:space="preserve">
+    <value>Profile:</value>
+  </data>
+<data name="TXT_TOTAL_PLAYBACK_TIME" xml:space="preserve">
     <value>Total playback time</value>
   </data>
   <data name="TXT_ADD_TO_DEEZER_PLAYLIST" xml:space="preserve">

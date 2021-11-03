@@ -583,27 +583,32 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
-        public static int XFadeAnticipation
+        public static int XFadeAnticipationPercentage
         {
             get
             {
-                return PersistenceProxy.ReadObject(false, "XFadeAnticipation", 10);
+                double val = PersistenceProxy.ReadObject(false, "XFadeAnticipationPercentage", 85);
+                return (int)Math.Min(99, Math.Max(val, 1));
             }
 
             set
             {
-                PersistenceProxy.SaveObject(false, "XFadeAnticipation", value);
+                PersistenceProxy.SaveObject(false, "XFadeAnticipationPercentage", value);
             }
         }
 
-        public static int XFadeAnticipatedEnd
+        public static int XFadeProfile
         {
             get
             {
-                return XFadeAnticipation + XFadeLength;
+                return PersistenceProxy.ReadObject(false, "XFadeProfile", 0);
+            }
+
+            set
+            {
+                PersistenceProxy.SaveObject(false, "XFadeProfile", value);
             }
         }
-
 
         public static int PlaylistEventHandler
         {
