@@ -126,6 +126,9 @@ Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesnt
 Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"
 ;--------------------------------------
+; Catalog templates
+Source: "{#BINDIR}\Templates\Catalog\Default Catalog"; DestDir: "{app}\Templates\Catalog"
+;--------------------------------------
 ; Icons and themes
 Source: "{#BINDIR}\Themes\Themes.thm"; DestDir: "{app}\Themes"
 Source: "{#BINDIR}\DefaultOnlineMediaData.xml"; DestDir: "{app}"
