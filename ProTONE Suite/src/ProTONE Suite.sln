@@ -57,6 +57,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.VideoDVDWorker", "Framework\ProTONE\OPMedia.VideoDVDWorker\OPMedia.VideoDVDWorker.csproj", "{687F92F3-7B8D-421A-BE43-4F2B40AEC69A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Core", "Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj", "{D75C6E16-0208-40FD-8C54-F073667F5384}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76033137-7758-4B97-B2A5-D7C135419E72} = {76033137-7758-4B97-B2A5-D7C135419E72}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{938C8AAA-FB3E-438C-B3F3-AB2CBE669FD9}"
 EndProject
@@ -128,7 +131,7 @@ Global
 		{D75C6E16-0208-40FD-8C54-F073667F5384} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 		RESX_NeutralResourcesLanguage = en-GB
+		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
 	EndGlobalSection
 EndGlobal
