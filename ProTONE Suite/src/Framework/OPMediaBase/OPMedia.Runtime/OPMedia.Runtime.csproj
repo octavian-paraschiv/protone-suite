@@ -17,7 +17,6 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/OPMedia.Runtime/</PublishUrl>
@@ -76,10 +75,6 @@
     <ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
-      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
-      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

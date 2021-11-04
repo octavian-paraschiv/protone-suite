@@ -17,7 +17,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.FileExplorer
 {

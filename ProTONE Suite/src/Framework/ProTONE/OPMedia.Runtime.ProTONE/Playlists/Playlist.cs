@@ -23,7 +23,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
 using Newtonsoft.Json;
-using OPMedia.ShellSupport;
+
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Playlists
@@ -798,7 +798,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                         xw.WriteStartElement("head");
                         {
                             string[] names = new string[] { "name", "content" };
-                            string[] values = new string[] { "Generator", string.Format("{0} v.{1}", ShellConstants.PlayerName, SuiteVersion.Version) };
+                            string[] values = new string[] { "Generator", string.Format("{0} v.{1}", Constants.PlayerName, SuiteVersion.Version) };
                             WriteXmlElement(xw, "meta", names, values);
 
                             values = new string[] { "AverageRating", "0" };

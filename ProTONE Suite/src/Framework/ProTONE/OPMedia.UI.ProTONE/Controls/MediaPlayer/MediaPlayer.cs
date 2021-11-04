@@ -47,7 +47,7 @@ using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.UI.Dialogs;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

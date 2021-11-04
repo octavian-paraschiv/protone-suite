@@ -112,6 +112,7 @@
     <Compile Include="OnlineMediaContent\LocalDatabaseSearcher.cs" />
     <Compile Include="OnlineMediaContent\OnlineContentSearcher.cs" />
     <Compile Include="OnlineMediaContent\ShoutcastDirSearcher.cs" />
+    <Compile Include="PlayerRemoteControl.cs" />
     <Compile Include="Playlists\DvdPlaylistItem.cs" />
     <Compile Include="Playlists\PersistentPlaylist.cs" />
     <Compile Include="Playlists\Playlist.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Playlists\RadioStationPlaylistItem.cs" />
     <Compile Include="Playlists\UrlPlaylistItem.cs" />
     <Compile Include="ProTONEConstants.cs" />
+    <Compile Include="RegistrationSupport.cs" />
     <Compile Include="RemoteControl\ActivateCommand.cs" />
     <Compile Include="RemoteControl\BasicCommand.cs" />
     <Compile Include="RemoteControl\MediaCommands.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Rendering\DS\DvdTypes.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SupportedFileProvider.cs" />
     <Compile Include="WorkerSupport\CommandProcessor.cs" />
     <Compile Include="WorkerSupport\WorkerCommandHelper.cs" />
     <Compile Include="WorkerSupport\WorkerError.cs" />
@@ -178,10 +181,6 @@
     <Compile Include="WorkerSupport\WorkerStreams.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj">
-      <Project>{1988db5f-1fa6-4648-939e-89f11761fb94}</Project>
-      <Name>OPMedia.ShellSupport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
       <Project>{41d162bd-95f4-4348-b353-93ba1c3923b4}</Project>
       <Name>OPMedia.DeezerInterop</Name>
@@ -189,10 +188,6 @@
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj">
       <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
       <Name>OPMedia.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OPMediaBase\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
-      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
-      <Name>OPMedia.LiteCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj">
       <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>

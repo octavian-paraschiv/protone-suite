@@ -255,7 +255,7 @@ namespace OPMedia.UI.HelpSupport
                         else if (docLines[i].ToLowerInvariant().Contains("<img"))
                         {
                             docLines[i] = docLines[i].ToLowerInvariant().Replace("src=\"images", string.Format("src=\"{0}\\docs\\images", 
-                                LiteAppConfig.InstallationPath));
+                                AppConfig.InstallationPath));
                         }
 
                         sb.AppendLine(docLines[i]);

@@ -14,6 +14,24 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         void EnqueueCommand(BasicCommand cmd);
     }
 
+    public enum CommandType
+    {
+        Activate = 0,
+        Terminate,
+        PlayFiles,
+        EnqueueFiles,
+        ClearPlaylist,
+        Playback,
+
+        BrowseRemoteFiles,
+        GetDriveList,
+
+        QueryMediaRenderer,
+
+        KeyPress,
+    }
+
+
     public class BasicCommandTarget : SelfRegisteredEventSinkObject
     {
         ICommandTarget _target = null;

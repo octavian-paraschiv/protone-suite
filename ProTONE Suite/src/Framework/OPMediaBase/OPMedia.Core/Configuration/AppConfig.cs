@@ -83,6 +83,31 @@ namespace OPMedia.Core.Configuration
 
         public const string UnconfiguredThemeName = "Light";
 
+        public static string InstallationPath
+        {
+            get
+            {
+                string retVal = string.Empty;
+                try
+                {
+                    if (string.IsNullOrEmpty(retVal))
+                    {
+                        Assembly asm = Assembly.GetAssembly(typeof(AppConfig));
+                        if (asm != null)
+                        {
+                            retVal = Path.GetDirectoryName(asm.Location);
+                        }
+                    }
+                }
+                catch
+                {
+                    retVal = string.Empty;
+                }
+
+                return retVal;
+            }
+        }
+
         public static CultureInfo GetCulture(string name)
         {
             if (_cultures.ContainsKey(name))
@@ -336,7 +361,7 @@ namespace OPMedia.Core.Configuration
                 }
                 catch { }
 
-                return string.Format("file:///{0}/docs", LiteAppConfig.InstallationPath);
+                return string.Format("file:///{0}/docs", AppConfig.InstallationPath);
             }
         }
 

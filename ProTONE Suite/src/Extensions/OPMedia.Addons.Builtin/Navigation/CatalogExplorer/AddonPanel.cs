@@ -2,35 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using OPMedia.Runtime.Addons.AddonsBase.Navigation;
 using OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls;
 using OPMedia.UI.Wizards;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.FileInformation;
 using System.IO;
 using OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks;
 using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Properties;
 using OPMedia.Core;
 using OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls;
 using OPMedia.UI;
-using OPMedia.Runtime;
-using OPMedia.Core.Configuration;
-using OPMedia.Addons.Builtin.FileExplorer;
-using OPMedia.UI.Themes;
 using OPMedia.UI.Dialogs;
 using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.FileInformation;
-using OPMedia.Runtime.Addons.AddonsBase;
 using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.Logging;
-using System.Threading;
-
-using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.UI.Configuration;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Utilities;
@@ -39,9 +25,9 @@ using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Runtime.Addons;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Addons.Builtin.Shared;
 using OPMedia.UI.Generic;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+
 
 /*
  * IMPORTANT NOTE: In Media Catalog, instead of paths are used VPaths. 
@@ -640,12 +626,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                         {
                             case ToolAction.ToolActionProTONEEnqueue:
                                 RunProTONEActionOnVPaths(taskSearch.MatchingItems,
-                                    Runtime.ProTONE.CommandType.EnqueueFiles);
+                                    CommandType.EnqueueFiles);
                                 break;
 
                             case ToolAction.ToolActionProTONEPlay:
                                 RunProTONEActionOnVPaths(taskSearch.MatchingItems,
-                                    Runtime.ProTONE.CommandType.PlayFiles);
+                                    CommandType.PlayFiles);
                                 break;
 
                             case ToolAction.ToolActionJumpToItem:
@@ -679,12 +665,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
                 case ToolAction.ToolActionProTONEEnqueue:
                     RunProTONEActionOnVPaths(GetSelectedVPaths(),
-                        Runtime.ProTONE.CommandType.EnqueueFiles);
+                        CommandType.EnqueueFiles);
                     break;
 
                 case ToolAction.ToolActionProTONEPlay:
                     RunProTONEActionOnVPaths(GetSelectedVPaths(),
-                        Runtime.ProTONE.CommandType.PlayFiles);
+                        CommandType.PlayFiles);
                     break;
 
                 case ToolAction.ToolActionRename:
@@ -694,7 +680,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         }
 
         private void RunProTONEActionOnVPaths(List<string> vpaths,
-            Runtime.ProTONE.CommandType commandType)
+            CommandType commandType)
         {
             List<string> launchPaths = new List<string>();
             foreach (string vPath in vpaths)
@@ -768,7 +754,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             if (tsic == null)
                 return;
 
-            bool playerInstalled = File.Exists(ShellProTONEConfig.PlayerInstallationPath);
+            bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible =
                 playerInstalled;
 

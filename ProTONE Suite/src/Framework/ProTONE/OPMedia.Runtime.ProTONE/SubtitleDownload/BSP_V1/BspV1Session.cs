@@ -14,7 +14,7 @@ using System.IO;
 using OPMedia.Core.NetworkAccess;
 using System.IO.Compression;
 using System.ComponentModel;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
 {
@@ -39,7 +39,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
         {
             _wsdl = new BSPSubtitlesService(_serverUrl);
             _wsdl.Proxy = AppConfig.GetWebProxy();
-            _wsdl.UserAgent = string.Format("{0} v{1}", ShellConstants.PlayerName, SuiteVersion.Version);
+            _wsdl.UserAgent = string.Format("{0} v{1}", Constants.PlayerName, SuiteVersion.Version);
         }
 
         protected override bool IsAuthenticationRequired()

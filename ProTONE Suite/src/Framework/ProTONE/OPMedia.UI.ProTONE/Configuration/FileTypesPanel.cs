@@ -1,35 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-
-using System.Text;
 using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Core.Configuration;
-using OPMedia.Runtime;
 using OPMedia.UI.Configuration;
 using OPMedia.UI.Controls;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.UI.Themes;
-using System.Drawing.Drawing2D;
 
 using System.Windows.Forms.VisualStyles;
 using OPMedia.UI.Generic;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
     public partial class FileTypesPanel : BaseCfgPanel
     {
-        private OPMCheckBox cbShellIntegration;
         private OPMLabel label3;
         private OPMComboBox cmbExplorerLaunchType;
         private OPMButton btnSelAllAudio;
@@ -86,9 +75,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             ThemeManager.SetFont(btnUnselAllPlaylists, FontSizes.Small);
             ThemeManager.SetFont(btnUnselAllVideo, FontSizes.Small);
 
-            cbShellIntegration.Checked = RegistrationSupport.IsContextMenuHandlerRegistered();
-            
-            ActivateShellIntegration();
             FillExplorerLaunchTypes();
 
             this.Enabled = AppConfig.CurrentUserIsAdministrator;
@@ -195,7 +181,6 @@ namespace OPMedia.UI.ProTONE.Configuration
         
         private void InitializeComponent()
         {
-            this.cbShellIntegration = new OPMedia.UI.Controls.OPMCheckBox();
             this.label3 = new OPMedia.UI.Controls.OPMLabel();
             this.cmbExplorerLaunchType = new OPMedia.UI.Controls.OPMComboBox();
             this.btnSelAllAudio = new OPMedia.UI.Controls.OPMButton();
@@ -219,25 +204,12 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.opmLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cbShellIntegration
-            // 
-            this.cbShellIntegration.AutoSize = true;
-            this.cbShellIntegration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbShellIntegration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbShellIntegration.Location = new System.Drawing.Point(0, 0);
-            this.cbShellIntegration.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.cbShellIntegration.Name = "cbShellIntegration";
-            this.cbShellIntegration.OverrideForeColor = System.Drawing.Color.Empty;
-            this.cbShellIntegration.Size = new System.Drawing.Size(573, 19);
-            this.cbShellIntegration.TabIndex = 0;
-            this.cbShellIntegration.Text = "TXT_SHELL_INTEGRATION";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Location = new System.Drawing.Point(0, 24);
+            this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.OverrideBackColor = System.Drawing.Color.Empty;
@@ -251,7 +223,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.cmbExplorerLaunchType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbExplorerLaunchType.FormattingEnabled = true;
-            this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 44);
+            this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 20);
             this.cmbExplorerLaunchType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbExplorerLaunchType.Name = "cmbExplorerLaunchType";
             this.cmbExplorerLaunchType.OverrideForeColor = System.Drawing.Color.Empty;
@@ -420,7 +392,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel1.Controls.Add(this.hdrVideo, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pnlAudioFiles, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 93);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 69);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -430,7 +402,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(573, 155);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(573, 179);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // pnlPlaylists
@@ -441,7 +413,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.pnlPlaylists.Location = new System.Drawing.Point(0, 85);
             this.pnlPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pnlPlaylists.Name = "pnlPlaylists";
-            this.pnlPlaylists.Size = new System.Drawing.Size(573, 65);
+            this.pnlPlaylists.Size = new System.Drawing.Size(573, 89);
             this.pnlPlaylists.TabIndex = 4;
             // 
             // pnlVideoFiles
@@ -471,7 +443,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblFileTypes.AutoSize = true;
             this.lblFileTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblFileTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFileTypes.Location = new System.Drawing.Point(0, 73);
+            this.lblFileTypes.Location = new System.Drawing.Point(0, 49);
             this.lblFileTypes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblFileTypes.Name = "lblFileTypes";
             this.lblFileTypes.OverrideBackColor = System.Drawing.Color.Empty;
@@ -485,7 +457,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.opmLayoutPanel1.ColumnCount = 1;
             this.opmLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmLayoutPanel1.Controls.Add(this.cbShellIntegration, 0, 0);
             this.opmLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.opmLayoutPanel1.Controls.Add(this.cmbExplorerLaunchType, 0, 2);
             this.opmLayoutPanel1.Controls.Add(this.lblFileTypes, 0, 3);
@@ -521,20 +492,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         private void cbShellIntegration_CheckStateChanged(object sender, EventArgs e)
         {
-            ActivateShellIntegration();
             Modified = true;
-        }
-
-        private void ActivateShellIntegration()
-        {
-            lblFileTypes.Enabled = cbShellIntegration.Checked;
-
-            cmbExplorerLaunchType.Enabled = cbShellIntegration.Checked;
-            tableLayoutPanel1.Enabled = cbShellIntegration.Checked;
-            pnlButtons.Enabled = cbShellIntegration.Checked;
-
-            this.cbShellIntegration.CheckStateChanged -= new System.EventHandler(this.cbShellIntegration_CheckStateChanged);
-            this.cbShellIntegration.CheckStateChanged += new System.EventHandler(this.cbShellIntegration_CheckStateChanged);
         }
 
         protected override void SaveInternal()
@@ -542,18 +500,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             if (!Modified)
             {
                 return;
-            }
-
-            if (cbShellIntegration.Checked != RegistrationSupport.IsContextMenuHandlerRegistered())
-            {
-                if (cbShellIntegration.Checked)
-                {
-                    RegistrationSupport.RegisterContextMenuHandler();
-                }
-                else
-                {
-                    RegistrationSupport.UnregisterContextMenuHandler();
-                }
             }
 
             SaveFileTypes(pnlAudioFiles);

@@ -88,19 +88,13 @@ Source: "{#BINDIR}\OPMedia.VideoWorker.exe"; DestDir: "{app}"; Flags: replacesam
 ; Services
 Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
-; shell extension
-Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}\shell"; Flags: touch uninsneveruninstall onlyifdoesntexist
-Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}\shell"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
-;--------------------------------------
 ; OPMedia DLL's
 Source: "{#BINDIR}\OPMedia.Addons.Builtin.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 Source: "{#BINDIR}\OPMedia.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.DeezerInterop.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.LiteCore.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.Runtime.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.Runtime.Addons.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 Source: "{#BINDIR}\OPMedia.Runtime.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.UI.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.UI.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
@@ -128,7 +122,7 @@ Source: "{#BINDIR}\fr\OPMedia.UI.ProTONE.resources.dll"; DestDir: "{app}\fr\"; F
 Source: "{#BINDIR}\fr\OPMedia.UI.resources.dll"; DestDir: "{app}\fr\"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; Database and support DLL's
-Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall; StrongAssemblyName: "OPMedia.ShellSupport.dll"
+Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall;
 Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"
 ;--------------------------------------
@@ -226,20 +220,15 @@ Name: "{app}\Resources"; Flags: uninsalwaysuninstall
 Name: "{app}\Themes"; Flags: uninsalwaysuninstall
 Name: "{app}\Codecs"; Flags: uninsalwaysuninstall; Components: itemCodecs\itemFFDShow
 Name: "{app}\HDSupport"; Flags: uninsalwaysuninstall; Components:   itemCodecs\itemHaali
-Name: "{app}\shell"; Flags: uninsneveruninstall
 
 [Run]
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.dll /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingDLL}"
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.exe /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingEXE}"
 Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallPlayer}"
-Filename: "{dotnet4032}\regasm.exe"; Parameters: "/codebase ""{app}\shell\OPMedia.ShellSupport.dll"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser skipifsilent; StatusMsg: "{cm:cfgShellSupport}"
-Filename: "{dotnet4064}\regasm.exe"; Parameters: "/codebase ""{app}\shell\OPMedia.ShellSupport.dll"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser skipifsilent; StatusMsg: "{cm:cfgShellSupport}"; Check: IsWin64
 Filename: "{dotnet4032}\installutil.exe"; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:instPersistenceService}"
 Filename: "cmd.exe"; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:startPersistenceService}"
 
 [UninstallRun]
-Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\shell\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3
-Filename: {dotnet4064}\regasm.exe; Parameters: "/u ""{app}\shell\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3.1; Check: IsWin64
 Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.ProTONE.exe"""; StatusMsg: {cm:delFirewallPlayer}; Flags: runhidden; RunOnceId: _id4
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopPersistenceService}; RunOnceId: _id7
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstPersistenceService}; RunOnceId: _id8

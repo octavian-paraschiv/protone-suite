@@ -1,8 +1,8 @@
 $version = $args[0]
 $isRelease = $args[1]
 
-$templateFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.LiteCore\VersionTemplate.cs"
-$versionFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.LiteCore\Version.cs"
+$templateFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs"
+$versionFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
 $content = (Get-Content $templateFile).replace('VERSION', $version).Replace('RELEASE', "$isRelease")
 $content | Set-Content $versionFile

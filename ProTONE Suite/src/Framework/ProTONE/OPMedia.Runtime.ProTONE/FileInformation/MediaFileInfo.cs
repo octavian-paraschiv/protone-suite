@@ -12,7 +12,7 @@ using System.Drawing.Design;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Core.TranslationSupport;
 using TagLib.Mpeg;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {

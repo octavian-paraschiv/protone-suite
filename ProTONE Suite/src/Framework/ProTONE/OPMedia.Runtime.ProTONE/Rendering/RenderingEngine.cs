@@ -11,39 +11,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
 
 #if HAVE_DSHOW
-    using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 #else
     using OPMedia.Runtime.ProTONE.Rendering.Mono;
 #endif
 
 using OPMedia.Core;
-using System.IO;
-
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.Core.Configuration;
 using OPMedia.UI.Generic;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
-using System.Runtime.Serialization;
-using System.ServiceModel;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
 using NAudio.CoreAudioApi;
 using System.Threading.Tasks;
 using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-using OPMedia.ShellSupport;
+
 using System.Linq;
 #endregion
 

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LoggedApplication.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Utilities\HelperClasses.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Utilities\SerialPortAPI.cs" />
+    <Compile Include="Version.cs" />
+    <None Include="VersionTemplate.cs" />
     <Compile Include="Win32\DllUtility.cs" />
     <Compile Include="Win32\Gdi32.cs" />
     <Compile Include="GlobalEvents\EventSinkAttribute.cs" />
@@ -148,13 +151,6 @@
     <Content Include="Resources\Library.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OPMedia.LiteCore\OPMedia.LiteCore.csproj">
-      <Project>{d7f86f2d-8754-4ed2-b28d-3073517cc237}</Project>
-      <Name>OPMedia.LiteCore</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

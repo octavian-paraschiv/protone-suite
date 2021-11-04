@@ -301,7 +301,7 @@ namespace OPMedia.UI.Controls
             if (e.FullPath != null)
             {
                 string folder = System.IO.Path.GetDirectoryName(e.FullPath);
-                if (string.Compare(folder, LiteAppConfig.InstallationPath, true) == 0)
+                if (string.Compare(folder, AppConfig.InstallationPath, true) == 0)
                 {
                     // Ignore any changes related to DB3 journal files located in the installation path.
                     if (e.FullPath.ToLowerInvariant().EndsWith("db3-journal"))

@@ -17,7 +17,7 @@ using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.UI.ProTONE.Properties;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

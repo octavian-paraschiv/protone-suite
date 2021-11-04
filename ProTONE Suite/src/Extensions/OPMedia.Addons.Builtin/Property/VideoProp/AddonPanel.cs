@@ -17,7 +17,7 @@ using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.UI.Controls;
 using OPMedia.Core;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.VideoProp
 {

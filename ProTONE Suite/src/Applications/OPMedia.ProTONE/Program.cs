@@ -3,35 +3,15 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using OPMedia.Core.Logging;
 using OPMedia.Core.InstanceManagement;
-using System.Text;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Core.TranslationSupport;
-using System.Configuration;
-using System.Globalization;
-
-using System.Diagnostics;
-using System.Threading;
 
 using OPMedia.Runtime.Shortcuts;
 using OPMedia.Core.Configuration;
-using OPMedia.Runtime;
-
-using OPMedia.Core;
-using OPMedia.UI;
-
-using System.Runtime.InteropServices;
-
-using OPMedia.UI.Themes;
 using OPMedia.UI.ProTONE.Controls.MediaPlayer;
 using OPMedia.Runtime.ProTONE;
-using OPMedia.Core.Utilities;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.HelpSupport;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.UI.Dialogs;
-using OPMedia.ShellSupport;
+
 using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.ProTONE
@@ -57,7 +37,7 @@ namespace OPMedia.ProTONE
                 {
                     try
                     {
-                        RemoteControllableApplication.Start(ShellConstants.PlayerName, true);
+                        RemoteControllableApplication.Start(Core.Constants.PlayerName, true);
 
                         ProcessCommandLine(false);
 
@@ -122,8 +102,7 @@ namespace OPMedia.ProTONE
                     CommandType cmdType = (CommandType)Enum.Parse(typeof(CommandType),
                         ProTONEConfig.ExplorerLaunchType);
 
-                    if (RegistrationSupport.IsContextMenuHandlerRegistered() &&
-                        (cmdType == CommandType.PlayFiles || cmdType == CommandType.EnqueueFiles))
+                    if (cmdType == CommandType.PlayFiles || cmdType == CommandType.EnqueueFiles)
                     {
                         if (PlayerRemoteControl.IsPlayerRunning())
                         {

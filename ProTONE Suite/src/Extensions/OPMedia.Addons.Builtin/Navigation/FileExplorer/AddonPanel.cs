@@ -12,7 +12,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using OPMedia.UI.Controls;
@@ -54,7 +53,8 @@ using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
 using OPMedia.Addons.Builtin.Shared;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+
 
 #endregion
 
@@ -592,7 +592,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
                                             PlayerRemoteControl.SendPlayerCommand(
-                                                Runtime.ProTONE.CommandType.EnqueueFiles,
+                                                CommandType.EnqueueFiles,
                                                 taskSearch.MatchingItems.ToArray());
                                         }
                                     }
@@ -603,7 +603,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
                                             PlayerRemoteControl.SendPlayerCommand(
-                                                Runtime.ProTONE.CommandType.PlayFiles,
+                                                CommandType.PlayFiles,
                                                 taskSearch.MatchingItems.ToArray());
                                         }
                                     }
@@ -748,7 +748,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             if (items.Count > 0)
                             {
                                 PlayerRemoteControl.SendPlayerCommand(
-                                    Runtime.ProTONE.CommandType.EnqueueFiles,
+                                    CommandType.EnqueueFiles,
                                     items.ToArray());
                             }
                         }
@@ -760,7 +760,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             if (items.Count > 0)
                             {
                                 PlayerRemoteControl.SendPlayerCommand(
-                                    Runtime.ProTONE.CommandType.PlayFiles,
+                                    CommandType.PlayFiles,
                                     items.ToArray());
                             }
                         }
@@ -820,7 +820,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             if (tsic == null)
                 return;
 
-            bool playerInstalled = File.Exists(ShellProTONEConfig.PlayerInstallationPath);
+            bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible = 
                 playerInstalled;
 

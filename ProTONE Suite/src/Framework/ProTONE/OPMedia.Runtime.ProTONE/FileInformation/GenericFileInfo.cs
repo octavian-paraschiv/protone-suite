@@ -6,7 +6,7 @@ using OPMedia.Runtime.FileInformation;
 using System.IO;
 using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {

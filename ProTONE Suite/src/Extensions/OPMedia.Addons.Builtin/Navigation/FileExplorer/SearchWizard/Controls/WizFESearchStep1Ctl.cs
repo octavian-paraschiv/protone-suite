@@ -30,7 +30,7 @@ using System.Threading;
 using System.Diagnostics;
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.UI.Generic;
-using OPMedia.ShellSupport;
+
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 {
@@ -602,7 +602,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
         private void OnMenuOpening(object sender, CancelEventArgs e)
         {
-            bool playerInstalled = File.Exists(ShellProTONEConfig.PlayerInstallationPath);
+            bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
             tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible =
                 playerInstalled;
 

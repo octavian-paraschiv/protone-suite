@@ -55,11 +55,27 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         #region Calculated Level 2 settings
 
+        public static string PlayerInstallationPath
+        {
+            get
+            {
+                return Path.Combine(AppConfig.InstallationPath, Core.Constants.PlayerBinary);
+            }
+        }
+
+        public static string LibraryInstallationPath
+        {
+            get
+            {
+                return Path.Combine(AppConfig.InstallationPath, Core.Constants.LibraryBinary);
+            }
+        }
+
         public static bool IsPlayer
         {
             get
             {
-                return (string.Compare(ApplicationInfo.ApplicationName, OPMedia.ShellSupport.ShellConstants.PlayerName) == 0);
+                return (string.Compare(ApplicationInfo.ApplicationName, Core.Constants.PlayerName) == 0);
             }
         }
 
@@ -67,7 +83,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return (string.Compare(ApplicationInfo.ApplicationName, OPMedia.ShellSupport.ShellConstants.LibraryName) == 0);
+                return (string.Compare(ApplicationInfo.ApplicationName, Core.Constants.LibraryName) == 0);
             }
         }
         #endregion

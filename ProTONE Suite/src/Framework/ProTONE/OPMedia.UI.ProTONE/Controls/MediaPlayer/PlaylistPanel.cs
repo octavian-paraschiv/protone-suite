@@ -41,7 +41,7 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using System.Threading.Tasks;
-using OPMedia.ShellSupport;
+
 using NAudio.CoreAudioApi;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer

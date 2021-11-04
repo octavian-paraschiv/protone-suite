@@ -80,7 +80,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             psi.CreateNoWindow = true;
             psi.RedirectStandardInput = true;
             psi.RedirectStandardOutput = true;
-            psi.WorkingDirectory = LiteAppConfig.InstallationPath;
+            psi.WorkingDirectory = AppConfig.InstallationPath;
             psi.UseShellExecute = false;
             psi.Arguments = args;
 

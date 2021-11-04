@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.UI.Themes;
 using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.ShellSupport;
+using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.Player
 {

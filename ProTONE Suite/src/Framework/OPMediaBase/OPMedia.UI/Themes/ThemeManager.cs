@@ -575,8 +575,8 @@ namespace OPMedia.UI.Themes
                     using (MemoryStream ms = new MemoryStream(OPMedia.UI.Properties.Resources.Themes))
                         doc = XDocument.Load(ms);
 
-                    string themeFolder = Path.Combine(LiteAppConfig.InstallationPath, "Themes");
-                    string themeFile = Path.Combine(LiteAppConfig.InstallationPath, "Themes\\Themes.thm");
+                    string themeFolder = Path.Combine(AppConfig.InstallationPath, "Themes");
+                    string themeFile = Path.Combine(AppConfig.InstallationPath, "Themes\\Themes.thm");
                     if (File.Exists(themeFile))
                         doc = XDocument.Load(themeFile);
 
@@ -638,7 +638,7 @@ namespace OPMedia.UI.Themes
         {
             if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
-                string themeFile = Path.Combine(LiteAppConfig.InstallationPath, "Themes\\Themes.thm");
+                string themeFile = Path.Combine(AppConfig.InstallationPath, "Themes\\Themes.thm");
                 if (e.ChangeType == WatcherChangeTypes.Changed && e.FullPath == themeFile)
                 {
                     Logger.LogInfo("Theme file changed. Reloading themes ...");
