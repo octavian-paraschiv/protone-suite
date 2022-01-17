@@ -29,10 +29,10 @@ artifacts:
 deploy:
     provider: FTP
     protocol: ftp
-    host: 188.213.19.151
-    username: ocparo
+    host: 185.247.61.111
+    username: ocparo_ftpops
     password: 
-        secure: Ni2Gm2mHimeSMAgzkaHXJA==
+        secure: q5T1rZCQBkgSA0/G7P2vXQ==
     folder: httpdocs/ProTONE/current/
     application: protone-setup
   
