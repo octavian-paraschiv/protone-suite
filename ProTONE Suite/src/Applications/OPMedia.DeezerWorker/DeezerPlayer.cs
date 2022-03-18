@@ -22,7 +22,16 @@ namespace OPMedia.DeezerWorker
 {
     public partial class DeezerPlayer : IWorkerPlayer
     {
+        private static dz_track_quality_t[] _trackQualities = new dz_track_quality_t[]
+        {
+            dz_track_quality_t.DZ_TRACK_QUALITY_HIGHQUALITY,
+            dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY,
+            dz_track_quality_t.DZ_TRACK_QUALITY_STANDARD,
+            dz_track_quality_t.DZ_TRACK_QUALITY_DATA_EFFICIENT,
+        };
+
         dz_connect_configuration _dzConfig = null;
+        dz_track_quality_t _requestedQuality;
 
         IntPtr _dzConnect = IntPtr.Zero;
         IntPtr _dzPlayer = IntPtr.Zero;
@@ -131,12 +140,7 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
                 HandleDzErrorCode("dz_connect_offline_mode", WorkerError.CannotConnectToMedia, err);
 
-                err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero,
-                    ProTONEConfig.DeezerTrackQuality);
-
-                HandleDzErrorCode("dz_player_set_track_quality", WorkerError.CannotConnectToMedia, err);
-
-                Logger.LogTrace($"DeezerPlayer::SetupAppContext => Rendering at {ProTONEConfig.DeezerTrackQuality}");
+                SetRenderQuality(ProTONEConfig.DeezerTrackQuality);                
 
                 if (_evtAppUserLoginOK.WaitOne(Worker.OperationTimeout) == false)
                     HandleDzErrorCode("DeezerPlayer::SetupConfig", WorkerError.CannotConnectToMedia, dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
@@ -145,6 +149,14 @@ namespace OPMedia.DeezerWorker
             }
         }
 
+        private void SetRenderQuality(dz_track_quality_t requestedQuality)
+        {
+            _requestedQuality = requestedQuality;
+
+            Logger.LogTrace($"DeezerPlayer::SetRenderQuality => Rendering at {_requestedQuality}");
+            var err = DeezerApi.dz_player_set_track_quality(_dzPlayer, null, IntPtr.Zero, _requestedQuality);
+            HandleDzErrorCode("dz_player_set_track_quality", WorkerError.CannotConnectToMedia, err);
+        }
 
         public void OnConnectDeactivated(IntPtr userData, IntPtr operation_userdata, dz_error_t status, IntPtr result)
         {
@@ -166,7 +178,6 @@ namespace OPMedia.DeezerWorker
             _needNaturalNext = false;
 
             Logger.LogTrace("DeezerPlayer::Play url={0}", url);
-
             CheckIfInitialized(userId);
 
             if (_dzConnect == IntPtr.Zero || _dzPlayer == IntPtr.Zero)
@@ -183,12 +194,14 @@ namespace OPMedia.DeezerWorker
             Logger.LogTrace("dz_player_load => Success");
             // --------------------------------------------------------------------
 
+try_play:
 
             // --------------------------------------------------------------------
             // Start playback using dz_player_play
             // This will trigger DZ_PLAYER_EVENT_RENDER_TRACK_START
             // Upon completion, _evtPlayerPlaybackStarted will be set.
             _evtPlayerPlaybackStarted.Reset();
+            _evtPlayerPlaybackError.Reset();
 
             // for playback from offset: dz_player_resume
 
@@ -203,8 +216,36 @@ namespace OPMedia.DeezerWorker
 
             HandleDzErrorCode("dz_player_play", WorkerError.RenderingError, err);
 
-            if (_evtPlayerPlaybackStarted.WaitOne(Worker.OperationTimeout) == false)
+            int evtIdx = WaitHandle.WaitAny(new WaitHandle[]
+            {
+                _evtPlayerPlaybackError,    // evtIdx = 0
+                _evtPlayerPlaybackStarted,  // evtIdx = 1
+            }, Worker.OperationTimeout);
+
+            if (evtIdx == 0)
+            {
+                // Playback error, try decreasing the quality
+                for (int i = 0; i < _trackQualities.Length; i++)
+                {
+                    if (_trackQualities[i] == _requestedQuality)
+                    {
+                        SetRenderQuality(_trackQualities[i + 1]);
+                        goto try_play;
+                    }
+                }
+
+                // No more lower qualities to try with
+                HandleDzErrorCode("dz_player_play", WorkerError.CannotConnectToMedia, dz_error_t.DZ_ERROR_MEDIASTREAMER_NOT_READABLE);
+            }
+            else if (evtIdx == 1)
+            {
+                // Playback success, nothing to do
+            }
+            else
+            {
+                // Timeout
                 HandleDzErrorCode("dz_player_play", WorkerError.RenderingError, dz_error_t.DZ_ERROR_PLAYER_PLAY_TIMEOUT);
+            }
 
             Logger.LogTrace("dz_player_play => Success");
             // --------------------------------------------------------------------
@@ -228,6 +269,7 @@ namespace OPMedia.DeezerWorker
         ManualResetEvent _evtPlayerPaused = new ManualResetEvent(false);
         ManualResetEvent _evtPlayerStreamReadyAfterSeek = new ManualResetEvent(false);
 
+        ManualResetEvent _evtPlayerPlaybackError = new ManualResetEvent(false);
         ManualResetEvent _evtPlayerPlaybackStarted = new ManualResetEvent(false);
         ManualResetEvent _evtPlayerPlaybackStopped = new ManualResetEvent(false);
 
@@ -413,6 +455,15 @@ namespace OPMedia.DeezerWorker
 
             switch (evtType)
             {
+                case dz_player_event_t.DZ_PLAYER_EVENT_RENDER_TRACK_START_FAILURE:
+                    {
+                        // Signal that it could not start playback with the requested params
+                        // Most likely it's about the track quality
+                        _evtPlayerPlaybackError.Set();
+                        FilterState = FilterState.Stopped;
+                    }
+                    break;
+
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_TRACK_SELECTED:
                     {
                         string selectedInfo = DeezerApi.dz_player_event_track_selected_dzapiinfo(evtHandle);
