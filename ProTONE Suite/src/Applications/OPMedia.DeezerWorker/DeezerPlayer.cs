@@ -51,7 +51,7 @@ namespace OPMedia.DeezerWorker
 
         public DeezerPlayer()
         {
-            _userCachePath = PathUtils.GetCacheFolderPath("dzrcache");
+            _userCachePath = PathUtils.GetCacheFolderPath("dzrcache", true);
         }
 
         private void CheckIfInitialized(string userId)
@@ -69,6 +69,7 @@ namespace OPMedia.DeezerWorker
             if (_dzConfig == null)
             {
                 Logger.LogTrace("DeezerPlayer::SetupConfig => Creating config object ...");
+                Logger.LogTrace($"DeezerPlayer::SetupConfig => Cache path is: {_userCachePath}");
 
                 _dzConfig = new dz_connect_configuration();
                 _dzConfig.app_id = userId;
