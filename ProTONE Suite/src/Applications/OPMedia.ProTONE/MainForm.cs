@@ -205,6 +205,7 @@ namespace OPMedia.ProTONE
             ThemeManager.SetFont(this, FontSizes.Normal);
 
             BuildThumbnailButtons(false);
+            SetTitle(mediaPlayer.BuildTitle());
         }
 
         bool BuildMediaStateString(bool showTime, ref string message)
