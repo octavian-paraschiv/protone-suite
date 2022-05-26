@@ -12,15 +12,14 @@
 
 #region Using directives
 using System;
+using System.Linq;
 using System.Resources;
-using System.Globalization;
 using System.Threading;
 using OPMedia.Core.Logging;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Collections;
 using System.Collections.Generic;
-using OPMedia.Core;
 using OPMedia.Core.Utilities;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
@@ -31,49 +30,12 @@ namespace OPMedia.Core.TranslationSupport
     /// <summary>
     /// Class that provides internationalization support.
     /// </summary>
-    /// <remarks>
-    /// <b>How does Translator work. The Translation Assembly Stack (TAS)</b>
-    /// 
-    /// To use an assembly as a Translation Assembly, it must be added in the translation assembly list
-    /// by means of a call to Translator.RegisterTranslationAssembly method.
-    /// 
-    /// Then, when translating a given tag (e.g. TXT_MYTAG) the Translator will try to look the
-    /// tag up in all registered assembles. The final translation is built on the first found 
-    /// translation resource that matches the given tag.
-    /// 
-    /// This approach would result in the fact that the first registered assemblies
-    /// have priority on top of the last registered ones. What if the developer tries to 
-    /// give another translation for the same tag ? With the approach of "return first tag
-    /// to match" there would not be a chance to override a given translation tag, whatsoever.
-    /// 
-    /// For this reason the Translator does in fact a reverse lookup: it looks first into the 
-    /// last registered assemnly, keeping the first registered one to be looked up the last.
-    /// This yields that the translation assembly list acts like a Translation Assembly Stack.
-    /// 
-    /// Typically, translations are to be provided by the assemblies that expose UI elements.
-    /// They have to be located in the Translations.resx file that resides in the Translations
-    /// folder located in the project folder.
-    /// 
-    /// 
-    /// For the OPMedia Library the register/lookup order is typically this one:
-    /// 
-    /// Assembly                       Register order        Lookup order
-    /// 
-    /// OPMedia.UI                           1                     1
-    /// OPMedia.ProTONE.UI                   2                     2 
-    /// OPMedia.MediaLibrary                 3                     3
-    /// OPMedia.Addons.Builtin               4                     4
-    /// 
-    /// Mind that you have to register the addon library EXPLICITLY in order to use it as a Translation
-    /// Assembly ! The best place for doing this is in the override of the ConfigureAddon method of the addon panel.
-    /// 
-    /// </remarks>
 	public static class Translator
     {
         #region Members
         static bool translate = true;
-        private static List<ResourceManager> _resManagers = new List<ResourceManager>();
-        private static List<Assembly> _assemblies = new List<Assembly>();
+
+        private static Dictionary<string, TranslationFile> _translations = new Dictionary<string, TranslationFile>();
         #endregion
 
         static List<string> __knownUntranslatableStrings = new List<string>();
@@ -94,24 +56,20 @@ namespace OPMedia.Core.TranslationSupport
                 "URL",
             });
 
+            AppConfig.SupportedCultures.ToList().ForEach(c =>
+            {
+                var tf = new TranslationFile(c.Name);
+                tf.TranslationUpdated += Tf_TranslationUpdated;
+                if (tf?.Translations?.Count > 0)
+                    _translations.Add(c.Name, tf);
+            });
         }
 
-        /// <summary>
-        /// Registers the given assembly as a Translation assembly.
-        /// </summary>
-        /// <param name="asm">Assembly to be registered</param>
-        public static void RegisterTranslationAssembly(Assembly asm)
+        private static void Tf_TranslationUpdated(string lang)
         {
-            if (translate && asm != null && !_assemblies.Contains(asm))
-            {
-                _assemblies.Add(asm);
-
-                ResourceManager resManager = 
-                    new ResourceManager(string.Format("{0}.Translations.Translation",
-                    asm.GetName().Name), asm);
-
-                _resManagers.Add(resManager);
-            }
+            string crtLang = AppConfig.GetCulture(_languageId).Name;
+            if (string.Compare(crtLang, lang, true) == 0)
+                SetInterfaceLanguage(lang);
         }
 
         /// <summary>
@@ -151,51 +109,44 @@ namespace OPMedia.Core.TranslationSupport
             string retVal = tag;
             string log = string.Empty;
 
-            if (translate)
+            try
             {
-                if (IsTranslatable(tag))
+                if (translate)
                 {
-                    bool hasTrailingColon = tag.TrimEnd().EndsWith(":");
-                    tag = tag.TrimEnd(':');
-
-                    string translatedTag = null;
-
-                    foreach (ResourceManager rm in _resManagers)
+                    if (IsTranslatable(tag))
                     {
-                        try
+                        bool hasTrailingColon = tag.TrimEnd().EndsWith(":");
+                        tag = tag.TrimEnd(':');
+
+                        string translatedTag = null;
+
+                        string lang = AppConfig.GetCulture(_languageId).Name;
+                        if (_translations.ContainsKey(lang))
                         {
-                            translatedTag = rm.GetString(tag, AppConfig.GetCulture(_languageId));
+                            translatedTag = _translations[lang][tag];
                             if (translatedTag != null)
                             {
-                                log = $"{rm.BaseName.Replace("Translations.Translation", "").Trim('.')}=>{tag}";
-
                                 retVal = translatedTag;
-
                                 if (hasTrailingColon && !retVal.EndsWith(":"))
-                                {
                                     retVal += ": ";
-                                }
-
-                                break;
                             }
-
                         }
-                        catch (Exception ex)
-                        {
-                            Logger.LogException(ex);
-                            retVal = tag;
-                        }
-                    }
-
-                    if (retVal == tag)
-                    {
-                        Logger.LogUntranslated(tag);
-                    }
-                    else
-                    {
-                        Logger.LogTranslated($"{log}");
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                retVal = tag;
+            }
+
+            if (retVal == tag)
+            {
+                Logger.LogUntranslated(tag);
+            }
+            else
+            {
+                Logger.LogTranslated($"{log}");
             }
 
             return retVal;
@@ -331,17 +282,12 @@ namespace OPMedia.Core.TranslationSupport
             {
                 retVal = taggedString;
 
-                foreach (ResourceManager rm in _resManagers)
+                string lang = AppConfig.GetCulture(_languageId).Name;
+                if (_translations.ContainsKey(lang))
                 {
-                    ResourceSet rs = rm.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true);
-                    if (rs != null)
+                    foreach (var kvp in _translations[lang].Translations)
                     {
-                        IDictionaryEnumerator enu = rs.GetEnumerator();
-
-                        while (enu.MoveNext())
-                        {
-                            retVal = retVal.Replace(enu.Key as string, enu.Value as string);
-                        }
+                        retVal = retVal.Replace(kvp.Key, kvp.Value);
                     }
                 }
             }
