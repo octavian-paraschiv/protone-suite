@@ -14,7 +14,7 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/OPMedia.OSDependentLayer/</PublishUrl>
     <Install>true</Install>
@@ -46,6 +46,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -77,6 +81,7 @@
     <Compile Include="TicToc.cs" />
     <Compile Include="Persistence\IPersistenceService.cs" />
     <Compile Include="Persistence\PersistenceProxy.cs" />
+    <Compile Include="TranslationSupport\TranslationFile.cs" />
     <Compile Include="Utilities\HelperClasses.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Utilities\SerialPortAPI.cs" />

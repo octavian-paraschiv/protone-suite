@@ -14,7 +14,7 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -48,6 +48,10 @@
     <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\NAudio.Wasapi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -115,6 +119,18 @@
     </Compile>
     <Compile Include="Controls\MediaPlayer\PlaylistItemInfo.Designer.cs">
       <DependentUpon>PlaylistItemInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MediaPlayer\SignalAnalisysFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MediaPlayer\SignalAnalisysFrame.Designer.cs">
+      <DependentUpon>SignalAnalisysFrame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MediaPlayer\SignalAnalysisScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MediaPlayer\SignalAnalysisScreen.Designer.cs">
+      <DependentUpon>SignalAnalysisScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\OnlineMediaBrowser\DeezerTrackBrowserCtl.cs">
       <SubType>UserControl</SubType>
@@ -270,11 +286,6 @@
       <DependentUpon>SubtitleDownloadNotifyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SubtitleDownload\SubtitleDownloadProcessor.cs" />
-    <Compile Include="Translations\Translation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Translation.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Configuration\ConnectedFilesConfigCtl.resx">
@@ -346,6 +357,12 @@
       <DependentUpon>RenderingZone.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MediaPlayer\SignalAnalisysFrame.resx">
+      <DependentUpon>SignalAnalisysFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MediaPlayer\SignalAnalysisScreen.resx">
+      <DependentUpon>SignalAnalysisScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MediaPlayer\TimeScale.resx">
       <DependentUpon>TimeScale.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -383,9 +400,6 @@
     <EmbeddedResource Include="Dialogs\OnlineContentBrowser.resx">
       <DependentUpon>OnlineContentBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.fr.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj">
@@ -414,24 +428,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Translations\Translation.de.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Configuration\MiscConfig\SchedulerSettingsPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SchedulerSettingsPage.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Translations\Translation.ro.resx">
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -500,7 +499,7 @@
     <None Include="Resources\btnPlay.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SignalAnalisys.png" />
+    <None Include="Resources\btnSignalAnalisys.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TrackInfo.png" />

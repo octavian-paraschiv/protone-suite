@@ -15,7 +15,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -401,11 +401,6 @@
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Generic\ColorHelper.cs" />
     <Compile Include="Generic\ImageProcessing.cs" />
-    <Compile Include="Translations\Translation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Translation.resx</DependentUpon>
-    </Compile>
     <Compile Include="ApplicationUpdate\ApplicationUpdateHelper.cs" />
     <Compile Include="UIExtensions.cs" />
     <Compile Include="Wizards\StepButtonsCtl.cs">
@@ -525,12 +520,6 @@
     <EmbeddedResource Include="Themes\ThemeFormBase.resx">
       <DependentUpon>ThemeFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.de.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.fr.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="TrayNotificationBox.resx">
       <DependentUpon>TrayNotificationBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -567,11 +556,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\UserControls\WeekdaySelector.resx">
@@ -590,10 +574,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\SerialPortCfgDlg.resx">
       <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.ro.resx">
-      <LastGenOutput>Translation.ro.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
