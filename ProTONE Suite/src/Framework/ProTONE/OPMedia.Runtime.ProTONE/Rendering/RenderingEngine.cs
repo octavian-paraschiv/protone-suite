@@ -29,12 +29,13 @@ using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
-using NAudio.CoreAudioApi;
 using System.Threading.Tasks;
 using System.Threading;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 using System.Linq;
+using NAudio.CoreAudioApi;
+using OPMedia.Runtime.ProTONE.AudioMetering;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering
@@ -923,27 +924,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             timerCheckState.Interval = 500;
             timerCheckState.Start();
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
-                
-            //Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
+
+            Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
         }
 
-        //void Application_ApplicationExit(object sender, EventArgs e)
-        //{
-        //    if (ProTONEConfig.IsPlayer && ProTONEConfig.DeezerHasValidConfig)
-        //    {
-        //        string deezerCachePath = PathUtils.GetCacheFolderPath("dzrcache");
-        //        // Cleanup cache
-        //        if (Directory.Exists(deezerCachePath))
-        //        {
-        //            Logger.LogInfo($"Purging Deezer cache folder at {deezerCachePath}");
-        //            Directory.Delete(deezerCachePath, true);
-        //        }
-        //    }
-        //}
+        void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            WasapiMeter.Instance.Stop();
+        }
 
 
         ~RenderingEngine()
         {
+            WasapiMeter.Instance.Stop();
+
             if (timerCheckState != null)
             {
                 timerCheckState.Dispose();
@@ -1127,37 +1121,54 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         public event MediaRendererEventHandler MediaRendererClock = null;
         private void FireMediaRendererClock()
         {
-            if (MediaRendererClock != null)
+            try
             {
-                MediaRendererClock();
+                MediaRendererClock?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
         public event MediaRendererEventHandler MediaRendererHeartbeat = null;
         private void FireMediaRendererHeartbeat()
         {
-            if (MediaRendererHeartbeat != null)
+            try
             {
-                MediaRendererHeartbeat();
+                MediaRendererHeartbeat?.Invoke();
             }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
         }
 
         public event FilterStateChangedHandler FilterStateChanged = null;
         private void FireFilterStateChanged(OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState, string oldMedia,
             OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState newState, string newMedia)
         {
-            if (FilterStateChanged != null)
+            try
             {
-                FilterStateChanged(oldState, oldMedia, newState, newMedia);
+                FilterStateChanged?.Invoke(oldState, oldMedia, newState, newMedia);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
         
         public event MediaRenderingExceptionHandler MediaRenderingException = null;
         private void FireMediaRenderingException(RenderingExceptionEventArgs args)
         {
-            if (MediaRenderingException != null)
+            try
             {
-                MediaRenderingException(args);
+                MediaRenderingException?.Invoke(args);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
         

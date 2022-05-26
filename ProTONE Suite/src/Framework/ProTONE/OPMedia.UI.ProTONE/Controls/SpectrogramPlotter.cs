@@ -11,6 +11,7 @@ using OPMedia.UI.Themes;
 using OPMedia.Runtime.DSP;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.AudioMetering;
 
 namespace OPMedia.UI.ProTONE.Controls
 {
@@ -25,16 +26,18 @@ namespace OPMedia.UI.ProTONE.Controls
 
         public int BandCount { get; set; }
 
+        static SpectrogramPlotter()
+        {
+            for (int i = 0; i < DecadeLinesRelativePositions.Length; i++)
+                DecadeLinesRelativePositions[i] /= WasapiMeter.MAX_SPECTROGRAM_BANDS;
+        }
+
         public SpectrogramPlotter() : base()
         {
             RecreateBrush();
 
-            for (int i = 0; i < DecadeLinesRelativePositions.Length; i++)
-                DecadeLinesRelativePositions[i] /= DsRendererBase.MAX_SPECTROGRAM_BANDS;
-
             this.Resize += new EventHandler(SpectrogramPlotter_Resize);
-
-            this.BandCount = DsRendererBase.MAX_SPECTROGRAM_BANDS;
+            this.BandCount = WasapiMeter.MAX_SPECTROGRAM_BANDS;
         }
 
         void SpectrogramPlotter_Resize(object sender, EventArgs e)
@@ -80,11 +83,11 @@ namespace OPMedia.UI.ProTONE.Controls
                     {
                         try
                         {
-                            int maxFq = 20500;// FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
+                            int maxFq = 24000;// FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
                                 //DsRendererBase.MAX_SPECTROGRAM_BANDS);
                             decadeLineText = string.Format("{0}K", (int)(maxFq / 1000));
                         }
-                        catch
+                        catch(Exception ex)
                         {
                             decadeLineText = string.Empty;
                         }

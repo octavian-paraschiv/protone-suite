@@ -419,7 +419,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             string title = Translator.Translate("TXT_APP_NAME");
             try
             {
-                if (this.PlayedFileTitle.Length > 0)
+                if (this.PlayedFileTitle?.Length > 0)
                 {
                     title = string.Format("{1} - [{2}] - {0}",
                         Translator.Translate("TXT_APP_NAME"),
@@ -944,6 +944,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         }
                     }
                     break;
+
+                case OPMShortcut.CmdSignalAnalisys:
+                    ShowSignalAnalisysFrame();
+                    break;
                     
                 default:
                     playlist.OnExecuteShortcut(args);
@@ -1025,6 +1029,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             return retVal;
         }
 
+        #region Rendering frame
+
+        private RenderingFrame _renderingFrame = null;
+
         private void ShowRenderingRegion()
         {
             if (_renderingFrame == null)
@@ -1045,7 +1053,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        private RenderingFrame _renderingFrame = null;
         private void CreateRenderingFrame()
         {
             GC.Collect();
@@ -1063,6 +1070,33 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _renderingFrame = null;
             GC.Collect();
         }
+        #endregion
+
+        #region Signal Analysis frame
+
+        private SignalAnalisysFrame _signalAnalysisFrame = null;
+
+        private void ShowSignalAnalisysFrame()
+        {
+            if (_signalAnalysisFrame == null)
+            {
+                GC.Collect();
+                _signalAnalysisFrame = new SignalAnalisysFrame();
+                _signalAnalysisFrame.HandleDestroyed += new EventHandler(signalAnalysisFrame_HandleDestroyed);
+            }
+
+            _signalAnalysisFrame.Show();
+            _signalAnalysisFrame.BringToFront();
+
+        }
+
+        void signalAnalysisFrame_HandleDestroyed(object sender, EventArgs e)
+        {
+            _signalAnalysisFrame = null;
+            GC.Collect();
+        }
+        #endregion
+
         #endregion
 
         public void SetRenderingMenu(ContextMenuStrip renderingMenu)

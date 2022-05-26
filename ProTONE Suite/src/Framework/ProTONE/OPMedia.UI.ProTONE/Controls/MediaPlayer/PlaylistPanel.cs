@@ -41,7 +41,6 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using System.Threading.Tasks;
-
 using NAudio.CoreAudioApi;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
@@ -187,6 +186,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void UpdateLanguage()
         {
             UpdatePlaylistNames(false);
+            UpdateTotalTime(playlist.TotalPlaylistTime);
         }
 
         [EventSink(LocalEventNames.UpdatePlaylistNames)]
@@ -246,51 +246,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void OnUpdateVUMeter(object sender, EventArgs e)
         {
-            double percVolL = 0;
-            double percVolR = 0;
-
-            try
-            {
-                if (RenderingEngine.DefaultInstance.FilterState == FilterState.Running)
-                {
-                    var enumerator = new MMDeviceEnumerator();
-                    var device = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
-                    if (device != null &&
-                                    device.AudioMeterInformation != null &&
-                                    device.AudioMeterInformation.PeakValues != null &&
-                                    device.AudioMeterInformation.PeakValues.Count > 0)
-                    {
-                        bool isStereo = device.AudioMeterInformation.PeakValues.Count > 1;
-
-                        var vol = Math.Max(1, RenderingEngine.DefaultInstance.AudioVolume);
-
-                        // Magic? No, this is just the inverse of the sound card transfer function.
-                        // For sure it's not the same between two sound cards. Not even of the same model.
-                        double mul = 1000 / Math.Pow(vol, 1.643f);
-
-                        var peakL = (device.AudioMeterInformation.PeakValues[0]);
-                        var peakR = (device.AudioMeterInformation.PeakValues[isStereo ? 1 : 0]);
-
-                        var actL = mul * peakL;
-                        var actR = mul * peakR;
-
-                        percVolL = Math.Min(1, mul * Math.Max(0, peakL));
-                        percVolR = Math.Min(1, mul * Math.Max(0, peakR));
-
-                        i++;
-                    }
-                }
-            }
-            catch
-            {
-                percVolL = 0;
-                percVolR = 0;
-            }
-
-            vuLeft.Value = percVolL * vuLeft.Maximum;
-            vuRight.Value = percVolR * vuLeft.Maximum;
-
         }
 
         private void OnTimerUpdateItemsDesc(object sender, EventArgs e)

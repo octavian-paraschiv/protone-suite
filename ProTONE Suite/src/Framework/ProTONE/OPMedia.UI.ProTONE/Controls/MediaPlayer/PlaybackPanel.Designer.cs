@@ -46,6 +46,7 @@
             this.btnOpenURL = new OPMedia.UI.Controls.ImageButton();
             this.btnOpenDisk = new OPMedia.UI.Controls.ImageButton();
             this.btnLoad = new OPMedia.UI.Controls.ImageButton();
+            this.btnSignalAnalisys = new OPMedia.UI.Controls.ImageButton();
             this.opmTableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPlayPause)).BeginInit();
@@ -61,11 +62,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenDisk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLoad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSignalAnalisys)).BeginInit();
             this.SuspendLayout();
             // 
             // opmTableLayoutPanel1
             // 
-            this.opmTableLayoutPanel1.ColumnCount = 18;
+            this.opmTableLayoutPanel1.ColumnCount = 19;
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
@@ -82,8 +84,10 @@
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.opmTableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.opmTableLayoutPanel1.Controls.Add(this.btnSignalAnalisys, 16, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.timeScale, 2, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.pbTimeIcon, 1, 0);
             this.opmTableLayoutPanel1.Controls.Add(this.volumeScale, 11, 1);
@@ -97,7 +101,7 @@
             this.opmTableLayoutPanel1.Controls.Add(this.btnToggleShuffle, 8, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.pbVolIcon, 10, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.lblTime, 13, 0);
-            this.opmTableLayoutPanel1.Controls.Add(this.btnSettings, 17, 1);
+            this.opmTableLayoutPanel1.Controls.Add(this.btnSettings, 18, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.btnOpenURL, 15, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.btnOpenDisk, 14, 1);
             this.opmTableLayoutPanel1.Controls.Add(this.btnLoad, 13, 1);
@@ -108,7 +112,7 @@
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(558, 75);
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(560, 75);
             this.opmTableLayoutPanel1.TabIndex = 0;
             // 
             // timeScale
@@ -126,7 +130,7 @@
             this.timeScale.Name = "timeScale";
             this.timeScale.OverrideBackColor = System.Drawing.Color.Empty;
             this.timeScale.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.timeScale.Size = new System.Drawing.Size(372, 15);
+            this.timeScale.Size = new System.Drawing.Size(339, 15);
             this.timeScale.TabIndex = 13;
             this.timeScale.TotalSeconds = 0D;
             // 
@@ -154,7 +158,7 @@
             this.volumeScale.Name = "volumeScale";
             this.volumeScale.OverrideBackColor = System.Drawing.Color.Empty;
             this.volumeScale.Position = 5000;
-            this.volumeScale.Size = new System.Drawing.Size(144, 25);
+            this.volumeScale.Size = new System.Drawing.Size(111, 25);
             this.volumeScale.TabIndex = 11;
             // 
             // btnPlayPause
@@ -279,17 +283,17 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.opmTableLayoutPanel1.SetColumnSpan(this.lblTime, 5);
+            this.opmTableLayoutPanel1.SetColumnSpan(this.lblTime, 6);
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblTime.FontSize = OPMedia.UI.Themes.FontSizes.VeryLarge;
-            this.lblTime.Location = new System.Drawing.Point(413, 0);
+            this.lblTime.Location = new System.Drawing.Point(380, 0);
             this.lblTime.MaximumSize = new System.Drawing.Size(3500, 25);
             this.lblTime.MinimumSize = new System.Drawing.Size(150, 25);
             this.lblTime.Name = "lblTime";
             this.lblTime.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblTime.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblTime.Size = new System.Drawing.Size(150, 25);
+            this.lblTime.Size = new System.Drawing.Size(177, 25);
             this.lblTime.TabIndex = 14;
             this.lblTime.Text = "00:00:00 / 00:00:00";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -298,7 +302,7 @@
             // 
             this.btnSettings.Checked = false;
             this.btnSettings.Image = null;
-            this.btnSettings.Location = new System.Drawing.Point(526, 33);
+            this.btnSettings.Location = new System.Drawing.Point(528, 33);
             this.btnSettings.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(29, 30);
@@ -311,7 +315,7 @@
             // 
             this.btnOpenURL.Checked = false;
             this.btnOpenURL.Image = null;
-            this.btnOpenURL.Location = new System.Drawing.Point(483, 33);
+            this.btnOpenURL.Location = new System.Drawing.Point(450, 33);
             this.btnOpenURL.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.btnOpenURL.Name = "btnOpenURL";
             this.btnOpenURL.Size = new System.Drawing.Size(29, 30);
@@ -324,7 +328,7 @@
             // 
             this.btnOpenDisk.Checked = false;
             this.btnOpenDisk.Image = null;
-            this.btnOpenDisk.Location = new System.Drawing.Point(448, 33);
+            this.btnOpenDisk.Location = new System.Drawing.Point(415, 33);
             this.btnOpenDisk.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.btnOpenDisk.Name = "btnOpenDisk";
             this.btnOpenDisk.Size = new System.Drawing.Size(29, 30);
@@ -337,7 +341,7 @@
             // 
             this.btnLoad.Checked = false;
             this.btnLoad.Image = global::OPMedia.UI.ProTONE.Properties.Resources.btnLoad;
-            this.btnLoad.Location = new System.Drawing.Point(413, 33);
+            this.btnLoad.Location = new System.Drawing.Point(380, 33);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(29, 30);
@@ -345,6 +349,19 @@
             this.btnLoad.TabStop = false;
             this.btnLoad.Tag = "CmdLoad";
             this.btnLoad.TipImage = null;
+            // 
+            // btnSignalAnalisys
+            // 
+            this.btnSignalAnalisys.Checked = false;
+            this.btnSignalAnalisys.Image = null;
+            this.btnSignalAnalisys.Location = new System.Drawing.Point(485, 33);
+            this.btnSignalAnalisys.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
+            this.btnSignalAnalisys.Name = "btnSignalAnalisys";
+            this.btnSignalAnalisys.Size = new System.Drawing.Size(29, 30);
+            this.btnSignalAnalisys.TabIndex = 19;
+            this.btnSignalAnalisys.TabStop = false;
+            this.btnSignalAnalisys.Tag = "CmdSignalAnalisys";
+            this.btnSignalAnalisys.TipImage = null;
             // 
             // PlaybackPanel
             // 
@@ -354,7 +371,7 @@
             this.MaximumSize = new System.Drawing.Size(3500, 75);
             this.MinimumSize = new System.Drawing.Size(500, 75);
             this.Name = "PlaybackPanel";
-            this.Size = new System.Drawing.Size(558, 75);
+            this.Size = new System.Drawing.Size(560, 75);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbTimeIcon)).EndInit();
@@ -371,6 +388,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenDisk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLoad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSignalAnalisys)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -395,5 +413,6 @@
         private UI.Controls.ImageButton btnOpenURL;
         private UI.Controls.ImageButton btnOpenDisk;
         private UI.Controls.ImageButton btnLoad;
+        private UI.Controls.ImageButton btnSignalAnalisys;
     }
 }

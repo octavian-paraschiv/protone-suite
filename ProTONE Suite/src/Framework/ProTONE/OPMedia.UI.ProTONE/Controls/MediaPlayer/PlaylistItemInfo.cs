@@ -41,7 +41,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 if (_item == null || _item != value)
                 {
                     _item = value;
-                    UpdateItem();
+                    PerformTranslation();
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 if (_altDisplay != value)
                 {
                     _altDisplay = value;
-                    UpdateItem();
+                    PerformTranslation();
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             pbInfo.Image = Resources.UnknownImage;
 
             OnThemeUpdatedInternal();
-            UpdateItem();
+            PerformTranslation();
 
             RenderingEngine.DefaultInstance.RenderedStreamPropertyChanged += DefaultInstance_RenderedStreamPropertyChanged;
         }
@@ -101,13 +101,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private string _oldUrl = null;
 
+
         protected override void OnThemeUpdatedInternal()
         {
             propDisplay.ForeColor = ThemeManager.ForeColor;
             propDisplay.BackColor = ThemeManager.GradientNormalColor1;
+            PerformTranslation();
         }
 
-        private void UpdateItem()
+        [EventSink(EventNames.PerformTranslation)]
+        public void PerformTranslation()
         {
             try
             {

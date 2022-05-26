@@ -40,10 +40,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblSep3 = new OPMedia.UI.Controls.OPMLabel();
             this.lblSep5 = new OPMedia.UI.Controls.OPMLabel();
             this.pnlLayout = new OPMedia.UI.Controls.OPMTableLayoutPanel();
-            this.piTotal = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
-            this.piCurrent = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
-            this.piPrev = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
-            this.piNext = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
             this.lblSep1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lvPlaylist = new OPMedia.UI.Controls.HeaderlessListView();
@@ -55,12 +51,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblEmptyPlaylist = new OPMedia.UI.Controls.OPMLabel();
             this.lblOpenPlaylist = new OPMedia.UI.Controls.OPMLinkLabel();
             this.lblOpenFiles = new OPMedia.UI.Controls.OPMLinkLabel();
-            this.vuLeft = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
-            this.vuRight = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
-            this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
-            this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
-            this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
-            this.opmLabel4 = new OPMedia.UI.Controls.OPMLabel();
+            this.piTotal = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
+            this.piCurrent = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
+            this.piPrev = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
+            this.piNext = new OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemInfo();
             this.cmsPlaylist.SuspendLayout();
             this.pnlLayout.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
@@ -88,7 +82,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblSep2.AutoSize = true;
             this.lblSep2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSep2.Location = new System.Drawing.Point(398, 439);
+            this.lblSep2.Location = new System.Drawing.Point(398, 550);
             this.lblSep2.Name = "lblSep2";
             this.lblSep2.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblSep2.OverrideForeColor = System.Drawing.Color.Empty;
@@ -101,7 +95,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblSep3.AutoSize = true;
             this.lblSep3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSep3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSep3.Location = new System.Drawing.Point(398, 461);
+            this.lblSep3.Location = new System.Drawing.Point(398, 572);
             this.lblSep3.Name = "lblSep3";
             this.lblSep3.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblSep3.OverrideForeColor = System.Drawing.Color.Empty;
@@ -114,7 +108,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlLayout.SetColumnSpan(this.lblSep5, 6);
             this.lblSep5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSep5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblSep5.Location = new System.Drawing.Point(3, 485);
+            this.lblSep5.Location = new System.Drawing.Point(3, 596);
             this.lblSep5.Name = "lblSep5";
             this.lblSep5.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblSep5.OverrideForeColor = System.Drawing.Color.Empty;
@@ -140,12 +134,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlLayout.Controls.Add(this.piNext, 4, 2);
             this.pnlLayout.Controls.Add(this.lblSep1, 3, 0);
             this.pnlLayout.Controls.Add(this.opmTableLayoutPanel1, 0, 0);
-            this.pnlLayout.Controls.Add(this.vuLeft, 1, 2);
-            this.pnlLayout.Controls.Add(this.vuRight, 1, 4);
-            this.pnlLayout.Controls.Add(this.opmLabel1, 0, 2);
-            this.pnlLayout.Controls.Add(this.opmLabel2, 0, 4);
-            this.pnlLayout.Controls.Add(this.opmLabel3, 2, 2);
-            this.pnlLayout.Controls.Add(this.opmLabel4, 2, 4);
             this.pnlLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
             this.pnlLayout.Margin = new System.Windows.Forms.Padding(0);
@@ -161,71 +149,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 2F));
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlLayout.Size = new System.Drawing.Size(695, 507);
+            this.pnlLayout.Size = new System.Drawing.Size(695, 618);
             this.pnlLayout.TabIndex = 4;
-            // 
-            // piTotal
-            // 
-            this.piTotal.AltDisplay = "";
-            this.piTotal.AutoSize = true;
-            this.piTotal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlLayout.SetColumnSpan(this.piTotal, 6);
-            this.piTotal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.piTotal.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.piTotal.Item = null;
-            this.piTotal.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.None;
-            this.piTotal.Location = new System.Drawing.Point(0, 488);
-            this.piTotal.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-            this.piTotal.Name = "piTotal";
-            this.piTotal.OverrideBackColor = System.Drawing.Color.Empty;
-            this.piTotal.Size = new System.Drawing.Size(695, 17);
-            this.piTotal.TabIndex = 4;
-            // 
-            // piCurrent
-            // 
-            this.piCurrent.AltDisplay = "";
-            this.piCurrent.AutoSize = true;
-            this.piCurrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.piCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.piCurrent.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.piCurrent.Item = null;
-            this.piCurrent.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Current;
-            this.piCurrent.Location = new System.Drawing.Point(395, 2);
-            this.piCurrent.Margin = new System.Windows.Forms.Padding(0, 2, 0, 5);
-            this.piCurrent.Name = "piCurrent";
-            this.piCurrent.OverrideBackColor = System.Drawing.Color.Empty;
-            this.piCurrent.Size = new System.Drawing.Size(280, 432);
-            this.piCurrent.TabIndex = 7;
-            // 
-            // piPrev
-            // 
-            this.piPrev.AltDisplay = "";
-            this.piPrev.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.piPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.piPrev.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.piPrev.Item = null;
-            this.piPrev.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Previous;
-            this.piPrev.Location = new System.Drawing.Point(395, 463);
-            this.piPrev.Margin = new System.Windows.Forms.Padding(0);
-            this.piPrev.Name = "piPrev";
-            this.piPrev.OverrideBackColor = System.Drawing.Color.Empty;
-            this.piPrev.Size = new System.Drawing.Size(280, 20);
-            this.piPrev.TabIndex = 6;
-            // 
-            // piNext
-            // 
-            this.piNext.AltDisplay = "";
-            this.piNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.piNext.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.piNext.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.piNext.Item = null;
-            this.piNext.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Next;
-            this.piNext.Location = new System.Drawing.Point(395, 441);
-            this.piNext.Margin = new System.Windows.Forms.Padding(0);
-            this.piNext.Name = "piNext";
-            this.piNext.OverrideBackColor = System.Drawing.Color.Empty;
-            this.piNext.Size = new System.Drawing.Size(280, 20);
-            this.piNext.TabIndex = 8;
             // 
             // lblSep1
             // 
@@ -238,7 +163,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblSep1.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblSep1.OverrideForeColor = System.Drawing.Color.Empty;
             this.pnlLayout.SetRowSpan(this.lblSep1, 5);
-            this.lblSep1.Size = new System.Drawing.Size(2, 473);
+            this.lblSep1.Size = new System.Drawing.Size(2, 584);
             this.lblSep1.TabIndex = 14;
             // 
             // opmTableLayoutPanel1
@@ -255,18 +180,23 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.opmTableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.opmTableLayoutPanel1.Name = "opmTableLayoutPanel1";
             this.opmTableLayoutPanel1.RowCount = 4;
-            this.pnlLayout.SetRowSpan(this.opmTableLayoutPanel1, 2);
+            this.pnlLayout.SetRowSpan(this.opmTableLayoutPanel1, 5);
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(383, 441);
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.opmTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.opmTableLayoutPanel1.Size = new System.Drawing.Size(383, 594);
             this.opmTableLayoutPanel1.TabIndex = 15;
             // 
             // lvPlaylist
             // 
             this.lvPlaylist.AllowEditing = false;
             this.lvPlaylist.AlternateRowColors = true;
+            this.lvPlaylist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvPlaylist.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colDummy,
             this.colMisc,
@@ -280,7 +210,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lvPlaylist.MultiSelect = false;
             this.lvPlaylist.Name = "lvPlaylist";
             this.lvPlaylist.OverrideBackColor = System.Drawing.Color.Empty;
-            this.lvPlaylist.Size = new System.Drawing.Size(373, 352);
+            this.lvPlaylist.Size = new System.Drawing.Size(373, 505);
             this.lvPlaylist.TabIndex = 5;
             this.lvPlaylist.UseCompatibleStateImageBehavior = false;
             this.lvPlaylist.View = System.Windows.Forms.View.Details;
@@ -340,120 +270,75 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.lblOpenFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblOpenFiles.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblOpenFiles_LinkClicked);
             // 
-            // vuLeft
+            // piTotal
             // 
-            this.vuLeft.AllowDragging = false;
-            this.vuLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.vuLeft.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.vuLeft.EffectiveMaximum = 0D;
-            this.vuLeft.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.vuLeft.Location = new System.Drawing.Point(62, 449);
-            this.vuLeft.Margin = new System.Windows.Forms.Padding(0, 8, 0, 3);
-            this.vuLeft.Maximum = 10000D;
-            this.vuLeft.MaximumSize = new System.Drawing.Size(10000, 9);
-            this.vuLeft.MinimumSize = new System.Drawing.Size(10, 9);
-            this.vuLeft.Name = "vuLeft";
-            this.vuLeft.NrTicks = 20;
-            this.vuLeft.OverrideBackColor = System.Drawing.Color.Empty;
-            this.vuLeft.OverrideElapsedBackColor = System.Drawing.Color.Empty;
-            this.vuLeft.ShowTicks = true;
-            this.vuLeft.Size = new System.Drawing.Size(284, 9);
-            this.vuLeft.TabIndex = 16;
-            this.vuLeft.Value = 0D;
-            this.vuLeft.Vertical = false;
+            this.piTotal.AltDisplay = "";
+            this.piTotal.AutoSize = true;
+            this.piTotal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlLayout.SetColumnSpan(this.piTotal, 6);
+            this.piTotal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.piTotal.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.piTotal.Item = null;
+            this.piTotal.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.None;
+            this.piTotal.Location = new System.Drawing.Point(0, 599);
+            this.piTotal.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
+            this.piTotal.Name = "piTotal";
+            this.piTotal.OverrideBackColor = System.Drawing.Color.Empty;
+            this.piTotal.Size = new System.Drawing.Size(695, 17);
+            this.piTotal.TabIndex = 4;
             // 
-            // vuRight
+            // piCurrent
             // 
-            this.vuRight.AllowDragging = false;
-            this.vuRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.vuRight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.vuRight.EffectiveMaximum = 0D;
-            this.vuRight.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.vuRight.Location = new System.Drawing.Point(62, 466);
-            this.vuRight.Margin = new System.Windows.Forms.Padding(0, 3, 0, 2);
-            this.vuRight.Maximum = 10000D;
-            this.vuRight.MaximumSize = new System.Drawing.Size(10000, 9);
-            this.vuRight.MinimumSize = new System.Drawing.Size(10, 9);
-            this.vuRight.Name = "vuRight";
-            this.vuRight.NrTicks = 20;
-            this.vuRight.OverrideBackColor = System.Drawing.Color.Empty;
-            this.vuRight.OverrideElapsedBackColor = System.Drawing.Color.Empty;
-            this.vuRight.ShowTicks = true;
-            this.vuRight.Size = new System.Drawing.Size(284, 9);
-            this.vuRight.TabIndex = 17;
-            this.vuRight.Value = 0D;
-            this.vuRight.Vertical = false;
+            this.piCurrent.AltDisplay = "";
+            this.piCurrent.AutoSize = true;
+            this.piCurrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.piCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.piCurrent.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.piCurrent.Item = null;
+            this.piCurrent.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Current;
+            this.piCurrent.Location = new System.Drawing.Point(395, 2);
+            this.piCurrent.Margin = new System.Windows.Forms.Padding(0, 2, 0, 5);
+            this.piCurrent.Name = "piCurrent";
+            this.piCurrent.OverrideBackColor = System.Drawing.Color.Empty;
+            this.piCurrent.Size = new System.Drawing.Size(280, 543);
+            this.piCurrent.TabIndex = 7;
             // 
-            // opmLabel1
+            // piPrev
             // 
-            this.opmLabel1.AutoSize = true;
-            this.opmLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.opmLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel1.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.opmLabel1.Location = new System.Drawing.Point(0, 448);
-            this.opmLabel1.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.opmLabel1.Name = "opmLabel1";
-            this.opmLabel1.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel1.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel1.Size = new System.Drawing.Size(60, 13);
-            this.opmLabel1.TabIndex = 18;
-            this.opmLabel1.Text = "LVOL:  0%";
-            this.opmLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.piPrev.AltDisplay = "";
+            this.piPrev.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.piPrev.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.piPrev.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.piPrev.Item = null;
+            this.piPrev.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Previous;
+            this.piPrev.Location = new System.Drawing.Point(395, 574);
+            this.piPrev.Margin = new System.Windows.Forms.Padding(0);
+            this.piPrev.Name = "piPrev";
+            this.piPrev.OverrideBackColor = System.Drawing.Color.Empty;
+            this.piPrev.Size = new System.Drawing.Size(280, 20);
+            this.piPrev.TabIndex = 6;
             // 
-            // opmLabel2
+            // piNext
             // 
-            this.opmLabel2.AutoSize = true;
-            this.opmLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.opmLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel2.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.opmLabel2.Location = new System.Drawing.Point(0, 463);
-            this.opmLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.opmLabel2.Name = "opmLabel2";
-            this.opmLabel2.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel2.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel2.Size = new System.Drawing.Size(60, 13);
-            this.opmLabel2.TabIndex = 19;
-            this.opmLabel2.Text = "RVOL:  0%";
-            this.opmLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // opmLabel3
-            // 
-            this.opmLabel3.AutoSize = true;
-            this.opmLabel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.opmLabel3.Location = new System.Drawing.Point(348, 448);
-            this.opmLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.opmLabel3.Name = "opmLabel3";
-            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel3.Size = new System.Drawing.Size(35, 13);
-            this.opmLabel3.TabIndex = 20;
-            this.opmLabel3.Text = "100%";
-            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // opmLabel4
-            // 
-            this.opmLabel4.AutoSize = true;
-            this.opmLabel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.opmLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.opmLabel4.FontSize = OPMedia.UI.Themes.FontSizes.Small;
-            this.opmLabel4.Location = new System.Drawing.Point(348, 463);
-            this.opmLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.opmLabel4.Name = "opmLabel4";
-            this.opmLabel4.OverrideBackColor = System.Drawing.Color.Empty;
-            this.opmLabel4.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel4.Size = new System.Drawing.Size(35, 13);
-            this.opmLabel4.TabIndex = 21;
-            this.opmLabel4.Text = "100%";
-            this.opmLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.piNext.AltDisplay = "";
+            this.piNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.piNext.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.piNext.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.piNext.Item = null;
+            this.piNext.ItemType = OPMedia.UI.ProTONE.Controls.MediaPlayer.PlaylistItemType.Next;
+            this.piNext.Location = new System.Drawing.Point(395, 552);
+            this.piNext.Margin = new System.Windows.Forms.Padding(0);
+            this.piNext.Name = "piNext";
+            this.piNext.OverrideBackColor = System.Drawing.Color.Empty;
+            this.piNext.Size = new System.Drawing.Size(280, 20);
+            this.piNext.TabIndex = 8;
             // 
             // PlaylistPanel
             // 
             this.Controls.Add(this.pnlLayout);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "PlaylistPanel";
-            this.Size = new System.Drawing.Size(695, 507);
+            this.Size = new System.Drawing.Size(695, 618);
             this.cmsPlaylist.ResumeLayout(false);
             this.pnlLayout.ResumeLayout(false);
             this.pnlLayout.PerformLayout();
@@ -467,7 +352,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private OPMToolStripMenuItem dummyToolStripMenuItem;
         private OPMContextMenuStrip cmsPlaylist;
-        private PlaylistItemInfo piNext;
         private PlaylistItemInfo piCurrent;
         private PlaylistItemInfo piPrev;
         private PlaylistItemInfo piTotal;
@@ -486,11 +370,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private OPMLabel lblEmptyPlaylist;
         private OPMLinkLabel lblOpenPlaylist;
         private OPMLinkLabel lblOpenFiles;
-        private VuMeterGauge vuLeft;
-        private VuMeterGauge vuRight;
-        private OPMLabel opmLabel1;
-        private OPMLabel opmLabel2;
-        private OPMLabel opmLabel3;
-        private OPMLabel opmLabel4;
+        private PlaylistItemInfo piNext;
     }
 }

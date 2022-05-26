@@ -1,89 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.Logging;
-using System.Diagnostics;
-using OPMedia.Runtime.DSP;
 using OPMedia.UI.Themes;
 using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System.Threading;
-using OPMedia.Core.Configuration;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 using OPMedia.Core.GlobalEvents;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.UI.ProTONE.Translations;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using System.Threading.Tasks;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.Runtime.ProTONE.AudioMetering;
+using OPMedia.Runtime.ProTONE.Configuration;
+using System.Collections.Generic;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
     public partial class SignalAnalysisScreen : OPMBaseControl
     {
-        public const int BandCount = DsRendererBase.MAX_SPECTROGRAM_BANDS;
+        public const int BandCount = WasapiMeter.MAX_SPECTROGRAM_BANDS;
         private double[] _bands = new double[BandCount];
-
-        private object _updateLock = new object();
-        private ManualResetEvent _evt = new ManualResetEvent(false);
-
-        System.Windows.Forms.Timer _tmrUpdate = null;
 
         #region Constructor
 
         public SignalAnalysisScreen()
         {
             InitializeComponent();
-            OnUpdateMediaScreens();
 
-            this.HandleCreated += SignalAnalysisScreen_HandleCreated;
-            this.HandleDestroyed += SignalAnalysisScreen_HandleDestroyed;
+            HandleCreated += SignalAnalysisScreen_HandleCreated;
+            HandleDestroyed += SignalAnalysisScreen_HandleDestroyed;
+
+            gpWaveform.IsHistogram = true;
+            gpWaveform.IsCentered = true;
 
             if (!DesignMode)
             {
-                MediaRenderer.DefaultInstance.FilterStateChanged += new FilterStateChangedHandler(OnMediaStateChanged);
-                MediaRenderer.DefaultInstance.MediaRendererHeartbeat += new MediaRendererEventHandler(OnMediaRendererHeartbeat);
-                MediaRenderer.DefaultInstance.MediaRenderingException += new MediaRenderingExceptionHandler(OnMediaRenderingException);
+                RenderingEngine.DefaultInstance.FilterStateChanged += OnMediaStateChanged;
+                RenderingEngine.DefaultInstance.MediaRendererHeartbeat += OnRenderingEngineHeartbeat;
+                RenderingEngine.DefaultInstance.MediaRenderingException += OnMediaRenderingException;
+
+                WasapiMeter.Instance.VuMeterData += OnVuMeterData;
+                WasapiMeter.Instance.WaveformData += OnWaveformData;
+                WasapiMeter.Instance.SpectrogramData += OnSpectrogramData;
             }
         }
 
         private void SignalAnalysisScreen_HandleCreated(object sender, EventArgs e)
         {
-            //_tmrUpdate = new System.Windows.Forms.Timer();
-            //_tmrUpdate.Interval = 5;
-            //_tmrUpdate.Tick += (ss, ee) =>
-            //{
-            //    OnUpdate();
-            //};
-            //_tmrUpdate.Start();
-
-            Task.Factory.StartNew(() =>
-            {
-                while (_evt.WaitOne(10) == false)
-                {
-                    Invoke(new MethodInvoker(OnUpdate));
-                }
-            });
+            OnUpdateMediaScreens();
+            OnVuMeterData(null);
+            OnWaveformData(null);
+            OnSpectrogramData(null);
         }
 
         private void SignalAnalysisScreen_HandleDestroyed(object sender, EventArgs e)
         {
-            _evt.Set();
-            MediaRenderer.DefaultInstance.FilterStateChanged -= new FilterStateChangedHandler(OnMediaStateChanged);
-            MediaRenderer.DefaultInstance.MediaRendererHeartbeat -= new MediaRendererEventHandler(OnMediaRendererHeartbeat);
-            MediaRenderer.DefaultInstance.MediaRenderingException -= new MediaRenderingExceptionHandler(OnMediaRenderingException);
+            WasapiMeter.Instance.VuMeterData -= OnVuMeterData;
+            WasapiMeter.Instance.WaveformData -= OnWaveformData;
+            WasapiMeter.Instance.SpectrogramData -= OnSpectrogramData;
+
+            RenderingEngine.DefaultInstance.FilterStateChanged -= OnMediaStateChanged;
+            RenderingEngine.DefaultInstance.MediaRendererHeartbeat -= OnRenderingEngineHeartbeat;
+            RenderingEngine.DefaultInstance.MediaRenderingException -= OnMediaRenderingException;
         }
 
-        private void OnMediaRendererHeartbeat()
+        private void OnRenderingEngineHeartbeat()
         {
             OnUpdateMediaScreens();
         }
@@ -97,7 +82,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         {
             OnUpdateMediaScreens();
         }
-
+        
         [EventSink(EventNames.ThemeUpdated)]
         [EventSink(LocalEventNames.UpdateMediaScreens)]
         public void OnUpdateMediaScreens()
@@ -106,13 +91,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             bool showWaveform = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Waveform);
             bool showSpectrogram = ProTONEConfig.SignalAnalisysFunctionActive(SignalAnalisysFunction.Spectrogram);
 
-            showVU &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Levels);
-            showWaveform &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Waveform);
-            showSpectrogram &= MediaRenderer.DefaultInstance.SupportedMeteringData.HasFlag(SupportedMeteringData.Spectrogram);
-
             pnlVuMeter.Visible = showVU;
 
-            opmTableLayoutPanel1.RowStyles[0] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, showVU ? 70F : 0F);
+            opmTableLayoutPanel1.RowStyles[0] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, showVU ? 50F : 0F);
 
             pnlWaveform.Visible = showWaveform;
 
@@ -138,61 +119,73 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                 opmTableLayoutPanel1.RowStyles[1] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F);
                 opmTableLayoutPanel1.RowStyles[2] = new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 0F);
             }
-
-            UpdateLabels();
-
-            //lblUnsupportedFunctionsHint.Visible = !sampleGrabberSupported;
         }
 
-        [EventSink(EventNames.PerformTranslation)]
-        private void UpdateLabels()
-        {
-            lblSignalLevel.Text = Translator.Translate("TXT_SIGNALLEVEL");
-            lblSignalWaveform.Text = Translator.Translate("TXT_SIGNALWAVEFORM");
-            lblSignalSpectrum.Text = Translator.Translate("TXT_SIGNALSPECTRUM");
-        }
+        List<double> _prevWaveform = new List<double>();
 
-        double[] _prevWaveform = null;
-
-        void OnUpdate()
+        private void OnVuMeterData(AudioSampleData vuData)
         {
             try
             {
-                double[] vuData = MediaRenderer.DefaultInstance.LevelsData;
                 if (vuData != null)
                 {
-                    vuLeft.Value = 0.5 * (vuLeft.Value + vuLeft.Maximum * vuData[0]);
-                    vuRight.Value = 0.5 * (vuRight.Value + vuRight.Maximum * vuData[1]);
+                    vuLeft.Value = 0.5 * (vuLeft.Value + vuLeft.Maximum * vuData.LVOL);
+                    vuRight.Value = 0.5 * (vuRight.Value + vuRight.Maximum * vuData.RVOL);
                 }
                 else
                 {
                     vuLeft.Value = 0;
                     vuRight.Value = 0;
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
 
+        private void OnWaveformData(double[][] waveformData)
+        {
+            try
+            {
                 gpWaveform.Reset(false);
-                double[] waveformData = MediaRenderer.DefaultInstance.WaveformData;
+
                 if (waveformData != null && waveformData.Length > 0)
                 {
-                    if (_prevWaveform == null)
-                        _prevWaveform = new double[waveformData.Length];
+                    for (int k = 0; k < waveformData.Length; k++)
+                    {
+                        double l = waveformData[0][k];
+                        double r = waveformData[1][k];
+                        double val = Math.Sqrt(l * l + r * r);
+                        _prevWaveform.Add(val);
+                    }
 
-                    for (int k = 0; k < _prevWaveform.Length; k++)
-                        _prevWaveform[k] = 0.5 * (_prevWaveform[k] + waveformData[k]);
+                    while (_prevWaveform.Count > 500)
+                        _prevWaveform.RemoveAt(0);
 
-                    gpWaveform.MinVal = -1 * MediaRenderer.DefaultInstance.MaxLevel;
-                    gpWaveform.MaxVal = MediaRenderer.DefaultInstance.MaxLevel;
-                    gpWaveform.AddDataRange(_prevWaveform, ThemeManager.GradientGaugeColor1);
+                    gpWaveform.MinVal = 0;// -1 * WasapiMeter.Instance.MaxLevel;
+                    gpWaveform.MaxVal = Math.Sqrt(2) * WasapiMeter.Instance.MaxLevel;
+                    gpWaveform.AddDataRange(_prevWaveform.ToArray(), ThemeManager.GradientGaugeColor1);
                 }
                 else
                 {
+                    _prevWaveform.Clear();
                     gpWaveform.Reset(true);
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+        }
 
-                double[] spectrogramData = MediaRenderer.DefaultInstance.SpectrogramData;
+        private void OnSpectrogramData(double[] spectrogramData)
+        {
+            try
+            {
                 if (spectrogramData != null && spectrogramData.Length > 0)
                 {
-                    double maxFftLevel = SpectrogramTransferFunction(MediaRenderer.DefaultInstance.MaxFFTLevel);
+                    double maxFftLevel = Math.Log(WasapiMeter.Instance.MaxFFTLevel);
 
                     spSpectrogram.Reset(false);
                     spSpectrogram.MinVal = maxFftLevel / 2; // Min level = -6 dBM
@@ -211,7 +204,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
                         int maxSize = (int)Math.Min(BandCount, spectrogramData.Length);
                         for (int i = 0; i < maxSize; i++)
                         {
-                            bands[i] = Math.Max(0, Math.Min(maxFftLevel, SpectrogramTransferFunction(spectrogramData[i])));
+                            bands[i] = Math.Max(0, Math.Min(maxFftLevel, Math.Log(spectrogramData[i])));
                             _bands[i] = 0.5 * (_bands[i] + bands[i]);
                         }
 
@@ -234,19 +227,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
             {
                 Logger.LogException(ex);
             }
-            finally
-            {
-            }
-        }
-
-        private double SpectrogramTransferFunction(double d)
-        {
-            return Math.Log(d);
         }
 
         #endregion
-
-        
-
     }
 }

@@ -421,5 +421,47 @@ namespace OPMedia.UI.Controls
     //    {
     //    }
     //}
-}
 
+    public static class BrushHelper
+    {
+        public static Brush GenerateVuMeterBrush(int w, int h, bool horizontal)
+        {
+            Bitmap bmp = new Bitmap(w, h);
+
+            if (horizontal)
+            {
+                for (int i = 0; i < bmp.Width; i++)
+                {
+                    Color c = Color.Empty;
+                    if (i > (int)(0.8 * w))
+                        c = ThemeManager.GradientGaugeColor2;
+                    else if (i > (int)(0.5 * w))
+                        c = ThemeManager.GradientGaugeColor1a;
+                    else
+                        c = ThemeManager.GradientGaugeColor1;
+
+                    for (int j = 0; j < bmp.Height; j++)
+                        bmp.SetPixel(i, j, c);
+                }
+            }
+            else
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    Color c = Color.Empty;
+                    if (j < (int)(0.2 * h))
+                        c = ThemeManager.GradientGaugeColor2;
+                    else if (j < (int)(0.5 * h))
+                        c = ThemeManager.GradientGaugeColor1a;
+                    else
+                        c = ThemeManager.GradientGaugeColor1;
+
+                    for (int i = 0; i < bmp.Width; i++)
+                        bmp.SetPixel(i, j, c);
+                }
+            }
+
+            return new TextureBrush(bmp);
+        }
+    }
+}

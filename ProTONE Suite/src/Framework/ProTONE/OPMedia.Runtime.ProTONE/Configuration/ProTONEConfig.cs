@@ -32,17 +32,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
     }
 
     [Flags]
-    public enum MediaScreen
+    public enum SignalAnalisysFunction
     {
         None = 0x00,
 
-        Playlist = 0x01,
-        TrackInfo = 0x02,
-        SignalAnalisys = 0x04,
-        BookmarkInfo = 0x08,
+        VUMeter = 0x01,
+        Waveform = 0x02,
+        Spectrogram = 0x04,
+
+        ExportInterface = 0x10,
 
         All = 0xFF
     }
+
 
     public static class ProTONEConfig
     {
@@ -815,6 +817,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+
         public static Point DetachedWindowLocation
         {
             get
@@ -890,6 +893,86 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set
             {
                 PersistenceProxy.SaveObject(true, "DetachedWindowState", (int)value);
+            }
+        }
+
+
+        public static Point SA_WindowLocation
+        {
+            get
+            {
+                try
+                {
+                    string str = PersistenceProxy.ReadObject(true, "SA_WindowLocation", string.Empty);
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        return (Point)new PointConverter().ConvertFromInvariantString(str);
+                    }
+                }
+                catch
+                {
+                }
+
+                Point ptFallback = new Point(100, 100);
+
+                PersistenceProxy.SaveObject(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+
+                return ptFallback;
+            }
+
+            set
+            {
+                if ((value.X >= 0) && (value.Y >= 0))
+                {
+                    PersistenceProxy.SaveObject(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                }
+            }
+        }
+
+        public static Size SA_WindowSize
+        {
+            get
+            {
+                Size size = new Size(800, 600);
+                try
+                {
+                    string str = PersistenceProxy.ReadObject(true, "SA_WindowSize", string.Empty);
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        size = (Size)new SizeConverter().ConvertFromInvariantString(str);
+                    }
+                }
+                catch
+                {
+                }
+                return size;
+            }
+            set
+            {
+                if ((value.Width >= 0) && (value.Height >= 0))
+                {
+                    PersistenceProxy.SaveObject(true, "SA_WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                }
+            }
+        }
+
+        public static FormWindowState SA_WindowState
+        {
+            get
+            {
+                FormWindowState normal = FormWindowState.Normal;
+                try
+                {
+                    normal = (FormWindowState)PersistenceProxy.ReadObject(true, "SA_WindowState", 0);
+                }
+                catch
+                {
+                }
+                return normal;
+            }
+            set
+            {
+                PersistenceProxy.SaveObject(true, "SA_WindowState", (int)value);
             }
         }
 
@@ -1028,5 +1111,48 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
+
+        private static SignalAnalisysFunction? _signalAnalisysFunctions = null;
+        private static object _signalAnalisysFunctionsLock = new object();
+
+        public static SignalAnalisysFunction SignalAnalisysFunctions
+        {
+            get
+            {
+                lock (_signalAnalisysFunctionsLock)
+                {
+                    if (_signalAnalisysFunctions == null)
+                        _signalAnalisysFunctions = (SignalAnalisysFunction)PersistenceProxy.ReadObject(true, "SignalAnalisysFunctions",
+                            (int)SignalAnalisysFunction.All);
+
+                    if (_signalAnalisysFunctions == null)
+                        return SignalAnalisysFunction.All;
+
+                    return _signalAnalisysFunctions.Value;
+                }
+            }
+
+            set
+            {
+                lock (_signalAnalisysFunctionsLock)
+                {
+                    if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
+                    {
+                        _signalAnalisysFunctions = value;
+                        PersistenceProxy.SaveObject(true, "SignalAnalisysFunctions", (int)value);
+                    }
+                }
+            }
+        }
+
+        public static bool SignalAnalisysFunctionActive(SignalAnalisysFunction function)
+        {
+            return ((ProTONEConfig.SignalAnalisysFunctions & function) == function);
+        }
+
+        public static bool IsSignalAnalisysActive()
+        {
+            return (ProTONEConfig.SignalAnalisysFunctions != SignalAnalisysFunction.None);
+        }
     }
 }

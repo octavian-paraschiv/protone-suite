@@ -23,9 +23,10 @@ namespace OPMedia.Core
         static string _networkPathStart = string.Format("{0}{1}",
             DirectorySeparator, DirectorySeparator);
 
+
         static string _cacheBaseFolder = null;
 
-        public static string GetCacheFolderPath(string cacheFolderName)
+        public static string GetCacheFolderPath(string cacheFolderName, bool userLevel)
         {
             if (string.IsNullOrEmpty(_cacheBaseFolder))
             {
@@ -34,23 +35,21 @@ namespace OPMedia.Core
                 _cacheBaseFolder = Path.Combine(_cacheBaseFolder, Constants.SuiteName);
             }
 
-            return Path.Combine(_cacheBaseFolder, cacheFolderName);
+            string actualCacheFolder = _cacheBaseFolder;
+
+            if (userLevel)
+                actualCacheFolder = Path.Combine(actualCacheFolder, Environment.UserName);
+
+            return Path.Combine(actualCacheFolder, cacheFolderName);
         }
 
         public static string ProgramDataDir
         {
             get
             {
-                string winRoot = Path.GetPathRoot(WinDir);
+                string winDir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                string winRoot = Path.GetPathRoot(winDir);
                 return Path.Combine(winRoot, "ProgramData");
-            }
-        }
-
-        public static string WinDir
-        {
-            get
-            {
-                return Environment.GetFolderPath(Environment.SpecialFolder.Windows);
             }
         }
 

@@ -21,10 +21,13 @@ namespace OPMedia.UI.Controls
         public bool LogarithmicYAxis { get; set; }
 
         public bool IsHistogram { get; set; }
+        public bool IsCentered { get; set; }
         public bool ShowDecadicLines { get; set; }
 
         public double? MinVal { get; set; }
         public double? MaxVal { get; set; }
+
+        public float PenWidth { get; set; } = 2f;
 
         public void Reset(bool redraw)
         {
@@ -52,44 +55,50 @@ namespace OPMedia.UI.Controls
 
         protected override void OnRenderGraphics(Graphics g, Rectangle clipRect)
         {
-            Rectangle rc = this.ClientRectangle;
-
-            using (Brush b = new SolidBrush(ThemeManager.BackColor))
-                g.FillRectangle(b, rc);
-
-            rc.Inflate(-1, -1);
-            if (IsHistogram)
-                rc.Height -= 17;
-
-            using (Pen p = new Pen(ThemeManager.ForeColor))
-            using (Pen p2 = new Pen(ThemeManager.ForeColor))
+            try
             {
-                for (int i = 0; i < _dataSets.Count; i++)
+                Rectangle rc = this.ClientRectangle;
+
+                using (Brush b = new SolidBrush(ThemeManager.BackColor))
+                    g.FillRectangle(b, rc);
+
+                rc.Inflate(-1, -1);
+                if (IsHistogram)
+                    rc.Height -= 17;
+
+                using (Pen p = new Pen(ThemeManager.ForeColor))
+                using (Pen p2 = new Pen(ThemeManager.ForeColor))
                 {
-                    DrawDataSet(g, rc, _dataSets[i], _dataSetsColors[i]);
+                    for (int i = 0; i < _dataSets.Count; i++)
+                    {
+                        DrawDataSet(g, rc, _dataSets[i], _dataSetsColors[i]);
+                    }
+
+                    p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                    g.DrawRectangle(p2, rc);
+
+                    if (ShowXAxis)
+                    {
+                        p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+                        g.DrawLine(p,
+                            rc.Left, rc.Top + rc.Height / 2,
+                            rc.Right, rc.Top + rc.Height / 2);
+                    }
+
+                    if (ShowYAxis)
+                    {
+                        p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+                        g.DrawLine(p,
+                            rc.Left + rc.Width / 2, rc.Top,
+                            rc.Left + rc.Width / 2, rc.Bottom);
+                    }
+
+                    if (IsHistogram && ShowDecadicLines)
+                        DrawDecadicLines(g, rc);
                 }
-
-                p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-                g.DrawRectangle(p2, rc);
-
-                if (ShowXAxis)
-                {
-                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-                    g.DrawLine(p,
-                        rc.Left, rc.Top + rc.Height / 2,
-                        rc.Right, rc.Top + rc.Height / 2);
-                }
-
-                if (ShowYAxis)
-                {
-                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-                    g.DrawLine(p,
-                        rc.Left + rc.Width / 2, rc.Top,
-                        rc.Left + rc.Width / 2, rc.Bottom);
-                }
-
-                if (IsHistogram && ShowDecadicLines)
-                    DrawDecadicLines(g, rc);
+            }
+            catch
+            {
             }
         }
 
@@ -139,22 +148,36 @@ namespace OPMedia.UI.Controls
 
                     if (IsHistogram)
                     {
-                        if (color == Color.Transparent)
+                        if (IsCentered)
                         {
-                            DrawCustomHistoBar(g, rc, w, pt);
+                            var barHeight = rc.Bottom - pt.Y;
+                            var barTop = rc.Top + (rc.Height - barHeight) / 2;
+
+                            using (Brush b = new SolidBrush(color))
+                            {
+                                Rectangle rcBar = new Rectangle(pt.X - w, barTop, w, barHeight);
+                                g.FillRectangle(b, rcBar);
+                            }
                         }
                         else
                         {
-                            using (Brush b = new SolidBrush(color))
+                            if (color == Color.Transparent)
                             {
-                                Rectangle rcBar = new Rectangle(pt.X - w, pt.Y, w, rc.Bottom - pt.Y);
-                                g.FillRectangle(b, rcBar);
+                                DrawCustomHistoBar(g, rc, w, pt);
+                            }
+                            else
+                            {
+                                using (Brush b = new SolidBrush(color))
+                                {
+                                    Rectangle rcBar = new Rectangle(pt.X - w, pt.Y, w, rc.Bottom - pt.Y);
+                                    g.FillRectangle(b, rcBar);
+                                }
                             }
                         }
                     }
                     else
                     {
-                        using (Pen pen = new Pen(color, 1.51f))
+                        using (Pen pen = new Pen(color, PenWidth))
                         {
                             g.DrawLine(pen, last, pt);
                         }

@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-using OPMedia.UI.Dialogs;
-using OPMedia.Addons.Builtin.Translations;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Addons.Builtin.Shared.Compression;
 using NAudio.Lame;
 

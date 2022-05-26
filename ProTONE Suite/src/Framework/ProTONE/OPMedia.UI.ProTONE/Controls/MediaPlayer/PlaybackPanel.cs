@@ -161,6 +161,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             btnOpenDisk.Image = ImageProcessing.DVD;
             btnOpenURL.Image = OPMedia.Core.Properties.Resources.Internet;
             btnSettings.Image = OPMedia.UI.Properties.Resources.Settings;
+            btnSignalAnalisys.Image = Resources.btnSignalAnalisys;
 
             this.HandleCreated += PlaybackPanel_HandleCreated;
 
@@ -189,10 +190,17 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             }
         }
 
-        private void PlaybackPanel_HandleCreated(object sender, EventArgs e)
+
+        [EventSink(EventNames.PerformTranslation)]
+        public void OnPerformTranslation()
         {
             BindEventHandlers(this);
             UpdateStateButtons();
+        }
+
+        private void PlaybackPanel_HandleCreated(object sender, EventArgs e)
+        {
+            OnPerformTranslation();
         }
 
         private void BindEventHandlers(Control parent)
@@ -204,8 +212,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     ImageButton btn = (ctl as ImageButton);
                     if (btn != null)
                     {
+                        btn.Click -= OnButtonPressed;
                         btn.Click += OnButtonPressed;
                         //ctl.MouseHover += OnMouseHover;
+
+                        if (_tips.ContainsKey(btn))
+                        {
+                            OPMToolTip oldTip = _tips[btn];
+                            oldTip.RemoveAll();
+                            _tips.Remove(btn);
+                        }
 
                         var tip = new OPMToolTip();
 

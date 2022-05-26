@@ -2,37 +2,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 
 using OPMedia.Core.Logging;
 using System.Runtime.InteropServices;
 using OPMedia.Core;
 using System.Windows.Forms;
-
-
-using System.Diagnostics;
-
-using DS = OPMedia.Runtime.ProTONE.Rendering.DS;
-using System.Threading;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-
-using System.Linq;
-using OPMedia.Runtime.DSP;
-using System.Collections.Concurrent;
 using OPMedia.Runtime.ProTONE.Configuration;
-using NAudio.CoreAudioApi;
-using System.IO;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
     public abstract class DsRendererBase : StreamRenderer
     {
-        public const int MAX_SPECTROGRAM_BANDS = 64;
-        const int WAVEFORM_WNDSIZEFACTOR = 128;
-        const int VU_WNDSIZEFACTOR = 4096;
-        const int FFT_WNDSIZEFACTOR = 16;
-
         protected IMediaControl mediaControl = null;
         protected IVideoWindow videoWindow = null;
         protected IBasicAudio basicAudio = null;
