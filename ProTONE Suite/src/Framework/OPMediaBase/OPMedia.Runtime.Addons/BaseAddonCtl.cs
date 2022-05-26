@@ -88,8 +88,6 @@ namespace OPMedia.Runtime.Addons
 
         public virtual void ConfigureAddon()
         {
-            Translator.RegisterTranslationAssembly(GetType().Assembly);
-
             AddonSettingsPanel.InitAddonCfg -= new InitAddonCfgHandler(_GetBaseCfgPanel);
             AddonSettingsPanel.InitAddonCfg += new InitAddonCfgHandler(_GetBaseCfgPanel);
         }

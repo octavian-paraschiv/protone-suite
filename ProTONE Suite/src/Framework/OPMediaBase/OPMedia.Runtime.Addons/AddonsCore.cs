@@ -165,8 +165,6 @@ namespace OPMedia.Runtime.Addons
         /// </summary>
         private AddonsCore()
         {
-            Translator.RegisterTranslationAssembly(GetType().Assembly);
-
             Logger.LogTrace("Checking default addons configuration ...");
 
             // Init addons config first

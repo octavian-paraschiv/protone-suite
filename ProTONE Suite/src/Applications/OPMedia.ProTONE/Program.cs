@@ -42,8 +42,6 @@ namespace OPMedia.ProTONE
                         ProcessCommandLine(false);
 
                         Translator.SetInterfaceLanguage(AppConfig.LanguageID);
-                        Translator.RegisterTranslationAssembly(typeof(MediaPlayer).Assembly);
-                        Translator.RegisterTranslationAssembly(typeof(MainForm).Assembly);
 
                         ShortcutMapper.IsPlayer = true;
 

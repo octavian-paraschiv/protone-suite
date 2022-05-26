@@ -57,9 +57,6 @@ namespace OPMedia.MediaLibrary
                     }
                 }
 
-                Translator.RegisterTranslationAssembly(typeof(MediaPlayer).Assembly);
-                Translator.RegisterTranslationAssembly(typeof(MediaLibraryForm).Assembly);
-
                 string cmdLine = Environment.CommandLine.ToLowerInvariant();
                 if (cmdLineArgs != null && cmdLineArgs.Length > 2 && cmdLine.Contains("configaddons"))
                 {

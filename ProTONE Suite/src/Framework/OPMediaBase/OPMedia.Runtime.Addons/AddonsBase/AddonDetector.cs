@@ -134,19 +134,8 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                         register = true;
                     }
 
-                    // If the assembly is a valid OPMedia addon then
-                    // register will be True. So try to register assembly
-                    // for translations then.
                     if (register)
                     {
-                        try
-                        {
-                            Translator.RegisterTranslationAssembly(asm);
-                        }
-                        catch
-                        {
-                        }
-
                         try
                         {
                             PropertyInfo pi = type.GetProperty("IsRequired", BindingFlags.Public | BindingFlags.Static);

@@ -42,8 +42,6 @@ namespace OPMedia.Runtime.Addons.Configuration
 
         public override void AddAditionalPanels()
         {
-            Translator.RegisterTranslationAssembly(GetType().Assembly);
-
             bool dissalowAddonsConfig = DissalowAddonConfigPages();
             AddPanel(typeof(AddonCfgPanel), !dissalowAddonsConfig);
             AddPanel(typeof(AddonSettingsPanel), !AddonsConfig.IsInitialConfig);

@@ -254,14 +254,6 @@ namespace OPMedia.Runtime.Addons.Configuration
                 Assembly asm = Assembly.LoadFrom(path);
                 AssemblyName asmName = null;
 
-                try
-                {
-                    Translator.RegisterTranslationAssembly(asm);
-                }
-                catch
-                {
-                }
-
                 Type[] types = null;
 
                 if (asm != null)

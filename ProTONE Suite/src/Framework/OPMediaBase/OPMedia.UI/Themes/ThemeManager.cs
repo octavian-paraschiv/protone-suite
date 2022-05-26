@@ -511,9 +511,6 @@ namespace OPMedia.UI.Themes
 
             try
             {
-                // Register assembly as translations assembly
-                Translator.RegisterTranslationAssembly(typeof(ThemeManager).Assembly);
-
                 RecreateFonts();
                 SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
             }
