@@ -165,6 +165,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 
                     gpWaveform.MinVal = 0;// -1 * WasapiMeter.Instance.MaxLevel;
                     gpWaveform.MaxVal = Math.Sqrt(2) * WasapiMeter.Instance.MaxLevel;
+
                     gpWaveform.AddDataRange(_prevWaveform.ToArray(), ThemeManager.GradientGaugeColor1);
                 }
                 else

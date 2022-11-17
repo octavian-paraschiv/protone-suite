@@ -926,6 +926,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             timerCheckState.Tick += new EventHandler(timerCheckState_Tick);
 
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
+
+            WasapiMeter.Instance.Start();
         }
 
         void Application_ApplicationExit(object sender, EventArgs e)

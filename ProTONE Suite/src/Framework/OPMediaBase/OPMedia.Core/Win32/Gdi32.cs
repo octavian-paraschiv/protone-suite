@@ -41,5 +41,8 @@ namespace OPMedia.Core
 
         [DllImport(GDI32, ExactSpelling = true, SetLastError = true)]
         public static extern uint SetBkColor(IntPtr hdc, int crColor);
+
+        [DllImport(GDI32, ExactSpelling = true, SetLastError = true)]
+        public static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pvd, [In] ref uint pcFonts);
     }
 }

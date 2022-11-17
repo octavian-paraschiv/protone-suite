@@ -14,7 +14,9 @@ using System.Threading;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Core.TranslationSupport;
 using System.Net.NetworkInformation;
-using LocalEvents = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+
 using OPMedia.Core.Utilities;
 
 using OPMedia.UI.Controls;
@@ -40,7 +42,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
         private static void FireNotify(string message, string title, MessageBoxIcon icon)
         {
-            EventDispatch.DispatchEvent(EventNames.ShowTrayMessage, message, title, icon);
+            EventDispatch.DispatchEvent(LocalEventNames.ShowTrayMessage, message, title, icon);
         }
 
         public static void TryFindSubtitle(string strFile, int duration, bool askToOverwrite)
@@ -88,7 +90,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                                     __filesInProgress.Remove(strFile.ToLowerInvariant());
 
                                     // This is for enforcing playlist refresh
-                                    EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                                    EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
                                 }
                             };
                         }
@@ -104,7 +106,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                                 __filesInProgress.Remove(strFile.ToLowerInvariant());
 
                                 // This is for enforcing playlist refresh
-                                EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                                EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
                             }
                         }
 
@@ -114,7 +116,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             finally
             {
                 // This is for enforcing playlist refresh
-                EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
             }
         }
 
@@ -235,7 +237,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         __filesInProgress.Add(movieFilePath.ToLowerInvariant());
 
                         // This is for enforcing playlist refresh
-                        EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+                        EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
                     }
 
                     Logger.LogTrace("A subtitle was not found for this movie. Attempting to find one ...");
@@ -403,7 +405,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
         static void dlg_SubtitleDownloadNotify(string movieFile, string subtitleFile)
         {
             // This is for enforcing playlist refresh
-            EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
+            EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
 
             SetCurrentSubtitle(movieFile, string.Empty);
             SetCurrentSubtitle(movieFile, subtitleFile);

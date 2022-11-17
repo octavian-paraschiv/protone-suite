@@ -27,7 +27,7 @@ using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Generic;
 using OPMedia.Runtime.ProTONE.RemoteControl;
-
+using EventNames = OPMedia.Core.EventNames;
 
 /*
  * IMPORTANT NOTE: In Media Catalog, instead of paths are used VPaths. 

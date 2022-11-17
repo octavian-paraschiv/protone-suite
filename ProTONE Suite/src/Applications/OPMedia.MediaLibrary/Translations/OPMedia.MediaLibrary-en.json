@@ -366,7 +366,7 @@
   "TXT_INTERNALLABEL": "Internal media label",
   "TXT_INTERNET_EXPLORER_HINT": "You need to have Internet Explorer 9.0 or higher installed in order to be able to auto-register the token.\r\nOtherwise, you will need to copy it from the URL displayed in the default browser and manually copy it into the application.",
   "TXT_INVALID_ADDON": "The DLL file you have selected is not a valid OPMedia extension library.\r\nNote: If you believe, however, that the respective file should have been a valid extension, \r\nyou are advised to contact the producer or the supplier of this DLL.",
-  "TXT_INVALID_NAME": "The DLL file you have selected is not a valid OPMedia extension library.\r\nA valid OPMedia extension library should follow the naming convention: <Library-Name>Extension.dll.",
+  "TXT_INVALID_NAME": "The DLL file you have selected is not a valid OPMedia extension library.\r\nA valid OPMedia extension library should follow the naming convention: <Library-Name>.dll.",
   "TXT_INVALIDDVDVOLUME": "You have specified an invalid DVD volume. Please reselect.",
   "TXT_ISORPHAN": "Is Orphan",
   "TXT_ITEMDATA": "Additional data",

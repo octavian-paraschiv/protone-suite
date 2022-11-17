@@ -14,6 +14,8 @@ using OPMedia.UI.Configuration;
 using System.Reflection;
 using System.Globalization;
 using OPMedia.UI.FileOperations.Tasks;
+using System.Configuration;
+using Newtonsoft.Json;
 
 namespace OPMedia.Runtime.Addons.AddonsBase
 {
@@ -24,6 +26,8 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         static string[] _previewAddons = null;
 
         static Dictionary<string, string> _assemblies = new Dictionary<string, string>();
+
+        static Dictionary<string, string> _diskAddonsConfig = null;
 
         public static string[] NavigationAddons
         {
@@ -71,7 +75,22 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
             try
             {
-                UninstallMarkedItems();
+                try
+                {
+                    string cfgJsonPath = $"{AppConfig.InstallationPath}\\{ApplicationInfo.ApplicationName}.addons.json";
+                    if (File.Exists(cfgJsonPath))
+                    {
+                        var addonsConfigJson = File.ReadAllText(cfgJsonPath);
+                        _diskAddonsConfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(addonsConfigJson);
+                    }
+                }
+                catch
+                {
+                    _diskAddonsConfig = null;
+                }
+
+                if (_diskAddonsConfig == null)
+                    UninstallMarkedItems();
 
                 _navAddons = ReadAddonConfig("NavigationAddons");
                 _previewAddons = ReadAddonConfig("PreviewAddons");
@@ -86,14 +105,35 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         private static string[] ReadAddonConfig(string keyBase)
         {
             string[] names = null;
-            string namesRaw = PersistenceProxy.ReadObject(true, keyBase, string.Empty, false);
+            string namesRaw = null;
+
+            if (_diskAddonsConfig == null || 
+                _diskAddonsConfig.ContainsKey(keyBase) == false)
+            {
+                namesRaw = PersistenceProxy.ReadObject(true, keyBase, string.Empty, false);
+            }
+            else
+            {
+                namesRaw = _diskAddonsConfig[keyBase];
+            }
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
                 names = namesRaw.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string name in names)
                 {
-                    string val = PersistenceProxy.ReadObject(true, name, string.Empty, false);
+                    string val = null;
+
+                    if (_diskAddonsConfig == null ||
+                        _diskAddonsConfig.ContainsKey(name) == false)
+                    {
+                        val = PersistenceProxy.ReadObject(true, name, string.Empty, false);
+                    }
+                    else
+                    {
+                        val = _diskAddonsConfig[name];
+                    }
+
                     _assemblies.Add(name, val);
                 }
             }

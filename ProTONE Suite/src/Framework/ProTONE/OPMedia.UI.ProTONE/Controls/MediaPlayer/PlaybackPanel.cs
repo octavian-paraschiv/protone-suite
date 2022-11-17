@@ -21,6 +21,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.UI.Themes;
+using EventNames = OPMedia.Core.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

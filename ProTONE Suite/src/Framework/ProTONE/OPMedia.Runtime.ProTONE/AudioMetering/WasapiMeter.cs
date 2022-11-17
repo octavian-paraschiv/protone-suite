@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.DSP;
 using OPMedia.Runtime.ProTONE.Configuration;
@@ -59,7 +60,9 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
 
         private ConcurrentQueue<AudioSample> samples = new ConcurrentQueue<AudioSample>();
 
+        private ManualResetEvent notifySoundDeviceChanged = new ManualResetEvent(false);
         private ManualResetEvent sampleAnalyzerMustStop = new ManualResetEvent(false);
+
         private Thread sampleAnalyzerThread = null;
 
         public event VuMeterDataHandler VuMeterData;
@@ -112,6 +115,8 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
         {
             try
             {
+                Logger.LogToConsole("WASAPI meter starting");
+
                 _waveIn = new WasapiLoopbackCapture();
                 _waveIn.DataAvailable += _waveIn_DataAvailable;
                 _waveIn.RecordingStopped += _waveIn_RecordingStopped;
@@ -147,22 +152,47 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
                 sampleAnalyzerThread.Priority = ThreadPriority.Normal;
                 sampleAnalyzerThread.Start();
 
+                Logger.LogToConsole("WASAPI meter started");
+
+                if (notifySoundDeviceChanged.WaitOne(0))
+                {
+                    notifySoundDeviceChanged.Reset();
+                    PersistenceProxy.SendIpcEvent(EventNames.SoundDeviceChanged);
+                }
+
                 return true;
             }
             catch { }
 
+            Logger.LogToConsole("WASAPI meter failed to start");
             return false;
         }
 
         private void _waveIn_RecordingStopped(object sender, StoppedEventArgs e)
         {
-            Logger.LogToConsole("WASAPI meter stopped");
+            Logger.LogToConsole("WASAPI capture stopped ... ");
+
+            if (sampleAnalyzerMustStop.WaitOne(0) == false)
+            {
+                Logger.LogToConsole("... this was not requested by us => Restarting WASAPI meter");
+
+                // Capture stopped, but we did not request it to stop
+                // Most likely something changed related to the sound device
+                // Need to request stop ourselves, then start it again.
+                if (Stop())
+                {
+                    notifySoundDeviceChanged.Set();
+                    Start();
+                }
+            }
         }
 
         public bool Stop()
         {
             try
             {
+                Logger.LogToConsole("Requesting WASAPI meter to stop");
+
                 sampleAnalyzerMustStop?.Set(); // This will cause the thread to stop
                 sampleAnalyzerThread?.Join(200);
                 sampleAnalyzerThread = null;
@@ -170,12 +200,15 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
                 _waveIn?.StopRecording();
                 _waveIn = null;
 
+                Logger.LogToConsole("WASAPI meter stopped");
+
                 return true;
             }
             catch
             {
             }
 
+            Logger.LogToConsole("WASAPI meter failed to stop");
             return false;
         }
 

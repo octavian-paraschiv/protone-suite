@@ -7,6 +7,7 @@ using System.Transactions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
 using System.Threading;
+using OPMedia.Core.Utilities;
 
 namespace OPMedia.PersistenceService
 {

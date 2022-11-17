@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OPMedia.UI.ProTONE.GlobalEvents
 {
-    public class EventNames : OPMedia.Core.EventNames
+    public class EventNames : OPMedia.Runtime.ProTONE.EventNames
     {
         public const string UpdatePlaylistNames = "UpdatePlaylistNames";
         public const string SubtitleDownloaded = "SubtitleDownloaded";

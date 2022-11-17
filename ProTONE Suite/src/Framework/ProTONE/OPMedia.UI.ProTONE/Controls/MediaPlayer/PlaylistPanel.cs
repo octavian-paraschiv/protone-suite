@@ -1155,12 +1155,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void lblOpenPlaylist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoadPlaylist));
+            EventDispatch.DispatchEvent(LocalEventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoadPlaylist));
         }
 
         private void lblOpenFiles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoad));
+            EventDispatch.DispatchEvent(LocalEventNames.ExecuteShortcut, new OPMShortcutEventArgs(OPMShortcut.CmdLoad));
         }
 
 

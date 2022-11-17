@@ -11,6 +11,7 @@ using System.Diagnostics;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Persistence;
 using OPMedia.Core.Utilities;
+using Newtonsoft.Json;
 
 namespace OPMedia.Core
 {
@@ -157,6 +158,33 @@ namespace OPMedia.Core
                 return string.Format("{0}_{1}", ApplicationInfo.ApplicationName, persistenceId);
 
             return persistenceId;
+        }
+
+        public static void SendIpcEvent(string eventName, params string[] eventArgs)
+        {
+            string content = eventName;
+
+            if (eventArgs?.Length > 0)
+                content += $"?{StringUtils.FromStringArray(eventArgs, '|')}";
+
+            _proxy.Notify(ChangeType.IpcEvent, ChangeType.IpcEvent.ToString(), _proxy._persistenceContext, content);
+        }
+
+        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
+        {
+            try
+            {
+                Logger.LogTrace($"IPersistenceService.SendIpcEvent persistenceId={persistenceId} persistenceContext={persistenceContext}");
+
+                if (_channel != null)
+                    _channel.Notify(changeType, persistenceId, persistenceContext, objectContent);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                Abort();
+                Open();
+            }
         }
 
         #region ReadObject
@@ -427,7 +455,24 @@ namespace OPMedia.Core
 
         void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
-            if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
+            if (changeType == ChangeType.IpcEvent)
+            {
+                if (objectContent is string content && !string.IsNullOrEmpty(content))
+                {
+                    var ss = content.Split('?');
+                    if (ss.Length > 0)
+                    {
+                        string evtName = ss[0];
+                        string[] evtData = null;
+
+                        if (ss.Length > 1)
+                            evtData = StringUtils.ToStringArray(ss[1], '|');
+
+                        EventDispatch.DispatchEvent(evtName, evtData);
+                    }
+                }
+            }
+            else if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
             {
                 Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
                 AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);

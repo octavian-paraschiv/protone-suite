@@ -27,6 +27,7 @@ using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.InstanceManagement;
 using System.Text;
+using System.Runtime.InteropServices;
 
 #endregion
 
@@ -72,6 +73,9 @@ namespace OPMedia.UI.Themes
         static Dictionary<string, Dictionary<string, string>> _allThemesElements = null;
 
         static FileSystemWatcher _fsw = null;
+
+        static string _fontFamily = AppConfig.OSVersion < AppConfig.VerWinVista ?
+                "Trebuchet MS" : "Segoe UI";
 
         static readonly float[] fontSizes = 
         { 
@@ -308,18 +312,6 @@ namespace OPMedia.UI.Themes
             } 
         }
 
-        public static string ThemeFontFamily
-        { 
-            get 
-            { 
-                string defFamily = AppConfig.OSVersion < AppConfig.VerWinVista ?
-                    "Trebuchet MS" : "Segoe UI";
-
-                return ThemeElement("ThemeFontFamily", defFamily); 
-            } 
-        }
-
-
         public static Color ColorValidationFailed
         { get { return Color.MistyRose; } }
 
@@ -442,26 +434,25 @@ namespace OPMedia.UI.Themes
                 using (Graphics g = Graphics.FromHwnd(l.Handle))
                 {
                     float step = 72f / g.DpiX;
-                    string themeFontFamily = ThemeManager.ThemeFontFamily;
 
                     int i = 0;
 
                     _smallestFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                         new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _smallFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _normalFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _normalBoldFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _largeFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _veryLargeFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _extremeLargeFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                     _hugeFont =
-                        new Font(themeFontFamily, fontSizes[i] * step, fontStyles[i++], GraphicsUnit.Point);
+                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
                 }
             }
         }
@@ -780,6 +771,22 @@ namespace OPMedia.UI.Themes
                 return null;
             }
         }
+
+        private static PrivateFontCollection privateFontCollection = new PrivateFontCollection();
+
+        private static FontFamily LoadFont(byte[] fontResource)
+        {
+            int dataLength = fontResource.Length;
+            IntPtr fontPtr = Marshal.AllocCoTaskMem(dataLength);
+            Marshal.Copy(fontResource, 0, fontPtr, dataLength);
+
+            uint cFonts = 0;
+            Gdi32.AddFontMemResourceEx(fontPtr, (uint)fontResource.Length, IntPtr.Zero, ref cFonts);
+            privateFontCollection.AddMemoryFont(fontPtr, dataLength);
+
+            return privateFontCollection.Families.Last();
+        }
+
 
         #endregion
     }

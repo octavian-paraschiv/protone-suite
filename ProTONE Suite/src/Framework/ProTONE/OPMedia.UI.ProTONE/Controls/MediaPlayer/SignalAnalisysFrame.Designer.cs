@@ -46,10 +46,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             // 
             this.AllowDrop = true;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(444, 365);
+            this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.signalAnalysisScreen1);
             this.Location = new System.Drawing.Point(0, 0);
-            this.MinimumSize = new System.Drawing.Size(200, 85);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "SignalAnalisysFrame";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

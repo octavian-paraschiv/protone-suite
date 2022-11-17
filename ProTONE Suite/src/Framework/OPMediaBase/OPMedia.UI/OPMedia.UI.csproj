@@ -616,6 +616,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Roboto-Medium.ttf" />
+    <None Include="Resources\Roboto-Regular.ttf" />
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>

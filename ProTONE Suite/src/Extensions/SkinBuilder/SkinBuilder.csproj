@@ -92,11 +92,6 @@
     </Compile>
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeFile.cs" />
-    <Compile Include="Translations\Translation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Translation.resx</DependentUpon>
-    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -115,11 +110,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Property\AddonPanel.resx">
       <DependentUpon>AddonPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Translations\Translation.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

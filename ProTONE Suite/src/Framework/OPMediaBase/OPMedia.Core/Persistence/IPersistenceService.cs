@@ -28,6 +28,9 @@ namespace OPMedia.Core
         /// Deleted
         /// </summary>
         Deleted,
+
+        [EnumMember]
+        IpcEvent,
     }
 
     [ServiceContract(CallbackContract = typeof(IPersistenceNotification))]
@@ -56,6 +59,9 @@ namespace OPMedia.Core
 
         [OperationContract(IsOneWay = false)]
         byte[] ReadBlob(string persistenceId, string persistenceContext);
+
+        [OperationContract(IsOneWay = true)]
+        void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent);
     }
 
     public interface IPersistenceNotification

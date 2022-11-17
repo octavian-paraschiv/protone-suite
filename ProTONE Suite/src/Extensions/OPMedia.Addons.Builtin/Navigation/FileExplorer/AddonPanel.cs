@@ -54,6 +54,7 @@ using OPMedia.UI.Controls.Dialogs;
 using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.Runtime.ProTONE.RemoteControl;
+using EventNames = OPMedia.Core.EventNames;
 
 
 #endregion

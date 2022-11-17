@@ -35,13 +35,12 @@
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.txtThemeName = new OPMedia.UI.Controls.OPMTextBox();
-            this.pnlContent.SuspendLayout();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContent
             // 
-            this.pnlContent.Controls.Add(this.opmTableLayoutPanel1);
+            this.Controls.Add(this.opmTableLayoutPanel1);
             // 
             // opmTableLayoutPanel1
             // 
@@ -161,7 +160,6 @@
             this.ClientSize = new System.Drawing.Size(381, 222);
             this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "ThemeChooser";
-            this.pnlContent.ResumeLayout(false);
             this.opmTableLayoutPanel1.ResumeLayout(false);
             this.opmTableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

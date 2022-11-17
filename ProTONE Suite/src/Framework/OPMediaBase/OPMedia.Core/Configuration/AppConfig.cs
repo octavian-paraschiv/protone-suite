@@ -131,13 +131,13 @@ namespace OPMedia.Core.Configuration
 
         static AppConfig()
         {
+            _cultures.Add("en", new CultureInfo("en"));
+            _cultures.Add("de", new CultureInfo("de"));
+            _cultures.Add("fr", new CultureInfo("fr"));
+            _cultures.Add("ro", new CultureInfo("ro"));
+
             if (IsAppUsingPersistence)
             {
-                _cultures.Add("en", new CultureInfo("en"));
-                _cultures.Add("de", new CultureInfo("de"));
-                _cultures.Add("fr", new CultureInfo("fr"));
-                _cultures.Add("ro", new CultureInfo("ro"));
-
                 _skinType = PersistenceProxy.ReadObject("SkinType", UnconfiguredThemeName);
 
                 string defLangId = Regedit.InstallLanguageID;

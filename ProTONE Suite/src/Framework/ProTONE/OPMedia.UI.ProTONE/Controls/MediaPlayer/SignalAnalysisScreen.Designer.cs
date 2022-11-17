@@ -31,12 +31,9 @@
             this.opmTableLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.pnlSpectrogram = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.opmLabel10 = new OPMedia.UI.Controls.OPMLabel();
-            this.spSpectrogram = new OPMedia.UI.ProTONE.Controls.SpectrogramPlotter();
             this.opmLabel11 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel5 = new OPMedia.UI.Controls.OPMLabel();
             this.pnlVuMeter = new System.Windows.Forms.TableLayoutPanel();
-            this.vuRight = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
-            this.vuLeft = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
             this.opmLabel1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel2 = new OPMedia.UI.Controls.OPMLabel();
             this.pnlWaveform = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -45,6 +42,10 @@
             this.opmLabel8 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLabel9 = new OPMedia.UI.Controls.OPMLabel();
             this.opmContextMenuStrip1 = new OPMedia.UI.Controls.OPMContextMenuStrip();
+            this.opmLabel3 = new OPMedia.UI.Controls.OPMLabel();
+            this.spSpectrogram = new OPMedia.UI.ProTONE.Controls.SpectrogramPlotter();
+            this.vuRight = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
+            this.vuLeft = new OPMedia.UI.ProTONE.Controls.VuMeterGauge();
             this.opmTableLayoutPanel1.SuspendLayout();
             this.pnlSpectrogram.SuspendLayout();
             this.pnlVuMeter.SuspendLayout();
@@ -79,8 +80,9 @@
             this.pnlSpectrogram.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pnlSpectrogram.Controls.Add(this.opmLabel10, 0, 1);
             this.pnlSpectrogram.Controls.Add(this.spSpectrogram, 1, 1);
-            this.pnlSpectrogram.Controls.Add(this.opmLabel11, 0, 3);
             this.pnlSpectrogram.Controls.Add(this.opmLabel5, 0, 2);
+            this.pnlSpectrogram.Controls.Add(this.opmLabel11, 0, 4);
+            this.pnlSpectrogram.Controls.Add(this.opmLabel3, 0, 3);
             this.pnlSpectrogram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSpectrogram.Location = new System.Drawing.Point(2, 229);
             this.pnlSpectrogram.Margin = new System.Windows.Forms.Padding(2, 7, 3, 3);
@@ -110,43 +112,21 @@
             this.opmLabel10.Text = "0 dBM";
             this.opmLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // spSpectrogram
-            // 
-            this.spSpectrogram.BandCount = 64;
-            this.pnlSpectrogram.SetColumnSpan(this.spSpectrogram, 3);
-            this.spSpectrogram.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spSpectrogram.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.spSpectrogram.IsHistogram = true;
-            this.spSpectrogram.Location = new System.Drawing.Point(45, 0);
-            this.spSpectrogram.LogarithmicXAxis = false;
-            this.spSpectrogram.LogarithmicYAxis = false;
-            this.spSpectrogram.Margin = new System.Windows.Forms.Padding(0);
-            this.spSpectrogram.MaxVal = null;
-            this.spSpectrogram.MinVal = null;
-            this.spSpectrogram.Name = "spSpectrogram";
-            this.spSpectrogram.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlSpectrogram.SetRowSpan(this.spSpectrogram, 3);
-            this.spSpectrogram.ShowDecadicLines = true;
-            this.spSpectrogram.ShowXAxis = true;
-            this.spSpectrogram.ShowYAxis = false;
-            this.spSpectrogram.Size = new System.Drawing.Size(388, 166);
-            this.spSpectrogram.TabIndex = 3;
-            // 
             // opmLabel11
             // 
             this.opmLabel11.AutoSize = true;
             this.opmLabel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLabel11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.opmLabel11.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
-            this.opmLabel11.Location = new System.Drawing.Point(0, 136);
-            this.opmLabel11.Margin = new System.Windows.Forms.Padding(0, 6, 2, 17);
+            this.opmLabel11.Location = new System.Drawing.Point(0, 153);
+            this.opmLabel11.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.opmLabel11.Name = "opmLabel11";
             this.opmLabel11.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel11.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel11.Size = new System.Drawing.Size(43, 13);
+            this.opmLabel11.Size = new System.Drawing.Size(45, 13);
             this.opmLabel11.TabIndex = 7;
-            this.opmLabel11.Text = "-6 dBM";
-            this.opmLabel11.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.opmLabel11.Text = "Hz -->";
+            this.opmLabel11.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // opmLabel5
             // 
@@ -159,7 +139,7 @@
             this.opmLabel5.Name = "opmLabel5";
             this.opmLabel5.OverrideBackColor = System.Drawing.Color.Empty;
             this.opmLabel5.OverrideForeColor = System.Drawing.Color.Empty;
-            this.opmLabel5.Size = new System.Drawing.Size(43, 117);
+            this.opmLabel5.Size = new System.Drawing.Size(43, 123);
             this.opmLabel5.TabIndex = 10;
             this.opmLabel5.Text = "-3 dBM";
             this.opmLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -186,47 +166,6 @@
             this.pnlVuMeter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlVuMeter.Size = new System.Drawing.Size(418, 37);
             this.pnlVuMeter.TabIndex = 3;
-            // 
-            // vuRight
-            // 
-            this.vuRight.AllowDragging = false;
-            this.vuRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.vuRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vuRight.EffectiveMaximum = 0D;
-            this.vuRight.Enabled = false;
-            this.vuRight.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.vuRight.Location = new System.Drawing.Point(29, 21);
-            this.vuRight.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
-            this.vuRight.Maximum = 10000D;
-            this.vuRight.Name = "vuRight";
-            this.vuRight.NrTicks = 10;
-            this.vuRight.OverrideBackColor = System.Drawing.Color.Empty;
-            this.vuRight.OverrideElapsedBackColor = System.Drawing.Color.Empty;
-            this.vuRight.ShowTicks = true;
-            this.vuRight.Size = new System.Drawing.Size(386, 11);
-            this.vuRight.TabIndex = 1;
-            this.vuRight.Value = 0D;
-            this.vuRight.Vertical = false;
-            // 
-            // vuLeft
-            // 
-            this.vuLeft.AllowDragging = false;
-            this.vuLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.vuLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vuLeft.EffectiveMaximum = 0D;
-            this.vuLeft.Enabled = false;
-            this.vuLeft.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
-            this.vuLeft.Location = new System.Drawing.Point(29, 3);
-            this.vuLeft.Maximum = 10000D;
-            this.vuLeft.Name = "vuLeft";
-            this.vuLeft.NrTicks = 10;
-            this.vuLeft.OverrideBackColor = System.Drawing.Color.Empty;
-            this.vuLeft.OverrideElapsedBackColor = System.Drawing.Color.Empty;
-            this.vuLeft.ShowTicks = true;
-            this.vuLeft.Size = new System.Drawing.Size(386, 12);
-            this.vuLeft.TabIndex = 0;
-            this.vuLeft.Value = 0D;
-            this.vuLeft.Vertical = false;
             // 
             // opmLabel1
             // 
@@ -286,6 +225,7 @@
             // 
             this.gpWaveform.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gpWaveform.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.gpWaveform.IsCentered = false;
             this.gpWaveform.IsHistogram = false;
             this.gpWaveform.Location = new System.Drawing.Point(40, 0);
             this.gpWaveform.LogarithmicXAxis = false;
@@ -295,6 +235,7 @@
             this.gpWaveform.MinVal = null;
             this.gpWaveform.Name = "gpWaveform";
             this.gpWaveform.OverrideBackColor = System.Drawing.Color.Empty;
+            this.gpWaveform.PenWidth = 2F;
             this.pnlWaveform.SetRowSpan(this.gpWaveform, 3);
             this.gpWaveform.ShowDecadicLines = false;
             this.gpWaveform.ShowXAxis = true;
@@ -357,6 +298,86 @@
             this.opmContextMenuStrip1.Name = "opmContextMenuStrip1";
             this.opmContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // opmLabel3
+            // 
+            this.opmLabel3.AutoSize = true;
+            this.opmLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.opmLabel3.FontSize = OPMedia.UI.Themes.FontSizes.Smallest;
+            this.opmLabel3.Location = new System.Drawing.Point(0, 136);
+            this.opmLabel3.Margin = new System.Windows.Forms.Padding(0, 0, 2, 2);
+            this.opmLabel3.Name = "opmLabel3";
+            this.opmLabel3.OverrideBackColor = System.Drawing.Color.Empty;
+            this.opmLabel3.OverrideForeColor = System.Drawing.Color.Empty;
+            this.opmLabel3.Size = new System.Drawing.Size(43, 13);
+            this.opmLabel3.TabIndex = 11;
+            this.opmLabel3.Text = "-6 dBM";
+            this.opmLabel3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // spSpectrogram
+            // 
+            this.spSpectrogram.BandCount = 64;
+            this.pnlSpectrogram.SetColumnSpan(this.spSpectrogram, 3);
+            this.spSpectrogram.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spSpectrogram.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.spSpectrogram.IsCentered = false;
+            this.spSpectrogram.IsHistogram = true;
+            this.spSpectrogram.Location = new System.Drawing.Point(45, 0);
+            this.spSpectrogram.LogarithmicXAxis = false;
+            this.spSpectrogram.LogarithmicYAxis = false;
+            this.spSpectrogram.Margin = new System.Windows.Forms.Padding(0);
+            this.spSpectrogram.MaxVal = null;
+            this.spSpectrogram.MinVal = null;
+            this.spSpectrogram.Name = "spSpectrogram";
+            this.spSpectrogram.OverrideBackColor = System.Drawing.Color.Empty;
+            this.spSpectrogram.PenWidth = 2F;
+            this.pnlSpectrogram.SetRowSpan(this.spSpectrogram, 4);
+            this.spSpectrogram.ShowDecadicLines = true;
+            this.spSpectrogram.ShowXAxis = true;
+            this.spSpectrogram.ShowYAxis = false;
+            this.spSpectrogram.Size = new System.Drawing.Size(388, 166);
+            this.spSpectrogram.TabIndex = 3;
+            // 
+            // vuRight
+            // 
+            this.vuRight.AllowDragging = false;
+            this.vuRight.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.vuRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vuRight.EffectiveMaximum = 0D;
+            this.vuRight.Enabled = false;
+            this.vuRight.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.vuRight.Location = new System.Drawing.Point(29, 21);
+            this.vuRight.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
+            this.vuRight.Maximum = 10000D;
+            this.vuRight.Name = "vuRight";
+            this.vuRight.NrTicks = 10;
+            this.vuRight.OverrideBackColor = System.Drawing.Color.Empty;
+            this.vuRight.OverrideElapsedBackColor = System.Drawing.Color.Empty;
+            this.vuRight.ShowTicks = true;
+            this.vuRight.Size = new System.Drawing.Size(386, 11);
+            this.vuRight.TabIndex = 1;
+            this.vuRight.Value = 0D;
+            this.vuRight.Vertical = false;
+            // 
+            // vuLeft
+            // 
+            this.vuLeft.AllowDragging = false;
+            this.vuLeft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.vuLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vuLeft.EffectiveMaximum = 0D;
+            this.vuLeft.Enabled = false;
+            this.vuLeft.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
+            this.vuLeft.Location = new System.Drawing.Point(29, 3);
+            this.vuLeft.Maximum = 10000D;
+            this.vuLeft.Name = "vuLeft";
+            this.vuLeft.NrTicks = 10;
+            this.vuLeft.OverrideBackColor = System.Drawing.Color.Empty;
+            this.vuLeft.OverrideElapsedBackColor = System.Drawing.Color.Empty;
+            this.vuLeft.ShowTicks = true;
+            this.vuLeft.Size = new System.Drawing.Size(386, 12);
+            this.vuLeft.TabIndex = 0;
+            this.vuLeft.Value = 0D;
+            this.vuLeft.Vertical = false;
+            // 
             // SignalAnalysisScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -396,5 +417,6 @@
         private SpectrogramPlotter spSpectrogram;
         private UI.Controls.OPMLabel opmLabel11;
         private UI.Controls.OPMLabel opmLabel5;
+        private UI.Controls.OPMLabel opmLabel3;
     }
 }

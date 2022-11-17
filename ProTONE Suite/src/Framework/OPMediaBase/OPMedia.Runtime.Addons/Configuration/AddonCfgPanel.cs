@@ -226,10 +226,6 @@ namespace OPMedia.Runtime.Addons.Configuration
                     {
                         ErrorDispatcher.DispatchError(Translator.Translate("TXT_CANT_INSTALL_BUILTIN"), false);
                     }
-                    else if (!dlg.FileName.ToLowerInvariant().EndsWith("extension.dll"))
-                    {
-                        ErrorDispatcher.DispatchError(Translator.Translate("TXT_INVALID_NAME"), false);
-                    }
                     else if (TestAssembly(dlg.FileName))
                     {
                         AddonsConfig.InstallAddonLibrary(dlg.FileName);

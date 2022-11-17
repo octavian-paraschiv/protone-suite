@@ -6,6 +6,7 @@ using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.AddonsBase;
 using OPMedia.Core.Configuration;
+using Newtonsoft.Json;
 
 namespace OPMedia.SkinBuilder
 {
@@ -45,8 +46,8 @@ namespace OPMedia.SkinBuilder
                     }
                 }
 
-                Translator.RegisterTranslationAssembly(typeof(SkinBuilderForm).Assembly);
                 Translator.SetInterfaceLanguage("en"); // Only English
+
                 Application.Run(new SkinBuilderForm());
 
 

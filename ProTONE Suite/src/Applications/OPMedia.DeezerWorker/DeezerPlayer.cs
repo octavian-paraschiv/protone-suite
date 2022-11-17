@@ -17,10 +17,12 @@ using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System.IO;
 using OPMedia.Runtime.ProTONE;
+using EventNames = OPMedia.Runtime.ProTONE.EventNames;
+using OPMedia.Core.GlobalEvents;
 
 namespace OPMedia.DeezerWorker
 {
-    public partial class DeezerPlayer : IWorkerPlayer
+    public partial class DeezerPlayer : SelfRegisteredEventSinkObject, IWorkerPlayer
     {
         private static dz_track_quality_t[] _trackQualities = new dz_track_quality_t[]
         {
@@ -171,6 +173,12 @@ namespace OPMedia.DeezerWorker
             _evtPlayerDeactivated.Set();
         }
 
+        string _url;
+        string _userId;
+        int _delayStart;
+        long _renderHwnd;
+        long _notifyHwnd;
+
 
         public void Play(string url, string userId, int delayStart, long renderHwnd, long notifyHwnd)
         {
@@ -249,8 +257,15 @@ try_play:
             }
 
             Logger.LogTrace("dz_player_play => Success");
-            // --------------------------------------------------------------------
 
+
+            _url = url;
+            _userId = userId;
+            _delayStart = delayStart;
+            _renderHwnd = renderHwnd;
+            _notifyHwnd = notifyHwnd;
+
+            // --------------------------------------------------------------------
             //if (delayStart > 0)
             //{
             //    Task.Factory.StartNew(() =>
@@ -629,6 +644,21 @@ try_play:
         public FilterState GetFilterState()
         {
             return this.FilterState;
+        }
+
+        [EventSink(EventNames.SoundDeviceChanged, ExecutionType.MainThreadPost)]
+        public void OnSoundDeviceChanged()
+        {
+            Logger.LogToConsole("DeezerPlayer::OnSoundDeviceChanged");
+
+            int pos = GetMediaPosition();
+            int vol = GetVolume();
+
+            Stop();
+            Play(_url, _userId, 0, _renderHwnd, _notifyHwnd);
+            Pause();
+            Resume(pos);
+            SetVolume(vol);
         }
     }
 }

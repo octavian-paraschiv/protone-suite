@@ -163,6 +163,11 @@ namespace OPMedia.PersistenceService
         {
             PersistenceServiceImpl.ReversePing();
         }
+
+        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
+        {
+            // Do nothing
+        }
     }
 }
 #endif

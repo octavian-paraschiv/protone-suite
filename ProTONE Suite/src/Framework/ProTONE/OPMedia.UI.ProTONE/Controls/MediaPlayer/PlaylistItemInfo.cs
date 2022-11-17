@@ -18,6 +18,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE;
+using EventNames = OPMedia.Core.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

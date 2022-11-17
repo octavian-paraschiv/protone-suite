@@ -50,16 +50,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void OnShown(object sender, EventArgs e)
         {
-            if (WasapiMeter.Instance.Start())
-            {
-                this.Location = ProTONEConfig.SA_WindowLocation;
-                this.Size = ProTONEConfig.SA_WindowSize;
-                this.WindowState = ProTONEConfig.SA_WindowState;
-            }
-            else
-            {
-                Close();
-            }
+            this.Location = ProTONEConfig.SA_WindowLocation;
+            this.Size = ProTONEConfig.SA_WindowSize;
+            this.WindowState = ProTONEConfig.SA_WindowState;
         }
 
         protected override bool AutoCenterEnabled
@@ -72,7 +65,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         void OnFormClosing(object sender, FormClosingEventArgs e)
         {
-            WasapiMeter.Instance.Stop();
             ProTONEConfig.SA_WindowLocation = this.Location;
             ProTONEConfig.SA_WindowSize = this.Size;
             ProTONEConfig.SA_WindowState = this.WindowState;

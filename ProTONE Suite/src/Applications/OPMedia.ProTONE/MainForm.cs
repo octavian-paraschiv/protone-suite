@@ -28,6 +28,7 @@ using OPMedia.UI.Dialogs;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 
 using OPMedia.Core.GlobalEvents;
+using EventNames = OPMedia.Core.EventNames;
 using OPMedia.UI.Menus;
 using OPMedia.Core.ComTypes;
 using OPMedia.UI.ProTONE;
