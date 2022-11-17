@@ -33,7 +33,7 @@ deploy:
     username: ocparo_ftpops
     password: 
         secure: q5T1rZCQBkgSA0/G7P2vXQ==
-    folder: ProTONE/current/
+    folder: content/ProTONE/current/
     application: protone-setup
   
 on_success:
