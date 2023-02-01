@@ -145,11 +145,8 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static void OnSettingsChanged(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
+        public static void OnSettingsChanged(string persistenceId, string persistenceContext, object objectContent)
         {
-            if (changeType != ChangeType.Saved)
-                return;
-
             if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
                 lock (_settingsChangesLock)

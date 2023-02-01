@@ -48,6 +48,10 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
@@ -61,10 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbStores\DbStore.cs" />
+    <Compile Include="PersistenceServiceImpl.cs" />
     <Compile Include="Sqlite\Database.cs" />
     <Compile Include="POCO\Entities.cs" />
     <Compile Include="DbStores\SqliteDbStore.cs" />
-    <Compile Include="PersistenceServiceImpl.cs" />
     <Compile Include="PersistenceServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,7 +82,6 @@
       <DependentUpon>PersistenceService.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceHelper.cs" />
     <Compile Include="SingletonCacheStore.cs" />
   </ItemGroup>
   <ItemGroup>

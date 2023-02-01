@@ -249,9 +249,9 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                 if (_wp != null && _wp.HasExited == false)
                 {
                     if (replyCmd != null)
-                        Logger.LogError($"Killing worker process after exception, last command: {cmd}, reply: {replyCmd}");
+                        Logger.LogWarning($"Killing worker process after exception, last command: {cmd}, reply: {replyCmd}");
                     else
-                        Logger.LogError($"Killing worker process after exception, last command: {cmd}, no reply");
+                        Logger.LogWarning($"Killing worker process after exception, last command: {cmd}, no reply");
 
                     _wp.Kill();
                     _wp = null;

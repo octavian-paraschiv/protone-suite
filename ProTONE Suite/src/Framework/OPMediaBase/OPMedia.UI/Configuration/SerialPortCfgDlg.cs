@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using OPMedia.UI.Themes;
 using System.IO.Ports;
-using OPMedia.Runtime.ServiceHelpers;
 using OPMedia.Core;
 
 namespace OPMedia.UI.Configuration

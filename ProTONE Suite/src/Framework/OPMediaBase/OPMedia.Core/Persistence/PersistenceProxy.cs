@@ -12,15 +12,15 @@ using OPMedia.Core.Configuration;
 using OPMedia.Core.Persistence;
 using OPMedia.Core.Utilities;
 using Newtonsoft.Json;
+using OPMedia.Core.InterProcessCommunication;
+using System.Threading.Tasks;
 
 namespace OPMedia.Core
 {
-    public class PersistenceProxy : IDisposable, IPersistenceService, IPersistenceNotification
+    public class PersistenceProxy : IDisposable, IPersistenceService, INotificationService
     {
         protected readonly static PersistenceProxy _proxy = new PersistenceProxy();
-        private static CacheStore _cache = new CacheStore(_proxy);
-
-        protected IPersistenceService _channel = null;
+        private static CacheStore _cache = new CacheStore(_proxy as IPersistenceService);
 
         protected string _persistenceContext = string.Empty;
         protected Guid _appId = Guid.NewGuid();
@@ -28,8 +28,8 @@ namespace OPMedia.Core
         private static int _unsuccesfulAttempts = 0;
 
         static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
-        static int _readCount = 0;
 
+        private PersistenceClient _cl = null;
 
         protected PersistenceProxy()
         {
@@ -62,9 +62,6 @@ namespace OPMedia.Core
 
         private bool ActivatePersistenceService()
         {
-            if (PersistenceConstants.UseRemoteServer)
-                return true;
-
             int attempts = 5;
 
             while(attempts > 0)
@@ -93,28 +90,17 @@ namespace OPMedia.Core
         {
             try
             {
-                var myBinding = new NetTcpBinding();
-                myBinding.MaxReceivedMessageSize = int.MaxValue;
-                myBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+                _cl = new PersistenceClient();
 
-                myBinding.OpenTimeout = TimeSpan.FromSeconds(4);
-                myBinding.CloseTimeout = TimeSpan.FromSeconds(4);
-                myBinding.SendTimeout = TimeSpan.FromSeconds(1);
-                myBinding.ReceiveTimeout = TimeSpan.FromSeconds(30);
-                myBinding.ReliableSession.InactivityTimeout = TimeSpan.FromSeconds(30);
+                _cl.ConnectionOpen = (connId, reconnect) => _cl.SendPdu(new ServicePDU { ActionType = ServiceActionType.Subscribe, ObjectContent = _appId.ToString() });
 
-                myBinding.Security.Mode = SecurityMode.None;
-                myBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.None;
-                myBinding.Security.Message.ClientCredentialType = MessageCredentialType.None;
-
-                var instanceContext = new InstanceContext(this);
-                var myEndpoint = new EndpointAddress(PersistenceConstants.PersistenceServiceAddress);
-                var myChannelFactory = new DuplexChannelFactory<IPersistenceService>(instanceContext, myBinding, myEndpoint);
-
-                _channel = myChannelFactory.CreateChannel();
-
-                var appId = _appId.ToString();
-                _channel.Subscribe(appId);
+                _cl.PduReceived = (connId, pdu) =>
+                {
+                    if (pdu is NotificationPDU npdu)
+                    {
+                        Task.Factory.StartNew(() => DispatchNotification(npdu.ChangeType, npdu.PersistenceId, npdu.PersistenceContext, npdu.ObjectContent));
+                    }
+                };
             }
             catch (Exception ex)
             {
@@ -122,34 +108,18 @@ namespace OPMedia.Core
             }
         }
 
-        protected void Abort()
-        {
-            try
-            {
-                ICommunicationObject channel = _channel as ICommunicationObject;
-                if (channel != null)
-                    channel.Abort();
-            }
-            catch { }
-        }
-
         public void Dispose()
         {
             try
             {
-                if (_channel != null)
-                {
-                    var appId = _appId.ToString();
-                    _channel.Unsubscribe(appId);
-
-                    ICommunicationObject channel = _channel as ICommunicationObject;
-                    if (channel != null)
-                        channel.Close();
-                }
+                _cl?.SendPdu(new ServicePDU { ActionType = ServiceActionType.Unsubscribe, ObjectContent = _appId.ToString() });
+                _cl?.SendGracefulEnd();
+                _cl?.Disconnect();
+                _cl?.Dispose();
             }
             catch { }
 
-            _channel = null;
+            _cl = null;
         }
 
         static string BuildPersistenceId(bool includeAppName, string persistenceId)
@@ -160,32 +130,6 @@ namespace OPMedia.Core
             return persistenceId;
         }
 
-        public static void SendIpcEvent(string eventName, params string[] eventArgs)
-        {
-            string content = eventName;
-
-            if (eventArgs?.Length > 0)
-                content += $"?{StringUtils.FromStringArray(eventArgs, '|')}";
-
-            _proxy.Notify(ChangeType.IpcEvent, ChangeType.IpcEvent.ToString(), _proxy._persistenceContext, content);
-        }
-
-        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
-        {
-            try
-            {
-                Logger.LogTrace($"IPersistenceService.SendIpcEvent persistenceId={persistenceId} persistenceContext={persistenceContext}");
-
-                if (_channel != null)
-                    _channel.Notify(changeType, persistenceId, persistenceContext, objectContent);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-                Abort();
-                Open();
-            }
-        }
 
         #region ReadObject
 
@@ -209,16 +153,12 @@ namespace OPMedia.Core
                         byte[] blob = usePersistenceContext ?
                             _cache.ReadBlob(persistenceId, _proxy._persistenceContext) :
                             _cache.ReadBlob(persistenceId, string.Empty);
-
-                        _readCount++;
                     }
                     else
                     {
                         string content = usePersistenceContext ?
                             _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
                             _cache.ReadObject(persistenceId, string.Empty);
-
-                        _readCount++;
 
                         if (!string.IsNullOrEmpty(content))
                         {
@@ -254,14 +194,20 @@ namespace OPMedia.Core
             {
                 Logger.LogTrace($"IPersistenceService.ReadObject persistenceId={persistenceId} persistenceContext={persistenceContext}");
 
-                if (_channel != null) 
-                    return _channel.ReadObject(persistenceId, persistenceContext);
+
+                var pdu = _cl.SendPduAndWaitResponse(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.ReadObject,
+                    PersistenceContext = persistenceContext,
+                    PersistenceId = persistenceId,
+                });
+
+                if (pdu != null)
+                    return pdu.ObjectContent;
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
 
             return null;
@@ -273,14 +219,20 @@ namespace OPMedia.Core
             {
                 Logger.LogTrace($"IPersistenceService.ReadBlob persistenceId={persistenceId} persistenceContext={persistenceContext}");
 
-                if (_channel != null)
-                    return _channel.ReadBlob(persistenceId, persistenceContext);
+                var pdu = _cl.SendPduAndWaitResponse(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.ReadObject,
+                    IsBlob = true,
+                    PersistenceContext = persistenceContext,
+                    PersistenceId = persistenceId,
+                });
+
+                if (pdu != null)
+                    return Convert.FromBase64String(pdu.ObjectContent);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
 
             return null;
@@ -334,14 +286,17 @@ namespace OPMedia.Core
         {
             try
             {
-                if (_channel != null)
-                    _channel.SaveObject(persistenceId, persistenceContext, objectContent);
+                _cl.SendPdu(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.SaveObject,
+                    ObjectContent = objectContent,
+                    PersistenceContext =  persistenceContext,
+                    PersistenceId = persistenceId,
+                });
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
         }
 
@@ -349,14 +304,18 @@ namespace OPMedia.Core
         {
             try
             {
-                if (_channel != null)
-                    _channel.SaveBlob(persistenceId, persistenceContext, objectBlob);
+                _cl.SendPdu(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.SaveObject,
+                    IsBlob = true,
+                    ObjectContent = Convert.ToBase64String(objectBlob),
+                    PersistenceContext = persistenceContext,
+                    PersistenceId = persistenceId,
+                });
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
         }
         #endregion
@@ -398,64 +357,54 @@ namespace OPMedia.Core
         {
             try
             {
-                if (_channel != null)
-                    _channel.DeleteObject(persistenceId, persistenceContext);
+                _cl.SendPdu(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.DeleteObject,
+                    PersistenceContext = persistenceContext,
+                    PersistenceId = persistenceId,
+                });
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
         }
         #endregion
 
-        void IPersistenceService.Subscribe(string appId)
+        #region Notifications
+        public static void SendIpcEvent(string eventName, params string[] eventArgs)
         {
-            throw new NotSupportedException();
+            string content = eventName;
+
+            if (eventArgs?.Length > 0)
+                content += $"?{StringUtils.FromStringArray(eventArgs, '|')}";
+
+            (_proxy as INotificationService).SendNotification(NotificationType.IpcEvent, NotificationType.IpcEvent.ToString(), _proxy._persistenceContext, content);
         }
 
-        void IPersistenceService.Unsubscribe(string appId)
-        {
-            throw new NotSupportedException();
-        }
-
-        void IPersistenceService.Ping(string appid)
+        void INotificationService.SendNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
             try
             {
-                if (_channel != null)
-                    _channel.Ping(_appId.ToString());
+                Logger.LogTrace($"IPersistenceService.SendNotification persistenceId={persistenceId} persistenceContext={persistenceContext}");
+
+                _cl.SendPdu(new NotificationPDU
+                {
+                    ChangeType = changeType,
+                    PersistenceContext = persistenceContext,
+                    PersistenceId = persistenceId,
+                    ObjectContent = objectContent
+                });
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-                Abort();
-                Open();
             }
         }
-        
-        void IPersistenceNotification.Notify(ChangeType changeType, string persistenceId, string persistenceContext, string objectContent)
-        {
-            if (changeType == ChangeType.None && objectContent == "ping")
-            {
-                Logger.LogToConsole("Ping received from PersistenceService");
-                return;
-            }
 
-            if (persistenceContext == null || persistenceContext == "*" || persistenceContext == _persistenceContext)
-                ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
-        }
-
-        void IPersistenceNotification.NotifyBlob(ChangeType changeType, string persistenceId, string persistenceContext, byte[] objectContent)
+        void DispatchNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
-            if (persistenceContext == null || persistenceContext == "*" || persistenceContext == _persistenceContext)
-                ThreadPool.QueueUserWorkItem((c) => ThreadedNotify(changeType, persistenceId, persistenceContext, objectContent));
-        }
-
-        void ThreadedNotify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
-        {
-            if (changeType == ChangeType.IpcEvent)
+            if (changeType == NotificationType.IpcEvent)
             {
                 if (objectContent is string content && !string.IsNullOrEmpty(content))
                 {
@@ -475,12 +424,14 @@ namespace OPMedia.Core
             else if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
             {
                 Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
-                AppConfig.OnSettingsChanged(changeType, persistenceId, persistenceContext, objectContent);
+                if (changeType == NotificationType.ObjectSaved)
+                    AppConfig.OnSettingsChanged(persistenceId, persistenceContext, objectContent);
             }
             else
             {
                 Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Ignored, as we failed to update the cache.");
             }
         }
+        #endregion
     }
 }

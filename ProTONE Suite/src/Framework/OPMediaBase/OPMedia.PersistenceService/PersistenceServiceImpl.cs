@@ -8,112 +8,156 @@ using OPMedia.Core;
 using OPMedia.Core.Logging;
 using System.Threading;
 using OPMedia.Core.Utilities;
+using OPMedia.Core.InterProcessCommunication;
+using Newtonsoft.Json;
+using OPMedia.Core.Persistence;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.PersistenceService
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)]
-    public class PersistenceServiceImpl : IPersistenceService
+    public class PersistenceServiceImpl : IPersistenceService, IDisposable
     {
         static TicToc _readTicToc = new TicToc("Persistence.Service.ReadObject");
         static TicToc _saveTicToc = new TicToc("Persistence.Service.SaveObject");
         static TicToc _deleteTicToc = new TicToc("Persistence.Service.DeleteObject");
 
-        static object _notifyLock = new object();
+        private PersistenceServer _server;
 
-        static Dictionary<string, IPersistenceNotification> _notifiedApps = new Dictionary<string,IPersistenceNotification>();
+        private object _subscriptionsLock = new object();
+        private Dictionary<string, string> _subscriptions = new Dictionary<string, string>();
 
-
-        public void Subscribe(string appId)
+        public PersistenceServiceImpl()
         {
-            lock (_notifyLock)
+            Environment.CurrentDirectory = AppConfig.InstallationPath;
+
+            _server = new PersistenceServer();
+            _server.TextLineReceived = OnLineReceived;
+            _server.ConnectionClosed = OnConnectionClosed;
+        }
+
+        private void OnConnectionClosed(string connId, bool isGracefully)
+        {
+            lock (_subscriptionsLock)
             {
-                try
-                {
-                    var channel = OperationContext.Current.GetCallbackChannel<IPersistenceNotification>();
-
-                    if (_notifiedApps.ContainsKey(appId) == false)
-                    {
-                        _notifiedApps.Add(appId, channel);
-                        Logger.LogTrace("Subscribe: Adding record for appId {0} ...", appId);
-                    }
-                    else
-                    {
-                        _notifiedApps[appId] = channel;
-                        Logger.LogTrace("Subscribe: Updating record for appId {0} ...", appId);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogException(ex);
-                }
+                if (_subscriptions.ContainsKey(connId))
+                    _subscriptions.Remove(connId);
             }
         }
 
-        public void Unsubscribe(string appId)
+        private void OnLineReceived(string connId, string line)
         {
-            DoUnsubscribe(appId);
-        }
+            var pdu = PduFactory.Decode(line);
 
-        static void DoUnsubscribe(string appId)
-        {
-            lock (_notifyLock)
+            // --------------------------------------------------------
+            if (pdu is ServicePDU spdu)
             {
-                try
+                switch (spdu.ActionType)
                 {
-                    if (_notifiedApps.ContainsKey(appId))
-                    {
-                        _notifiedApps.Remove(appId);
-                        Logger.LogTrace("Unsubscribe: Removing record for appId {0} ...", appId);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogException(ex);
+                    case ServiceActionType.Subscribe:
+                        {
+                            Logger.LogTrace($"Subscribing for {connId}/{spdu.ObjectContent} ...");
+                            lock (_subscriptionsLock)
+                            {
+                                if (_subscriptions.ContainsKey(connId))
+                                    _subscriptions[connId] = spdu.ObjectContent;
+                                else
+                                    _subscriptions.Add(connId, spdu.ObjectContent);
+                            }
+                        }
+                        break;
+
+                    case ServiceActionType.Unsubscribe:
+                        {
+                            Logger.LogTrace($"Unsubscribing for {connId} ...");
+                            lock (_subscriptionsLock)
+                            {
+                                if (_subscriptions.ContainsKey(connId))
+                                    _subscriptions.Remove(connId);
+                            }
+                        }
+                        break;
+
                 }
             }
-        }
 
-
-        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
-        {
-            DoNotify(changeType, persistenceId, persistenceContext, objectContent);
-        }
-
-        static void DoNotify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
-        {
-            ThreadPool.QueueUserWorkItem((c) =>
+            // --------------------------------------------------------
+            else if (pdu is PersistencePDU rpdu)
             {
-                lock (_notifyLock)
+                switch (rpdu.ActionType)
                 {
+                    case PersistenceActionType.ReadObject:
+                        {
+                            if (rpdu.IsBlob)
+                            {
+                                var blob = ReadBlob(rpdu.PersistenceId, rpdu.PersistenceContext);
+                                if (blob?.Length > 0)
+                                    rpdu.ObjectContent = Convert.ToBase64String(blob);
+                                else
+                                    rpdu.ObjectContent = "";
+                            }
+                            else
+                            {
+                                rpdu.ObjectContent = ReadObject(rpdu.PersistenceId, rpdu.PersistenceContext) ?? "";
+                            }
 
+                            string data = JsonConvert.SerializeObject(rpdu);
+                            _server.SendTo(connId, data);
+                        }
+                        break;
+
+                    case PersistenceActionType.SaveObject:
+                        {
+                            if (rpdu.IsBlob)
+                            {
+                                var data = Convert.FromBase64String(rpdu.ObjectContent);
+                                SaveBlob(rpdu.PersistenceId, rpdu.PersistenceContext, data);
+                            }
+                            else
+                            {
+                                SaveObject(rpdu.PersistenceId, rpdu.PersistenceContext, rpdu.ObjectContent);
+                            }
+                        }
+                        break;
+
+                    case PersistenceActionType.DeleteObject:
+                        DeleteObject(rpdu.PersistenceId, rpdu.PersistenceContext);
+                        break;
+                }
+            }
+
+            // --------------------------------------------------------
+            else if (pdu is NotificationPDU npdu)
+            {
+                Notify(npdu);
+            }
+        }
+        public void Notify(NotificationPDU npdu)
+        {
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                lock (_subscriptionsLock)
+                {
                     List<string> appsToRemove = new List<string>();
 
-                    foreach (KeyValuePair<string, IPersistenceNotification> appRecord in _notifiedApps)
+                    foreach (KeyValuePair<string, string> appRecord in _subscriptions)
                     {
                         try
                         {
-                            if (changeType == ChangeType.None && (objectContent as string == "ping"))
-                            {
-                                Logger.LogTrace("Sending Ping to appId {0}", appRecord.Key);
-                            }
-
-                            if (objectContent is byte[])
-                                appRecord.Value.NotifyBlob(changeType, persistenceId, persistenceContext, objectContent as byte[]);
-                            else
-                                appRecord.Value.Notify(changeType, persistenceId, persistenceContext, objectContent as string);
+                            string data = JsonConvert.SerializeObject(npdu);
+                            _server.SendTo(appRecord.Key, data);
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogTrace("Notify: Marking record for appId {0} for deletion, it looks faulted ...",
-                                appRecord.Key);
-
+                            Logger.LogTrace($"Notify: Marking record for connId {appRecord.Key} for deletion, it looks faulted ...");
                             appsToRemove.Add(appRecord.Key);
-                            Logger.LogException(ex);
                         }
                     }
 
-                    appsToRemove.ForEach((appId) => DoUnsubscribe(appId));
+                    appsToRemove.ForEach(connId =>
+                    {
+                        if (_subscriptions.ContainsKey(connId))
+                            _subscriptions.Remove(connId);
+                    });
                 }
 
             }, null);
@@ -166,7 +210,15 @@ namespace OPMedia.PersistenceService
                 
                 bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
                 if (ok)
-                    Notify(ChangeType.Saved, persistenceId, persistenceContext, objectContent);
+                {
+                    Notify(new NotificationPDU
+                    {
+                        ChangeType = NotificationType.ObjectSaved,
+                        PersistenceId = persistenceId,
+                        PersistenceContext = persistenceContext,
+                        ObjectContent = objectContent
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -186,7 +238,16 @@ namespace OPMedia.PersistenceService
 
                 bool ok = SingletonCacheStore.Instance.SaveBlob(persistenceId, persistenceContext, objectContent);
                 if (ok)
-                    Notify(ChangeType.Saved, persistenceId, persistenceContext, objectContent);
+                {
+                    Notify(new NotificationPDU
+                    {
+                        ChangeType = NotificationType.ObjectSaved,
+                        PersistenceId = persistenceId,
+                        PersistenceContext = persistenceContext,
+                        ObjectContent = Convert.ToBase64String(objectContent),
+                        IsBlob = true
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -206,7 +267,15 @@ namespace OPMedia.PersistenceService
 
                 bool ok = SingletonCacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
                 if (ok)
-                    Notify(ChangeType.Deleted, persistenceId, persistenceContext, string.Empty);
+                {
+                    Notify(new NotificationPDU
+                    {
+                        ChangeType = NotificationType.ObjectDeleted,
+                        PersistenceId = persistenceId,
+                        PersistenceContext = persistenceContext,
+                        ObjectContent = ""
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -218,14 +287,9 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public void Ping(string appId)
+        public void Dispose()
         {
-            Logger.LogTrace($"Ping received from appId={appId}");
-        }
-
-        public static void ReversePing()
-        {
-            DoNotify(ChangeType.None, string.Empty, string.Empty, "ping");
+            _server?.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OPMedia.Core;
+using OPMedia.Core.InterProcessCommunication;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using System.Collections.Generic;
@@ -47,6 +48,11 @@ namespace OPMedia.Runtime.ProTONE
             }
 
             string command = FromStringArray(fields.ToArray(), '?');
+
+            using (RemoteControlClient rcc = new RemoteControlClient())
+            {
+                rcc.Send(command);
+            }
         }
 
         private static string FromStringArray(string[] array, char delim)
@@ -79,6 +85,13 @@ namespace OPMedia.Runtime.ProTONE
             {
                 return false;
             }
+        }
+    }
+
+    public class RemoteControlClient : TextCommunicationClient
+    {
+        public RemoteControlClient() : base(RemoteControlServer.RemoteControlPort)
+        {
         }
     }
 }

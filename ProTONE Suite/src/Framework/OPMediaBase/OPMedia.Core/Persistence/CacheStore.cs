@@ -63,7 +63,7 @@ namespace OPMedia.Core.Persistence
         const int ExpiredItemsPollTimer = 10 * 1000;
         const int IterationsUntilGarbageCollection = (10 * 60 * 1000) / ExpiredItemsPollTimer;
 
-        private IPersistenceService _persistence = null;       
+        private IPersistenceService _persistence = null;
 
         private Dictionary<string, CacheItem> _cache = new Dictionary<string, CacheItem>();
 
@@ -88,10 +88,8 @@ namespace OPMedia.Core.Persistence
                 _tmrCachePoller.Stop();
                 PollForExpiredCachedItems();
 
-                _persistence.Ping(null);
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -313,7 +311,7 @@ namespace OPMedia.Core.Persistence
             return string.Format("{0}_{1}", persistenceId, persistenceContext);
         }
 
-        internal bool RefreshObject(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
+        internal bool RefreshObject(NotificationType changeType, string persistenceId, string persistenceContext, object objectContent)
         {
             bool success = false;
 
@@ -328,7 +326,7 @@ namespace OPMedia.Core.Persistence
 
                     switch (changeType)
                     {
-                        case ChangeType.Deleted:
+                        case NotificationType.ObjectDeleted:
                             if (isInCache)
                             {
                                 Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was found in cache and removed");
@@ -340,7 +338,7 @@ namespace OPMedia.Core.Persistence
                             }
                             break;
 
-                        case ChangeType.Saved:
+                        case NotificationType.ObjectSaved:
                             {
                                 CacheItem ci = new CacheItem(key, objectContent);
 
@@ -373,6 +371,7 @@ namespace OPMedia.Core.Persistence
 
             return success;
         }
+
     }
 
 }

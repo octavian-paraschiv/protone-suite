@@ -6,18 +6,26 @@ using OPMedia.Core.Logging;
 using System.Reflection;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Core.InstanceManagement;
-//using OPMedia.Runtime.UdpCommunication;
 using OPMedia.Core;
-using OPMedia.Runtime.InterProcessCommunication;
+using OPMedia.Core.InterProcessCommunication;
 using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
+    public class RemoteControlServer : TextCommunicationServer
+    {
+        public const int RemoteControlPort = 10201;
+
+        public RemoteControlServer() : base(RemoteControlPort)
+        {
+        }
+    }
+
     #region RemoteControllableApplication
     public sealed class RemoteControllableApplication : SingleInstanceApplication
     {
         #region Members
-        private WmCopyDataReceiver _wcdReceiver = null;
+        private RemoteControlServer _rmtServer = null;
         #endregion
 
         #region Methods
@@ -30,7 +38,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
             else
             {
-                Logger.LogError(string.Format("Only one instance of OpMediaApplication (or derived) can be started per process !!"));
+                Logger.LogWarning(string.Format("Only one instance of OpMediaApplication (or derived) can be started per process !!"));
             }
         }
 
@@ -38,17 +46,15 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         {
             base.DoInitialize();
 
-            _wcdReceiver = new WmCopyDataReceiver(_appName);
-            _wcdReceiver.DataReceived += new DataReceivedHandler(_wcdReceiver_DataReceived);
+            _rmtServer = new RemoteControlServer();
+            _rmtServer.TextLineReceived = (connId, line) => OnDataReceived(line);
         }
 
         protected override void DoTerminate()
         {
-            if (_wcdReceiver != null)
-            {
-                _wcdReceiver.DataReceived -= new DataReceivedHandler(_wcdReceiver_DataReceived);
-            	_wcdReceiver = null;
-            }
+            _rmtServer?.Stop();
+            _rmtServer?.Dispose();
+            _rmtServer = null;
             
             base.DoTerminate();
         }
@@ -59,23 +65,21 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         {
         }
 
-        void _wcdReceiver_DataReceived(string data)
+        void OnDataReceived(string data)
         {
             BasicCommand cmd = BasicCommand.Create(data);
-
-            Logger.LogTrace("_wcdReceiver_DataReceived: {0} => cmd: {1}", data, cmd);
-
+            Logger.LogTrace("OnDataReceived: {0} => cmd: {1}", data, cmd);
             EventDispatch.DispatchEvent(BasicCommand.EventName, cmd);
         }
 
         void _receiver_OnPostRequest(string data)
         {
-            _wcdReceiver_DataReceived(data);
+            OnDataReceived(data);
         }
 
         string _receiver_OnSendRequest(string data)
         {
-            _wcdReceiver_DataReceived(data);
+            OnDataReceived(data);
             return "ACK\r\n";
         }
         #endregion

@@ -228,7 +228,7 @@ namespace OPMedia.Runtime.Addons
                         Translator.Translate("TXT_APP_NAME"),
                         MessageBoxIcon.Error);
 
-                    Logger.LogError("No navigation addons are currently configured. Application is exiting.");
+                    Logger.LogWarning("No navigation addons are currently configured. Application is exiting.");
 
                     // Exit application by closing the main form.
                     Close();

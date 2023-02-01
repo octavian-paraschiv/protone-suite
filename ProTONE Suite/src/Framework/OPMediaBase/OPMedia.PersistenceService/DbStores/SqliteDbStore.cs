@@ -149,25 +149,9 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public void Subscribe(string appId)
-        {
-            // Do nothing
-        }
 
-        public void Unsubscribe(string appId)
-        {
-            // Do nothing
-        }
-
-        public void Ping(string appid)
-        {
-            PersistenceServiceImpl.ReversePing();
-        }
-
-        public void Notify(ChangeType changeType, string persistenceId, string persistenceContext, object objectContent)
-        {
-            // Do nothing
-        }
+        public void SendNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent) { }
+        public void SendNotificationBlob(NotificationType changeType, string persistenceId, string persistenceContext, byte[] objectBlob) { }
     }
 }
 #endif

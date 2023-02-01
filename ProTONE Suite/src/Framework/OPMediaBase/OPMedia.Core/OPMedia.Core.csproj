@@ -62,6 +62,9 @@
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="InterProcessCommunication\CommunicationBase.cs" />
+    <Compile Include="InterProcessCommunication\CommunicationClient.cs" />
+    <Compile Include="InterProcessCommunication\CommunicationServer.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LoggedApplication.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -73,6 +76,7 @@
     </Compile>
     <Compile Include="NetworkAccess\WebFileRetriever.cs" />
     <Compile Include="Persistence\CacheStore.cs" />
+    <Compile Include="Persistence\PersistenceCommunication.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

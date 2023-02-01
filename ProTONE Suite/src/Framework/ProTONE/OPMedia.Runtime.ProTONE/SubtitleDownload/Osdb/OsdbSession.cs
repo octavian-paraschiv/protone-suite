@@ -126,7 +126,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
             if (!rsp.IsOK())
             {
                 // Logout failed.
-                Logger.LogError("OsdbSession: No-Operation failed: {0}", rsp.status);
+                Logger.LogWarning("OsdbSession: No-Operation failed: {0}", rsp.status);
             }
         }
 

@@ -8,14 +8,13 @@ using System.ServiceProcess;
 using System.Text;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.ServiceHelpers;
 
 namespace OPMedia.PersistenceService
 {
     public partial class PersistenceService : ServiceBase
     {
-        ServiceHelper _sh = null;
-        
+        PersistenceServiceImpl _svc = null;
+
         public PersistenceService()
         {
             InitializeComponent();
@@ -61,7 +60,8 @@ namespace OPMedia.PersistenceService
             {
                 ticToc.Tic();
 
-                StartServiceHelper();
+                _svc = new PersistenceServiceImpl();
+
                 Logger.LogInfo("Service started with success.");
             }
             catch (Exception ex)
@@ -85,7 +85,9 @@ namespace OPMedia.PersistenceService
             {
                 ticToc.Tic();
 
-                StopServiceHelper();
+                _svc?.Dispose();
+                _svc = null;
+
                 Logger.LogInfo("Service stopped with success.");
             }
             catch (Exception ex)
@@ -99,71 +101,5 @@ namespace OPMedia.PersistenceService
 
             LoggedApplication.Stop();
         }
-
-        protected override void OnCustomCommand(int command)
-        {
-            try
-            {
-                ServiceCommand sc = (ServiceCommand)command;
-                switch (sc)
-                {
-                    case ServiceCommand.Reconfigure:
-                        Reconfigure();
-                        break;
-
-                    case ServiceCommand.QueryStatus:
-                        QueryStatus();
-                        break;
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        private void Reconfigure()
-        {
-            try
-            {
-                Logger.LogInfo("Service preparing to reconfigure ...");
-
-                StopServiceHelper();
-                StartServiceHelper();
-
-                Logger.LogInfo("Service reconfigured with success ...");
-            }
-            catch (Exception ex)
-            {
-                Logger.LogInfo("Service failed to reconfigure. {0}", ex.Message);
-            }
-        }
-
-        internal void StartServiceHelper()
-        {
-            Logger.LogInfo("Service helper preparing to start ...");
-
-            _sh = new ServiceHelper();
-            _sh.Start();
-
-            Logger.LogInfo("Service helper started succesfully !");
-        }
-
-        private void StopServiceHelper()
-        {
-            Logger.LogInfo("Service helper preparing to stop ...");
-
-            if (_sh != null)
-            {
-                _sh.Stop();
-                _sh = null;
-            }
-
-            Logger.LogInfo("Service helper stopped succesfully !");
-        }
-
-        private void QueryStatus()
-        {
-        }
-       
     }
 }

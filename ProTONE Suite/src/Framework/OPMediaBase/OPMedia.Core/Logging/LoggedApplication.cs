@@ -28,7 +28,7 @@ namespace OPMedia.Core.Logging
             }
             else
             {
-                Logger.LogError("Error encountered: {0}",
+                Logger.LogWarning("Error encountered: {0}",
                     "Only one instance of OpMediaApplication (or derived) can be started per process !!");
             }
         }
@@ -72,8 +72,13 @@ namespace OPMedia.Core.Logging
 
         protected virtual void RegisterAppMutex()
         {
-            bool isNew = false;
-            _appMutex = new Mutex(false, "Global\\" + _appMutexName, out isNew);
+            try
+            {
+                _appMutex = new Mutex(false, "Global\\" + _appMutexName, out bool _);
+            }
+            catch
+            {
+            }
         }
 
         private void InstallApplicationEventHandlers()
