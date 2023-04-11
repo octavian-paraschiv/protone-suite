@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using OPMedia.Core.Logging;
+using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -56,7 +57,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     internalDatabase.OnlineMediaItems == null ||
                     internalDatabase.OnlineMediaItems.Count < 1)
                 {
-                    using (FileStream fs = new FileStream(@".\DefaultOnlineMediaData.xml", FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream($"{AppConfig.InstallationPath}/DefaultOnlineMediaData.xml", FileMode.Open, FileAccess.Read))
                     using (XmlReader xr = XmlReader.Create(fs))
                     {
                         XmlSerializer xs = new XmlSerializer(typeof(OnlineMediaData));

@@ -571,7 +571,7 @@
   "TXT_SETSKIN": "Définir le thème de l'interface utilisateur (par toute ProTone Suite):",
   "TXT_SETTINGS": "Paramètres du programme",
   "TXT_SETUILANGUAGE": "Réglez la langue de l'interface utilisateur (par toute ProTone Suite):",
-  "TXT_SHELL_INTEGRATION": "Intégration avec l'Explorateur Windows",
+  "TXT_SHELL_INTEGRATION": "Intégration avec le menu contextuel de Windows Explorateur",
   "TXT_SHOUTCAST_DEV_ID": "ShoutCast API Device ID private key:",
   "TXT_SHOUTCAST_DEV_ID_HINT": "La clé privée ShoutCastAPI Device ID représente votre identité unique pour l'API ShoutCast.\r\nIl est destiné à être utilisé individuellement, alors s'il vous plaît ne le partagez avec personne.\r\nPour obtenir votre propre clé privée, veuillez accéder à:",
   "TXT_SHOUTCAST_DIR": "Répertoire de Shoutcast",

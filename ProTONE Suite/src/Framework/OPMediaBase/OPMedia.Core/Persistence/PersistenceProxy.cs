@@ -92,7 +92,10 @@ namespace OPMedia.Core
             {
                 _cl = new PersistenceClient();
 
-                _cl.ConnectionOpen = (connId, reconnect) => _cl.SendPdu(new ServicePDU { ActionType = ServiceActionType.Subscribe, ObjectContent = _appId.ToString() });
+                _cl.ConnectionOpen = (connId, reconnect) =>
+                {
+                    _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, ObjectContent = _appId.ToString() });
+                };
 
                 _cl.PduReceived = (connId, pdu) =>
                 {
@@ -112,7 +115,7 @@ namespace OPMedia.Core
         {
             try
             {
-                _cl?.SendPdu(new ServicePDU { ActionType = ServiceActionType.Unsubscribe, ObjectContent = _appId.ToString() });
+                _cl?.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Unsubscribe, ObjectContent = _appId.ToString() });
                 _cl?.SendGracefulEnd();
                 _cl?.Disconnect();
                 _cl?.Dispose();
@@ -372,13 +375,9 @@ namespace OPMedia.Core
         #endregion
 
         #region Notifications
-        public static void SendIpcEvent(string eventName, params string[] eventArgs)
+        public static void SendIpcEvent(string eventName, string eventArgs)
         {
-            string content = eventName;
-
-            if (eventArgs?.Length > 0)
-                content += $"?{StringUtils.FromStringArray(eventArgs, '|')}";
-
+            string content = StringUtils.FromStringArray(new string[] { eventName, eventArgs }, '>');
             (_proxy as INotificationService).SendNotification(NotificationType.IpcEvent, NotificationType.IpcEvent.ToString(), _proxy._persistenceContext, content);
         }
 
@@ -402,34 +401,32 @@ namespace OPMedia.Core
             }
         }
 
-        void DispatchNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
+        void DispatchNotification(NotificationType changeType, string persistenceId, string persistenceContext, string content)
         {
             if (changeType == NotificationType.IpcEvent)
             {
-                if (objectContent is string content && !string.IsNullOrEmpty(content))
+                if (content?.Length > 0)
                 {
-                    var ss = content.Split('?');
-                    if (ss.Length > 0)
-                    {
-                        string evtName = ss[0];
-                        string[] evtData = null;
+                    string evtName = null, evtData = null;
+                    string[] fields = StringUtils.ToStringArray(content, '>');
+                    
+                    if (fields?.Length > 0)
+                        evtName = fields[0];
+                    if (fields?.Length > 1)
+                        evtData = fields[1];
 
-                        if (ss.Length > 1)
-                            evtData = StringUtils.ToStringArray(ss[1], '|');
-
-                        EventDispatch.DispatchEvent(evtName, evtData);
-                    }
+                    EventDispatch.DispatchEvent(evtName, evtData);
                 }
             }
-            else if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, objectContent))
+            else if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, content))
             {
-                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Cache updated. Bubbling up event to its potential consumers.");
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={content} => Cache updated. Bubbling up event to its potential consumers.");
                 if (changeType == NotificationType.ObjectSaved)
-                    AppConfig.OnSettingsChanged(persistenceId, persistenceContext, objectContent);
+                    AppConfig.OnSettingsChanged(persistenceId, persistenceContext, content);
             }
             else
             {
-                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent} => Ignored, as we failed to update the cache.");
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={content} => Ignored, as we failed to update the cache.");
             }
         }
         #endregion

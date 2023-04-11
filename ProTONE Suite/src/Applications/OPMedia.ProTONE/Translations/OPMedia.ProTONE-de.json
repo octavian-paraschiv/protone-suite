@@ -571,7 +571,7 @@
   "TXT_SETSKIN": "Legen Sie die User Interface Design (pro gesamte ProTONE Suite):",
   "TXT_SETTINGS": "Programm-Einstellungen",
   "TXT_SETUILANGUAGE": "Stellen Sie die Sprache der Benutzeroberfläche (pro gesamte ProTONE Suite):",
-  "TXT_SHELL_INTEGRATION": "Integration mit Windows Explorer",
+  "TXT_SHELL_INTEGRATION": "Integration mit dem Kontextmenü von Windows Explorer",
   "TXT_SHOUTCAST_DEV_ID": "ShoutCast API Device ID private key:",
   "TXT_SHOUTCAST_DEV_ID_HINT": "Der private Schlüssel der ShoutCastAPI-Geräte-ID stellt Ihre eindeutige Identität für die ShoutCast-API dar.\r\nEs soll individuell verwendet werden, also teilen Sie es bitte nicht mit anderen.\r\nUm Ihren eigenen privaten Schlüssel zu erhalten, gehen Sie bitte auf:",
   "TXT_SHOUTCAST_DIR": "Shoutcast Verzeichnis!",

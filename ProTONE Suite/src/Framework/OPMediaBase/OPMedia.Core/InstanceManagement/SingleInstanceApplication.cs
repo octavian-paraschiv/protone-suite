@@ -90,7 +90,9 @@ namespace OPMedia.Core.InstanceManagement
                     string.Format("Another instance of app: {0} is already running.", _appName));
             }
         }
-       
+
+
+               
         #endregion
     }
     #endregion

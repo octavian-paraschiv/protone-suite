@@ -157,7 +157,7 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
                 if (notifySoundDeviceChanged.WaitOne(0))
                 {
                     notifySoundDeviceChanged.Reset();
-                    PersistenceProxy.SendIpcEvent(EventNames.SoundDeviceChanged);
+                    PersistenceProxy.SendIpcEvent(EventNames.SoundDeviceChanged, null);
                 }
 
                 return true;

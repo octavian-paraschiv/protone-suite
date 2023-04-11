@@ -37,7 +37,7 @@ namespace OPMedia.ProTONE
                 {
                     try
                     {
-                        RemoteControllableApplication.Start(Core.Constants.PlayerName, true);
+                        SingleInstanceApplication.Start(Core.Constants.PlayerName, true);
 
                         ProcessCommandLine(false);
 
@@ -73,7 +73,7 @@ namespace OPMedia.ProTONE
                     }
                     finally
                     {
-                        RemoteControllableApplication.Stop();
+                        SingleInstanceApplication.Stop();
                     }
                 }
             }
@@ -115,9 +115,7 @@ namespace OPMedia.ProTONE
                             
                             // Note: when player is launched like this - clear previous playlist first.
                             _commandQueue.Add(BasicCommand.Create(CommandType.ClearPlaylist));
-                            
                             _commandQueue.Add(BasicCommand.Create(cmdType, files.ToArray()));
-
                             return false; // Don't exit
                         }
                     }

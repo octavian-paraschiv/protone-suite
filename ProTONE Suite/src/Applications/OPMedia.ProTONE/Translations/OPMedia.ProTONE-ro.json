@@ -571,7 +571,7 @@
   "TXT_SETSKIN": "Setare tema interfaţă grafică (pentru toată suita ProTONE):",
   "TXT_SETTINGS": "Setări program",
   "TXT_SETUILANGUAGE": "Setare limbă interfaţă grafică (pentru toată suita ProTONE):",
-  "TXT_SHELL_INTEGRATION": "Integrare cu Windows Explorer",
+  "TXT_SHELL_INTEGRATION": "Integrare cu meniul contextual al Windows Explorer",
   "TXT_SHOUTCAST_DEV_ID": "Cheie privată ShoutCast API Device ID:",
   "TXT_SHOUTCAST_DEV_ID_HINT": "Cheia privată ShoutCastAPI Device ID reprezintă identitatea dvs. unică pentru ShoutCast API.\r\nEste destinată să fie folosită individual, deci vă rugăm să nu o împărțiți  cu nimeni.\r\nPentru a obține propria dvs. cheie, accesați:",
   "TXT_SHOUTCAST_DIR": "Director ShoutCast",

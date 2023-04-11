@@ -51,7 +51,7 @@ namespace OPMedia.PersistenceService
             // --------------------------------------------------------
             if (pdu is ServicePDU spdu)
             {
-                switch (spdu.ActionType)
+                switch (spdu.SvcActionType)
                 {
                     case ServiceActionType.Subscribe:
                         {

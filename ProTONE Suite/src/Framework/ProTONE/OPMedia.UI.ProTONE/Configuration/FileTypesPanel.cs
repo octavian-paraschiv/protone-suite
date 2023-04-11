@@ -55,6 +55,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         private OPMFlowLayoutPanel pnlPlaylists;
         private OPMFlowLayoutPanel pnlVideoFiles;
         private OPMFlowLayoutPanel pnlAudioFiles;
+        private OPMCheckBox chkShellExtension;
         private OPMLabel lblFileTypes;
 
         public FileTypesPanel() : base()
@@ -90,6 +91,8 @@ namespace OPMedia.UI.ProTONE.Configuration
                 _sizeText = g.MeasureString(pattern, ThemeManager.SmallFont).ToSize();
                 _sizeGlyph = CheckBoxRenderer.GetGlyphSize(g, CheckBoxState.CheckedHot);
             }
+
+            chkShellExtension.Checked = RegistrationSupport.IsShellExtensionRegistered();
 
             FillFileTypeAssociations();
         }
@@ -199,6 +202,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.pnlAudioFiles = new OPMedia.UI.Controls.OPMFlowLayoutPanel();
             this.lblFileTypes = new OPMedia.UI.Controls.OPMLabel();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
+            this.chkShellExtension = new OPMedia.UI.Controls.OPMCheckBox();
             this.pnlButtons.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.opmLayoutPanel1.SuspendLayout();
@@ -209,7 +213,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Location = new System.Drawing.Point(0, 30);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label3.Name = "label3";
             this.label3.OverrideBackColor = System.Drawing.Color.Empty;
@@ -223,7 +227,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.cmbExplorerLaunchType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbExplorerLaunchType.FormattingEnabled = true;
-            this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 20);
+            this.cmbExplorerLaunchType.Location = new System.Drawing.Point(0, 50);
             this.cmbExplorerLaunchType.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.cmbExplorerLaunchType.Name = "cmbExplorerLaunchType";
             this.cmbExplorerLaunchType.OverrideForeColor = System.Drawing.Color.Empty;
@@ -392,7 +396,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel1.Controls.Add(this.hdrVideo, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pnlAudioFiles, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 69);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 99);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -402,7 +406,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(573, 179);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(573, 149);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // pnlPlaylists
@@ -413,7 +417,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.pnlPlaylists.Location = new System.Drawing.Point(0, 85);
             this.pnlPlaylists.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pnlPlaylists.Name = "pnlPlaylists";
-            this.pnlPlaylists.Size = new System.Drawing.Size(573, 89);
+            this.pnlPlaylists.Size = new System.Drawing.Size(573, 59);
             this.pnlPlaylists.TabIndex = 4;
             // 
             // pnlVideoFiles
@@ -443,7 +447,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.lblFileTypes.AutoSize = true;
             this.lblFileTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblFileTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblFileTypes.Location = new System.Drawing.Point(0, 49);
+            this.lblFileTypes.Location = new System.Drawing.Point(0, 79);
             this.lblFileTypes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.lblFileTypes.Name = "lblFileTypes";
             this.lblFileTypes.OverrideBackColor = System.Drawing.Color.Empty;
@@ -457,16 +461,19 @@ namespace OPMedia.UI.ProTONE.Configuration
             // 
             this.opmLayoutPanel1.ColumnCount = 1;
             this.opmLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.opmLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.opmLayoutPanel1.Controls.Add(this.cmbExplorerLaunchType, 0, 2);
-            this.opmLayoutPanel1.Controls.Add(this.lblFileTypes, 0, 3);
-            this.opmLayoutPanel1.Controls.Add(this.tableLayoutPanel1, 0, 4);
-            this.opmLayoutPanel1.Controls.Add(this.pnlButtons, 0, 5);
+            this.opmLayoutPanel1.Controls.Add(this.label3, 0, 3);
+            this.opmLayoutPanel1.Controls.Add(this.cmbExplorerLaunchType, 0, 4);
+            this.opmLayoutPanel1.Controls.Add(this.lblFileTypes, 0, 5);
+            this.opmLayoutPanel1.Controls.Add(this.tableLayoutPanel1, 0, 6);
+            this.opmLayoutPanel1.Controls.Add(this.pnlButtons, 0, 7);
+            this.opmLayoutPanel1.Controls.Add(this.chkShellExtension, 0, 0);
             this.opmLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.opmLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.opmLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.opmLayoutPanel1.Name = "opmLayoutPanel1";
-            this.opmLayoutPanel1.RowCount = 6;
+            this.opmLayoutPanel1.RowCount = 8;
+            this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -475,6 +482,20 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.opmLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.opmLayoutPanel1.Size = new System.Drawing.Size(573, 303);
             this.opmLayoutPanel1.TabIndex = 0;
+            // 
+            // chkShellExtension
+            // 
+            this.chkShellExtension.AutoSize = true;
+            this.chkShellExtension.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkShellExtension.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkShellExtension.Location = new System.Drawing.Point(3, 3);
+            this.chkShellExtension.Name = "chkShellExtension";
+            this.chkShellExtension.OverrideForeColor = System.Drawing.Color.Empty;
+            this.chkShellExtension.Size = new System.Drawing.Size(567, 19);
+            this.chkShellExtension.TabIndex = 7;
+            this.chkShellExtension.Text = "TXT_SHELL_INTEGRATION";
+            this.chkShellExtension.UseVisualStyleBackColor = true;
+            this.chkShellExtension.CheckedChanged += OnCheckedChanged;
             // 
             // FileTypesPanel
             // 
@@ -508,7 +529,11 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             ProTONEConfig.ExplorerLaunchType =
                 (cmbExplorerLaunchType.SelectedItem as ExplorerLaunchType).CommandType.ToString();
-            
+
+            if (chkShellExtension.Checked)
+                RegistrationSupport.RegisterShellExtension();
+            else
+                RegistrationSupport.UnregisterShellExtension();
 
             RegistrationSupport.ReloadFileAssociations();
         }

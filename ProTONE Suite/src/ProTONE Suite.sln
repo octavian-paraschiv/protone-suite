@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.Core", "Framework\O
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{938C8AAA-FB3E-438C-B3F3-AB2CBE669FD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPMedia.ShellSupport", "Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj", "{1988DB5F-1FA6-4648-939E-89F11761FB94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{D75C6E16-0208-40FD-8C54-F073667F5384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75C6E16-0208-40FD-8C54-F073667F5384}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{D75C6E16-0208-40FD-8C54-F073667F5384}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +172,7 @@ Global
 		{4D74BE50-0F8C-4B99-9E78-723F54CD5973} = {05C5855D-D6FE-4832-89F9-FFDC4A8993E1}
 		{687F92F3-7B8D-421A-BE43-4F2B40AEC69A} = {05C5855D-D6FE-4832-89F9-FFDC4A8993E1}
 		{D75C6E16-0208-40FD-8C54-F073667F5384} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
+		{1988DB5F-1FA6-4648-939E-89F11761FB94} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		RESX_NeutralResourcesLanguage = en-GB

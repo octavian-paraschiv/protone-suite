@@ -48,6 +48,7 @@ namespace OPMedia.Core.Logging
 
         protected LoggedApplication()
         {
+            Environment.CurrentDirectory = AppConfig.InstallationPath;
         }
 
         ~LoggedApplication()

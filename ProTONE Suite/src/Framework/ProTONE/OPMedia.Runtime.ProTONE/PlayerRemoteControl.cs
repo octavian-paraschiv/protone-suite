@@ -38,37 +38,8 @@ namespace OPMedia.Runtime.ProTONE
                 }
             }
 
-
-            List<string> fields = new List<string>();
-            fields.Add(cmdType.ToString());
-
-            if (args != null && args.Length > 0)
-            {
-                fields.AddRange(args);
-            }
-
-            string command = FromStringArray(fields.ToArray(), '?');
-
-            using (RemoteControlClient rcc = new RemoteControlClient())
-            {
-                rcc.Send(command);
-            }
-        }
-
-        private static string FromStringArray(string[] array, char delim)
-        {
-            string retVal = string.Empty;
-
-            if (array != null && array.Length > 0)
-            {
-                foreach (string field in array)
-                {
-                    retVal += field;
-                    retVal += delim;
-                }
-            }
-
-            return retVal.TrimEnd(new char[] { delim });
+            string cmd = BasicCommand.Create(cmdType, args).ToString();
+            PersistenceProxy.SendIpcEvent(BasicCommand.EventName, cmd);
         }
 
         public static bool IsPlayerRunning()
@@ -85,13 +56,6 @@ namespace OPMedia.Runtime.ProTONE
             {
                 return false;
             }
-        }
-    }
-
-    public class RemoteControlClient : TextCommunicationClient
-    {
-        public RemoteControlClient() : base(RemoteControlServer.RemoteControlPort)
-        {
         }
     }
 }

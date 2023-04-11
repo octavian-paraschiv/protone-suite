@@ -31,7 +31,7 @@ namespace OPMedia.Core.Persistence
 
     public class ServicePDU : GenericPDU
     {
-        public ServiceActionType ActionType { get; set; }
+        public ServiceActionType SvcActionType { get; set; }
     }
 
     public enum ServiceActionType
@@ -71,7 +71,7 @@ namespace OPMedia.Core.Persistence
                 return npdu;
 
             ServicePDU spdu = JsonConvert.DeserializeObject<ServicePDU>(line, _settings);
-            if (spdu.ActionType != ServiceActionType.None)
+            if (spdu.SvcActionType != ServiceActionType.None)
                 return spdu;
 
             return null;

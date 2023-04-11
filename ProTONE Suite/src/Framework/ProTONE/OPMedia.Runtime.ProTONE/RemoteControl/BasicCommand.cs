@@ -25,7 +25,6 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
 
         BrowseRemoteFiles,
         GetDriveList,
-
         QueryMediaRenderer,
 
         KeyPress,
@@ -47,7 +46,13 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         }
 
         [EventSink(BasicCommand.EventName)]
-        public void RunCommand(BasicCommand cmd)
+        public void RunCommand(string data)
+        {
+            BasicCommand cmd = BasicCommand.Create(data);
+            _RunCommand(cmd);
+        }
+
+        private void _RunCommand(BasicCommand cmd)
         {
             Logger.LogTrace("BasicCommand.RunCommand: {0}", cmd);
 
@@ -56,7 +61,8 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
 
             if (cmd.RequiresAnswer)
             {
-                RunExtendedCommand(cmd);
+                string response = RunExtendedCommand(cmd);
+                PersistenceProxy.SendIpcEvent(BasicCommand.ResponseEventName, response);
                 return;
             }
 
@@ -97,6 +103,8 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
     public abstract class BasicCommand
     {
         public const string EventName = "BasicCommand";
+        public const string ResponseEventName = "BasicCommandResponse";
+
         public const char FieldSeparator = '?';
 
         protected CommandType type;
@@ -127,7 +135,6 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             }
         }
 
-
         public override string ToString()
         {
             List<string> fields = new List<string>();
@@ -138,7 +145,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
                 fields.AddRange(args);
             }
 
-            return StringUtils.FromStringArray(fields.ToArray(), BasicCommand.FieldSeparator);
+            return StringUtils.FromStringArray(fields.ToArray(), FieldSeparator);
         }
 
         internal BasicCommand(CommandType type, string[] args)

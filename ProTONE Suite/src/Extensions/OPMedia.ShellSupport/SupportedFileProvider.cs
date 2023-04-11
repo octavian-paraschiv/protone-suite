@@ -1,9 +1,8 @@
-﻿using OPMedia.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace OPMedia.Runtime.ProTONE
+namespace OPMedia.ShellSupport
 {
     public class SupportedFileProvider
     {
@@ -32,6 +31,7 @@ namespace OPMedia.Runtime.ProTONE
         static List<string> __supportedVideoMediaTypes = new List<string>(new string[]
         {
             // 14 supported video file types
+
             "avi", "divx", "qt",  "m1v", "m2v",
 
             "mod", // video format for use in digital tapeless camcorders (JVC / Panasonic / Canon)
@@ -112,7 +112,7 @@ namespace OPMedia.Runtime.ProTONE
 
         public bool IsSupportedPlaylist(string path)
         {
-            string ext = PathUtils.GetExtension(path);
+            string ext = Path.GetExtension(path).Trim('.').ToLowerInvariant();
             return SupportedPlaylists.Contains(ext);
         }
 
@@ -128,7 +128,7 @@ namespace OPMedia.Runtime.ProTONE
             {
             }
 
-            string ext = PathUtils.GetExtension(path);
+            string ext = Path.GetExtension(path).Trim('.').ToLowerInvariant();
             return AllMediaTypes.Contains(ext);
         }
 

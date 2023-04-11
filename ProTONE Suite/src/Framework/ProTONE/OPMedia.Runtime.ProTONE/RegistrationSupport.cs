@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Win32;
 using System.IO;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Configuration;
 using OPMedia.Core;
+using System.ComponentModel.Composition.Hosting;
+using SharpShell;
+using SharpShell.ServerRegistration;
+using OPMedia.Core.Win32;
 
 namespace OPMedia.Runtime.ProTONE
 {
@@ -360,6 +365,70 @@ namespace OPMedia.Runtime.ProTONE
         {
             Shell32.SHChangeNotify(HChangeNotifyEventID.SHCNE_ASSOCCHANGED,
                 HChangeNotifyFlags.SHCNF_IDLIST, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        static Lazy<ISharpShellServer> _shellExt = GetShellExtension();
+
+        public static bool IsShellExtensionRegistered()
+        {
+            var isReg = true;
+
+            var reg32 = ServerRegistrationManager.GetServerRegistrationInfo(_shellExt?.Value, RegistrationType.OS32Bit);
+            isReg &= (reg32?.IsApproved).GetValueOrDefault();
+
+            if (isReg && Environment.Is64BitOperatingSystem)
+            {
+                var reg64 = ServerRegistrationManager.GetServerRegistrationInfo(_shellExt?.Value, RegistrationType.OS64Bit);
+                isReg &= (reg64?.IsApproved).GetValueOrDefault();
+            }
+
+            return isReg;
+        }
+
+        public static bool RegisterShellExtension()
+        {
+            if (!IsShellExtensionRegistered())
+            {
+                try
+                {
+                    ServerRegistrationManager.RegisterServer(_shellExt.Value, RegistrationType.OS32Bit);
+                    if (Environment.Is64BitOperatingSystem)
+                        ServerRegistrationManager.RegisterServer(_shellExt.Value, RegistrationType.OS64Bit);
+                }
+                catch { }
+            }
+
+            return IsShellExtensionRegistered();
+        }
+
+        public static bool UnregisterShellExtension()
+        {
+            if (IsShellExtensionRegistered())
+            {
+                try
+                {
+                    ServerRegistrationManager.UnregisterServer(_shellExt.Value, RegistrationType.OS32Bit);
+                    if (Environment.Is64BitOperatingSystem)
+                        ServerRegistrationManager.UnregisterServer(_shellExt.Value, RegistrationType.OS64Bit);
+                }
+                catch { }
+            }
+
+            return !IsShellExtensionRegistered();
+        }
+
+        private static Lazy<ISharpShellServer> GetShellExtension()
+        {
+            try
+            {
+                var cat = new AssemblyCatalog($"{AppConfig.InstallationPath}/OPMedia.ShellSupport.dll");
+                var servers = new CompositionContainer(cat).GetExports<ISharpShellServer>();
+                return (from srv in servers
+                        where (srv?.Value?.DisplayName?.Equals("OPMedia Shell Extension", StringComparison.OrdinalIgnoreCase)).GetValueOrDefault()
+                        select srv).FirstOrDefault();
+            }
+            catch
+            { return null; }
         }
     }
 }

@@ -70,7 +70,7 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
                         return parentFilePath;
                 }
 
-                string fileType = Path.GetExtension(file).ToUpperInvariant();
+                string fileType = PathUtils.GetExtension(file).ToUpperInvariant();
                 string[] parentFileTypes = ProTONEConfig.GetParentFileTypes(fileType);
 
                 if (parentFileTypes != null && parentFileTypes.Length > 0)

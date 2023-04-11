@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using System;
 using System.Collections.Generic;
@@ -62,14 +63,15 @@ namespace OPMedia.Core.TranslationSupport
         {
             _lang = lang;
 
-            FileInfo fi = new FileInfo($"./Translations/{ApplicationInfo.ApplicationName}-{lang}.json");
+            FileInfo fi = new FileInfo($"{AppConfig.InstallationPath}/Translations/{ApplicationInfo.ApplicationName}-{lang}.json");
             _filePath = fi.FullName;
 
-            ReadFile();
-
-            _fsw = new FileSystemWatcher(fi.DirectoryName, "*.json");
-            _fsw.Changed += _fsw_Changed;
-            _fsw.EnableRaisingEvents = true;
+            if (ReadFile())
+            {
+                _fsw = new FileSystemWatcher(fi.DirectoryName, "*.json");
+                _fsw.Changed += _fsw_Changed;
+                _fsw.EnableRaisingEvents = true;
+            }
         }
 
         private void _fsw_Changed(object sender, FileSystemEventArgs e)
@@ -78,34 +80,37 @@ namespace OPMedia.Core.TranslationSupport
                 ReadFile();
         }
 
-        private void ReadFile()
+        private bool ReadFile()
         {
             Dictionary<string, string> translations = null;
             try
             {
                 var content = File.ReadAllText(_filePath);
                 translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+
+                if (translations?.Count > 0)
+                {
+                    lock (_lock)
+                    {
+                        foreach (var x in translations)
+                        {
+                            if (!_translations.ContainsKey(x.Key))
+                                _translations.Add(x.Key, x.Value);
+                            else
+                                _translations[x.Key] = x.Value;
+                        }
+                    }
+
+                    TranslationUpdated?.Invoke(_lang);
+                    return true;
+                }
+
             }
             catch (Exception ex)
             { 
                 Logger.LogException(ex);
             }
-
-            if (translations?.Count > 0)
-            {
-                lock (_lock)
-                {
-                    foreach (var x in translations)
-                    {
-                        if (!_translations.ContainsKey(x.Key))
-                            _translations.Add(x.Key, x.Value);
-                        else
-                            _translations[x.Key] = x.Value;
-                    }
-                }
-
-                TranslationUpdated?.Invoke(_lang);
-            }
+            return false;
         }
     }
 }

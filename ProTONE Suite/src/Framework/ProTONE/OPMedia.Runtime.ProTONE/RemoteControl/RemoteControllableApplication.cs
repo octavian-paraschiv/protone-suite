@@ -12,15 +12,7 @@ using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
-    public class RemoteControlServer : TextCommunicationServer
-    {
-        public const int RemoteControlPort = 10201;
-
-        public RemoteControlServer() : base(RemoteControlPort)
-        {
-        }
-    }
-
+    /*
     #region RemoteControllableApplication
     public sealed class RemoteControllableApplication : SingleInstanceApplication
     {
@@ -85,4 +77,5 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
         #endregion
     }
     #endregion
+    */
 }

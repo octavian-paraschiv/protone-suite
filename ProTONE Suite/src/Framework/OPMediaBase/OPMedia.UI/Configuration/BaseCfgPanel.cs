@@ -56,7 +56,8 @@ namespace OPMedia.UI.Configuration
 
         void BaseCfgPanel_HandleCreated(object sender, EventArgs e)
         {
-            Translator.TranslateControl(this, DesignMode);
+            if (!DesignMode)
+                Translator.TranslateControl(this, DesignMode);
         }
 
         public void Save()
