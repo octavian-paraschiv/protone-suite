@@ -371,18 +371,18 @@ namespace OPMedia.Runtime.ProTONE
 
         public static bool IsShellExtensionRegistered()
         {
-            var isReg = true;
+            bool isReg32 = false, isReg64 = false;
 
             var reg32 = ServerRegistrationManager.GetServerRegistrationInfo(_shellExt?.Value, RegistrationType.OS32Bit);
-            isReg &= (reg32?.IsApproved).GetValueOrDefault();
+            isReg32 = (reg32?.IsApproved).GetValueOrDefault();
 
-            if (isReg && Environment.Is64BitOperatingSystem)
+            if (Environment.Is64BitOperatingSystem)
             {
                 var reg64 = ServerRegistrationManager.GetServerRegistrationInfo(_shellExt?.Value, RegistrationType.OS64Bit);
-                isReg &= (reg64?.IsApproved).GetValueOrDefault();
+                isReg64 = (reg64?.IsApproved).GetValueOrDefault();
             }
 
-            return isReg;
+            return isReg32 || isReg64;
         }
 
         public static bool RegisterShellExtension()
@@ -391,11 +391,20 @@ namespace OPMedia.Runtime.ProTONE
             {
                 try
                 {
+                    ServerRegistrationManager.InstallServer(_shellExt.Value, RegistrationType.OS32Bit, true);
                     ServerRegistrationManager.RegisterServer(_shellExt.Value, RegistrationType.OS32Bit);
-                    if (Environment.Is64BitOperatingSystem)
-                        ServerRegistrationManager.RegisterServer(_shellExt.Value, RegistrationType.OS64Bit);
                 }
                 catch { }
+
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    try
+                    {
+                        ServerRegistrationManager.InstallServer(_shellExt.Value, RegistrationType.OS64Bit, true);
+                        ServerRegistrationManager.RegisterServer(_shellExt.Value, RegistrationType.OS64Bit);
+                    }
+                    catch { }
+                }
             }
 
             return IsShellExtensionRegistered();
@@ -408,10 +417,19 @@ namespace OPMedia.Runtime.ProTONE
                 try
                 {
                     ServerRegistrationManager.UnregisterServer(_shellExt.Value, RegistrationType.OS32Bit);
-                    if (Environment.Is64BitOperatingSystem)
-                        ServerRegistrationManager.UnregisterServer(_shellExt.Value, RegistrationType.OS64Bit);
+                    ServerRegistrationManager.UninstallServer(_shellExt.Value, RegistrationType.OS32Bit);
                 }
                 catch { }
+
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    try
+                    {
+                        ServerRegistrationManager.UnregisterServer(_shellExt.Value, RegistrationType.OS64Bit);
+                        ServerRegistrationManager.UninstallServer(_shellExt.Value, RegistrationType.OS64Bit);
+                    }
+                    catch { }
+                }
             }
 
             return !IsShellExtensionRegistered();
