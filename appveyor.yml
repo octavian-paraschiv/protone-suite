@@ -4,7 +4,7 @@ image: Visual Studio 2017
 
 environment:
     git_access_token:
-        secure: bESENEVwed18fFX4bPTfcDGvY17MJlNNC44GWElRrhpY+KFVIsg1rxaQFMwFYNQc
+        secure: ON4vmgHe1F5fEi4l35Nj+Ks2UmJ4v8fvh2wF9ixw50sHjcVLrHVZY5OwrAdJmSCd
     
 before_build:
 - git checkout master
