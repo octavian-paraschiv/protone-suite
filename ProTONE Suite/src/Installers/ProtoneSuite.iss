@@ -44,8 +44,8 @@ DisableStartupPrompt=true
 EnableDirDoesntExistWarning=true
 LanguageDetectionMethod=locale
 
-; Windows Vista SP2 - miniumum OS required for ProTONE Suite
-MinVersion=0,6.0.6001sp2
+; Minimum Windows 7 with Service Pack 1
+MinVersion=0,6.1.7601
 
 PrivilegesRequired=admin
 SetupIconFile=Installer.ico
@@ -76,6 +76,9 @@ Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 ; Application executables
 Source: "{#BINDIR}\OPMedia.ProTONE.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.MediaLibrary.exe"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
+;--------------------------------------
+; Shell integration
+Source: {#BINDIR}\OPMedia.ShellSupport.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: OPMedia.ShellSupport.dll
 ;--------------------------------------
 ; Rendering workers
 Source: "{#BINDIR}\OPMedia.AudioCdWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -141,6 +144,7 @@ Source: "{#BINDIR}\NAudio.Wasapi.dll"; DestDir: "{app}"; Flags: replacesameversi
 Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
 Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\taglib-sharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\SharpShell.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; Support DLL's for setup
 Source: "isxdl.dll"; DestDir: "{tmp}"; Flags: dontcopy
@@ -220,8 +224,12 @@ Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.exe /c ""{dotnet
 Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallPlayer}"
 Filename: "{dotnet4032}\installutil.exe"; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:instPersistenceService}"
 Filename: "cmd.exe"; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:startPersistenceService}"
+Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer
+Filename: {dotnet4064}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer; Check: IsWin64
 
 [UninstallRun]
+Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3; Components: itemPlayer
+Filename: {dotnet4064}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3.1; Components: itemPlayer; Check: IsWin64
 Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.ProTONE.exe"""; StatusMsg: {cm:delFirewallPlayer}; Flags: runhidden; RunOnceId: _id4
 Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopPersistenceService}; RunOnceId: _id7
 Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstPersistenceService}; RunOnceId: _id8
@@ -1518,3 +1526,6 @@ Name: {app}\OPMedia.PersistenceService.InstallState; Type: files
 
 [Code]
 #include "Include\SetupCode.pas"
+
+
+

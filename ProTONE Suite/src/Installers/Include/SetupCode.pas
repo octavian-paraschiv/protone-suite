@@ -2,8 +2,7 @@
 // Various constants required to detect isntallation of various features
 const
    // .NET Framework detection parameters
-   DotNetFxRegistryPath =       'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full';
-   DotNetFxDownloadUrl =        'http://download.microsoft.com/download/C/3/A/C3A5200B-D33C-47E9-9D70-2F7C65DAAD94/NDP46-KB3045557-x86-x64-AllOS-ENU.exe';
+   DotNetFxDownloadUrl =        'https://go.microsoft.com/fwlink?LinkID=863265';
    
    // Haali Media Splitter detection parameter
    // This is the CLSID of splitter.ax filter
@@ -27,36 +26,16 @@ const
    MediaLibraryAppName =        'ProTONE Media Library';
    
 //--------------------------------------------------------------------------------
-// External functions
 
-// Importing ShowWindow Windows API from User32.DLL
-function ShowWindow(hWnd: Integer; uType: Integer): Integer;
-external 'ShowWindow@user32.dll stdcall';
+var
+  DownloadPage: TDownloadWizardPage;
 
-function isxdl_Download(hWnd: Integer; URL, Filename: String): Integer;
-external 'isxdl_Download@files:isxdl.dll stdcall';
-
-procedure isxdl_AddFile(URL, Filename: String);
-external 'isxdl_AddFile@files:isxdl.dll stdcall';
-
-procedure isxdl_AddFileSize(URL, Filename: String; Size: Cardinal);
-external 'isxdl_AddFileSize@files:isxdl.dll stdcall';
-
-function isxdl_DownloadFiles(hWnd: Integer): Integer;
-external 'isxdl_DownloadFiles@files:isxdl.dll stdcall';
-
-procedure isxdl_ClearFiles;
-external 'isxdl_ClearFiles@files:isxdl.dll stdcall';
-
-function isxdl_IsConnected: Integer;
-external 'isxdl_IsConnected@files:isxdl.dll stdcall';
-
-function isxdl_SetOption(Option, Value: String): Integer;
-external 'isxdl_SetOption@files:isxdl.dll stdcall';
-
-function isxdl_GetFileName(URL: String): String;
-external 'isxdl_GetFileName@files:isxdl.dll stdcall';
-
+function OnDownloadProgress(const Url, FileName: String; const Progress, ProgressMax: Int64): Boolean;
+begin
+  if Progress = ProgressMax then
+    Log(Format('Successfully downloaded file to {tmp}: %s', [FileName]));
+  Result := True;
+end;
 
 //--------------------------------------------------------------------------------
 // Checks whether the feature specified via its reg path & reg value
@@ -152,62 +131,6 @@ begin
 
 end;
 
-//--------------------------------------------------------------------------------
-function DownloadFile(sLabel, sDesc, sUrl, sDest : string ) : Integer;
-begin
-   isxdl_SetOption('label', sLabel);
-   isxdl_SetOption('description', sDesc);
-   isxdl_AddFile(sUrl, sDest);
-   result := isxdl_DownloadFiles(StrToInt(ExpandConstant('{wizardhwnd}')));
-end;
-
-//--------------------------------------------------------------------------------
-// Indicates whether .NET Framework 4.6 is installed.
-function IsDotNETFxDetected: boolean;
-var
-    success: boolean;
-    install: cardinal;
-    instVersion: string;
-
-begin
-    success := RegQueryDWordValue(HKLM, DotNetFxRegistryPath, 'Install', install);
-    if (success and (install = 1)) then
-    begin
-        success := RegQueryStringValue(HKLM, DotNetFxRegistryPath, 'Version', instVersion);
-        if (success) then
-        begin
-            result := (CompareVersion(instVersion, '4.6') >= 0);
-            exit;
-        end;
-    end;
-    result := false;
-end;
-
-//--------------------------------------------------------------------------------
-// Installs .NET Framework
-function InstallDotNETFx: boolean;
-var
-   ResultCode : integer;
-   wicPresent : boolean;
-begin
-
-   DownloadFile('Download .NET 4.6 installation ...', 'Please wait while downloading Microsoft .NET Framework 4.6 ...', 
-       DotNetFxDownloadUrl, ExpandConstant('{tmp}\dotnet46.exe'));
-
-   Exec(ExpandConstant('{tmp}\dotnet46.exe'), '/q', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
-   
-   DeleteFile(ExpandConstant('{tmp}\dotnet46.exe'))
-
-   if (IsDotNETFxDetected = false) then
-   begin
-    MsgBox(CustomMessage('DotNetInstallFailedLong'), mbCriticalError, MB_OK);
-    result := false;
-    exit;
-   end;
-
-   result := true;
-end;
-
 //---------------------------------------------------------------------------------
 procedure StopPersistenceService;
 var
@@ -281,13 +204,35 @@ begin
 
 end;
 
+
+//--------------------------------------------------------------------------------
+// Installs .NET Framework
+function InstallDotNETFx: boolean;
+var
+   ResultCode : integer;
+begin
+    Exec(ExpandConstant('{tmp}\dotnet_install.exe'), '/q', '', SW_SHOW, ewWaitUntilTerminated, ResultCode);
+    DeleteFile(ExpandConstant('{tmp}\dotnet_install.exe'))
+
+    if (IsDotNetInstalled(net472, 0) = false) then
+    begin
+      MsgBox(CustomMessage('DotNetInstallFailedLong'), mbCriticalError, MB_OK);
+      result := false;
+      exit;
+   end;
+
+   result := true;
+end;
+
 //---------------------------------------------------------------------------------
 // Verifies install preconditions
 function CheckPrerequisites: String;
 var
    res: integer;
    DependencyPage: TOutputProgressWizardPage;
-
+   DownloadPage: TDownloadWizardPage;
+   success: boolean;
+   xx: string;
 begin
 
    DependencyPage := CreateOutputProgressPage(
@@ -296,31 +241,105 @@ begin
 
    DependencyPage.Show;
 
+   DependencyPage.SetProgress(0, 4);
    DependencyPage.SetText(CustomMessage('PersistenceServiceCheck'), '');
+
    StopPersistenceService;
 
+   DependencyPage.SetProgress(1, 4);
    DependencyPage.SetText(CustomMessage('DotNetInstalling'), '');
-   DependencyPage.SetProgress(0, 2);
 
    // Detect and install .NET Framework if not present
-   if (IsDotNETFxDetected = false) then
+   if (IsDotNetInstalled(net472, 0) = false) then
    begin
-   
+
     // .NET Framework was not detected.
     res := MsgBox(CustomMessage('DotNetRequired'), mbConfirmation, MB_YESNO);
-
-    if ((res = IDNO) or (InstallDotNETFx = false)) then
+    if (res = IDNO) then 
     begin
-        result := CustomMessage('DotNetInstallFailed');
-        exit;
+      result := CustomMessage('installAborted');
+      exit;
     end;
-   end;
 
-   DependencyPage.SetText(CustomMessage('DependenciesInstallSuccess'), '');
-   DependencyPage.SetProgress(2, 2);
+    DownloadPage := CreateDownloadPage(
+      CustomMessage('DotNetDownload'),
+      CustomMessage('DotNetDownloadWait'), 
+      @OnDownloadProgress);
 
-   result := '';
+    DownloadPage.Clear;
 
+    DownloadPage.Add(DotNetFxDownloadUrl, 'dotnet_install.exe', '');
+    DownloadPage.Show;
+
+    try
+      DownloadPage.Download;
+      DependencyPage.SetProgress(2, 4);
+    except
+      MsgBox(AddPeriod(GetExceptionMessage), mbCriticalError, MB_OK);
+      success := False;
+    finally
+      DownloadPage.Hide;
+    end;
+
+    if (success = False) then
+    begin
+      result := CustomMessage('DotNetInstallFailed');
+    end;
+
+    success := InstallDotNETFx;
+    if (success = False) then
+    begin
+      result := CustomMessage('DotNetInstallFailed');
+      exit;
+    end;
+  end;
+
+  DependencyPage.SetProgress(3, 4);
+  DependencyPage.SetText(CustomMessage('DependenciesInstallSuccess'), '');
+  DependencyPage.SetProgress(2, 2);
+
+  result := '';
+
+end;
+
+//--------------------------------------------------------------------------------
+// Allows for standard command line parsing assuming a key/value organization
+function GetCommandlineParam (inParam: String):String;
+var
+  LoopVar : Integer;
+  BreakLoop : Boolean;
+begin
+  // Init the variable to known values
+  LoopVar :=0;
+  Result := '';
+  BreakLoop := False;
+
+  // Loop through the passed in arry to find the parameter
+  while ( (LoopVar < ParamCount) and
+          (not BreakLoop) ) do
+  begin
+    // Determine if the looked for parameter is the next value
+    if ( (ParamStr(LoopVar) = inParam) and
+         ( (LoopVar+1) <= ParamCount )) then
+    begin
+      // Set the return result equal to the next command line parameter
+      Result := ParamStr(LoopVar+1);
+
+      // Break the loop }
+      BreakLoop := True;
+    end;
+
+    //{ Increment the loop variable
+    LoopVar := LoopVar + 1;
+  end;
+end;
+
+//--------------------------------------------------------------------------------
+// EVENT FUNCTIONS
+//--------------------------------------------------------------------------------
+function PrepareToInstall(var needsRestart : Boolean) : String;
+begin
+   result := CheckPrerequisites();
 end;
 
 //--------------------------------------------------------------------------------
@@ -357,55 +376,14 @@ begin
 end;
 
 //--------------------------------------------------------------------------------
-// Validates setup preconditions
-function PrepareToInstall(var needsRestart : Boolean) : String;
-begin
-   result := CheckPrerequisites();
-end;
-
-//--------------------------------------------------------------------------------
-// Allows for standard command line parsing assuming a key/value organization
-function GetCommandlineParam (inParam: String):String;
-var
-  LoopVar : Integer;
-  BreakLoop : Boolean;
-begin
-  // Init the variable to known values
-  LoopVar :=0;
-  Result := '';
-  BreakLoop := False;
-
-  // Loop through the passed in arry to find the parameter
-  while ( (LoopVar < ParamCount) and
-          (not BreakLoop) ) do
-  begin
-    // Determine if the looked for parameter is the next value
-    if ( (ParamStr(LoopVar) = inParam) and
-         ( (LoopVar+1) <= ParamCount )) then
-    begin
-      // Set the return result equal to the next command line parameter
-      Result := ParamStr(LoopVar+1);
-
-      // Break the loop }
-      BreakLoop := True;
-    end;
-
-    //{ Increment the loop variable
-    LoopVar := LoopVar + 1;
-  end;
-end;
-
-//--------------------------------------------------------------------------------
 procedure DeinitializeSetup();
 var
    s : string;
    rc : integer;
 begin
-   
    s := GetCommandlineParam('/APPRESTART');
    if (Length(s) > 0) then
    begin
-    //MsgBox(s, mbInformation, MB_OK);
     Exec(s, '', '', SW_SHOW, ewNoWait, rc);
    end;
 end;
