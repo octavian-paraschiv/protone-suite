@@ -1,581 +1,504 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.UI</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3405ACFC-77F4-470D-BF75-4754A8214998}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OPMedia.UI</RootNamespace>
-    <AssemblyName>OPMedia.UI</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
-    <OutputPath>..\..\..\bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PreBuildEvent />
+    <PostBuildEvent />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUpdate\BuildInfo.cs" />
-    <Compile Include="ApplicationUpdate\UpdateWaitForm.cs">
+    <Compile Update="ApplicationUpdate\UpdateWaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ApplicationUpdate\UpdateWaitForm.Designer.cs">
+    <Compile Update="ApplicationUpdate\UpdateWaitForm.Designer.cs">
       <DependentUpon>UpdateWaitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\BaseCfgPanel.cs">
+    <Compile Update="Configuration\BaseCfgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\ControlAppPanel.cs">
+    <Compile Update="Configuration\ControlAppPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\ControlAppPanel.designer.cs">
+    <Compile Update="Configuration\ControlAppPanel.designer.cs">
       <DependentUpon>ControlAppPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\MultiPageCfgPanel.cs">
+    <Compile Update="Configuration\MultiPageCfgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\MultiPageCfgPanel.designer.cs">
+    <Compile Update="Configuration\MultiPageCfgPanel.designer.cs">
       <DependentUpon>MultiPageCfgPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\GeneralSettingsPanel.cs">
+    <Compile Update="Configuration\GeneralSettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\GeneralSettingsPanel.Designer.cs">
+    <Compile Update="Configuration\GeneralSettingsPanel.Designer.cs">
       <DependentUpon>GeneralSettingsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\KeyCommandEditor.cs">
+    <Compile Update="Configuration\KeyCommandEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuration\KeyCommandEditor.Designer.cs">
+    <Compile Update="Configuration\KeyCommandEditor.Designer.cs">
       <DependentUpon>KeyCommandEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\KeyMapCfgPanel.cs">
+    <Compile Update="Configuration\KeyMapCfgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\KeyMapCfgPanel.Designer.cs">
+    <Compile Update="Configuration\KeyMapCfgPanel.Designer.cs">
       <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\InternetSettingsPanel.cs">
+    <Compile Update="Configuration\InternetSettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\InternetSettingsPanel.designer.cs">
+    <Compile Update="Configuration\InternetSettingsPanel.designer.cs">
       <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\NetworkCfgPanel.cs">
+    <Compile Update="Configuration\NetworkCfgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\NetworkCfgPanel.designer.cs">
+    <Compile Update="Configuration\NetworkCfgPanel.designer.cs">
       <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\SerialPortCfgDlg.cs">
+    <Compile Update="Configuration\SerialPortCfgDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuration\SerialPortCfgDlg.Designer.cs">
+    <Compile Update="Configuration\SerialPortCfgDlg.Designer.cs">
       <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\SerialPortCfgPanel.cs">
+    <Compile Update="Configuration\SerialPortCfgPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\SerialPortCfgPanel.Designer.cs">
+    <Compile Update="Configuration\SerialPortCfgPanel.Designer.cs">
       <DependentUpon>SerialPortCfgPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\SettingsForm.cs">
+    <Compile Update="Configuration\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuration\SettingsForm.Designer.cs">
+    <Compile Update="Configuration\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\TroubleshootingPanel.cs">
+    <Compile Update="Configuration\TroubleshootingPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Configuration\TroubleshootingPanel.designer.cs">
+    <Compile Update="Configuration\TroubleshootingPanel.designer.cs">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Containers\OPMCustomPanel.cs">
+    <Compile Update="Controls\Containers\OPMCustomPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\ImageButton.cs">
+    <Compile Update="Controls\Derived\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMFontChooserCtl.cs">
+    <Compile Update="Controls\UserControls\OPMFontChooserCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMFontChooserCtl.Designer.cs">
+    <Compile Update="Controls\UserControls\OPMFontChooserCtl.Designer.cs">
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Custom\GraphPlotter.cs">
+    <Compile Update="Controls\Custom\GraphPlotter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\MultilineEditTextBox.cs">
+    <Compile Update="Controls\Derived\MultilineEditTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMColorChooserCtl.cs">
+    <Compile Update="Controls\UserControls\OPMColorChooserCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMColorChooserCtl.Designer.cs">
+    <Compile Update="Controls\UserControls\OPMColorChooserCtl.Designer.cs">
       <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Derived\OPMDoubleBufferControl.cs">
+    <Compile Update="Controls\Derived\OPMDoubleBufferControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMPropertyGrid.cs">
+    <Compile Update="Controls\Common\OPMPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\OPMNumericTextBox.cs">
+    <Compile Update="Controls\Derived\OPMNumericTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ExtendedMethods.cs" />
-    <Compile Include="Controls\Common\OPMGroupBox.cs">
+    <Compile Update="Controls\Common\OPMGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Containers\OPMLayoutPanel.cs">
+    <Compile Update="Controls\Containers\OPMLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\OPMBaseControl.cs">
+    <Compile Update="Controls\Derived\OPMBaseControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ListView\OPMListView.cs" />
-    <Compile Include="Controls\ListView\OPMListViewSubItem.cs" />
-    <Compile Include="Controls\ListView\ISelfValidable.cs" />
-    <Compile Include="Controls\ListView\IValidator.cs" />
-    <Compile Include="Controls\ListView\OPMShellListView.cs">
+    <Compile Update="Controls\ListView\OPMShellListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TreeView\OPMShellTreeView.cs">
+    <Compile Update="Controls\TreeView\OPMShellTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMStatusStripTextBox.cs" />
-    <Compile Include="Controls\UserControls\OPMNumericUpDown.cs">
+    <Compile Update="Controls\UserControls\OPMNumericUpDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMTextBox.cs">
+    <Compile Update="Controls\UserControls\OPMTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\BooleanChooser.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\BooleanChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\BooleanChooser.Designer.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\BooleanChooser.Designer.cs">
       <DependentUpon>BooleanChooser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.Designer.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.Designer.cs">
       <DependentUpon>EnumeratedTypeChooser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\IntegerChooser.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\IntegerChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\IntegerChooser.Designer.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\IntegerChooser.Designer.cs">
       <DependentUpon>IntegerChooser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\IPropertyChooser.cs" />
-    <Compile Include="Controls\PropertyEditor\Choosers\SBColorChooser.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\SBColorChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\StringChooser.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\StringChooser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\Choosers\StringChooser.Designer.cs">
+    <Compile Update="Controls\PropertyEditor\Choosers\StringChooser.Designer.cs">
       <DependentUpon>StringChooser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\OPMPropertyEditor.cs">
+    <Compile Update="Controls\PropertyEditor\OPMPropertyEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
+    <Compile Update="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Themes\SmoothGraphics.cs" />
-    <Compile Include="TrayNotificationBox.cs">
+    <Compile Update="TrayNotificationBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\ToolAndMenuStrips.cs">
+    <Compile Update="Controls\Derived\ToolAndMenuStrips.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TreeView\OPMTreeView.cs">
+    <Compile Update="Controls\TreeView\OPMTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\FileAttributesBrowserCtl.cs">
+    <Compile Update="Controls\UserControls\FileAttributesBrowserCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\FileAttributesBrowserCtl.Designer.cs">
+    <Compile Update="Controls\UserControls\FileAttributesBrowserCtl.Designer.cs">
       <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Common\OPMToolTip.cs" />
-    <Compile Include="Controls\UserControls\OPMTimePicker.cs">
+    <Compile Update="Controls\UserControls\OPMTimePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\OPMTimePicker.Designer.cs">
+    <Compile Update="Controls\UserControls\OPMTimePicker.Designer.cs">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Derived\WaitingPictureBox.cs">
+    <Compile Update="Controls\Derived\WaitingPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Custom\ControlGauge.cs">
+    <Compile Update="Controls\Custom\ControlGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Custom\GradientGauge.cs">
+    <Compile Update="Controls\Custom\GradientGauge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\NetworkStatusIndicator.cs">
+    <Compile Update="Controls\UserControls\NetworkStatusIndicator.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\ProxySettingsDefinitionCtl.cs">
+    <Compile Update="Controls\UserControls\ProxySettingsDefinitionCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\ProxySettingsDefinitionCtl.designer.cs">
+    <Compile Update="Controls\UserControls\ProxySettingsDefinitionCtl.designer.cs">
       <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Common\OPMTabControl.cs">
+    <Compile Update="Controls\Common\OPMTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Dialogs\OPMFontChooserDialog.cs">
+    <Compile Update="Dialogs\OPMFontChooserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\OPMFontChooserDialog.Designer.cs">
+    <Compile Update="Dialogs\OPMFontChooserDialog.Designer.cs">
       <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\OPMColorChooserDialog.cs">
+    <Compile Update="Dialogs\OPMColorChooserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\OPMColorChooserDialog.Designer.cs">
+    <Compile Update="Dialogs\OPMColorChooserDialog.Designer.cs">
       <DependentUpon>OPMColorChooserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\OPMFolderBrowserDialog.cs">
+    <Compile Update="Dialogs\OPMFolderBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\OPMFolderBrowserDialog.Designer.cs">
+    <Compile Update="Dialogs\OPMFolderBrowserDialog.Designer.cs">
       <DependentUpon>OPMFolderBrowserDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\OPMFileDialog.cs">
+    <Compile Update="Dialogs\OPMFileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\OPMFileDialog.Designer.cs">
+    <Compile Update="Dialogs\OPMFileDialog.Designer.cs">
       <DependentUpon>OPMFileDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UserControls\WeekdaySelector.cs">
+    <Compile Update="Controls\UserControls\WeekdaySelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\UserControls\WeekdaySelector.Designer.cs">
+    <Compile Update="Controls\UserControls\WeekdaySelector.Designer.cs">
       <DependentUpon>WeekdaySelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Derived\TransparentRichTextBox.cs">
+    <Compile Update="Controls\Derived\TransparentRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Dialogs\GenericWaitDialog.cs">
+    <Compile Update="Dialogs\GenericWaitDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\GenericWaitDialog.Designer.cs">
+    <Compile Update="Dialogs\GenericWaitDialog.Designer.cs">
       <DependentUpon>GenericWaitDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\InsertDriveNotifyDialog.cs">
+    <Compile Update="Dialogs\InsertDriveNotifyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\InsertDriveNotifyDialog.Designer.cs">
+    <Compile Update="Dialogs\InsertDriveNotifyDialog.Designer.cs">
       <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\TimerWaitingDialog.cs">
+    <Compile Update="Dialogs\TimerWaitingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\TimerWaitingDialog.Designer.cs">
+    <Compile Update="Dialogs\TimerWaitingDialog.Designer.cs">
       <DependentUpon>TimerWaitingDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TaskbarThumbnailManager.cs" />
-    <Compile Include="FileOperations\Tasks\FileTaskSupport.cs" />
-    <Compile Include="FileOperations\Tasks\DeleteFilesTask.cs" />
-    <Compile Include="FileOperations\Tasks\MoveFilesTask.cs" />
-    <Compile Include="FileOperations\Tasks\CopyFilesTask.cs" />
-    <Compile Include="FileOperations\Tasks\BaseFileTask.cs" />
-    <Compile Include="FileOperations\Forms\FileTaskErrorReport.cs">
+    <Compile Update="FileOperations\Forms\FileTaskErrorReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FileOperations\Forms\FileTaskErrorReport.Designer.cs">
+    <Compile Update="FileOperations\Forms\FileTaskErrorReport.Designer.cs">
       <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="FileOperations\Forms\FileTaskForm.cs">
+    <Compile Update="FileOperations\Forms\FileTaskForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FileOperations\Forms\FileTaskForm.Designer.cs">
+    <Compile Update="FileOperations\Forms\FileTaskForm.Designer.cs">
       <DependentUpon>FileTaskForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generic\GuiHelper.cs" />
-    <Compile Include="HelpSupport\HelpTarget.cs" />
-    <Compile Include="HelpSupport\HelpViewer.cs">
+    <Compile Update="HelpSupport\HelpViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menus\MenuWrapper.cs" />
-    <Compile Include="Controls\Common\OPMButton.cs">
+    <Compile Update="Controls\Common\OPMButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMCheckBox.cs">
+    <Compile Update="Controls\Common\OPMCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMComboBox.cs">
+    <Compile Update="Controls\Common\OPMComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMDateTimePicker.cs">
+    <Compile Update="Controls\Common\OPMDateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMEditableComboBox.cs">
+    <Compile Update="Controls\Common\OPMEditableComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Common\OPMLabel.cs">
+    <Compile Update="Controls\Common\OPMLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Derived\OPMNumericUpDownBase.cs">
+    <Compile Update="Controls\Derived\OPMNumericUpDownBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Containers\OPMSplitContainer.cs">
+    <Compile Update="Controls\Containers\OPMSplitContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TaskRunner.cs">
-    </Compile>
-    <Compile Include="MessageDisplay.cs">
+    <Compile Update="MessageDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessageDisplay.Designer.cs">
+    <Compile Update="MessageDisplay.Designer.cs">
       <DependentUpon>MessageDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Themes\ThemeForm.cs">
+    <Compile Update="Themes\ThemeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Themes\ThemeForm.Designer.cs">
+    <Compile Update="Themes\ThemeForm.Designer.cs">
       <DependentUpon>ThemeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Themes\ThemeFormBase.cs">
+    <Compile Update="Themes\ThemeFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Themes\ThemeManager.cs" />
-    <Compile Include="Generic\ColorHelper.cs" />
-    <Compile Include="Generic\ImageProcessing.cs" />
-    <Compile Include="ApplicationUpdate\ApplicationUpdateHelper.cs" />
-    <Compile Include="UIExtensions.cs" />
-    <Compile Include="Wizards\StepButtonsCtl.cs">
+    <Compile Update="Wizards\StepButtonsCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\StepButtonsCtl.Designer.cs">
+    <Compile Update="Wizards\StepButtonsCtl.Designer.cs">
       <DependentUpon>StepButtonsCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\WizardBaseCtl.cs">
+    <Compile Update="Wizards\WizardBaseCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\WizardBaseCtl.Designer.cs">
+    <Compile Update="Wizards\WizardBaseCtl.Designer.cs">
       <DependentUpon>WizardBaseCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\WizardHostForm.cs">
+    <Compile Update="Wizards\WizardHostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wizards\WizardHostForm.Designer.cs">
+    <Compile Update="Wizards\WizardHostForm.Designer.cs">
       <DependentUpon>WizardHostForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wizards\WizFinishPageCtl.cs">
+    <Compile Update="Wizards\WizFinishPageCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Wizards\WizFinishPageCtl.Designer.cs">
+    <Compile Update="Wizards\WizFinishPageCtl.Designer.cs">
       <DependentUpon>WizFinishPageCtl.cs</DependentUpon>
     </Compile>
-    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj">
-      <Project>{d75c6e16-0208-40fd-8c54-f073667f5384}</Project>
-      <Name>OPMedia.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OPMedia.Runtime\OPMedia.Runtime.csproj">
-      <Project>{0A0114C0-4409-42F3-940C-31038104261C}</Project>
-      <Name>OPMedia.Runtime</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
+    <ProjectReference Include="..\OPMedia.Runtime\OPMedia.Runtime.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ApplicationUpdate\UpdateWaitForm.resx">
+    <EmbeddedResource Update="ApplicationUpdate\UpdateWaitForm.resx">
       <DependentUpon>UpdateWaitForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\ControlAppPanel.resx">
+    <EmbeddedResource Update="Configuration\ControlAppPanel.resx">
       <DependentUpon>ControlAppPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\MultiPageCfgPanel.resx">
+    <EmbeddedResource Update="Configuration\MultiPageCfgPanel.resx">
       <DependentUpon>MultiPageCfgPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\NetworkCfgPanel.resx">
+    <EmbeddedResource Update="Configuration\NetworkCfgPanel.resx">
       <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\TroubleshootingPanel.resx">
+    <EmbeddedResource Update="Configuration\TroubleshootingPanel.resx">
       <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMFontChooserCtl.resx">
+    <EmbeddedResource Update="Controls\UserControls\OPMFontChooserCtl.resx">
       <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\FileAttributesBrowserCtl.resx">
+    <EmbeddedResource Update="Controls\UserControls\FileAttributesBrowserCtl.resx">
       <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMColorChooserCtl.resx">
+    <EmbeddedResource Update="Controls\UserControls\OPMColorChooserCtl.resx">
       <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMNumericUpDown.resx">
+    <EmbeddedResource Update="Controls\UserControls\OPMNumericUpDown.resx">
       <DependentUpon>OPMNumericUpDown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMTextBox.resx">
+    <EmbeddedResource Update="Controls\UserControls\OPMTextBox.resx">
       <DependentUpon>OPMTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\OPMTimePicker.resx">
+    <EmbeddedResource Update="Controls\UserControls\OPMTimePicker.resx">
       <DependentUpon>OPMTimePicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PropertyEditor\Choosers\BooleanChooser.resx">
+    <EmbeddedResource Update="Controls\PropertyEditor\Choosers\BooleanChooser.resx">
       <DependentUpon>BooleanChooser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.resx">
+    <EmbeddedResource Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.resx">
       <DependentUpon>EnumeratedTypeChooser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PropertyEditor\Choosers\IntegerChooser.resx">
+    <EmbeddedResource Update="Controls\PropertyEditor\Choosers\IntegerChooser.resx">
       <DependentUpon>IntegerChooser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PropertyEditor\Choosers\StringChooser.resx">
+    <EmbeddedResource Update="Controls\PropertyEditor\Choosers\StringChooser.resx">
       <DependentUpon>StringChooser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PropertyEditor\OPMPropertyEditor.resx">
+    <EmbeddedResource Update="Controls\PropertyEditor\OPMPropertyEditor.resx">
       <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OPMFontChooserDialog.resx">
+    <EmbeddedResource Update="Dialogs\OPMFontChooserDialog.resx">
       <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OPMColorChooserDialog.resx">
+    <EmbeddedResource Update="Dialogs\OPMColorChooserDialog.resx">
       <DependentUpon>OPMColorChooserDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OPMFileDialog.resx">
+    <EmbeddedResource Update="Dialogs\OPMFileDialog.resx">
       <DependentUpon>OPMFileDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\OPMFolderBrowserDialog.resx">
+    <EmbeddedResource Update="Dialogs\OPMFolderBrowserDialog.resx">
       <DependentUpon>OPMFolderBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\TimerWaitingDialog.resx">
+    <EmbeddedResource Update="Dialogs\TimerWaitingDialog.resx">
       <DependentUpon>TimerWaitingDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileOperations\Forms\FileTaskForm.resx">
+    <EmbeddedResource Update="FileOperations\Forms\FileTaskForm.resx">
       <DependentUpon>FileTaskForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelpSupport\HelpViewer.resx">
+    <EmbeddedResource Update="HelpSupport\HelpViewer.resx">
       <DependentUpon>HelpViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageDisplay.resx">
+    <EmbeddedResource Update="MessageDisplay.resx">
       <DependentUpon>MessageDisplay.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Themes\ThemeForm.resx">
+    <EmbeddedResource Update="Themes\ThemeForm.resx">
       <DependentUpon>ThemeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Themes\ThemeFormBase.resx">
+    <EmbeddedResource Update="Themes\ThemeFormBase.resx">
       <DependentUpon>ThemeFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrayNotificationBox.resx">
+    <EmbeddedResource Update="TrayNotificationBox.resx">
       <DependentUpon>TrayNotificationBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\StepButtonsCtl.resx">
+    <EmbeddedResource Update="Wizards\StepButtonsCtl.resx">
       <DependentUpon>StepButtonsCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\WizardBaseCtl.resx">
+    <EmbeddedResource Update="Wizards\WizardBaseCtl.resx">
       <DependentUpon>WizardBaseCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\WizardHostForm.resx">
+    <EmbeddedResource Update="Wizards\WizardHostForm.resx">
       <DependentUpon>WizardHostForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizards\WizFinishPageCtl.resx">
+    <EmbeddedResource Update="Wizards\WizFinishPageCtl.resx">
       <DependentUpon>WizFinishPageCtl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Configuration\GeneralSettingsPanel.resx">
+    <EmbeddedResource Update="Configuration\GeneralSettingsPanel.resx">
       <DependentUpon>GeneralSettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\InternetSettingsPanel.resx">
+    <EmbeddedResource Update="Configuration\InternetSettingsPanel.resx">
       <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\SettingsForm.resx">
+    <EmbeddedResource Update="Configuration\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\InsertDriveNotifyDialog.resx">
+    <EmbeddedResource Update="Dialogs\InsertDriveNotifyDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\UserControls\WeekdaySelector.resx">
+    <EmbeddedResource Update="Controls\UserControls\WeekdaySelector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WeekdaySelector.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Configuration\KeyCommandEditor.resx">
+    <EmbeddedResource Update="Configuration\KeyCommandEditor.resx">
       <DependentUpon>KeyCommandEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\KeyMapCfgPanel.resx">
+    <EmbeddedResource Update="Configuration\KeyMapCfgPanel.resx">
       <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configuration\SerialPortCfgDlg.resx">
+    <EmbeddedResource Update="Configuration\SerialPortCfgDlg.resx">
       <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Configuration\SerialPortCfgPanel.resx">
+    <EmbeddedResource Update="Configuration\SerialPortCfgPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SerialPortCfgPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -583,52 +506,36 @@
     <None Include="Resources\menuChildren.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Configuration\BaseCfgPanel.resx">
+    <EmbeddedResource Update="Configuration\BaseCfgPanel.resx">
       <DependentUpon>BaseCfgPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\NetworkStatusIndicator.resx">
+    <EmbeddedResource Update="Controls\UserControls\NetworkStatusIndicator.resx">
       <DependentUpon>NetworkStatusIndicator.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UserControls\ProxySettingsDefinitionCtl.resx">
+    <EmbeddedResource Update="Controls\UserControls\ProxySettingsDefinitionCtl.resx">
       <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\GenericWaitDialog.resx">
+    <EmbeddedResource Update="Dialogs\GenericWaitDialog.resx">
       <DependentUpon>GenericWaitDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Resources\blank.ico" />
-    <EmbeddedResource Include="FileOperations\Forms\FileTaskErrorReport.resx">
+    <EmbeddedResource Update="FileOperations\Forms\FileTaskErrorReport.resx">
       <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Roboto-Black.ttf" />
-    <None Include="Resources\Roboto-BlackItalic.ttf" />
-    <None Include="Resources\Roboto-Bold.ttf" />
-    <None Include="Resources\Roboto-BoldCondensed.ttf" />
-    <None Include="Resources\Roboto-BoldCondensedItalic.ttf" />
-    <None Include="Resources\Roboto-BoldItalic.ttf" />
-    <None Include="Resources\Roboto-Condensed.ttf" />
-    <None Include="Resources\Roboto-CondensedItalic.ttf" />
-    <None Include="Resources\Roboto-Italic.ttf" />
-    <None Include="Resources\Roboto-Light.ttf" />
-    <None Include="Resources\Roboto-LightItalic.ttf" />
-    <None Include="Resources\Roboto-Medium.ttf" />
-    <None Include="Resources\Roboto-MediumItalic.ttf" />
-    <None Include="Resources\Roboto-Regular.ttf" />
-    <None Include="Resources\Roboto-Thin.ttf" />
-    <None Include="Resources\Roboto-ThinItalic.ttf" />
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>
@@ -708,19 +615,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

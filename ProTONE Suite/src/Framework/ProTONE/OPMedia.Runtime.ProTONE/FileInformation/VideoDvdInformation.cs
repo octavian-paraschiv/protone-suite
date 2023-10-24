@@ -4,13 +4,10 @@ using System.Text;
 using OPMedia.Core.Logging;
 using System.Runtime.InteropServices;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-#if HAVE_DSHOW
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Core;
 using System.IO;
 using OPMedia.Core.Configuration;
-#endif
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {

@@ -19,7 +19,7 @@ using OPMedia.Core.Configuration;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Addons.Builtin.Configuration;
 
 namespace OPMedia.Addons.Builtin.CDAProp

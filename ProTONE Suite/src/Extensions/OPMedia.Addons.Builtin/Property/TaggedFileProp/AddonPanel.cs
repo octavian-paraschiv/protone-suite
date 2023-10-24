@@ -19,9 +19,10 @@ using OPMedia.Core.Configuration;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.ProTONE.GlobalEvents;
 using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Runtime.FileInformation;
 using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Properties;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp
 {

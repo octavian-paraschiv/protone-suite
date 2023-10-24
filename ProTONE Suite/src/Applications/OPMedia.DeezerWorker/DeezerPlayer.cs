@@ -19,6 +19,7 @@ using System.IO;
 using OPMedia.Runtime.ProTONE;
 using EventNames = OPMedia.Runtime.ProTONE.EventNames;
 using OPMedia.Core.GlobalEvents;
+using Newtonsoft.Json;
 
 namespace OPMedia.DeezerWorker
 {
@@ -483,8 +484,8 @@ try_play:
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_TRACK_SELECTED:
                     {
                         string selectedInfo = DeezerApi.dz_player_event_track_selected_dzapiinfo(evtHandle);
-                        dynamic obj2 = JObject.Parse(selectedInfo);
-                        _duration = obj2.duration;
+                        var obj2 = JsonConvert.DeserializeObject<DurationWrapper>(selectedInfo);
+                        _duration = (obj2?.duration).GetValueOrDefault();
                     }
                     break;
 
@@ -660,5 +661,10 @@ try_play:
             Resume(pos);
             SetVolume(vol);
         }
+    }
+
+    class DurationWrapper
+    {
+        public int duration;
     }
 }

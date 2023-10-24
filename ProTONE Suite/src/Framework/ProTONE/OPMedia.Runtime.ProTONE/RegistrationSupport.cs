@@ -6,10 +6,10 @@ using System.IO;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Core.Configuration;
 using OPMedia.Core;
-using System.ComponentModel.Composition.Hosting;
 using SharpShell;
 using SharpShell.ServerRegistration;
 using OPMedia.Core.Win32;
+using System.ComponentModel.Composition.Hosting;
 
 namespace OPMedia.Runtime.ProTONE
 {

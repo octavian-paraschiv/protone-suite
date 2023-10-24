@@ -136,15 +136,8 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                         Directory.SetCurrentDirectory(Path.GetDirectoryName(InstallLocation));
                     }
 
-                    unsafe
-                    {
-                        Ole32.CoUninitialize();
-
-                        if (data._delegate != null)
-                        {
-                            data._delegate(data._hwnd, IntPtr.Zero, string.Empty, ShowWindowStyles.SW_NORMAL);
-                        }
-                    }
+                    Ole32.CoUninitialize();
+                    data._delegate.Invoke(data._hwnd, IntPtr.Zero, string.Empty, ShowWindowStyles.SW_NORMAL);
 
                     if (!data._isDynamicDelegate)
                     {

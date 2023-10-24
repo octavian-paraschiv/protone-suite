@@ -25,7 +25,7 @@ using OPMedia.UI.Wizards;
 using OPMedia.Addons.Builtin.FileExplorer.SearchWizard;
 using OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls;
 using OPMedia.Core.Logging;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.UI;
 using OPMedia.Core.TranslationSupport;
@@ -55,6 +55,7 @@ using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using EventNames = OPMedia.Core.EventNames;
+using OPMedia.Addons.Builtin.Properties;
 
 
 #endregion

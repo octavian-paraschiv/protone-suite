@@ -18,7 +18,7 @@ using OPMedia.Core.Logging;
 using OPMedia.UI.Controls;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.UI.Controls.Dialogs;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Core.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;

@@ -1,7 +1,7 @@
 using OPMedia.UI.Controls;
 
 using System.Windows.Forms;
-using OPMedia.Addons.Builtin.Properties;
+
 using System.Drawing;
 
 namespace OPMedia.Addons.Builtin.FileExplorer

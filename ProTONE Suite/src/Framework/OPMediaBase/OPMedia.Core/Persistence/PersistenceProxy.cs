@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
 using OPMedia.Core.Logging;
 using System.Security.Principal;
-using System.ServiceProcess;
 using System.Threading;
 using System.Diagnostics;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Persistence;
 using OPMedia.Core.Utilities;
-using Newtonsoft.Json;
-using OPMedia.Core.InterProcessCommunication;
 using System.Threading.Tasks;
+using System.ServiceProcess;
 
 namespace OPMedia.Core
 {

@@ -143,7 +143,7 @@ Source: "{#BINDIR}\NAudio.Lame.dll"; DestDir: "{app}"; Flags: replacesameversion
 Source: "{#BINDIR}\NAudio.Wasapi.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
 Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
 Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
-Source: "{#BINDIR}\taglib-sharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\TagLibSharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\SharpShell.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; Support DLL's for setup

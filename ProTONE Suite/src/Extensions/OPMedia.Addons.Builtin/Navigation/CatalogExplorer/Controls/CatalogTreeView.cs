@@ -9,7 +9,7 @@ using OPMedia.UI.Controls;
 using OPMedia.Core.Logging;
 using System.Threading;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.UI.Generic;
 

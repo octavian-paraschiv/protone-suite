@@ -1,5 +1,3 @@
-#if HAVE_DSHOW
-
 using System;
 using System.Collections.Generic;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
@@ -589,5 +587,3 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         }
     }
 }
-
-#endif

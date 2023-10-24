@@ -15,15 +15,7 @@ using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-
-#if HAVE_DSHOW
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-#else
-    using OPMedia.Runtime.ProTONE.Rendering.Mono;
-#endif
-
 using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
 using OPMedia.UI.Generic;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.Configuration;
@@ -36,6 +28,8 @@ using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System.Linq;
 using NAudio.CoreAudioApi;
 using OPMedia.Runtime.ProTONE.AudioMetering;
+using OPMedia.Runtime.ProTONE.FfdShowApi;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering

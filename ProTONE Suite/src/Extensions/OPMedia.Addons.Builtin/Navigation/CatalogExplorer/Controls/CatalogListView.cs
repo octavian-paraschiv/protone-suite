@@ -13,7 +13,7 @@ using OPMedia.Core.TranslationSupport;
 using System.ComponentModel;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.Core.Utilities;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Addons.Builtin.Shared;
 using OPMedia.UI.Generic;
 

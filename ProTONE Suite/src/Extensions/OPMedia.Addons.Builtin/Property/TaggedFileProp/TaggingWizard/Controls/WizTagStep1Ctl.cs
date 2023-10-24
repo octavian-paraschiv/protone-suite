@@ -14,8 +14,9 @@ using OPMedia.Core;
 using OPMedia.UI.Themes;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.Dialogs;
-using OPMedia.Addons.Builtin.Properties;
+
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Addons.Builtin.Properties;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {

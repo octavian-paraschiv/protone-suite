@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.Utilities;
@@ -6,11 +6,9 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Playlists;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -62,7 +60,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     else
                     {
                         // generic search
-                        searchUrl += string.Format("&search={0}", StringUtils.UrlEncode(searchParams.SearchText));
+                        searchUrl += string.Format("&search={0}&f=json", StringUtils.UrlEncode(searchParams.SearchText));
                     }
                 }
 
@@ -76,99 +74,70 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                     if (abortEvent.WaitOne(5))
                         return results;
 
-                    dynamic obj2 = JObject.Parse(jsonReply);
+                    var response = JsonConvert.DeserializeObject<ShoutcastResponse>(jsonReply);
 
                     if (abortEvent.WaitOne(5))
                         return results;
 
-                    var response = obj2.response;
-                    if (response != null && response.statusCode == "200")
+                    if (response?.Reply?.StatusCode == (int)HttpStatusCode.OK)
                     {
                         if (abortEvent.WaitOne(5))
                             return results;
 
-                        if (response.data != null &&
-                            response.data.stationlist != null)
+                        var tuneInBase = response?.Reply?.Data?.StationList?.TuneInUrl?.Base ?? "/sbin/tunein-station.pls";
+
+                        if (response?.Reply?.Data?.StationList?.Stations?.Length > 0)
                         {
                             if (abortEvent.WaitOne(5))
                                 return results;
 
-                            var stations = response.data.stationlist.station;
-                            if (stations != null)
+                            foreach(var station in response?.Reply?.Data?.StationList?.Stations)
                             {
-                                if (abortEvent.WaitOne(5))
-                                    return results;
-
-                                string tuneInBase = string.Empty;
                                 try
                                 {
-                                    tuneInBase = response.data.stationlist.tunein["base"] as string;
+                                    RadioStation rs = new RadioStation(OnlineMediaSource.ShoutCast);
+                                    rs.Title = station.name;
+                                    rs.Type = station.mt;
+                                    rs.Genre = station.genre;
+                                    rs.Bitrate = station.br;
+
+                                    string ct = "";
+                                    string cst = "";
+
+                                    try { ct = station.ct; }
+                                    catch { }
+                                    try { cst = station.cst; }
+                                    catch { }
+
+                                    if (string.IsNullOrEmpty(ct) == false)
+                                        rs.Content = ct;
+                                    else if (string.IsNullOrEmpty(cst) == false)
+                                        rs.Content = cst;
+                                    else
+                                        rs.Content = Translator.Translate("TXT_NA");
+
+                                    int stationId = station.id;
+
+                                    string tuneInUrl = string.Format("{0}/{1}?id={2}",
+                                        shoutCastTuneInBaseUrl, tuneInBase, stationId);
+
+                                    string reply = wc.DownloadString(tuneInUrl);
+
+                                    string stationUrl = ParseReply(reply);
+                                    if (string.IsNullOrEmpty(stationUrl))
+                                        continue;
+
+                                    rs.Url = stationUrl;
+
+                                    if (rs.Title.ToLowerInvariant().Contains("radionomy") ||
+                                        rs.Url.ToLowerInvariant().Contains("radionomy"))
+                                        continue;
+
+                                    results.Add(rs);
                                 }
                                 catch (Exception ex)
                                 {
                                     Logger.LogException(ex);
-                                    tuneInBase = null;
-                                }
-
-                                if (abortEvent.WaitOne(5))
-                                    return results;
-
-                                if (string.IsNullOrEmpty(tuneInBase))
-                                    tuneInBase = "/sbin/tunein-station.pls";
-
-                                for (int i = 0; i < stations.Count; i++)
-                                {
-                                    if (abortEvent.WaitOne(5))
-                                        return results;
-
-                                    var station = stations[i];
-
-                                    try
-                                    {
-                                        RadioStation rs = new RadioStation(OnlineMediaSource.ShoutCast);
-                                        rs.Title = station.name;
-                                        rs.Type = station.mt;
-                                        rs.Genre = station.genre;
-                                        rs.Bitrate = station.br;
-
-                                        string ct = "";
-                                        string cst = "";
-
-                                        try { ct = station.ct; }
-                                        catch { }
-                                        try { cst = station.cst; }
-                                        catch { }
-
-                                        if (string.IsNullOrEmpty(ct) == false)
-                                            rs.Content = ct;
-                                        else if (string.IsNullOrEmpty(cst) == false)
-                                            rs.Content = cst;
-                                        else
-                                            rs.Content = Translator.Translate("TXT_NA");
-
-                                        int stationId = station.id;
-
-                                        string tuneInUrl = string.Format("{0}/{1}?id={2}",
-                                            shoutCastTuneInBaseUrl, tuneInBase, stationId);
-
-                                        string reply = wc.DownloadString(tuneInUrl);
-
-                                        string stationUrl = ParseReply(reply);
-                                        if (string.IsNullOrEmpty(stationUrl))
-                                            continue;
-
-                                        rs.Url = stationUrl;
-
-                                        if (rs.Title.ToLowerInvariant().Contains("radionomy") ||
-                                            rs.Url.ToLowerInvariant().Contains("radionomy"))
-                                            continue;
-
-                                        results.Add(rs);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Logger.LogException(ex);
-                                    }
                                 }
                             }
                         }
@@ -255,4 +224,61 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
         }
 
     }
+
+    #region Shoutcast API data models (http://wiki.shoutcast.com/wiki/SHOUTcast_Radio_Directory_API)
+
+    internal class ShoutcastTuneInUrl
+    {
+        [JsonProperty("base")]
+        public string Base;
+    }
+
+    internal class ShoutcastStation
+    {
+        public int br;
+        public int ml;
+        public int id;
+        public int lc;
+
+        public string name;
+        public string genre;
+        public string mt;
+        public string ct;
+        public string cst;
+    }
+
+    internal class ShoutcastStationList
+    {
+        [JsonProperty("station")]
+        public ShoutcastStation[] Stations;
+
+        [JsonProperty("tunein")]
+        public ShoutcastTuneInUrl TuneInUrl;
+    }
+
+    internal class ShoutcastData
+    {
+        [JsonProperty("stationlist")]
+        public ShoutcastStationList StationList;
+    }
+
+    internal class ShoutcastReply
+    {
+        [JsonProperty("data")]
+        public ShoutcastData Data;
+
+        [JsonProperty("statusCode")]
+        public int StatusCode;
+
+        [JsonProperty("statusText")]
+        public string StatusText;
+    }
+
+    internal class ShoutcastResponse
+    {
+        [JsonProperty("response")]
+        public ShoutcastReply Reply;
+    }
+
+    #endregion
 }

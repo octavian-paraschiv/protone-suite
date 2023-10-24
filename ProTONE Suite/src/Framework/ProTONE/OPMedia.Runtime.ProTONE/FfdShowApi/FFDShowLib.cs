@@ -1,5 +1,3 @@
-#if HAVE_DSHOW
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -1659,5 +1657,3 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
     
   }
 }
-
-#endif

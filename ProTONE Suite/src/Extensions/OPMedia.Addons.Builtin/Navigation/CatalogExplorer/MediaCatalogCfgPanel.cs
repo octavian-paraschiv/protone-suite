@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using OPMedia.UI.Configuration;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Addons.Builtin.Properties;
+
 
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.Addons.Configuration;

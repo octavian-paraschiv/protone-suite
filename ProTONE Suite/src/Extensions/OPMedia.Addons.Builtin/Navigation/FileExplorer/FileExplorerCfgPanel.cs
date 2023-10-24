@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using OPMedia.UI.Configuration;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Addons.Builtin.Properties;
+
 
 using OPMedia.UI.Controls;
 using OPMedia.Runtime.Addons.Configuration;
@@ -18,6 +18,7 @@ using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Runtime.ProTONE;
+using OPMedia.Addons.Builtin.Properties;
 
 namespace OPMedia.Addons.Builtin.FileExplorer
 {
