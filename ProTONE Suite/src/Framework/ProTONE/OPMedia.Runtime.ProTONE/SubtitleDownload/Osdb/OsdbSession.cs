@@ -62,7 +62,6 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         public OsdbSession(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogTrace("OsdbSession: object created");
         }
         #endregion
 

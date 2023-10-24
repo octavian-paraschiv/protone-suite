@@ -249,8 +249,8 @@ namespace OPMedia.UI.Themes
             ApplyWindowParams();
             ApplyTitlebarValues();
             ApplyDrawingValues();
-            Invalidate(true);
             OnThemeUpdatedInternal();
+            Invalidate(true);
         }
 
         #region Form resize and move operations

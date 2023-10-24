@@ -613,8 +613,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Roboto-Black.ttf" />
+    <None Include="Resources\Roboto-BlackItalic.ttf" />
+    <None Include="Resources\Roboto-Bold.ttf" />
+    <None Include="Resources\Roboto-BoldCondensed.ttf" />
+    <None Include="Resources\Roboto-BoldCondensedItalic.ttf" />
+    <None Include="Resources\Roboto-BoldItalic.ttf" />
+    <None Include="Resources\Roboto-Condensed.ttf" />
+    <None Include="Resources\Roboto-CondensedItalic.ttf" />
+    <None Include="Resources\Roboto-Italic.ttf" />
+    <None Include="Resources\Roboto-Light.ttf" />
+    <None Include="Resources\Roboto-LightItalic.ttf" />
     <None Include="Resources\Roboto-Medium.ttf" />
+    <None Include="Resources\Roboto-MediumItalic.ttf" />
     <None Include="Resources\Roboto-Regular.ttf" />
+    <None Include="Resources\Roboto-Thin.ttf" />
+    <None Include="Resources\Roboto-ThinItalic.ttf" />
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>

@@ -115,14 +115,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
                 if (nfi.IsValid)
                 {
                     if (_session == null)
-                    {
                         _session = SubtitleServerSession.Create(_serverType, _serverUrl, _userName, _password);
-                    }
 
-                    if (_session != null)
-                    {
-                        return _session.GetSubtitles(fileName);
-                    }
+                    return _session?.GetSubtitles(fileName);
                 }
             }
             catch (Exception ex)
@@ -138,14 +133,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
             try
             {
                 if (_session == null)
-                {
                     _session = SubtitleServerSession.Create(_serverType, _serverUrl, _userName, _password);
-                }
 
-                if (_session != null)
-                {
-                    return _session.DownloadSubtitle(fileName, subtitle);
-                }
+                return _session?.DownloadSubtitle(fileName, subtitle);
             }
             catch (Exception ex)
             {
@@ -160,11 +150,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 
         public void Dispose()
         {
-            if (_session != null)
-            {
-                _session.Dispose();
-                _session = null;
-            }
+            _session?.Dispose();
+            _session = null;
         }
 
         #endregion

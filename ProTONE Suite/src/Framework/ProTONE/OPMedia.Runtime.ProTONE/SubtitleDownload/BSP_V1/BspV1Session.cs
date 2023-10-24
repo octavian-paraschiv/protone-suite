@@ -31,7 +31,6 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
         public BspV1Session(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogTrace("BspV1Session: object created");
         }
         #endregion
 
@@ -86,23 +85,29 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
             SearchResult res = _wsdl.searchSubtitles(_sessionToken, vi.moviehash, (long)vi.moviebytesize, vi.sublanguageid, vi.imdbid);
             if (res.data != null && res.data.Length > 0)
             {
-                foreach (SubtitleData sd in res.data)
-                {
-                    SubtitleInfo si = new SubtitleInfo();
+                var infos = from sd in res.data
+                            where
+                            (
+                                sd?.movieName?.Length > 0 &&
+                                sd?.movieHash?.Length > 0 &&
+                                sd?.subHash?.Length > 0 &&
+                                sd?.subLang?.Length > 0 &&
+                                sd?.subFormat?.Length > 0 &&
+                                sd?.subDownloadLink?.Length > 0
+                            )
+                            select new SubtitleInfo
+                            {
+                                IDSubtitleFile = sd.subID.ToString(),
+                                SubFileName = sd.subName,
+                                MovieName = sd.movieName,
+                                LanguageName = OPMedia.Core.Language.ThreeLetterISOLanguageNameToEnglishName(sd.subLang),
+                                MovieHash = vi.moviehash,
+                                SubDownloadLink = sd.subDownloadLink,
+                                SubHash = sd.subHash,
+                                SubFormat = sd.subFormat
+                            };
 
-                    si.IDSubtitleFile = sd.subID.ToString();
-                    si.SubFileName = sd.subName;
-                    si.MovieName = sd.movieName;
-                    si.SubHash = sd.subHash;
-
-                    si.LanguageName = OPMedia.Core.Language.ThreeLetterISOLanguageNameToEnglishName(sd.subLang);
-
-                    si.MovieHash = vi.moviehash;
-                    si.SubDownloadLink = sd.subDownloadLink;
-                    si.SubFormat = sd.subFormat;
-
-                    retVal.Add(si);
-                }
+                retVal.AddRange(infos);
             }
 
             return retVal;

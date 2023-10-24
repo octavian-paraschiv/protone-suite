@@ -164,6 +164,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                 _tmrKeepAlive.Elapsed += new System.Timers.ElapsedEventHandler(_tmrKeepAlive_Elapsed);
                 _tmrKeepAlive.Start();
             }
+
+            Logger.LogTrace($"{GetType().Name}: object created");
         }
         #endregion
 
@@ -203,6 +205,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
             DoCleanup();
             
             _sessionToken = null;
+
+            Logger.LogTrace($"{GetType().Name}: object disposed");
         }
 
         protected bool CheckMatch(string movieName, List<string> fileNamePartsList)
