@@ -140,7 +140,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             Logger.LogTrace($"BaseWorkerRenderer::~DoDispose => Cleanup ...");
             DoStopRenderer();
         }
-        
+
 
         protected override void DoStartRendererWithHint(RenderingStartHint startHint)
         {
@@ -326,7 +326,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             return fs;
         }
-       
+
         public override double PercentualVolume
         {
             get

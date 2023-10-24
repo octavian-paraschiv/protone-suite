@@ -122,7 +122,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         ProTONEConfig.DetachedWindowLocation = this.Location;
                         ProTONEConfig.DetachedWindowSize = this.Size;
                         ProTONEConfig.DetachedWindowState = FormWindowState.Normal;
-                        
+
                     }
 
                     this.WindowState = FormWindowState.Maximized;

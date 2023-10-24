@@ -23,8 +23,8 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 
         public string PropertyValue
         {
-            get 
-            { 
+            get
+            {
                 return ec.ConvertToInvariantString(cmbValue.Text);
             }
 
@@ -58,5 +58,5 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
         }
     }
 
-    
+
 }

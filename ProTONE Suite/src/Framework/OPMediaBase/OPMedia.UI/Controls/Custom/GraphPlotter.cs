@@ -110,7 +110,7 @@ namespace OPMedia.UI.Controls
 
             int dataSetLen = data.Length;
 
-            Point last = new Point(rc.Left, 
+            Point last = new Point(rc.Left,
                 (max == min) ? rc.Bottom - rc.Height / 2 :
                 rc.Bottom - (int)((data[0] - min) * rc.Height / (max - min)));
 

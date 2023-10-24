@@ -37,7 +37,7 @@ namespace OPMedia.UI
             string message = string.Format(msgFmt,
                 Translator.Translate("TXT_APP_NAME"),
                 Translator.Translate("TXT_VERSION", AssemblyInfo.GetVersionNumber(thisAssembly)),
-                buildDate.HasValue ? 
+                buildDate.HasValue ?
                     string.Format("{0}, 2005-{1}", copyrightNotice, buildDate.Value.Year) :
                     copyrightNotice);
 
@@ -45,7 +45,7 @@ namespace OPMedia.UI
             dlg._isAboutBox = true;
             dlg.ShowDialog();
         }
-        
+
         public static DialogResult QueryWithCancelAndAbort(string message, string title, bool showForAll = false, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
             MessageDisplay dlg = new MessageDisplay(message, title, icon);
@@ -111,7 +111,7 @@ namespace OPMedia.UI
             pbImage.Visible = false;
 
             this.KeyDown += OnKeyDown;
-            
+
             btn1.KeyDown += OnKeyDown;
             btn2.KeyDown += OnKeyDown;
             btn3.KeyDown += OnKeyDown;
@@ -247,11 +247,11 @@ namespace OPMedia.UI
             {
                 btn1.Text = "&" + Translator.Translate("TXT_YES");
                 btn1.DialogResult = DialogResult.Yes;
-                
+
                 btn2.Visible = true;
                 btn2.Text = "&" + Translator.Translate("TXT_NO");
                 btn2.DialogResult = DialogResult.No;
-                
+
                 CancelButton = btn2;
 
                 if (_cancel)

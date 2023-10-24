@@ -21,7 +21,7 @@ namespace OPMedia.UI.Controls
             InitializeComponent();
         }
 
-       
+
 
         private void SetWeekdays(Weekday value)
         {
@@ -51,7 +51,7 @@ namespace OPMedia.UI.Controls
                 if (chk != null && chk.Checked)
                 {
                     string tag = chk.Tag as string;
-                    if (!string.IsNullOrEmpty(tag) )
+                    if (!string.IsNullOrEmpty(tag))
                     {
                         wd |= (Weekday)Enum.Parse(typeof(Weekday), tag);
                     }

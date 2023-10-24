@@ -22,10 +22,10 @@
             return false;
         }
 
-        public UrlPlaylistItem(string uri) : 
+        public UrlPlaylistItem(string uri) :
             base(uri, false, false)
         {
-            
+
         }
     }
 }

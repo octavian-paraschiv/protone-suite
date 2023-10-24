@@ -60,9 +60,9 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         try
                         {
                             var totalFound = (from subInfos in subs.Values.ToList()
-                                   from si in subInfos
-                                   where si.IDSubtitle?.Length > 0
-                                   select 1).Count();
+                                              from si in subInfos
+                                              where si.IDSubtitle?.Length > 0
+                                              select 1).Count();
 
                             if (totalFound > 0)
                             {
@@ -188,7 +188,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                     {
                         // There is at least another file having a similar name in the folder.
                         // Check if its extension is a valid subtitle extension.
-                        foreach(string file in files)
+                        foreach (string file in files)
                         {
                             if (file.ToLowerInvariant() == movieFileName.ToLowerInvariant())
                                 continue; // This is our video file ... not interesting
@@ -270,7 +270,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                     }
                 }
             }
-            catch (Exception ex)    
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -406,7 +406,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             if (ProTONEConfig.SubDownloadedNotificationsEnabled)
             {
                 string msg = Translator.Translate("TXT_SUB_LOADED");
-                FireNotify(msg,  ApplicationInfo.ApplicationName, MessageBoxIcon.Information);
+                FireNotify(msg, ApplicationInfo.ApplicationName, MessageBoxIcon.Information);
             }
         }
     }

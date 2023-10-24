@@ -154,15 +154,15 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
                             }
                         }
 
-                        MainThread.Post((d) => 
+                        MainThread.Post((d) =>
                         {
                             cmbAudioCDDrives.SelectedItem = selected;
                         });
                     }
                     finally
                     {
-                        MainThread.Post((d) => 
-                        { 
+                        MainThread.Post((d) =>
+                        {
                             pbWaiting.Visible = false;
                             btnRefresh.Enabled = true;
                         });
@@ -227,10 +227,10 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 
                                 if (cdEntry != null)
                                 {
-                                   // Cache the disk to persistent storage for retrieving it faster later on
-                                   cdEntry.PersistDisc();
-                               }
-                           }
+                                    // Cache the disk to persistent storage for retrieving it faster later on
+                                    cdEntry.PersistDisc();
+                                }
+                            }
                         }
 
                         if (cdEntry != null)
@@ -239,32 +239,32 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
                             {
                                 double size = cd.TrackSize(i);
                                 int duration = cd.GetSeconds(i);
-    
+
                                 ListViewItem lvItem = new ListViewItem(i.ToString());
-    
+
                                 lvItem.SubItems.Add(TimeSpan.FromSeconds(duration).ToString());
                                 lvItem.SubItems.Add(((size / (1024 * 1024)).ToString("F")) + " MB");
-    
+
                                 OPMListViewSubItem subItem = new OPMListViewSubItem(tbEditAlbum, lvItem,
                                     cdEntry.Tracks[i - 1].Album ?? string.Empty);
                                 subItem.ReadOnly = false;
                                 lvItem.SubItems.Add(subItem);
-    
+
                                 subItem = new OPMListViewSubItem(tbEditArtist, lvItem,
                                     cdEntry.Tracks[i - 1].Artist ?? string.Empty);
                                 subItem.ReadOnly = false;
                                 lvItem.SubItems.Add(subItem);
-    
+
                                 subItem = new OPMListViewSubItem(tbEditTitle, lvItem,
                                     cdEntry.Tracks[i - 1].Title ?? string.Empty);
                                 subItem.ReadOnly = false;
                                 lvItem.SubItems.Add(subItem);
-    
+
                                 subItem = new OPMListViewSubItem(cmbEditgenre, lvItem,
                                     cdEntry.Tracks[i - 1].Genre ?? string.Empty);
                                 subItem.ReadOnly = false;
                                 lvItem.SubItems.Add(subItem);
-    
+
                                 if (Wizard.RepeatCount == 0)
                                 {
                                     lvItem.ImageIndex = 1;
@@ -273,9 +273,9 @@ namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
                                 {
                                     //lvItem.ImageIndex = ((BkgTask as Task).Tracks.Contains(i)) ? 1 : 0;
                                 }
-    
+
                                 lvItem.Tag = cdEntry.Tracks[i - 1];
-    
+
                                 lvTracks.Items.Add(lvItem);
                             }
                         }

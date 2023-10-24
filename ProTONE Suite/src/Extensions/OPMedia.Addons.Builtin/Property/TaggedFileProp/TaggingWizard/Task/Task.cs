@@ -75,7 +75,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 
         public string Year
         { get { return year; } set { year = value; } }
-        
+
         string tagFilePattern = "<A> - <T>";
         [Browsable(false)]
         public string TagFilePattern
@@ -92,7 +92,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         [Browsable(false)]
         public string RemamePattern
         { get { return remamePattern; } set { remamePattern = value; } }
-        
+
         TaskType taskType = TaskType.MultiRename;
         [Browsable(false)]
         public TaskType TaskType

@@ -28,7 +28,7 @@ namespace OPMedia.Runtime.Processors
         string _repositoryPath = string.Empty;
         int _downloadInterval = 0;
 
-        public BackgroundRetriever(ProxySettings ns, string descName, string downloadUrl, 
+        public BackgroundRetriever(ProxySettings ns, string descName, string downloadUrl,
             string repositoryPath, int downloadInterval)
         {
             _ns = ns;

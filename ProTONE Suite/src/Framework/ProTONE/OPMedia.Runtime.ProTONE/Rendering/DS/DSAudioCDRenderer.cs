@@ -35,13 +35,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             GC.Collect();
 
             mediaControl = BuildMediaControl();
-            
+
             // Create Filter
             _source = new DSBaseSourceFilter(new AudioCdSourceFilter());
-            
+
             // load the file
             _source.FileName = renderMediaName;
-            
+
             // Add to the filter Graph
             _source.FilterGraph = (mediaControl) as IGraphBuilder;
 

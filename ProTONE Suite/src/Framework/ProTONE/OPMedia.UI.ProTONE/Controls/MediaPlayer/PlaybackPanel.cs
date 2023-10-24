@@ -33,7 +33,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         Dictionary<Control, OPMToolTip> _tips = new Dictionary<Control, OPMToolTip>();
 
         #region Properties
-        
+
         // TODO: implement
         public bool CompactView { get; set; }
 

@@ -50,7 +50,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
         protected override void DoAuthenticate()
         {
             SubtitlesResult res = _wsdl.logIn(_username, _password, _wsdl.UserAgent);
-            if (res.result != "200" )
+            if (res.result != "200")
                 // not OK
                 throw new SubtitleDownloadException("Login to BSP_V1 server has failed", res.status);
 

@@ -12,7 +12,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
     public class CatalogTreeView : OPMTreeView
     {
         private ImageList ilItems;
-        
+
 
         public CatalogTreeView()
             : base()
@@ -56,7 +56,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
             TreeNode[] nodes = BrowseCatalogFolders(cat);
             TreeNode catNode = new TreeNode(cat.Name, nodes);
             catNode.ImageIndex = catNode.SelectedImageIndex = 0;
-            
+
             this.Nodes.Add(catNode);
             catNode.Expand();
 
@@ -132,7 +132,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
 
                 List<CatalogItem> childList = new List<CatalogItem>(children);
 
-                childList.Sort(delegate(CatalogItem ci1, CatalogItem ci2)
+                childList.Sort(delegate (CatalogItem ci1, CatalogItem ci2)
                 {
                     if (ci1 == null && ci2 == null)
                         return 0;
@@ -164,7 +164,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
                     {
                         treeNodes[childList[i].ParentItemID].Nodes.Add(node);
                     }
-                    
+
                     if (!treeNodes.ContainsKey(childList[i].ItemID))
                     {
                         treeNodes.Add(childList[i].ItemID, node);

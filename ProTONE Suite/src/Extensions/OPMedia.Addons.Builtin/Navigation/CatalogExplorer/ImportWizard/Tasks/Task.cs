@@ -79,7 +79,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 detail.Results = (isAborted) ? Translator.Translate("TXT_ABORTED") : Translator.Translate("TXT_SUCCESS");
                 detail.IsSuccess = !isAborted;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 detail.Results = ex.Message;
                 detail.IsSuccess = false;
@@ -104,7 +104,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 _steps += PathUtils.EnumDirectories(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
                 _steps += PathUtils.EnumFiles(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ConfirmScanAbortOnException(ex);
             }
@@ -118,10 +118,10 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         public void ScanFolder(Catalog cat, string dir, CatalogItem parent)
         {
-            if (!CanContinue()) 
+            if (!CanContinue())
                 return;
 
-            ReportPseudoStepInit("TXT_SCANNING: "  + dir);
+            ReportPseudoStepInit("TXT_SCANNING: " + dir);
 
             try
             {
@@ -145,12 +145,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 ci.RootSerialNumber = Kernel32.GetVolumeSerialNumber(di.RootDirectory.FullName);
 
                 ci.Name = GetName(dir, di);
-                
+
                 if (parent != null)
                 {
                     ci.ParentItemID = parent.ItemID;
                 }
-                                
+
                 if (ci.IsRoot)
                 {
                     // This is a disk
@@ -176,7 +176,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 RaiseTaskProgressEvent(null, _currentStep++);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ConfirmScanAbortOnException(ex);
             }
@@ -199,7 +199,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         private void ScanFile(Catalog cat, string file, CatalogItem parent)
         {
-            if (!CanContinue()) 
+            if (!CanContinue())
                 return;
 
             ReportPseudoStepInit("TXT_SCANNING: " + file);
@@ -244,7 +244,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.LogException(ex);
                 }
@@ -270,7 +270,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
             }
             else
             {
-                MainThread.Post(delegate(object x)
+                MainThread.Post(delegate (object x)
                 {
                     string message = Translator.Translate("TXT_SCAN_ERROR_MSG", SourcePath, ex.Message);
 
@@ -290,7 +290,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
         {
             do
             {
-                if (_abortScan.WaitOne(0)) 
+                if (_abortScan.WaitOne(0))
                     return false;
 
                 Thread.Sleep(50);

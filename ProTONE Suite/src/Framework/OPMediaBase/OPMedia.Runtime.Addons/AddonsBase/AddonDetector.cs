@@ -25,7 +25,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             {
                 return _navAddons.ToArray();
             }
-            
+
         }
 
         public static string[] PropertyAddons
@@ -111,7 +111,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                         _assemblies.Add(type.FullName,
                             string.Format("{0}|{1}", asmName.Name, type.FullName));
 
-                        register = true;   
+                        register = true;
                     }
                     else if (type.IsSubclassOf(typeof(PropBaseCtl)))
                     {

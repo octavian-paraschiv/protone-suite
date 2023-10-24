@@ -67,7 +67,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     Track tr = _cdEntry.Tracks[_track - 1];
                     return tr.Title;
                 }
-                
+
                 return null;
             }
         }
@@ -88,7 +88,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 return null;
             }
-            
+
         }
 
         [TranslatableDisplayName("TXT_ALBUM")]
@@ -130,7 +130,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public override string Comments
         {
             get { return string.Empty; }
-            
+
         }
 
 
@@ -141,7 +141,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public override short? Track
         {
             get { return (short)_track; }
-            
+
         }
 
         [TranslatableDisplayName("TXT_YEAR")]
@@ -163,8 +163,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         }
                     }
                 }
-                catch 
-                { 
+                catch
+                {
                 }
                 return default(short?);
             }
@@ -181,7 +181,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 info.Add("TXT_BITRATE", Bitrate.GetValueOrDefault().ToString());
                 info.Add("TXT_CHANNELS:", Channels.GetValueOrDefault().ToString());
                 info.Add("TXT_FREQUENCY:", Frequency.GetValueOrDefault().ToString());
-              
+
                 if (_cdEntry != null)
                 {
                     info.Add(string.Empty, null); // separator
@@ -207,7 +207,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         removeSep = false;
                         info.Add("TXT_GENRE:", Genre);
                     }
-                    
+
                     if (Track.HasValue)
                     {
                         removeSep = false;
@@ -227,8 +227,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 return info;
             }
-           
-            
+
+
         }
 
         [TranslatableDisplayName("TXT_DURATION")]
@@ -340,7 +340,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     _cdEntry = null;
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
                 _cdEntry = null;

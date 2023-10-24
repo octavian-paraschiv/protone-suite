@@ -26,7 +26,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             return _instance.ShowDialog();
         }
 
-        protected ProTONESettingsForm(string titleToOpen, string subTitleToOpen) 
+        protected ProTONESettingsForm(string titleToOpen, string subTitleToOpen)
             : base(titleToOpen, subTitleToOpen)
         {
         }
@@ -34,7 +34,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         public ProTONESettingsForm() : base()
         {
         }
-        
+
         public override void AddAditionalPanels()
         {
             if (ProTONEConfig.IsPlayer)
@@ -81,9 +81,9 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         public override List<BaseCfgPanel> GetTroubleshootingSubPages()
         {
-            return new List<BaseCfgPanel> 
-            { 
-                new DiagnosticsPage() 
+            return new List<BaseCfgPanel>
+            {
+                new DiagnosticsPage()
             };
         }
 
@@ -92,8 +92,8 @@ namespace OPMedia.UI.ProTONE.Configuration
             if (!ProTONEConfig.IsPlayer)
                 return null;
 
-            return new List<BaseCfgPanel> 
-            { 
+            return new List<BaseCfgPanel>
+            {
                 new ShoutcastConfigPage(),
                 new DeezerConfigPage(),
             };

@@ -21,7 +21,7 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
         public string PropertyValue
         {
             get { return txtValue.Text; }
-            set { txtValue.Text = value;}
+            set { txtValue.Text = value; }
         }
 
         public StringChooser()

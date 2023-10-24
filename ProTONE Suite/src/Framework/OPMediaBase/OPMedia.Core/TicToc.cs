@@ -14,7 +14,7 @@ namespace OPMedia.Core
         double _totalTime = 0;
         long _totalCount = 0;
         object _syncRoot = new object();
-        
+
         int _avgReportCount = 20;
         long _longOpThreshold = 10;
 

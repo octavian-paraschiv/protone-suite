@@ -32,7 +32,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            ProTONEConfig.SetFavoriteFolders(favoriteFoldersControl.FavoriteFolders, 
+            ProTONEConfig.SetFavoriteFolders(favoriteFoldersControl.FavoriteFolders,
                 favoriteFoldersControl.FavoriteFoldersHiveName);
         }
 

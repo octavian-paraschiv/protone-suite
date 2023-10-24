@@ -55,11 +55,11 @@ namespace OPMedia.Addons.Builtin.FileExplorer
     public partial class AddonPanel : NavBaseCtl
     {
         private bool disableEvents = false;
-        
+
         //private bool drivesDisplayed = false;
 
         private ImageList ilDrives = null;
-        
+
         private FileTaskForm _pasteFileTask = null;
         private FileTaskForm _deleteFileTask = null;
 
@@ -86,7 +86,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             opmShellList.BorderStyle = BorderStyle.None;
 
             opmShellList.MultiSelect = true;
-            
+
             opmShellList.Clear();
 
             ilAddon.Images.Add(Resources.FileExplorer);
@@ -392,7 +392,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             {
                 List<string> paths = new List<string>();
                 paths.Add(args.m_strPath);
-                
+
                 RaiseNavigationAction(NavActionType.ActionDoubleClickFile, paths);
             }
         }
@@ -419,7 +419,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 paths.Add(args.m_strPath);
                 RaiseNavigationAction(NavActionType.ActionSelectFile, paths);
 
-                if (paths != null && 
+                if (paths != null &&
                     paths.Count == 1 &&
                     !string.IsNullOrEmpty(paths[0]))
                 {
@@ -461,7 +461,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         #endregion
 
         #region Helpers
-        
+
 
         private void ChangePath(string path)
         {
@@ -619,7 +619,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                                 taskTagging.Files.Add(item);
                                             }
                                         }
-                                        
+
                                         TaggingWizardMain.Execute(FindForm(), taskTagging);
                                         ReloadProperties();
                                     }
@@ -655,7 +655,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     case ToolAction.ToolActionTaggingWizard:
                         {
                             TaggedFileProp.TaggingWizard.Task taskTagging = new TaggedFileProp.TaggingWizard.Task();
-                            foreach(string item in opmShellList.SelectedPaths)
+                            foreach (string item in opmShellList.SelectedPaths)
                             {
                                 if (Directory.Exists(item))
                                 {
@@ -666,7 +666,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                     taskTagging.Files.Add(item);
                                 }
                             }
-                            
+
                             TaggingWizardMain.Execute(FindForm(), taskTagging);
 
                             if (taskTagging.TaskType != TaskType.MultiRename)
@@ -810,7 +810,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 return;
 
             bool playerInstalled = File.Exists(ProTONEConfig.PlayerInstallationPath);
-            tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible = 
+            tsmiSepProTONE.Visible = tsmiProTONEEnqueue.Visible = tsmiProTONEPlay.Visible =
                 playerInstalled;
 
             for (int i = 0; i < tsic.Count; i++)
@@ -959,7 +959,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             {
                 ToolStripItem btn = contextMenuStrip.Items[i] as ToolStripItem;
 
-                if (btn == null || 
+                if (btn == null ||
                     string.IsNullOrEmpty(btn.Tag as string))
                 {
                     // Not an action button, continue.
@@ -1023,7 +1023,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     DriveInfoItem dii = new DriveInfoItem(di);
                     OPMToolStripDropDownMenuItem tsi = new OPMToolStripDropDownMenuItem(tsbDrives);
                     tsi.ImageScaling = ToolStripItemImageScaling.None;
-                    
+
                     tsi.Text = dii.ToString();
                     tsi.Tag = dii.Path;
                     tsi.Image = dii.Image;
@@ -1031,7 +1031,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     tsbDrives.DropDownItems.Add(tsi);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -1041,7 +1041,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         private void BuildMenuText(ToolStripItem tsm, string tag, string param, OPMShortcut command)
         {
             tsm.ToolTipText =
-                (tsm.Enabled && !string.IsNullOrEmpty(param)) ? Translator.Translate(tag) + ": " + param : 
+                (tsm.Enabled && !string.IsNullOrEmpty(param)) ? Translator.Translate(tag) + ": " + param :
                 Translator.Translate(tag);
             tsm.Text = Translator.Translate(tag);
 
@@ -1057,19 +1057,19 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     tsm.ToolTipText = string.Empty;
                     tsm.Text = text;
                 }
-                
+
                 if (command != OPMShortcut.CmdOutOfRange)
                 {
-                    (tsm as OPMToolStripMenuItem).ShortcutKeyDisplayString = 
+                    (tsm as OPMToolStripMenuItem).ShortcutKeyDisplayString =
                         ShortcutMapper.GetShortcutString(command);
                 }
-                
+
             }
             else
             {
                 if (command != OPMShortcut.CmdOutOfRange)
                 {
-                    tsm.ToolTipText += 
+                    tsm.ToolTipText +=
                         string.Format(" ({0})", ShortcutMapper.GetShortcutString(command));
                 }
             }
@@ -1080,7 +1080,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             try
             {
                 ToolStripDropDownItem tsmi = sender as ToolStripDropDownItem;
-                if (tsmi == null || tsmi.DropDownItems == null || tsmi.DropDownItems.Count < 2) 
+                if (tsmi == null || tsmi.DropDownItems == null || tsmi.DropDownItems.Count < 2)
                     return;
 
                 tsbFavorites.DropDown.BackColor = ThemeManager.WndValidColor;
@@ -1157,7 +1157,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             {
                 opmShellList.Path = newPath;
             }
-            
+
         }
 
         private bool ValidatePath(string path)
@@ -1229,7 +1229,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     typeof(WizFESearchStep1Ctl),
                 };
 
-            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_FE", pages, true, initTask, 
+            return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_FE", pages, true, initTask,
                 OPMedia.UI.Properties.Resources.Search.ToIcon());
         }
 
@@ -1249,7 +1249,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                     typeof(WizCdRipperStep2),
                 };
 
-            return WizardHostForm.CreateWizard("TXT_CDRIPPERWIZARD", pages, true, initTask, 
+            return WizardHostForm.CreateWizard("TXT_CDRIPPERWIZARD", pages, true, initTask,
                 OPMedia.Core.Properties.Resources.CDA.ToIcon());
         }
 

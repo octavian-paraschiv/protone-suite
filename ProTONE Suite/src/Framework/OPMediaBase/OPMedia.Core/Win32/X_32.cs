@@ -54,8 +54,8 @@ namespace OPMedia.Core
             int y,
             [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
             int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)] 
-			ref object ppUnk,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)]
+            ref object ppUnk,
             int cPages,
             IntPtr lpPageClsID,
             int lcid,

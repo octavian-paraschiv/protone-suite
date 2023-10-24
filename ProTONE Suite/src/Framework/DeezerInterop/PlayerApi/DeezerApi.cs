@@ -23,7 +23,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
             return string.Format("Error raised by the Deezer Player Runtime: {0}", DzErrorCode);
         }
 
-        private DeezerPlayerException() 
+        private DeezerPlayerException()
             : base()
         {
         }

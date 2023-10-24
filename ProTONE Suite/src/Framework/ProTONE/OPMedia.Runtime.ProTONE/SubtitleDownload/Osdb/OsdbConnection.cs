@@ -25,7 +25,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
                 return _proxy.SearchMoviesOnIMDB(token, query);
             }
         }
-        
+
         public OsdbSearchSubtitleResponse SearchSubtitles(string token, VideoInfo[] videoInfoList)
         {
             lock (SyncRoot)

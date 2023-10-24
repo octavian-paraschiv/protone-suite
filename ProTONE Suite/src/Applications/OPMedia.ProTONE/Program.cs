@@ -109,7 +109,7 @@ namespace OPMedia.ProTONE
                         {
                             // There is no other player instance. 
                             // This instance needs to process the command itself.
-                            
+
                             // Note: when player is launched like this - clear previous playlist first.
                             _commandQueue.Add(BasicCommand.Create(CommandType.ClearPlaylist));
                             _commandQueue.Add(BasicCommand.Create(cmdType, files.ToArray()));
@@ -117,7 +117,7 @@ namespace OPMedia.ProTONE
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ErrorDispatcher.DispatchError(ex, false);
                 }

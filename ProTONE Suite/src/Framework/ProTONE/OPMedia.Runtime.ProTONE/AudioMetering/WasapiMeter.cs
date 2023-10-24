@@ -48,8 +48,8 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
 
         public const int MAX_SPECTROGRAM_BANDS = 64;
         private int _waveformWindowSize = 512;
-        
-        
+
+
         private int _fftWindowSize = 2048;
 
         private ConcurrentQueue<AudioSampleData> _sampleData = new ConcurrentQueue<AudioSampleData>();

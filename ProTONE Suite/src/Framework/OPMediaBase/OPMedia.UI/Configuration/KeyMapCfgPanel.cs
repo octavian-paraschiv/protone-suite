@@ -95,7 +95,7 @@ namespace OPMedia.UI.Configuration
 
                 StringBuilder sb = new StringBuilder();
 
-                foreach(OPMShortcut cmd in shortcuts)
+                foreach (OPMShortcut cmd in shortcuts)
                 {
                     if (ShortcutMapper.IsHiddenShortcut(cmd))
                         continue;
@@ -215,7 +215,7 @@ namespace OPMedia.UI.Configuration
 
         private void OnRestoreDefaults(object sender, EventArgs e)
         {
-            if (MessageDisplay.Query("TXT_CONFIRM_RESTORE", "TXT_RESTOREDEFAULTS", 
+            if (MessageDisplay.Query("TXT_CONFIRM_RESTORE", "TXT_RESTOREDEFAULTS",
                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ShortcutMapper.RestoreDefaults(true);

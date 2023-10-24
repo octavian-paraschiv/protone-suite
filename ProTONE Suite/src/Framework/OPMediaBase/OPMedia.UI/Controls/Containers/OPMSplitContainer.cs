@@ -21,7 +21,7 @@ namespace OPMedia.UI.Controls
             this.RegisterAsEventSink();
             OnThemeUpdated();
         }
-        
+
         [EventSink(EventNames.ThemeUpdated)]
         public void OnThemeUpdated()
         {

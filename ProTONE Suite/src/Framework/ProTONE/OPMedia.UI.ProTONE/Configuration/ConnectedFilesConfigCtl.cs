@@ -20,7 +20,7 @@ namespace OPMedia.UI.Configuration
         public ConnectedFilesConfigCtl()
         {
             InitializeComponent();
-            
+
             lvConnFiles.RegisterEditControl(_txtEditPFT);
             lvConnFiles.RegisterEditControl(_txtEditCFT);
 

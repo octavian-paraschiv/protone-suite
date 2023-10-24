@@ -60,7 +60,7 @@ namespace OPMedia.UI.Themes
 
         bool _inheritAppIcon = true;
         [DefaultValue(true)]
-        public bool InheritAppIcon 
+        public bool InheritAppIcon
         { get { return _inheritAppIcon; } set { _inheritAppIcon = value; } }
 
         Icon _icon = null;
@@ -93,7 +93,7 @@ namespace OPMedia.UI.Themes
         {
             InitializeComponent();
 
-            this.Visible = false; 
+            this.Visible = false;
             base.MinimizeBox = false;
             base.MaximizeBox = false;
 
@@ -228,7 +228,7 @@ namespace OPMedia.UI.Themes
 
         public virtual void OnExecuteShortcut(OPMShortcutEventArgs args) { }
 
-        public virtual void FireHelpRequest() 
+        public virtual void FireHelpRequest()
         {
             HelpTarget.HelpRequest(this.Name);
         }
@@ -394,7 +394,7 @@ namespace OPMedia.UI.Themes
 
         void OnMove(object sender, EventArgs e)
         {
-            if (previousState == FormWindowState.Normal && 
+            if (previousState == FormWindowState.Normal &&
                 WindowState == FormWindowState.Normal)
             {
                 // Only persist position if moving in normal state.

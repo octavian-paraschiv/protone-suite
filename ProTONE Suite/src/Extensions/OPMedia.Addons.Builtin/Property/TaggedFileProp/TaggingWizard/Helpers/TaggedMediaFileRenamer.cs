@@ -50,12 +50,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
                     newName = StringUtils.StripInvalidPathChars(newName);
                     retVal = Path.Combine(fi.DirectoryName, StringUtils.Capitalize(newName, wordCasing) + fi.Extension);
                 }
-                
+
             }
-            
+
             return retVal;
         }
 
-        
+
     }
 }

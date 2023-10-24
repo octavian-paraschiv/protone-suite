@@ -73,8 +73,8 @@ namespace OPMedia.UI.Controls
         System.Windows.Forms.Timer _delayedRenameTimer = null;
 
         private string m_strDirPath = Environment.CurrentDirectory;
-		private string m_strPrevDirPath = "";
-		
+        private string m_strPrevDirPath = "";
+
         private bool ignoreEvents = false;
 
         private object syncRoot = new object();
@@ -313,7 +313,7 @@ namespace OPMedia.UI.Controls
                     _delayedExplore.Start();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -352,7 +352,7 @@ namespace OPMedia.UI.Controls
         /// Default contructor.
         /// </summary>
         public OPMShellListView() : base()
-		{
+        {
             this.SearchPattern = null;
 
             base.SmallImageList = m_ilDirListManager.ImageList;
@@ -378,12 +378,12 @@ namespace OPMedia.UI.Controls
             colAttr.DisplayIndex = i++;
 
             //this.ListViewItemSorter = new Sorter(colName.Index);
-            
+
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             this.DoubleClick += new EventHandler(this.OnDoubleClick);
-            
+
             //this.KeyDown += new KeyEventHandler(this.OnKeyDown);
             this.PreviewKeyDown += new PreviewKeyDownEventHandler(OnPreviewKeyDown);
 
@@ -579,31 +579,31 @@ namespace OPMedia.UI.Controls
         /// </summary>
 		//private void OnKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         void OnPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-		{
+        {
             if (!this.IsInEditMode)
             {
-	            if (e.Modifiers == Keys.None)
-	            {
-				    if (e.KeyCode == Keys.Back && !IsInDriveRoot)
-				    {
-					    this.Path = PathUtils.ParentDir;
-					    //e.Handled = true;
-				    }
-	                else if (e.KeyCode == Keys.Enter)
-	                {
-	                    OnDoubleClick(sender, e);
-	                }
-	                else if (e.KeyCode == Keys.F2)
-	                {
-	                    Rename();
-	                }
-	                //else if (e.KeyCode == Keys.Escape)
-	                //{
-	                //    CancelRename();
-	                //}
+                if (e.Modifiers == Keys.None)
+                {
+                    if (e.KeyCode == Keys.Back && !IsInDriveRoot)
+                    {
+                        this.Path = PathUtils.ParentDir;
+                        //e.Handled = true;
+                    }
+                    else if (e.KeyCode == Keys.Enter)
+                    {
+                        OnDoubleClick(sender, e);
+                    }
+                    else if (e.KeyCode == Keys.F2)
+                    {
+                        Rename();
+                    }
+                    //else if (e.KeyCode == Keys.Escape)
+                    //{
+                    //    CancelRename();
+                    //}
                 }
             }
-		}
+        }
 
         void _delayedSelectionTimer_Tick(object sender, EventArgs e)
         {
@@ -705,7 +705,7 @@ namespace OPMedia.UI.Controls
                 SelectDirectoryEventArgs eventArgs = new SelectDirectoryEventArgs();
                 if (File.Exists(strPath) || Directory.Exists(strPath))
                 {
-                    eventArgs.m_strPath = strPath;                    
+                    eventArgs.m_strPath = strPath;
                 }
 
                 SelectDirectory(this, eventArgs);
@@ -716,7 +716,7 @@ namespace OPMedia.UI.Controls
         /// Occurs when multiple items were selected.
         /// </summary>
 		private void OnSelectMultipleItems()
-		{
+        {
             if (SelectMultipleItems != null)
             {
                 SelectMultipleItemsEventArgs eventArgs = new SelectMultipleItemsEventArgs();
@@ -724,7 +724,7 @@ namespace OPMedia.UI.Controls
 
                 SelectMultipleItems(this, eventArgs);
             }
-		}
+        }
         #endregion
 
         #region Implementation
@@ -805,7 +805,7 @@ namespace OPMedia.UI.Controls
         /// </summary>
         private delegate void ExploreHandler(bool keepSelection);
         private void Explore(bool keepSelection)
-		{
+        {
             if (InvokeRequired)
             {
                 Invoke(new ExploreHandler(Explore), keepSelection);
@@ -884,7 +884,7 @@ namespace OPMedia.UI.Controls
 
                     if (isUncPathRoot && shares != null)
                     {
-                        foreach(Share share in shares)
+                        foreach (Share share in shares)
                         {
                             if (!share.IsFileSystem)
                                 continue;
@@ -984,7 +984,7 @@ namespace OPMedia.UI.Controls
                             item.Focused = true;
 
                             lastVisibleIndex = item.Index;
-                           
+
                             break;
                         }
                     }
@@ -1008,7 +1008,7 @@ namespace OPMedia.UI.Controls
 
             this.Select();
             this.Focus();
-		}
+        }
 
         public void ExploreBack()
         {
@@ -1063,7 +1063,7 @@ namespace OPMedia.UI.Controls
                     Explore(false);
                 }
                 finally
-                { 
+                {
                     ignoreEvents = false;
                 }
             }
@@ -1114,10 +1114,10 @@ namespace OPMedia.UI.Controls
         /// Occurs when the item was double-clicked.
         /// </summary>
 		private void OnDoubleClick(object sender, System.EventArgs e)
-		{
+        {
             if (ignoreEvents ||
                 this.SelectedItems == null ||
-                this.SelectedItems.Count < 1) 
+                this.SelectedItems.Count < 1)
                 return;
 
             if (LaunchMultipleItems == null || !LaunchMultipleItems(sender, e))
@@ -1136,7 +1136,7 @@ namespace OPMedia.UI.Controls
                     }
                 }
             }
-		}
+        }
 
         /// <summary>
         /// Converts the given path (that can contain invalid parts)
@@ -1242,7 +1242,7 @@ namespace OPMedia.UI.Controls
                     List<string> data = new List<string>();
 
                     data.Add(PathUtils.ParentDir);
-                    
+
                     data.Add("[ DIR ]");
 
                     if (ShowLastAccess)
@@ -1318,7 +1318,7 @@ namespace OPMedia.UI.Controls
             item.UseItemStyleForSubItems = false;
 
             this.Items.Add(item);
-            
+
         }
 
         private string BuildDisplayName(string fsi)
@@ -1412,21 +1412,21 @@ namespace OPMedia.UI.Controls
             //Application.DoEvents();
         }
     }
-    
+
     /// <summary>
     /// Class used to compare list entries
     /// </summary>
-	public class Sorter : IComparer
-	{
+    public class Sorter : IComparer
+    {
         int _col = 0;
 
         public Sorter(int column)
-		{
+        {
             _col = column;
-		}
+        }
 
-		public int Compare(object x, object y)
-		{
+        public int Compare(object x, object y)
+        {
             try
             {
                 ListViewItem row1 = x as ListViewItem;
@@ -1467,39 +1467,39 @@ namespace OPMedia.UI.Controls
                 return 0;
             }
 
-		}
-	}
+        }
+    }
 
     #region Event args classes
-	public class DoubleClickServerEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
-	
+    public class DoubleClickServerEventArgs : EventArgs
+    {
+        public string m_strPath = "";
+    }
+
     public class DoubleClickDirectoryEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
-	
+    {
+        public string m_strPath = "";
+    }
+
     public class DoubleClickFileEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
-	
+    {
+        public string m_strPath = "";
+    }
+
     public class SelectServerEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
-	
+    {
+        public string m_strPath = "";
+    }
+
     public class SelectDirectoryEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
-	
+    {
+        public string m_strPath = "";
+    }
+
     public class SelectFileEventArgs : EventArgs
-	{
-		public string m_strPath = "";
-	}
+    {
+        public string m_strPath = "";
+    }
 
     public class SelectMultipleItemsEventArgs : EventArgs
     {

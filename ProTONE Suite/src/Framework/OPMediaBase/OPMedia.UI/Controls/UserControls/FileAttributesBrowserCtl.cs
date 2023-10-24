@@ -38,7 +38,7 @@ namespace OPMedia.UI.Controls
 
         private void OnAttrChanged(object sender, EventArgs e)
         {
-            if (chkA.Checked) 
+            if (chkA.Checked)
                 Attributes |= FileAttributes.Archive;
             else
                 Attributes ^= (Attributes & FileAttributes.Archive);

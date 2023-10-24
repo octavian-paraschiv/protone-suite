@@ -57,7 +57,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get { return _IsTrackInfoEditable(); }
         }
-        
+
         public bool SupportsBookmarkInfo
         {
             get { return _SupportsBookmarkInfo(); }
@@ -102,13 +102,13 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             {
                 string retVal = string.Empty;
 
-                 string artist =string.Empty;
-                 string album = string.Empty;
-                 string title = string.Empty;
-                 string genre = string.Empty;
-                 string comments = string.Empty;
-                 string track = string.Empty;
-                 string year = string.Empty;
+                string artist = string.Empty;
+                string album = string.Empty;
+                string title = string.Empty;
+                string genre = string.Empty;
+                string comments = string.Empty;
+                string track = string.Empty;
+                string year = string.Empty;
 
                 if (ProTONEConfig.UseMetadata)
                 {
@@ -136,13 +136,13 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                     // Second - replace formatting fields with data from file name where available
                     if (fileTokens != null && fileTokens.Count > 0)
                     {
-                        artist =   GetFieldValue(artist,   GetTokenValue(fileTokens, "<A>"));
-                        album =    GetFieldValue(album,    GetTokenValue(fileTokens, "<B>"));
-                        title =    GetFieldValue(title,    GetTokenValue(fileTokens, "<T>"));
-                        genre =    GetFieldValue(genre,    GetTokenValue(fileTokens, "<G>"));
+                        artist = GetFieldValue(artist, GetTokenValue(fileTokens, "<A>"));
+                        album = GetFieldValue(album, GetTokenValue(fileTokens, "<B>"));
+                        title = GetFieldValue(title, GetTokenValue(fileTokens, "<T>"));
+                        genre = GetFieldValue(genre, GetTokenValue(fileTokens, "<G>"));
                         comments = GetFieldValue(comments, GetTokenValue(fileTokens, "<C>"));
-                        track =    GetFieldValue(track,    GetTokenValue(fileTokens, "<#>"));
-                        year =     GetFieldValue(year,     GetTokenValue(fileTokens, "<Y>"));
+                        track = GetFieldValue(track, GetTokenValue(fileTokens, "<#>"));
+                        year = GetFieldValue(year, GetTokenValue(fileTokens, "<Y>"));
                     }
                 }
 
@@ -221,7 +221,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 {
                     retVal = mi.Details;
                 }
-                
+
                 return retVal;
             }
         }
@@ -230,7 +230,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         {
             get
             {
-                Dictionary<string, string> info = new Dictionary<string,string>();
+                Dictionary<string, string> info = new Dictionary<string, string>();
 
                 const int maxLen = 90;
 
@@ -336,7 +336,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 if (DeezerJsonFilter.IsNullOrEmpty(filter) == false)
                 {
-                    start_search:
+                start_search:
                     int i = 0;
                     var evt = new ManualResetEvent(false);
 
@@ -443,7 +443,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                             new Dictionary<PlaylistSubItem, List<PlaylistSubItem>>();
 
             submenu.Add(new AudioCdSubItem(this, Translator.Translate("TXT_OPT_RELOAD_CDINFO")), null);
-            
+
             return submenu;
         }
 
@@ -452,7 +452,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             Dictionary<PlaylistSubItem, List<PlaylistSubItem>> submenu =
                             new Dictionary<PlaylistSubItem, List<PlaylistSubItem>>();
 
-            PlaylistSubItem title = new BookmarkSubItem(this, 
+            PlaylistSubItem title = new BookmarkSubItem(this,
                 Translator.Translate("TXT_BOOKMARKS"));
 
             List<PlaylistSubItem> bookmarks = new List<PlaylistSubItem>();

@@ -14,7 +14,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         public const string FFDSHOWVFW_NAME_L = "ffdshow VFW decoder helper";
 
         public const int MSG_TRAYICON = 32777;
-        
+
         /// <summary>
         /// Parameter Id of FFDShow to set/get
         /// </summary>
@@ -1387,76 +1387,76 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
     /// </summary>
     public enum FFD_WPRM : int
     {
-      SET_PARAM_NAME = 0,
-      SET_PARAM_VALUE_INT = 1,
-      GET_PARAM_NAME = 2,
-      GET_PARAM_VALUE_INT = 3,
-      PAUSE_VIDEO = 4,
-      RESUME_VIDEO = 5,
-      GET_STATE = 6,
-      GET_DURATION = 7,
-      GET_CUR_TIME = 8,
-      SET_PARAM_VALUE_STR = 9,
-      //GET_PARAM_VALUE_STR = 13,
-      SET_CURTIME = 13,
-      SET_ADDTOROT = 14,
-      FASTFORWARD = 15,
-      FASTREWIND = 16,
-      GETFASTFORWARDSPEED = 17,
-      CAPTUREIMAGE = 18,
-      SET_OSD_POSX = 19,
-      SET_OSD_POSY = 20,
-      //SET_STREAM = 21,
-      //GET_CURRENT_AUDIO_STREAM = 22,
-      //GET_CURRENT_SUBTITLE_STREAM = 23,
-      GET_FRAMERATE = 24,
-      SET_AUDIO_STREAM = 25,
-      SET_SUBTITLE_STREAM = 26,
-      SET_FFRW_NO_OSD = 27,
+        SET_PARAM_NAME = 0,
+        SET_PARAM_VALUE_INT = 1,
+        GET_PARAM_NAME = 2,
+        GET_PARAM_VALUE_INT = 3,
+        PAUSE_VIDEO = 4,
+        RESUME_VIDEO = 5,
+        GET_STATE = 6,
+        GET_DURATION = 7,
+        GET_CUR_TIME = 8,
+        SET_PARAM_VALUE_STR = 9,
+        //GET_PARAM_VALUE_STR = 13,
+        SET_CURTIME = 13,
+        SET_ADDTOROT = 14,
+        FASTFORWARD = 15,
+        FASTREWIND = 16,
+        GETFASTFORWARDSPEED = 17,
+        CAPTUREIMAGE = 18,
+        SET_OSD_POSX = 19,
+        SET_OSD_POSY = 20,
+        //SET_STREAM = 21,
+        //GET_CURRENT_AUDIO_STREAM = 22,
+        //GET_CURRENT_SUBTITLE_STREAM = 23,
+        GET_FRAMERATE = 24,
+        SET_AUDIO_STREAM = 25,
+        SET_SUBTITLE_STREAM = 26,
+        SET_FFRW_NO_OSD = 27,
 
-      SET_WPRM_SET_OSDDURATION = 28,
-      SET_WPRM_SET_OSD_CLEAN = 29,
+        SET_WPRM_SET_OSDDURATION = 28,
+        SET_WPRM_SET_OSD_CLEAN = 29,
     }
 
     /// <summary>
     /// List of commands understood by FFDShow remote API.
     /// These are commands that require strings transmissions
     /// </summary>
-    #pragma warning disable 1591
+#pragma warning disable 1591
     public enum FFD_MSG
     {
-      GET_PARAMSTR = 19,
-      GET_CURRENT_SUBTITLES = 20,
-      GET_PRESETLIST = 21,
-      GET_SOURCEFILE = 22,
-      GET_SUBTITLEFILESLIST = 23,
-      GET_CHAPTERSLIST = 25,
-      GET_AUDIOSTREAMSLIST = 300,
-      GET_SUBTITLESTREAMSLIST = 301
+        GET_PARAMSTR = 19,
+        GET_CURRENT_SUBTITLES = 20,
+        GET_PRESETLIST = 21,
+        GET_SOURCEFILE = 22,
+        GET_SUBTITLEFILESLIST = 23,
+        GET_CHAPTERSLIST = 25,
+        GET_AUDIOSTREAMSLIST = 300,
+        GET_SUBTITLESTREAMSLIST = 301
     }
-    #pragma warning restore 1591
+#pragma warning restore 1591
 
     /// <summary>
     /// Playing state
     /// </summary>
     public enum PlayState : int
     {
-      /// <summary>
-      /// Stop state
-      /// </summary>
-      StopState = 0,
-      /// <summary>
-      /// Pause state
-      /// </summary>
-      PauseState = 1,
-      /// <summary>
-      /// Play state
-      /// </summary>
-      PlayState = 2,
-      /// <summary>
-      /// Fast forwarding or rewinding state
-      /// </summary>
-      FastForwardRewind = 3
+        /// <summary>
+        /// Stop state
+        /// </summary>
+        StopState = 0,
+        /// <summary>
+        /// Pause state
+        /// </summary>
+        PauseState = 1,
+        /// <summary>
+        /// Play state
+        /// </summary>
+        PlayState = 2,
+        /// <summary>
+        /// Fast forwarding or rewinding state
+        /// </summary>
+        FastForwardRewind = 3
     };
 
     /// <summary>
@@ -1464,17 +1464,17 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
     /// </summary>
     public enum ROTRegistration : int
     {
-      /// <summary>
-      /// Register the DirectShow graph in the running object table (graph can be read and modified after that)
-      /// Don't forget to unregister it.
-      /// </summary>
-      RegisterToRot = 1,
-      /// <summary>
-      /// Unregister the DirectShow graph from the running object table
-      /// </summary>
-      UnregisterToRot = 0
+        /// <summary>
+        /// Register the DirectShow graph in the running object table (graph can be read and modified after that)
+        /// Don't forget to unregister it.
+        /// </summary>
+        RegisterToRot = 1,
+        /// <summary>
+        /// Unregister the DirectShow graph from the running object table
+        /// </summary>
+        UnregisterToRot = 0
     };
 
-    
+
     #endregion Constants
 }

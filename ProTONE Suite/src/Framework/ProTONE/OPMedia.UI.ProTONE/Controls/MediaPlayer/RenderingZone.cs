@@ -28,7 +28,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public RenderingZone()
         {
         }
-        
+
         #endregion
 
         #region Event Handlers

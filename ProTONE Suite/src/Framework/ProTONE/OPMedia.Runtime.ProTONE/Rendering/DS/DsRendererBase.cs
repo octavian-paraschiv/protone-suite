@@ -91,7 +91,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected abstract void HandleGraphEvent(EventCode code, int p1, int p2);
 
-        
+
 
         protected override void DoStartRenderer()
         {
@@ -475,7 +475,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         public static IMediaControl BuildMediaControl()
         {
-            Guid filterGraphGuid =  ProTONEConfig.FilterGraphGuid;
+            Guid filterGraphGuid = ProTONEConfig.FilterGraphGuid;
 
             Type mediaControlType = Type.GetTypeFromCLSID(filterGraphGuid, true);
 

@@ -38,26 +38,26 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 
         static Transcoder()
         {
-            _supportedTranscodings.Add(new Transcoding 
-                {
-                    // MP3 to MP3 is supported
-                    InputFormat = AudioMediaFormatType.MP3,
-                    OutputFormat = AudioMediaFormatType.MP3
-                });
+            _supportedTranscodings.Add(new Transcoding
+            {
+                // MP3 to MP3 is supported
+                InputFormat = AudioMediaFormatType.MP3,
+                OutputFormat = AudioMediaFormatType.MP3
+            });
 
             _supportedTranscodings.Add(new Transcoding
-                {
-                    // MP3 to WAV is supported
-                    InputFormat = AudioMediaFormatType.MP3,
-                    OutputFormat = AudioMediaFormatType.WAV
-                });
+            {
+                // MP3 to WAV is supported
+                InputFormat = AudioMediaFormatType.MP3,
+                OutputFormat = AudioMediaFormatType.WAV
+            });
 
             _supportedTranscodings.Add(new Transcoding
-                {
-                    // WAV to MP3 is supported
-                    InputFormat = AudioMediaFormatType.WAV,
-                    OutputFormat = AudioMediaFormatType.MP3
-                });
+            {
+                // WAV to MP3 is supported
+                InputFormat = AudioMediaFormatType.WAV,
+                OutputFormat = AudioMediaFormatType.MP3
+            });
         }
 
         public Transcoder()
@@ -154,7 +154,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
-                                
+
                                 // Resample is not supported at this time.
                                 // Specify the same settings as the input WAV file, otherwise we'll be failing.
                                 grabber.Options.WaveFormat = wfex;
@@ -162,7 +162,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 grabber.EncodeBuffer(buff,
                                     Path.ChangeExtension(inputFile, "MP3"),
                                     false, null);
-                                
+
                                 return;
                             }
                     }
@@ -192,7 +192,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
-                                ID3FileInfoSlim ifiSlim = 
+                                ID3FileInfoSlim ifiSlim =
                                     new ID3FileInfoSlim(MediaFileInfo.FromPath(inputFile, false));
 
                                 grabber.EncodeBuffer(buff,
@@ -221,7 +221,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

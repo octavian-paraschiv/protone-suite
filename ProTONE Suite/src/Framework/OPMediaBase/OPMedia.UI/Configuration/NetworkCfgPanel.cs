@@ -41,7 +41,7 @@ namespace OPMedia.UI.Configuration
         protected override void SaveInternal()
         {
             AppConfig.ProxySettings = ctlProxy.ProxySettings;
-            
+
         }
 
         [EventSink(EventNames.PerformTranslation)]
@@ -49,6 +49,6 @@ namespace OPMedia.UI.Configuration
         {
             ctlProxy.ProxySettings.PerformTranslation();
         }
-        
+
     }
 }

@@ -33,7 +33,7 @@ namespace OPMedia.Runtime.Addons
 
         public void ReloadNavigation(object target)
         {
-            OnNavigationAction(null, 
+            OnNavigationAction(null,
                 new NavigationActionEventArgs(null, NavActionType.ActionReloadNavigation, null, target));
         }
 
@@ -121,7 +121,7 @@ namespace OPMedia.Runtime.Addons
             ExitEditPathMode(false);
         }
 
-        protected override void  OnThemeUpdatedInternal()
+        protected override void OnThemeUpdatedInternal()
         {
             base.OnThemeUpdatedInternal();
             SetColors();
@@ -135,7 +135,7 @@ namespace OPMedia.Runtime.Addons
             statusBar.BackColor = ThemeManager.BackColor;
             lblStatusBarSep.OverrideBackColor = ThemeManager.SeparatorColor;
         }
-        
+
         [EventSink(EventNames.SetMainStatusBar)]
         public void OnSetMainStatusBar(string text, Image img)
         {
@@ -214,7 +214,7 @@ namespace OPMedia.Runtime.Addons
             {
                 if (AddonAppSettingsForm.Show("TXT_S_ADDONSETTINGS", string.Empty) == DialogResult.Cancel)
                 {
-                    EventDispatch.DispatchEvent(EventNames.ShowMessageBox, 
+                    EventDispatch.DispatchEvent(EventNames.ShowMessageBox,
                         Translator.Translate("TXT_NO_NAV_ADDONS"),
                         Translator.Translate("TXT_APP_NAME"),
                         MessageBoxIcon.Error);
@@ -271,7 +271,7 @@ namespace OPMedia.Runtime.Addons
         {
             AddonAppConfig.VSplitterDistance = this.VSplitterDistance;
             AddonAppConfig.HSplitterDistance = this.HSplitterDistance;
-            
+
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace OPMedia.Runtime.Addons
                     foreach (OPMToolStripMenuItem button in msMain.Items)
                     {
                         NavigationAddon addon = button.Tag as NavigationAddon;
-                        if (addon != null && 
+                        if (addon != null &&
                             addon.AddonPanel != null &&
                             addon.AddonPanel.HandledFileTypes != null &&
                             addon.AddonPanel.HandledFileTypes.Count > 0 &&
@@ -356,14 +356,14 @@ namespace OPMedia.Runtime.Addons
                     return true;
                 }
             }
-            
+
             if (previousAddonButton != null)
             {
                 AddonButtonClick(previousAddonButton, null);
             }
             else if (msMain.Items.Count >= 1)
             {
-                foreach(OPMToolStripMenuItem button in msMain.Items)
+                foreach (OPMToolStripMenuItem button in msMain.Items)
                 {
                     if (button is OPMAddonMenuItem && button.Tag is NavigationAddon)
                     {
@@ -518,7 +518,7 @@ namespace OPMedia.Runtime.Addons
 
                 lblNoPreview.Text = Translator.Translate("TXT_THEREARENOITEMS");
 
-                prepareAutoPreview = 
+                prepareAutoPreview =
                     (args.ActionType == NavActionType.ActionPrepareAutoPreview &&
                      args.ActionType != NavActionType.ActionCancelAutoPreview);
 
@@ -630,7 +630,7 @@ namespace OPMedia.Runtime.Addons
                         if (previewCtl != null)
                         {
                             previewCtl.EndPreview();
-                            previewCtl.NavigationAction -= 
+                            previewCtl.NavigationAction -=
                                 new BaseAddonCtl.NavigationActionEventHandler(OnNavigationAction);
                         }
 

@@ -96,7 +96,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             {
                 module = Kernel32.LoadLibrary(InstallLocation);
             }
-            
+
             if (module != IntPtr.Zero)
             {
                 IntPtr proc = Kernel32.GetProcAddress(module, fncName);

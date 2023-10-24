@@ -27,7 +27,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
         /// <summary>
         /// Loads the preview add-ons
         /// </summary>
-        protected override void  Load()
+        protected override void Load()
         {
             // Initialize each of preview addons. Careful not to break the loop
             // on eventual exceptions. It's important to try loading as much as

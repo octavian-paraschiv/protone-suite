@@ -135,9 +135,9 @@ namespace OPMedia.UI.Controls
             }
 
             text += "}";
-                
+
             this.Rtf = text;
-            
+
             this.ForeColor = cf;
         }
 

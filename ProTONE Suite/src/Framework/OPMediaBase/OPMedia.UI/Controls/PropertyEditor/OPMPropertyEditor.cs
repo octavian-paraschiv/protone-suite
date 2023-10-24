@@ -141,10 +141,10 @@ namespace OPMedia.UI.Controls.PropertyEditor
 
             else if (pi.PropertyType.IsIntegerType())
                 chooser = new IntegerChooser(pi.PropertyType);
-            
+
             else if (pi.PropertyType == typeof(bool))
                 chooser = new BooleanChooser();
-            
+
             else
                 chooser = new StringChooser();
 

@@ -9,8 +9,8 @@ namespace OPMedia.ShellSupport
 {
     public enum CommandType
     {
-       PlayFiles,
-       EnqueueFiles
+        PlayFiles,
+        EnqueueFiles
     }
 
 

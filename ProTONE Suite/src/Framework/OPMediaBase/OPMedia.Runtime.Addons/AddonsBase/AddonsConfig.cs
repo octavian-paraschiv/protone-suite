@@ -27,7 +27,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             {
                 return _navAddons;
             }
-            
+
         }
 
         public static string[] PropertyAddons
@@ -99,7 +99,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             string[] names = null;
             string namesRaw = null;
 
-            if (_diskAddonsConfig == null || 
+            if (_diskAddonsConfig == null ||
                 _diskAddonsConfig.ContainsKey(keyBase) == false)
             {
                 namesRaw = PersistenceProxy.ReadObject(true, keyBase, string.Empty, false);
@@ -192,7 +192,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     {
                         UninstallAddonLibrary(name);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Logger.LogException(ex);
                     }
@@ -236,7 +236,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                                 }
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Logger.LogException(ex);
                         }
@@ -244,7 +244,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
                     foreach (string file in filesToCopy)
                     {
-                        CopyToRunLocation(file.ToLowerInvariant(), 
+                        CopyToRunLocation(file.ToLowerInvariant(),
                             Path.GetDirectoryName(fileName.ToLowerInvariant()));
                     }
                 }
@@ -258,7 +258,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
         private static void CopyToRunLocation(string filePath, string baseFilePath)
         {
             string diffPath = filePath.Replace(baseFilePath, string.Empty);
-            string destFileName = string.Format("{0}{1}{2}", 
+            string destFileName = string.Format("{0}{1}{2}",
                 Application.StartupPath, PathUtils.DirectorySeparator, diffPath).Replace(@"\\", @"\");
 
             string destFolder = Path.GetDirectoryName(destFileName);

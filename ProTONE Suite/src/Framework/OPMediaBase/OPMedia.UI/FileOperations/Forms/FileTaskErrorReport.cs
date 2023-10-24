@@ -34,7 +34,7 @@ namespace OPMedia.UI.FileTasks
             tvReports.ExpandAll();
 
             int treeHeight = 2 * errorMap.Count * tvReports.ItemHeight + SystemInformation.HorizontalScrollBarHeight;
-            
+
 
             this.Height = tvReports.Top + treeHeight + 30;
         }

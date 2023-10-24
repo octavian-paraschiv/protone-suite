@@ -31,48 +31,48 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
     /// Summary description for FreedbHelper.
     /// </summary>
     public class FreedbHelper : IDisposable
-	{
-		private string m_UserName;
-		private string m_Hostname;
-		private string m_ClientName;
-		private string m_Version;
+    {
+        private string m_UserName;
+        private string m_Hostname;
+        private string m_ClientName;
+        private string m_Version;
 
         private TcpClient _tcpClient = new TcpClient();
         NetworkStream _ns = null;
         StreamWriter _writer = null;
         StreamReader _reader = null;
 
-		#region Constants for Freedb commands
-		public class Commands
-		{
-			public const string CMD_HELLO	= "cddb hello";
-			public const string CMD_READ	= "cddb read";
-			public const string CMD_QUERY	= "cddb query";
-			public const string CMD_TERMINATOR	= "."; 
-		}
-		#endregion
+        #region Constants for Freedb commands
+        public class Commands
+        {
+            public const string CMD_HELLO = "cddb hello";
+            public const string CMD_READ = "cddb read";
+            public const string CMD_QUERY = "cddb query";
+            public const string CMD_TERMINATOR = ".";
+        }
+        #endregion
 
-		#region Constants for Freedb ResponseCodes
-		public class ResponseCodes
-		{
+        #region Constants for Freedb ResponseCodes
+        public class ResponseCodes
+        {
             //query codes
             public const string CODE_200 = "200"; // Exact match 
             public const string CODE_201 = "201"; // Partial match 
             public const string CODE_202 = "202"; // No match 
             public const string CODE_210 = "210"; // Okay // or in a query multiple exact matches
-			public const string CODE_211 = "211"; // InExact matches found - list follows
+            public const string CODE_211 = "211"; // InExact matches found - list follows
 
             public const string CODE_401 = "401"; // sites: no site information available
             public const string CODE_402 = "402"; // Server Error
             public const string CODE_403 = "403"; // Database entry is corrupt
-			public const string CODE_409 = "409"; // No Handshake
+            public const string CODE_409 = "409"; // No Handshake
 
             public const string CODE_500 = "500"; // Invalid command, invalid parameters, etc.
 
-			// our own code
-			public const string CODE_INVALID = "-1"; // Invalid code 
-		}
-		#endregion
+            // our own code
+            public const string CODE_INVALID = "-1"; // Invalid code 
+        }
+        #endregion
 
         static Dictionary<string, string> _codeMap = new Dictionary<string, string>();
 
@@ -122,15 +122,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 
             return string.Format("{0} [{1}]", code, detail);
         }
-		
-		/// <summary>
-		/// Read Entry from the database. 
-		/// </summary>
-		/// <param name="qr">A QueryResult object that is created by performing a query</param>
-		/// <param name="cdEntry">out parameter - CDEntry object</param>
-		/// <returns></returns>
-		public string Read(QueryResult qr, out CDEntry cdEntry)
-		{
+
+        /// <summary>
+        /// Read Entry from the database. 
+        /// </summary>
+        /// <param name="qr">A QueryResult object that is created by performing a query</param>
+        /// <param name="cdEntry">out parameter - CDEntry object</param>
+        /// <returns></returns>
+        public string Read(QueryResult qr, out CDEntry cdEntry)
+        {
             StringBuilder builder = new StringBuilder(FreedbHelper.Commands.CMD_READ);
             builder.Append(" ");
             builder.Append(qr.Category);
@@ -152,7 +152,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
                 }
 
                 string code = GetReplyCode(reply, request);
-                
+
                 switch (code)
                 {
                     case ResponseCodes.CODE_210:
@@ -173,28 +173,28 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
                 Exception newex = new Exception(msg, ex);
                 throw newex;
             }
-		}
+        }
 
 
-		/// <summary>
-		/// Query the freedb server to see if there is information on this cd
-		/// </summary>
-		/// <param name="querystring"></param>
-		/// <param name="queryResult"></param>
-		/// <param name="queryResultsColl"></param>
-		/// <returns></returns>
-		public string Query(string querystring, out QueryResult queryResult, out List<QueryResult> queryResultsColl)
-		{
+        /// <summary>
+        /// Query the freedb server to see if there is information on this cd
+        /// </summary>
+        /// <param name="querystring"></param>
+        /// <param name="queryResult"></param>
+        /// <param name="queryResultsColl"></param>
+        /// <returns></returns>
+        public string Query(string querystring, out QueryResult queryResult, out List<QueryResult> queryResultsColl)
+        {
             StringBuilder builder = new StringBuilder(FreedbHelper.Commands.CMD_QUERY);
             builder.Append(" ");
             builder.Append(querystring);
 
             queryResult = null;
             queryResultsColl = null;
-           
-			//make call
-			try
-			{
+
+            //make call
+            try
+            {
                 string request = builder.ToString();
                 List<string> reply = SendRequest(request);
 
@@ -231,14 +231,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
                 }
 
                 return code;
-			}
-			catch (Exception ex)
-			{
-				string msg = "Unable to perform cddb query.";
-				Exception newex = new Exception(msg,ex);
-				throw newex ;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                string msg = "Unable to perform cddb query.";
+                Exception newex = new Exception(msg, ex);
+                throw newex;
+            }
+        }
 
         /// <summary>
         /// Build the hello part of the command 
@@ -310,7 +310,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             bool expectMultiLineReply = false;
 
             List<string> replyLines = new List<string>();
-            while(true)
+            while (true)
             {
                 try
                 {
@@ -342,7 +342,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             return replyLines;
         }
 
-       
+
 
         private string GetReplyCode(List<string> reply, string request)
         {

@@ -53,7 +53,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             ilImages.Images.Clear();
 
             ilImages.Images.Add(ImageProvider.GetIconOfFileType("ctx"));
-            
+
             LoadShell32Image(Shell32Icon.DriveUnknown);
             LoadShell32Image(Shell32Icon.DriveNoRoot);
             LoadShell32Image(Shell32Icon.DriveRemovable);
@@ -78,18 +78,18 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         private void OnClearSearchPatternHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchPatternsMC = string.Empty;
-            
+
             PopulateSearchPattern();
         }
 
         private void OnClearSearchValueHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchTextsMC = string.Empty;
-            
+
             PopulateSearchText();
         }
 
-        
+
 
         protected override void OnPageEnter_Initializing()
         {
@@ -148,7 +148,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         {
             BuiltinAddonConfig.SearchPatternsMC = SaveSetting(BuiltinAddonConfig.SearchPatternsMC, cmbSearchPattern.Text);
             BuiltinAddonConfig.SearchTextsMC = SaveSetting(BuiltinAddonConfig.SearchTextsMC, cmbSearchText.Text);
-            
+
         }
 
         private string SaveSetting(string initialSetting, string settingToAdd)

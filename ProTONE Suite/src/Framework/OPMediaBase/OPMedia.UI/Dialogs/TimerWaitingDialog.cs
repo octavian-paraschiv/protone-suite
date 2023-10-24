@@ -86,7 +86,7 @@ namespace OPMedia.UI.Dialogs
                 lblTimer.Text = TimeSpan.FromSeconds((int)remaining).ToString();
             }
 
-           
+
             int x = (SystemInformation.WorkingArea.Width - Width) / 2;
             int y = (SystemInformation.WorkingArea.Height - Height) / 2;
 

@@ -23,10 +23,10 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             lvFiles.MultiSelect = true;
             lvFiles.SmallImageList = _ilm.ImageList;
 
-            
+
         }
 
-        protected override void  OnPageLeave_MovingNext()
+        protected override void OnPageLeave_MovingNext()
         {
             (BkgTask as Task).Files = new List<string>();
             foreach (ListViewItem item in lvFiles.Items)
@@ -129,7 +129,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
                         AddFile(file);
                     }
                 }
-                
+
                 ProTONEConfig.LastOpenedFolder = dlg.SelectedPath;
             }
 

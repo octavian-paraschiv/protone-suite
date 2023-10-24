@@ -6,7 +6,7 @@ namespace OPMedia.MediaLibrary
 {
     public class MediaLibraryForm : AddonHostForm
     {
-        public MediaLibraryForm() 
+        public MediaLibraryForm()
             : base(Program.LaunchPath)
         {
         }

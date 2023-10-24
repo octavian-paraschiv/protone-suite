@@ -140,15 +140,15 @@ namespace OPMedia.UI.Controls
             // Suppress WM_LBUTTONDBLCLK
             if (base.CheckBoxes)
             {
-                if (m.Msg == (int)Messages.WM_LBUTTONDBLCLK) 
-                { 
+                if (m.Msg == (int)Messages.WM_LBUTTONDBLCLK)
+                {
                     m.Result = IntPtr.Zero;
                     return;
                 }
             }
 
             base.WndProc(ref m);
-        }   
+        }
     }
 
 

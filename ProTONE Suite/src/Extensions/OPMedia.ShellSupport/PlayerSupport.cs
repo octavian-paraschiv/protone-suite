@@ -82,7 +82,7 @@ namespace OPMedia.ShellSupport
                     Thread.Sleep(2000);
                     playerRunning = IsPlayerRunning();
                 }
-                catch 
+                catch
                 {
                     playerRunning = false;
                 }

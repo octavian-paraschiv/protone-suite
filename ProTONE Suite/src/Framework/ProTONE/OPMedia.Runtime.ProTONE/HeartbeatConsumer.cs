@@ -70,7 +70,7 @@ namespace OPMedia.Runtime.ProTONE
             }
         }
 
-        protected abstract bool InitTask(); 
+        protected abstract bool InitTask();
         protected abstract void CleanupTask();
         protected abstract void ExecuteTask();
     }

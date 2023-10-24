@@ -137,16 +137,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
 
         public override HRESULT SetMediaType(AMMediaType pmt)
         {
-            if (pmt.majorType != m_mt.majorType) 
+            if (pmt.majorType != m_mt.majorType)
                 return VFW_E_TYPE_NOT_ACCEPTED;
-            
-            if (pmt.formatPtr == IntPtr.Zero) 
+
+            if (pmt.formatPtr == IntPtr.Zero)
                 return VFW_E_INVALIDMEDIATYPE;
-            
+
             if (pmt.subType != m_mt.subType)
                 return VFW_E_TYPE_NOT_ACCEPTED;
-            
-            if (pmt.formatType != m_mt.formatType) 
+
+            if (pmt.formatType != m_mt.formatType)
                 return VFW_E_TYPE_NOT_ACCEPTED;
 
             return NOERROR;
@@ -175,8 +175,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters
             _data.Buffer = new byte[m_lSampleSize * 2];
             uint size = (uint)_data.Buffer.Length;
 
-            int bytesRead = cdrom.ReadTrack(track, _data.Buffer, ref size, (uint)(m_rtMediaPosition / UNITS), 
-                1, 
+            int bytesRead = cdrom.ReadTrack(track, _data.Buffer, ref size, (uint)(m_rtMediaPosition / UNITS),
+                1,
                 null);
 
             if (size > 0)

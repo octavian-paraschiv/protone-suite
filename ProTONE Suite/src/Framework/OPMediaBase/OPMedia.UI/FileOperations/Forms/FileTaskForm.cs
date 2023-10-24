@@ -99,7 +99,7 @@ namespace OPMedia.UI.FileTasks
             pbOperation.Visible = false;
 
             Application.DoEvents();
-            
+
             _task.RunTask(DestFolder);
         }
 
@@ -110,7 +110,7 @@ namespace OPMedia.UI.FileTasks
                 Application.DoEvents();
             }
 
-            MainThread.Post(delegate(object x)
+            MainThread.Post(delegate (object x)
             {
                 switch (eventType)
                 {

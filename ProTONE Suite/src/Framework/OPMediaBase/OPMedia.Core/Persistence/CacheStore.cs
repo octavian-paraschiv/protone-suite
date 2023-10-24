@@ -15,7 +15,7 @@ namespace OPMedia.Core.Persistence
         object _accessLock = new object();
 
         public object _value = null;
-        public object Value 
+        public object Value
         {
             get
             {

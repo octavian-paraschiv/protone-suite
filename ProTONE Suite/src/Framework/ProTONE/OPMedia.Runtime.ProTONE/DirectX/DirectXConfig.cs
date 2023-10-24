@@ -19,7 +19,7 @@ namespace OPMedia.Runtime.ProTONE.DirectX
         static DirectXConfig()
         {
             _dxVersionMap.Add(Dx1Version, "1.0");
-            
+
             _dxVersionMap.Add(new Version("4.03.00.1096"), "2.0");
             _dxVersionMap.Add(new Version("4.04.00.0068"), "3.0");
             _dxVersionMap.Add(new Version("4.04.00.0069"), "3.0a");
@@ -55,7 +55,7 @@ namespace OPMedia.Runtime.ProTONE.DirectX
             _dxVersionMap.Add(new Version("6.03.9600.16384"), "11.2");
 
             _dxVersionMap.Add(new Version("10.00.10240.16384"), "12.0");
-            _dxVersionMap.Add(new Version("10.00.16299.15"),    "12.0.1");
+            _dxVersionMap.Add(new Version("10.00.16299.15"), "12.0.1");
 
             _dxVersionMap.Add(new Version(int.MaxValue, int.MaxValue), "????");
         }

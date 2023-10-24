@@ -41,7 +41,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             return this.Options.ToString();
         }
 
-        public Mp3EncoderSettings() 
+        public Mp3EncoderSettings()
             : base(AudioMediaFormatType.MP3)
         {
             this.CopyInputFileMetadata = false;

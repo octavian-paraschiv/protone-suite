@@ -14,8 +14,8 @@ namespace OPMedia.UI.Dialogs
         private FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
         public string FavoriteFoldersHiveName { get; set; }
 
-        public bool ShowOKButton 
-        { 
+        public bool ShowOKButton
+        {
             get { return btnOK.Visible; }
             set { btnOK.Visible = value; }
         }
@@ -47,7 +47,7 @@ namespace OPMedia.UI.Dialogs
 
         void lvFavorites_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = (lvFavorites.SelectedItems != null && lvFavorites.SelectedItems.Count > 0) ;
+            btnDelete.Enabled = (lvFavorites.SelectedItems != null && lvFavorites.SelectedItems.Count > 0);
         }
 
         void FavoriteFoldersControl_Load(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace OPMedia.UI.Dialogs
 
         protected override void OnThemeUpdatedInternal()
         {
-            
+
         }
     }
 }

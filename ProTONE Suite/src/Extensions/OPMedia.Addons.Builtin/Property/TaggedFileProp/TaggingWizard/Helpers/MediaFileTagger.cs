@@ -9,7 +9,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
     {
         ITaggedMediaFileInfo _taggedFileInfo = null;
         Task task = null;
-        
+
         string _name = string.Empty;
         string _folder = string.Empty;
         string _artist = string.Empty;

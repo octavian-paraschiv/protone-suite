@@ -91,7 +91,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             bool isOk = false;
 
             string dxFriendlyName = "";
-            
+
             Version actualVersion = DirectXConfig.GetDirectXVersion(out dxFriendlyName);
             Version minimumVersion = DirectXConfig.Dx9cVersion;
 

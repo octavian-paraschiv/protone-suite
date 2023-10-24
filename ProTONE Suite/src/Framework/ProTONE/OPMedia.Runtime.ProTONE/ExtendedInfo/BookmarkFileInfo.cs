@@ -63,7 +63,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 
                 return;
             }
-                
+
             LoadBookmarks(false, throwExceptionOnInvalid);
         }
 
@@ -156,7 +156,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
             {
                 LoadBookmarks(true, true);
             }
-            
+
             if (BookmarkCollectionChanged != null)
             {
                 BookmarkCollectionChanged(null, null);

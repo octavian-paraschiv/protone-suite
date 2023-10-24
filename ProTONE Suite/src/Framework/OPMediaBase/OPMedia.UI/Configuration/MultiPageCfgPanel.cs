@@ -30,7 +30,7 @@ namespace OPMedia.UI.Configuration
             tp.ImageIndex = tabSubPages.ImageList.Images.Count;
             tp.Tag = page.Title;
             tp.Name = page.Name;
-            
+
             tabSubPages.ImageList.Images.Add(page.Image);
             tabSubPages.TabPages.Add(tp);
 

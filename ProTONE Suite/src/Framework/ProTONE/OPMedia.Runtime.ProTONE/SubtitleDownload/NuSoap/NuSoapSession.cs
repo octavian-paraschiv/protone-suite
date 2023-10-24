@@ -90,7 +90,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
                                 SubFormat = PathUtils.GetExtension(sf.file_name)
                             };
 
-               retVal.AddRange(infos);
+                retVal.AddRange(infos);
             }
 
             return retVal;

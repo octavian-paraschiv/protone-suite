@@ -34,15 +34,15 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
             {
                 case AudioMediaFormatType.WAV:
                     return new GrabberToWave();
-                
+
                 case AudioMediaFormatType.MP3:
                     return new GrabberToMP3();
-                
-                //case AudioMediaFormatType.WMA:
-                //    return new GrabberToWMA();
-                
-                //case AudioMediaFormatType.OGG:
-                //    return new GrabberToOGG();
+
+                    //case AudioMediaFormatType.WMA:
+                    //    return new GrabberToWMA();
+
+                    //case AudioMediaFormatType.OGG:
+                    //    return new GrabberToOGG();
             }
 
             return null;
@@ -68,7 +68,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
         public static string GetFileName(WordCasing wordCasing, Track track, string renamePattern)
         {
             string newName = renamePattern;
-            
+
             StringUtils.ReplaceToken(ref newName, "<A", track.Artist);
             StringUtils.ReplaceToken(ref newName, "<B", track.Album);
             StringUtils.ReplaceToken(ref newName, "<T", track.Title);
@@ -82,7 +82,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
                 return newName;
             }
 
-            return string.Format("track{0:d2}", track.Index);;
+            return string.Format("track{0:d2}", track.Index); ;
         }
     }
 }

@@ -204,7 +204,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
                 case CommandType.QueryMediaRenderer:
                     return false;
 
-              
+
             }
 
             return false;

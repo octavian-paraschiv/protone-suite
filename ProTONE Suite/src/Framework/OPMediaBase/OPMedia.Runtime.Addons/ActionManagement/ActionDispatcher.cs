@@ -114,7 +114,7 @@ namespace OPMedia.Runtime.Addons.ActionManagement
                                 return true;
                             }
                         }
-                        
+
                         return false;
                 }
             }

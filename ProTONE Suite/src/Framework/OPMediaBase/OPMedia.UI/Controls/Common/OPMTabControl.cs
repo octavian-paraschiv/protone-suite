@@ -9,7 +9,7 @@ namespace OPMedia.UI.Controls
 {
     public class OPMTabControl : TabControl
     {
-        public new ImageList ImageList { get; set;}
+        public new ImageList ImageList { get; set; }
 
         [ReadOnly(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -28,7 +28,7 @@ namespace OPMedia.UI.Controls
         }
 
         Padding _innerPadding = new Padding(5, 10, 5, 5);
-        public Padding InnerPadding 
+        public Padding InnerPadding
         {
             get { return _innerPadding; }
             set { _innerPadding = value; }
@@ -125,7 +125,7 @@ namespace OPMedia.UI.Controls
         void OPMTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             Invalidate(true);
-        }        
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -134,7 +134,7 @@ namespace OPMedia.UI.Controls
             Rectangle rcx = new Rectangle(
                 ClientRectangle.Left,
                 ClientRectangle.Top + ItemSize.Height + 2,
-                ClientRectangle.Width - 2, 
+                ClientRectangle.Width - 2,
                 ClientRectangle.Height - ItemSize.Height - 4);
 
             using (Pen p = new Pen(ThemeManager.BorderColor))
@@ -173,11 +173,11 @@ namespace OPMedia.UI.Controls
                 c2 = ThemeManager.GradientHoverColor2;
                 cText = ThemeManager.SelectedTextColor;
             }
-            
+
             Rectangle rcx = new Rectangle(
-                rcDraw.Left - 2, 
+                rcDraw.Left - 2,
                 rcDraw.Top,
-                rcDraw.Width, 
+                rcDraw.Width,
                 rcDraw.Height);
             Rectangle rcx2 = new Rectangle(
                 rcDraw.Left - 1,
@@ -246,7 +246,7 @@ namespace OPMedia.UI.Controls
 
             #region Draw text
             Rectangle rcText = Rectangle.Empty;
-                
+
             switch (this.TextImageRelation)
             {
                 case TextImageRelation.ImageBeforeText:

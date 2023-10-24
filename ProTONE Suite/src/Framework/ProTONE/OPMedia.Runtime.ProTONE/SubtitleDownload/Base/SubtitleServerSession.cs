@@ -26,7 +26,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         protected string _username = string.Empty;
         protected string _password = string.Empty;
         protected CultureInfo _culture = null;
-        
+
         protected string _sessionToken = string.Empty;
 
         #region Factory
@@ -52,7 +52,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                         break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -199,7 +199,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
             }
 
             DoCleanup();
-            
+
             _sessionToken = null;
 
             Logger.LogTrace($"{GetType().Name}: object disposed");

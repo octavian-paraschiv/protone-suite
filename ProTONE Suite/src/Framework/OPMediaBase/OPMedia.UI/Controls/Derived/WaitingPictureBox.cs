@@ -82,8 +82,8 @@ namespace OPMedia.UI.Controls
                 _timer.Enabled = false;
                 MainThread.Post((d) => DisplayNextFrame());
             }
-            catch{}
-            finally 
+            catch { }
+            finally
             {
                 _timer.Enabled = true;
             }

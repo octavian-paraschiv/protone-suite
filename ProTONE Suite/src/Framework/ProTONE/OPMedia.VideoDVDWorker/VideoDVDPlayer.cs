@@ -319,10 +319,10 @@ namespace OPMedia.VideoDVDWorker
             int hr = videoWindow.GetWindowPosition(out l, out t, out w, out h);
             if (hr == 0)
 
-            if (w != width || h != height || l != left || h != height)
-            {
-                hr = videoWindow.SetWindowPosition(left, top, width, height);
-            }
+                if (w != width || h != height || l != left || h != height)
+                {
+                    hr = videoWindow.SetWindowPosition(left, top, width, height);
+                }
         }
 
         private Size GetWindowSize(IntPtr hwnd)

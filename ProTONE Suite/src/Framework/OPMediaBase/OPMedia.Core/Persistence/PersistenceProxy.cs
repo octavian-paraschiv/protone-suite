@@ -58,7 +58,7 @@ namespace OPMedia.Core
         {
             int attempts = 5;
 
-            while(attempts > 0)
+            while (attempts > 0)
             {
                 try
                 {
@@ -69,7 +69,7 @@ namespace OPMedia.Core
                     srv.Start();
                     Thread.Sleep(500);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.LogException(ex);
                 }
@@ -172,7 +172,7 @@ namespace OPMedia.Core
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
                 retVal = defaultValue;
@@ -287,7 +287,7 @@ namespace OPMedia.Core
                 {
                     ActionType = PersistenceActionType.SaveObject,
                     ObjectContent = objectContent,
-                    PersistenceContext =  persistenceContext,
+                    PersistenceContext = persistenceContext,
                     PersistenceId = persistenceId,
                 });
             }
@@ -403,7 +403,7 @@ namespace OPMedia.Core
                 {
                     string evtName = null, evtData = null;
                     string[] fields = StringUtils.ToStringArray(content, '>');
-                    
+
                     if (fields?.Length > 0)
                         evtName = fields[0];
                     if (fields?.Length > 1)

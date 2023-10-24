@@ -88,7 +88,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public RadioStationPlaylistItem(RadioStation rs) : 
+        public RadioStationPlaylistItem(RadioStation rs) :
             base(rs.Url, false, false)
         {
             _rs = rs;

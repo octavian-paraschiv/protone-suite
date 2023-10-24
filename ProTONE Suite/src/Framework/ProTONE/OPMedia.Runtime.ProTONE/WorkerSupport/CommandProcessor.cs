@@ -87,7 +87,7 @@ namespace OPMedia.Runtime.ProTONE
                 replyArg = $"err_{ex.ErrorType}";
                 replyArg2 = ex.Message;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
                 return null;

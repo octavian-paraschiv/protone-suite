@@ -5,7 +5,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
     [Serializable]
     public class ActivateCommand : BasicCommand
     {
-        internal ActivateCommand() 
+        internal ActivateCommand()
             : base(CommandType.Activate, null)
         {
         }

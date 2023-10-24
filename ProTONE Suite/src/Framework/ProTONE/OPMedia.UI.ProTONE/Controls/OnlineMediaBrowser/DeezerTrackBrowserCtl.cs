@@ -24,7 +24,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             lvTracks.MultiSelect = true;
             lvTracks.Resize += OnListResize;
             lvTracks.SelectedIndexChanged += OnListSelectedIndexChanged;
-            
+
             OPMContextMenuStrip cms = BuildCommonMenuStrip(true);
 
             OPMMenuStripSeparator sep = new OPMMenuStripSeparator();
@@ -124,7 +124,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 StartCancellableSearch();
             }
         }
-                
+
 
         private void OnListSelectedIndexChanged(object sender, EventArgs e)
         {

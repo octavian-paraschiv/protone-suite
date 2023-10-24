@@ -56,7 +56,7 @@ namespace OPMedia.ProTONE
             : base("TXT_APP_NAME")
         {
             AppConfig.CanSendToTray = true;
-            
+
 
             InitializeComponent();
 
@@ -126,7 +126,7 @@ namespace OPMedia.ProTONE
                         else
                             name = "btnPlay";
                     }
-                    
+
 
                     Bitmap img = OPMedia.UI.ProTONE.Properties.Resources.ResourceManager.GetImage(name);
                     if (img != null)
@@ -188,7 +188,7 @@ namespace OPMedia.ProTONE
             mnuAbout.Text = Translator.Translate("TXT_ABOUT", Translator.Translate("TXT_APP_NAME"));
             mnuTools.Text = Translator.Translate("TXT_MNUTOOLS");
             mnuExit.Text = Translator.Translate("TXT_BTNCLOSE");
-            
+
             ThemeManager.SetFont(this, FontSizes.Normal);
 
             BuildThumbnailButtons(false);
@@ -211,7 +211,7 @@ namespace OPMedia.ProTONE
 
                 if (showTime)
                 {
-                    bool running = (RenderingEngine.DefaultInstance.FilterState == FilterState.Running || 
+                    bool running = (RenderingEngine.DefaultInstance.FilterState == FilterState.Running ||
                         RenderingEngine.DefaultInstance.FilterState == FilterState.Paused);
 
                     if (running)
@@ -417,10 +417,10 @@ namespace OPMedia.ProTONE
                 {
                     tsi.ToolTipText = "";
                 }
-                
+
                 if (tsi is OPMToolStripMenuItem && tsi.Tag != null)
                 {
-                    switch((OPMShortcut)tsi.Tag)
+                    switch ((OPMShortcut)tsi.Tag)
                     {
                         case OPMShortcut.CmdPlaylistEnd:
                             (tsi as OPMToolStripMenuItem).Checked = SystemScheduler.PlaylistEventEnabled;

@@ -16,7 +16,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         protected override void DisplayTask()
         {
             _task.TaskType = TaskType.FillTagByFS;
-            
+
             if (!cmbFilePattern.Items.Contains(_task.TagFilePattern))
             {
                 cmbFilePattern.Items.Add(_task.TagFilePattern);

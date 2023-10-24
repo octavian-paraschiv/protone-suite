@@ -90,7 +90,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                             if (abortEvent.WaitOne(5))
                                 return results;
 
-                            foreach(var station in response?.Reply?.Data?.StationList?.Stations)
+                            foreach (var station in response?.Reply?.Data?.StationList?.Stations)
                             {
                                 try
                                 {

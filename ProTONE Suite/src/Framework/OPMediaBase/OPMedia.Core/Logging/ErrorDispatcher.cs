@@ -78,7 +78,7 @@ namespace OPMedia.Core.Logging
                 StringBuilder sb = new StringBuilder(MAX_ERROR_TEXT_LEN, MAX_ERROR_TEXT_LEN);
 
                 COMException cex = ex as COMException;
-                
+
                 if (Quartz.AMGetErrorText(cex.ErrorCode, sb, MAX_ERROR_TEXT_LEN) > 0)
                 {
                     msg = sb.ToString();

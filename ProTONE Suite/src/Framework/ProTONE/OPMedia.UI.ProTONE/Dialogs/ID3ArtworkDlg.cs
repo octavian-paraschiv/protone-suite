@@ -81,7 +81,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             lvPictures_Resize(sender, e);
             LoadPictures();
-            
+
             pbPicture.Image = pbPicture.ErrorImage;
             pbPicture.SizeMode = PictureBoxSizeMode.CenterImage;
 
@@ -100,7 +100,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
             lvPictures.Items.Clear();
 
-            foreach(PictureInfo pi in _id3ArtworkInfo.ArtworkImages)
+            foreach (PictureInfo pi in _id3ArtworkInfo.ArtworkImages)
             {
                 ListViewItem lvi = new ListViewItem();
 
@@ -164,8 +164,8 @@ namespace OPMedia.UI.ProTONE.Dialogs
 
                         if (img != null)
                         {
-                            Bitmap bmp = new Bitmap(ImageProvider.ScaleImage(img, 
-                                new Size(200, 200 * img.Size.Height / img.Size.Width), 
+                            Bitmap bmp = new Bitmap(ImageProvider.ScaleImage(img,
+                                new Size(200, 200 * img.Size.Height / img.Size.Width),
                                 false));
                             pi.Picture = bmp;
 
@@ -194,7 +194,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
                         ImageFormat imgFormat = ImageFormat.Bmp;
-                        switch(PathUtils.GetExtension(dlg.FileName).ToLowerInvariant())
+                        switch (PathUtils.GetExtension(dlg.FileName).ToLowerInvariant())
                         {
                             case "jpg":
                             case "jpeg":
@@ -251,7 +251,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             }
         }
 
-        
+
         private void lvPictures_SubItemEdited(object sender, ListViewSubItemEventArgs args)
         {
             if (lvPictures.SelectedItems.Count > 0)
@@ -283,7 +283,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             colDescription.Width = lvPictures.EffectiveWidth - colImage.Width - colImageType.Width;
         }
 
-        
+
 
     }
 

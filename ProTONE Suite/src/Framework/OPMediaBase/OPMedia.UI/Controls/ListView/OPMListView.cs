@@ -20,107 +20,107 @@ namespace OPMedia.UI.Controls
     /// Implements event arguments wrapper for the SubItemEditing/Edited events.
     /// </summary>
     public class ListViewSubItemEventArgs : HandledEventArgs
-	{
-		#region Members
-		/// <summary>
-		/// Reference to the editable control for the subitem.
-		/// </summary>
-		private Control editableControl = null;
-		/// <summary>
-		/// The edited subitem.
-		/// </summary>
-		private ListViewItem.ListViewSubItem editedSubItem = null;
-		/// <summary>
-		/// The edited item (whose subitem is edited).
-		/// </summary>
-		private ListViewItem editedItem = null;
-		/// <summary>
-		/// The edited subitem index (column index).
-		/// </summary>
-		private int editedSubItemIndex = -1;
-		#endregion
+    {
+        #region Members
+        /// <summary>
+        /// Reference to the editable control for the subitem.
+        /// </summary>
+        private Control editableControl = null;
+        /// <summary>
+        /// The edited subitem.
+        /// </summary>
+        private ListViewItem.ListViewSubItem editedSubItem = null;
+        /// <summary>
+        /// The edited item (whose subitem is edited).
+        /// </summary>
+        private ListViewItem editedItem = null;
+        /// <summary>
+        /// The edited subitem index (column index).
+        /// </summary>
+        private int editedSubItemIndex = -1;
+        #endregion
 
-		#region Properties
-		/// <summary>
-		/// Gets the editable control that is used for editing this item.
-		/// </summary>
-		public Control EditableControl
-		{
-			get
-			{
-				return editableControl;
-			}
-		}
+        #region Properties
+        /// <summary>
+        /// Gets the editable control that is used for editing this item.
+        /// </summary>
+        public Control EditableControl
+        {
+            get
+            {
+                return editableControl;
+            }
+        }
 
-		/// <summary>
-		/// Gets the edited subitem.
-		/// </summary>
-		public ListViewItem.ListViewSubItem SubItem
-		{
-			get
-			{
-				return editedSubItem;
-			}
-		}
+        /// <summary>
+        /// Gets the edited subitem.
+        /// </summary>
+        public ListViewItem.ListViewSubItem SubItem
+        {
+            get
+            {
+                return editedSubItem;
+            }
+        }
 
-		/// <summary>
-		/// Gets the edited item.
-		/// </summary>
-		public ListViewItem Item
-		{
-			get
-			{
-				return editedItem;
-			}
-		}
+        /// <summary>
+        /// Gets the edited item.
+        /// </summary>
+        public ListViewItem Item
+        {
+            get
+            {
+                return editedItem;
+            }
+        }
 
-		/// <summary>
-		/// Gets the index of the subitem in the item list 
-		/// (the edited column index).
-		/// </summary>
-		public int SubItemIndex
-		{
-			get
-			{
-				return editedSubItemIndex;
-			}
-		}
-		#endregion
+        /// <summary>
+        /// Gets the index of the subitem in the item list 
+        /// (the edited column index).
+        /// </summary>
+        public int SubItemIndex
+        {
+            get
+            {
+                return editedSubItemIndex;
+            }
+        }
+        #endregion
 
-		#region Construction
-		/// <summary>
-		/// Creates an empty new event argument instance.
-		/// </summary>
-		public ListViewSubItemEventArgs() 
-			: base()
-		{
-		}
+        #region Construction
+        /// <summary>
+        /// Creates an empty new event argument instance.
+        /// </summary>
+        public ListViewSubItemEventArgs()
+            : base()
+        {
+        }
 
-		/// <summary>
-		/// Creates a new event argument instance.
-		/// </summary>
-		/// <param name="editableControl">The editable control.</param>
-		/// <param name="editedItem">The edited item.</param>
-		/// <param name="editedSubItem">The edited subitem.</param>
-		/// <param name="editedSubItemIndex">The edited subitem index (the edited
-		/// column).</param>
-		public ListViewSubItemEventArgs(Control editableControl, ListViewItem editedItem,
-			ListViewItem.ListViewSubItem editedSubItem, int editedSubItemIndex)
-			: base()
-		{
-			this.editableControl = editableControl;
-			this.editedItem = editedItem;
-			this.editedSubItem = editedSubItem;
-			this.editedSubItemIndex = editedSubItemIndex;
-		}
-		#endregion
-	}
-	#endregion
+        /// <summary>
+        /// Creates a new event argument instance.
+        /// </summary>
+        /// <param name="editableControl">The editable control.</param>
+        /// <param name="editedItem">The edited item.</param>
+        /// <param name="editedSubItem">The edited subitem.</param>
+        /// <param name="editedSubItemIndex">The edited subitem index (the edited
+        /// column).</param>
+        public ListViewSubItemEventArgs(Control editableControl, ListViewItem editedItem,
+            ListViewItem.ListViewSubItem editedSubItem, int editedSubItemIndex)
+            : base()
+        {
+            this.editableControl = editableControl;
+            this.editedItem = editedItem;
+            this.editedSubItem = editedSubItem;
+            this.editedSubItemIndex = editedSubItemIndex;
+        }
+        #endregion
+    }
+    #endregion
 
-	/// <summary>
-	/// Implements a custom editable list view control.
-	/// </summary>
-	public class OPMListView : ListView
+    /// <summary>
+    /// Implements a custom editable list view control.
+    /// </summary>
+    public class OPMListView : ListView
     {
         int _sortColumn = -1;
         SortOrder _sortorder = SortOrder.Ascending;
@@ -129,18 +129,18 @@ namespace OPMedia.UI.Controls
 
         ImageList _stateImageList = null;
 
-		#region Delegates
-		/// <summary>
-		/// Type of delegate used to raise EditableListViewXXX events.
-		/// Usually, this will be used to display and handle in-place
-		/// edit controls, other than the supported ones.
-		/// Use carefully since it is currently under development.
-		public delegate void EditableListViewEventHandler(object sender,
-			ListViewSubItemEventArgs args);
-		#endregion
+        #region Delegates
+        /// <summary>
+        /// Type of delegate used to raise EditableListViewXXX events.
+        /// Usually, this will be used to display and handle in-place
+        /// edit controls, other than the supported ones.
+        /// Use carefully since it is currently under development.
+        public delegate void EditableListViewEventHandler(object sender,
+            ListViewSubItemEventArgs args);
+        #endregion
 
-		#region Members
-		/// <summary>
+        #region Members
+        /// <summary>
         /// A reference to the active edit control (that is,
         /// the control that is used to edit the list contents 
         /// at a given moment.
@@ -286,11 +286,11 @@ namespace OPMedia.UI.Controls
         public Color OverrideBackColor
         {
             get { return _overrideBackColor; }
-            set 
-            { 
-                _overrideBackColor = value; 
+            set
+            {
+                _overrideBackColor = value;
                 base.BackColor = GetBackColor();
-                Invalidate(true); 
+                Invalidate(true);
             }
         }
 
@@ -303,7 +303,7 @@ namespace OPMedia.UI.Controls
         }
 
         #endregion
-        
+
         #region Construction
 
         public OPMListView(ColumnHeaderStyle headerStyle)
@@ -471,7 +471,7 @@ namespace OPMedia.UI.Controls
         #endregion
 
         #region Event Handlers
-        
+
         /// <summary>
         /// Window procedure. Legacy Win32 programming.
         /// Neither ListView nor its base classes do expose have an
@@ -535,7 +535,7 @@ namespace OPMedia.UI.Controls
 
             base.WndProc(ref m);
         }
-        
+
         /// <summary>
         /// Overrides the default behaviour of the list view when 
         /// an item is clicked with the mouse. This is done in order
@@ -569,7 +569,7 @@ namespace OPMedia.UI.Controls
             StartEditing(item, subItem);
             base.OnMouseClick(e);
         }
-        
+
         /// <summary>
         /// Event handler for the Leave event of the in-place edit control.
         /// This must result in ending the editing action. By design in this
@@ -1033,33 +1033,33 @@ namespace OPMedia.UI.Controls
             // Check if event handler available and if positive, raise the event
 
             Control editControl = null;
-			
-			// Override the editable control in the custom subitem, if such an item is used.
-			OPMListViewSubItem customSubItem = editedSubItem as OPMListViewSubItem;
-			if (customSubItem != null)
-			{
-				if (customSubItem.ReadOnly)
-				{
-					// non-editable item
-					return;
-				}
-				else
-				{
-					// override the edit control
-					editControl = customSubItem.EditControl;
-				}
-			}
+
+            // Override the editable control in the custom subitem, if such an item is used.
+            OPMListViewSubItem customSubItem = editedSubItem as OPMListViewSubItem;
+            if (customSubItem != null)
+            {
+                if (customSubItem.ReadOnly)
+                {
+                    // non-editable item
+                    return;
+                }
+                else
+                {
+                    // override the edit control
+                    editControl = customSubItem.EditControl;
+                }
+            }
 
             if (editControl == null)
                 return;
 
-			ListViewSubItemEventArgs args =
-				new ListViewSubItemEventArgs(editControl, editedItem, 
-				editedSubItem, column);
-			if (SubItemEditing != null && editControl != null)
-			{
-				SubItemEditing(this, args);
-			}
+            ListViewSubItemEventArgs args =
+                new ListViewSubItemEventArgs(editControl, editedItem,
+                editedSubItem, column);
+            if (SubItemEditing != null && editControl != null)
+            {
+                SubItemEditing(this, args);
+            }
 
             if (!(editControl is LinkLabel))
             {
@@ -1124,7 +1124,7 @@ namespace OPMedia.UI.Controls
 
 
                     string text = "";
-                    
+
                     if (activeEditControl is MultilineEditTextBox)
                         text = (activeEditControl as MultilineEditTextBox).MultiLineText;
                     else
@@ -1193,14 +1193,14 @@ namespace OPMedia.UI.Controls
 		/// <param name="editedSubItem">The subitem being edited (to display
 		/// the edit control for).</param>
         private void DisplayEditControl(bool positioningOnly, Control editControl,
-			ListViewItem.ListViewSubItem editedSubItem)
+            ListViewItem.ListViewSubItem editedSubItem)
         {
-			// see if the subitem is a customized one
-			activeEditControl = editControl;
-			if (activeEditControl == null)
-			{
-				// non-editable column
-				return;
+            // see if the subitem is a customized one
+            activeEditControl = editControl;
+            if (activeEditControl == null)
+            {
+                // non-editable column
+                return;
             }
 
             #region Commented code
@@ -1217,7 +1217,7 @@ namespace OPMedia.UI.Controls
             //        editedSubItem.Bounds.Width, editedSubItem.Bounds.Height - dh);
 
             //    activeEditControl.Height = origHeight;
-                
+
             //}
             //else
             //{
@@ -1247,7 +1247,7 @@ namespace OPMedia.UI.Controls
             }
 
             activeEditControl.Height = origHeight;
-            
+
             // Enable the control
             activeEditControl.Visible = true;
             activeEditControl.Enabled = true;
@@ -1355,7 +1355,7 @@ namespace OPMedia.UI.Controls
         }
     }
 
-    public class HeaderlessListView: OPMListView
+    public class HeaderlessListView : OPMListView
     {
         public HeaderlessListView()
             : base(ColumnHeaderStyle.None)

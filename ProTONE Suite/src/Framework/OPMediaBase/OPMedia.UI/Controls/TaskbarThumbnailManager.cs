@@ -42,7 +42,7 @@ namespace OPMedia.UI.Controls
         {
             if (_taskbarList != null)
             {
-                MainThread.Post(delegate(object x)
+                MainThread.Post(delegate (object x)
                 {
                     _taskbarList.SetProgressValue(MainThread.MainWindow.Handle, completed, total);
                 });
@@ -53,7 +53,7 @@ namespace OPMedia.UI.Controls
         {
             if (_taskbarList != null)
             {
-                MainThread.Post(delegate(object x)
+                MainThread.Post(delegate (object x)
                 {
                     _taskbarList.SetProgressState(MainThread.MainWindow.Handle, status);
                 });

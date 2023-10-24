@@ -64,7 +64,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public override string ToString()
         {
-            return string.Format("[ID={0}, Artist={1}, Title={2}, Genre={3}]", 
+            return string.Format("[ID={0}, Artist={1}, Title={2}, Genre={3}]",
                 this.Id, this.Artist, this.Title, this.Genre);
         }
     }

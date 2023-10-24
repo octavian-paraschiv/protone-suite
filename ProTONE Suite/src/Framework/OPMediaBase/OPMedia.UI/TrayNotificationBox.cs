@@ -30,7 +30,7 @@ namespace OPMedia.UI.Controls
             __count++;
 
             AssignData(title, values, img);
-            
+
             User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
             User32.SetWindowOnTop(Handle, false, true);
 

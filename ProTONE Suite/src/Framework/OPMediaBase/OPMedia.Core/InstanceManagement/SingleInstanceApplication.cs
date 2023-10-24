@@ -28,7 +28,7 @@ namespace OPMedia.Core.InstanceManagement
             }
             else
             {
-                Logger.LogError("Error encountered: {0}", 
+                Logger.LogError("Error encountered: {0}",
                     "Only one instance of OpMediaApplication (or derived) can be started per process !!");
             }
         }
@@ -88,7 +88,7 @@ namespace OPMedia.Core.InstanceManagement
         }
 
 
-               
+
         #endregion
     }
     #endregion

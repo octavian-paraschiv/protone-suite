@@ -89,7 +89,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
 
         public VideoFileInfo(string path, bool throwExceptionOnInvalid)
-            : base(path, throwExceptionOnInvalid)    
+            : base(path, throwExceptionOnInvalid)
         {
         }
 

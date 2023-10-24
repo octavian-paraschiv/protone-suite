@@ -6,7 +6,7 @@
 
         ObjectSaved,
         ObjectDeleted,
-        
+
         IpcEvent,
     }
 

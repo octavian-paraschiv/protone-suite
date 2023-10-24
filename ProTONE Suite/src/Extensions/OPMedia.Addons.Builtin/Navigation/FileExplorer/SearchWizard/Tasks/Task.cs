@@ -15,7 +15,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Tasks
 
         public bool IsRecursive = true;
         public bool UseAttributes = false;
-        public bool IsCaseInsensitive = true; 
+        public bool IsCaseInsensitive = true;
         public bool SearchProperties = false;
 
         public bool Option1 = false;

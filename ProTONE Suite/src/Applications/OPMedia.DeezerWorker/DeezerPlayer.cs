@@ -135,7 +135,7 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
                 HandleDzErrorCode("dz_connect_offline_mode", WorkerError.CannotConnectToMedia, err);
 
-                SetRenderQuality(ProTONEConfig.DeezerTrackQuality);                
+                SetRenderQuality(ProTONEConfig.DeezerTrackQuality);
 
                 if (_evtAppUserLoginOK.WaitOne(Worker.OperationTimeout) == false)
                     HandleDzErrorCode("DeezerPlayer::SetupConfig", WorkerError.CannotConnectToMedia, dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
@@ -193,9 +193,9 @@ namespace OPMedia.DeezerWorker
                 HandleDzErrorCode("dz_player_load", WorkerError.MediaReadError, dz_error_t.DZ_ERROR_PLAYER_LOAD_TIMEOUT);
 
             Logger.LogTrace("dz_player_load => Success");
-            // --------------------------------------------------------------------
+        // --------------------------------------------------------------------
 
-try_play:
+        try_play:
 
             // --------------------------------------------------------------------
             // Start playback using dz_player_play

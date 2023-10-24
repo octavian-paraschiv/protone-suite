@@ -62,18 +62,18 @@ namespace OPMedia.ShoutcastWorker
                     }
                     break;
 
-                //case "audio/aac":
-                //case "audio/aacp":
-                //    {
-                //        WaveFormatEx wfex = WaveFormatEx.Cdda;
+                    //case "audio/aac":
+                    //case "audio/aacp":
+                    //    {
+                    //        WaveFormatEx wfex = WaveFormatEx.Cdda;
 
-                //        mt.majorType = MediaType.Audio;
-                //        mt.subType = MediaSubType.PCM;
-                //        mt.sampleSize = wfex.nBlockAlign;
-                //        mt.fixedSizeSamples = true;
-                //        mt.SetFormat(wfex);
-                //    }
-                //    break;
+                    //        mt.majorType = MediaType.Audio;
+                    //        mt.subType = MediaSubType.PCM;
+                    //        mt.sampleSize = wfex.nBlockAlign;
+                    //        mt.fixedSizeSamples = true;
+                    //        mt.SetFormat(wfex);
+                    //    }
+                    //    break;
             }
 
             m_Tracks.Add(new ShoutcastStreamTrack(this, mt));
@@ -171,50 +171,50 @@ namespace OPMedia.ShoutcastWorker
                         }
                         break;
 
-                    //case "audio/aac":
-                    //case "audio/aacp":
-                    //    {
-                    //        try
-                    //        {
-                    //            // The data that was read has ac3 format
-                    //            // Since we initialized the media subtype as PCM, we'll need to convert the AC3 data
-                    //            // to WAV before sending to the output renderer.
-                    //            string aacFile = PathUtils.GetTempFilePath("shoutcast_in.aac");
-                    //            string wavFile = PathUtils.GetTempFilePath("shoutcast_out.wav");
+                        //case "audio/aac":
+                        //case "audio/aacp":
+                        //    {
+                        //        try
+                        //        {
+                        //            // The data that was read has ac3 format
+                        //            // Since we initialized the media subtype as PCM, we'll need to convert the AC3 data
+                        //            // to WAV before sending to the output renderer.
+                        //            string aacFile = PathUtils.GetTempFilePath("shoutcast_in.aac");
+                        //            string wavFile = PathUtils.GetTempFilePath("shoutcast_out.wav");
 
-                    //            File.WriteAllBytes(aacFile, dataToRead.Buffer);
+                        //            File.WriteAllBytes(aacFile, dataToRead.Buffer);
 
-                    //            string aacFileUrl = string.Format(@"file:///{0}", aacFile.Replace("\\", "/"));
+                        //            string aacFileUrl = string.Format(@"file:///{0}", aacFile.Replace("\\", "/"));
 
-                                
 
-                    //            using (var reader = new MediaFoundationReader(aacFileUrl))
-                    //                WaveFileWriter.CreateWaveFile(wavFile, reader);
 
-                    //            WaveFormatEx wfex = WaveFormatEx.Cdda;
-                    //            byte[] buff = WaveFile.ReadWaveData(wavFile, ref wfex);
+                        //            using (var reader = new MediaFoundationReader(aacFileUrl))
+                        //                WaveFileWriter.CreateWaveFile(wavFile, reader);
 
-                    //            dataToRead.Position = 0;
-                    //            dataToRead.Size = buff.Length;
-                    //            dataToRead.SyncPoint = true;
-                    //            dataToRead.Start = m_rtMediaPosition;
-                    //            dataToRead.Stop = dataToRead.Start + UNITS;
-                    //            m_rtMediaPosition = dataToRead.Stop;
+                        //            WaveFormatEx wfex = WaveFormatEx.Cdda;
+                        //            byte[] buff = WaveFile.ReadWaveData(wavFile, ref wfex);
 
-                    //            dataToReturn = new PacketData();
-                    //            dataToReturn.Buffer = new byte[buff.Length];
-                    //            Array.Copy(buff, dataToReturn.Buffer, buff.Length);
-                    //        }
-                    //        catch (Exception ex)
-                    //        {
-                    //            Logger.LogTrace("ShoutcastStreamTrack: " + ex.ToString());
-                    //        }
-                    //    }
-                    //    break;
+                        //            dataToRead.Position = 0;
+                        //            dataToRead.Size = buff.Length;
+                        //            dataToRead.SyncPoint = true;
+                        //            dataToRead.Start = m_rtMediaPosition;
+                        //            dataToRead.Stop = dataToRead.Start + UNITS;
+                        //            m_rtMediaPosition = dataToRead.Stop;
+
+                        //            dataToReturn = new PacketData();
+                        //            dataToReturn.Buffer = new byte[buff.Length];
+                        //            Array.Copy(buff, dataToReturn.Buffer, buff.Length);
+                        //        }
+                        //        catch (Exception ex)
+                        //        {
+                        //            Logger.LogTrace("ShoutcastStreamTrack: " + ex.ToString());
+                        //        }
+                        //    }
+                        //    break;
                 }
             }
 
-            Logger.LogTrace("ShoutcastStreamTrack::GetNextPacket contentType={0} returning {1}null", ss.ContentType, 
+            Logger.LogTrace("ShoutcastStreamTrack::GetNextPacket contentType={0} returning {1}null", ss.ContentType,
                 (dataToReturn == null) ? string.Empty : "non-");
             return dataToReturn;
         }
@@ -236,7 +236,7 @@ namespace OPMedia.ShoutcastWorker
 
             return null;
 
-            
+
         }
 
         public ShoutcastStreamSourceFilter()

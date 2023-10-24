@@ -38,7 +38,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
                 {
                     dn = null;
                 }
-                
+
                 return $"[{_serverType}] {dn}";
             }
         }

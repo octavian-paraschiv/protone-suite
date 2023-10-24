@@ -33,7 +33,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
                 return pl;
             }
         }
-        
+
         public SelectOnlinePlaylistDlg(List<OnlinePlaylist> playlists)
             : base("TXT_SELECT_ONLINE_PLAYLIST")
         {
@@ -77,7 +77,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             if (!IsSelectionValid() && keyDown == Keys.Enter)
                 return false;
-            
+
             return base.AllowCloseOnKeyDown(keyDown);
         }
 

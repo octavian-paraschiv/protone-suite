@@ -66,14 +66,14 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         [TranslatableCategory("TXT_CATALOGINFO")]
         [ReadOnly(true)]
         public string CatalogSchemaVersion
-        { 
-            get 
+        {
+            get
             {
                 if (version == null)
                 {
                     version = _info.Version;
                 }
-                
+
                 return version;
             }
 
@@ -180,7 +180,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             {
                 throw new CatalogException("TXT_ERROR_INVALID_CATALOG", origCatalogPath);
             }
-                
+
             if (origCatalog.Path.ToLowerInvariant() == this.Path.ToLowerInvariant())
             {
                 throw new CatalogException("TXT_ERROR_MERGE_SAME_CATALOG", origCatalogPath);
@@ -206,7 +206,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 
         private void MergeCatalogItem(Catalog origCatalog, CatalogItem origItem, CatalogItem parentItem)
         {
- 	        // We create a new CatalogItem, because the existing one
+            // We create a new CatalogItem, because the existing one
             // belongs to other catalog, and all its relations are based
             // on that catalog. We need, though, an item related to this catalog.
             CatalogItem newItem = new CatalogItem(this);
@@ -315,7 +315,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         private void ConsistencyCheck()
         {
             List<CatalogDataset.CatalogItemsRow> orphanedRows = new List<CatalogDataset.CatalogItemsRow>();
-            foreach(CatalogDataset.CatalogItemsRow row in this.CatalogItems.Rows)
+            foreach (CatalogDataset.CatalogItemsRow row in this.CatalogItems.Rows)
             {
                 if (CheckRowAncestorship(row) == false)
                     orphanedRows.Add(row);
@@ -369,7 +369,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             _info = new CatalogInfo(this);
         }
 
-        public Catalog(string fileName) 
+        public Catalog(string fileName)
             : base(fileName, false)
         {
             LoadCompressedCatalog(fileName);
@@ -488,20 +488,20 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
             }
 
             var rows = from row in CatalogItems
-                    where
-                    (
-                        (type == null || type.TypeID == row.ItemTypeID) &&
+                       where
+                       (
+                           (type == null || type.TypeID == row.ItemTypeID) &&
 
-                        (string.IsNullOrEmpty(parentPath) || (row.OrigItemPath.ToLowerInvariant().StartsWith(parentPath.ToLowerInvariant()))) &&
+                           (string.IsNullOrEmpty(parentPath) || (row.OrigItemPath.ToLowerInvariant().StartsWith(parentPath.ToLowerInvariant()))) &&
 
-                        (parentItemId < 0 || row.ParentItemID == parentItemId) &&
+                           (parentItemId < 0 || row.ParentItemID == parentItemId) &&
 
-                        (string.IsNullOrEmpty(namePattern) || row.Name.ToLowerInvariant().Contains(namePattern.ToLowerInvariant())) &&
+                           (string.IsNullOrEmpty(namePattern) || row.Name.ToLowerInvariant().Contains(namePattern.ToLowerInvariant())) &&
 
-                        (string.IsNullOrEmpty(descPattern) || row.Description.ToLowerInvariant().Contains(descPattern.ToLowerInvariant()))
+                           (string.IsNullOrEmpty(descPattern) || row.Description.ToLowerInvariant().Contains(descPattern.ToLowerInvariant()))
 
-                    )
-                    select row;
+                       )
+                       select row;
 
             return GetItemArray(rows.ToArray());
         }

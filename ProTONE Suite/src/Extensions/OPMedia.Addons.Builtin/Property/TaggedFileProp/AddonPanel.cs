@@ -135,7 +135,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
 
         void _reloadTimer_Tick(object sender, EventArgs e)
         {
-            _reloadTimer.Stop(); 
+            _reloadTimer.Stop();
             InternalShowProperties(true);
         }
 
@@ -181,7 +181,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
         {
             btnSave.Enabled = base.Modified;
             btnUndo.Enabled = base.Modified;
-            btnLaunchWizard.Visible =  (pgProperties.SelectedObjects.Length > 0);
+            btnLaunchWizard.Visible = (pgProperties.SelectedObjects.Length > 0);
         }
 
         private void btnLaunchWizard_Click(object sender, EventArgs e)

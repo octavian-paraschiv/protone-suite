@@ -11,7 +11,7 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 
         public string Description
         { get { return currentRow.Description; } set { currentRow.Description = value; } }
-        
+
         public CatalogInfo(Catalog cat)
         {
             currentRow = cat.CatalogInfoTable.Rows[0] as CatalogDataset.CatalogInfoRow;

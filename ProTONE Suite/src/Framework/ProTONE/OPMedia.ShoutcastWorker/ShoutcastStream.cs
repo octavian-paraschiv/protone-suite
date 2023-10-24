@@ -14,7 +14,7 @@ using static TagLib.File;
 
 namespace OPMedia.ShoutcastWorker
 {
-    public delegate void StreamPropertyChangedDG(Dictionary<string ,string> props);
+    public delegate void StreamPropertyChangedDG(Dictionary<string, string> props);
 
     /// <summary>
     /// Provides the functionality to receive a shoutcast media stream
@@ -33,7 +33,7 @@ namespace OPMedia.ShoutcastWorker
 
         public bool Connected { get { return connected; } }
 
-        public int Bitrate { get { return bitrate; } set { bitrate = value; }}
+        public int Bitrate { get { return bitrate; } set { bitrate = value; } }
 
         private int sampleRate = 44100;
         public int SampleRate { get { return sampleRate; } set { sampleRate = value; } }
@@ -113,8 +113,8 @@ namespace OPMedia.ShoutcastWorker
                 {
                     case "audio/mpg":
                     case "audio/mpeg":
-                    //case "audio/aac":
-                    //case "audio/aacp":
+                        //case "audio/aac":
+                        //case "audio/aacp":
                         this.ContentType = contentType;
                         break;
 
@@ -161,7 +161,7 @@ namespace OPMedia.ShoutcastWorker
 
                 connected = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 connected = false;
                 WorkerException.Throw(WorkerError.CannotConnectToMedia, -1);

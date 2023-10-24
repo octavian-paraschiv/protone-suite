@@ -27,7 +27,7 @@ namespace OPMedia.UI.Generic
                 var img = ImageProvider.GetAppIcon(true).ToBitmap();
                 //var img = ImageProvider.ApplicationIconLarge as Bitmap;
 
-                ImageProcessing.GrayToBlack(img); 
+                ImageProcessing.GrayToBlack(img);
 
                 return img;
             }

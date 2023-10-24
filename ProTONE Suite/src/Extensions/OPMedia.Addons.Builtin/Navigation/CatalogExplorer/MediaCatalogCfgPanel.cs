@@ -49,9 +49,9 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             BuiltinAddonConfig.MCRememberRecentFiles = chkRememberRecentFiles.Checked;
             BuiltinAddonConfig.MCRecentFilesCount = (int)nudRecentFilesCount.Value;
 
-            
+
         }
 
-        
+
     }
 }

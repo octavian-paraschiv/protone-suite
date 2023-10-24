@@ -13,7 +13,7 @@ namespace OPMedia.Core.TranslationSupport
     {
         public string Tag { get; private set; }
 
-        public TranslatableCategoryAttribute(string tag) : 
+        public TranslatableCategoryAttribute(string tag) :
             base(TranslateCategoryName(tag))
         {
             this.Tag = tag;

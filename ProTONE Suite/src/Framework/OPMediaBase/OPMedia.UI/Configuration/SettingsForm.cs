@@ -68,7 +68,7 @@ namespace OPMedia.UI
             AddAditionalPanels();
             AddPanel(typeof(InternetSettingsPanel), RequiresInternetConfig());
             AddPanel(typeof(TroubleshootingPanel));
-            
+
             RemoveUnneededPanels();
 
             _delayedPanelSelector = new Timer();
@@ -142,7 +142,7 @@ namespace OPMedia.UI
                     return;
                 }
             }
-            catch(SettingsSaveException ex)
+            catch (SettingsSaveException ex)
             {
                 ErrorDispatcher.DispatchError(ex.Message, false);
             }
@@ -248,7 +248,7 @@ namespace OPMedia.UI
                                 }
                             }
 
-                            foreach(var page in subPagesToAdd)
+                            foreach (var page in subPagesToAdd)
                             {
                                 (panel as MultiPageCfgPanel).AddSubPage(page);
                             }

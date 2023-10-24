@@ -34,65 +34,65 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
     /// </summary>
     [DataContract]
     public class CDEntry
-	{
-		#region Public Member Variables
-		/// <summary>
-		/// Property Discid (string)
-		/// </summary>
+    {
+        #region Public Member Variables
+        /// <summary>
+        /// Property Discid (string)
+        /// </summary>
         [DataMember(Order = 0)]
         public string Discid { get; set; }
 
-		/// <summary>
-		/// Property Artist (string)
-		/// </summary>
+        /// <summary>
+        /// Property Artist (string)
+        /// </summary>
         [DataMember(Order = 1)]
         public string Artist { get; set; }
-		
-		/// <summary>
-		/// Property Title (string)
-		/// </summary>
+
+        /// <summary>
+        /// Property Title (string)
+        /// </summary>
         [DataMember(Order = 2)]
         public string Title { get; set; }
-		
-		/// <summary>
-		/// Property Year (string)
-		/// </summary>
+
+        /// <summary>
+        /// Property Year (string)
+        /// </summary>
         [DataMember(Order = 3)]
         public string Year { get; set; }
 
-		/// <summary>
-		/// Property Genre (string)
-		/// </summary>
+        /// <summary>
+        /// Property Genre (string)
+        /// </summary>
         [DataMember(Order = 4)]
         public string Genre { get; set; }
 
-		/// <summary>
-		/// Property Tracks (StringCollection)
-		/// </summary>
+        /// <summary>
+        /// Property Tracks (StringCollection)
+        /// </summary>
         [DataMember(Order = 5)]
         public List<Track> Tracks { get; set; }
-		
-		/// <summary>
-		/// Property ExtendedData (string)
-		/// </summary>
+
+        /// <summary>
+        /// Property ExtendedData (string)
+        /// </summary>
         [DataMember(Order = 6)]
         public string ExtendedData { get; set; }
-		
-		/// <summary>
-		/// Property PlayOrder (string)
-		/// </summary>
+
+        /// <summary>
+        /// Property PlayOrder (string)
+        /// </summary>
         [DataMember(Order = 7)]
         public string PlayOrder { get; set; }
 
-		public int NumberOfTracks
-		{
-			get
-			{
-				return (Tracks != null) ? Tracks.Count : 0;
-			}
-		}
+        public int NumberOfTracks
+        {
+            get
+            {
+                return (Tracks != null) ? Tracks.Count : 0;
+            }
+        }
 
-		#endregion
+        #endregion
 
         public static CDEntry LoadPersistentDisc(string discId)
         {
@@ -100,7 +100,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             if (!string.IsNullOrEmpty(xml))
             {
                 XmlReaderSettings settings = new XmlReaderSettings();
-                using (StringReader sr = new StringReader(xml))  
+                using (StringReader sr = new StringReader(xml))
                 using (XmlReader xr = XmlReader.Create(sr))
                 {
                     XmlSerializer xs = new XmlSerializer(typeof(CDEntry));
@@ -128,7 +128,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             {
                 XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
-                
+
                 XmlSerializer xs = new XmlSerializer(typeof(CDEntry));
                 xs.Serialize(xw, this, ns);
             }
@@ -146,15 +146,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             Tracks = new List<Track>();
         }
 
-		public CDEntry(List<string> data) : this()
-		{
-			if (!Parse(data))
-			{
-				throw new Exception("Unable to Parse CDEntry.");
-			}
+        public CDEntry(List<string> data) : this()
+        {
+            if (!Parse(data))
+            {
+                throw new Exception("Unable to Parse CDEntry.");
+            }
 
             SyncTrackFields();
-		}
+        }
 
         private void SyncTrackFields()
         {
@@ -181,172 +181,172 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 
 
         private bool Parse(List<string> data)
-		{
-			foreach (string line in data)
-			{
+        {
+            foreach (string line in data)
+            {
 
-				// check for comment
+                // check for comment
 
-				if (line[0] == '#')
-					continue;
+                if (line[0] == '#')
+                    continue;
 
-				int index = line.IndexOf('=');
-				if (index == -1) // couldn't find equal sign have no clue what the data is
-					continue;
-				string field = line.Substring(0,index);
-				index++; // move it past the equal sign
+                int index = line.IndexOf('=');
+                if (index == -1) // couldn't find equal sign have no clue what the data is
+                    continue;
+                string field = line.Substring(0, index);
+                index++; // move it past the equal sign
 
-				switch (field)
-				{
-					case "DISCID":
-					{
-						this.Discid = line.Substring(index);
-						continue;
-					}
+                switch (field)
+                {
+                    case "DISCID":
+                        {
+                            this.Discid = line.Substring(index);
+                            continue;
+                        }
 
-					case "DTITLE": // artist / title
-					{
-						this.Artist += line.Substring(index);
-						continue;
-					}
+                    case "DTITLE": // artist / title
+                        {
+                            this.Artist += line.Substring(index);
+                            continue;
+                        }
 
-					case "DYEAR":
-					{
-						this.Year = line.Substring(index);
-						continue;
-					}
+                    case "DYEAR":
+                        {
+                            this.Year = line.Substring(index);
+                            continue;
+                        }
 
-					case "DGENRE":
-					{
-						this.Genre += line.Substring(index);
-						continue;
-					}
+                    case "DGENRE":
+                        {
+                            this.Genre += line.Substring(index);
+                            continue;
+                        }
 
-					case "EXTD":
-					{
-						// may be more than one - just concatenate them
-						this.ExtendedData += line.Substring(index);
-						continue;
-					}
+                    case "EXTD":
+                        {
+                            // may be more than one - just concatenate them
+                            this.ExtendedData += line.Substring(index);
+                            continue;
+                        }
 
-					case "PLAYORDER":
-					{
-						this.PlayOrder += line.Substring(index);
-						continue;
-					}
-
-					
-					default:
-
-						//get track info or extended track info
-						if (field.StartsWith("TTITLE"))
-						{
-							int trackNumber = -1;
-							// Parse could throw an exception
-							try
-							{
-								trackNumber = int.Parse(field.Substring("TTITLE".Length));
-							}
-							
-							catch (Exception ex)
-							{
-								Debug.WriteLine("Failed to parse track Number. Reason: " + ex.Message);
-								continue;
-							}
-
-							//may need to concatenate track info
-							if (trackNumber < Tracks.Count )
-								Tracks[trackNumber].Title += line.Substring(index);
-							else
-							{
-								Track track = new Track { Index = trackNumber + 1, Title = line.Substring(index) };
-								this.Tracks.Add(track);
-							}
-							continue;
-						}
-						else if (field.StartsWith("EXTT"))
-						{
-							int trackNumber = -1;
-							// Parse could throw an exception
-							try
-							{
-								trackNumber = int.Parse(field.Substring("EXTT".Length));
-							}
-							
-							catch (Exception ex)
-							{
-								Debug.WriteLine("Failed to parse track Number. Reason: " + ex.Message);
-								continue;
-							}
-							
-							if (trackNumber < 0 || trackNumber >  Tracks.Count -1)
-								continue;
-
-							Tracks[trackNumber].ExtendedData += line.Substring(index);
+                    case "PLAYORDER":
+                        {
+                            this.PlayOrder += line.Substring(index);
+                            continue;
+                        }
 
 
+                    default:
 
-						}
+                        //get track info or extended track info
+                        if (field.StartsWith("TTITLE"))
+                        {
+                            int trackNumber = -1;
+                            // Parse could throw an exception
+                            try
+                            {
+                                trackNumber = int.Parse(field.Substring("TTITLE".Length));
+                            }
+
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("Failed to parse track Number. Reason: " + ex.Message);
+                                continue;
+                            }
+
+                            //may need to concatenate track info
+                            if (trackNumber < Tracks.Count)
+                                Tracks[trackNumber].Title += line.Substring(index);
+                            else
+                            {
+                                Track track = new Track { Index = trackNumber + 1, Title = line.Substring(index) };
+                                this.Tracks.Add(track);
+                            }
+                            continue;
+                        }
+                        else if (field.StartsWith("EXTT"))
+                        {
+                            int trackNumber = -1;
+                            // Parse could throw an exception
+                            try
+                            {
+                                trackNumber = int.Parse(field.Substring("EXTT".Length));
+                            }
+
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("Failed to parse track Number. Reason: " + ex.Message);
+                                continue;
+                            }
+
+                            if (trackNumber < 0 || trackNumber > Tracks.Count - 1)
+                                continue;
+
+                            Tracks[trackNumber].ExtendedData += line.Substring(index);
 
 
 
-
-						continue;
-
-				} //end of switch
-
-			}
+                        }
 
 
-			//split the title and artist from DTITLE;
-			// see if we have a slash
-			int slash = this.Artist.IndexOf(" / ");
-			if (slash == -1)
-			{
-				this.Title= Artist;
-			}
-			else
-			{
-				string titleArtist = Artist;
-				this.Artist = titleArtist.Substring(0,slash);
-				slash +=3; // move past " / "
-				this.Title  = titleArtist.Substring(slash );
-			}
 
 
-			return true;
+                        continue;
+
+                } //end of switch
+
+            }
 
 
-		}
+            //split the title and artist from DTITLE;
+            // see if we have a slash
+            int slash = this.Artist.IndexOf(" / ");
+            if (slash == -1)
+            {
+                this.Title = Artist;
+            }
+            else
+            {
+                string titleArtist = Artist;
+                this.Artist = titleArtist.Substring(0, slash);
+                slash += 3; // move past " / "
+                this.Title = titleArtist.Substring(slash);
+            }
 
-		public override string ToString()
-		{
-			StringBuilder builder = new StringBuilder();
-			builder.Append("Title: ");
-			builder.Append(this.Title);
-			builder.Append("\n");
-			builder.Append("Artist: ");
-			builder.Append(this.Artist);
-			builder.Append("\n");
-			builder.Append("Discid: ");
-			builder.Append(this.Discid);
-			builder.Append("\n");
-			builder.Append("Genre: ");
-			builder.Append(this.Genre);
-			builder.Append("\n");
-			builder.Append("Year: ");
-			builder.Append(this.Year);
-			builder.Append("\n");
-			builder.Append("Tracks:");
-			foreach (Track track in this.Tracks)
-			{
-				builder.Append("\n");
-				builder.Append(track.Title);
-			}
 
-			return builder.ToString();
+            return true;
 
-		}
+
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Title: ");
+            builder.Append(this.Title);
+            builder.Append("\n");
+            builder.Append("Artist: ");
+            builder.Append(this.Artist);
+            builder.Append("\n");
+            builder.Append("Discid: ");
+            builder.Append(this.Discid);
+            builder.Append("\n");
+            builder.Append("Genre: ");
+            builder.Append(this.Genre);
+            builder.Append("\n");
+            builder.Append("Year: ");
+            builder.Append(this.Year);
+            builder.Append("\n");
+            builder.Append("Tracks:");
+            foreach (Track track in this.Tracks)
+            {
+                builder.Append("\n");
+                builder.Append(track.Title);
+            }
+
+            return builder.ToString();
+
+        }
 
         internal void Merge(CDEntry slave)
         {

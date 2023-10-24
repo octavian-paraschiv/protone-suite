@@ -393,7 +393,7 @@ namespace OPMedia.Core.Configuration
         #region Level 1 settings using Settings File (Combined per-app and per-user settings)
 
         #region Network preferences
-       
+
 
         public static IWebProxy GetWebProxy()
         {
@@ -413,7 +413,7 @@ namespace OPMedia.Core.Configuration
 
             return wp;
         }
-                
+
         public static ProxySettings ProxySettings
         {
             get
@@ -543,7 +543,7 @@ namespace OPMedia.Core.Configuration
                 {
                     size = new Size(2 * Screen.PrimaryScreen.Bounds.Width / 3, 2 * Screen.PrimaryScreen.Bounds.Height / 3);
                 }
-                    
+
                 try
                 {
                     string str = PersistenceProxy.ReadObject(true, "WindowSize", string.Empty);
@@ -611,7 +611,7 @@ namespace OPMedia.Core.Configuration
                 PersistenceProxy.SaveObject(true, "CanSendToTray", value);
             }
         }
-        
+
         #endregion
 
         #region Application state persistence

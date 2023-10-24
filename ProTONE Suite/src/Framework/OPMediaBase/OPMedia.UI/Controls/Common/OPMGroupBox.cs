@@ -52,7 +52,7 @@ namespace OPMedia.UI.Controls
         #endregion
 
         #region Implementation
-       
+
 
         /// <summary>
         /// Override for the Paint procedure.

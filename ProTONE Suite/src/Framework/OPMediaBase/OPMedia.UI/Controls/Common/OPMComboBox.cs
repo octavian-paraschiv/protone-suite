@@ -143,7 +143,7 @@ namespace OPMedia.UI.Controls
             base.OnSelectedIndexChanged(e);
             this.Invalidate();
         }
-        
+
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             if (e.Index < 0 || e.Index > Items.Count)
@@ -171,7 +171,7 @@ namespace OPMedia.UI.Controls
                 cText = ThemeManager.WndValidColor;
                 hot = true;
             }
-            
+
             ThemeManager.PrepareGraphics(e.Graphics);
 
             Rectangle rc1 = e.Bounds;
@@ -247,7 +247,7 @@ namespace OPMedia.UI.Controls
                     cText = ThemeManager.SelectedTextColor;
                 }
             }
-           
+
             if (_overrideForeColor != Color.Empty)
             {
                 cText = _overrideForeColor;
@@ -364,7 +364,7 @@ namespace OPMedia.UI.Controls
         {
             PopulateInstalledFonts();
         }
-        
+
         private void PopulateInstalledFonts()
         {
             FontFamily[] fontFamilies = new InstalledFontCollection().Families;
@@ -524,7 +524,7 @@ namespace OPMedia.UI.Controls
         {
             PopulateKnownColors();
         }
-        
+
         private void PopulateKnownColors()
         {
             KnownColor[] knownColors = (KnownColor[])Enum.GetValues(typeof(KnownColor));

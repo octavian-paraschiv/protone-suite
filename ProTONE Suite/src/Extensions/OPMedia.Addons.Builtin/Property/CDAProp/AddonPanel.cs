@@ -91,7 +91,7 @@ namespace OPMedia.Addons.Builtin.CDAProp
 
         void _reloadTimer_Tick(object sender, EventArgs e)
         {
-            _reloadTimer.Stop(); 
+            _reloadTimer.Stop();
             InternalShowProperties(true);
         }
 

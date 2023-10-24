@@ -104,7 +104,7 @@ namespace OPMedia.Core.TranslationSupport
 
             }
             catch (Exception ex)
-            { 
+            {
                 Logger.LogException(ex);
             }
             return false;

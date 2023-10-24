@@ -41,8 +41,8 @@ namespace OPMedia.Core
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", 
-                StringUtils.Capitalize(_ci.NativeName, WordCasing.CapitalizeWords), 
+            return string.Format("{0} ({1})",
+                StringUtils.Capitalize(_ci.NativeName, WordCasing.CapitalizeWords),
                 _ci.TwoLetterISOLanguageName.ToUpperInvariant());
         }
 
@@ -77,7 +77,7 @@ namespace OPMedia.Core
                 if (string.Compare(lang.ThreeLetterISOLanguageName, name, true) == 0)
                     return lang;
             }
-            
+
             try
             {
                 switch (name.ToLowerInvariant())
@@ -106,7 +106,7 @@ namespace OPMedia.Core
                     case "alb":
                     case "alb/sqi":
                         return new Language("sq");
-                    
+
                     case "hye":
                     case "arm":
                     case "arm/hye":
@@ -121,12 +121,12 @@ namespace OPMedia.Core
                     case "bur":
                     case "bur/mya":
                         return new Language("my");
-                    
+
                     case "zho":
                     case "chi":
                     case "chi/zho":
                         return new Language("zh");
-                    
+
                     case "kat":
                     case "geo":
                     case "geo/kat":
@@ -141,7 +141,7 @@ namespace OPMedia.Core
                     case "ell":
                     case "gre/ell":
                         return new Language("el");
-                    
+
                     case "isl":
                     case "ice":
                     case "ice/isl":
@@ -171,15 +171,15 @@ namespace OPMedia.Core
                     case "pob":
                     case "pob/pb":
                         return new Language("pt-BR");
-                    
+
                     //case "qaa-qtz":
-                      //  return new Language("ro");
+                    //  return new Language("ro");
 
                     case "slo":
                     case "slk":
                     case "slk/slo":
                         return new Language("sk");
-                    
+
                     case "bod":
                     case "tib":
                     case "tib/bod":
@@ -195,7 +195,7 @@ namespace OPMedia.Core
 
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

@@ -25,7 +25,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
         {
             get { return lbMatchingItems.SelectedItem as PlaylistItem; }
         }
-        
+
         public JumpToItemDlg(Playlist playlist)
             : base("TXT_JUMP_TO_ITEM")
         {

@@ -69,7 +69,7 @@ namespace OPMedia.Runtime.DSP
                                 string s = ex.Message;
                             }
 
-                            
+
                     }
 
                     data = data / idxs.Length;
@@ -84,7 +84,7 @@ namespace OPMedia.Runtime.DSP
                     }
 
                 }
-                
+
             }
 
             return outData;

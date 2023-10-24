@@ -71,7 +71,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubEnabled.CheckedChanged += new System.EventHandler(this.chkSubEnabled_CheckedChanged);
 
         }
-        
+
         void chkFilterStateNotificationsEnabled_CheckedChanged(object sender, EventArgs e)
         {
             Modified = true;

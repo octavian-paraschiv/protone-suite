@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace OPMedia.Core
 {
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-    public class LOGFONT 
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    public class LOGFONT
     {
         public int lfHeight;
         public int lfWidth;
@@ -23,7 +23,7 @@ namespace OPMedia.Core
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
         public string szFaceName;
     };
-    
+
     public class Gdi32
     {
         const string GDI32 = "gdi32.dll";

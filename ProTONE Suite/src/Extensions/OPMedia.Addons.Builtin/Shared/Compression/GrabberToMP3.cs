@@ -48,7 +48,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
 
             WaveFormat fmt = new WaveFormat(this.Options.ResampleFrequency,
                 this.Options.ChannelMode == ChannelMode.SingleChannel ? 1 : 2);
-            
+
             switch (this.Options.BitrateMode)
             {
                 case BitrateMode.CBR:
@@ -73,7 +73,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
 
             if (MustCancel())
                 return;
-            
+
             try
             {
                 int buffPos = 0;

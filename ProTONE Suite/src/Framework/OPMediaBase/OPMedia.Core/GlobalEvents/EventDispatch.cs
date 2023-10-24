@@ -174,7 +174,7 @@ namespace OPMedia.Core
 
             bool handlerNotFound = true; ;
 
-            lock(_invocationMap)
+            lock (_invocationMap)
             {
                 if (_invocationMap.ContainsKey(eventName))
                 {
@@ -272,7 +272,7 @@ namespace OPMedia.Core
             int objectCount = 0;
             foreach (KeyValuePair<string, Dictionary<object, EventSinkMethodInfo>> kvp in _invocationMap)
             {
-                Debug.WriteLine("    EventDispatch: Event: {0} has {1} registered objects: ", 
+                Debug.WriteLine("    EventDispatch: Event: {0} has {1} registered objects: ",
                     kvp.Key, kvp.Value.Count);
 
                 foreach (object obj in kvp.Value.Keys)

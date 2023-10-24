@@ -20,7 +20,7 @@ namespace OPMedia.DeezerInterop.RestApi
         /// Gets the country name.
         /// </summary>
         public string Country { get; internal set; }
-        
+
         /// <summary>
         /// Gets a value indicating whether the Deezer service is open in the country.
         /// </summary>

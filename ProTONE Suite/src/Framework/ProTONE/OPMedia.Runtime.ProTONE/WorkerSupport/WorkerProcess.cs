@@ -40,7 +40,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         /// OPMedia.VideoDvdWorker.exe
         /// </summary>
         VideoDvd,
-      
+
         /// <summary>
         /// OPMedia.VideoWorker.exe
         /// </summary>
@@ -78,7 +78,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             _wp = Process.Start(psi);
 
             this.Pid = _wp.Id;
-            
+
             _wcs = new WorkerClientStream(this.Pid);
 
         }

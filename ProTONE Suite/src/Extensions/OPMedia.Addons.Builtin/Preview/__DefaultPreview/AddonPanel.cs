@@ -23,7 +23,7 @@ namespace OPMedia.Addons.Builtin.__DefaultPreview
         {
             InitializeComponent();
         }
-    
+
         private void InitializeComponent()
         {
             this.lblResult = new OPMLabel();
@@ -61,6 +61,6 @@ namespace OPMedia.Addons.Builtin.__DefaultPreview
 
         protected override void DoEndPreview()
         {
-        } 
+        }
     }
 }

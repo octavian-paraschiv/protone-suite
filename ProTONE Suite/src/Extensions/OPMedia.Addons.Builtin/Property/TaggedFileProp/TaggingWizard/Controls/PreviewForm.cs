@@ -34,10 +34,10 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
                         lvPreview.Columns["TXT_NEW_FILENAME"].Width = w / 2;
                     }
                     break;
-            
+
                 case TaskType.EditTag:
                 case TaskType.FillTagByFS:
-                
+
                     {
                         w -= 180;
 
@@ -127,9 +127,9 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
                 {
                     ITaggedMediaFileInfo taggedFileInfo = new MediaFileTagger(file, _task).PreviewUpdateTag(_task.WordCasing);
 
-                    string[] data = new string[] 
-                    { 
-                        Path.GetFileName(file), 
+                    string[] data = new string[]
+                    {
+                        Path.GetFileName(file),
                         taggedFileInfo.Artist,
                         taggedFileInfo.Album,
                         taggedFileInfo.Title,
@@ -158,9 +158,9 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
                 {
                     ITaggedMediaFileInfo taggedFileInfo = new MediaFileTagger(file, _task).PreviewTagFromFileFolderName(_task.WordCasing);
 
-                    string[] data = new string[] 
-                    { 
-                        Path.GetFileName(file), 
+                    string[] data = new string[]
+                    {
+                        Path.GetFileName(file),
                         taggedFileInfo.Artist,
                         taggedFileInfo.Album,
                         taggedFileInfo.Title,
@@ -203,7 +203,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
         }
 
 
-        
+
 
     }
 }

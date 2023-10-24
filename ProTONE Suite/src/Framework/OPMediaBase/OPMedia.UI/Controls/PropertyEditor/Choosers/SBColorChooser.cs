@@ -18,12 +18,12 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 
         public string PropertyValue
         {
-            get 
+            get
             {
-                return cc.ConvertToInvariantString(base.Color); 
+                return cc.ConvertToInvariantString(base.Color);
             }
-            
-            set 
+
+            set
             {
                 base.Color = ThemeManager.SafeColorFromString(value);
             }

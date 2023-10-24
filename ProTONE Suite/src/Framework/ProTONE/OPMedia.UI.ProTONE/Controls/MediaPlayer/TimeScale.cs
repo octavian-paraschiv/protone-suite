@@ -123,10 +123,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             InitializeComponent();
 
             timeProgress.GaugeMode = GaugeMode.BandToStart;
-            
-            timeProgress.PositionChanged += 
+
+            timeProgress.PositionChanged +=
                 new ValueChangedEventHandler(timeProgress_PositionChanged);
-            timeProgress.HoveredPositionChanged += 
+            timeProgress.HoveredPositionChanged +=
                 new ValueChangedEventHandler(timeProgress_HoveredPositionChanged);
 
             this.HandleCreated += TimeScale_HandleCreated;
@@ -260,7 +260,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 TimeScale.Enabled = RenderingEngine.DefaultInstance.CanSeekMedia;
                 TimeScale.ElapsedSeconds = (int)(RenderingEngine.DefaultInstance.MediaPosition);
                 TimeScale.TotalSeconds = (int)(RenderingEngine.DefaultInstance.MediaLength);
-            }             
+            }
         }
 
         void TimeScale_PositionChanged(double newVal)

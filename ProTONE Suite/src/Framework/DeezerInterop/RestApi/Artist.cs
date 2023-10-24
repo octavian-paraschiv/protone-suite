@@ -16,7 +16,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         [JsonProperty("link")]
         public string WebUri { get; set; }
-        
+
         [JsonProperty("picture_medium")]
         public Uri ImageUriSmall { get; set; }
 
@@ -25,7 +25,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         [JsonProperty("nb_fan")]
         public int FansCount { get; set; }
-        
+
         public int AlbumsCount { get; set; }
 
         [JsonProperty("radio")]
@@ -49,7 +49,7 @@ namespace OPMedia.DeezerInterop.RestApi
             AlbumsCount = -1;
         }
 
-        public List<Album>  LoadAlbums()
+        public List<Album> LoadAlbums()
         {
             Albums = new List<Album>();
 
@@ -74,7 +74,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public override string ToString()
         {
-            return string.Format("[ID={0}, Name={1}]", 
+            return string.Format("[ID={0}, Name={1}]",
                 this.Id, this.Name);
         }
     }

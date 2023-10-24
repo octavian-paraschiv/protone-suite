@@ -57,7 +57,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
                 if (_evtCmdReceived.WaitOne(0) == false)
                 {
-                    Logger.LogTrace($"Worker loop has not received any command in {_tmrCheckWorkerLoop.Interval / 1000 } sec ... Exiting worker process.");
+                    Logger.LogTrace($"Worker loop has not received any command in {_tmrCheckWorkerLoop.Interval / 1000} sec ... Exiting worker process.");
 
                     // Kill worker process
                     Process.GetCurrentProcess().Kill();

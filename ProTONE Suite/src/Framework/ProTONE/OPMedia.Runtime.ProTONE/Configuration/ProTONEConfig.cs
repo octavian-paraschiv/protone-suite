@@ -43,7 +43,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
     public static class ProTONEConfig
     {
-        const string _Fallback_DefaultSubtitleURIs = 
+        const string _Fallback_DefaultSubtitleURIs =
             @"BSP_V1;http://api.bsplayer-subtitles.com/v1.php;1\Osdb;http://api.opensubtitles.org/xml-rpc;1\NuSoap;http://api.getsubtitle.com/server.php;0";
 
         const string _Fallback_DefaultLinkedFiles =
@@ -344,19 +344,19 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         public static bool UseLinkedFiles
         {
-            get 
+            get
             {
                 if (_useLinkedFiles.HasValue)
                     return _useLinkedFiles.Value;
 
                 _useLinkedFiles = (PersistenceProxy.ReadObject("UseLinkedFiles", 1) != 0);
 
-                return _useLinkedFiles.Value; 
+                return _useLinkedFiles.Value;
             }
-            set 
+            set
             {
                 _useLinkedFiles = value;
-                PersistenceProxy.SaveObject("UseLinkedFiles", value ? 1 : 0); 
+                PersistenceProxy.SaveObject("UseLinkedFiles", value ? 1 : 0);
             }
         }
 
@@ -736,7 +736,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
         }
 
-        
+
         public static bool FullScreenOn
         {
             get

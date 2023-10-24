@@ -26,7 +26,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
     /// </summary>
     [DataContract]
     public class Track
-	{
+    {
         [DataMember(Order = 0)]
         public string Artist { get; set; }
 
@@ -45,7 +45,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
         [DataMember(Order = 5)]
         public string ExtendedData { get; set; }
 
-        [DataMember(Order = 6, IsRequired=false)]
+        [DataMember(Order = 6, IsRequired = false)]
         public int Index { get; set; }
 
         public override string ToString()
@@ -53,13 +53,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
             return string.Format("{0}", Index);
         }
 
-		/// <summary>
-		/// Create an instance of a Track 
-		/// </summary>
-		/// <param name="title"></param>
-		public Track()
-		{
-		}
+        /// <summary>
+        /// Create an instance of a Track 
+        /// </summary>
+        /// <param name="title"></param>
+        public Track()
+        {
+        }
 
         internal void Merge(Track slave)
         {

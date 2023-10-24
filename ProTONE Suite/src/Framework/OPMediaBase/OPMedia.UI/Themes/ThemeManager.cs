@@ -37,7 +37,7 @@ namespace OPMedia.UI.Themes
 
     public class FontSizeInfo
     {
-        public FontSizes SizeName { get; private set;}
+        public FontSizes SizeName { get; private set; }
         public float Size { get; private set; }
         public FontStyle Style { get; private set; }
 
@@ -95,7 +95,7 @@ namespace OPMedia.UI.Themes
         }.ToDictionary(fi => fi.SizeName);
 
         static Dictionary<FontSizes, Font> _fonts = new Dictionary<FontSizes, Font>();
- 
+
         #region Members
 
         private static ColorConverter cc = new ColorConverter();
@@ -128,11 +128,11 @@ namespace OPMedia.UI.Themes
         }
 
         public static Color ListActiveItemColor
-        { 
-            get 
+        {
+            get
             {
-                return ThemeElement("ListActiveItemColor", SafeColorFromString("255, 000, 000")); 
-            } 
+                return ThemeElement("ListActiveItemColor", SafeColorFromString("255, 000, 000"));
+            }
         }
 
         public static Color ListHotItemColor
@@ -290,12 +290,12 @@ namespace OPMedia.UI.Themes
         { get { return ThemeElement("FormBorderWidth", 3); } }
 
         public static string ResourcesFolder
-        { 
-            get 
+        {
+            get
             {
                 string currentTheme = AppConfig.SkinType;
-                return ThemeElement("ResourcesFolder", currentTheme); 
-            } 
+                return ThemeElement("ResourcesFolder", currentTheme);
+            }
         }
 
         public static Color ColorValidationFailed
@@ -327,7 +327,7 @@ namespace OPMedia.UI.Themes
 
         #region Methods
 
-        public static Font GetFontBySize(FontSizes fnSize) 
+        public static Font GetFontBySize(FontSizes fnSize)
         {
             return _fonts[fnSize];
         }
@@ -342,7 +342,7 @@ namespace OPMedia.UI.Themes
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 g.TextContrast = 1;
-                
+
             }
         }
 
@@ -440,7 +440,7 @@ namespace OPMedia.UI.Themes
                 RecreateFonts();
                 SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -463,7 +463,7 @@ namespace OPMedia.UI.Themes
         {
             Type t = typeof(Control);
             BindingFlags all = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            
+
             PropertyInfo pi = t.GetProperty("DoubleBuffered", all);
             if (pi != null)
             {
@@ -588,7 +588,7 @@ namespace OPMedia.UI.Themes
             try
             {
                 if (_allThemesElements == null)
-                    _allThemesElements = new Dictionary<string,Dictionary<string,string>>();
+                    _allThemesElements = new Dictionary<string, Dictionary<string, string>>();
 
                 if (_allThemesElements.ContainsKey(themeName) == false)
                     _allThemesElements.Add(themeName, new Dictionary<string, string>());

@@ -30,6 +30,6 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
         internal virtual void Reload()
         {
         }
-            
+
     }
 }

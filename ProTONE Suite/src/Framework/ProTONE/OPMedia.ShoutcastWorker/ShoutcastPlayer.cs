@@ -77,7 +77,7 @@ namespace OPMedia.ShoutcastWorker
             mediaControl = BuildMediaControl();
 
             var filter = new ShoutcastStreamSourceFilter();
-            
+
             // Create Filter
             _source = new DSBaseSourceFilter(filter);
 

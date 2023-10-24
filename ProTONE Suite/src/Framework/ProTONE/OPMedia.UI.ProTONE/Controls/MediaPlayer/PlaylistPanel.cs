@@ -46,7 +46,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         OPMToolTip _tip = new OPMToolTip();
 
         Playlist playlist = new Playlist();
-        
+
         public event LaunchFileEventHandler LaunchFile = null;
         public event EventHandler PlaylistItemMenuClick = null;
         public event TotalTimeChangedHandler TotalTimeChanged = null;
@@ -99,7 +99,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrSavePlaylist.Interval = 500;
             _tmrSavePlaylist.Tick += _tmrSavePlaylist_Tick;
 
-           
+
             _tmrUpdateItemsDesc = new System.Windows.Forms.Timer();
             _tmrUpdateItemsDesc.Interval = 300;
             _tmrUpdateItemsDesc.Tick += OnTimerUpdateItemsDesc;
@@ -152,7 +152,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 UpdateTotalTime(playlist.TotalPlaylistTime);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -218,7 +218,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (idxVisible >= 0)
             {
-            	// THis generates issue #264
+                // THis generates issue #264
                 // TODO: fix #264 while still keep the capability to auto-scroll to the active item...
                 //lvPlaylist.EnsureVisible(idxVisible);
             }
@@ -358,7 +358,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         }
 
         bool initialState = true;
-        
+
 
         internal List<PlaylistItem> GetPlaylistItems()
         {
@@ -482,7 +482,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 if (playlist.Count <= 0)
                     return null;
-    
+
                 return GetActivePlaylistItem();
             }
             catch { }
@@ -496,7 +496,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 if (playlist.Count <= 0)
                     return null;
-    
+
                 return GetActivePlaylistItem().DisplayName;
             }
             catch { }
@@ -735,7 +735,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     Clear();
                     playlist.LoadPlaylist(dlg.FileName);
                 }
-                
+
                 try
                 {
                     string file = dlg.FileNames[0];
@@ -810,7 +810,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 UpdateTotalTime(playlist.TotalPlaylistTime);
                 UpdateItemsDesc();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -1023,7 +1023,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (e.Button == MouseButtons.Right)
             {
-                
+
             }
         }
 

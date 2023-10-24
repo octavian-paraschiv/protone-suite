@@ -327,7 +327,7 @@ namespace OPMedia.VideoWorker
                     }
             }
             catch
-            { 
+            {
             }
         }
 

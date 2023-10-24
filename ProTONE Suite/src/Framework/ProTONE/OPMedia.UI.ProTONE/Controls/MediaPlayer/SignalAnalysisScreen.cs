@@ -77,7 +77,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         {
             OnUpdateMediaScreens();
         }
-        
+
         [EventSink(EventNames.ThemeUpdated)]
         [EventSink(LocalEventNames.UpdateMediaScreens)]
         public void OnUpdateMediaScreens()

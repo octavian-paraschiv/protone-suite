@@ -471,7 +471,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         HWDecOnly = 0x02,
         SWDecPrefer = 0x04,
         SWDecOnly = 0x08,
-        
+
         DoNotClear = 0x200,
         VMR9Only = 0x800,
         EVROnly = 0x1000,   // only use EVR (otherwise fail) for rendering

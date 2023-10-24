@@ -114,7 +114,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
             int hr = dvdControl2.SetOption(DvdOptionFlag.HMSFTimeCodeEvents, true);	// use new HMSF timecode format
             WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
-            
+
             hr = dvdControl2.SetOption(DvdOptionFlag.ResetOnStop, false);
             WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
@@ -209,7 +209,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         {
             if ((dvdControl2 == null) || (menuMode != MenuMode.Buttons))
                 return;
-            
+
             int hr = dvdControl2.ActivateAtPosition(DsPOINT.FromPoint(e.Location));
             WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
         }
@@ -269,9 +269,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         //}
 
         protected override void DoResumeRenderer(double fromPosition)
+        {
+            if (mediaControl != null)
             {
-                if (mediaControl != null)
-                {
                 int hr = mediaControl.Run();
                 WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
@@ -317,7 +317,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         protected override void HandleGraphEvent(EventCode code, int p1, int p2)
         {
-            
+
 
             switch (code)
             {
@@ -376,46 +376,46 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
                         WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
                     }
                     break;
-                }
             }
+        }
 
-            protected override int DoGetSubtitleStream()
+        protected override int DoGetSubtitleStream()
+        {
+            int nStreams = 0;
+            int crtStream = 0;
+            bool disabled = true;
+
+            dvdInfo.GetCurrentSubpicture(out nStreams, out crtStream, out disabled);
+
+            if (!disabled)
             {
-                int nStreams = 0;
-                int crtStream = 0;
-                bool disabled = true;
-
-                dvdInfo.GetCurrentSubpicture(out nStreams, out crtStream, out disabled);
-
-                if (!disabled)
-                {
-                    return crtStream;
-                }
-
-                return -1;
+                return crtStream;
             }
 
-            protected override void DoSetSubtitleStream(int sid)
+            return -1;
+        }
+
+        protected override void DoSetSubtitleStream(int sid)
+        {
+            try
             {
-                try
-                {
-                    int hr = dvdControl2.SelectSubpictureStream(sid, DvdCmdFlags.None, _lastCmd);
-                    WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
-                    
-                    hr = dvdControl2.SetSubpictureState(true, DvdCmdFlags.None, _lastCmd);
-                    WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
-                }
-                catch (Exception exception)
-                {
-                    Logger.LogException(exception);
-                }
-            }
+                int hr = dvdControl2.SelectSubpictureStream(sid, DvdCmdFlags.None, _lastCmd);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
 
-            protected override double GetDurationScaleFactor()
-            {
-                return 1;
+                hr = dvdControl2.SetSubpictureState(true, DvdCmdFlags.None, _lastCmd);
+                WorkerException.ThrowForHResult(WorkerError.RenderingError, hr);
             }
+            catch (Exception exception)
+            {
+                Logger.LogException(exception);
+            }
+        }
+
+        protected override double GetDurationScaleFactor()
+        {
+            return 1;
+        }
     }
 
-    
+
 }

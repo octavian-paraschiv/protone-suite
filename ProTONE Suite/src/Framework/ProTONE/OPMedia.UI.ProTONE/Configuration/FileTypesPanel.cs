@@ -60,7 +60,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         public FileTypesPanel() : base()
         {
             this.Title = "TXT_S_FILETYPES";
-            
+
             InitializeComponent();
 
             hdrAudio.Image = ImageProcessing.AudioFile16;
@@ -82,7 +82,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.HandleCreated += new EventHandler(FileTypesPanel_HandleCreated);
         }
 
-       
+
         void FileTypesPanel_HandleCreated(object sender, EventArgs e)
         {
             using (Graphics g = CreateGraphics())
@@ -118,7 +118,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         {
             Modified = true;
         }
-       
+
         private void FillExplorerLaunchTypes()
         {
             cmbExplorerLaunchType.Items.Clear();
@@ -179,8 +179,8 @@ namespace OPMedia.UI.ProTONE.Configuration
                 OPMCheckBox cb = CreateCheckBox(type, isRegistered);
                 pnlPlaylists.Controls.Add(cb);
             }
-       }
-        
+        }
+
         private void InitializeComponent()
         {
             this.label3 = new OPMedia.UI.Controls.OPMLabel();
@@ -634,9 +634,9 @@ namespace OPMedia.UI.ProTONE.Configuration
             }
         }
 
-        
 
-       
+
+
     }
 }
 

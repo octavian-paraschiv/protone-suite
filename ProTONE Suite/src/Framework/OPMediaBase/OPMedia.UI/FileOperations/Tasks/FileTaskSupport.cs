@@ -72,7 +72,7 @@ namespace OPMedia.UI.FileOperations.Tasks
         }
 
         ManualResetEvent _canContinueEvent = new ManualResetEvent(true);
-        public bool CanContinue 
+        public bool CanContinue
         {
             get
             {
@@ -123,7 +123,7 @@ namespace OPMedia.UI.FileOperations.Tasks
 
                 ConfirmationData retVal = new ConfirmationData();
 
-                MainThread.Send(delegate(object x)
+                MainThread.Send(delegate (object x)
                 {
                     DialogResult dr = DialogResult.Abort;
 
@@ -304,7 +304,7 @@ namespace OPMedia.UI.FileOperations.Tasks
                     _transferredAtomCount = 0;
                     FileRoutines.CopyFile(srcFile, destFile, Kernel32.CopyFileOptions.None, new Kernel32.CopyFileCallback(this.CopyFileCallback));
                     _task.FireTaskProgress(ProgressEventType.Progress, srcFile, UpdateProgressData.FileDone);
-                    
+
                     Log(FSAction.Copy, srcFile, destFile);
 
                     // File system changed => refresh will be required
@@ -390,8 +390,8 @@ namespace OPMedia.UI.FileOperations.Tasks
             while (_fileTaskWaitEvent.WaitOne(10))
                 Application.DoEvents();
 
-            return CanContinue ? 
-                Kernel32.CopyFileCallbackAction.Continue : 
+            return CanContinue ?
+                Kernel32.CopyFileCallbackAction.Continue :
                 Kernel32.CopyFileCallbackAction.Cancel;
         }
 

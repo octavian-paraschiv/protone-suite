@@ -51,11 +51,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         #region Properties
 
         internal bool MediaSeekable
-        { 
-            get 
+        {
+            get
             {
-                return IsMediaSeekable(); 
-            } 
+                return IsMediaSeekable();
+            }
         }
 
         internal double DurationScaleFactor
@@ -68,24 +68,24 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
 
         internal double MediaLength
-        { 
-            get 
+        {
+            get
             {
-                return GetMediaLength(); 
-            } 
+                return GetMediaLength();
+            }
         }
 
         internal double MediaPosition
-        { 
-            get 
+        {
+            get
             {
                 return DoGetMediaPosition();
                 //return GetMediaPosition(); 
-            } 
-            set 
+            }
+            set
             {
-                SetMediaPosition(value); 
-            } 
+                SetMediaPosition(value);
+            }
         }
 
         protected virtual double DoGetMediaPosition()
@@ -97,11 +97,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         }
 
         internal bool AudioMediaAvailable
-        { 
-            get 
+        {
+            get
             {
-                return IsAudioMediaAvailable(); 
-            } 
+                return IsAudioMediaAvailable();
+            }
         }
 
         internal bool VideoMediaAvailable
@@ -113,11 +113,11 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         }
 
         internal OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState FilterState
-        { 
-            get 
+        {
+            get
             {
-                return GetFilterState(); 
-            } 
+                return GetFilterState();
+            }
         }
 
         public virtual double PercentualVolume
@@ -130,12 +130,12 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
 
         internal int AudioVolume
         {
-            get 
+            get
             {
                 int vol = GetAudioVolume();
                 return vol;
-            } 
-            set 
+            }
+            set
             {
                 int vol = value;
                 if (vol < 0)
@@ -143,8 +143,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
                 if (vol > 100)
                     vol = 100;
 
-                SetAudioVolume(vol); 
-            } 
+                SetAudioVolume(vol);
+            }
         }
 
         internal int AudioBalance
@@ -210,8 +210,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             int hintPos = 0;
             if (startHint is BookmarkStartHint)
                 hintPos = (int)(startHint as BookmarkStartHint).Bookmark.PlaybackTimeInSeconds;
-                
-            CreateAndStartInternalClock(hintPos); 
+
+            CreateAndStartInternalClock(hintPos);
             DoStartRendererWithHint(startHint);
         }
 
@@ -286,7 +286,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         private void StopInternalClock()
         {
             if (_tmrInternalClock != null)
-                _tmrInternalClock.Stop(); 
+                _tmrInternalClock.Stop();
 
             lock (_syncElapsedSeconds)
             {
@@ -299,10 +299,10 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
             get
             {
                 bool ret = IsEndOfMedia();
-                
+
                 if (ret)
                     StopInternalClock();
-                
+
                 return ret;
             }
         }
@@ -390,7 +390,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.Base
         protected abstract void DoSetFullScreen(bool fullScreen);
 
         protected abstract object DoGetGraphFilter();
-        
+
 
         #endregion
 

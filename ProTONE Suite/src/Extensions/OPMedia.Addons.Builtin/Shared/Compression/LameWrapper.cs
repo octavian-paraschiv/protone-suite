@@ -47,7 +47,7 @@ namespace OPMedia.Addons.Builtin.Shared.Compression
         public LAMEPreset Preset { get; set; }
 
         public VBRQuality VBRQuality { get; set; }
-            
+
         public WaveFormatEx WaveFormat { get; set; }
 
         public int ResampleFrequency { get; set; }

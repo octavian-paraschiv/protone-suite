@@ -9,8 +9,8 @@ namespace OPMedia.UI.ProTONE
     {
         public static Image GetImageEx(this PlaylistItem pli, bool large)
         {
-            Image img = null; 
-            
+            Image img = null;
+
             if (pli != null)
             {
                 if (pli is RadioStationPlaylistItem)

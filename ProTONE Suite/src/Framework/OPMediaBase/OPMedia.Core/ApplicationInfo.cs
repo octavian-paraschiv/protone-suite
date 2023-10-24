@@ -95,7 +95,7 @@ namespace OPMedia.Core
                         return Assembly.GetEntryAssembly().GetName().Name;
                     }
                 }
-                catch 
+                catch
                 {
                     _appName = "Unknown";
                 }

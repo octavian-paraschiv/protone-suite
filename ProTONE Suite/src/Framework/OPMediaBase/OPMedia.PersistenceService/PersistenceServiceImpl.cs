@@ -201,7 +201,7 @@ namespace OPMedia.PersistenceService
             try
             {
                 _saveTicToc.Tic();
-                
+
                 bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
                 if (ok)
                 {

@@ -140,7 +140,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         public override Dictionary<string, string> MediaInfo
         {
-            get            
+            get
             {
                 Dictionary<string, string> info = base.MediaInfo;
 
@@ -169,7 +169,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public DeezerTrackPlaylistItem(DeezerTrackItem dti) : 
+        public DeezerTrackPlaylistItem(DeezerTrackItem dti) :
             base(dti.Url, false, false)
         {
             _dti = dti;

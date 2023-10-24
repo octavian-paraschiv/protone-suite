@@ -289,7 +289,7 @@ namespace OPMedia.Core
             uint cbFileInfo, uint uFlags);
 
         [DllImport(SHELL32, CharSet = CharSet.Auto)]
-        public static extern uint ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge, 
+        public static extern uint ExtractIconEx(string lpszFile, int nIconIndex, IntPtr[] phiconLarge,
             IntPtr[] phiconSmall, uint nIcons);
 
         [DllImport(SHELL32, CharSet = CharSet.Auto)]

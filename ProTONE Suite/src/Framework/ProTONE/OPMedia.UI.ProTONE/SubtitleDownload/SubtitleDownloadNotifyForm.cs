@@ -78,12 +78,12 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 {
                     foreach (SubtitleInfo si in list)
                     {
-                        string[] data = new string[] 
-                        { 
+                        string[] data = new string[]
+                        {
                             string.IsNullOrEmpty(si.SubFileName) ? none : si.SubFileName,
-                            string.IsNullOrEmpty(sd.DisplayName) ? none : sd.DisplayName, 
-                            sd.Priority.ToString(), 
-                            string.IsNullOrEmpty(si.LanguageName) ? none : si.LanguageName, 
+                            string.IsNullOrEmpty(sd.DisplayName) ? none : sd.DisplayName,
+                            sd.Priority.ToString(),
+                            string.IsNullOrEmpty(si.LanguageName) ? none : si.LanguageName,
                             string.IsNullOrEmpty(si.SubSize) ? none : si.SubSize
                         };
 
@@ -108,7 +108,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         {
                             item.UseItemStyleForSubItems = false;
                             item.Font = ThemeManager.SmallFont;
-                            foreach(ListViewItem.ListViewSubItem lvsi in item.SubItems)
+                            foreach (ListViewItem.ListViewSubItem lvsi in item.SubItems)
                                 lvsi.Font = ThemeManager.SmallFont;
                         }
                     }
@@ -191,7 +191,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                 e.Handled = true;
                 return;
             }
-            
+
             if (e.Value != null && e.Value.ToString() == none)
             {
                 e.CellStyle.ForeColor = ThemeManager.BorderColor;
@@ -215,23 +215,23 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
     /// Needed to sort the list view items.
     /// </summary>
 	internal class SubtitleFormComparer : IComparer
-	{
-		private int _col;
+    {
+        private int _col;
         private int _sortOrderParam = 1;
 
-		public SubtitleFormComparer(int column, int sortOrderParam)
-		{
-			_col = column;
+        public SubtitleFormComparer(int column, int sortOrderParam)
+        {
+            _col = column;
             _sortOrderParam = (sortOrderParam > 0) ? 1 : -1;
-		}
+        }
 
-		public int Compare(object x, object y)
-		{
+        public int Compare(object x, object y)
+        {
             ListViewItem row1 = x as ListViewItem;
             ListViewItem row2 = y as ListViewItem;
 
             if (row1 == null && row2 == null)
-               return 0;
+                return 0;
             else if (row1 == null)
                 return 1;
             else if (row2 == null)
@@ -247,7 +247,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         int res = CompareByCriterion(row1, row2, _col);
                         if (res != 0)
                             return _sortOrderParam * res;
-                        else 
+                        else
                             goto default;
                     }
 
@@ -267,7 +267,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                             return localSortParam * CompareByCriterion(row1, row2, Columns.ServerOrder);
                     }
             }
-		}
+        }
 
         private int CompareByCriterion(ListViewItem row1, ListViewItem row2, int criterion)
         {
@@ -307,5 +307,5 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
             return string.Compare(lang1, lang2);
         }
-	}
+    }
 }

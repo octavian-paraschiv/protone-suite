@@ -20,24 +20,24 @@ namespace OPMedia.Runtime.FileInformation
             ulong num = (ulong)length;
             long num3 = 0L;
             byte[] buffer = new byte[8];
-            
+
             input.Position = 0L;
-            
+
             while ((num3 < 0x2000L) && (input.Read(buffer, 0, 8) > 0))
             {
                 num3 += 1L;
                 num += BitConverter.ToUInt64(buffer, 0);
             }
-            
+
             input.Position = Math.Max((long)0L, (long)(length - 0x10000L));
             num3 = 0L;
-            
+
             while ((num3 < 0x2000L) && (input.Read(buffer, 0, 8) > 0))
             {
                 num3 += 1L;
                 num += BitConverter.ToUInt64(buffer, 0);
             }
-            
+
             byte[] bytes = BitConverter.GetBytes(num);
             Array.Reverse(bytes);
             return bytes;

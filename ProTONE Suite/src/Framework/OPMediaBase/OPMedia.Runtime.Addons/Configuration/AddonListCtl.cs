@@ -94,7 +94,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                     tnLibrary.Nodes.Add(tnCategory);
                 }
             }
-            
+
             foreach (AddonInfo ai in NavigationAddons)
             {
                 TreeNode libNode = _libNodes[ai.LibraryName];
@@ -111,7 +111,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 TreeNode catNode = libNode.Nodes[1];
 
                 TreeNode tn = new TreeNode(ai.TranslatedName);
-                tn.NodeFont = ThemeManager.SmallFont; 
+                tn.NodeFont = ThemeManager.SmallFont;
                 tn.Tag = ai;
                 catNode.Nodes.Add(tn);
             }
@@ -126,8 +126,8 @@ namespace OPMedia.Runtime.Addons.Configuration
                 catNode.Nodes.Add(tn);
             }
 
-            UpdateTreeNodes(); 
-           
+            UpdateTreeNodes();
+
             tvAddons.AfterSelect += new TreeViewEventHandler(tvAddons_AfterSelect);
 
             tvAddons.ExpandAll();
@@ -227,7 +227,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             if (e.Action == TreeViewAction.Collapse ||
                 e.Action == TreeViewAction.Expand)
                 return;
-            
+
             Logger.LogTrace("OnNodeChecked: " + e);
 
             try
@@ -322,7 +322,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             }
         }
 
-        
+
 
         private void CheckAddon(TreeNode tn)
         {
@@ -333,7 +333,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             }
         }
 
-        
+
     }
 
     public class AddonInfo

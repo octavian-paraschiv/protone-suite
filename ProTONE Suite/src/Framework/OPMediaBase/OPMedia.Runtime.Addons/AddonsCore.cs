@@ -223,7 +223,7 @@ namespace OPMedia.Runtime.Addons
             if (errors)
             {
                 ErrorDispatcher.DispatchError("Some errors were encountered while loading addons.\n" +
-                "You can open Settings -> Addon Config to check which addons are operational.", 
+                "You can open Settings -> Addon Config to check which addons are operational.",
                 false);
             }
 

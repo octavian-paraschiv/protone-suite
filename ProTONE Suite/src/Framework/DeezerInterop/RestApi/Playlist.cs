@@ -46,7 +46,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         internal class TracksContainer
         {
-            public List<Track> Data { get; set; } 
+            public List<Track> Data { get; set; }
         }
 
         public void LoadTracks()

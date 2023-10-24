@@ -25,15 +25,15 @@ namespace OPMedia.Runtime.ProTONE
 
         public static bool PlaylistEventEnabled
         {
-            get 
+            get
             {
                 lock (_playlistSync)
                 {
                     return (_instance != null) && _instance._playlistEventEnabled;
                 }
             }
-            
-            set 
+
+            set
             {
                 lock (_playlistSync)
                 {
@@ -49,7 +49,7 @@ namespace OPMedia.Runtime.ProTONE
                 }
             }
         }
-        
+
         public static void Start()
         {
             if (_instance == null)
@@ -223,7 +223,7 @@ namespace OPMedia.Runtime.ProTONE
 
                     bool res = false;
 
-                    MainThread.Send(delegate(object x)
+                    MainThread.Send(delegate (object x)
                     {
                         res = QueryScheduledAction(action, msg);
 
@@ -281,7 +281,7 @@ namespace OPMedia.Runtime.ProTONE
         {
 
             // Wait here for proceed signal.
-            while(true)
+            while (true)
             {
                 if (_canProceed.WaitOne(10, true))
                     break;
@@ -308,7 +308,7 @@ namespace OPMedia.Runtime.ProTONE
                             break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ErrorDispatcher.DispatchError(ex, true);
                 }

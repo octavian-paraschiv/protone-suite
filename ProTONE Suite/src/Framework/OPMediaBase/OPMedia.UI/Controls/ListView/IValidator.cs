@@ -7,34 +7,34 @@ namespace OPMedia.UI.Controls
     /// Provides a common interface for the Number/TextValidator instances.
     /// </summary>
     public interface IValidator
-	{
-		#region Properties
-		/// <summary>
-		/// Gets the minimum length of the text accepted by the validator.
-		/// </summary>
-		int MinLength
-		{
-			get;
-		}
+    {
+        #region Properties
+        /// <summary>
+        /// Gets the minimum length of the text accepted by the validator.
+        /// </summary>
+        int MinLength
+        {
+            get;
+        }
 
-		/// <summary>
-		/// Gets the maximum length of the text accepted by the validator.
-		/// </summary>
-		int MaxLength
-		{
-			get;
-		}
-		#endregion
+        /// <summary>
+        /// Gets the maximum length of the text accepted by the validator.
+        /// </summary>
+        int MaxLength
+        {
+            get;
+        }
+        #endregion
 
-		#region Methods
-		/// <summary>
-		/// Checks the specified text against this validator.
-		/// </summary>
-		/// <param name="text">The text to check.</param>
-		/// <returns>True if text valid, false otherwise.</returns>
-		bool Check(string text);
-		#endregion
-	}
+        #region Methods
+        /// <summary>
+        /// Checks the specified text against this validator.
+        /// </summary>
+        /// <param name="text">The text to check.</param>
+        /// <returns>True if text valid, false otherwise.</returns>
+        bool Check(string text);
+        #endregion
+    }
 }
 
 #region ChangeLog

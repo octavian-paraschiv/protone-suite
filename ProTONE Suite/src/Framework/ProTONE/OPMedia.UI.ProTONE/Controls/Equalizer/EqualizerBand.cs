@@ -54,6 +54,6 @@ namespace OPMedia.UI.ProTONE.Controls.Equalizer
             };
         }
 
-        
+
     }
 }

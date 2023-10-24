@@ -17,7 +17,7 @@ namespace OPMedia.UI.Dialogs
         public bool ShowNewFolderButton { get; set; }
         public string SelectedPath { get; set; }
         public string Description { get; set; }
-        
+
         public event PerformPathValidationHandler PerformPathValidation = null;
 
         string _title = null;
@@ -31,7 +31,7 @@ namespace OPMedia.UI.Dialogs
             this.InheritAppIcon = false;
 
             this.Description = Translator.Translate("TXT_SELECT_FOLDER");
-            
+
 
             this.ShowNewFolderButton = true;
             this.SelectedPath = PathUtils.CurrentDir;
@@ -88,7 +88,7 @@ namespace OPMedia.UI.Dialogs
 
         void OPMFolderBrowserDialog_Shown(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -9,14 +9,14 @@ namespace OPMedia.UI.Controls
     {
         public event EventHandler FontChanged = null;
 
-        public string Description 
+        public string Description
         {
             get { return lblDescription.Text; }
             set { lblDescription.Text = value; }
         }
 
         private Font _selFont = ThemeManager.NormalFont;
-        public Font SelectedFont 
+        public Font SelectedFont
         {
             get { return _selFont; }
             set { _selFont = value; }
@@ -77,7 +77,7 @@ namespace OPMedia.UI.Controls
                 cmbCharset.SelectedItem = (FontCharSet)_selFont.GdiCharSet;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

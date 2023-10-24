@@ -48,9 +48,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public int Position
         {
-            get 
-            { 
-                return (int)volumeProgress.Value; 
+            get
+            {
+                return (int)volumeProgress.Value;
             }
             set
             {
@@ -82,10 +82,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             InitializeComponent();
             volumeProgress.Maximum = 10000;
             volumeProgress.Value = 5000;
-            volumeProgress.PositionChanged += 
+            volumeProgress.PositionChanged +=
                 new ValueChangedEventHandler(volumeProgress_PositionChanged);
 
-            volumeProgress.HoveredPositionChanged += 
+            volumeProgress.HoveredPositionChanged +=
                 new ValueChangedEventHandler(volumeProgress_HoveredPositionChanged);
 
             this.HandleCreated += VolumeScale_HandleCreated;
@@ -116,7 +116,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void ApplyMenuBarColors()
         {
             volumeProgress.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            
+
             lblCurrent.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
             lblMin.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
             lblMax.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
@@ -161,7 +161,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             //this.BackColor = Color.FromKnownColor(KnownColor.Window);
             //VolumeScale.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            
+
             VolumeScale.ApplyMenuBarColors();
 
 

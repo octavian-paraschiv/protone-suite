@@ -19,7 +19,7 @@ namespace OPMedia.Runtime.FileInformation
         public static void CopyFile(string source, string destination,
             Kernel32.CopyFileOptions options, Kernel32.CopyFileCallback callback, object state)
         {
-            if (source == null) 
+            if (source == null)
                 throw new ArgumentNullException("source");
             if (destination == null)
                 throw new ArgumentNullException("destination");

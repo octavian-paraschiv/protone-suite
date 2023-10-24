@@ -159,7 +159,7 @@ namespace OPMedia.UI.FileTasks
             }
         }
 
-        
+
 
         public void FireTaskProgress(ProgressEventType eventType, string file, UpdateProgressData data)
         {
@@ -339,7 +339,7 @@ namespace OPMedia.UI.FileTasks
         protected virtual bool CopyObject(string path) { return true; }
         protected virtual bool MoveObject(string path) { return true; }
         protected virtual bool DeleteObject(string path) { return true; }
-        
+
         #endregion
     }
 }

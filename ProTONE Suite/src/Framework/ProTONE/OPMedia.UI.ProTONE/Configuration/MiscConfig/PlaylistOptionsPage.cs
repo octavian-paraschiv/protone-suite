@@ -44,7 +44,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.cmbFileNameFormat.SelectedIndexChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.cmbFileNameFormat.TextChanged += new System.EventHandler(this.OnFileNameFormatChanged);
             this.chkFileNameFormat.CheckedChanged += new System.EventHandler(this.chkFileNameFormat_CheckedChanged);
-            
+
             this.cmbProfile.SelectedIndexChanged += OnPlaylistSettingsChanged;
 
             this.chkLoopPlay.CheckedChanged += OnPlaylistSettingsChanged;

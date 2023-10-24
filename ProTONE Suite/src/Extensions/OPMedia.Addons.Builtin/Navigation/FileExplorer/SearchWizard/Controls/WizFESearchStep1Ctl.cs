@@ -60,7 +60,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             lvResults.MultiSelect = true;
             lvResults.SmallImageList = _ilm.ImageList;
 
-            foreach(FileAttributes attr in Enum.GetValues(typeof(FileAttributes)))
+            foreach (FileAttributes attr in Enum.GetValues(typeof(FileAttributes)))
             {
                 lbAttributes.Items.Add(attr);
             }
@@ -71,14 +71,14 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         private void OnClearSearchPatternHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchPatterns = string.Empty;
-            
+
             PopulateSearchPattern();
         }
 
         private void OnClearSearchValueHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchTexts = string.Empty;
-            
+
             PopulateSearchText();
         }
 
@@ -173,7 +173,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             chkRecursive.Checked = theTask.IsRecursive;
             chkAttrSearch.Checked = theTask.UseAttributes;
 
-            for(int i = 0; i < lbAttributes.Items.Count; i++)
+            for (int i = 0; i < lbAttributes.Items.Count; i++)
             {
                 FileAttributes attr = (FileAttributes)lbAttributes.Items[i];
                 lbAttributes.SetItemChecked(i, ((theTask.Attributes & attr) == attr));
@@ -212,7 +212,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                     cmbSearchPattern.AddUniqueItem(str);
                 }
             }
-            
+
             cmbSearchPattern.AddUniqueItem(theTask.SearchPattern);
 
             cmbSearchPattern.AddUniqueItem(Translator.Translate("TXT_SEARCH_BOOKMARKS"));
@@ -234,7 +234,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             }
 
             BuiltinAddonConfig.SearchTexts = SaveSetting(BuiltinAddonConfig.SearchTexts, cmbSearchText.Text);
-            
+
         }
 
         private string SaveSetting(string initialSetting, string settingToAdd)
@@ -311,7 +311,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
         private void CreateListViewItem(string path)
         {
-            ListViewItem item = new ListViewItem(new string[] { path } );
+            ListViewItem item = new ListViewItem(new string[] { path });
             item.Tag = path;
             item.ImageKey = _ilm.GetImageKey(path);
 
@@ -342,7 +342,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 ssStatus.Text = Translator.Translate("TXT_INIT_SEARCH");
                 Application.DoEvents();
 
-                bool needFolderLookup = 
+                bool needFolderLookup =
                     (theTask.UseAttributes == true) && ((theTask.Attributes & FileAttributes.Directory) == FileAttributes.Directory);
 
                 string actualSearchPattern = theTask.SearchPattern;
@@ -358,7 +358,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 }
 
                 List<string> fsEntries = new List<string>();
-                
+
                 SearchOption searchOption = theTask.IsRecursive ?
                     SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
@@ -395,7 +395,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
                 foreach (string str in _displayItems)
                     CreateListViewItem(str);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ssStatus.Text = ex.Message;
             }
@@ -476,7 +476,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 
             if (!theTask.UseAttributes || AttributesMatch(File.GetAttributes(file), true))
             {
-                bool match = 
+                bool match =
                     (theTask.SearchText.Length == 0) ||
                     (theTask.SearchProperties && ContainsProperty(file)) ||
                     (!theTask.SearchProperties && ContainsText(file));

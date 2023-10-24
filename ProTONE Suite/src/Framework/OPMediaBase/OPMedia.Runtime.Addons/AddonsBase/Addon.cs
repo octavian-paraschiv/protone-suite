@@ -95,7 +95,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             if (assemblyInfo.Length == 2)
             {
                 this.assemblyFileName = assemblyInfo[0];
-                this.addonTypeName = assemblyInfo[1]; 
+                this.addonTypeName = assemblyInfo[1];
             }
 
             this.addonAssembly = Assembly.Load(assemblyFileName);

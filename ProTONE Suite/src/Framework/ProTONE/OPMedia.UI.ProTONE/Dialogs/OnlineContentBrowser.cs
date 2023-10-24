@@ -32,7 +32,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.ShowInTaskbar = true;
 
             _ilImages = new ImageList();
-            
+
             _ilImages.TransparentColor = Color.White;
 
             _ilImages.ColorDepth = ColorDepth.Depth32Bit;

@@ -48,24 +48,24 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         #region Properties
         public virtual int PlayIndex
-        { get { return playIndex; }  }
+        { get { return playIndex; } }
 
         public virtual double TotalPlaylistTime
-        { 
-            get 
+        {
+            get
             {
                 double retVal = 0;
                 foreach (PlaylistItem item in this.AsReadOnly())
                 {
-                    retVal += item.Duration.TotalSeconds; 
+                    retVal += item.Duration.TotalSeconds;
                 }
 
                 return retVal;
-            } 
+            }
         }
 
-       public virtual PlaylistItem ActivePlaylistItem
-       {
+        public virtual PlaylistItem ActivePlaylistItem
+        {
             get
             {
                 if (Count > 0 && playIndex >= 0 && playIndex < Count)
@@ -78,15 +78,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
         }
 
         public bool IsAtEnd
-        { 
-            get 
-            { 
+        {
+            get
+            {
                 // When playing in loop, the playlist is never at the end
                 if (ProTONEConfig.LoopPlay)
                     return false; // If playing in loop, 
 
-                return (Count > 0 && playIndex == Count - 1); 
-            } 
+                return (Count > 0 && playIndex == Count - 1);
+            }
         }
 
         public List<PlaylistItem> AllItems
@@ -478,7 +478,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 RenderingEngine.DefaultInstance.PlaylistAtEnd = false;
             }
         }
-       
+
         #endregion
 
         #region Construction
@@ -577,7 +577,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 var path = item.Path;
 
                 //if (item.DelayStart > 0)
-                  //  path += $">{item.DelayStart}";
+                //  path += $">{item.DelayStart}";
 
                 sb.AppendLine(path);
             }
@@ -608,7 +608,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
                 string[] lines = content.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (lines != null)
                 {
-                    foreach(string line in lines)
+                    foreach (string line in lines)
                     {
                         if (_abortLoad)
                             break;
@@ -871,7 +871,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             doc.LoadXml(docText.ToLowerInvariant());
 
             XmlNodeList nodes = doc.SelectNodes("/smil/body/seq/media");
-            foreach(XmlNode node in nodes)
+            foreach (XmlNode node in nodes)
             {
                 if (_abortLoad)
                     break;
@@ -971,7 +971,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(docText.ToLowerInvariant());
-            
+
             XmlNodeList nodes = doc.SelectNodes("/asx/entry/ref");
             foreach (XmlNode node in nodes)
             {

@@ -142,11 +142,11 @@ namespace OPMedia.UI.Controls
             {
             }
         }
-    
+
         private void FormatText()
         {
             string[] Parts = TheTimeBox.Text.Trim().Split(":".ToCharArray());
-            
+
             int Hours = 0;
             if (!int.TryParse(Parts[0], out Hours))
             {
@@ -168,7 +168,7 @@ namespace OPMedia.UI.Controls
             }
 
             string[] SecondParts = Parts[2].Split(".".ToCharArray());
-            
+
             int Seconds = 0;
             if (!int.TryParse(SecondParts[0], out Seconds))
             {
@@ -189,7 +189,7 @@ namespace OPMedia.UI.Controls
                 Milliseconds = 0;
             }
 
-            SetText(Hours.ToString("D2"),Minutes.ToString("D2"), Seconds.ToString("D2"), Milliseconds.ToString("D3"));
+            SetText(Hours.ToString("D2"), Minutes.ToString("D2"), Seconds.ToString("D2"), Milliseconds.ToString("D3"));
             if (OnValueChanged != null)
             {
                 OnValueChanged.Invoke(null, new EventArgs());

@@ -663,7 +663,7 @@ namespace OPMedia.Core
 
             try
             {
-                foreach(Environment.SpecialFolder sf in Enum.GetValues(typeof(Environment.SpecialFolder)))
+                foreach (Environment.SpecialFolder sf in Enum.GetValues(typeof(Environment.SpecialFolder)))
                 {
                     string dir2 = Environment.GetFolderPath(sf);
 
@@ -677,7 +677,7 @@ namespace OPMedia.Core
                     }
                 }
 
-                
+
             }
             catch
             {

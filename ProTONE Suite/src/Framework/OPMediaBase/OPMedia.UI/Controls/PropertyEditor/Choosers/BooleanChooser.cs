@@ -9,7 +9,7 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
         public string PropertyName
         {
             get { return lblValueName.Text; }
-            set 
+            set
             {
                 if (!string.IsNullOrEmpty(value))
                 {

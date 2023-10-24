@@ -41,7 +41,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             {
                 task = new Task();
             }
-            
+
             _task = task;
             DisplayTask();
         }

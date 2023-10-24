@@ -49,14 +49,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [Browsable(false)]
         public Dictionary<TimeSpan, Bookmark> Bookmarks
-        { 
-            get 
+        {
+            get
             {
                 if (_bookmarkInfo == null)
                     return null;
 
-                return _bookmarkInfo.Bookmarks; 
-            } 
+                return _bookmarkInfo.Bookmarks;
+            }
         }
 
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [SingleSelectionBrowsable]
         public PlaylistItem BookmarkManager
         {
-            get {  return new BoormarkEditablePlaylistItem(this.Path); }
+            get { return new BoormarkEditablePlaylistItem(this.Path); }
             set { /* dummy setter just to enable drop down editing in property grids */ }
         }
 
@@ -142,14 +142,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             get { return null; }
             set { }
         }
-        
+
         [Browsable(false)]
         public virtual ChannelMode? Channels
         {
             get { return null; }
             set { }
         }
-        
+
         [Browsable(false)]
         public virtual int? Frequency
         {
@@ -257,7 +257,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     string mediaName = base.Name;
                     mediaType = base.Extension.Trim(new char[] { '.' }).ToLowerInvariant();
                     RenderingEngine renderer = RenderingEngine.DefaultInstance;
-                    
+
                     if (!SupportedFileProvider.Instance.AllMediaTypes.Contains(mediaType))
                     {
                         throw new FileLoadException("Unexpected file type: " + mediaType,
@@ -268,7 +268,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     string bookmarkPath = string.Format("{0}.bmk", base.Path);
                     _bookmarkInfo = new BookmarkFileInfo(bookmarkPath, false);
 
-                    _bookmarkInfo.BookmarkCollectionChanged += 
+                    _bookmarkInfo.BookmarkCollectionChanged +=
                         new EventHandler(_bookmarkInfo_BookmarkCollectionChanged);
                 }
                 catch (FileLoadException)
@@ -403,7 +403,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         public void Save()
         {
-            if (_mfi != null) 
+            if (_mfi != null)
                 _mfi.Save();
         }
     }
@@ -450,7 +450,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         {
         }
 
-        public ID3FileInfoSlim(MediaFileInfo mfi) 
+        public ID3FileInfoSlim(MediaFileInfo mfi)
             : base(mfi)
         {
         }

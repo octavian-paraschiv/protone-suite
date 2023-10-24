@@ -32,7 +32,7 @@ namespace OPMedia.UI.FileTasks
                 }
                 else
                 {
-                    CopyConnectedFiles(path, destinationPath); 
+                    CopyConnectedFiles(path, destinationPath);
                     _support.CopyFile(path, destinationPath);
                 }
             }
@@ -44,6 +44,6 @@ namespace OPMedia.UI.FileTasks
             return true;
         }
 
-        protected virtual void CopyConnectedFiles(string srcFile, string destPath) {}
+        protected virtual void CopyConnectedFiles(string srcFile, string destPath) { }
     }
 }

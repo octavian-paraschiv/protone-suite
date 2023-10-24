@@ -40,7 +40,7 @@ namespace OPMedia.UI.Configuration
                 }
             }
         }
-        
+
         public string Title { get; protected set; }
 
         public BaseCfgPanel()

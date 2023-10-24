@@ -85,7 +85,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
             this.SmallImageList = ilItems;
 
             ilItems.Images.Add(ImageProcessing.Library16);
-            
+
             LoadShell32Image(Shell32Icon.DriveUnknown);
             LoadShell32Image(Shell32Icon.DriveNoRoot);
             LoadShell32Image(Shell32Icon.DriveRemovable);

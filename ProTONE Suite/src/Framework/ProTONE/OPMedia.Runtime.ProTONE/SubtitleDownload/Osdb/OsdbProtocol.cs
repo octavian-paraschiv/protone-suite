@@ -47,7 +47,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 
         [XmlRpcMethod("SearchSubtitles")]
         OsdbDownloadSubtitlesResponse DownloadSubtitles(string token, int[] subtitleFileIDs);
-        
+
         [XmlRpcMethod("SearchSubtitles")]
         OsdbSearchSubtitleResponse SearchSubtitles(string token, VideoInfo[] videoInfoList);
 

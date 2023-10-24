@@ -38,7 +38,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             cbDisableDVDMenu.CheckedChanged += new EventHandler(OnSettingsChanged);
             txtCddbServerName.TextChanged += new EventHandler(OnSettingsChanged);
             txtCddbServerPort.TextChanged += new EventHandler(OnSettingsChanged);
-       }
+        }
 
         protected override void SaveInternal()
         {
@@ -62,7 +62,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             }
         }
 
-        
+
     }
 
 

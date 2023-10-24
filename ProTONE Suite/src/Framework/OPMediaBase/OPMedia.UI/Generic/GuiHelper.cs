@@ -28,7 +28,7 @@ namespace OPMedia.UI.Generic
         {
             StringAlignments sa = new StringAlignments();
             sa.LineAlignment = StringAlignment.Center;
-            switch(ha)
+            switch (ha)
             {
                 case HorizontalAlignment.Center:
                     sa.Alignment = StringAlignment.Center;

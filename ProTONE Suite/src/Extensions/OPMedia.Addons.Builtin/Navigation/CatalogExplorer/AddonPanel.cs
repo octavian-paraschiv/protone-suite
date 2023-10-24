@@ -101,7 +101,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                 foreach (string file in list)
                 {
                     string lowercaseFile = file.ToLowerInvariant();
-                    if (File.Exists(lowercaseFile) && !_recentFiles.Contains(lowercaseFile) 
+                    if (File.Exists(lowercaseFile) && !_recentFiles.Contains(lowercaseFile)
                         && lowercaseFile.EndsWith(".ctx"))
                     {
                         _recentFiles.Add(lowercaseFile);
@@ -347,7 +347,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             {
                 Cursor = Cursors.Default;
 
-                
+
             }
         }
 
@@ -397,9 +397,9 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                     if (root != null)
                     {
                         InsertDriveNotifyDialog dlg = new InsertDriveNotifyDialog(
-                            ci.RootItemLabel, 
+                            ci.RootItemLabel,
                             root.Description,
-                            ci.RootSerialNumber, 
+                            ci.RootSerialNumber,
                             (DriveType)root.ItemType);
 
                         if (dlg.ShowDialog() == DialogResult.OK)
@@ -504,7 +504,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                     text = Translator.Translate("TXT_CURRENT_PATH", _cat.Path);
                 }
             }
-            catch 
+            catch
             {
                 img = null;
                 text = null;
@@ -675,7 +675,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
                 case ToolAction.ToolActionRename:
                     lvCatalogFolder.Rename();
-                   break;
+                    break;
             }
         }
 
@@ -702,7 +702,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             }
         }
 
-        
+
 
         private void CreateNewCatalog()
         {
@@ -787,7 +787,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                 {
                     continue;
                 }
-                
+
                 List<string> selItems = GetSelectedVPaths();
                 switch (action)
                 {
@@ -863,7 +863,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                         btn.Visible = false;
                         btn.Enabled = false;
 #endif
-                        
+
                         break;
 
                     case ToolAction.ToolActionMerge:
@@ -956,8 +956,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         private void BuildMenuText(ToolStripItem tsm, string tag, string param, OPMShortcut command)
         {
             tsm.ToolTipText =
-                (tsm.Enabled && !string.IsNullOrEmpty(param)) ? 
-                Translator.Translate(tag) + ": " + param : 
+                (tsm.Enabled && !string.IsNullOrEmpty(param)) ?
+                Translator.Translate(tag) + ": " + param :
                 Translator.Translate(tag);
             tsm.Text = Translator.Translate(tag);
 
@@ -1273,7 +1273,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
 
                     BuiltinAddonConfig.MCRecentFiles =
                         StringUtils.FromStringArray(_recentFiles.ToArray(), '?');
-                    
+
                 }
             }
         }

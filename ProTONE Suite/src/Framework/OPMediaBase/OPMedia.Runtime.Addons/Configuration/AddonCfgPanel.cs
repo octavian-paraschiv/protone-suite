@@ -57,7 +57,7 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             Translator.TranslateControl(this, DesignMode);
             Application.DoEvents();
-            
+
             ReloadConfig();
             Modified = true;
         }
@@ -152,7 +152,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 }
                 else if (!AddonsConfig.IsInitialConfig)
                 {
-                    MessageDisplay.Show(Translator.Translate("TXT_ADDONS_NOT_CHANGED"), 
+                    MessageDisplay.Show(Translator.Translate("TXT_ADDONS_NOT_CHANGED"),
                         "Info", MessageBoxIcon.Information);
                 }
             }
@@ -311,8 +311,8 @@ namespace OPMedia.Runtime.Addons.Configuration
 
             foreach (AddonInfo ai in addonList.AllAddons)
             {
-                string[] codebaseParts = ai.CodeBase.Split(new char[]{'|'});
-                if (codebaseParts.Length > 0 && 
+                string[] codebaseParts = ai.CodeBase.Split(new char[] { '|' });
+                if (codebaseParts.Length > 0 &&
                     codebaseParts[0].ToLowerInvariant() == assembly.ToLowerInvariant())
                 {
                     addons += ai.TranslatedName;
@@ -340,7 +340,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 _uninstallScheduled = true;
             }
 
-            
+
         }
 
         private void OnKeyUp(object sender, KeyEventArgs e)

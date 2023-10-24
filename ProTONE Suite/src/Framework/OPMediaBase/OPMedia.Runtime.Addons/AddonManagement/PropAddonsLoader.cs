@@ -23,7 +23,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
         /// <summary>
         /// Loads the property add-ons
         /// </summary>
-        protected override void  Load()
+        protected override void Load()
         {
             // Initialize each of property addons. Careful not to break the loop
             // on eventual exceptions. It's important to try loading as much as
@@ -87,7 +87,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
         /// <summary>
         /// Effectively handles the addon selection.
         /// </summary>
-        private Addon InternalSelectAddon(List<string> extensions, bool mustHandleFolders, 
+        private Addon InternalSelectAddon(List<string> extensions, bool mustHandleFolders,
             int itemCount)
         {
             Addon genericAddon = null;

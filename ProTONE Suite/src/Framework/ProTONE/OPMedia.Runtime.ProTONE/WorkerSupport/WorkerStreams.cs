@@ -154,7 +154,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string s = ex.Message;
             }

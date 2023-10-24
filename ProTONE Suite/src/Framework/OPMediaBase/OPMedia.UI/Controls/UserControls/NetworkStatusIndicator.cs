@@ -33,7 +33,7 @@ namespace OPMedia.UI.Controls
 
             tmrCheckNetwork.Enabled = true;
         }
-    
+
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -51,8 +51,8 @@ namespace OPMedia.UI.Controls
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.FontSize = OPMedia.UI.Themes.FontSizes.Large;
@@ -67,7 +67,7 @@ namespace OPMedia.UI.Controls
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = Resources.NetworkOff;
             this.pictureBox1.InitialImage = Resources.NetworkOff;

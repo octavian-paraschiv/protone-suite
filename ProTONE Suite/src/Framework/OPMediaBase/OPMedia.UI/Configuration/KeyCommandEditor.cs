@@ -72,7 +72,7 @@ namespace OPMedia.UI.Configuration
                     )
                     ||
                     (
-                        (args.Control && (args.KeyData == Keys.F2 || args.KeyData == Keys.Left|| args.KeyData == Keys.Right|| args.KeyData == Keys.Up|| args.KeyData == Keys.Down))
+                        (args.Control && (args.KeyData == Keys.F2 || args.KeyData == Keys.Left || args.KeyData == Keys.Right || args.KeyData == Keys.Up || args.KeyData == Keys.Down))
                     )
                 )
             {
@@ -116,18 +116,18 @@ namespace OPMedia.UI.Configuration
             KeysConverter kc = new KeysConverter();
             string key = kc.ConvertToInvariantString(args.KeyData);
 
-            if ((args.KeyData == Keys.Space && ShortcutMapper.IsPlayer) || 
+            if ((args.KeyData == Keys.Space && ShortcutMapper.IsPlayer) ||
                 !ShortcutMapper.IsConfigurableShortcut(cmd))
             {
                 // Key combination currently assigned 
                 // to a non-configurable command (e.g. F1 = help)
-                MessageDisplay.Show(Translator.Translate("TXT_DUP_SHORTCUT_FIXED", key, cmdOld), 
+                MessageDisplay.Show(Translator.Translate("TXT_DUP_SHORTCUT_FIXED", key, cmdOld),
                     Translator.Translate("TXT_DUPPLICATE_SHORTCUT"),
                     MessageBoxIcon.Warning);
                 return false;
             }
 
-            if (MessageDisplay.Query(Translator.Translate("TXT_DUP_SHORTCUT_CONFIRM", key, cmdOld, cmdNew), 
+            if (MessageDisplay.Query(Translator.Translate("TXT_DUP_SHORTCUT_CONFIRM", key, cmdOld, cmdNew),
                     Translator.Translate("TXT_DUPPLICATE_SHORTCUT"),
                     MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
             {
@@ -171,6 +171,6 @@ namespace OPMedia.UI.Configuration
             return retVal;
         }
 
-       
+
     }
 }

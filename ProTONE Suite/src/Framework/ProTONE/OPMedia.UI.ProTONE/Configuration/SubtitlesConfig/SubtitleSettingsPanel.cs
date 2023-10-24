@@ -64,7 +64,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         {
             pageSubtitles.Save();
             pageOsd.Save();
-            
+
 
             Modified = false;
         }

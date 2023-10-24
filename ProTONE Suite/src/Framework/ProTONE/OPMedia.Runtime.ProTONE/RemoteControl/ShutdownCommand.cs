@@ -5,7 +5,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
     [Serializable]
     public class TerminateCommand : BasicCommand
     {
-        internal TerminateCommand() 
+        internal TerminateCommand()
             : base(CommandType.Terminate, null)
         {
         }

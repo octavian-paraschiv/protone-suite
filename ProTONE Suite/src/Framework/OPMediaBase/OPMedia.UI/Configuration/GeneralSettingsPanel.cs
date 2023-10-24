@@ -27,10 +27,10 @@ namespace OPMedia.UI.Configuration
             }
         }
 
-      
+
         public GeneralSettingsPanel() : base()
         {
-            this.Title= "TXT_S_GENERALSETTINGS";
+            this.Title = "TXT_S_GENERALSETTINGS";
             InitializeComponent();
 
             bool allowGUISetup = OpMediaApplication.AllowRealTimeGUIUpdate;
@@ -70,7 +70,7 @@ namespace OPMedia.UI.Configuration
             this.cmbThemes.SelectedIndexChanged += new System.EventHandler(this.OnThemeChanged);
             #endregion
 
-            labelProductName.Text = String.Format("{0} - {1}", 
+            labelProductName.Text = String.Format("{0} - {1}",
                 Constants.SuiteName, Translator.Translate("TXT_APP_NAME"));
 
             labelVersion.Text = Translator.Translate("TXT_VERSION",
@@ -114,8 +114,8 @@ namespace OPMedia.UI.Configuration
             if (newTheme != null)
             {
                 AppConfig.SkinType = newTheme;
-            	Modified = true;
-        	}
+                Modified = true;
+            }
         }
 
         private void OnSettingsChanged(object sender, EventArgs e)

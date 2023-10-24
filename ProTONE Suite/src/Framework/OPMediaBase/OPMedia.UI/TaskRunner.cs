@@ -54,7 +54,7 @@ namespace OPMedia.UI
                 TaskStepInit(currentStepDetail);
             }
         }
-        
+
         public void RaiseTaskProgressEvent(StepDetail currentStepDetail, int stepsDone)
         {
             TaskbarThumbnailManager.Instance.UpdateProgress((ulong)stepsDone, (ulong)TotalSteps);
@@ -126,7 +126,7 @@ namespace OPMedia.UI
 
             _worker = new BackgroundWorker();
             _worker.WorkerSupportsCancellation = true;
-            
+
             _worker.DoWork += new DoWorkEventHandler(_worker_DoWork);
             _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
         }

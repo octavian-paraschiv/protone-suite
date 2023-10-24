@@ -40,7 +40,7 @@ namespace OPMedia.Core
 
         public static void SavePortSettings(SerialPort serialPort)
         {
-            using (RegistryKey key = Registry.LocalMachine.CreateSubKey( @"SOFTWARE\OPMedia Research\Serial Ports\" + serialPort.PortName))
+            using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\OPMedia Research\Serial Ports\" + serialPort.PortName))
             {
                 if (key != null)
                 {

@@ -18,7 +18,7 @@ namespace OPMedia.Runtime.FileInformation
 
         [Browsable(false)]
         public FileSystemInfo FileSystemInfo
-        {get { return fsi; } }
+        { get { return fsi; } }
 
         [Browsable(false)]
         public bool IsURI
@@ -30,7 +30,7 @@ namespace OPMedia.Runtime.FileInformation
 
         [Browsable(false)]
         private bool IsFile
-        { get { return IsValid && ! IsURI && (fsi is FileInfo); } }
+        { get { return IsValid && !IsURI && (fsi is FileInfo); } }
 
         [TranslatableDisplayName("TXT_PARENT")]
         [TranslatableCategory("TXT_FILESYSTEMINFO")]
@@ -52,16 +52,16 @@ namespace OPMedia.Runtime.FileInformation
         [TranslatableCategory("TXT_FILESYSTEMINFO")]
         [SingleSelectionBrowsable]
         public string Path
-        { 
-            get 
+        {
+            get
             {
                 if (IsValid)
                 {
                     return IsURI ? _uri.AbsoluteUri : fsi.FullName;
                 }
 
-                return null; 
-            } 
+                return null;
+            }
         }
 
         [TranslatableDisplayName("TXT_NAME")]
@@ -77,7 +77,7 @@ namespace OPMedia.Runtime.FileInformation
                 }
 
                 return null;
-            } 
+            }
         }
 
         [TranslatableDisplayName("TXT_EXTENSION")]
@@ -92,16 +92,16 @@ namespace OPMedia.Runtime.FileInformation
         [RefreshProperties(System.ComponentModel.RefreshProperties.All)]
         [SingleSelectionBrowsable]
         public FileAttributes? Attributes
-        { 
-            get 
+        {
+            get
             {
-                if (IsValid) 
-                    return fsi.Attributes; 
-                else 
-                    return null; 
-            } 
+                if (IsValid)
+                    return fsi.Attributes;
+                else
+                    return null;
+            }
 
-            set 
+            set
             {
                 if (IsValid)
                 {
@@ -113,9 +113,9 @@ namespace OPMedia.Runtime.FileInformation
                     object arg = new string[] { this.Path };
                     EventDispatch.DispatchEvent(EventNames.RefreshItems, arg);
                 }
-            } 
+            }
         }
-        
+
         [TranslatableDisplayName("TXT_FILESIZE")]
         [TranslatableCategory("TXT_FILESYSTEMINFO")]
         [SingleSelectionBrowsable]
