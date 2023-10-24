@@ -1,9 +1,6 @@
-﻿using System;
+﻿using OPMedia.Core.Logging;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core;
-using OPMedia.Core.Logging;
 using System.Threading;
 
 namespace OPMedia.Core.Persistence

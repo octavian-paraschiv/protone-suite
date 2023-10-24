@@ -1,14 +1,7 @@
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Services;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Runtime.InteropServices.ComTypes;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {

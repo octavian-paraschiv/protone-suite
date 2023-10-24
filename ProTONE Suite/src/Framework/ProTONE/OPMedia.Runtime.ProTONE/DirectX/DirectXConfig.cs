@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Reflection;
 using System.Diagnostics;
-using Microsoft.Win32;
-using OPMedia.Core;
+using System.IO;
+using System.Linq;
 
 namespace OPMedia.Runtime.ProTONE.DirectX
 {

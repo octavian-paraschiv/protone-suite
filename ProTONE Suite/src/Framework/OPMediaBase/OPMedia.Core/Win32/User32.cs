@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Drawing;
-using OPMedia.Core.Logging;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OPMedia.Core
 {

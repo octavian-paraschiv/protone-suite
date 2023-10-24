@@ -1,21 +1,8 @@
-﻿using System;
+﻿using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
-using OPMedia.Core;
-using System.Xml;
-using System.IO;
 using System.Xml.Serialization;
-using OPMedia.Core.Utilities;
-using System.Net;
-using Newtonsoft.Json.Linq;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Logging;
-using System.Web;
-using OPMedia.Core.TranslationSupport;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {

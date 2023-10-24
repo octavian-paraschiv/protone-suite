@@ -16,15 +16,14 @@
  * 
  */
 #endregion
-using System;
 using OPMedia.Core.Utilities;
 using System.Runtime.Serialization;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 {
-	/// <summary>
-	/// Summary description for Track.
-	/// </summary>
+    /// <summary>
+    /// Summary description for Track.
+    /// </summary>
     [DataContract]
     public class Track
 	{

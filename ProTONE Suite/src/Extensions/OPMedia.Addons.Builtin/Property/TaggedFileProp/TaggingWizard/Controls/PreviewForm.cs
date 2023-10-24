@@ -1,16 +1,10 @@
-﻿using OPMedia.UI.Themes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using System.IO;
 using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Controls;
-using OPMedia.Core.Logging;
+using OPMedia.UI.Themes;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard.Controls
 {

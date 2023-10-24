@@ -1,9 +1,5 @@
 using OPMedia.UI.Controls;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.UI.ProTONE.Controls;
 using System.Windows.Forms;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.Themes;
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
     partial class MediaPlayer

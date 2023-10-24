@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Runtime.ProTONE.AudioMetering;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
-using OPMedia.Runtime.DSP;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Runtime.ProTONE.AudioMetering;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.ProTONE.Controls
 {

@@ -1,6 +1,5 @@
 ﻿using OPMedia.UI.Controls;
 using System.Windows.Forms;
-using OPMedia.UI.ProTONE.Properties;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {

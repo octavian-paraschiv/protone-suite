@@ -1,17 +1,10 @@
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Core;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Generic;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using OPMedia.Runtime;
-using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Controls;
-using OPMedia.Core.Logging;
-using System.Threading;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-
-using OPMedia.Addons.Builtin.Shared;
-using OPMedia.UI.Generic;
 
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls

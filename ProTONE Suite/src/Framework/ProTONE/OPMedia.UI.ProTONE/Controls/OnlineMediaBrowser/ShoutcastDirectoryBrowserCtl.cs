@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
+﻿using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Logging;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {

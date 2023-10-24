@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using OPMedia.Core;
 using System.Reflection;
-using System.Windows.Forms;
-using OPMedia.Core.GlobalEvents;
 
 namespace OPMedia.Core.TranslationSupport
 {

@@ -1,23 +1,17 @@
+using Microsoft.Win32;
+using OPMedia.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Text;
 using System.Threading;
-using System.Windows.Forms;
-using System.Collections;
-using Microsoft.Win32;
-using System.IO;
-using System.Runtime.Remoting.Messaging;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.FfdShowApi
 {
-  /// <summary>
-  /// FFDShowAPI library class. Use this class to get/set FFDShow live settings
-  /// </summary>
-  internal class FfdShowLib : IDisposable
+    /// <summary>
+    /// FFDShowAPI library class. Use this class to get/set FFDShow live settings
+    /// </summary>
+    internal class FfdShowLib : IDisposable
   {
     #region Structures
 

@@ -1,35 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
 using OPMedia.Core;
-using System.Runtime.InteropServices;
-using System.Collections;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.ActionManagement;
 using OPMedia.Runtime.Addons.AddonsBase.Navigation;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.UI;
-using OPMedia.Runtime.Addons;
-using OPMedia.Runtime.Addons.ActionManagement;
-using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.UI.Dialogs;
-
-using OPMedia.Core.GlobalEvents;
 using OPMedia.Runtime.Addons.Controls;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
 using OPMedia.UI.HelpSupport;
 using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons
 {

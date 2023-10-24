@@ -1,13 +1,5 @@
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using System.Security;
-using System.Security.Permissions;
-using System.Drawing.Design;
-using System.Windows.Forms.Design;
-using OPMedia.UI.Controls;
 #endregion
 
 namespace OPMedia.UI.Controls

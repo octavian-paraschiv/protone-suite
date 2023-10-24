@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using System.IO;
-using OPMedia.Core;
-using OPMedia.Runtime;
 using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {

@@ -20,10 +20,10 @@ using System;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 {
-	/// <summary>
-	/// Summary description for QueryResult.
-	/// </summary>
-	public class QueryResult
+    /// <summary>
+    /// Summary description for QueryResult.
+    /// </summary>
+    public class QueryResult
 	{
 		private string m_ResponseCode;
 		private string m_Category;

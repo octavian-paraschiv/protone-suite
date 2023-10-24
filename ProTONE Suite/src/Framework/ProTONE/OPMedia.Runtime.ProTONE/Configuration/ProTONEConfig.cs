@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.Configuration;
-using System.ServiceProcess;
+﻿using Microsoft.Win32;
 using OPMedia.Core;
-using System.IO;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.Utilities;
-using Microsoft.Win32;
-using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using System.Reflection;
-using OPMedia.Core.Win32;
 using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE.Configuration
 {

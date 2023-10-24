@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Runtime.ProTONE.BSP_V1;
-using System.Globalization;
-using OPMedia.Core.Logging;
-using System.Net;
+﻿using OPMedia.Core;
 using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.NuSoap;
-using System.IO;
+using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
+using OPMedia.Runtime.ProTONE.BSP_V1;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.IO.Compression;
-using System.ComponentModel;
+using System.Linq;
 
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1

@@ -1,12 +1,8 @@
 ﻿using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace OPMedia.AudioCdWorker
 {

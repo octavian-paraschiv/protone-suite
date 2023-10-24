@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI.Controls;
+﻿using OPMedia.UI.Themes;
+using System;
 using System.Drawing;
-using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 {

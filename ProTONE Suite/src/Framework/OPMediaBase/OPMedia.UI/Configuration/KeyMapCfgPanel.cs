@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Configuration;
-using OPMedia.UI.Properties;
 using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Shortcuts;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Configuration
 {

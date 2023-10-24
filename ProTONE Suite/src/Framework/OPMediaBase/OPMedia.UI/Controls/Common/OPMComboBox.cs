@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using OPMedia.UI.Themes;
-using System.ComponentModel;
 using OPMedia.Core;
-using System.Drawing.Drawing2D;
-using OPMedia.UI.Generic;
-using System.Windows.Forms.VisualStyles;
-using System.Reflection;
-using OPMedia.UI.Controls;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Themes;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {

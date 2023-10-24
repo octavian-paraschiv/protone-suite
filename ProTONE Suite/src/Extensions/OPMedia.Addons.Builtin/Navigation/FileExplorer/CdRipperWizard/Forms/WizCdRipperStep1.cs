@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda;
-using System.IO;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
 using OPMedia.Core;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Controls;
-using System.Threading;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
+using OPMedia.UI.Wizards;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 using WF = System.Windows.Forms;
-using OPMedia.UI.Themes;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 {

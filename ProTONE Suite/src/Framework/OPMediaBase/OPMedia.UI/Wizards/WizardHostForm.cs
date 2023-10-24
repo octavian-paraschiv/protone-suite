@@ -1,22 +1,14 @@
 #region Using directives
+using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Generic;
+using OPMedia.UI.HelpSupport;
+using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using OPMedia.UI.Properties;
-using OPMedia.UI.HelpSupport;
-using System.Diagnostics;
-using OPMedia.UI.Generic;
 
 
 #endregion

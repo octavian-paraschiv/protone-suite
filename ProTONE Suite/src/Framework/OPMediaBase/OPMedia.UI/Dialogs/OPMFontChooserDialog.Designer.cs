@@ -1,5 +1,4 @@
-﻿using OPMedia.UI.Themes;
-namespace OPMedia.UI.Dialogs
+﻿namespace OPMedia.UI.Dialogs
 {
     partial class OPMFontChooserDialog
     {

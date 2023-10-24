@@ -3,7 +3,6 @@ using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.DSP;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;

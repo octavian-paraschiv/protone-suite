@@ -1,15 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.Reflection;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.Core.InstanceManagement;
-using OPMedia.Core;
-using OPMedia.Core.InterProcessCommunication;
-using OPMedia.Core.Configuration;
-
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
     /*

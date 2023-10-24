@@ -1,13 +1,13 @@
-﻿using System;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using System.Security.Principal;
-using System.Threading;
-using System.Diagnostics;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.Persistence;
 using OPMedia.Core.Utilities;
-using System.Threading.Tasks;
+using System;
+using System.Diagnostics;
+using System.Security.Principal;
 using System.ServiceProcess;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OPMedia.Core
 {

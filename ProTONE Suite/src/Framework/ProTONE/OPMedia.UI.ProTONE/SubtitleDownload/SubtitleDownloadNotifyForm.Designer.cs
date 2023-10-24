@@ -1,6 +1,5 @@
 ﻿
 using OPMedia.UI.Controls;
-using System.Windows.Forms;
 namespace OPMedia.UI.ProTONE.SubtitleDownload
 {
     partial class SubtitleDownloadNotifyForm

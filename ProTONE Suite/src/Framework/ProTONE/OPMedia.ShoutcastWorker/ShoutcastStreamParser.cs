@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda;
-using OPMedia.Core;
-using System.IO;
-using System.Runtime.InteropServices;
-
-using OPMedia.Core.Logging;
-
-using OPMedia.Runtime.ProTONE.Compression;
+using System;
 
 namespace OPMedia.ShoutcastWorker
 {

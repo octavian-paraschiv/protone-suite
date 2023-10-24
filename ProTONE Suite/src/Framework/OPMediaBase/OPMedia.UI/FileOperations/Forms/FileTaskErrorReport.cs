@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Core;
 using OPMedia.UI.Themes;
-using OPMedia.Core;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 
 namespace OPMedia.UI.FileTasks

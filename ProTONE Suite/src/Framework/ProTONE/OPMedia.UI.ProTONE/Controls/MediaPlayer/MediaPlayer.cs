@@ -1,53 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-
-using OPMedia.UI.Controls;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.Runtime.ProTONE;
-using System.Diagnostics;
+using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
-
-using System.IO;
 using OPMedia.Core.TranslationSupport;
-using System.Threading;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.FfdShowApi;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Core;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.ProTONE.Dialogs;
-using OPMedia.UI.ProTONE.Configuration;
-
-using OPMedia.UI.Configuration;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-
-using OPMedia.UI.ProTONE.SubtitleDownload;
-using OPMedia.Runtime;
-using System.Net.NetworkInformation;
-using OPMedia.Runtime.ProTONE.SubtitleDownload;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.Menus;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using System.Net;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.Dialogs;
+using OPMedia.UI.Menus;
+using OPMedia.UI.ProTONE.Configuration;
+using OPMedia.UI.ProTONE.Dialogs;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.ProTONE.SubtitleDownload;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 using EventNames = OPMedia.Core.EventNames;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

@@ -11,18 +11,14 @@
 //#define _NO_TRANSLATIONS
 
 #region Using directives
-using System;
-using System.Linq;
-using System.Resources;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.Reflection;
-using System.Windows.Forms;
-using System.Collections;
-using System.Collections.Generic;
-using OPMedia.Core.Utilities;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Core.TranslationSupport

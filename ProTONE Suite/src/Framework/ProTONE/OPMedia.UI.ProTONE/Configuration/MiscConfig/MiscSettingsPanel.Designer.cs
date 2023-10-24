@@ -1,5 +1,4 @@
-﻿using OPMedia.UI.Controls;
-namespace OPMedia.UI.ProTONE.Configuration
+﻿namespace OPMedia.UI.ProTONE.Configuration
 {
     partial class MiscellaneousSettingsPanel
     {

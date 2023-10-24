@@ -1,6 +1,3 @@
-using OPMedia.UI.Controls;
-using System.Windows.Forms;
-
 namespace OPMedia.UI.Wizards
 {
     partial class WizardBaseCtl

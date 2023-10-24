@@ -8,17 +8,15 @@
 
 #region Using directives
 using System;
-using System.Collections.Generic;
-using System.Text;
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	#region Event Args
-	/// <summary>
-	/// Specifies event args to be send with a validation event.
-	/// </summary>
-	public class ValidationEventArgs : EventArgs
+    #region Event Args
+    /// <summary>
+    /// Specifies event args to be send with a validation event.
+    /// </summary>
+    public class ValidationEventArgs : EventArgs
 	{
 		#region Members
 		/// <summary>

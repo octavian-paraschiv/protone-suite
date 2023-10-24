@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Threading;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb;
-using OPMedia.Core.Configuration;
+﻿using CookComputing.XmlRpc;
 using OPMedia.Core;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using CookComputing.XmlRpc;
-using System.Collections;
-using System.IO;
 using OPMedia.Core.NetworkAccess;
-using System.IO.Compression;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.IO.Compression;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 {

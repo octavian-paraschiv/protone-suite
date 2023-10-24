@@ -1,22 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using System.Globalization;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-using OPMedia.Core;
-
-using OPMedia.Runtime;
 using OPMedia.UI.Configuration;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
 using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Properties;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {

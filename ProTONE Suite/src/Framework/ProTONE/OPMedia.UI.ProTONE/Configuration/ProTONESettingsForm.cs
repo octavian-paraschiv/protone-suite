@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Configuration;
-using OPMedia.Core;
-
-using System.Windows.Forms;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.UI.ProTONE.Configuration.MiscConfig;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Configuration;
+using OPMedia.UI.Configuration;
 using OPMedia.UI.ProTONE.Configuration.InternetConfig;
+using OPMedia.UI.ProTONE.Configuration.MiscConfig;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {

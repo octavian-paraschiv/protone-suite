@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
 
 
 namespace OPMedia.UI.Configuration

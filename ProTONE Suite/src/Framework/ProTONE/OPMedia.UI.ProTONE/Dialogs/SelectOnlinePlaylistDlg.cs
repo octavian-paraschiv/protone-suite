@@ -1,15 +1,10 @@
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.ProTONE.FileInformation;
 using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.Controls;
-using System.Threading;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 
 
 namespace OPMedia.UI.ProTONE.Dialogs

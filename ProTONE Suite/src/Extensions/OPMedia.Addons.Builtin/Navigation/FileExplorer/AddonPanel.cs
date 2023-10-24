@@ -7,55 +7,42 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Runtime;
-using System.IO;
-using OPMedia.Runtime.Addons.AddonsBase.Navigation;
-using OPMedia.Addons.Builtin.TaggedFileProp;
-using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Wizards;
-using OPMedia.Addons.Builtin.FileExplorer.SearchWizard;
+using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.FileExplorer.FileOperations.Forms;
 using OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls;
-using OPMedia.Core.Logging;
-
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.UI;
-using OPMedia.Core.TranslationSupport;
+using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms;
+using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
+using OPMedia.Addons.Builtin.Properties;
+using OPMedia.Addons.Builtin.TaggedFileProp;
+using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
+using OPMedia.Core;
 using OPMedia.Core.Configuration;
-using OPMedia.Runtime.Addons.AddonsBase;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons;
 using OPMedia.Runtime.Addons.ActionManagement;
-using OPMedia.Runtime.Shortcuts;
+using OPMedia.Runtime.Addons.AddonsBase.Navigation;
 using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.FileTasks;
 using OPMedia.UI.Generic;
-using System.Diagnostics;
-
-using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.UI.Configuration;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Addons.Builtin.FileExplorer.FileOperations.Forms;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda;
-using OPMedia.Core.NetworkAccess;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Addons.Builtin.Configuration;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
-using OPMedia.Addons.Builtin.Shared;
-using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.UI.Themes;
+using OPMedia.UI.Wizards;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using EventNames = OPMedia.Core.EventNames;
-using OPMedia.Addons.Builtin.Properties;
 
 
 #endregion

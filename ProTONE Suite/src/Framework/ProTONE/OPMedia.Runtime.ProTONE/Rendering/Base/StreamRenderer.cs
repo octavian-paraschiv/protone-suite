@@ -7,15 +7,12 @@
 #endregion
 
 #region Using directives
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.FileInformation;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Base

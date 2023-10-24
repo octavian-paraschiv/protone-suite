@@ -1,15 +1,12 @@
 ﻿
-using System.Windows.Forms;
-using System.Drawing;
-using OPMedia.UI.Themes;
 using OPMedia.Core;
-using System.Collections.Generic;
-
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
 using OPMedia.UI.Controls;
 using System;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Logging;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE
 {

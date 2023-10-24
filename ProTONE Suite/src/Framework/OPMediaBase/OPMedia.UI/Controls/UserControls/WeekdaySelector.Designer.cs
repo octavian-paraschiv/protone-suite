@@ -1,5 +1,3 @@
-
-using OPMedia.UI.Controls;
 namespace OPMedia.UI.Controls
 {
     partial class WeekdaySelector

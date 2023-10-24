@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI.Themes;
-using System.IO;
-using System.Drawing;
-using OPMedia.UI.Generic;
-using OPMedia.Core;
-using System.Windows.Forms;
-using OPMedia.Core.GlobalEvents;
-using System.Net;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using System.ComponentModel;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.HelpSupport
 {

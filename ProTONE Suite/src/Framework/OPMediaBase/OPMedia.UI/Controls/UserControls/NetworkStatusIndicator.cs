@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Net.NetworkInformation;
-using System.Drawing;
+﻿using OPMedia.UI.Properties;
 using OPMedia.UI.Themes;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Properties;
+using System;
+using System.Drawing;
+using System.Net.NetworkInformation;
+using System.Windows.Forms;
 
 
 namespace OPMedia.UI.Controls

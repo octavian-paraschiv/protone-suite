@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using NAudio.Wave;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
+﻿using NAudio.Wave;
+using OPMedia.Addons.Builtin.Shared.Compression;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.UI;
-using OPMedia.Addons.Builtin.Shared.Compression;
 using OPMedia.Runtime.ProTONE.Compression;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 {

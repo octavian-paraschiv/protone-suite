@@ -1,20 +1,15 @@
+using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
+using OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers;
+using OPMedia.Addons.Builtin.Shared.EncoderOptions;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.UI;
+using OPMedia.UI.FileTasks;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using OPMedia.UI.Wizards;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using System.IO;
-using OPMedia.Core;
-using OPMedia.UI;
-using OPMedia.Runtime;
-using OPMedia.Core.Utilities;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
-using OPMedia.UI.FileTasks;
 using System.Drawing.Design;
-using OPMedia.Addons.Builtin.Shared.EncoderOptions;
-using OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {

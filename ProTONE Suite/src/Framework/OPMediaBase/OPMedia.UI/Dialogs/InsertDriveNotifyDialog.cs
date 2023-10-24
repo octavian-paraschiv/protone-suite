@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
-using System.IO;
 using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Themes;
-using System.Diagnostics;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Dialogs
 {

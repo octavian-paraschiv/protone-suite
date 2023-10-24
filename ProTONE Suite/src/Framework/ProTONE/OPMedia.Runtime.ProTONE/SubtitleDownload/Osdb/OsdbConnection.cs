@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Core.Logging;
+﻿using CookComputing.XmlRpc;
 using OPMedia.Core.Configuration;
-using System.Net;
-using System.Collections;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using CookComputing.XmlRpc;
+using System;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 {

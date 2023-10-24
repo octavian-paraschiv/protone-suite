@@ -10,9 +10,10 @@
 
 #pragma warning disable 1591
 
-namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer {
-    
-    
+namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
+{
+
+
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>

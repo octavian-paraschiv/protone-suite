@@ -1,12 +1,8 @@
+using OPMedia.Core.TranslationSupport;
 using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security;
-using OPMedia.Core;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Core.Logging
 {

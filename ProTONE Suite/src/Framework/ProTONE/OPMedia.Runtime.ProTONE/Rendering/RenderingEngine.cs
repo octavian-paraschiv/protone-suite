@@ -7,29 +7,28 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Runtime.ProTONE.FileInformation;
+using NAudio.CoreAudioApi;
+using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
-using OPMedia.UI.Generic;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
-using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
-using System.Threading.Tasks;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-
-using System.Linq;
-using NAudio.CoreAudioApi;
 using OPMedia.Runtime.ProTONE.AudioMetering;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.FfdShowApi;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.UI.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering

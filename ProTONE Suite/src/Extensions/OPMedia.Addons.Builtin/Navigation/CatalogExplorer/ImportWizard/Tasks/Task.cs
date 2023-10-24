@@ -1,23 +1,18 @@
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Core;
+using OPMedia.Core.ComTypes;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Wizards;
 using System.IO;
+using System.Threading;
 //using OPMedia.Runtime.Playlists;
 using System.Windows.Forms;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Logging;
-using OPMedia.UI;
-using System.Threading;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Controls;
-using OPMedia.Core.ComTypes;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.Runtime.FileInformation;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 {

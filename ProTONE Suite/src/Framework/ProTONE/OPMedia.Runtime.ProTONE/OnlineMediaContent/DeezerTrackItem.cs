@@ -1,13 +1,7 @@
-﻿using OPMedia.DeezerInterop.RestApi;
-using OPMedia.Runtime.ProTONE.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.Utilities;
-using OPMedia.Core.Logging;
+using OPMedia.DeezerInterop.RestApi;
+using System;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

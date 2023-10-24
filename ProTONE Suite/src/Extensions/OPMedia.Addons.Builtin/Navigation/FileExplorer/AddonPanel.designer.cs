@@ -1,9 +1,5 @@
 using OPMedia.UI.Controls;
 
-using System.Windows.Forms;
-
-using System.Drawing;
-
 namespace OPMedia.Addons.Builtin.FileExplorer
 {
     partial class AddonPanel

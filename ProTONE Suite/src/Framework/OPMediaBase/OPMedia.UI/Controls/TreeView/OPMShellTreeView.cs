@@ -1,23 +1,17 @@
 #region Using directives
+using OPMedia.Core;
 using System;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Diagnostics;
-
-using System.Collections;
-using OPMedia.Core;
-using OPMedia.Core.ComTypes;
-using System.Collections.Generic;
-using OPMedia.UI.Controls;
+using System.Windows.Forms;
 
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	#region OPMShellTreeView Class
-	public class OPMShellTreeView : OPMTreeView
+    #region OPMShellTreeView Class
+    public class OPMShellTreeView : OPMTreeView
     {
         #region Members
         private System.Windows.Forms.ImageList OPMShellTreeViewImageList;

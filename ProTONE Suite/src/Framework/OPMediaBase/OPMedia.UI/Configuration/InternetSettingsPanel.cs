@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Properties;
 
 namespace OPMedia.UI.Configuration
 {

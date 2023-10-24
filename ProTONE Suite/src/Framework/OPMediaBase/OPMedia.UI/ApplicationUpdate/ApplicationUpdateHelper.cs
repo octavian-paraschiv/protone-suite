@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
 using OPMedia.Core;
-using OPMedia.Core.GlobalEvents;
-using System.Threading;
-using System.IO;
-using OPMedia.Core.NetworkAccess;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
-using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Dialogs;
-using OPMedia.Runtime.AssemblyInfo;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using OPMedia.Core.InstanceManagement;
 using System.Net;
-using Newtonsoft.Json;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ApplicationUpdate
 {

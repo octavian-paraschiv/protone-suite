@@ -1,14 +1,6 @@
 ﻿using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace OPMedia.Runtime.ProTONE
 {

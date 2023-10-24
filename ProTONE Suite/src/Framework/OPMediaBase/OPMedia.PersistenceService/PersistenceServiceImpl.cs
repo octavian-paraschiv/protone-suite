@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using System.Transactions;
+﻿using Newtonsoft.Json;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
-using System.Threading;
-using OPMedia.Core.Utilities;
-using OPMedia.Core.InterProcessCommunication;
-using Newtonsoft.Json;
-using OPMedia.Core.Persistence;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Persistence;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace OPMedia.PersistenceService
 {

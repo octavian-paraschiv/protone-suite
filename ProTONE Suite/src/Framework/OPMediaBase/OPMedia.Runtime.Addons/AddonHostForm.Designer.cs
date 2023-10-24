@@ -1,7 +1,5 @@
 
 using OPMedia.UI.Controls;
-
-using System.Windows.Forms;
 namespace OPMedia.Runtime.Addons
 {
     partial class AddonHostForm

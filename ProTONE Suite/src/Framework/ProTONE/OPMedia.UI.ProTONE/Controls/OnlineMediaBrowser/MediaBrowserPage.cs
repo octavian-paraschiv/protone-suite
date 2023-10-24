@@ -1,22 +1,17 @@
-﻿using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+﻿using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Dialogs;
+using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Core;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.UI.Generic;
-using OPMedia.UI.ProTONE.Dialogs;
 using System.Windows.Forms;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.Dialogs;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
 {

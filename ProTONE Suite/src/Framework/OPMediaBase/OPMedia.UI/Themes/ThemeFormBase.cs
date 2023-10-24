@@ -1,12 +1,12 @@
-﻿using System;
+﻿using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Controls;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
-using OPMedia.Core;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.GlobalEvents;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Themes
 {

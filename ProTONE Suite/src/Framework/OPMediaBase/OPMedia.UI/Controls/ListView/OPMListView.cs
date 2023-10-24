@@ -1,30 +1,25 @@
 
 #region Using directives
+using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.UI.Themes;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Logging;
-using OPMedia.Core;
-using System.Runtime.InteropServices;
-using OPMedia.Core.GlobalEvents;
 using System.Drawing.Drawing2D;
-using OPMedia.UI.Generic;
+using System.Runtime.InteropServices;
 using System.Threading;
-using System.Diagnostics;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	#region Event Args
-	/// <summary>
-	/// Implements event arguments wrapper for the SubItemEditing/Edited events.
-	/// </summary>
-	public class ListViewSubItemEventArgs : HandledEventArgs
+    #region Event Args
+    /// <summary>
+    /// Implements event arguments wrapper for the SubItemEditing/Edited events.
+    /// </summary>
+    public class ListViewSubItemEventArgs : HandledEventArgs
 	{
 		#region Members
 		/// <summary>

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core.Win32;
+using System;
 using System.Runtime.InteropServices;
-using OPMedia.Core.Win32;
 
 // Ported from original header file deezer-player.h
 

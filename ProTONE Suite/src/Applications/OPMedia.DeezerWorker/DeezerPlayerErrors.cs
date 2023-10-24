@@ -1,10 +1,6 @@
 ﻿using OPMedia.Core.Logging;
 using OPMedia.DeezerInterop.PlayerApi;
 using OPMedia.Runtime.ProTONE;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OPMedia.DeezerWorker
 {

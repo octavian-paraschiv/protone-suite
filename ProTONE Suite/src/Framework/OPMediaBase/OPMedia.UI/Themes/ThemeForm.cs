@@ -1,26 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Drawing.Text;
-using OPMedia.Core.TranslationSupport;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
 using OPMedia.Core.Configuration;
-using OPMedia.Runtime;
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.Dialogs;
-using System.Threading;
-
 using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Shortcuts;
 using OPMedia.UI.ApplicationUpdate;
+using OPMedia.UI.Controls;
 using OPMedia.UI.HelpSupport;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace OPMedia.UI.Themes

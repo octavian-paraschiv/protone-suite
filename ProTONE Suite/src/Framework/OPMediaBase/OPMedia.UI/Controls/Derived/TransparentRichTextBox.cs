@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.Core;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime;
-using System.Drawing;
-using OPMedia.UI.Themes;
-
-using OPMedia.Core.Utilities;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.UI.Themes;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {

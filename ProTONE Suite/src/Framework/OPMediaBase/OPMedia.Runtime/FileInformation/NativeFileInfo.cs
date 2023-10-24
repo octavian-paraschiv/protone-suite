@@ -1,13 +1,11 @@
+using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.ComponentModel;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
 using System.Drawing.Design;
-using OPMedia.Core;
-using OPMedia.Core.Utilities;
+using System.IO;
 
 namespace OPMedia.Runtime.FileInformation
 {

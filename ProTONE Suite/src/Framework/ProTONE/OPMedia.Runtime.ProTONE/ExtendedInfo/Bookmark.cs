@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
+﻿using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Utilities;
+using System;
+using System.ComponentModel;
 
 namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 {

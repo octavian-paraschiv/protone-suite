@@ -1,21 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json;
+using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using System.IO;
-using System.Diagnostics;
-using OPMedia.UI;
-using OPMedia.Core;
-using System.Windows.Forms;
-using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.Runtime;
-using OPMedia.UI.Configuration;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using OPMedia.UI.FileOperations.Tasks;
-using System.Configuration;
-using Newtonsoft.Json;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons.AddonsBase
 {

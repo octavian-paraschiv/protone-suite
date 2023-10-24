@@ -16,23 +16,22 @@
  * 
  */
 #endregion
-using System;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Collections.Generic;
-using OPMedia.Core.Utilities;
-using System.Xml.Serialization;
-using System.IO;
-using System.Xml;
 using OPMedia.Core;
+using OPMedia.Core.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 {
-	/// <summary>
-	/// Summary description for CDEntry.
-	/// </summary>
+    /// <summary>
+    /// Summary description for CDEntry.
+    /// </summary>
     [DataContract]
     public class CDEntry
 	{

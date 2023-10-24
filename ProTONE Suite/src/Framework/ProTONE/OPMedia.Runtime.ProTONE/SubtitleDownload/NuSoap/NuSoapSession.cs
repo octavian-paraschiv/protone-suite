@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Runtime.ProTONE.NuSoap;
-using System.Net;
-using OPMedia.Core.Configuration;
+﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
+using OPMedia.Core.Configuration;
+using OPMedia.Runtime.ProTONE.NuSoap;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.IO.Compression;
 using System.IO;
 using System.Linq;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
 {

@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime;
-using System.IO;
-using System.Drawing;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.Addons;
 using OPMedia.Core.TranslationSupport;
-using System.ComponentModel;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.Core.Utilities;
-
-using OPMedia.Addons.Builtin.Shared;
+using OPMedia.Runtime.Addons;
+using OPMedia.UI.Controls;
 using OPMedia.UI.Generic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.Controls
 {

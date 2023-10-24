@@ -1,10 +1,7 @@
-﻿using System;
+﻿using OPMedia.UI.Themes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
 using System.Drawing.Drawing2D;
 
 namespace OPMedia.UI.Controls

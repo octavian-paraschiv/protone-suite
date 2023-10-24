@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
 {
-  public class DataReadEventArgs : EventArgs
+    public class DataReadEventArgs : EventArgs
   {
     private byte[] m_Data;
     private uint m_DataSize;

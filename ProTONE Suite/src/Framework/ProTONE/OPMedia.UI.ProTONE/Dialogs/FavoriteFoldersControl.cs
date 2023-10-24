@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Controls;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Dialogs
 {

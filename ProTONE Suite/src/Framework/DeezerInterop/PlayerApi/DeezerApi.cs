@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using OPMedia.Core.Logging;
 
 // Ported from original header file deezer-api.h
 

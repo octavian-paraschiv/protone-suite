@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OPMedia.Core.Logging;
+using System;
 using System.Threading;
-using OPMedia.Core.Logging;
 
 namespace OPMedia.Runtime.ProTONE
 {

@@ -1,15 +1,10 @@
-﻿using OPMedia.Core.Logging;
+﻿using Newtonsoft.Json;
+using OPMedia.Core.Logging;
 using OPMedia.DeezerInterop.RestApi;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Core.Utilities;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

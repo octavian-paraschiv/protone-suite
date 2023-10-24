@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using System.Security;
-using System.Drawing.Design;
-using System.Security.Permissions;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.UI.Generic;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-
-using System.IO;
-using TagLib;
-using OPMedia.Core;
-using OPMedia.UI.ProTONE.Properties;
-using System.Drawing.Imaging;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.UI.Controls;
 using OPMedia.UI.Controls.Dialogs;
+using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Imaging;
+using System.Security;
+using System.Security.Permissions;
+using System.Windows.Forms;
+using TagLib;
 
 namespace OPMedia.UI.ProTONE.Dialogs
 {

@@ -1,7 +1,7 @@
-﻿using System;
-using OPMedia.Core.TranslationSupport;
+﻿using NAudio.Lame;
 using OPMedia.Addons.Builtin.Shared.Compression;
-using NAudio.Lame;
+using OPMedia.Core.TranslationSupport;
+using System;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {

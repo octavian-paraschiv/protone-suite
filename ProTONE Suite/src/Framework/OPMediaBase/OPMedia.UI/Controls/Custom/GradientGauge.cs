@@ -7,15 +7,11 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Generic;
-using System.Drawing.Drawing2D;
 using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.UI.Controls

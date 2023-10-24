@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
+using System;
+using System.Collections.Generic;
 
 namespace OPMedia.Addons.Builtin.Bookmarks
 {

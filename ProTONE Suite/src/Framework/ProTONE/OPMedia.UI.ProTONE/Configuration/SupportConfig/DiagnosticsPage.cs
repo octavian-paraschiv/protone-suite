@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-
-using OPMedia.Core;
-using Microsoft.Win32;
-using OPMedia.UI.Properties;
-using OPMedia.Runtime.ProTONE.Haali;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.DirectX;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.DirectX;
+using OPMedia.Runtime.ProTONE.FfdShowApi;
+using OPMedia.Runtime.ProTONE.Haali;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Properties;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {

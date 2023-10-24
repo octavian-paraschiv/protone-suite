@@ -1,17 +1,12 @@
-﻿using System;
+﻿using OPMedia.Core;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Permissions;
-using System.Security;
 using System.Threading;
 using System.Windows.Forms;
-using System.Drawing;
-using System.IO;
-using OPMedia.Core;
 
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses

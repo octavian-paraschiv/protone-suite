@@ -1,33 +1,23 @@
 #region Using directives
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Resources;
-using System.Collections.Specialized;
-using System.Configuration;
-using OPMedia.UI.Controls;
-using System.Reflection;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-using System.Collections.Generic;
-using OPMedia.UI.Generic;
-using System.IO;
-
+using Microsoft.Win32;
 using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.InstanceManagement;
+using OPMedia.Core.Logging;
+using OPMedia.UI.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using Microsoft.Win32;
-using System.ComponentModel;
-using OPMedia.UI.Properties;
-using System.Xml;
-using System.Xml.Linq;
+using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Diagnostics;
-using OPMedia.Core.InstanceManagement;
-using System.Text;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 #endregion
 

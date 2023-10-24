@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.Themes;
-using System.Threading.Tasks;
-using OPMedia.Core;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.UI.ProTONE.Properties;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.UI.Controls;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
 using EventNames = OPMedia.Core.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer

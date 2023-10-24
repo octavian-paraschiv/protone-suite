@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using OPMedia.Core;
-using System.Windows.Forms;
-using System.Threading;
-using System.IO;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.UI.FileOperations.Tasks;
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
 namespace OPMedia.UI.FileTasks
 {

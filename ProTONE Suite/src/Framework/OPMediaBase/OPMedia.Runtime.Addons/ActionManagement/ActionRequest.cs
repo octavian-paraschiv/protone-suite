@@ -7,9 +7,7 @@
 #endregion
 
 #region Using directives
-using System;
 using System.Collections.Generic;
-using System.Text;
 #endregion
 
 namespace OPMedia.Runtime.Addons.ActionManagement

@@ -7,14 +7,7 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using Microsoft.Win32;
-using System.Reflection.Emit;
-using System.IO;
-using OPMedia.Core.TranslationSupport;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase

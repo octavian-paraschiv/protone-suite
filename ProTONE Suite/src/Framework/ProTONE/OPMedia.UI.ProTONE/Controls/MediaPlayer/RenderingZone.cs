@@ -7,16 +7,8 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Core;
 using OPMedia.UI.Controls;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer

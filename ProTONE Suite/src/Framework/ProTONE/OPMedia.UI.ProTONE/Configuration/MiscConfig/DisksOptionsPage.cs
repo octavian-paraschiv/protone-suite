@@ -1,22 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime;
-
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core;
-using OPMedia.Core.Utilities;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI.Configuration;
+using System;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {

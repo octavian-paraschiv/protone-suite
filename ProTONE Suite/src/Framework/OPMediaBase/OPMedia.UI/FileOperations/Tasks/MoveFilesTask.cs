@@ -1,9 +1,7 @@
-﻿using System;
+﻿using OPMedia.Core;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using OPMedia.Core;
 
 namespace OPMedia.UI.FileTasks
 {

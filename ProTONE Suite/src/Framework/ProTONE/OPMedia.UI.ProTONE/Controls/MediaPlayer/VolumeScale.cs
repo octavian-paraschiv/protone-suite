@@ -7,26 +7,17 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
-using System.Windows.Forms.Design;
-using OPMedia.Core.Configuration;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using OPMedia.Core.GlobalEvents;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core;
-
+using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
-using OPMedia.Runtime.ProTONE.Configuration;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 #endregion
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer

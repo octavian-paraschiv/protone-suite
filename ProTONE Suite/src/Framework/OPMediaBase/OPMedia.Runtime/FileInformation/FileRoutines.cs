@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security;
-using System.IO;
-using OPMedia.Core;
-using System.Security.Permissions;
+﻿using OPMedia.Core;
+using System;
 using System.ComponentModel;
+using System.IO;
 
 namespace OPMedia.Runtime.FileInformation
 {

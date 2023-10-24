@@ -1,9 +1,7 @@
+using OPMedia.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using OPMedia.Core.Logging;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {

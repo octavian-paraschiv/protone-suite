@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Dialogs;
-using OPMedia.Core.NetworkAccess;
+﻿using OPMedia.Core;
 using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using System.IO;
-using System.Diagnostics;
 using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
+using OPMedia.UI.Dialogs;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ApplicationUpdate
 {

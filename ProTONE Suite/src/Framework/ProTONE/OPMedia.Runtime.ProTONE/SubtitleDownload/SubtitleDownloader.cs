@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using OPMedia.Runtime.FileInformation;
-using System.Threading;
-using OPMedia.Core.Logging;
-using OPMedia.Core.NetworkAccess;
-using OPMedia.Core.Configuration;
-using System.IO.Compression;
-using System.Net;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.Utilities;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
+using System.Collections.Generic;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 {

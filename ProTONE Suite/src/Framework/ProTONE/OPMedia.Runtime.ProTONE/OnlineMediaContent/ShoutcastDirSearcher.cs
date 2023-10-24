@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
-using static System.Collections.Specialized.BitVector32;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

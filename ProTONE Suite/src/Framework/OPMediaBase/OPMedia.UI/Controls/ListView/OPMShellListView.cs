@@ -7,34 +7,22 @@
 #endregion
 
 #region Using directives
+using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.UI.FileTasks;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using OPMedia.Runtime;
-
-using System.Threading;
-using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-
-using OPMedia.UI.Controls;
-using OPMedia.Core.GlobalEvents;
-
-using System.Linq;
-using System.Globalization;
-using OPMedia.Core.Utilities;
-using OPMedia.UI.FileTasks;
-using OPMedia.Core.NetworkAccess;
 
 #endregion
 

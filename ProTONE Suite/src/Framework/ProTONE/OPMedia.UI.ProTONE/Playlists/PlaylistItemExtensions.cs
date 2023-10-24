@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Playlists;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Core;
+using System.Drawing;
 
 namespace OPMedia.UI.ProTONE
 {

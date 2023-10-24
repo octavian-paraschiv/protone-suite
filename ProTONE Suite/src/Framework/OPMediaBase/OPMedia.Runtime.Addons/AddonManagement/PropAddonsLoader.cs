@@ -7,18 +7,13 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Win32;
-using System.Windows.Forms;
+using OPMedia.Core;
+using OPMedia.Core.Logging;
 using OPMedia.Runtime.Addons.AddonsBase;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using OPMedia.Core;
-using OPMedia.Runtime.Addons;
-using OPMedia.Core.Logging;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonManagement

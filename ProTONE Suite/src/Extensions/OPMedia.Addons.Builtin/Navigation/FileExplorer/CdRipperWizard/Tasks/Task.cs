@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI;
-using System.ComponentModel;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda;
-using System.IO;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using OPMedia.Core.Utilities;
-
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core.TranslationSupport;
-using System.Threading;
+﻿using OPMedia.Addons.Builtin.Shared.Compression;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
-using OPMedia.Addons.Builtin.Shared.Compression;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
+using OPMedia.UI;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks
 {

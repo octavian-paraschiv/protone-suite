@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime;
-using OPMedia.Core.Configuration;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Core.Logging;
-using System.IO;
-using System.Collections;
-using System.Globalization;
 using OPMedia.UI.ProTONE.Configuration;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.SubtitleDownload
 {

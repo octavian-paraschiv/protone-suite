@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.Rendering;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
 using OPMedia.Core;
-using System.Diagnostics;
-using OPMedia.UI.Dialogs;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.SystemScheduler;
+using OPMedia.UI.Dialogs;
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE
 {

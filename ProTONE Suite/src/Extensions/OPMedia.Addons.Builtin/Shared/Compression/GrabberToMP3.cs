@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NAudio.Lame;
+using NAudio.Wave;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using System.IO;
-
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using NAudio.Lame;
-using NAudio.Wave;
+using System;
 
 namespace OPMedia.Addons.Builtin.Shared.Compression
 {

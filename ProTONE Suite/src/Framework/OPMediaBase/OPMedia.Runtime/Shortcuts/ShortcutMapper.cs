@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Windows.Forms;
-using OPMedia.Core.Logging;
 using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
+using System.Windows.Forms;
 
 
 namespace OPMedia.Runtime.Shortcuts

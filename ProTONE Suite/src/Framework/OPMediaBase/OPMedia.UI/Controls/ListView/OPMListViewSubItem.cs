@@ -1,23 +1,21 @@
 #region Using directives
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	/// <summary>
-	/// Implements a custom list view subitem that provides support
-	/// for displaying custom edit controls and also for dynamic read-only/editable
-	/// behavior.
-	/// Replaces the base class in the ListViewItem.SubItems collection.
-	/// </summary>
-	/// <remarks>
-	/// Usage: Create an editable or read only subitem and add it to the ListViewItem instance.
-	/// Set/unset 
-	/// </remarks>
-	public class OPMListViewSubItem : ListViewItem.ListViewSubItem, ISelfValidable
+    /// <summary>
+    /// Implements a custom list view subitem that provides support
+    /// for displaying custom edit controls and also for dynamic read-only/editable
+    /// behavior.
+    /// Replaces the base class in the ListViewItem.SubItems collection.
+    /// </summary>
+    /// <remarks>
+    /// Usage: Create an editable or read only subitem and add it to the ListViewItem instance.
+    /// Set/unset 
+    /// </remarks>
+    public class OPMListViewSubItem : ListViewItem.ListViewSubItem, ISelfValidable
 	{	
 		#region Members
 		/// <summary>

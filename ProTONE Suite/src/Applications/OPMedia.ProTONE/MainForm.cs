@@ -1,40 +1,26 @@
+using OPMedia.Core;
+using OPMedia.Core.ComTypes;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Menus;
+using OPMedia.UI.ProTONE;
+using OPMedia.UI.ProTONE.Controls.MediaPlayer;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.UI.Controls;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Configuration;
-using OPMedia.UI;
-
-using System.Reflection;
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime;
-using OPMedia.Core;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.Runtime.ProTONE;
-
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.Dialogs;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using OPMedia.Core.GlobalEvents;
 using EventNames = OPMedia.Core.EventNames;
-using OPMedia.UI.Menus;
-using OPMedia.Core.ComTypes;
-using OPMedia.UI.ProTONE;
-using OPMedia.UI.Properties;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Configuration;
 
 
 namespace OPMedia.ProTONE

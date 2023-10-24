@@ -1,5 +1,4 @@
 using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
     partial class TimeScale

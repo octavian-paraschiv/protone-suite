@@ -1,24 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime;
-using OPMedia.UI.Controls;
-using System.Threading;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.UI.Themes;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.ProTONE.GlobalEvents;
+using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.SystemScheduler;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
+using System.Threading;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {

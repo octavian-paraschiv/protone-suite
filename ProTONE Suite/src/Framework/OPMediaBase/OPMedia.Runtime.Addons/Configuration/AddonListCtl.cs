@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-
-using OPMedia.UI.Themes;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Core;
-using OPMedia.UI.Generic;
-using OPMedia.Runtime.Addons.Properties;
-using System.Runtime.InteropServices;
-using OPMedia.Core.Logging;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {

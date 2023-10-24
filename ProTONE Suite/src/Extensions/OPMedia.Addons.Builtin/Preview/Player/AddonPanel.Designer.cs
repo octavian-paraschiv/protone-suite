@@ -1,4 +1,3 @@
-using OPMedia.UI.Themes;
 using OPMedia.UI.ProTONE.Controls.MediaPlayer;
 namespace OPMedia.Addons.Builtin.Player
 {

@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
 using OPMedia.Core.TranslationSupport;
-using System.Threading;
-using System.Drawing.Design;
 using OPMedia.Core.Utilities;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing.Design;
 
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {

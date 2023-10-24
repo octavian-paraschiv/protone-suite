@@ -1,9 +1,7 @@
-﻿using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
+﻿using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {

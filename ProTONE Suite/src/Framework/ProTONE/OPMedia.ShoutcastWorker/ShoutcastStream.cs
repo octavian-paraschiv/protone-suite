@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using OPMedia.Core.Configuration;
-using System.IO;
-using OPMedia.Core;
-using System.Text.RegularExpressions;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using System.Reflection;
-using System.Net.Configuration;
-using System.Collections.Specialized;
-using static TagLib.File;
 using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Rendering;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Configuration;
+using System.Reflection;
+using System.Text;
 using TagLib.Mpeg;
-using System.Diagnostics;
+using static TagLib.File;
 
 namespace OPMedia.ShoutcastWorker
 {

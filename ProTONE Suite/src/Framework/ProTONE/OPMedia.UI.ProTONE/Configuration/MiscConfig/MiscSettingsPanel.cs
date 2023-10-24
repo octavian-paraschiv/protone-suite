@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.ProTONE.Properties;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Configuration;
-using OPMedia.Core.TranslationSupport;
-
-using OPMedia.Core;
 using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
 using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Properties;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {

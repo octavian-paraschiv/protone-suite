@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System.Drawing;
-using OPMedia.Core.TranslationSupport;
-using System.ComponentModel;
-
-using System.IO;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
-using System.Runtime.Serialization.Formatters.Binary;
-using OPMedia.Runtime.FileInformation;
-using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using TagLib;
 
 namespace OPMedia.Runtime.ProTONE.ExtendedInfo

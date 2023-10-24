@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {
     public class CatalogInfo

@@ -1,18 +1,17 @@
+using OPMedia.Core.Configuration;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.Themes;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Configuration;
-using OPMedia.UI.Controls;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.UI.Themes;
-
 using System.Windows.Forms.VisualStyles;
-using OPMedia.UI.Generic;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE;
 
 
 namespace OPMedia.UI.ProTONE.Configuration

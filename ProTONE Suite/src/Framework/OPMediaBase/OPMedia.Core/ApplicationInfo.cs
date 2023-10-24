@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace OPMedia.Core
 {

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Security.Permissions;
-using System.Windows.Forms;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
+using System;
+using System.Drawing;
 
 namespace OPMedia.VideoDVDWorker
 {

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core.Logging;
+using System;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using OPMedia.Core.Logging;
+using System.Runtime.Serialization;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Base
 {

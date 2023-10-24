@@ -7,25 +7,20 @@
 #endregion
 
 #region Using directives
+using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.DeezerInterop.RestApi;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core.TranslationSupport;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using System.ComponentModel;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Utilities;
-using OPMedia.Core;
-using System.Linq;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-using OPMedia.DeezerInterop.RestApi;
-using Newtonsoft.Json;
 using System.Threading;
 #endregion
 

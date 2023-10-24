@@ -1,23 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using OPMedia.Core;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Core.Logging;
-using System.Diagnostics;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using System.Windows.Forms;
+﻿using OPMedia.Core.Logging;
 using OPMedia.DeezerInterop;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 {

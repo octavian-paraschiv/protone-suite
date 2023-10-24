@@ -1,28 +1,16 @@
+using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.AddonsBase;
+using OPMedia.Runtime.Addons.Properties;
+using OPMedia.UI;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
-using OPMedia.UI;
-using System.Diagnostics;
-using OPMedia.Core.TranslationSupport;
-using System.IO;
 using System.Reflection;
-
-using OPMedia.Core;
-using OPMedia.Core.InstanceManagement;
-using System.Security.AccessControl;
-using System.Threading;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Configuration;
-using OPMedia.Runtime.Addons.Properties;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Controls.Dialogs;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {

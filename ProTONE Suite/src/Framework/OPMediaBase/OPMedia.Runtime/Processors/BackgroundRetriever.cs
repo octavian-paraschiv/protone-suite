@@ -1,20 +1,18 @@
-using OPMedia.Runtime;
-using OPMedia.Core.Configuration;
-using System.Net;
-using OPMedia.Core.Logging;
-using System.Threading;
-using System.IO;
-using System;
-using System.Windows.Forms;
-using System.Security.Cryptography;
-using OPMedia.Core.NetworkAccess;
 using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
 using OPMedia.Core.Utilities;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Processors
 {
-    
+
 
     public class BackgroundRetriever : Processor
     {

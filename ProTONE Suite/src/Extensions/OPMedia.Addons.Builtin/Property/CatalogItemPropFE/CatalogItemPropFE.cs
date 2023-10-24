@@ -1,15 +1,10 @@
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.AddonsBase.Prop;
+using OPMedia.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.Addons.AddonsBase.Prop;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Logging;
-using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropFE
 {

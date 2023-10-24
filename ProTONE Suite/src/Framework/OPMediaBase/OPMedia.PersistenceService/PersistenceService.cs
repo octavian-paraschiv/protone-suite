@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
+using System;
+using System.Diagnostics;
+using System.ServiceProcess;
 
 namespace OPMedia.PersistenceService
 {

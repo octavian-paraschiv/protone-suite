@@ -1,11 +1,8 @@
 ﻿using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport

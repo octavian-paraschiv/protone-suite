@@ -11,20 +11,18 @@
 //  Copyright (C) 2002-2003 Idael Cardoso. 
 //
 
-using System;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
+using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using OPMedia.Core.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using OPMedia.Core;
-using OPMedia.Core.TranslationSupport;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda
 {
-  public class CDBufferFiller
+    public class CDBufferFiller
   {
     byte[] BufferArray;
     int WritePosition = 0;

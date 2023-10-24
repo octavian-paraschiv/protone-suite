@@ -1,28 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System.ComponentModel;
-using System.IO;
-using System.Drawing.Design;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using System.Windows.Forms.Design;
-using System.Security;
-using System.Security.Permissions;
-using System.Windows.Forms;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using TagLib.Mpeg;
-using TagLib;
 using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering;
-using System.Threading;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Design;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
+using TagLib;
+using TagLib.Mpeg;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {

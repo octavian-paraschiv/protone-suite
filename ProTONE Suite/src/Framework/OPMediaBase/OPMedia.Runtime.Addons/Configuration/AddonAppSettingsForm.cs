@@ -1,12 +1,8 @@
+using OPMedia.Runtime.Addons.AddonsBase;
+using OPMedia.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Configuration;
-using OPMedia.Core;
 using System.Windows.Forms;
-using OPMedia.UI;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {

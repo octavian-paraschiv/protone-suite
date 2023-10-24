@@ -9,13 +9,7 @@
 #region Using directives
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
-using System.Reflection;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase.Navigation

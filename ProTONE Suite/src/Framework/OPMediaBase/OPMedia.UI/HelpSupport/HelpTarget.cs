@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core;
-using System.Windows.Forms;
-using OPMedia.Core.Logging;
-using OPMedia.Core.GlobalEvents;
-using System.Diagnostics;
-using OPMedia.UI.Themes;
+﻿using OPMedia.Core;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.HelpSupport
 {

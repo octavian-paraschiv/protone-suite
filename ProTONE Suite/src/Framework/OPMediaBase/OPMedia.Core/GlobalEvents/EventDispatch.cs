@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-using OPMedia.Core.GlobalEvents;
-using System.Windows.Forms;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Collections.Specialized;
+﻿using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Core
 {

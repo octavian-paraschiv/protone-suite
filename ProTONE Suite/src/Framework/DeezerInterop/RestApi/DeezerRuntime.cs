@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Threading;
-using System.Net;
+﻿using Newtonsoft.Json;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading;
 
 namespace OPMedia.DeezerInterop.RestApi
 {

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OPMedia.Addons.Builtin.Properties {
-    using System;
-    
-    
+namespace OPMedia.Addons.Builtin.Properties
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

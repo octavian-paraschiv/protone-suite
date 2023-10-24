@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Wizards;
-using System.IO;
-using OPMedia.UI;
 using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.UI;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Tasks
 {

@@ -16,25 +16,21 @@
  * 
  */
 #endregion
-using System;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Collections.Specialized;
-using System.Diagnostics;
-using OPMedia.Core.Configuration;
 using OPMedia.Core;
-using System.Net.Sockets;
-using System.Collections.Generic;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.Configuration;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb
 {
-	/// <summary>
-	/// Summary description for FreedbHelper.
-	/// </summary>
-	public class FreedbHelper : IDisposable
+    /// <summary>
+    /// Summary description for FreedbHelper.
+    /// </summary>
+    public class FreedbHelper : IDisposable
 	{
 		private string m_UserName;
 		private string m_Hostname;

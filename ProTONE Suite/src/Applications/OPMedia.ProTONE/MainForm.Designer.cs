@@ -1,11 +1,5 @@
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using System;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
 using OPMedia.UI.Controls;
-using System.Drawing;
-using System.ComponentModel;
-using System.Windows.Forms.Design;
+using OPMedia.UI.ProTONE.Controls.MediaPlayer;
 using System.Windows.Forms;
 namespace OPMedia.ProTONE
 {

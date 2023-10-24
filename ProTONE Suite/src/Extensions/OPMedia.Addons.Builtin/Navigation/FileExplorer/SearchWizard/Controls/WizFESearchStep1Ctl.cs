@@ -1,35 +1,24 @@
+using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Tasks;
+using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Dialogs;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Themes;
+using OPMedia.UI.Wizards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
 using System.IO;
-using OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Tasks;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Core;
-
-using OPMedia.Runtime;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-
-using OPMedia.UI.Controls;
-using OPMedia.Core.Utilities;
-using OPMedia.UI.Dialogs;
-using OPMedia.Addons.Builtin.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-
-using System.Linq;
 using System.Threading;
-using System.Diagnostics;
-using OPMedia.Addons.Builtin.Shared;
-using OPMedia.UI.Generic;
+using System.Windows.Forms;
 
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls

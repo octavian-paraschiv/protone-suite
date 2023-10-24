@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core;
-using OPMedia.Core.TranslationSupport;
-using System.Windows.Forms;
-using OPMedia.UI.FileTasks;
-using System.Threading;
-using System.IO;
-using OPMedia.Runtime.FileInformation;
-using System.ComponentModel;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Core;
 using OPMedia.Core.ComTypes;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.UI.Controls;
+using OPMedia.UI.FileTasks;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.FileOperations.Tasks
 {

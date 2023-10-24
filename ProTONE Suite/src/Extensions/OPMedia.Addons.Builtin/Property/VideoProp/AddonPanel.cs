@@ -1,23 +1,11 @@
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI.Controls;
+using OPMedia.UI.ProTONE.SubtitleDownload;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.ProTONE.SubtitleDownload;
-using OPMedia.Core.Configuration;
-using System.Threading;
-using OPMedia.Core.Logging;
-using OPMedia.UI;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.ProTONE.GlobalEvents;
-using OPMedia.UI.Controls;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.VideoProp
 {

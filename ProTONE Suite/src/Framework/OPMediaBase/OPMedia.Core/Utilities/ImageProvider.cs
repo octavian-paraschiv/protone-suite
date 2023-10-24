@@ -7,21 +7,16 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.Core;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Resources;
-using OPMedia.Core.Properties;
-using System.Reflection;
-using OPMedia.Core.Utilities;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
-using System.Drawing.Imaging;
+using OPMedia.Core.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 #endregion
 
 

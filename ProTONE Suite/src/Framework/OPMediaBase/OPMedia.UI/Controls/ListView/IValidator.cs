@@ -1,15 +1,12 @@
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	/// <summary>
-	/// Provides a common interface for the Number/TextValidator instances.
-	/// </summary>
-	public interface IValidator
+    /// <summary>
+    /// Provides a common interface for the Number/TextValidator instances.
+    /// </summary>
+    public interface IValidator
 	{
 		#region Properties
 		/// <summary>

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Runtime.Addons;
-using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
+﻿using OPMedia.Core;
 using System.ComponentModel;
-using OPMedia.Core;
 
 namespace OPMedia.Addons.Builtin.Configuration
 {

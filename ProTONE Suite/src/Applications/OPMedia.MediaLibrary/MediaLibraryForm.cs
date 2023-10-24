@@ -1,23 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using OPMedia.Core.InstanceManagement;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
-using System.Configuration;
 using OPMedia.Runtime.Addons;
-using OPMedia.Core.Configuration;
-using OPMedia.UI;
-using System.Diagnostics;
-using OPMedia.UI.ProTONE;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.UI.Themes;
-using OPMedia.UI.ProTONE.Configuration;
-using OPMedia.Runtime;
-using OPMedia.Core;
 using OPMedia.Runtime.Shortcuts;
-using OPMedia.Core.Utilities;
-using OPMedia.UI.HelpSupport;
+using OPMedia.UI.ProTONE.Configuration;
 
 namespace OPMedia.MediaLibrary
 {

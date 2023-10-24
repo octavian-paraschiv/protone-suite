@@ -1,19 +1,10 @@
 #region Using directives
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
+using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Dialogs;
-using System.Threading;
-using OPMedia.Runtime;
-using OPMedia.Core;
+using System.ComponentModel;
+using System.Drawing;
 
 #endregion
 

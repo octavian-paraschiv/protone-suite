@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Addons.Builtin.Shared.Compression;
+﻿using OPMedia.Addons.Builtin.Shared.Compression;
 
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions

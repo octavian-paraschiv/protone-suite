@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core;
-using System.IO;
 using System.Diagnostics;
-using OPMedia.Core.Configuration;
+using System.Windows.Forms;
 
 namespace OPMedia.Core.InstanceManagement
 {

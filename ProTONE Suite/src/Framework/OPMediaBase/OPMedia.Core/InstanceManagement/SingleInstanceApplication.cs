@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using OPMedia.Core.Logging;
-using System.Reflection;
+using System;
 using System.Security.AccessControl;
-using OPMedia.Core;
+using System.Threading;
 
 namespace OPMedia.Core.InstanceManagement
 {

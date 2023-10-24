@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using OPMedia.Core;
 using System.ComponentModel;
-using System.Configuration.Install;
-using System.Linq;
 using System.ServiceProcess;
-using OPMedia.Core;
 
 
 namespace OPMedia.PersistenceService

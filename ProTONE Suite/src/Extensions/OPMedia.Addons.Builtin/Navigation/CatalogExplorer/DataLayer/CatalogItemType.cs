@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {
     public class CatalogItemType

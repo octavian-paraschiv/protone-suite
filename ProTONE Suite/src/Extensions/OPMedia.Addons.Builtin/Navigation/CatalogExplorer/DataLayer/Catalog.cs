@@ -1,16 +1,15 @@
+using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 //using ICSharpCode.SharpZipLib.BZip2;
 using System.Reflection;
-using OPMedia.Core;
-using System.ComponentModel;
-using OPMedia.Runtime.FileInformation;
-using OPMedia.Core.TranslationSupport;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {

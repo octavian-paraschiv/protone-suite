@@ -7,22 +7,20 @@
 #endregion
 
 #region Using directives
+using Newtonsoft.Json;
+using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using OPMedia.Core.Logging;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core;
-using System.Xml;
-using OPMedia.Core.Utilities;
+using System.Text;
 using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-using System.Linq;
-using Newtonsoft.Json;
+using System.Xml;
 
 #endregion
 

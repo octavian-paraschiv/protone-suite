@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-
+﻿using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Runtime;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using OPMedia.Core;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.TranslationSupport;
+using System.Linq;
 using System.Net.NetworkInformation;
-
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-
-using OPMedia.Core.Utilities;
-
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.Configuration;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.SubtitleDownload
 {

@@ -1,13 +1,10 @@
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering;
 using System.Globalization;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
