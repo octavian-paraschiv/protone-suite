@@ -7,7 +7,7 @@ environment:
         secure: ON4vmgHe1F5fEi4l35Nj+Ks2UmJ4v8fvh2wF9ixw50sHjcVLrHVZY5OwrAdJmSCd
     
 before_build:
-- git checkout master
+- git checkout ilmerge
 - ps: .\prep_build.ps1 "$env:APPVEYOR_BUILD_VERSION" "$env:IS_RELEASE"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
