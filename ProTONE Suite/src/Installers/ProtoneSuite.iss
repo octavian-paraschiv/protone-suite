@@ -71,6 +71,7 @@ Name: fr; MessagesFile: compiler:Languages\French.isl
 Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 
 [Files]
+Source: "{#BINDIR}\CookComputing.XmlRpcV2.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ;--------------------------------------
 ; Application executables
@@ -78,7 +79,7 @@ Source: "{#BINDIR}\OPMedia.ProTONE.exe"; DestDir: "{app}"; Flags: replacesamever
 Source: "{#BINDIR}\OPMedia.MediaLibrary.exe"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 ;--------------------------------------
 ; Shell integration
-Source: {#BINDIR}\OPMedia.ShellSupport.dll; DestDir: {app}; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: OPMedia.ShellSupport.dll
+Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: "OPMedia.ShellSupport.dll"
 ;--------------------------------------
 ; Rendering workers
 Source: "{#BINDIR}\OPMedia.AudioCdWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -112,7 +113,7 @@ Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-ro.json"; DestDir: "{app}\T
 Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-fr.json"; DestDir: "{app}\Translations"
 ;--------------------------------------
 ; Database and support DLL's
-Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall;
+Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall
 Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"
 ;--------------------------------------
@@ -131,17 +132,19 @@ Source: "{#BINDIR}\Resources\Subtitle.ico"; DestDir: "{app}\Resources\"; Flags: 
 Source: "{#BINDIR}\Resources\catalog.ico"; DestDir: "{app}\Resources\"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 ;--------------------------------------
 ; Third party libraries
-Source: "{#BINDIR}\CookComputing.XmlRpcV2.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\libdeezer.x86.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\libdeezer.x64.dll"; DestDir: "{app}"
-Source: "{#BINDIR}\libmp3lame.32.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\libmp3lame.64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\NAudio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\NAudio.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\NAudio.Lame.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\NAudio.Wasapi.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
-Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace;
+Source: "{#BINDIR}\libmp3lame.32.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\libmp3lame.64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.Asio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.Lame.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.Midi.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.Wasapi.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.WinForms.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
 Source: "{#BINDIR}\TagLibSharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\SharpShell.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -188,6 +191,17 @@ Source: "{#EXTDIR}\haali\mp4.dll"; DestDir: "{app}\HDSupport"; Flags: regserver;
 Source: "{#EXTDIR}\haali\ogm.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\splitter.ax"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
 Source: "{#EXTDIR}\haali\ts.dll"; DestDir: "{app}\HDSupport"; Flags: regserver; Components: itemCodecs\itemHaali
+;--------------------------------------
+; .NET packages
+Source: "{#BINDIR}\Microsoft.Win32.Registry.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Buffers.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Memory.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Numerics.Vectors.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Resources.Extensions.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Runtime.CompilerServices.Unsafe.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Security.AccessControl.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Security.Principal.Windows.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\System.Threading.Tasks.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 
 [Icons]
