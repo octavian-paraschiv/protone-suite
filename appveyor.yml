@@ -12,6 +12,7 @@ before_build:
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
 build_script:
+- dotnet restore ".\ProTONE Suite\src\ProTONE Suite.sln"
 - dotnet build ".\ProTONE Suite\src\ProTONE Suite.sln"
   
 after_build:
