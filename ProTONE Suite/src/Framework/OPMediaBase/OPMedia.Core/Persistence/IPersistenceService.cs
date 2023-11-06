@@ -3,10 +3,8 @@
     public enum NotificationType
     {
         None = 0,
-
         ObjectSaved,
         ObjectDeleted,
-
         IpcEvent,
     }
 
