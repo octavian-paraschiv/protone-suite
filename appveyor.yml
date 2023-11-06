@@ -1,6 +1,6 @@
-version: 4.0.{build}
+version: 5.0.{build}
 skip_tags: true
-image: Visual Studio 2019
+image: Visual Studio 2022
 
 environment:
     git_access_token:
@@ -10,10 +10,9 @@ before_build:
 - git checkout master
 - ps: .\prep_build.ps1 "$env:APPVEYOR_BUILD_VERSION" "$env:IS_RELEASE"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
-- nuget restore ".\ProTONE Suite\src\ProTONE Suite.sln"
 
 build_script:
-- msbuild /p:Configuration=Debug /t:Rebuild ".\ProTONE Suite\src\ProTONE Suite.sln" /v:minimal 
+- dotnet msbuild ".\ProTONE Suite\src\ProTONE Suite.sln"
   
 after_build:
 - copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 6\Languages"
