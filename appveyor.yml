@@ -12,7 +12,7 @@ before_build:
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
 build_script:
-- dotnet msbuild ".\ProTONE Suite\src\ProTONE Suite.sln"
+- dotnet build ".\ProTONE Suite\src\ProTONE Suite.sln"
   
 after_build:
 - copy ".\ProTONE Suite\src\Installers\Romanian.isl" "C:\Program Files (x86)\Inno Setup 6\Languages"
