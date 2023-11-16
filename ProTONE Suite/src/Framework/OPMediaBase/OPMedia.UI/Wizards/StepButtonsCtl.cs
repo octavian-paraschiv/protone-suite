@@ -1,12 +1,7 @@
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.UI.Controls;
+using System;
+using System.ComponentModel;
 #endregion
 
 namespace OPMedia.UI.Wizards
@@ -253,7 +248,7 @@ namespace OPMedia.UI.Wizards
         }
         #endregion
 
-        
+
 
         #region Implementation
         #endregion

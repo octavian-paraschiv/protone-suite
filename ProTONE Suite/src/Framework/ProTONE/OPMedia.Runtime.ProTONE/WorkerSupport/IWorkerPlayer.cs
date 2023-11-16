@@ -1,9 +1,4 @@
-﻿using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {

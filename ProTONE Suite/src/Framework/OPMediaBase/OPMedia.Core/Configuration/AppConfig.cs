@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.Core;
-using System.IO;
-using System.Reflection;
+﻿using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
-using System.ComponentModel;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Core.Utilities;
-using System.Text.RegularExpressions;
-using System.Net;
-using System.Globalization;
-using System.Security.Principal;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using OPMedia.Core.Win32;
-using OPMedia.Core.InstanceManagement;
-using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
+using System.Windows.Forms;
 
 namespace OPMedia.Core.Configuration
 {
@@ -401,7 +393,7 @@ namespace OPMedia.Core.Configuration
         #region Level 1 settings using Settings File (Combined per-app and per-user settings)
 
         #region Network preferences
-       
+
 
         public static IWebProxy GetWebProxy()
         {
@@ -421,7 +413,7 @@ namespace OPMedia.Core.Configuration
 
             return wp;
         }
-                
+
         public static ProxySettings ProxySettings
         {
             get
@@ -551,7 +543,7 @@ namespace OPMedia.Core.Configuration
                 {
                     size = new Size(2 * Screen.PrimaryScreen.Bounds.Width / 3, 2 * Screen.PrimaryScreen.Bounds.Height / 3);
                 }
-                    
+
                 try
                 {
                     string str = PersistenceProxy.ReadObject(true, "WindowSize", string.Empty);
@@ -619,7 +611,7 @@ namespace OPMedia.Core.Configuration
                 PersistenceProxy.SaveObject(true, "CanSendToTray", value);
             }
         }
-        
+
         #endregion
 
         #region Application state persistence

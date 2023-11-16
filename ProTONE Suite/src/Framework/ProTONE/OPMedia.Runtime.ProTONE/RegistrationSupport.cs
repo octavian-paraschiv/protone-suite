@@ -1,15 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Win32;
-using System.IO;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Configuration;
+﻿using Microsoft.Win32;
 using OPMedia.Core;
-using System.ComponentModel.Composition.Hosting;
+using OPMedia.Core.Configuration;
+using OPMedia.Runtime.ProTONE.Configuration;
 using SharpShell;
 using SharpShell.ServerRegistration;
-using OPMedia.Core.Win32;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
+using System.IO;
+using System.Linq;
 
 namespace OPMedia.Runtime.ProTONE
 {

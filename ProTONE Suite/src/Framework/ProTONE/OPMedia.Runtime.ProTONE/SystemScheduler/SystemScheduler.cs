@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.Rendering;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
 using OPMedia.Core;
-using System.Diagnostics;
-using OPMedia.UI.Dialogs;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.SystemScheduler;
+using OPMedia.UI.Dialogs;
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.ProTONE
 {
@@ -27,15 +25,15 @@ namespace OPMedia.Runtime.ProTONE
 
         public static bool PlaylistEventEnabled
         {
-            get 
+            get
             {
                 lock (_playlistSync)
                 {
                     return (_instance != null) && _instance._playlistEventEnabled;
                 }
             }
-            
-            set 
+
+            set
             {
                 lock (_playlistSync)
                 {
@@ -51,7 +49,7 @@ namespace OPMedia.Runtime.ProTONE
                 }
             }
         }
-        
+
         public static void Start()
         {
             if (_instance == null)
@@ -225,7 +223,7 @@ namespace OPMedia.Runtime.ProTONE
 
                     bool res = false;
 
-                    MainThread.Send(delegate(object x)
+                    MainThread.Send(delegate (object x)
                     {
                         res = QueryScheduledAction(action, msg);
 
@@ -283,7 +281,7 @@ namespace OPMedia.Runtime.ProTONE
         {
 
             // Wait here for proceed signal.
-            while(true)
+            while (true)
             {
                 if (_canProceed.WaitOne(10, true))
                     break;
@@ -310,7 +308,7 @@ namespace OPMedia.Runtime.ProTONE
                             break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ErrorDispatcher.DispatchError(ex, true);
                 }

@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace OPMedia.Core.ComTypes
 {
@@ -50,7 +46,7 @@ namespace OPMedia.Core.ComTypes
         CMF_RESERVED = 0xffff0000,
         CMF_VERBSONLY = 2
     }
-  
+
 
     [Flags]
     public enum GCS : uint
@@ -85,9 +81,9 @@ namespace OPMedia.Core.ComTypes
         public int Y;
     }
 
-    
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode), ComVisible(false)]
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode), ComVisible(false)]
     public class LPCSHCOLUMNDATA
     {
         public uint dwFlags;
@@ -95,7 +91,7 @@ namespace OPMedia.Core.ComTypes
         public uint dwReserved;
         [MarshalAs(UnmanagedType.LPWStr)]
         public string pwszExt;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst=260)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
         public string wszFile;
     }
 
@@ -106,12 +102,12 @@ namespace OPMedia.Core.ComTypes
         public uint pid;
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode), ComVisible(false)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode), ComVisible(false)]
     public class LPCSHCOLUMNINIT
     {
         public uint dwFlags;
         public uint dwReserved;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst=260)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
         public string wszFolder;
     }
 
@@ -176,7 +172,7 @@ namespace OPMedia.Core.ComTypes
         USECHECKBITMAPS = 0x200
     }
 
-    
+
 
     [Flags]
     public enum MFS : uint
@@ -233,7 +229,7 @@ namespace OPMedia.Core.ComTypes
         public uint pid;
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode, Pack=1), ComVisible(false)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1), ComVisible(false)]
     public struct SHCOLUMNINFO
     {
         public SHCOLUMNID scid;
@@ -241,9 +237,9 @@ namespace OPMedia.Core.ComTypes
         public LVCFMT fmt;
         public uint cChars;
         public SHCOLSTATE csFlags;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst=80)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
         public string wszTitle;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst=0x80)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x80)]
         public string wszDescription;
     }
 

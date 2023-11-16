@@ -1,15 +1,7 @@
-#if HAVE_DSHOW
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Services;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Runtime.InteropServices.ComTypes;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
 {
@@ -21,7 +13,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             {
                 string s = GetErrorText(hr);
                 COMException ex = null;
-                
+
                 if (string.IsNullOrEmpty(s))
                     ex = new COMException("COM Error", hr);
                 else
@@ -63,7 +55,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         //    return ErrorDispatcher.GetErrorMessageForException(new COMException("Error: ", hr), true);
         //}
     }
-    
+
     public static class Filters		// uuids.h  :  CLSID_*
     {
         public static readonly Guid FileSource = new Guid("e436ebb5-524f-11ce-9f53-0020af0ba770");
@@ -111,6 +103,3 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     }
 
 }
-
- 
-#endif

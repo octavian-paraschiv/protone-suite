@@ -1,33 +1,23 @@
 #region Using directives
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Resources;
-using System.Collections.Specialized;
-using System.Configuration;
-using OPMedia.UI.Controls;
-using System.Reflection;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-using System.Collections.Generic;
-using OPMedia.UI.Generic;
-using System.IO;
-
+using Microsoft.Win32;
 using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.InstanceManagement;
+using OPMedia.Core.Logging;
+using OPMedia.UI.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using Microsoft.Win32;
-using System.ComponentModel;
-using OPMedia.UI.Properties;
-using System.Xml;
-using System.Xml.Linq;
+using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Diagnostics;
-using OPMedia.Core.InstanceManagement;
-using System.Text;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 #endregion
 
@@ -43,6 +33,20 @@ namespace OPMedia.UI.Themes
         VeryLarge,
         ExtremeLarge,
         Huge
+    }
+
+    public class FontSizeInfo
+    {
+        public FontSizes SizeName { get; private set; }
+        public float Size { get; private set; }
+        public FontStyle Style { get; private set; }
+
+        public FontSizeInfo(FontSizes sizeName, float size, FontStyle style)
+        {
+            SizeName = sizeName;
+            Size = size;
+            Style = style;
+        }
     }
 
     public static class ResourceManagerExtension
@@ -74,42 +78,25 @@ namespace OPMedia.UI.Themes
 
         static FileSystemWatcher _fsw = null;
 
-        static string _fontFamily = AppConfig.OSVersion < AppConfig.VerWinVista ?
-                "Trebuchet MS" : "Segoe UI";
+        const string _fontFamily = "Segoe UI";
+        static readonly float _step;
 
-        static readonly float[] fontSizes = 
-        { 
-            11, 
-            11, 
-            12, 
-            12, 
-            14, 
-            16, 
-            20,
-            24 
-        };
-        
-        static readonly FontStyle[] fontStyles = 
-        { 
-            FontStyle.Regular, 
-            FontStyle.Bold, 
-            FontStyle.Regular, 
-            FontStyle.Bold, 
-            FontStyle.Bold, 
-            FontStyle.Bold,
-            FontStyle.Bold,
-            FontStyle.Bold 
-        };
+        static readonly Dictionary<FontSizes, FontSizeInfo> _fontSizeInfo = new List<FontSizeInfo>
+        {
+            new FontSizeInfo ( FontSizes.Smallest,     11, FontStyle.Regular ),
+            new FontSizeInfo ( FontSizes.Small,        11, FontStyle.Bold    ),
+            new FontSizeInfo ( FontSizes.Normal,       12, FontStyle.Regular ),
+            new FontSizeInfo ( FontSizes.NormalBold,   12, FontStyle.Bold    ),
+            new FontSizeInfo ( FontSizes.Large,        14, FontStyle.Bold    ),
+            new FontSizeInfo ( FontSizes.VeryLarge,    16, FontStyle.Bold    ),
+            new FontSizeInfo ( FontSizes.ExtremeLarge, 20, FontStyle.Bold    ),
+            new FontSizeInfo ( FontSizes.Huge,         24, FontStyle.Bold    ),
+
+        }.ToDictionary(fi => fi.SizeName);
+
+        static Dictionary<FontSizes, Font> _fonts = new Dictionary<FontSizes, Font>();
 
         #region Members
-        private static Font _smallestFont = null;
-        private static Font _smallFont = null;
-        private static Font _normalFont = null;
-        private static Font _normalBoldFont = null;
-        private static Font _largeFont = null;
-        private static Font _veryLargeFont = null;
-        private static Font _extremeLargeFont = null;
-        private static Font _hugeFont = null;
 
         private static ColorConverter cc = new ColorConverter();
 
@@ -141,12 +128,11 @@ namespace OPMedia.UI.Themes
         }
 
         public static Color ListActiveItemColor
-        { 
-            get 
+        {
+            get
             {
-
-                return ThemeElement("ListActiveItemColor", SafeColorFromString("255, 000, 000")); 
-            } 
+                return ThemeElement("ListActiveItemColor", SafeColorFromString("255, 000, 000"));
+            }
         }
 
         public static Color ListHotItemColor
@@ -304,12 +290,12 @@ namespace OPMedia.UI.Themes
         { get { return ThemeElement("FormBorderWidth", 3); } }
 
         public static string ResourcesFolder
-        { 
-            get 
+        {
+            get
             {
                 string currentTheme = AppConfig.SkinType;
-                return ThemeElement("ResourcesFolder", currentTheme); 
-            } 
+                return ThemeElement("ResourcesFolder", currentTheme);
+            }
         }
 
         public static Color ColorValidationFailed
@@ -318,29 +304,14 @@ namespace OPMedia.UI.Themes
         public static Color TransparentColor
         { get { return Color.White; } }
 
-        public static Font SmallFont
-        { get { return _smallFont; } }
-
-        public static Font SmallestFont
-        { get { return _smallestFont; } }
-
-        public static Font NormalFont
-        { get { return _normalFont; } }
-
-        public static Font NormalBoldFont
-        { get { return _normalBoldFont; } }
-
-        public static Font LargeFont
-        { get { return _largeFont; } }
-
-        public static Font VeryLargeFont
-        { get { return _veryLargeFont; } }
-
-        public static Font ExtremeLargeFont
-        { get { return _extremeLargeFont; } }
-
-        public static Font HugeFont
-        { get { return _hugeFont; } }
+        public static Font SmallFont => _fonts[FontSizes.Small];
+        public static Font SmallestFont => _fonts[FontSizes.Smallest];
+        public static Font NormalFont => _fonts[FontSizes.Normal];
+        public static Font NormalBoldFont => _fonts[FontSizes.NormalBold];
+        public static Font LargeFont => _fonts[FontSizes.Large];
+        public static Font VeryLargeFont => _fonts[FontSizes.VeryLarge];
+        public static Font ExtremeLargeFont => _fonts[FontSizes.ExtremeLarge];
+        public static Font HugeFont => _fonts[FontSizes.Huge];
 
         public static bool IsDarkTheme
         {
@@ -356,29 +327,9 @@ namespace OPMedia.UI.Themes
 
         #region Methods
 
-        
-
         public static Font GetFontBySize(FontSizes fnSize)
         {
-            switch (fnSize)
-            {
-                case FontSizes.Smallest:
-                    return ThemeManager.SmallestFont;
-                case FontSizes.Small:
-                    return ThemeManager.SmallFont;
-                case FontSizes.Large:
-                    return ThemeManager.LargeFont;
-                case FontSizes.VeryLarge:
-                    return ThemeManager.VeryLargeFont;
-                case FontSizes.NormalBold:
-                    return ThemeManager.NormalBoldFont;
-                case FontSizes.ExtremeLarge:
-                    return ThemeManager.ExtremeLargeFont;
-                case FontSizes.Huge:
-                    return ThemeManager.HugeFont;
-            }
-
-            return ThemeManager.NormalFont;
+            return _fonts[fnSize];
         }
 
         public static void PrepareGraphics(Graphics g)
@@ -391,7 +342,7 @@ namespace OPMedia.UI.Themes
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 g.TextContrast = 1;
-                
+
             }
         }
 
@@ -428,32 +379,13 @@ namespace OPMedia.UI.Themes
 
         public static void RecreateFonts()
         {
-            using (Label l = new Label())
+            _fonts.Clear();
+
+            foreach (FontSizes fs in Enum.GetValues(typeof(FontSizes)))
             {
-                l.CreateControl();
-                using (Graphics g = Graphics.FromHwnd(l.Handle))
-                {
-                    float step = 72f / g.DpiX;
-
-                    int i = 0;
-
-                    _smallestFont =
-                         new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _smallFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _normalFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _normalBoldFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _largeFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _veryLargeFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _extremeLargeFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                    _hugeFont =
-                        new Font(_fontFamily, step * fontSizes[i], fontStyles[i++], GraphicsUnit.Point);
-                }
+                var fis = _fontSizeInfo[fs];
+                var font = new Font(_fontFamily, _step * fis.Size, fis.Style);
+                _fonts.Add(fs, font);
             }
         }
 
@@ -471,17 +403,11 @@ namespace OPMedia.UI.Themes
                         }
                     }
 
-                    Font f = ThemeManager.GetFontBySize(size);
-                    Font newFont = new Font(f, f.Style);
-
-                    if (newFont != null)
+                    ctl.Font = _fonts[size];
+                    if (ctl is DataGridView)
                     {
-                        ctl.Font = newFont;
-                        if (ctl is DataGridView)
-                        {
-                            (ctl as DataGridView).ColumnHeadersDefaultCellStyle.Font = newFont;
-                            (ctl as DataGridView).RowTemplate.DefaultCellStyle.Font = newFont;
-                        }
+                        (ctl as DataGridView).ColumnHeadersDefaultCellStyle.Font = _fonts[size];
+                        (ctl as DataGridView).RowTemplate.DefaultCellStyle.Font = _fonts[size];
                     }
                 }
             }
@@ -498,6 +424,15 @@ namespace OPMedia.UI.Themes
         /// </summary>
         static ThemeManager()
         {
+            using (Label l = new Label())
+            {
+                l.CreateControl();
+                using (Graphics g = Graphics.FromHwnd(l.Handle))
+                {
+                    _step = 72f / g.DpiX;
+                }
+            }
+
             InitThemeElements();
 
             try
@@ -505,7 +440,7 @@ namespace OPMedia.UI.Themes
                 RecreateFonts();
                 SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -528,7 +463,7 @@ namespace OPMedia.UI.Themes
         {
             Type t = typeof(Control);
             BindingFlags all = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            
+
             PropertyInfo pi = t.GetProperty("DoubleBuffered", all);
             if (pi != null)
             {
@@ -653,7 +588,7 @@ namespace OPMedia.UI.Themes
             try
             {
                 if (_allThemesElements == null)
-                    _allThemesElements = new Dictionary<string,Dictionary<string,string>>();
+                    _allThemesElements = new Dictionary<string, Dictionary<string, string>>();
 
                 if (_allThemesElements.ContainsKey(themeName) == false)
                     _allThemesElements.Add(themeName, new Dictionary<string, string>());

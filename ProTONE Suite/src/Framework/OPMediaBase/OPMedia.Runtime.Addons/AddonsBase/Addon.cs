@@ -7,14 +7,7 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using Microsoft.Win32;
-using System.Reflection.Emit;
-using System.IO;
-using OPMedia.Core.TranslationSupport;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase
@@ -102,7 +95,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             if (assemblyInfo.Length == 2)
             {
                 this.assemblyFileName = assemblyInfo[0];
-                this.addonTypeName = assemblyInfo[1]; 
+                this.addonTypeName = assemblyInfo[1];
             }
 
             this.addonAssembly = Assembly.Load(assemblyFileName);

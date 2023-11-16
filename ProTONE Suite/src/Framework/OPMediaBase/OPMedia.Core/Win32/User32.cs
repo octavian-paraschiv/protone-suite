@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Drawing;
-using OPMedia.Core.Logging;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OPMedia.Core
 {
@@ -48,7 +47,7 @@ namespace OPMedia.Core
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
         public int[] rgstate;
-    } 
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct WINDOWPOS
@@ -269,7 +268,7 @@ namespace OPMedia.Core
         WM_NCXBUTTONDBLCLK = 0x00AD,
 
         WM_INPUT = 0x00FF,
-        
+
         WM_KEYDOWN = 0x0100,
         WM_KEYUP = 0x0101,
         WM_CHAR = 0x0102,
@@ -380,7 +379,7 @@ namespace OPMedia.Core
         WM_APPCOMMAND = 0x0319,
 
 
-        
+
         WM_THEME_CHANGED = 0x031A,
         WM_HANDHELDFIRST = 0x0358,
         WM_HANDHELDLAST = 0x035F,
@@ -391,13 +390,13 @@ namespace OPMedia.Core
 
         WM_APP = 0x8000,
         WM_USER = 0x0400,
-        
+
         WM_REFLECT = WM_USER + 0x1c00,
 
         WM_GRAPH_EVENT = 0x0400 + 13,	// message from filter graph
 
         SC_CLOSE = 0xF060,
- 
+
     }
 
     [Flags]
@@ -443,18 +442,18 @@ namespace OPMedia.Core
     [Flags]
     public enum RedrawWindowFlags : uint
     {
-        RDW_INVALIDATE          = 0x0001,
-        RDW_INTERNALPAINT       = 0x0002,
-        RDW_ERASE               = 0x0004,
-        RDW_VALIDATE            = 0x0008,
-        RDW_NOINTERNALPAINT     = 0x0010,
-        RDW_NOERASE             = 0x0020,
-        RDW_NOCHILDREN          = 0x0040,
-        RDW_ALLCHILDREN         = 0x0080,
-        RDW_UPDATENOW           = 0x0100,
-        RDW_ERASENOW            = 0x0200,
-        RDW_FRAME               = 0x0400,
-        RDW_NOFRAME             = 0x0800,
+        RDW_INVALIDATE = 0x0001,
+        RDW_INTERNALPAINT = 0x0002,
+        RDW_ERASE = 0x0004,
+        RDW_VALIDATE = 0x0008,
+        RDW_NOINTERNALPAINT = 0x0010,
+        RDW_NOERASE = 0x0020,
+        RDW_NOCHILDREN = 0x0040,
+        RDW_ALLCHILDREN = 0x0080,
+        RDW_UPDATENOW = 0x0100,
+        RDW_ERASENOW = 0x0200,
+        RDW_FRAME = 0x0400,
+        RDW_NOFRAME = 0x0800,
     }
 
     public enum HeaderItemFlags
@@ -524,22 +523,22 @@ namespace OPMedia.Core
 
     public enum MessageFilterInfo : uint
     {
-        None=0, 
-        AlreadyAllowed=1, 
-        AlreadyDisAllowed=2, 
-        AllowedHigher=3
+        None = 0,
+        AlreadyAllowed = 1,
+        AlreadyDisAllowed = 2,
+        AllowedHigher = 3
     };
 
     public enum ChangeWindowMessageFilterExAction : uint
     {
-        Reset = 0, 
-        Allow = 1, 
+        Reset = 0,
+        Allow = 1,
         DisAllow = 2
     };
 
     public enum ChangeWindowMessageFilterFlags : uint
     {
-        Add = 1, 
+        Add = 1,
         Remove = 2
     }
 
@@ -824,7 +823,7 @@ namespace OPMedia.Core
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int PostMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-        
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, ref RECT rect);
 
@@ -834,7 +833,7 @@ namespace OPMedia.Core
         // Import the SendMessage function for use with COPYDATASTRUCT
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hwnd, int msg, Int32 hwndFrom, ref COPYDATASTRUCT cds);
-    
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern void GetClassName(IntPtr h, StringBuilder s, int nMaxCount);
 
@@ -870,13 +869,13 @@ namespace OPMedia.Core
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int ReleaseDC(IntPtr hwnd, IntPtr hDC);
-       
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int GetDlgCtrlID(IntPtr hwndCtl);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public extern static System.IntPtr GetWindowDC(System.IntPtr hWnd);
-     
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public extern static System.IntPtr GetTopWindow(System.IntPtr hWnd);
 
@@ -910,7 +909,7 @@ namespace OPMedia.Core
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern IntPtr AttachThreadInput(IntPtr idAttach, IntPtr idAttachTo, int fAttach);
-        
+
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern bool ShowWindow(IntPtr hWnd, ShowWindowStyles nCmdShow);
 
@@ -929,8 +928,8 @@ namespace OPMedia.Core
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern IntPtr CreateWindowEx(
-           uint dwExStyle,string lpClassName,string lpWindowName, uint dwStyle,int x,int y,        
-           int nWidth,int nHeight,IntPtr hWndParent,IntPtr hMenu,IntPtr hInstance,IntPtr lpParam);
+           uint dwExStyle, string lpClassName, string lpWindowName, uint dwStyle, int x, int y,
+           int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern int EnumWindows(EnumWindowProc lpEnumFunc, IntPtr lParam);
@@ -994,13 +993,13 @@ namespace OPMedia.Core
         }
 
         public static bool SetWindowOnTop(IntPtr fgWnd, bool bSetFocusToWindow, bool makeTopMost)
-		{
-			IntPtr bgWnd = GetForegroundWindow();
-			if (fgWnd == bgWnd)
-				return true;
+        {
+            IntPtr bgWnd = GetForegroundWindow();
+            if (fgWnd == bgWnd)
+                return true;
 
-			IntPtr ThreadID1 = GetWindowThreadProcessId(bgWnd, IntPtr.Zero);
-			IntPtr ThreadID2 = GetWindowThreadProcessId(fgWnd, IntPtr.Zero);
+            IntPtr ThreadID1 = GetWindowThreadProcessId(bgWnd, IntPtr.Zero);
+            IntPtr ThreadID2 = GetWindowThreadProcessId(fgWnd, IntPtr.Zero);
 
             bool retVal = false;
 
@@ -1008,16 +1007,16 @@ namespace OPMedia.Core
                 bgWnd = (IntPtr)(-1);
 
             if (ThreadID1 != ThreadID2)
-			{
-				AttachThreadInput(ThreadID1, ThreadID2, 1);
+            {
+                AttachThreadInput(ThreadID1, ThreadID2, 1);
                 retVal = MoveToForeground(fgWnd, bgWnd, bSetFocusToWindow);
-				AttachThreadInput(ThreadID1, ThreadID2, 0);
-			}
-			else
+                AttachThreadInput(ThreadID1, ThreadID2, 0);
+            }
+            else
                 retVal = MoveToForeground(fgWnd, bgWnd, bSetFocusToWindow);
 
             return retVal;
-		}
+        }
 
         private static bool MoveToForeground(IntPtr fgWnd, IntPtr bgWnd, bool bSetFocusToWindow)
         {
@@ -1025,11 +1024,11 @@ namespace OPMedia.Core
             if (!bSetFocusToWindow)
                 uFlags |= SetWindowPosFlags.SWP_NOACTIVATE;
 
-            return SetWindowPos(fgWnd, 
-			    bgWnd,
-			    0, 0, 0, 0,
+            return SetWindowPos(fgWnd,
+                bgWnd,
+                0, 0, 0, 0,
                 uFlags);
-	    }
+        }
 
         public static bool UIPI_AllowWindowsMessage(IntPtr wndHandle, Messages msg, string desc)
         {
@@ -1070,5 +1069,5 @@ namespace OPMedia.Core
 }
 
 
-      
+
 

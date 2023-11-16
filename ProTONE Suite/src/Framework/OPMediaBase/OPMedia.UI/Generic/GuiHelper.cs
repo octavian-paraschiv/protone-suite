@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -31,7 +28,7 @@ namespace OPMedia.UI.Generic
         {
             StringAlignments sa = new StringAlignments();
             sa.LineAlignment = StringAlignment.Center;
-            switch(ha)
+            switch (ha)
             {
                 case HorizontalAlignment.Center:
                     sa.Alignment = StringAlignment.Center;

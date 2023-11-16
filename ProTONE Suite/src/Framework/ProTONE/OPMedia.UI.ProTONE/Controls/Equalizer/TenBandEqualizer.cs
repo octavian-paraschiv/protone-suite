@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.UI.Controls;
+using System;
 using System.Windows.Forms;
-using OPMedia.UI.Controls;
 
 namespace OPMedia.UI.ProTONE.Controls.Equalizer
 {
@@ -88,9 +82,9 @@ namespace OPMedia.UI.ProTONE.Controls.Equalizer
             }
         }
 
-        static readonly int[] defaultFrequencies = 
-            new int[] { 25, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800};
-        
+        static readonly int[] defaultFrequencies =
+            new int[] { 25, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800 };
+
         static readonly double[] defaultLevels =
             new double[] { 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000 };
 

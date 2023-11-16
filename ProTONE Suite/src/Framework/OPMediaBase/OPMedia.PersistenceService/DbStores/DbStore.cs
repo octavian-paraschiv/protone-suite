@@ -1,4 +1,4 @@
-﻿# if HAVE_LITE_DB
+﻿#if HAVE_LITE_DB
 using System;
 using System.Linq;
 using OPMedia.Core;

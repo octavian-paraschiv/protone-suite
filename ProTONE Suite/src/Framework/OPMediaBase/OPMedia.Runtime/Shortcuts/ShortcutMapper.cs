@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Windows.Forms;
-using OPMedia.Core.Logging;
 using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
+using System.Windows.Forms;
 
 
 namespace OPMedia.Runtime.Shortcuts
@@ -182,7 +180,7 @@ namespace OPMedia.Runtime.Shortcuts
         {
             if (enableShortcutDispatch)
             {
-                EventDispatch.DispatchEvent(EventNames.ExecuteShortcut, 
+                EventDispatch.DispatchEvent(EventNames.ExecuteShortcut,
                     new OPMShortcutEventArgs(cmd));
             }
         }
@@ -197,9 +195,9 @@ namespace OPMedia.Runtime.Shortcuts
 
             for (OPMShortcut cmd = CmdFirst; cmd < CmdLast; cmd++)
             {
-                string actionKeys = 
+                string actionKeys =
                     kc.ConvertToInvariantString(keyCommands[(int)cmd].KeyData);
-                string altActionKeys = 
+                string altActionKeys =
                     kc.ConvertToInvariantString(altKeyCommands[(int)cmd].KeyData);
 
                 if (pressedKeys == actionKeys || pressedKeys == altActionKeys)
@@ -214,7 +212,7 @@ namespace OPMedia.Runtime.Shortcuts
             if (cmd >= OPMShortcut.CmdPlayPause && cmd < OPMShortcut.CmdOutOfRange)
             {
                 KeysConverter kc = new KeysConverter();
-                
+
                 string actionKeys =
                    kc.ConvertToInvariantString(keyCommands[(int)cmd].KeyData);
                 string altActionKeys =
@@ -449,19 +447,19 @@ namespace OPMedia.Runtime.Shortcuts
         CmdNext,
         CmdLoad,
         CmdOpenDisk,
-        CmdOpenURL, 
-        
+        CmdOpenURL,
+
         // Full Screen
         CmdFullScreen,
-        
+
         // Media seek control
         CmdFwd,
         CmdRew,
-        
+
         // Volume control
         CmdVolUp,
         CmdVolDn,
-        
+
         // Playlist control
         CmdMoveUp,
         CmdMoveDown,
@@ -501,7 +499,7 @@ namespace OPMedia.Runtime.Shortcuts
         CmdGenericApply,
 
         // 
-        CmdSwitchWindows, 
+        CmdSwitchWindows,
 
         // 
         CmdGenericCopy,

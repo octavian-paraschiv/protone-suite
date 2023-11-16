@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Win32;
+using System;
 using System.IO.Ports;
-using Microsoft.Win32;
 
 namespace OPMedia.Core
 {
@@ -42,7 +40,7 @@ namespace OPMedia.Core
 
         public static void SavePortSettings(SerialPort serialPort)
         {
-            using (RegistryKey key = Registry.LocalMachine.CreateSubKey( @"SOFTWARE\OPMedia Research\Serial Ports\" + serialPort.PortName))
+            using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\OPMedia Research\Serial Ports\" + serialPort.PortName))
             {
                 if (key != null)
                 {

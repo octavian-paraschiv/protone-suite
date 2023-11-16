@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System.Drawing;
-using OPMedia.Core.TranslationSupport;
-using System.ComponentModel;
-
-using System.IO;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
-using System.Runtime.Serialization.Formatters.Binary;
-using OPMedia.Runtime.FileInformation;
-using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using TagLib;
 
 namespace OPMedia.Runtime.ProTONE.ExtendedInfo
@@ -55,11 +49,11 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
             foreach (PictureInfo pi in ArtworkImages)
             {
                 MemoryStream ms = new MemoryStream();
-                
+
                 Bitmap bmp = pi.Picture;
 
                 const int MaxAPICFrameSize = 64 * 1024; // 64 kB
-                
+
                 bmp.Save(ms, ImageFormat.Png);
                 while (ms.Length >= MaxAPICFrameSize)
                 {
@@ -70,7 +64,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
                     bmp = new Bitmap(ImageProvider.ScaleImage(bmp, sz, false));
                     bmp.Save(ms, ImageFormat.Png);
                 }
-                
+
                 Picture pic = new Picture();
                 pic.Data = new ByteVector(ms.GetBuffer());
                 pic.Description = pi.Description;

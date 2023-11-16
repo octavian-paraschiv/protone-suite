@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Configuration;
-using OPMedia.Core;
-
-using System.Windows.Forms;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.UI.ProTONE.Configuration.MiscConfig;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Configuration;
+using OPMedia.UI.Configuration;
 using OPMedia.UI.ProTONE.Configuration.InternetConfig;
+using OPMedia.UI.ProTONE.Configuration.MiscConfig;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -30,7 +26,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             return _instance.ShowDialog();
         }
 
-        protected ProTONESettingsForm(string titleToOpen, string subTitleToOpen) 
+        protected ProTONESettingsForm(string titleToOpen, string subTitleToOpen)
             : base(titleToOpen, subTitleToOpen)
         {
         }
@@ -38,7 +34,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         public ProTONESettingsForm() : base()
         {
         }
-        
+
         public override void AddAditionalPanels()
         {
             if (ProTONEConfig.IsPlayer)
@@ -85,9 +81,9 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         public override List<BaseCfgPanel> GetTroubleshootingSubPages()
         {
-            return new List<BaseCfgPanel> 
-            { 
-                new DiagnosticsPage() 
+            return new List<BaseCfgPanel>
+            {
+                new DiagnosticsPage()
             };
         }
 
@@ -96,8 +92,8 @@ namespace OPMedia.UI.ProTONE.Configuration
             if (!ProTONEConfig.IsPlayer)
                 return null;
 
-            return new List<BaseCfgPanel> 
-            { 
+            return new List<BaseCfgPanel>
+            {
                 new ShoutcastConfigPage(),
                 new DeezerConfigPage(),
             };

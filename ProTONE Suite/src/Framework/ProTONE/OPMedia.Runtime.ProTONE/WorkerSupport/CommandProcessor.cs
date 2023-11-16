@@ -1,14 +1,6 @@
 ﻿using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace OPMedia.Runtime.ProTONE
 {
@@ -95,7 +87,7 @@ namespace OPMedia.Runtime.ProTONE
                 replyArg = $"err_{ex.ErrorType}";
                 replyArg2 = ex.Message;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
                 return null;

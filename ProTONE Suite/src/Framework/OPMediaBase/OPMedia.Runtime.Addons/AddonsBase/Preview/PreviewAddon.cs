@@ -8,10 +8,6 @@
 
 #region Using directives
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase.Preview

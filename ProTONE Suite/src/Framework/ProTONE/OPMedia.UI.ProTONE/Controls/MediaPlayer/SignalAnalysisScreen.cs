@@ -1,22 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Logging;
-using OPMedia.UI.Themes;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using System.Threading;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
+﻿using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using System.Threading.Tasks;
+using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.AudioMetering;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
 {
@@ -82,7 +77,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer.Screens
         {
             OnUpdateMediaScreens();
         }
-        
+
         [EventSink(EventNames.ThemeUpdated)]
         [EventSink(LocalEventNames.UpdateMediaScreens)]
         public void OnUpdateMediaScreens()

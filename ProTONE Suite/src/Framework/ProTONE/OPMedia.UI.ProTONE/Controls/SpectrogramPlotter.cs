@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Runtime.ProTONE.AudioMetering;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
-using OPMedia.Runtime.DSP;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Runtime.ProTONE.AudioMetering;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.ProTONE.Controls
 {
@@ -84,10 +75,10 @@ namespace OPMedia.UI.ProTONE.Controls
                         try
                         {
                             int maxFq = 24000;// FFTHelper.GetMaxDisplayableFreq(MediaRenderer.DefaultInstance.ActualAudioFormat.nSamplesPerSec / 2,
-                                //DsRendererBase.MAX_SPECTROGRAM_BANDS);
+                                              //DsRendererBase.MAX_SPECTROGRAM_BANDS);
                             decadeLineText = string.Format("{0}K", (int)(maxFq / 1000));
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             decadeLineText = string.Empty;
                         }

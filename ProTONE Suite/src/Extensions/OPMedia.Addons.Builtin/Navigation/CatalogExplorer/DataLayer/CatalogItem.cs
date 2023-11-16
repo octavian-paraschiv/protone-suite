@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Data;
 using OPMedia.Core.TranslationSupport;
-using System.Threading;
-using System.Drawing.Design;
 using OPMedia.Core.Utilities;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing.Design;
 
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {
@@ -49,25 +44,25 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         #region Properties
         [Browsable(false)]
         public Catalog Catalog
-        { 
-            get 
+        {
+            get
             {
                 return _cat;
-            } 
+            }
         }
 
         [Browsable(false)]
         public long ItemID
-        { 
-            get 
+        {
+            get
             {
                 if (currentRow.RowState == DataRowState.Detached)
                 {
                     return -1;
                 }
-                
-                return currentRow.ItemID; 
-            } 
+
+                return currentRow.ItemID;
+            }
         }
 
         [Browsable(false)]
@@ -97,27 +92,27 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         [TranslatableDisplayName("TXT_NAME")]
         [TranslatableCategory("TXT_CATALOGITEMINFO")]
         public string Name
-        { get { return currentRow.Name; } set { currentRow.Name = value;} }
+        { get { return currentRow.Name; } set { currentRow.Name = value; } }
 
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor)), Localizable(true)]
         [TranslatableDisplayName("TXT_DESC")]
         [TranslatableCategory("TXT_CATALOGITEMINFO")]
         public string Description
-        { 
-            get { return currentRow.Description; } 
-            set { currentRow.Description = value; } 
+        {
+            get { return currentRow.Description; }
+            set { currentRow.Description = value; }
         }
 
         [TranslatableDisplayName("TXT_ITEMDATA")]
         [TranslatableCategory("TXT_CATALOGITEMINFO")]
         public string ItemData
-        { get { return currentRow.ItemData; } set { currentRow.ItemData = value;} }
+        { get { return currentRow.ItemData; } set { currentRow.ItemData = value; } }
 
         [TranslatableDisplayName("TXT_LASTCHANGEDATE")]
         [TranslatableCategory("TXT_CATALOGITEMINFO_RO")]
         public string DateModified
-        { 
-            get 
+        {
+            get
             {
                 try
                 {
@@ -127,14 +122,14 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
                 {
                     return Translator.Translate("TXT_NA");
                 }
-            } 
+            }
         }
 
         [TranslatableDisplayName("TXT_CREATIONDATE")]
         [TranslatableCategory("TXT_CATALOGITEMINFO_RO")]
         public string DateCreated
-        { 
-            get 
+        {
+            get
             {
                 try
                 {
@@ -144,14 +139,14 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
                 {
                     return Translator.Translate("TXT_NA");
                 }
-            } 
+            }
         }
-        
+
         [TranslatableDisplayName("TXT_INTERNALLABEL")]
         [TranslatableCategory("TXT_CATALOGITEMINFO_RO")]
         [ReadOnly(true)]
         public string RootItemLabel
-        { get { return currentRow.RootItemLabel; } set { currentRow.RootItemLabel = value; currentRow.AcceptChanges();} }
+        { get { return currentRow.RootItemLabel; } set { currentRow.RootItemLabel = value; currentRow.AcceptChanges(); } }
 
         [TranslatableDisplayName("TXT_ROOTSERIALNUMBER")]
         [TranslatableCategory("TXT_CATALOGITEMINFO_RO")]
@@ -169,8 +164,8 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
         [TranslatableCategory("TXT_CATALOGITEMINFO_RO")]
         [ReadOnly(true)]
         public string ItemTypeDesc
-        { 
-            get 
+        {
+            get
             {
                 if (string.IsNullOrEmpty(_tmpItemTypeDesc))
                 {

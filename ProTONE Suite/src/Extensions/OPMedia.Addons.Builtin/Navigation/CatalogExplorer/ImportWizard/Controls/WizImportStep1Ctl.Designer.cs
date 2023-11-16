@@ -1,5 +1,4 @@
 using OPMedia.Addons.Builtin.CatalogExplorer.Controls;
-using System.Drawing;
 using OPMedia.UI.Controls;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls

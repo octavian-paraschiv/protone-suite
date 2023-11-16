@@ -7,18 +7,13 @@
 #endregion
 
 #region Using directives
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.Configuration;
+using OPMedia.UI;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Core.Configuration;
-using System.Reflection;
-using OPMedia.Runtime.Addons.Configuration;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase.Prop

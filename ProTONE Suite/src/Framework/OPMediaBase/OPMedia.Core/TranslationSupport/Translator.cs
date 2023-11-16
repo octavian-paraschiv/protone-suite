@@ -11,18 +11,14 @@
 //#define _NO_TRANSLATIONS
 
 #region Using directives
-using System;
-using System.Linq;
-using System.Resources;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.Reflection;
-using System.Windows.Forms;
-using System.Collections;
-using System.Collections.Generic;
-using OPMedia.Core.Utilities;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Core.TranslationSupport
@@ -80,7 +76,7 @@ namespace OPMedia.Core.TranslationSupport
         /// the syntax of method String.Format)</param>
         /// <returns>The translated string</returns>
         public static string Translate(string tag, params object[] args)
-		{
+        {
             string retVal = tag;
 
             if (translate)
@@ -100,9 +96,9 @@ namespace OPMedia.Core.TranslationSupport
                     }
                 }
             }
-            
+
             return retVal;
-		}
+        }
 
         public static string Translate(string tag)
         {
@@ -225,7 +221,7 @@ namespace OPMedia.Core.TranslationSupport
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string s = ex.Message;
             }
@@ -262,11 +258,11 @@ namespace OPMedia.Core.TranslationSupport
                         }
                     }
 
-                   if (IsTranslatable(tsi.Text))
+                    if (IsTranslatable(tsi.Text))
                         tsi.Text = Translator.Translate(tsi.Text);
 
-                   tsi.ToolTipText = tsi.Text;
-                   
+                    tsi.ToolTipText = tsi.Text;
+
                 }
             }
             catch
@@ -298,7 +294,7 @@ namespace OPMedia.Core.TranslationSupport
 
         private static bool IsTranslatable(string s)
         {
-            if (string.IsNullOrEmpty(s) || 
+            if (string.IsNullOrEmpty(s) ||
                 __knownUntranslatableStrings.Contains(s))
                 return false;
 

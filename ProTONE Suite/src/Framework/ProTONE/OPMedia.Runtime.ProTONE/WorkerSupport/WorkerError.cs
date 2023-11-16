@@ -1,9 +1,5 @@
 ﻿using OPMedia.Core;
-using OPMedia.Core.Logging;
-using OPMedia.DeezerInterop.PlayerApi;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace OPMedia.Runtime.ProTONE

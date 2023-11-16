@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Generic;
-
-using System.ComponentModel;
+﻿using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Themes;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {

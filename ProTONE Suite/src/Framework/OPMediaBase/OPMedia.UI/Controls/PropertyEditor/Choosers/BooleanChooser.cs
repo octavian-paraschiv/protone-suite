@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
 
 namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 {
@@ -17,7 +9,7 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
         public string PropertyName
         {
             get { return lblValueName.Text; }
-            set 
+            set
             {
                 if (!string.IsNullOrEmpty(value))
                 {

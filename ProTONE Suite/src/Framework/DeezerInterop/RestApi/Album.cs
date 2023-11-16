@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace OPMedia.DeezerInterop.RestApi
 {
@@ -65,7 +64,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         public override string ToString()
         {
-            return string.Format("[ID={0}, Artist={1}, Title={2}, Genre={3}]", 
+            return string.Format("[ID={0}, Artist={1}, Title={2}, Genre={3}]",
                 this.Id, this.Artist, this.Title, this.Genre);
         }
     }

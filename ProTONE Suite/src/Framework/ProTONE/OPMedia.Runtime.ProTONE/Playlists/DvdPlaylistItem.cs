@@ -1,13 +1,10 @@
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering;
 using System.Globalization;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -50,15 +47,15 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return true;
         }
 
-        public DvdPlaylistItem(string discPath) : 
+        public DvdPlaylistItem(string discPath) :
             base(discPath, true, true)
         {
-            
+
         }
 
         private Dictionary<PlaylistSubItem, List<PlaylistSubItem>> ConstructDvdSubmenu()
         {
-            Dictionary<PlaylistSubItem, List<PlaylistSubItem>> submenu = 
+            Dictionary<PlaylistSubItem, List<PlaylistSubItem>> submenu =
                 new Dictionary<PlaylistSubItem, List<PlaylistSubItem>>();
 
             DvdSubItem title = new DvdSubItem(Translator.Translate("TXT_DVD_MAIN_MENU"), DvdRenderingStartHint.MainMenu, this);
@@ -82,7 +79,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             for (int i = 0; i < vdi.ChaptersPerTitle.Count; i++)
             {
                 List<PlaylistSubItem> chapters = new List<PlaylistSubItem>();
-               
+
                 for (int j = 0; j < vdi.ChaptersPerTitle[i]; j++)
                 {
                     DvdSubItem chapter = CreateChapterSubItem(i, j);

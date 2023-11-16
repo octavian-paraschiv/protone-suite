@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+﻿using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Themes;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs
 {

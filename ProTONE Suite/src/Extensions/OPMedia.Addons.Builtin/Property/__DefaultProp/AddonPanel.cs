@@ -1,17 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
 using OPMedia.Runtime.FileInformation;
-using System.Reflection;
-using OPMedia.UI;
 using OPMedia.UI.Controls;
+using System.Collections.Generic;
 
 namespace OPMedia.Addons.Builtin.__DefaultProp
 {

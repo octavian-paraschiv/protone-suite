@@ -1,40 +1,26 @@
+using OPMedia.Core;
+using OPMedia.Core.ComTypes;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Menus;
+using OPMedia.UI.ProTONE;
+using OPMedia.UI.ProTONE.Controls.MediaPlayer;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.UI.Controls;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Configuration;
-using OPMedia.UI;
-
-using System.Reflection;
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime;
-using OPMedia.Core;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.Runtime.ProTONE;
-
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.Dialogs;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using OPMedia.Core.GlobalEvents;
 using EventNames = OPMedia.Core.EventNames;
-using OPMedia.UI.Menus;
-using OPMedia.Core.ComTypes;
-using OPMedia.UI.ProTONE;
-using OPMedia.UI.Properties;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Configuration;
 
 
 namespace OPMedia.ProTONE
@@ -70,7 +56,7 @@ namespace OPMedia.ProTONE
             : base("TXT_APP_NAME")
         {
             AppConfig.CanSendToTray = true;
-            
+
 
             InitializeComponent();
 
@@ -140,7 +126,7 @@ namespace OPMedia.ProTONE
                         else
                             name = "btnPlay";
                     }
-                    
+
 
                     Bitmap img = OPMedia.UI.ProTONE.Properties.Resources.ResourceManager.GetImage(name);
                     if (img != null)
@@ -202,7 +188,7 @@ namespace OPMedia.ProTONE
             mnuAbout.Text = Translator.Translate("TXT_ABOUT", Translator.Translate("TXT_APP_NAME"));
             mnuTools.Text = Translator.Translate("TXT_MNUTOOLS");
             mnuExit.Text = Translator.Translate("TXT_BTNCLOSE");
-            
+
             ThemeManager.SetFont(this, FontSizes.Normal);
 
             BuildThumbnailButtons(false);
@@ -225,7 +211,7 @@ namespace OPMedia.ProTONE
 
                 if (showTime)
                 {
-                    bool running = (RenderingEngine.DefaultInstance.FilterState == FilterState.Running || 
+                    bool running = (RenderingEngine.DefaultInstance.FilterState == FilterState.Running ||
                         RenderingEngine.DefaultInstance.FilterState == FilterState.Paused);
 
                     if (running)
@@ -431,10 +417,10 @@ namespace OPMedia.ProTONE
                 {
                     tsi.ToolTipText = "";
                 }
-                
+
                 if (tsi is OPMToolStripMenuItem && tsi.Tag != null)
                 {
-                    switch((OPMShortcut)tsi.Tag)
+                    switch ((OPMShortcut)tsi.Tag)
                     {
                         case OPMShortcut.CmdPlaylistEnd:
                             (tsi as OPMToolStripMenuItem).Checked = SystemScheduler.PlaylistEventEnabled;

@@ -1,23 +1,15 @@
+using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Properties;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.Addons.Configuration;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Addons.Builtin.Properties;
-
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Addons.Builtin.Configuration;
-using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.FileExplorer
 {
@@ -82,7 +74,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             connectedFilesConfigCtl1.Save();
             AddonAppConfig.MaxProcessedEntries = (int)nudMaxProcessedFiles.Value;
             BuiltinAddonConfig.FEPreviewTimer = nudPreviewTimer.Value;
-            
+
         }
     }
 }

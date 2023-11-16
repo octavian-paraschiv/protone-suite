@@ -1,12 +1,9 @@
+using OPMedia.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using System.Diagnostics;
-using OPMedia.Core;
+using System.Drawing.Imaging;
 
 namespace OPMedia.UI.Generic
 {
@@ -30,7 +27,7 @@ namespace OPMedia.UI.Generic
                 var img = ImageProvider.GetAppIcon(true).ToBitmap();
                 //var img = ImageProvider.ApplicationIconLarge as Bitmap;
 
-                ImageProcessing.GrayToBlack(img); 
+                ImageProcessing.GrayToBlack(img);
 
                 return img;
             }

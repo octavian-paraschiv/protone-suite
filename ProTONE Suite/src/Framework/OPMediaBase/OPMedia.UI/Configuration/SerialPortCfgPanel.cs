@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using System.IO.Ports;
 using OPMedia.Core;
 using OPMedia.UI.Controls;
+using System;
+using System.ComponentModel;
+using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Configuration
 {

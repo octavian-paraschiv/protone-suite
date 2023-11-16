@@ -8,9 +8,6 @@
 
 #region Using directives
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonsBase.Navigation
@@ -73,7 +70,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase.Navigation
             }
 
             // If we're here, the specified addon is not a valid navigation addon.
-            string exception = 
+            string exception =
                 string.Format("An error occured while loading the addon: \"{0}\".\n\n" +
                     "The associated assembly: \"{1}\" does not represent a valid navigation addon,\n" +
                     "because it does not contain any subclasses of \"{2}\".\n\n" +

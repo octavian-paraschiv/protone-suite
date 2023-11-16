@@ -1,16 +1,8 @@
-﻿using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+﻿using Newtonsoft.Json;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.Utilities;
 using System.ComponentModel;
-using System.Drawing;
-using System.Net;
-using System.IO;
-using OPMedia.Core.NetworkAccess;
-using OPMedia.Core.Logging;
-using Newtonsoft.Json;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -148,7 +140,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         public override Dictionary<string, string> MediaInfo
         {
-            get            
+            get
             {
                 Dictionary<string, string> info = base.MediaInfo;
 
@@ -177,7 +169,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public DeezerTrackPlaylistItem(DeezerTrackItem dti) : 
+        public DeezerTrackPlaylistItem(DeezerTrackItem dti) :
             base(dti.Url, false, false)
         {
             _dti = dti;

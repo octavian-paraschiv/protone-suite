@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Menus;
-using System.Linq;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Runtime.ProTONE.Configuration;
+﻿using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
-using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.UI.ProTONE.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
-using System.Diagnostics;
-using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
+using System;
+using System.Diagnostics;
 
 
 namespace OPMedia.Addons.Builtin.__DefaultPreview
@@ -25,7 +23,7 @@ namespace OPMedia.Addons.Builtin.__DefaultPreview
         {
             InitializeComponent();
         }
-    
+
         private void InitializeComponent()
         {
             this.lblResult = new OPMLabel();
@@ -63,6 +61,6 @@ namespace OPMedia.Addons.Builtin.__DefaultPreview
 
         protected override void DoEndPreview()
         {
-        } 
+        }
     }
 }

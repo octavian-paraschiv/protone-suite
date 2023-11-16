@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CookComputing.XmlRpc;
+﻿using CookComputing.XmlRpc;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
@@ -55,7 +52,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         public SubtitleInfo[] data;
         public double seconds;
     }
-    
+
     public struct OsdbImdbMovieInformation
     {
         public string id;
@@ -69,7 +66,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
         public double seconds;
     }
 
-    public struct SubtitleContents 
+    public struct SubtitleContents
     {
         public int idsubtitlefile;
         public string data;

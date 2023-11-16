@@ -1,28 +1,20 @@
+using OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Tasks;
+using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs;
+using OPMedia.Core;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Themes;
+using OPMedia.UI.Wizards;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
 using System.IO;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Core;
-using OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Tasks;
-using OPMedia.Runtime;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.Dialogs;
-using OPMedia.Addons.Builtin.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Addons.Builtin.Shared;
-using OPMedia.UI.Generic;
+using System.Windows.Forms;
 
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
@@ -61,7 +53,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
             ilImages.Images.Clear();
 
             ilImages.Images.Add(ImageProvider.GetIconOfFileType("ctx"));
-            
+
             LoadShell32Image(Shell32Icon.DriveUnknown);
             LoadShell32Image(Shell32Icon.DriveNoRoot);
             LoadShell32Image(Shell32Icon.DriveRemovable);
@@ -86,18 +78,18 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         private void OnClearSearchPatternHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchPatternsMC = string.Empty;
-            
+
             PopulateSearchPattern();
         }
 
         private void OnClearSearchValueHistory(object sender, EventArgs e)
         {
             BuiltinAddonConfig.SearchTextsMC = string.Empty;
-            
+
             PopulateSearchText();
         }
 
-        
+
 
         protected override void OnPageEnter_Initializing()
         {
@@ -156,7 +148,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         {
             BuiltinAddonConfig.SearchPatternsMC = SaveSetting(BuiltinAddonConfig.SearchPatternsMC, cmbSearchPattern.Text);
             BuiltinAddonConfig.SearchTextsMC = SaveSetting(BuiltinAddonConfig.SearchTextsMC, cmbSearchText.Text);
-            
+
         }
 
         private string SaveSetting(string initialSetting, string settingToAdd)

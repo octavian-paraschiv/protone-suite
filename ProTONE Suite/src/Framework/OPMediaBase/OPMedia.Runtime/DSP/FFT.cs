@@ -33,10 +33,10 @@ namespace OPMedia.Runtime.DSP
             double c1, c2, tx, ty, t1, t2, u1, u2, z;
 
             // Calculate the number of points
-            int m = (int)(Math.Log(data.Length,2.0)-0.05);
+            int m = (int)(Math.Log(data.Length, 2.0) - 0.05);
             n = data.Length;
             // check all are valid
-            if (((n & (n - 1)) != 0) || (n != (2<<m))) // checks nn is a power of 2 in 2's complement format
+            if (((n & (n - 1)) != 0) || (n != (2 << m))) // checks nn is a power of 2 in 2's complement format
                 throw new Exception("realIn has data length: " + n + ", which is not a power of 2");
             n /= 2;
 

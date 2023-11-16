@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 
 // Ported from original header file deezer-track.h
@@ -67,11 +64,11 @@ namespace OPMedia.DeezerInterop.PlayerApi
         /// <summary>
         /// Media format has not been set yet, not a valid value
         /// </summary>
-        DZ_MEDIA_FORMAT_UNKNOWN,   
+        DZ_MEDIA_FORMAT_UNKNOWN,
         /// <summary>
         /// Audio format is PCM
         /// </summary>
-        DZ_MEDIA_FORMAT_AUDIO_PCM, 
+        DZ_MEDIA_FORMAT_AUDIO_PCM,
         /// <summary>
         /// Audio format is MPEG
         /// </summary>
@@ -84,7 +81,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
     public struct audio_mpeg_t
     {
-        public int  layer;    /**< Equals to 3 for MP3 */
+        public int layer;    /**< Equals to 3 for MP3 */
         public float version; /**< Equals to 1.0, 2.0 or 2.5 for layer 3 */
     }
 
@@ -140,7 +137,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
         [FieldOffset(16)]
         public float average_bitrate; /**< Average bitrate */
-    
+
         #region union(audio, video, subtitle)
 
         [FieldOffset(20)]

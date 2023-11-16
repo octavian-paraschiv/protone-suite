@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OPMedia.Runtime.ProTONE.Playlists
+﻿namespace OPMedia.Runtime.ProTONE.Playlists
 {
     public class UrlPlaylistItem : PlaylistItem
     {
@@ -27,10 +22,10 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return false;
         }
 
-        public UrlPlaylistItem(string uri) : 
+        public UrlPlaylistItem(string uri) :
             base(uri, false, false)
         {
-            
+
         }
     }
 }

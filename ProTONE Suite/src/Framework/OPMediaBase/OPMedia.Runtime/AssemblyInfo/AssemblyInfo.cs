@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.AssemblyInfo
 {
@@ -49,7 +46,7 @@ namespace OPMedia.Runtime.AssemblyInfo
             // If there aren't any Product attributes, return an empty string
             if (attributes.Length == 0)
                 return "";
-           
+
             // If there is a Product attribute, return its value
             return ((AssemblyProductAttribute)attributes[0]).Product;
         }

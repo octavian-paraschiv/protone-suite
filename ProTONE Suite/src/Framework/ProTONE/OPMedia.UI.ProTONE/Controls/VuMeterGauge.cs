@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI.Controls;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
-using OPMedia.Core.GlobalEvents;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.ProTONE.Controls
 {

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
-using System.IO;
-using OPMedia.UI.Controls;
-using OPMedia.UI;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls.Dialogs
 {
@@ -45,7 +39,7 @@ namespace OPMedia.UI.Controls.Dialogs
         public event QueryDisplayNameHandler QueryDisplayName = null;
 
         List<OpenOption> _openDropDownOptions = null;
-        public List<OpenOption> OpenDropDownOptions 
+        public List<OpenOption> OpenDropDownOptions
         {
             get
             {
@@ -72,7 +66,7 @@ namespace OPMedia.UI.Controls.Dialogs
             }
         }
 
-        public string FileName 
+        public string FileName
         {
             get
             {
@@ -105,7 +99,7 @@ namespace OPMedia.UI.Controls.Dialogs
         public OPMFileDialog()
         {
             InitializeComponent();
-            
+
             this.FilterIndex = -1;
 
             this.ShowAddToFavorites = false;
@@ -157,7 +151,7 @@ namespace OPMedia.UI.Controls.Dialogs
 
                 tsmi.Click -= new EventHandler(tsmi_Click);
                 tsmi.Click += new EventHandler(tsmi_Click);
-                
+
                 _cmsDynamic.Items.Add(tsmi);
             }
 
@@ -166,7 +160,7 @@ namespace OPMedia.UI.Controls.Dialogs
 
             Point p = new Point(0, btnOK.Height);
             _cmsDynamic.Show(btnOK, p, ToolStripDropDownDirection.Default);
-            
+
         }
 
         void _cmsDynamic_Opened(object sender, EventArgs e)
@@ -242,7 +236,7 @@ namespace OPMedia.UI.Controls.Dialogs
                 DialogResult = DialogResult.OK;
                 Close();
             }
-           
+
         }
 
 
@@ -255,7 +249,7 @@ namespace OPMedia.UI.Controls.Dialogs
         void lvExplorer_SelectMultipleItems(object sender, SelectMultipleItemsEventArgs args)
         {
             List<string> files = new List<string>();
-            foreach(string fileName in args.m_strPaths)
+            foreach (string fileName in args.m_strPaths)
             {
                 if (File.Exists(fileName))
                 {
@@ -286,7 +280,7 @@ namespace OPMedia.UI.Controls.Dialogs
                     }
                 }
             }
-                
+
             try
             {
                 _enableTextChange = false;
@@ -802,7 +796,7 @@ namespace OPMedia.UI.Controls.Dialogs
                         tsSpecialFolders.Items.Add(btn);
                     }
                     catch { }
-                    
+
                 }
             }
         }
@@ -856,7 +850,7 @@ namespace OPMedia.UI.Controls.Dialogs
             : base(GetDisplayName(sf))
         {
             _sf = sf;
-            
+
             if (string.IsNullOrEmpty(Path))
                 throw new ArgumentException();
 
@@ -892,7 +886,7 @@ namespace OPMedia.UI.Controls.Dialogs
         public DriveInfoItem(DriveInfo di)
         {
             _di = di;
-            
+
             base.Image = ImageProvider.GetIcon(di.Name.ToUpperInvariant(), false);
             _displayText = BuildDisplayText();
         }
@@ -921,12 +915,12 @@ namespace OPMedia.UI.Controls.Dialogs
             try { ready = (_di.IsReady) ? Translator.Translate("TXT_READY") : Translator.Translate("TXT_NOT_READY"); }
             catch { }
             */
-              
+
             if (string.IsNullOrEmpty(name))
                 name = Translator.Translate("TXT_NO_NAME");
             if (string.IsNullOrEmpty(label))
                 label = Translator.Translate("TXT_NO_LABEL");
-            
+
             /*
             if (string.IsNullOrEmpty(format))
                 format = Translator.Translate("TXT_FORMAT_UNKNOWN");
@@ -943,7 +937,7 @@ namespace OPMedia.UI.Controls.Dialogs
 
     public abstract class FolderItem : ComboBoxItem
     {
-        public string Path 
+        public string Path
         {
             get
             {
@@ -961,7 +955,7 @@ namespace OPMedia.UI.Controls.Dialogs
 
     public sealed class FilterItem : ComboBoxItem
     {
-        public string DisplayName { get; private set; } 
+        public string DisplayName { get; private set; }
         public string SearchPattern { get; private set; }
 
         public override string ToString()

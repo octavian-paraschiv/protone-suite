@@ -1,8 +1,6 @@
 ﻿using OPMedia.Core;
-using OPMedia.Core.InterProcessCommunication;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.AccessControl;
 using System.Threading;

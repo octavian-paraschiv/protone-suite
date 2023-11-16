@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -16,8 +10,8 @@ namespace OPMedia.UI.Controls
         public string Description
         {
             get { return lblColorName.Text; }
-            set 
-            { 
+            set
+            {
                 lblColorName.Text = value;
                 lblColorName.Visible = !string.IsNullOrEmpty(lblColorName.Text);
             }
@@ -26,8 +20,8 @@ namespace OPMedia.UI.Controls
         public Color Color
         {
             get { return lblResultingColor.OverrideBackColor; }
-            set 
-            { 
+            set
+            {
                 lblResultingColor.OverrideBackColor = value;
                 ApplyColor(false, false);
             }
@@ -128,7 +122,7 @@ namespace OPMedia.UI.Controls
         private void ColorChangedByText(object sender, EventArgs e)
         {
             byte r = 255, g = 255, b = 255;
-            
+
             string cStr = txtColor.Text;
             string[] fields = cStr.Split(' ');
             if (fields != null && fields.Length == 3)

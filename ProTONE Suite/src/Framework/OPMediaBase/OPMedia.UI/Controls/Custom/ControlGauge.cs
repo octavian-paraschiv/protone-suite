@@ -7,17 +7,12 @@
 #endregion
 
 #region Using directives
+using OPMedia.UI.Themes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Generic;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
-using System.Windows.Forms.Design;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.UI.Controls
@@ -93,8 +88,8 @@ namespace OPMedia.UI.Controls
         public new bool Enabled
         {
             get { return base.Enabled; }
-            set 
-            { 
+            set
+            {
                 base.Enabled = value;
                 if (value)
                     this.Cursor = Cursors.Hand;
@@ -233,7 +228,7 @@ namespace OPMedia.UI.Controls
             {
                 val = newVal;
                 Invalidate(true);
-            } 
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -286,7 +281,7 @@ namespace OPMedia.UI.Controls
                     if (_effMax > 0)
                         rcMajorEff = new Rectangle((int)(this.Width * _effMax / _max), 1,
                             (int)(this.Width * (1 - _effMax / _max)), Height - 3);
-                    
+
                     rcDot = new Rectangle((int)(this.Width * _pos / _max) - 7 + 1, 1, 14, Height - 3);
 
                     a = 90f;

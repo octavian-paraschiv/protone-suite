@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Core
 {
@@ -42,7 +40,7 @@ namespace OPMedia.Core
                 return (ModalForm != null);
             }
         }
-      
+
         private MainThread(Form mainForm)
         {
             _context = WindowsFormsSynchronizationContext.Current;
@@ -50,7 +48,7 @@ namespace OPMedia.Core
 
             _mainForm = mainForm;
             _control = new Control();
-            
+
             // force handle creation
             IntPtr handle = _control.Handle;
         }
@@ -84,8 +82,8 @@ namespace OPMedia.Core
 
         public static Form MainWindow
         {
-            get 
-            { 
+            get
+            {
                 if (_instance != null)
                     return _instance._mainForm;
 
@@ -95,7 +93,7 @@ namespace OPMedia.Core
 
         public static Thread Thread
         {
-            get 
+            get
             {
                 if (_instance != null)
                     return _instance._mainThread;

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using NAudio.Wave;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
+﻿using NAudio.Wave;
+using OPMedia.Addons.Builtin.Shared.Compression;
 using OPMedia.Addons.Builtin.Shared.EncoderOptions;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.UI;
-using OPMedia.Addons.Builtin.Shared.Compression;
 using OPMedia.Runtime.ProTONE.Compression;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 {
@@ -45,26 +38,26 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 
         static Transcoder()
         {
-            _supportedTranscodings.Add(new Transcoding 
-                {
-                    // MP3 to MP3 is supported
-                    InputFormat = AudioMediaFormatType.MP3,
-                    OutputFormat = AudioMediaFormatType.MP3
-                });
+            _supportedTranscodings.Add(new Transcoding
+            {
+                // MP3 to MP3 is supported
+                InputFormat = AudioMediaFormatType.MP3,
+                OutputFormat = AudioMediaFormatType.MP3
+            });
 
             _supportedTranscodings.Add(new Transcoding
-                {
-                    // MP3 to WAV is supported
-                    InputFormat = AudioMediaFormatType.MP3,
-                    OutputFormat = AudioMediaFormatType.WAV
-                });
+            {
+                // MP3 to WAV is supported
+                InputFormat = AudioMediaFormatType.MP3,
+                OutputFormat = AudioMediaFormatType.WAV
+            });
 
             _supportedTranscodings.Add(new Transcoding
-                {
-                    // WAV to MP3 is supported
-                    InputFormat = AudioMediaFormatType.WAV,
-                    OutputFormat = AudioMediaFormatType.MP3
-                });
+            {
+                // WAV to MP3 is supported
+                InputFormat = AudioMediaFormatType.WAV,
+                OutputFormat = AudioMediaFormatType.MP3
+            });
         }
 
         public Transcoder()
@@ -161,7 +154,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
-                                
+
                                 // Resample is not supported at this time.
                                 // Specify the same settings as the input WAV file, otherwise we'll be failing.
                                 grabber.Options.WaveFormat = wfex;
@@ -169,7 +162,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 grabber.EncodeBuffer(buff,
                                     Path.ChangeExtension(inputFile, "MP3"),
                                     false, null);
-                                
+
                                 return;
                             }
                     }
@@ -199,7 +192,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
                                 GrabberToMP3 grabber = (_grabber as GrabberToMP3);
                                 grabber.Options = (encoderSettings as Mp3EncoderSettings).Options;
 
-                                ID3FileInfoSlim ifiSlim = 
+                                ID3FileInfoSlim ifiSlim =
                                     new ID3FileInfoSlim(MediaFileInfo.FromPath(inputFile, false));
 
                                 grabber.EncodeBuffer(buff,
@@ -228,7 +221,7 @@ namespace OPMedia.Addons.Builtin.Property.TaggedFileProp.TaggingWizard.Helpers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

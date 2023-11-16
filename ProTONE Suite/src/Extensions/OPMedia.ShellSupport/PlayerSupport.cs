@@ -1,16 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Security.AccessControl;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace OPMedia.ShellSupport
 {
@@ -87,7 +82,7 @@ namespace OPMedia.ShellSupport
                     Thread.Sleep(2000);
                     playerRunning = IsPlayerRunning();
                 }
-                catch 
+                catch
                 {
                     playerRunning = false;
                 }

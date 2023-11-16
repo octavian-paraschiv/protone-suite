@@ -1,21 +1,7 @@
-#if HAVE_DSHOW
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using System.Runtime.InteropServices;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core;
-using OPMedia.Core.Logging;
-using System.Drawing;
-using OPMedia.Core.Configuration;
-using System.Threading;
-
-using System.Windows.Forms;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.Rendering.DS.DsFilters;
+using System;
 
 
 namespace OPMedia.Runtime.ProTONE.Rendering.DS
@@ -49,13 +35,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
             GC.Collect();
 
             mediaControl = BuildMediaControl();
-            
+
             // Create Filter
             _source = new DSBaseSourceFilter(new AudioCdSourceFilter());
-            
+
             // load the file
             _source.FileName = renderMediaName;
-            
+
             // Add to the filter Graph
             _source.FilterGraph = (mediaControl) as IGraphBuilder;
 
@@ -85,5 +71,3 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     }
 
 }
-
-#endif

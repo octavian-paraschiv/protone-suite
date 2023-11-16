@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using OPMedia.Core.Configuration;
-using System.IO;
-using OPMedia.Core;
-using System.Text.RegularExpressions;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using System.Reflection;
-using System.Net.Configuration;
-using System.Collections.Specialized;
-using static TagLib.File;
 using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Rendering;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Configuration;
+using System.Reflection;
+using System.Text;
 using TagLib.Mpeg;
-using System.Diagnostics;
+using static TagLib.File;
 
 namespace OPMedia.ShoutcastWorker
 {
-    public delegate void StreamPropertyChangedDG(Dictionary<string ,string> props);
+    public delegate void StreamPropertyChangedDG(Dictionary<string, string> props);
 
     /// <summary>
     /// Provides the functionality to receive a shoutcast media stream
@@ -38,7 +33,7 @@ namespace OPMedia.ShoutcastWorker
 
         public bool Connected { get { return connected; } }
 
-        public int Bitrate { get { return bitrate; } set { bitrate = value; }}
+        public int Bitrate { get { return bitrate; } set { bitrate = value; } }
 
         private int sampleRate = 44100;
         public int SampleRate { get { return sampleRate; } set { sampleRate = value; } }
@@ -118,8 +113,8 @@ namespace OPMedia.ShoutcastWorker
                 {
                     case "audio/mpg":
                     case "audio/mpeg":
-                    //case "audio/aac":
-                    //case "audio/aacp":
+                        //case "audio/aac":
+                        //case "audio/aacp":
                         this.ContentType = contentType;
                         break;
 
@@ -166,7 +161,7 @@ namespace OPMedia.ShoutcastWorker
 
                 connected = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 connected = false;
                 WorkerException.Throw(WorkerError.CannotConnectToMedia, -1);

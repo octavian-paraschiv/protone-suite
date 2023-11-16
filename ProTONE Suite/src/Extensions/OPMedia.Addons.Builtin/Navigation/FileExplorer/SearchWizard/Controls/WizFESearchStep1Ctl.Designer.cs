@@ -1,6 +1,6 @@
 using OPMedia.UI.Controls;
 using System.Windows.Forms;
-using OPMedia.Addons.Builtin.Properties;
+
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
 {

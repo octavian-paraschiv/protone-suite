@@ -1,13 +1,9 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
+using OPMedia.UI.Themes;
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using OPMedia.UI.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -56,7 +52,7 @@ namespace OPMedia.UI.Controls
         #endregion
 
         #region Implementation
-       
+
 
         /// <summary>
         /// Override for the Paint procedure.

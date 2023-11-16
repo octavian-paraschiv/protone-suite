@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Dialogs;
-using OPMedia.Core.NetworkAccess;
+﻿using OPMedia.Core;
 using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using System.IO;
-using System.Diagnostics;
 using OPMedia.Core.Logging;
+using OPMedia.Core.NetworkAccess;
+using OPMedia.UI.Dialogs;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ApplicationUpdate
 {
@@ -101,10 +94,10 @@ namespace OPMedia.UI.ApplicationUpdate
         private bool LaunchSetup(string path)
         {
             ProcessStartInfo psi = new ProcessStartInfo(path);
-            
+
             psi.Arguments = string.Format("/SILENT /SUPRESSMSGBOXES /APPRESTART \"{0}\"",
                 ApplicationInfo.ApplicationLaunchPath);
-                
+
             psi.ErrorDialog = false;
             psi.UseShellExecute = true;
             psi.WorkingDirectory = Path.GetTempPath();
@@ -129,6 +122,6 @@ namespace OPMedia.UI.ApplicationUpdate
                 _wfr = null;
             }
         }
-      
+
     }
 }

@@ -7,45 +7,38 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Runtime.ProTONE.FileInformation;
+using NAudio.CoreAudioApi;
+using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-
-#if HAVE_DSHOW
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-#else
-    using OPMedia.Runtime.ProTONE.Rendering.Mono;
-#endif
-
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.UI.Generic;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
-using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
-using System.Threading.Tasks;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-
-using System.Linq;
-using NAudio.CoreAudioApi;
 using OPMedia.Runtime.ProTONE.AudioMetering;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.FfdShowApi;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.Rendering.WorkerSupport;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.UI.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Runtime.ProTONE.Rendering
 {
     public delegate void MediaRendererEventHandler();
-    public delegate void FilterStateChangedHandler(OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState, string oldMedia, 
+    public delegate void FilterStateChangedHandler(OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState, string oldMedia,
         OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState newState, string newMedia);
 
     public delegate void MediaRenderingExceptionHandler(RenderingExceptionEventArgs args);
-    
+
     public delegate void RenderedStreamPropertyChangedHandler(Dictionary<string, string> newData);
 
     public enum XFadeProfiles
@@ -73,7 +66,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         private WorkerRenderer _renderer = null;
         private System.Windows.Forms.Timer timerCheckState = null;
 
-        private OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState = 
+        private OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState oldState =
             OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
 
         private string oldMedia = string.Empty;
@@ -87,7 +80,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         #endregion
 
         #region Properties
-        
+
         public static RenderingEngine DefaultInstance
         {
             get
@@ -101,9 +94,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             return new RenderingEngine(false);
         }
 
-        
 
-        internal object GraphFilter 
+
+        internal object GraphFilter
         { get { return (_renderer != null) ? _renderer.GraphFilter : null; } }
 
         public double[] EqFrequencies
@@ -159,15 +152,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public bool PlaylistAtEnd
         {
-            get 
+            get
             {
                 lock (_syncPlaylist)
                 {
                     return playlistAtEnd;
                 }
             }
-            
-            set 
+
+            set
             {
                 lock (_syncPlaylist)
                 {
@@ -303,8 +296,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         }
 
         public MediaTypes RenderedMediaType
-        { 
-            get 
+        {
+            get
             {
                 MediaTypes mediaType = MediaTypes.None;
 
@@ -322,20 +315,20 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 }
 
                 return mediaType;
-            } 
+            }
         }
 
         public OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState FilterState
-         { 
-            get 
+        {
+            get
             {
                 if (UseCrossFading && _crossFadePendingStop)
                     return FilterState.Stopped;
 
                 return (_renderer == null) ?
-                    OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped : 
-                    _renderer.FilterState; 
-            } 
+                    OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped :
+                    _renderer.FilterState;
+            }
         }
 
 
@@ -365,7 +358,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 return false;
             }
         }
-        
+
         public Dictionary<string, string> StreamData { get; private set; }
 
         internal void FireStreamPropertyChanged(Dictionary<string, string> newData)
@@ -839,7 +832,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
             filterPart1 = filterPart1.TrimEnd(new char[] { ',' });
             filterPart2 = filterPart2.TrimEnd(new char[] { ';' });
-            
+
             return string.Format(filterFormat, filterPart1, filterPart2);
         }
 
@@ -982,7 +975,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Running && oldMediaPosition == newMediaPosition)
                 {
                     nofPasses++;
-                    Logger.LogToConsole("Media position did not change in the last {0} iterations ... old={1}, new={2}", 
+                    Logger.LogToConsole("Media position did not change in the last {0} iterations ... old={1}, new={2}",
                         nofPasses, oldMediaPosition, newMediaPosition);
                 }
                 else
@@ -998,7 +991,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 {
                     if (newState != OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                     {
-                        Logger.LogTrace("timerCheckState_Tick ... IsEndOfMedia={0}, IsStreamedMedia={1}, nofPasses={2}, newState={3}", 
+                        Logger.LogTrace("timerCheckState_Tick ... IsEndOfMedia={0}, IsStreamedMedia={1}, nofPasses={2}, newState={3}",
                             IsEndOfMedia, IsStreamedMedia, nofPasses, newState);
 
                         this.StopRenderer(false);
@@ -1008,7 +1001,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                     {
                         newState = OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped;
                     }
-                    
+
                 }
                 else if (oldState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened && newState == OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped)
                 {
@@ -1031,7 +1024,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
                             case OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.NotOpened:
                             case OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped:
-                                //break;
+                            //break;
 
                             case OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Paused:
                                 _position = _renderer.MediaPosition;
@@ -1067,7 +1060,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public void ReportRenderingException(Exception ex)
         {
-             _hasRenderingErrors = true;
+            _hasRenderingErrors = true;
 
             try
             {
@@ -1160,7 +1153,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 Logger.LogException(ex);
             }
         }
-        
+
         public event MediaRenderingExceptionHandler MediaRenderingException = null;
         private void FireMediaRenderingException(RenderingExceptionEventArgs args)
         {
@@ -1173,7 +1166,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 Logger.LogException(ex);
             }
         }
-        
+
         #endregion
 
         #region FFdShow subtitle and OSD
@@ -1297,7 +1290,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
         #endregion
     }
 
-   
+
 
     public abstract class RenderingStartHint
     {

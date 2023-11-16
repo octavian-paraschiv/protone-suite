@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Timers;
-using System.Diagnostics;
-using OPMedia.Core.Logging;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -37,7 +30,7 @@ namespace OPMedia.UI.Controls
             __count++;
 
             AssignData(title, values, img);
-            
+
             User32.ShowWindow(Handle, ShowWindowStyles.SW_SHOWNOACTIVATE);
             User32.SetWindowOnTop(Handle, false, true);
 

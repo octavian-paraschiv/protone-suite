@@ -3,7 +3,6 @@ using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.DSP;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -49,8 +48,8 @@ namespace OPMedia.Runtime.ProTONE.AudioMetering
 
         public const int MAX_SPECTROGRAM_BANDS = 64;
         private int _waveformWindowSize = 512;
-        
-        
+
+
         private int _fftWindowSize = 2048;
 
         private ConcurrentQueue<AudioSampleData> _sampleData = new ConcurrentQueue<AudioSampleData>();

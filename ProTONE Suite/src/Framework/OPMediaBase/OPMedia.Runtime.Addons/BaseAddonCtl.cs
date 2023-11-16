@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.UI.Configuration;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.Addons.Configuration;
+using OPMedia.UI.Controls;
+using System.Collections.Generic;
 
 namespace OPMedia.Runtime.Addons
 {
@@ -107,5 +99,5 @@ namespace OPMedia.Runtime.Addons
         }
     }
 
-    
+
 }

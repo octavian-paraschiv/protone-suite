@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
+﻿using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Utilities;
+using System;
+using System.ComponentModel;
 
 namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 {
@@ -26,8 +24,8 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 
         public override string ToString()
         {
-            return string.Format("{0}|{1}", 
-                new TimeSpanConverter().ConvertToInvariantString(_playbackTime), 
+            return string.Format("{0}|{1}",
+                new TimeSpanConverter().ConvertToInvariantString(_playbackTime),
                 _title.Replace(";", " "));
         }
 

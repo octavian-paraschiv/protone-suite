@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace OPMedia.Core.GlobalEvents
 {
@@ -35,7 +32,7 @@ namespace OPMedia.Core.GlobalEvents
         public MethodInfo MethodInfo { get; set; }
     }
 
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     public class EventSinkAttribute : Attribute
     {
         public string EventName { get; private set; }

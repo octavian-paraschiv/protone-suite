@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OPMedia.Runtime.DSP
 {
@@ -71,7 +69,7 @@ namespace OPMedia.Runtime.DSP
                                 string s = ex.Message;
                             }
 
-                            
+
                     }
 
                     data = data / idxs.Length;
@@ -86,7 +84,7 @@ namespace OPMedia.Runtime.DSP
                     }
 
                 }
-                
+
             }
 
             return outData;

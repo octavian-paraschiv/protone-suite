@@ -1,7 +1,5 @@
-using System.Windows.Forms;
 using OPMedia.UI.Controls;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.Themes;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

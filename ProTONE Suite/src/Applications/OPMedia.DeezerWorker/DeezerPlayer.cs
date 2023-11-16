@@ -1,24 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using OPMedia.Core;
-using OPMedia.Core.Configuration;
-using OPMedia.DeezerInterop.PlayerApi;
-using OPMedia.Runtime.ProTONE.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Core.Logging;
-using System.Diagnostics;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.WorkerSupport;
-using System.IO;
-using OPMedia.Runtime.ProTONE;
-using EventNames = OPMedia.Runtime.ProTONE.EventNames;
 using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.ProTONE.WorkerSupport;
+using OPMedia.Runtime.Shortcuts;
+using System;
+using System.Threading;
+using EventNames = OPMedia.Runtime.ProTONE.EventNames;
 
 namespace OPMedia.DeezerWorker
 {
@@ -143,7 +135,7 @@ namespace OPMedia.DeezerWorker
                 err = DeezerApi.dz_connect_offline_mode(_dzConnect, null, IntPtr.Zero, false);
                 HandleDzErrorCode("dz_connect_offline_mode", WorkerError.CannotConnectToMedia, err);
 
-                SetRenderQuality(ProTONEConfig.DeezerTrackQuality);                
+                SetRenderQuality(ProTONEConfig.DeezerTrackQuality);
 
                 if (_evtAppUserLoginOK.WaitOne(Worker.OperationTimeout) == false)
                     HandleDzErrorCode("DeezerPlayer::SetupConfig", WorkerError.CannotConnectToMedia, dz_error_t.DZ_ERROR_CONNECT_SESSION_LOGIN_FAILED);
@@ -201,9 +193,9 @@ namespace OPMedia.DeezerWorker
                 HandleDzErrorCode("dz_player_load", WorkerError.MediaReadError, dz_error_t.DZ_ERROR_PLAYER_LOAD_TIMEOUT);
 
             Logger.LogTrace("dz_player_load => Success");
-            // --------------------------------------------------------------------
+        // --------------------------------------------------------------------
 
-try_play:
+        try_play:
 
             // --------------------------------------------------------------------
             // Start playback using dz_player_play
@@ -483,8 +475,8 @@ try_play:
                 case dz_player_event_t.DZ_PLAYER_EVENT_QUEUELIST_TRACK_SELECTED:
                     {
                         string selectedInfo = DeezerApi.dz_player_event_track_selected_dzapiinfo(evtHandle);
-                        dynamic obj2 = JObject.Parse(selectedInfo);
-                        _duration = obj2.duration;
+                        var obj2 = JsonConvert.DeserializeObject<DurationWrapper>(selectedInfo);
+                        _duration = (obj2?.duration).GetValueOrDefault();
                     }
                     break;
 
@@ -660,5 +652,10 @@ try_play:
             Resume(pos);
             SetVolume(vol);
         }
+    }
+
+    class DurationWrapper
+    {
+        public int duration;
     }
 }

@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI.Themes;
-using System.IO;
-using System.Drawing;
-using OPMedia.UI.Generic;
-using OPMedia.Core;
-using System.Windows.Forms;
-using OPMedia.Core.GlobalEvents;
-using System.Net;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using System.ComponentModel;
 using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.HelpSupport
 {
@@ -244,7 +240,7 @@ namespace OPMedia.UI.HelpSupport
             {
                 try
                 {
-                    
+
                     string[] docLines = File.ReadAllLines(uri.LocalPath);
                     for (int i = 0; i < docLines.Length; i++)
                     {
@@ -254,16 +250,16 @@ namespace OPMedia.UI.HelpSupport
                         }
                         else if (docLines[i].ToLowerInvariant().Contains("<img"))
                         {
-                            docLines[i] = docLines[i].ToLowerInvariant().Replace("src=\"images", string.Format("src=\"{0}\\docs\\images", 
+                            docLines[i] = docLines[i].ToLowerInvariant().Replace("src=\"images", string.Format("src=\"{0}\\docs\\images",
                                 AppConfig.InstallationPath));
                         }
 
                         sb.AppendLine(docLines[i]);
                     }
                 }
-                catch(Exception ex)
-                { 
-					Logger.LogException(ex);
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
                 }
 
                 docText = sb.ToString();
@@ -327,7 +323,7 @@ namespace OPMedia.UI.HelpSupport
 
         void wbHelpDisplay_DocumentCompleted(object sender, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e)
         {
-            string newTitle = string.Format("{0} {1}: {2}", 
+            string newTitle = string.Format("{0} {1}: {2}",
                 Translator.Translate("TXT_APP_NAME"),
                 Translator.Translate("TXT_HELP"),
                 wbHelpDisplay.DocumentTitle
@@ -449,7 +445,7 @@ namespace OPMedia.UI.HelpSupport
             if (bckUrls.Count > 0)
             {
                 tsbPrev.Enabled = true;
-                tsbPrev.ToolTipText = string.Format("{0}: {1}", 
+                tsbPrev.ToolTipText = string.Format("{0}: {1}",
                   Translator.Translate("TXT_BACK"), bckUrls.Peek());
             }
             else

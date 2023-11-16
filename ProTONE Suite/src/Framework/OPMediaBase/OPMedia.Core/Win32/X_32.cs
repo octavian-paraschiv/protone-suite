@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.IO;
 using System.Runtime.InteropServices.ComTypes;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using OPMedia.Core.Utilities;
+using System.Text;
 
 namespace OPMedia.Core
 {
@@ -59,8 +54,8 @@ namespace OPMedia.Core
             int y,
             [MarshalAs(UnmanagedType.LPWStr)] string lpszCaption,
             int cObjects,
-            [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)] 
-			ref object ppUnk,
+            [MarshalAs(UnmanagedType.Interface, ArraySubType = UnmanagedType.IUnknown)]
+            ref object ppUnk,
             int cPages,
             IntPtr lpPageClsID,
             int lcid,

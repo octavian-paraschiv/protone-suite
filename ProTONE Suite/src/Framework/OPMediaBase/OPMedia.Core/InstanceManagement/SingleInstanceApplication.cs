@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using OPMedia.Core.Logging;
-using System.Reflection;
+using System;
 using System.Security.AccessControl;
-using OPMedia.Core;
+using System.Threading;
 
 namespace OPMedia.Core.InstanceManagement
 {
@@ -32,7 +28,7 @@ namespace OPMedia.Core.InstanceManagement
             }
             else
             {
-                Logger.LogError("Error encountered: {0}", 
+                Logger.LogError("Error encountered: {0}",
                     "Only one instance of OpMediaApplication (or derived) can be started per process !!");
             }
         }
@@ -92,7 +88,7 @@ namespace OPMedia.Core.InstanceManagement
         }
 
 
-               
+
         #endregion
     }
     #endregion

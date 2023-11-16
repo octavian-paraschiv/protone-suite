@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OPMedia.Runtime.ProTONE.Rendering.Base
 {
     public enum BalanceRange

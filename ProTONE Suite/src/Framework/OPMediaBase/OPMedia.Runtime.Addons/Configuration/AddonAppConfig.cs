@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.Configuration;
+﻿using OPMedia.Core;
 using System.Windows.Forms;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {

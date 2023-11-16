@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CookComputing.XmlRpc;
-using System.Runtime.InteropServices;
+﻿using CookComputing.XmlRpc;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 {
@@ -50,7 +47,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb
 
         [XmlRpcMethod("SearchSubtitles")]
         OsdbDownloadSubtitlesResponse DownloadSubtitles(string token, int[] subtitleFileIDs);
-        
+
         [XmlRpcMethod("SearchSubtitles")]
         OsdbSearchSubtitleResponse SearchSubtitles(string token, VideoInfo[] videoInfoList);
 

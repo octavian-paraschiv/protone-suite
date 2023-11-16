@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Threading;
-using System.Net;
+﻿using Newtonsoft.Json;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading;
 
 namespace OPMedia.DeezerInterop.RestApi
 {
@@ -56,7 +53,7 @@ namespace OPMedia.DeezerInterop.RestApi
         internal void CheckResponseForErrors(string response)
         {
             if (string.IsNullOrEmpty(response))
-                    throw new WebException("Empty response received from server.");
+                throw new WebException("Empty response received from server.");
 
             var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
             if (jsonResult.ContainsKey("error"))
@@ -89,7 +86,7 @@ namespace OPMedia.DeezerInterop.RestApi
                 // Since these either indicate problems with the server or an internal app bug, we should log them
                 Logger.LogWarning($"HTTP GET error: URL={url} => {wex.Message}");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

@@ -1,16 +1,12 @@
+using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.Runtime.ProTONE.Rendering.DS;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.Core.Logging;
-using System.Runtime.InteropServices;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-#if HAVE_DSHOW
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.Core;
 using System.IO;
-using OPMedia.Core.Configuration;
-#endif
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -30,14 +26,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         DvdMenuAttributes _dma;
 
-        public string Label 
-        { 
-            get 
-            { 
+        public string Label
+        {
+            get
+            {
                 return string.IsNullOrEmpty(_label) ? _defaultLabel : _label;
-            } 
+            }
         }
-        
+
         public override string MediaType
         {
             get
@@ -45,7 +41,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 return "DVD";
             }
         }
-        
+
         public new string Path
         { get { return _dvdPath; } }
 
@@ -245,7 +241,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             if (IsOSSupported == false)
             {
                 var ver = AppConfig.OSVersion;
-                throw new COMException(string.Format(VideoDvdInformation.UnsupportedWindows, 
+                throw new COMException(string.Format(VideoDvdInformation.UnsupportedWindows,
                     string.Format("{0}.{1}", ver / 10, ver % 10)), -1);
             }
 

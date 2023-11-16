@@ -1,19 +1,13 @@
 #region Using directives
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using System.Configuration;
-using System.Windows.Forms;
-using System.Collections.Specialized;
-using System.Threading;
-using System.ComponentModel;
-using System.IO;
-using System.Globalization;
-using OPMedia.Core;
 using System.Collections.Concurrent;
-using OPMedia.Core.Utilities;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
 #endregion
 
 namespace OPMedia.Core.Logging

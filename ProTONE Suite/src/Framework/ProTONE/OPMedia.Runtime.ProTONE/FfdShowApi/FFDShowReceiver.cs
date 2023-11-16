@@ -1,10 +1,5 @@
-#if HAVE_DSHOW
-
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -21,7 +16,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         /// The CopyData Constant for SendMessage
         /// </summary>
         public const Int32 WM_COPYDATA = 0x004A;
-       
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct COPYDATASTRUCT
         {
@@ -131,4 +126,3 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         }
     }
 }
-#endif

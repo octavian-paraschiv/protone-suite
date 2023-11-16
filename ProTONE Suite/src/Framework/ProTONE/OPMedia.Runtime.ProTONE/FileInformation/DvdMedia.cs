@@ -1,9 +1,7 @@
+using OPMedia.Core;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using OPMedia.Core.Logging;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -83,7 +81,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 if (path.ToUpperInvariant().EndsWith("VIDEO_TS") ||      // this is the case of a DVD folder somewhere in the system
                     PathUtils.PathHasChildFolder(path, "VIDEO_TS") ||
                     (drv.DriveType == DriveType.CDRom && drv.IsReady)) // this covers the disks in the DVD-ROM units
-                    
+
                 {
                     _dvdPath = path;
 

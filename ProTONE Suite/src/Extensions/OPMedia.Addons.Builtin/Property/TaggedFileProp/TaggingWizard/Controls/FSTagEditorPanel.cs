@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.UI.Themes;
+using System;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {
@@ -22,7 +16,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         protected override void DisplayTask()
         {
             _task.TaskType = TaskType.FillTagByFS;
-            
+
             if (!cmbFilePattern.Items.Contains(_task.TagFilePattern))
             {
                 cmbFilePattern.Items.Add(_task.TagFilePattern);

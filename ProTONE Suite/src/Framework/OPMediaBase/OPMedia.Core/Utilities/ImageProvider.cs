@@ -7,21 +7,16 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.Core;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Resources;
-using OPMedia.Core.Properties;
-using System.Reflection;
-using OPMedia.Core.Utilities;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
-using System.Drawing.Imaging;
+using OPMedia.Core.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 #endregion
 
 
@@ -29,26 +24,26 @@ namespace OPMedia.Core
 {
     public enum Shell32Icon
     {
-        BlankFile =      0,
-        GenericFile =    1,
-        GenericFolder =  4,
-        
+        BlankFile = 0,
+        GenericFile = 1,
+        GenericFolder = 4,
+
         DriveRemovable = 7,
-        DriveFixed =     8,
-        DriveNetwork =   9,
-        DriveNoRoot =    10,
-        DriveCdrom =     11,
-        DriveRamdisk =   12,
-        
-        Internet =       13,
-        DesktopFolder =  34,
-        DriveUnknown =   53,
+        DriveFixed = 8,
+        DriveNetwork = 9,
+        DriveNoRoot = 10,
+        DriveCdrom = 11,
+        DriveRamdisk = 12,
+
+        Internet = 13,
+        DesktopFolder = 34,
+        DriveUnknown = 53,
 
         GenericFileSystem = 84,
 
         DvdDisk = 113,
         CompactDisk = 188,
-        
+
         AutomaticProcess = 165,
 
         URL = 0xFFFF001,
@@ -84,7 +79,7 @@ namespace OPMedia.Core
                 ApplicationIcon = icon.ToBitmap();
         }
 
-        
+
         public static string ImageToString(Image img)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -116,7 +111,7 @@ namespace OPMedia.Core
 
             return null;
         }
-        
+
         public static Image GetIconOfFileType(string ext, bool largeIcon = false)
         {
             string key = string.Format("{0}_{1}", ext.ToLowerInvariant(), largeIcon ? "1" : "0");
@@ -214,7 +209,7 @@ namespace OPMedia.Core
         {
             SHFILEINFO info = new SHFILEINFO();
             int cbFileInfo = Marshal.SizeOf(info);
-            
+
             Shell32.SHGetFileInfo(strPath, 256, ref info, (uint)cbFileInfo, (uint)SHGetFileInfoConstants.SHGFI_SYSICONINDEX);
 
             Icon retVal = null;
@@ -336,7 +331,7 @@ namespace OPMedia.Core
 
             return img;
         }
-        
+
         public static Icon ResizeIcon(Icon src, bool largeIcon)
         {
             if (src != null)
@@ -351,7 +346,7 @@ namespace OPMedia.Core
 
             return null;
         }
-        
+
         public static Image GetIcon(string file, int iconIndex, bool largeIcon)
         {
             IntPtr[] handlesIconLarge = new IntPtr[1] { IntPtr.Zero };
@@ -457,7 +452,7 @@ namespace OPMedia.Core
 
         private ImageList _il = null;
 
-        public ImageList ImageList 
+        public ImageList ImageList
         {
             get { return _il; }
         }
@@ -473,7 +468,7 @@ namespace OPMedia.Core
             _large = large;
             _il = new ImageList();
             _il.ColorDepth = ColorDepth.Depth32Bit;
-            _il.ImageSize = 
+            _il.ImageSize =
                 large ? new Size(32, 32) : new Size(16, 16);
         }
 

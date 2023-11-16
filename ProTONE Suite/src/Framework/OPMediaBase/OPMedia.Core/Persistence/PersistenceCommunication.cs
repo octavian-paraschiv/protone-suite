@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace OPMedia.Core.Persistence
@@ -17,21 +15,27 @@ namespace OPMedia.Core.Persistence
         public string PersistenceContext { get; set; }
         public string ObjectContent { get; set; }
         public bool IsBlob { get; set; }
+
+        [JsonIgnore]
+        public abstract bool IsValid { get; }
     }
 
     public class NotificationPDU : GenericPDU
     {
         public NotificationType ChangeType { get; set; }
+        public override bool IsValid => (ChangeType != NotificationType.None);
     }
 
     public class PersistencePDU : GenericPDU
     {
         public PersistenceActionType ActionType { get; set; }
+        public override bool IsValid => (ActionType != PersistenceActionType.None);
     }
 
     public class ServicePDU : GenericPDU
     {
         public ServiceActionType SvcActionType { get; set; }
+        public override bool IsValid => (SvcActionType != ServiceActionType.None);
     }
 
     public enum ServiceActionType
@@ -51,30 +55,50 @@ namespace OPMedia.Core.Persistence
 
     public static class PduFactory
     {
-        static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
+        private enum PduTypeIndicator
+        {
+            ChangeType,
+            ActionType,
+            SvcActionType
+        }
+
+        private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
         {
             Formatting = Formatting.None,
             DefaultValueHandling = DefaultValueHandling.Ignore,
             NullValueHandling = NullValueHandling.Ignore
         };
 
+        private static readonly Dictionary<PduTypeIndicator, Type> _pduTypeMap = new Dictionary<PduTypeIndicator, Type>()
+        {
+            { PduTypeIndicator.ActionType, typeof(PersistencePDU) },
+            { PduTypeIndicator.ChangeType, typeof(NotificationPDU) },
+            { PduTypeIndicator.SvcActionType, typeof(ServicePDU) },
+        };
+
         public static GenericPDU Decode(string line)
         {
             Logging.Logger.LogToConsole(line);
 
-            PersistencePDU rpdu = JsonConvert.DeserializeObject<PersistencePDU>(line, _settings);
-            if (rpdu.ActionType != PersistenceActionType.None)
-                return rpdu;
+            GenericPDU gpdu = default;
 
-            NotificationPDU npdu = JsonConvert.DeserializeObject<NotificationPDU>(line, _settings);
-            if (npdu.ChangeType != NotificationType.None)
-                return npdu;
+            if (!string.IsNullOrEmpty(line))
+            {
+                var pduTypeIndicators = Enum.GetValues(typeof(PduTypeIndicator)).OfType<PduTypeIndicator>();
+                foreach (var pduType in pduTypeIndicators)
+                {
+                    if (line.ToUpperInvariant().Contains($"\"{pduType.ToString().ToUpperInvariant()}\"") &&
+                        _pduTypeMap.ContainsKey(pduType))
+                    {
 
-            ServicePDU spdu = JsonConvert.DeserializeObject<ServicePDU>(line, _settings);
-            if (spdu.SvcActionType != ServiceActionType.None)
-                return spdu;
+                        var pdu = JsonConvert.DeserializeObject(line, _pduTypeMap[pduType]) as GenericPDU;
+                        if ((pdu?.IsValid).GetValueOrDefault())
+                            return pdu;
+                    }
+                }
+            }
 
-            return null;
+            return gpdu;
         }
 
         public static string Encode<T>(T pdu) where T : GenericPDU

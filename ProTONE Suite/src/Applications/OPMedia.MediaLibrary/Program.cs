@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.Addons;
-using OPMedia.UI.ProTONE.Configuration;
-using System.Windows.Forms;
+﻿using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Core;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.Runtime.Addons.Configuration;
+using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.AddonsBase;
-using System.Diagnostics;
-using OPMedia.Runtime.ProTONE.SubtitleDownload;
-using OPMedia.Runtime.ProTONE;
-
+using OPMedia.Runtime.Addons.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.MediaLibrary
 {

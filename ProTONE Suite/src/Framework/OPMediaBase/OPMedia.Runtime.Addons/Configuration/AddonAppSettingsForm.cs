@@ -1,12 +1,8 @@
+using OPMedia.Runtime.Addons.AddonsBase;
+using OPMedia.UI;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Configuration;
-using OPMedia.Core;
 using System.Windows.Forms;
-using OPMedia.UI;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {
@@ -26,7 +22,7 @@ namespace OPMedia.Runtime.Addons.Configuration
             return _instance.ShowDialog();
         }
 
-        protected AddonAppSettingsForm(string titleToOpen, string subTitleToOpen) 
+        protected AddonAppSettingsForm(string titleToOpen, string subTitleToOpen)
             : base(titleToOpen, subTitleToOpen)
         {
         }
@@ -55,7 +51,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 KeepPanels(new List<Type>(new Type[] { typeConfigurator }));
 
                 btnCancel.Visible = false;
-                btnOk.Location = btnCancel.Location; 
+                btnOk.Location = btnCancel.Location;
             }
         }
 

@@ -1,8 +1,8 @@
-using System;
-using System.Runtime.InteropServices;
-using System.Drawing;
-using System.Runtime.InteropServices.ComTypes;
 using OPMedia.Core;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 
 // namespace for export direct show interfaces
 namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
@@ -1178,7 +1178,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
     [ComVisible(false)]
     public class Mpeg2VideoInfo
     {
-        public VideoInfoHeader2    hdr;
+        public VideoInfoHeader2 hdr;
         public uint dwStartTimeCode;
         public uint cbSequenceHeader;
         public uint dwProfile;
@@ -1342,7 +1342,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
         public IntPtr unkPtr;
         public int formatSize;
         public IntPtr formatPtr;
-        
+
         #endregion
 
         #region Constructor
@@ -1659,7 +1659,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
             {
                 byte[] _buffer = new byte[_size];
                 Marshal.Copy(_data, _buffer, 0, _size);
-                AddFormatExtraData(_buffer,_size);
+                AddFormatExtraData(_buffer, _size);
             }
         }
 
@@ -3636,13 +3636,13 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
         [PreserveSig]
         int IsDirty();
-        
+
         [PreserveSig]
         int Load(IntPtr pStm);
-        
+
         [PreserveSig]
         int Save(IntPtr pStm, [MarshalAs(UnmanagedType.Bool)] bool fClearDirty);
-        
+
         [PreserveSig]
         int GetSizeMax(out long pcbSize);
     }
@@ -3941,16 +3941,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
         [PreserveSig]
         int AddSourceFilter(
-            [In]											string strFilename,
-            [Out, MarshalAs(UnmanagedType.IDispatch)]	out object ppUnk);
+            [In] string strFilename,
+            [Out, MarshalAs(UnmanagedType.IDispatch)] out object ppUnk);
 
         [PreserveSig]
         int get_FilterCollection(
-            [Out, MarshalAs(UnmanagedType.IDispatch)]	out object ppUnk);
+            [Out, MarshalAs(UnmanagedType.IDispatch)] out object ppUnk);
 
         [PreserveSig]
         int get_RegFilterCollection(
-            [Out, MarshalAs(UnmanagedType.IDispatch)]	out object ppUnk);
+            [Out, MarshalAs(UnmanagedType.IDispatch)] out object ppUnk);
 
         [PreserveSig]
         int StopWhenReady();
@@ -4382,7 +4382,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
         int GetAllocatorProperties([Out] AllocatorProperties pprop);
     }
 
-    public enum AMSTREAMSELECTINFOFLAGS: uint
+    public enum AMSTREAMSELECTINFOFLAGS : uint
     {
         ENABLED = 0x1,
         EXCLUSIVE = 0x2
@@ -4404,9 +4404,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
         int Count(
             [Out] out int pcStreams
             );
-        
+
         [PreserveSig]
-        int Info( 
+        int Info(
             [In] int lIndex,
             [In, Out] IntPtr ppmt, // AMMediaType
             [In, Out] IntPtr pdwFlags, // DWORD * AMSTREAMSELECTINFOFLAGS
@@ -4415,9 +4415,9 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
             [In, Out] IntPtr ppszName, // WCHAR **
             [In, Out] IntPtr ppObject, // IUnknown * 
             [In, Out] IntPtr ppUnk); // IUnknown * 
-        
+
         [PreserveSig]
-        int Enable( 
+        int Enable(
             [In] int lIndex,
             [In] AMSTREAMSELECTENABLEFLAGS dwFlags);
     }
@@ -4481,7 +4481,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
         private delegate int GetTimeProc(
             IntPtr pUnk,
-            out long pTimeStart, 
+            out long pTimeStart,
             out long pTimeEnd
             );
 
@@ -4843,7 +4843,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
         #region Constructor
 
         public IMemInputPinImpl(IntPtr pMemInputPin)
-            : base(pMemInputPin,false)
+            : base(pMemInputPin, false)
         {
 
         }
@@ -4919,8 +4919,8 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
             return (HRESULT)_Proc(
                         m_pUnknown,
-                        pSamples, 
-                        nSamples, 
+                        pSamples,
+                        nSamples,
                         out nSamplesProcessed
                         );
         }
@@ -5226,7 +5226,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
         private delegate int EnumMediaTypesProc(
             IntPtr pUnk,
             [Out] out IntPtr ppEnum);
-            //[Out] out IEnumMediaTypes ppEnum);
+        //[Out] out IEnumMediaTypes ppEnum);
 
         private delegate int QueryInternalConnectionsProc(
             IntPtr pUnk,
@@ -5309,7 +5309,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
             //}
 
             Marshal.ThrowExceptionForHR(hr);
-            
+
             return hr;
         }
 
@@ -5504,7 +5504,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
     public class ISeekingPassThruImpl : VTableInterface, ISeekingPassThru
     {
         #region Delegate
- 
+
         private delegate int InitProc(
             IntPtr pUnk,
             [In, MarshalAs(UnmanagedType.Bool)] bool bSupportRendering,
@@ -6061,7 +6061,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
             return (HRESULT)_Proc(
                         m_pUnknown,
-                        baseTime, streamTime, hEvent, out pdwAdviseCookie 
+                        baseTime, streamTime, hEvent, out pdwAdviseCookie
                         );
         }
 
@@ -6242,7 +6242,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
 
             return (HRESULT)_Proc(
                         m_pUnknown,
-                        dwTimeout,out ppSample, out pdwUser
+                        dwTimeout, out ppSample, out pdwUser
                         );
         }
 
@@ -6320,15 +6320,15 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
     }
 
     [ComVisible(false)]
-    public class IStreamImpl: VTableInterface, IStream
+    public class IStreamImpl : VTableInterface, IStream
     {
         #region Delegate
 
         private delegate int ReadProc(
             IntPtr pUnk,
-            [In, Out,MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv, 
-            [In] int cb, 
-            [In,Out] IntPtr pcbRead
+            [In, Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] pv,
+            [In] int cb,
+            [In, Out] IntPtr pcbRead
             );
 
         private delegate int WriteProc(
@@ -6529,7 +6529,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses
                         );
             hr.Throw();
         }
-      
+
         public void Stat(out System.Runtime.InteropServices.ComTypes.STATSTG pstatstg, int grfStatFlag)
         {
             if (m_pUnknown == IntPtr.Zero) E_NOINTERFACE.Throw();

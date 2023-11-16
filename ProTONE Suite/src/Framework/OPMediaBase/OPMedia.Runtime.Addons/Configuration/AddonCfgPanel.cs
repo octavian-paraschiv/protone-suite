@@ -1,28 +1,16 @@
+using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.AddonsBase;
+using OPMedia.Runtime.Addons.Properties;
+using OPMedia.UI;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
-using OPMedia.UI;
-using System.Diagnostics;
-using OPMedia.Core.TranslationSupport;
-using System.IO;
 using System.Reflection;
-
-using OPMedia.Core;
-using OPMedia.Core.InstanceManagement;
-using System.Security.AccessControl;
-using System.Threading;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.UI.Themes;
-using OPMedia.UI.Configuration;
-using OPMedia.Runtime.Addons.Properties;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Controls.Dialogs;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons.Configuration
 {
@@ -69,7 +57,7 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             Translator.TranslateControl(this, DesignMode);
             Application.DoEvents();
-            
+
             ReloadConfig();
             Modified = true;
         }
@@ -164,7 +152,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 }
                 else if (!AddonsConfig.IsInitialConfig)
                 {
-                    MessageDisplay.Show(Translator.Translate("TXT_ADDONS_NOT_CHANGED"), 
+                    MessageDisplay.Show(Translator.Translate("TXT_ADDONS_NOT_CHANGED"),
                         "Info", MessageBoxIcon.Information);
                 }
             }
@@ -323,8 +311,8 @@ namespace OPMedia.Runtime.Addons.Configuration
 
             foreach (AddonInfo ai in addonList.AllAddons)
             {
-                string[] codebaseParts = ai.CodeBase.Split(new char[]{'|'});
-                if (codebaseParts.Length > 0 && 
+                string[] codebaseParts = ai.CodeBase.Split(new char[] { '|' });
+                if (codebaseParts.Length > 0 &&
                     codebaseParts[0].ToLowerInvariant() == assembly.ToLowerInvariant())
                 {
                     addons += ai.TranslatedName;
@@ -352,7 +340,7 @@ namespace OPMedia.Runtime.Addons.Configuration
                 _uninstallScheduled = true;
             }
 
-            
+
         }
 
         private void OnKeyUp(object sender, KeyEventArgs e)

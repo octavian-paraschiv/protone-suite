@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Runtime.ProTONE.NuSoap;
-using System.Net;
-using OPMedia.Core.Configuration;
+﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using OPMedia.Core;
-using OPMedia.Core.Logging;
+using OPMedia.Core.Configuration;
+using OPMedia.Runtime.ProTONE.NuSoap;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.IO.Compression;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-
+using System.Linq;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
 {
@@ -28,7 +24,6 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
         public NuSoapSession(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
-            Logger.LogTrace("NuSoapSession: object created");
         }
         #endregion
 
@@ -78,19 +73,24 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
             SubtitleFile[] subtitles = _wsdl.searchSubtitlesByHash(vi.moviehash, vi.sublanguageid, 0, 100);
             if (subtitles != null && subtitles.Length > 0)
             {
-                foreach (SubtitleFile sf in subtitles)
-                {
-                    SubtitleInfo si = new SubtitleInfo();
+                var infos = from sf in subtitles
+                            where
+                            (
+                                sf?.file_name?.Length > 0 &&
+                                sf?.sub_hash?.Length > 0 &&
+                                sf?.language?.Length > 0
+                            )
+                            select new SubtitleInfo
+                            {
+                                IDSubtitleFile = sf.cod_subtitle_file.ToString(),
+                                SubFileName = sf.file_name,
+                                SubHash = sf.sub_hash,
+                                LanguageName = sf.language,
+                                MovieHash = vi.moviehash,
+                                SubFormat = PathUtils.GetExtension(sf.file_name)
+                            };
 
-                    si.IDSubtitleFile = sf.cod_subtitle_file.ToString();
-                    si.SubFileName = sf.file_name;
-                    si.SubHash = sf.sub_hash;
-                    si.LanguageName = sf.language;
-                    si.MovieHash = vi.moviehash;
-                    si.SubFormat = PathUtils.GetExtension(sf.file_name);
-
-                    retVal.Add(si);
-                }
+                retVal.AddRange(infos);
             }
 
             return retVal;

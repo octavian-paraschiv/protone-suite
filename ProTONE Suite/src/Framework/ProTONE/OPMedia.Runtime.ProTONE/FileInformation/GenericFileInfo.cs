@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core;
 using OPMedia.Runtime.FileInformation;
-using System.IO;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Rendering;
 
 
 namespace OPMedia.Runtime.ProTONE.FileInformation

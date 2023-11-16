@@ -1,14 +1,10 @@
-﻿using System;
+﻿using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Controls.PropertyEditor.Choosers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Reflection;
-using OPMedia.UI.Controls.PropertyEditor.Choosers;
-using OPMedia.Core.TranslationSupport;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls.PropertyEditor
 {
@@ -145,10 +141,10 @@ namespace OPMedia.UI.Controls.PropertyEditor
 
             else if (pi.PropertyType.IsIntegerType())
                 chooser = new IntegerChooser(pi.PropertyType);
-            
+
             else if (pi.PropertyType == typeof(bool))
                 chooser = new BooleanChooser();
-            
+
             else
                 chooser = new StringChooser();
 

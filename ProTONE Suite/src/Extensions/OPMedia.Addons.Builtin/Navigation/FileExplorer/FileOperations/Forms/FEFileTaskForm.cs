@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
 using OPMedia.UI.FileTasks;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using System.IO;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks;
+using System.Collections.Generic;
 
 namespace OPMedia.Addons.Builtin.FileExplorer.FileOperations.Forms
 {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Playlists;
+using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

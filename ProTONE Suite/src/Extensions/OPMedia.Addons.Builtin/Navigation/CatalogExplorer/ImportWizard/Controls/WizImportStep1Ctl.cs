@@ -1,27 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
 using OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks;
-using OPMedia.Core.TranslationSupport;
-using System.IO;
-using OPMedia.Runtime.ProTONE.FileInformation;
-
-using OPMedia.Core;
-using OPMedia.Runtime.FileInformation;
-using System.Threading;
-using OPMedia.Core.Logging;
-using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.Addons.Builtin.Properties;
-using OPMedia.Core.Configuration;
 using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Controls.Dialogs;
+using OPMedia.UI.Wizards;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Controls
 {

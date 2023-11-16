@@ -1,5 +1,4 @@
 using OPMedia.UI.Controls;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer

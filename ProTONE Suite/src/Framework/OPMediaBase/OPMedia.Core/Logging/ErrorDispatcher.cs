@@ -1,12 +1,8 @@
+using OPMedia.Core.TranslationSupport;
 using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using System.Security;
-using OPMedia.Core;
-using OPMedia.Core.TranslationSupport;
 
 namespace OPMedia.Core.Logging
 {
@@ -82,7 +78,7 @@ namespace OPMedia.Core.Logging
                 StringBuilder sb = new StringBuilder(MAX_ERROR_TEXT_LEN, MAX_ERROR_TEXT_LEN);
 
                 COMException cex = ex as COMException;
-                
+
                 if (Quartz.AMGetErrorText(cex.ErrorCode, sb, MAX_ERROR_TEXT_LEN) > 0)
                 {
                     msg = sb.ToString();

@@ -1,26 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core;
-
-using System.Configuration;
-
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.Shortcuts;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.Core.GlobalEvents;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.AudioMetering;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Themes;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {

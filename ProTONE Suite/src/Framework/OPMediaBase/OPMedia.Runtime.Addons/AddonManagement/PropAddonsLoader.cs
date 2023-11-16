@@ -7,18 +7,13 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Win32;
-using System.Windows.Forms;
+using OPMedia.Core;
+using OPMedia.Core.Logging;
 using OPMedia.Runtime.Addons.AddonsBase;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using OPMedia.Core;
-using OPMedia.Runtime.Addons;
-using OPMedia.Core.Logging;
 #endregion
 
 namespace OPMedia.Runtime.Addons.AddonManagement
@@ -28,7 +23,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
         /// <summary>
         /// Loads the property add-ons
         /// </summary>
-        protected override void  Load()
+        protected override void Load()
         {
             // Initialize each of property addons. Careful not to break the loop
             // on eventual exceptions. It's important to try loading as much as
@@ -92,7 +87,7 @@ namespace OPMedia.Runtime.Addons.AddonManagement
         /// <summary>
         /// Effectively handles the addon selection.
         /// </summary>
-        private Addon InternalSelectAddon(List<string> extensions, bool mustHandleFolders, 
+        private Addon InternalSelectAddon(List<string> extensions, bool mustHandleFolders,
             int itemCount)
         {
             Addon genericAddon = null;

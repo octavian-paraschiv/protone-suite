@@ -1,11 +1,9 @@
+using Microsoft.Win32;
+using OPMedia.Core;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
-using OPMedia.Core;
-using Microsoft.Win32;
+using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.FfdShowApi
 {
@@ -98,7 +96,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             {
                 module = Kernel32.LoadLibrary(InstallLocation);
             }
-            
+
             if (module != IntPtr.Zero)
             {
                 IntPtr proc = Kernel32.GetProcAddress(module, fncName);
@@ -136,15 +134,8 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                         Directory.SetCurrentDirectory(Path.GetDirectoryName(InstallLocation));
                     }
 
-                    unsafe
-                    {
-                        Ole32.CoUninitialize();
-
-                        if (data._delegate != null)
-                        {
-                            data._delegate(data._hwnd, IntPtr.Zero, string.Empty, ShowWindowStyles.SW_NORMAL);
-                        }
-                    }
+                    Ole32.CoUninitialize();
+                    data._delegate.Invoke(data._hwnd, IntPtr.Zero, string.Empty, ShowWindowStyles.SW_NORMAL);
 
                     if (!data._isDynamicDelegate)
                     {

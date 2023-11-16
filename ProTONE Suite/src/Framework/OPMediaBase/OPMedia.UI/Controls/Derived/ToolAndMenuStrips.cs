@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-using OPMedia.UI.Themes;
-using System.Drawing.Drawing2D;
-using OPMedia.UI.Generic;
 using OPMedia.Core;
-using System.ComponentModel;
-using System.Windows.Forms.Design;
-using OPMedia.UI.Controls;
+using OPMedia.UI.Generic;
 using OPMedia.UI.Properties;
-using System.Data;
+using OPMedia.UI.Themes;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace OPMedia.UI.Controls
 {
@@ -169,7 +165,7 @@ namespace OPMedia.UI.Controls
 
             return imgDraw;
         }
-        
+
         protected override void OnPaint(PaintEventArgs e)
         {
             ThemeManager.PrepareGraphics(e.Graphics);
@@ -225,107 +221,107 @@ namespace OPMedia.UI.Controls
         {
             ThemeManager.PrepareGraphics(e.Graphics);
 
-                bool isHighlight = Enabled && (Selected || Checked);
+            bool isHighlight = Enabled && (Selected || Checked);
 
-                Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
-                Color c1 = ThemeManager.GradientHoverColor1;
-                Color c2 = ThemeManager.GradientHoverColor2;
+            Color clText = Enabled ? ThemeManager.ForeColor : Color.FromKnownColor(KnownColor.ControlDark);
+            Color c1 = ThemeManager.GradientHoverColor1;
+            Color c2 = ThemeManager.GradientHoverColor2;
 
-                int offset = 3;
+            int offset = 3;
 
-                if (Selected)
+            if (Selected)
+            {
+                //c1 = c2 = ThemeManager.SelectedColor;
+                clText = ThemeManager.HighlightMenuTextColor;
+            }
+            else if (Checked)
+            {
+                c1 = c2 = ThemeManager.CheckedMenuColor;
+                clText = ThemeManager.CheckedMenuTextColor;
+            }
+
+            Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2 + offset,
+               ContentRectangle.Y - 2,
+               ContentRectangle.Width + 2,
+               ContentRectangle.Height + 4);
+
+            using (Brush bBack = new LinearGradientBrush(clientRectangle, c1, c2, 90f))
+            using (Pen p2 = new Pen(ThemeManager.BorderColor))
+            {
                 {
-                    //c1 = c2 = ThemeManager.SelectedColor;
-                    clText = ThemeManager.HighlightMenuTextColor;
-                }
-                else if (Checked)
-                {
-                    c1 = c2 = ThemeManager.CheckedMenuColor;
-                    clText = ThemeManager.CheckedMenuTextColor;
-                }
+                    Rectangle rect = clientRectangle;
+                    rect.Width -= 2;
+                    rect.Height -= 2;
 
-                Rectangle clientRectangle = new Rectangle(ContentRectangle.X - 2 + offset,
-                   ContentRectangle.Y - 2,
-                   ContentRectangle.Width + 2,
-                   ContentRectangle.Height + 4);
-
-                using (Brush bBack = new LinearGradientBrush(clientRectangle, c1, c2, 90f))
-                using (Pen p2 = new Pen(ThemeManager.BorderColor))
-                {
+                    if (isHighlight)
                     {
-                        Rectangle rect = clientRectangle;
-                        rect.Width -= 2;
-                        rect.Height -= 2;
-
-                        if (isHighlight)
-                        {
                         e.Graphics.FillRectangle(bBack, rect);
                         e.Graphics.DrawRectangle(p2, rect);
+                    }
+
+                    int xpos = this.ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2 + 1 + offset;
+
+                    if (Image != null)
+                    {
+                        Image img = this.Image;
+                        if (!Enabled)
+                        {
+                            Bitmap bmp = ImageProcessing.Grayscale(this.Image);
+                            bmp.MakeTransparent(Color.Black);
+                            img = bmp;
                         }
 
-                        int xpos = this.ContentRectangle.Width / 2 - this.Owner.ImageScalingSize.Width / 2 + 1 + offset;
+                        int ypos = 2;
 
-                        if (Image != null)
+                        if (string.IsNullOrEmpty(this.Text))
                         {
-                            Image img = this.Image;
-                            if (!Enabled)
-                            {
-                                Bitmap bmp = ImageProcessing.Grayscale(this.Image);
-                                bmp.MakeTransparent(Color.Black);
-                                img = bmp;
-                            }
+                            ypos += (this.Height - img.Height) / 2 - 2;
+                        }
 
-                            int ypos = 2;
-
-                            if (string.IsNullOrEmpty(this.Text))
-                            {
-                                ypos += (this.Height - img.Height) / 2 - 2;
-                            }
-
-                            if ((this.DisplayStyle & ToolStripItemDisplayStyle.Image) == ToolStripItemDisplayStyle.Image)
-                            {
+                        if ((this.DisplayStyle & ToolStripItemDisplayStyle.Image) == ToolStripItemDisplayStyle.Image)
+                        {
                             e.Graphics.DrawImage(ImageProvider.ScaleImage(img, Owner.ImageScalingSize, true),
                                     new Point(xpos, ypos));
-                            }
                         }
+                    }
 
-                        StringFormat sf = new StringFormat();
+                    StringFormat sf = new StringFormat();
 
-                        rect = clientRectangle;
+                    rect = clientRectangle;
 
-                        switch (TextDirection)
+                    switch (TextDirection)
+                    {
+                        case ToolStripTextDirection.Inherit:
+                        case ToolStripTextDirection.Horizontal:
+                            sf.LineAlignment = StringAlignment.Near;
+                            sf.Alignment = StringAlignment.Center;
+                            break;
+
+                        default:
+                            sf.FormatFlags |= StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft;
+                            sf.LineAlignment = StringAlignment.Center;
+                            sf.Alignment = StringAlignment.Center;
+                            break;
+
+                    }
+
+                    if (Image != null)
+                    {
+                        rect.Y += this.Owner.ImageScalingSize.Height;
+                        rect.Height -= this.Owner.ImageScalingSize.Height;
+                    }
+
+                    if ((this.DisplayStyle & ToolStripItemDisplayStyle.Text) == ToolStripItemDisplayStyle.Text)
+                    {
+                        using (Brush b = new SolidBrush(clText))
                         {
-                            case ToolStripTextDirection.Inherit:
-                            case ToolStripTextDirection.Horizontal:
-                                sf.LineAlignment = StringAlignment.Near;
-                                sf.Alignment = StringAlignment.Center;
-                                break;
-
-                            default:
-                                sf.FormatFlags |= StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft;
-                                sf.LineAlignment = StringAlignment.Center;
-                                sf.Alignment = StringAlignment.Center;
-                                break;
-
-                        }
-
-                        if (Image != null)
-                        {
-                            rect.Y += this.Owner.ImageScalingSize.Height;
-                            rect.Height -= this.Owner.ImageScalingSize.Height;
-                        }
-
-                        if ((this.DisplayStyle & ToolStripItemDisplayStyle.Text) == ToolStripItemDisplayStyle.Text)
-                        {
-                            using (Brush b = new SolidBrush(clText))
-                            {
                             e.Graphics.DrawString(this.Text, this.Font, b, rect, sf);
-                            }
                         }
                     }
                 }
             }
         }
+    }
     #endregion
 
     #region OPMTriStateToolStripButton
@@ -576,124 +572,124 @@ namespace OPMedia.UI.Controls
             ThemeManager.PrepareGraphics(e.Graphics);
 
 
-                Rectangle clientRectangle = Rectangle.Empty;
+            Rectangle clientRectangle = Rectangle.Empty;
 
-                if (header)
-                {
-                    clientRectangle = new Rectangle(ContentRectangle.X + 2, ContentRectangle.Y - 1,
-                        ContentRectangle.Width - 5, ContentRectangle.Height + 2);
-                }
-                else
-                {
-                    clientRectangle = new Rectangle(ContentRectangle.X, ContentRectangle.Y - 1,
-                        ContentRectangle.Width, ContentRectangle.Height + 2);
-                }
+            if (header)
+            {
+                clientRectangle = new Rectangle(ContentRectangle.X + 2, ContentRectangle.Y - 1,
+                    ContentRectangle.Width - 5, ContentRectangle.Height + 2);
+            }
+            else
+            {
+                clientRectangle = new Rectangle(ContentRectangle.X, ContentRectangle.Y - 1,
+                    ContentRectangle.Width, ContentRectangle.Height + 2);
+            }
 
-                using (SolidBrush b1 = new SolidBrush(clBack))
+            using (SolidBrush b1 = new SolidBrush(clBack))
+            {
+                using (SolidBrush b2 = new SolidBrush(ThemeManager.CheckedMenuColor))
                 {
-                    using (SolidBrush b2 = new SolidBrush(ThemeManager.CheckedMenuColor))
+                    Rectangle rect = clientRectangle;
+
+                    if (Enabled && highlight)
                     {
-                        Rectangle rect = clientRectangle;
-
-                        if (Enabled && highlight)
+                        if (Enabled)
                         {
-                            if (Enabled)
-                            {
-                                if (Checked && !Selected)
+                            if (Checked && !Selected)
                                 e.Graphics.FillRectangle(b2, rect);
-                                else
-                                e.Graphics.FillRectangle(b1, rect);
-                            }
-
-                            if (!header)
-                            {
-                                rect.Height -= 1;
-                            }
-
-                            using (Pen p = new Pen(ThemeManager.BorderColor, 1))
-                            {
-                            e.Graphics.DrawRectangle(p, rect);
-                            }
-
-                            if (Pressed)
-                            {
-                                using (Pen p = new Pen(ThemeManager.BackColor, 1))
-                                {
-                                    Point p1 = new Point(rect.Left, rect.Bottom + 1);
-                                    Point p2 = new Point(rect.Right, rect.Bottom + 1);
-                                e.Graphics.DrawLine(p, p1, p2);
-                                }
-                            }
-                        }
-
-                        StringAlignment hAlign = header ? StringAlignment.Center : StringAlignment.Near;
-
-                        if (Image != null)
-                        {
-                            Point ptOffset = header ? new Point(1, 4) : new Point(4, 4);
-
-                            int w = 0;
-
-                            if (this is OPMToolStripDropDownMenuItem)
-                            {
-                            e.Graphics.DrawImage(Image, new Rectangle(ptOffset, Image.Size));
-                                w = Image.Width;
-                            }
                             else
-                            {
-                                Image img = ImageProvider.ScaleImage(Image, Owner.ImageScalingSize, false);
-                            e.Graphics.DrawImage(img, new Rectangle(ptOffset, Owner.ImageScalingSize));
-                                w = img.Width;
-                            }
-
-                            if (header)
-                            {
-                                rect.X += ptOffset.X + w;
-                                rect.Width -= ptOffset.X + w;
-                            }
-
-                            hAlign = StringAlignment.Near;
+                                e.Graphics.FillRectangle(b1, rect);
                         }
-
-                        if (DropDownItems != null && DropDownItems.Count > 0 && !header)
-                        {
-                            Image unscaled = Resources.menuChildren;
-                        e.Graphics.DrawImage(ImageProvider.ScaleImage(unscaled, unscaled.Size, true),
-                                new Point(rect.Width - 9, 8));
-                        }
-
-                        StringFormat sf = new StringFormat();
-                        sf.LineAlignment = StringAlignment.Center;
-                        sf.FormatFlags = StringFormatFlags.NoWrap;
-                        sf.Alignment = hAlign;
-                        sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
 
                         if (!header)
                         {
-                            rect.X += 25;
-                            rect.Width -= 30;
+                            rect.Height -= 1;
                         }
 
-                        using (Brush b = new SolidBrush(clText))
+                        using (Pen p = new Pen(ThemeManager.BorderColor, 1))
                         {
-                        e.Graphics.DrawString(Text, this.Font, b, rect, sf);
+                            e.Graphics.DrawRectangle(p, rect);
+                        }
 
-                            if (!string.IsNullOrEmpty(ShortcutKeyDisplayString))
+                        if (Pressed)
+                        {
+                            using (Pen p = new Pen(ThemeManager.BackColor, 1))
                             {
-                                sf = new StringFormat();
-                                sf.FormatFlags = StringFormatFlags.NoWrap;
-                                sf.LineAlignment = StringAlignment.Center;
-                                sf.Alignment = StringAlignment.Far;
-                                sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
-
-                            e.Graphics.DrawString(ShortcutKeyDisplayString, this.Font, b, rect, sf);
+                                Point p1 = new Point(rect.Left, rect.Bottom + 1);
+                                Point p2 = new Point(rect.Right, rect.Bottom + 1);
+                                e.Graphics.DrawLine(p, p1, p2);
                             }
                         }
                     }
-            }
 
+                    StringAlignment hAlign = header ? StringAlignment.Center : StringAlignment.Near;
+
+                    if (Image != null)
+                    {
+                        Point ptOffset = header ? new Point(1, 4) : new Point(4, 4);
+
+                        int w = 0;
+
+                        if (this is OPMToolStripDropDownMenuItem)
+                        {
+                            e.Graphics.DrawImage(Image, new Rectangle(ptOffset, Image.Size));
+                            w = Image.Width;
+                        }
+                        else
+                        {
+                            Image img = ImageProvider.ScaleImage(Image, Owner.ImageScalingSize, false);
+                            e.Graphics.DrawImage(img, new Rectangle(ptOffset, Owner.ImageScalingSize));
+                            w = img.Width;
+                        }
+
+                        if (header)
+                        {
+                            rect.X += ptOffset.X + w;
+                            rect.Width -= ptOffset.X + w;
+                        }
+
+                        hAlign = StringAlignment.Near;
+                    }
+
+                    if (DropDownItems != null && DropDownItems.Count > 0 && !header)
+                    {
+                        Image unscaled = Resources.menuChildren;
+                        e.Graphics.DrawImage(ImageProvider.ScaleImage(unscaled, unscaled.Size, true),
+                                new Point(rect.Width - 9, 8));
+                    }
+
+                    StringFormat sf = new StringFormat();
+                    sf.LineAlignment = StringAlignment.Center;
+                    sf.FormatFlags = StringFormatFlags.NoWrap;
+                    sf.Alignment = hAlign;
+                    sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
+
+                    if (!header)
+                    {
+                        rect.X += 25;
+                        rect.Width -= 30;
+                    }
+
+                    using (Brush b = new SolidBrush(clText))
+                    {
+                        e.Graphics.DrawString(Text, this.Font, b, rect, sf);
+
+                        if (!string.IsNullOrEmpty(ShortcutKeyDisplayString))
+                        {
+                            sf = new StringFormat();
+                            sf.FormatFlags = StringFormatFlags.NoWrap;
+                            sf.LineAlignment = StringAlignment.Center;
+                            sf.Alignment = StringAlignment.Far;
+                            sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
+
+                            e.Graphics.DrawString(ShortcutKeyDisplayString, this.Font, b, rect, sf);
+                        }
+                    }
                 }
             }
+
+        }
+    }
 
     #endregion
 
@@ -719,7 +715,7 @@ namespace OPMedia.UI.Controls
     #endregion
 
     #endregion
-    
+
     #region OPMMenuStrip and related
 
     #region OPMMenuStrip
@@ -804,32 +800,32 @@ namespace OPMedia.UI.Controls
                 e.AffectedBounds.Width - 25,
                 e.AffectedBounds.Height - 1);
 
-                using (Brush b = new SolidBrush(ThemeManager.WndValidColor))
-                {
+            using (Brush b = new SolidBrush(ThemeManager.WndValidColor))
+            {
                 e.Graphics.FillRectangle(b, rcLeft);
-                }
+            }
 
-                using (Brush b = new SolidBrush(Color.White))
-                {
+            using (Brush b = new SolidBrush(Color.White))
+            {
                 e.Graphics.FillRectangle(b, rcRight);
-                }
+            }
 
-                using (Pen p = new Pen(ThemeManager.BorderColor, 1))
-                {
+            using (Pen p = new Pen(ThemeManager.BorderColor, 1))
+            {
                 e.Graphics.DrawRectangle(p, rc);
-                }
+            }
 
-                if (e.ToolStrip != null)
+            if (e.ToolStrip != null)
+            {
+                using (Pen p = new Pen(ThemeManager.WndValidColor, 1))
                 {
-                    using (Pen p = new Pen(ThemeManager.WndValidColor, 1))
-                    {
-                        Point p1 = new Point(e.ConnectedArea.Left, rc.Top);
-                        Point p2 = new Point(e.ConnectedArea.Right - 1, rc.Top);
+                    Point p1 = new Point(e.ConnectedArea.Left, rc.Top);
+                    Point p2 = new Point(e.ConnectedArea.Right - 1, rc.Top);
 
                     e.Graphics.DrawLine(p, p1, p2);
-                    }
                 }
             }
+        }
 
 
     }

@@ -1,15 +1,11 @@
+using OPMedia.Core;
+using OPMedia.Runtime.Addons.AddonsBase.Navigation;
+using OPMedia.Runtime.Addons.AddonsBase.Preview;
+using OPMedia.Runtime.Addons.AddonsBase.Prop;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-using System.IO;
 using System.Windows.Forms;
-using OPMedia.Runtime.Addons.AddonsBase.Navigation;
-using OPMedia.Runtime.Addons.AddonsBase.Prop;
-using OPMedia.Runtime.Addons.AddonsBase.Preview;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.Addons.AddonsBase
 {
@@ -29,7 +25,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             {
                 return _navAddons.ToArray();
             }
-            
+
         }
 
         public static string[] PropertyAddons
@@ -115,7 +111,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                         _assemblies.Add(type.FullName,
                             string.Format("{0}|{1}", asmName.Name, type.FullName));
 
-                        register = true;   
+                        register = true;
                     }
                     else if (type.IsSubclassOf(typeof(PropBaseCtl)))
                     {

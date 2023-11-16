@@ -1,35 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
 using OPMedia.Core;
-using System.Runtime.InteropServices;
-using System.Collections;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.ActionManagement;
 using OPMedia.Runtime.Addons.AddonsBase.Navigation;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.UI;
-using OPMedia.Runtime.Addons;
-using OPMedia.Runtime.Addons.ActionManagement;
-using OPMedia.Runtime.Shortcuts;
 using OPMedia.Runtime.Addons.Configuration;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.UI.Dialogs;
-
-using OPMedia.Core.GlobalEvents;
 using OPMedia.Runtime.Addons.Controls;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
 using OPMedia.UI.HelpSupport;
 using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.Runtime.Addons
 {
@@ -42,7 +33,7 @@ namespace OPMedia.Runtime.Addons
 
         public void ReloadNavigation(object target)
         {
-            OnNavigationAction(null, 
+            OnNavigationAction(null,
                 new NavigationActionEventArgs(null, NavActionType.ActionReloadNavigation, null, target));
         }
 
@@ -130,7 +121,7 @@ namespace OPMedia.Runtime.Addons
             ExitEditPathMode(false);
         }
 
-        protected override void  OnThemeUpdatedInternal()
+        protected override void OnThemeUpdatedInternal()
         {
             base.OnThemeUpdatedInternal();
             SetColors();
@@ -144,7 +135,7 @@ namespace OPMedia.Runtime.Addons
             statusBar.BackColor = ThemeManager.BackColor;
             lblStatusBarSep.OverrideBackColor = ThemeManager.SeparatorColor;
         }
-        
+
         [EventSink(EventNames.SetMainStatusBar)]
         public void OnSetMainStatusBar(string text, Image img)
         {
@@ -223,7 +214,7 @@ namespace OPMedia.Runtime.Addons
             {
                 if (AddonAppSettingsForm.Show("TXT_S_ADDONSETTINGS", string.Empty) == DialogResult.Cancel)
                 {
-                    EventDispatch.DispatchEvent(EventNames.ShowMessageBox, 
+                    EventDispatch.DispatchEvent(EventNames.ShowMessageBox,
                         Translator.Translate("TXT_NO_NAV_ADDONS"),
                         Translator.Translate("TXT_APP_NAME"),
                         MessageBoxIcon.Error);
@@ -280,7 +271,7 @@ namespace OPMedia.Runtime.Addons
         {
             AddonAppConfig.VSplitterDistance = this.VSplitterDistance;
             AddonAppConfig.HSplitterDistance = this.HSplitterDistance;
-            
+
         }
 
         /// <summary>
@@ -349,7 +340,7 @@ namespace OPMedia.Runtime.Addons
                     foreach (OPMToolStripMenuItem button in msMain.Items)
                     {
                         NavigationAddon addon = button.Tag as NavigationAddon;
-                        if (addon != null && 
+                        if (addon != null &&
                             addon.AddonPanel != null &&
                             addon.AddonPanel.HandledFileTypes != null &&
                             addon.AddonPanel.HandledFileTypes.Count > 0 &&
@@ -365,14 +356,14 @@ namespace OPMedia.Runtime.Addons
                     return true;
                 }
             }
-            
+
             if (previousAddonButton != null)
             {
                 AddonButtonClick(previousAddonButton, null);
             }
             else if (msMain.Items.Count >= 1)
             {
-                foreach(OPMToolStripMenuItem button in msMain.Items)
+                foreach (OPMToolStripMenuItem button in msMain.Items)
                 {
                     if (button is OPMAddonMenuItem && button.Tag is NavigationAddon)
                     {
@@ -527,7 +518,7 @@ namespace OPMedia.Runtime.Addons
 
                 lblNoPreview.Text = Translator.Translate("TXT_THEREARENOITEMS");
 
-                prepareAutoPreview = 
+                prepareAutoPreview =
                     (args.ActionType == NavActionType.ActionPrepareAutoPreview &&
                      args.ActionType != NavActionType.ActionCancelAutoPreview);
 
@@ -639,7 +630,7 @@ namespace OPMedia.Runtime.Addons
                         if (previewCtl != null)
                         {
                             previewCtl.EndPreview();
-                            previewCtl.NavigationAction -= 
+                            previewCtl.NavigationAction -=
                                 new BaseAddonCtl.NavigationActionEventHandler(OnNavigationAction);
                         }
 

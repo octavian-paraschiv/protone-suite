@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons.Properties;
+using OPMedia.UI.Configuration;
 using OPMedia.UI.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 
 namespace OPMedia.Runtime.Addons.Configuration
 {
     public delegate BaseCfgPanel InitAddonCfgHandler();
 
-    public partial class AddonSettingsPanel : BaseCfgPanel                     
+    public partial class AddonSettingsPanel : BaseCfgPanel
     {
         internal static event InitAddonCfgHandler InitAddonCfg = null;
 
@@ -54,77 +49,77 @@ namespace OPMedia.Runtime.Addons.Configuration
             this.HandleCreated += new EventHandler(AddonSettingsPanel_HandleCreated);
         }
 
-         void AddonSettingsPanel_HandleCreated(object sender, EventArgs e)
-         {
-             tabAddons.TabPages.Clear();
-             tabAddons.ImageList.Images.Clear();
+        void AddonSettingsPanel_HandleCreated(object sender, EventArgs e)
+        {
+            tabAddons.TabPages.Clear();
+            tabAddons.ImageList.Images.Clear();
 
-             if (InitAddonCfg != null)
-             {
-                 foreach (Delegate dlg in InitAddonCfg.GetInvocationList())
-                 {
-                     InitAddonCfgHandler callDlg = dlg as InitAddonCfgHandler;
-                     if (callDlg != null)
-                     {
-                         BaseCfgPanel pageContents = callDlg();
-                         if (pageContents != null)
-                         {
-                             string title = Translator.Translate(pageContents.Title);
+            if (InitAddonCfg != null)
+            {
+                foreach (Delegate dlg in InitAddonCfg.GetInvocationList())
+                {
+                    InitAddonCfgHandler callDlg = dlg as InitAddonCfgHandler;
+                    if (callDlg != null)
+                    {
+                        BaseCfgPanel pageContents = callDlg();
+                        if (pageContents != null)
+                        {
+                            string title = Translator.Translate(pageContents.Title);
 
-                             pageContents.Dock = DockStyle.Fill;
+                            pageContents.Dock = DockStyle.Fill;
 
-                             OPMTabPage tp = new OPMTabPage(title, pageContents);
-                             tp.Dock = DockStyle.Fill;
-                             tp.ImageIndex = tabAddons.ImageList.Images.Count;
-                             tp.Tag = pageContents.Title;
+                            OPMTabPage tp = new OPMTabPage(title, pageContents);
+                            tp.Dock = DockStyle.Fill;
+                            tp.ImageIndex = tabAddons.ImageList.Images.Count;
+                            tp.Tag = pageContents.Title;
 
-                             tabAddons.ImageList.Images.Add(pageContents.Image);
-                             tabAddons.TabPages.Add(tp);
+                            tabAddons.ImageList.Images.Add(pageContents.Image);
+                            tabAddons.TabPages.Add(tp);
 
-                             pageContents.ModifiedActive -= new EventHandler(OnModifiedActive);
-                             pageContents.ModifiedActive += new EventHandler(OnModifiedActive);
-                         }
-                     }
-                 }
+                            pageContents.ModifiedActive -= new EventHandler(OnModifiedActive);
+                            pageContents.ModifiedActive += new EventHandler(OnModifiedActive);
+                        }
+                    }
+                }
 
-                 if (tabAddons.TabPages.Count > 1)
-                 {
-                     tabAddons.SelectedIndex = 0;
-                 }
-             }
-         }
+                if (tabAddons.TabPages.Count > 1)
+                {
+                    tabAddons.SelectedIndex = 0;
+                }
+            }
+        }
 
-         void OnModifiedActive(object sender, EventArgs e)
-         {
-             Modified = true;
-         }
+        void OnModifiedActive(object sender, EventArgs e)
+        {
+            Modified = true;
+        }
 
-         protected override void SaveInternal()
-         {
-             foreach (OPMTabPage tp in tabAddons.TabPages)
-             {
-                 BaseCfgPanel page = tp.Control as BaseCfgPanel;
-                 if (page != null)
-                 {
-                     page.Save();
-                 }
-             }
+        protected override void SaveInternal()
+        {
+            foreach (OPMTabPage tp in tabAddons.TabPages)
+            {
+                BaseCfgPanel page = tp.Control as BaseCfgPanel;
+                if (page != null)
+                {
+                    page.Save();
+                }
+            }
 
-             Modified = false;
-         }
+            Modified = false;
+        }
 
-         protected override void DiscardInternal()
-         {
-             foreach (OPMTabPage tp in tabAddons.TabPages)
-             {
-                 BaseCfgPanel page = tp.Control as BaseCfgPanel;
-                 if (page != null)
-                 {
-                     page.Discard();
-                 }
-             }
+        protected override void DiscardInternal()
+        {
+            foreach (OPMTabPage tp in tabAddons.TabPages)
+            {
+                BaseCfgPanel page = tp.Control as BaseCfgPanel;
+                if (page != null)
+                {
+                    page.Discard();
+                }
+            }
 
-             Modified = false;
-         }
+            Modified = false;
+        }
     }
 }

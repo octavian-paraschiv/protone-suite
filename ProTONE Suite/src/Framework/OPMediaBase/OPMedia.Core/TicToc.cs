@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.Logging;
+﻿using OPMedia.Core.Logging;
+using System;
 using System.Diagnostics;
 
 namespace OPMedia.Core
@@ -17,7 +14,7 @@ namespace OPMedia.Core
         double _totalTime = 0;
         long _totalCount = 0;
         object _syncRoot = new object();
-        
+
         int _avgReportCount = 20;
         long _longOpThreshold = 10;
 

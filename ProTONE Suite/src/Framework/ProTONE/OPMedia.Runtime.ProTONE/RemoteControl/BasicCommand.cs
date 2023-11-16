@@ -1,11 +1,10 @@
+using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.Core;
 
 namespace OPMedia.Runtime.ProTONE.RemoteControl
 {
@@ -205,7 +204,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
                 case CommandType.QueryMediaRenderer:
                     return false;
 
-              
+
             }
 
             return false;

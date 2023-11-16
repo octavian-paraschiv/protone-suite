@@ -1,23 +1,17 @@
 #region Using directives
+using OPMedia.Core;
 using System;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Diagnostics;
-
-using System.Collections;
-using OPMedia.Core;
-using OPMedia.Core.ComTypes;
-using System.Collections.Generic;
-using OPMedia.UI.Controls;
+using System.Windows.Forms;
 
 #endregion
 
 namespace OPMedia.UI.Controls
 {
-	#region OPMShellTreeView Class
-	public class OPMShellTreeView : OPMTreeView
+    #region OPMShellTreeView Class
+    public class OPMShellTreeView : OPMTreeView
     {
         #region Members
         private System.Windows.Forms.ImageList OPMShellTreeViewImageList;
@@ -29,18 +23,18 @@ namespace OPMedia.UI.Controls
         /// </summary>
         public OPMShellTreeView()
             : base()
-		{
+        {
             this.LabelEdit = false;
             this.ShowSpecialFolders = false;
 
             this.KeyUp += new KeyEventHandler(OPMShellTreeView_KeyUp);
 
-			this.BeforeExpand += 
+            this.BeforeExpand +=
                 new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewBeforeExpand);
 
             this.BeforeLabelEdit += new NodeLabelEditEventHandler(OPMShellTreeView_BeforeLabelEdit);
             this.AfterLabelEdit += new NodeLabelEditEventHandler(OPMShellTreeView_AfterLabelEdit);
-		}
+        }
 
         void OPMShellTreeView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
@@ -91,11 +85,11 @@ namespace OPMedia.UI.Controls
         /// Initializes the tree vew.
         /// </summary>
         public void InitOPMShellTreeView()
-		{
-			InitImageList();
+        {
+            InitImageList();
             ShellOperations.PopulateTree(this, base.ImageList, ShowSpecialFolders);
             this.SelectedNode = null;
-		}
+        }
 
         public TreeNode CreateTreeNode(string dir, bool getIcons = true)
         {
@@ -106,48 +100,48 @@ namespace OPMedia.UI.Controls
         ///  Initializes the system image list.
         /// </summary>
 		private void InitImageList()
-		{
-			// setup the image list to hold the folder icons
-			OPMShellTreeViewImageList = new System.Windows.Forms.ImageList();
-			OPMShellTreeViewImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-			OPMShellTreeViewImageList.ImageSize = new System.Drawing.Size(16, 16);
-			OPMShellTreeViewImageList.TransparentColor = System.Drawing.Color.Gainsboro;
+        {
+            // setup the image list to hold the folder icons
+            OPMShellTreeViewImageList = new System.Windows.Forms.ImageList();
+            OPMShellTreeViewImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            OPMShellTreeViewImageList.ImageSize = new System.Drawing.Size(16, 16);
+            OPMShellTreeViewImageList.TransparentColor = System.Drawing.Color.Gainsboro;
 
-			// add the Desktop icon to the image list
-			try
-			{
-				OPMShellTreeViewImageList.Images.Add(ImageProvider.GetDesktopIcon(false));
-			}
-			catch
-			{
-				// Create a blank icon if the desktop icon fails for some reason
-				Bitmap bmp = new Bitmap(16,16);
-				Image img = (Image)bmp;
-				OPMShellTreeViewImageList.Images.Add((Image)img.Clone());
-				bmp.Dispose();
-			}
-			this.ImageList = OPMShellTreeViewImageList;
-		}
+            // add the Desktop icon to the image list
+            try
+            {
+                OPMShellTreeViewImageList.Images.Add(ImageProvider.GetDesktopIcon(false));
+            }
+            catch
+            {
+                // Create a blank icon if the desktop icon fails for some reason
+                Bitmap bmp = new Bitmap(16, 16);
+                Image img = (Image)bmp;
+                OPMShellTreeViewImageList.Images.Add((Image)img.Clone());
+                bmp.Dispose();
+            }
+            this.ImageList = OPMShellTreeViewImageList;
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void TreeViewBeforeExpand(object sender, System.Windows.Forms.TreeViewCancelEventArgs e)
-		{
-			this.BeginUpdate();
-			ShellOperations.ExpandBranch(e.Node, this.ImageList);
-			this.EndUpdate();
-		}
+        private void TreeViewBeforeExpand(object sender, System.Windows.Forms.TreeViewCancelEventArgs e)
+        {
+            this.BeginUpdate();
+            ShellOperations.ExpandBranch(e.Node, this.ImageList);
+            this.EndUpdate();
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties & Methods
+        #region Properties & Methods
 
         public bool ShowSpecialFolders { get; set; }
 
-		public string SelectedNodePath
-		{
+        public string SelectedNodePath
+        {
             get
             {
                 string selPath = this.SelectedNode.FullPath;
@@ -156,33 +150,33 @@ namespace OPMedia.UI.Controls
 
                 return selPath.Replace("\\\\", "\\");
             }
-		}
+        }
 
-		public bool DrillToFolder(string folderPath)
-		{
-			bool folderFound = false;
-			if(Directory.Exists(folderPath)) // don't bother drilling unless the directory exists
-			{
-				this.BeginUpdate();
+        public bool DrillToFolder(string folderPath)
+        {
+            bool folderFound = false;
+            if (Directory.Exists(folderPath)) // don't bother drilling unless the directory exists
+            {
+                this.BeginUpdate();
 
                 // if there's a trailing \ on the folderPath, remove it unless it's a drive letter
                 if (PathUtils.IsRootPath(folderPath) == false)
                     folderPath = folderPath.TrimEnd(PathUtils.DirectorySeparatorChars);
-				
-                //Start drilling the tree
-				DrillTree(this.Nodes, folderPath.ToUpperInvariant(), ref folderFound);
-				this.EndUpdate();
-			}
-            
-			return folderFound;
-		}
 
-		private void DrillTree(TreeNodeCollection tnc, string path, ref bool folderFound)
-		{
-			foreach(TreeNode tn in tnc)
-			{
-				if(!folderFound)
-				{
+                //Start drilling the tree
+                DrillTree(this.Nodes, folderPath.ToUpperInvariant(), ref folderFound);
+                this.EndUpdate();
+            }
+
+            return folderFound;
+        }
+
+        private void DrillTree(TreeNodeCollection tnc, string path, ref bool folderFound)
+        {
+            foreach (TreeNode tn in tnc)
+            {
+                if (!folderFound)
+                {
                     // Some brief preconditions checks here ...
                     string folder = tn.Tag as string;
                     if (folder == null)
@@ -192,39 +186,39 @@ namespace OPMedia.UI.Controls
                     }
 
                     string tnPath = folder.ToUpperInvariant();
-					if(path == tnPath && !folderFound)
-					{
+                    if (path == tnPath && !folderFound)
+                    {
                         // We have found the node !!! Congratulations ...
                         // Probably the path to the node is fully expanded now (at least, it should be !).
                         this.Select();
                         this.Focus();
-						this.SelectedNode = tn;
+                        this.SelectedNode = tn;
 
                         // Make sure we have it visible.
-						tn.EnsureVisible();
+                        tn.EnsureVisible();
                         // Tell above that we have found the node and to stop searching.
-						folderFound = true;
-						return;
-					}
-					else if(path.StartsWith(tnPath) && !folderFound)
-					{
+                        folderFound = true;
+                        return;
+                    }
+                    else if (path.StartsWith(tnPath) && !folderFound)
+                    {
                         // Leave the trail of expansion wherever we go.
-						tn.Expand();
+                        tn.Expand();
 
                         // We're on the good track but we are not there yet, so drill deeper on. 
-						DrillTree(tn.Nodes, path, ref folderFound);
-					}
-				}
-			}
-		}
+                        DrillTree(tn.Nodes, path, ref folderFound);
+                    }
+                }
+            }
+        }
 
-		#endregion
+        #endregion
     }
-	#endregion
+    #endregion
 
-	#region ShellOperations Class
-	public static class ShellOperations
-	{
+    #region ShellOperations Class
+    public static class ShellOperations
+    {
         private static Environment.SpecialFolder[] SpecialFolders = new Environment.SpecialFolder[]
             {
                 Environment.SpecialFolder.Desktop,
@@ -232,22 +226,22 @@ namespace OPMedia.UI.Controls
                 Environment.SpecialFolder.Recent,
             };
 
-		#region OPMShellTreeView Methods
+        #region OPMShellTreeView Methods
 
-		#region Populate Tree
+        #region Populate Tree
         public static void PopulateTree(OPMTreeView tree, ImageList imageList, bool showSpecialFolders)
-		{
-			tree.Nodes.Clear();
+        {
+            tree.Nodes.Clear();
             AddRootNodes(tree, imageList, true, showSpecialFolders);
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Add Root Node
+        #region Add Root Node
         private static void AddRootNodes(OPMTreeView tree, ImageList imageList, bool getIcons, bool showSpecialFolders)
-		{
+        {
             CursorHelper.ShowWaitCursor(tree, true);
 
-			tree.Nodes.Clear();
+            tree.Nodes.Clear();
 
             List<string> roots = new List<string>();
 
@@ -274,7 +268,7 @@ namespace OPMedia.UI.Controls
             catch
             {
             }
-            
+
             foreach (string dir in roots)
             {
                 TreeNode rootNode = CreateTreeNode(dir, imageList, true);
@@ -283,12 +277,12 @@ namespace OPMedia.UI.Controls
             }
 
             CursorHelper.ShowWaitCursor(tree, false);
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Fill Sub Dirs
-		private static void FillSubDirectories(TreeNode tn, ref int imageCount, ImageList imageList, bool getIcons)
-		{
+        #region Fill Sub Dirs
+        private static void FillSubDirectories(TreeNode tn, ref int imageCount, ImageList imageList, bool getIcons)
+        {
             try
             {
                 CursorHelper.ShowWaitCursor(tn.TreeView, true);
@@ -311,22 +305,22 @@ namespace OPMedia.UI.Controls
             {
                 CursorHelper.ShowWaitCursor(tn.TreeView, false);
             }
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Create Dummy Node
+        #region Create Dummy Node
 
-       
 
-		private static void CheckForSubDirs(TreeNode tn, ImageList imageList)
-		{
+
+        private static void CheckForSubDirs(TreeNode tn, ImageList imageList)
+        {
             CursorHelper.ShowWaitCursor(tn.TreeView, true);
 
-			if(tn.Nodes.Count == 0)
-			{
-				try
-				{
-					// create dummy nodes for any subfolders that have further subfolders
+            if (tn.Nodes.Count == 0)
+            {
+                try
+                {
+                    // create dummy nodes for any subfolders that have further subfolders
                     string dir = tn.Tag as string;
                     if (string.IsNullOrEmpty(dir) == false && Directory.Exists(dir))
                     {
@@ -338,25 +332,25 @@ namespace OPMedia.UI.Controls
                             tn.Nodes.Add(ntn);
                         }
                     }
-				}
-				catch
+                }
+                catch
                 {
                 }
-			}
+            }
 
             CursorHelper.ShowWaitCursor(tn.TreeView, false);
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Expand Branch
-		public static void ExpandBranch(TreeNode tn, ImageList imageList)
-		{
+        #region Expand Branch
+        public static void ExpandBranch(TreeNode tn, ImageList imageList)
+        {
             CursorHelper.ShowWaitCursor(tn.TreeView, true);
 
-			// if there's a dummy node present, clear it and replace with actual contents
-			if(tn.Nodes.Count == 1 && tn.Nodes[0].Tag.ToString() == "DUMMYNODE")
-			{
-				tn.Nodes.Clear();
+            // if there's a dummy node present, clear it and replace with actual contents
+            if (tn.Nodes.Count == 1 && tn.Nodes[0].Tag.ToString() == "DUMMYNODE")
+            {
+                tn.Nodes.Clear();
 
                 string dir = tn.Tag as string;
                 if (string.IsNullOrEmpty(dir) == false && Directory.Exists(dir))
@@ -370,44 +364,44 @@ namespace OPMedia.UI.Controls
                         CursorHelper.ShowWaitCursor(tn.TreeView, true);
                     }
                 }
-			}
+            }
 
             CursorHelper.ShowWaitCursor(tn.TreeView, false);
-		}
-		#endregion
+        }
+        #endregion
 
-		public static TreeNode CreateTreeNode(string dir, ImageList imageList, bool getIcons)
-		{
-			TreeNode tn = new TreeNode();
-			tn.Text = PathUtils.GetDirectoryTitle(dir);
-			tn.Tag = dir;
+        public static TreeNode CreateTreeNode(string dir, ImageList imageList, bool getIcons)
+        {
+            TreeNode tn = new TreeNode();
+            tn.Text = PathUtils.GetDirectoryTitle(dir);
+            tn.Tag = dir;
 
-			if(getIcons)
-			{
-				try
-				{
+            if (getIcons)
+            {
+                try
+                {
                     imageList.Images.Add(ImageProvider.GetIcon(dir, false)); // normal icon
                     tn.ImageIndex = imageList.Images.Count - 1;
                     imageList.Images.Add(ImageProvider.GetIcon(dir, true)); // selected icon
                     tn.SelectedImageIndex = imageList.Images.Count - 1;
-				}
-				catch // use default 
-				{
-					tn.ImageIndex = 1;
-					tn.SelectedImageIndex = 2;
-				}
-			}
-			else // use default
-			{
-				tn.ImageIndex = 1;
-				tn.SelectedImageIndex = 2;
-			}
-			return tn;
-		}
+                }
+                catch // use default 
+                {
+                    tn.ImageIndex = 1;
+                    tn.SelectedImageIndex = 2;
+                }
+            }
+            else // use default
+            {
+                tn.ImageIndex = 1;
+                tn.SelectedImageIndex = 2;
+            }
+            return tn;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 
-	#endregion
+    #endregion
 }
 

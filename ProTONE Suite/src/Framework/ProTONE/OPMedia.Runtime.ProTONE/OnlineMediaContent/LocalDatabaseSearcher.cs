@@ -1,16 +1,13 @@
 ﻿using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Playlists;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using OPMedia.Core.Logging;
-using OPMedia.Core.Configuration;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {
@@ -53,7 +50,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 }
 
                 // Try fall back to DefaultOnlineMediaData.xml
-                if (internalDatabase == null || 
+                if (internalDatabase == null ||
                     internalDatabase.OnlineMediaItems == null ||
                     internalDatabase.OnlineMediaItems.Count < 1)
                 {

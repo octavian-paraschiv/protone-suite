@@ -1,12 +1,10 @@
-﻿using System;
+﻿using OPMedia.Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using OPMedia.Core.Utilities;
-using OPMedia.Core.Logging;
 
 namespace OPMedia.Core
 {
@@ -665,7 +663,7 @@ namespace OPMedia.Core
 
             try
             {
-                foreach(Environment.SpecialFolder sf in Enum.GetValues(typeof(Environment.SpecialFolder)))
+                foreach (Environment.SpecialFolder sf in Enum.GetValues(typeof(Environment.SpecialFolder)))
                 {
                     string dir2 = Environment.GetFolderPath(sf);
 
@@ -679,7 +677,7 @@ namespace OPMedia.Core
                     }
                 }
 
-                
+
             }
             catch
             {

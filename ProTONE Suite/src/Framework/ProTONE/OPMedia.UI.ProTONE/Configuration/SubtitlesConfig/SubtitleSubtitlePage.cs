@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using System.Globalization;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
-
-using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime;
-using OPMedia.UI.Controls;
 using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.UI.ProTONE.Properties;
 using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.Logging;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -111,7 +102,7 @@ namespace OPMedia.UI.ProTONE.Configuration
                 (colServerType.Width + colServerUrl.Width + colActive.Width);
 
             colUserName.Width = colPassword.Width = w / 2;
-           
+
         }
 
         void OnLoad(object sender, EventArgs e)
@@ -138,7 +129,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         private void OnAdd(object sender, EventArgs e)
         {
-            string[] data = new string[] 
+            string[] data = new string[]
             { string.Empty, "Osdb", "[ URL ]", Translator.Translate("TXT_NO"), string.Empty, string.Empty };
 
             lvDownloadAddresses.EndEditing(false);
@@ -146,7 +137,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             int i = 0;
 
             ListViewItem item = new ListViewItem(data[i++]);
-            
+
             OPMListViewSubItem subItem = new OPMListViewSubItem(_cmbEditServerType, item, data[i++]);
             subItem.ReadOnly = false;
             item.SubItems.Add(subItem);
@@ -382,7 +373,7 @@ namespace OPMedia.UI.ProTONE.Configuration
                     bool isDefaultServer = ProTONEConfig.DefaultSubtitleURIs.ToUpperInvariant().Contains(
                         lFields[colServerUrl.Index].ToUpperInvariant());
 
-                    for(int i = 1; i < lFields.Count; i++)
+                    for (int i = 1; i < lFields.Count; i++)
                     {
                         OPMListViewSubItem subItem = null;
                         string text = lFields[i];
@@ -415,7 +406,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
                         item.SubItems.Add(subItem);
                     }
-                    
+
                     lvDownloadAddresses.Items.Add(item);
                 }
             }
@@ -468,7 +459,7 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         public static CultureInfo[] AvailableLanguages
         {
-            get 
+            get
             {
                 var l = (from c in __cultures
                          where c.LCID != LOCALE_CUSTOM_UNSPECIFIED

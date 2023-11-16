@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
-using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
+﻿using OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Tasks;
 using OPMedia.UI.Dialogs;
+using OPMedia.UI.Wizards;
+using System;
 using System.IO;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Addons.Builtin.Shared.EncoderOptions;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.CdRipperWizard.Forms
 {

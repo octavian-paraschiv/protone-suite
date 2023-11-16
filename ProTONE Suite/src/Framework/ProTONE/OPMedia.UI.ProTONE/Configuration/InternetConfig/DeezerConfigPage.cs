@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using OPMedia.Core.TranslationSupport;
+using OPMedia.DeezerInterop.OAuth;
+using OPMedia.DeezerInterop.PlayerApi;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Configuration;
 using OPMedia.UI.ProTONE.Properties;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
-using OPMedia.UI.Themes;
-using OPMedia.DeezerInterop.OAuth;
-using OPMedia.Core.TranslationSupport;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
-using OPMedia.DeezerInterop.PlayerApi;
-using OPMedia.Core.Utilities;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 {

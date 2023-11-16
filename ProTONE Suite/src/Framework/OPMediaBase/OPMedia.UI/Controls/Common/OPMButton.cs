@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using OPMedia.UI.Generic;
-using System.Drawing;
+﻿using OPMedia.UI.Generic;
 using OPMedia.UI.Themes;
-using OPMedia.Core;
-using System.Drawing.Text;
-using OPMedia.Core.GlobalEvents;
+using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -27,7 +21,7 @@ namespace OPMedia.UI.Controls
 
         #region GUI Properties
 
-#region Font Size
+        #region Font Size
 
         [ReadOnly(true)]
         [Browsable(false)]
@@ -48,9 +42,9 @@ namespace OPMedia.UI.Controls
                 Invalidate(true);
             }
         }
-#endregion
+        #endregion
 
-#region Override settings
+        #region Override settings
 
         [ReadOnly(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -72,11 +66,11 @@ namespace OPMedia.UI.Controls
             set { _overrideBackColor = value; Invalidate(true); }
         }
 
-#endregion
+        #endregion
 
         public bool ShowDropDown { get; set; }
 
-#endregion
+        #endregion
 
         public OPMButton()
             : base()
@@ -126,10 +120,10 @@ namespace OPMedia.UI.Controls
 
         void OnKeyDown(object sender, KeyEventArgs e)
         {
-            _isKeyDown  = false;
+            _isKeyDown = false;
             if (Enabled && e.Modifiers == Keys.None)
             {
-                switch(e.KeyData)
+                switch (e.KeyData)
                 {
                     case Keys.Space:
                     case Keys.Enter:

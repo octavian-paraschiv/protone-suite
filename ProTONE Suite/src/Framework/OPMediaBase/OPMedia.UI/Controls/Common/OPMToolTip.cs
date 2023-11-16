@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.ComponentModel;
-using OPMedia.UI.Themes;
-using System.Drawing.Drawing2D;
-using System.Drawing;
-using System.Drawing.Text;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
-using System.Reflection;
-using System.Diagnostics;
-
-using OPMedia.UI.Generic;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
-using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -50,7 +43,7 @@ namespace OPMedia.UI.Controls
                 d.Add(text, string.Empty);
             }
 
-            SetToolTip(ctl, Translator.Translate("TXT_APP_NAME"), d, 
+            SetToolTip(ctl, Translator.Translate("TXT_APP_NAME"), d,
                 img ?? ImageProvider.ApplicationIconLarge);
         }
 
@@ -78,7 +71,7 @@ namespace OPMedia.UI.Controls
                 }
                 else
                 {
-                    _data[ctl] = new OPMToolTipData { Values = values, Title = title, TitleImage = titleImage, CustomImage = customImage};
+                    _data[ctl] = new OPMToolTipData { Values = values, Title = title, TitleImage = titleImage, CustomImage = customImage };
                 }
             }
             else if (!string.IsNullOrEmpty(title))
@@ -117,7 +110,7 @@ namespace OPMedia.UI.Controls
 
                 return fake;
             }
-            
+
             return title;
         }
 
@@ -224,9 +217,9 @@ namespace OPMedia.UI.Controls
 
                 //e.DrawBackground();
                 //e.DrawBorder(); 
-                
+
                 using (LinearGradientBrush b = new LinearGradientBrush(e.Bounds,
-                    ControlPaint.Light(ThemeManager.GradientNormalColor1), 
+                    ControlPaint.Light(ThemeManager.GradientNormalColor1),
                     ControlPaint.Light(ThemeManager.GradientNormalColor2), 90))
                 {
                     e.Graphics.FillRectangle(b, e.Bounds);
@@ -308,7 +301,7 @@ namespace OPMedia.UI.Controls
                         }
                     }
                 }
-                
+
                 if (data.CustomImage != null)
                 {
                     y += 5;
@@ -332,7 +325,7 @@ namespace OPMedia.UI.Controls
                     return ImageProvider.ScaleImage(img, new Size(sizeX, sizeY), true);
                 }
             }
-            catch 
+            catch
             {
             }
 
@@ -375,7 +368,7 @@ namespace OPMedia.UI.Controls
         public OPMToolTipManager(Control ctl)
         {
             int autoDelay = 500;
-            this.AutomaticDelay = autoDelay; 
+            this.AutomaticDelay = autoDelay;
             this.AutoPopDelay = 10 * autoDelay;
             this.InitialDelay = 2 * autoDelay;
             this.ReshowDelay = 2 * autoDelay;
@@ -412,7 +405,7 @@ namespace OPMedia.UI.Controls
             try
             {
                 RemoveAll();
-                
+
                 _tip = new OPMToolTip();
                 _tip.AutomaticDelay = this.AutomaticDelay;
                 _tip.AutoPopDelay = this.AutoPopDelay;
@@ -426,7 +419,7 @@ namespace OPMedia.UI.Controls
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Logger.LogToConsole("TIP: ToolTipCreated esxception: {0}", ex.ToString());
                 //Logger.LogToConsole("TIP: ToolTipCreated -> return False");

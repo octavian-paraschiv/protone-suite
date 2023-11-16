@@ -1,16 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
-using System.IO;
 using OPMedia.Core;
 using OPMedia.UI.Themes;
-using System.Diagnostics;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Dialogs
 {
@@ -95,7 +86,7 @@ namespace OPMedia.UI.Dialogs
                 lblTimer.Text = TimeSpan.FromSeconds((int)remaining).ToString();
             }
 
-           
+
             int x = (SystemInformation.WorkingArea.Width - Width) / 2;
             int y = (SystemInformation.WorkingArea.Height - Height) / 2;
 

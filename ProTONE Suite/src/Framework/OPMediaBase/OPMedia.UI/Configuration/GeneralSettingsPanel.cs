@@ -1,28 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using System.Globalization;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Configuration;
 using OPMedia.Core;
-using OPMedia.Runtime;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.AssemblyInfo;
-using System.Reflection;
-using OPMedia.Core.Logging;
-using System.Diagnostics;
-
+using OPMedia.Core.Configuration;
 using OPMedia.Core.GlobalEvents;
-using OPMedia.Core.Utilities;
-using OPMedia.UI.Generic;
 using OPMedia.Core.InstanceManagement;
-using OPMedia.UI.Dialogs;
-using System.Threading.Tasks;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.AssemblyInfo;
 using OPMedia.UI.ApplicationUpdate;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
+using System.Globalization;
+using System.Reflection;
 
 namespace OPMedia.UI.Configuration
 {
@@ -39,10 +27,10 @@ namespace OPMedia.UI.Configuration
             }
         }
 
-      
+
         public GeneralSettingsPanel() : base()
         {
-            this.Title= "TXT_S_GENERALSETTINGS";
+            this.Title = "TXT_S_GENERALSETTINGS";
             InitializeComponent();
 
             bool allowGUISetup = OpMediaApplication.AllowRealTimeGUIUpdate;
@@ -82,7 +70,7 @@ namespace OPMedia.UI.Configuration
             this.cmbThemes.SelectedIndexChanged += new System.EventHandler(this.OnThemeChanged);
             #endregion
 
-            labelProductName.Text = String.Format("{0} - {1}", 
+            labelProductName.Text = String.Format("{0} - {1}",
                 Constants.SuiteName, Translator.Translate("TXT_APP_NAME"));
 
             labelVersion.Text = Translator.Translate("TXT_VERSION",
@@ -126,8 +114,8 @@ namespace OPMedia.UI.Configuration
             if (newTheme != null)
             {
                 AppConfig.SkinType = newTheme;
-            	Modified = true;
-        	}
+                Modified = true;
+            }
         }
 
         private void OnSettingsChanged(object sender, EventArgs e)

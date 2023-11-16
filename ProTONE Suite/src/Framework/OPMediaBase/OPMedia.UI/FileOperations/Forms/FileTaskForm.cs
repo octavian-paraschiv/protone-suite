@@ -1,22 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using System.Threading;
-using System.IO;
 using OPMedia.Core;
-using System.Runtime.InteropServices;
-using OPMedia.Runtime.FileInformation;
+using OPMedia.Core.ComTypes;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.FileOperations.Tasks;
 using OPMedia.UI.Controls;
-using OPMedia.Core.ComTypes;
+using OPMedia.UI.Themes;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.FileTasks
 {
@@ -109,7 +99,7 @@ namespace OPMedia.UI.FileTasks
             pbOperation.Visible = false;
 
             Application.DoEvents();
-            
+
             _task.RunTask(DestFolder);
         }
 
@@ -120,7 +110,7 @@ namespace OPMedia.UI.FileTasks
                 Application.DoEvents();
             }
 
-            MainThread.Post(delegate(object x)
+            MainThread.Post(delegate (object x)
             {
                 switch (eventType)
                 {

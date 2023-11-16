@@ -1,18 +1,13 @@
-﻿using System;
+﻿using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Security.Permissions;
 using System.Drawing.Design;
-using System.Windows.Forms.Design;
 using System.IO;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.FileInformation;
-using System.Reflection;
+using System.Security.Permissions;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace OPMedia.UI.Controls
 {
@@ -43,7 +38,7 @@ namespace OPMedia.UI.Controls
 
         private void OnAttrChanged(object sender, EventArgs e)
         {
-            if (chkA.Checked) 
+            if (chkA.Checked)
                 Attributes |= FileAttributes.Archive;
             else
                 Attributes ^= (Attributes & FileAttributes.Archive);

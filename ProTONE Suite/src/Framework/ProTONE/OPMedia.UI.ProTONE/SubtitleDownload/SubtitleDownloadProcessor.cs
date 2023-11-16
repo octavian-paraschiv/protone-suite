@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-
+﻿using OPMedia.Core;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.Runtime;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using OPMedia.Core;
-using System.Threading;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.TranslationSupport;
+using System.Linq;
 using System.Net.NetworkInformation;
-
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-
-using OPMedia.Core.Utilities;
-
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.Configuration;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.SubtitleDownload
 {
@@ -68,46 +57,32 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
                     }).ContinueWith(_ =>
                     {
-                        if (subs.Count > 0)
+                        try
                         {
-                            SubtitleDownloadNotifyForm dlg = new SubtitleDownloadNotifyForm(strFile, subs);
-                            dlg.SubtitleDownloadNotify += new SubtitleDownloadNotifyHandler(dlg_SubtitleDownloadNotify);
-                            dlg.Show();
+                            var totalFound = (from subInfos in subs.Values.ToList()
+                                              from si in subInfos
+                                              where si.IDSubtitle?.Length > 0
+                                              select 1).Count();
 
-                            dlg.FormClosed += (ss, ee) =>
+                            if (totalFound > 0)
                             {
-                                foreach (SubtitleDownloader sd in subs.Keys)
-                                {
-                                    if (sd != null)
-                                    {
-                                        sd.Dispose();
-                                    }
-                                }
+                                SubtitleDownloadNotifyForm dlg = new SubtitleDownloadNotifyForm(strFile, subs);
+                                dlg.SubtitleDownloadNotify += new SubtitleDownloadNotifyHandler(dlg_SubtitleDownloadNotify);
+                                dlg.FormClosed += (ss, ee) => SubDownloaderComplete(strFile, subs);
+                                dlg.Show();
+                                return;
+                            }
 
-                                // Perform cleanup
-                                lock (__filesInProgress)
-                                {
-                                    __filesInProgress.Remove(strFile.ToLowerInvariant());
+                            SubDownloaderComplete(strFile, subs);
 
-                                    // This is for enforcing playlist refresh
-                                    EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
-                                }
-                            };
-                        }
-                        else
-                        {
                             // No subtitles found, give message and exit
                             FireNotify(Translator.Translate("TXT_NO_SUBS_FOUND"),
                                 Translator.Translate("TXT_CAUTION"), MessageBoxIcon.Warning);
-
-                            // Perform cleanup
-                            lock (__filesInProgress)
-                            {
-                                __filesInProgress.Remove(strFile.ToLowerInvariant());
-
-                                // This is for enforcing playlist refresh
-                                EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                            SubDownloaderComplete(strFile, subs);
                         }
 
                     }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -117,6 +92,27 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             {
                 // This is for enforcing playlist refresh
                 EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
+            }
+        }
+
+        private static void SubDownloaderComplete(string strFile, Dictionary<SubtitleDownloader, List<SubtitleInfo>> subs)
+        {
+            try
+            {
+                subs.Keys.ToList().ForEach(sd => sd?.Dispose());
+
+                // Perform cleanup
+                lock (__filesInProgress)
+                {
+                    __filesInProgress.Remove(strFile.ToLowerInvariant());
+
+                    // This is for enforcing playlist refresh
+                    EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
             }
         }
 
@@ -192,7 +188,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                     {
                         // There is at least another file having a similar name in the folder.
                         // Check if its extension is a valid subtitle extension.
-                        foreach(string file in files)
+                        foreach (string file in files)
                         {
                             if (file.ToLowerInvariant() == movieFileName.ToLowerInvariant())
                                 continue; // This is our video file ... not interesting
@@ -268,12 +264,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                             finally
                             {
                                 if (sd != null)
-                                {
-                                    if (foundSubtitles != null && foundSubtitles.Count > 0)
-                                    {
-                                        subs.Add(sd, foundSubtitles);
-                                    }
-                                }
+                                    subs.Add(sd, foundSubtitles);
                             }
                         }
                     }
@@ -415,7 +406,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             if (ProTONEConfig.SubDownloadedNotificationsEnabled)
             {
                 string msg = Translator.Translate("TXT_SUB_LOADED");
-                FireNotify(msg,  ApplicationInfo.ApplicationName, MessageBoxIcon.Information);
+                FireNotify(msg, ApplicationInfo.ApplicationName, MessageBoxIcon.Information);
             }
         }
     }

@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Properties;
-using OPMedia.Core.GlobalEvents;
 using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.UI.Properties;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.Configuration
 {
@@ -48,7 +41,7 @@ namespace OPMedia.UI.Configuration
         protected override void SaveInternal()
         {
             AppConfig.ProxySettings = ctlProxy.ProxySettings;
-            
+
         }
 
         [EventSink(EventNames.PerformTranslation)]
@@ -56,6 +49,6 @@ namespace OPMedia.UI.Configuration
         {
             ctlProxy.ProxySettings.PerformTranslation();
         }
-        
+
     }
 }

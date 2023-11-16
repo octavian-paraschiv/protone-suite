@@ -7,26 +7,17 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
-using System.Windows.Forms.Design;
-using OPMedia.Core.Configuration;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-
-using OPMedia.Core.GlobalEvents;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core;
-
+using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
-using OPMedia.Runtime.ProTONE.Configuration;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 #endregion
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
@@ -57,9 +48,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public int Position
         {
-            get 
-            { 
-                return (int)volumeProgress.Value; 
+            get
+            {
+                return (int)volumeProgress.Value;
             }
             set
             {
@@ -91,10 +82,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             InitializeComponent();
             volumeProgress.Maximum = 10000;
             volumeProgress.Value = 5000;
-            volumeProgress.PositionChanged += 
+            volumeProgress.PositionChanged +=
                 new ValueChangedEventHandler(volumeProgress_PositionChanged);
 
-            volumeProgress.HoveredPositionChanged += 
+            volumeProgress.HoveredPositionChanged +=
                 new ValueChangedEventHandler(volumeProgress_HoveredPositionChanged);
 
             this.HandleCreated += VolumeScale_HandleCreated;
@@ -125,7 +116,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void ApplyMenuBarColors()
         {
             volumeProgress.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            
+
             lblCurrent.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
             lblMin.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
             lblMax.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
@@ -170,7 +161,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             //this.BackColor = Color.FromKnownColor(KnownColor.Window);
             //VolumeScale.OverrideBackColor = Color.FromKnownColor(KnownColor.Window);
-            
+
             VolumeScale.ApplyMenuBarColors();
 
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.UI.FileOperations.Tasks;
 using OPMedia.UI.FileTasks;
-using OPMedia.UI.FileOperations.Tasks;
-using System.IO;
+using System.Collections.Generic;
 
 namespace OPMedia.Addons.Builtin.Navigation.FileExplorer.FileOperations.Tasks
 {

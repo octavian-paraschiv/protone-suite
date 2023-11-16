@@ -1,19 +1,10 @@
 #region Using directives
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
+using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Dialogs;
-using System.Threading;
-using OPMedia.Runtime;
-using OPMedia.Core;
+using System.ComponentModel;
+using System.Drawing;
 
 #endregion
 
@@ -84,7 +75,7 @@ namespace OPMedia.UI.Wizards
         Finishing = 3
     }
     #endregion
-    
+
     /// <summary>
     /// The base class for all the wizard pages.
     /// </summary>
@@ -96,7 +87,7 @@ namespace OPMedia.UI.Wizards
         /// that occur when the associated buttons are clicked 
         /// in the StepButtonsCtl user control.
         public delegate void WizardStepEventHandler(object sender, HandledEventArgs args);
-       
+
         #endregion
 
         #region Properties
@@ -117,16 +108,16 @@ namespace OPMedia.UI.Wizards
         /// </summary>
         public BackgroundTask BkgTask { get; set; }
 
-		/// <summary>
-		/// Gets the wizard this page belongs to.
-		/// </summary>
-		protected WizardHostForm Wizard
-		{
-			get
-			{
-				return FindForm() as WizardHostForm;
-			}
-		}
+        /// <summary>
+        /// Gets the wizard this page belongs to.
+        /// </summary>
+        protected WizardHostForm Wizard
+        {
+            get
+            {
+                return FindForm() as WizardHostForm;
+            }
+        }
         #endregion
 
         #region Methods
@@ -279,8 +270,8 @@ namespace OPMedia.UI.Wizards
 
         #endregion
 
-       
-        
+
+
         #endregion
     }
 }

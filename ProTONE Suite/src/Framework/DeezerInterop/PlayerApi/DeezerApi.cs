@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using OPMedia.Core.Logging;
 
 // Ported from original header file deezer-api.h
 
@@ -28,7 +23,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
             return string.Format("Error raised by the Deezer Player Runtime: {0}", DzErrorCode);
         }
 
-        private DeezerPlayerException() 
+        private DeezerPlayerException()
             : base()
         {
         }

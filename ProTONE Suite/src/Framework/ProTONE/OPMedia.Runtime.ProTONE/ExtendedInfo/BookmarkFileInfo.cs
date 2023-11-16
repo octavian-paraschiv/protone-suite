@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.FileInformation;
-using System.IO;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.Playlists;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
+using System.IO;
 
 namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 {
@@ -64,7 +63,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
 
                 return;
             }
-                
+
             LoadBookmarks(false, throwExceptionOnInvalid);
         }
 
@@ -157,7 +156,7 @@ namespace OPMedia.Runtime.ProTONE.ExtendedInfo
             {
                 LoadBookmarks(true, true);
             }
-            
+
             if (BookmarkCollectionChanged != null)
             {
                 BookmarkCollectionChanged(null, null);

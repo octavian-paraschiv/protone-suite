@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Drawing;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.FileInformation;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using TagLib;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
@@ -90,7 +89,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
 
         public VideoFileInfo(string path, bool throwExceptionOnInvalid)
-            : base(path, throwExceptionOnInvalid)    
+            : base(path, throwExceptionOnInvalid)
         {
         }
 

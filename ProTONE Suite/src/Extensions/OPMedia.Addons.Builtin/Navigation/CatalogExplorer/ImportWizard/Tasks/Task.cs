@@ -1,23 +1,18 @@
+using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
+using OPMedia.Core;
+using OPMedia.Core.ComTypes;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Wizards;
 using System.IO;
+using System.Threading;
 //using OPMedia.Runtime.Playlists;
 using System.Windows.Forms;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.Logging;
-using OPMedia.UI;
-using System.Threading;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Controls;
-using OPMedia.Core.ComTypes;
-using OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer;
-using OPMedia.Runtime.FileInformation;
 
 namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 {
@@ -84,7 +79,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 detail.Results = (isAborted) ? Translator.Translate("TXT_ABORTED") : Translator.Translate("TXT_SUCCESS");
                 detail.IsSuccess = !isAborted;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 detail.Results = ex.Message;
                 detail.IsSuccess = false;
@@ -109,7 +104,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 _steps += PathUtils.EnumDirectories(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
                 _steps += PathUtils.EnumFiles(_abortScan, SourcePath, "*", SearchOption.AllDirectories).Count;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ConfirmScanAbortOnException(ex);
             }
@@ -123,10 +118,10 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         public void ScanFolder(Catalog cat, string dir, CatalogItem parent)
         {
-            if (!CanContinue()) 
+            if (!CanContinue())
                 return;
 
-            ReportPseudoStepInit("TXT_SCANNING: "  + dir);
+            ReportPseudoStepInit("TXT_SCANNING: " + dir);
 
             try
             {
@@ -150,12 +145,12 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                 ci.RootSerialNumber = Kernel32.GetVolumeSerialNumber(di.RootDirectory.FullName);
 
                 ci.Name = GetName(dir, di);
-                
+
                 if (parent != null)
                 {
                     ci.ParentItemID = parent.ItemID;
                 }
-                                
+
                 if (ci.IsRoot)
                 {
                     // This is a disk
@@ -181,7 +176,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
                 RaiseTaskProgressEvent(null, _currentStep++);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ConfirmScanAbortOnException(ex);
             }
@@ -204,7 +199,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
 
         private void ScanFile(Catalog cat, string file, CatalogItem parent)
         {
-            if (!CanContinue()) 
+            if (!CanContinue())
                 return;
 
             ReportPseudoStepInit("TXT_SCANNING: " + file);
@@ -249,7 +244,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.LogException(ex);
                 }
@@ -275,7 +270,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
             }
             else
             {
-                MainThread.Post(delegate(object x)
+                MainThread.Post(delegate (object x)
                 {
                     string message = Translator.Translate("TXT_SCAN_ERROR_MSG", SourcePath, ex.Message);
 
@@ -295,7 +290,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.ImportWizard.Tasks
         {
             do
             {
-                if (_abortScan.WaitOne(0)) 
+                if (_abortScan.WaitOne(0))
                     return false;
 
                 Thread.Sleep(50);

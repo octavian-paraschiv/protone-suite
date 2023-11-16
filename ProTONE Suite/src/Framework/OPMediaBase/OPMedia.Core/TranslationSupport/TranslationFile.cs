@@ -4,9 +4,6 @@ using OPMedia.Core.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OPMedia.Core.TranslationSupport
 {
@@ -107,7 +104,7 @@ namespace OPMedia.Core.TranslationSupport
 
             }
             catch (Exception ex)
-            { 
+            {
                 Logger.LogException(ex);
             }
             return false;

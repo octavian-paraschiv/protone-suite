@@ -1,7 +1,7 @@
-﻿using System;
-using OPMedia.Core.TranslationSupport;
+﻿using NAudio.Lame;
 using OPMedia.Addons.Builtin.Shared.Compression;
-using NAudio.Lame;
+using OPMedia.Core.TranslationSupport;
+using System;
 
 namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
 {
@@ -23,7 +23,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             }
         }
 
-        public Mp3EncoderOptionsCtl() 
+        public Mp3EncoderOptionsCtl()
             : base(new Mp3EncoderSettings())
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace OPMedia.Addons.Builtin.Shared.EncoderOptions
             }
         }
 
-        internal override void  Reload()
+        internal override void Reload()
         {
             chkGenerateTag.Text = Translator.Translate(UsedForCdRipper ?
                 "TXT_GENERATE_TAG" : "TXT_REUSE_TAG");

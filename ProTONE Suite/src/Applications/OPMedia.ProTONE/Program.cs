@@ -1,18 +1,15 @@
+using OPMedia.Core.Configuration;
+using OPMedia.Core.InstanceManagement;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.Shortcuts;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OPMedia.Core.Logging;
-using OPMedia.Core.InstanceManagement;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using OPMedia.Core.TranslationSupport;
-
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.ProTONE.Controls.MediaPlayer;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.Configuration;
-
-using OPMedia.Runtime.ProTONE.Rendering;
 
 namespace OPMedia.ProTONE
 {
@@ -112,7 +109,7 @@ namespace OPMedia.ProTONE
                         {
                             // There is no other player instance. 
                             // This instance needs to process the command itself.
-                            
+
                             // Note: when player is launched like this - clear previous playlist first.
                             _commandQueue.Add(BasicCommand.Create(CommandType.ClearPlaylist));
                             _commandQueue.Add(BasicCommand.Create(cmdType, files.ToArray()));
@@ -120,7 +117,7 @@ namespace OPMedia.ProTONE
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ErrorDispatcher.DispatchError(ex, false);
                 }

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Core;
-using System.IO;
-using OPMedia.Runtime;
 using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {
@@ -55,12 +50,12 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
                     newName = StringUtils.StripInvalidPathChars(newName);
                     retVal = Path.Combine(fi.DirectoryName, StringUtils.Capitalize(newName, wordCasing) + fi.Extension);
                 }
-                
+
             }
-            
+
             return retVal;
         }
 
-        
+
     }
 }

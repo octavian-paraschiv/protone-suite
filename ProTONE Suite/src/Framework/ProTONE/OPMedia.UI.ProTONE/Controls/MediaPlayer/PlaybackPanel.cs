@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Generic;
+﻿using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.Shortcuts;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.UI.Themes;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Generic;
+using OPMedia.UI.ProTONE.Properties;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using EventNames = OPMedia.Core.EventNames;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -38,7 +33,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         Dictionary<Control, OPMToolTip> _tips = new Dictionary<Control, OPMToolTip>();
 
         #region Properties
-        
+
         // TODO: implement
         public bool CompactView { get; set; }
 

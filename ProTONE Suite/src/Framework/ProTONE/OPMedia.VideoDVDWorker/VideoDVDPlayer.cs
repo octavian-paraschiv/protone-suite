@@ -1,17 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Security.Permissions;
-using System.Windows.Forms;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
+using System;
+using System.Drawing;
 
 namespace OPMedia.VideoDVDWorker
 {
@@ -323,10 +319,10 @@ namespace OPMedia.VideoDVDWorker
             int hr = videoWindow.GetWindowPosition(out l, out t, out w, out h);
             if (hr == 0)
 
-            if (w != width || h != height || l != left || h != height)
-            {
-                hr = videoWindow.SetWindowPosition(left, top, width, height);
-            }
+                if (w != width || h != height || l != left || h != height)
+                {
+                    hr = videoWindow.SetWindowPosition(left, top, width, height);
+                }
         }
 
         private Size GetWindowSize(IntPtr hwnd)

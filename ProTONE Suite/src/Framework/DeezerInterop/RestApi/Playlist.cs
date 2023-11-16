@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace OPMedia.DeezerInterop.RestApi
 {
@@ -49,7 +46,7 @@ namespace OPMedia.DeezerInterop.RestApi
 
         internal class TracksContainer
         {
-            public List<Track> Data { get; set; } 
+            public List<Track> Data { get; set; }
         }
 
         public void LoadTracks()

@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using OPMedia.Core;
 using System.Reflection;
-using System.Windows.Forms;
-using OPMedia.Core.GlobalEvents;
 
 namespace OPMedia.Core.TranslationSupport
 {
@@ -19,7 +13,7 @@ namespace OPMedia.Core.TranslationSupport
     {
         public string Tag { get; private set; }
 
-        public TranslatableCategoryAttribute(string tag) : 
+        public TranslatableCategoryAttribute(string tag) :
             base(TranslateCategoryName(tag))
         {
             this.Tag = tag;

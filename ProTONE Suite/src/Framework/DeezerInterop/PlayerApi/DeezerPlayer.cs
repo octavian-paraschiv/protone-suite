@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OPMedia.Core.Win32;
+using System;
 using System.Runtime.InteropServices;
-using OPMedia.Core.Win32;
 
 // Ported from original header file deezer-player.h
 
@@ -47,7 +44,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
         DZ_PLAYER_EVENT_RENDER_TRACK_UNDERFLOW,           /* Underflow happened whilst playing a track. */
         DZ_PLAYER_EVENT_RENDER_TRACK_RESUMED,             /* Player resumed play after a underflow or a pause. */
         DZ_PLAYER_EVENT_RENDER_TRACK_REMOVED,             /* Player stopped playing a track. */
-}
+    }
 
     // Add an hint about why a new play is done.
     public enum dz_player_play_command_t
@@ -92,13 +89,13 @@ namespace OPMedia.DeezerInterop.PlayerApi
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void dz_player_onevent_cb(IntPtr handle, IntPtr evtHandle, IntPtr userdata);
 
-        /**
-     // Prototype of the on renderer event callback
-     *
-     * @param self     Deezer player handle.
-     * @param event    The handle of the renderer event that has just occured.
-     * @param userdata A reference to the user’s data.
-     */
+    /**
+ // Prototype of the on renderer event callback
+ *
+ * @param self     Deezer player handle.
+ * @param event    The handle of the renderer event that has just occured.
+ * @param userdata A reference to the user’s data.
+ */
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void dz_player_onrendererevent_cb(IntPtr handle, IntPtr evtHandle, IntPtr userdata);
     #endregion

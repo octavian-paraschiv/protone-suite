@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Controls;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.FfdShowApi;
-using OPMedia.Runtime.ProTONE.Rendering;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.UI.Configuration;
 using OPMedia.UI.Dialogs;
-using OPMedia.Core.TranslationSupport;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {
@@ -80,7 +71,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             this.chkSubEnabled.CheckedChanged += new System.EventHandler(this.chkSubEnabled_CheckedChanged);
 
         }
-        
+
         void chkFilterStateNotificationsEnabled_CheckedChanged(object sender, EventArgs e)
         {
             Modified = true;

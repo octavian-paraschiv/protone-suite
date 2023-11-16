@@ -1,19 +1,10 @@
-﻿using OPMedia.Core;
-using OPMedia.Core.Configuration;
+﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Core.Utilities;
 using OPMedia.DeezerInterop.PlayerApi;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
@@ -49,7 +40,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         /// OPMedia.VideoDvdWorker.exe
         /// </summary>
         VideoDvd,
-      
+
         /// <summary>
         /// OPMedia.VideoWorker.exe
         /// </summary>
@@ -87,7 +78,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
             _wp = Process.Start(psi);
 
             this.Pid = _wp.Id;
-            
+
             _wcs = new WorkerClientStream(this.Pid);
 
         }

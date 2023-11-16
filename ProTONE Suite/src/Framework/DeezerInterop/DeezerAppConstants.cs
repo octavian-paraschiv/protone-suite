@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OPMedia.DeezerInterop
+﻿namespace OPMedia.DeezerInterop
 {
     public static class DeezerAppConstants
     {

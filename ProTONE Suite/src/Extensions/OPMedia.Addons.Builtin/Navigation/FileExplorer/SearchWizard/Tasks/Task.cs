@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.UI.Wizards;
-using System.IO;
 using OPMedia.UI;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Tasks
 {
@@ -18,7 +15,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Tasks
 
         public bool IsRecursive = true;
         public bool UseAttributes = false;
-        public bool IsCaseInsensitive = true; 
+        public bool IsCaseInsensitive = true;
         public bool SearchProperties = false;
 
         public bool Option1 = false;

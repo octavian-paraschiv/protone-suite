@@ -1,10 +1,5 @@
-﻿using OPMedia.DeezerInterop;
-using OPMedia.DeezerInterop.RestApi;
+﻿using OPMedia.DeezerInterop.RestApi;
 using OPMedia.Runtime.ProTONE.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

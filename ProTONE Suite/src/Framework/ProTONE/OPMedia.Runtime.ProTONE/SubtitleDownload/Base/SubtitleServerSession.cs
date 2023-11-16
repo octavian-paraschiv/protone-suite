@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Threading;
-using OPMedia.Core.Logging;
-using System.IO;
-using OPMedia.Core.NetworkAccess;
-using OPMedia.Core.Configuration;
-using System.IO.Compression;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Runtime.FileInformation;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
 {
@@ -30,7 +26,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         protected string _username = string.Empty;
         protected string _password = string.Empty;
         protected CultureInfo _culture = null;
-        
+
         protected string _sessionToken = string.Empty;
 
         #region Factory
@@ -56,7 +52,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                         break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -164,6 +160,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                 _tmrKeepAlive.Elapsed += new System.Timers.ElapsedEventHandler(_tmrKeepAlive_Elapsed);
                 _tmrKeepAlive.Start();
             }
+
+            Logger.LogTrace($"{GetType().Name}: object created");
         }
         #endregion
 
@@ -201,8 +199,10 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
             }
 
             DoCleanup();
-            
+
             _sessionToken = null;
+
+            Logger.LogTrace($"{GetType().Name}: object disposed");
         }
 
         protected bool CheckMatch(string movieName, List<string> fileNamePartsList)

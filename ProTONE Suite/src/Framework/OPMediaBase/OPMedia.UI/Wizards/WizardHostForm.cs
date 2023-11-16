@@ -1,22 +1,14 @@
 #region Using directives
+using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Generic;
+using OPMedia.UI.HelpSupport;
+using OPMedia.UI.Properties;
+using OPMedia.UI.Themes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
-using OPMedia.UI.Controls;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.Core;
-using OPMedia.UI.Properties;
-using OPMedia.UI.HelpSupport;
-using System.Diagnostics;
-using OPMedia.UI.Generic;
 
 
 #endregion
@@ -46,7 +38,7 @@ namespace OPMedia.UI.Wizards
         /// Stores if the wizard has to display a finish page.
         /// </summary>
         private bool hasFinishPage = true;
-        
+
         /// <summary>
         /// The wizard task.
         /// </summary>
@@ -315,10 +307,10 @@ namespace OPMedia.UI.Wizards
         /// to the wizard before initialization.
         /// </param>
         /// <returns>The wizard dialog result (OK, Cancel etc).</returns>
-        public static DialogResult CreateWizard(string wizardName, 
+        public static DialogResult CreateWizard(string wizardName,
             Type[] wizardPages,
             bool hasFinishPage,
-            BackgroundTask initTask, 
+            BackgroundTask initTask,
             Icon customIcon = null)
         {
             // Test there have been defined any wizard pages.
@@ -490,7 +482,7 @@ namespace OPMedia.UI.Wizards
             {
                 // If must not be repeated, exit wizard.
                 this.DialogResult = DialogResult.OK;
-                
+
             }
         }
 
@@ -551,22 +543,22 @@ namespace OPMedia.UI.Wizards
                 // If the wizard has only one step show .
                 if (wizardPages.Count > 1)
                 {
-                   SetTitle(string.Format("{0} - {1} {2} {3} {4}",
-                        Translator.Translate(wizardName),
-                        Translator.Translate("TXT_WIZARDSTEPTEXT"),
-                        wizardStep + 1,
-                        Translator.Translate("TXT_WIZARDSTEPDELIMITER"),
-                        wizardPages.Count));
+                    SetTitle(string.Format("{0} - {1} {2} {3} {4}",
+                         Translator.Translate(wizardName),
+                         Translator.Translate("TXT_WIZARDSTEPTEXT"),
+                         wizardStep + 1,
+                         Translator.Translate("TXT_WIZARDSTEPDELIMITER"),
+                         wizardPages.Count));
                 }
                 else
                 {
-                   SetTitle(Translator.Translate(wizardName));
+                    SetTitle(Translator.Translate(wizardName));
                 }
 
                 AddPageToForm(wizardPage);
 
                 wizardPage.BkgTask = task;
-                
+
                 // Set the wizard direction
                 wizardPage.Direction = wizardDirection;
                 wizardPage.Focus();
@@ -654,9 +646,9 @@ namespace OPMedia.UI.Wizards
             wizardPage = _finishPage;
 
             // Subscribe for wizard events.
-            (wizardPage as WizFinishPageCtl).FinishPageExit += 
+            (wizardPage as WizFinishPageCtl).FinishPageExit +=
                 new WizFinishPageCtl.FinishPageExitEventHandler(OnFinishPageExit);
-            
+
             // Set the title bar text.
             SetTitle(string.Format("{0} {1}",
                 Translator.Translate(wizardName),
@@ -677,7 +669,7 @@ namespace OPMedia.UI.Wizards
                 previousPage.Direction = wizardDirection;
                 previousPage.ExecutePageLeaveActions();
             }
-            
+
             wizardPage.ExecutePageEnterActions();
             wizardPage.Focus();
 
@@ -695,7 +687,7 @@ namespace OPMedia.UI.Wizards
         {
             if ((keyData == Keys.Escape || keyData == Keys.Enter) && this.SuppressKeyPress)
                 return false;
-            
+
             if (keyData == Keys.F1)
             {
                 string wizName = wizardName.Replace("TXT_", "").ToLowerInvariant();

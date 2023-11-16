@@ -1,7 +1,5 @@
 
 using OPMedia.UI.Controls;
-
-using System.Windows.Forms;
 namespace OPMedia.Runtime.Addons
 {
     partial class AddonHostForm
@@ -72,16 +70,18 @@ namespace OPMedia.Runtime.Addons
             // 
             // msMain
             // 
+            this.msMain.AutoSize = false;
             this.msMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.msMain.Font = new System.Drawing.Font("Trebuchet MS", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.msMain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
             this.tXTHELPToolStripMenuItem});
-            this.msMain.Location = new System.Drawing.Point(0, 0);
+            this.msMain.Location = new System.Drawing.Point(4, 25);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0);
-            this.msMain.Size = new System.Drawing.Size(824, 24);
+            this.msMain.Size = new System.Drawing.Size(816, 32);
             this.msMain.TabIndex = 0;
             // 
             // tsmiFile
@@ -91,26 +91,26 @@ namespace OPMedia.Runtime.Addons
             this.toolStripSeparator1,
             this.tsmiExit});
             this.tsmiFile.Name = "tsmiFile";
-            this.tsmiFile.Size = new System.Drawing.Size(67, 24);
+            this.tsmiFile.Size = new System.Drawing.Size(66, 32);
             this.tsmiFile.Text = "TXT_FILE";
             // 
             // tsmiSettings
             // 
             this.tsmiSettings.Name = "tsmiSettings";
-            this.tsmiSettings.Size = new System.Drawing.Size(163, 22);
+            this.tsmiSettings.Size = new System.Drawing.Size(180, 22);
             this.tsmiSettings.Text = "TXT_SETTINGS";
             this.tsmiSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.ShortcutKeyDisplayString = "Alt+F4";
-            this.tsmiExit.Size = new System.Drawing.Size(163, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(180, 22);
             this.tsmiExit.Text = "TXT_EXIT";
             this.tsmiExit.Click += new System.EventHandler(this.OnExit);
             // 
@@ -121,21 +121,21 @@ namespace OPMedia.Runtime.Addons
             this.tXTAPPHELPToolStripMenuItem,
             this.tsmiAbout});
             this.tXTHELPToolStripMenuItem.Name = "tXTHELPToolStripMenuItem";
-            this.tXTHELPToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
+            this.tXTHELPToolStripMenuItem.Size = new System.Drawing.Size(69, 32);
             this.tXTHELPToolStripMenuItem.Text = "TXT_HELP";
             // 
             // tXTAPPHELPToolStripMenuItem
             // 
             this.tXTAPPHELPToolStripMenuItem.Name = "tXTAPPHELPToolStripMenuItem";
             this.tXTAPPHELPToolStripMenuItem.ShortcutKeyDisplayString = "F1";
-            this.tXTAPPHELPToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.tXTAPPHELPToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.tXTAPPHELPToolStripMenuItem.Text = "TXT_APPHELP";
             this.tXTAPPHELPToolStripMenuItem.Click += new System.EventHandler(this.tXTAPPHELPToolStripMenuItem_Click);
             // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(164, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(161, 22);
             this.tsmiAbout.Text = "TXT_ABOUT";
             this.tsmiAbout.Click += new System.EventHandler(this.tXTABOUTToolStripMenuItem_Click);
             // 
@@ -152,7 +152,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlLayoutFull.Controls.Add(this.statusBar, 0, 3);
             this.pnlLayoutFull.Controls.Add(this.lblStatusBarSep, 0, 2);
             this.pnlLayoutFull.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLayoutFull.Location = new System.Drawing.Point(0, 24);
+            this.pnlLayoutFull.Location = new System.Drawing.Point(4, 57);
             this.pnlLayoutFull.Margin = new System.Windows.Forms.Padding(0);
             this.pnlLayoutFull.Name = "pnlLayoutFull";
             this.pnlLayoutFull.RowCount = 4;
@@ -160,7 +160,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlLayoutFull.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlLayoutFull.Size = new System.Drawing.Size(824, 547);
+            this.pnlLayoutFull.Size = new System.Drawing.Size(816, 510);
             this.pnlLayoutFull.TabIndex = 3;
             // 
             // pnlOpMedia
@@ -180,8 +180,8 @@ namespace OPMedia.Runtime.Addons
             // pnlOpMedia.Panel2
             // 
             this.pnlOpMedia.Panel2.Controls.Add(this.pnlLocalContent);
-            this.pnlOpMedia.Size = new System.Drawing.Size(824, 519);
-            this.pnlOpMedia.SplitterDistance = 491;
+            this.pnlOpMedia.Size = new System.Drawing.Size(816, 482);
+            this.pnlOpMedia.SplitterDistance = 454;
             this.pnlOpMedia.SplitterWidth = 3;
             this.pnlOpMedia.TabIndex = 6;
             // 
@@ -194,7 +194,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlNavContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNavContainer.Name = "pnlNavContainer";
             this.pnlNavContainer.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlNavContainer.Size = new System.Drawing.Size(824, 491);
+            this.pnlNavContainer.Size = new System.Drawing.Size(816, 454);
             this.pnlNavContainer.TabIndex = 0;
             // 
             // lblNoItems
@@ -207,7 +207,7 @@ namespace OPMedia.Runtime.Addons
             this.lblNoItems.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNoItems.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoItems.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNoItems.Size = new System.Drawing.Size(824, 60);
+            this.lblNoItems.Size = new System.Drawing.Size(816, 60);
             this.lblNoItems.TabIndex = 0;
             this.lblNoItems.Text = "aaaa";
             this.lblNoItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -228,7 +228,7 @@ namespace OPMedia.Runtime.Addons
             // pnlLocalContent.Panel2
             // 
             this.pnlLocalContent.Panel2.Controls.Add(this.pnlPreview);
-            this.pnlLocalContent.Size = new System.Drawing.Size(824, 25);
+            this.pnlLocalContent.Size = new System.Drawing.Size(816, 25);
             this.pnlLocalContent.SplitterDistance = 25;
             this.pnlLocalContent.SplitterWidth = 3;
             this.pnlLocalContent.TabIndex = 3;
@@ -243,7 +243,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(0);
             this.pnlProperties.Name = "pnlProperties";
             this.pnlProperties.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlProperties.Size = new System.Drawing.Size(822, 25);
+            this.pnlProperties.Size = new System.Drawing.Size(824, 25);
             this.pnlProperties.TabIndex = 0;
             // 
             // lblNoProperties
@@ -256,7 +256,7 @@ namespace OPMedia.Runtime.Addons
             this.lblNoProperties.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNoProperties.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoProperties.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNoProperties.Size = new System.Drawing.Size(822, 60);
+            this.lblNoProperties.Size = new System.Drawing.Size(824, 60);
             this.lblNoProperties.TabIndex = 0;
             this.lblNoProperties.Text = "aaaa";
             this.lblNoProperties.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -271,7 +271,7 @@ namespace OPMedia.Runtime.Addons
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
             this.pnlPreview.Name = "pnlPreview";
             this.pnlPreview.OverrideBackColor = System.Drawing.Color.Empty;
-            this.pnlPreview.Size = new System.Drawing.Size(822, 26);
+            this.pnlPreview.Size = new System.Drawing.Size(824, 26);
             this.pnlPreview.TabIndex = 0;
             // 
             // lblNoPreview
@@ -284,7 +284,7 @@ namespace OPMedia.Runtime.Addons
             this.lblNoPreview.OverrideBackColor = System.Drawing.Color.Empty;
             this.lblNoPreview.OverrideForeColor = System.Drawing.Color.Empty;
             this.lblNoPreview.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNoPreview.Size = new System.Drawing.Size(822, 60);
+            this.lblNoPreview.Size = new System.Drawing.Size(824, 60);
             this.lblNoPreview.TabIndex = 0;
             this.lblNoPreview.Text = "abcdef";
             this.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -299,9 +299,9 @@ namespace OPMedia.Runtime.Addons
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusMain,
             this.txtStatusMain});
-            this.statusBar.Location = new System.Drawing.Point(0, 525);
+            this.statusBar.Location = new System.Drawing.Point(0, 488);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(824, 22);
+            this.statusBar.Size = new System.Drawing.Size(816, 22);
             this.statusBar.SizingGrip = false;
             this.statusBar.Stretch = false;
             this.statusBar.TabIndex = 0;
@@ -314,7 +314,7 @@ namespace OPMedia.Runtime.Addons
             this.lblStatusMain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblStatusMain.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatusMain.Name = "lblStatusMain";
-            this.lblStatusMain.Size = new System.Drawing.Size(110, 22);
+            this.lblStatusMain.Size = new System.Drawing.Size(109, 22);
             this.lblStatusMain.Text = "nonEditModePath";
             this.lblStatusMain.Click += new System.EventHandler(this.lblStatusMain_Click);
             // 
@@ -336,12 +336,12 @@ namespace OPMedia.Runtime.Addons
             // 
             this.lblStatusBarSep.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatusBarSep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblStatusBarSep.Location = new System.Drawing.Point(0, 519);
+            this.lblStatusBarSep.Location = new System.Drawing.Point(0, 482);
             this.lblStatusBarSep.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.lblStatusBarSep.Name = "lblStatusBarSep";
             this.lblStatusBarSep.OverrideBackColor = System.Drawing.Color.Red;
             this.lblStatusBarSep.OverrideForeColor = System.Drawing.Color.Empty;
-            this.lblStatusBarSep.Size = new System.Drawing.Size(824, 3);
+            this.lblStatusBarSep.Size = new System.Drawing.Size(816, 3);
             this.lblStatusBarSep.TabIndex = 7;
             this.lblStatusBarSep.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -350,6 +350,7 @@ namespace OPMedia.Runtime.Addons
             this.ClientSize = new System.Drawing.Size(824, 571);
             this.Controls.Add(this.pnlLayoutFull);
             this.Controls.Add(this.msMain);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimumSize = new System.Drawing.Size(700, 450);
             this.Name = "AddonHostForm";
             this.msMain.ResumeLayout(false);
@@ -370,7 +371,6 @@ namespace OPMedia.Runtime.Addons
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using OPMedia.Core.Utilities;
+﻿using Newtonsoft.Json;
 using OPMedia.Runtime.ProTONE.Rendering;
+using System.Collections.Generic;
 
 namespace OPMedia.Runtime.ProTONE.Playlists
 {
@@ -92,7 +88,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             }
         }
 
-        public RadioStationPlaylistItem(RadioStation rs) : 
+        public RadioStationPlaylistItem(RadioStation rs) :
             base(rs.Url, false, false)
         {
             _rs = rs;

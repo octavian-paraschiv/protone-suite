@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using OPMedia.Runtime.FileInformation;
-using System.Threading;
-using OPMedia.Core.Logging;
-using OPMedia.Core.NetworkAccess;
-using OPMedia.Core.Configuration;
-using System.IO.Compression;
-using System.Net;
-using OPMedia.Core;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.Utilities;
+using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
+using System;
+using System.Collections.Generic;
 
 namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 {
@@ -46,7 +38,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
                 {
                     dn = null;
                 }
-                
+
                 return $"[{_serverType}] {dn}";
             }
         }
@@ -115,14 +107,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
                 if (nfi.IsValid)
                 {
                     if (_session == null)
-                    {
                         _session = SubtitleServerSession.Create(_serverType, _serverUrl, _userName, _password);
-                    }
 
-                    if (_session != null)
-                    {
-                        return _session.GetSubtitles(fileName);
-                    }
+                    return _session?.GetSubtitles(fileName);
                 }
             }
             catch (Exception ex)
@@ -138,14 +125,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
             try
             {
                 if (_session == null)
-                {
                     _session = SubtitleServerSession.Create(_serverType, _serverUrl, _userName, _password);
-                }
 
-                if (_session != null)
-                {
-                    return _session.DownloadSubtitle(fileName, subtitle);
-                }
+                return _session?.DownloadSubtitle(fileName, subtitle);
             }
             catch (Exception ex)
             {
@@ -160,11 +142,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 
         public void Dispose()
         {
-            if (_session != null)
-            {
-                _session.Dispose();
-                _session = null;
-            }
+            _session?.Dispose();
+            _session = null;
         }
 
         #endregion

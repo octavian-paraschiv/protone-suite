@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.IO;
+using System.Text;
 
 namespace OPMedia.Core
 {
@@ -66,7 +64,7 @@ namespace OPMedia.Core
                         totalFileSize, totalBytesTransferred);
                 }
 
-                return(int) CopyFileCallbackAction.Continue;
+                return (int)CopyFileCallbackAction.Continue;
             }
         }
 
@@ -535,7 +533,7 @@ namespace OPMedia.Core
         [DllImport(KERNEL32, CharSet = CharSet.Auto)]
         public static extern IntPtr LoadLibrary(string lpModuleName);
 
-        [DllImport(KERNEL32, CharSet=CharSet.Auto)]
+        [DllImport(KERNEL32, CharSet = CharSet.Auto)]
         public static extern IntPtr GetModuleHandle(string lpModuleName);
 
         [DllImport(KERNEL32)]
@@ -592,7 +590,7 @@ namespace OPMedia.Core
         }
 
         [DllImport(KERNEL32)]
-        public static extern bool GetVersionEx(ref OSVERSIONINFO osvi);  
+        public static extern bool GetVersionEx(ref OSVERSIONINFO osvi);
 
         #endregion
     }

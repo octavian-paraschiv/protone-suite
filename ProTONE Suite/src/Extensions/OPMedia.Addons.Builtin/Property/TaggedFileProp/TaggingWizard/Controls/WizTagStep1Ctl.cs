@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Wizards;
-using System.IO;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Controls;
-using OPMedia.Core.Configuration;
+using OPMedia.Addons.Builtin.Properties;
 using OPMedia.Core;
-using OPMedia.UI.Themes;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Controls;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.Dialogs;
-using OPMedia.Addons.Builtin.Properties;
-using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Wizards;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {
@@ -29,10 +23,10 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             lvFiles.MultiSelect = true;
             lvFiles.SmallImageList = _ilm.ImageList;
 
-            
+
         }
 
-        protected override void  OnPageLeave_MovingNext()
+        protected override void OnPageLeave_MovingNext()
         {
             (BkgTask as Task).Files = new List<string>();
             foreach (ListViewItem item in lvFiles.Items)
@@ -135,7 +129,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
                         AddFile(file);
                     }
                 }
-                
+
                 ProTONEConfig.LastOpenedFolder = dlg.SelectedPath;
             }
 

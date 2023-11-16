@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
-using System.IO;
-using OPMedia.Core.Utilities;
-using System.Threading;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
+using OPMedia.Core.Utilities;
+using OPMedia.UI.Themes;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Dialogs
 {
@@ -23,7 +17,7 @@ namespace OPMedia.UI.Dialogs
         public bool ShowNewFolderButton { get; set; }
         public string SelectedPath { get; set; }
         public string Description { get; set; }
-        
+
         public event PerformPathValidationHandler PerformPathValidation = null;
 
         string _title = null;
@@ -37,7 +31,7 @@ namespace OPMedia.UI.Dialogs
             this.InheritAppIcon = false;
 
             this.Description = Translator.Translate("TXT_SELECT_FOLDER");
-            
+
 
             this.ShowNewFolderButton = true;
             this.SelectedPath = PathUtils.CurrentDir;
@@ -94,7 +88,7 @@ namespace OPMedia.UI.Dialogs
 
         void OPMFolderBrowserDialog_Shown(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

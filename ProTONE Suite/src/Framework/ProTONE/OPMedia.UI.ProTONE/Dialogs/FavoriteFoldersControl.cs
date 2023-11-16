@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
+﻿using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Core;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Controls;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Dialogs
 {
@@ -19,8 +14,8 @@ namespace OPMedia.UI.Dialogs
         private FileSystemImageListManager _ilm = new FileSystemImageListManager(false);
         public string FavoriteFoldersHiveName { get; set; }
 
-        public bool ShowOKButton 
-        { 
+        public bool ShowOKButton
+        {
             get { return btnOK.Visible; }
             set { btnOK.Visible = value; }
         }
@@ -52,7 +47,7 @@ namespace OPMedia.UI.Dialogs
 
         void lvFavorites_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = (lvFavorites.SelectedItems != null && lvFavorites.SelectedItems.Count > 0) ;
+            btnDelete.Enabled = (lvFavorites.SelectedItems != null && lvFavorites.SelectedItems.Count > 0);
         }
 
         void FavoriteFoldersControl_Load(object sender, EventArgs e)
@@ -136,7 +131,7 @@ namespace OPMedia.UI.Dialogs
 
         protected override void OnThemeUpdatedInternal()
         {
-            
+
         }
     }
 }

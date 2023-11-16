@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security;
-using System.IO;
-using OPMedia.Core;
-using System.Security.Permissions;
+﻿using OPMedia.Core;
+using System;
 using System.ComponentModel;
+using System.IO;
 
 namespace OPMedia.Runtime.FileInformation
 {
@@ -23,7 +19,7 @@ namespace OPMedia.Runtime.FileInformation
         public static void CopyFile(string source, string destination,
             Kernel32.CopyFileOptions options, Kernel32.CopyFileCallback callback, object state)
         {
-            if (source == null) 
+            if (source == null)
                 throw new ArgumentNullException("source");
             if (destination == null)
                 throw new ArgumentNullException("destination");

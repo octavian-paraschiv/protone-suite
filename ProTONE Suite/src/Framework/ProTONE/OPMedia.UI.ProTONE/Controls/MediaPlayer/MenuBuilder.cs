@@ -1,24 +1,20 @@
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Menus;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.ProTONE.SubtitleDownload;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.UI.Controls;
-using System.ComponentModel;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.UI.ProTONE.SubtitleDownload;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Menus;
-using OPMedia.UI.Themes;
-using OPMedia.UI.ProTONE.Properties;
 using System.Drawing;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.UI.Generic;
-using OPMedia.Runtime.ProTONE.Configuration;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -92,7 +88,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 OPMToolStripMenuItem item = new OPMToolStripMenuItem(plItem.DisplayName);
                 item.Tag = plItem;
                 item.Click += clickHandler;
-                
+
                 int idx = menu.AddSingleEntry(item);
                 item.Checked = (idx == _pnlPlaylist.PlayIndex);
 
@@ -190,7 +186,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         public void AttachCommonPlaylistToolsMenu(MenuWrapper<T> menu, MenuType menuType, EventHandler clickHandler, PlaylistItem plItem)
         {
             //OPMShortcut cmdStart = (menuType == MenuType.SingleItem) ? 
-              //  OPMShortcut.CmdMoveUp : OPMShortcut.CmdClear;
+            //  OPMShortcut.CmdMoveUp : OPMShortcut.CmdClear;
 
             for (OPMShortcut cmd = OPMShortcut.CmdMoveUp; cmd <= OPMShortcut.CmdSavePlaylist; cmd++)
             {
@@ -301,7 +297,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 case OPMShortcut.CmdCfgTimer:
                     tsmi.Image = Resources.IconTime;
                     break;
-                
+
                 default:
                     tsmi.Image = Resources.ResourceManager.GetImage(imageName);
                     break;
@@ -346,10 +342,10 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private bool EnableSubtitleEntry(PlaylistItem plItem)
         {
-            return 
+            return
                 plItem != null &&
-                plItem.IsVideo && 
-                SubtitleDownloadProcessor.CanPerformSubtitleDownload(plItem.Path, 
+                plItem.IsVideo &&
+                SubtitleDownloadProcessor.CanPerformSubtitleDownload(plItem.Path,
                 (int)plItem.Duration.TotalSeconds);
         }
 

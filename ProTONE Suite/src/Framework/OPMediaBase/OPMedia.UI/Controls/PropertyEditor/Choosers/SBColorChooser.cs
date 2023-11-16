@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.UI.Controls;
+﻿using OPMedia.UI.Themes;
+using System;
 using System.Drawing;
-using OPMedia.UI.Themes;
 
 namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 {
@@ -22,12 +18,12 @@ namespace OPMedia.UI.Controls.PropertyEditor.Choosers
 
         public string PropertyValue
         {
-            get 
+            get
             {
-                return cc.ConvertToInvariantString(base.Color); 
+                return cc.ConvertToInvariantString(base.Color);
             }
-            
-            set 
+
+            set
             {
                 base.Color = ThemeManager.SafeColorFromString(value);
             }

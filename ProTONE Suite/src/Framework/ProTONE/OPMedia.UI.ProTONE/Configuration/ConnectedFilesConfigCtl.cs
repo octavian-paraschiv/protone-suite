@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
-using OPMedia.Core;
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI.Properties;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Properties;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Configuration
 {
@@ -27,7 +20,7 @@ namespace OPMedia.UI.Configuration
         public ConnectedFilesConfigCtl()
         {
             InitializeComponent();
-            
+
             lvConnFiles.RegisterEditControl(_txtEditPFT);
             lvConnFiles.RegisterEditControl(_txtEditCFT);
 

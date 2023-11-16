@@ -1,17 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Net;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Properties;
-using OPMedia.UI.Controls;
-using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Controls;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Configuration
 {
@@ -40,7 +30,7 @@ namespace OPMedia.UI.Configuration
             tp.ImageIndex = tabSubPages.ImageList.Images.Count;
             tp.Tag = page.Title;
             tp.Name = page.Name;
-            
+
             tabSubPages.ImageList.Images.Add(page.Image);
             tabSubPages.TabPages.Add(tp);
 

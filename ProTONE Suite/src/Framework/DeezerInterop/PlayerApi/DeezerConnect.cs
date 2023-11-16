@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 
 // Ported from original header file deezer-connect.h
@@ -12,11 +9,11 @@ namespace OPMedia.DeezerInterop.PlayerApi
     /// <summary>
     /// Connect events
     /// </summary>
-    public enum dz_connect_event_t 
+    public enum dz_connect_event_t
     {
         DZ_CONNECT_EVENT_UNKNOWN,                           /* Connect event has not been set yet, not a valid value. */
         DZ_CONNECT_EVENT_USER_OFFLINE_AVAILABLE,            /* User logged in, and credentials from offline store are loaded. */
-    
+
         DZ_CONNECT_EVENT_USER_ACCESS_TOKEN_OK,              /* (Not available) dz_connect_login_with_email() ok, and access_token is available */
         DZ_CONNECT_EVENT_USER_ACCESS_TOKEN_FAILED,          /* (Not available) dz_connect_login_with_email() failed */
 
@@ -25,9 +22,9 @@ namespace OPMedia.DeezerInterop.PlayerApi
         DZ_CONNECT_EVENT_USER_LOGIN_FAIL_BAD_CREDENTIALS,   /* Login with access_token failed because of bad credentials. */
         DZ_CONNECT_EVENT_USER_LOGIN_FAIL_USER_INFO,         /* Login with access_token failed because of other problem. */
         DZ_CONNECT_EVENT_USER_LOGIN_FAIL_OFFLINE_MODE,      /* Login with access_token failed because we are in forced offline mode. */
-    
+
         DZ_CONNECT_EVENT_USER_NEW_OPTIONS,                  /* User options have just changed. */
-    
+
         DZ_CONNECT_EVENT_ADVERTISEMENT_START,               /* A new advertisement needs to be displayed. */
         DZ_CONNECT_EVENT_ADVERTISEMENT_STOP,                /* An advertisement needs to be stopped. */
     }
@@ -54,12 +51,12 @@ namespace OPMedia.DeezerInterop.PlayerApi
     /// Configuration for a Deezer connect handle
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public class dz_connect_configuration 
+    public class dz_connect_configuration
     {
         // The Deezer application ID being used
         [MarshalAs(UnmanagedType.LPStr)]
         public string app_id;
-    
+
         // Product ID of the application being used.\n
         // In a compact form, only ascii characters and '.' (point character) are allowed.
         [MarshalAs(UnmanagedType.LPStr)]
@@ -68,19 +65,19 @@ namespace OPMedia.DeezerInterop.PlayerApi
         // Build product ID which will be used by the Native SDK. 
         [MarshalAs(UnmanagedType.LPStr)]
         public string product_build_id;
-    
+
         // User profile path of application being used. 
         [MarshalAs(UnmanagedType.LPStr)]
         public string user_profile_path;
-    
+
         // (Optional) #connect_event_cb() connect event callback of application being used.
         [MarshalAs(UnmanagedType.FunctionPtr)]
         public dz_connect_onevent_cb connect_event_cb;
-    
+
         // (Optional) Use to allow discovery.
         [MarshalAs(UnmanagedType.LPStr)]
         public string anonymous_blob;
-    
+
         // (Optional) Delegate used to let the lib know if the application has previously crashed.\n
         // If this delegate is not set, an internal crash reporter will be used by the Native SDK.
         [MarshalAs(UnmanagedType.FunctionPtr)]
@@ -100,14 +97,14 @@ namespace OPMedia.DeezerInterop.PlayerApi
         public static extern dz_connect_event_t dz_connect_event_get_type(IntPtr self);
 
 
-                /**
-         * @brief Constructor for IntPtr.
-         *
-         * @param config see #dz_connect_configuration.
-         * @returns      A Deezer connect handle.
-         */
+        /**
+ * @brief Constructor for IntPtr.
+ *
+ * @param config see #dz_connect_configuration.
+ * @returns      A Deezer connect handle.
+ */
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr dz_connect_new([MarshalAs(UnmanagedType.LPStruct)]dz_connect_configuration config);
+        public static extern IntPtr dz_connect_new([MarshalAs(UnmanagedType.LPStruct)] dz_connect_configuration config);
 
 
         /**
@@ -118,7 +115,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
          */
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_debug_log_disable(IntPtr self);
-    
+
         /**
          * @brief Activate the connect session.
          *
@@ -138,10 +135,10 @@ namespace OPMedia.DeezerInterop.PlayerApi
          */
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_deactivate(IntPtr self,
-            
+
             [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
-            
+
             IntPtr operation_userdata);
 
 
@@ -156,12 +153,12 @@ namespace OPMedia.DeezerInterop.PlayerApi
          */
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_set_access_token(IntPtr self,
-            
+
             [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
 
-            IntPtr       operation_userdata,
-                                                                
+            IntPtr operation_userdata,
+
             [MarshalAs(UnmanagedType.LPStr)]
             string access_token);
 
@@ -176,10 +173,10 @@ namespace OPMedia.DeezerInterop.PlayerApi
          */
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern dz_error_t dz_connect_logout(IntPtr self,
-            
+
             [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
-            
+
             IntPtr operation_userdata);
 
         /**
@@ -198,9 +195,9 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
             [MarshalAs(UnmanagedType.FunctionPtr)]
             dz_activity_operation_callback cb,
-            
+
             IntPtr operation_userdata,
-            
+
             [MarshalAs(UnmanagedType.LPStr)]
             string local_path);
 
@@ -220,7 +217,7 @@ namespace OPMedia.DeezerInterop.PlayerApi
 
             IntPtr operation_userdata,
 
-            bool  offline_mode_forced);
+            bool offline_mode_forced);
     }
     #endregion
 

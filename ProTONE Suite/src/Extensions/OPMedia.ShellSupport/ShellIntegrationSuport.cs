@@ -1,17 +1,16 @@
-using System.Runtime.InteropServices;
 using OPMedia.ShellSupport.Properties;
 using SharpShell.Attributes;
 using SharpShell.SharpContextMenu;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using SharpShell.ServerRegistration;
 
 namespace OPMedia.ShellSupport
 {
     public enum CommandType
     {
-       PlayFiles,
-       EnqueueFiles
+        PlayFiles,
+        EnqueueFiles
     }
 
 

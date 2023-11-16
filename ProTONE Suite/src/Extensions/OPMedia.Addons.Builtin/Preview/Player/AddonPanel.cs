@@ -1,14 +1,7 @@
+using OPMedia.Runtime.Addons.AddonsBase.Preview;
+using OPMedia.Runtime.ProTONE;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime.Addons.AddonsBase.Preview;
-using OPMedia.UI.Themes;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE;
 
 namespace OPMedia.Addons.Builtin.Player
 {

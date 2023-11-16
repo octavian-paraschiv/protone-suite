@@ -1,28 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System.ComponentModel;
-using System.IO;
-using System.Drawing.Design;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using System.Windows.Forms.Design;
-using System.Security;
-using System.Security.Permissions;
-using System.Windows.Forms;
-using System.Drawing;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using TagLib.Mpeg;
-using TagLib;
 using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.ExtendedInfo;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.Rendering;
-using System.Threading;
-using OPMedia.Core.Configuration;
-using OPMedia.Runtime.ProTONE.Configuration;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Design;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
+using System.Security;
+using System.Security.Permissions;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
+using TagLib;
+using TagLib.Mpeg;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
 {
@@ -74,9 +71,9 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
         [Browsable(false)]
         public bool HasTag
-        { 
-            get 
-            { 
+        {
+            get
+            {
                 //return (af != null && 
                 //    ((af.TagTypesOnDisk & TagTypes.Id3v1) == TagTypes.Id3v1 ||
                 //    (af.TagTypesOnDisk & TagTypes.Id3v2) == TagTypes.Id3v2));
@@ -84,7 +81,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 //return (af != null && _tag != null);
 
                 return (_tag != null);
-            } 
+            }
         }
 
         [TranslatableDisplayName("TXT_ARTIST")]
@@ -150,7 +147,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [TranslatableDisplayName("TXT_COMMENTS")]
         [TranslatableCategory("TXT_TAGINFO")]
         [Browsable(true)]
-        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", 
+        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             typeof(UITypeEditor)), Localizable(true)]
         public override string Comments
         {
@@ -196,8 +193,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [DefaultValue((short)1)]
         public override short? Track
         {
-            get 
-            { 
+            get
+            {
                 short? retVal = new Nullable<short>();
                 if (HasTag && _tag.Track > 0 && _tag.Track < 255)
                 {
@@ -234,8 +231,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [Browsable(true)]
         public override short? Year
         {
-            get 
-            { 
+            get
+            {
                 short? retVal = new Nullable<short>();
                 if (HasTag && _tag.Year > 1000 && _tag.Year < 9999)
                 {
@@ -338,12 +335,12 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         {
             get
             {
-                if (AudioHeader != null) 
-                    return new Bitrate((short)AudioHeader.Value.AudioBitrate, 
+                if (AudioHeader != null)
+                    return new Bitrate((short)AudioHeader.Value.AudioBitrate,
                         AudioHeader.Value.VBRIHeader.Present || AudioHeader.Value.XingHeader.Present);
                 else if (_prop != null)
                     return new Bitrate((short)_prop.AudioBitrate, false);
-                else 
+                else
                     return null;
             }
         }
@@ -383,7 +380,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 if (_prop != null)
                     return (_prop.AudioChannels == 1) ? ChannelMode.SingleChannel : ChannelMode.Stereo;
-                
+
                 return ChannelMode.SingleChannel;
             }
         }
@@ -429,14 +426,14 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         [TranslatableCategory("TXT_EXTRAINFO")]
         public ID3ArtworkInfo ArtworkInfo
         {
-            get 
+            get
             {
                 if (artworkInfo == null)
                 {
                     artworkInfo = new ID3ArtworkInfo(af);
                 }
 
-                return artworkInfo; 
+                return artworkInfo;
             }
 
             set
@@ -503,7 +500,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     {
                         af.RemoveTags(TagTypes.AllTags);
                     }
-                    
+
 
                     try
                     {
@@ -532,7 +529,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             }
         }
 
-        public override void  DeepLoad()
+        public override void DeepLoad()
         {
             // Read the audio header if not already done
             if (!_deepLoad)
@@ -612,7 +609,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         }
 
         [Browsable(false)]
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             get
             {

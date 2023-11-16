@@ -7,11 +7,9 @@
 #endregion
 
 #region Using directives
-using System;
-using System.Collections.Generic;
-using System.Text;
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Runtime.Addons.AddonsBase.Prop;
+using System.Collections.Generic;
 #endregion
 
 namespace OPMedia.Runtime.Addons.ActionManagement
@@ -116,7 +114,7 @@ namespace OPMedia.Runtime.Addons.ActionManagement
                                 return true;
                             }
                         }
-                        
+
                         return false;
                 }
             }

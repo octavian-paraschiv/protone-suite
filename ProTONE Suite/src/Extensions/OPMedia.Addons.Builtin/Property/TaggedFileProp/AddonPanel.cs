@@ -1,27 +1,19 @@
+using OPMedia.Addons.Builtin.Configuration;
+using OPMedia.Addons.Builtin.Properties;
+using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
+using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.Addons.AddonsBase.Prop;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Wizards;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using OPMedia.Core;
-using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
-using OPMedia.Runtime.Addons.AddonsBase.Prop;
-using OPMedia.UI.Wizards;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.UI;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.Core.Configuration;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.ProTONE.GlobalEvents;
-using OPMedia.UI.Controls;
-using OPMedia.Addons.Builtin.Properties;
-using OPMedia.Runtime.FileInformation;
-using OPMedia.Addons.Builtin.Configuration;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp
 {
@@ -143,7 +135,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
 
         void _reloadTimer_Tick(object sender, EventArgs e)
         {
-            _reloadTimer.Stop(); 
+            _reloadTimer.Stop();
             InternalShowProperties(true);
         }
 
@@ -189,7 +181,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
         {
             btnSave.Enabled = base.Modified;
             btnUndo.Enabled = base.Modified;
-            btnLaunchWizard.Visible =  (pgProperties.SelectedObjects.Length > 0);
+            btnLaunchWizard.Visible = (pgProperties.SelectedObjects.Length > 0);
         }
 
         private void btnLaunchWizard_Click(object sender, EventArgs e)

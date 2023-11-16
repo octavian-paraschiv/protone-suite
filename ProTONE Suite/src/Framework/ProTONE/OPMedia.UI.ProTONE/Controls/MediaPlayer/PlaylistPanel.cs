@@ -1,47 +1,37 @@
+using OPMedia.Core;
+using OPMedia.Core.Configuration;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.OnlineMediaContent;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
+using OPMedia.Runtime.Shortcuts;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
+using OPMedia.UI.Generic;
+using OPMedia.UI.Menus;
+using OPMedia.UI.ProTONE.Dialogs;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.ProTONE.SubtitleDownload;
+using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
-using OPMedia.Core.Logging;
-
-using System.IO;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Runtime;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Themes;
-using OPMedia.Core.Configuration;
 using System.Diagnostics;
-
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Runtime.ProTONE.FileInformation;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.UI.Generic;
-using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
-using OPMedia.Core;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.Menus;
-using System.Threading;
-using OPMedia.UI.ProTONE.Dialogs;
-using OPMedia.UI.ProTONE.SubtitleDownload;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Runtime.Processors;
+using System.Drawing;
+using System.IO;
 using System.Net;
-using OPMedia.Core.Utilities;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
-using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-
-using System.Linq;
-using OPMedia.Runtime.ProTONE.RemoteControl;
-using System.Threading.Tasks;
-using NAudio.CoreAudioApi;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 {
@@ -56,7 +46,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         OPMToolTip _tip = new OPMToolTip();
 
         Playlist playlist = new Playlist();
-        
+
         public event LaunchFileEventHandler LaunchFile = null;
         public event EventHandler PlaylistItemMenuClick = null;
         public event TotalTimeChangedHandler TotalTimeChanged = null;
@@ -109,7 +99,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrSavePlaylist.Interval = 500;
             _tmrSavePlaylist.Tick += _tmrSavePlaylist_Tick;
 
-           
+
             _tmrUpdateItemsDesc = new System.Windows.Forms.Timer();
             _tmrUpdateItemsDesc.Interval = 300;
             _tmrUpdateItemsDesc.Tick += OnTimerUpdateItemsDesc;
@@ -162,7 +152,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 UpdateTotalTime(playlist.TotalPlaylistTime);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -228,7 +218,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
             if (idxVisible >= 0)
             {
-            	// THis generates issue #264
+                // THis generates issue #264
                 // TODO: fix #264 while still keep the capability to auto-scroll to the active item...
                 //lvPlaylist.EnsureVisible(idxVisible);
             }
@@ -368,7 +358,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         }
 
         bool initialState = true;
-        
+
 
         internal List<PlaylistItem> GetPlaylistItems()
         {
@@ -492,7 +482,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 if (playlist.Count <= 0)
                     return null;
-    
+
                 return GetActivePlaylistItem();
             }
             catch { }
@@ -506,7 +496,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 if (playlist.Count <= 0)
                     return null;
-    
+
                 return GetActivePlaylistItem().DisplayName;
             }
             catch { }
@@ -745,7 +735,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     Clear();
                     playlist.LoadPlaylist(dlg.FileName);
                 }
-                
+
                 try
                 {
                     string file = dlg.FileNames[0];
@@ -820,7 +810,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 UpdateTotalTime(playlist.TotalPlaylistTime);
                 UpdateItemsDesc();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }
@@ -1033,7 +1023,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             if (e.Button == MouseButtons.Right)
             {
-                
+
             }
         }
 

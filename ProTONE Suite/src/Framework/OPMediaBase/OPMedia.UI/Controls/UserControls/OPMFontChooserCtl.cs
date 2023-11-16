@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing.Text;
+﻿using OPMedia.Core.Logging;
 using OPMedia.UI.Themes;
-using OPMedia.Core.Logging;
+using System;
+using System.Drawing;
 
 namespace OPMedia.UI.Controls
 {
@@ -16,14 +9,14 @@ namespace OPMedia.UI.Controls
     {
         public event EventHandler FontChanged = null;
 
-        public string Description 
+        public string Description
         {
             get { return lblDescription.Text; }
             set { lblDescription.Text = value; }
         }
 
         private Font _selFont = ThemeManager.NormalFont;
-        public Font SelectedFont 
+        public Font SelectedFont
         {
             get { return _selFont; }
             set { _selFont = value; }
@@ -84,7 +77,7 @@ namespace OPMedia.UI.Controls
                 cmbCharset.SelectedItem = (FontCharSet)_selFont.GdiCharSet;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
             }

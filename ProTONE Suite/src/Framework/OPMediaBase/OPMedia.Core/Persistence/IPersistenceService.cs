@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using System.Runtime.Serialization;
-using Microsoft.Win32;
-
-namespace OPMedia.Core
+﻿namespace OPMedia.Core
 {
     public enum NotificationType
     {
         None = 0,
-
         ObjectSaved,
         ObjectDeleted,
-        
         IpcEvent,
     }
 

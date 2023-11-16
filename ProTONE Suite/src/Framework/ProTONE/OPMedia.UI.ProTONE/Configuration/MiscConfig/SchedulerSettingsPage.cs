@@ -1,24 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Configuration;
-using OPMedia.Runtime.ProTONE;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime;
-using OPMedia.UI.Controls;
-using System.Threading;
-using OPMedia.Runtime.Shortcuts;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.UI.Themes;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.ProTONE.GlobalEvents;
+using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.SystemScheduler;
+using OPMedia.UI.Configuration;
+using OPMedia.UI.ProTONE.Properties;
+using OPMedia.UI.Themes;
+using System;
+using System.Drawing;
+using System.Threading;
 
 namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
 {
@@ -32,7 +21,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             }
         }
 
-        public SchedulerSettingsPage(): base()
+        public SchedulerSettingsPage() : base()
         {
             this.Title = "TXT_S_SCHEDULERSETTINGS";
             InitializeComponent();
@@ -80,7 +69,7 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             wsScheduledEvtDays.Weekdays = (Weekday)ProTONEConfig.ScheduledEventDays;
 
             DateTime dtDisplay = DateTime.Today;
-            TimeSpan tsTimeOfDay = 
+            TimeSpan tsTimeOfDay =
                 new TimeSpan(ProTONEConfig.ScheduledEventTime.Hours, ProTONEConfig.ScheduledEventTime.Minutes, ProTONEConfig.ScheduledEventTime.Seconds);
             dtDisplay = dtDisplay.Add(tsTimeOfDay);
 
@@ -96,18 +85,18 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
         protected override void SaveInternal()
         {
             SystemScheduler.PlaylistEventEnabled = chkEnablePlaylistEvt.Checked;
-            
-            ProTONEConfig.PlaylistEventHandler =  cmbPlaylistEvtHandler.SelectedIndex;
 
-            ProTONEConfig.EnableScheduledEvent =  chkEnableScheduledEvt.Checked;
+            ProTONEConfig.PlaylistEventHandler = cmbPlaylistEvtHandler.SelectedIndex;
+
+            ProTONEConfig.EnableScheduledEvent = chkEnableScheduledEvt.Checked;
             ProTONEConfig.ScheduledEventHandler = cmbScheduledEvtHandler.SelectedIndex;
-            ProTONEConfig.ScheduledEventDays =    (int)wsScheduledEvtDays.Weekdays;
+            ProTONEConfig.ScheduledEventDays = (int)wsScheduledEvtDays.Weekdays;
             ProTONEConfig.ScheduledEventTime =
                 new TimeSpan(dtpScheduledEvtTime.Value.TimeOfDay.Hours, dtpScheduledEvtTime.Value.TimeOfDay.Minutes, 0);
 
             ProTONEConfig.SchedulerWaitTimerProceed = (int)nudSchedulerWaitTimerProceed.Value;
 
-            
+
         }
 
         private void OnSettingsChanged(object sender, EventArgs e)

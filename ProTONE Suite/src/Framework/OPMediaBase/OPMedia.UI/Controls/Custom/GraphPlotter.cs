@@ -1,10 +1,7 @@
-﻿using System;
+﻿using OPMedia.UI.Themes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Windows.Forms;
-using OPMedia.UI.Themes;
 using System.Drawing.Drawing2D;
 
 namespace OPMedia.UI.Controls
@@ -113,7 +110,7 @@ namespace OPMedia.UI.Controls
 
             int dataSetLen = data.Length;
 
-            Point last = new Point(rc.Left, 
+            Point last = new Point(rc.Left,
                 (max == min) ? rc.Bottom - rc.Height / 2 :
                 rc.Bottom - (int)((data[0] - min) * rc.Height / (max - min)));
 

@@ -1,11 +1,7 @@
 ﻿using OPMedia.Core.Logging;
-using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 {

@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using OPMedia.Core.Configuration;
-using OPMedia.UI.Themes;
-using System.Windows.Forms;
-using OPMedia.Core.TranslationSupport;
 using OPMedia.Core;
-using System.Drawing;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Dialogs;
 using OPMedia.UI.Properties;
-using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.UI.Themes;
+using System;
 
 namespace OPMedia.Addons.Builtin.FileExplorer
 {
@@ -38,7 +32,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            ProTONEConfig.SetFavoriteFolders(favoriteFoldersControl.FavoriteFolders, 
+            ProTONEConfig.SetFavoriteFolders(favoriteFoldersControl.FavoriteFolders,
                 favoriteFoldersControl.FavoriteFoldersHiveName);
         }
 

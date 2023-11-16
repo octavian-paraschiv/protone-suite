@@ -1,6 +1,4 @@
 using OPMedia.UI.Controls;
-
-using System;
 namespace OPMedia.Runtime.Addons.Configuration
 {
     partial class AddonCfgPanel

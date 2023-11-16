@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.UI.Controls;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
 {
@@ -43,9 +36,9 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
         protected override void DisplayTask()
         {
             _task.TaskType = TaskType.ChangeEncoding;
-            
+
             //if (_task.EncoderSettings != null)
-              //  encoderOptionsCtl.EncoderSettings = _task.EncoderSettings;
+            //  encoderOptionsCtl.EncoderSettings = _task.EncoderSettings;
 
             encoderOptionsCtl.DisplaySettings(false);
         }

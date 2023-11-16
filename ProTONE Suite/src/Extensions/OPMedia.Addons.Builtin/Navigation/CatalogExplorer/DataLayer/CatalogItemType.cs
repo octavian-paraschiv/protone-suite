@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 {
     public class CatalogItemType
@@ -12,23 +8,23 @@ namespace OPMedia.Addons.Builtin.Navigation.CatalogExplorer.DataLayer
 
         #region Properties
         public byte TypeID
-        { get { return currentRow.TypeID; } } 
+        { get { return currentRow.TypeID; } }
 
         public string TypeCode
-        { get { return currentRow.TypeCode; } } 
+        { get { return currentRow.TypeCode; } }
 
         public bool IsDisk
-        { get { return currentRow.IsDisk; } } 
+        { get { return currentRow.IsDisk; } }
 
         public bool IsFolder
-        { get { return currentRow.IsFolder; } } 
+        { get { return currentRow.IsFolder; } }
 
         public bool IsFile
         { get { return currentRow.IsFile; } }
         #endregion
 
         #region Methods
-        
+
 
         public override string ToString()
         {

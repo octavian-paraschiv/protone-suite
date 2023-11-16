@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace OPMedia.DeezerInterop.OAuth
 {
@@ -11,12 +8,12 @@ namespace OPMedia.DeezerInterop.OAuth
     {
         const string RedirectUrl = "http://ocpa.ro/protone/oauth.aspx";
 
-        static readonly string OAuthUrl = 
-            $"https://connect.deezer.com/oauth/auth.php?app_id={DeezerAppConstants.AppId}&" + 
+        static readonly string OAuthUrl =
+            $"https://connect.deezer.com/oauth/auth.php?app_id={DeezerAppConstants.AppId}&" +
             $"redirect_uri={RedirectUrl}&perms=basic_access,offline_access,manage_library";
 
-        static readonly string TokenUrlBase = 
-            $"https://connect.deezer.com/oauth/access_token.php?app_id={DeezerAppConstants.AppId}" + 
+        static readonly string TokenUrlBase =
+            $"https://connect.deezer.com/oauth/access_token.php?app_id={DeezerAppConstants.AppId}" +
             $"&secret={DeezerAppConstants.SecretKey}&code=";
 
         RedirectHandler _rh = new RedirectHandler();

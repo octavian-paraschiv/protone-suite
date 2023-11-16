@@ -1,16 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
-using OPMedia.Runtime;
-using OPMedia.UI.Controls;
-
-using OPMedia.UI.Themes;
-using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.SystemScheduler;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace OPMedia.UI.Controls
 {
@@ -30,7 +21,7 @@ namespace OPMedia.UI.Controls
             InitializeComponent();
         }
 
-       
+
 
         private void SetWeekdays(Weekday value)
         {
@@ -60,7 +51,7 @@ namespace OPMedia.UI.Controls
                 if (chk != null && chk.Checked)
                 {
                     string tag = chk.Tag as string;
-                    if (!string.IsNullOrEmpty(tag) )
+                    if (!string.IsNullOrEmpty(tag))
                     {
                         wd |= (Weekday)Enum.Parse(typeof(Weekday), tag);
                     }

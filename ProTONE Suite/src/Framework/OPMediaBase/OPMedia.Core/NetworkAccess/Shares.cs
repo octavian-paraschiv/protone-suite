@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using OPMedia.Core.Win32;
+using System;
 using System.Collections;
+using System.IO;
 using System.Runtime.InteropServices;
-using OPMedia.Core.Win32;
 
 namespace OPMedia.Core.NetworkAccess
 {

@@ -1,6 +1,4 @@
 using OPMedia.UI.Controls;
-using System;
-using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Configuration
 {

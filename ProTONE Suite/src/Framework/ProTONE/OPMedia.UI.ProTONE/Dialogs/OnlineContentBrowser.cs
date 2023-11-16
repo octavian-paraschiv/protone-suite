@@ -1,27 +1,20 @@
 ﻿using OPMedia.Core;
+using OPMedia.Core.GlobalEvents;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.OnlineMediaContent;
-using OPMedia.UI.Dialogs;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.UI.Controls;
+using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser;
+using OPMedia.UI.ProTONE.Properties;
 using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using OPMedia.UI.ProTONE.Properties;
-using OPMedia.Runtime.ProTONE.Configuration;
-using OPMedia.Core.GlobalEvents;
-using OPMedia.UI.Controls;
-using OPMedia.UI.Controls.Dialogs;
-using OPMedia.Runtime.ProTONE.Rendering;
-using OPMedia.Core.TranslationSupport;
 using System.IO;
-using OPMedia.Runtime.ProTONE.Playlists;
+using System.Windows.Forms;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
 
 namespace OPMedia.UI.ProTONE.Dialogs
@@ -39,7 +32,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.ShowInTaskbar = true;
 
             _ilImages = new ImageList();
-            
+
             _ilImages.TransparentColor = Color.White;
 
             _ilImages.ColorDepth = ColorDepth.Depth32Bit;

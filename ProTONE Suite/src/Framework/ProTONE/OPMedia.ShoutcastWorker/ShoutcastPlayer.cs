@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using OPMedia.Core.Logging;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.ProTONE.WorkerSupport;
+using System;
+using System.Collections.Generic;
 
 namespace OPMedia.ShoutcastWorker
 {
@@ -79,7 +77,7 @@ namespace OPMedia.ShoutcastWorker
             mediaControl = BuildMediaControl();
 
             var filter = new ShoutcastStreamSourceFilter();
-            
+
             // Create Filter
             _source = new DSBaseSourceFilter(filter);
 

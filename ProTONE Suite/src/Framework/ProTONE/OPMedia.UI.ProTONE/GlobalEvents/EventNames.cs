@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OPMedia.UI.ProTONE.GlobalEvents
+﻿namespace OPMedia.UI.ProTONE.GlobalEvents
 {
     public class EventNames : OPMedia.Runtime.ProTONE.EventNames
     {

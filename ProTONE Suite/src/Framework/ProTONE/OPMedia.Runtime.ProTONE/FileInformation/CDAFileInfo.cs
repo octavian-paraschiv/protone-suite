@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
-using OPMedia.Runtime.ProTONE.Rendering.Cdda;
-using System.ComponentModel;
-using OPMedia.Core;
-using System.Net;
-using OPMedia.Core.Logging;
-using System.IO;
-using System.IO.Compression;
-using System.Data;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.FileInformation;
-using OPMedia.Runtime.ProTONE.ExtendedInfo;
-using OPMedia.Runtime.ProTONE.Playlists;
-using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.Runtime.ProTONE.Playlists;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda;
+using OPMedia.Runtime.ProTONE.Rendering.Cdda.Freedb;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using TagLib.Mpeg;
 
 namespace OPMedia.Runtime.ProTONE.FileInformation
@@ -76,7 +67,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     Track tr = _cdEntry.Tracks[_track - 1];
                     return tr.Title;
                 }
-                
+
                 return null;
             }
         }
@@ -97,7 +88,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 return null;
             }
-            
+
         }
 
         [TranslatableDisplayName("TXT_ALBUM")]
@@ -139,7 +130,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public override string Comments
         {
             get { return string.Empty; }
-            
+
         }
 
 
@@ -150,7 +141,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
         public override short? Track
         {
             get { return (short)_track; }
-            
+
         }
 
         [TranslatableDisplayName("TXT_YEAR")]
@@ -172,8 +163,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         }
                     }
                 }
-                catch 
-                { 
+                catch
+                {
                 }
                 return default(short?);
             }
@@ -190,7 +181,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                 info.Add("TXT_BITRATE", Bitrate.GetValueOrDefault().ToString());
                 info.Add("TXT_CHANNELS:", Channels.GetValueOrDefault().ToString());
                 info.Add("TXT_FREQUENCY:", Frequency.GetValueOrDefault().ToString());
-              
+
                 if (_cdEntry != null)
                 {
                     info.Add(string.Empty, null); // separator
@@ -216,7 +207,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                         removeSep = false;
                         info.Add("TXT_GENRE:", Genre);
                     }
-                    
+
                     if (Track.HasValue)
                     {
                         removeSep = false;
@@ -236,8 +227,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
 
                 return info;
             }
-           
-            
+
+
         }
 
         [TranslatableDisplayName("TXT_DURATION")]
@@ -349,7 +340,7 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
                     _cdEntry = null;
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Logger.LogException(ex);
                 _cdEntry = null;

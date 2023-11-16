@@ -1,10 +1,8 @@
-#if HAVE_DSHOW
-
+using OPMedia.Runtime.ProTONE.Rendering.Base;
+using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using OPMedia.Runtime.ProTONE.Rendering.Base;
-using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using System.Text;
 
 
@@ -155,58 +153,58 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
     {
         [PreserveSig]
         int PlayTitle(int ulTitle, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayChapterInTitle(int ulTitle, int ulChapter, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayAtTimeInTitle(int ulTitle, [In] ref DvdHMSFTimeCode pStartTime, DvdCmdFlags dwFlags,
-               [Out]                                                                                   OptIDvdCmd ppCmd);
+               [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int Stop();
 
         [PreserveSig]
         int ReturnFromSubmenu(DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayAtTime([In] ref DvdHMSFTimeCode pTime, DvdCmdFlags dwFlags,
-               [Out]                                                                                   OptIDvdCmd ppCmd);
+               [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayChapter(int ulChapter, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayPrevChapter(DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int ReplayChapter(DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayNextChapter(DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayForwards(double dSpeed, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayBackwards(double dSpeed, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int ShowMenu(DvdMenuId MenuID, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int Resume(DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SelectRelativeButton(DvdRelativeButton buttonDir);
@@ -225,25 +223,25 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         [PreserveSig]
         int Pause(
-                [In, MarshalAs(UnmanagedType.Bool)]                             bool bState);
+                [In, MarshalAs(UnmanagedType.Bool)] bool bState);
 
         [PreserveSig]
         int SelectAudioStream(int ulAudio, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SelectSubpictureStream(int ulSubPicture, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SetSubpictureState(
-                [In, MarshalAs(UnmanagedType.Bool)]                             bool bState,
+                [In, MarshalAs(UnmanagedType.Bool)] bool bState,
                                                                                                                 DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SelectAngle(int ulAngle, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SelectParentalLevel(int ulParentalLevel);
@@ -259,7 +257,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         [PreserveSig]
         int SetDVDDirectory(
-                [In, MarshalAs(UnmanagedType.LPWStr)]                   string pszwPath);
+                [In, MarshalAs(UnmanagedType.LPWStr)] string pszwPath);
 
         [PreserveSig]
         int ActivateAtPosition(DsPOINT point);
@@ -269,30 +267,30 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
 
         [PreserveSig]
         int PlayChaptersAutoStop(int ulTitle, int ulChapter, int ulChaptersToPlay, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int AcceptParentalLevelChange(
-                [In, MarshalAs(UnmanagedType.Bool)]                             bool bAccept);
+                [In, MarshalAs(UnmanagedType.Bool)] bool bAccept);
 
         [PreserveSig]
         int SetOption(DvdOptionFlag flag,
-                [In, MarshalAs(UnmanagedType.Bool)]                             bool fState);
+                [In, MarshalAs(UnmanagedType.Bool)] bool fState);
 
         [PreserveSig]
         int SetState(IDvdState pState, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int PlayPeriodInTitleAutoStop(int ulTitle,
-                [In]                                                                            ref DvdHMSFTimeCode pStartTime,
-                [In]                                                                            ref DvdHMSFTimeCode pEndTime,
+                [In] ref DvdHMSFTimeCode pStartTime,
+                [In] ref DvdHMSFTimeCode pEndTime,
                                                                                                                 DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SetGPRM(int ulIndex, short wValue, DvdCmdFlags dwFlags,
-                [Out]                                                                                   OptIDvdCmd ppCmd);
+                [Out] OptIDvdCmd ppCmd);
 
         [PreserveSig]
         int SelectDefaultMenuLanguage(int Language);
@@ -409,5 +407,3 @@ namespace OPMedia.Runtime.ProTONE.Rendering.DS
         void GetParentalLevel(out int pulParentalLevel);
     }
 }
-
-#endif

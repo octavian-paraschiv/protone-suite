@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using OPMedia.UI.Controls;
 
 namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
@@ -48,7 +41,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             {
                 task = new Task();
             }
-            
+
             _task = task;
             DisplayTask();
         }
