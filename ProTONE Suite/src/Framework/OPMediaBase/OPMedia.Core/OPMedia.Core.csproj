@@ -17,7 +17,6 @@
 	  <DesignTime>True</DesignTime>
 	  <DependentUpon>Resources.resx</DependentUpon>
 	</Compile>
-	<None Include="VersionTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
 	<EmbeddedResource Include="Resources\player.ico">
@@ -69,7 +68,6 @@
 	</Content>
   </ItemGroup>
   <ItemGroup>
-	<Compile Remove="VersionTemplate.cs" />
 	<Compile Remove="NetworkAccess\Impersonator.cs" />
 	<Compile Remove="NetworkAccess\NetworkStorageHost.cs" />
   </ItemGroup>

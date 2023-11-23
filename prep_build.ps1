@@ -1,10 +1,9 @@
 $version = $args[0]
 $isRelease = $args[1]
 
-$templateFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\VersionTemplate.cs"
 $versionFile = ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
-$content = (Get-Content $templateFile).replace('VERSION', $version).Replace('RELEASE', "$isRelease")
+$content = (Get-Content $versionFile).replace('1.0.0.0', $version).Replace('((false))', "$isRelease")
 $content | Set-Content $versionFile
 
 $buildInfoFile = ".\ProTONE Suite $version.buildinfo.txt"
