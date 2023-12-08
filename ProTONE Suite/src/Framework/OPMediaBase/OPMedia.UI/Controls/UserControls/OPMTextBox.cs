@@ -235,7 +235,6 @@ namespace OPMedia.UI.Controls
 
         private void UpdateColors()
         {
-            this.OverrideBackColor = Color.Transparent;
             txtField.BackColor = ThemeManager.WndValidColor;
             txtField.ForeColor = GetForeColor();
             Invalidate(true);

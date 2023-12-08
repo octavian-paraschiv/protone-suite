@@ -162,7 +162,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPassword.MaxLength = 512;
             this.txtProxyPassword.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPassword.Name = "txtProxyPassword";
-            this.txtProxyPassword.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtProxyPassword.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtProxyPassword.PasswordChar = '●';
             this.txtProxyPassword.ReadOnly = false;
@@ -187,7 +186,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyUser.MaxLength = 512;
             this.txtProxyUser.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyUser.Name = "txtProxyUser";
-            this.txtProxyUser.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtProxyUser.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtProxyUser.PasswordChar = '\0';
             this.txtProxyUser.ReadOnly = false;
@@ -213,7 +211,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyPort.Name = "txtProxyPort";
             this.txtProxyPort.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
-            this.txtProxyPort.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtProxyPort.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtProxyPort.PasswordChar = '\0';
             this.txtProxyPort.ReadOnly = false;
@@ -238,7 +235,6 @@ namespace OPMedia.UI.Configuration
             this.txtProxyServer.MaxLength = 512;
             this.txtProxyServer.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtProxyServer.Name = "txtProxyServer";
-            this.txtProxyServer.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtProxyServer.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtProxyServer.PasswordChar = '\0';
             this.txtProxyServer.ReadOnly = false;

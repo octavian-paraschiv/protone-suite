@@ -193,7 +193,6 @@ namespace OPMedia.Runtime.Addons
             this.pnlNavContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlNavContainer.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNavContainer.Name = "pnlNavContainer";
-            this.pnlNavContainer.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlNavContainer.Size = new System.Drawing.Size(816, 454);
             this.pnlNavContainer.TabIndex = 0;
             // 
@@ -242,7 +241,6 @@ namespace OPMedia.Runtime.Addons
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
             this.pnlProperties.Margin = new System.Windows.Forms.Padding(0);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlProperties.Size = new System.Drawing.Size(824, 25);
             this.pnlProperties.TabIndex = 0;
             // 
@@ -270,7 +268,6 @@ namespace OPMedia.Runtime.Addons
             this.pnlPreview.Location = new System.Drawing.Point(0, 0);
             this.pnlPreview.Margin = new System.Windows.Forms.Padding(0);
             this.pnlPreview.Name = "pnlPreview";
-            this.pnlPreview.OverrideBackColor = System.Drawing.Color.Empty;
             this.pnlPreview.Size = new System.Drawing.Size(824, 26);
             this.pnlPreview.TabIndex = 0;
             // 

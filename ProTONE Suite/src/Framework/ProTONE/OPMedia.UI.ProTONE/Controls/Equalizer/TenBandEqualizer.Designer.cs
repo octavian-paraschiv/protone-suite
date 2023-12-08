@@ -87,7 +87,6 @@
             this.equalizerBand10.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand10.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand10.Name = "equalizerBand10";
-            this.equalizerBand10.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand10.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand10.TabIndex = 8;
             this.equalizerBand10.Tag = "9";
@@ -105,7 +104,6 @@
             this.equalizerBand9.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand9.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand9.Name = "equalizerBand9";
-            this.equalizerBand9.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand9.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand9.TabIndex = 7;
             this.equalizerBand9.Tag = "8";
@@ -123,7 +121,6 @@
             this.equalizerBand8.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand8.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand8.Name = "equalizerBand8";
-            this.equalizerBand8.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand8.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand8.TabIndex = 6;
             this.equalizerBand8.Tag = "7";
@@ -141,7 +138,6 @@
             this.equalizerBand7.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand7.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand7.Name = "equalizerBand7";
-            this.equalizerBand7.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand7.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand7.TabIndex = 5;
             this.equalizerBand7.Tag = "6";
@@ -159,7 +155,6 @@
             this.equalizerBand6.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand6.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand6.Name = "equalizerBand6";
-            this.equalizerBand6.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand6.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand6.TabIndex = 4;
             this.equalizerBand6.Tag = "5";
@@ -177,7 +172,6 @@
             this.equalizerBand5.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand5.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand5.Name = "equalizerBand5";
-            this.equalizerBand5.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand5.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand5.TabIndex = 3;
             this.equalizerBand5.Tag = "4";
@@ -195,7 +189,6 @@
             this.equalizerBand4.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand4.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand4.Name = "equalizerBand4";
-            this.equalizerBand4.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand4.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand4.TabIndex = 2;
             this.equalizerBand4.Tag = "3";
@@ -213,7 +206,6 @@
             this.equalizerBand2.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand2.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand2.Name = "equalizerBand2";
-            this.equalizerBand2.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand2.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand2.TabIndex = 1;
             this.equalizerBand2.Tag = "1";
@@ -231,7 +223,6 @@
             this.equalizerBand1.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand1.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand1.Name = "equalizerBand1";
-            this.equalizerBand1.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand1.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand1.TabIndex = 0;
             this.equalizerBand1.Tag = "0";
@@ -249,7 +240,6 @@
             this.equalizerBand3.MaximumSize = new System.Drawing.Size(33, 600);
             this.equalizerBand3.MinimumSize = new System.Drawing.Size(33, 200);
             this.equalizerBand3.Name = "equalizerBand3";
-            this.equalizerBand3.OverrideBackColor = System.Drawing.Color.Empty;
             this.equalizerBand3.Size = new System.Drawing.Size(33, 203);
             this.equalizerBand3.TabIndex = 1;
             this.equalizerBand3.Tag = "2";

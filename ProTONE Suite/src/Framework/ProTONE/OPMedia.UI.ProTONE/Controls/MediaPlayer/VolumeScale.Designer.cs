@@ -88,7 +88,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.volumeProgress.Maximum = 10000D;
             this.volumeProgress.Name = "volumeProgress";
             this.volumeProgress.NrTicks = 10;
-            this.volumeProgress.OverrideBackColor = System.Drawing.Color.Empty;
             this.volumeProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.volumeProgress.ShowTicks = true;
             this.volumeProgress.Size = new System.Drawing.Size(270, 6);

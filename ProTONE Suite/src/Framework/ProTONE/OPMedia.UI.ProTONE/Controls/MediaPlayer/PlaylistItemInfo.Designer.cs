@@ -33,11 +33,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlLayout = new OPMedia.UI.Controls.OPMTableLayoutPanel();
             this.lblDesc = new OPMedia.UI.Controls.OPMLabel();
             this.pbInfo = new System.Windows.Forms.PictureBox();
-            this.pnlDisplay = new OPMCustomPanel();
             this.propDisplay = new OPMedia.UI.Controls.InfoTextBox();
             this.pnlLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).BeginInit();
-            this.pnlDisplay.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlLayout
@@ -47,7 +45,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pnlLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlLayout.Controls.Add(this.lblDesc, 0, 0);
             this.pnlLayout.Controls.Add(this.pbInfo, 0, 1);
-            this.pnlLayout.Controls.Add(this.pnlDisplay, 0, 2);
+            this.pnlLayout.Controls.Add(this.propDisplay, 0, 2);
             this.pnlLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLayout.Location = new System.Drawing.Point(0, 0);
             this.pnlLayout.Margin = new System.Windows.Forms.Padding(0);
@@ -89,18 +87,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.pbInfo.TabIndex = 3;
             this.pbInfo.TabStop = false;
             // 
-            // pnlDisplay
-            // 
-            this.pnlDisplay.Controls.Add(this.propDisplay);
-            this.pnlDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDisplay.ForeColor = System.Drawing.Color.Black;
-            this.pnlDisplay.Location = new System.Drawing.Point(5, 295);
-            this.pnlDisplay.Margin = new System.Windows.Forms.Padding(5, 5, 5, 0);
-            this.pnlDisplay.Name = "pnlDisplay";
-            this.pnlDisplay.Padding = new System.Windows.Forms.Padding(3);
-            this.pnlDisplay.Size = new System.Drawing.Size(268, 180);
-            this.pnlDisplay.TabIndex = 2;
-            // 
             // propDisplay
             // 
             this.propDisplay.AutoSize = true;
@@ -108,12 +94,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.propDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propDisplay.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.propDisplay.ForeColor = System.Drawing.Color.Black;
-            this.propDisplay.Location = new System.Drawing.Point(3, 3);
-            this.propDisplay.Margin = new System.Windows.Forms.Padding(0);
+            this.propDisplay.Location = new System.Drawing.Point(5, 295);
+            this.propDisplay.Margin = new System.Windows.Forms.Padding(5);
             this.propDisplay.Name = "propDisplay";
             this.propDisplay.ReadOnly = true;
             this.propDisplay.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.propDisplay.Size = new System.Drawing.Size(260, 172);
+            this.propDisplay.Size = new System.Drawing.Size(268, 175);
             this.propDisplay.TabIndex = 2;
             this.propDisplay.Text = "";
             // 
@@ -127,9 +113,8 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.Name = "PlaylistItemInfo";
             this.Size = new System.Drawing.Size(278, 475);
             this.pnlLayout.ResumeLayout(false);
+            this.pnlLayout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbInfo)).EndInit();
-            this.pnlDisplay.ResumeLayout(false);
-            this.pnlDisplay.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -140,6 +125,5 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         private UI.Controls.OPMLabel lblDesc;
         private UI.Controls.InfoTextBox propDisplay;
         private System.Windows.Forms.PictureBox pbInfo;
-        private UI.Controls.OPMCustomPanel pnlDisplay;
     }
 }

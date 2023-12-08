@@ -68,7 +68,6 @@ namespace OPMedia.UI.Dialogs
             this.pbWaiting.Maximum = 100D;
             this.pbWaiting.Name = "pbWaiting";
             this.pbWaiting.NrTicks = 20;
-            this.pbWaiting.OverrideBackColor = System.Drawing.Color.Empty;
             this.pbWaiting.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbWaiting.ShowTicks = false;
             this.pbWaiting.Size = new System.Drawing.Size(350, 14);

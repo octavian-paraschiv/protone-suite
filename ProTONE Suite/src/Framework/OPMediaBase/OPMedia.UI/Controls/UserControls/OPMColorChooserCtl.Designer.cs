@@ -176,7 +176,6 @@
             this.cgR.Maximum = 255D;
             this.cgR.Name = "cgR";
             this.cgR.NrTicks = 10;
-            this.cgR.OverrideBackColor = System.Drawing.Color.Empty;
             this.cgR.OverrideElapsedBackColor = System.Drawing.Color.Red;
             this.cgR.ShowTicks = true;
             this.cgR.Size = new System.Drawing.Size(293, 23);
@@ -197,7 +196,6 @@
             this.cgG.Maximum = 255D;
             this.cgG.Name = "cgG";
             this.cgG.NrTicks = 10;
-            this.cgG.OverrideBackColor = System.Drawing.Color.Empty;
             this.cgG.OverrideElapsedBackColor = System.Drawing.Color.Green;
             this.cgG.ShowTicks = true;
             this.cgG.Size = new System.Drawing.Size(293, 23);
@@ -218,7 +216,6 @@
             this.cgB.Maximum = 255D;
             this.cgB.Name = "cgB";
             this.cgB.NrTicks = 10;
-            this.cgB.OverrideBackColor = System.Drawing.Color.Empty;
             this.cgB.OverrideElapsedBackColor = System.Drawing.Color.Blue;
             this.cgB.ShowTicks = true;
             this.cgB.Size = new System.Drawing.Size(293, 23);
@@ -251,7 +248,6 @@
             0});
             this.nudR.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudR.Name = "nudR";
-            this.nudR.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudR.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudR.ReadOnly = false;
             this.nudR.Size = new System.Drawing.Size(55, 25);
@@ -291,7 +287,6 @@
             0});
             this.nudG.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudG.Name = "nudG";
-            this.nudG.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudG.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudG.ReadOnly = false;
             this.nudG.Size = new System.Drawing.Size(55, 25);
@@ -331,7 +326,6 @@
             0});
             this.nudB.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudB.Name = "nudB";
-            this.nudB.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudB.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudB.ReadOnly = false;
             this.nudB.Size = new System.Drawing.Size(55, 25);

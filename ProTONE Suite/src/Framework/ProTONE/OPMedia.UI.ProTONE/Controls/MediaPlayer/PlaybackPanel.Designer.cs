@@ -128,7 +128,6 @@
             this.timeScale.Location = new System.Drawing.Point(33, 10);
             this.timeScale.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.timeScale.Name = "timeScale";
-            this.timeScale.OverrideBackColor = System.Drawing.Color.Empty;
             this.timeScale.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.timeScale.Size = new System.Drawing.Size(339, 15);
             this.timeScale.TabIndex = 13;
@@ -156,7 +155,6 @@
             this.volumeScale.Location = new System.Drawing.Point(261, 45);
             this.volumeScale.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
             this.volumeScale.Name = "volumeScale";
-            this.volumeScale.OverrideBackColor = System.Drawing.Color.Empty;
             this.volumeScale.Position = 5000;
             this.volumeScale.Size = new System.Drawing.Size(111, 25);
             this.volumeScale.TabIndex = 11;

@@ -923,7 +923,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         protected override void OnThemeUpdatedInternal()
         {
             UpdatePlaylistNames(false);
-
             var c = ThemeManager.ForeColor;
             lblSep2.OverrideBackColor = c;
             lblSep3.OverrideBackColor = c;

@@ -18,7 +18,7 @@ namespace OPMedia.UI.Configuration
 
         public virtual string GetHelpTopic()
         {
-            return this.Name;
+            return this.Title;
         }
 
         public event EventHandler ModifiedActive = null;
@@ -76,17 +76,6 @@ namespace OPMedia.UI.Configuration
 
         protected virtual void DiscardInternal()
         {
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // BaseCfgPanel
-            // 
-            this.Name = "BaseCfgPanel";
-            this.ResumeLayout(false);
-
         }
 
         public virtual Size? RequestedItemSize

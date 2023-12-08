@@ -96,7 +96,6 @@
             this.ctlColorChooser.Location = new System.Drawing.Point(0, 0);
             this.ctlColorChooser.Margin = new System.Windows.Forms.Padding(0);
             this.ctlColorChooser.Name = "ctlColorChooser";
-            this.ctlColorChooser.OverrideBackColor = System.Drawing.Color.Empty;
             this.ctlColorChooser.Size = new System.Drawing.Size(377, 208);
             this.ctlColorChooser.TabIndex = 2;
             // 

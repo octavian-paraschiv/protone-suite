@@ -217,7 +217,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerName.MaxLength = 32767;
             this.txtCddbServerName.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtCddbServerName.Name = "txtCddbServerName";
-            this.txtCddbServerName.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtCddbServerName.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtCddbServerName.PasswordChar = '\0';
             this.txtCddbServerName.ReadOnly = false;
@@ -243,7 +242,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtCddbServerPort.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtCddbServerPort.Name = "txtCddbServerPort";
             this.txtCddbServerPort.NumBase = OPMedia.UI.Controls.NumberingBase.Base10;
-            this.txtCddbServerPort.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtCddbServerPort.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtCddbServerPort.PasswordChar = '\0';
             this.txtCddbServerPort.ReadOnly = false;

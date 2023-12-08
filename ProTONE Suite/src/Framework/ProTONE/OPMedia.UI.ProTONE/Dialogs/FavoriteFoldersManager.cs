@@ -49,7 +49,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.favoriteFoldersControl.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.favoriteFoldersControl.Location = new System.Drawing.Point(0, 0);
             this.favoriteFoldersControl.Name = "favoriteFoldersControl";
-            this.favoriteFoldersControl.OverrideBackColor = System.Drawing.Color.Empty;
             this.favoriteFoldersControl.ShowOKButton = true;
             this.favoriteFoldersControl.Size = new System.Drawing.Size(398, 200);
             this.favoriteFoldersControl.TabIndex = 0;

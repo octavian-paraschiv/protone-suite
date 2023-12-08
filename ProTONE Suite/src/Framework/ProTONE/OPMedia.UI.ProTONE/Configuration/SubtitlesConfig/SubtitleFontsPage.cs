@@ -166,5 +166,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             _osdTimer = (int)nudOsdTmr.Value * 1000;
             Modified = true;
         }
+
+
     }
 }

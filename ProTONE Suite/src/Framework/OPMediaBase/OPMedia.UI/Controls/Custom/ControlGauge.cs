@@ -63,9 +63,6 @@ namespace OPMedia.UI.Controls
         public Color OverrideElapsedBackColor
         { get { return _overrideElapsedBackColor; } set { _overrideElapsedBackColor = value; Invalidate(true); } }
 
-        //public Color OverrideBackColor
-        //{ get { return _overrideBackColor; } set { _overrideBackColor = value; Invalidate(true); } }
-
         [DefaultValue(GaugeMode.BandToStart)]
         public GaugeMode GaugeMode
         { get { return _gaugeMode; } set { _gaugeMode = value; Invalidate(true); } }
@@ -252,10 +249,6 @@ namespace OPMedia.UI.Controls
                 if (_overrideElapsedBackColor != Color.Empty)
                 {
                     c1 = c2 = _overrideElapsedBackColor;
-                }
-                if (_overrideBackColor != Color.Empty)
-                {
-                    cBack = _overrideBackColor;
                 }
 
                 float a;

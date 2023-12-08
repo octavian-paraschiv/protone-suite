@@ -1017,8 +1017,8 @@ namespace OPMedia.UI.Controls
         /// and assigned to the proper column, by means of the SetEditControl
         /// method.
         /// </summary>
-		/// <param name="editedItem">The item to be edited.</param>
-		/// <param name="editedSubItem">The subitem to be edited.</param>
+        /// <param name="editedItem">The item to be edited.</param>
+        /// <param name="editedSubItem">The subitem to be edited.</param>
         public void StartEditing(ListViewItem editedItem, OPMListViewSubItem editedSubItem)
         {
             if (_allowEdit == false)
@@ -1187,11 +1187,11 @@ namespace OPMedia.UI.Controls
         /// <summary>
         /// Displays the proper in-place edit control.
         /// </summary>
-		/// <param name="positioningOnly">Indicates that we only require repositioning the 
-		/// given edit control in the current row/column.</param>
-		/// <param name="editControl">The edit control to display/reposition.</param>
-		/// <param name="editedSubItem">The subitem being edited (to display
-		/// the edit control for).</param>
+        /// <param name="positioningOnly">Indicates that we only require repositioning the 
+        /// given edit control in the current row/column.</param>
+        /// <param name="editControl">The edit control to display/reposition.</param>
+        /// <param name="editedSubItem">The subitem being edited (to display
+        /// the edit control for).</param>
         private void DisplayEditControl(bool positioningOnly, Control editControl,
             ListViewItem.ListViewSubItem editedSubItem)
         {

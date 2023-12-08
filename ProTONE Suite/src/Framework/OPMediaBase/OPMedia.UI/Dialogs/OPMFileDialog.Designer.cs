@@ -143,7 +143,6 @@
             this.txtFileNames.MaxLength = 32767;
             this.txtFileNames.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtFileNames.Name = "txtFileNames";
-            this.txtFileNames.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtFileNames.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtFileNames.PasswordChar = '\0';
             this.txtFileNames.ReadOnly = false;

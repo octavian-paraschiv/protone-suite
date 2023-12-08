@@ -34,6 +34,7 @@ namespace OPMedia.UI.Controls
         public virtual void OnThemeUpdated()
         {
             this.ForeColor = ThemeManager.ForeColor;
+            this.BackColor = ThemeManager.BackColor;
         }
     }
 
@@ -95,13 +96,11 @@ namespace OPMedia.UI.Controls
             string fontFamily = font.FontFamily.Name;
             int fontSize = (int)(2 * font.Size);
 
-            string format = @"{\fonttbl{\f0\fswiss\fprq2\fcharset238 #FF#;}}";
-            text += format.Replace("#FF#", fontFamily);
-
             Color cf = ThemeManager.ForeColor;
 
+            string format = @"{\fonttbl{\f0\fswiss\fprq2\fcharset238 #FF#;}}";
+            text += format.Replace("#FF#", fontFamily);
             text += $"{{\\colortbl ;\\red{cf.R}\\green{cf.G}\\blue{cf.B};}}";
-
             text += @"\viewkind4\uc1\pard\lang1048\f0\fs" + fontSize;
 
             if (!string.IsNullOrEmpty(_desc))
@@ -138,7 +137,8 @@ namespace OPMedia.UI.Controls
 
             this.Rtf = text;
 
-            this.ForeColor = cf;
+            base.ForeColor = ThemeManager.ForeColor;
+            base.BackColor = ThemeManager.BackColor;
         }
 
         private string GenerateRtfLabel(string p)

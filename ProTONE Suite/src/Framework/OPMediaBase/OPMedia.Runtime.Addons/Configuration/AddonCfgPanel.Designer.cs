@@ -131,7 +131,6 @@ namespace OPMedia.Runtime.Addons.Configuration
             this.addonList.Location = new System.Drawing.Point(0, 46);
             this.addonList.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.addonList.Name = "addonList";
-            this.addonList.OverrideBackColor = System.Drawing.Color.Empty;
             this.addonList.Size = new System.Drawing.Size(346, 248);
             this.addonList.TabIndex = 1;
             // 

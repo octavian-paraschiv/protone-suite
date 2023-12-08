@@ -207,7 +207,6 @@ namespace OPMedia.UI.Controls
 
         private void UpdateColors()
         {
-            this.OverrideBackColor = Color.Transparent;
             nudField.BackColor = ThemeManager.WndValidColor;
             nudField.ForeColor = GetForeColor();
             Invalidate(true);

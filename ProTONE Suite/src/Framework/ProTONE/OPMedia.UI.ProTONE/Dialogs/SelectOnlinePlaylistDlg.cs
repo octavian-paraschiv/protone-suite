@@ -224,7 +224,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtNewName.MaxLength = 32767;
             this.txtNewName.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtNewName.Name = "txtNewName";
-            this.txtNewName.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtNewName.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtNewName.PasswordChar = '\0';
             this.txtNewName.ReadOnly = false;

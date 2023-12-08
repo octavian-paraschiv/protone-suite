@@ -92,9 +92,6 @@
 	<Compile Update="Configuration\TroubleshootingPanel.designer.cs">
 	  <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Controls\Containers\OPMCustomPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
 	<Compile Update="Controls\Derived\ImageButton.cs">
 	  <SubType>Component</SubType>
 	</Compile>

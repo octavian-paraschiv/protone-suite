@@ -80,7 +80,6 @@
             this.localDbBrowser.Location = new System.Drawing.Point(0, 0);
             this.localDbBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.localDbBrowser.Name = "localDbBrowser";
-            this.localDbBrowser.OverrideBackColor = System.Drawing.Color.Empty;
             this.localDbBrowser.Size = new System.Drawing.Size(935, 613);
             this.localDbBrowser.TabIndex = 0;
             // 
@@ -102,7 +101,6 @@
             this.shoutcastDirBrowser.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
             this.shoutcastDirBrowser.Location = new System.Drawing.Point(0, 0);
             this.shoutcastDirBrowser.Name = "shoutcastDirBrowser";
-            this.shoutcastDirBrowser.OverrideBackColor = System.Drawing.Color.Empty;
             this.shoutcastDirBrowser.Size = new System.Drawing.Size(192, 73);
             this.shoutcastDirBrowser.TabIndex = 0;
             // 
@@ -125,7 +123,6 @@
             this.deezerTrackBrowser.Location = new System.Drawing.Point(0, 0);
             this.deezerTrackBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.deezerTrackBrowser.Name = "deezerTrackBrowser";
-            this.deezerTrackBrowser.OverrideBackColor = System.Drawing.Color.Empty;
             this.deezerTrackBrowser.Size = new System.Drawing.Size(192, 73);
             this.deezerTrackBrowser.TabIndex = 0;
             // 

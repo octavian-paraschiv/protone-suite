@@ -180,7 +180,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.txtHints.MultiLineText = "TXT_METADATAPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;
@@ -340,7 +339,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0});
             this.nudXFadeLength.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudXFadeLength.Name = "nudXFadeLength";
-            this.nudXFadeLength.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudXFadeLength.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudXFadeLength.ReadOnly = false;
             this.nudXFadeLength.Size = new System.Drawing.Size(88, 25);
@@ -380,7 +378,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0});
             this.nudAnticipatedEnd.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudAnticipatedEnd.Name = "nudAnticipatedEnd";
-            this.nudAnticipatedEnd.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudAnticipatedEnd.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudAnticipatedEnd.ReadOnly = false;
             this.nudAnticipatedEnd.Size = new System.Drawing.Size(88, 25);

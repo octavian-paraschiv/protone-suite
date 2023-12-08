@@ -76,7 +76,6 @@ namespace OPMedia.UI.FileTasks
             this.pbCurrent.Maximum = 10000D;
             this.pbCurrent.Name = "pbCurrent";
             this.pbCurrent.NrTicks = 20;
-            this.pbCurrent.OverrideBackColor = System.Drawing.Color.Empty;
             this.pbCurrent.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbCurrent.ShowTicks = false;
             this.pbCurrent.Size = new System.Drawing.Size(510, 14);
@@ -129,7 +128,6 @@ namespace OPMedia.UI.FileTasks
             this.pbOperation.Maximum = 10000D;
             this.pbOperation.Name = "pbOperation";
             this.pbOperation.NrTicks = 20;
-            this.pbOperation.OverrideBackColor = System.Drawing.Color.Empty;
             this.pbOperation.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.pbOperation.ShowTicks = false;
             this.pbOperation.Size = new System.Drawing.Size(510, 14);

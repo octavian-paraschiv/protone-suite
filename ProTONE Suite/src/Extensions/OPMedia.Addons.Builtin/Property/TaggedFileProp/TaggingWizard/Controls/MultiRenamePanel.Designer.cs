@@ -64,7 +64,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtRenamePattern.MaxLength = 32767;
             this.txtRenamePattern.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtRenamePattern.Name = "txtRenamePattern";
-            this.txtRenamePattern.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtRenamePattern.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtRenamePattern.PasswordChar = '\0';
             this.txtRenamePattern.ReadOnly = false;
@@ -90,7 +89,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.MultiLineText = "TXT_TAGGINGPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;

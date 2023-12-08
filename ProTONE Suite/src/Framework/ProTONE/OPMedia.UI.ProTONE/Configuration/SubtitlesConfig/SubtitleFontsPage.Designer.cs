@@ -117,7 +117,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             0});
             this.nudOsdTmr.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudOsdTmr.Name = "nudOsdTmr";
-            this.nudOsdTmr.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudOsdTmr.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudOsdTmr.ReadOnly = true;
             this.nudOsdTmr.Size = new System.Drawing.Size(56, 29);

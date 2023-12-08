@@ -52,11 +52,6 @@ namespace OPMedia.UI.ProTONE.Controls
             _b1V = BrushHelper.GenerateVuMeterBrush(Width, Height, false);
 
             Color cBack = ThemeManager.BackColor;
-            if (_overrideBackColor != Color.Empty)
-            {
-                cBack = _overrideBackColor;
-            }
-
             _b2H = new SolidBrush(cBack);
             _b2V = new SolidBrush(cBack);
         }

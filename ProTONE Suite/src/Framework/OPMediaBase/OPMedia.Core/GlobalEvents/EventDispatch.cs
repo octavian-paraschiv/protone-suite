@@ -22,27 +22,17 @@ namespace OPMedia.Core
         {
             if (ctl != null)
             {
-                ctl.HandleCreated -= RegisterAsEventSink;
-                ctl.HandleCreated += RegisterAsEventSink;
-
-                ctl.HandleDestroyed -= UnregisterAsEventSink;
-                ctl.HandleDestroyed += UnregisterAsEventSink;
-            }
-        }
-
-        private static void RegisterAsEventSink(object s, EventArgs e)
-        {
-            try
-            {
-                Control ctl = s as Control;
-                if (ctl != null)
+                try
                 {
                     RegisterHandler(ctl);
+
+                    ctl.HandleDestroyed -= UnregisterAsEventSink;
+                    ctl.HandleDestroyed += UnregisterAsEventSink;
                 }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+                }
             }
         }
 

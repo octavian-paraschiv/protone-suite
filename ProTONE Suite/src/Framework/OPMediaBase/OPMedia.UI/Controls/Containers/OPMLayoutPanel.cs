@@ -13,13 +13,16 @@ namespace OPMedia.UI.Controls
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color BackColor
-        { get { return base.BackColor; } }
+        public new Color BackColor => base.BackColor;
 
         public OPMTableLayoutPanel()
             : base()
         {
-            base.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.DoubleBuffered = true;
+
             base.BackColor = ThemeManager.BackColor;
 
             this.RegisterAsEventSink();
@@ -39,13 +42,16 @@ namespace OPMedia.UI.Controls
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color BackColor
-        { get { return base.BackColor; } }
+        public new Color BackColor => base.BackColor;
 
         public OPMFlowLayoutPanel()
             : base()
         {
-            base.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.DoubleBuffered = true;
+
             base.BackColor = ThemeManager.BackColor;
 
             this.RegisterAsEventSink();

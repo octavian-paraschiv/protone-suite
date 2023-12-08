@@ -281,7 +281,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.piTotal.Location = new System.Drawing.Point(0, 599);
             this.piTotal.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
             this.piTotal.Name = "piTotal";
-            this.piTotal.OverrideBackColor = System.Drawing.Color.Empty;
             this.piTotal.Size = new System.Drawing.Size(695, 17);
             this.piTotal.TabIndex = 4;
             // 
@@ -297,7 +296,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.piCurrent.Location = new System.Drawing.Point(395, 2);
             this.piCurrent.Margin = new System.Windows.Forms.Padding(0, 2, 0, 5);
             this.piCurrent.Name = "piCurrent";
-            this.piCurrent.OverrideBackColor = System.Drawing.Color.Empty;
             this.piCurrent.Size = new System.Drawing.Size(280, 543);
             this.piCurrent.TabIndex = 7;
             // 
@@ -312,7 +310,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.piPrev.Location = new System.Drawing.Point(395, 574);
             this.piPrev.Margin = new System.Windows.Forms.Padding(0);
             this.piPrev.Name = "piPrev";
-            this.piPrev.OverrideBackColor = System.Drawing.Color.Empty;
             this.piPrev.Size = new System.Drawing.Size(280, 20);
             this.piPrev.TabIndex = 6;
             // 
@@ -327,7 +324,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.piNext.Location = new System.Drawing.Point(395, 552);
             this.piNext.Margin = new System.Windows.Forms.Padding(0);
             this.piNext.Name = "piNext";
-            this.piNext.OverrideBackColor = System.Drawing.Color.Empty;
             this.piNext.Size = new System.Drawing.Size(280, 20);
             this.piNext.TabIndex = 8;
             // 

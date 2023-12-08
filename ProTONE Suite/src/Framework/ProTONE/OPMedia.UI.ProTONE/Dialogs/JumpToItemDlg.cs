@@ -162,7 +162,6 @@ namespace OPMedia.UI.ProTONE.Dialogs
             this.txtKeyword.MaxLength = 32767;
             this.txtKeyword.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtKeyword.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtKeyword.PasswordChar = '\0';
             this.txtKeyword.ReadOnly = false;

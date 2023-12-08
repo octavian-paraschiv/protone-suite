@@ -65,7 +65,6 @@ namespace OPMedia.UI.Wizards
             this.stepButtons.Location = new System.Drawing.Point(3, 333);
             this.stepButtons.Name = "stepButtons";
             this.stepButtons.OKButtonText = "TXT_WIZARDOK";
-            this.stepButtons.OverrideBackColor = System.Drawing.Color.Empty;
             this.stepButtons.RepeatWizard = false;
             this.stepButtons.ShowMovementButtons = true;
             this.stepButtons.ShowOKButton = false;

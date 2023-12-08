@@ -117,13 +117,13 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                 if (this.ItemType != PlaylistItemType.Current)
                 {
-                    pnlDisplay.Visible = false;
+                    propDisplay.Visible = false;
                     pbInfo.Image = null;
                     pbInfo.Visible = false;
                 }
                 else
                 {
-                    pnlDisplay.Visible = true;
+                    propDisplay.Visible = true;
                     pbInfo.Visible = true;
                 }
 

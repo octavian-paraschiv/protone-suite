@@ -83,7 +83,6 @@
             this.txtDeezerToken.MaxLength = 100;
             this.txtDeezerToken.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDeezerToken.Name = "txtDeezerToken";
-            this.txtDeezerToken.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtDeezerToken.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtDeezerToken.PasswordChar = '\0';
             this.txtDeezerToken.ReadOnly = false;

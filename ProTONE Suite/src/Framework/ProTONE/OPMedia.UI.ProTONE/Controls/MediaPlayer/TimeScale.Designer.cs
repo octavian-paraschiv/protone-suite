@@ -63,7 +63,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.timeProgress.Maximum = 10000D;
             this.timeProgress.Name = "timeProgress";
             this.timeProgress.NrTicks = 20;
-            this.timeProgress.OverrideBackColor = System.Drawing.Color.Empty;
             this.timeProgress.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.timeProgress.ShowTicks = true;
             this.timeProgress.Size = new System.Drawing.Size(270, 6);

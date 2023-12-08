@@ -84,7 +84,6 @@
             this.pageDisksOptions.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageDisksOptions.Modified = false;
             this.pageDisksOptions.Name = "pageDisksOptions";
-            this.pageDisksOptions.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageDisksOptions.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageDisksOptions.Size = new System.Drawing.Size(617, 411);
             this.pageDisksOptions.TabIndex = 0;
@@ -110,7 +109,6 @@
             this.pagePlaylist.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pagePlaylist.Modified = false;
             this.pagePlaylist.Name = "pagePlaylist";
-            this.pagePlaylist.OverrideBackColor = System.Drawing.Color.Empty;
             this.pagePlaylist.Size = new System.Drawing.Size(617, 411);
             this.pagePlaylist.TabIndex = 0;
             // 
@@ -133,7 +131,6 @@
             this.pageScheduler.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageScheduler.Modified = true;
             this.pageScheduler.Name = "pageScheduler";
-            this.pageScheduler.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageScheduler.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageScheduler.Size = new System.Drawing.Size(617, 411);
             this.pageScheduler.TabIndex = 0;
@@ -159,7 +156,6 @@
             this.pageFavoriteFolders.Margin = new System.Windows.Forms.Padding(3, 12, 3, 3);
             this.pageFavoriteFolders.Modified = false;
             this.pageFavoriteFolders.Name = "pageFavoriteFolders";
-            this.pageFavoriteFolders.OverrideBackColor = System.Drawing.Color.Empty;
             this.pageFavoriteFolders.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.pageFavoriteFolders.Size = new System.Drawing.Size(617, 411);
             this.pageFavoriteFolders.TabIndex = 0;

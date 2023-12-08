@@ -108,7 +108,6 @@
             this.txtDestFolder.MaxLength = 32767;
             this.txtDestFolder.MinimumSize = new System.Drawing.Size(20, 20);
             this.txtDestFolder.Name = "txtDestFolder";
-            this.txtDestFolder.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtDestFolder.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtDestFolder.PasswordChar = '\0';
             this.txtDestFolder.ReadOnly = true;

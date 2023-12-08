@@ -234,7 +234,6 @@
             this.gpWaveform.MaxVal = null;
             this.gpWaveform.MinVal = null;
             this.gpWaveform.Name = "gpWaveform";
-            this.gpWaveform.OverrideBackColor = System.Drawing.Color.Empty;
             this.gpWaveform.PenWidth = 2F;
             this.pnlWaveform.SetRowSpan(this.gpWaveform, 3);
             this.gpWaveform.ShowDecadicLines = false;
@@ -328,7 +327,6 @@
             this.spSpectrogram.MaxVal = null;
             this.spSpectrogram.MinVal = null;
             this.spSpectrogram.Name = "spSpectrogram";
-            this.spSpectrogram.OverrideBackColor = System.Drawing.Color.Empty;
             this.spSpectrogram.PenWidth = 2F;
             this.pnlSpectrogram.SetRowSpan(this.spSpectrogram, 4);
             this.spSpectrogram.ShowDecadicLines = true;
@@ -350,7 +348,6 @@
             this.vuRight.Maximum = 10000D;
             this.vuRight.Name = "vuRight";
             this.vuRight.NrTicks = 10;
-            this.vuRight.OverrideBackColor = System.Drawing.Color.Empty;
             this.vuRight.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.vuRight.ShowTicks = true;
             this.vuRight.Size = new System.Drawing.Size(386, 11);
@@ -370,7 +367,6 @@
             this.vuLeft.Maximum = 10000D;
             this.vuLeft.Name = "vuLeft";
             this.vuLeft.NrTicks = 10;
-            this.vuLeft.OverrideBackColor = System.Drawing.Color.Empty;
             this.vuLeft.OverrideElapsedBackColor = System.Drawing.Color.Empty;
             this.vuLeft.ShowTicks = true;
             this.vuLeft.Size = new System.Drawing.Size(386, 12);

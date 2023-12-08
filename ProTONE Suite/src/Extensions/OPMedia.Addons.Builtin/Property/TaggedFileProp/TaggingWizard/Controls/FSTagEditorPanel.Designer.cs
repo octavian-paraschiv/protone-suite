@@ -135,7 +135,6 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             this.txtHints.MultiLineText = "TXT_TAGGINGPATTERNS";
             this.txtHints.MultiLineTextSeparator = ';';
             this.txtHints.Name = "txtHints";
-            this.txtHints.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtHints.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtHints.PasswordChar = '\0';
             this.txtHints.ReadOnly = true;

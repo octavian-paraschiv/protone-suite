@@ -95,7 +95,6 @@
             this.ctlFontChooser.Location = new System.Drawing.Point(0, 0);
             this.ctlFontChooser.Margin = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.ctlFontChooser.Name = "ctlFontChooser";
-            this.ctlFontChooser.OverrideBackColor = System.Drawing.Color.Empty;
             this.ctlFontChooser.SelectedFont = new System.Drawing.Font("Segoe UI", 9F);
             this.ctlFontChooser.Size = new System.Drawing.Size(407, 221);
             this.ctlFontChooser.TabIndex = 2;

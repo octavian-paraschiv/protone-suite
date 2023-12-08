@@ -38,7 +38,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             this.signalAnalysisScreen1.Location = new System.Drawing.Point(4, 25);
             this.signalAnalysisScreen1.Margin = new System.Windows.Forms.Padding(0);
             this.signalAnalysisScreen1.Name = "signalAnalysisScreen1";
-            this.signalAnalysisScreen1.OverrideBackColor = System.Drawing.Color.Empty;
             this.signalAnalysisScreen1.Size = new System.Drawing.Size(436, 336);
             this.signalAnalysisScreen1.TabIndex = 0;
             // 

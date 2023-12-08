@@ -18,43 +18,7 @@ namespace OPMedia.UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new Color BackColor { get { return base.BackColor; } }
-
-        protected Color _overrideBackColor = Color.Empty;
-        public Color OverrideBackColor
-        {
-            get { return _overrideBackColor; }
-            set
-            {
-                _overrideBackColor = value;
-                ApplyBackColor();
-            }
-        }
-
-        [EventSink(EventNames.ThemeUpdated)]
-        public void OnThemeUpdated()
-        {
-            OnThemeUpdatedInternal();
-        }
-
-        protected virtual void OnThemeUpdatedInternal()
-        {
-            ApplyBackColor();
-        }
-
-        private void ApplyBackColor()
-        {
-            if (_overrideBackColor == Color.Empty)
-            {
-                base.BackColor = ThemeManager.BackColor;
-            }
-            else
-            {
-                base.BackColor = _overrideBackColor;
-            }
-
-            Invalidate(true);
-        }
+        public new Color BackColor => base.BackColor;
 
         public FontSizes FontSize
         {
@@ -95,30 +59,26 @@ namespace OPMedia.UI.Controls
 
         public OPMBaseControl() : base()
         {
-            InitializeComponent();
-
-            ApplyBackColor();
-
             this.FontSize = FontSizes.Normal;
-
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.DoubleBuffer, true);
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-
             this.DoubleBuffered = true;
+
+            base.BackColor = ThemeManager.BackColor;
 
             this.RegisterAsEventSink();
         }
 
-        private void InitializeComponent()
+        [EventSink(EventNames.ThemeUpdated)]
+        public void OnThemeUpdated()
         {
-            this.SuspendLayout();
-            // 
-            // OPMUserControl
-            // 
-            this.Name = "OPMUserControl";
-            this.ResumeLayout(false);
+            base.BackColor = ThemeManager.BackColor;
+            OnThemeUpdatedInternal();
+            this.Invalidate(true);
         }
+
+        protected virtual void OnThemeUpdatedInternal() { }
     }
 
 }

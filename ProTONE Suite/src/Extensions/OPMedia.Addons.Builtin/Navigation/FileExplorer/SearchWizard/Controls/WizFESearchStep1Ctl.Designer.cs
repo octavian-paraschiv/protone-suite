@@ -209,7 +209,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
             this.txtSearchPath.MaxLength = 32767;
             this.txtSearchPath.MinimumSize = new System.Drawing.Size(22, 22);
             this.txtSearchPath.Name = "txtSearchPath";
-            this.txtSearchPath.OverrideBackColor = System.Drawing.Color.Transparent;
             this.txtSearchPath.OverrideForeColor = System.Drawing.Color.Empty;
             this.txtSearchPath.PasswordChar = '\0';
             this.txtSearchPath.ReadOnly = true;

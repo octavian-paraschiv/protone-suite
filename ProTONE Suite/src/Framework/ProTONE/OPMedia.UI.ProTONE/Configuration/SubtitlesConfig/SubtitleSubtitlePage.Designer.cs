@@ -387,7 +387,6 @@ namespace OPMedia.UI.ProTONE.Configuration
             0});
             this.nudMinMovieDuration.MinimumSize = new System.Drawing.Size(10, 25);
             this.nudMinMovieDuration.Name = "nudMinMovieDuration";
-            this.nudMinMovieDuration.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudMinMovieDuration.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudMinMovieDuration.ReadOnly = false;
             this.nudMinMovieDuration.Size = new System.Drawing.Size(50, 25);

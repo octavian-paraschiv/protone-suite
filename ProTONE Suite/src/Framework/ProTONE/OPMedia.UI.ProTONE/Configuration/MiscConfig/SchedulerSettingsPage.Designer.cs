@@ -64,7 +64,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             this.wsScheduledEvtDays.MaximumSize = new System.Drawing.Size(4270, 50);
             this.wsScheduledEvtDays.MinimumSize = new System.Drawing.Size(400, 45);
             this.wsScheduledEvtDays.Name = "wsScheduledEvtDays";
-            this.wsScheduledEvtDays.OverrideBackColor = System.Drawing.Color.Empty;
             this.wsScheduledEvtDays.Size = new System.Drawing.Size(493, 50);
             this.wsScheduledEvtDays.TabIndex = 3;
             // 
@@ -158,7 +157,6 @@ namespace OPMedia.UI.ProTONE.Configuration.MiscConfig
             0,
             0});
             this.nudSchedulerWaitTimerProceed.Name = "nudSchedulerWaitTimerProceed";
-            this.nudSchedulerWaitTimerProceed.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudSchedulerWaitTimerProceed.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudSchedulerWaitTimerProceed.ReadOnly = true;
             this.nudSchedulerWaitTimerProceed.Size = new System.Drawing.Size(80, 25);

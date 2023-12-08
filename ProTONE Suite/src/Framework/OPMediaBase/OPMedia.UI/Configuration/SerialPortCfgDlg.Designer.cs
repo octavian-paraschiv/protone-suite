@@ -80,7 +80,6 @@ namespace OPMedia.UI.Configuration
             this.cfgPanel.Location = new System.Drawing.Point(0, 0);
             this.cfgPanel.Margin = new System.Windows.Forms.Padding(0);
             this.cfgPanel.Name = "cfgPanel";
-            this.cfgPanel.OverrideBackColor = System.Drawing.Color.Empty;
             this.cfgPanel.PortName = "COM1";
             this.cfgPanel.Size = new System.Drawing.Size(264, 235);
             this.cfgPanel.TabIndex = 0;

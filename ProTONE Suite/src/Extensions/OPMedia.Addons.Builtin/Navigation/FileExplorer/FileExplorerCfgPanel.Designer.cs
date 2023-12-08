@@ -55,7 +55,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             // nudPreviewTimer
             // 
-            this.nudPreviewTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.nudPreviewTimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.nudPreviewTimer.DecimalPlaces = 1;
             this.nudPreviewTimer.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
@@ -79,7 +79,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             0});
             this.nudPreviewTimer.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudPreviewTimer.Name = "nudPreviewTimer";
-            this.nudPreviewTimer.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudPreviewTimer.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudPreviewTimer.ReadOnly = true;
             this.nudPreviewTimer.Size = new System.Drawing.Size(53, 25);
@@ -112,7 +111,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // 
             // nudMaxProcessedFiles
             // 
-            this.nudMaxProcessedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.nudMaxProcessedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.nudMaxProcessedFiles.DecimalPlaces = 0;
             this.nudMaxProcessedFiles.FontSize = OPMedia.UI.Themes.FontSizes.Normal;
@@ -136,7 +135,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             0});
             this.nudMaxProcessedFiles.MinimumSize = new System.Drawing.Size(22, 25);
             this.nudMaxProcessedFiles.Name = "nudMaxProcessedFiles";
-            this.nudMaxProcessedFiles.OverrideBackColor = System.Drawing.Color.Transparent;
             this.nudMaxProcessedFiles.OverrideForeColor = System.Drawing.Color.Empty;
             this.nudMaxProcessedFiles.ReadOnly = false;
             this.nudMaxProcessedFiles.Size = new System.Drawing.Size(53, 25);
@@ -187,7 +185,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.connectedFilesConfigCtl1.Margin = new System.Windows.Forms.Padding(0);
             this.connectedFilesConfigCtl1.Modified = false;
             this.connectedFilesConfigCtl1.Name = "connectedFilesConfigCtl1";
-            this.connectedFilesConfigCtl1.OverrideBackColor = System.Drawing.Color.Empty;
             this.connectedFilesConfigCtl1.Size = new System.Drawing.Size(375, 273);
             this.connectedFilesConfigCtl1.TabIndex = 8;
             // 

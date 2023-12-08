@@ -401,7 +401,6 @@
 	<EmbeddedResource Include="Resources\FileTypes.png" />
   </ItemGroup>
   <ItemGroup>
-	<None Include="ILMergeConfig.json" />
 	<None Include="Resources\Shoutcast.png" />
 	<EmbeddedResource Include="Resources\Shoutcast16.png" />
 	<EmbeddedResource Include="Resources\deezer16.png" />
@@ -449,14 +448,5 @@
   <ItemGroup>
 	<Compile Remove="Dialogs\BookmarkManager.cs" />
 	<Compile Remove="Dialogs\BookmarkManager.Designer.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\BookmarkScreen.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\BookmarkScreen.Designer.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\MediaScreens.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\PlaybackControlPanel.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\PlaybackControlPanel.Designer.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\RenderingPanel.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\RenderingPanel.Designer.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\TrackInfoScreen.cs" />
-	<Compile Remove="Controls\MediaPlayer\Excluded\TrackInfoScreen.Designer.cs" />
   </ItemGroup>
 </Project>
