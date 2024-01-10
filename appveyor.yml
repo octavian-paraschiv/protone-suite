@@ -24,7 +24,7 @@ artifacts:
 deploy:
     provider: FTP
     protocol: ftp
-    host: 188.213.133.67
+    host: ocpa.ro
     username: ocparo_ftpops
     password: 
         secure: Vu0FvCIJ5sKkVuiZoWBhUA==
