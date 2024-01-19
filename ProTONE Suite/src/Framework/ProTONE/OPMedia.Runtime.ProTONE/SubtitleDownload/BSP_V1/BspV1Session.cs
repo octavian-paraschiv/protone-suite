@@ -2,6 +2,7 @@
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using OPMedia.Core.NetworkAccess;
+using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.BSP_V1;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
 using System;
@@ -19,35 +20,27 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
         BSPSubtitlesService _wsdl = null;
 
         #region Construction / Cleanup
-        public BspV1Session(string serverUrl, CultureInfo culture)
-            : this(serverUrl, string.Empty, string.Empty, culture)
-        {
-        }
-
         public BspV1Session(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
         }
         #endregion
 
-        protected override void DoInitializeSession()
+        protected override void InitializeSession()
         {
             _wsdl = new BSPSubtitlesService(_serverUrl);
             _wsdl.Proxy = AppConfig.GetWebProxy();
             _wsdl.UserAgent = string.Format("{0} v{1}", Constants.PlayerName, SuiteVersion.Version);
         }
 
-        protected override bool IsAuthenticationRequired()
-        {
-            return true; // BSP subtitles V1 requires authentication
-        }
+        protected override bool AuthenticationRequired => true;
 
-        protected override void DoTestConnection()
+        protected override void TestConnection()
         {
             string hello = _wsdl.helloWorld();
         }
 
-        protected override void DoAuthenticate()
+        protected override void Authenticate()
         {
             SubtitlesResult res = _wsdl.logIn(_username, _password, _wsdl.UserAgent);
             if (res.result != "200")
@@ -57,24 +50,14 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
             _sessionToken = res.data;
         }
 
-        protected override double GetKeepAliveInterval()
-        {
-            return 0; // No keepalive mechanism
-        }
-
-        protected override void DoKeepAliveSession()
-        {
-            // No keepalive mechanism
-        }
-
-        protected override void DoCleanup()
+        protected override void CleanupSession()
         {
             _wsdl.Abort();
             _wsdl.Dispose();
             _wsdl = null;
         }
 
-        protected override List<SubtitleInfo> DoGetSubtitles(VideoInfo vi)
+        protected override List<SubtitleInfo> GetSubtitles(VideoInfo vi)
         {
             List<SubtitleInfo> retVal = new List<SubtitleInfo>();
 
@@ -84,8 +67,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
                 var infos = from sd in res.data
                             where
                             (
-                                sd?.movieName?.Length > 0 &&
-                                sd?.movieHash?.Length > 0 &&
+                                //sd?.movieName?.Length > 0 &&
+                                //sd?.movieHash?.Length > 0 &&
                                 sd?.subHash?.Length > 0 &&
                                 sd?.subLang?.Length > 0 &&
                                 sd?.subFormat?.Length > 0 &&
@@ -93,10 +76,13 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
                             )
                             select new SubtitleInfo
                             {
-                                IDSubtitleFile = sd.subID.ToString(),
+                                IDSubtitleFile = sd.subID,
                                 SubFileName = sd.subName,
                                 MovieName = sd.movieName,
-                                LanguageName = OPMedia.Core.Language.ThreeLetterISOLanguageNameToEnglishName(sd.subLang),
+
+                                LanguageName = LanguageHelper.Lookup(sd.subLang)?.DisplayName() ?? sd.subLang,
+                                ISO639 = LanguageHelper.Lookup(sd.subLang)?.Part3 ?? sd.subLang,
+
                                 MovieHash = vi.moviehash,
                                 SubDownloadLink = sd.subDownloadLink,
                                 SubHash = sd.subHash,
@@ -109,12 +95,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
             return retVal;
         }
 
-        protected override Dictionary<string, object> DoGetServerStatistics()
-        {
-            return new Dictionary<string, object>();
-        }
-
-        protected override string DoDownloadSubtitle(string fileName, SubtitleInfo subtitle)
+        protected override string DownloadSubtitleInternal(string fileName, SubtitleInfo subtitle)
         {
             string destPath = Path.ChangeExtension(fileName, subtitle.SubFormat);
             string downloadPath = Path.ChangeExtension(fileName, "gz");

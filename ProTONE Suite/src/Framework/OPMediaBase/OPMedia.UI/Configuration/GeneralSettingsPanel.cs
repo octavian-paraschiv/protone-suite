@@ -1,3 +1,4 @@
+using Iso639;
 using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.GlobalEvents;
@@ -9,7 +10,6 @@ using OPMedia.UI.Generic;
 using OPMedia.UI.Themes;
 using System;
 using System.Drawing;
-using System.Globalization;
 using System.Reflection;
 
 namespace OPMedia.UI.Configuration
@@ -37,20 +37,13 @@ namespace OPMedia.UI.Configuration
 
             #region Languages
 
-            foreach (CultureInfo ci in AppConfig.SupportedCultures)
-            {
-                cmbLanguages.Items.Add(new Language(ci.Name));
-            }
-
+            cmbLanguages.DisplayMember = "Name";
+            cmbLanguages.ValueMember = "Part1";
+            cmbLanguages.DataSource = AppConfig.SupportedUiLanguages;
             curLangID = Translator.GetInterfaceLanguage();
-            for (int i = 0; i < cmbLanguages.Items.Count; i++)
-            {
-                if ((cmbLanguages.Items[i] as Language).ID == curLangID)
-                {
-                    cmbLanguages.SelectedIndex = i;
-                    break;
-                }
-            }
+
+            cmbLanguages.SelectedValue = curLangID;
+
             this.cmbLanguages.SelectedIndexChanged += new System.EventHandler(this.OnSettingsChanged);
 
             lblSetLanguage.Visible = allowGUISetup;
@@ -99,7 +92,7 @@ namespace OPMedia.UI.Configuration
             string curLangID = Translator.GetInterfaceLanguage();
             for (int i = 0; i < cmbLanguages.Items.Count; i++)
             {
-                if ((cmbLanguages.Items[i] as Language).ID == curLangID)
+                if ((cmbLanguages.Items[i] as Language).Part1 == curLangID)
                 {
                     cmbLanguages.SelectedIndex = i;
                     break;
@@ -130,11 +123,9 @@ namespace OPMedia.UI.Configuration
 
         protected override void SaveInternal()
         {
-            string newID = (cmbLanguages.SelectedItem as Language).ID;
+            string newID = (cmbLanguages.SelectedItem as Language).Part1;
             if (newID != curLangID)
-            {
                 AppConfig.LanguageID = newID;
-            }
 
             AppConfig.AllowAutomaticUpdates = chkAllowAutoUpdates.Checked;
 

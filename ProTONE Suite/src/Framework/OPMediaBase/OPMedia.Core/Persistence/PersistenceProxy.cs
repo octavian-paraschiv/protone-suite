@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.ServiceProcess;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OPMedia.Core
 {
@@ -95,7 +94,7 @@ namespace OPMedia.Core
                 {
                     if (pdu is NotificationPDU npdu)
                     {
-                        Task.Factory.StartNew(() => DispatchNotification(npdu.ChangeType, npdu.PersistenceId, npdu.PersistenceContext, npdu.ObjectContent));
+                        ThreadPool.QueueUserWorkItem(_ => DispatchNotification(npdu.ChangeType, npdu.PersistenceId, npdu.PersistenceContext, npdu.ObjectContent));
                     }
                 };
             }

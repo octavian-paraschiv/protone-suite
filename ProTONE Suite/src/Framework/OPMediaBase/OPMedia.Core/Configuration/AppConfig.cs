@@ -1,12 +1,14 @@
-﻿using OPMedia.Core.InstanceManagement;
+﻿using Iso639;
+using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
 using OPMedia.Core.Win32;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -63,7 +65,7 @@ namespace OPMedia.Core.Configuration
         public const int VerWin8_1 = 63;
         public const int VerWin10 = 100;
 
-        static Dictionary<string, CultureInfo> _cultures = new Dictionary<string, CultureInfo>();
+        static Dictionary<string, Language> _languages = new Dictionary<string, Language>();
 
         static string _skinType = string.Empty;
         static string _languageId = string.Empty;
@@ -100,12 +102,12 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static CultureInfo GetCulture(string name)
+        public static Language GetLanguage(string name)
         {
-            if (_cultures.ContainsKey(name))
-                return _cultures[name];
+            if (_languages.ContainsKey(name))
+                return _languages[name];
 
-            return new CultureInfo("en");
+            return LanguageHelper.Lookup("en");
         }
 
         private static bool IsAppUsingPersistence
@@ -123,10 +125,10 @@ namespace OPMedia.Core.Configuration
 
         static AppConfig()
         {
-            _cultures.Add("en", new CultureInfo("en"));
-            _cultures.Add("de", new CultureInfo("de"));
-            _cultures.Add("fr", new CultureInfo("fr"));
-            _cultures.Add("ro", new CultureInfo("ro"));
+            _languages.Add("en", LanguageHelper.Lookup("en"));
+            _languages.Add("de", LanguageHelper.Lookup("de"));
+            _languages.Add("fr", LanguageHelper.Lookup("fr"));
+            _languages.Add("ro", LanguageHelper.Lookup("ro"));
 
             if (IsAppUsingPersistence)
             {
@@ -279,13 +281,11 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static CultureInfo[] SupportedCultures
+        public static Language[] SupportedUiLanguages
         {
             get
             {
-                CultureInfo[] retVal = new CultureInfo[_cultures.Count];
-                _cultures.Values.CopyTo(retVal, 0);
-                return retVal;
+                return _languages.Values.ToArray();
             }
         }
 

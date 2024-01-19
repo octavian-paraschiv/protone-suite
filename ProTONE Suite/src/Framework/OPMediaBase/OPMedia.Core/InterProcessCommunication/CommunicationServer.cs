@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace OPMedia.Core.InterProcessCommunication
 {
@@ -45,13 +45,13 @@ namespace OPMedia.Core.InterProcessCommunication
 
             Logger.LogInfo($"accepting connections on {ipAddr}:{_port}");
 
-            Task.Factory.StartNew(() =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 while (_needStop.Wait(0) == false)
                 {
                     var client = _listener.AcceptTcpClient();
-                    Task.Factory.StartNew(() => DoClient(client));
-                    Task.Delay(400).Wait();
+                    ThreadPool.QueueUserWorkItem(__ => DoClient(client));
+                    Thread.Sleep(400);
                 }
             });
         }

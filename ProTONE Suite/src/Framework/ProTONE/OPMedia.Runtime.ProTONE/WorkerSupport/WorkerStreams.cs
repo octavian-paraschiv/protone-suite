@@ -5,7 +5,6 @@ using System.IO.Pipes;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OPMedia.Runtime.ProTONE.WorkerSupport
 {
@@ -44,7 +43,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
 
         static WorkerServerStream()
         {
-            Task.Run(() =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 int pid = Process.GetCurrentProcess().Id;
 
@@ -60,7 +59,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
                 _evt.Set();
             });
 
-            Task.Run(() =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 int pid = Process.GetCurrentProcess().Id;
 

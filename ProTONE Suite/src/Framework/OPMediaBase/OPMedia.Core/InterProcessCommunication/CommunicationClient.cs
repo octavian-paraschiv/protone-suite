@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace OPMedia.Core.InterProcessCommunication
 {
@@ -39,7 +39,7 @@ namespace OPMedia.Core.InterProcessCommunication
                 _client = null;
             }
 
-            Task.Factory.StartNew(() =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 _client = new TcpClient(_address, _port);
                 bool gracefulClose = false;
@@ -77,9 +77,9 @@ namespace OPMedia.Core.InterProcessCommunication
 
                 if (ReconnectTime > 0 && !gracefulClose)
                 {
-                    Task.Factory.StartNew(() =>
+                    ThreadPool.QueueUserWorkItem(__ =>
                     {
-                        Task.Delay(ReconnectTime).Wait();
+                        Thread.Sleep(ReconnectTime);
                         Logger.LogInfo($"Attempt to reconnect to {_address}:{_port}");
                         Connect(true);
                     });

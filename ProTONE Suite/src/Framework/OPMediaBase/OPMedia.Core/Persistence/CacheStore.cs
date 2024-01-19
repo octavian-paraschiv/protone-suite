@@ -152,6 +152,8 @@ namespace OPMedia.Core.Persistence
             if (string.IsNullOrEmpty(persistenceContext))
                 persistenceContext = "*";
 
+            object ret = null;
+
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
             lock (_cachePollerLock)
@@ -159,38 +161,36 @@ namespace OPMedia.Core.Persistence
                 // Is the requested object in the cache ?
                 if (_cache.ContainsKey(key))
                 {
-                    Logger.LogToConsole("ReadObject: Object with key {0} was found in cache.", key);
-
-                    // If it is, return it from the cache.
-                    return _cache[key].Value;
+                    ret = _cache[key].Value;
+                    Logger.LogToConsole($"ReadObject: {key} from cache => {ret ?? "<null>"}");
                 }
             }
 
-            Logger.LogToConsole("ReadObject: Object with key {0} was not found in cache.", key);
-
-            // If it is not, get it from the persistence DB and also add it in the cache.
-            object s = null;
-
-            if (isBlob)
-                s = _persistence.ReadBlob(persistenceId, persistenceContext);
-            else
-                s = _persistence.ReadObject(persistenceId, persistenceContext);
-
-            if (s != null)
-                Logger.LogToConsole("ReadObject: Object with key {0} was found in DB.", key);
-            else
-                Logger.LogToConsole("ReadObject: Object with key {0} was not found in DB also.", key);
-
-
-            CacheItem ci = new CacheItem(key, s);
-
-            lock (_cachePollerLock)
+            if (ret == null)
             {
-                Logger.LogToConsole("ReadObject: Object with key {0} was added to cache with a TTL of {1} sec", key, CacheItem.MaxCachedItemTTL);
-                _cache.Add(key, ci);
+                Logger.LogToConsole($"ReadObject: {key} not found in cache, or it was null");
+
+                if (isBlob)
+                    ret = _persistence.ReadBlob(persistenceId, persistenceContext);
+                else
+                    ret = _persistence.ReadObject(persistenceId, persistenceContext);
+
+                if (ret != null)
+                    Logger.LogToConsole($"ReadObject: {key} from DB => {ret}");
+                else
+                    Logger.LogToConsole($"ReadObject: {key} not found in DB");
+
+
+                CacheItem ci = new CacheItem(key, ret);
+
+                lock (_cachePollerLock)
+                {
+                    _cache.Add(key, ci);
+                    Logger.LogToConsole($"ReadObject: {key} added to cache with TTL = {CacheItem.MaxCachedItemTTL} sec");
+                }
             }
 
-            return ci.Value;
+            return ret;
         }
         #endregion
 
@@ -223,7 +223,7 @@ namespace OPMedia.Core.Persistence
                     // Is the requested object in the cache ?
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} was found and updated in cache.", key);
+                        Logger.LogToConsole($"SaveObject: {key} updated in cache to value {objectContent}");
 
                         // If it is, update it in the cache.
                         _cache[key].Value = objectContent;
@@ -240,7 +240,7 @@ namespace OPMedia.Core.Persistence
 
                     lock (_cachePollerLock)
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} was not found cache => adding it now", key);
+                        Logger.LogToConsole($"SaveObject: {key} added in cache with value {objectContent}");
                         _cache.Add(key, ci);
 
                         retVal = true;
@@ -249,12 +249,12 @@ namespace OPMedia.Core.Persistence
 
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
-                        Logger.LogToConsole("SaveObject: Object with key {0} is now saved also in DB.", key);
-
                         if (objectContent is byte[])
                             _persistence.SaveBlob(persistenceId, persistenceContext, objectContent as byte[]);
                         else
                             _persistence.SaveObject(persistenceId, persistenceContext, objectContent as string);
+
+                        Logger.LogToConsole($"SaveObject: {key} saved in DB with value {objectContent}");
                     });
             }
             catch

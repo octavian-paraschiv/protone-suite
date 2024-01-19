@@ -1,4 +1,5 @@
-﻿using OPMedia.Core.Logging;
+﻿using Iso639;
+using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.Configuration;
@@ -8,7 +9,6 @@ using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,7 +16,6 @@ namespace OPMedia.UI.ProTONE.Configuration
 {
     public partial class SubtitleSubtitlePage : BaseCfgPanel
     {
-        List<SubtitleLanguage> languages = null;
         bool _subtitleDownloadEnabled = ProTONEConfig.SubtitleDownloadEnabled;
 
         OPMComboBox _cmbEditServerType = new OPMComboBox();
@@ -36,11 +35,8 @@ namespace OPMedia.UI.ProTONE.Configuration
             ProTONEConfig.SubtitleDownloadEnabled = _subtitleDownloadEnabled;
             ProTONEConfig.SubtitleDownloadURIs = _subtitleDownloadURIs;
 
-            if (cmbLanguages.SelectedItem is SubtitleLanguage)
-            {
-                ProTONEConfig.PrefferedSubtitleLang =
-                    (cmbLanguages.SelectedItem as SubtitleLanguage).LCID;
-            }
+            if (cmbLanguages.SelectedItem is SubtitleLanguage lang)
+                ProTONEConfig.PrefferedSubtitleLang = lang.LCID;
 
             ProTONEConfig.SubtitleMinimumMovieDuration = (int)nudMinMovieDuration.Value;
             ProTONEConfig.SubDownloadedNotificationsEnabled = chkNotifySubDownloaded.Checked;
@@ -50,7 +46,7 @@ namespace OPMedia.UI.ProTONE.Configuration
         {
             InitializeComponent();
 
-            _cmbEditServerType.Items.Add(SubtitleServerType.Osdb);
+            _cmbEditServerType.Items.Add(SubtitleServerType.OpenSubtitles);
             _cmbEditServerType.Items.Add(SubtitleServerType.BSP_V1);
             _cmbEditServerType.Items.Add(SubtitleServerType.NuSoap);
             _cmbEditServerType.DropDownHeight = 30;
@@ -284,24 +280,16 @@ namespace OPMedia.UI.ProTONE.Configuration
 
         private void PopulateLanguages()
         {
-            cmbLanguages.Items.Clear();
-
-            languages = new List<SubtitleLanguage>();
-
-            languages.Add(new SubtitleLanguage(-1));
-
-            foreach (CultureInfo ci in SubtitleLanguage.AvailableLanguages)
-            {
-                languages.Add(new SubtitleLanguage(ci.LCID));
-            }
-
-            languages.Sort();
+            var languages = Language.Database
+                .Where(l => l.Culture.LCID != SubtitleLanguage.LOCALE_CUSTOM_UNSPECIFIED)
+                .OrderBy(l => l.DisplayName())
+                .Select(l => new SubtitleLanguage(l))
+                .Prepend(new SubtitleLanguage(null))
+                .ToArray();
 
             cmbLanguages.DataSource = languages;
-            cmbLanguages.SelectedItem = new SubtitleLanguage(ProTONEConfig.PrefferedSubtitleLang);
-
+            cmbLanguages.SelectedItem = languages.Where(l => l.LCID == ProTONEConfig.PrefferedSubtitleLang).FirstOrDefault();
             cmbLanguages.SelectedIndexChanged += new EventHandler(cmbLanguages_SelectedIndexChanged);
-
         }
 
         private void chkNotifySubDownloaded_CheckedChanged(object sender, EventArgs e)
@@ -450,49 +438,29 @@ namespace OPMedia.UI.ProTONE.Configuration
 
     #region SubtitleLanguage class
 
-    public class SubtitleLanguage : IComparable
+    public class SubtitleLanguage
     {
-        const int LOCALE_CUSTOM_UNSPECIFIED = 0x1000;
+        public const int LOCALE_CUSTOM_UNSPECIFIED = 0x1000;
 
-        private static CultureInfo[] __cultures =
-            CultureInfo.GetCultures(CultureTypes.NeutralCultures);
+        private Language _lang;
 
-        public static CultureInfo[] AvailableLanguages
+        public int LCID => _lang?.Culture?.LCID ?? -1;
+
+        public SubtitleLanguage(Language lang)
         {
-            get
-            {
-                var l = (from c in __cultures
-                         where c.LCID != LOCALE_CUSTOM_UNSPECIFIED
-                         select c).ToArray();
-
-                return l;
-            }
-        }
-
-        public int LCID = -1;
-
-        public SubtitleLanguage(int lcid)
-        {
-            LCID = lcid;
-        }
-
-        public override int GetHashCode()
-        {
-            return LCID.GetHashCode();
+            _lang = lang;
         }
 
         public override string ToString()
         {
             try
             {
-                if (LCID > 0 && LCID != LOCALE_CUSTOM_UNSPECIFIED)
+                if (_lang != null)
                 {
-                    CultureInfo ci = new CultureInfo(LCID);
-
                     return string.Format("{0} | {1} | {2}",
-                        StringUtils.CapitalizeWords(ci.EnglishName),
-                        StringUtils.CapitalizeWords(ci.NativeName),
-                        ci.TwoLetterISOLanguageName.ToUpperInvariant());
+                        StringUtils.CapitalizeWords(_lang.DisplayName()),
+                        StringUtils.CapitalizeWords(_lang.Culture.NativeName),
+                        _lang.Culture.TwoLetterISOLanguageName.ToUpperInvariant());
                 }
             }
             catch (Exception ex)
@@ -503,49 +471,8 @@ namespace OPMedia.UI.ProTONE.Configuration
             return "[ " + Translator.Translate("TXT_NO_LANG") + " ]";
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is SubtitleLanguage)
-            {
-                return this.LCID == (obj as SubtitleLanguage).LCID;
-            }
-
-            return false;
-        }
-
-        public static bool IsPrefferedLanguage(string lang)
-        {
-            foreach (CultureInfo ci in __cultures)
-            {
-                string ciLang = ci.EnglishName;
-                int pos = ci.EnglishName.LastIndexOf('(');
-                if (pos > 0)
-                    ciLang = ciLang.Substring(0, pos).Trim();
-
-                if (lang.ToLowerInvariant() == ciLang.ToLowerInvariant() &&
-                    ci.LCID == ProTONEConfig.PrefferedSubtitleLang)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        #region IComparable Members
-
-        public int CompareTo(object obj)
-        {
-            if (obj is SubtitleLanguage)
-            {
-                return this.ToString().CompareTo(obj.ToString());
-            }
-
-            return 1;
-        }
-
-        #endregion
     }
+
 
     #endregion
 }

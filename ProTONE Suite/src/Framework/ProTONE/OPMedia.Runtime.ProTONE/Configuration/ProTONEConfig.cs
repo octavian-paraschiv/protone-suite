@@ -44,7 +44,10 @@ namespace OPMedia.Runtime.ProTONE.Configuration
     public static class ProTONEConfig
     {
         const string _Fallback_DefaultSubtitleURIs =
-            @"BSP_V1;http://api.bsplayer-subtitles.com/v1.php;1\Osdb;http://api.opensubtitles.org/xml-rpc;1\NuSoap;http://api.getsubtitle.com/server.php;0";
+            "OpenSubtitles;https://api.opensubtitles.com/api/v1;1\\" +
+            "BSP_V1;http://api.bsplayer-subtitles.com/v1.php;1\\" +
+            "NuSoap;http://api.getsubtitle.com/server.php;1\\" +
+            "";
 
         const string _Fallback_DefaultLinkedFiles =
             @"AU;AIF;AIFF;CDA;FLAC;MID;MIDI;MP1;MP2;MP3;MPA;RAW;RMI;SND;WAV;WMA/BMK\AVI;DIVX;QT;M1V;M2V;MOD;MOV;MPG;MPEG;VOB;WM;WMV;MKV;MP4/SUB;SRT;USF;ASS;SSA;BMK";

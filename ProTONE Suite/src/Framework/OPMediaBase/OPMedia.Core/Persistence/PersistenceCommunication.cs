@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using OPMedia.Core.InterProcessCommunication;
+using OPMedia.Core.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace OPMedia.Core.Persistence
 {
@@ -134,7 +135,7 @@ namespace OPMedia.Core.Persistence
         public void SendPdu(GenericPDU pdu)
         {
             string line = PduFactory.Encode(pdu);
-            Task.Factory.StartNew(() => Send(line));
+            ThreadPool.QueueUserWorkItem(_ => Send(line));
         }
 
         public PersistencePDU SendPduAndWaitResponse(PersistencePDU req, int timeout = 5000)
@@ -161,11 +162,12 @@ namespace OPMedia.Core.Persistence
                             return rpdu;
                         }
                     }
-                    Task.Delay(100).Wait();
+                    Thread.Sleep(100);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogToConsole(ex.Message);
             }
 
             return null;

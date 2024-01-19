@@ -8,6 +8,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         public string moviehash;
         public double moviebytesize;
         public string imdbid;
+        public string moviename;
     }
 
     public struct SubtitleInfo
@@ -16,12 +17,12 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         public string MovieHash;
         public string MovieByteSize;
         public string MovieTimeMS;
-        public string IDSubtitleFile;
+        public int IDSubtitleFile;
         public string SubFileName;
         public string SubActualCD;
         public string SubSize;
         public string SubHash;
-        public string IDSubtitle;
+        public int IDSubtitle;
         public string UserID;
         public string SubLanguageID;
         public string SubFormat;

@@ -222,9 +222,7 @@
 	<Compile Update="Controls\MediaPlayer\VolumeScale.Designer.cs">
 	  <DependentUpon>VolumeScale.cs</DependentUpon>
 	</Compile>
-	<Compile Update="SubtitleDownload\SubtitleDownloadNotifyForm.cs">
-	  <SubType>Form</SubType>
-	</Compile>
+	<Compile Update="SubtitleDownload\SubtitleDownloadNotifyForm.cs" />
 	<Compile Update="SubtitleDownload\SubtitleDownloadNotifyForm.Designer.cs">
 	  <DependentUpon>SubtitleDownloadNotifyForm.cs</DependentUpon>
 	</Compile>

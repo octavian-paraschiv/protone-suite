@@ -1,8 +1,10 @@
-﻿using OPMedia.Core.Logging;
+﻿using MovieCollection.OpenSubtitles;
+using OPMedia.Core;
+using OPMedia.Core.Logging;
 using OPMedia.Runtime.FileInformation;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap;
-using OPMedia.Runtime.ProTONE.SubtitleDownload.Osdb;
+using OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,9 +15,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
 {
     public enum SubtitleServerType
     {
-        Osdb = 0,
         NuSoap = 1,
         BSP_V1 = 2,
+        OpenSubtitles = 3
     }
 
     public abstract class SubtitleServerSession : IDisposable
@@ -46,10 +48,12 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                         session = new NuSoapSession(serverUrl, userName, password, culture);
                         break;
 
-                    case SubtitleServerType.Osdb:
-                    default:
-                        session = new OsdbSession(serverUrl, userName, password, culture);
+                    case SubtitleServerType.OpenSubtitles:
+                        session = new OpenSubtitlesSession(serverUrl, userName, password, culture);
                         break;
+
+                    default:
+                        throw new ArgumentException($"Unsupported server type: {serverType}");
                 }
             }
             catch (Exception ex)
@@ -62,10 +66,6 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         #endregion
 
         #region Server session operations
-        public Dictionary<string, object> GetServerStatistics()
-        {
-            return DoGetServerStatistics();
-        }
 
         public List<SubtitleInfo> GetSubtitles(string fileName)
         {
@@ -74,7 +74,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
             NativeFileInfo nfi = new NativeFileInfo(fileName, true);
             if (nfi.IsValid)
             {
-                string hashCode = FileHash.ToHexadecimal(FileHash.ComputeHash(fileName));
+                string hashCode = OpenSubtitlesHasher.GetFileHash(fileName);
 
                 VideoInfo ovi = new VideoInfo();
                 ovi.imdbid = string.Empty;
@@ -88,7 +88,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                 //ovi.moviebytesize = 366876694;
                 #endregion
 
-                List<SubtitleInfo> response = DoGetSubtitles(ovi);
+                List<SubtitleInfo> response = GetSubtitles(ovi);
 
                 string[] fileNameParts = nfi.Name.ToLowerInvariant().Split(" -.][(){}".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (fileNameParts.Length > 0)
@@ -96,22 +96,11 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                     List<string> fileNamePartsList = new List<string>(fileNameParts);
                     foreach (SubtitleInfo osf in response)
                     {
-                        if (CheckMatch(osf.MovieName, fileNamePartsList))
-                        {
+                        if (CheckMatch(osf.MovieName, fileNamePartsList) ||
+                            CheckMatch(osf.MovieNameEng, fileNamePartsList) ||
+                            CheckMatch(osf.MovieReleaseName, fileNamePartsList) ||
+                            CheckMatch(osf.SubFileName, fileNamePartsList))
                             retVal.Add(osf);
-                        }
-                        else if (CheckMatch(osf.MovieNameEng, fileNamePartsList))
-                        {
-                            retVal.Add(osf);
-                        }
-                        else if (CheckMatch(osf.MovieReleaseName, fileNamePartsList))
-                        {
-                            retVal.Add(osf);
-                        }
-                        else if (CheckMatch(osf.SubFileName, fileNamePartsList))
-                        {
-                            retVal.Add(osf);
-                        }
 
                     }
                 }
@@ -123,11 +112,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         public string DownloadSubtitle(string fileName, SubtitleInfo subtitle)
         {
             if (string.IsNullOrEmpty(subtitle.SubFormat))
-            {
                 subtitle.SubFormat = "srt";
-            }
 
-            return DoDownloadSubtitle(fileName, subtitle);
+            return DownloadSubtitleInternal(fileName, subtitle);
         }
 
         #endregion
@@ -140,18 +127,16 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
             _password = password;
             _culture = culture ?? Thread.CurrentThread.CurrentUICulture;
 
-            DoInitializeSession();
+            InitializeSession();
 
-            DoTestConnection();
+            TestConnection();
 
-            if (IsAuthenticationRequired())
-            {
-                DoAuthenticate();
-            }
+            if (AuthenticationRequired)
+                Authenticate();
 
             // Create keepalive timer
-            // keepAliveInterval == 0 means that no keep alive reoutine is required.
-            double keepAliveInterval = GetKeepAliveInterval();
+            // keepAliveInterval == 0 means that no keep alive is required.
+            double keepAliveInterval = KeepAliveInterval;
             if (keepAliveInterval > 0)
             {
                 _tmrKeepAlive = new System.Timers.Timer();
@@ -173,7 +158,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
 
             try
             {
-                DoKeepAliveSession();
+                KeepAliveSession();
             }
             finally
             {
@@ -184,7 +169,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
 
         protected void CheckAuthentication(string operationName)
         {
-            if (IsAuthenticationRequired() && string.IsNullOrEmpty(_sessionToken))
+            if (AuthenticationRequired && string.IsNullOrEmpty(_sessionToken))
             {
                 throw new SubtitleDownloadException("Cannot perform " + operationName, "Not yet logged in");
             }
@@ -198,7 +183,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                 _tmrKeepAlive = null;
             }
 
-            DoCleanup();
+            CleanupSession();
 
             _sessionToken = null;
 
@@ -285,16 +270,19 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         }
         #endregion
 
-        protected abstract void DoInitializeSession();
-        protected abstract bool IsAuthenticationRequired();
-        protected abstract void DoTestConnection();
-        protected abstract void DoAuthenticate();
-        protected abstract double GetKeepAliveInterval();
-        protected abstract void DoKeepAliveSession();
-        protected abstract void DoCleanup();
+        protected virtual string UserAgent => $"{ProTONEConstants.PlayerUserAgent} v{SuiteVersion.Version}";
+        protected virtual bool AuthenticationRequired => true;
+        protected virtual double KeepAliveInterval => 0;
 
-        protected abstract List<SubtitleInfo> DoGetSubtitles(VideoInfo vi);
-        protected abstract Dictionary<string, object> DoGetServerStatistics();
-        protected abstract string DoDownloadSubtitle(string fileName, SubtitleInfo subtitle);
+        protected virtual void Authenticate() { }
+        protected virtual void KeepAliveSession() { }
+
+        protected abstract void InitializeSession();
+        protected abstract void TestConnection();
+        protected abstract void CleanupSession();
+
+        protected abstract List<SubtitleInfo> GetSubtitles(VideoInfo vi);
+
+        protected abstract string DownloadSubtitleInternal(string fileName, SubtitleInfo subtitle);
     }
 }

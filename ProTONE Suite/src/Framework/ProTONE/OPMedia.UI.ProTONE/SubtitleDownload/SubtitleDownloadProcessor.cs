@@ -61,7 +61,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         {
                             var totalFound = (from subInfos in subs.Values.ToList()
                                               from si in subInfos
-                                              where si.IDSubtitle?.Length > 0
+                                              where si.IDSubtitle > 0
                                               select 1).Count();
 
                             if (totalFound > 0)
@@ -263,7 +263,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                             }
                             finally
                             {
-                                if (sd != null)
+                                if (sd != null && foundSubtitles?.Count > 0)
                                     subs.Add(sd, foundSubtitles);
                             }
                         }

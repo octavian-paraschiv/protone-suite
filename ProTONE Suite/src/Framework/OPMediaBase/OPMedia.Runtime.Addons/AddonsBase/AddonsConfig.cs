@@ -1,10 +1,10 @@
+using Iso639;
 using Newtonsoft.Json;
 using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -147,11 +147,11 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 {
                     filesToDelete.Add(asmFile);
 
-                    foreach (CultureInfo ci in AppConfig.SupportedCultures)
+                    foreach (Language lang in AppConfig.SupportedUiLanguages)
                     {
                         try
                         {
-                            Assembly satAsm = asm.GetSatelliteAssembly(ci);
+                            Assembly satAsm = asm.GetSatelliteAssembly(lang.Culture);
                             if (satAsm != null)
                             {
                                 string path = satAsm.Location.ToLowerInvariant();
@@ -222,11 +222,11 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 {
                     filesToCopy.Add(asm.Location.ToLowerInvariant());
 
-                    foreach (CultureInfo ci in AppConfig.SupportedCultures)
+                    foreach (Language lang in AppConfig.SupportedUiLanguages)
                     {
                         try
                         {
-                            Assembly satAsm = asm.GetSatelliteAssembly(ci);
+                            Assembly satAsm = asm.GetSatelliteAssembly(lang.Culture);
                             if (satAsm != null)
                             {
                                 string path = satAsm.Location.ToLowerInvariant();

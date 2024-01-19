@@ -1,6 +1,7 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using OPMedia.Core;
 using OPMedia.Core.Configuration;
+using OPMedia.Core.Utilities;
 using OPMedia.Runtime.ProTONE.NuSoap;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
 using System;
@@ -16,57 +17,31 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
         NuSoapWsdl _wsdl = null;
 
         #region Construction / Cleanup
-        public NuSoapSession(string serverUrl, CultureInfo culture)
-            : this(serverUrl, string.Empty, string.Empty, culture)
-        {
-        }
-
         public NuSoapSession(string serverUrl, string username, string password, CultureInfo culture)
             : base(serverUrl, username, password, culture)
         {
         }
         #endregion
 
-        protected override void DoInitializeSession()
+        protected override void InitializeSession()
         {
             _wsdl = new NuSoapWsdl(_serverUrl);
             _wsdl.Proxy = AppConfig.GetWebProxy();
             _wsdl.UserAgent = string.Format("{0} v{1}", Constants.PlayerName, SuiteVersion.Version);
         }
-
-        protected override bool IsAuthenticationRequired()
-        {
-            return false;
-        }
-
-        protected override void DoTestConnection()
+        protected override void TestConnection()
         {
             OPMedia.Runtime.ProTONE.NuSoap.Language[] langs = _wsdl.getLanguages();
         }
 
-        protected override void DoAuthenticate()
-        {
-            // No authentication
-        }
-
-        protected override double GetKeepAliveInterval()
-        {
-            return 0; // No keepalive mechanism
-        }
-
-        protected override void DoKeepAliveSession()
-        {
-            // No keepalive mechanism
-        }
-
-        protected override void DoCleanup()
+        protected override void CleanupSession()
         {
             _wsdl.Abort();
             _wsdl.Dispose();
             _wsdl = null;
         }
 
-        protected override List<SubtitleInfo> DoGetSubtitles(VideoInfo vi)
+        protected override List<SubtitleInfo> GetSubtitles(VideoInfo vi)
         {
             List<SubtitleInfo> retVal = new List<SubtitleInfo>();
 
@@ -76,18 +51,21 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
                 var infos = from sf in subtitles
                             where
                             (
-                                sf?.file_name?.Length > 0 &&
+                                // sf?.file_name?.Length > 0 &&
                                 sf?.sub_hash?.Length > 0 &&
                                 sf?.language?.Length > 0
                             )
                             select new SubtitleInfo
                             {
-                                IDSubtitleFile = sf.cod_subtitle_file.ToString(),
+                                IDSubtitleFile = sf.cod_subtitle_file,
                                 SubFileName = sf.file_name,
                                 SubHash = sf.sub_hash,
-                                LanguageName = sf.language,
+
+                                LanguageName = LanguageHelper.Lookup(sf.language)?.DisplayName() ?? sf.language,
+                                ISO639 = LanguageHelper.Lookup(sf.language)?.Part3 ?? sf.language,
+
                                 MovieHash = vi.moviehash,
-                                SubFormat = PathUtils.GetExtension(sf.file_name)
+                                SubFormat = PathUtils.GetExtension(sf.file_name ?? "x.srt")
                             };
 
                 retVal.AddRange(infos);
@@ -96,18 +74,11 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
             return retVal;
         }
 
-        protected override Dictionary<string, object> DoGetServerStatistics()
-        {
-            return new Dictionary<string, object>();
-        }
-
-        protected override string DoDownloadSubtitle(string fileName, SubtitleInfo si)
+        protected override string DownloadSubtitleInternal(string fileName, SubtitleInfo si)
         {
             OPMedia.Runtime.ProTONE.NuSoap.SubtitleDownload sd = new OPMedia.Runtime.ProTONE.NuSoap.SubtitleDownload();
-            int x = 0;
-            int.TryParse(si.IDSubtitleFile, out x);
 
-            sd.cod_subtitle_file = x;
+            sd.cod_subtitle_file = si.IDSubtitle;
             sd.movie_hash = si.MovieHash;
 
             string destPath = Path.ChangeExtension(fileName, si.SubFormat);

@@ -12,7 +12,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
         public static readonly List<string> AllowedSubtitleExtensions = new List<string>(
             new string[] { "sub", "srt", "txt", "utf", "idx", "smi", "rt", "ass", "ssa", "aqt", "mpl", "usf" });
 
-        SubtitleServerType _serverType = SubtitleServerType.Osdb;
+        SubtitleServerType _serverType = SubtitleServerType.OpenSubtitles;
         string _serverUrl = string.Empty;
         string _userName = string.Empty;
         string _password = string.Empty;
@@ -28,18 +28,16 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
         {
             get
             {
-                string dn = null;
+                string dn = _serverType.ToString();
                 try
                 {
-                    Uri uri = new Uri(_serverUrl);
-                    dn = StringUtils.ToStringArray(uri.Host, '.')[1];
+                    dn = new Uri(_serverUrl).Host;
                 }
                 catch
                 {
-                    dn = null;
                 }
 
-                return $"[{_serverType}] {dn}";
+                return dn;
             }
         }
 
@@ -67,14 +65,14 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
                     password = fields[i++];
             }
 
-            SubtitleServerType serverType = SubtitleServerType.Osdb;
+            SubtitleServerType serverType = SubtitleServerType.OpenSubtitles;
             try
             {
                 serverType = (SubtitleServerType)Enum.Parse(typeof(SubtitleServerType), serverTypeStr);
             }
             catch
             {
-                serverType = SubtitleServerType.Osdb;
+                serverType = SubtitleServerType.OpenSubtitles;
             }
 
             SubtitleDownloader sd = new SubtitleDownloader(serverType, serverUrl, userName, password);
@@ -85,7 +83,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload
 
         #region Constructors
         public SubtitleDownloader(string serverUrl, string userName, string password)
-            : this(SubtitleServerType.Osdb, serverUrl, userName, password)
+            : this(SubtitleServerType.OpenSubtitles, serverUrl, userName, password)
         {
         }
 

@@ -26,7 +26,7 @@ namespace OPMedia.Core.TranslationSupport
     /// <summary>
     /// Class that provides internationalization support.
     /// </summary>
-	public static class Translator
+    public static class Translator
     {
         #region Members
         static bool translate = true;
@@ -52,18 +52,18 @@ namespace OPMedia.Core.TranslationSupport
                 "URL",
             });
 
-            AppConfig.SupportedCultures.ToList().ForEach(c =>
+            AppConfig.SupportedUiLanguages.ToList().ForEach(c =>
             {
-                var tf = new TranslationFile(c.Name);
+                var tf = new TranslationFile(c.Part1);
                 tf.TranslationUpdated += Tf_TranslationUpdated;
                 if (tf?.Translations?.Count > 0)
-                    _translations.Add(c.Name, tf);
+                    _translations.Add(c.Part1, tf);
             });
         }
 
         private static void Tf_TranslationUpdated(string lang)
         {
-            string crtLang = AppConfig.GetCulture(_languageId).Name;
+            string crtLang = AppConfig.GetLanguage(_languageId).Part1;
             if (string.Compare(crtLang, lang, true) == 0)
                 SetInterfaceLanguage(lang);
         }
@@ -116,7 +116,7 @@ namespace OPMedia.Core.TranslationSupport
 
                         string translatedTag = null;
 
-                        string lang = AppConfig.GetCulture(_languageId).Name;
+                        string lang = AppConfig.GetLanguage(_languageId).Part1;
                         if (_translations.ContainsKey(lang))
                         {
                             translatedTag = _translations[lang][tag];
@@ -278,7 +278,7 @@ namespace OPMedia.Core.TranslationSupport
             {
                 retVal = taggedString;
 
-                string lang = AppConfig.GetCulture(_languageId).Name;
+                string lang = AppConfig.GetLanguage(_languageId).Part1;
                 if (_translations.ContainsKey(lang))
                 {
                     foreach (var kvp in _translations[lang].Translations)

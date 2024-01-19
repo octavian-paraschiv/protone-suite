@@ -256,18 +256,6 @@ namespace OPMedia.DeezerWorker
             _delayStart = delayStart;
             _renderHwnd = renderHwnd;
             _notifyHwnd = notifyHwnd;
-
-            // --------------------------------------------------------------------
-            //if (delayStart > 0)
-            //{
-            //    Task.Factory.StartNew(() =>
-            //    {
-            //        Thread.Sleep(500);
-            //        Pause();
-            //        Thread.Sleep(500);
-            //        Resume(delayStart);
-            //    });
-            //}
         }
 
         ManualResetEvent _evtAppUserOfflineAvailable = new ManualResetEvent(false);

@@ -27,7 +27,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
 
@@ -571,7 +570,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             {
                 if (_renderer != null)
                 {
-                    Task.Factory.StartNew(() =>
+                    ThreadPool.QueueUserWorkItem(_ =>
                     {
                         while (_xfadeInProgress.WaitOne(0))
                             Thread.Sleep(100);
@@ -595,7 +594,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             // double quant = ;
             _renderer.AudioVolume = 0;
 
-            Task.Factory.StartNew(() =>
+            ThreadPool.QueueUserWorkItem(_ =>
             {
                 Logger.LogTrace($"[XFADE] Before loop: old=[{_oldRenderer}] new=[{_renderer}]");
                 _xfadeInProgress.Set();

@@ -1,7 +1,8 @@
 ﻿using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.SubtitleDownload;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.Base;
-using OPMedia.UI.ProTONE.Configuration;
 using OPMedia.UI.Themes;
 using System;
 using System.Collections;
@@ -14,14 +15,14 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 {
     public delegate void SubtitleDownloadNotifyHandler(string movieFile, string subtitleFile);
 
+    public class SubtitleDownloaderInfo
+    {
+        public SubtitleDownloader Downloader { get; set; }
+        public SubtitleInfo Info { get; set; }
+    }
+
     public partial class SubtitleDownloadNotifyForm : ToolForm
     {
-        struct SubtitleDownloadInfo
-        {
-            public SubtitleDownloader sd;
-            public SubtitleInfo si;
-        }
-
         Dictionary<SubtitleDownloader, List<SubtitleInfo>> _subtitleDownloadInfo = null;
         string _movieFilePath = string.Empty;
 
@@ -89,21 +90,24 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
                         ListViewItem item = new ListViewItem(data);
 
-                        SubtitleDownloadInfo sdi = new SubtitleDownloadInfo();
-                        sdi.sd = sd;
-                        sdi.si = si;
-                        item.Tag = sdi;
+                        item.Tag = new SubtitleDownloaderInfo
+                        {
+                            Info = si,
+                            Downloader = sd
+                        };
+
                         lvSubtitles.Items.Add(item);
 
                         item.Font = ThemeManager.SmallestFont;
                         item.UseItemStyleForSubItems = true;
+                        item.ForeColor = ThemeManager.ForeColor;
 
-                        if (SubtitleLanguage.IsPrefferedLanguage(si.LanguageName))
+                        if (LanguageHelper.IsSameLanguage(ProTONEConfig.PrefferedSubtitleLang, si.ISO639))
                         {
-                            item.UseItemStyleForSubItems = false;
                             item.ForeColor = ThemeManager.ListActiveItemColor;
+                            item.UseItemStyleForSubItems = false;
                         }
-
+                            
                         if (_highestPrio == sd.Priority)
                         {
                             item.UseItemStyleForSubItems = false;
@@ -130,16 +134,17 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             if (lvSubtitles.SelectedItems != null && lvSubtitles.SelectedItems.Count > 0)
             {
                 ListViewItem item = lvSubtitles.SelectedItems[0];
-                SubtitleDownloadInfo sdi = (SubtitleDownloadInfo)item.Tag;
-
-                string downloadedSubtitleFile = sdi.sd.DownloadCompressedSubtitle(_movieFilePath, sdi.si);
-                if (!string.IsNullOrEmpty(downloadedSubtitleFile))
+                if (item.Tag is SubtitleDownloaderInfo sdi)
                 {
-                    string movieFileName = Path.GetFileName(_movieFilePath);
-
-                    if (SubtitleDownloadNotify != null)
+                    string downloadedSubtitleFile = sdi.Downloader.DownloadCompressedSubtitle(_movieFilePath, sdi.Info);
+                    if (!string.IsNullOrEmpty(downloadedSubtitleFile))
                     {
-                        SubtitleDownloadNotify(_movieFilePath, downloadedSubtitleFile);
+                        string movieFileName = Path.GetFileName(_movieFilePath);
+
+                        if (SubtitleDownloadNotify != null)
+                        {
+                            SubtitleDownloadNotify(_movieFilePath, downloadedSubtitleFile);
+                        }
                     }
                 }
             }
@@ -167,7 +172,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             // Show preffered language with bold text
             if (e.ColumnIndex == Columns.Language)
             {
-                if (e.Value != null && SubtitleLanguage.IsPrefferedLanguage(e.Value.ToString()))
+                if (e.Value != null && LanguageHelper.IsSameLanguage(ProTONEConfig.PrefferedSubtitleLang, e.Value.ToString()))
                 {
                     e.CellStyle.Font = new Font(ThemeManager.NormalFont, FontStyle.Bold);
                 }
@@ -214,7 +219,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
     /// Class used to compare two list view items.
     /// Needed to sort the list view items.
     /// </summary>
-	internal class SubtitleFormComparer : IComparer
+    internal class SubtitleFormComparer : IComparer
     {
         private int _col;
         private int _sortOrderParam = 1;
@@ -294,18 +299,20 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
 
         private int CompareLanguages(ListViewItem row1, ListViewItem row2)
         {
-            string lang1 = row1.SubItems[Columns.Language].Text;
-            string lang2 = row2.SubItems[Columns.Language].Text;
+            string lang1 = (row1.Tag as SubtitleDownloaderInfo)?.Info.ISO639;
+            string lang2 = (row2.Tag as SubtitleDownloaderInfo)?.Info.ISO639;
 
-            bool pref1 = SubtitleLanguage.IsPrefferedLanguage(lang1);
-            bool pref2 = SubtitleLanguage.IsPrefferedLanguage(lang2);
+            bool pref1 = LanguageHelper.IsSameLanguage(ProTONEConfig.PrefferedSubtitleLang, lang1);
+            bool pref2 = LanguageHelper.IsSameLanguage(ProTONEConfig.PrefferedSubtitleLang, lang2);
 
             // Preferred language should go on top
             int res = (pref2 ? 1 : 0) - (pref1 ? 1 : 0);
             if (res != 0)
                 return res;
 
-            return string.Compare(lang1, lang2);
+            bool sameLanguage = LanguageHelper.IsSameLanguage(lang1, lang2);
+
+            return sameLanguage ? 0 : string.Compare(lang1, lang2);
         }
     }
 }
