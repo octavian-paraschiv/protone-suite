@@ -218,7 +218,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
                     else if (CheckSeriesMovieName(movieNamePart, fileNamePartsList))
                         return true;
 
-                    if (matchCounter >= 2)
+                    if (matchCounter >= (fileNamePartsList.Count - 2))
                         return true;
                 }
             }

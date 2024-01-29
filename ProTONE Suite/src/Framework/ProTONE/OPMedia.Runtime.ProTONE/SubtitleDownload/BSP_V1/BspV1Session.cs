@@ -83,7 +83,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
                                 LanguageName = LanguageHelper.Lookup(sd.subLang)?.DisplayName() ?? sd.subLang,
                                 ISO639 = LanguageHelper.Lookup(sd.subLang)?.Part3 ?? sd.subLang,
 
-                                MovieHash = vi.moviehash,
+                                MovieHash = sd.movieHash ?? vi.moviehash,
+
                                 SubDownloadLink = sd.subDownloadLink,
                                 SubHash = sd.subHash,
                                 SubFormat = sd.subFormat

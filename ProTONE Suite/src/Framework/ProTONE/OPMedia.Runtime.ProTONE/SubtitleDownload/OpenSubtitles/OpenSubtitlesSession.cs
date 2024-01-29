@@ -144,7 +144,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles
                                 LanguageName = LanguageHelper.Lookup(sd.Attributes.Language)?.DisplayName() ?? sd.Attributes.Language,
                                 ISO639 = LanguageHelper.Lookup(sd.Attributes.Language)?.Part3 ?? sd.Attributes.Language,
 
-                                MovieHash = vi.moviehash,
+                                MovieHash = vi.moviehash, // Ideally we should get this from the response ...
+
                                 SubDownloadLink = sd.Attributes.Url.ToString(),
                                 // SubHash = sd.Attributes.,
                                 SubFormat = StringUtils.FirstNonEmpty(sd.Attributes.Format,
