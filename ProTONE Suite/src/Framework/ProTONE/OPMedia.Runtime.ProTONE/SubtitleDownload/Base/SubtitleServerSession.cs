@@ -273,6 +273,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         protected virtual string UserAgent => $"{ProTONEConstants.PlayerUserAgent} v{SuiteVersion.Version}";
         protected virtual bool AuthenticationRequired => true;
         protected virtual double KeepAliveInterval => 0;
+        protected virtual double Timeout => 1000 * 20;
 
         protected virtual void Authenticate() { }
         protected virtual void KeepAliveSession() { }

@@ -61,7 +61,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                         {
                             var totalFound = (from subInfos in subs.Values.ToList()
                                               from si in subInfos
-                                              where si.IDSubtitle > 0
+                                              where si.SubFileName?.Length > 0
                                               select 1).Count();
 
                             if (totalFound > 0)
@@ -69,7 +69,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                                 SubtitleDownloadNotifyForm dlg = new SubtitleDownloadNotifyForm(strFile, subs);
                                 dlg.SubtitleDownloadNotify += new SubtitleDownloadNotifyHandler(dlg_SubtitleDownloadNotify);
                                 dlg.FormClosed += (ss, ee) => SubDownloaderComplete(strFile, subs);
-                                dlg.Show();
+                                dlg.Show(MainThread.MainWindow);
                                 return;
                             }
 

@@ -36,6 +36,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles
         protected override void InitializeSession()
         {
             _cl = new HttpClient();
+            _cl.Timeout = TimeSpan.FromMilliseconds(Timeout);
 
             _svc = new OpenSubtitlesService(_cl, new OpenSubtitlesOptions
             {
