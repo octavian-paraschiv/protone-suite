@@ -135,21 +135,21 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        #region ReadObject
+        #region ReadNode
 
-        public string ReadObject(string persistenceId, string persistenceContext)
+        public string ReadNode(string nodeId, string context)
         {
-            return __Read(persistenceId, persistenceContext);
+            return __Read(nodeId, context);
         }
 
-        private string __Read(string persistenceId, string persistenceContext)
+        private string __Read(string nodeId, string context)
         {
-            if (string.IsNullOrEmpty(persistenceContext))
-                persistenceContext = "*";
+            if (string.IsNullOrEmpty(context))
+                context = "*";
 
             string ret = null;
 
-            string key = BuildCacheKey(persistenceId, persistenceContext);
+            string key = BuildCacheKey(nodeId, context);
 
             lock (_cachePollerLock)
             {
@@ -157,20 +157,20 @@ namespace OPMedia.Core.Persistence
                 if (_cache.ContainsKey(key))
                 {
                     ret = _cache[key].Value;
-                    Logger.LogToConsole($"ReadObject: {key} from cache => {ret ?? "<null>"}");
+                    Logger.LogToConsole($"ReadNode: {key} from cache => {ret ?? "<null>"}");
                 }
             }
 
             if (ret == null)
             {
-                Logger.LogToConsole($"ReadObject: {key} not found in cache, or it was null");
+                Logger.LogToConsole($"ReadNode: {key} not found in cache, or it was null");
 
-                ret = _persistence.ReadObject(persistenceId, persistenceContext);
+                ret = _persistence.ReadNode(nodeId, context);
 
                 if (ret != null)
-                    Logger.LogToConsole($"ReadObject: {key} from DB => {ret}");
+                    Logger.LogToConsole($"ReadNode: {key} from DB => {ret}");
                 else
-                    Logger.LogToConsole($"ReadObject: {key} not found in DB");
+                    Logger.LogToConsole($"ReadNode: {key} not found in DB");
 
 
                 CacheItem ci = new CacheItem(key, ret);
@@ -178,7 +178,7 @@ namespace OPMedia.Core.Persistence
                 lock (_cachePollerLock)
                 {
                     _cache.Add(key, ci);
-                    Logger.LogToConsole($"ReadObject: {key} added to cache with TTL = {CacheItem.MaxCachedItemTTL} sec");
+                    Logger.LogToConsole($"ReadNode: {key} added to cache with TTL = {CacheItem.MaxCachedItemTTL} sec");
                 }
             }
 
@@ -186,23 +186,23 @@ namespace OPMedia.Core.Persistence
         }
         #endregion
 
-        #region SaveObject
+        #region SaveNode
 
-        public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public bool SaveNode(string nodeId, string context, string content)
         {
-            return __Save(persistenceId, persistenceContext, objectContent);
+            return __Save(nodeId, context, content);
         }
 
-        private bool __Save(string persistenceId, string persistenceContext, string objectContent)
+        private bool __Save(string nodeId, string context, string content)
         {
             bool retVal = false;
 
             try
             {
-                if (string.IsNullOrEmpty(persistenceContext))
-                    persistenceContext = "*";
+                if (string.IsNullOrEmpty(context))
+                    context = "*";
 
-                string key = BuildCacheKey(persistenceId, persistenceContext);
+                string key = BuildCacheKey(nodeId, context);
                 bool foundInCache = false;
 
                 lock (_cachePollerLock)
@@ -210,10 +210,10 @@ namespace OPMedia.Core.Persistence
                     // Is the requested object in the cache ?
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole($"SaveObject: {key} updated in cache to value {objectContent}");
+                        Logger.LogToConsole($"SaveNode: {key} updated in cache to value {content}");
 
                         // If it is, update it in the cache.
-                        _cache[key].Value = objectContent;
+                        _cache[key].Value = content;
                         foundInCache = true;
 
                         retVal = true;
@@ -223,11 +223,11 @@ namespace OPMedia.Core.Persistence
                 // We need to update in DB anyways and also make sure it is in the cache.
                 if (foundInCache == false)
                 {
-                    CacheItem ci = new CacheItem(key, objectContent);
+                    CacheItem ci = new CacheItem(key, content);
 
                     lock (_cachePollerLock)
                     {
-                        Logger.LogToConsole($"SaveObject: {key} added in cache with value {objectContent}");
+                        Logger.LogToConsole($"SaveNode: {key} added in cache with value {content}");
                         _cache.Add(key, ci);
 
                         retVal = true;
@@ -236,8 +236,8 @@ namespace OPMedia.Core.Persistence
 
                 ThreadPool.QueueUserWorkItem(_ =>
                 {
-                    _persistence.SaveObject(persistenceId, persistenceContext, objectContent);
-                    Logger.LogToConsole($"SaveObject: {key} saved in DB with value {objectContent}");
+                    _persistence.SaveNode(nodeId, context, content);
+                    Logger.LogToConsole($"SaveNode: {key} saved in DB with value {content}");
                 });
             }
             catch
@@ -250,22 +250,22 @@ namespace OPMedia.Core.Persistence
 
         #endregion
 
-        public bool DeleteObject(string persistenceId, string persistenceContext)
+        public bool DeleteNode(string nodeId, string context)
         {
             bool retVal = false;
 
             try
             {
-                if (string.IsNullOrEmpty(persistenceContext))
-                    persistenceContext = "*";
+                if (string.IsNullOrEmpty(context))
+                    context = "*";
 
-                string key = BuildCacheKey(persistenceId, persistenceContext);
+                string key = BuildCacheKey(nodeId, context);
 
                 lock (_cachePollerLock)
                 {
                     if (_cache.ContainsKey(key))
                     {
-                        Logger.LogToConsole("DeleteObject: Object with key {0} was found in cache and removed.", key);
+                        Logger.LogToConsole("DeleteNode: Object with key {0} was found in cache and removed.", key);
                         _cache.Remove(key);
 
                         retVal = true;
@@ -274,8 +274,8 @@ namespace OPMedia.Core.Persistence
 
                 ThreadPool.QueueUserWorkItem((c) =>
                     {
-                        Logger.LogToConsole("DeleteObject: Object with key {0} is now removed also from the DB.", key);
-                        _persistence.DeleteObject(persistenceId, persistenceContext);
+                        Logger.LogToConsole("DeleteNode: Object with key {0} is now removed also from the DB.", key);
+                        _persistence.DeleteNode(nodeId, context);
                     });
             }
             catch
@@ -286,27 +286,27 @@ namespace OPMedia.Core.Persistence
             return retVal;
         }
 
-        private string BuildCacheKey(string persistenceId, string persistenceContext)
+        private string BuildCacheKey(string nodeId, string context)
         {
-            return string.Format("{0}_{1}", persistenceId, persistenceContext);
+            return string.Format("{0}_{1}", nodeId, context);
         }
 
-        internal bool RefreshObject(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
+        internal bool RefreshObject(NotificationType changeType, string nodeId, string context, string content)
         {
             bool success = false;
 
             try
             {
-                Logger.LogToConsole($"RefreshObject request: ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={objectContent}");
+                Logger.LogToConsole($"RefreshObject request: ({changeType}, Id={nodeId}, Context={context}, Data={content}");
 
-                string key = BuildCacheKey(persistenceId, persistenceContext);
+                string key = BuildCacheKey(nodeId, context);
                 lock (_cachePollerLock)
                 {
                     bool isInCache = _cache.ContainsKey(key);
 
                     switch (changeType)
                     {
-                        case NotificationType.ObjectDeleted:
+                        case NotificationType.NodeDeleted:
                             if (isInCache)
                             {
                                 Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was found in cache and removed");
@@ -318,19 +318,19 @@ namespace OPMedia.Core.Persistence
                             }
                             break;
 
-                        case NotificationType.ObjectSaved:
+                        case NotificationType.NodeSaved:
                             {
-                                CacheItem ci = new CacheItem(key, objectContent);
+                                CacheItem ci = new CacheItem(key, content);
 
                                 if (isInCache)
                                 {
-                                    Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was found in cache and assigned to value={objectContent}");
+                                    Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was found in cache and assigned to value={content}");
                                     _cache[key] = ci;
                                     success = true;
                                 }
                                 else
                                 {
-                                    Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was NOT found in cache and added now with value={objectContent}");
+                                    Logger.LogToConsole($"ForceUpdate({changeType}): Object with key {key} was NOT found in cache and added now with value={content}");
                                     _cache.Add(key, ci);
                                     success = true;
                                 }

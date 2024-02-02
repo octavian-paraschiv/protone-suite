@@ -85,14 +85,14 @@ namespace OPMedia.Core
 
                 _cl.ConnectionOpen = (connId, reconnect) =>
                 {
-                    _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, ObjectContent = _appId.ToString() });
+                    _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, Content = _appId.ToString() });
                 };
 
                 _cl.PduReceived = (connId, pdu) =>
                 {
                     if (pdu is NotificationPDU npdu)
                     {
-                        ThreadPool.QueueUserWorkItem(_ => DispatchNotification(npdu.ChangeType, npdu.PersistenceId, npdu.PersistenceContext, npdu.ObjectContent));
+                        ThreadPool.QueueUserWorkItem(_ => DispatchNotification(npdu.ChangeType, npdu.NodeId, npdu.Context, npdu.Content));
                     }
                 };
             }
@@ -106,7 +106,7 @@ namespace OPMedia.Core
         {
             try
             {
-                _cl?.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Unsubscribe, ObjectContent = _appId.ToString() });
+                _cl?.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Unsubscribe, Content = _appId.ToString() });
                 _cl?.SendGracefulEnd();
                 _cl?.Disconnect();
                 _cl?.Dispose();
@@ -116,32 +116,32 @@ namespace OPMedia.Core
             _cl = null;
         }
 
-        static string BuildPersistenceId(bool includeAppName, string persistenceId)
+        static string BuildPersistenceId(bool includeAppName, string nodeId)
         {
             if (includeAppName)
-                return string.Format("{0}_{1}", ApplicationInfo.ApplicationName, persistenceId);
+                return string.Format("{0}_{1}", ApplicationInfo.ApplicationName, nodeId);
 
-            return persistenceId;
+            return nodeId;
         }
 
 
-        #region ReadObject
+        #region ReadNode
 
-        public static T ReadObject<T>(bool includeAppName, string persistenceId, T defaultValue, bool usePersistenceContext = true)
+        public static T ReadNode<T>(bool includeAppName, string nodeId, T defaultValue, bool usePersistenceContext = true)
         {
-            string id = BuildPersistenceId(includeAppName, persistenceId);
-            return ReadObject<T>(id, defaultValue, usePersistenceContext);
+            string id = BuildPersistenceId(includeAppName, nodeId);
+            return ReadNode<T>(id, defaultValue, usePersistenceContext);
         }
 
-        public static T ReadObject<T>(string persistenceId, T defaultValue, bool usePersistenceContext = true)
+        public static T ReadNode<T>(string nodeId, T defaultValue, bool usePersistenceContext = true)
         {
             T retVal = defaultValue;
 
             try
             {
                 string content = usePersistenceContext ?
-                    _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
-                    _cache.ReadObject(persistenceId, string.Empty);
+                    _cache.ReadNode(nodeId, _proxy._persistenceContext) :
+                    _cache.ReadNode(nodeId, string.Empty);
 
                 if (!string.IsNullOrEmpty(content))
                 {
@@ -165,22 +165,22 @@ namespace OPMedia.Core
             return retVal;
         }
 
-        string IPersistenceService.ReadObject(string persistenceId, string persistenceContext)
+        string IPersistenceService.ReadNode(string nodeId, string context)
         {
             try
             {
-                Logger.LogTrace($"IPersistenceService.ReadObject persistenceId={persistenceId} persistenceContext={persistenceContext}");
+                Logger.LogTrace($"IPersistenceService.ReadNode nodeId={nodeId} context={context}");
 
 
                 var pdu = _cl.SendPduAndWaitResponse(new PersistencePDU
                 {
-                    ActionType = PersistenceActionType.ReadObject,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
+                    ActionType = PersistenceActionType.ReadNode,
+                    Context = context,
+                    NodeId = nodeId,
                 });
 
                 if (pdu != null)
-                    return pdu.ObjectContent;
+                    return pdu.Content;
             }
             catch (Exception ex)
             {
@@ -191,22 +191,22 @@ namespace OPMedia.Core
         }
         #endregion
 
-        #region SaveObject
+        #region SaveNode
 
-        public static void SaveObject<T>(bool includeAppName, string persistenceId, T objectContent, bool usePersistenceContext = true)
+        public static void SaveNode<T>(bool includeAppName, string nodeId, T content, bool usePersistenceContext = true)
         {
-            string id = BuildPersistenceId(includeAppName, persistenceId);
-            SaveObject<T>(id, objectContent, usePersistenceContext);
+            string id = BuildPersistenceId(includeAppName, nodeId);
+            SaveNode<T>(id, content, usePersistenceContext);
         }
 
-        public static void SaveObject<T>(string persistenceId, T objectContent, bool usePersistenceContext = true)
+        public static void SaveNode<T>(string nodeId, T content, bool usePersistenceContext = true)
         {
             try
             {
                 if (usePersistenceContext)
-                    _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
+                    _cache.SaveNode(nodeId, _proxy._persistenceContext, content.ToString());
                 else
-                    _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
+                    _cache.SaveNode(nodeId, string.Empty, content.ToString());
             }
             catch (Exception ex)
             {
@@ -214,16 +214,16 @@ namespace OPMedia.Core
             }
         }
 
-        void IPersistenceService.SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        void IPersistenceService.SaveNode(string nodeId, string context, string content)
         {
             try
             {
                 _cl.SendPdu(new PersistencePDU
                 {
-                    ActionType = PersistenceActionType.SaveObject,
-                    ObjectContent = objectContent,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
+                    ActionType = PersistenceActionType.SaveNode,
+                    Content = content,
+                    Context = context,
+                    NodeId = nodeId,
                 });
             }
             catch (Exception ex)
@@ -233,22 +233,22 @@ namespace OPMedia.Core
         }
         #endregion
 
-        #region DeleteObject
+        #region DeleteNode
 
-        public static void DeleteObject(bool includeAppName, string persistenceId, bool usePersistenceContext = true)
+        public static void DeleteNode(bool includeAppName, string nodeId, bool usePersistenceContext = true)
         {
-            string id = BuildPersistenceId(includeAppName, persistenceId);
-            DeleteObject(id, usePersistenceContext);
+            string id = BuildPersistenceId(includeAppName, nodeId);
+            DeleteNode(id, usePersistenceContext);
         }
 
-        public static void DeleteObject(string persistenceId, bool usePersistenceContext = true)
+        public static void DeleteNode(string nodeId, bool usePersistenceContext = true)
         {
             try
             {
                 if (usePersistenceContext)
-                    _cache.DeleteObject(persistenceId, _proxy._persistenceContext);
+                    _cache.DeleteNode(nodeId, _proxy._persistenceContext);
                 else
-                    _cache.DeleteObject(persistenceId, string.Empty);
+                    _cache.DeleteNode(nodeId, string.Empty);
             }
             catch (Exception ex)
             {
@@ -256,15 +256,15 @@ namespace OPMedia.Core
             }
         }
 
-        void IPersistenceService.DeleteObject(string persistenceId, string persistenceContext)
+        void IPersistenceService.DeleteNode(string nodeId, string context)
         {
             try
             {
                 _cl.SendPdu(new PersistencePDU
                 {
-                    ActionType = PersistenceActionType.DeleteObject,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
+                    ActionType = PersistenceActionType.DeleteNode,
+                    Context = context,
+                    NodeId = nodeId,
                 });
             }
             catch (Exception ex)
@@ -278,21 +278,21 @@ namespace OPMedia.Core
         public static void SendIpcEvent(string eventName, string eventArgs)
         {
             string content = StringUtils.FromStringArray(new string[] { eventName, eventArgs }, '>');
-            (_proxy as INotificationService).SendNotification(NotificationType.IpcEvent, NotificationType.IpcEvent.ToString(), _proxy._persistenceContext, content);
+            (_proxy as INotificationService).Notify(NotificationType.IpcEvent, NotificationType.IpcEvent.ToString(), _proxy._persistenceContext, content);
         }
 
-        void INotificationService.SendNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
+        void INotificationService.Notify(NotificationType changeType, string nodeId, string context, string content)
         {
             try
             {
-                Logger.LogTrace($"IPersistenceService.SendNotification persistenceId={persistenceId} persistenceContext={persistenceContext}");
+                Logger.LogTrace($"IPersistenceService.Notify nodeId={nodeId} context={context}");
 
                 _cl.SendPdu(new NotificationPDU
                 {
                     ChangeType = changeType,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
-                    ObjectContent = objectContent
+                    Context = context,
+                    NodeId = nodeId,
+                    Content = content
                 });
             }
             catch (Exception ex)
@@ -301,7 +301,7 @@ namespace OPMedia.Core
             }
         }
 
-        void DispatchNotification(NotificationType changeType, string persistenceId, string persistenceContext, string content)
+        void DispatchNotification(NotificationType changeType, string nodeId, string context, string content)
         {
             if (changeType == NotificationType.IpcEvent)
             {
@@ -318,15 +318,15 @@ namespace OPMedia.Core
                     EventDispatch.DispatchEvent(evtName, evtData);
                 }
             }
-            else if (_cache.RefreshObject(changeType, persistenceId, persistenceContext, content))
+            else if (_cache.RefreshObject(changeType, nodeId, context, content))
             {
-                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={content} => Cache updated. Bubbling up event to its potential consumers.");
-                if (changeType == NotificationType.ObjectSaved)
-                    AppConfig.OnSettingsChanged(persistenceId, persistenceContext, content);
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={nodeId}, Context={context}, Data={content} => Cache updated. Bubbling up event to its potential consumers.");
+                if (changeType == NotificationType.NodeSaved)
+                    AppConfig.OnSettingsChanged(nodeId, context, content);
             }
             else
             {
-                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={persistenceId}, Context={persistenceContext}, Data={content} => Ignored, as we failed to update the cache.");
+                Logger.LogToConsole($"Notification from PersistenceService ({changeType}, Id={nodeId}, Context={context}, Data={content} => Ignored, as we failed to update the cache.");
             }
         }
         #endregion

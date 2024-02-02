@@ -13,7 +13,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
         public static void Load(ref Playlist playlist)
         {
-            string persistedPlaylist = PersistenceProxy.ReadObject(true, "PersistentPlaylist", string.Empty);
+            string persistedPlaylist = PersistenceProxy.ReadNode(true, "PersistentPlaylist", string.Empty);
             if (string.IsNullOrEmpty(persistedPlaylist) == false)
             {
                 try
@@ -38,7 +38,7 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             {
                 Logger.LogTrace("PersistentPlaylist::Save called to persist current playlist ...");
                 string persistedPlaylist = playlist.SaveM3UPlaylistAsString();
-                PersistenceProxy.SaveObject(true, "PersistentPlaylist", persistedPlaylist);
+                PersistenceProxy.SaveNode(true, "PersistentPlaylist", persistedPlaylist);
             }
         }
     }

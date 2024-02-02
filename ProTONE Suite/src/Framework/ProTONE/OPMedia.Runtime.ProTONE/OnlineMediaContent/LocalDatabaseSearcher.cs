@@ -32,7 +32,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
                 try
                 {
                     // Fill with Internal stations list from Persistence Service
-                    string xml = PersistenceProxy.ReadObject("OnlineMediaData", string.Empty, false);
+                    string xml = PersistenceProxy.ReadNode("OnlineMediaData", string.Empty, false);
                     if (!string.IsNullOrEmpty(xml))
                     {
                         using (StringReader sr = new StringReader(xml))
@@ -90,7 +90,7 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
                     if (xml != null)
                     {
-                        PersistenceProxy.SaveObject("OnlineMediaData", xml, false);
+                        PersistenceProxy.SaveNode("OnlineMediaData", xml, false);
                         isSaved = true;
                     }
                 }

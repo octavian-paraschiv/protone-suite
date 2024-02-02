@@ -9,12 +9,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SearchPaths", string.Empty);
+                return PersistenceProxy.ReadNode(true, "SearchPaths", string.Empty);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SearchPaths", value);
+                PersistenceProxy.SaveNode(true, "SearchPaths", value);
             }
         }
 
@@ -22,12 +22,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SearchTexts", string.Empty);
+                return PersistenceProxy.ReadNode(true, "SearchTexts", string.Empty);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SearchTexts", value);
+                PersistenceProxy.SaveNode(true, "SearchTexts", value);
             }
         }
 
@@ -35,12 +35,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SearchPatterns", string.Empty);
+                return PersistenceProxy.ReadNode(true, "SearchPatterns", string.Empty);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SearchPatterns", value);
+                PersistenceProxy.SaveNode(true, "SearchPatterns", value);
             }
         }
 
@@ -49,12 +49,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SearchTextsMC", string.Empty);
+                return PersistenceProxy.ReadNode(true, "SearchTextsMC", string.Empty);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SearchTextsMC", value);
+                PersistenceProxy.SaveNode(true, "SearchTextsMC", value);
             }
         }
 
@@ -62,12 +62,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SearchPatternsMC", string.Empty);
+                return PersistenceProxy.ReadNode(true, "SearchPatternsMC", string.Empty);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SearchPatternsMC", value);
+                PersistenceProxy.SaveNode(true, "SearchPatternsMC", value);
             }
         }
 
@@ -75,12 +75,12 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "SplitterDistanceMC", 200);
+                return PersistenceProxy.ReadNode(true, "SplitterDistanceMC", 200);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "SplitterDistanceMC", value);
+                PersistenceProxy.SaveNode(true, "SplitterDistanceMC", value);
             }
         }
 
@@ -91,7 +91,7 @@ namespace OPMedia.Addons.Builtin.Configuration
                 try
                 {
                     return (decimal)new DecimalConverter().ConvertFromInvariantString(
-                    PersistenceProxy.ReadObject(true, "FEPreviewTimer",
+                    PersistenceProxy.ReadNode(true, "FEPreviewTimer",
                         new DecimalConverter().ConvertToInvariantString(0.5M)));
                 }
                 catch { }
@@ -101,7 +101,7 @@ namespace OPMedia.Addons.Builtin.Configuration
 
             set
             {
-                PersistenceProxy.SaveObject(true, "FEPreviewTimer",
+                PersistenceProxy.SaveNode(true, "FEPreviewTimer",
                     new DecimalConverter().ConvertToInvariantString(value));
             }
         }
@@ -110,11 +110,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "MCLastOpenedFolder", string.Empty);
+                return PersistenceProxy.ReadNode(true, "MCLastOpenedFolder", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "MCLastOpenedFolder", value);
+                PersistenceProxy.SaveNode(true, "MCLastOpenedFolder", value);
             }
         }
 
@@ -122,11 +122,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "MCOpenLastCatalog", false);
+                return PersistenceProxy.ReadNode(true, "MCOpenLastCatalog", false);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "MCOpenLastCatalog", value);
+                PersistenceProxy.SaveNode(true, "MCOpenLastCatalog", value);
             }
         }
 
@@ -134,11 +134,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "MCRememberRecentFiles", false);
+                return PersistenceProxy.ReadNode(true, "MCRememberRecentFiles", false);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "MCRememberRecentFiles", value);
+                PersistenceProxy.SaveNode(true, "MCRememberRecentFiles", value);
             }
         }
 
@@ -146,11 +146,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "MCRecentFilesCount", 5);
+                return PersistenceProxy.ReadNode(true, "MCRecentFilesCount", 5);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "MCRecentFilesCount", value);
+                PersistenceProxy.SaveNode(true, "MCRecentFilesCount", value);
             }
         }
 
@@ -158,11 +158,11 @@ namespace OPMedia.Addons.Builtin.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "MCRecentFiles", string.Empty);
+                return PersistenceProxy.ReadNode(true, "MCRecentFiles", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "MCRecentFiles", value);
+                PersistenceProxy.SaveNode(true, "MCRecentFiles", value);
             }
         }
 

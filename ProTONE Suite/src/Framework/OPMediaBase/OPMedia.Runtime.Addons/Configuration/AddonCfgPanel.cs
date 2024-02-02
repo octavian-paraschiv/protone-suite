@@ -172,17 +172,17 @@ namespace OPMedia.Runtime.Addons.Configuration
                     addons += ai.Name;
                     addons += "|";
 
-                    PersistenceProxy.SaveObject(true, ai.Name, ai.CodeBase, false);
+                    PersistenceProxy.SaveNode(true, ai.Name, ai.CodeBase, false);
                 }
             }
 
             if (addons.Length > 0)
             {
-                PersistenceProxy.SaveObject(true, groupName, addons.TrimEnd(new char[] { '|' }), false);
+                PersistenceProxy.SaveNode(true, groupName, addons.TrimEnd(new char[] { '|' }), false);
             }
             else
             {
-                PersistenceProxy.SaveObject(true, groupName, string.Empty, false);
+                PersistenceProxy.SaveNode(true, groupName, string.Empty, false);
             }
         }
 
@@ -332,7 +332,7 @@ namespace OPMedia.Runtime.Addons.Configuration
 
                 foreach (AddonInfo ai in itemsToDisable)
                 {
-                    PersistenceProxy.DeleteObject(ai.Name, false);
+                    PersistenceProxy.DeleteNode(ai.Name, false);
                     addonList.RemoveAddon(ai);
                 }
 

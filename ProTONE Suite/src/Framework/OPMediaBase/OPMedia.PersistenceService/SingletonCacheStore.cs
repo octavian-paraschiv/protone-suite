@@ -29,19 +29,19 @@ namespace OPMedia.PersistenceService
             _cache = new CacheStore(_db);
         }
 
-        public string ReadObject(string persistenceId, string persistenceContext)
+        public string ReadNode(string nodeId, string context)
         {
-            return _cache.ReadObject(persistenceId, persistenceContext);
+            return _cache.ReadNode(nodeId, context);
         }
 
-        public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public bool SaveNode(string nodeId, string context, string content)
         {
-            return _cache.SaveObject(persistenceId, persistenceContext, objectContent);
+            return _cache.SaveNode(nodeId, context, content);
         }
 
-        public bool DeleteObject(string persistenceId, string persistenceContext)
+        public bool DeleteNode(string nodeId, string context)
         {
-            return _cache.DeleteObject(persistenceId, persistenceContext);
+            return _cache.DeleteNode(nodeId, context);
         }
     }
 }

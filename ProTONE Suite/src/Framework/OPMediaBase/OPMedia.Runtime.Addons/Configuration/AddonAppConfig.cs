@@ -9,12 +9,12 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "VSplitterDistance", 4 * Screen.PrimaryScreen.Bounds.Width / 9);
+                return PersistenceProxy.ReadNode(true, "VSplitterDistance", 4 * Screen.PrimaryScreen.Bounds.Width / 9);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "VSplitterDistance", value);
+                PersistenceProxy.SaveNode(true, "VSplitterDistance", value);
             }
         }
 
@@ -22,12 +22,12 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "HSplitterDistance", Screen.PrimaryScreen.Bounds.Height / 3 - 50);
+                return PersistenceProxy.ReadNode(true, "HSplitterDistance", Screen.PrimaryScreen.Bounds.Height / 3 - 50);
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "HSplitterDistance", value);
+                PersistenceProxy.SaveNode(true, "HSplitterDistance", value);
             }
         }
 
@@ -35,19 +35,19 @@ namespace OPMedia.Runtime.Addons.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "LastNavAddon", "FileExplorer");
+                return PersistenceProxy.ReadNode(true, "LastNavAddon", "FileExplorer");
             }
 
             set
             {
-                PersistenceProxy.SaveObject(true, "LastNavAddon", value);
+                PersistenceProxy.SaveNode(true, "LastNavAddon", value);
             }
         }
 
         public static int MaxProcessedEntries
         {
-            get { return PersistenceProxy.ReadObject(true, "MaxProcessedEntries", 100); }
-            set { PersistenceProxy.SaveObject(true, "MaxProcessedEntries", value); }
+            get { return PersistenceProxy.ReadNode(true, "MaxProcessedEntries", 100); }
+            set { PersistenceProxy.SaveNode(true, "MaxProcessedEntries", value); }
         }
     }
 }

@@ -45,13 +45,13 @@ namespace OPMedia.PersistenceService
                 {
                     case ServiceActionType.Subscribe:
                         {
-                            Logger.LogTrace($"Subscribing for {connId}/{spdu.ObjectContent} ...");
+                            Logger.LogTrace($"Subscribing for {connId}/{spdu.Content} ...");
                             lock (_subscriptionsLock)
                             {
                                 if (_subscriptions.ContainsKey(connId))
-                                    _subscriptions[connId] = spdu.ObjectContent;
+                                    _subscriptions[connId] = spdu.Content;
                                 else
-                                    _subscriptions.Add(connId, spdu.ObjectContent);
+                                    _subscriptions.Add(connId, spdu.Content);
                             }
                         }
                         break;
@@ -75,20 +75,20 @@ namespace OPMedia.PersistenceService
             {
                 switch (rpdu.ActionType)
                 {
-                    case PersistenceActionType.ReadObject:
+                    case PersistenceActionType.ReadNode:
                         {
-                            rpdu.ObjectContent = ReadObject(rpdu.PersistenceId, rpdu.PersistenceContext) ?? "";
+                            rpdu.Content = ReadNode(rpdu.NodeId, rpdu.Context) ?? "";
                             string data = JsonConvert.SerializeObject(rpdu);
                             _server.SendTo(connId, data);
                         }
                         break;
 
-                    case PersistenceActionType.SaveObject:
-                        SaveObject(rpdu.PersistenceId, rpdu.PersistenceContext, rpdu.ObjectContent);
+                    case PersistenceActionType.SaveNode:
+                        SaveNode(rpdu.NodeId, rpdu.Context, rpdu.Content);
                         break;
 
-                    case PersistenceActionType.DeleteObject:
-                        DeleteObject(rpdu.PersistenceId, rpdu.PersistenceContext);
+                    case PersistenceActionType.DeleteNode:
+                        DeleteNode(rpdu.NodeId, rpdu.Context);
                         break;
                 }
             }
@@ -131,11 +131,11 @@ namespace OPMedia.PersistenceService
             }, null);
         }
 
-        public string ReadObject(string persistenceId, string persistenceContext)
+        public string ReadNode(string nodeId, string context)
         {
             try
             {
-                return SingletonCacheStore.Instance.ReadObject(persistenceId, persistenceContext);
+                return SingletonCacheStore.Instance.ReadNode(nodeId, context);
             }
             catch (Exception ex)
             {
@@ -146,19 +146,19 @@ namespace OPMedia.PersistenceService
         }
 
 
-        public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public void SaveNode(string nodeId, string context, string content)
         {
             try
             {
-                bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
+                bool ok = SingletonCacheStore.Instance.SaveNode(nodeId, context, content);
                 if (ok)
                 {
                     Notify(new NotificationPDU
                     {
-                        ChangeType = NotificationType.ObjectSaved,
-                        PersistenceId = persistenceId,
-                        PersistenceContext = persistenceContext,
-                        ObjectContent = objectContent
+                        ChangeType = NotificationType.NodeSaved,
+                        NodeId = nodeId,
+                        Context = context,
+                        Content = content
                     });
                 }
             }
@@ -168,19 +168,19 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public void DeleteObject(string persistenceId, string persistenceContext)
+        public void DeleteNode(string nodeId, string context)
         {
             try
             {
-                bool ok = SingletonCacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
+                bool ok = SingletonCacheStore.Instance.DeleteNode(nodeId, context);
                 if (ok)
                 {
                     Notify(new NotificationPDU
                     {
-                        ChangeType = NotificationType.ObjectDeleted,
-                        PersistenceId = persistenceId,
-                        PersistenceContext = persistenceContext,
-                        ObjectContent = ""
+                        ChangeType = NotificationType.NodeDeleted,
+                        NodeId = nodeId,
+                        Context = context,
+                        Content = ""
                     });
                 }
             }

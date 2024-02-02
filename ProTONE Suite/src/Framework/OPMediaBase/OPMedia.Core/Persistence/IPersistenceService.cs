@@ -3,20 +3,20 @@
     public enum NotificationType
     {
         None = 0,
-        ObjectSaved,
-        ObjectDeleted,
+        NodeSaved,
+        NodeDeleted,
         IpcEvent,
     }
 
     public interface IPersistenceService
     {
-        string ReadObject(string persistenceId, string persistenceContext);
-        void SaveObject(string persistenceId, string persistenceContext, string objectContent);
-        void DeleteObject(string persistenceId, string persistenceContext);
+        string ReadNode(string nodeId, string context);
+        void SaveNode(string nodeId, string context, string content);
+        void DeleteNode(string nodeId, string context);
     }
 
     public interface INotificationService
     {
-        void SendNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent);
+        void Notify(NotificationType changeType, string nodeId, string context, string content);
     }
 }

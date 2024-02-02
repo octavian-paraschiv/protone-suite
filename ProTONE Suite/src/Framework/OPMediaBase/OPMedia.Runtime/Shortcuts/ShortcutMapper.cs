@@ -115,7 +115,7 @@ namespace OPMedia.Runtime.Shortcuts
             {
                 KeysConverter kc = new KeysConverter();
 
-                string keymap = PersistenceProxy.ReadObject(true, "Keymap", string.Empty);
+                string keymap = PersistenceProxy.ReadNode(true, "Keymap", string.Empty);
                 if (string.IsNullOrEmpty(keymap) == false)
                 {
                     string[] lines = keymap.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -162,7 +162,7 @@ namespace OPMedia.Runtime.Shortcuts
                         kc.ConvertToInvariantString(altKeyCommands[(int)cmd].KeyData)));
                 }
 
-                PersistenceProxy.SaveObject(true, "Keymap", sb.ToString());
+                PersistenceProxy.SaveNode(true, "Keymap", sb.ToString());
             }
             catch { }
         }

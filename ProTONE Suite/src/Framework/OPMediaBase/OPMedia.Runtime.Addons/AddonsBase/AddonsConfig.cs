@@ -102,7 +102,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             if (_diskAddonsConfig == null ||
                 _diskAddonsConfig.ContainsKey(keyBase) == false)
             {
-                namesRaw = PersistenceProxy.ReadObject(true, keyBase, string.Empty, false);
+                namesRaw = PersistenceProxy.ReadNode(true, keyBase, string.Empty, false);
             }
             else
             {
@@ -119,7 +119,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     if (_diskAddonsConfig == null ||
                         _diskAddonsConfig.ContainsKey(name) == false)
                     {
-                        val = PersistenceProxy.ReadObject(true, name, string.Empty, false);
+                        val = PersistenceProxy.ReadNode(true, name, string.Empty, false);
                     }
                     else
                     {
@@ -135,7 +135,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         internal static void MarkForUninstall(string assembly)
         {
-            string markedForUninstall = PersistenceProxy.ReadObject(true, "MarkedForUninstall", string.Empty, false);
+            string markedForUninstall = PersistenceProxy.ReadNode(true, "MarkedForUninstall", string.Empty, false);
 
             List<string> filesToDelete = new List<string>();
 
@@ -175,13 +175,13 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 }
             }
 
-            PersistenceProxy.SaveObject(true, "MarkedForUninstall", markedForUninstall, false);
+            PersistenceProxy.SaveNode(true, "MarkedForUninstall", markedForUninstall, false);
         }
 
         private static void UninstallMarkedItems()
         {
             string[] names = null;
-            string namesRaw = PersistenceProxy.ReadObject(true, "MarkedForUninstall", string.Empty, false);
+            string namesRaw = PersistenceProxy.ReadNode(true, "MarkedForUninstall", string.Empty, false);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
@@ -198,7 +198,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     }
                 }
 
-                PersistenceProxy.SaveObject(true, "MarkedForUninstall", string.Empty, false);
+                PersistenceProxy.SaveNode(true, "MarkedForUninstall", string.Empty, false);
             }
         }
 

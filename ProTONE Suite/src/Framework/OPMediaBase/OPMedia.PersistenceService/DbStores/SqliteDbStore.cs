@@ -32,12 +32,12 @@ namespace OPMedia.PersistenceService
         }
 
 
-        public string ReadObject(string persistenceId, string persistenceContext)
+        public string ReadNode(string nodeId, string context)
         {
             try
             {
                 var x = (from po in PersistedObjects
-                         where po.PersistenceId == persistenceId && po.PersistenceContext == persistenceContext
+                         where po.PersistenceId == nodeId && po.PersistenceContext == context
                          select po.Content).FirstOrDefault();
 
                 return x;
@@ -50,28 +50,28 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
-        public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
+        public void SaveNode(string nodeId, string context, string content)
         {
             try
             {
                 var x = (from po in PersistedObjects
-                         where po.PersistenceId == persistenceId && po.PersistenceContext == persistenceContext
+                         where po.PersistenceId == nodeId && po.PersistenceContext == context
                          select po).FirstOrDefault();
 
                 if (x == null)
                 {
                     x = new PersistedObject
                     {
-                        PersistenceId = persistenceId,
-                        PersistenceContext = persistenceContext,
-                        Content = objectContent
+                        PersistenceId = nodeId,
+                        PersistenceContext = context,
+                        Content = content
                     };
 
                     _db.Insert(x);
                 }
                 else
                 {
-                    x.Content = objectContent;
+                    x.Content = content;
                     _db.Update(x);
                 }
             }
@@ -81,12 +81,12 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public void DeleteObject(string persistenceId, string persistenceContext)
+        public void DeleteNode(string nodeId, string context)
         {
             try
             {
                 var x = (from po in PersistedObjects
-                         where po.PersistenceId == persistenceId && po.PersistenceContext == persistenceContext
+                         where po.PersistenceId == nodeId && po.PersistenceContext == context
                          select po).FirstOrDefault();
 
                 if (x != null)
@@ -101,8 +101,8 @@ namespace OPMedia.PersistenceService
         }
 
 
-        public void SendNotification(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent) { }
-        public void SendNotificationBlob(NotificationType changeType, string persistenceId, string persistenceContext, byte[] objectBlob) { }
+        public void Notify(NotificationType changeType, string nodeId, string context, string content) { }
+        public void SendNotificationBlob(NotificationType changeType, string nodeId, string context, byte[] objectBlob) { }
     }
 }
 #endif

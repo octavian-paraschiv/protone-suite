@@ -12,9 +12,15 @@ namespace OPMedia.Core.Persistence
     public abstract class GenericPDU
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string PersistenceId { get; set; }
-        public string PersistenceContext { get; set; }
-        public string ObjectContent { get; set; }
+
+        [JsonProperty(PropertyName = "PersistenceId")]
+        public string NodeId { get; set; }
+
+        [JsonProperty(PropertyName = "PersistenceContext")]
+        public string Context { get; set; }
+
+        [JsonProperty(PropertyName = "ObjectContent")]
+        public string Content { get; set; }
 
         [JsonIgnore]
         public abstract bool IsValid { get; }
@@ -48,9 +54,9 @@ namespace OPMedia.Core.Persistence
     public enum PersistenceActionType
     {
         None = 0,
-        ReadObject,
-        SaveObject,
-        DeleteObject,
+        ReadNode,
+        SaveNode,
+        DeleteNode,
     }
 
     public static class PduFactory
