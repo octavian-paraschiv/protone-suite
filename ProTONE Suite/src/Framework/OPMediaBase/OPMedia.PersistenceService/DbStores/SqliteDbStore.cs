@@ -81,55 +81,6 @@ namespace OPMedia.PersistenceService
             }
         }
 
-        public byte[] ReadBlob(string persistenceId, string persistenceContext)
-        {
-            try
-            {
-                var x = (from po in PersistedObjects
-                         where po.PersistenceId == persistenceId && po.PersistenceContext == persistenceContext
-                         select po.ContentBlob).FirstOrDefault();
-
-                return x;
-            }
-            catch (Exception ex)
-            {
-                OP_Logger.LogException(ex);
-            }
-
-            return null;
-        }
-
-        public void SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob)
-        {
-            try
-            {
-                var x = (from po in PersistedObjects
-                         where po.PersistenceId == persistenceId && po.PersistenceContext == persistenceContext
-                         select po).FirstOrDefault();
-
-                if (x == null)
-                {
-                    x = new PersistedObject
-                    {
-                        PersistenceId = persistenceId,
-                        PersistenceContext = persistenceContext,
-                        ContentBlob = objectBlob
-                    };
-
-                    _db.Insert(x);
-                }
-                else
-                {
-                    x.ContentBlob = objectBlob;
-                    _db.Update(x);
-                }
-            }
-            catch (Exception ex)
-            {
-                OP_Logger.LogException(ex);
-            }
-        }
-
         public void DeleteObject(string persistenceId, string persistenceContext)
         {
             try

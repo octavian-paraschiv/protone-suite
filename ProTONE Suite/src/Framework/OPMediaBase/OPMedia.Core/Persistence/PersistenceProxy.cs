@@ -139,29 +139,20 @@ namespace OPMedia.Core
 
             try
             {
-                if (typeof(T) == typeof(byte[]))
-                {
-                    byte[] blob = usePersistenceContext ?
-                        _cache.ReadBlob(persistenceId, _proxy._persistenceContext) :
-                        _cache.ReadBlob(persistenceId, string.Empty);
-                }
-                else
-                {
-                    string content = usePersistenceContext ?
-                        _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
-                        _cache.ReadObject(persistenceId, string.Empty);
+                string content = usePersistenceContext ?
+                    _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
+                    _cache.ReadObject(persistenceId, string.Empty);
 
-                    if (!string.IsNullOrEmpty(content))
+                if (!string.IsNullOrEmpty(content))
+                {
+                    try
                     {
-                        try
-                        {
-                            retVal = StringUtils.Coerce<T>(content);
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.LogException(ex);
-                            retVal = defaultValue;
-                        }
+                        retVal = StringUtils.Coerce<T>(content);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogException(ex);
+                        retVal = defaultValue;
                     }
                 }
             }
@@ -198,31 +189,6 @@ namespace OPMedia.Core
 
             return null;
         }
-
-        byte[] IPersistenceService.ReadBlob(string persistenceId, string persistenceContext)
-        {
-            try
-            {
-                Logger.LogTrace($"IPersistenceService.ReadBlob persistenceId={persistenceId} persistenceContext={persistenceContext}");
-
-                var pdu = _cl.SendPduAndWaitResponse(new PersistencePDU
-                {
-                    ActionType = PersistenceActionType.ReadObject,
-                    IsBlob = true,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
-                });
-
-                if (pdu != null)
-                    return Convert.FromBase64String(pdu.ObjectContent);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-
-            return null;
-        }
         #endregion
 
         #region SaveObject
@@ -237,20 +203,10 @@ namespace OPMedia.Core
         {
             try
             {
-                if (typeof(T) == typeof(byte[]))
-                {
-                    if (usePersistenceContext)
-                        _cache.SaveBlob(persistenceId, _proxy._persistenceContext, objectContent as byte[]);
-                    else
-                        _cache.SaveBlob(persistenceId, string.Empty, objectContent as byte[]);
-                }
+                if (usePersistenceContext)
+                    _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
                 else
-                {
-                    if (usePersistenceContext)
-                        _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
-                    else
-                        _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
-                }
+                    _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
             }
             catch (Exception ex)
             {
@@ -266,25 +222,6 @@ namespace OPMedia.Core
                 {
                     ActionType = PersistenceActionType.SaveObject,
                     ObjectContent = objectContent,
-                    PersistenceContext = persistenceContext,
-                    PersistenceId = persistenceId,
-                });
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        void IPersistenceService.SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob)
-        {
-            try
-            {
-                _cl.SendPdu(new PersistencePDU
-                {
-                    ActionType = PersistenceActionType.SaveObject,
-                    IsBlob = true,
-                    ObjectContent = Convert.ToBase64String(objectBlob),
                     PersistenceContext = persistenceContext,
                     PersistenceId = persistenceId,
                 });

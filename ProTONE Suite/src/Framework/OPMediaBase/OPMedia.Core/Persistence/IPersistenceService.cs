@@ -11,11 +11,7 @@
     public interface IPersistenceService
     {
         string ReadObject(string persistenceId, string persistenceContext);
-        byte[] ReadBlob(string persistenceId, string persistenceContext);
-
         void SaveObject(string persistenceId, string persistenceContext, string objectContent);
-        void SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob);
-
         void DeleteObject(string persistenceId, string persistenceContext);
     }
 

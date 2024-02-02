@@ -15,7 +15,6 @@ namespace OPMedia.Core.Persistence
         public string PersistenceId { get; set; }
         public string PersistenceContext { get; set; }
         public string ObjectContent { get; set; }
-        public bool IsBlob { get; set; }
 
         [JsonIgnore]
         public abstract bool IsValid { get; }

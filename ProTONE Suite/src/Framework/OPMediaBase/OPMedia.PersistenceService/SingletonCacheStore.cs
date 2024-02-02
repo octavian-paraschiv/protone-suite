@@ -39,16 +39,6 @@ namespace OPMedia.PersistenceService
             return _cache.SaveObject(persistenceId, persistenceContext, objectContent);
         }
 
-        public byte[] ReadBlob(string persistenceId, string persistenceContext)
-        {
-            return _cache.ReadBlob(persistenceId, persistenceContext);
-        }
-
-        public bool SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
-        {
-            return _cache.SaveBlob(persistenceId, persistenceContext, objectContent);
-        }
-
         public bool DeleteObject(string persistenceId, string persistenceContext)
         {
             return _cache.DeleteObject(persistenceId, persistenceContext);

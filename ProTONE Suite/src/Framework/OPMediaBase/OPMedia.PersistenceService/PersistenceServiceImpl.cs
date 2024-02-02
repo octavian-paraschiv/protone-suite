@@ -77,36 +77,14 @@ namespace OPMedia.PersistenceService
                 {
                     case PersistenceActionType.ReadObject:
                         {
-                            if (rpdu.IsBlob)
-                            {
-                                var blob = ReadBlob(rpdu.PersistenceId, rpdu.PersistenceContext);
-                                if (blob?.Length > 0)
-                                    rpdu.ObjectContent = Convert.ToBase64String(blob);
-                                else
-                                    rpdu.ObjectContent = "";
-                            }
-                            else
-                            {
-                                rpdu.ObjectContent = ReadObject(rpdu.PersistenceId, rpdu.PersistenceContext) ?? "";
-                            }
-
+                            rpdu.ObjectContent = ReadObject(rpdu.PersistenceId, rpdu.PersistenceContext) ?? "";
                             string data = JsonConvert.SerializeObject(rpdu);
                             _server.SendTo(connId, data);
                         }
                         break;
 
                     case PersistenceActionType.SaveObject:
-                        {
-                            if (rpdu.IsBlob)
-                            {
-                                var data = Convert.FromBase64String(rpdu.ObjectContent);
-                                SaveBlob(rpdu.PersistenceId, rpdu.PersistenceContext, data);
-                            }
-                            else
-                            {
-                                SaveObject(rpdu.PersistenceId, rpdu.PersistenceContext, rpdu.ObjectContent);
-                            }
-                        }
+                        SaveObject(rpdu.PersistenceId, rpdu.PersistenceContext, rpdu.ObjectContent);
                         break;
 
                     case PersistenceActionType.DeleteObject:
@@ -167,20 +145,6 @@ namespace OPMedia.PersistenceService
             return null;
         }
 
-        public byte[] ReadBlob(string persistenceId, string persistenceContext)
-        {
-            try
-            {
-                return SingletonCacheStore.Instance.ReadBlob(persistenceId, persistenceContext);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-
-            return null;
-        }
-
 
         public void SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
@@ -195,29 +159,6 @@ namespace OPMedia.PersistenceService
                         PersistenceId = persistenceId,
                         PersistenceContext = persistenceContext,
                         ObjectContent = objectContent
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogException(ex);
-            }
-        }
-
-        public void SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
-        {
-            try
-            {
-                bool ok = SingletonCacheStore.Instance.SaveBlob(persistenceId, persistenceContext, objectContent);
-                if (ok)
-                {
-                    Notify(new NotificationPDU
-                    {
-                        ChangeType = NotificationType.ObjectSaved,
-                        PersistenceId = persistenceId,
-                        PersistenceContext = persistenceContext,
-                        ObjectContent = Convert.ToBase64String(objectContent),
-                        IsBlob = true
                     });
                 }
             }

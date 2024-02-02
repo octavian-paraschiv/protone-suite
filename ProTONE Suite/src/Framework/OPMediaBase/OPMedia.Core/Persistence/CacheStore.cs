@@ -14,8 +14,8 @@ namespace OPMedia.Core.Persistence
 
         object _accessLock = new object();
 
-        public object _value = null;
-        public object Value
+        public string _value = null;
+        public string Value
         {
             get
             {
@@ -47,7 +47,7 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        public CacheItem(string key, object value)
+        public CacheItem(string key, string value)
         {
             this.Key = key;
             this.Value = value;
@@ -135,24 +135,19 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        #region ReadObject / ReadBlob
+        #region ReadObject
 
         public string ReadObject(string persistenceId, string persistenceContext)
         {
-            return __Read(persistenceId, persistenceContext, false) as string;
+            return __Read(persistenceId, persistenceContext);
         }
 
-        public byte[] ReadBlob(string persistenceId, string persistenceContext)
-        {
-            return __Read(persistenceId, persistenceContext, true) as byte[];
-        }
-
-        private object __Read(string persistenceId, string persistenceContext, bool isBlob)
+        private string __Read(string persistenceId, string persistenceContext)
         {
             if (string.IsNullOrEmpty(persistenceContext))
                 persistenceContext = "*";
 
-            object ret = null;
+            string ret = null;
 
             string key = BuildCacheKey(persistenceId, persistenceContext);
 
@@ -170,10 +165,7 @@ namespace OPMedia.Core.Persistence
             {
                 Logger.LogToConsole($"ReadObject: {key} not found in cache, or it was null");
 
-                if (isBlob)
-                    ret = _persistence.ReadBlob(persistenceId, persistenceContext);
-                else
-                    ret = _persistence.ReadObject(persistenceId, persistenceContext);
+                ret = _persistence.ReadObject(persistenceId, persistenceContext);
 
                 if (ret != null)
                     Logger.LogToConsole($"ReadObject: {key} from DB => {ret}");
@@ -194,19 +186,14 @@ namespace OPMedia.Core.Persistence
         }
         #endregion
 
-        #region SaveObject / SaveBlob
+        #region SaveObject
 
         public bool SaveObject(string persistenceId, string persistenceContext, string objectContent)
         {
             return __Save(persistenceId, persistenceContext, objectContent);
         }
 
-        public bool SaveBlob(string persistenceId, string persistenceContext, byte[] objectBlob)
-        {
-            return __Save(persistenceId, persistenceContext, objectBlob);
-        }
-
-        private bool __Save(string persistenceId, string persistenceContext, object objectContent)
+        private bool __Save(string persistenceId, string persistenceContext, string objectContent)
         {
             bool retVal = false;
 
@@ -247,15 +234,11 @@ namespace OPMedia.Core.Persistence
                     }
                 }
 
-                ThreadPool.QueueUserWorkItem((c) =>
-                    {
-                        if (objectContent is byte[])
-                            _persistence.SaveBlob(persistenceId, persistenceContext, objectContent as byte[]);
-                        else
-                            _persistence.SaveObject(persistenceId, persistenceContext, objectContent as string);
-
-                        Logger.LogToConsole($"SaveObject: {key} saved in DB with value {objectContent}");
-                    });
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    _persistence.SaveObject(persistenceId, persistenceContext, objectContent);
+                    Logger.LogToConsole($"SaveObject: {key} saved in DB with value {objectContent}");
+                });
             }
             catch
             {
@@ -308,7 +291,7 @@ namespace OPMedia.Core.Persistence
             return string.Format("{0}_{1}", persistenceId, persistenceContext);
         }
 
-        internal bool RefreshObject(NotificationType changeType, string persistenceId, string persistenceContext, object objectContent)
+        internal bool RefreshObject(NotificationType changeType, string persistenceId, string persistenceContext, string objectContent)
         {
             bool success = false;
 
