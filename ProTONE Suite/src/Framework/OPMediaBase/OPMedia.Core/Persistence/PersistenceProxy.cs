@@ -20,8 +20,6 @@ namespace OPMedia.Core
 
         private static int _unsuccesfulAttempts = 0;
 
-        static TicToc _readTicToc = new TicToc("Persistence.Proxy.ReadObject");
-
         private PersistenceClient _cl = null;
 
         protected PersistenceProxy()
@@ -141,32 +139,28 @@ namespace OPMedia.Core
 
             try
             {
-                _readTicToc.Tic();
-
+                if (typeof(T) == typeof(byte[]))
                 {
-                    if (typeof(T) == typeof(byte[]))
-                    {
-                        byte[] blob = usePersistenceContext ?
-                            _cache.ReadBlob(persistenceId, _proxy._persistenceContext) :
-                            _cache.ReadBlob(persistenceId, string.Empty);
-                    }
-                    else
-                    {
-                        string content = usePersistenceContext ?
-                            _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
-                            _cache.ReadObject(persistenceId, string.Empty);
+                    byte[] blob = usePersistenceContext ?
+                        _cache.ReadBlob(persistenceId, _proxy._persistenceContext) :
+                        _cache.ReadBlob(persistenceId, string.Empty);
+                }
+                else
+                {
+                    string content = usePersistenceContext ?
+                        _cache.ReadObject(persistenceId, _proxy._persistenceContext) :
+                        _cache.ReadObject(persistenceId, string.Empty);
 
-                        if (!string.IsNullOrEmpty(content))
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        try
                         {
-                            try
-                            {
-                                retVal = StringUtils.Coerce<T>(content);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.LogException(ex);
-                                retVal = defaultValue;
-                            }
+                            retVal = StringUtils.Coerce<T>(content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogException(ex);
+                            retVal = defaultValue;
                         }
                     }
                 }
@@ -175,10 +169,6 @@ namespace OPMedia.Core
             {
                 Logger.LogException(ex);
                 retVal = defaultValue;
-            }
-            finally
-            {
-                _readTicToc.Toc();
             }
 
             return retVal;
@@ -243,38 +233,28 @@ namespace OPMedia.Core
             SaveObject<T>(id, objectContent, usePersistenceContext);
         }
 
-        static TicToc _saveTicToc = new TicToc("Persistence.Proxy.SaveObject");
-
         public static void SaveObject<T>(string persistenceId, T objectContent, bool usePersistenceContext = true)
         {
             try
             {
-                _saveTicToc.Tic();
-
+                if (typeof(T) == typeof(byte[]))
                 {
-                    if (typeof(T) == typeof(byte[]))
-                    {
-                        if (usePersistenceContext)
-                            _cache.SaveBlob(persistenceId, _proxy._persistenceContext, objectContent as byte[]);
-                        else
-                            _cache.SaveBlob(persistenceId, string.Empty, objectContent as byte[]);
-                    }
+                    if (usePersistenceContext)
+                        _cache.SaveBlob(persistenceId, _proxy._persistenceContext, objectContent as byte[]);
                     else
-                    {
-                        if (usePersistenceContext)
-                            _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
-                        else
-                            _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
-                    }
+                        _cache.SaveBlob(persistenceId, string.Empty, objectContent as byte[]);
+                }
+                else
+                {
+                    if (usePersistenceContext)
+                        _cache.SaveObject(persistenceId, _proxy._persistenceContext, objectContent.ToString());
+                    else
+                        _cache.SaveObject(persistenceId, string.Empty, objectContent.ToString());
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-            }
-            finally
-            {
-                _saveTicToc.Toc();
             }
         }
 
@@ -324,28 +304,18 @@ namespace OPMedia.Core
             DeleteObject(id, usePersistenceContext);
         }
 
-        static TicToc _deleteTicToc = new TicToc("Persistence.Proxy.DeleteObject", 5);
-
         public static void DeleteObject(string persistenceId, bool usePersistenceContext = true)
         {
             try
             {
-                _deleteTicToc.Tic();
-
-                {
-                    if (usePersistenceContext)
-                        _cache.DeleteObject(persistenceId, _proxy._persistenceContext);
-                    else
-                        _cache.DeleteObject(persistenceId, string.Empty);
-                }
+                if (usePersistenceContext)
+                    _cache.DeleteObject(persistenceId, _proxy._persistenceContext);
+                else
+                    _cache.DeleteObject(persistenceId, string.Empty);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-            }
-            finally
-            {
-                _deleteTicToc.Toc();
             }
         }
 

@@ -11,10 +11,6 @@ namespace OPMedia.PersistenceService
 {
     public class PersistenceServiceImpl : IPersistenceService, IDisposable
     {
-        static TicToc _readTicToc = new TicToc("Persistence.Service.ReadObject");
-        static TicToc _saveTicToc = new TicToc("Persistence.Service.SaveObject");
-        static TicToc _deleteTicToc = new TicToc("Persistence.Service.DeleteObject");
-
         private PersistenceServer _server;
 
         private object _subscriptionsLock = new object();
@@ -161,16 +157,11 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                _readTicToc.Tic();
                 return SingletonCacheStore.Instance.ReadObject(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-            }
-            finally
-            {
-                _readTicToc.Toc();
             }
 
             return null;
@@ -180,16 +171,11 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                _readTicToc.Tic();
                 return SingletonCacheStore.Instance.ReadBlob(persistenceId, persistenceContext);
             }
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-            }
-            finally
-            {
-                _readTicToc.Toc();
             }
 
             return null;
@@ -200,8 +186,6 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                _saveTicToc.Tic();
-
                 bool ok = SingletonCacheStore.Instance.SaveObject(persistenceId, persistenceContext, objectContent);
                 if (ok)
                 {
@@ -218,18 +202,12 @@ namespace OPMedia.PersistenceService
             {
                 Logger.LogException(ex);
             }
-            finally
-            {
-                _saveTicToc.Toc();
-            }
         }
 
         public void SaveBlob(string persistenceId, string persistenceContext, byte[] objectContent)
         {
             try
             {
-                _saveTicToc.Tic();
-
                 bool ok = SingletonCacheStore.Instance.SaveBlob(persistenceId, persistenceContext, objectContent);
                 if (ok)
                 {
@@ -247,18 +225,12 @@ namespace OPMedia.PersistenceService
             {
                 Logger.LogException(ex);
             }
-            finally
-            {
-                _saveTicToc.Toc();
-            }
         }
 
         public void DeleteObject(string persistenceId, string persistenceContext)
         {
             try
             {
-                _deleteTicToc.Tic();
-
                 bool ok = SingletonCacheStore.Instance.DeleteObject(persistenceId, persistenceContext);
                 if (ok)
                 {
@@ -274,10 +246,6 @@ namespace OPMedia.PersistenceService
             catch (Exception ex)
             {
                 Logger.LogException(ex);
-            }
-            finally
-            {
-                _deleteTicToc.Toc();
             }
         }
 

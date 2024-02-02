@@ -49,14 +49,9 @@ namespace OPMedia.PersistenceService
             LoggedApplication.Start(this.ServiceName, false);
             Logger.LogInfo("Service preparing to start ...");
 
-            TicToc ticToc = new TicToc("Persistence.Service.OnStart", 1);
-
             try
             {
-                ticToc.Tic();
-
                 _svc = new PersistenceServiceImpl();
-
                 Logger.LogInfo("Service started with success.");
             }
             catch (Exception ex)
@@ -64,34 +59,21 @@ namespace OPMedia.PersistenceService
                 Logger.LogInfo("Service failed to start correctly. {0}", ex.Message);
                 Stop();
             }
-            finally
-            {
-                ticToc.Toc();
-            }
         }
 
         protected override void OnStop()
         {
             Logger.LogInfo("Service preparing to stop ...");
 
-            TicToc ticToc = new TicToc("Persistence.Service.OnStop", 1);
-
             try
             {
-                ticToc.Tic();
-
                 _svc?.Dispose();
                 _svc = null;
-
                 Logger.LogInfo("Service stopped with success.");
             }
             catch (Exception ex)
             {
                 Logger.LogInfo("Service failed to stop correctly. {0}", ex.Message);
-            }
-            finally
-            {
-                ticToc.Toc();
             }
 
             LoggedApplication.Stop();
