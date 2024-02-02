@@ -6,15 +6,6 @@ using System;
 
 namespace OPMedia.PersistenceService
 {
-#if HAVE_LITE_DB
-    public class PersistedObject
-    {
-        public Int64 _id { get; set; }
-        public string PersistenceId { get; set; }
-        public string PersistenceContext  { get; set; }
-        public string Content { get; set; }
-    }
-#else
     public partial class PersistedObject
     {
         [PrimaryKey, AutoIncrement, NotNull]
@@ -25,8 +16,5 @@ namespace OPMedia.PersistenceService
         public String PersistenceContext { get; set; }
 
         public String Content { get; set; }
-
-        public Byte[] ContentBlob { get; set; }
     }
-#endif
 }

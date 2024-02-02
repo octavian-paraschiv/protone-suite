@@ -5,6 +5,7 @@ using OPMedia.Core.Logging;
 using OPMedia.Core.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 
 namespace OPMedia.PersistenceService
@@ -15,6 +16,7 @@ namespace OPMedia.PersistenceService
 
         private object _subscriptionsLock = new object();
         private Dictionary<string, string> _subscriptions = new Dictionary<string, string>();
+        private SqliteDbStore _db = new SqliteDbStore();
 
         public PersistenceServiceImpl()
         {
@@ -75,6 +77,17 @@ namespace OPMedia.PersistenceService
             {
                 switch (rpdu.ActionType)
                 {
+                    case PersistenceActionType.ReadAll:
+                        {
+                            var dict = ReadAll(rpdu.AppName, rpdu.Context);
+                            var str = JsonConvert.SerializeObject(dict);
+                            var strBytes = Encoding.UTF8.GetBytes(str);
+                            rpdu.Content = Convert.ToBase64String(strBytes);
+                            string data = JsonConvert.SerializeObject(rpdu);
+                            _server.SendTo(connId, data);
+                        }
+                        break;
+
                     case PersistenceActionType.ReadNode:
                         {
                             rpdu.Content = ReadNode(rpdu.NodeId, rpdu.Context) ?? "";
@@ -131,11 +144,25 @@ namespace OPMedia.PersistenceService
             }, null);
         }
 
+        public Dictionary<string, string> ReadAll(string appName, string context)
+        {
+            try
+            {
+                return _db.ReadAll(appName, context);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return null;
+        }
+
         public string ReadNode(string nodeId, string context)
         {
             try
             {
-                return SingletonCacheStore.Instance.ReadNode(nodeId, context);
+                return _db.ReadNode(nodeId, context);
             }
             catch (Exception ex)
             {
@@ -150,17 +177,14 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                bool ok = SingletonCacheStore.Instance.SaveNode(nodeId, context, content);
-                if (ok)
+                _db.SaveNode(nodeId, context, content);
+                Notify(new NotificationPDU
                 {
-                    Notify(new NotificationPDU
-                    {
-                        ChangeType = NotificationType.NodeSaved,
-                        NodeId = nodeId,
-                        Context = context,
-                        Content = content
-                    });
-                }
+                    ChangeType = NotificationType.NodeSaved,
+                    NodeId = nodeId,
+                    Context = context,
+                    Content = content
+                });
             }
             catch (Exception ex)
             {
@@ -172,17 +196,15 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                bool ok = SingletonCacheStore.Instance.DeleteNode(nodeId, context);
-                if (ok)
+                _db.DeleteNode(nodeId, context);
+
+                Notify(new NotificationPDU
                 {
-                    Notify(new NotificationPDU
-                    {
-                        ChangeType = NotificationType.NodeDeleted,
-                        NodeId = nodeId,
-                        Context = context,
-                        Content = ""
-                    });
-                }
+                    ChangeType = NotificationType.NodeDeleted,
+                    NodeId = nodeId,
+                    Context = context,
+                    Content = ""
+                });
             }
             catch (Exception ex)
             {

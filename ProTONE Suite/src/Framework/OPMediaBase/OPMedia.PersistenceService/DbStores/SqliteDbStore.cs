@@ -1,6 +1,4 @@
-﻿#if HAVE_LITE_DB
-#else
-using OPMedia.Core;
+﻿using OPMedia.Core;
 using OPMedia.Core.Win32;
 using SQLite;
 using System;
@@ -13,34 +11,74 @@ namespace OPMedia.PersistenceService
 {
     public class SqliteDbStore : IPersistenceService
     {
-        private static string __peristenceDbPath = @"..\\Persistence.db3";
+        const string DbName = "Persistence.db3";
         private SQLiteConnection _db = null;
 
         public SqliteDbStore()
         {
             DllUtility.SelectProperDllVersion("sqlite3");
 
-            if (File.Exists(__peristenceDbPath) == false)
-                __peristenceDbPath = "Persistence.db3";
+            var dbPath = Path.Combine(OperationDbFolder, DbName);
+            if (!File.Exists(dbPath))
+            {
+                var currentDbPath = Path.Combine(PathUtils.CurrentDir, DbName);
+                File.Copy(currentDbPath, dbPath);
+            }
 
-            _db = new SQLiteConnection(__peristenceDbPath);
+            _db = new SQLiteConnection(dbPath);
         }
 
-        public List<PersistedObject> PersistedObjects
+        private static string OperationDbFolder
         {
-            get { return _db.Table<PersistedObject>().ToList(); }
+            get
+            {
+                try
+                {
+                    string dbFolder = PathUtils.ProgramDataDir;
+                    dbFolder = Path.Combine(dbFolder, Constants.CompanyName);
+                    dbFolder = Path.Combine(dbFolder, Constants.SuiteName);
+                    return dbFolder;
+                }
+                catch
+                {
+                }
+
+                return PathUtils.CurrentDir;
+            }
         }
 
+        public Dictionary<string, string> ReadAll(string appName, string context)
+        {
+            Dictionary<string, string> all = new Dictionary<string, string>();
+
+            try
+            {
+                var list = FindObjects(null, context)?
+                    .Where(po => po.PersistenceId != null && (po.PersistenceId.StartsWith("OPMedia") == false || po.PersistenceId.StartsWith(appName)))?
+                    .ToList();
+
+                list?.ForEach(po =>
+                {
+                    if (all.ContainsKey(po.PersistenceId))
+                        all[po.PersistenceId] = po.Content;
+                    else
+                        all.Add(po.PersistenceId, po.Content);
+                });
+
+            }
+            catch (Exception ex)
+            {
+                OP_Logger.LogException(ex);
+            }
+
+            return all;
+        }
 
         public string ReadNode(string nodeId, string context)
         {
             try
             {
-                var x = (from po in PersistedObjects
-                         where po.PersistenceId == nodeId && po.PersistenceContext == context
-                         select po.Content).FirstOrDefault();
-
-                return x;
+                return FindObjects(nodeId, context)?.FirstOrDefault()?.Content;
             }
             catch (Exception ex)
             {
@@ -54,10 +92,7 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                var x = (from po in PersistedObjects
-                         where po.PersistenceId == nodeId && po.PersistenceContext == context
-                         select po).FirstOrDefault();
-
+                var x = FindObjects(nodeId, context)?.FirstOrDefault();
                 if (x == null)
                 {
                     x = new PersistedObject
@@ -85,14 +120,9 @@ namespace OPMedia.PersistenceService
         {
             try
             {
-                var x = (from po in PersistedObjects
-                         where po.PersistenceId == nodeId && po.PersistenceContext == context
-                         select po).FirstOrDefault();
-
+                var x = FindObjects(nodeId, context)?.FirstOrDefault();
                 if (x != null)
-                {
                     _db.Delete(x);
-                }
             }
             catch (Exception ex)
             {
@@ -100,9 +130,13 @@ namespace OPMedia.PersistenceService
             }
         }
 
-
-        public void Notify(NotificationType changeType, string nodeId, string context, string content) { }
-        public void SendNotificationBlob(NotificationType changeType, string nodeId, string context, byte[] objectBlob) { }
+        private TableQuery<PersistedObject> FindObjects(string nodeId, string context)
+        {
+            return _db.Table<PersistedObject>()
+                .Where(po =>
+                    (context == null || context == "*" || po.PersistenceContext == null || po.PersistenceContext == "*" || po.PersistenceContext.ToUpper() == context.ToUpper()) &&
+                    (nodeId == null || nodeId == "*" || (po.PersistenceId != null && po.PersistenceId.ToUpper() == nodeId.ToUpper()))
+                );
+        }
     }
 }
-#endif

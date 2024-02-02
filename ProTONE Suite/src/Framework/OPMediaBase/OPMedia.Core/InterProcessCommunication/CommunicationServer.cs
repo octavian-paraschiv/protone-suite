@@ -154,12 +154,15 @@ namespace OPMedia.Core.InterProcessCommunication
 
         public void SendTo(string connId, string line)
         {
-            if (_clients.ContainsKey(connId))
+            ThreadPool.QueueUserWorkItem(_ =>
             {
-                var client = _clients[connId];
-                byte[] data = Encoding.UTF8.GetBytes($"{line}{Environment.NewLine}");
-                client.GetStream().Write(data, 0, data.Length);
-            }
+                if (_clients.ContainsKey(connId))
+                {
+                    var client = _clients[connId];
+                    byte[] data = Encoding.UTF8.GetBytes($"{line}{Environment.NewLine}");
+                    client.GetStream().Write(data, 0, data.Length);
+                }
+            });
         }
 
         public void SendGracefulEndTo(string connId) => SendTo(connId, GracefulEndMarker);

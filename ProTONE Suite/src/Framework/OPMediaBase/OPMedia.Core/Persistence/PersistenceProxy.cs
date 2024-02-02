@@ -1,11 +1,14 @@
-﻿using OPMedia.Core.Configuration;
+﻿using Newtonsoft.Json;
+using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using OPMedia.Core.Persistence;
 using OPMedia.Core.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Principal;
 using System.ServiceProcess;
+using System.Text;
 using System.Threading;
 
 namespace OPMedia.Core
@@ -13,7 +16,7 @@ namespace OPMedia.Core
     public class PersistenceProxy : IDisposable, IPersistenceService, INotificationService
     {
         protected readonly static PersistenceProxy _proxy = new PersistenceProxy();
-        private static CacheStore _cache = new CacheStore(_proxy as IPersistenceService);
+        private static CacheStore _cache = new CacheStore(_proxy);
 
         protected string _persistenceContext = string.Empty;
         protected Guid _appId = Guid.NewGuid();
@@ -86,6 +89,7 @@ namespace OPMedia.Core
                 _cl.ConnectionOpen = (connId, reconnect) =>
                 {
                     _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, Content = _appId.ToString() });
+                    _cache.Init(_persistenceContext);
                 };
 
                 _cl.PduReceived = (connId, pdu) =>
@@ -147,7 +151,7 @@ namespace OPMedia.Core
                 {
                     try
                     {
-                        retVal = StringUtils.Coerce<T>(content);
+                        retVal = StringUtils.CastAs<T>(content);
                     }
                     catch (Exception ex)
                     {
@@ -189,6 +193,39 @@ namespace OPMedia.Core
 
             return null;
         }
+
+        Dictionary<string, string> IPersistenceService.ReadAll(string appName, string context)
+        {
+            try
+            {
+                Logger.LogTrace($"IPersistenceService.ReadAll appName={appName} context={context}");
+
+
+                var pdu = _cl.SendPduAndWaitResponse(new PersistencePDU
+                {
+                    ActionType = PersistenceActionType.ReadAll,
+                    Context = context,
+                    AppName = appName,
+                    NodeId = null,
+
+                });
+
+                if (pdu?.Content?.Length > 0)
+                {
+                    byte[] data = Convert.FromBase64String(pdu.Content);
+                    string dataStr = Encoding.UTF8.GetString(data);
+                    var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(dataStr);
+                    return dictionary;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region SaveNode

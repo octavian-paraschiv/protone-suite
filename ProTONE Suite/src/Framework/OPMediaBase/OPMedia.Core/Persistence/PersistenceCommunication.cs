@@ -36,6 +36,9 @@ namespace OPMedia.Core.Persistence
     {
         public PersistenceActionType ActionType { get; set; }
         public override bool IsValid => (ActionType != PersistenceActionType.None);
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public string AppName { get; set; }
     }
 
     public class ServicePDU : GenericPDU
@@ -57,6 +60,8 @@ namespace OPMedia.Core.Persistence
         ReadNode,
         SaveNode,
         DeleteNode,
+
+        ReadAll
     }
 
     public static class PduFactory
@@ -164,6 +169,7 @@ namespace OPMedia.Core.Persistence
                         if (_recvPdus.ContainsKey(req.Id))
                         {
                             var rpdu = _recvPdus[req.Id];
+                            _recvPdus.Remove(req.Id);
                             return rpdu;
                         }
                     }
