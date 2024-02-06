@@ -71,7 +71,6 @@ Name: fr; MessagesFile: compiler:Languages\French.isl
 Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 
 [Files]
-Source: "{#BINDIR}\CookComputing.XmlRpcV2.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 ;--------------------------------------
 ; Application executables
@@ -114,8 +113,8 @@ Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-fr.json"; DestDir: "{app}\T
 ;--------------------------------------
 ; Database and support DLL's
 Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall
-Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"
-Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; Catalog templates
 Source: "{#BINDIR}\Templates\Catalog\Default Catalog"; DestDir: "{app}\Templates\Catalog"
@@ -133,10 +132,12 @@ Source: "{#BINDIR}\Resources\catalog.ico"; DestDir: "{app}\Resources\"; Flags: u
 ;--------------------------------------
 ; Third party libraries
 Source: "{#BINDIR}\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\libdeezer.x86.dll"; DestDir: "{app}"
-Source: "{#BINDIR}\libdeezer.x64.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\Iso639.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\libdeezer.x86.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\libdeezer.x64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\libmp3lame.32.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\libmp3lame.64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\MovieCollection.OpenSubtitles.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\NAudio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\NAudio.Asio.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\NAudio.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -145,7 +146,7 @@ Source: "{#BINDIR}\NAudio.Midi.dll"; DestDir: "{app}"; Flags: replacesameversion
 Source: "{#BINDIR}\NAudio.Wasapi.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\NAudio.WinForms.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"
+Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\TagLibSharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\SharpShell.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
