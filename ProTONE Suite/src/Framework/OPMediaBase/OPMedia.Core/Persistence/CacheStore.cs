@@ -21,11 +21,14 @@ namespace OPMedia.Core.Persistence
             ThreadPool.QueueUserWorkItem(_ =>
             {
                 var allNodes = ReadAll(ApplicationInfo.ApplicationName, context);
-                lock (_cacheLock)
+                if (allNodes?.Count > 0)
                 {
-                    foreach (var node in allNodes)
+                    lock (_cacheLock)
                     {
-                        AddOrUpdateCacheItem(node.Key, context, node.Value);
+                        foreach (var node in allNodes)
+                        {
+                            AddOrUpdateCacheItem(node.Key, context, node.Value);
+                        }
                     }
                 }
             });
