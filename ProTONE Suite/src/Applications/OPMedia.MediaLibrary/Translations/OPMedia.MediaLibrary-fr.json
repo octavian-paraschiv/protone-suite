@@ -361,7 +361,7 @@
   "TXT_INSTALL_ADDONLIB": "Installer modules complementaires ...",
   "TXT_INSTALLADDONFILTER": "Modules complementaires OPMedia (*.dll)|*.dll||",
   "TXT_INSTALLADDONS": "Sélectionnez une modules complementaires OPMedia à installer:",
-  "TXT_INSTALLCOMPONENT": "Installer le composant ...",
+  "TXT_INSTALLCOMPONENT": "Résoudre le problème",
   "TXT_INTERNALLABEL": "Interne étiquette du média",
   "TXT_INTERNET_EXPLORER_HINT": "Vous devez avoir Internet Explorer 9.0 ou une version plus récente afin de pouvoir s’auto-enregistrer le jeton.\r\nDans le cas contraire, vous devrez copier à partir de l’URL affichée dans le navigateur par défaut et le copier manuellement dans l’application. ",
   "TXT_INVALID_ADDON": "Le fichier DLL que vous avez sélectionné n'est pas une modules complementair valide OPMedia.\r\nRemarque: Si vous crois, cependant, que le fichier en question aurait dû être une module valide, il vous est conseillé de contacter le producteur ou le fournisseur de cette DLL.",

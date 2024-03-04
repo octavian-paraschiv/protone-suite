@@ -361,7 +361,7 @@
   "TXT_INSTALL_ADDONLIB": "Installieren Addon Bibliothek...",
   "TXT_INSTALLADDONFILTER": "OPMedia Addon Bibliotheken (*.dll)|*.dll||",
   "TXT_INSTALLADDONS": "Wählen Sie eine OPMedia Addon Bibliothek zu installieren:",
-  "TXT_INSTALLCOMPONENT": "Install Component ...",
+  "TXT_INSTALLCOMPONENT": "Beheben das Problem",
   "TXT_INTERNALLABEL": "Interne Medien Etikett",
   "TXT_INTERNET_EXPLORER_HINT": "Sie müssen Internet Explorer 9.0 oder höher installiert um autoregister-Token können.\r\nAndernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und manuell in die Anwendung kopieren/",
   "TXT_INVALID_ADDON": "Die DLL-Datei, die Sie ausgewählt haben, ist keine gültige OPMedia Erweiterungsbibliothek.\r\nHinweis: Wenn Sie glauben jedoch, dass die jeweilige Datei sollte eine gültige Erweiterung haben, \r\nIhnen wird geraten, den Hersteller oder den Lieferanten von dieser DLL zu kontaktieren.",

@@ -305,7 +305,7 @@
   "TXT_INPUT_DATA": "Input-Daten",
   "TXT_INSERT_DISK": "Legen Sie Diskette",
   "TXT_INSERT_MEDIA": "Bitte legen Sie die Diskette mit der Aufschrift {0} (desc: {1}) in die {2}-Laufwerk.",
-  "TXT_INSTALLCOMPONENT": "Install Component ...",
+  "TXT_INSTALLCOMPONENT": "Beheben das Problem",
   "TXT_INTERNET_EXPLORER_HINT": "Sie müssen Internet Explorer 9.0 oder höher installiert um autoregister-Token können.\r\nAndernfalls müssen Sie aus in der Standard-Browser angezeigte URL kopieren und manuell in die Anwendung kopieren/",
   "TXT_INVALIDDVDVOLUME": "Sie haben eine ungültige DVD Volumen angegeben. Bitte wählen Sie erneut.",
   "TXT_JUMP_TO_ITEM": "Gehe zu Wiedergabelistenobjekt",

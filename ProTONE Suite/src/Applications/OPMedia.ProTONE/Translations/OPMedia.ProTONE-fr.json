@@ -305,7 +305,7 @@
   "TXT_INPUT_DATA": "Les données d'entrée",
   "TXT_INSERT_DISK": "Insérez la disque",
   "TXT_INSERT_MEDIA": "S'il vous plaît insérez le disque nommé {0} (desc: {1}) dans le lecteur de {2}.",
-  "TXT_INSTALLCOMPONENT": "Installer le composant ...",
+  "TXT_INSTALLCOMPONENT": "Résoudre le problème",
   "TXT_INTERNET_EXPLORER_HINT": "Vous devez avoir Internet Explorer 9.0 ou une version plus récente afin de pouvoir s’auto-enregistrer le jeton.\r\nDans le cas contraire, vous devrez copier à partir de l’URL affichée dans le navigateur par défaut et le copier manuellement dans l’application. ",
   "TXT_INVALIDDVDVOLUME": "Vous avez spécifié un volume DVD invalide. S'il vous plaît sélectionnez de nouveau.",
   "TXT_JUMP_TO_ITEM": "Aller à la rubrique liste de lecture",

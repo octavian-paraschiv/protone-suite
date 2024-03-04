@@ -361,7 +361,7 @@
   "TXT_INSTALL_ADDONLIB": "Instalare bibliotecă de extensii ...",
   "TXT_INSTALLADDONFILTER": "Extensii OPMedia (*.dll)|*.dll||",
   "TXT_INSTALLADDONS": "Selectaţi o extensie OPMedia pentru instalare:",
-  "TXT_INSTALLCOMPONENT": "Instalează componenta...",
+  "TXT_INSTALLCOMPONENT": "Rezolvă problema",
   "TXT_INTERNALLABEL": "Etichetă internă mediu",
   "TXT_INTERNET_EXPLORER_HINT": "Aveţi nevoie de Internet Explorer 9.0 sau mai nou instalat pentru a putea auto-inregistra tokenul.\r\nÎn caz contrar, va trebui să-l copiaţi din adresa URL afişată în browserul implicit și apoi sa-l copiaţi manual în aplicaţie.",
   "TXT_INVALID_ADDON": "Fişierul DLL selectat de dvs. nu reprezintă o bibliotecă de extensii OPMedia validă.\r\nNotă: Dacă dvs. credeti că ar fi trebuit sa fie o bibliotecă validă, \r\nsunteţi sfătuit să contactaţi producătorul sau distribuitorul acelui DLL.",
