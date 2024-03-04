@@ -447,5 +447,25 @@ namespace OPMedia.Runtime.ProTONE
             catch
             { return null; }
         }
+
+        public static string GetInstalledLocationForCLSID(string clsid)
+        {
+            try
+            {
+                string keyPath = string.Format(@"SOFTWARE\Classes\CLSID\{0}\InprocServer32", clsid);
+                using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(keyPath))
+                {
+                    if (key != null)
+                    {
+                        return key.GetValue("") as string;
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
     }
 }

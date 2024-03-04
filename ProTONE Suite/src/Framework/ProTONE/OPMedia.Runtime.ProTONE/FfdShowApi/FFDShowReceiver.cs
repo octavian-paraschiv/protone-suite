@@ -1,3 +1,4 @@
+using OPMedia.Core;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -12,19 +13,6 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
     /// </summary>
     public class FFDShowReceiver : Form
     {
-        /// <summary>
-        /// The CopyData Constant for SendMessage
-        /// </summary>
-        public const Int32 WM_COPYDATA = 0x004A;
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct COPYDATASTRUCT
-        {
-            internal UIntPtr dwData;
-            internal uint cbData;
-            internal IntPtr lpData;
-        }
-
         /// <summary>
         /// Received string
         /// </summary>
@@ -88,19 +76,13 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_COPYDATA)
+            if (m.Msg == (int)Messages.WM_COPYDATA)
             {
                 try
                 {
                     COPYDATASTRUCT cd = new COPYDATASTRUCT();
                     cd = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
-
-                    //#if UNICODE
                     string returnedData = Marshal.PtrToStringUni(cd.lpData);
-                    //#else
-                    //                    string returnedData = Marshal.PtrToStringAnsi(cd.lpData);
-                    //#endif
-                    receivedString = returnedData;
                     receivedType = (int)cd.dwData.ToUInt32();
 
                     if (parentThread != null && parentThread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
@@ -112,5 +94,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             }
             base.WndProc(ref m);
         }
+
+
     }
 }

@@ -1,4 +1,3 @@
-using Microsoft.Win32;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
 using System;
@@ -13,27 +12,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         const string CLSID = "{4DB2B5D9-4556-4340-B189-AD20110D953F}";
         const int MSG_TRAYICON = 32777;
 
-        public static string InstallLocation { get; private set; }
-
-        static FfdShowConfig()
-        {
-            InstallLocation = null;
-            try
-            {
-                string keyPath = string.Format(@"SOFTWARE\Classes\CLSID\{0}\InprocServer32", CLSID);
-                using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(keyPath))
-                {
-                    if (key != null)
-                    {
-                        InstallLocation = key.GetValue("") as string;
-                    }
-                }
-            }
-            catch
-            {
-                InstallLocation = null;
-            }
-        }
+        public static string InstallLocation { get; } = RegistrationSupport.GetInstalledLocationForCLSID(CLSID);
 
         public static void DoConfigureVideo()
         {

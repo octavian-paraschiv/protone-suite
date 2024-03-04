@@ -174,10 +174,6 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             List<IntPtr> instancesArray = (List<IntPtr>)gch.Target;
             StringBuilder sbc = new StringBuilder(1024);
             User32.GetClassName(hwnd, sbc, sbc.Capacity);
-
-            //sb = new StringBuilder(1024);
-            //User32.GetWindowText((int)windowHandle, sb, sb.Capacity);
-
             if (sbc.Length > 0)
             {
                 if (sbc.ToString().Equals(strAppName))
@@ -186,7 +182,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
 
             return true;
         }
-        #endregion
+        #endregion 
 
         #region Commands
         /// <summary>
