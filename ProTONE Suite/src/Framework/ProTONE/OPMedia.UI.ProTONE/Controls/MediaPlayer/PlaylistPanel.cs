@@ -282,7 +282,21 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             {
                 bool isActive = (lvi.Index == playlist.PlayIndex);
 
-                if (plItem.IsVideo)
+                if (isActive)
+                {
+                    switch (RenderingEngine.DefaultInstance.FilterState)
+                    {
+                        case FilterState.Running:
+                            imgMisc = Resources.btnPlay.Resize(false);
+                            break;
+
+                        case FilterState.Paused:
+                            imgMisc = Resources.btnPause.Resize(false);
+                            break;
+                    }
+                }
+
+                if (imgMisc == null && plItem.IsVideo)
                 {
                     if (SubtitleDownloadProcessor.IsFileOnDownloadList(plItem.Path))
                     {
@@ -299,30 +313,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                         imgMisc = ImageProcessing.Subtitle16;
                         txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE");
                     }
-                }
-                else if (isActive)
-                {
-                    Image img = null;
-                    switch (RenderingEngine.DefaultInstance.FilterState)
-                    {
-                        case FilterState.Running:
-                            img = Resources.btnPlay;
-                            break;
-
-                        case FilterState.Paused:
-                            img = Resources.btnPause;
-                            break;
-
-                        default:
-                            img = null;
-                            break;
-                    }
-
-                    imgMisc = img.Resize(false);
-                }
-                else
-                {
-                    imgMisc = null;
                 }
 
                 if (isActive)

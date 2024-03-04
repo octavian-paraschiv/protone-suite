@@ -155,12 +155,14 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             if (PathUtils.IsRootPath(movieFileName))
                 return false;
 
-            if (movieFileName.ToLowerInvariant() ==
-                RenderingEngine.DefaultInstance.GetRenderFile().ToLowerInvariant())
+            var moviePath = Path.GetFullPath(movieFileName);
+            var renderedPath = RenderingEngine.DefaultInstance.GetRenderFile();
+
+            if (string.Compare(moviePath, renderedPath, true) == 0 && RenderingEngine.DefaultInstance.IsRunningOrPaused)
             {
                 string subtitleFile = RenderingEngine.DefaultInstance.CurrentSubtitleFile;
 
-                bool usingSubtitle = !string.IsNullOrEmpty(subtitleFile);
+                bool usingSubtitle = subtitleFile?.Length > 0;
 
                 if (string.Compare(_prevSubtitleFile, subtitleFile, true) != 0)
                 {
@@ -178,8 +180,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             else
             {
                 // The file is not being played now.
-                string fileName = Path.GetFileNameWithoutExtension(movieFileName);
-                string directory = Path.GetDirectoryName(movieFileName);
+                string fileName = Path.GetFileNameWithoutExtension(moviePath);
+                string directory = Path.GetDirectoryName(moviePath);
 
                 if (Directory.Exists(directory))
                 {
@@ -205,18 +207,6 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             }
         }
 
-        private static void SetCurrentSubtitle(string movieName, string downloadedSubtitleFile)
-        {
-            if (string.IsNullOrEmpty(downloadedSubtitleFile))
-            {
-                RenderingEngine.DefaultInstance.CurrentSubtitleFile = string.Empty;
-            }
-            else
-            {
-                RenderingEngine.DefaultInstance.CurrentSubtitleFile = downloadedSubtitleFile;
-            }
-        }
-
         private static Dictionary<SubtitleDownloader, List<SubtitleInfo>> GetSubtitles(string movieFilePath)
         {
             Dictionary<SubtitleDownloader, List<SubtitleInfo>> subs =
@@ -226,7 +216,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             {
                 if (!string.IsNullOrEmpty(movieFilePath))
                 {
-                    SetCurrentSubtitle(movieFilePath, string.Empty);
+                    RenderingEngine.DefaultInstance.CurrentSubtitleFile = string.Empty;
 
                     lock (__filesInProgress)
                     {
@@ -278,128 +268,13 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             return subs;
         }
 
-        /*
-        private static void AttemptDownload(string movieFilePath)
-        {
-            try
-            {
-                Dictionary<SubtitleDownloader, List<SubtitleInfo>> subtitleDownloadInfo =
-                    new Dictionary<SubtitleDownloader, List<SubtitleInfo>>();
-
-                int totalSubtitlesFound = 0;
-
-                if (!string.IsNullOrEmpty(movieFilePath))
-                {
-                    SetCurrentSubtitle(movieFilePath, string.Empty);
-
-                    lock (__filesInProgress)
-                    {
-                        __filesInProgress.Add(movieFilePath.ToLowerInvariant());
-
-                        // This is for enforcing playlist refresh
-                        EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
-                    }
-
-                    Logger.LogTrace("A subtitle was not found for this movie. Attempting to download one ...");
-
-                    try
-                    {
-                        string[] subtitleDownloadURIs = StringUtils.ToStringArray(ProTONEConfig.SubtitleDownloadURIs, '\\');
-                        if (subtitleDownloadURIs != null)
-                        {
-                            int prio = 1;
-
-                            foreach (string subtitleDownloadURI in subtitleDownloadURIs)
-                            {
-                                SubtitleDownloader sd = null;
-                                List<SubtitleInfo> foundSubtitles = null;
-
-                                try
-                                {
-                                    sd = SubtitleDownloader.FromDownloadURI(subtitleDownloadURI);
-                                    if (sd.IsActive)
-                                    {
-                                        sd.Priority = prio++;
-                                        foundSubtitles = sd.GetSubtitles(movieFilePath);
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logger.LogException(ex);
-                                    FireNotify(Translator.Translate("TXT_SUB_DOWNLOAD_ERROR"),
-                                        Translator.Translate("TXT_ERROR"), MessageBoxIcon.Warning);
-                                }
-                                finally
-                                {
-                                    if (sd != null)
-                                    {
-                                        if (foundSubtitles != null && foundSubtitles.Count > 0)
-                                        {
-                                            subtitleDownloadInfo.Add(sd, foundSubtitles);
-                                            totalSubtitlesFound += foundSubtitles.Count;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (totalSubtitlesFound < 1)
-                        {
-                            // No subtitles found, give message and exit
-
-                            FireNotify(Translator.Translate("TXT_NO_SUBS_FOUND"),
-                                Translator.Translate("TXT_CAUTION"), MessageBoxIcon.Warning);
-
-                            return;
-                        }
-                        else
-                        {
-                            MainThread.Post(delegate(object x)
-                            {
-                                SubtitleDownloadNotifyForm dlg = new SubtitleDownloadNotifyForm(movieFilePath, subtitleDownloadInfo);
-                                dlg.SubtitleDownloadNotify += new SubtitleDownloadNotifyHandler(dlg_SubtitleDownloadNotify);
-                                dlg.Show();
-                                
-                                //dlg.CenterToScreen();
-                            });
-                        }
-
-                        // Perform cleanup
-
-                        foreach (SubtitleDownloader sd in subtitleDownloadInfo.Keys)
-                        {
-                            if (sd != null)
-                            {
-                                sd.Dispose();
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        lock (__filesInProgress)
-                        {
-                            __filesInProgress.Remove(movieFilePath.ToLowerInvariant());
-
-                            // This is for enforcing playlist refresh
-                            EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                // This is for enforcing playlist refresh
-                EventDispatch.DispatchEvent(LocalEvents.UpdatePlaylistNames, false);
-            }
-        }*/
-
         static void dlg_SubtitleDownloadNotify(string movieFile, string subtitleFile)
         {
             // This is for enforcing playlist refresh
             EventDispatch.DispatchEvent(LocalEventNames.UpdatePlaylistNames, false);
 
-            SetCurrentSubtitle(movieFile, string.Empty);
-            SetCurrentSubtitle(movieFile, subtitleFile);
+            RenderingEngine.DefaultInstance.CurrentSubtitleFile = string.Empty;
+            RenderingEngine.DefaultInstance.CurrentSubtitleFile = subtitleFile;
 
             Logger.LogTrace("A subtitle was found: {0}, for movie: {1}", subtitleFile, movieFile);
 

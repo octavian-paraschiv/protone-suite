@@ -24,6 +24,7 @@ using OPMedia.Runtime.ProTONE.WorkerSupport;
 using OPMedia.UI.Generic;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -295,6 +296,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
+        public bool IsRunningOrPaused => (FilterState == FilterState.Running || FilterState == FilterState.Paused);
 
         public string TranslatedFilterState
         { get { return Translator.Translate("TXT_" + FilterState.ToString().ToUpperInvariant()); } }
@@ -357,7 +359,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
                 if (_renderer == null)
                     return string.Empty;
 
-                return _renderer.RenderMediaName;
+                return Path.GetFullPath(_renderer.RenderMediaName);
             }
             catch (Exception ex)
             {
