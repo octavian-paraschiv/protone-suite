@@ -14,15 +14,6 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
     public class FFDShowReceiver : Form
     {
         /// <summary>
-        /// Received string
-        /// </summary>
-        private String receivedString = null;
-        /// <summary>
-        /// Received type : identifier of the requested parameter
-        /// </summary>
-        private Int32 receivedType = 0;
-
-        /// <summary>
         /// Thread instance of FFDShowAPI waiting for the response
         /// </summary>
         private Thread parentThread;
@@ -30,32 +21,12 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         /// <summary>
         /// Gets or sets the string received from FFDShow
         /// </summary>
-        public String ReceivedString
-        {
-            get
-            {
-                return receivedString;
-            }
-            set
-            {
-                receivedString = value;
-            }
-        }
+        public String ReceivedString { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the value to retrieve
         /// </summary>
-        public Int32 ReceivedType
-        {
-            get
-            {
-                return receivedType;
-            }
-            set
-            {
-                receivedType = value;
-            }
-        }
+        public Int32 ReceivedType { get; set; }
 
 
         #region Constructors
@@ -82,8 +53,9 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                 {
                     COPYDATASTRUCT cd = new COPYDATASTRUCT();
                     cd = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
-                    string returnedData = Marshal.PtrToStringUni(cd.lpData);
-                    receivedType = (int)cd.dwData.ToUInt32();
+
+                    ReceivedString = Marshal.PtrToStringUni(cd.lpData);
+                    ReceivedType = (int)cd.dwData.ToUInt32();
 
                     if (parentThread != null && parentThread.ThreadState == System.Threading.ThreadState.WaitSleepJoin)
                         parentThread.Interrupt();

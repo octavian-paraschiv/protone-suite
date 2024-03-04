@@ -32,11 +32,6 @@
 	</Content>
   </ItemGroup>
   <ItemGroup>
-	<EmbeddedResource Update="FfdShowApi\FFDShowReceiver.resx">
-	  <DependentUpon>FFDShowReceiver.cs</DependentUpon>
-	</EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
 	<Compile Remove="Rendering\SampleGrabberUtils.cs" />
 	<Compile Remove="Rendering\Cdda\FreeDb\TrackCollection.cs" />
   </ItemGroup>
