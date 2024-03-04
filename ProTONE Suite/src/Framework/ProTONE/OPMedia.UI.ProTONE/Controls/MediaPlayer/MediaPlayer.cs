@@ -843,12 +843,12 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case OPMShortcut.CmdCfgAudio:
-                    FfdShowConfig.DoConfigureAudio(this.Handle);
+                    FfdShowConfig.DoConfigureAudio();
                     args.Handled = true;
                     break;
 
                 case OPMShortcut.CmdCfgVideo:
-                    FfdShowConfig.DoConfigureVideo(this.Handle);
+                    FfdShowConfig.DoConfigureVideo();
                     args.Handled = true;
                     break;
 

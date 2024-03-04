@@ -93,49 +93,16 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             return new RenderingEngine(false);
         }
 
+        public string CurrentSubtitleFile
+        {
+            get => ActiveFfdShowInstance?.CurrentSubtitleFile;
+            set { if (ActiveFfdShowInstance != null) ActiveFfdShowInstance.CurrentSubtitleFile = value; }
+        }
 
 
         internal object GraphFilter
         { get { return (_renderer != null) ? _renderer.GraphFilter : null; } }
 
-        public double[] EqFrequencies
-        {
-            get
-            {
-                double[] freqs = new double[10];
-
-                using (FfdShowLib ff = FfdShowInstance())
-                {
-                    for (FFDShowConstants.FFDShowDataId i = FFDShowConstants.FFDShowDataId.IDFF_filterEQ; i < FFDShowConstants.FFDShowDataId.IDFF_filterWinamp2; i++)
-                    {
-                        int iVal = ff.getIntParam(i);
-                        string sVal = ff.getStringParam(i);
-                    }
-
-                }
-
-                return freqs;
-            }
-
-            set
-            {
-            }
-        }
-
-
-        public int[] EqLevels
-        {
-            get
-            {
-                int[] levels = new int[10];
-
-                return levels;
-            }
-
-            set
-            {
-            }
-        }
 
         public Control RenderPanel
         {
@@ -168,7 +135,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        protected bool IsEndOfMedia
+        private bool IsEndOfMedia
         {
             get
             {
@@ -317,16 +284,14 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
         }
 
-        public OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState FilterState
+        public FilterState FilterState
         {
             get
             {
-                if (UseCrossFading && _crossFadePendingStop)
+                if (_renderer == null || (UseCrossFading && _crossFadePendingStop))
                     return FilterState.Stopped;
 
-                return (_renderer == null) ?
-                    OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses.FilterState.Stopped :
-                    _renderer.FilterState;
+                return _renderer.FilterState;
             }
         }
 
@@ -1172,118 +1137,104 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         IntPtr _oldFfdShowHandle = IntPtr.Zero;
 
-        public string CurrentSubtitleFile
-        {
-            get
-            {
-                using (FfdShowLib i = FfdShowInstance())
-                {
-                    return i.CurrentSubtitleFile;
-                }
-            }
-
-            set
-            {
-                using (FfdShowLib i = FfdShowInstance())
-                {
-                    i.CurrentSubtitleFile = value;
-                }
-            }
-        }
-
         public void DisplayOsdMessage(string msg)
         {
             if (ProTONEConfig.OsdEnabled)
             {
-                using (FfdShowLib i = FfdShowInstance())
+                if (ActiveFfdShowInstance != null)
                 {
                     int osdPersistTimer = ProTONEConfig.OsdPersistTimer;
-                    float frameRate = i.getFrameRate();
+                    float frameRate = ActiveFfdShowInstance.getFrameRate();
                     int persistFrames = (int)(osdPersistTimer * frameRate / 1000);
 
                     // OsdPersistTimer is given in msec
-                    i.clearOsd();
-                    i.setOsdDuration(persistFrames);
-                    i.displayOSDMessage(msg, true);
+                    ActiveFfdShowInstance.clearOsd();
+                    ActiveFfdShowInstance.setOsdDuration(persistFrames);
+                    ActiveFfdShowInstance.displayOSDMessage(msg, true);
+                }
+            }
+        }
+
+        private void EnforceSettings(FfdShowLib ffdShowLib)
+        {
+            if (ffdShowLib != null)
+            {
+                // Subtitles
+                ffdShowLib.DoShowSubtitles = ProTONEConfig.SubEnabled;
+                ffdShowLib.DoShowOSD = ProTONEConfig.OsdEnabled;
+
+                if (ProTONEConfig.SubEnabled)
+                {
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontColor,
+                        ColorHelper.BGR(ProTONEConfig.SubColor));
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontSizeA,
+                        ProTONEConfig.SubFont.Height);
+                    ffdShowLib.setStringParam(FFDShowConstants.FFDShowDataId.IDFF_fontName,
+                        ProTONEConfig.SubFont.OriginalFontName);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontCharset,
+                      ProTONEConfig.SubFont.GdiCharSet);
+
+                    LOGFONT lf = new LOGFONT();
+                    ProTONEConfig.SubFont.ToLogFont(lf);
+
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontWeight,
+                        lf.lfWeight);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontItalic,
+                       lf.lfItalic);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontUnderline,
+                       lf.lfUnderline);
+                }
+
+                if (ProTONEConfig.OsdEnabled)
+                {
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontColor,
+                        ColorHelper.BGR(ProTONEConfig.OsdColor));
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontSize,
+                        ProTONEConfig.OsdFont.Height);
+                    ffdShowLib.setStringParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontName,
+                        ProTONEConfig.OsdFont.OriginalFontName);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontCharset,
+                        ProTONEConfig.OsdFont.GdiCharSet);
+
+                    LOGFONT lf = new LOGFONT();
+                    ProTONEConfig.OsdFont.ToLogFont(lf);
+
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontWeight,
+                        lf.lfWeight);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontItalic,
+                       lf.lfItalic);
+                    ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontUnderline,
+                       lf.lfUnderline);
                 }
             }
         }
 
         public void ReloadFfdShowSettings()
         {
-            using (FfdShowLib i = FfdShowInstance())
-            {
-                EnforceSettings(i);
-            }
+            if (ActiveFfdShowInstance != null)
+                EnforceSettings(ActiveFfdShowInstance);
         }
 
-        private void EnforceSettings(FfdShowLib ffdShowLib)
+        private FfdShowLib ActiveFfdShowInstance
         {
-            // Subtitles
-            ffdShowLib.DoShowSubtitles = ProTONEConfig.SubEnabled;
-
-            if (ProTONEConfig.SubEnabled)
+            get
             {
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontColor,
-                    ColorHelper.BGR(ProTONEConfig.SubColor));
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontSizeA,
-                    ProTONEConfig.SubFont.Height);
-                ffdShowLib.setStringParam(FFDShowConstants.FFDShowDataId.IDFF_fontName,
-                    ProTONEConfig.SubFont.OriginalFontName);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontCharset,
-                  ProTONEConfig.SubFont.GdiCharSet);
+                string renderFile = this.GetRenderFile();
+                FfdShowLib ffdShowLib = FfdShowLib.findFfdShowInstance(renderFile);
 
-                LOGFONT lf = new LOGFONT();
-                ProTONEConfig.SubFont.ToLogFont(lf);
-
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontWeight,
-                    lf.lfWeight);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontItalic,
-                   lf.lfItalic);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_fontUnderline,
-                   lf.lfUnderline);
-            }
-
-            if (ProTONEConfig.OsdEnabled)
-            {
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontColor,
-                    ColorHelper.BGR(ProTONEConfig.OsdColor));
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontSize,
-                    ProTONEConfig.OsdFont.Height);
-                ffdShowLib.setStringParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontName,
-                    ProTONEConfig.OsdFont.OriginalFontName);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontCharset,
-                    ProTONEConfig.OsdFont.GdiCharSet);
-
-                LOGFONT lf = new LOGFONT();
-                ProTONEConfig.OsdFont.ToLogFont(lf);
-
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontWeight,
-                    lf.lfWeight);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontItalic,
-                   lf.lfItalic);
-                ffdShowLib.setIntParam(FFDShowConstants.FFDShowDataId.IDFF_OSDfontUnderline,
-                   lf.lfUnderline);
-            }
-        }
-
-        private FfdShowLib FfdShowInstance()
-        {
-            string renderFile = this.GetRenderFile();
-            FfdShowLib ffdShowLib = new FfdShowLib(renderFile);
-
-            if (ffdShowLib.checkFFDShowActive())
-            {
-                if (ffdShowLib.FFDShowInstanceHandle != _oldFfdShowHandle)
+                if (ffdShowLib?.IsActive ?? false)
                 {
-                    // API re-created so enforce parameters
-                    EnforceSettings(ffdShowLib);
+                    if (ffdShowLib.FFDShowInstanceHandle != _oldFfdShowHandle)
+                    {
+                        // API re-created so enforce parameters
+                        EnforceSettings(ffdShowLib);
 
-                    _oldFfdShowHandle = ffdShowLib.FFDShowInstanceHandle;
+                        _oldFfdShowHandle = ffdShowLib.FFDShowInstanceHandle;
+                    }
                 }
-            }
 
-            return ffdShowLib;
+                return ffdShowLib;
+            }
         }
 
         #endregion

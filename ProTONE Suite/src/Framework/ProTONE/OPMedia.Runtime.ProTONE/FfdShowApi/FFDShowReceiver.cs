@@ -95,11 +95,11 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                     COPYDATASTRUCT cd = new COPYDATASTRUCT();
                     cd = (COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(COPYDATASTRUCT));
 
-#if UNICODE
+                    //#if UNICODE
                     string returnedData = Marshal.PtrToStringUni(cd.lpData);
-#else
-                    string returnedData = Marshal.PtrToStringAnsi(cd.lpData);
-#endif
+                    //#else
+                    //                    string returnedData = Marshal.PtrToStringAnsi(cd.lpData);
+                    //#endif
                     receivedString = returnedData;
                     receivedType = (int)cd.dwData.ToUInt32();
 
@@ -111,18 +111,6 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                 }
             }
             base.WndProc(ref m);
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FFDShowReceiver
-            // 
-            this.ClientSize = new System.Drawing.Size(287, 261);
-            this.Name = "FFDShowReceiver";
-            this.ResumeLayout(false);
-
         }
     }
 }

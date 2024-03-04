@@ -101,7 +101,7 @@ namespace OPMedia.Core
 
         public static bool Exists(string path)
         {
-            return (File.Exists(path) || Directory.Exists(path));
+            return (path?.Length > 0 && (File.Exists(path) || Directory.Exists(path)));
         }
 
         public static string GetDirectoryTitle(string path)

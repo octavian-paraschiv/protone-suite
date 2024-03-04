@@ -1,16 +1,18 @@
 using Microsoft.Win32;
 using OPMedia.Core;
+using OPMedia.Core.Logging;
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace OPMedia.Runtime.ProTONE.FfdShowApi
 {
     public static class FfdShowConfig
     {
-        public const string ModuleName = "ffdshow.ax";
-        public const string CLSID = "{4DB2B5D9-4556-4340-B189-AD20110D953F}";
+        const string CLSID = "{4DB2B5D9-4556-4340-B189-AD20110D953F}";
+        const int MSG_TRAYICON = 32777;
+
         public static string InstallLocation { get; private set; }
 
         static FfdShowConfig()
@@ -19,7 +21,7 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             try
             {
                 string keyPath = string.Format(@"SOFTWARE\Classes\CLSID\{0}\InprocServer32", CLSID);
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyPath))
+                using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(keyPath))
                 {
                     if (key != null)
                     {
@@ -33,118 +35,43 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
             }
         }
 
-        public static void DoConfigureVideo(IntPtr hWndParent)
+        public static void DoConfigureVideo()
         {
             IntPtr hWnd = WindowHelper.FindWindow("ffdshow_tray");
             if (hWnd != IntPtr.Zero)
-            {
-                User32.SendMessage(hWnd, FFDShowConstants.MSG_TRAYICON, 1, (int)Messages.WM_LBUTTONDBLCLK);
-            }
+                User32.SendMessage(hWnd, MSG_TRAYICON, 1, (int)Messages.WM_LBUTTONDBLCLK);
             else
-            {
-                AsyncCallUnsafeDelegate("configure", hWndParent);
-            }
+                ThreadPool.QueueUserWorkItem(_ => RunDll("configure"));
         }
 
-        public static void DoConfigureAudio(IntPtr hWndParent)
+        public static void DoConfigureAudio()
         {
             IntPtr hWnd = WindowHelper.FindWindow("ffdshowaudio_tray");
             if (hWnd != IntPtr.Zero)
-            {
-                User32.SendMessage(hWnd, FFDShowConstants.MSG_TRAYICON, 1, (int)Messages.WM_LBUTTONDBLCLK);
-            }
+                User32.SendMessage(hWnd, MSG_TRAYICON, 1, (int)Messages.WM_LBUTTONDBLCLK);
             else
-            {
-                AsyncCallUnsafeDelegate("configureAudio", hWndParent);
-            }
+                ThreadPool.QueueUserWorkItem(_ => RunDll("configureAudio"));
         }
 
-        class FfdShowConfigureData
-        {
-            public FfdShowCfgDelegate _delegate = null;
-            public IntPtr _hwnd = IntPtr.Zero;
-            public bool _isDynamicDelegate = false;
-
-            public FfdShowConfigureData(FfdShowCfgDelegate dlg, IntPtr hWnd)
-            {
-                _delegate = dlg;
-                _hwnd = hWnd;
-            }
-
-            public FfdShowConfigureData(IntPtr func, IntPtr hWnd)
-            {
-                _delegate = Marshal.GetDelegateForFunctionPointer(func, typeof(FfdShowCfgDelegate))
-                    as FfdShowCfgDelegate;
-
-                if (_delegate == null)
-                    throw new ArgumentException("Cannot retrieve dynamic delegate");
-
-                _hwnd = hWnd;
-                _isDynamicDelegate = true;
-            }
-        };
-
-        private delegate void FfdShowCfgDelegate(IntPtr hwnd, IntPtr hinst, string lpCmdLine, ShowWindowStyles nCmdShow);
-
-        private static void AsyncCallUnsafeDelegate(string fncName, IntPtr hWnd)
-        {
-            FfdShowConfigureData data = null;
-            IntPtr module = IntPtr.Zero;
-
-            module = Kernel32.GetModuleHandle(ModuleName);
-            if (module == IntPtr.Zero)
-            {
-                module = Kernel32.LoadLibrary(InstallLocation);
-            }
-
-            if (module != IntPtr.Zero)
-            {
-                IntPtr proc = Kernel32.GetProcAddress(module, fncName);
-                if (proc != IntPtr.Zero)
-                {
-                    try
-                    {
-                        data = new FfdShowConfigureData(proc, hWnd);
-                    }
-                    catch
-                    {
-                        data = null;
-                    }
-                }
-            }
-
-            if (data != null)
-            {
-                ThreadPool.QueueUserWorkItem(new WaitCallback(CallUnsafeDelegate), data);
-            }
-        }
-
-
-        private static void CallUnsafeDelegate(object state)
+        private static void RunDll(string fncName)
         {
             try
             {
-                FfdShowConfigureData data = state as FfdShowConfigureData;
-                if (data != null && data._delegate != null)
+                var runDllPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "rundll32.exe");
+                if (!File.Exists(runDllPath))
+                    throw new FileNotFoundException(runDllPath);
+
+                Process.Start(new ProcessStartInfo
                 {
-                    string cwd = Directory.GetCurrentDirectory();
-
-                    if (!data._isDynamicDelegate)
-                    {
-                        Directory.SetCurrentDirectory(Path.GetDirectoryName(InstallLocation));
-                    }
-
-                    Ole32.CoUninitialize();
-                    data._delegate.Invoke(data._hwnd, IntPtr.Zero, string.Empty, ShowWindowStyles.SW_NORMAL);
-
-                    if (!data._isDynamicDelegate)
-                    {
-                        Directory.SetCurrentDirectory(cwd);
-                    }
-                }
+                    Arguments = $"\"{InstallLocation}\", {fncName}",
+                    CreateNoWindow = false,
+                    UseShellExecute = false,
+                    FileName = runDllPath,
+                });
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogException(ex);
             }
         }
     }
