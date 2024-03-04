@@ -11,22 +11,13 @@
 	<AssemblyOriginatorKeyFile>opmedia.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-	<Compile Update="Properties\Resources.Designer.cs">
-	  <AutoGen>True</AutoGen>
-	  <DesignTime>True</DesignTime>
-	  <DependentUpon>Resources.resx</DependentUpon>
-	</Compile>
-  </ItemGroup>
-  <ItemGroup>
 	<Reference Include="System.Windows.Forms" />
   </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="SharpShell" Version="2.7.2" />
-		<PackageReference Include="System.Resources.Extensions" Version="7.0.0" />
 	</ItemGroup>
   <ItemGroup>
 	<None Include="opmedia.pfx" />
-	<None Include="Resources\player.bmp" />
   </ItemGroup>
 </Project>
