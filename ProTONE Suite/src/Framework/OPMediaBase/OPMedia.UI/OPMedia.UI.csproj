@@ -68,18 +68,6 @@
 	<Compile Update="Configuration\NetworkCfgPanel.designer.cs">
 	  <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Configuration\SerialPortCfgDlg.cs">
-	  <SubType>Form</SubType>
-	</Compile>
-	<Compile Update="Configuration\SerialPortCfgDlg.Designer.cs">
-	  <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
-	</Compile>
-	<Compile Update="Configuration\SerialPortCfgPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
-	<Compile Update="Configuration\SerialPortCfgPanel.Designer.cs">
-	  <DependentUpon>SerialPortCfgPanel.cs</DependentUpon>
-	</Compile>
 	<Compile Update="Configuration\SettingsForm.cs">
 	  <SubType>Form</SubType>
 	</Compile>
@@ -490,16 +478,8 @@
 	  <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
 	  <SubType>Designer</SubType>
 	</EmbeddedResource>
-	<EmbeddedResource Update="Configuration\SerialPortCfgDlg.resx">
-	  <DependentUpon>SerialPortCfgDlg.cs</DependentUpon>
-	  <SubType>Designer</SubType>
-	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-	<EmbeddedResource Update="Configuration\SerialPortCfgPanel.resx">
-	  <SubType>Designer</SubType>
-	  <DependentUpon>SerialPortCfgPanel.cs</DependentUpon>
-	</EmbeddedResource>
 	<None Include="Resources\ImageNotFound.png" />
 	<None Include="Resources\menuChildren.png" />
   </ItemGroup>
