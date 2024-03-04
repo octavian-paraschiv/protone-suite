@@ -98,7 +98,7 @@ namespace OPMedia.Core.InterProcessCommunication
         public void Send(string line)
         {
             byte[] data = Encoding.UTF8.GetBytes($"{line}{Environment.NewLine}");
-            _client.GetStream().Write(data, 0, data.Length);
+            _client?.GetStream().Write(data, 0, data.Length);
         }
 
         public void SendGracefulEnd() => Send(GracefulEndMarker);
