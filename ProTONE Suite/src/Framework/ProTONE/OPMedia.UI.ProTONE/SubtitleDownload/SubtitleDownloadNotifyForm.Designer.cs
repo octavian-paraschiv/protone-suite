@@ -36,7 +36,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.colServer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colPrio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colLanguage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colFPS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDownload = new OPMedia.UI.Controls.OPMButton();
             this.label1 = new OPMedia.UI.Controls.OPMLabel();
             this.opmLayoutPanel1 = new OPMedia.UI.Controls.OPMTableLayoutPanel();
@@ -53,7 +53,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.colServer,
             this.colPrio,
             this.colLanguage,
-            this.colSize});
+            this.colFPS});
             this.opmLayoutPanel1.SetColumnSpan(this.lvSubtitles, 2);
             this.lvSubtitles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvSubtitles.Font = new System.Drawing.Font("Segoe UI", 6.75F);
@@ -90,11 +90,11 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             this.colLanguage.Text = "TXT_LANGUAGE";
             this.colLanguage.Width = 99;
             // 
-            // colSize
+            // colFPS
             // 
-            this.colSize.Name = "colSize";
-            this.colSize.Text = "TXT_SIZE";
-            this.colSize.Width = 70;
+            this.colFPS.Name = "colFPS";
+            this.colFPS.Text = "TXT_FRAME_RATE";
+            this.colFPS.Width = 70;
             // 
             // btnDownload
             // 
@@ -167,7 +167,8 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
         private System.Windows.Forms.ColumnHeader colServer;
         private System.Windows.Forms.ColumnHeader colPrio;
         private System.Windows.Forms.ColumnHeader colLanguage;
-        private System.Windows.Forms.ColumnHeader colSize;
+        private System.Windows.Forms.ColumnHeader colFPS;
+
         private UI.Controls.OPMTableLayoutPanel opmLayoutPanel1;
     }
 }

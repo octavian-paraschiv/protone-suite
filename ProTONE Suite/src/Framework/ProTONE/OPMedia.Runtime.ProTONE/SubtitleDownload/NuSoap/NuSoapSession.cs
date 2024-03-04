@@ -66,7 +66,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap
                                 ISO639 = LanguageHelper.Lookup(sf.language)?.Part3 ?? sf.language,
 
                                 MovieHash = vi.moviehash,
-                                SubFormat = PathUtils.GetExtension(sf.file_name ?? "x.srt")
+                                SubFormat = PathUtils.GetExtension(sf.file_name ?? "x.srt"),
                             };
 
                 retVal.AddRange(infos);

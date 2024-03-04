@@ -1,7 +1,8 @@
 ﻿using MovieCollection.OpenSubtitles;
 using OPMedia.Core;
 using OPMedia.Core.Logging;
-using OPMedia.Runtime.FileInformation;
+using OPMedia.Runtime.ProTONE.FileInformation;
+using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.NuSoap;
 using OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles;
@@ -71,16 +72,19 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         {
             List<SubtitleInfo> retVal = new List<SubtitleInfo>();
 
-            NativeFileInfo nfi = new NativeFileInfo(fileName, true);
-            if (nfi.IsValid)
+            VideoFileInfo vfi = RenderingEngine.DefaultInstance.QueryVideoMediaInfo(fileName);
+            if (vfi?.IsValid ?? false)
             {
                 string hashCode = OpenSubtitlesHasher.GetFileHash(fileName);
 
-                VideoInfo ovi = new VideoInfo();
-                ovi.imdbid = string.Empty;
-                ovi.moviehash = hashCode;
-                ovi.moviebytesize = nfi.Size.GetValueOrDefault();
-                ovi.sublanguageid = "all";
+                VideoInfo ovi = new VideoInfo
+                {
+                    framerate = (vfi.FrameRate?.Value ?? -1).ToString("##.###"),
+                    imdbid = string.Empty,
+                    moviehash = hashCode,
+                    moviebytesize = vfi.Size.GetValueOrDefault(),
+                    sublanguageid = "all"
+                };
 
                 #region GetSubtitles Commented code - DEBUG PURPOSE ONLY
                 // Name the movie "fringe 4x03.avi"                
@@ -90,7 +94,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
 
                 List<SubtitleInfo> response = GetSubtitles(ovi);
 
-                string[] fileNameParts = nfi.Name.ToLowerInvariant().Split(" -.][(){}".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] fileNameParts = vfi.Name.ToLowerInvariant().Split(" -.][(){}".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (fileNameParts.Length > 0)
                 {
                     List<string> fileNamePartsList = new List<string>(fileNameParts);

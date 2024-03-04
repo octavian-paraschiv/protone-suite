@@ -131,6 +131,8 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles
                             (
                                 //sd?.movieName?.Length > 0 &&
                                 //sd?.movieHash?.Length > 0 &&
+
+                                (string.IsNullOrEmpty(sd.Attributes?.Fps) || vi.framerate == StringUtils.CastAs<double>(sd.Attributes?.Fps ?? "0").ToString("##.###")) &&
                                 sd?.Attributes?.MovieHashMatch == true &&
                                 sd?.Attributes?.Language?.Length > 0 &&
                                 sd?.Attributes?.Url?.ToString()?.Length > 0
@@ -150,7 +152,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles
                                 SubDownloadLink = sd.Attributes.Url.ToString(),
                                 // SubHash = sd.Attributes.,
                                 SubFormat = StringUtils.FirstNonEmpty(sd.Attributes.Format,
-                                    PathUtils.GetExtension(sd.Attributes.Files?.FirstOrDefault()?.FileName), "srt")
+                                    PathUtils.GetExtension(sd.Attributes.Files?.FirstOrDefault()?.FileName), "srt"),
+
+                                FrameRate = sd.Attributes?.Fps,
                             };
 
                 if (infos.Count() > 0)

@@ -9,6 +9,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         public double moviebytesize;
         public string imdbid;
         public string moviename;
+        public string framerate;
     }
 
     public struct SubtitleInfo
@@ -44,6 +45,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.Base
         public string LanguageName;
         public string SubDownloadLink;
         public string ZipDownloadLink;
+        public string FrameRate;
     }
 
     public class SubtitleDownloadException : Exception

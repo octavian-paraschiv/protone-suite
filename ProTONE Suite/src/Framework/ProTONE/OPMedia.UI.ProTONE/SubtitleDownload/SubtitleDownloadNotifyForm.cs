@@ -53,10 +53,10 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
             colServer.Width = 190;
             colPrio.Width = 50;
             colLanguage.Width = 70;
-            colSize.Width = 55;
+            colFPS.Width = 55;
 
             colFileName.Width = lvSubtitles.EffectiveWidth -
-                (colServer.Width + colPrio.Width + colLanguage.Width + colSize.Width);
+                (colServer.Width + colPrio.Width + colLanguage.Width + colFPS.Width);
         }
 
         int _highestPrio = int.MaxValue;
@@ -85,7 +85,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                             string.IsNullOrEmpty(sd.DisplayName) ? none : sd.DisplayName,
                             sd.Priority.ToString(),
                             string.IsNullOrEmpty(si.LanguageName) ? none : si.LanguageName,
-                            string.IsNullOrEmpty(si.SubSize) ? none : si.SubSize
+                            string.IsNullOrEmpty(si.FrameRate) ? none : si.FrameRate
                         };
 
                         ListViewItem item = new ListViewItem(data);
@@ -107,7 +107,7 @@ namespace OPMedia.UI.ProTONE.SubtitleDownload
                             item.ForeColor = ThemeManager.ListActiveItemColor;
                             item.UseItemStyleForSubItems = false;
                         }
-                            
+
                         if (_highestPrio == sd.Priority)
                         {
                             item.UseItemStyleForSubItems = false;

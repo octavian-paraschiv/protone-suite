@@ -70,6 +70,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
                             (
                                 //sd?.movieName?.Length > 0 &&
                                 //sd?.movieHash?.Length > 0 &&
+                                (sd.movieFPS <= 0 || vi.framerate == sd.movieFPS.ToString("##.###")) &&
                                 sd?.subHash?.Length > 0 &&
                                 sd?.subLang?.Length > 0 &&
                                 sd?.subFormat?.Length > 0 &&
@@ -88,7 +89,9 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.BSP_V1
 
                                 SubDownloadLink = sd.subDownloadLink,
                                 SubHash = sd.subHash,
-                                SubFormat = sd.subFormat
+                                SubFormat = sd.subFormat,
+
+                                FrameRate = sd.movieFPS > 0 ? sd.movieFPS.ToString(CultureInfo.InvariantCulture) : null,
                             };
 
                 retVal.AddRange(infos);
