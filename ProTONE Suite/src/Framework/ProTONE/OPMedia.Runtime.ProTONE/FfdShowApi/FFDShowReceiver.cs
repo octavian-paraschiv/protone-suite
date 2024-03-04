@@ -64,9 +64,8 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
                 {
                 }
             }
+
             base.WndProc(ref m);
         }
-
-
     }
 }

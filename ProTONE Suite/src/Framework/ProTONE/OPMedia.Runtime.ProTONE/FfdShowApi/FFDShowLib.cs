@@ -267,9 +267,9 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
 
             receiver.ReceivedString = null;
             receiver.ReceivedType = 0;
-            IntPtr ret = new IntPtr(0);
+
             User32.SendMessageTimeout(ffDShowInstanceHandle, (int)type, receiver.Handle, new IntPtr((int)param),
-                SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, requestTimeout, out ret);
+                SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, requestTimeout, out IntPtr ret);
 
             if (ret.ToInt32() != 1)
                 return null;
@@ -310,17 +310,16 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         /// <returns></returns>
         public int setStringParam(FFDShowConstants.FFDShowDataId param, string value)
         {
-            int result = SendMessage(FFD_WPRM.SET_PARAM_NAME, (int)param);
+            SendMessage(FFD_WPRM.SET_PARAM_NAME, (int)param);
 
             COPYDATASTRUCT cd = new COPYDATASTRUCT();
             cd.dwData = new UIntPtr((uint)FFD_WPRM.SET_PARAM_VALUE_STR);
             cd.lpData = Marshal.StringToHGlobalUni(value);
             cd.cbData = (uint)Kernel32.GlobalSize(cd.lpData);
-            IntPtr returnedValue = new IntPtr(0);
 
-            User32.SendMessageTimeout(ffDShowInstanceHandle, (int)(int)Messages.WM_COPYDATA,
-                receiver.Handle, ref cd, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, (int)requestTimeout,
-                out returnedValue);
+            User32.SendMessageTimeout(ffDShowInstanceHandle, (int)Messages.WM_COPYDATA,
+                receiver.Handle, ref cd, SendMessageTimeoutFlags.SMTO_ABORTIFHUNG, requestTimeout,
+                out IntPtr returnedValue);
 
             Marshal.FreeHGlobal(cd.lpData);
             return returnedValue.ToInt32();
@@ -329,11 +328,6 @@ namespace OPMedia.Runtime.ProTONE.FfdShowApi
         private int SendMessage(FFD_WPRM wParam, int lParam)
         {
             return User32.SendMessage(ffDShowInstanceHandle, (int)FFDShowAPIRemoteId, (int)wParam, lParam);
-        }
-
-        private int PostMessage(FFD_WPRM wParam, int lParam)
-        {
-            return User32.PostMessage(ffDShowInstanceHandle, (int)FFDShowAPIRemoteId, (int)wParam, lParam);
         }
 
         public void Dispose()
