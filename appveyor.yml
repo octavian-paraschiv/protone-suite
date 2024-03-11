@@ -1,9 +1,9 @@
-version: 4.0.{build}
+version: 4.1.{build}
 skip_tags: true
 image: Visual Studio 2019
 
 before_build:
-- git checkout master
+- git checkout bug-fixes-release-4-0
 - ps: .\prep_build.ps1 "$env:APPVEYOR_BUILD_VERSION" "$env:IS_RELEASE"
 - type ".\ProTONE Suite\src\Framework\OPMediaBase\OPMedia.Core\Version.cs"
 
