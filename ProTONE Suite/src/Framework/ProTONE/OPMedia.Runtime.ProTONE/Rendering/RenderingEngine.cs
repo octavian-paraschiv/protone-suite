@@ -495,7 +495,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
             }
             catch
             {
-                throw new Exception("The audio subsystem failed to initialize properly (no audio devices detected).");
+                ErrorDispatcher.DisplayErrorAndTerminate("The audio subsystem failed to initialize properly (no audio devices detected).");
             }
         }
 

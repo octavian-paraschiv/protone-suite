@@ -109,7 +109,7 @@ namespace OPMedia.Core.InterProcessCommunication
                 try
                 {
                     Logger.LogInfo($"Accepted connection from {connId}");
-                    ConnectionOpen?.Invoke(connId, false);
+                    FireConnectionOpen(connId, false);
 
                     lock (_lock)
                     {
@@ -137,7 +137,7 @@ namespace OPMedia.Core.InterProcessCommunication
                         _clients.Remove(connId);
                     }
 
-                    ConnectionClosed?.Invoke(connId, isGracefulClose);
+                    FireConnectionClosed(connId, isGracefulClose);
                 }
             }
 

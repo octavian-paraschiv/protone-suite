@@ -71,7 +71,7 @@ namespace OPMedia.Runtime.ProTONE.WorkerSupport
         public T Arg<T>(int idx)
         {
             if (_args.Count > idx)
-                return StringUtils.CastAs<T>(_args[idx]);
+                return StringUtils.CastAs<T>(_args[idx], default(T));
 
             return default(T);
         }

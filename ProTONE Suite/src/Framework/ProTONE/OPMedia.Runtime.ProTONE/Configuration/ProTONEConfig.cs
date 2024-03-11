@@ -43,13 +43,13 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
     public static class ProTONEConfig
     {
-        const string _Fallback_DefaultSubtitleURIs =
+        public const string DefaultSubtitleURIs =
             "OpenSubtitles;https://api.opensubtitles.com/api/v1;1\\" +
             "BSP_V1;http://api.bsplayer-subtitles.com/v1.php;1\\" +
             "NuSoap;http://api.getsubtitle.com/server.php;1\\" +
             "";
 
-        const string _Fallback_DefaultLinkedFiles =
+        public const string DefaultLinkedFiles =
             @"AU;AIF;AIFF;CDA;FLAC;MID;MIDI;MP1;MP2;MP3;MPA;RAW;RMI;SND;WAV;WMA/BMK\AVI;DIVX;QT;M1V;M2V;MOD;MOV;MPG;MPEG;VOB;WM;WMV;MKV;MP4/SUB;SRT;USF;ASS;SSA;BMK";
 
 
@@ -146,10 +146,23 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set { PersistenceProxy.SaveNode(true, "DisableDVDMenu", value); }
         }
 
+        private static int _prefferedSubtitleLang = 0;
+
         public static int PrefferedSubtitleLang
         {
-            get { return PersistenceProxy.ReadNode("PrefferedSubtitleLang", 1033); }
-            set { PersistenceProxy.SaveNode("PrefferedSubtitleLang", value); }
+            get
+            {
+                if (_prefferedSubtitleLang <= 0)
+                    _prefferedSubtitleLang = PersistenceProxy.ReadNode("PrefferedSubtitleLang", 1033);
+
+                return _prefferedSubtitleLang;
+            }
+
+            set
+            {
+                _prefferedSubtitleLang = value;
+                PersistenceProxy.SaveNode("PrefferedSubtitleLang", value);
+            }
         }
 
         public static bool SubEnabled
@@ -266,17 +279,6 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 PersistenceProxy.SaveNode("SubtitleMinimumMovieDuration", value);
             }
         }
-
-        public static string DefaultSubtitleURIs
-        {
-            get { return PersistenceProxy.ReadNode("DefaultSubtitleURIs", _Fallback_DefaultSubtitleURIs, false); }
-        }
-
-        public static string DefaultLinkedFiles
-        {
-            get { return PersistenceProxy.ReadNode("DefaultLinkedFiles", _Fallback_DefaultLinkedFiles, false); }
-        }
-
 
         public static CddaInfoSource AudioCdInfoSource
         {

@@ -162,19 +162,20 @@ namespace OPMedia.Core
         {
             Dictionary<object, EventSinkMethodInfo> tableEvent = null;
 
-            bool handlerNotFound = true; ;
+            bool handlerNotFound = true;
 
             lock (_invocationMap)
             {
                 if (_invocationMap.ContainsKey(eventName))
                 {
                     tableEvent = SafeCopy(_invocationMap[eventName]);
-                    handlerNotFound = false;
                 }
             }
 
-            if (tableEvent != null)
+            if (tableEvent?.Count > 0)
             {
+                handlerNotFound = false;
+
                 foreach (KeyValuePair<object, EventSinkMethodInfo> kvp in tableEvent)
                 {
                     try
@@ -276,6 +277,5 @@ namespace OPMedia.Core
 
             Debug.WriteLine("EventDispatch: # of registered objects: {0}", objectCount);
         }
-
     }
 }

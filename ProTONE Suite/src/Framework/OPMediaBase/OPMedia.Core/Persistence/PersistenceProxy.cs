@@ -6,6 +6,7 @@ using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Principal;
 using System.ServiceProcess;
 using System.Text;
@@ -24,34 +25,39 @@ namespace OPMedia.Core
         private static int _unsuccesfulAttempts = 0;
 
         private PersistenceClient _cl = null;
+        private ManualResetEventSlim _evtConnected = new ManualResetEventSlim(false);
 
         protected PersistenceProxy()
         {
             try
             {
-                if (_unsuccesfulAttempts < 5)
+                if (ActivatePersistenceService())
                 {
-                    if (ActivatePersistenceService())
-                        _unsuccesfulAttempts = 0;
-                    else
-                        _unsuccesfulAttempts++;
+                    try
+                    {
+                        _persistenceContext = WindowsIdentity.GetCurrent().Name;
+                    }
+                    catch
+                    {
+                        _persistenceContext = string.Format("{0}\\{1}",
+                            Environment.UserDomainName, Environment.UserName);
+                    }
+
+                    _cl = new PersistenceClient();
+                    _cl.ConnectionOpen += OnConnectionOpen;
+                    _cl.Connect(false);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.LogException(ex);
             }
 
-            try
+            ThreadPool.QueueUserWorkItem(_ =>
             {
-                _persistenceContext = WindowsIdentity.GetCurrent().Name;
-            }
-            catch
-            {
-                _persistenceContext = string.Format("{0}\\{1}",
-                    Environment.UserDomainName, Environment.UserName);
-            }
-
-            Open();
+                if (!_evtConnected.Wait(5000))
+                    ErrorDispatcher.DisplayErrorAndTerminate("Unable to connect to Persistence Service in a timely manner.");
+            });
         }
 
         private bool ActivatePersistenceService()
@@ -60,14 +66,26 @@ namespace OPMedia.Core
 
             while (attempts > 0)
             {
+
                 try
                 {
-                    ServiceController srv = new ServiceController(Constants.PersistenceServiceShortName);
-                    if (srv.Status == ServiceControllerStatus.Running)
+                    var count = Process.GetProcesses()?
+                        .Where(p => (p.ProcessName ?? "").ToUpperInvariant().Contains(Constants.PersistenceServiceShortName.ToUpperInvariant()))
+
+                        .Count();
+
+                    if (count > 0)
                         return true;
 
-                    srv.Start();
-                    Thread.Sleep(500);
+                    if (AppConfig.CurrentUserIsAdministrator)
+                    {
+                        ServiceController srv = new ServiceController(Constants.PersistenceServiceShortName);
+                        if (srv.Status == ServiceControllerStatus.Stopped)
+                        {
+                            srv.Start();
+                            Thread.Sleep(500);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -80,30 +98,11 @@ namespace OPMedia.Core
             return false;
         }
 
-        protected virtual void Open()
+        private void OnConnectionOpen(string connId, bool reconnect)
         {
-            try
-            {
-                _cl = new PersistenceClient();
-
-                _cl.ConnectionOpen = (connId, reconnect) =>
-                {
-                    _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, Content = _appId.ToString() });
-                    _cache.Init(_persistenceContext);
-                };
-
-                _cl.PduReceived = (connId, pdu) =>
-                {
-                    if (pdu is NotificationPDU npdu)
-                    {
-                        ThreadPool.QueueUserWorkItem(_ => DispatchNotification(npdu.ChangeType, npdu.NodeId, npdu.Context, npdu.Content));
-                    }
-                };
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-            }
+            _evtConnected.Set();
+            _cl.SendPdu(new ServicePDU { SvcActionType = ServiceActionType.Subscribe, Content = _appId.ToString() });
+            _cache.Init(_persistenceContext);
         }
 
         public void Dispose()
@@ -151,7 +150,7 @@ namespace OPMedia.Core
                 {
                     try
                     {
-                        retVal = StringUtils.CastAs<T>(content);
+                        retVal = StringUtils.CastAs<T>(content, defaultValue);
                     }
                     catch (Exception ex)
                     {

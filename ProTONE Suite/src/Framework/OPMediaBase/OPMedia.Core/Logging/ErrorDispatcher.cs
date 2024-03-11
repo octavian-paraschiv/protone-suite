@@ -1,5 +1,6 @@
 using OPMedia.Core.TranslationSupport;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -10,6 +11,15 @@ namespace OPMedia.Core.Logging
     {
         const string ExcFormat = "";
         const string ErrFormat = "";
+
+        public static void DisplayErrorAndTerminate(string msg)
+        {
+            Logger.LogError(msg);
+            InnerDisplayFatalError($"The application has encountered an unrecoverable fatal error, and it will terminate. Details:\n\n{msg}",
+                Translator.Translate("TXT_APP_NAME"), false);
+
+            Process.GetCurrentProcess().Kill();
+        }
 
         public static void DispatchFatalError(Exception ex)
         {

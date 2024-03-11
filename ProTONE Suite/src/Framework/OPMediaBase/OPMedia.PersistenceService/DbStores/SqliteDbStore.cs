@@ -3,6 +3,7 @@ using OPMedia.Core.Win32;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using OP_Logger = OPMedia.Core.Logging.Logger;
@@ -26,6 +27,12 @@ namespace OPMedia.PersistenceService
             }
 
             _db = new SQLiteConnection(dbPath);
+
+            if (!(_db?.Table<PersistedObject>()?.Count() > 0))
+            {
+                OP_Logger.LogError("Unable to read database, exiting.");
+                Process.GetCurrentProcess().Kill();
+            }
         }
 
         private static string OperationDbFolder
@@ -59,10 +66,13 @@ namespace OPMedia.PersistenceService
 
                 list?.ForEach(po =>
                 {
-                    if (all.ContainsKey(po.PersistenceId))
-                        all[po.PersistenceId] = po.Content;
+                    var ctx = string.IsNullOrEmpty(po.PersistenceContext) ? "*" : po.PersistenceContext;
+                    var key = $"{po.PersistenceId}_{ctx}";
+
+                    if (all.ContainsKey(key))
+                        all[key] = po.Content;
                     else
-                        all.Add(po.PersistenceId, po.Content);
+                        all.Add(key, po.Content);
                 });
 
             }

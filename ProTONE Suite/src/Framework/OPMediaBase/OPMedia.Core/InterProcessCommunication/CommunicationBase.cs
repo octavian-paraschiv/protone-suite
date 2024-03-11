@@ -17,10 +17,18 @@ namespace OPMedia.Core.InterProcessCommunication
 
         protected ManualResetEventSlim _needStop = new ManualResetEventSlim(false);
 
-        public ConnectionOpenHandler ConnectionOpen;
-        public ConnectionClosedHandler ConnectionClosed;
-        public TextLineReceivedHandler TextLineReceived;
+        public event ConnectionOpenHandler ConnectionOpen;
+        public event ConnectionClosedHandler ConnectionClosed;
+        public event TextLineReceivedHandler TextLineReceived;
 
+        protected void FireConnectionOpen(string connId, bool isReconnect) =>
+            ThreadPool.QueueUserWorkItem(_ => ConnectionOpen?.Invoke(connId, isReconnect));
+
+        protected void FireConnectionClosed(string connId, bool isGracefully) =>
+            ThreadPool.QueueUserWorkItem(_ => ConnectionClosed?.Invoke(connId, isGracefully));
+
+        protected void FireTextLineReceived(string connId, string line) =>
+            ThreadPool.QueueUserWorkItem(_ => TextLineReceived(connId, line));
         protected virtual bool HandleClientStream(string connId, NetworkStream ns)
         {
             using (StreamReader sr = new StreamReader(ns))
@@ -38,7 +46,13 @@ namespace OPMedia.Core.InterProcessCommunication
                             return true; // graceful exit
                         }
 
-                        TextLineReceived?.Invoke(connId, line);
+                        if (string.IsNullOrEmpty(line))
+                            throw new IOException($"Reading null or empty line");
+
+                        if (string.IsNullOrEmpty(connId))
+                            throw new IOException($"Unidentified connection ID");
+
+                        FireTextLineReceived(connId, line);
                     }
                     catch (IOException ioex)
                     {

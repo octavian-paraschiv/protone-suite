@@ -23,7 +23,6 @@ namespace OPMedia.Core.InterProcessCommunication
             _address = address ?? Localhost;
 
             Logger.LogInfo($"Attempt to connect to {_address}:{_port}");
-            Connect(false);
         }
 
         public void Dispose()
@@ -52,7 +51,7 @@ namespace OPMedia.Core.InterProcessCommunication
                     try
                     {
                         Logger.LogInfo($"Connected to {connId}");
-                        base.ConnectionOpen?.Invoke(connId, reconnect);
+                        FireConnectionOpen(connId, reconnect);
 
                         using (NetworkStream ns = _client.GetStream())
                             gracefulClose = HandleClientStream(connId, ns);
@@ -67,7 +66,7 @@ namespace OPMedia.Core.InterProcessCommunication
                     }
                     finally
                     {
-                        ConnectionClosed?.Invoke(connId, gracefulClose);
+                        FireConnectionClosed(connId, gracefulClose);
                     }
                 }
                 else
@@ -97,8 +96,11 @@ namespace OPMedia.Core.InterProcessCommunication
     {
         public void Send(string line)
         {
-            byte[] data = Encoding.UTF8.GetBytes($"{line}{Environment.NewLine}");
-            _client?.GetStream().Write(data, 0, data.Length);
+            if (_client?.Connected ?? false)
+            {
+                byte[] data = Encoding.UTF8.GetBytes($"{line}{Environment.NewLine}");
+                _client?.GetStream().Write(data, 0, data.Length);
+            }
         }
 
         public void SendGracefulEnd() => Send(GracefulEndMarker);

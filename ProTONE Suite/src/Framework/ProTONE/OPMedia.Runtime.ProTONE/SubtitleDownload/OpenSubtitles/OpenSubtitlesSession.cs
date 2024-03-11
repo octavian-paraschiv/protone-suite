@@ -132,7 +132,7 @@ namespace OPMedia.Runtime.ProTONE.SubtitleDownload.OpenSubtitles
                                 //sd?.movieName?.Length > 0 &&
                                 //sd?.movieHash?.Length > 0 &&
 
-                                (string.IsNullOrEmpty(sd.Attributes?.Fps) || vi.framerate == StringUtils.CastAs<double>(sd.Attributes?.Fps ?? "0").ToString("##.###")) &&
+                                (string.IsNullOrEmpty(sd.Attributes?.Fps) || vi.framerate == StringUtils.CastAs<double>(sd.Attributes?.Fps ?? "0", 0).ToString("##.###")) &&
                                 sd?.Attributes?.MovieHashMatch == true &&
                                 sd?.Attributes?.Language?.Length > 0 &&
                                 sd?.Attributes?.Url?.ToString()?.Length > 0

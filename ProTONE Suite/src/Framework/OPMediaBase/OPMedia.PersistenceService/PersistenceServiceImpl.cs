@@ -23,8 +23,8 @@ namespace OPMedia.PersistenceService
             Environment.CurrentDirectory = AppConfig.InstallationPath;
 
             _server = new PersistenceServer();
-            _server.TextLineReceived = OnLineReceived;
-            _server.ConnectionClosed = OnConnectionClosed;
+            _server.TextLineReceived += OnLineReceived;
+            _server.ConnectionClosed += OnConnectionClosed;
         }
 
         private void OnConnectionClosed(string connId, bool isGracefully)
@@ -38,79 +38,85 @@ namespace OPMedia.PersistenceService
 
         private void OnLineReceived(string connId, string line)
         {
-            var pdu = PduFactory.Decode(line);
-
-            // --------------------------------------------------------
-            if (pdu is ServicePDU spdu)
+            if (connId?.Length > 0 && line?.Length > 0)
             {
-                switch (spdu.SvcActionType)
+
+                var pdu = PduFactory.Decode(line);
+
+                // --------------------------------------------------------
+                if (pdu is ServicePDU spdu)
                 {
-                    case ServiceActionType.Subscribe:
-                        {
-                            Logger.LogTrace($"Subscribing for {connId}/{spdu.Content} ...");
-                            lock (_subscriptionsLock)
+                    switch (spdu.SvcActionType)
+                    {
+                        case ServiceActionType.Subscribe:
                             {
-                                if (_subscriptions.ContainsKey(connId))
-                                    _subscriptions[connId] = spdu.Content;
-                                else
-                                    _subscriptions.Add(connId, spdu.Content);
+                                Logger.LogTrace($"Subscribing for {connId}/{spdu.Content} ...");
+                                lock (_subscriptionsLock)
+                                {
+                                    if (_subscriptions.ContainsKey(connId))
+                                        _subscriptions[connId] = spdu.Content;
+                                    else
+                                        _subscriptions.Add(connId, spdu.Content);
+                                }
                             }
-                        }
-                        break;
+                            break;
 
-                    case ServiceActionType.Unsubscribe:
-                        {
-                            Logger.LogTrace($"Unsubscribing for {connId} ...");
-                            lock (_subscriptionsLock)
+                        case ServiceActionType.Unsubscribe:
                             {
-                                if (_subscriptions.ContainsKey(connId))
-                                    _subscriptions.Remove(connId);
+                                Logger.LogTrace($"Unsubscribing for {connId} ...");
+                                lock (_subscriptionsLock)
+                                {
+                                    if (_subscriptions.ContainsKey(connId))
+                                        _subscriptions.Remove(connId);
+                                }
                             }
-                        }
-                        break;
+                            break;
 
+                    }
+                }
+
+                // --------------------------------------------------------
+                else if (pdu is PersistencePDU rpdu)
+                {
+                    switch (rpdu.ActionType)
+                    {
+                        case PersistenceActionType.ReadAll:
+                            {
+                                var dict = ReadAll(rpdu.AppName, rpdu.Context);
+                                var str = JsonConvert.SerializeObject(dict);
+                                var strBytes = Encoding.UTF8.GetBytes(str);
+                                rpdu.Content = Convert.ToBase64String(strBytes);
+                                string data = JsonConvert.SerializeObject(rpdu);
+                                _server.SendTo(connId, data);
+                            }
+                            break;
+
+                        case PersistenceActionType.ReadNode:
+                            {
+                                rpdu.Content = ReadNode(rpdu.NodeId, rpdu.Context) ?? "";
+                                string data = JsonConvert.SerializeObject(rpdu);
+                                _server.SendTo(connId, data);
+                            }
+                            break;
+
+                        case PersistenceActionType.SaveNode:
+                            SaveNode(rpdu.NodeId, rpdu.Context, rpdu.Content);
+                            break;
+
+                        case PersistenceActionType.DeleteNode:
+                            DeleteNode(rpdu.NodeId, rpdu.Context);
+                            break;
+                    }
+                }
+
+                // --------------------------------------------------------
+                else if (pdu is NotificationPDU npdu)
+                {
+                    Notify(npdu);
                 }
             }
-
-            // --------------------------------------------------------
-            else if (pdu is PersistencePDU rpdu)
-            {
-                switch (rpdu.ActionType)
-                {
-                    case PersistenceActionType.ReadAll:
-                        {
-                            var dict = ReadAll(rpdu.AppName, rpdu.Context);
-                            var str = JsonConvert.SerializeObject(dict);
-                            var strBytes = Encoding.UTF8.GetBytes(str);
-                            rpdu.Content = Convert.ToBase64String(strBytes);
-                            string data = JsonConvert.SerializeObject(rpdu);
-                            _server.SendTo(connId, data);
-                        }
-                        break;
-
-                    case PersistenceActionType.ReadNode:
-                        {
-                            rpdu.Content = ReadNode(rpdu.NodeId, rpdu.Context) ?? "";
-                            string data = JsonConvert.SerializeObject(rpdu);
-                            _server.SendTo(connId, data);
-                        }
-                        break;
-
-                    case PersistenceActionType.SaveNode:
-                        SaveNode(rpdu.NodeId, rpdu.Context, rpdu.Content);
-                        break;
-
-                    case PersistenceActionType.DeleteNode:
-                        DeleteNode(rpdu.NodeId, rpdu.Context);
-                        break;
-                }
-            }
-
-            // --------------------------------------------------------
-            else if (pdu is NotificationPDU npdu)
-            {
-                Notify(npdu);
-            }
+            else
+                Logger.LogToConsole("PersistenceServiceImpl::OnLineReceived called with null or empty line");
         }
         public void Notify(NotificationPDU npdu)
         {

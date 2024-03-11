@@ -105,7 +105,8 @@ namespace OPMedia.ProTONE
 
         void MainForm_Shown(object sender, EventArgs e)
         {
-            User32.UIPI_AllowWindowsMessage(this.Handle, Messages.WM_COMMAND, "MainForm");
+            if (User32.IsWindow(this.Handle))
+                User32.UIPI_AllowWindowsMessage(this.Handle, Messages.WM_COMMAND, "MainForm");
 
             _commandTarget = new BasicCommandTarget(this);
 

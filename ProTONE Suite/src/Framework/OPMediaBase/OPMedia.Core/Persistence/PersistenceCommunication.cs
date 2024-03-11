@@ -89,8 +89,6 @@ namespace OPMedia.Core.Persistence
 
         public static GenericPDU Decode(string line)
         {
-            Logging.Logger.LogToConsole(line);
-
             GenericPDU gpdu = default;
 
             if (!string.IsNullOrEmpty(line))
@@ -108,6 +106,8 @@ namespace OPMedia.Core.Persistence
                     }
                 }
             }
+            else
+                Logger.LogToConsole("PduFactory::Decode called with null or empty line");
 
             return gpdu;
         }
@@ -140,7 +140,7 @@ namespace OPMedia.Core.Persistence
         private List<string> _pendingPdus = new List<string>();
         private Dictionary<string, PersistencePDU> _recvPdus = new Dictionary<string, PersistencePDU>();
 
-        public PduReceivedHandler PduReceived;
+        public event PduReceivedHandler PduReceived;
 
         public void SendPdu(GenericPDU pdu)
         {
@@ -186,26 +186,31 @@ namespace OPMedia.Core.Persistence
 
         public PersistenceClient() : base(PersistenceConstants.TcpPort)
         {
-            TextLineReceived = (connId, line) =>
+            TextLineReceived += (connId, line) =>
             {
-                var pdu = PduFactory.Decode(line);
-                if (pdu != null)
+                if (line?.Length > 0 && connId?.Length > 0)
                 {
-                    if (pdu is PersistencePDU rpdu)
+                    var pdu = PduFactory.Decode(line);
+                    if (pdu != null)
                     {
-                        lock (_pduLock)
+                        if (pdu is PersistencePDU rpdu)
                         {
-                            if (_pendingPdus.Contains(rpdu.Id))
+                            lock (_pduLock)
                             {
-                                _pendingPdus.Remove(rpdu.Id);
-                                _recvPdus.Add(rpdu.Id, rpdu);
-                                return;
+                                if (_pendingPdus.Contains(rpdu.Id))
+                                {
+                                    _pendingPdus.Remove(rpdu.Id);
+                                    _recvPdus.Add(rpdu.Id, rpdu);
+                                    return;
+                                }
                             }
                         }
-                    }
 
-                    PduReceived?.Invoke(connId, pdu);
+                        PduReceived?.Invoke(connId, pdu);
+                    }
                 }
+                else
+                    Logger.LogToConsole("PersistenceClient::TextLineReceived called with invalid information");
             };
         }
     }

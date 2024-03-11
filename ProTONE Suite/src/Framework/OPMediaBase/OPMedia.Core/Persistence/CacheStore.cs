@@ -20,15 +20,12 @@ namespace OPMedia.Core.Persistence
         {
             ThreadPool.QueueUserWorkItem(_ =>
             {
-                var allNodes = ReadAll(ApplicationInfo.ApplicationName, context);
-                if (allNodes?.Count > 0)
+                lock (_cacheLock)
                 {
-                    lock (_cacheLock)
+                    var allNodes = ReadAll(ApplicationInfo.ApplicationName, context);
+                    if (allNodes?.Count > 0)
                     {
-                        foreach (var node in allNodes)
-                        {
-                            AddOrUpdateCacheItem(node.Key, context, node.Value);
-                        }
+                        _cache = new Dictionary<string, string>(allNodes);
                     }
                 }
             });
@@ -36,6 +33,9 @@ namespace OPMedia.Core.Persistence
 
         public Dictionary<string, string> ReadAll(string appName, string context)
         {
+            if (string.IsNullOrEmpty(context))
+                context = "*";
+
             return _persistence.ReadAll(appName, context);
         }
 
@@ -43,15 +43,12 @@ namespace OPMedia.Core.Persistence
 
         public string ReadNode(string nodeId, string context)
         {
-            if (string.IsNullOrEmpty(context))
-                context = "*";
-
-            string ret = ReadCacheItem(nodeId, context);
+            string ret = ReadCacheItem(nodeId, ref context);
 
             if (ret == null)
             {
                 ret = _persistence.ReadNode(nodeId, context);
-                AddOrUpdateCacheItem(nodeId, context, ret);
+                AddOrUpdateCacheItem(nodeId, ref context, ret);
             }
 
             return ret;
@@ -66,11 +63,7 @@ namespace OPMedia.Core.Persistence
 
             try
             {
-                if (string.IsNullOrEmpty(context))
-                    context = "*";
-
-                AddOrUpdateCacheItem(nodeId, context, content);
-
+                AddOrUpdateCacheItem(nodeId, ref context, content);
                 ThreadPool.QueueUserWorkItem(_ => _persistence.SaveNode(nodeId, context, content));
             }
             catch
@@ -90,14 +83,12 @@ namespace OPMedia.Core.Persistence
 
             try
             {
-                if (string.IsNullOrEmpty(context))
-                    context = "*";
-
-                DeleteCacheItem(nodeId, context);
+                DeleteCacheItem(nodeId, ref context);
 
                 retVal = true;
+                var ctx = context;
 
-                ThreadPool.QueueUserWorkItem(_ => _persistence.DeleteNode(nodeId, context));
+                ThreadPool.QueueUserWorkItem(_ => _persistence.DeleteNode(nodeId, ctx));
             }
             catch
             {
@@ -109,9 +100,9 @@ namespace OPMedia.Core.Persistence
         #endregion
 
 
-        private void AddOrUpdateCacheItem(string nodeId, string context, string value)
+        private void AddOrUpdateCacheItem(string nodeId, ref string context, string value)
         {
-            string key = string.Format("{0}_{1}", nodeId, context);
+            string key = BuildKey(nodeId, ref context);
 
             lock (_cacheLock)
             {
@@ -128,9 +119,9 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        private void DeleteCacheItem(string nodeId, string context)
+        private void DeleteCacheItem(string nodeId, ref string context)
         {
-            string key = string.Format("{0}_{1}", nodeId, context);
+            string key = BuildKey(nodeId, ref context);
 
             lock (_cacheLock)
             {
@@ -142,18 +133,20 @@ namespace OPMedia.Core.Persistence
             }
         }
 
-        private string ReadCacheItem(string nodeId, string context)
+        private string ReadCacheItem(string nodeId, ref string context)
         {
             string ret = null;
-            string key = string.Format("{0}_{1}", nodeId, context);
+
+
+            string key = BuildKey(nodeId, ref context);
 
             lock (_cacheLock)
             {
                 if (_cache.ContainsKey(key))
-                {
-                    Logger.LogToConsole($"[READ CACHE] [{nodeId}][{context}] = {ret}");
                     ret = _cache[key];
-                }
+                else
+                    Logger.LogToConsole($"[READ CACHE] [{nodeId}][{context}] not found in cache");
+
             }
 
             return ret;
@@ -170,14 +163,14 @@ namespace OPMedia.Core.Persistence
                 {
                     case NotificationType.NodeDeleted:
                         {
-                            DeleteCacheItem(nodeId, context);
+                            DeleteCacheItem(nodeId, ref context);
                             success = true;
                         }
                         break;
 
                     case NotificationType.NodeSaved:
                         {
-                            AddOrUpdateCacheItem(nodeId, context, content);
+                            AddOrUpdateCacheItem(nodeId, ref context, content);
                             success = true;
                         }
                         break;
@@ -196,6 +189,13 @@ namespace OPMedia.Core.Persistence
             return success;
         }
 
+        private string BuildKey(string nodeId, ref string context)
+        {
+            if (string.IsNullOrEmpty(context))
+                context = "*";
+
+            return string.Format("{0}_{1}", nodeId, context);
+        }
     }
 
 }
