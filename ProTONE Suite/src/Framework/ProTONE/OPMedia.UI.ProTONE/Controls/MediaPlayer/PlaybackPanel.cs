@@ -14,6 +14,7 @@ using OPMedia.UI.ProTONE.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using EventNames = OPMedia.Core.EventNames;
 using LocalEventNames = OPMedia.UI.ProTONE.GlobalEvents.EventNames;
@@ -34,8 +35,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         #region Properties
 
-        // TODO: implement
-        public bool CompactView { get; set; }
+        private bool _compactView = false;
+        public bool CompactView
+        {
+            get => _compactView;
+            set
+            {
+                _compactView = value;
+                BindEventHandlers(this);
+            }
+        }
 
         public FilterState FilterState
         { get { return _filterState; } set { _filterState = value; UpdatePlayPauseButton(); } }
@@ -201,13 +210,45 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         private void BindEventHandlers(Control parent)
         {
+            _tips.Clear();
+
             if (parent != null && parent.Controls != null)
             {
-                foreach (Control ctl in parent.Controls)
+                var list = parent.Controls.OfType<Control>();
+                foreach (Control ctl in list)
                 {
                     ImageButton btn = (ctl as ImageButton);
                     if (btn != null)
                     {
+                        OPMShortcut cmd = OPMShortcut.CmdOutOfRange;
+                        Enum.TryParse<OPMShortcut>(btn.Tag as string, out cmd);
+                        bool shouldShow = false;
+
+                        if (cmd != OPMShortcut.CmdOutOfRange)
+                        {
+                            if (_compactView)
+                            {
+                                switch (cmd)
+                                {
+                                    case OPMShortcut.CmdPlayPause:
+                                    case OPMShortcut.CmdStop:
+                                    case OPMShortcut.CmdFwd:
+                                    case OPMShortcut.CmdRew:
+                                        shouldShow = true;
+                                        break;
+                                }
+                            }
+                            else
+                                shouldShow = true;
+                        }
+
+                        if (!shouldShow)
+                        {
+                            btn.Visible = false;
+                            parent.Controls.Remove(btn);
+                            continue;
+                        }
+
                         btn.Click -= OnButtonPressed;
                         btn.Click += OnButtonPressed;
                         //ctl.MouseHover += OnMouseHover;
@@ -221,20 +262,16 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
                         var tip = new OPMToolTip();
 
-                        OPMShortcut cmd = OPMShortcut.CmdOutOfRange;
-                        if (Enum.TryParse<OPMShortcut>(btn.Tag as string, out cmd))
-                        {
-                            string resourceTag = string.Format("TXT_{0}", cmd.ToString().ToUpperInvariant()).Replace("CMD", "BTN");
-                            string tipText = Translator.Translate(resourceTag, ShortcutMapper.GetShortcutString(cmd));
+                        string resourceTag = string.Format("TXT_{0}", cmd.ToString().ToUpperInvariant()).Replace("CMD", "BTN");
+                        string tipText = Translator.Translate(resourceTag, ShortcutMapper.GetShortcutString(cmd));
 
-                            Image img = null;
-                            if (btn.TipImage != null)
-                                img = btn.TipImage.Resize(true);
-                            else if (btn.Image != null)
-                                img = btn.Image.Resize(true);
+                        Image img = null;
+                        if (btn.TipImage != null)
+                            img = btn.TipImage.Resize(true);
+                        else if (btn.Image != null)
+                            img = btn.Image.Resize(true);
 
-                            tip.SetSimpleToolTip(btn, tipText, img);
-                        }
+                        tip.SetSimpleToolTip(btn, tipText, img);
 
                         _tips.Add(btn, tip);
                     }

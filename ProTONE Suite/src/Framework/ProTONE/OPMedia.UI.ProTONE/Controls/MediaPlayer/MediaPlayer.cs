@@ -57,6 +57,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             set
             {
                 compactView = value;
+                pnlPlayback.CompactView = value;
                 DoLayout();
             }
             get { return compactView; }

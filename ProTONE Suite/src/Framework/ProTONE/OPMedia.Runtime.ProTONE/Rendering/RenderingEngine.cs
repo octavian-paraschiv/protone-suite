@@ -1141,7 +1141,7 @@ namespace OPMedia.Runtime.ProTONE.Rendering
 
         public void DisplayOsdMessage(string msg)
         {
-            if (ProTONEConfig.OsdEnabled)
+            if (ProTONEConfig.OsdEnabled && this.RenderedMediaInfo.IsVideoFile)
             {
                 if (ActiveFfdShowInstance != null)
                 {

@@ -1,5 +1,6 @@
 using OPMedia.Runtime.Addons.AddonsBase.Preview;
 using OPMedia.Runtime.ProTONE;
+using OPMedia.Runtime.ProTONE.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -16,8 +17,7 @@ namespace OPMedia.Addons.Builtin.Player
             : base()
         {
             InitializeComponent();
-
-            //mediaPlayer.CompactView = true;
+            mediaPlayer.CompactView = true;
         }
 
         public override List<string> HandledFileTypes
@@ -34,6 +34,7 @@ namespace OPMedia.Addons.Builtin.Player
         protected override void DoBeginPreview(string item, object additionalData)
         {
             mediaPlayer.PlayFiles(new string[] { item });
+            ProTONEConfig.SignalAnalisysFunctions = SignalAnalisysFunction.VUMeter | SignalAnalisysFunction.Spectrogram;
 
             if (additionalData != null)
             {
@@ -44,6 +45,7 @@ namespace OPMedia.Addons.Builtin.Player
         protected override void DoEndPreview()
         {
             mediaPlayer.StopPlayback();
+            ProTONEConfig.SignalAnalisysFunctions = SignalAnalisysFunction.None;
         }
     }
 }
