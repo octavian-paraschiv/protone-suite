@@ -60,7 +60,8 @@ WizardImageBackColor=clBlack
 WizardImageFile=..\main.bmp
 WizardImageStretch=false
 WizardSmallImageFile=..\main_small.bmp
-CloseApplications=False
+RestartApplications=False
+CloseApplications=no
 
 [Tasks]
 
@@ -71,7 +72,10 @@ Name: fr; MessagesFile: compiler:Languages\French.isl
 Name: ro; MessagesFile: compiler:Languages\Romanian.isl
 
 [Files]
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+;--------------------------------------
+; Support files for setup
+Source: "isxdl.dll"; DestDir: "{tmp}"; Flags: dontcopy
+Source: "{#BINDIR}\OPMedia.Utility.exe"; DestDir: "{tmp}"; Flags: dontcopy
 ;--------------------------------------
 ; Application executables
 Source: "{#BINDIR}\OPMedia.ProTONE.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -88,7 +92,7 @@ Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe"; DestDir: "{app}"; Flags: replac
 Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.VideoWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
-; Services
+; PersistenceService
 Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; OPMedia DLL's
@@ -149,9 +153,6 @@ Source: "{#BINDIR}\NAudio.WinMM.dll"; DestDir: "{app}"; Flags: replacesameversio
 Source: "{#BINDIR}\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\TagLibSharp.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\SharpShell.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-;--------------------------------------
-; Support DLL's for setup
-Source: "isxdl.dll"; DestDir: "{tmp}"; Flags: dontcopy
 ;--------------------------------------
 ; FFDShow codec files
 Source: "{#EXTDIR}\ffdshow\Boost_Software_License_1.0.txt"; DestDir: "{app}\Codecs"; Components: itemCodecs\itemFFDShow
@@ -247,18 +248,12 @@ Name: "{app}\HDSupport"; Flags: uninsalwaysuninstall; Components:   itemCodecs\i
 [Run]
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.dll /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingDLL}"
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.exe /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingEXE}"
-Filename: "{sys}\netsh.exe"; Parameters: "firewall add allowedprogram ""{app}\OPMedia.ProTONE.exe"" ""ProTONE Player"" ENABLE ALL"; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:firewallPlayer}"
-Filename: "{dotnet4032}\installutil.exe"; Parameters: "-i ""{app}\OPMedia.PersistenceService.exe"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:instPersistenceService}"
-Filename: "cmd.exe"; Parameters: "/c ""sc start OPMedia.PersistenceService"""; WorkingDir: "{app}"; Flags: runhidden runascurrentuser; StatusMsg: "{cm:startPersistenceService}"
 Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer
 Filename: {dotnet4064}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer; Check: IsWin64
 
 [UninstallRun]
 Filename: {dotnet4032}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3; Components: itemPlayer
 Filename: {dotnet4064}\regasm.exe; Parameters: "/u ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; Flags: runhidden; StatusMsg: {cm:uninstShellSupport}; RunOnceId: _id3.1; Components: itemPlayer; Check: IsWin64
-Filename: {sys}\netsh.exe; Parameters: "firewall delete allowedprogram program=""{app}\OPMedia.ProTONE.exe"""; StatusMsg: {cm:delFirewallPlayer}; Flags: runhidden; RunOnceId: _id4
-Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:stopPersistenceService}; RunOnceId: _id7
-Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: {cm:uninstPersistenceService}; RunOnceId: _id8
 
 [Registry]
 Root: HKCU; Subkey: SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer; ValueType: dword; ValueName: DesktopProcess; ValueData: 1; Flags: createvalueifdoesntexist noerror
@@ -1542,16 +1537,8 @@ Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; Val
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg1; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
 Root: HKLM; SubKey: Software\GNU\ffdshow; ValueType: dword; ValueName: mpg2; ValueData: $00000005; Components: itemCodecs\itemFFDShow; MinVersion: 0,6.2
 
-[UninstallDelete]
-Name: {app}\InstallUtil.InstallLog; Type: files
-Name: {app}\OPMedia.PersistenceService.InstallLog; Type: files
-Name: {app}\OPMedia.PersistenceService.InstallState; Type: files
-
 [CustomMessages]
 #include "Include\CustomMessages.iss"
 
 [Code]
 #include "Include\SetupCode.pas"
-
-
-

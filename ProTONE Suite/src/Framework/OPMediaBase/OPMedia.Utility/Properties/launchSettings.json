@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OPMedia.Utility": {
+      "commandName": "Project",
+      "commandLineArgs": "-killall"
+    }
+  }
+}

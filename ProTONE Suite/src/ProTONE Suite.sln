@@ -60,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.ShellSupport", "Extensions\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj", "{1988DB5F-1FA6-4648-939E-89F11761FB94}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.Utility", "Framework\OPMediaBase\OPMedia.Utility\OPMedia.Utility.csproj", "{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1988DB5F-1FA6-4648-939E-89F11761FB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,9 +170,10 @@ Global
 		{687F92F3-7B8D-421A-BE43-4F2B40AEC69A} = {05C5855D-D6FE-4832-89F9-FFDC4A8993E1}
 		{D75C6E16-0208-40FD-8C54-F073667F5384} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 		{1988DB5F-1FA6-4648-939E-89F11761FB94} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
+		{528BEA23-B914-43B7-AAC3-F51C9E0A8E7D} = {1101B967-4322-4698-8D82-83DA0B0DACFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-GB
 		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
+		RESX_NeutralResourcesLanguage = en-GB
 	EndGlobalSection
 EndGlobal

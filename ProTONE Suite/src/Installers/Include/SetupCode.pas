@@ -17,14 +17,6 @@ const
    // This means to read default value. It should return the installed location of ffdshow.ax.
    FFDShowRegistryValue =       ''; 
 
-   // Application Names
-   PlayerAppShortName =         'opmedia.protone';
-   MediaLibraryAppShortName =   'opmedia.medialibrary';
-   
-   // Application Long Names
-   PlayerAppName =              'ProTONE Player';
-   MediaLibraryAppName =        'ProTONE Media Library';
-   
 //--------------------------------------------------------------------------------
 
 var
@@ -131,53 +123,26 @@ begin
 
 end;
 
-//---------------------------------------------------------------------------------
-procedure StopPersistenceService;
-var
-   ResultCode: Integer;
-begin
-   Exec('cmd.exe', '/c "sc stop OPMedia.PersistenceService"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
-   Sleep(750);
-end;
-
-//--------------------------------------------------------------------------------
-function IsApplicationRunning(appName : String) : Boolean;
-begin
-   result := CheckForMutexes(appName + '.mutex');
-end;
-
 //--------------------------------------------------------------------------------
 function VerifyApplications() : Integer;
 var
-   playerRunning : Boolean;
-   libraryRunning : Boolean;
-   warningMessage : String;
-   res: integer;
+   ResFileName, ExeFileName: String;
+   ExecResults: AnsiString;   
+   ResultCode: integer;
 
 begin
-   playerRunning := IsApplicationRunning(PlayerAppShortName);
-   libraryRunning := IsApplicationRunning(MediaLibraryAppShortName);
+  ExeFileName := ExpandConstant('{tmp}') + '\OPMedia.Utility.exe';
+  ResFileName := ExpandConstant('{tmp}') + '\OPMedia.Utility.res';
 
-   if (playerRunning or libraryRunning) then
-   begin
+  Exec(ExeFileName, '-killall -redirectToFile', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
 
-    warningMessage := Chr(13);
-    if (playerRunning) then
-    begin
-        warningMessage := warningMessage + PlayerAppName + Chr(13);
-    end;
-
-    if (libraryRunning) then
-    begin
-        warningMessage := warningMessage + MediaLibraryAppName  + Chr(13);
-    end;
-
-    result := MsgBox(FmtMessage(CustomMessage('AppsStillRunning'), [ warningMessage ]), mbError, MB_RETRYCANCEL);
-
+  if ( LoadStringFromFile(ResFileName, ExecResults) and ( Length(ExecResults) > 0 ) ) then 
+  begin
+    result := MsgBox(FmtMessage(CustomMessage('AppsStillRunning'), [ Chr(13) + ExecResults + Chr(13) ]), mbError, MB_RETRYCANCEL);
     exit;
-   end;
+  end;
 
-   result := IDOK;
+  result := IDOK;
 
 end;
 
@@ -186,8 +151,7 @@ function AreApplicationsStopped() : Boolean;
 var
    res: integer;
 begin
-
-
+   ExtractTemporaryFile('OPMedia.Utility.exe');    
    res := VerifyApplications();
    while(res = IDRETRY) do
    begin
@@ -240,11 +204,6 @@ begin
     CustomMessage('WaitInstallingDependencies'));
 
    DependencyPage.Show;
-
-   DependencyPage.SetProgress(0, 4);
-   DependencyPage.SetText(CustomMessage('PersistenceServiceCheck'), '');
-
-   StopPersistenceService;
 
    DependencyPage.SetProgress(1, 4);
    DependencyPage.SetText(CustomMessage('DotNetInstalling'), '');
@@ -348,14 +307,13 @@ function InitializeSetup: Boolean;
 var
    res : integer;
 begin
-  
-   if (AreApplicationsStopped = false) then
-   begin
+  if (AreApplicationsStopped = false) then
+  begin
     result := false;
     exit;
-   end;
+  end;
 
-   result := true;
+  result := true;
 
 end;
 

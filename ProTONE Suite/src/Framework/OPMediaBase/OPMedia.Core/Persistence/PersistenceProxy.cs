@@ -6,9 +6,9 @@ using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
-using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 
@@ -71,21 +71,19 @@ namespace OPMedia.Core
                 {
                     var count = Process.GetProcesses()?
                         .Where(p => (p.ProcessName ?? "").ToUpperInvariant().Contains(Constants.PersistenceServiceShortName.ToUpperInvariant()))
-
                         .Count();
 
                     if (count > 0)
                         return true;
 
-                    if (AppConfig.CurrentUserIsAdministrator)
+                    Process.Start(new ProcessStartInfo
                     {
-                        ServiceController srv = new ServiceController(Constants.PersistenceServiceShortName);
-                        if (srv.Status == ServiceControllerStatus.Stopped)
-                        {
-                            srv.Start();
-                            Thread.Sleep(500);
-                        }
-                    }
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
+                        FileName = Path.Combine(AppConfig.InstallationPath, Constants.PersistenceServiceBinary),
+                    });
+
+                    Thread.Sleep(500);
                 }
                 catch (Exception ex)
                 {

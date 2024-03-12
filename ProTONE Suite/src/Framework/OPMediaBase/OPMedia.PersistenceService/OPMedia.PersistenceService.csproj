@@ -9,12 +9,6 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
-  <PropertyGroup>
-	<StartupObject />
-  </PropertyGroup>
-  <PropertyGroup>
-	<PostBuildEvent />
-  </PropertyGroup>
   <ItemGroup>
 	<Reference Include="System.configuration" />
 	<Reference Include="System.Configuration.Install" />
@@ -22,20 +16,6 @@
 	<Reference Include="System.ServiceModel" />
 	<Reference Include="System.Transactions" />
 	<Reference Include="System.ServiceProcess" />
-  </ItemGroup>
-  <ItemGroup>
-	<Compile Update="PersistenceServiceInstaller.cs">
-	  <SubType>Component</SubType>
-	</Compile>
-	<Compile Update="PersistenceServiceInstaller.Designer.cs">
-	  <DependentUpon>PersistenceServiceInstaller.cs</DependentUpon>
-	</Compile>
-	<Compile Update="PersistenceService.cs">
-	  <SubType>Component</SubType>
-	</Compile>
-	<Compile Update="PersistenceService.Designer.cs">
-	  <DependentUpon>PersistenceService.cs</DependentUpon>
-	</Compile>
   </ItemGroup>
   <ItemGroup>
 	<ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
