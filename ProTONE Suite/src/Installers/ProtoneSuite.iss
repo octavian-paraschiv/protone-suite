@@ -246,6 +246,11 @@ Name: "{app}\Codecs"; Flags: uninsalwaysuninstall; Components: itemCodecs\itemFF
 Name: "{app}\HDSupport"; Flags: uninsalwaysuninstall; Components:   itemCodecs\itemHaali
 
 [Run]
+;--------------------------------------
+;Stop and uninstall PersistenceService from Windows SCM - it's no longer used like this
+Filename: cmd.exe; Parameters: "/c ""sc stop OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: ">>>>"
+Filename: cmd.exe; Parameters: "/c ""sc delete OPMedia.PersistenceService"""; Flags: runhidden; WorkingDir: {app}; StatusMsg: "<<<<"
+;--------------------------------------
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.dll /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingDLL}"
 Filename: "{sys}\cmd.exe"; Parameters: "/c ""forfiles /p . /m *.exe /c ""{dotnet4032}\ngen.exe install @file"""""; WorkingDir: "{app}"; Flags: runascurrentuser runhidden; StatusMsg: "{cm:OptimizingEXE}"
 Filename: {dotnet4032}\regasm.exe; Parameters: "/codebase ""{app}\OPMedia.ShellSupport.dll"""; WorkingDir: {app}; StatusMsg: {cm:cfgShellSupport}; Flags: runhidden runascurrentuser; Components: itemPlayer
