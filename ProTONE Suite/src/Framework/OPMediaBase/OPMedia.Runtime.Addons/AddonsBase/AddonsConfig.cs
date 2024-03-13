@@ -102,7 +102,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
             if (_diskAddonsConfig == null ||
                 _diskAddonsConfig.ContainsKey(keyBase) == false)
             {
-                namesRaw = PersistenceProxy.ReadNode(true, keyBase, string.Empty, false);
+                namesRaw = SettingsProxy.Instance.ReadNode(true, keyBase, string.Empty);
             }
             else
             {
@@ -119,7 +119,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     if (_diskAddonsConfig == null ||
                         _diskAddonsConfig.ContainsKey(name) == false)
                     {
-                        val = PersistenceProxy.ReadNode(true, name, string.Empty, false);
+                        val = SettingsProxy.Instance.ReadNode(true, name, string.Empty);
                     }
                     else
                     {
@@ -135,7 +135,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         internal static void MarkForUninstall(string assembly)
         {
-            string markedForUninstall = PersistenceProxy.ReadNode(true, "MarkedForUninstall", string.Empty, false);
+            string markedForUninstall = SettingsProxy.Instance.ReadNode(true, "MarkedForUninstall", string.Empty);
 
             List<string> filesToDelete = new List<string>();
 
@@ -175,13 +175,13 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                 }
             }
 
-            PersistenceProxy.SaveNode(true, "MarkedForUninstall", markedForUninstall, false);
+            SettingsProxy.Instance.SaveNode(true, "MarkedForUninstall", markedForUninstall);
         }
 
         private static void UninstallMarkedItems()
         {
             string[] names = null;
-            string namesRaw = PersistenceProxy.ReadNode(true, "MarkedForUninstall", string.Empty, false);
+            string namesRaw = SettingsProxy.Instance.ReadNode(true, "MarkedForUninstall", string.Empty);
 
             if (!string.IsNullOrEmpty(namesRaw))
             {
@@ -198,7 +198,7 @@ namespace OPMedia.Runtime.Addons.AddonsBase
                     }
                 }
 
-                PersistenceProxy.SaveNode(true, "MarkedForUninstall", string.Empty, false);
+                SettingsProxy.Instance.SaveNode(true, "MarkedForUninstall", string.Empty);
             }
         }
 

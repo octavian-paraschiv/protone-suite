@@ -132,10 +132,10 @@ namespace OPMedia.Core.Configuration
 
             if (IsAppUsingPersistence)
             {
-                _skinType = PersistenceProxy.ReadNode("SkinType", UnconfiguredThemeName);
+                _skinType = SettingsProxy.Instance.ReadNode("SkinType", UnconfiguredThemeName);
 
                 string defLangId = Regedit.InstallLanguageID;
-                _languageId = PersistenceProxy.ReadNode("LanguageID", defLangId);
+                _languageId = SettingsProxy.Instance.ReadNode("LanguageID", defLangId);
             }
         }
 
@@ -306,7 +306,7 @@ namespace OPMedia.Core.Configuration
                     _skinType = value;
 
                     Logger.LogTrace("AllowRealTimeGUIUpdate => PersistenceProxy.SaveNode(SkinType) called ...");
-                    PersistenceProxy.SaveNode("SkinType", value);
+                    SettingsProxy.Instance.SaveNode("SkinType", value);
 
                     EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
                 }
@@ -325,7 +325,7 @@ namespace OPMedia.Core.Configuration
                 if (value != _languageId)
                 {
                     _languageId = value;
-                    PersistenceProxy.SaveNode("LanguageID", value);
+                    SettingsProxy.Instance.SaveNode("LanguageID", value);
                     Translator.SetInterfaceLanguage(_languageId);
                 }
             }
@@ -358,7 +358,7 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("UseOnlineDocumentation", true);
+                return SettingsProxy.Instance.ReadNode("UseOnlineDocumentation", true);
             }
         }
 
@@ -376,7 +376,7 @@ namespace OPMedia.Core.Configuration
             get
             {
                 if (OpMediaApplication.AllowRealTimeGUIUpdate)
-                    return PersistenceProxy.ReadNode("AllowAutomaticUpdates", false);
+                    return SettingsProxy.Instance.ReadNode("AllowAutomaticUpdates", false);
 
                 return false;
             }
@@ -384,7 +384,7 @@ namespace OPMedia.Core.Configuration
             set
             {
                 if (OpMediaApplication.AllowRealTimeGUIUpdate)
-                    PersistenceProxy.SaveNode("AllowAutomaticUpdates", value);
+                    SettingsProxy.Instance.SaveNode("AllowAutomaticUpdates", value);
             }
         }
 
@@ -442,11 +442,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return (ProxyType)PersistenceProxy.ReadNode("ProxyType", (int)ProxyType.NoProxy);
+                return (ProxyType)SettingsProxy.Instance.ReadNode("ProxyType", (int)ProxyType.NoProxy);
             }
             set
             {
-                PersistenceProxy.SaveNode("ProxyType", (int)value);
+                SettingsProxy.Instance.SaveNode("ProxyType", (int)value);
             }
         }
 
@@ -454,11 +454,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("ProxyAddress", "your.proxy.address");
+                return SettingsProxy.Instance.ReadNode("ProxyAddress", "your.proxy.address");
             }
             set
             {
-                PersistenceProxy.SaveNode("ProxyAddress", value);
+                SettingsProxy.Instance.SaveNode("ProxyAddress", value);
             }
         }
 
@@ -466,11 +466,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("ProxyPort", 8080);
+                return SettingsProxy.Instance.ReadNode("ProxyPort", 8080);
             }
             set
             {
-                PersistenceProxy.SaveNode("ProxyPort", value);
+                SettingsProxy.Instance.SaveNode("ProxyPort", value);
             }
         }
 
@@ -478,11 +478,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("ProxyUser", "user.name");
+                return SettingsProxy.Instance.ReadNode("ProxyUser", "user.name");
             }
             set
             {
-                PersistenceProxy.SaveNode("ProxyUser", value);
+                SettingsProxy.Instance.SaveNode("ProxyUser", value);
             }
         }
 
@@ -490,11 +490,11 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("ProxyPassword", string.Empty);
+                return SettingsProxy.Instance.ReadNode("ProxyPassword", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveNode("ProxyPassword", value);
+                SettingsProxy.Instance.SaveNode("ProxyPassword", value);
             }
         }
         #endregion
@@ -513,7 +513,7 @@ namespace OPMedia.Core.Configuration
 
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "WindowLocation", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "WindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         point = (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -529,7 +529,7 @@ namespace OPMedia.Core.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "WindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -546,7 +546,7 @@ namespace OPMedia.Core.Configuration
 
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "WindowSize", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "WindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -561,7 +561,7 @@ namespace OPMedia.Core.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "WindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -572,7 +572,7 @@ namespace OPMedia.Core.Configuration
             {
                 try
                 {
-                    return (FormWindowState)PersistenceProxy.ReadNode(true, "WindowState", (int)FormWindowState.Normal);
+                    return (FormWindowState)SettingsProxy.Instance.ReadNode(true, "WindowState", (int)FormWindowState.Normal);
                 }
                 catch
                 {
@@ -582,7 +582,7 @@ namespace OPMedia.Core.Configuration
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "WindowState", (int)value);
+                SettingsProxy.Instance.SaveNode(true, "WindowState", (int)value);
             }
         }
 
@@ -590,12 +590,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return (PersistenceProxy.ReadNode(true, "MimimizedToTray", false) && CanSendToTray);
+                return (SettingsProxy.Instance.ReadNode(true, "MimimizedToTray", false) && CanSendToTray);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "MimimizedToTray", value && CanSendToTray);
+                SettingsProxy.Instance.SaveNode(true, "MimimizedToTray", value && CanSendToTray);
             }
         }
 
@@ -603,12 +603,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "CanSendToTray", false);
+                return SettingsProxy.Instance.ReadNode(true, "CanSendToTray", false);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "CanSendToTray", value);
+                SettingsProxy.Instance.SaveNode(true, "CanSendToTray", value);
             }
         }
 
@@ -619,12 +619,12 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LastExploredFolder", PathUtils.CurrentDir);
+                return SettingsProxy.Instance.ReadNode(true, "LastExploredFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LastExploredFolder", value);
+                SettingsProxy.Instance.SaveNode(true, "LastExploredFolder", value);
             }
         }
         #endregion

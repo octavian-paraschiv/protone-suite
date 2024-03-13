@@ -94,56 +94,56 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("OsdbKeepAliveInterval", 5 * 60 * 1000);
+                return SettingsProxy.Instance.ReadNode("OsdbKeepAliveInterval", 5 * 60 * 1000);
             }
             set
             {
-                PersistenceProxy.SaveNode("OsdbKeepAliveInterval", value);
+                SettingsProxy.Instance.SaveNode("OsdbKeepAliveInterval", value);
             }
         }
 
 
         public static bool UseMetadata
         {
-            get { return PersistenceProxy.ReadNode("UseMetadata", true); }
-            set { PersistenceProxy.SaveNode("UseMetadata", value); }
+            get { return SettingsProxy.Instance.ReadNode("UseMetadata", true); }
+            set { SettingsProxy.Instance.SaveNode("UseMetadata", value); }
         }
 
         public static bool UseFileNameFormat
         {
-            get { return PersistenceProxy.ReadNode("UseFileNameFormat", true); }
-            set { PersistenceProxy.SaveNode("UseFileNameFormat", value); }
+            get { return SettingsProxy.Instance.ReadNode("UseFileNameFormat", true); }
+            set { SettingsProxy.Instance.SaveNode("UseFileNameFormat", value); }
         }
 
         public static string PlaylistEntryFormat
         {
-            get { return PersistenceProxy.ReadNode("PlaylistEntryFormat", "<A> - <T>"); }
-            set { PersistenceProxy.SaveNode("PlaylistEntryFormat", value); }
+            get { return SettingsProxy.Instance.ReadNode("PlaylistEntryFormat", "<A> - <T>"); }
+            set { SettingsProxy.Instance.SaveNode("PlaylistEntryFormat", value); }
         }
 
         public static string FileNameFormat
         {
-            get { return PersistenceProxy.ReadNode("FileNameFormat", "<A> - <T>"); }
-            set { PersistenceProxy.SaveNode("FileNameFormat", value); }
+            get { return SettingsProxy.Instance.ReadNode("FileNameFormat", "<A> - <T>"); }
+            set { SettingsProxy.Instance.SaveNode("FileNameFormat", value); }
         }
 
         public static string CustomPlaylistEntryFormats
         {
-            get { return PersistenceProxy.ReadNode("CustomPlaylistEntryFormats", string.Empty); }
-            set { PersistenceProxy.SaveNode("CustomPlaylistEntryFormats", value); }
+            get { return SettingsProxy.Instance.ReadNode("CustomPlaylistEntryFormats", string.Empty); }
+            set { SettingsProxy.Instance.SaveNode("CustomPlaylistEntryFormats", value); }
         }
 
         public static string CustomFileNameFormats
         {
-            get { return PersistenceProxy.ReadNode("CustomFileNameFormats", string.Empty); }
-            set { PersistenceProxy.SaveNode("CustomFileNameFormats", value); }
+            get { return SettingsProxy.Instance.ReadNode("CustomFileNameFormats", string.Empty); }
+            set { SettingsProxy.Instance.SaveNode("CustomFileNameFormats", value); }
         }
 
 
         public static bool DisableDVDMenu
         {
-            get { return PersistenceProxy.ReadNode(true, "DisableDVDMenu", false); }
-            set { PersistenceProxy.SaveNode(true, "DisableDVDMenu", value); }
+            get { return SettingsProxy.Instance.ReadNode(true, "DisableDVDMenu", false); }
+            set { SettingsProxy.Instance.SaveNode(true, "DisableDVDMenu", value); }
         }
 
         private static int _prefferedSubtitleLang = 0;
@@ -153,7 +153,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             get
             {
                 if (_prefferedSubtitleLang <= 0)
-                    _prefferedSubtitleLang = PersistenceProxy.ReadNode("PrefferedSubtitleLang", 1033);
+                    _prefferedSubtitleLang = SettingsProxy.Instance.ReadNode("PrefferedSubtitleLang", 1033);
 
                 return _prefferedSubtitleLang;
             }
@@ -161,33 +161,33 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set
             {
                 _prefferedSubtitleLang = value;
-                PersistenceProxy.SaveNode("PrefferedSubtitleLang", value);
+                SettingsProxy.Instance.SaveNode("PrefferedSubtitleLang", value);
             }
         }
 
         public static bool SubEnabled
         {
-            get { return PersistenceProxy.ReadNode("SubEnabled", false); }
-            set { PersistenceProxy.SaveNode("SubEnabled", value); }
+            get { return SettingsProxy.Instance.ReadNode("SubEnabled", false); }
+            set { SettingsProxy.Instance.SaveNode("SubEnabled", value); }
         }
 
         public static bool OsdEnabled
         {
-            get { return PersistenceProxy.ReadNode("OsdEnabled", false); }
-            set { PersistenceProxy.SaveNode("OsdEnabled", value); }
+            get { return SettingsProxy.Instance.ReadNode("OsdEnabled", false); }
+            set { SettingsProxy.Instance.SaveNode("OsdEnabled", value); }
         }
 
         public static Color OsdColor
         {
             get
             {
-                int argb = PersistenceProxy.ReadNode("OsdColor", Color.White.ToArgb());
+                int argb = SettingsProxy.Instance.ReadNode("OsdColor", Color.White.ToArgb());
                 return Color.FromArgb(argb);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("OsdColor", value.ToArgb());
+                SettingsProxy.Instance.SaveNode("OsdColor", value.ToArgb());
             }
         }
 
@@ -195,13 +195,13 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                int argb = PersistenceProxy.ReadNode("SubColor", Color.White.ToArgb());
+                int argb = SettingsProxy.Instance.ReadNode("SubColor", Color.White.ToArgb());
                 return Color.FromArgb(argb);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("SubColor", value.ToArgb());
+                SettingsProxy.Instance.SaveNode("SubColor", value.ToArgb());
             }
         }
 
@@ -211,16 +211,16 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                string _f = PersistenceProxy.ReadNode("OsdFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
+                string _f = SettingsProxy.Instance.ReadNode("OsdFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
                 Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
-                byte charSet = (byte)PersistenceProxy.ReadNode("OsdFontCharSet", DefSubAndOsdFont.GdiCharSet);
+                byte charSet = (byte)SettingsProxy.Instance.ReadNode("OsdFontCharSet", DefSubAndOsdFont.GdiCharSet);
                 return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("OsdFont", new FontConverter().ConvertToInvariantString(value));
-                PersistenceProxy.SaveNode("OsdFontCharSet", value.GdiCharSet);
+                SettingsProxy.Instance.SaveNode("OsdFont", new FontConverter().ConvertToInvariantString(value));
+                SettingsProxy.Instance.SaveNode("OsdFontCharSet", value.GdiCharSet);
             }
         }
 
@@ -228,16 +228,16 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                string _f = PersistenceProxy.ReadNode("SubFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
+                string _f = SettingsProxy.Instance.ReadNode("SubFont", new FontConverter().ConvertToInvariantString(DefSubAndOsdFont));
                 Font f = (Font)new FontConverter().ConvertFromInvariantString(_f);
-                byte charSet = (byte)PersistenceProxy.ReadNode("SubFontCharSet", DefSubAndOsdFont.GdiCharSet);
+                byte charSet = (byte)SettingsProxy.Instance.ReadNode("SubFontCharSet", DefSubAndOsdFont.GdiCharSet);
                 return new Font(f.FontFamily, f.Size, f.Style, f.Unit, charSet);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("SubFont", new FontConverter().ConvertToInvariantString(value));
-                PersistenceProxy.SaveNode("SubFontCharSet", value.GdiCharSet);
+                SettingsProxy.Instance.SaveNode("SubFont", new FontConverter().ConvertToInvariantString(value));
+                SettingsProxy.Instance.SaveNode("SubFontCharSet", value.GdiCharSet);
             }
         }
 
@@ -245,12 +245,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("OsdPersistTimer", 4000);
+                return SettingsProxy.Instance.ReadNode("OsdPersistTimer", 4000);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("OsdPersistTimer", value);
+                SettingsProxy.Instance.SaveNode("OsdPersistTimer", value);
             }
         }
 
@@ -258,12 +258,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("SubtitleDownloadEnabled", true);
+                return SettingsProxy.Instance.ReadNode("SubtitleDownloadEnabled", true);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("SubtitleDownloadEnabled", value);
+                SettingsProxy.Instance.SaveNode("SubtitleDownloadEnabled", value);
             }
         }
 
@@ -271,31 +271,31 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode("SubtitleMinimumMovieDuration", 20 /* 20 minutes */);
+                return SettingsProxy.Instance.ReadNode("SubtitleMinimumMovieDuration", 20 /* 20 minutes */);
             }
 
             set
             {
-                PersistenceProxy.SaveNode("SubtitleMinimumMovieDuration", value);
+                SettingsProxy.Instance.SaveNode("SubtitleMinimumMovieDuration", value);
             }
         }
 
         public static CddaInfoSource AudioCdInfoSource
         {
-            get { return PersistenceProxy.ReadNode("AudioCdInfoSource", CddaInfoSource.CdText_Cddb, false); }
-            set { PersistenceProxy.SaveNode("AudioCdInfoSource", value, false); }
+            get { return SettingsProxy.Instance.ReadNode("AudioCdInfoSource", CddaInfoSource.CdText_Cddb); }
+            set { SettingsProxy.Instance.SaveNode("AudioCdInfoSource", value); }
         }
 
         public static string CddbServerName
         {
-            get { return PersistenceProxy.ReadNode("CddbServerName", "freedb.freedb.org", false); }
-            set { PersistenceProxy.SaveNode("CddbServerName", value, false); }
+            get { return SettingsProxy.Instance.ReadNode("CddbServerName", "freedb.freedb.org"); }
+            set { SettingsProxy.Instance.SaveNode("CddbServerName", value); }
         }
 
         public static int CddbServerPort
         {
-            get { return PersistenceProxy.ReadNode("CddbServerPort", 8880, false); }
-            set { PersistenceProxy.SaveNode("CddbServerPort", value, false); }
+            get { return SettingsProxy.Instance.ReadNode("CddbServerPort", 8880); }
+            set { SettingsProxy.Instance.SaveNode("CddbServerPort", value); }
         }
 
         #endregion
@@ -304,15 +304,15 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         public static string SubtitleDownloadURIs
         {
-            get { return PersistenceProxy.ReadNode("SubtitleDownloadURIs", DefaultSubtitleURIs); }
-            set { PersistenceProxy.SaveNode("SubtitleDownloadURIs", value); }
+            get { return SettingsProxy.Instance.ReadNode("SubtitleDownloadURIs", DefaultSubtitleURIs); }
+            set { SettingsProxy.Instance.SaveNode("SubtitleDownloadURIs", value); }
         }
 
         public static List<string> GetFavoriteFolders(string favFoldersHiveName)
         {
             List<string> favoriteFolders = new List<string>();
 
-            string str = PersistenceProxy.ReadNode(favFoldersHiveName, string.Empty);
+            string str = SettingsProxy.Instance.ReadNode(favFoldersHiveName, string.Empty);
             if (!string.IsNullOrEmpty(str))
             {
                 string[] favFolders = StringUtils.ToStringArray(str, '?');
@@ -331,7 +331,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             if (favFolders == null)
                 favFolders = string.Empty;
 
-            PersistenceProxy.SaveNode(favFoldersHiveName, favFolders);
+            SettingsProxy.Instance.SaveNode(favFoldersHiveName, favFolders);
         }
 
         public static bool AddToFavoriteFolders(string path)
@@ -354,14 +354,14 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 if (_useLinkedFiles.HasValue)
                     return _useLinkedFiles.Value;
 
-                _useLinkedFiles = (PersistenceProxy.ReadNode("UseLinkedFiles", 1) != 0);
+                _useLinkedFiles = (SettingsProxy.Instance.ReadNode("UseLinkedFiles", 1) != 0);
 
                 return _useLinkedFiles.Value;
             }
             set
             {
                 _useLinkedFiles = value;
-                PersistenceProxy.SaveNode("UseLinkedFiles", value ? 1 : 0);
+                SettingsProxy.Instance.SaveNode("UseLinkedFiles", value ? 1 : 0);
             }
         }
 
@@ -376,7 +376,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                     try
                     {
-                        string st = PersistenceProxy.ReadNode("LinkedFiles", DefaultLinkedFiles);
+                        string st = SettingsProxy.Instance.ReadNode("LinkedFiles", DefaultLinkedFiles);
                         string[] pairs = StringUtils.ToStringArray(st, '\\');
                         if (pairs != null && pairs.Length > 0)
                         {
@@ -424,7 +424,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                         str = str.Trim('\\').Trim('/');
 
-                        PersistenceProxy.SaveNode("LinkedFiles", str);
+                        SettingsProxy.Instance.SaveNode("LinkedFiles", str);
                     }
 
                     _table = value;
@@ -473,12 +473,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "ExplorerLaunchType", "EnqueueFiles");
+                return SettingsProxy.Instance.ReadNode(true, "ExplorerLaunchType", "EnqueueFiles");
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "ExplorerLaunchType", value);
+                SettingsProxy.Instance.SaveNode(true, "ExplorerLaunchType", value);
             }
         }
 
@@ -486,12 +486,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LastBalance", 0);
+                return SettingsProxy.Instance.ReadNode(true, "LastBalance", 0);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LastBalance", value);
+                SettingsProxy.Instance.SaveNode(true, "LastBalance", value);
             }
         }
 
@@ -499,12 +499,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LastVolume", 5000);
+                return SettingsProxy.Instance.ReadNode(true, "LastVolume", 5000);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LastVolume", value);
+                SettingsProxy.Instance.SaveNode(true, "LastVolume", value);
             }
         }
 
@@ -512,12 +512,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LastFilterIndex", 0);
+                return SettingsProxy.Instance.ReadNode(true, "LastFilterIndex", 0);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LastFilterIndex", value);
+                SettingsProxy.Instance.SaveNode(true, "LastFilterIndex", value);
             }
         }
 
@@ -525,12 +525,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LastOpenedFolder", PathUtils.CurrentDir);
+                return SettingsProxy.Instance.ReadNode(true, "LastOpenedFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LastOpenedFolder", value);
+                SettingsProxy.Instance.SaveNode(true, "LastOpenedFolder", value);
             }
         }
 
@@ -538,12 +538,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "PL_LastFilterIndex", 0);
+                return SettingsProxy.Instance.ReadNode(true, "PL_LastFilterIndex", 0);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "PL_LastFilterIndex", value);
+                SettingsProxy.Instance.SaveNode(true, "PL_LastFilterIndex", value);
             }
         }
 
@@ -551,12 +551,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "PL_LastOpenedFolder", PathUtils.CurrentDir);
+                return SettingsProxy.Instance.ReadNode(true, "PL_LastOpenedFolder", PathUtils.CurrentDir);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "PL_LastOpenedFolder", value);
+                SettingsProxy.Instance.SaveNode(true, "PL_LastOpenedFolder", value);
             }
         }
 
@@ -566,12 +566,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "LoopPlay", false);
+                return SettingsProxy.Instance.ReadNode(true, "LoopPlay", false);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "LoopPlay", value);
+                SettingsProxy.Instance.SaveNode(true, "LoopPlay", value);
             }
         }
 
@@ -579,12 +579,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(false, "XFade", false);
+                return SettingsProxy.Instance.ReadNode(false, "XFade", false);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(false, "XFade", value);
+                SettingsProxy.Instance.SaveNode(false, "XFade", value);
             }
         }
 
@@ -592,12 +592,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(false, "XFadeLength", 10);
+                return SettingsProxy.Instance.ReadNode(false, "XFadeLength", 10);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(false, "XFadeLength", value);
+                SettingsProxy.Instance.SaveNode(false, "XFadeLength", value);
             }
         }
 
@@ -605,13 +605,13 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                double val = PersistenceProxy.ReadNode(false, "XFadeAnticipationPercentage", 85);
+                double val = SettingsProxy.Instance.ReadNode(false, "XFadeAnticipationPercentage", 85);
                 return (int)Math.Min(99, Math.Max(val, 1));
             }
 
             set
             {
-                PersistenceProxy.SaveNode(false, "XFadeAnticipationPercentage", value);
+                SettingsProxy.Instance.SaveNode(false, "XFadeAnticipationPercentage", value);
             }
         }
 
@@ -619,12 +619,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(false, "XFadeProfile", 0);
+                return SettingsProxy.Instance.ReadNode(false, "XFadeProfile", 0);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(false, "XFadeProfile", value);
+                SettingsProxy.Instance.SaveNode(false, "XFadeProfile", value);
             }
         }
 
@@ -632,11 +632,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "PlaylistEventHandler", 0);
+                return SettingsProxy.Instance.ReadNode(true, "PlaylistEventHandler", 0);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "PlaylistEventHandler", value);
+                SettingsProxy.Instance.SaveNode(true, "PlaylistEventHandler", value);
             }
         }
 
@@ -644,11 +644,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "PlaylistEventData", string.Empty);
+                return SettingsProxy.Instance.ReadNode(true, "PlaylistEventData", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "PlaylistEventData", value);
+                SettingsProxy.Instance.SaveNode(true, "PlaylistEventData", value);
             }
         }
 
@@ -657,11 +657,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "ScheduledEventHandler", 0);
+                return SettingsProxy.Instance.ReadNode(true, "ScheduledEventHandler", 0);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "ScheduledEventHandler", value);
+                SettingsProxy.Instance.SaveNode(true, "ScheduledEventHandler", value);
             }
         }
 
@@ -669,11 +669,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "ScheduledEventTime", new TimeSpan(0, 0, 0));
+                return SettingsProxy.Instance.ReadNode(true, "ScheduledEventTime", new TimeSpan(0, 0, 0));
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "ScheduledEventTime", value);
+                SettingsProxy.Instance.SaveNode(true, "ScheduledEventTime", value);
             }
         }
 
@@ -681,11 +681,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "ScheduledEventDays", 0);
+                return SettingsProxy.Instance.ReadNode(true, "ScheduledEventDays", 0);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "ScheduledEventDays", value);
+                SettingsProxy.Instance.SaveNode(true, "ScheduledEventDays", value);
             }
         }
 
@@ -693,11 +693,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "EnableScheduledEvent", false);
+                return SettingsProxy.Instance.ReadNode(true, "EnableScheduledEvent", false);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "EnableScheduledEvent", value);
+                SettingsProxy.Instance.SaveNode(true, "EnableScheduledEvent", value);
             }
         }
 
@@ -705,11 +705,11 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "SchedulerWaitTimerProceed", 2);
+                return SettingsProxy.Instance.ReadNode(true, "SchedulerWaitTimerProceed", 2);
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "SchedulerWaitTimerProceed", value);
+                SettingsProxy.Instance.SaveNode(true, "SchedulerWaitTimerProceed", value);
             }
         }
 
@@ -719,12 +719,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "MediaStateNotificationsEnabled", true);
+                return SettingsProxy.Instance.ReadNode(true, "MediaStateNotificationsEnabled", true);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "MediaStateNotificationsEnabled", value);
+                SettingsProxy.Instance.SaveNode(true, "MediaStateNotificationsEnabled", value);
             }
         }
 
@@ -732,12 +732,12 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadNode(true, "SubDownloadedNotificationsEnabled", true);
+                return SettingsProxy.Instance.ReadNode(true, "SubDownloadedNotificationsEnabled", true);
             }
 
             set
             {
-                PersistenceProxy.SaveNode(true, "SubDownloadedNotificationsEnabled", value);
+                SettingsProxy.Instance.SaveNode(true, "SubDownloadedNotificationsEnabled", value);
             }
         }
 
@@ -747,7 +747,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             get
             {
                 if (IsPlayer)
-                    return PersistenceProxy.ReadNode(true, "FullScreenOn", false);
+                    return SettingsProxy.Instance.ReadNode(true, "FullScreenOn", false);
 
                 return false;
             }
@@ -755,7 +755,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             set
             {
                 if (IsPlayer)
-                    PersistenceProxy.SaveNode(true, "FullScreenOn", value);
+                    SettingsProxy.Instance.SaveNode(true, "FullScreenOn", value);
             }
         }
 
@@ -765,7 +765,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "OnlineContentBrowser_WindowLocation", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "OnlineContentBrowser_WindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         return (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -777,7 +777,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 Point ptFallback = new Point(100, 100);
 
-                PersistenceProxy.SaveNode(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+                SettingsProxy.Instance.SaveNode(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
 
                 return ptFallback;
             }
@@ -785,7 +785,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "OnlineContentBrowser_WindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -797,7 +797,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 Size size = new Size(800, 600);
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "OnlineContentBrowser_WindowSize", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "OnlineContentBrowser_WindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -812,7 +812,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "OnlineContentBrowser_WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "OnlineContentBrowser_WindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -824,7 +824,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "DetachedWindowLocation", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "DetachedWindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         return (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -836,7 +836,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 Point ptFallback = new Point(100, 100);
 
-                PersistenceProxy.SaveNode(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+                SettingsProxy.Instance.SaveNode(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
 
                 return ptFallback;
             }
@@ -844,7 +844,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "DetachedWindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -856,7 +856,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 Size size = new Size(800, 600);
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "DetachedWindowSize", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "DetachedWindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -871,7 +871,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "DetachedWindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "DetachedWindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -883,7 +883,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 FormWindowState normal = FormWindowState.Normal;
                 try
                 {
-                    normal = (FormWindowState)PersistenceProxy.ReadNode(true, "DetachedWindowState", 0);
+                    normal = (FormWindowState)SettingsProxy.Instance.ReadNode(true, "DetachedWindowState", 0);
                 }
                 catch
                 {
@@ -892,7 +892,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "DetachedWindowState", (int)value);
+                SettingsProxy.Instance.SaveNode(true, "DetachedWindowState", (int)value);
             }
         }
 
@@ -903,7 +903,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "SA_WindowLocation", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "SA_WindowLocation", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         return (Point)new PointConverter().ConvertFromInvariantString(str);
@@ -915,7 +915,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
                 Point ptFallback = new Point(100, 100);
 
-                PersistenceProxy.SaveNode(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
+                SettingsProxy.Instance.SaveNode(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(ptFallback));
 
                 return ptFallback;
             }
@@ -924,7 +924,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.X >= 0) && (value.Y >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "SA_WindowLocation", new PointConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -936,7 +936,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 Size size = new Size(800, 600);
                 try
                 {
-                    string str = PersistenceProxy.ReadNode(true, "SA_WindowSize", string.Empty);
+                    string str = SettingsProxy.Instance.ReadNode(true, "SA_WindowSize", string.Empty);
                     if (!string.IsNullOrEmpty(str))
                     {
                         size = (Size)new SizeConverter().ConvertFromInvariantString(str);
@@ -951,7 +951,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             {
                 if ((value.Width >= 0) && (value.Height >= 0))
                 {
-                    PersistenceProxy.SaveNode(true, "SA_WindowSize", new SizeConverter().ConvertToInvariantString(value));
+                    SettingsProxy.Instance.SaveNode(true, "SA_WindowSize", new SizeConverter().ConvertToInvariantString(value));
                 }
             }
         }
@@ -963,7 +963,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 FormWindowState normal = FormWindowState.Normal;
                 try
                 {
-                    normal = (FormWindowState)PersistenceProxy.ReadNode(true, "SA_WindowState", 0);
+                    normal = (FormWindowState)SettingsProxy.Instance.ReadNode(true, "SA_WindowState", 0);
                 }
                 catch
                 {
@@ -972,7 +972,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
             }
             set
             {
-                PersistenceProxy.SaveNode(true, "SA_WindowState", (int)value);
+                SettingsProxy.Instance.SaveNode(true, "SA_WindowState", (int)value);
             }
         }
 
@@ -982,20 +982,20 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         public static string ShoutCastApiDevID
         {
-            get { return PersistenceProxy.ReadNode("ShoutCastApiDevID", string.Empty); }
-            set { PersistenceProxy.SaveNode("ShoutCastApiDevID", value); }
+            get { return SettingsProxy.Instance.ReadNode("ShoutCastApiDevID", string.Empty); }
+            set { SettingsProxy.Instance.SaveNode("ShoutCastApiDevID", value); }
         }
 
         public static string ShoutCastSearchBaseURL
         {
-            get { return PersistenceProxy.ReadNode("ShoutCastSearchBaseURL", "http://api.shoutcast.com/station"); }
-            set { PersistenceProxy.SaveNode("ShoutCastSearchBaseURL", value); }
+            get { return SettingsProxy.Instance.ReadNode("ShoutCastSearchBaseURL", "http://api.shoutcast.com/station"); }
+            set { SettingsProxy.Instance.SaveNode("ShoutCastSearchBaseURL", value); }
         }
 
         public static string ShoutCastTuneInBaseURL
         {
-            get { return PersistenceProxy.ReadNode("ShoutCastTuneInBaseURL", "http://yp.shoutcast.com"); }
-            set { PersistenceProxy.SaveNode("ShoutCastTuneInBaseURL", value); }
+            get { return SettingsProxy.Instance.ReadNode("ShoutCastTuneInBaseURL", "http://yp.shoutcast.com"); }
+            set { SettingsProxy.Instance.SaveNode("ShoutCastTuneInBaseURL", value); }
         }
 
         #endregion
@@ -1004,14 +1004,14 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         public static dz_track_quality_t DeezerTrackQuality
         {
-            get { return PersistenceProxy.ReadNode("DeezerTrackQuality", dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY); }
-            set { PersistenceProxy.SaveNode("DeezerTrackQuality", value); }
+            get { return SettingsProxy.Instance.ReadNode("DeezerTrackQuality", dz_track_quality_t.DZ_TRACK_QUALITY_CDQUALITY); }
+            set { SettingsProxy.Instance.SaveNode("DeezerTrackQuality", value); }
         }
 
         public static string DeezerUserAccessToken
         {
-            get { return PersistenceProxy.ReadNode("DeezerUserAccessToken", string.Empty); }
-            set { PersistenceProxy.SaveNode("DeezerUserAccessToken", value); }
+            get { return SettingsProxy.Instance.ReadNode("DeezerUserAccessToken", string.Empty); }
+            set { SettingsProxy.Instance.SaveNode("DeezerUserAccessToken", value); }
         }
 
         public static bool DeezerHasValidConfig
@@ -1025,8 +1025,8 @@ namespace OPMedia.Runtime.ProTONE.Configuration
 
         public static bool DeezerUseServicesForFileMetadata
         {
-            get { return PersistenceProxy.ReadNode("DeezerUseServicesForFileMetadata", false); }
-            set { PersistenceProxy.SaveNode("DeezerUseServicesForFileMetadata", value); }
+            get { return SettingsProxy.Instance.ReadNode("DeezerUseServicesForFileMetadata", false); }
+            set { SettingsProxy.Instance.SaveNode("DeezerUseServicesForFileMetadata", value); }
         }
 
         #endregion
@@ -1036,14 +1036,14 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                string str = PersistenceProxy.ReadNode(true, "Media_Browser_History_Local", string.Empty);
+                string str = SettingsProxy.Instance.ReadNode(true, "Media_Browser_History_Local", string.Empty);
                 return StringUtils.ToStringList(str, '|');
             }
 
             set
             {
                 string str = StringUtils.FromStringList(value, '|');
-                PersistenceProxy.SaveNode(true, "Media_Browser_History_Local", str);
+                SettingsProxy.Instance.SaveNode(true, "Media_Browser_History_Local", str);
             }
         }
 
@@ -1051,14 +1051,14 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                string str = PersistenceProxy.ReadNode(true, "Media_Browser_History_Shoutcast", string.Empty);
+                string str = SettingsProxy.Instance.ReadNode(true, "Media_Browser_History_Shoutcast", string.Empty);
                 return StringUtils.ToStringList(str, '|');
             }
 
             set
             {
                 string str = StringUtils.FromStringList(value, '|');
-                PersistenceProxy.SaveNode(true, "Media_Browser_History_Shoutcast", str);
+                SettingsProxy.Instance.SaveNode(true, "Media_Browser_History_Shoutcast", str);
             }
         }
 
@@ -1066,14 +1066,14 @@ namespace OPMedia.Runtime.ProTONE.Configuration
         {
             get
             {
-                string str = PersistenceProxy.ReadNode(true, "Media_Browser_History_Deezer", string.Empty);
+                string str = SettingsProxy.Instance.ReadNode(true, "Media_Browser_History_Deezer", string.Empty);
                 return StringUtils.ToStringList(str, '|');
             }
 
             set
             {
                 string str = StringUtils.FromStringList(value, '|');
-                PersistenceProxy.SaveNode(true, "Media_Browser_History_Deezer", str);
+                SettingsProxy.Instance.SaveNode(true, "Media_Browser_History_Deezer", str);
             }
         }
         #endregion
@@ -1122,7 +1122,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                 lock (_signalAnalisysFunctionsLock)
                 {
                     if (_signalAnalisysFunctions == null)
-                        _signalAnalisysFunctions = (SignalAnalisysFunction)PersistenceProxy.ReadNode(true, "SignalAnalisysFunctions",
+                        _signalAnalisysFunctions = (SignalAnalisysFunction)SettingsProxy.Instance.ReadNode(true, "SignalAnalisysFunctions",
                             (int)SignalAnalisysFunction.All);
 
                     if (_signalAnalisysFunctions == null)
@@ -1139,7 +1139,7 @@ namespace OPMedia.Runtime.ProTONE.Configuration
                     if (_signalAnalisysFunctions == null || _signalAnalisysFunctions.Value != value)
                     {
                         _signalAnalisysFunctions = value;
-                        PersistenceProxy.SaveNode(true, "SignalAnalisysFunctions", (int)value);
+                        SettingsProxy.Instance.SaveNode(true, "SignalAnalisysFunctions", (int)value);
                     }
                 }
             }

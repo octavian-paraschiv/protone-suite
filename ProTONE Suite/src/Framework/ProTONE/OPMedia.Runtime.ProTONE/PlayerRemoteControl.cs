@@ -37,7 +37,7 @@ namespace OPMedia.Runtime.ProTONE
             }
 
             string cmd = BasicCommand.Create(cmdType, args).ToString();
-            PersistenceProxy.SendIpcEvent(BasicCommand.EventName, cmd);
+            SettingsProxy.Instance.SendIpcEvent(BasicCommand.EventName, cmd);
         }
 
         public static bool IsPlayerRunning()

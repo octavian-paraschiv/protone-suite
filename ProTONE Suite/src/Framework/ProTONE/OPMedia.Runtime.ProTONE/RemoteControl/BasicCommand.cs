@@ -61,7 +61,7 @@ namespace OPMedia.Runtime.ProTONE.RemoteControl
             if (cmd.RequiresAnswer)
             {
                 string response = RunExtendedCommand(cmd);
-                PersistenceProxy.SendIpcEvent(BasicCommand.ResponseEventName, response);
+                SettingsProxy.Instance.SendIpcEvent(BasicCommand.ResponseEventName, response);
                 return;
             }
 
