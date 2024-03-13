@@ -67,8 +67,8 @@ namespace OPMedia.Core.Configuration
 
         static Dictionary<string, Language> _languages = new Dictionary<string, Language>();
 
-        static string _skinType = string.Empty;
-        static string _languageId = string.Empty;
+        // static string _skinType = string.Empty;
+        // static string _languageId = string.Empty;
 
         public const string UriBase = "http://ocpa.ro/protone/";
 
@@ -129,17 +129,9 @@ namespace OPMedia.Core.Configuration
             _languages.Add("de", LanguageHelper.Lookup("de"));
             _languages.Add("fr", LanguageHelper.Lookup("fr"));
             _languages.Add("ro", LanguageHelper.Lookup("ro"));
-
-            if (IsAppUsingPersistence)
-            {
-                _skinType = SettingsProxy.Instance.ReadNode("SkinType", UnconfiguredThemeName);
-
-                string defLangId = Regedit.InstallLanguageID;
-                _languageId = SettingsProxy.Instance.ReadNode("LanguageID", defLangId);
-            }
         }
 
-        public static void OnSettingsChanged(string nodeId, string context, object content)
+        public static void OnSettingsChanged()
         {
             if (OpMediaApplication.AllowRealTimeGUIUpdate)
             {
@@ -147,30 +139,12 @@ namespace OPMedia.Core.Configuration
                 {
                     try
                     {
-                        switch (nodeId)
+                        MainThread.Post(_ =>
                         {
-                            case "LanguageID":
-                                {
-                                    string langId = content as string;
-                                    if (langId != _languageId)
-                                    {
-                                        _languageId = langId;
-                                        MainThread.Post((c) => Translator.SetInterfaceLanguage(_languageId));
-                                    }
-                                }
-                                break;
-
-                            case "SkinType":
-                                {
-                                    string skinType = content as string;
-                                    if (skinType != _skinType)
-                                    {
-                                        _skinType = skinType;
-                                        MainThread.Post((c) => EventDispatch.DispatchEvent(EventNames.ThemeUpdated));
-                                    }
-                                }
-                                break;
-                        }
+                            Translator.SetInterfaceLanguage(LanguageID);
+                            EventDispatch.DispatchEvent(EventNames.PerformTranslation);
+                            EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
+                        });
                     }
                     catch (Exception ex)
                     {
@@ -293,21 +267,19 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
+
                 if (OpMediaApplication.AllowRealTimeGUIUpdate)
-                    return _skinType;
+                    return SettingsProxy.Instance.ReadNode("SkinType", UnconfiguredThemeName);
 
                 return UnconfiguredThemeName;
             }
 
             set
             {
-                if (OpMediaApplication.AllowRealTimeGUIUpdate && value != _skinType)
+                if (OpMediaApplication.AllowRealTimeGUIUpdate)
                 {
-                    _skinType = value;
-
                     Logger.LogTrace("AllowRealTimeGUIUpdate => PersistenceProxy.SaveNode(SkinType) called ...");
                     SettingsProxy.Instance.SaveNode("SkinType", value);
-
                     EventDispatch.DispatchEvent(EventNames.ThemeUpdated);
                 }
             }
@@ -317,17 +289,13 @@ namespace OPMedia.Core.Configuration
         {
             get
             {
-                return _languageId;
+                return SettingsProxy.Instance.ReadNode("LanguageID", "en");
             }
 
             set
             {
-                if (value != _languageId)
-                {
-                    _languageId = value;
-                    SettingsProxy.Instance.SaveNode("LanguageID", value);
-                    Translator.SetInterfaceLanguage(_languageId);
-                }
+                SettingsProxy.Instance.SaveNode("LanguageID", value);
+                Translator.SetInterfaceLanguage(value);
             }
         }
 

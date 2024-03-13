@@ -1,3 +1,4 @@
+using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
@@ -70,6 +71,7 @@ namespace OPMedia.ProTONE
                     }
                     finally
                     {
+                        SettingsProxy.Instance.SaveSettings();
                         SingleInstanceApplication.Stop();
                     }
                 }
@@ -77,6 +79,8 @@ namespace OPMedia.ProTONE
             catch (Exception ex)
             {
                 ErrorDispatcher.DispatchFatalError(ex);
+                SettingsProxy.Instance.SaveSettings();
+                LoggedApplication.Stop();
             }
         }
 

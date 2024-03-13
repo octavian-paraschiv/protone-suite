@@ -92,9 +92,6 @@ Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe"; DestDir: "{app}"; Flags: replac
 Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.VideoWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
-; PersistenceService
-Source: "{#BINDIR}\OPMedia.PersistenceService.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-;--------------------------------------
 ; OPMedia DLL's
 Source: "{#BINDIR}\OPMedia.Addons.Builtin.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 Source: "{#BINDIR}\OPMedia.Core.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -114,11 +111,6 @@ Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-en.json"; DestDir: "{app}\T
 Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-de.json"; DestDir: "{app}\Translations"
 Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-ro.json"; DestDir: "{app}\Translations"
 Source: "{#BINDIR}\Translations\OPMedia.MediaLibrary-fr.json"; DestDir: "{app}\Translations"
-;--------------------------------------
-; Database and support DLL's
-Source: "{#BINDIR}\Persistence.db3"; DestDir: "{app}"; Flags: touch onlyifdoesntexist uninsneveruninstall
-Source: "{#BINDIR}\sqlite3.x86.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\sqlite3.x64.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
 ; Catalog templates
 Source: "{#BINDIR}\Templates\Catalog\Default Catalog"; DestDir: "{app}\Templates\Catalog"
@@ -210,7 +202,6 @@ Source: "{#BINDIR}\OPMedia.AudioCdWorker.exe.config"; DestDir: "{app}"; Flags: r
 Source: "{#BINDIR}\OPMedia.AudioWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.DeezerWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.MediaLibrary.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
-Source: "{#BINDIR}\OPMedia.PersistenceService.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.ProTONE.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace

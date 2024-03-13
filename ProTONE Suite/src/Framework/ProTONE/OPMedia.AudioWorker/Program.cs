@@ -6,8 +6,11 @@ namespace OPMedia.AudioWorker
     {
         static void Main(string[] args)
         {
-            AudioFilePlayer player = new AudioFilePlayer();
-            Worker.Run(player);
+            if (Utility.Program.Main(args) == 0)
+            {
+                AudioFilePlayer player = new AudioFilePlayer();
+                Worker.Run(player);
+            }
         }
     }
 }

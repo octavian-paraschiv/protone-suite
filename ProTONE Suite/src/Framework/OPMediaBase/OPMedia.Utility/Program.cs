@@ -6,22 +6,30 @@ using System.Threading;
 
 namespace OPMedia.Utility
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static int Main(string[] args)
         {
             if (args?.Length > 0)
             {
                 if (args[0].ToUpperInvariant() == "-KILLALL")
                 {
-                    var res = KillAllApps(0);
+                    try
+                    {
+                        var res = KillAllApps(0);
 
-                    if (args?.Length > 1 && args[1].ToUpperInvariant() == "-REDIRECTTOFILE")
-                        File.WriteAllText(".\\OPMedia.Utility.res", res);
-                    else
-                        Console.WriteLine(res);
+                        if (args?.Length > 1 && args[1].ToUpperInvariant() == "-REDIRECTTOFILE")
+                            File.WriteAllText(".\\OPMedia.RunningApps.res", res);
+                        else
+                            Console.WriteLine(res);
+                    }
+                    catch { }
+
+                    return 1;
                 }
             }
+
+            return 0;
         }
 
         private static string KillAllApps(int level)
@@ -67,14 +75,22 @@ namespace OPMedia.Utility
         {
             List<Process> opmediaProcs = new List<Process>();
             var procs = Process.GetProcesses();
+
             if (procs?.Length > 0)
             {
+                var thisProcess = Process.GetCurrentProcess();
+
                 foreach (var proc in procs)
                 {
+                    // Exclude self
+                    if (proc.Id == thisProcess.Id)
+                        continue;
+
                     if (proc?.ProcessName?.Length > 0)
                     {
                         var procName = proc.ProcessName.ToUpperInvariant();
-                        if (procName.Contains("OPMEDIA") && !procName.Contains("OPMEDIA.UTILITY") && !HasExited(proc))
+
+                        if (procName.Contains("OPMEDIA") && !HasExited(proc))
                             opmediaProcs.Add(proc);
                     }
                 }

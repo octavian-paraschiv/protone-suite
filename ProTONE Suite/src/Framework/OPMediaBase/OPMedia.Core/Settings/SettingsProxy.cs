@@ -1,4 +1,8 @@
-﻿using OPMedia.Core.Utilities;
+﻿using OPMedia.Core.Configuration;
+using OPMedia.Core.Logging;
+using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Utilities;
+using System;
 using System.IO;
 
 namespace OPMedia.Core
@@ -19,54 +23,79 @@ namespace OPMedia.Core
         static readonly string AppSettingsStorePath = $"{SettingsFolder}/{ApplicationInfo.ApplicationName}.json";
         static readonly string SuiteSettingsStorePath = $"{SettingsFolder}/{Constants.SuiteName}.json";
 
+        private DictionaryFile _appSettingsFile;
+        private DictionaryFile _suiteSettingsFile;
+
         public static SettingsProxy Instance { get; } = new SettingsProxy();
 
         private SettingsProxy()
         {
+            _appSettingsFile = new DictionaryFile(AppSettingsStorePath);
+            _appSettingsFile.DictionaryUpdated += () => AppConfig.OnSettingsChanged();
+
+            _suiteSettingsFile = new DictionaryFile(SuiteSettingsStorePath);
+            _suiteSettingsFile.DictionaryUpdated += () => AppConfig.OnSettingsChanged();
         }
 
         #region ReadNode
 
+        public T ReadNode<T>(string nodeId, T defaultValue) => ReadNode<T>(false, nodeId, defaultValue);
+
         public T ReadNode<T>(bool appScoped, string nodeId, T defaultValue)
         {
-            // TODO implement
-            return default(T);
+            T retVal = defaultValue;
+
+            try
+            {
+                string content = appScoped ? _appSettingsFile[nodeId] : _suiteSettingsFile[nodeId];
+
+                if (!string.IsNullOrEmpty(content))
+                {
+                    try
+                    {
+                        retVal = StringUtils.CastAs<T>(content, defaultValue);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogException(ex);
+                        retVal = defaultValue;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+                retVal = defaultValue;
+            }
+
+            return retVal;
         }
-
-        public T ReadNode<T>(string nodeId, T defaultValue)
-        {
-            // TODO implement
-            return default(T);
-
-        }
-
         #endregion
 
         #region SaveNode
 
+        public void SaveNode<T>(string nodeId, T content) => SaveNode<T>(false, nodeId, content);
+
         public void SaveNode<T>(bool appScoped, string nodeId, T content)
         {
-            // TODO implement
+            try
+            {
+                if (appScoped)
+                    _appSettingsFile[nodeId] = content?.ToString();
+                else
+                    _suiteSettingsFile[nodeId] = content?.ToString();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
         }
-
-        public void SaveNode<T>(string nodeId, T content)
-        {
-            // TODO implement
-        }
-
         #endregion
 
         #region DeleteNode
 
-        public void DeleteNode(bool appScoped, string nodeId)
-        {
-            // TODO implement
-        }
-
-        public void DeleteNode(string nodeId)
-        {
-            // TODO implement
-        }
+        public void DeleteNode(string nodeId) => DeleteNode(false, nodeId);
+        public void DeleteNode(bool appScoped, string nodeId) => SaveNode<string>(appScoped, nodeId, null);
 
         #endregion
 
@@ -110,6 +139,8 @@ namespace OPMedia.Core
 
         public void SaveSettings()
         {
+            _appSettingsFile?.SaveFile();
+            _suiteSettingsFile?.SaveFile();
         }
     }
 }

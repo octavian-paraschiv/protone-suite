@@ -7,98 +7,124 @@ using System.IO;
 
 namespace OPMedia.Core.TranslationSupport
 {
-    internal class Translation
-    {
-        public string Key { get; set; }
-        public string Value { get; set; }
-    }
+    public delegate void DictionaryUpdatedHandler();
 
-    internal class TranslationData
-    {
-        [JsonProperty("data")]
-        public List<Translation> Translations { get; set; }
-    }
-
-    public delegate void TranslationUpdatedHandler(string lang);
-
-    internal class TranslationFile
+    public class DictionaryFile
     {
         object _lock = new object();
-        Dictionary<string, string> _translations = new Dictionary<string, string>();
+        Dictionary<string, string> _nodes = new Dictionary<string, string>();
         FileSystemWatcher _fsw;
         string _filePath;
-        string _lang;
 
-        public event TranslationUpdatedHandler TranslationUpdated;
+        public event DictionaryUpdatedHandler DictionaryUpdated;
 
-        public Dictionary<string, string> Translations
+        public Dictionary<string, string> Nodes
         {
             get
             {
                 lock (_lock)
                 {
-                    return _translations;
+                    return _nodes;
                 }
             }
         }
 
-        public string this[string tag]
+        public string this[string key]
         {
             get
             {
                 lock (_lock)
                 {
-                    if (_translations.ContainsKey(tag))
-                        return _translations[tag];
+                    if (_nodes.TryGetValue(key, out string val))
+                        return val;
 
                     return null;
                 }
             }
-        }
 
-        public TranslationFile(string lang)
-        {
-            _lang = lang;
-
-            FileInfo fi = new FileInfo($"{AppConfig.InstallationPath}/Translations/{ApplicationInfo.ApplicationName}-{lang}.json");
-            _filePath = fi.FullName;
-
-            if (ReadFile())
+            set
             {
-                _fsw = new FileSystemWatcher(fi.DirectoryName, "*.json");
-                _fsw.Changed += _fsw_Changed;
-                _fsw.EnableRaisingEvents = true;
+                lock (_lock)
+                {
+                    if (value != null)
+                    {
+                        if (_nodes.ContainsKey(key))
+                            _nodes[key] = value;
+                        else
+                            _nodes.Add(key, value);
+                    }
+                    else if (_nodes.ContainsKey(key))
+                    {
+                        _nodes.Remove(key);
+                    }
+                }
             }
         }
 
-        private void _fsw_Changed(object sender, FileSystemEventArgs e)
+        public DictionaryFile(string path)
         {
-            if (string.Equals(e.FullPath, _filePath, StringComparison.OrdinalIgnoreCase))
-                ReadFile();
+            FileInfo fi = new FileInfo(path);
+            _filePath = fi.FullName;
+
+            ReadFile();
+
+            _fsw = new FileSystemWatcher(fi.DirectoryName, $"*{fi.Extension}"); // fi.Extension includes the leading dot character (.)
+            _fsw.Changed += OnFileChanged;
+            _fsw.Created += OnFileChanged;
+            _fsw.Deleted += OnFileChanged;
+            _fsw.EnableRaisingEvents = true;
+        }
+
+        private void _fsw_Deleted(object sender, FileSystemEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _fsw_Created(object sender, FileSystemEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnFileChanged(object sender, FileSystemEventArgs e)
+        {
+            switch (e.ChangeType)
+            {
+                case WatcherChangeTypes.Created:
+                case WatcherChangeTypes.Changed:
+                    {
+                        if (string.Equals(e.FullPath, _filePath, StringComparison.OrdinalIgnoreCase))
+                            ReadFile();
+                    }
+                    break;
+
+                case WatcherChangeTypes.Deleted:
+                    {
+                        lock (_lock)
+                        {
+                            _nodes.Clear();
+                        }
+
+                        DictionaryUpdated?.Invoke();
+                    }
+                    break;
+            }
         }
 
         private bool ReadFile()
         {
-            Dictionary<string, string> translations = null;
             try
             {
                 var content = File.ReadAllText(_filePath);
-                translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+                var nodes = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
 
-                if (translations?.Count > 0)
+                if (nodes?.Count > 0)
                 {
                     lock (_lock)
                     {
-                        foreach (var x in translations)
-                        {
-                            if (!_translations.ContainsKey(x.Key))
-                                _translations.Add(x.Key, x.Value);
-                            else
-                                _translations[x.Key] = x.Value;
-                        }
+                        _nodes = new Dictionary<string, string>(nodes);
                     }
 
-                    TranslationUpdated?.Invoke(_lang);
+                    DictionaryUpdated?.Invoke();
                     return true;
                 }
 
@@ -108,6 +134,36 @@ namespace OPMedia.Core.TranslationSupport
                 Logger.LogException(ex);
             }
             return false;
+        }
+
+        public bool SaveFile()
+        {
+            try
+            {
+                var content = JsonConvert.SerializeObject(Nodes, Formatting.Indented);
+                File.WriteAllText(_filePath, content);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+            }
+            return false;
+        }
+    }
+
+    public delegate void TranslationsUpdatedHandler(string lang);
+
+    public class TranslationsFile : DictionaryFile
+    {
+        string _lang;
+
+        public event TranslationsUpdatedHandler TranslationsUpdated;
+
+        public TranslationsFile(string lang)
+            : base($"{AppConfig.InstallationPath}/Translations/{ApplicationInfo.ApplicationName}-{lang}.json")
+        {
+            _lang = lang;
+            base.DictionaryUpdated += () => TranslationsUpdated?.Invoke(_lang);
         }
     }
 }

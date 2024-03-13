@@ -109,6 +109,8 @@ namespace OPMedia.UI
 
         void SettingsForm_HandleDestroyed(object sender, EventArgs e)
         {
+            SettingsProxy.Instance.SaveSettings();
+
             if (_restart)
             {
                 LoggedApplication.Restart();

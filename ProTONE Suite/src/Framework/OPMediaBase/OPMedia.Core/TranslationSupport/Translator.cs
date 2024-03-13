@@ -31,7 +31,7 @@ namespace OPMedia.Core.TranslationSupport
         #region Members
         static bool translate = true;
 
-        private static Dictionary<string, TranslationFile> _translations = new Dictionary<string, TranslationFile>();
+        private static Dictionary<string, DictionaryFile> _translations = new Dictionary<string, DictionaryFile>();
         #endregion
 
         static List<string> __knownUntranslatableStrings = new List<string>();
@@ -54,9 +54,9 @@ namespace OPMedia.Core.TranslationSupport
 
             AppConfig.SupportedUiLanguages.ToList().ForEach(c =>
             {
-                var tf = new TranslationFile(c.Part1);
-                tf.TranslationUpdated += Tf_TranslationUpdated;
-                if (tf?.Translations?.Count > 0)
+                var tf = new TranslationsFile(c.Part1);
+                tf.TranslationsUpdated += Tf_TranslationUpdated;
+                if (tf?.Nodes?.Count > 0)
                     _translations.Add(c.Part1, tf);
             });
         }
@@ -281,7 +281,7 @@ namespace OPMedia.Core.TranslationSupport
                 string lang = AppConfig.GetLanguage(_languageId).Part1;
                 if (_translations.ContainsKey(lang))
                 {
-                    foreach (var kvp in _translations[lang].Translations)
+                    foreach (var kvp in _translations[lang].Nodes)
                     {
                         retVal = retVal.Replace(kvp.Key, kvp.Value);
                     }

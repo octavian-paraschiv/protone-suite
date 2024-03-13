@@ -15,6 +15,7 @@
   <ItemGroup>
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Utility\OPMedia.Utility.csproj" />
 	<ProjectReference Include="..\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
   </ItemGroup>
 </Project>

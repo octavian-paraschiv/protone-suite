@@ -124,48 +124,60 @@ begin
 end;
 
 //--------------------------------------------------------------------------------
-function VerifyApplications() : Integer;
+function VerifyApplications(isInstall: Boolean) : Integer;
 var
-   ResFileName, ExeFileName: String;
-   ExecResults: AnsiString;   
+   RunningAppsFileName, ExeFileName: String;
+   RunningApps: AnsiString;   
    ResultCode: integer;
 
 begin
-  ExeFileName := ExpandConstant('{tmp}') + '\OPMedia.Utility.exe';
-  ResFileName := ExpandConstant('{tmp}') + '\OPMedia.Utility.res';
+
+  if (isInstall) then
+  begin
+    ExeFileName := ExpandConstant('{tmp}') + '\OPMedia.Utility.exe';
+    RunningAppsFileName := ExpandConstant('{tmp}') + '\OPMedia.RunningApps.res';
+  end
+  else
+  begin
+    ExeFileName := ExpandConstant('{app}') + '\OPMedia.AudioWorker.exe';
+    RunningAppsFileName := ExpandConstant('{app}') + '\OPMedia.RunningApps.res';
+  end;
 
   Exec(ExeFileName, '-killall -redirectToFile', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
 
-  if ( LoadStringFromFile(ResFileName, ExecResults) and ( Length(ExecResults) > 0 ) ) then 
+  if ( LoadStringFromFile(RunningAppsFileName, RunningApps) and ( Length(RunningApps) > 0 ) ) then 
   begin
-    result := MsgBox(FmtMessage(CustomMessage('AppsStillRunning'), [ Chr(13) + ExecResults + Chr(13) ]), mbError, MB_RETRYCANCEL);
+    result := MsgBox(FmtMessage(CustomMessage('AppsStillRunning'), [ Chr(13) + RunningApps + Chr(13) ]), mbError, MB_RETRYCANCEL);
     exit;
   end;
 
+  DeleteFile(RunningAppsFileName);
   result := IDOK;
 
 end;
 
 //--------------------------------------------------------------------------------
-function AreApplicationsStopped() : Boolean;
+function AreApplicationsStopped(isInstall: Boolean) : Boolean;
 var
    res: integer;
 begin
-   ExtractTemporaryFile('OPMedia.Utility.exe');    
-   res := VerifyApplications();
-   while(res = IDRETRY) do
-   begin
-    res := VerifyApplications();
-   end;
 
-   if (res = IDCANCEL) then
-   begin
+  if (isInstall) then
+    ExtractTemporaryFile('OPMedia.Utility.exe');
+       
+  res := VerifyApplications(isInstall);
+  while(res = IDRETRY) do
+  begin
+    res := VerifyApplications(isInstall);
+  end;
+
+  if (res = IDCANCEL) then
+  begin
     result := false;
     exit;
-   end;
+  end;
 
-   result := true;
-
+  result := true;
 end;
 
 
@@ -307,7 +319,7 @@ function InitializeSetup: Boolean;
 var
    res : integer;
 begin
-  if (AreApplicationsStopped = false) then
+  if (AreApplicationsStopped(true) = false) then
   begin
     result := false;
     exit;
@@ -323,7 +335,7 @@ function InitializeUninstall: Boolean;
 var
    res : integer;
 begin
-   if (AreApplicationsStopped = false) then
+   if (AreApplicationsStopped(false) = false) then
    begin
     result := false;
     exit;

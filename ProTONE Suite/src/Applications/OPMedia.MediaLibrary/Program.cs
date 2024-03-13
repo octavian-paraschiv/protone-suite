@@ -78,6 +78,7 @@ namespace OPMedia.MediaLibrary
             }
             finally
             {
+                SettingsProxy.Instance.SaveSettings();
                 LoggedApplication.Stop();
             }
         }
