@@ -11,15 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OPMediaBase", "OPMediaBase"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProTONE", "ProTONE", "{114014C8-9E85-476A-9BD3-036DE649D6CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EE48AD0-EB1A-46F0-BF87-2587913815BF}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\appveyor.yml = ..\..\appveyor.yml
-		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
-		..\..\prep_build.ps1 = ..\..\prep_build.ps1
-		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
-		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.MediaLibrary", "Applications\OPMedia.MediaLibrary\OPMedia.MediaLibrary.csproj", "{83EB55B7-DC25-4D02-B6A1-282D29033829}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.Addons.Builtin", "Extensions\OPMedia.Addons.Builtin\OPMedia.Addons.Builtin.csproj", "{6F8F065A-62A9-48D7-AADC-5E59CBCD1D3A}"
@@ -59,6 +50,19 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.VideoDVDWorker", "Workers\OPMedia.VideoDVDWorker\OPMedia.VideoDVDWorker.csproj", "{8E87F45C-57DE-41AD-8F65-048CA029D2CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.VideoWorker", "Workers\OPMedia.VideoWorker\OPMedia.VideoWorker.csproj", "{64B8CCAE-AE15-42F4-87EE-E8FC047194CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{1331FBC8-81F1-4200-BE01-E05CB47D3061}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\appveyor.yml = ..\..\appveyor.yml
+		..\..\prep_build.ps1 = ..\..\prep_build.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_install", "_install", "{34918DA1-B5BB-4FDA-94DB-A01E9EA033FD}"
+	ProjectSection(SolutionItems) = preProject
+		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
+		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
+		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
