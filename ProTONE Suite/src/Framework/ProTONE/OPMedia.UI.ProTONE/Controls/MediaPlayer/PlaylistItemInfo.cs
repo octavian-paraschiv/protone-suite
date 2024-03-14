@@ -5,6 +5,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.ShellSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.ProTONE.Properties;
 using OPMedia.UI.Themes;

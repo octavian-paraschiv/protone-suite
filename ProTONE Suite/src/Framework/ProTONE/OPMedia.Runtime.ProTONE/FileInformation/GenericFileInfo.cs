@@ -1,5 +1,6 @@
 ﻿using OPMedia.Core;
 using OPMedia.Runtime.FileInformation;
+using OPMedia.ShellSupport;
 
 
 namespace OPMedia.Runtime.ProTONE.FileInformation

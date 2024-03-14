@@ -7,6 +7,7 @@
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
   <ItemGroup>
 	  <Reference Include="System.Data.DataSetExtensions" />
@@ -20,63 +21,43 @@
 	  <DesignTime>True</DesignTime>
 	  <DependentUpon>CatalogDataset.xsd</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.cs">
-	  <SubType>Form</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.cs" />
 	<Compile Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.Designer.cs">
 	  <DependentUpon>CatalogFolderBrowserDialog.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.Designer.cs">
 	  <DependentUpon>ChangeEncodingPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\EncoderConfiguratorCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\EncoderConfiguratorCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\EncoderConfiguratorCtl.Designer.cs">
 	  <DependentUpon>EncoderConfiguratorCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\EncoderOptionsCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\EncoderOptionsCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\EncoderOptionsCtl.Designer.cs">
 	  <DependentUpon>EncoderOptionsCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.Designer.cs">
 	  <DependentUpon>Mp3EncoderOptionsCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\OggEncoderOptionsCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\OggEncoderOptionsCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\OggEncoderOptionsCtl.Designer.cs">
 	  <DependentUpon>OggEncoderOptionsCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\WavEncoderOptionsCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\WavEncoderOptionsCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\WavEncoderOptionsCtl.Designer.cs">
 	  <DependentUpon>WavEncoderOptionsCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.cs" />
 	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.Designer.cs">
 	  <DependentUpon>WizCdRipperStep2.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.cs" />
 	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.Designer.cs">
 	  <DependentUpon>WizCdRipperStep1.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.cs" />
 	<Compile Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.Designer.cs">
 	  <DependentUpon>WmaEncoderOptionsCtl.cs</DependentUpon>
 	</Compile>
@@ -85,159 +66,103 @@
 	  <DesignTime>True</DesignTime>
 	  <DependentUpon>Resources.resx</DependentUpon>
 	</Compile>
-	<Compile Update="Property\Bookmarks\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\Bookmarks\AddonPanel.cs" />
 	<Compile Update="Property\Bookmarks\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\CDAProp\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\CDAProp\AddonPanel.cs" />
 	<Compile Update="Property\CDAProp\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.cs">
-	  <SubType>Form</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.Designer.cs">
 	  <DependentUpon>PreviewForm.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.cs" />
 	<Compile Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.Designer.cs">
 	  <DependentUpon>MediaCatalogCfgPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Preview\__DefaultPreview\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
-	<Compile Update="Navigation\FileExplorer\FileOperations\Forms\FEFileTaskForm.cs">
-	  <SubType>Form</SubType>
-	</Compile>
-	<Compile Update="Navigation\FileExplorer\FileExplorerCfgPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Preview\__DefaultPreview\AddonPanel.cs" />
+	<Compile Update="Navigation\FileExplorer\FileOperations\Forms\FEFileTaskForm.cs" />
+	<Compile Update="Navigation\FileExplorer\FileExplorerCfgPanel.cs" />
 	<Compile Update="Navigation\FileExplorer\FileExplorerCfgPanel.Designer.cs">
 	  <DependentUpon>FileExplorerCfgPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.cs" />
 	<Compile Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.Designer.cs">
 	  <DependentUpon>WizFESearchStep1Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.Designer.cs">
 	  <DependentUpon>FSTagEditorPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\CatalogItemPropFE\CatalogItemPropFE.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\CatalogItemPropFE\CatalogItemPropFE.cs" />
 	<Compile Update="Property\CatalogItemPropFE\CatalogItemPropFE.Designer.cs">
 	  <DependentUpon>CatalogItemPropFE.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\CatalogItemPropMC\CatalogItemPropMC.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\CatalogItemPropMC\CatalogItemPropMC.cs" />
 	<Compile Update="Property\CatalogItemPropMC\CatalogItemPropMC.Designer.cs">
 	  <DependentUpon>CatalogItemPropMC.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\__DefaultProp\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\__DefaultProp\AddonPanel.cs" />
 	<Compile Update="Property\__DefaultProp\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\FileExplorer\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\FileExplorer\AddonPanel.cs" />
 	<Compile Update="Navigation\FileExplorer\AddonPanel.designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\AddonPanel.cs" />
 	<Compile Update="Property\TaggedFileProp\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\EditPanelBase.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\EditPanelBase.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\EditPanelBase.Designer.cs">
 	  <DependentUpon>EditPanelBase.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.Designer.cs">
 	  <DependentUpon>MultiRenamePanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.Designer.cs">
 	  <DependentUpon>TagEditorPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.Designer.cs">
 	  <DependentUpon>WizTagStep1Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.cs" />
 	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.Designer.cs">
 	  <DependentUpon>WizTagStep2Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Preview\Images\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Preview\Images\AddonPanel.cs" />
 	<Compile Update="Preview\Images\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\AddonPanel.cs" />
 	<Compile Update="Navigation\CatalogExplorer\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogListView.cs">
-	  <SubType>Component</SubType>
-	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogTreeView.cs">
-	  <SubType>Component</SubType>
-	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogListView.cs" />
+	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogTreeView.cs" />
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.cs" />
 	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.Designer.cs">
 	  <DependentUpon>WizImportStep2Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.cs" />
 	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.Designer.cs">
 	  <DependentUpon>WizImportStep1Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.cs" />
 	<Compile Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.Designer.cs">
 	  <DependentUpon>WizMCSearchStep1Ctl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Preview\Player\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Preview\Player\AddonPanel.cs" />
 	<Compile Update="Preview\Player\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Property\VideoProp\AddonPanel.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
+	<Compile Update="Property\VideoProp\AddonPanel.cs" />
 	<Compile Update="Property\VideoProp\AddonPanel.Designer.cs">
 	  <DependentUpon>AddonPanel.cs</DependentUpon>
 	</Compile>

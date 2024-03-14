@@ -2,7 +2,6 @@
 using OPMedia.Core.GlobalEvents;
 using OPMedia.UI.Generic;
 using OPMedia.UI.Themes;
-using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -163,7 +162,7 @@ namespace OPMedia.UI.Controls
                         e.Graphics.RotateTransform(180);
                         e.Graphics.TranslateTransform(-Width, -Height);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                     }
                 }

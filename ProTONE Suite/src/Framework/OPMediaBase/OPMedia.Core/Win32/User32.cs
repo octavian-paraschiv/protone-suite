@@ -1,5 +1,3 @@
-using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -498,48 +496,11 @@ namespace OPMedia.Core
         TVM_SETITEM = TV_FIRST + 63,
     }
 
-    public enum SendMessageTimeoutFlags
-    {
-        SMTO_NORMAL = 0x0000,
-        SMTO_BLOCK = 0x0001,
-        SMTO_ABORTIFHUNG = 0x0002,
-        SMTO_NOTIMEOUTIFNOTHUNG = 0x0008
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct COPYDATASTRUCT
-    {
-        public UIntPtr dwData;
-        public uint cbData;
-        public IntPtr lpData;
-    }
-
     [StructLayout(LayoutKind.Sequential)]
     public struct HDLAYOUT
     {
         public IntPtr prc;   // RECT*
         public IntPtr pwpos; // WINDOWPOS*
-    }
-
-    public enum MessageFilterInfo : uint
-    {
-        None = 0,
-        AlreadyAllowed = 1,
-        AlreadyDisAllowed = 2,
-        AllowedHigher = 3
-    };
-
-    public enum ChangeWindowMessageFilterExAction : uint
-    {
-        Reset = 0,
-        Allow = 1,
-        DisAllow = 2
-    };
-
-    public enum ChangeWindowMessageFilterFlags : uint
-    {
-        Add = 1,
-        Remove = 2
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -569,10 +530,8 @@ namespace OPMedia.Core
     /// functions imported from User32.dll. Refer to 
     /// MSDN documentation for further information.
     /// </summary>
-    public class User32
+    public class User32 : S_User32
     {
-        const string USER32 = "user32.dll";
-
         #region OS_Dependent
 
         public delegate bool EnumWindowProc(IntPtr hWnd, IntPtr parameter);
@@ -603,15 +562,6 @@ namespace OPMedia.Core
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern void GetClassName(IntPtr h, StringBuilder s, int nMaxCount);
 
-        [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessageTimeout(
-            IntPtr windowHandle,
-            int Msg,
-            IntPtr wParam,
-            ref COPYDATASTRUCT cds,
-            SendMessageTimeoutFlags flags,
-            int timeout,
-            out IntPtr result);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessageTimeout(
@@ -689,10 +639,6 @@ namespace OPMedia.Core
         public static extern bool IsWindow(IntPtr hWnd);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-
-        [DllImport(USER32, CharSet = CharSet.Auto)]
         public static extern IntPtr CreateWindowEx(
            uint dwExStyle, string lpClassName, string lpWindowName, uint dwStyle, int x, int y,
            int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
@@ -714,12 +660,6 @@ namespace OPMedia.Core
 
         [DllImport(USER32)]
         public static extern int GetSystemMetrics(int nIndex);
-
-        [DllImport(USER32)]
-        public static extern bool ChangeWindowMessageFilter(uint message, ChangeWindowMessageFilterFlags dwFlag);
-
-        [DllImport(USER32)]
-        public static extern bool ChangeWindowMessageFilterEx(IntPtr hWnd, uint msg, ChangeWindowMessageFilterExAction action, ref CHANGEFILTERSTRUCT changeInfo);
 
         #endregion
 
@@ -790,39 +730,6 @@ namespace OPMedia.Core
                 bgWnd,
                 0, 0, 0, 0,
                 uFlags);
-        }
-
-        public static bool UIPI_AllowWindowsMessage(IntPtr wndHandle, Messages msg, string desc)
-        {
-            bool ret = true;
-
-            uint osVersion = AppConfig.OSVersion;
-            decimal ver = osVersion / 10;
-
-            if (osVersion == AppConfig.VerWinVista)
-            {
-                // Allow WM_COPYDATA through UIPI
-                // On Vista, there is no way to do it per-window; you have to do it per-process
-                ret = User32.ChangeWindowMessageFilter((uint)msg, ChangeWindowMessageFilterFlags.Add);
-                Logger.LogTrace("[Windows v.{2:0.0} => VISTA] Calling ChangeWindowMessageFilter to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
-            }
-            else if (AppConfig.OSVersion >= AppConfig.VerWin7)
-            {
-                // Allow WM_COPYDATA through UIPI
-                CHANGEFILTERSTRUCT cfs = new CHANGEFILTERSTRUCT();
-                cfs.size = (uint)Marshal.SizeOf(cfs);
-                cfs.info = MessageFilterInfo.None;
-
-                ret = User32.ChangeWindowMessageFilterEx(wndHandle, (uint)msg, ChangeWindowMessageFilterExAction.Allow, ref cfs);
-                Logger.LogTrace("[Windows v.{2:0.0} => Win8 or later] Calling ChangeWindowMessageFilterEx to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
-            }
-            else
-            {
-                Logger.LogTrace("[Windows v.{2:0.0} => earlier than VISTA] No need to ask UIPI to allow {0} for {1} ...", msg, desc, ver);
-                ret = true;
-            }
-
-            return ret;
         }
 
         [DllImport(USER32, CharSet = CharSet.Auto)]

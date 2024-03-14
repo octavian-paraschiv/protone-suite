@@ -12,7 +12,7 @@ namespace OPMedia.UI.Controls
         bool _hasInput = false;
         protected OPMNumericUpDownBase nudField;
 
-        public new event EventHandler ValueChanged = null;
+        public event EventHandler ValueChanged = null;
 
         #region GUI Properties
 

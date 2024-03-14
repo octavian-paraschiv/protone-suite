@@ -158,11 +158,8 @@ namespace OPMedia.UI.HelpSupport
             wbHelpDisplay.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(wbHelpDisplay_DocumentCompleted);
         }
 
-        bool _validDocument = false;
-
         void OnHelpDocumentLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            _validDocument = false;
             string docToDisplay = GenerateDocument("[ There is no document to display. ]");
 
             if (e.Cancelled)
@@ -179,7 +176,6 @@ namespace OPMedia.UI.HelpSupport
                 if (s != null)
                 {
                     docToDisplay = s;
-                    _validDocument = true;
                 }
             }
 

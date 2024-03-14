@@ -30,6 +30,10 @@ namespace OPMedia.DeezerInterop.RestApi
             return bEq;
         }
 
+        public override int GetHashCode()
+        {
+            return (UserAccessToken ?? "").GetHashCode();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DeezerRuntime"/> class.

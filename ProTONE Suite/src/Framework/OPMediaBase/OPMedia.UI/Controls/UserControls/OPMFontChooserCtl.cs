@@ -7,8 +7,6 @@ namespace OPMedia.UI.Controls
 {
     public partial class OPMFontChooserCtl : OPMBaseControl
     {
-        public event EventHandler FontChanged = null;
-
         public string Description
         {
             get { return lblDescription.Text; }

@@ -229,54 +229,54 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
     internal class ShoutcastTuneInUrl
     {
         [JsonProperty("base")]
-        public string Base;
+        public string Base { get; set; }
     }
 
     internal class ShoutcastStation
     {
-        public int br;
-        public int ml;
-        public int id;
-        public int lc;
+        public int br { get; set; }
+        public int ml { get; set; }
+        public int id { get; set; }
+        public int lc { get; set; }
 
-        public string name;
-        public string genre;
-        public string mt;
-        public string ct;
-        public string cst;
+        public string name { get; set; }
+        public string genre { get; set; }
+        public string mt { get; set; }
+        public string ct { get; set; }
+        public string cst { get; set; }
     }
 
     internal class ShoutcastStationList
     {
         [JsonProperty("station")]
-        public ShoutcastStation[] Stations;
+        public ShoutcastStation[] Stations { get; set; }
 
         [JsonProperty("tunein")]
-        public ShoutcastTuneInUrl TuneInUrl;
+        public ShoutcastTuneInUrl TuneInUrl { get; set; }
     }
 
     internal class ShoutcastData
     {
         [JsonProperty("stationlist")]
-        public ShoutcastStationList StationList;
+        public ShoutcastStationList StationList { get; set; }
     }
 
     internal class ShoutcastReply
     {
         [JsonProperty("data")]
-        public ShoutcastData Data;
+        public ShoutcastData Data { get; set; }
 
         [JsonProperty("statusCode")]
-        public int StatusCode;
+        public int StatusCode { get; set; }
 
         [JsonProperty("statusText")]
-        public string StatusText;
+        public string StatusText { get; set; }
     }
 
     internal class ShoutcastResponse
     {
         [JsonProperty("response")]
-        public ShoutcastReply Reply;
+        public ShoutcastReply Reply { get; set; }
     }
 
     #endregion

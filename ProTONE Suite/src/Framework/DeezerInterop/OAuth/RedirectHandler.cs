@@ -69,9 +69,8 @@ namespace OPMedia.DeezerInterop.OAuth
                         }, _listener.GetContext());
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    // ignored
                 }
             });
         }

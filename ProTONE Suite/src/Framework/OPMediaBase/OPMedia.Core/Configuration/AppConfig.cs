@@ -55,16 +55,6 @@ namespace OPMedia.Core.Configuration
 
     public static class AppConfig
     {
-        public const int VerWin2000 = 50;
-        public const int VerWinXP = 51;
-
-        public const int VerWinVista = 60;
-        public const int VerWin7 = 61;
-
-        public const int VerWin8 = 62;
-        public const int VerWin8_1 = 63;
-        public const int VerWin10 = 100;
-
         static Dictionary<string, Language> _languages = new Dictionary<string, Language>();
 
         // static string _skinType = string.Empty;
@@ -176,19 +166,6 @@ namespace OPMedia.Core.Configuration
             }
         }
 
-        public static uint OSVersion
-        {
-            get
-            {
-                uint winVer = 0;
-
-                winVer += (uint)Environment.OSVersion.Version.Major * 10;
-                winVer += (uint)Environment.OSVersion.Version.Minor;
-
-                return winVer;
-            }
-        }
-
         public static bool CurrentUserIsAdministrator
         {
             get
@@ -201,7 +178,7 @@ namespace OPMedia.Core.Configuration
                     if (principal.IsInRole(WindowsBuiltInRole.Administrator))
                         return true;
 
-                    if (OSVersion < VerWinVista)
+                    if (WindowsVersions.CurrentVersion < WindowsVersions.WinVista)
                         // Operating system does not support UAC; skipping elevation check.
                         return false;
 

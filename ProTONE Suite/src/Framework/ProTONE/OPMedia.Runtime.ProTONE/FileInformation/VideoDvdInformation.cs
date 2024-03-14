@@ -1,4 +1,4 @@
-using OPMedia.Core.Configuration;
+using OPMedia.Core;
 using OPMedia.Core.Logging;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS;
@@ -210,9 +210,8 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             {
                 bool retVal = false;
 
-                var ver = AppConfig.OSVersion;
-
-                retVal = (ver >= AppConfig.VerWinVista);
+                var ver = WindowsVersions.CurrentVersion;
+                retVal = (ver >= WindowsVersions.WinVista);
 
                 Logger.LogTrace("[Windows {0}.{1}] - VideoDVDHelpers::IsOSSupported={2}",
                     ver / 10, ver % 10, retVal);
@@ -221,26 +220,12 @@ namespace OPMedia.Runtime.ProTONE.FileInformation
             }
         }
 
-        //private static AMDvdGraphFlags DvdRenderingFlags
-        //{
-        //    get
-        //    {
-        //        AMDvdGraphFlags retVal = AMDvdGraphFlags.SWDecPrefer;
-        //        var ver = AppConfig.OSVersion;
-
-        //        Logger.LogTrace("[Windows {0}.{1}] Using {2} to render DVD media.",
-        //            ver / 10, ver % 10, retVal);
-
-        //        return retVal;
-        //    }
-        //}
-
         public static void TryRenderDVD(this IDvdGraphBuilder dvdGraphBuilder, string volumePath, out AMDvdRenderStatus latestStatus)
         {
             // Is the OS supported for this operation ?
             if (IsOSSupported == false)
             {
-                var ver = AppConfig.OSVersion;
+                var ver = WindowsVersions.CurrentVersion;
                 throw new COMException(string.Format(VideoDvdInformation.UnsupportedWindows,
                     string.Format("{0}.{1}", ver / 10, ver % 10)), -1);
             }

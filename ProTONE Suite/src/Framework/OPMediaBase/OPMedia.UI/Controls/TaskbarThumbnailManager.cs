@@ -1,6 +1,5 @@
 ﻿using OPMedia.Core;
 using OPMedia.Core.ComTypes;
-using OPMedia.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -91,7 +90,7 @@ namespace OPMedia.UI.Controls
         {
             try
             {
-                if (AppConfig.OSVersion >= AppConfig.VerWin7)
+                if (WindowsVersions.CurrentVersion >= WindowsVersions.Win7)
                 {
 
                     _taskbarList = Activator.CreateInstance(Type.GetTypeFromCLSID(TaskbarListClass))

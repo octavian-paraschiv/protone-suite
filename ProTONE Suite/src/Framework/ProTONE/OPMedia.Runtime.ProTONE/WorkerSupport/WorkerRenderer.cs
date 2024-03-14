@@ -226,16 +226,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
             _wp?.SetVolume(vol);
         }
 
-
-        private bool OnApplicationError()
-        {
-            return true;
-        }
-
-        #region Duration and related
-
-        int _duration = 0;
-
         protected override bool IsEndOfMedia()
         {
             if (_wt == WorkerType.Shoutcast)
@@ -250,7 +240,6 @@ namespace OPMedia.Runtime.ProTONE.Rendering.WorkerSupport
 
             return (nElapsed >= nMediaLen || nMediaPos >= nMediaLen);
         }
-        #endregion
 
         #region Media position and related
 

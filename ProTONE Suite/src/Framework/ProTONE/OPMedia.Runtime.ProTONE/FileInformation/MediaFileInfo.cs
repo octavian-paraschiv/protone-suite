@@ -4,6 +4,7 @@ using OPMedia.Runtime.FileInformation;
 using OPMedia.Runtime.ProTONE.ExtendedInfo;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
+using OPMedia.ShellSupport;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

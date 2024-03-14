@@ -81,9 +81,6 @@ Source: "{#BINDIR}\OPMedia.Utility.exe"; DestDir: "{tmp}"; Flags: dontcopy
 Source: "{#BINDIR}\OPMedia.ProTONE.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.MediaLibrary.exe"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 ;--------------------------------------
-; Shell integration
-Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: "OPMedia.ShellSupport.dll"
-;--------------------------------------
 ; Rendering workers
 Source: "{#BINDIR}\OPMedia.AudioCdWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.AudioWorker.exe"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
@@ -99,6 +96,7 @@ Source: "{#BINDIR}\OPMedia.DeezerInterop.dll"; DestDir: "{app}"; Flags: replaces
 Source: "{#BINDIR}\OPMedia.Runtime.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.Runtime.Addons.dll"; DestDir: "{app}"; Flags: uninsremovereadonly promptifolder uninsrestartdelete touch replacesameversion restartreplace; Components: itemPlayer\itemLibrary
 Source: "{#BINDIR}\OPMedia.Runtime.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+Source: "{#BINDIR}\OPMedia.ShellSupport.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace; StrongAssemblyName: "OPMedia.ShellSupport.dll"
 Source: "{#BINDIR}\OPMedia.UI.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.UI.ProTONE.dll"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------

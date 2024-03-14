@@ -3,11 +3,11 @@ using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -63,7 +63,7 @@ namespace OPMedia.ProTONE
                         Logger.LogWarning(ex.Message);
 
                         // Send an activate command to the main instance
-                        PlayerRemoteControl.SendPlayerCommand(CommandType.Activate, null);
+                        PlayerRemoteControl.SendPlayerCommand(CommandType.Activate.ToString(), null);
                     }
                     catch (Exception ex)
                     {
@@ -107,7 +107,7 @@ namespace OPMedia.ProTONE
                         {
                             // There is another player instance that is running.
                             // Just pass the command to that instance and exit.
-                            PlayerRemoteControl.SendPlayerCommand(cmdType, files.ToArray());
+                            PlayerRemoteControl.SendPlayerCommand(cmdType.ToString(), files.ToArray());
                         }
                         else
                         {

@@ -2,6 +2,7 @@
 using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Runtime.ProTONE.Configuration;
+using OPMedia.ShellSupport;
 using SharpShell;
 using SharpShell.ServerRegistration;
 using System;

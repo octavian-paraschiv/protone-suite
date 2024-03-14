@@ -14,6 +14,7 @@ using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using OPMedia.UI;
 using OPMedia.UI.Configuration;
 using OPMedia.UI.Controls;
@@ -697,9 +698,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
             _prevDriveLetter = string.Empty;
 
             if (launchPaths.Count > 0)
-            {
-                PlayerRemoteControl.SendPlayerCommand(commandType, launchPaths.ToArray());
-            }
+                PlayerRemoteControl.SendPlayerCommand(commandType.ToString(), launchPaths.ToArray());
         }
 
 

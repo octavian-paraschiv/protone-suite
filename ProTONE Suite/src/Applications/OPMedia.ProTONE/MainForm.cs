@@ -10,6 +10,7 @@ using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using OPMedia.UI;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Menus;
@@ -30,6 +31,7 @@ namespace OPMedia.ProTONE
         private Queue<BasicCommand> commandQueue;
         private Timer commandExecTimer;
         private BasicCommandTarget _commandTarget = null;
+        private WmCopyDataReceiver _wcdReceiver = null;
 
         TrayNotificationTarget _msgTarget = null;
 
@@ -66,6 +68,13 @@ namespace OPMedia.ProTONE
 
             if (!this.DesignMode)
             {
+                _wcdReceiver = new WmCopyDataReceiver(Constants.PlayerBinary);
+                _wcdReceiver.DataReceived += (data) =>
+                {
+                    BasicCommand cmd = BasicCommand.Create(data);
+                    EnqueueCommand(cmd);
+                };
+
                 commandQueue = new Queue<BasicCommand>();
                 commandExecTimer = new Timer();
                 commandExecTimer.Enabled = true;
@@ -106,7 +115,7 @@ namespace OPMedia.ProTONE
         void MainForm_Shown(object sender, EventArgs e)
         {
             if (User32.IsWindow(this.Handle))
-                User32.UIPI_AllowWindowsMessage(this.Handle, Messages.WM_COMMAND, "MainForm");
+                User32.UIPI_AllowWindowsMessage(this.Handle, (uint)Messages.WM_COMMAND, "MainForm");
 
             _commandTarget = new BasicCommandTarget(this);
 

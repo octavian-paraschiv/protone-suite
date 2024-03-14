@@ -419,10 +419,8 @@ namespace OPMedia.UI.Controls
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                //Logger.LogToConsole("TIP: ToolTipCreated esxception: {0}", ex.ToString());
-                //Logger.LogToConsole("TIP: ToolTipCreated -> return False");
                 return false;
             }
         }

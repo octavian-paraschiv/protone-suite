@@ -13,7 +13,6 @@ namespace OPMedia.UI.ProTONE
     public class TrayNotificationTarget : SelfRegisteredEventSinkObject
     {
         private NotifyIcon _notifyIcon = null;
-        private bool _tipVisible = false;
         private string _dispMessage = string.Empty;
 
         private TrayNotificationBox _box = new TrayNotificationBox();

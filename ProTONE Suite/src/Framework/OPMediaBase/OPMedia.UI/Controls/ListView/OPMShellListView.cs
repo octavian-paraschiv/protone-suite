@@ -61,10 +61,10 @@ namespace OPMedia.UI.Controls
 
     #region Main class
     /// <summary>
-	/// Component that implements a list with the contents of a
+    /// Component that implements a list with the contents of a
     /// given file system folder.
-	/// </summary>
-	public class OPMShellListView : OPMListView
+    /// </summary>
+    public class OPMShellListView : OPMListView
     {
         #region Members
 
@@ -577,7 +577,7 @@ namespace OPMedia.UI.Controls
         /// <summary>
         /// Occurs when a key was pressed.
         /// </summary>
-		//private void OnKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        //private void OnKeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         void OnPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (!this.IsInEditMode)
@@ -715,7 +715,7 @@ namespace OPMedia.UI.Controls
         /// <summary>
         /// Occurs when multiple items were selected.
         /// </summary>
-		private void OnSelectMultipleItems()
+        private void OnSelectMultipleItems()
         {
             if (SelectMultipleItems != null)
             {
@@ -905,7 +905,6 @@ namespace OPMedia.UI.Controls
                                     continue;
 
                                 CreateNewRow(dir);
-                                int tt = 0;
                             }
                         }
 
@@ -1113,7 +1112,7 @@ namespace OPMedia.UI.Controls
         /// <summary>
         /// Occurs when the item was double-clicked.
         /// </summary>
-		private void OnDoubleClick(object sender, System.EventArgs e)
+        private void OnDoubleClick(object sender, System.EventArgs e)
         {
             if (ignoreEvents ||
                 this.SelectedItems == null ||

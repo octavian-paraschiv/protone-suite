@@ -3,6 +3,7 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
+using OPMedia.ShellSupport;
 using OPMedia.UI.Configuration;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Generic;

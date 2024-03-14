@@ -31,7 +31,11 @@ namespace OPMedia.Core.Utilities
                 (
                     string.Equals(l.Part1, lang, StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(l.Part2, lang, StringComparison.OrdinalIgnoreCase) ||
+
+#pragma warning disable CS0612 // Type or member is obsolete
                     string.Equals(l.Part2B, lang, StringComparison.OrdinalIgnoreCase) ||
+#pragma warning restore CS0612 // Type or member is obsolete
+
                     string.Equals(l.Part3, lang, StringComparison.OrdinalIgnoreCase) ||
 
                     string.Equals(l.Culture.TwoLetterISOLanguageName, lang, StringComparison.OrdinalIgnoreCase) ||

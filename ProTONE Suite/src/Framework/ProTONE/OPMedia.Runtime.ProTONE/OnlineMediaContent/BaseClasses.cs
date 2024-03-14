@@ -79,6 +79,11 @@ namespace OPMedia.Runtime.ProTONE.OnlineMediaContent
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            return (Url ?? "").GetHashCode();
+        }
     }
 
     [DataContract]

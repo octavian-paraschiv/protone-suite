@@ -14,6 +14,7 @@ using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.Base;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.Dialogs;

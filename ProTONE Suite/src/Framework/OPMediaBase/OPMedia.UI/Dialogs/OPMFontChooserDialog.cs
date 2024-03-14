@@ -11,7 +11,7 @@ namespace OPMedia.UI.Dialogs
             set { ctlFontChooser.Description = value; }
         }
 
-        public Font Font
+        public Font SelectedFont
         {
             get { return ctlFontChooser.SelectedFont; }
             set { ctlFontChooser.SelectedFont = value; }

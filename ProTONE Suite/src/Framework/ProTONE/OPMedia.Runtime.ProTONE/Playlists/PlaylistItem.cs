@@ -88,6 +88,11 @@ namespace OPMedia.Runtime.ProTONE.Playlists
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return (Path ?? "").GetHashCode();
+        }
+
         public virtual string PersistentPlaylistName
         {
             get
@@ -336,8 +341,6 @@ namespace OPMedia.Runtime.ProTONE.Playlists
 
                 if (DeezerJsonFilter.IsNullOrEmpty(filter) == false)
                 {
-                start_search:
-                    int i = 0;
                     var evt = new ManualResetEvent(false);
 
                     List<Track> tracks = dzr.ExecuteSearch(filter.SearchText, 1, evt);

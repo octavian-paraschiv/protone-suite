@@ -7,6 +7,7 @@
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
   <PropertyGroup>
 	<PostBuildEvent />

@@ -10,13 +10,11 @@ namespace OPMedia.Core
     /// functions imported from Kernel32.dll. Refer to 
     /// MSDN documentation for further information.
     /// </summary>
-    public class Kernel32
+    public class Kernel32 : S_Kernel32
     {
-        const string KERNEL32 = "kernel32.dll";
         public const int MAX_PATH = 260;
         public const int MAX_FILES = 65536;
         public const int MAX_FILE_BUFFER = 4 * MAX_PATH * MAX_FILES;
-
 
         public enum CopyFileCallbackAction
         {

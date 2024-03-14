@@ -262,11 +262,6 @@ namespace OPMedia.UI.Themes
             }
             else
             {
-                if (key == (Keys.Control | Keys.F12))
-                {
-                    int ss = 0;
-                }
-
                 OPMShortcut cmd = ShortcutMapper.MapCommand(key);
                 if (IsShortcutAllowed(cmd))
                 {

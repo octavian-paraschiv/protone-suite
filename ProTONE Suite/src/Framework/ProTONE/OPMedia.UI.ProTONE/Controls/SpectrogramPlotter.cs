@@ -78,7 +78,7 @@ namespace OPMedia.UI.ProTONE.Controls
                                               //DsRendererBase.MAX_SPECTROGRAM_BANDS);
                             decadeLineText = string.Format("{0}K", (int)(maxFq / 1000));
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             decadeLineText = string.Empty;
                         }

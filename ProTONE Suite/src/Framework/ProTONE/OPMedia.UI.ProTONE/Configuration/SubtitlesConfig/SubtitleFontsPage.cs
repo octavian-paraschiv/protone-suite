@@ -120,13 +120,13 @@ namespace OPMedia.UI.ProTONE.Configuration
         private bool ChooseFont(ref Font f, string reason)
         {
             OPMFontChooserDialog dlg = new OPMFontChooserDialog();
-            dlg.Font = f;
+            dlg.SelectedFont = f;
             dlg.Description = Translator.Translate(reason);
             dlg.SetTitle("TXT_CHOOSE_FONT");
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                f = dlg.Font;
+                f = dlg.SelectedFont;
                 return true;
             }
 

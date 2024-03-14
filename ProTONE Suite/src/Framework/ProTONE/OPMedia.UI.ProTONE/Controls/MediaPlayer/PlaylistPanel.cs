@@ -13,6 +13,7 @@ using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.Runtime.ProTONE.Rendering.DS.BaseClasses;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Controls.Dialogs;
 using OPMedia.UI.Generic;
@@ -54,8 +55,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
 
         public System.Windows.Forms.Timer _tmrSavePlaylist = null;
         private System.Windows.Forms.Timer _tmrUpdateItemsDesc = null;
-
-        private System.Windows.Forms.Timer _tmrUpdateVUMeter = null;
 
         public bool IsPlaylistAtEnd
         { get { return playlist.IsAtEnd; } }
@@ -103,11 +102,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             _tmrUpdateItemsDesc = new System.Windows.Forms.Timer();
             _tmrUpdateItemsDesc.Interval = 300;
             _tmrUpdateItemsDesc.Tick += OnTimerUpdateItemsDesc;
-
-            _tmrUpdateVUMeter = new System.Windows.Forms.Timer();
-            _tmrUpdateVUMeter.Interval = 50;
-            _tmrUpdateVUMeter.Tick += OnUpdateVUMeter;
-            _tmrUpdateVUMeter.Enabled = true;
 
             ThemeManager.SetFont(lvPlaylist, FontSizes.Normal);
             lvPlaylist.MultiSelect = true;
@@ -230,12 +224,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             _tmrUpdateItemsDesc.Stop();
             _tmrUpdateItemsDesc.Start();
-        }
-
-        int i = 0;
-
-        private void OnUpdateVUMeter(object sender, EventArgs e)
-        {
         }
 
         private void OnTimerUpdateItemsDesc(object sender, EventArgs e)
@@ -1171,7 +1159,6 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                             StringBuilder sb = new StringBuilder();
                             plItems.ForEach((item) =>
                             {
-                                OPMedia.DeezerInterop.RestApi.Track t = null;
                                 try
                                 {
                                     sb.Append(item.Track.Url.Replace(DeezerTrackItem.DeezerTrackUrlBase, ""));

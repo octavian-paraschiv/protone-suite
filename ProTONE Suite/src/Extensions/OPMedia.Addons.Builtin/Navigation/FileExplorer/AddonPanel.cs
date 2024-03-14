@@ -29,6 +29,7 @@ using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.Shortcuts;
+using OPMedia.ShellSupport;
 using OPMedia.UI;
 using OPMedia.UI.Configuration;
 using OPMedia.UI.Controls;
@@ -581,7 +582,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
                                             PlayerRemoteControl.SendPlayerCommand(
-                                                CommandType.EnqueueFiles,
+                                                CommandType.EnqueueFiles.ToString(),
                                                 taskSearch.MatchingItems.ToArray());
                                         }
                                     }
@@ -592,7 +593,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                                         if (taskSearch.MatchingItems.Count > 0)
                                         {
                                             PlayerRemoteControl.SendPlayerCommand(
-                                                CommandType.PlayFiles,
+                                                CommandType.PlayFiles.ToString(),
                                                 taskSearch.MatchingItems.ToArray());
                                         }
                                     }
@@ -737,7 +738,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             if (items.Count > 0)
                             {
                                 PlayerRemoteControl.SendPlayerCommand(
-                                    CommandType.EnqueueFiles,
+                                    CommandType.EnqueueFiles.ToString(),
                                     items.ToArray());
                             }
                         }
@@ -749,7 +750,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                             if (items.Count > 0)
                             {
                                 PlayerRemoteControl.SendPlayerCommand(
-                                    CommandType.PlayFiles,
+                                    CommandType.PlayFiles.ToString(),
                                     items.ToArray());
                             }
                         }

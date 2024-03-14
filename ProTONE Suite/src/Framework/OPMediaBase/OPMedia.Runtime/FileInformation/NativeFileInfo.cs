@@ -173,7 +173,7 @@ namespace OPMedia.Runtime.FileInformation
 
         public override int GetHashCode()
         {
-            return (string.IsNullOrEmpty(Path) ? 0 : Path.GetHashCode());
+            return (Path ?? "").GetHashCode();
         }
 
         public NativeFileInfo()

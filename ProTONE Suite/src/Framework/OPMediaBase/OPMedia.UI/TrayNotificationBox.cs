@@ -38,8 +38,6 @@ namespace OPMedia.UI.Controls
             _tmrHide.Start();
         }
 
-        int showLocation = 0, startLocation = 0;
-
         public TrayNotificationBox()
         {
             InitializeComponent();
