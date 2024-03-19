@@ -263,7 +263,7 @@ namespace OPMedia.UI.Controls
         [EventSink(EventNames.ThemeUpdated)]
         public void OnThemeUpdated()
         {
-            base.OverrideBackColor = ThemeManager.SelectedColor;
+            base.OverrideBackColor = ThemeManager.GradientFocusHoverColor2;
             base.OverrideForeColor = ThemeManager.ForeColor;
         }
     }
