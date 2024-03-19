@@ -292,15 +292,7 @@
 	<None Include="Resources\Merge.png" />
   </ItemGroup>
   <ItemGroup>
-	<None Include="Resources\FileExplorer16.png" />
-	<None Include="Resources\Move.png" />
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="Resources\lame-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
 	<Content Include="Resources\Tagging.png" />
-	<Content Include="Resources\Tagging16.png" />
   </ItemGroup>
   <ItemGroup>
 	<None Update="C:\Users\octavian.paraschiv%40cegeka.com\.nuget\packages\naudio.lame\2.1.0\build\libmp3lame.32.dll">

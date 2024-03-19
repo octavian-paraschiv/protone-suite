@@ -4,7 +4,7 @@ using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
-using OPMedia.UI.Properties;
+using OPMedia.UI.Generic;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,7 +60,7 @@ namespace OPMedia.UI.Themes
             }
             else
             {
-                bmp = Resources.ImageNotFound;
+                bmp = ImageProcessing.ColoredBitmap(16, 16, Brushes.White);
             }
 
             return bmp;

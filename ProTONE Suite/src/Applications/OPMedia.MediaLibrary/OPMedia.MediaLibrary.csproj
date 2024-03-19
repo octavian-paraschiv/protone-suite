@@ -22,9 +22,6 @@
 	</Compile>
   </ItemGroup>
   <ItemGroup>
-	<Content Include="Library.ico" />
-  </ItemGroup>
-  <ItemGroup>
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj" />
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
@@ -47,4 +44,7 @@
 	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</None>
   </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy ..\..\Framework\OPMediaBase\OPMedia.Core\Resources\Library.ico ." />
+  </Target>
 </Project>

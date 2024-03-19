@@ -16,7 +16,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             get
             {
-                return Resources.Shoutcast16;
+                return Resources.Shoutcast;
             }
         }
 

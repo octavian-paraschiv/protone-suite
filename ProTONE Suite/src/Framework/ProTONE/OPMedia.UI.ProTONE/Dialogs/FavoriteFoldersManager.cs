@@ -27,7 +27,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         void FavoriteFoldersManager_Load(object sender, EventArgs e)
         {
             this.InheritAppIcon = false;
-            this.Icon = Resources.Favorites16.ToIcon();
+            this.Icon = Resources.Favorites.ToIcon();
         }
 
         private void btnOK_Click(object sender, EventArgs e)

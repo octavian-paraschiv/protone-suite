@@ -604,7 +604,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = OPMedia.UI.Properties.Resources.Save16.ToIcon();
+            dlg.Icon = OPMedia.UI.Properties.Resources.Save.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
@@ -672,7 +672,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = OPMedia.UI.Properties.Resources.Open16.ToIcon();
+            dlg.Icon = OPMedia.UI.Properties.Resources.Open.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };

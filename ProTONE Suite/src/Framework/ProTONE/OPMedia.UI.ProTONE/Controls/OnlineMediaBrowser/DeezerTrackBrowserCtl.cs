@@ -7,7 +7,6 @@ using OPMedia.UI.ProTONE.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
@@ -35,33 +34,30 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
             tsmi.Tag = MediaBrowserAction.AddToDeezerPlaylist;
-            tsmi.Image = Resources.deezer16;
+            tsmi.Image = Resources.deezer;
             cms.Items.Add(tsmi);
 
             cms.Items.Add(sep);
-
-            Bitmap searchIcon = OPMedia.UI.Properties.Resources.Search16;
-            searchIcon.MakeTransparent(Color.Magenta);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ARTIST");
             tsmi.Tag = "LookupDeezerArtist";
-            tsmi.Image = searchIcon;
+            tsmi.Image = UI.Properties.Resources.Search;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_ALBUM");
             tsmi.Tag = "LookupDeezerAlbum";
-            tsmi.Image = searchIcon;
+            tsmi.Image = UI.Properties.Resources.Search;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_THIS_TRACK");
             tsmi.Tag = "LookupDeezerTrack";
-            tsmi.Image = searchIcon;
+            tsmi.Image = UI.Properties.Resources.Search;
             cms.Items.Add(tsmi);
 
             sep = new OPMMenuStripSeparator();
@@ -71,14 +67,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = "www.deezer.com";
             tsmi.Tag = "OpenDeezerPage";
-            tsmi.Image = searchIcon;
+            tsmi.Image = Properties.Resources.deezer;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_LOOKUP_MY_PLAYLISTS");
             tsmi.Tag = "LookupMyPlaylists";
-            tsmi.Image = searchIcon;
+            tsmi.Image = UI.Properties.Resources.Search;
             cms.Items.Add(tsmi);
 
             lvTracks.ContextMenuStrip = cms;

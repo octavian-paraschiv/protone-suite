@@ -2,7 +2,6 @@
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Playlists;
 using OPMedia.Runtime.ProTONE.Rendering;
 using OPMedia.ShellSupport;
@@ -190,9 +189,9 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                                 {
                                     string itemType = (this.Item.Type ?? "").ToLowerInvariant();
                                     if (SupportedFileProvider.Instance.SupportedVideoTypes.Contains(itemType))
-                                        image = Resources.VideoDefaultImage;
+                                        image = OPMedia.Core.Properties.Resources.VideoFile.ToBitmap();
                                     else if (itemType == "URL" || SupportedFileProvider.Instance.SupportedAudioTypes.Contains(itemType))
-                                        image = Resources.AudioDefaultImage;
+                                        image = OPMedia.Core.Properties.Resources.AudioFile.ToBitmap();
                                     else
                                         image = Resources.UnknownImage;
                                 }

@@ -180,12 +180,6 @@
 	<Compile Update="Controls\UserControls\FileAttributesBrowserCtl.Designer.cs">
 	  <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
 	</Compile>
-	<Compile Update="Controls\UserControls\OPMTimePicker.cs">
-	  <SubType>UserControl</SubType>
-	</Compile>
-	<Compile Update="Controls\UserControls\OPMTimePicker.Designer.cs">
-	  <DependentUpon>OPMTimePicker.cs</DependentUpon>
-	</Compile>
 	<Compile Update="Controls\Derived\WaitingPictureBox.cs">
 	  <SubType>Component</SubType>
 	</Compile>
@@ -378,9 +372,6 @@
 	<EmbeddedResource Update="Controls\UserControls\OPMTextBox.resx">
 	  <DependentUpon>OPMTextBox.cs</DependentUpon>
 	</EmbeddedResource>
-	<EmbeddedResource Update="Controls\UserControls\OPMTimePicker.resx">
-	  <DependentUpon>OPMTimePicker.cs</DependentUpon>
-	</EmbeddedResource>
 	<EmbeddedResource Update="Controls\PropertyEditor\Choosers\BooleanChooser.resx">
 	  <DependentUpon>BooleanChooser.cs</DependentUpon>
 	</EmbeddedResource>
@@ -481,7 +472,6 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-	<None Include="Resources\ImageNotFound.png" />
 	<None Include="Resources\menuChildren.png" />
   </ItemGroup>
   <ItemGroup>
@@ -508,7 +498,6 @@
 	  <DependentUpon>GenericWaitDialog.cs</DependentUpon>
 	  <SubType>Designer</SubType>
 	</EmbeddedResource>
-	<None Include="Resources\blank.ico" />
 	<EmbeddedResource Update="FileOperations\Forms\FileTaskErrorReport.resx">
 	  <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
 	  <SubType>Designer</SubType>
@@ -530,60 +519,27 @@
 	<None Include="Resources\OK.png" />
   </ItemGroup>
   <ItemGroup>
-	<None Include="Resources\Up.ico" />
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="Resources\ilUp.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="Resources\ilDn.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="Resources\Add2.png" />
-	<None Include="Resources\Add3.png" />
 	<None Include="Resources\Add.png" />
 	<Content Include="Resources\Assistance.png" />
 	<None Include="Resources\Back.png" />
-	<None Include="Resources\Back16.png" />
 	<Content Include="Resources\ControlPanel.png" />
 	<None Include="Resources\Forward.png" />
-	<None Include="Resources\Forward16.png" />
 	<None Include="Resources\Favorites.png" />
-	<None Include="Resources\Favorites16.png" />
 	<None Include="Resources\Copy.png" />
-	<None Include="Resources\copy16.png" />
 	<None Include="Resources\Cut.png" />
-	<None Include="Resources\cut16.png" />
-	<None Include="Resources\delete16.png" />
 	<None Include="Resources\Down.png" />
-	<None Include="Resources\Down16.png" />
-	<None Include="Resources\Del2.png" />
-	<None Include="Resources\Del3.png" />
 	<None Include="Resources\Del.png" />
 	<None Include="Resources\Up.png" />
-	<None Include="Resources\Up16.png" />
 	<None Include="Resources\Open.png" />
 	<None Include="Resources\SaveAs.png" />
-	<None Include="Resources\Open16.png" />
-	<None Include="Resources\Save16.png" />
-	<None Include="Resources\SaveAs16.png" />
 	<None Include="Resources\Paste.png" />
-	<None Include="Resources\paste16.png" />
 	<None Include="Resources\Reload.png" />
-	<None Include="Resources\reload16.png" />
 	<None Include="Resources\Rename.png" />
-	<None Include="Resources\rename16.png" />
 	<None Include="Resources\new_folder_command.png" />
-	<None Include="Resources\new_folder_command16.png" />
 	<None Include="Resources\Settings.png" />
-	<None Include="Resources\Settings16.png" />
 	<Content Include="Resources\lan_disconnect.png" />
 	<Content Include="Resources\lan_ok.png" />
-	<None Include="Resources\Logging.png" />
-	<None Include="Resources\Stop.png" />
-	<None Include="Resources\Stop16.png" />
 	<None Include="Resources\Search.png" />
-	<None Include="Resources\search16.png" />
 	<Content Include="Resources\wizard.png" />
 	<None Include="Resources\waiting.gif" />
 	<Content Include="Resources\hourglass.png" />

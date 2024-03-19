@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OPMedia.Core.Properties
-{
-
-
+namespace OPMedia.Core.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -127,16 +127,6 @@ namespace OPMedia.Core.Properties
             get {
                 object obj = ResourceManager.GetObject("Internet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        public static System.Drawing.Icon ir_remote {
-            get {
-                object obj = ResourceManager.GetObject("ir_remote", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         

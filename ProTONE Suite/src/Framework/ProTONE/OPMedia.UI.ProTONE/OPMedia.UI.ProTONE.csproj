@@ -380,10 +380,6 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-	<EmbeddedResource Include="Resources\Stopped.png" />
-	<EmbeddedResource Include="Resources\running.png" />
-	<EmbeddedResource Include="Resources\Paused.png" />
-	<EmbeddedResource Include="Resources\notopened.png" />
 	<EmbeddedResource Include="Resources\IconTime.png" />
 	<EmbeddedResource Include="Resources\icon-audio.png" />
 	<EmbeddedResource Include="Resources\btnLoopPlay.png" />
@@ -401,13 +397,8 @@
   </ItemGroup>
   <ItemGroup>
 	<None Include="Resources\Shoutcast.png" />
-	<EmbeddedResource Include="Resources\Shoutcast16.png" />
-	<EmbeddedResource Include="Resources\deezer16.png" />
 	<None Include="Resources\deezer.png" />
 	<None Include="Resources\btnClear.png" />
-  </ItemGroup>
-  <ItemGroup>
-	<None Include="Resources\Tabs.png" />
   </ItemGroup>
   <ItemGroup>
 	<None Include="Resources\btnRew.png" />
@@ -425,9 +416,6 @@
 	<None Include="Resources\btnSignalAnalisys.png" />
   </ItemGroup>
   <ItemGroup>
-	<None Include="Resources\TrackInfo.png" />
-  </ItemGroup>
-  <ItemGroup>
 	<None Include="Resources\Fonts.png" />
   </ItemGroup>
   <ItemGroup>
@@ -440,9 +428,7 @@
 	<None Include="Resources\btnLargePause.png" />
   </ItemGroup>
   <ItemGroup>
-	<Content Include="Resources\AudioDefaultImage.png" />
 	<None Include="Resources\UnknownImage.png" />
-	<Content Include="Resources\VideoDefaultImage.png" />
   </ItemGroup>
   <ItemGroup>
 	<Compile Remove="Dialogs\BookmarkManager.cs" />

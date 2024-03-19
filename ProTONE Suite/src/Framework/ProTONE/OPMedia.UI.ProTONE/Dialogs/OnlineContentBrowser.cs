@@ -128,7 +128,7 @@ namespace OPMedia.UI.ProTONE.Dialogs
             dlg.InitialDirectory = ProTONEConfig.PL_LastOpenedFolder;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = OPMedia.UI.Properties.Resources.Save16.ToIcon();
+            dlg.Icon = OPMedia.UI.Properties.Resources.Save.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };

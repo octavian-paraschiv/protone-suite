@@ -425,6 +425,17 @@ namespace OPMedia.UI.Generic
                 }
             }
         }
+
+        public static Bitmap ColoredBitmap(int width, int height, Brush br = null)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+            using (Graphics graph = Graphics.FromImage(bmp))
+            {
+                Rectangle ImageSize = new Rectangle(0, 0, width, height);
+                graph.FillRectangle(br ?? Brushes.Transparent, ImageSize);
+            }
+            return bmp;
+        }
     }
 
 }

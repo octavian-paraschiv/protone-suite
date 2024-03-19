@@ -344,7 +344,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             // tsmiTaggingWizard
             // 
             this.tsmiTaggingWizard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.tsmiTaggingWizard.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Tagging16;
+            this.tsmiTaggingWizard.Image = global::OPMedia.Addons.Builtin.Properties.Resources.Tagging;
             this.tsmiTaggingWizard.Name = "tsmiTaggingWizard";
             this.tsmiTaggingWizard.Size = new System.Drawing.Size(209, 22);
             this.tsmiTaggingWizard.Tag = "ToolActionTaggingWizard";

@@ -175,7 +175,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_ADD_FAV_LIST");
                 tsmi.Tag = MediaBrowserAction.AddFav;
-                tsmi.Image = OPMedia.UI.Properties.Resources.Favorites16;
+                tsmi.Image = OPMedia.UI.Properties.Resources.Favorites;
                 cms.Items.Add(tsmi);
             }
             else
@@ -184,7 +184,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
                 tsmi.Click += new EventHandler(OnMenuClick);
                 tsmi.Text = Translator.Translate("TXT_DEL_FAV_LIST");
                 tsmi.Tag = MediaBrowserAction.DelFav;
-                tsmi.Image = OPMedia.UI.Properties.Resources.Delete16;
+                tsmi.Image = OPMedia.UI.Properties.Resources.Delete;
                 cms.Items.Add(tsmi);
             }
 

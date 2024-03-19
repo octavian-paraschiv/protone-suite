@@ -1,4 +1,5 @@
 #region Using directives
+using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Generic;
 using OPMedia.UI.HelpSupport;
@@ -311,7 +312,7 @@ namespace OPMedia.UI.Wizards
             Type[] wizardPages,
             bool hasFinishPage,
             BackgroundTask initTask,
-            Icon customIcon = null)
+            Bitmap customIcon = null)
         {
             // Test there have been defined any wizard pages.
             // If not, then do not show the wizard.
@@ -339,7 +340,7 @@ namespace OPMedia.UI.Wizards
             if (customIcon != null)
             {
                 wizardHostForm.InheritAppIcon = false;
-                wizardHostForm.Icon = customIcon;
+                wizardHostForm.Icon = customIcon.ToIcon();
             }
 
             try
@@ -358,7 +359,7 @@ namespace OPMedia.UI.Wizards
         /// buttons through the wizard.
         /// </summary>
         /// <param name="type">The type of the user control to 
-		/// use as wizard page.</param>
+        /// use as wizard page.</param>
         public void AddWizardPage(Type type)
         {
             // Create the wizard page.

@@ -1,5 +1,6 @@
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Addons.Builtin.Properties;
+using OPMedia.Core;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.Addons.Configuration;
@@ -21,7 +22,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         {
             get
             {
-                return Resources.FileExplorer16;
+                return Resources.FileExplorer.Resize(false);
             }
         }
 

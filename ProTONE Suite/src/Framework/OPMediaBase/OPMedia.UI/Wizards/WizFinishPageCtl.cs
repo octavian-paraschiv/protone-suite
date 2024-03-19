@@ -1,6 +1,7 @@
 #region Using directives
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
+using OPMedia.UI.Generic;
 using OPMedia.UI.Properties;
 using OPMedia.UI.Themes;
 using System;
@@ -47,7 +48,7 @@ namespace OPMedia.UI.Wizards
 
             ilStatus.Images.Add(Resources.Error);
             ilStatus.Images.Add(Resources.OK);
-            ilStatus.Images.Add(Resources.blank);
+            ilStatus.Images.Add(ImageProcessing.ColoredBitmap(48, 48, Brushes.White));
 
             tvResults.ImageList = ilStatus;
 

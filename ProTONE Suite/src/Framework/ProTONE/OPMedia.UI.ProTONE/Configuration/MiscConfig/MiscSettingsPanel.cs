@@ -42,7 +42,7 @@ namespace OPMedia.UI.ProTONE.Configuration
             tabMisc.ImageList = new ImageList();
             tabMisc.ImageList.ImageSize = new System.Drawing.Size(24, 24);
 
-            Image bmp = Resources.Tabs;
+            Image bmp = Core.Properties.Resources.DVD;
             tabMisc.ImageList.Images.Add(bmp);
 
             bmp = ImageProcessing.DVD;

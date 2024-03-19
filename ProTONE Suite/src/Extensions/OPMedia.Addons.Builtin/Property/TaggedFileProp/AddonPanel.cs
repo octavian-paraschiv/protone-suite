@@ -1,7 +1,6 @@
 using OPMedia.Addons.Builtin.Configuration;
 using OPMedia.Addons.Builtin.Properties;
 using OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard;
-using OPMedia.Core;
 using OPMedia.Core.GlobalEvents;
 using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
@@ -209,7 +208,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp
                     typeof(WizTagStep2Ctl)
                 };
 
-            return WizardHostForm.CreateWizard("TXT_TAGGINGWIZARD", pages, true, initTask, Resources.Tagging16.ToIcon());
+            return WizardHostForm.CreateWizard("TXT_TAGGINGWIZARD", pages, true, initTask, Resources.Tagging);
         }
 
         public static DialogResult Execute(Form parentForm)

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OPMedia.Addons.Builtin.Properties
-{
-
-
+namespace OPMedia.Addons.Builtin.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -73,26 +73,6 @@ namespace OPMedia.Addons.Builtin.Properties
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FileExplorer16 {
-            get {
-                object obj = ResourceManager.GetObject("FileExplorer16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lame_logo {
-            get {
-                object obj = ResourceManager.GetObject("lame_logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Merge {
             get {
                 object obj = ResourceManager.GetObject("Merge", resourceCulture);
@@ -116,16 +96,6 @@ namespace OPMedia.Addons.Builtin.Properties
         internal static System.Drawing.Bitmap Tagging {
             get {
                 object obj = ResourceManager.GetObject("Tagging", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Tagging16 {
-            get {
-                object obj = ResourceManager.GetObject("Tagging16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

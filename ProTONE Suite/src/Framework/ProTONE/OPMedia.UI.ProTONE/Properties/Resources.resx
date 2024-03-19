@@ -127,9 +127,6 @@
   <data name="btnLoad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnLoad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="notopened" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\notopened.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="btnPause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnPause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,9 +148,6 @@
   <data name="FileTypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FileTypes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="paused" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\paused.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="btnPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnPlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -166,14 +160,8 @@
   <data name="btnVolDn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnVolDn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="running" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\running.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="btnVolUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnVolUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stopped" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stopped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,12 +172,6 @@
   <data name="btnRew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnRew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="deezer16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\deezer16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Shoutcast16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shoutcast16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="deezer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deezer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -198,12 +180,6 @@
   </data>
   <data name="btnClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnClear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TrackInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TrackInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Fonts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fonts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -216,12 +192,6 @@
   </data>
   <data name="btnLargePlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnLargePlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AudioDefaultImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\audiodefaultimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VideoDefaultImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\videodefaultimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UnknownImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UnknownImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

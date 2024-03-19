@@ -10,7 +10,6 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Core.Utilities;
 using OPMedia.Runtime.Addons;
 using OPMedia.Runtime.Addons.AddonsBase.Navigation;
-using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.RemoteControl;
 using OPMedia.Runtime.Shortcuts;
@@ -1349,7 +1348,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
                 };
 
             return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_MC", pages, true, initTask,
-                OPMedia.UI.Properties.Resources.Search.ToIcon());
+                UI.Properties.Resources.Search);
         }
 
         public static DialogResult Execute()

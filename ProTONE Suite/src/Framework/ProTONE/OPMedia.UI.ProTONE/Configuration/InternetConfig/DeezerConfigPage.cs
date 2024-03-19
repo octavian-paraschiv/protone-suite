@@ -28,7 +28,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
         {
             get
             {
-                return Resources.deezer16;
+                return Resources.deezer;
             }
         }
 
@@ -41,7 +41,7 @@ namespace OPMedia.UI.ProTONE.Configuration.InternetConfig
 
             txtDeezerToken.TextChanged += new EventHandler(OnSettingsChanged);
             chkUseServices.CheckedChanged += new EventHandler(OnSettingsChanged);
-            btnNew.Image = OPMedia.UI.Properties.Resources.Reload16;
+            btnNew.Image = OPMedia.UI.Properties.Resources.Reload;
 
             cmbTrackQuality.DataSource = (from dz_track_quality_t q in Enum.GetValues(typeof(dz_track_quality_t))
                                           where QualityTextHint.ContainsKey(q)

@@ -24,7 +24,6 @@ using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.Addons;
 using OPMedia.Runtime.Addons.ActionManagement;
 using OPMedia.Runtime.Addons.AddonsBase.Navigation;
-using OPMedia.Runtime.ProTONE;
 using OPMedia.Runtime.ProTONE.Configuration;
 using OPMedia.Runtime.ProTONE.FileInformation;
 using OPMedia.Runtime.ProTONE.RemoteControl;
@@ -93,12 +92,12 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             ilAddon.Images.Add(Resources.FileExplorer);
 
             this.tsbFavorites.Image = OPMedia.UI.Properties.Resources.Favorites;
-            this.tsmiFavorites.Image = OPMedia.UI.Properties.Resources.Favorites16;
+            this.tsmiFavorites.Image = OPMedia.UI.Properties.Resources.Favorites;
             this.tsbNewFolder.Image = OPMedia.UI.Properties.Resources.New_Folder_Command;
-            this.tsmiNewFolder.Image = OPMedia.UI.Properties.Resources.New_Folder_Command16;
+            this.tsmiNewFolder.Image = OPMedia.UI.Properties.Resources.New_Folder_Command;
 
             this.AddonImage = Resources.FileExplorer;
-            this.SmallAddonImage = Resources.FileExplorer16;
+            this.SmallAddonImage = Resources.FileExplorer.Resize(false);
 
             updateUiTimer = new Timer();
             updateUiTimer.Enabled = true;
@@ -1231,7 +1230,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 };
 
             return WizardHostForm.CreateWizard("TXT_SEARCHWIZARD_FE", pages, true, initTask,
-                OPMedia.UI.Properties.Resources.Search.ToIcon());
+                UI.Properties.Resources.Search);
         }
 
         public static DialogResult Execute()
@@ -1251,7 +1250,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
                 };
 
             return WizardHostForm.CreateWizard("TXT_CDRIPPERWIZARD", pages, true, initTask,
-                OPMedia.Core.Properties.Resources.CDA.ToIcon());
+                Core.Properties.Resources.CDA);
         }
 
         public static DialogResult Execute()

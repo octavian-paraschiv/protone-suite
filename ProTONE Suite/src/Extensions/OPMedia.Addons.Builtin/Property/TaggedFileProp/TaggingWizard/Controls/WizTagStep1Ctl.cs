@@ -78,7 +78,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             dlg.Multiselect = true;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = Resources.Tagging16.ToIcon();
+            dlg.Icon = Resources.Tagging.ToIcon();
 
             dlg.FillFavoriteFoldersEvt += () => { return ProTONEConfig.GetFavoriteFolders("FavoriteFolders"); };
             dlg.AddToFavoriteFolders += (s) => { return ProTONEConfig.AddToFavoriteFolders(s); };
@@ -117,7 +117,7 @@ namespace OPMedia.Addons.Builtin.TaggedFileProp.TaggingWizard
             dlg.ShowNewFolderButton = false;
 
             dlg.InheritAppIcon = false;
-            dlg.Icon = Resources.Tagging16.ToIcon();
+            dlg.Icon = Resources.Tagging.ToIcon();
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {

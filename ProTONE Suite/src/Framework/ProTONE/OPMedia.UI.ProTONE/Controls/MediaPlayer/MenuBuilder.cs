@@ -101,7 +101,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                 tsmi.Click += clickHandler;
                 tsmi.Text = Translator.Translate("TXT_ADD_TO_DEEZER_PLAYLIST");
                 tsmi.Tag = "AddToDeezerPlaylist";
-                tsmi.Image = Resources.deezer16;
+                tsmi.Image = Resources.deezer;
                 menuToAlter.AddSingleEntry(tsmi);
             }
 
@@ -227,23 +227,23 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
             switch (cmd)
             {
                 case OPMShortcut.CmdMoveUp:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Up16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Up;
                     break;
 
                 case OPMShortcut.CmdMoveDown:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Down16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Down;
                     break;
 
                 case OPMShortcut.CmdDelete:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Delete16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Delete;
                     break;
 
                 case OPMShortcut.CmdLoadPlaylist:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Open16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Open;
                     break;
 
                 case OPMShortcut.CmdSavePlaylist:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Save16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Save;
                     break;
 
                 case OPMShortcut.CmdOpenDisk:
@@ -291,7 +291,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case OPMShortcut.CmdOpenSettings:
-                    tsmi.Image = OPMedia.UI.Properties.Resources.Settings16;
+                    tsmi.Image = OPMedia.UI.Properties.Resources.Settings;
                     break;
 
                 case OPMShortcut.CmdCfgTimer:

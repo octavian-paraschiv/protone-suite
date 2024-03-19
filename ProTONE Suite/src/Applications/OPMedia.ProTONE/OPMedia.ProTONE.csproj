@@ -12,6 +12,9 @@
 	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="player.ico" />
+  </ItemGroup>
+  <ItemGroup>
 	<Reference Include="System.configuration" />
 	<Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -25,11 +28,6 @@
 	<EmbeddedResource Update="MainForm.resx">
 	  <DependentUpon>MainForm.cs</DependentUpon>
 	  <SubType>Designer</SubType>
-	</EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-	<EmbeddedResource Include="player.ico">
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -54,4 +52,7 @@
 	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</None>
   </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy ..\..\Framework\OPMediaBase\OPMedia.Core\Resources\player.ico ." />
+  </Target>
 </Project>
