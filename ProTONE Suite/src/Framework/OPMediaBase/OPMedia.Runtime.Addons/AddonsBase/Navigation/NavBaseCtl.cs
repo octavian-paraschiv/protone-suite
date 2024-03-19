@@ -33,11 +33,6 @@ namespace OPMedia.Runtime.Addons.AddonsBase.Navigation
         public Image AddonImage { get; set; }
 
         /// <summary>
-        /// Gets/sets the addon image.
-        /// </summary>
-        public Image SmallAddonImage { get; set; }
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         public NavBaseCtl()

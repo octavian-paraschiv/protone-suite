@@ -157,14 +157,14 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_PLAY");
             tsmi.Tag = MediaBrowserAction.Play;
-            tsmi.Image = ImageProcessing.Player16;
+            tsmi.Image = ImageProcessing.Player;
             cms.Items.Add(tsmi);
 
             tsmi = new OPMToolStripMenuItem();
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_ENQUEUE");
             tsmi.Tag = MediaBrowserAction.Enqueue;
-            tsmi.Image = ImageProcessing.Player16;
+            tsmi.Image = ImageProcessing.Player;
             cms.Items.Add(tsmi);
 
             cms.Items.Add(sep);
@@ -194,7 +194,7 @@ namespace OPMedia.UI.ProTONE.Controls.OnlineMediaBrowser
             tsmi.Click += new EventHandler(OnMenuClick);
             tsmi.Text = Translator.Translate("TXT_ADD_TO_LOCAL_PLAYLIST");
             tsmi.Tag = MediaBrowserAction.AddToLocalPlaylist;
-            tsmi.Image = ImageProcessing.Playlist16;
+            tsmi.Image = ImageProcessing.Playlist;
             cms.Items.Add(tsmi);
 
             return cms;

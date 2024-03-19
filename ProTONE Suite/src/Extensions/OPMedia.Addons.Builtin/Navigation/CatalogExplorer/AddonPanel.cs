@@ -71,14 +71,13 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         {
             InitializeComponent();
 
-            tsmiProTONEPlay.Image = ImageProcessing.Player16;
-            tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
-            tsmiCatalog.Image = ImageProcessing.Library16;
+            tsmiProTONEPlay.Image = ImageProcessing.Player;
+            tsmiProTONEEnqueue.Image = ImageProcessing.Player;
+            tsmiCatalog.Image = ImageProcessing.Library;
 
             tsbCatalog.Image = ImageProcessing.Library;
 
             this.AddonImage = ImageProcessing.Library;
-            this.SmallAddonImage = ImageProcessing.Library16;
 
             tvCatalog.Cursor = lvCatalogFolder.Cursor = Cursors.Default;
 

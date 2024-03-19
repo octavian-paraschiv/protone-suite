@@ -311,7 +311,7 @@ namespace OPMedia.Runtime.Addons
                     //button.AutoSize = true;
 
                     NavBaseCtl panel = addon.AddonPanel;
-                    button.Image = panel.SmallAddonImage;
+                    button.Image = panel.AddonImage;
                     button.Tag = addon;
                     button.ImageTransparentColor = Color.Magenta;
 

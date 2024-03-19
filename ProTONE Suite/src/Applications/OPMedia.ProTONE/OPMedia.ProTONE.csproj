@@ -12,9 +12,6 @@
 	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="player.ico" />
-  </ItemGroup>
-  <ItemGroup>
 	<Reference Include="System.configuration" />
 	<Reference Include="System.Windows.Forms" />
   </ItemGroup>

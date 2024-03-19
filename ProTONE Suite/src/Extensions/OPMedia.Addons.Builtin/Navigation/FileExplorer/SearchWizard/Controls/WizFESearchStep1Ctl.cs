@@ -48,8 +48,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer.SearchWizard.Controls
         {
             InitializeComponent();
 
-            this.tsmiProTONEPlay.Image = ImageProcessing.Player16;
-            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
+            this.tsmiProTONEPlay.Image = ImageProcessing.Player;
+            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player;
 
             this.ShowImage = false;
             this.ShowSeparator = false;

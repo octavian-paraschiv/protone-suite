@@ -40,8 +40,8 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer.SearchWizard.Controls
         public WizMCSearchStep1Ctl()
         {
             InitializeComponent();
-            this.tsmiProTONEPlay.Image = ImageProcessing.Player16;
-            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
+            this.tsmiProTONEPlay.Image = ImageProcessing.Player;
+            this.tsmiProTONEEnqueue.Image = ImageProcessing.Player;
 
             this.ShowImage = false;
             this.ShowSeparator = false;

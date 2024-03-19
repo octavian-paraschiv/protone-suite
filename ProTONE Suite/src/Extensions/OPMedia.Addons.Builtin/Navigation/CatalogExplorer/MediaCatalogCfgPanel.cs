@@ -13,7 +13,7 @@ namespace OPMedia.Addons.Builtin.CatalogExplorer
         {
             get
             {
-                return ImageProcessing.Library16;
+                return ImageProcessing.Library;
             }
         }
 

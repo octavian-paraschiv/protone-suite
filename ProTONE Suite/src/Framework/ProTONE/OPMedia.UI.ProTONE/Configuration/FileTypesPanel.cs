@@ -1,3 +1,4 @@
+using OPMedia.Core;
 using OPMedia.Core.Configuration;
 using OPMedia.Core.TranslationSupport;
 using OPMedia.Runtime.ProTONE;
@@ -64,9 +65,9 @@ namespace OPMedia.UI.ProTONE.Configuration
 
             InitializeComponent();
 
-            hdrAudio.Image = ImageProcessing.AudioFile16;
-            hdrVideo.Image = ImageProcessing.VideoFile16;
-            hdrPlaylists.Image = ImageProcessing.Playlist16;
+            hdrAudio.Image = ImageProcessing.AudioFile.Resize(false);
+            hdrVideo.Image = ImageProcessing.VideoFile.Resize(false);
+            hdrPlaylists.Image = ImageProcessing.Playlist.Resize(false);
 
             Translator.TranslateControl(this, DesignMode);
             ThemeManager.SetFont(btnSelAllAudio, FontSizes.Small);

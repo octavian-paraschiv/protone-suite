@@ -279,15 +279,15 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     break;
 
                 case OPMShortcut.CmdCfgAudio:
-                    tsmi.Image = ImageProcessing.AudioFile16;
+                    tsmi.Image = ImageProcessing.AudioFile;
                     break;
 
                 case OPMShortcut.CmdCfgVideo:
-                    tsmi.Image = ImageProcessing.VideoFile16;
+                    tsmi.Image = ImageProcessing.VideoFile;
                     break;
 
                 case OPMShortcut.CmdCfgSubtitles:
-                    tsmi.Image = ImageProcessing.Subtitle16;
+                    tsmi.Image = ImageProcessing.Subtitle;
                     break;
 
                 case OPMShortcut.CmdOpenSettings:

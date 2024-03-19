@@ -25,19 +25,9 @@ namespace OPMedia.UI.Generic
             get
             {
                 var img = ImageProvider.GetAppIcon(true).ToBitmap();
-                //var img = ImageProvider.ApplicationIconLarge as Bitmap;
-
                 ImageProcessing.GrayToBlack(img);
 
                 return img;
-            }
-        }
-
-        public static Image AppIcon16
-        {
-            get
-            {
-                return AppIcon.Resize(false);
             }
         }
 
@@ -51,15 +41,6 @@ namespace OPMedia.UI.Generic
             }
         }
 
-        public static Image Subtitle16
-        {
-            get
-            {
-                return Subtitle.Resize(false);
-            }
-        }
-
-
         public static Image AudioFile
         {
             get
@@ -67,14 +48,6 @@ namespace OPMedia.UI.Generic
                 var img = OPMedia.Core.Properties.Resources.AudioFile.ToBitmap();
                 ImageProcessing.GrayToBlack(img);
                 return img;
-            }
-        }
-
-        public static Image AudioFile16
-        {
-            get
-            {
-                return AudioFile.Resize(false);
             }
         }
 
@@ -88,14 +61,6 @@ namespace OPMedia.UI.Generic
             }
         }
 
-        public static Image VideoFile16
-        {
-            get
-            {
-                return VideoFile.Resize(false);
-            }
-        }
-
         public static Image Library
         {
             get
@@ -103,14 +68,6 @@ namespace OPMedia.UI.Generic
                 var img = OPMedia.Core.Properties.Resources.Library.ToBitmap();
                 ImageProcessing.GrayToBlack(img);
                 return img;
-            }
-        }
-
-        public static Image Library16
-        {
-            get
-            {
-                return Library.Resize(false);
             }
         }
 
@@ -124,15 +81,6 @@ namespace OPMedia.UI.Generic
             }
         }
 
-        public static Image Player16
-        {
-            get
-            {
-                return Player.Resize(false);
-            }
-        }
-
-
         public static Image Playlist
         {
             get
@@ -143,15 +91,6 @@ namespace OPMedia.UI.Generic
             }
         }
 
-        public static Image Playlist16
-        {
-            get
-            {
-                return Playlist.Resize(false);
-            }
-        }
-
-
         public static Image Bookmark
         {
             get
@@ -159,14 +98,6 @@ namespace OPMedia.UI.Generic
                 var img = OPMedia.Core.Properties.Resources.bookmark.ToBitmap();
                 ImageProcessing.GrayToBlack(img);
                 return img;
-            }
-        }
-
-        public static Image Bookmark16
-        {
-            get
-            {
-                return Bookmark.Resize(false);
             }
         }
 
@@ -180,14 +111,6 @@ namespace OPMedia.UI.Generic
             }
         }
 
-        public static Image CDA16
-        {
-            get
-            {
-                return CDA.Resize(false);
-            }
-        }
-
         public static Image DVD
         {
             get
@@ -197,15 +120,6 @@ namespace OPMedia.UI.Generic
                 return img;
             }
         }
-
-        public static Image DVD16
-        {
-            get
-            {
-                return CDA.Resize(false);
-            }
-        }
-
 
         public static Bitmap Brightness(Image b, float brightness)
         {

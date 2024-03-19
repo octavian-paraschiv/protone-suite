@@ -80,8 +80,8 @@ namespace OPMedia.Addons.Builtin.FileExplorer
         {
             InitializeComponent();
 
-            tsmiProTONEPlay.Image = ImageProcessing.Player16;
-            tsmiProTONEEnqueue.Image = ImageProcessing.Player16;
+            tsmiProTONEPlay.Image = ImageProcessing.Player;
+            tsmiProTONEEnqueue.Image = ImageProcessing.Player;
 
             opmShellList.BorderStyle = BorderStyle.None;
 
@@ -97,7 +97,6 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             this.tsmiNewFolder.Image = OPMedia.UI.Properties.Resources.New_Folder_Command;
 
             this.AddonImage = Resources.FileExplorer;
-            this.SmallAddonImage = Resources.FileExplorer.Resize(false);
 
             updateUiTimer = new Timer();
             updateUiTimer.Enabled = true;

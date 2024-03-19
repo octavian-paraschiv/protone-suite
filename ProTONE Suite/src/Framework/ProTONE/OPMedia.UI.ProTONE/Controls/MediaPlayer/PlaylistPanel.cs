@@ -298,7 +298,7 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
                     else if (SubtitleDownloadProcessor.TestForExistingSubtitle(plItem.Path))
                     {
                         // Already having a subtitle
-                        imgMisc = ImageProcessing.Subtitle16;
+                        imgMisc = ImageProcessing.Subtitle;
                         txtMisc = Translator.Translate("TXT_SUBTITLE_AVAILABLE");
                     }
                 }
