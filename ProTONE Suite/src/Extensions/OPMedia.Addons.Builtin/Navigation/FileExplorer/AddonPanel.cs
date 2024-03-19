@@ -117,7 +117,7 @@ namespace OPMedia.Addons.Builtin.FileExplorer
             ilFavorites = new ImageList();
             ilFavorites.ImageSize = new Size(16, 16);
             ilFavorites.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            ilFavorites.Images.Add(Resources.none);
+            ilFavorites.Images.Add(ImageProcessing.ColoredBitmap(16, 16));
 
             toolStripMain.ImageList = ilDrives;
 

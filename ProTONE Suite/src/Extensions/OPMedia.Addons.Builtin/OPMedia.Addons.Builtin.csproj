@@ -275,9 +275,6 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-	<None Include="Resources\none.ico" />
-  </ItemGroup>
-  <ItemGroup>
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj" />
 	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />

@@ -48,7 +48,6 @@ LanguageDetectionMethod=locale
 MinVersion=0,6.1.7601
 
 PrivilegesRequired=admin
-SetupIconFile=Installer.ico
 SetupLogging=true
 ShowLanguageDialog=yes
 ShowTasksTreeLines=true
@@ -57,9 +56,7 @@ SolidCompression=true
 UninstallLogMode=append
 UsePreviousLanguage=no
 WizardImageBackColor=clBlack
-WizardImageFile=..\main.bmp
 WizardImageStretch=false
-WizardSmallImageFile=..\main_small.bmp
 RestartApplications=False
 CloseApplications=no
 
