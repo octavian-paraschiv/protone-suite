@@ -343,7 +343,6 @@
 	</EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-	<ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj" />
 	<ProjectReference Include="..\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
