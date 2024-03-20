@@ -227,6 +227,8 @@ namespace OPMedia.Runtime.Addons
                 }
             }
 
+            this.RegisterAsEventSink();
+
             this.VSplitterDistance = AddonAppConfig.VSplitterDistance;
             this.HSplitterDistance = AddonAppConfig.HSplitterDistance;
         }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using OPMedia.Core.Logging;
+﻿using OPMedia.Core.Logging;
 using OPMedia.Core.TranslationSupport;
-using OPMedia.Runtime.Addons.AddonsBase;
-using OPMedia.Core.Configuration;
-using Newtonsoft.Json;
+using System;
+using System.Windows.Forms;
 
 namespace OPMedia.SkinBuilder
 {

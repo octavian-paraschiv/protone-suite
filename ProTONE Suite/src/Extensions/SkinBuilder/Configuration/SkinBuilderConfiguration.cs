@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OPMedia.Core.Configuration;
-using OPMedia.Core;
+﻿using OPMedia.Core;
 
 namespace OPMedia.SkinBuilder.Configuration
 {
-    public class SkinBuilderConfiguration 
+    public class SkinBuilderConfiguration
     {
         public static string LastOpenedFolder
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "LastOpenedFolder", string.Empty);
+                return SettingsProxy.Instance.ReadNode(true, "LastOpenedFolder", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "LastOpenedFolder", value);
+                SettingsProxy.Instance.SaveNode(true, "LastOpenedFolder", value);
             }
         }
 
@@ -25,11 +20,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "OpenLastFile", false);
+                return SettingsProxy.Instance.ReadNode(true, "OpenLastFile", false);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "OpenLastFile", value);
+                SettingsProxy.Instance.SaveNode(true, "OpenLastFile", value);
             }
         }
 
@@ -37,11 +32,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "RememberRecentFiles", false);
+                return SettingsProxy.Instance.ReadNode(true, "RememberRecentFiles", false);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "RememberRecentFiles", value);
+                SettingsProxy.Instance.SaveNode(true, "RememberRecentFiles", value);
             }
         }
 
@@ -49,11 +44,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "RecentFilesCount", 5);
+                return SettingsProxy.Instance.ReadNode(true, "RecentFilesCount", 5);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "RecentFilesCount", value);
+                SettingsProxy.Instance.SaveNode(true, "RecentFilesCount", value);
             }
         }
 
@@ -61,11 +56,11 @@ namespace OPMedia.SkinBuilder.Configuration
         {
             get
             {
-                return PersistenceProxy.ReadObject(true, "RecentFiles", string.Empty);
+                return SettingsProxy.Instance.ReadNode(true, "RecentFiles", string.Empty);
             }
             set
             {
-                PersistenceProxy.SaveObject(true, "RecentFiles", value);
+                SettingsProxy.Instance.SaveNode(true, "RecentFiles", value);
             }
         }
     }

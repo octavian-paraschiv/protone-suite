@@ -21,6 +21,11 @@ namespace OPMedia.Runtime.Addons.AddonsBase
 
         static Dictionary<string, string> _diskAddonsConfig = null;
 
+        static Dictionary<string, string> _defaultAddonsConfig = new Dictionary<string, string>
+        {
+
+        };
+
         public static string[] NavigationAddons
         {
             get
