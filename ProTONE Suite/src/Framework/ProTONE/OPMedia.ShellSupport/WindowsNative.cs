@@ -3,13 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace OPMedia.Core
 {
-    public enum ChangeWindowMessageFilterFlags : uint
+    internal enum ChangeWindowMessageFilterFlags : uint
     {
         Add = 1,
         Remove = 2
     }
 
-    public enum MessageFilterInfo : uint
+    internal enum MessageFilterInfo : uint
     {
         None = 0,
         AlreadyAllowed = 1,
@@ -17,14 +17,14 @@ namespace OPMedia.Core
         AllowedHigher = 3
     }
 
-    public enum ChangeWindowMessageFilterExAction : uint
+    internal enum ChangeWindowMessageFilterExAction : uint
     {
         Reset = 0,
         Allow = 1,
         DisAllow = 2
     }
 
-    public enum SendMessageTimeoutFlags
+    internal enum SendMessageTimeoutFlags
     {
         SMTO_NORMAL = 0x0000,
         SMTO_BLOCK = 0x0001,
@@ -33,34 +33,34 @@ namespace OPMedia.Core
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct COPYDATASTRUCT
+    internal struct COPYDATASTRUCT
     {
-        public UIntPtr dwData;
-        public uint cbData;
-        public IntPtr lpData;
+        internal UIntPtr dwData;
+        internal uint cbData;
+        internal IntPtr lpData;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct CHANGEFILTERSTRUCT
+    internal struct CHANGEFILTERSTRUCT
     {
-        public uint size;
-        public MessageFilterInfo info;
+        internal uint size;
+        internal MessageFilterInfo info;
     }
 
-    public static class WindowsVersions
+    internal static class WindowsVersions
     {
-        public const int Win2000 = 50;
-        public const int WinXP = 51;
+        internal const int Win2000 = 50;
+        internal const int WinXP = 51;
 
-        public const int WinVista = 60;
-        public const int Win7 = 61;
+        internal const int WinVista = 60;
+        internal const int Win7 = 61;
 
-        public const int Win8 = 62;
-        public const int Win8_1 = 63;
+        internal const int Win8 = 62;
+        internal const int Win8_1 = 63;
 
-        public const int Win10 = 100;
+        internal const int Win10 = 100;
 
-        public static uint CurrentVersion
+        internal static uint CurrentVersion
         {
             get
             {
@@ -74,9 +74,9 @@ namespace OPMedia.Core
         }
     }
 
-    public class S_Kernel32
+    internal static class S_Kernel32
     {
-        public const string KERNEL32 = "kernel32.dll";
+        internal const string KERNEL32 = "kernel32.dll";
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto)]
         internal extern static int GetLastError();
@@ -85,24 +85,24 @@ namespace OPMedia.Core
         internal static extern Int32 GlobalSize(IntPtr hmem);
     }
 
-    public class S_User32
+    internal static class S_User32
     {
-        public const string USER32 = "user32.dll";
+        internal const string USER32 = "user32.dll";
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        internal static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport(USER32)]
-        public static extern bool ChangeWindowMessageFilter(uint message,
+        internal static extern bool ChangeWindowMessageFilter(uint message,
             ChangeWindowMessageFilterFlags dwFlag);
 
         [DllImport(USER32)]
-        public static extern bool ChangeWindowMessageFilterEx(IntPtr hWnd,
+        internal static extern bool ChangeWindowMessageFilterEx(IntPtr hWnd,
             uint msg, ChangeWindowMessageFilterExAction action,
             ref CHANGEFILTERSTRUCT changeInfo);
 
         [DllImport(USER32, CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessageTimeout(
+        internal static extern IntPtr SendMessageTimeout(
            IntPtr windowHandle,
            int Msg,
            IntPtr wParam,
@@ -111,7 +111,7 @@ namespace OPMedia.Core
            int timeout,
            out IntPtr result);
 
-        public static bool UIPI_AllowWindowsMessage(IntPtr wndHandle, uint msg, string desc)
+        internal static bool UIPI_AllowWindowsMessage(IntPtr wndHandle, uint msg, string desc)
         {
             bool ret = true;
 

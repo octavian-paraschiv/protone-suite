@@ -117,8 +117,8 @@ namespace OPMedia.UI.Controls.Dialogs
 
             this.Load += new EventHandler(OPMFileDialog_Load);
 
-            btnAddToFavorites.Image = Resources.Favorites;
-            btnNewFolder.Image = Resources.New_Folder_Command;
+            btnAddToFavorites.Image = Resources.Favorites.Resize(false);
+            btnNewFolder.Image = Resources.New_Folder_Command.Resize(false);
 
             _tt = new OPMToolTipManager(btnAddToFavorites);
             _tt2 = new OPMToolTipManager(btnNewFolder);

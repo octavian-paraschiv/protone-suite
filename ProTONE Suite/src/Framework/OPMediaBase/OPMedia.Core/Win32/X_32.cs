@@ -215,4 +215,31 @@ namespace OPMedia.Core
         public ushort SizeOfOptionalHeader;
         public ushort Characteristics;
     };
+
+    public static class WindowsVersions
+    {
+        public const int Win2000 = 50;
+        public const int WinXP = 51;
+
+        public const int WinVista = 60;
+        public const int Win7 = 61;
+
+        public const int Win8 = 62;
+        public const int Win8_1 = 63;
+
+        public const int Win10 = 100;
+
+        public static uint CurrentVersion
+        {
+            get
+            {
+                uint winVer = 0;
+
+                winVer += (uint)Environment.OSVersion.Version.Major * 10;
+                winVer += (uint)Environment.OSVersion.Version.Minor;
+
+                return winVer;
+            }
+        }
+    }
 }

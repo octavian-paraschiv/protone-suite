@@ -22,10 +22,11 @@
 	<Compile Update="FfdShowApi\FFDShowReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
-	<ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
 	<ProjectReference Include="..\..\OPMediaBase\OPMedia.UI\OPMedia.UI.csproj" />
+	<ProjectReference Include="..\OPMedia.DeezerInterop\OPMedia.DeezerInterop.csproj" />
+	<ProjectReference Include="..\OPMedia.ShellSupport\OPMedia.ShellSupport.csproj" />
   </ItemGroup>
   <ItemGroup>
 	<Content Include="DefaultOnlineMediaData.xml">
