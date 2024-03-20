@@ -63,7 +63,7 @@ namespace OPMedia.Core.Configuration
         public const string UriBase = "http://ocpa.ro/protone/";
 
         const string VersionApiUriBase = UriBase + "?release={0}";
-        const string DefaultHelpUriBase = UriBase + "protone-suite-docs/#VERSION#/";
+        const string DefaultHelpUriBase = UriBase + "protone-suite-docs/#VERSION#";
 
         public const string UnconfiguredThemeName = "Light";
 
@@ -276,34 +276,43 @@ namespace OPMedia.Core.Configuration
             }
         }
 
+        static readonly string _overrideDocLocation =
+            SettingsProxy.Instance.ReadNode("OverrideDocumentationLocation", default(string));
+
+        public static string OverrideDocLocation => _overrideDocLocation;
+
         public static string HelpUriBase
         {
             get
             {
                 try
                 {
-                    if (UseOnlineDocumentation)
+                    if (_overrideDocLocation?.Length > 0)
                     {
-                        string val = DefaultHelpUriBase;
-                        if (!string.IsNullOrEmpty(val))
-                        {
-                            Version ver = new Version(SuiteVersion.Version);
-                            val = val.Replace("#VERSION#", string.Format("{0}.{1}", ver.Major, ver.Minor));
-                            return val;
-                        }
+                        if (_overrideDocLocation.StartsWith("http", StringComparison.OrdinalIgnoreCase) ||
+                            _overrideDocLocation.StartsWith("file", StringComparison.OrdinalIgnoreCase))
+                            return _overrideDocLocation;
+
+                        return string.Format("file:///{0}", _overrideDocLocation.Replace("\\", "/"));
+                    }
+
+                    string val = DefaultHelpUriBase;
+
+                    if (val?.Length > 0)
+                    {
+                        Version ver = new Version(SuiteVersion.Version);
+                        if (ver.Major == 1)
+                            val = val.Replace("#VERSION#", "dev");
+                        else
+                            val = val.Replace("#VERSION#", string.Format("{0}.{1}",
+                                Math.Max(2, ver.Major), ver.Minor));
+
+                        return val;
                     }
                 }
                 catch { }
 
-                return string.Format("file:///{0}/docs", AppConfig.InstallationPath);
-            }
-        }
-
-        public static bool UseOnlineDocumentation
-        {
-            get
-            {
-                return SettingsProxy.Instance.ReadNode("UseOnlineDocumentation", true);
+                return string.Format("file:///{0}/docs", AppConfig.InstallationPath.Replace("\\", "/"));
             }
         }
 

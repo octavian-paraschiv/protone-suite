@@ -106,8 +106,6 @@ namespace OPMedia.UI.Themes
             this.Shown += new EventHandler(ThemeForm_Shown);
 
             this.ShowInTaskbar = false;
-
-            this.RegisterAsEventSink();
         }
 
         protected virtual bool AutoCenterEnabled
@@ -309,6 +307,7 @@ namespace OPMedia.UI.Themes
 
         void ThemeForm_HandleCreated(object sender, EventArgs e)
         {
+            this.RegisterAsEventSink();
             ApplyIcons();
         }
 

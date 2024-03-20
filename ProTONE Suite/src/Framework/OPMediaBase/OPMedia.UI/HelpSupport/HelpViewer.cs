@@ -1,29 +1,22 @@
-﻿using OPMedia.Core.Configuration;
-using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
+﻿using OPMedia.Core.TranslationSupport;
 using OPMedia.UI.Controls;
 using OPMedia.UI.Themes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.IO;
-using System.Net;
-using System.Text;
 using System.Windows.Forms;
 
 namespace OPMedia.UI.HelpSupport
 {
     public class HelpViewer : ToolForm
     {
-        BackgroundWorker _loader;
         private Controls.OPMToolStrip tsMain;
         private OPMTriStateToolStripButton tsbPrev;
         private OPMTriStateToolStripButton tsbNext;
         private System.Windows.Forms.WebBrowser wbHelpDisplay;
 
-        private Stack<string> bckUrls = new Stack<string>();
-        private Stack<string> fwdUrls = new Stack<string>();
+        private Stack<string> _bckUrls = new Stack<string>();
+        private Stack<string> _fwdUrls = new Stack<string>();
 
         #region InitializeComponent
         private void InitializeComponent()
@@ -151,50 +144,10 @@ namespace OPMedia.UI.HelpSupport
             this.InheritAppIcon = false;
             this.Icon = SystemIcons.Question;
 
-            _loader = new BackgroundWorker();
-            _loader.DoWork += new DoWorkEventHandler(OnLoadHelpDocument);
-            _loader.RunWorkerCompleted += new RunWorkerCompletedEventHandler(OnHelpDocumentLoadCompleted);
 
-            wbHelpDisplay.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(wbHelpDisplay_DocumentCompleted);
+            wbHelpDisplay.DocumentCompleted += wbHelpDisplay_DocumentCompleted;
         }
 
-        void OnHelpDocumentLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            string docToDisplay = GenerateDocument("[ There is no document to display. ]");
-
-            if (e.Cancelled)
-            {
-                docToDisplay = GenerateDocument("Navigation cancelled !");
-            }
-            else if (e.Error != null)
-            {
-                docToDisplay = GenerateDocument(string.Format("Exception occured: {0}", e.Error));
-            }
-            else
-            {
-                string s = e.Result as string;
-                if (s != null)
-                {
-                    docToDisplay = s;
-                }
-            }
-
-            wbHelpDisplay.Navigating -= new WebBrowserNavigatingEventHandler(wbHelpDisplay_Navigating);
-            wbHelpDisplay.DocumentText = docToDisplay;
-            BringToFront();
-        }
-
-        void OnLoadHelpDocument(object sender, DoWorkEventArgs e)
-        {
-            object result = null;
-            string helpUri = e.Argument as String;
-            if (helpUri != null)
-            {
-                result = LoadURL(helpUri);
-            }
-
-            e.Result = result;
-        }
 
         void HelpViewer_Shown(object sender, EventArgs e)
         {
@@ -205,120 +158,29 @@ namespace OPMedia.UI.HelpSupport
 
         private TableLayoutPanel tableLayoutPanel1;
 
-        string _uri = string.Empty;
+        string _displayedUrl = string.Empty;
+        bool _fromHistory = false;
 
-        internal void OpenURL(string helpUri)
+        public void OpenURL(string helpUri, bool fromHistory = false)
         {
-            if (string.IsNullOrEmpty(_uri) == false)
-            {
-                bckUrls.Push(_uri);
+            _fromHistory = fromHistory;
+            wbHelpDisplay.DocumentText = "Document is loading, please wait ...";
+            wbHelpDisplay.Url = new Uri(helpUri);
+        }
+
+        void wbHelpDisplay_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            var newUrl = GetUrlWithoutFragment(e.Url);
+
+            if (_displayedUrl?.Length > 0 &&
+                string.Compare(newUrl ?? "", _displayedUrl, true) != 0 &&
+                !_fromHistory &&
+                PushUrlToStack(_bckUrls, _displayedUrl))
                 UpdatePrevnextDocuments();
-            }
 
-            InternalOpenurl(helpUri);
-        }
+            _fromHistory = false;
+            _displayedUrl = newUrl;
 
-        private void InternalOpenurl(string helpUri)
-        {
-            wbHelpDisplay.DocumentText = GenerateDocument("Document is loading, please wait ...");
-            _loader.RunWorkerAsync(helpUri);
-        }
-
-        private string LoadURL(string helpUri)
-        {
-            _uri = helpUri;
-            StringBuilder sb = new StringBuilder();
-
-            string docText = string.Empty;
-
-            Uri uri = new Uri(helpUri);
-            if (uri.Scheme == "file")
-            {
-                try
-                {
-
-                    string[] docLines = File.ReadAllLines(uri.LocalPath);
-                    for (int i = 0; i < docLines.Length; i++)
-                    {
-                        if (docLines[i].ToLowerInvariant() == "<html>")
-                        {
-                            docLines[i] += GenerateStyleSheet();
-                        }
-                        else if (docLines[i].ToLowerInvariant().Contains("<img"))
-                        {
-                            docLines[i] = docLines[i].ToLowerInvariant().Replace("src=\"images", string.Format("src=\"{0}\\docs\\images",
-                                AppConfig.InstallationPath));
-                        }
-
-                        sb.AppendLine(docLines[i]);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogException(ex);
-                }
-
-                docText = sb.ToString();
-            }
-            else
-            {
-                HttpWebRequest request = WebRequest.Create(helpUri) as HttpWebRequest;
-
-                // execute the request
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                    {
-                        string[] docLines = sr.ReadToEnd().Split(Environment.NewLine.ToCharArray());
-                        for (int i = 0; i < docLines.Length; i++)
-                        {
-                            if (docLines[i].ToLowerInvariant() == "<html>")
-                            {
-                                docLines[i] += GenerateStyleSheet();
-                            }
-                            else if (docLines[i].ToLowerInvariant().Contains("<img"))
-                            {
-                                docLines[i] = docLines[i].ToLowerInvariant().Replace("src=\"images", string.Format("src=\"{0}/images",
-                                    AppConfig.HelpUriBase));
-                            }
-
-                            sb.AppendLine(docLines[i]);
-                        }
-                    }
-                }
-
-                docText = sb.ToString();
-            }
-
-            return docText;
-        }
-
-        private string GenerateDocument(String text)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<html>");
-            sb.AppendLine(GenerateStyleSheet());
-            sb.AppendLine(text);
-            sb.AppendLine("</html>");
-            return sb.ToString();
-        }
-
-        private string GenerateStyleSheet()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine();
-            sb.AppendLine("<style type=\"text/css\">");
-            sb.AppendLine("h1 {{ font-family:Arial; font-size:12px; font-weight:bold; }}");
-            sb.AppendLine("h2 {{ font-family:Arial; font-size:11px; font-weight:bold; text-decoration: underline; }}");
-            sb.AppendLine("a {{ font-family:Arial; font-size:11px; font-weight:bold; }}");
-            sb.AppendLine("body {{ font-family:Arial; font-size:11px; }}");
-            sb.AppendLine("td {{ font-family:Arial; font-size:10px; }}");
-            sb.AppendLine("</style>");
-            return sb.ToString();
-        }
-
-        void wbHelpDisplay_DocumentCompleted(object sender, System.Windows.Forms.WebBrowserDocumentCompletedEventArgs e)
-        {
             string newTitle = string.Format("{0} {1}: {2}",
                 Translator.Translate("TXT_APP_NAME"),
                 Translator.Translate("TXT_HELP"),
@@ -326,42 +188,6 @@ namespace OPMedia.UI.HelpSupport
                 );
 
             SetTitle(newTitle);
-
-            wbHelpDisplay.Navigating += new WebBrowserNavigatingEventHandler(wbHelpDisplay_Navigating);
-        }
-
-        void wbHelpDisplay_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            if (e == null || e.Url == null)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            e.Cancel = false;
-
-            if (e.Url.AbsolutePath == null ||
-                e.Url.AbsolutePath.ToLowerInvariant() == "blank")
-                return;
-
-            string url = CombineURIs(new Uri(_uri), e.Url);
-            if (!string.IsNullOrEmpty(url))
-            {
-                e.Cancel = true;
-                OpenURL(url.Replace("\\", "/"));
-            }
-        }
-
-        private string CombineURIs(Uri baseUri, Uri relativeUri)
-        {
-            if (relativeUri.Scheme == "about")
-            {
-                string baseUrl = baseUri.AbsoluteUri;
-                string url = baseUrl.Replace(Path.GetFileName(baseUrl), relativeUri.AbsolutePath);
-                return url;
-            }
-
-            return relativeUri.AbsolutePath;
         }
 
         private void wbHelpDisplay_PreviewKeyDown(object sender, System.Windows.Forms.PreviewKeyDownEventArgs e)
@@ -394,55 +220,31 @@ namespace OPMedia.UI.HelpSupport
 
         private void tsbPrev_Click(object sender, EventArgs e)
         {
-            string s = null;
+            var url = PopUrlFromStack(_bckUrls);
 
-            try
-            {
-                s = bckUrls.Pop();
-            }
-            catch
-            {
-                s = null;
-            }
-
-            if (!string.IsNullOrEmpty(s))
-            {
-                fwdUrls.Push(_uri);
-                InternalOpenurl(s);
-            }
+            if (url?.Length > 0 && PushUrlToStack(_fwdUrls, _displayedUrl))
+                OpenURL(url, true);
 
             UpdatePrevnextDocuments();
         }
 
         private void tsbNext_Click(object sender, EventArgs e)
         {
-            string s = null;
+            var url = PopUrlFromStack(_fwdUrls);
 
-            try
-            {
-                s = fwdUrls.Pop();
-            }
-            catch
-            {
-                s = null;
-            }
-
-            if (!string.IsNullOrEmpty(s))
-            {
-                bckUrls.Push(_uri);
-                InternalOpenurl(s);
-            }
+            if (url?.Length > 0 && PushUrlToStack(_bckUrls, _displayedUrl))
+                OpenURL(url, true);
 
             UpdatePrevnextDocuments();
         }
 
         private void UpdatePrevnextDocuments()
         {
-            if (bckUrls.Count > 0)
+            if (_bckUrls.Count > 0)
             {
                 tsbPrev.Enabled = true;
                 tsbPrev.ToolTipText = string.Format("{0}: {1}",
-                  Translator.Translate("TXT_BACK"), bckUrls.Peek());
+                  Translator.Translate("TXT_BACK"), _bckUrls.Peek());
             }
             else
             {
@@ -450,17 +252,57 @@ namespace OPMedia.UI.HelpSupport
                 tsbPrev.ToolTipText = string.Empty;
             }
 
-            if (fwdUrls.Count > 0)
+            if (_fwdUrls.Count > 0)
             {
                 tsbNext.Enabled = true;
                 tsbNext.ToolTipText = string.Format("{0}: {1}",
-                   Translator.Translate("TXT_FORWARD"), fwdUrls.Peek());
+                   Translator.Translate("TXT_FORWARD"), _fwdUrls.Peek());
             }
             else
             {
                 tsbNext.Enabled = false;
                 tsbNext.ToolTipText = string.Empty;
             }
+        }
+
+        private bool PushUrlToStack(Stack<string> stack, string url)
+        {
+            try
+            {
+                if (stack != null)
+                {
+                    var uri = new Uri(url);
+                    if (string.Compare(uri.Scheme, "about", true) != 0 && string.IsNullOrEmpty(uri.Fragment))
+                    {
+                        string topUriInStack = (stack.Count > 0) ? stack.Peek() : null;
+                        if (string.Compare(topUriInStack, url, true) != 0)
+                        {
+                            stack.Push(url);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
+        private string PopUrlFromStack(Stack<string> stack)
+        {
+            return (stack?.Count > 0) ? stack.Pop() : null;
+        }
+
+        private string GetUrlWithoutFragment(Uri uri)
+        {
+            try
+            {
+                if (uri?.Fragment?.Length > 0)
+                    return uri.ToString().Replace(uri.Fragment, "");
+            }
+            catch { }
+
+            return uri?.ToString();
         }
     }
 }
