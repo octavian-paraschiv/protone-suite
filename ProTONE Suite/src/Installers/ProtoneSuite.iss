@@ -202,7 +202,9 @@ Source: "{#BINDIR}\OPMedia.ShoutcastWorker.exe.config"; DestDir: "{app}"; Flags:
 Source: "{#BINDIR}\OPMedia.VideoDVDWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 Source: "{#BINDIR}\OPMedia.VideoWorker.exe.config"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
 ;--------------------------------------
-
+; Other config files
+Source: "{#BINDIR}\OPMedia.MediaLibrary.addons.json"; DestDir: "{app}"; Flags: replacesameversion uninsremovereadonly promptifolder uninsrestartdelete touch restartreplace
+;--------------------------------------
 [Icons]
 Name: {group}\{cm:UninstallProgram,ProTONE Suite}; Filename: {uninstallexe}
 Name: {group}\{cm:namePlayer}; Filename: {app}\OPMedia.ProTONE.exe; WorkingDir: {app}; IconFilename: {app}\Resources\player.ico; Comment: {cm:startPlayer}

@@ -12,3 +12,4 @@ ProTONE Suite/src/package-builder/*.dll
 ProTONE Suite/src/package-builder/*.exe
 ProTONE Suite/src/Applications/OPMedia.MediaLibrary/Library.ico
 ProTONE Suite/src/Applications/OPMedia.ProTONE/player.ico
+ProTONE Suite/output/
