@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
-using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OPMedia.Core.TranslationSupport
+namespace OPMedia.Core.Settings
 {
     public delegate void DictionaryUpdatedHandler();
 
@@ -148,22 +147,6 @@ namespace OPMedia.Core.TranslationSupport
                 Logger.LogException(ex);
             }
             return false;
-        }
-    }
-
-    public delegate void TranslationsUpdatedHandler(string lang);
-
-    public class TranslationsFile : DictionaryFile
-    {
-        string _lang;
-
-        public event TranslationsUpdatedHandler TranslationsUpdated;
-
-        public TranslationsFile(string lang)
-            : base($"{AppConfig.InstallationPath}/Translations/{ApplicationInfo.ApplicationName}-{lang}.json")
-        {
-            _lang = lang;
-            base.DictionaryUpdated += () => TranslationsUpdated?.Invoke(_lang);
         }
     }
 }

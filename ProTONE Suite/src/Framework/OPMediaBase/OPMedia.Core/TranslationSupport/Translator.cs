@@ -14,6 +14,7 @@
 using OPMedia.Core.Configuration;
 using OPMedia.Core.InstanceManagement;
 using OPMedia.Core.Logging;
+using OPMedia.Core.Settings;
 using OPMedia.Core.Utilities;
 using System;
 using System.Collections.Generic;
@@ -303,6 +304,22 @@ namespace OPMedia.Core.TranslationSupport
 
             Logger.LogUntranslatable(s);
             return false;
+        }
+
+        internal delegate void TranslationsUpdatedHandler(string lang);
+
+        internal class TranslationsFile : DictionaryFile
+        {
+            private string _lang;
+
+            internal event TranslationsUpdatedHandler TranslationsUpdated;
+
+            internal TranslationsFile(string lang)
+                : base($"{AppConfig.InstallationPath}/Translations/{ApplicationInfo.ApplicationName}-{lang}.json")
+            {
+                _lang = lang;
+                base.DictionaryUpdated += () => TranslationsUpdated?.Invoke(_lang);
+            }
         }
     }
 }

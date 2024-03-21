@@ -1,6 +1,6 @@
 ﻿using OPMedia.Core.Configuration;
 using OPMedia.Core.Logging;
-using OPMedia.Core.TranslationSupport;
+using OPMedia.Core.Settings;
 using OPMedia.Core.Utilities;
 using System;
 using System.IO;
@@ -30,8 +30,12 @@ namespace OPMedia.Core
 
         private SettingsProxy()
         {
-            _appSettingsFile = new DictionaryFile(AppSettingsStorePath);
-            _appSettingsFile.DictionaryUpdated += () => AppConfig.OnSettingsChanged();
+            if (!ApplicationInfo.ApplicationName.EndsWith("worker", StringComparison.OrdinalIgnoreCase))
+            {
+                // Worker processes don't have an application settings store
+                _appSettingsFile = new DictionaryFile(AppSettingsStorePath);
+                _appSettingsFile.DictionaryUpdated += () => AppConfig.OnSettingsChanged();
+            }
 
             _suiteSettingsFile = new DictionaryFile(SuiteSettingsStorePath);
             _suiteSettingsFile.DictionaryUpdated += () => AppConfig.OnSettingsChanged();
