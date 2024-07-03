@@ -13,9 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProTONE", "ProTONE", "{1140
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EE48AD0-EB1A-46F0-BF87-2587913815BF}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\appveyor.yml = ..\..\appveyor.yml
 		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
-		..\..\prep_build.ps1 = ..\..\prep_build.ps1
 		Installers\ProtoneSuite.iss = Installers\ProtoneSuite.iss
 		Installers\Include\SetupCode.pas = Installers\Include\SetupCode.pas
 	EndProjectSection
@@ -166,7 +164,7 @@ Global
 		{1988DB5F-1FA6-4648-939E-89F11761FB94} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-GB
 		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
+		RESX_NeutralResourcesLanguage = en-GB
 	EndGlobalSection
 EndGlobal
