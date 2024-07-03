@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>SkinBuilder</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\Bin\</OutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Reference Include="OPMedia.Core">
+	    <HintPath>..\..\Bin\OPMedia.Core.dll</HintPath>
+	  </Reference>
+	  <Reference Include="OPMedia.Runtime">
+	    <HintPath>..\..\Bin\OPMedia.Runtime.dll</HintPath>
+	  </Reference>
+	  <Reference Include="OPMedia.Runtime.Addons">
+	    <HintPath>..\..\Bin\OPMedia.Runtime.Addons.dll</HintPath>
+	  </Reference>
+	  <Reference Include="OPMedia.UI">
+	    <HintPath>..\..\Bin\OPMedia.UI.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System.Windows.Forms" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,553 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.UI</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+  <PropertyGroup>
+	<PreBuildEvent />
+	<PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.Design" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="ApplicationUpdate\UpdateWaitForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="ApplicationUpdate\UpdateWaitForm.Designer.cs">
+	  <DependentUpon>UpdateWaitForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\BaseCfgPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\ControlAppPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\ControlAppPanel.designer.cs">
+	  <DependentUpon>ControlAppPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\MultiPageCfgPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\MultiPageCfgPanel.designer.cs">
+	  <DependentUpon>MultiPageCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\GeneralSettingsPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\GeneralSettingsPanel.Designer.cs">
+	  <DependentUpon>GeneralSettingsPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\KeyCommandEditor.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Configuration\KeyCommandEditor.Designer.cs">
+	  <DependentUpon>KeyCommandEditor.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\KeyMapCfgPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\KeyMapCfgPanel.Designer.cs">
+	  <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\InternetSettingsPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\InternetSettingsPanel.designer.cs">
+	  <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\NetworkCfgPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\NetworkCfgPanel.designer.cs">
+	  <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\SettingsForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Configuration\SettingsForm.Designer.cs">
+	  <DependentUpon>SettingsForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\TroubleshootingPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\TroubleshootingPanel.designer.cs">
+	  <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Derived\ImageButton.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMFontChooserCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMFontChooserCtl.Designer.cs">
+	  <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Custom\GraphPlotter.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\Derived\MultilineEditTextBox.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMColorChooserCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMColorChooserCtl.Designer.cs">
+	  <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Derived\OPMDoubleBufferControl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMPropertyGrid.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Derived\OPMNumericTextBox.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMGroupBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Containers\OPMLayoutPanel.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Derived\OPMBaseControl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\ListView\OPMShellListView.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\TreeView\OPMShellTreeView.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMNumericUpDown.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\OPMTextBox.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\BooleanChooser.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\BooleanChooser.Designer.cs">
+	  <DependentUpon>BooleanChooser.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.Designer.cs">
+	  <DependentUpon>EnumeratedTypeChooser.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\IntegerChooser.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\IntegerChooser.Designer.cs">
+	  <DependentUpon>IntegerChooser.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\SBColorChooser.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\StringChooser.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\Choosers\StringChooser.Designer.cs">
+	  <DependentUpon>StringChooser.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\OPMPropertyEditor.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\PropertyEditor\OPMPropertyEditor.Designer.cs">
+	  <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
+	</Compile>
+	<Compile Update="TrayNotificationBox.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Controls\Derived\ToolAndMenuStrips.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\TreeView\OPMTreeView.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\FileAttributesBrowserCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\FileAttributesBrowserCtl.Designer.cs">
+	  <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Derived\WaitingPictureBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Custom\ControlGauge.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\Custom\GradientGauge.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\NetworkStatusIndicator.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\ProxySettingsDefinitionCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\ProxySettingsDefinitionCtl.designer.cs">
+	  <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Common\OPMTabControl.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Dialogs\OPMFontChooserDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\OPMFontChooserDialog.Designer.cs">
+	  <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Dialogs\OPMColorChooserDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\OPMColorChooserDialog.Designer.cs">
+	  <DependentUpon>OPMColorChooserDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Dialogs\OPMFolderBrowserDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\OPMFolderBrowserDialog.Designer.cs">
+	  <DependentUpon>OPMFolderBrowserDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Dialogs\OPMFileDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\OPMFileDialog.Designer.cs">
+	  <DependentUpon>OPMFileDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\UserControls\WeekdaySelector.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Controls\UserControls\WeekdaySelector.Designer.cs">
+	  <DependentUpon>WeekdaySelector.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\Derived\TransparentRichTextBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Dialogs\GenericWaitDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\GenericWaitDialog.Designer.cs">
+	  <DependentUpon>GenericWaitDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Dialogs\InsertDriveNotifyDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\InsertDriveNotifyDialog.Designer.cs">
+	  <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Dialogs\TimerWaitingDialog.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Dialogs\TimerWaitingDialog.Designer.cs">
+	  <DependentUpon>TimerWaitingDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="FileOperations\Forms\FileTaskErrorReport.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="FileOperations\Forms\FileTaskErrorReport.Designer.cs">
+	  <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
+	</Compile>
+	<Compile Update="FileOperations\Forms\FileTaskForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="FileOperations\Forms\FileTaskForm.Designer.cs">
+	  <DependentUpon>FileTaskForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="HelpSupport\HelpViewer.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMButton.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMCheckBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMComboBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMDateTimePicker.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMEditableComboBox.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Common\OPMLabel.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Derived\OPMNumericUpDownBase.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Controls\Containers\OPMSplitContainer.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Properties\Resources.Designer.cs">
+	  <AutoGen>True</AutoGen>
+	  <DesignTime>True</DesignTime>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+	<Compile Update="MessageDisplay.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="MessageDisplay.Designer.cs">
+	  <DependentUpon>MessageDisplay.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Themes\ThemeForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Themes\ThemeForm.Designer.cs">
+	  <DependentUpon>ThemeForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Themes\ThemeFormBase.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Wizards\StepButtonsCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Wizards\StepButtonsCtl.Designer.cs">
+	  <DependentUpon>StepButtonsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Wizards\WizardBaseCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Wizards\WizardBaseCtl.Designer.cs">
+	  <DependentUpon>WizardBaseCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Wizards\WizardHostForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Wizards\WizardHostForm.Designer.cs">
+	  <DependentUpon>WizardHostForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Wizards\WizFinishPageCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Wizards\WizFinishPageCtl.Designer.cs">
+	  <DependentUpon>WizFinishPageCtl.cs</DependentUpon>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="ApplicationUpdate\UpdateWaitForm.resx">
+	  <DependentUpon>UpdateWaitForm.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\ControlAppPanel.resx">
+	  <DependentUpon>ControlAppPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\MultiPageCfgPanel.resx">
+	  <DependentUpon>MultiPageCfgPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\NetworkCfgPanel.resx">
+	  <DependentUpon>NetworkCfgPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\TroubleshootingPanel.resx">
+	  <DependentUpon>TroubleshootingPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\OPMFontChooserCtl.resx">
+	  <DependentUpon>OPMFontChooserCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\FileAttributesBrowserCtl.resx">
+	  <DependentUpon>FileAttributesBrowserCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\OPMColorChooserCtl.resx">
+	  <DependentUpon>OPMColorChooserCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\OPMNumericUpDown.resx">
+	  <DependentUpon>OPMNumericUpDown.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\OPMTextBox.resx">
+	  <DependentUpon>OPMTextBox.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\PropertyEditor\Choosers\BooleanChooser.resx">
+	  <DependentUpon>BooleanChooser.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\PropertyEditor\Choosers\EnumeratedTypeChooser.resx">
+	  <DependentUpon>EnumeratedTypeChooser.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\PropertyEditor\Choosers\IntegerChooser.resx">
+	  <DependentUpon>IntegerChooser.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\PropertyEditor\Choosers\StringChooser.resx">
+	  <DependentUpon>StringChooser.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\PropertyEditor\OPMPropertyEditor.resx">
+	  <DependentUpon>OPMPropertyEditor.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\OPMFontChooserDialog.resx">
+	  <DependentUpon>OPMFontChooserDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\OPMColorChooserDialog.resx">
+	  <DependentUpon>OPMColorChooserDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\OPMFileDialog.resx">
+	  <DependentUpon>OPMFileDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\OPMFolderBrowserDialog.resx">
+	  <DependentUpon>OPMFolderBrowserDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\TimerWaitingDialog.resx">
+	  <DependentUpon>TimerWaitingDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="FileOperations\Forms\FileTaskForm.resx">
+	  <DependentUpon>FileTaskForm.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="HelpSupport\HelpViewer.resx">
+	  <DependentUpon>HelpViewer.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="MessageDisplay.resx">
+	  <DependentUpon>MessageDisplay.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Themes\ThemeForm.resx">
+	  <DependentUpon>ThemeForm.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Themes\ThemeFormBase.resx">
+	  <DependentUpon>ThemeFormBase.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="TrayNotificationBox.resx">
+	  <DependentUpon>TrayNotificationBox.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Wizards\StepButtonsCtl.resx">
+	  <DependentUpon>StepButtonsCtl.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Wizards\WizardBaseCtl.resx">
+	  <DependentUpon>WizardBaseCtl.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Wizards\WizardHostForm.resx">
+	  <DependentUpon>WizardHostForm.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Wizards\WizFinishPageCtl.resx">
+	  <DependentUpon>WizFinishPageCtl.cs</DependentUpon>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Configuration\GeneralSettingsPanel.resx">
+	  <DependentUpon>GeneralSettingsPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\InternetSettingsPanel.resx">
+	  <DependentUpon>InternetSettingsPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\SettingsForm.resx">
+	  <DependentUpon>SettingsForm.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\InsertDriveNotifyDialog.resx">
+	  <SubType>Designer</SubType>
+	  <DependentUpon>InsertDriveNotifyDialog.cs</DependentUpon>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Controls\UserControls\WeekdaySelector.resx">
+	  <SubType>Designer</SubType>
+	  <DependentUpon>WeekdaySelector.cs</DependentUpon>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Configuration\KeyCommandEditor.resx">
+	  <DependentUpon>KeyCommandEditor.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\KeyMapCfgPanel.resx">
+	  <DependentUpon>KeyMapCfgPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\menuChildren.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Properties\Resources.resx">
+	  <Generator>PublicResXFileCodeGenerator</Generator>
+	  <SubType>Designer</SubType>
+	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Configuration\BaseCfgPanel.resx">
+	  <DependentUpon>BaseCfgPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\NetworkStatusIndicator.resx">
+	  <DependentUpon>NetworkStatusIndicator.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Controls\UserControls\ProxySettingsDefinitionCtl.resx">
+	  <DependentUpon>ProxySettingsDefinitionCtl.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Dialogs\GenericWaitDialog.resx">
+	  <DependentUpon>GenericWaitDialog.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="FileOperations\Forms\FileTaskErrorReport.resx">
+	  <DependentUpon>FileTaskErrorReport.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\Keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\OK.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\Add.png" />
+	<Content Include="Resources\Assistance.png" />
+	<None Include="Resources\Back.png" />
+	<Content Include="Resources\ControlPanel.png" />
+	<None Include="Resources\Forward.png" />
+	<None Include="Resources\Favorites.png" />
+	<None Include="Resources\Copy.png" />
+	<None Include="Resources\Cut.png" />
+	<None Include="Resources\Down.png" />
+	<None Include="Resources\Del.png" />
+	<None Include="Resources\Up.png" />
+	<None Include="Resources\Open.png" />
+	<None Include="Resources\SaveAs.png" />
+	<None Include="Resources\Paste.png" />
+	<None Include="Resources\Reload.png" />
+	<None Include="Resources\Rename.png" />
+	<None Include="Resources\new_folder_command.png" />
+	<None Include="Resources\Settings.png" />
+	<Content Include="Resources\lan_disconnect.png" />
+	<Content Include="Resources\lan_ok.png" />
+	<None Include="Resources\Search.png" />
+	<Content Include="Resources\wizard.png" />
+	<None Include="Resources\waiting.gif" />
+	<Content Include="Resources\hourglass.png" />
+	<Content Include="Resources\Troubleshooting.png" />
+	<Content Include="Resources\TVState0.bmp" />
+	<Content Include="Resources\TVState1.bmp" />
+	<EmbeddedResource Include="Themes\Themes.thm">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</EmbeddedResource>
+  </ItemGroup>
+</Project>

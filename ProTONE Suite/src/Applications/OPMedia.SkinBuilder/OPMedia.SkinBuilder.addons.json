@@ -1,0 +1,8 @@
+﻿{
+  "NavigationAddons": "SkinBuilder.Navigation.AddonPanel",
+  "PropertyAddons": "SkinBuilder.Property.AddonPanel",
+  "PreviewAddons": "SkinBuilder.Preview.AddonPanel",
+  "SkinBuilder.Navigation.AddonPanel": "SkinBuilder|SkinBuilder.Navigation.AddonPanel",
+  "SkinBuilder.Property.AddonPanel": "SkinBuilder|SkinBuilder.Property.AddonPanel",
+  "SkinBuilder.Preview.AddonPanel": "SkinBuilder|SkinBuilder.Preview.AddonPanel"
+}

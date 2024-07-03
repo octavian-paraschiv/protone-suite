@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<ApplicationIcon>player.ico</ApplicationIcon>
+	<OutputType>WinExe</OutputType>
+	<RootNamespace>OPMedia.ProTONE</RootNamespace>
+	<TargetFramework>net472</TargetFramework>
+	<OutputPath>..\..\Bin\</OutputPath>
+	<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.configuration" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="MainForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="MainForm.Designer.cs">
+	  <DependentUpon>MainForm.cs</DependentUpon>
+	</Compile>
+	<EmbeddedResource Update="MainForm.resx">
+	  <DependentUpon>MainForm.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.UI\OPMedia.UI.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.UI.ProTONE\OPMedia.UI.ProTONE.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="app.manifest" />
+	<None Include="Translations\OPMedia.ProTONE-de.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.ProTONE-en.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.ProTONE-fr.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.ProTONE-ro.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy ..\..\Framework\OPMediaBase\OPMedia.Core\Resources\player.ico ." />
+  </Target>
+</Project>

@@ -1,0 +1,304 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.Addons.Builtin</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\Bin\</OutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+  <ItemGroup>
+	  <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NAudio.Lame" Version="2.1.0" />
+	</ItemGroup>
+  <ItemGroup>
+	<Compile Update="Navigation\CatalogExplorer\DataLayer\CatalogDataset.Designer.cs">
+	  <AutoGen>True</AutoGen>
+	  <DesignTime>True</DesignTime>
+	  <DependentUpon>CatalogDataset.xsd</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.cs" />
+	<Compile Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.Designer.cs">
+	  <DependentUpon>CatalogFolderBrowserDialog.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.Designer.cs">
+	  <DependentUpon>ChangeEncodingPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\EncoderConfiguratorCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\EncoderConfiguratorCtl.Designer.cs">
+	  <DependentUpon>EncoderConfiguratorCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\EncoderOptionsCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\EncoderOptionsCtl.Designer.cs">
+	  <DependentUpon>EncoderOptionsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.Designer.cs">
+	  <DependentUpon>Mp3EncoderOptionsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\OggEncoderOptionsCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\OggEncoderOptionsCtl.Designer.cs">
+	  <DependentUpon>OggEncoderOptionsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\WavEncoderOptionsCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\WavEncoderOptionsCtl.Designer.cs">
+	  <DependentUpon>WavEncoderOptionsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.cs" />
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.Designer.cs">
+	  <DependentUpon>WizCdRipperStep2.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.cs" />
+	<Compile Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.Designer.cs">
+	  <DependentUpon>WizCdRipperStep1.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.cs" />
+	<Compile Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.Designer.cs">
+	  <DependentUpon>WmaEncoderOptionsCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Properties\Resources.Designer.cs">
+	  <AutoGen>True</AutoGen>
+	  <DesignTime>True</DesignTime>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+	<Compile Update="Property\Bookmarks\AddonPanel.cs" />
+	<Compile Update="Property\Bookmarks\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\CDAProp\AddonPanel.cs" />
+	<Compile Update="Property\CDAProp\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.Designer.cs">
+	  <DependentUpon>PreviewForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.cs" />
+	<Compile Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.Designer.cs">
+	  <DependentUpon>MediaCatalogCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Preview\__DefaultPreview\AddonPanel.cs" />
+	<Compile Update="Navigation\FileExplorer\FileOperations\Forms\FEFileTaskForm.cs" />
+	<Compile Update="Navigation\FileExplorer\FileExplorerCfgPanel.cs" />
+	<Compile Update="Navigation\FileExplorer\FileExplorerCfgPanel.Designer.cs">
+	  <DependentUpon>FileExplorerCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.cs" />
+	<Compile Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.Designer.cs">
+	  <DependentUpon>WizFESearchStep1Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.Designer.cs">
+	  <DependentUpon>FSTagEditorPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\CatalogItemPropFE\CatalogItemPropFE.cs" />
+	<Compile Update="Property\CatalogItemPropFE\CatalogItemPropFE.Designer.cs">
+	  <DependentUpon>CatalogItemPropFE.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\CatalogItemPropMC\CatalogItemPropMC.cs" />
+	<Compile Update="Property\CatalogItemPropMC\CatalogItemPropMC.Designer.cs">
+	  <DependentUpon>CatalogItemPropMC.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\__DefaultProp\AddonPanel.cs" />
+	<Compile Update="Property\__DefaultProp\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\FileExplorer\AddonPanel.cs" />
+	<Compile Update="Navigation\FileExplorer\AddonPanel.designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\AddonPanel.cs" />
+	<Compile Update="Property\TaggedFileProp\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\EditPanelBase.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\EditPanelBase.Designer.cs">
+	  <DependentUpon>EditPanelBase.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.Designer.cs">
+	  <DependentUpon>MultiRenamePanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.Designer.cs">
+	  <DependentUpon>TagEditorPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.Designer.cs">
+	  <DependentUpon>WizTagStep1Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.cs" />
+	<Compile Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.Designer.cs">
+	  <DependentUpon>WizTagStep2Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Preview\Images\AddonPanel.cs" />
+	<Compile Update="Preview\Images\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\AddonPanel.cs" />
+	<Compile Update="Navigation\CatalogExplorer\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogListView.cs" />
+	<Compile Update="Navigation\CatalogExplorer\Controls\CatalogTreeView.cs" />
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.cs" />
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.Designer.cs">
+	  <DependentUpon>WizImportStep2Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.cs" />
+	<Compile Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.Designer.cs">
+	  <DependentUpon>WizImportStep1Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.cs" />
+	<Compile Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.Designer.cs">
+	  <DependentUpon>WizMCSearchStep1Ctl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Preview\Player\AddonPanel.cs" />
+	<Compile Update="Preview\Player\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Property\VideoProp\AddonPanel.cs" />
+	<Compile Update="Property\VideoProp\AddonPanel.Designer.cs">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\AddonPanel.resx">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\Dialogs\CatalogFolderBrowserDialog.resx">
+	  <DependentUpon>CatalogFolderBrowserDialog.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\FileExplorer\AddonPanel.resx">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\ChangeEncodingPanel.resx">
+	  <DependentUpon>ChangeEncodingPanel.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Shared\EncoderOptions\EncoderOptionsCtl.resx">
+	  <DependentUpon>EncoderOptionsCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Shared\EncoderOptions\Mp3EncoderOptionsCtl.resx">
+	  <DependentUpon>Mp3EncoderOptionsCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Shared\EncoderOptions\OggEncoderOptionsCtl.resx">
+	  <DependentUpon>OggEncoderOptionsCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Shared\EncoderOptions\WavEncoderOptionsCtl.resx">
+	  <DependentUpon>WavEncoderOptionsCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep1.resx">
+	  <DependentUpon>WizCdRipperStep1.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\FileExplorer\CdRipperWizard\Forms\WizCdRipperStep2.resx">
+	  <DependentUpon>WizCdRipperStep2.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Shared\EncoderOptions\WmaEncoderOptionsCtl.resx">
+	  <DependentUpon>WmaEncoderOptionsCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\FileExplorer\FileExplorerCfgPanel.resx">
+	  <DependentUpon>FileExplorerCfgPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Preview\Player\AddonPanel.resx">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\AddonPanel.resx">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\FSTagEditorPanel.resx">
+	  <DependentUpon>FSTagEditorPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\MultiRenamePanel.resx">
+	  <DependentUpon>MultiRenamePanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\PreviewForm.resx">
+	  <DependentUpon>PreviewForm.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\TagEditorPanel.resx">
+	  <DependentUpon>TagEditorPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep1Ctl.resx">
+	  <DependentUpon>WizTagStep1Ctl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\TaggedFileProp\TaggingWizard\Controls\WizTagStep2Ctl.resx">
+	  <DependentUpon>WizTagStep2Ctl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\MediaCatalogCfgPanel.resx">
+	  <DependentUpon>MediaCatalogCfgPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep1Ctl.resx">
+	  <DependentUpon>WizImportStep1Ctl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\ImportWizard\Controls\WizImportStep2Ctl.resx">
+	  <DependentUpon>WizImportStep2Ctl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Properties\Resources.resx">
+	  <SubType>Designer</SubType>
+	  <Generator>ResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Property\VideoProp\AddonPanel.resx">
+	  <DependentUpon>AddonPanel.cs</DependentUpon>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Navigation\CatalogExplorer\DataLayer\CatalogDataset.xsc">
+	  <DependentUpon>CatalogDataset.xsd</DependentUpon>
+	</None>
+	<None Include="Navigation\CatalogExplorer\DataLayer\CatalogDataset.xsd">
+	  <Generator>MSDataSetGenerator</Generator>
+	  <LastGenOutput>CatalogDataset.Designer.cs</LastGenOutput>
+	  <SubType>Designer</SubType>
+	</None>
+	<None Include="Navigation\CatalogExplorer\DataLayer\CatalogDataset.xss">
+	  <DependentUpon>CatalogDataset.xsd</DependentUpon>
+	</None>
+	<None Include="Templates\Catalog\Default Catalog">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Navigation\FileExplorer\SearchWizard\Controls\WizFESearchStep1Ctl.resx">
+	  <SubType>Designer</SubType>
+	  <DependentUpon>WizFESearchStep1Ctl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Navigation\CatalogExplorer\SearchWizard\Controls\WizMCSearchStep1Ctl.resx">
+	  <DependentUpon>WizMCSearchStep1Ctl.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.UI\OPMedia.UI.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.UI.ProTONE\OPMedia.UI.ProTONE.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\FileExplorer.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\Merge.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="Resources\Tagging.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Update="C:\Users\octavian.paraschiv%40cegeka.com\.nuget\packages\naudio.lame\2.1.0\build\libmp3lame.32.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+  <ItemGroup>
+	<None Update="C:\Users\octavian.paraschiv%40cegeka.com\.nuget\packages\naudio.lame\2.1.0\build\libmp3lame.64.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+</Project>

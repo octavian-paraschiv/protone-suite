@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A7A68260-004D-455C-AE56-BFC3AB1136B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{938C8AAA-FB3E-438C-B3F3-AB2CBE669FD9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkinBuilder", "Extensions\SkinBuilder\SkinBuilder.csproj", "{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.SkinBuilder", "Applications\OPMedia.SkinBuilder\OPMedia.SkinBuilder.csproj", "{18220B02-4A4A-48E1-98A6-85D45B2B4D82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|x86.ActiveCfg = Debug|Any CPU
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F}.Release|x86.Build.0 = Debug|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Debug|x86.Build.0 = Debug|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Release|x86.ActiveCfg = Release|Any CPU
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FCB8AB1F-B2E7-4C65-A45D-D8E612B3BA3F} = {A7A68260-004D-455C-AE56-BFC3AB1136B2}
+		{18220B02-4A4A-48E1-98A6-85D45B2B4D82} = {938C8AAA-FB3E-438C-B3F3-AB2CBE669FD9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_NeutralResourcesLanguage = en-GB
+		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
+	EndGlobalSection
+EndGlobal

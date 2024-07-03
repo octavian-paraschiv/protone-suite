@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.DeezerInterop</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup>
+	<RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+	<PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup>
+	<Content Include="libdeezer.x64.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+	<Content Include="libdeezer.x86.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+  </ItemGroup>
+</Project>

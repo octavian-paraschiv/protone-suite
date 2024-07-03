@@ -1,0 +1,18 @@
+{
+  "OPMedia.Addons.Builtin.CatalogExplorer.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.CatalogExplorer.AddonPanel",
+  "OPMedia.Addons.Builtin.FileExplorer.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.FileExplorer.AddonPanel",
+  "NavigationAddons": "OPMedia.Addons.Builtin.CatalogExplorer.AddonPanel|OPMedia.Addons.Builtin.FileExplorer.AddonPanel",
+  "OPMedia.Addons.Builtin.__DefaultProp.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.__DefaultProp.AddonPanel",
+  "OPMedia.Addons.Builtin.Bookmarks.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.Bookmarks.AddonPanel",
+  "OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropFE.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropFE.AddonPanel",
+  "OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropMC.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropMC.AddonPanel",
+  "OPMedia.Addons.Builtin.CDAProp.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.CDAProp.AddonPanel",
+  "OPMedia.Addons.Builtin.TaggedFileProp.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.TaggedFileProp.AddonPanel",
+  "OPMedia.Addons.Builtin.VideoProp.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.VideoProp.AddonPanel",
+  "PropertyAddons": "OPMedia.Addons.Builtin.__DefaultProp.AddonPanel|OPMedia.Addons.Builtin.Bookmarks.AddonPanel|OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropFE.AddonPanel|OPMedia.Addons.Builtin.CatalogExplorer.CatalogItemPropMC.AddonPanel|OPMedia.Addons.Builtin.CDAProp.AddonPanel|OPMedia.Addons.Builtin.TaggedFileProp.AddonPanel|OPMedia.Addons.Builtin.VideoProp.AddonPanel",
+  "OPMedia.Addons.Builtin.__DefaultPreview.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.__DefaultPreview.AddonPanel",
+  "OPMedia.Addons.Builtin.Images.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.Images.AddonPanel",
+  "OPMedia.Addons.Builtin.Player.AddonPanel": "OPMedia.Addons.Builtin|OPMedia.Addons.Builtin.Player.AddonPanel",
+  "PreviewAddons": "OPMedia.Addons.Builtin.__DefaultPreview.AddonPanel|OPMedia.Addons.Builtin.Images.AddonPanel|OPMedia.Addons.Builtin.Player.AddonPanel",
+  "LastNavAddon": "OPMedia.Addons.Builtin.CatalogExplorer.AddonPanel"
+}
