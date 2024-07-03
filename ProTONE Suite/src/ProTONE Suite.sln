@@ -47,12 +47,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.VideoDVDWorker", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OPMedia.VideoWorker", "Workers\OPMedia.VideoWorker\OPMedia.VideoWorker.csproj", "{64B8CCAE-AE15-42F4-87EE-E8FC047194CF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{1331FBC8-81F1-4200-BE01-E05CB47D3061}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\appveyor.yml = ..\..\appveyor.yml
-		..\..\prep_build.ps1 = ..\..\prep_build.ps1
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_install", "_install", "{34918DA1-B5BB-4FDA-94DB-A01E9EA033FD}"
 	ProjectSection(SolutionItems) = preProject
 		Installers\Include\CustomMessages.iss = Installers\Include\CustomMessages.iss
@@ -169,7 +163,7 @@ Global
 		{C3C28382-FC77-4F23-B431-6E34119C2523} = {114014C8-9E85-476A-9BD3-036DE649D6CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-GB
 		SolutionGuid = {3F497AF3-A229-42B3-8947-BD8BCBE64E77}
+		RESX_NeutralResourcesLanguage = en-GB
 	EndGlobalSection
 EndGlobal
