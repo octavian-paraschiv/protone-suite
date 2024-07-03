@@ -1,0 +1,12 @@
+*.cache
+*.pdb
+*.resources
+*.tlog
+*.bak
+*.user
+.vs
+ProTONE Suite/**/obj
+ProTONE Suite/src/bin/*
+packages
+ProTONE Suite/src/package-builder/*.dll
+ProTONE Suite/src/package-builder/*.exe

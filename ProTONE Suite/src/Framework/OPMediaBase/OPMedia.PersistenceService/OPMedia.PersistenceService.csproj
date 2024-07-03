@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>OPMedia.PersistenceService</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+  <PropertyGroup>
+	<StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+	<PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.configuration" />
+	<Reference Include="System.Configuration.Install" />
+	<Reference Include="System.Data.Linq" />
+	<Reference Include="System.ServiceModel" />
+	<Reference Include="System.Transactions" />
+	<Reference Include="System.ServiceProcess" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="PersistenceServiceInstaller.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="PersistenceServiceInstaller.Designer.cs">
+	  <DependentUpon>PersistenceServiceInstaller.cs</DependentUpon>
+	</Compile>
+	<Compile Update="PersistenceService.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="PersistenceService.Designer.cs">
+	  <DependentUpon>PersistenceService.cs</DependentUpon>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="sqlite3.x64.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+	<Content Include="sqlite3.x86.dll">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+	<None Include="Persistence.db3">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+</Project>

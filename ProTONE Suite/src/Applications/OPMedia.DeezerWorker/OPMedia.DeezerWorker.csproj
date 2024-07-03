@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>OPMedia.DeezerWorker</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\Framework\DeezerInterop\OPMedia.DeezerInterop.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="CommandProcessor.cs" />
+  </ItemGroup>
+</Project>

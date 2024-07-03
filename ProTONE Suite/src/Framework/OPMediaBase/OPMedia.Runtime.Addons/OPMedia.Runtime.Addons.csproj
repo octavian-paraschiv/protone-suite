@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.Runtime.Addons</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.Configuration" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="AddonHostForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="AddonHostForm.Designer.cs">
+	  <DependentUpon>AddonHostForm.cs</DependentUpon>
+	</Compile>
+	<Compile Update="AddonsBase\Navigation\NavBaseCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="AddonsBase\Preview\PreviewBaseCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="AddonsBase\Prop\PropBaseCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="BaseAddonCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="BaseAddonCtl.Designer.cs">
+	  <DependentUpon>BaseAddonCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\AddonAppSettingsForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+	<Compile Update="Configuration\AddonCfgPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\AddonCfgPanel.Designer.cs">
+	  <DependentUpon>AddonCfgPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\AddonListCtl.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\AddonListCtl.Designer.cs">
+	  <DependentUpon>AddonListCtl.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Configuration\AddonSettingsPanel.cs">
+	  <SubType>UserControl</SubType>
+	</Compile>
+	<Compile Update="Configuration\AddonSettingsPanel.Designer.cs">
+	  <DependentUpon>AddonSettingsPanel.cs</DependentUpon>
+	</Compile>
+	<Compile Update="Controls\OPMAddonMenuItem.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Properties\Resources1.Designer.cs">
+	  <AutoGen>True</AutoGen>
+	  <DesignTime>True</DesignTime>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\OPMedia.UI\OPMedia.UI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="AddonHostForm.resx">
+	  <DependentUpon>AddonHostForm.cs</DependentUpon>
+	  <SubType>Designer</SubType>
+	</EmbeddedResource>
+	<EmbeddedResource Update="AddonsBase\Navigation\NavBaseCtl.resx">
+	  <DependentUpon>NavBaseCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\AddonAppSettingsForm.resx">
+	  <DependentUpon>AddonAppSettingsForm.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\AddonCfgPanel.resx">
+	  <DependentUpon>AddonCfgPanel.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\AddonListCtl.resx">
+	  <DependentUpon>AddonListCtl.cs</DependentUpon>
+	</EmbeddedResource>
+	<EmbeddedResource Update="Configuration\AddonSettingsPanel.resx">
+	  <DependentUpon>AddonSettingsPanel.cs</DependentUpon>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="Resources\Addons.png" />
+	<None Include="Resources\AddonsSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="AddonsBase\BaseAddonCtl.cs" />
+  </ItemGroup>
+</Project>

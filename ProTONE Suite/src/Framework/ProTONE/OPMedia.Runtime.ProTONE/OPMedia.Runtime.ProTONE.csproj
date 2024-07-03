@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.Runtime.ProTONE</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+  <PropertyGroup>
+	<PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.ComponentModel.Composition" />
+	<Reference Include="System.ServiceProcess" />
+	<Reference Include="System.ServiceModel" />
+	<Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="FfdShowApi\FFDShowReceiver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\DeezerInterop\OPMedia.DeezerInterop.csproj" />
+	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\..\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\OPMediaBase\OPMedia.UI\OPMedia.UI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="DefaultOnlineMediaData.xml">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="Rendering\SampleGrabberUtils.cs" />
+	<Compile Remove="Rendering\Cdda\FreeDb\TrackCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="MovieCollection.OpenSubtitles" Version="1.0.0-preview.3" />
+	<PackageReference Include="NAudio" Version="2.2.1" />
+	<PackageReference Include="SharpShell" Version="2.7.2" />
+	<PackageReference Include="SharpZipLib" Version="1.4.2" />
+	<PackageReference Include="System.Net.Http" Version="4.3.4" />
+	<PackageReference Include="TagLibSharp" Version="2.3.0" />
+  </ItemGroup>
+</Project>

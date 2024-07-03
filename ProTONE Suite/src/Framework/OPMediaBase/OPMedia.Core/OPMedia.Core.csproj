@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <RootNamespace>OPMedia.Core</RootNamespace>
+	  <TargetFramework>net472</TargetFramework>
+	  <OutputPath>..\..\..\Bin\</OutputPath>
+	  <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>  
+  <ItemGroup>
+	<Compile Update="NetworkAccess\WebClientWithTimeout.cs">
+	  <SubType>Component</SubType>
+	</Compile>
+	<Compile Update="Properties\Resources.Designer.cs">
+	  <AutoGen>True</AutoGen>
+	  <DesignTime>True</DesignTime>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Include="Resources\player.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Update="Properties\Resources.resx">
+	  <SubType>Designer</SubType>
+	  <Generator>PublicResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\ir_remote.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Include="Resources\bookmark.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<EmbeddedResource Include="Resources\Subtitle.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\Playlist.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\AudioFile.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\VideoFile.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="Resources\CDA.png" />
+	<None Include="Resources\DVD.png" />
+	<None Include="Resources\Internet.png" />
+	<None Include="Resources\DiskDrive.png" />
+	<None Include="Resources\folder.png" />
+	<None Include="Resources\folder16.png" />
+	<None Include="Resources\DiskDrive16.png" />
+	<Content Include="Resources\Catalog.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+	<Content Include="Resources\Library.ico">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="NetworkAccess\Impersonator.cs" />
+	<Compile Remove="NetworkAccess\NetworkStorageHost.cs" />
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+	<PackageReference Include="Iso639" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+	<Reference Include="System.ServiceProcess" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>OPMedia.Runtime</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+	<PropertyGroup>
+	<PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.ServiceModel" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\OPMedia.Core\OPMedia.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="DisplayAdapterInformation\MonitorInfo.cs" />
+	<Compile Remove="DisplayAdapterInformation\MonitorInfoStatic.cs" />
+	<Compile Remove="InstanceManagement\OpMediaApplication.cs" />
+	<Compile Remove="InstanceManagement\SingleInstanceApplication.cs" />
+	<Compile Remove="Logging\ErrorDispatcher.cs" />
+	<Compile Remove="Logging\LogEntry.cs" />
+	<Compile Remove="Logging\LogFileReader.cs" />
+	<Compile Remove="Logging\LoggedApplication.cs" />
+	<Compile Remove="Logging\Logger.cs" />
+	<Compile Remove="Logging\LoggingConfiguration.cs" />
+	<Compile Remove="Shortcuts\ShortcutEventTargets.cs" />
+	<Compile Remove="TranslationSupport\TranslatableAttributes.cs" />
+	<Compile Remove="TranslationSupport\TranslationNotifyTarget.cs" />
+	<Compile Remove="TranslationSupport\Translator.cs" />
+  </ItemGroup>
+</Project>

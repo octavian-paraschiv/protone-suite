@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<ApplicationIcon>Library.ico</ApplicationIcon>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>OPMedia.MediaLibrary</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<OutputPath>..\..\Bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System.configuration" />
+	<Reference Include="System.Deployment" />
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Update="MediaLibraryForm.cs">
+	  <SubType>Form</SubType>
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="Library.ico" />
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Core\OPMedia.Core.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime.Addons\OPMedia.Runtime.Addons.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.Runtime\OPMedia.Runtime.csproj" />
+	<ProjectReference Include="..\..\Framework\OPMediaBase\OPMedia.UI\OPMedia.UI.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.Runtime.ProTONE\OPMedia.Runtime.ProTONE.csproj" />
+	<ProjectReference Include="..\..\Framework\ProTONE\OPMedia.UI.ProTONE\OPMedia.UI.ProTONE.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="app.manifest" />
+	<None Include="Translations\OPMedia.MediaLibrary-de.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.MediaLibrary-en.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.MediaLibrary-fr.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+	<None Include="Translations\OPMedia.MediaLibrary-ro.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+</Project>
