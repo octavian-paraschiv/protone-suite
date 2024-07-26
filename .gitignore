@@ -10,3 +10,4 @@ ProTONE Suite/src/bin/*
 packages
 ProTONE Suite/src/package-builder/*.dll
 ProTONE Suite/src/package-builder/*.exe
+ProTONE Suite/output/
