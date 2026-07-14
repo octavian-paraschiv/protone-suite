@@ -741,13 +741,14 @@ namespace OPMedia.UI.ProTONE.Controls.MediaPlayer
         {
             try
             {
+                _delayedSubtitleLookupTimer.Stop();
+
                 SubtitleDownloadProcessor.TryFindSubtitle(RenderingEngine.DefaultInstance.GetRenderFile(),
                             (int)RenderingEngine.DefaultInstance.MediaLength, false);
             }
-            catch { }
-            finally
-            {
-                _delayedSubtitleLookupTimer.Stop();
+            catch(Exception ex)
+            { 
+                Logger.LogException(ex);
             }
         }
 

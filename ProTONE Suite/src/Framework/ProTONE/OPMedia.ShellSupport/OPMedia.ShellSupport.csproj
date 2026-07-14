@@ -9,7 +9,8 @@
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	<RegisterForComInterop>false</RegisterForComInterop>
 	<AssemblyOriginatorKeyFile>opmedia.pfx</AssemblyOriginatorKeyFile>
-	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	<PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
 	<Reference Include="System.Windows.Forms" />
